@@ -206,7 +206,7 @@ void edytornc::saveAs()
 void edytornc::cut()
 {
     if(activeMdiChild())
-      activeMdiChild()->cut();
+      activeMdiChild()->textEdit->cut();
 }
 
 //**************************************************************************************************
@@ -216,7 +216,7 @@ void edytornc::cut()
 void edytornc::copy()
 {
     if(activeMdiChild())
-      activeMdiChild()->copy();
+      activeMdiChild()->textEdit->copy();
 }
 
 //**************************************************************************************************
@@ -252,7 +252,7 @@ void edytornc::find()
 {
    if(currentMdiChild())
    {  
-      searchOptions.expr = currentMdiChild()->textCursor().selectedText();
+      searchOptions.expr = currentMdiChild()->textEdit->textCursor().selectedText();
    }
    else
      return;
@@ -283,20 +283,20 @@ void edytornc::findSlot(SSearchOptions &s, bool findFirst)
 
     if((s.fromCursor || !findFirst) || (s.options & QTextDocument::FindBackward))
     {
-       s.cursor = currentMdiChild()->textCursor();
-       s.cursor = mdiChild->document()->find(s.expr, s.cursor, s.options);
+       s.cursor = currentMdiChild()->textEdit->textCursor();
+       s.cursor = mdiChild->textEdit->document()->find(s.expr, s.cursor, s.options);
     }
     else
     {
        s.cursor.setPosition(0);
-       s.cursor = mdiChild->document()->find(s.expr, s.cursor, s.options);
+       s.cursor = mdiChild->textEdit->document()->find(s.expr, s.cursor, s.options);
     };
 
     searchOptions = s;
     
     if(!s.cursor.isNull())
     {  
-       mdiChild->setTextCursor(s.cursor);
+       mdiChild->textEdit->setTextCursor(s.cursor);
     }
     else
       QMessageBox::information( this, tr("EdytorNC"), QString(tr("Can't find : '%1'.")).arg(searchOptions.expr));
@@ -322,7 +322,7 @@ void edytornc::replaceSlot(bool &found)
    MdiChild *mdiChild = currentMdiChild();
    if(mdiChild)
    {
-      if(searchOptions.cursor != currentMdiChild()->textCursor()) 
+      if(searchOptions.cursor != currentMdiChild()->textEdit->textCursor())
       {
          replaceFindSlot(found);
          return;
@@ -334,11 +334,11 @@ void edytornc::replaceSlot(bool &found)
          searchOptions.cursor.removeSelectedText();
          searchOptions.cursor.insertText(searchOptions.replaceText);
          searchOptions.cursor.endEditBlock();
-         mdiChild->setTextCursor(searchOptions.cursor);
+         mdiChild->textEdit->setTextCursor(searchOptions.cursor);
       };
       replaceFindSlot(found);
       if(found)
-        mdiChild->setTextCursor(searchOptions.cursor);  
+        mdiChild->textEdit->setTextCursor(searchOptions.cursor);
    };
 }
 
@@ -354,11 +354,11 @@ void edytornc::replaceFindSlot(bool &found)
    if(mdiChild)
    { 
       curTmp = searchOptions.cursor;
-      searchOptions.cursor = mdiChild->document()->find(searchOptions.expr, currentMdiChild()->textCursor(), 
+      searchOptions.cursor = mdiChild->textEdit->document()->find(searchOptions.expr, currentMdiChild()->textEdit->textCursor(),
                                                         searchOptions.options); 
       found = !searchOptions.cursor.isNull();
       if(found)
-        mdiChild->setTextCursor(searchOptions.cursor);
+        mdiChild->textEdit->setTextCursor(searchOptions.cursor);
       else 
         searchOptions.cursor = curTmp; 
          
@@ -375,7 +375,7 @@ void edytornc::replaceAllSlot(bool &found)
    
    if(mdiChild)
    {
-      if(searchOptions.cursor != currentMdiChild()->textCursor()) 
+      if(searchOptions.cursor != currentMdiChild()->textEdit->textCursor())
       {
          replaceFindSlot(found);
          return;
@@ -384,16 +384,16 @@ void edytornc::replaceAllSlot(bool &found)
       {
          if(!searchOptions.cursor.isNull())
          {  
-            searchOptions.cursor = currentMdiChild()->textCursor();
+            searchOptions.cursor = currentMdiChild()->textEdit->textCursor();
             searchOptions.cursor.beginEditBlock();
             searchOptions.cursor.removeSelectedText();
             searchOptions.cursor.insertText(searchOptions.replaceText);
             searchOptions.cursor.endEditBlock();
-            mdiChild->setTextCursor(searchOptions.cursor);
+            mdiChild->textEdit->setTextCursor(searchOptions.cursor);
          };
          replaceFindSlot(found);;
          if(found)
-         mdiChild->setTextCursor(searchOptions.cursor); 
+         mdiChild->textEdit->setTextCursor(searchOptions.cursor);
       }while(found);
    };
 }
@@ -412,7 +412,7 @@ void edytornc::replace()
       return;
 
 
-    tx = mdiChild->textCursor().selectedText();
+    tx = mdiChild->textEdit->textCursor().selectedText();
     if(!tx.isEmpty())
       searchOptions.expr = tx;
 
@@ -425,19 +425,19 @@ void edytornc::replace()
 
        if(searchOptions.fromCursor)
        {
-          searchOptions.cursor = currentMdiChild()->textCursor();
+          searchOptions.cursor = currentMdiChild()->textEdit->textCursor();
           searchOptions.cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::MoveAnchor);
-          searchOptions.cursor = mdiChild->document()->find(searchOptions.expr, searchOptions.cursor, searchOptions.options);
+          searchOptions.cursor = mdiChild->textEdit->document()->find(searchOptions.expr, searchOptions.cursor, searchOptions.options);
        }
        else
        {
           searchOptions.cursor.setPosition(0);
-          searchOptions.cursor = mdiChild->document()->find(searchOptions.expr, searchOptions.cursor, searchOptions.options);
+          searchOptions.cursor = mdiChild->textEdit->document()->find(searchOptions.expr, searchOptions.cursor, searchOptions.options);
        }
 
        if(!searchOptions.cursor.isNull())
        {
-          mdiChild->setTextCursor(searchOptions.cursor);
+          mdiChild->textEdit->setTextCursor(searchOptions.cursor);
           ReplaceConfirmDialog *confirmationDialog = new ReplaceConfirmDialog(&QString(tr("Searching text '%1' was found. What to do now ?").arg(searchOptions.expr)), this);
 
           connect( confirmationDialog, SIGNAL(replaceSignal(bool &)), this, SLOT(replaceSlot(bool &)));
@@ -460,7 +460,7 @@ void edytornc::replace()
 void edytornc::selAll()
 {
    if(activeMdiChild())
-      activeMdiChild()->selectAll();
+      activeMdiChild()->textEdit->selectAll();
 }
 
 //**************************************************************************************************
@@ -470,7 +470,7 @@ void edytornc::selAll()
 void edytornc::zoomIn()
 {
    if(activeMdiChild())
-      activeMdiChild()->zoomIn();
+      activeMdiChild()->textEdit->zoomIn();
 }
 
 //**************************************************************************************************
@@ -480,7 +480,7 @@ void edytornc::zoomIn()
 void edytornc::zoomOut()
 {
    if(activeMdiChild())
-      activeMdiChild()->zoomOut();
+      activeMdiChild()->textEdit->zoomOut();
 }
 
 //**************************************************************************************************
@@ -499,7 +499,7 @@ void edytornc::config()
 void edytornc::readOnly()
 {
     if(activeMdiChild())
-      activeMdiChild()->setReadOnly(readOnlyAct->isChecked());
+      activeMdiChild()->textEdit->setReadOnly(readOnlyAct->isChecked());
     updateMenus();
 }
 
@@ -711,7 +711,7 @@ void edytornc::doCalc()
 void edytornc::deleteText()
 {
     if(activeMdiChild())
-      activeMdiChild()->textCursor().removeSelectedText();
+      activeMdiChild()->textEdit->textCursor().removeSelectedText();
 }
 
 //**************************************************************************************************
@@ -721,7 +721,7 @@ void edytornc::deleteText()
 void edytornc::paste()
 {
     if (activeMdiChild())
-        activeMdiChild()->paste();
+        activeMdiChild()->textEdit->paste();
 }
 
 //**************************************************************************************************
@@ -731,7 +731,7 @@ void edytornc::paste()
 void edytornc::undo()
 {
     if (activeMdiChild())
-        activeMdiChild()->document()->undo();
+        activeMdiChild()->textEdit->document()->undo();
 }
 
 //**************************************************************************************************
@@ -741,7 +741,7 @@ void edytornc::undo()
 void edytornc::redo()
 {
     if (activeMdiChild())
-        activeMdiChild()->document()->redo();
+        activeMdiChild()->textEdit->document()->redo();
 }
 
 //**************************************************************************************************
@@ -775,7 +775,7 @@ void edytornc::about()
 void edytornc::updateMenus()
 {
     bool hasMdiChild = (activeMdiChild() != 0);
-    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
+    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
     saveAct->setEnabled(hasMdiChild);
     saveAsAct->setEnabled(hasMdiChild);
     pasteAct->setEnabled(hasMdiChild);
@@ -801,7 +801,7 @@ void edytornc::updateMenus()
     convertProgAct->setEnabled(hasMdiChildNotReadOnly);
 
 
-    if(activeMdiChild() && activeMdiChild()->isReadOnly())
+    if(activeMdiChild() && activeMdiChild()->textEdit->isReadOnly())
     {
        readOnlyAct->setChecked(TRUE);
        readOnlyAct->setIcon(QIcon(":/images/lock.png"));
@@ -812,7 +812,7 @@ void edytornc::updateMenus()
        readOnlyAct->setIcon(QIcon(":/images/unlock.png"));
     };
 
-    bool hasSelection = (activeMdiChild() && activeMdiChild()->textCursor().hasSelection());
+    bool hasSelection = (activeMdiChild() && activeMdiChild()->textEdit->textCursor().hasSelection());
     cutAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
     copyAct->setEnabled(hasSelection);
     deleteAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
@@ -873,15 +873,15 @@ void edytornc::updateWindowMenu()
 
 MdiChild *edytornc::createMdiChild()
 {
-    MdiChild *child = new MdiChild;
+    MdiChild *child = new MdiChild(this);
     mdiArea->addSubWindow(child);
 
-    connect(child, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
-    connect(child, SIGNAL(copyAvailable(bool)), copyAct, SLOT(setEnabled(bool)));
-    connect(child, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
-    connect(child, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-    connect(child, SIGNAL(textChanged()), this, SLOT(updateMenus()));
-    connect(child, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
+    connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
+    connect(child->textEdit, SIGNAL(copyAvailable(bool)), copyAct, SLOT(setEnabled(bool)));
+    connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
+    connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
+    connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
+    connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
 
     return child;
 }
@@ -1263,7 +1263,7 @@ void edytornc::readSettings()
     QSettings settings("Trolltech", "EdytorNC");
 
     QPoint pos = settings.value("Pos", QPoint(200, 200)).toPoint();
-    QSize size = settings.value("Size", QSize(500, 700)).toSize();
+    QSize size = settings.value("Size", QSize(700, 600)).toSize();
     move(pos);
     resize(size);
 
@@ -1331,12 +1331,12 @@ void edytornc::readSettings()
            //defaultMdiWindowProperites.cursorPosY = settings.value( "CursorY_" + QString::number(i), 1).toInt();
            defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly_" + QString::number(i), FALSE).toBool();
            defaultMdiWindowProperites.geometry = settings.value("Geometry_" + QString::number(i), QByteArray()).toByteArray();
-           loadFile(defaultMdiWindowProperites);
 
-           //pos = settings.value("Pos_" + QString::number(i), QPoint(0, 0)).toPoint();
-           //size = settings.value("Size_" + QString::number(i), QSize(200, 200)).toSize();
+
+           defaultMdiWindowProperites.pos = settings.value("Pos_" + QString::number(i), QPoint(0, 0)).toPoint();
+           defaultMdiWindowProperites.size = settings.value("Size_" + QString::number(i), QSize(200, 200)).toSize();
            
-           
+           loadFile(defaultMdiWindowProperites);
            
            //QMdiSubWindow *existing = findMdiChild(defaultMdiWindowProperites.fileName);
            //if(existing)
@@ -1443,8 +1443,8 @@ void edytornc::writeSettings()
         //settings.setValue("CursorY_" + QString::number(i), Opt.cursorPosY);
         settings.setValue( "ReadOnly_" + QString::number(i), Opt.readOnly);
    
-        //settings.setValue("Pos_" + QString::number(i), mdiChild->pos());
-        //settings.setValue("Size_" + QString::number(i), mdiChild->size());
+        settings.setValue("Pos_" + QString::number(i), mdiChild->pos());
+        settings.setValue("Size_" + QString::number(i), mdiChild->size());
         //settings.setValue("Pos_" + QString::number(i), Opt.winPos);
 
         settings.setValue("Geometry_" + QString::number(i), mdiChild->saveGeometry());
@@ -1533,7 +1533,11 @@ void edytornc::loadFile(_editor_properites options)
        child->newFile();
        child->loadFile(options.fileName);
        child->setMdiWindowProperites(options);
+
+
        child->show();
+
+
     };
 }
 

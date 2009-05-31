@@ -368,7 +368,6 @@ class BHCTab : public QWidget, public Ui::BHCTab
   private slots:
     void copySelection();
     void sellAll();
-    void addCommentsChk();
     void inputChanged();
 
   private:
@@ -390,7 +389,7 @@ class BHCDraw : public QWidget
   Q_OBJECT
 
   public:
-    BHCDraw( QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::Tool);
+    BHCDraw(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::Tool);
 
     ~BHCDraw();
 

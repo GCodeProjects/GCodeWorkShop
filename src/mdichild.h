@@ -28,12 +28,14 @@
 #include "commoninc.h"
 #include "customfiledialog.h"
 
-class MdiChild : public QTextEdit
+#include "ui_mdichildform.h"
+
+class MdiChild : public QWidget, public Ui::MdiChild
 {
     Q_OBJECT
 
 public:
-    MdiChild();
+    MdiChild(QWidget *parent = 0, Qt::WindowFlags f = Qt::SubWindow);
 
     void newFile();
     bool loadFile(const QString &fileName);

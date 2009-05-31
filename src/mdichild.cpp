@@ -31,17 +31,21 @@
 //
 //**************************************************************************************************
 
-MdiChild::MdiChild()
+MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
+    setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
     isUntitled = true;
-    setWordWrapMode(QTextOption::NoWrap);
+    textEdit->setWordWrapMode(QTextOption::NoWrap);
     highlighter = 0;
-    setAcceptRichText(FALSE);
-    installEventFilter( this );
-    //resize(QSize(400, 400));
+    textEdit->setAcceptRichText(FALSE);
 
 
+    marginWidget->setAutoFillBackground(TRUE);
+    marginWidget->setBackgroundRole(QPalette::Base);
+
+    textEdit->installEventFilter(this);
+    //marginWidget->setParent(textEdit);
     //setContentsMargins(200,200,200,200); 
 
     //connect(this, SIGNAL(moveEvent(QMoveEvent *)), this, SLOT(savePosMoveEvent(QMoveEvent *)));
@@ -61,7 +65,7 @@ void MdiChild::newFile()
 
     setWindowIcon(QIcon(":/images/ncfile.png"));
 
-    connect(document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+    connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 }
 
 //**************************************************************************************************
@@ -84,13 +88,13 @@ bool MdiChild::loadFile(const QString &fileName)
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     QString tex = in.readAll();
-    setPlainText(tex);
+    textEdit->setPlainText(tex);
     QApplication::restoreOverrideCursor();
 
     setCurrentFile(fileName, tex);
-    //document()->adjustSize();
+    //adjustSize();
 
-    connect(document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+    connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 
     return true;
 }
@@ -190,17 +194,17 @@ bool MdiChild::saveFile(const QString &fileName)
     };
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    curPos = textCursor().position(); 
+    curPos = textEdit->textCursor().position();
    
     QDate dat = QDate::currentDate();
 
 
     exp.setPattern("(DATA|DATE)[:\\s]*[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
-    cursor = textCursor();
+    cursor = textEdit->textCursor();
     cursor.setPosition(0);
     //setTextCursor(cursor);
 
-    cursor = document()->find(exp, cursor);
+    cursor = textEdit->document()->find(exp, cursor);
     if(!cursor.isNull())
     {
        setUpdatesEnabled( FALSE );
@@ -213,9 +217,9 @@ bool MdiChild::saveFile(const QString &fileName)
     else
     {
        exp.setPattern("[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
-       cursor = textCursor();
+       cursor = textEdit->textCursor();
        cursor.setPosition(0);
-       cursor = document()->find(exp, cursor);
+       cursor = textEdit->document()->find(exp, cursor);
        if(!cursor.isNull())
        {
           setUpdatesEnabled( FALSE );
@@ -230,15 +234,15 @@ bool MdiChild::saveFile(const QString &fileName)
 
     
     QTextStream out(&file);
-    QString tex = toPlainText();
+    QString tex = textEdit->toPlainText();
     if(!tex.contains("\r\n"))
       tex.replace("\n", "\r\n" ); 
     out << tex;
     QApplication::restoreOverrideCursor();
     
-    cursor = textCursor();
+    cursor = textEdit->textCursor();
     cursor.setPosition(curPos);
-    setTextCursor(cursor);
+    textEdit->setTextCursor(cursor);
     
     setCurrentFile(fileName, tex);
     return true;
@@ -275,7 +279,7 @@ void MdiChild::closeEvent(QCloseEvent *event)
 
 void MdiChild::documentWasModified()
 {
-    setWindowModified(document()->isModified());
+    setWindowModified(textEdit->document()->isModified());
 }
 
 //**************************************************************************************************
@@ -284,7 +288,7 @@ void MdiChild::documentWasModified()
 
 bool MdiChild::maybeSave()
 {
-    if(document()->isModified()) 
+    if(textEdit->document()->isModified())
     {
 	QMessageBox::StandardButton ret;
         ret = QMessageBox::warning(this, tr("EdytorNC"),
@@ -314,7 +318,7 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
 
     curFile = QFileInfo(fileName).canonicalFilePath();
     isUntitled = false;
-    document()->setModified(false);
+    textEdit->document()->setModified(false);
     setWindowModified(false);
 
     exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
@@ -355,13 +359,13 @@ QString MdiChild::strippedName(const QString &fullFileName)
 
 _editor_properites MdiChild::getMdiWindowProperites()
 {
-   mdiWindowProperites.isRedo = document()->isRedoAvailable();
-   mdiWindowProperites.isUndo = document()->isUndoAvailable();
-   mdiWindowProperites.ins = overwriteMode();
-   mdiWindowProperites.modified = document()->isModified();
-   mdiWindowProperites.readOnly = isReadOnly();
-   mdiWindowProperites.isSel = textCursor().hasSelection();
-   mdiWindowProperites.cursorPosX = textCursor().position(); //textCursor().blockNumber();
+   mdiWindowProperites.isRedo = textEdit->document()->isRedoAvailable();
+   mdiWindowProperites.isUndo = textEdit->document()->isUndoAvailable();
+   mdiWindowProperites.ins = textEdit->overwriteMode();
+   mdiWindowProperites.modified = textEdit->document()->isModified();
+   mdiWindowProperites.readOnly = textEdit->isReadOnly();
+   mdiWindowProperites.isSel = textEdit->textCursor().hasSelection();
+   mdiWindowProperites.cursorPosX = textEdit->textCursor().position(); //textCursor().blockNumber();
    mdiWindowProperites.geometry = saveGeometry();
    QRect rect = frameGeometry();
    QPoint position = QPoint(rect.x(), rect.y());
@@ -377,7 +381,7 @@ _editor_properites MdiChild::getMdiWindowProperites()
 void MdiChild::setMdiWindowProperites(_editor_properites opt)
 {
    mdiWindowProperites = opt;
-   setReadOnly(mdiWindowProperites.readOnly);
+   textEdit->setReadOnly(mdiWindowProperites.readOnly);
    setFont(QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
    //editorOpt.lastDir = opt.lastDir;
 
@@ -385,7 +389,7 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    if(mdiWindowProperites.syntaxH)
    {
       if(highlighter <= 0)
-        highlighter = new Highlighter(document(), mdiWindowProperites.hColors);
+        highlighter = new Highlighter(textEdit->document(), mdiWindowProperites.hColors);
       if(highlighter > 0)
         highlighter->rehighlight();
    }
@@ -397,11 +401,20 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    };
     
    
-   QTextCursor cursor = textCursor();
+   QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(mdiWindowProperites.cursorPosX);
-   setTextCursor(cursor);
+   textEdit->setTextCursor(cursor);
+
+   textEdit->ensureCursorVisible();
+
    restoreGeometry(mdiWindowProperites.geometry);
-   ensureCursorVisible();
+   resize(mdiWindowProperites.size);
+   move(mdiWindowProperites.pos);
+
+   //textEdit->setMinimumSize(mdiWindowProperites.size);
+   //textEdit->setBaseSize(mdiWindowProperites.size);
+   //textEdit->setMinimumSize(QSize(0, 0));
+
 }
 
 //**************************************************************************************************
@@ -410,7 +423,7 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
 
 bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 {
-   if((obj == this) && !(isReadOnly()))
+   if((obj == textEdit) && !(textEdit->isReadOnly()))
    {
        if ( ev->type() == QEvent::KeyPress )
        {
@@ -418,7 +431,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 
           if((k->key() == Qt::Key_Comma) && (k->modifiers() == Qt::KeypadModifier))
           {
-             insertPlainText(".");
+             textEdit->insertPlainText(".");
              return TRUE;
           };
 
@@ -426,14 +439,14 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
           {
              if((k->text().toAscii() >= QByteArray("a")) && (k->text().toAscii() <= QByteArray("z")))
              {
-                insertPlainText(k->text().toUpper());
+                textEdit->insertPlainText(k->text().toUpper());
                 return TRUE;
              };
 
              if(((k->text().toAscii() >= QByteArray("A")) && (k->text().toAscii() <= QByteArray("Z"))) 
                 && (k->modifiers() == Qt::ShiftModifier))
              {
-                insertPlainText(k->text().toLower());
+                textEdit->insertPlainText(k->text().toLower());
                 return TRUE;
              };
           };
@@ -444,7 +457,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
    else
    {
       // pass the event on to the parent class
-      return QTextEdit::eventFilter(obj, ev);
+      return textEdit->eventFilter(obj, ev);
    };
 }
 
@@ -461,7 +474,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
 
    exp.setCaseSensitivity (Qt::CaseInsensitive);
 
-   tx = toPlainText();
+   tx = textEdit->toPlainText();
    count = 0;
    while(1)
    {
@@ -523,7 +536,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       if(mode == 2)
       {
          num = startAt;
-         for(i = 0; i < (document()->lineCount() - 1); i++)
+         for(i = 0; i < (textEdit->document()->lineCount() - 1); i++)
          {
             line = tx.section('\n', i, i);
             exp.setPattern("[N]{1,1}[0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
@@ -589,11 +602,11 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       break;
    };
 
-   selectAll();
-   insertPlainText(tx);
-   QTextCursor cursor = textCursor();
+   textEdit->selectAll();
+   textEdit->insertPlainText(tx);
+   QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(0);
-   setTextCursor(cursor);
+   textEdit->setTextCursor(cursor);
 
 }
 
@@ -606,7 +619,7 @@ void MdiChild::doRemoveSpace()
    int i;
    QString tx;
 
-   tx = toPlainText();
+   tx = textEdit->toPlainText();
 
    for(i = 0; i <              tx.length(); i++)
    {
@@ -641,11 +654,11 @@ void MdiChild::doRemoveSpace()
       };
    };
 
-   selectAll();
-   insertPlainText(tx);
-   QTextCursor cursor = textCursor();
+   textEdit->selectAll();
+   textEdit->insertPlainText(tx);
+   QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(0);
-   setTextCursor(cursor);
+   textEdit->setTextCursor(cursor);
 }
 
 //**************************************************************************************************
@@ -662,7 +675,7 @@ void MdiChild::doInsertSpace()
 
    exp.setPattern("[A-Z]+|[#@;:(\\']");
 
-   tx = toPlainText();
+   tx = textEdit->toPlainText();
    pos = 1;
    while((pos = tx.indexOf(exp, pos)) > 0)
    {
@@ -735,11 +748,11 @@ void MdiChild::doInsertSpace()
       pos +=  exp.matchedLength();
    };
 
-   selectAll();
-   insertPlainText(tx);
-   QTextCursor cursor = textCursor();
+   textEdit->selectAll();
+   textEdit->insertPlainText(tx);
+   QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(0);
-   setTextCursor(cursor);
+   textEdit->setTextCursor(cursor);
 }
 
 //**************************************************************************************************
@@ -759,7 +772,7 @@ void MdiChild::doInsertDot()
    exp.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(mdiWindowProperites.dotAdr));
 
    count = 0;
-   tx = toPlainText();
+   tx = textEdit->toPlainText();
    pos = 0;
    while((pos = tx.indexOf(exp, pos)) >= 0)
    {
@@ -795,11 +808,11 @@ void MdiChild::doInsertDot()
 
   //emit message( QString(tr("Inserted : %1 dots.")).arg(count), 6000 );
   cleanUp(&tx);
-  selectAll();
-  insertPlainText(tx);
-  QTextCursor cursor = textCursor();
+  textEdit->selectAll();
+  textEdit->insertPlainText(tx);
+  QTextCursor cursor = textEdit->textCursor();
   cursor.setPosition(0);
-  setTextCursor(cursor);
+  textEdit->setTextCursor(cursor);
 }
 
 //**************************************************************************************************

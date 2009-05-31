@@ -26,4 +26,5 @@ FORMS += i2mdialog.ui \
     dotdialog.ui \
     triangledialog.ui \
     bhctabform.ui \
-    bhcdialog.ui
+    bhcdialog.ui \
+    mdichildform.ui

@@ -21,6 +21,29 @@
 #include "dialogs.h"
 
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+QString removeZeros(QString str)
+{
+   QRegExp exp;
+   int pos;
+
+   pos = 1;
+   exp.setPattern("[\\d]+[.][-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$");
+
+   while((pos = str.indexOf(exp, pos)) > 0)
+   {
+      if((str.at(pos + exp.matchedLength() - 1) == '0'))
+        str.remove(pos + exp.matchedLength() - 1, 1);
+      else
+        pos += exp.matchedLength();
+   };
+   return(str);
+}
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================
@@ -1616,24 +1639,17 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
    contextMenu->addSeparator();
    contextMenu->addAction(tr("Select all"), this, SLOT(sellAll()), Qt::CTRL+Qt::Key_A);
    contextMenu->addSeparator();
-   addCommentsId = contextMenu->addAction(tr("Add comments"), this, SLOT(addCommentsChk()));
+   addCommentsId = contextMenu->addAction(tr("Add comments"));
    addCommentsId->setCheckable(TRUE);
 
    resultTable->setContextMenuPolicy(Qt::CustomContextMenu);
 
-
-   //QHeaderView *header = resultTable->horizontalHeader();
-   //header->setHeaderData(0, Qt::Horizontal, QObject::tr("X"));
-   //header->setHeaderData(1, Qt::Horizontal, QObject::tr("Y"));
-
    resultTable->setHorizontalHeaderLabels(QStringList()<<"X"<<"Y");
 
-   //resultTable->setReadOnly(true);
-   //resultTable->setSelectionMode(QTable::MultiRow);
-   connect(resultTable, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(contextMenuReq(const QPoint &)));
-   //resultTable->setColumnMovingEnabled(FALSE);
-   //resultTable->setRowMovingEnabled(TRUE);
 
+   connect(resultTable, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(contextMenuReq(const QPoint &)));
+   resultTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+   resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
    //adjustSize();
 
    connect( xCenterInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
@@ -1701,10 +1717,7 @@ void BHCTab::inputChanged()
 
 void BHCTab::contextMenuReq(const QPoint &pos)
 {
-   int x;
-   x = pos.x() + this->x();
-   pos.setX(x);
-   contextMenu->exec(pos);
+   contextMenu->popup(QCursor::pos());
 }
 
 //**************************************************************************************************
@@ -1713,7 +1726,7 @@ void BHCTab::contextMenuReq(const QPoint &pos)
 
 void BHCTab::sellAll()
 {
-   resultTable->setRangeSelected(QTableWidgetSelectionRange(0, 0, resultTable->rowCount(), resultTable->columnCount()), TRUE);
+   resultTable->selectAll();
 }
 
 //**************************************************************************************************
@@ -1722,11 +1735,12 @@ void BHCTab::sellAll()
 
 void BHCTab::copySelection()
 {
-   /*int i;
+   int i;
    int pos;
    QString selText, tmp;
    QRegExp exp;
    QStringList list;
+   QTableWidgetItem *it;
 
 
 
@@ -1737,55 +1751,39 @@ void BHCTab::copySelection()
 
    for(i = 0; i < resultTable->rowCount(); i++)
    {
-      if(resultTable->isRowSelected(i))
+
+      if(resultTable->item(i, 0)->isSelected() || resultTable->item(i, 1)->isSelected())
       {
+         it = resultTable->item(i, 0);
+         selText += "X" + it->text();
+         it = resultTable->item(i, 0);
+         selText += " Y" + it->text();
+
          if(addCommentsId->isChecked())
-         {
-            //resultTable->setHorizontalHeaderLabels(QStringList()<<"X"<<"Y");
-            QHeader *vHeader = resultTable->verticalHeader();
-            tmp = vHeader->label(i);
+         {  
+            it = resultTable->verticalHeaderItem(i);
+            tmp = it->text();
             tmp.remove(")");
             tmp.replace("(", "- ");
-            selText += "X" + resultTable->text(i, 0) + " Y" + resultTable->text(i, 1) + " (" + tmp + ")\n";
+            selText += " (" + tmp + ")\n";
          }
          else
-           selText += "X" + resultTable->text(i, 0) + " Y" + resultTable->text(i, 1) + "\n";
+         {
+            selText += "\n";
+         };
       };
 
    };
 
    selText.remove(selText.length()-1, 1);
-
-
-
-
-   pos = 1;
-   exp.setPattern("[\\d]+[.][-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$");
-
-   while((pos = selText.indexOf(exp, pos)) > 0)
-   {
-      if((selText.at(pos + exp.matchedLength() - 1) == '0'))
-        selText.remove(pos + exp.matchedLength() - 1, 1);
-      else
-        pos += exp.matchedLength();
-   };
-
+   selText = removeZeros(selText);
 
    QClipboard *clipBoard = QApplication::clipboard();
    clipBoard->setText(selText, QClipboard::Clipboard);
    if(clipBoard->supportsSelection())
      clipBoard->setText(selText, QClipboard::Selection);
-*/
 
-}
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void BHCTab::addCommentsChk()
-{
-   addCommentsId->setChecked(!addCommentsId->isChecked());
 }
 
 //**************************************************************************************************
@@ -1861,6 +1859,8 @@ void BHCDraw::setScale(double sc)
 void BHCDraw::paintEvent( QPaintEvent * )
 {
     //bitBlt( this, 0, 0, pm );
+    if(pm->isNull())
+      return;
     QPainter painter(this);
     painter.drawPixmap(0, 0, *pm);
 
@@ -1884,7 +1884,7 @@ void BHCDraw::drawHole(double ang, double dia, bool first, bool last, QColor col
     double x, y, x1, y1;
 
     QPainter *paint = new QPainter(pm);
-    //paint->begin( pm);
+    //paint->begin(pm);
     paint->save();
     paint->setWindow(-(geometry().width()/2), -(geometry().height()/2), geometry().width(), geometry().height());
     QRect v = paint->viewport();
@@ -2284,7 +2284,8 @@ void BHCDialog::computeButtonClicked()
          yItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
          //yItem->setFlags(Qt::ItemIsEnabled);
 
-         QTableWidgetItem *hdr = new QTableWidgetItem(QString("%1 - %2").arg(i+1).arg(ang, 0, 'f', 3));
+
+         QTableWidgetItem *hdr = new QTableWidgetItem(removeZeros(QString("%1 - %2").arg(i+1).arg(ang, 0, 'f', 3)));
          tab->resultTable->setVerticalHeaderItem(i, hdr);
          tab->resultTable->setItem(i, 0, xItem);
          tab->resultTable->setItem(i, 1, yItem);
