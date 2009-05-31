@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE KDevPrjSession>
+<KDevPrjSession>
+ <DocsAndViews NumberOfDocuments="11" >
+  <Doc0 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/edytornc.cpp" >
+   <View0 Encoding="" Type="Source" />
+  </Doc0>
+  <Doc1 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/edytornc.h" >
+   <View0 Encoding="" line="0" Type="Source" />
+  </Doc1>
+  <Doc2 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/mdichild.cpp" >
+   <View0 Encoding="" line="0" Type="Source" />
+  </Doc2>
+  <Doc3 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/mdichild.h" >
+   <View0 Encoding="" Type="Source" />
+  </Doc3>
+  <Doc4 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/commoninc.h" >
+   <View0 Encoding="" Type="Source" />
+  </Doc4>
+  <Doc5 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/findinf.cpp" >
+   <View0 Encoding="" Type="Source" />
+  </Doc5>
+  <Doc6 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/findinf.h" >
+   <View0 Encoding="" Type="Source" />
+  </Doc6>
+  <Doc7 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/dialogs.cpp" >
+   <View0 Encoding="" line="479" Type="Source" />
+  </Doc7>
+  <Doc8 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/dialogs.h" >
+   <View0 Encoding="" line="1" Type="Source" />
+  </Doc8>
+  <Doc9 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/customfiledialog.cpp" >
+   <View0 Encoding="" line="172" Type="Source" />
+  </Doc9>
+  <Doc10 NumberOfViews="1" URL="file:///home/artur/Documents/Projekty/edytornc2/src/customfiledialog.h" >
+   <View0 Encoding="" line="77" Type="Source" />
+  </Doc10>
+ </DocsAndViews>
+ <pluginList>
+  <kdevdebugger>
+   <breakpointList>
+    <breakpoint0 location="/home/artur/Documents/Projekty/edytornc2/src/customfiledialog.cpp:494" type="1" tracingFormatString="" traceFormatStringEnabled="0" condition="" tracingEnabled="0" enabled="1" >
+     <tracedExpressions/>
+    </breakpoint0>
+    <breakpoint1 location="/home/artur/Documents/Projekty/edytornc2/src/customfiledialog.cpp:502" type="1" tracingFormatString="" traceFormatStringEnabled="0" condition="" tracingEnabled="0" enabled="1" >
+     <tracedExpressions/>
+    </breakpoint1>
+    <breakpoint2 location="/home/artur/Documents/Projekty/edytornc2/src/mdichild.cpp:150" type="1" tracingFormatString="" traceFormatStringEnabled="0" condition="" tracingEnabled="0" enabled="1" >
+     <tracedExpressions/>
+    </breakpoint2>
+    <breakpoint3 location="/home/artur/Documents/Projekty/edytornc2/src/mdichild.cpp:262" type="1" tracingFormatString="" traceFormatStringEnabled="0" condition="" tracingEnabled="0" enabled="1" >
+     <tracedExpressions/>
+    </breakpoint3>
+    <breakpoint4 location="/home/artur/Documents/Projekty/edytornc2/src/mdichild.cpp:287" type="1" tracingFormatString="" traceFormatStringEnabled="0" condition="" tracingEnabled="0" enabled="1" >
+     <tracedExpressions/>
+    </breakpoint4>
+    <breakpoint5 location="/home/artur/Documents/Projekty/edytornc2/src/edytornc.cpp:322" type="1" tracingFormatString="" traceFormatStringEnabled="0" condition="" tracingEnabled="0" enabled="1" >
+     <tracedExpressions/>
+    </breakpoint5>
+   </breakpointList>
+   <showInternalCommands value="0" />
+  </kdevdebugger>
+  <kdevastyle>
+   <Extensions ext="*.cpp *.h,*.c *.h,*.cxx *.hxx,*.c++ *.h++,*.cc *.hh,*.C *.H,*.diff,*.inl,*.java,*.moc,*.patch,*.tlh,*.xpm" />
+   <AStyle IndentPreprocessors="0" FillCount="4" PadParenthesesOut="1" IndentNamespaces="1" IndentLabels="1" Fill="Spaces" MaxStatement="40" Brackets="Break" MinConditional="-1" IndentBrackets="0" PadParenthesesUn="1" BlockBreak="1" KeepStatements="1" KeepBlocks="1" BlockIfElse="1" IndentSwitches="1" PadOperators="0" FStyle="UserDefined" IndentCases="0" FillEmptyLines="0" BracketsCloseHeaders="0" BlockBreakAll="1" PadParenthesesIn="1" IndentClasses="1" IndentBlocks="0" FillForce="0" />
+  </kdevastyle>
+  <kdevbookmarks>
+   <bookmarks/>
+  </kdevbookmarks>
+  <kdevvalgrind>
+   <executable path="" params="" />
+   <valgrind path="" params="" />
+   <calltree path="" params="" />
+   <kcachegrind path="" />
+  </kdevvalgrind>
+ </pluginList>
+</KDevPrjSession>
