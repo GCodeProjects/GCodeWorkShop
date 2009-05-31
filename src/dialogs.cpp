@@ -1619,6 +1619,7 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
    addCommentsId = contextMenu->addAction(tr("Add comments"), this, SLOT(addCommentsChk()));
    addCommentsId->setCheckable(TRUE);
 
+   resultTable->setContextMenuPolicy(Qt::CustomContextMenu);
 
 
    //QHeaderView *header = resultTable->horizontalHeader();
@@ -1629,7 +1630,7 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
 
    //resultTable->setReadOnly(true);
    //resultTable->setSelectionMode(QTable::MultiRow);
-   connect(resultTable, SIGNAL(contextMenuRequested(int, int, const QPoint &)), this, SLOT(contextMenuReq(int, int, const QPoint &)));
+   connect(resultTable, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(contextMenuReq(const QPoint &)));
    //resultTable->setColumnMovingEnabled(FALSE);
    //resultTable->setRowMovingEnabled(TRUE);
 
@@ -1698,8 +1699,11 @@ void BHCTab::inputChanged()
 //
 //**************************************************************************************************
 
-void BHCTab::contextMenuReq(int row, int col, const QPoint & pos)
+void BHCTab::contextMenuReq(const QPoint &pos)
 {
+   int x;
+   x = pos.x() + this->x();
+   pos.setX(x);
    contextMenu->exec(pos);
 }
 
@@ -2066,6 +2070,7 @@ BHCDialog::BHCDialog(QWidget *parent) : QDialog(parent)
 
    //setFocusProxy(page1);
    //setMaximumSize(width(), height());
+   //adjustSize();
 }
 
 //**************************************************************************************************

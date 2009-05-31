@@ -3,10 +3,10 @@ Some features :
   bolt holes calculation
   solutions of triangles calculation
   speed, feed calculation
-  conversion inch/mm, mm/inch. You can write inches format 1.3/4  1/4 ...
+  conversion inch/mm, mm/inch. You can write inches in format 1.3/4  1/4 ...
   first comment in program is displayed in title bar. In first comment you can write part name.
   comment with date will be replaced with current date on file save. Comment format (dd-mm-yyyy) or ;dd-mm-yyyy
-
+  code colourizing
 
 
 EdytorNC is developed in QT Creator : http://www.qtsoftware.com/products/developer-tools

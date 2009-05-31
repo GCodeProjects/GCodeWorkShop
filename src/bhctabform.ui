@@ -114,6 +114,12 @@
         </item>
         <item row="6" column="2">
          <widget class="QSpinBox" name="roateInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimum">
            <number>-3600</number>
           </property>
@@ -127,6 +133,12 @@
         </item>
         <item row="5" column="2">
          <widget class="QLineEdit" name="angleBeetwenInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>0</string>
           </property>
@@ -137,6 +149,12 @@
         </item>
         <item row="4" column="2">
          <widget class="QLineEdit" name="angleStartInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>0</string>
           </property>
@@ -147,6 +165,12 @@
         </item>
         <item row="3" column="2">
          <widget class="QLineEdit" name="holesInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>6</string>
           </property>
@@ -157,6 +181,12 @@
         </item>
         <item row="2" column="2">
          <widget class="QLineEdit" name="diaInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>400</string>
           </property>
@@ -167,6 +197,12 @@
         </item>
         <item row="1" column="2">
          <widget class="QLineEdit" name="yCenterInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>0</string>
           </property>
@@ -177,6 +213,12 @@
         </item>
         <item row="0" column="2">
          <widget class="QLineEdit" name="xCenterInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>0</string>
           </property>

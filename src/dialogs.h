@@ -359,7 +359,7 @@ class BHCTab : public QWidget, public Ui::BHCTab
 
 
   protected slots:
-    void contextMenuReq(int row, int col, const QPoint & pos);
+    void contextMenuReq(const QPoint & pos);
     void inputChk();
 
   signals:
