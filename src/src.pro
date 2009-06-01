@@ -19,6 +19,7 @@ CONFIG += warn_on \
     debug
 TARGET = ../bin/edytornc
 RESOURCES = application.qrc
+RC_FILE = edytornc.rc
 CONFIG -= release
 FORMS += i2mdialog.ui \
     feedsdialog.ui \

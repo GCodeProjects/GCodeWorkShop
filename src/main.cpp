@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Artur Kozioł   *
- *   artkoz@poczta.onet.pl   *
+ *   Copyright (C) 2009 by Artur Kozioł                                    *
+ *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *

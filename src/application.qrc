@@ -45,5 +45,6 @@
         <file>images/edytornc.png</file>
         <file>images/trig1.png</file>
         <file>images/trig.png</file>
+        <file>images/edytornc.ico</file>
     </qresource>
 </RCC>

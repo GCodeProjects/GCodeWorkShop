@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Artur Kozioł                                    *
+ *   Copyright (C) 2009 by Artur Kozioł                                    *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -178,14 +178,15 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
 
         QFile file(directory.absoluteFilePath(files[i]));
 
-        if (file.open(QIODevice::ReadOnly)) {
+        if (file.open(QIODevice::ReadOnly))
+        {
             QString line;
             QTextStream in(&file);
             while (!in.atEnd()) {
                 if (progressDialog.wasCanceled())
                     break;
                 line = in.readLine();
-                if (line.contains(text)) 
+                if(line.contains(text, Qt::CaseInsensitive))
                 {
                     foundFiles << files[i];
                     break;
