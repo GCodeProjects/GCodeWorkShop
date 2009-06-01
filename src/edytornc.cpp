@@ -37,8 +37,11 @@ edytornc::edytornc()
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
 
-    mdiArea = new QMdiArea;
+    mdiArea = new QMdiArea(this);
     setCentralWidget(mdiArea);
+
+    mdiArea->setViewMode(QMdiArea::SubWindowView);
+
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
@@ -89,6 +92,18 @@ void edytornc::closeEvent(QCloseEvent *event)
    // }
 
     writeSettings();
+
+    foreach (QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
+    {
+       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+       if(mdiChild->textEdit->document()->isModified())
+         if(!mdiChild->close())
+          {
+             event->ignore();
+             return;
+          };
+    };
+
     mdiArea->closeAllSubWindows();
 
     if(currentMdiChild()) 
@@ -109,8 +124,10 @@ void edytornc::newFile()
 {
     MdiChild *child = createMdiChild();
     child->newFile();
-    defaultMdiWindowProperites.cursorPosX = 0;
+    defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.readOnly = FALSE;
+    defaultMdiWindowProperites.maximized = FALSE;
+    defaultMdiWindowProperites.geometry = QByteArray();
     child->setMdiWindowProperites(defaultMdiWindowProperites);
     child->show();
 }
@@ -122,11 +139,63 @@ void edytornc::newFile()
 
 void edytornc::open()
 {
+    QFileInfo file;
+
+
+    QString filters = tr("CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);; Text files *.txt (*.txt);; All files (*.* *)");
+
+
+    QStringList files = QFileDialog::getOpenFileNames(
+                         this,
+                         tr("Select one or more files to open"),
+                         lastDir.absolutePath(),
+                         filters, &openFileFilter);
+
+    qDebug()<< openFileFilter;
+
+
+    QStringList::Iterator it = files.begin();
+    while( it != files.end() )
+    {
+       file.setFile(*it);
+       QMdiSubWindow *existing = findMdiChild(*it);
+
+       if((file.exists ()) && (file.isReadable ()) && !existing)
+       {
+          lastDir = file.absoluteDir();
+          MdiChild *child = createMdiChild();
+          if(child->loadFile(*it))
+          {
+             defaultMdiWindowProperites.cursorPos = 0;
+             defaultMdiWindowProperites.readOnly = FALSE;
+             defaultMdiWindowProperites.maximized = FALSE;
+             defaultMdiWindowProperites.geometry = QByteArray();
+             child->setMdiWindowProperites(defaultMdiWindowProperites);
+             child->show();
+             updateRecentFiles(*it);
+          }
+          else
+          {
+             child->close();
+          };
+       };
+       ++it;
+    };
+    statusBar()->showMessage(tr("File loaded"), 2000);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::openWithPreview()
+{
 
     CustomFDialog *fileDialog;
     QStringList filters;
     QFileInfo file;
-    
+
+
 
     fileDialog = new CustomFDialog(this, fdShowPreview + fdExistingFiles);
 
@@ -143,7 +212,7 @@ void edytornc::open()
 
     fileDialog->restoreState(fileDialogState);
     fileDialog->selectNameFilter(openFileFilter);
-    
+
 
     if (fileDialog->exec() == QDialog::Accepted)
     {
@@ -161,13 +230,17 @@ void edytornc::open()
           if((file.exists ()) && (file.isReadable ()) && !existing)
           {
              MdiChild *child = createMdiChild();
-             if(child->loadFile(*it)) 
+             if(child->loadFile(*it))
              {
+                defaultMdiWindowProperites.cursorPos = 0;
+                defaultMdiWindowProperites.readOnly = FALSE;
+                defaultMdiWindowProperites.maximized = FALSE;
+                defaultMdiWindowProperites.geometry = QByteArray();
                 child->setMdiWindowProperites(defaultMdiWindowProperites);
                 child->show();
                 updateRecentFiles(*it);
-             } 
-             else 
+             }
+             else
              {
                 child->close();
              };
@@ -1271,7 +1344,7 @@ void edytornc::readSettings()
     restoreState(settings.value("State", QByteArray()).toByteArray());
 
 
-    //lastdir = settings.readEntry("LastDir", QString(getenv("HOME")) );
+    lastDir = settings.value("LastDir", QString(getenv("HOME"))).toString();
 
     openFileFilter = settings.value("FileOpenFilter", "*.nc").toString();
 
@@ -1315,57 +1388,30 @@ void edytornc::readSettings()
 
 
     settings.beginGroup("LastDoc" );
+    //
 
-    defaultMdiWindowProperites.cursorPosX = 0;
-    defaultMdiWindowProperites.readOnly = FALSE;
+    //defaultMdiWindowProperites.cursorPos = 0;
+    //defaultMdiWindowProperites.readOnly = FALSE;
 
     int max = settings.value("OpenedFileCount", 0 ).toInt();
     for(int i = 1; i < max; ++i) 
     {
-        //defaultMdiWindowProperites.lastDir = lastdir.absPath(); 
 
-        defaultMdiWindowProperites.fileName = settings.value( "OpenedFile_" + QString::number(i) ).toString();
-        if(!defaultMdiWindowProperites.fileName.isEmpty())
-        {
-           defaultMdiWindowProperites.cursorPosX = settings.value( "CursorX_" + QString::number(i), 1).toInt();
-           //defaultMdiWindowProperites.cursorPosY = settings.value( "CursorY_" + QString::number(i), 1).toInt();
-           defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly_" + QString::number(i), FALSE).toBool();
-           defaultMdiWindowProperites.geometry = settings.value("Geometry_" + QString::number(i), QByteArray()).toByteArray();
+       defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
 
-
-           defaultMdiWindowProperites.pos = settings.value("Pos_" + QString::number(i), QPoint(0, 0)).toPoint();
-           defaultMdiWindowProperites.size = settings.value("Size_" + QString::number(i), QSize(200, 200)).toSize();
+       defaultMdiWindowProperites.fileName = settings.value( "OpenedFile_" + QString::number(i) ).toString();
+       if(!defaultMdiWindowProperites.fileName.isEmpty())
+       {
+          defaultMdiWindowProperites.cursorPos = settings.value( "Cursor_" + QString::number(i), 1).toInt();
+          defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly_" + QString::number(i), FALSE).toBool();
+          defaultMdiWindowProperites.geometry = settings.value("Geometry_" + QString::number(i), QByteArray()).toByteArray();
+          defaultMdiWindowProperites.maximized = settings.value("Maximized_" + QString::number(i), FALSE).toBool();
+          loadFile(defaultMdiWindowProperites);
            
-           loadFile(defaultMdiWindowProperites);
-           
-           //QMdiSubWindow *existing = findMdiChild(defaultMdiWindowProperites.fileName);
-           //if(existing)
-           //{
-              //existing->move(pos);
-              //existing->resize(size);
-              //existing->restoreGeometry(geom);
-           //};
-
-           
-        };
+       };
         
-        settings.remove( "OpenedFile_" + QString::number(i));
-        settings.remove( "CursorX_" + QString::number(i));
-        settings.remove( "CursorY_" + QString::number(i));
-        settings.remove( "ReadOnly_" + QString::number(i));
-        settings.remove( "Pos_" + QString::number(i));
-        settings.remove( "Size_" + QString::number(i));
-        settings.remove( "Geometry_" + QString::number(i));
-
     };
 
-    //QMdiSubWindow *existing = findMdiChild(defaultMdiWindowProperites.fileName);
-    //if(existing)
-    //{
-       //if(settings.value("MdiMaximized", TRUE).toBool())
-         //existing->showMaximized(); 
-    //}; 
-    
 
     settings.endGroup();
 
@@ -1384,6 +1430,23 @@ void edytornc::writeSettings()
    
     QSettings settings("Trolltech", "EdytorNC");
 
+    //cleanup old settings
+    settings.beginGroup("LastDoc" );
+    int max = settings.value("OpenedFileCount", 0 ).toInt();
+    for(int i = 1; i < max; ++i)
+    {
+        settings.remove( "OpenedFile_" + QString::number(i));
+        settings.remove( "Cursor_" + QString::number(i));
+        settings.remove( "ReadOnly_" + QString::number(i));
+        settings.remove( "Pos_" + QString::number(i));
+        settings.remove( "Size_" + QString::number(i));
+        settings.remove( "Geometry_" + QString::number(i));
+        settings.remove( "Maximized_" + QString::number(i));
+
+    };
+    settings.endGroup();
+
+
     settings.setValue("Pos", pos());
     settings.setValue("Size", size());
 
@@ -1391,7 +1454,7 @@ void edytornc::writeSettings()
     settings.setValue("State", saveState());
 
 
-    //settings.setValue("LastDir", lastdir.path());
+    settings.setValue("LastDir", lastDir.path());
     
     settings.setValue("FileOpenFilter", openFileFilter);
 
@@ -1439,22 +1502,13 @@ void edytornc::writeSettings()
         _editor_properites Opt = mdiChild->getMdiWindowProperites();
 
         settings.setValue( "OpenedFile_" + QString::number(i), Opt.fileName);
-        settings.setValue( "CursorX_" + QString::number(i), Opt.cursorPosX);
-        //settings.setValue("CursorY_" + QString::number(i), Opt.cursorPosY);
+        settings.setValue( "Cursor_" + QString::number(i), Opt.cursorPos);
         settings.setValue( "ReadOnly_" + QString::number(i), Opt.readOnly);
-   
-        settings.setValue("Pos_" + QString::number(i), mdiChild->pos());
-        settings.setValue("Size_" + QString::number(i), mdiChild->size());
-        //settings.setValue("Pos_" + QString::number(i), Opt.winPos);
+        settings.setValue("Geometry_" + QString::number(i), mdiChild->parentWidget()->saveGeometry());
+        settings.setValue("Maximized_" + QString::number(i), mdiChild->parentWidget()->isMaximized());
 
-        settings.setValue("Geometry_" + QString::number(i), mdiChild->saveGeometry());
-
-
-        //settings.setValue("MdiMaximized", mdiChild->isMaximized());
         i++;
     };
-    //if(activeMdiChild())
-      //settings.setValue("MdiMaximized", activeMdiChild()->isMaximized());
     
     settings.setValue( "OpenedFileCount", (i)); 
     settings.endGroup();
@@ -1534,10 +1588,10 @@ void edytornc::loadFile(_editor_properites options)
        child->loadFile(options.fileName);
        child->setMdiWindowProperites(options);
 
-
-       child->show();
-
-
+       if(defaultMdiWindowProperites.maximized)
+         child->showMaximized();
+       else
+         child->showNormal();
     };
 }
 
@@ -1564,7 +1618,8 @@ void edytornc::updateRecentFiles( const QString &filename )
 void edytornc::fileOpenRecent( QAction *act )
 {
     defaultMdiWindowProperites.readOnly = FALSE;
-    defaultMdiWindowProperites.cursorPosX = 0;
+    defaultMdiWindowProperites.maximized = FALSE;
+    defaultMdiWindowProperites.cursorPos = 0;
     //defaultMdiWindowProperites.cursorPosY = 0;
     defaultMdiWindowProperites.fileName = m_recentFiles[act->data().toInt()];
     loadFile(defaultMdiWindowProperites);
@@ -1612,7 +1667,8 @@ void edytornc::loadFoundedFile(const QString &fileName)
        MdiChild *child = createMdiChild();
        child->newFile();
        child->loadFile(fileName);
-       defaultMdiWindowProperites.cursorPosX = 0;
+       defaultMdiWindowProperites.maximized = FALSE;
+       defaultMdiWindowProperites.cursorPos = 0;
        defaultMdiWindowProperites.readOnly = FALSE;
        child->setMdiWindowProperites(defaultMdiWindowProperites);
        child->show();

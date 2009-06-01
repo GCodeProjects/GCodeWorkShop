@@ -39,14 +39,13 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     textEdit->setWordWrapMode(QTextOption::NoWrap);
     highlighter = 0;
     textEdit->setAcceptRichText(FALSE);
-
+    setFocusProxy(textEdit);
 
     marginWidget->setAutoFillBackground(TRUE);
     marginWidget->setBackgroundRole(QPalette::Base);
 
     textEdit->installEventFilter(this);
-    //marginWidget->setParent(textEdit);
-    //setContentsMargins(200,200,200,200); 
+    //parentWidget()->setWindowState(Qt::WindowActive);
 
     //connect(this, SIGNAL(moveEvent(QMoveEvent *)), this, SLOT(savePosMoveEvent(QMoveEvent *)));
 }
@@ -122,12 +121,56 @@ bool MdiChild::save()
 
 bool MdiChild::saveAs()
 {
-    
+    QString filters = tr("CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);; Text files *.txt (*.txt);; All files (*.* *)");
+
+
+    QString file = QFileDialog::getSaveFileName(
+                         this,
+                         tr("Save file as..."),
+                         curFile,
+                         filters, &saveFileFilter);
+
+       
+    if((QFile(file).exists()))
+    {
+
+       QMessageBox msgBox;
+       msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(userFriendlyCurrentFile()));
+       msgBox.setInformativeText("Do you want overwrite it ?");
+       msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
+       msgBox.setDefaultButton(QMessageBox::Discard);
+       msgBox.setIcon(QMessageBox::Warning);
+       int ret = msgBox.exec();
+       switch (ret)
+       {
+          case QMessageBox::Save    : break;
+          case QMessageBox::Discard : return false;
+                                      break;
+          default                   : return false;
+                                      break;
+       } ;
+
+    };
+
+    if(file.isNull())
+      return false;
+    else
+      return saveFile(file);
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::saveAsWithPreview()
+{
+
     CustomFDialog *fileDialog;
     QStringList filters;
     QFileInfo file;
     QString fileName;
-    
+
 
     fileDialog = new CustomFDialog(this, fdShowPreview);
 
@@ -146,7 +189,7 @@ bool MdiChild::saveAs()
     if(!saveFileFilter.isEmpty())
       fileDialog->selectNameFilter(saveFileFilter);
 
-    fileDialog->selectFile(curFile); 
+    fileDialog->selectFile(curFile);
     fileDialog->setConfirmOverwrite(FALSE);
 
     if(fileDialog->exec() == QDialog::Accepted)
@@ -154,10 +197,10 @@ bool MdiChild::saveAs()
        saveDialogState = fileDialog->saveState();
        saveFileFilter = fileDialog->selectedNameFilter();
        fileName = fileDialog->selectedFile();
-       
+
        if((QFile(fileName).exists()))
        {
-          switch( QMessageBox::warning(this, tr("Warring"), tr("File : %1 exists. Overwrite ?").arg(fileName),
+          switch( QMessageBox::warning(this, tr("Warning"), tr("File : %1 exists. Overwrite ?").arg(fileName),
                                        tr("Yes"), tr("No")))
           {
              case 0:  break;
@@ -168,7 +211,7 @@ bool MdiChild::saveAs()
     };
     return false;
 
-    
+
 
 }
 
@@ -288,20 +331,29 @@ void MdiChild::documentWasModified()
 
 bool MdiChild::maybeSave()
 {
-    if(textEdit->document()->isModified())
-    {
-	QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("EdytorNC"),
-                                         tr("'%1' has been modified.\n"
-                                            "Do you want to save your changes?").arg(userFriendlyCurrentFile()),
-                                         QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        if(ret == QMessageBox::Save)
-          return save();
-        else 
-          if(ret == QMessageBox::Cancel)
-            return FALSE;
-    }
-    return TRUE;
+   if(textEdit->document()->isModified())
+   {
+      QMessageBox msgBox;
+      msgBox.setText(tr("<b>File \"%1\" has been modified.</b>").arg(userFriendlyCurrentFile()));
+      msgBox.setInformativeText("Do you want to save your changes ?");
+      msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+      msgBox.setDefaultButton(QMessageBox::Save);
+      msgBox.setIcon(QMessageBox::Warning);
+      int ret = msgBox.exec();
+      switch (ret)
+      {
+         case QMessageBox::Save    : return save();
+                                     break;
+         case QMessageBox::Discard : textEdit->document()->setModified(FALSE);
+                                     return TRUE;
+                                     break;
+         case QMessageBox::Cancel  : return FALSE;
+                                     break;
+         default                   : return TRUE;
+                                     break;
+      } ;
+   };
+   return TRUE;
 }
 
 //**************************************************************************************************
@@ -365,7 +417,7 @@ _editor_properites MdiChild::getMdiWindowProperites()
    mdiWindowProperites.modified = textEdit->document()->isModified();
    mdiWindowProperites.readOnly = textEdit->isReadOnly();
    mdiWindowProperites.isSel = textEdit->textCursor().hasSelection();
-   mdiWindowProperites.cursorPosX = textEdit->textCursor().position(); //textCursor().blockNumber();
+   mdiWindowProperites.cursorPos = textEdit->textCursor().position(); //textCursor().blockNumber();
    mdiWindowProperites.geometry = saveGeometry();
    QRect rect = frameGeometry();
    QPoint position = QPoint(rect.x(), rect.y());
@@ -400,21 +452,11 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
       highlighter = 0;
    };
     
-   
+   parentWidget()->restoreGeometry(mdiWindowProperites.geometry);
    QTextCursor cursor = textEdit->textCursor();
-   cursor.setPosition(mdiWindowProperites.cursorPosX);
+   cursor.setPosition(mdiWindowProperites.cursorPos);
    textEdit->setTextCursor(cursor);
-
    textEdit->ensureCursorVisible();
-
-   restoreGeometry(mdiWindowProperites.geometry);
-   resize(mdiWindowProperites.size);
-   move(mdiWindowProperites.pos);
-
-   //textEdit->setMinimumSize(mdiWindowProperites.size);
-   //textEdit->setBaseSize(mdiWindowProperites.size);
-   //textEdit->setMinimumSize(QSize(0, 0));
-
 }
 
 //**************************************************************************************************

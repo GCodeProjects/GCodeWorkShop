@@ -41,6 +41,7 @@ public:
     bool loadFile(const QString &fileName);
     bool save();
     bool saveAs();
+    bool saveAsWithPreview();
     bool saveFile(const QString &fileName);
     QString userFriendlyCurrentFile();
     QString currentFile() { return curFile; }

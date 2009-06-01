@@ -50,7 +50,7 @@ typedef struct _editor_properites
    bool readOnly;
    bool ins;
    bool modified;
-   int cursorPosX;
+   int cursorPos;
    QPoint winPos;
    QString lastDir, dotAdr, i2mAdr;
    QString fileName;
@@ -64,8 +64,7 @@ typedef struct _editor_properites
    bool syntaxH;
    _h_colors hColors;
    QByteArray geometry;
-   QPoint pos;
-   QSize size;
+   bool maximized;
 };
 
 

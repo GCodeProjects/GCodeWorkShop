@@ -58,6 +58,7 @@ protected:
 private slots:
     void newFile();
     void open();
+    void openWithPreview();
     void save();
     void saveAs();
     void cut();
@@ -183,6 +184,7 @@ private:
     QAction *convertProgAct;
 
     QProcess *proc;
+    QDir lastDir;
 
 
 };
