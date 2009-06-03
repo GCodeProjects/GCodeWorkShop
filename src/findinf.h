@@ -71,6 +71,8 @@
 #include "commoninc.h"
 #include "highlighter.h"
 
+#include "ui_findinfilesdialog.h"
+
 
 QT_BEGIN_NAMESPACE
 class QComboBox;
@@ -81,7 +83,7 @@ class QTableWidget;
 QT_END_NAMESPACE
 
 
-class FindInFiles : public QDialog
+class FindInFiles : public QDialog, private Ui::FindInFiles
 {
     Q_OBJECT
 
@@ -95,8 +97,8 @@ public slots:
 private slots:
     void browse();
     void find();
-    void filesTableClicked(QTableWidgetItem *item);
-    void filePreview(QTableWidgetItem *item);
+    void filesTableClicked(int x, int y);
+    void filePreview(int x, int y);
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -105,24 +107,9 @@ private:
     QStringList findFiles(const QDir &directory, const QStringList &files,
                           const QString &text);
     void showFiles(const QDir &directory, const QStringList &files);
-    QPushButton *createButton(const QString &text, const char *member);
-    QComboBox *createComboBox(const QString &text = QString());
     void createFilesTable();
     void readSettings();
 
-    QComboBox *fileComboBox;
-    QComboBox *textComboBox;
-    QComboBox *directoryComboBox;
-    QLabel *fileLabel;
-    QLabel *textLabel;
-    QLabel *directoryLabel;
-    QLabel *filesFoundLabel;
-    QPushButton *browseButton;
-    QPushButton *findButton;
-    QPushButton *closeButton;
-    QTableWidget *filesTable;
-    QTextEdit *preview;
-    
     Highlighter *highlighter;
 
 signals:

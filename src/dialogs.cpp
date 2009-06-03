@@ -2285,14 +2285,16 @@ void BHCDialog::computeButtonClicked()
          //yItem->setFlags(Qt::ItemIsEnabled);
 
 
-         QTableWidgetItem *hdr = new QTableWidgetItem(removeZeros(QString("%1 - %2").arg(i+1).arg(ang, 0, 'f', 3)));
+         QTableWidgetItem *hdr = new QTableWidgetItem(removeZeros(QString("%1 - %2  ").arg(i+1).arg(ang, 0, 'f', 3)));
          tab->resultTable->setVerticalHeaderItem(i, hdr);
          tab->resultTable->setItem(i, 0, xItem);
          tab->resultTable->setItem(i, 1, yItem);
       };
 
       tab->resultTable->resizeColumnsToContents();
-      tab->adjustSize();
+      tab->resultTable->resizeRowsToContents();
+      tab->resultTable->adjustSize();
+      //tab->adjustSize();
 
    };
 

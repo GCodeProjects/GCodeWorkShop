@@ -28,4 +28,5 @@ FORMS += i2mdialog.ui \
     triangledialog.ui \
     bhctabform.ui \
     bhcdialog.ui \
-    mdichildform.ui
+    mdichildform.ui \
+    findinfilesdialog.ui

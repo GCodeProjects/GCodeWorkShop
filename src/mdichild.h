@@ -43,7 +43,7 @@ public:
     bool saveAs();
     bool saveAsWithPreview();
     bool saveFile(const QString &fileName);
-    QString userFriendlyCurrentFile();
+    //QString userFriendlyCurrentFile();
     QString currentFile() { return curFile; }
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);

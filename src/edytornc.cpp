@@ -141,8 +141,18 @@ void edytornc::open()
 {
     QFileInfo file;
 
+#ifdef Q_OS_LINUX
+    QString filters = tr("CNC programs files *.nc (*.nc);;"
+                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
+                         "Text files *.txt (*.txt);; All files (*.* *)");
+#endif
 
-    QString filters = tr("CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);; Text files *.txt (*.txt);; All files (*.* *)");
+#ifdef Q_OS_WIN32
+  QString filters = tr("CNC programs files (*.nc);;"
+                         "CNC programs files (*.nc *.min *.anc *.cnc);;"
+                         "Text files (*.txt);; All files (*.* *)");
+#endif
+
 
 
     QStringList files = QFileDialog::getOpenFileNames(
@@ -151,7 +161,7 @@ void edytornc::open()
                          lastDir.absolutePath(),
                          filters, &openFileFilter);
 
-    qDebug()<< openFileFilter;
+    //qDebug()<< openFileFilter;
 
 
     QStringList::Iterator it = files.begin();
@@ -927,10 +937,10 @@ void edytornc::updateWindowMenu()
         QString text;
         if (i < 9) {
             text = tr("&%1 %2").arg(i + 1)
-                               .arg(child->userFriendlyCurrentFile());
+                               .arg(child->currentFile());
         } else {
             text = tr("%1 %2").arg(i + 1)
-                              .arg(child->userFriendlyCurrentFile());
+                              .arg(child->currentFile());
         }
         QAction *action  = windowMenu->addAction(text);
         action->setCheckable(true);
@@ -1355,11 +1365,11 @@ void edytornc::readSettings()
 
     defaultMdiWindowProperites.i2mAdr = settings.value("I2MAddress", "XYZB").toString();
     defaultMdiWindowProperites.i2mprec = settings.value("I2MPrec", 3).toInt();
-    defaultMdiWindowProperites.inch = settings.value("I2M", TRUE ).toBool();
+    defaultMdiWindowProperites.inch = settings.value("I2M", TRUE).toBool();
 
     defaultMdiWindowProperites.fontName = settings.value("FontName", "Courier").toString();
-    defaultMdiWindowProperites.fontSize = settings.value("FontSize", 14 ).toInt();
-    defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", TRUE ).toBool();
+    defaultMdiWindowProperites.fontSize = settings.value("FontSize", 12).toInt();
+    defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", TRUE).toBool();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray(); 
 
@@ -1670,6 +1680,7 @@ void edytornc::loadFoundedFile(const QString &fileName)
        defaultMdiWindowProperites.maximized = FALSE;
        defaultMdiWindowProperites.cursorPos = 0;
        defaultMdiWindowProperites.readOnly = FALSE;
+       defaultMdiWindowProperites.geometry = QByteArray();
        child->setMdiWindowProperites(defaultMdiWindowProperites);
        child->show();
     };

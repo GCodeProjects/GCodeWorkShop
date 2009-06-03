@@ -75,12 +75,13 @@ bool MdiChild::loadFile(const QString &fileName)
 {
 
     QFile file(fileName);
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("EdytorNC"),
-                             tr("Cannot read file %1:\n%2.")
-                             .arg(fileName)
-                             .arg(file.errorString()));
-        return false;
+    if(!file.open(QIODevice::ReadOnly))
+    {
+       QMessageBox::warning(this, tr("EdytorNC"),
+                            tr("Cannot read file %1:\n%2.")
+                            .arg(fileName)
+                            .arg(file.errorString()));
+       return false;
     }
 
     QTextStream in(&file);
@@ -88,6 +89,7 @@ bool MdiChild::loadFile(const QString &fileName)
 
     QString tex = in.readAll();
     textEdit->setPlainText(tex);
+    file.close();
     QApplication::restoreOverrideCursor();
 
     setCurrentFile(fileName, tex);
@@ -107,11 +109,11 @@ bool MdiChild::save()
     setFocus();
     if(isUntitled) 
     {
-       return saveAs();
+      return saveAs();
     } 
     else 
     {
-       return saveFile(curFile);
+      return saveFile(curFile);
     }
 }
 
@@ -121,8 +123,18 @@ bool MdiChild::save()
 
 bool MdiChild::saveAs()
 {
-    QString filters = tr("CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);; Text files *.txt (*.txt);; All files (*.* *)");
 
+#ifdef Q_OS_LINUX
+    QString filters = tr("CNC programs files *.nc (*.nc);;"
+                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
+                         "Text files *.txt (*.txt);; All files (*.* *)");
+#endif
+
+#ifdef Q_OS_WIN32
+    QString filters = tr("CNC programs files (*.nc);;"
+                         "CNC programs files (*.nc *.min *.anc *.cnc);;"
+                         "Text files (*.txt);; All files (*.* *)");
+#endif
 
     QString file = QFileDialog::getSaveFileName(
                          this,
@@ -135,7 +147,7 @@ bool MdiChild::saveAs()
     {
 
        QMessageBox msgBox;
-       msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(userFriendlyCurrentFile()));
+       msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(curFile));
        msgBox.setInformativeText("Do you want overwrite it ?");
        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
        msgBox.setDefaultButton(QMessageBox::Discard);
@@ -227,13 +239,13 @@ bool MdiChild::saveFile(const QString &fileName)
     QTextCursor cursor;
 
     QFile file(fileName);
-    if (!file.open(QFile::WriteOnly | QFile::Text)) 
+    if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::warning(this, tr("EdytorNC"),
-                             tr("Cannot write file %1:\n%2.")
-                             .arg(fileName)
-                             .arg(file.errorString()));
-        return false;
+       QMessageBox::warning(this, tr("EdytorNC"),
+                            tr("Cannot write file %1:\n%2.")
+                            .arg(fileName)
+                            .arg(file.errorString()));
+       return false;
     };
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -250,12 +262,12 @@ bool MdiChild::saveFile(const QString &fileName)
     cursor = textEdit->document()->find(exp, cursor);
     if(!cursor.isNull())
     {
-       setUpdatesEnabled( FALSE );
+       textEdit->setUpdatesEnabled( FALSE );
        cursor.removeSelectedText();
        cursor.insertText(dat.toString("dd.MM.yyyy"));
 
-       setUpdatesEnabled( TRUE );
-       repaint();
+       textEdit->setUpdatesEnabled( TRUE );
+       textEdit->repaint();
     }
     else
     {
@@ -265,22 +277,23 @@ bool MdiChild::saveFile(const QString &fileName)
        cursor = textEdit->document()->find(exp, cursor);
        if(!cursor.isNull())
        {
-          setUpdatesEnabled( FALSE );
+          textEdit->setUpdatesEnabled( FALSE );
           cursor.removeSelectedText();
           cursor.insertText(dat.toString("dd.MM.yyyy"));
 
-          setUpdatesEnabled( TRUE );
-          repaint();
+          textEdit->setUpdatesEnabled( TRUE );
+          textEdit->repaint();
        }
 
     };
 
-    
     QTextStream out(&file);
+
     QString tex = textEdit->toPlainText();
     if(!tex.contains("\r\n"))
-      tex.replace("\n", "\r\n" ); 
+      tex.replace("\n", "\r\n");
     out << tex;
+    file.close();
     QApplication::restoreOverrideCursor();
     
     cursor = textEdit->textCursor();
@@ -295,10 +308,10 @@ bool MdiChild::saveFile(const QString &fileName)
 //
 //**************************************************************************************************
 
-QString MdiChild::userFriendlyCurrentFile()
+/*QString MdiChild::currentFile()
 {
     return strippedName(curFile);
-}
+}*/
 
 //**************************************************************************************************
 //
@@ -306,14 +319,14 @@ QString MdiChild::userFriendlyCurrentFile()
 
 void MdiChild::closeEvent(QCloseEvent *event)
 {
-    if(maybeSave()) 
-    {
-       event->accept();
-    } 
-    else 
-    {
-       event->ignore();
-    }
+   if(maybeSave())
+   {
+      event->accept();
+   }
+   else
+   {
+      event->ignore();
+   }
 }
 
 //**************************************************************************************************
@@ -322,7 +335,7 @@ void MdiChild::closeEvent(QCloseEvent *event)
 
 void MdiChild::documentWasModified()
 {
-    setWindowModified(textEdit->document()->isModified());
+   setWindowModified(textEdit->document()->isModified());
 }
 
 //**************************************************************************************************
@@ -334,7 +347,7 @@ bool MdiChild::maybeSave()
    if(textEdit->document()->isModified())
    {
       QMessageBox msgBox;
-      msgBox.setText(tr("<b>File \"%1\" has been modified.</b>").arg(userFriendlyCurrentFile()));
+      msgBox.setText(tr("<b>File \"%1\" has been modified.</b>").arg(curFile));
       msgBox.setInformativeText("Do you want to save your changes ?");
       msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
       msgBox.setDefaultButton(QMessageBox::Save);
@@ -392,7 +405,7 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
     };
    
  
-    setWindowTitle(QString("%2 ----> %1 [*]").arg(userFriendlyCurrentFile()).arg(f_tx.simplified()));
+    setWindowTitle(QString("%2 ----> %1 [*]").arg(curFile).arg(f_tx.simplified()));
 
 }
 
@@ -418,10 +431,10 @@ _editor_properites MdiChild::getMdiWindowProperites()
    mdiWindowProperites.readOnly = textEdit->isReadOnly();
    mdiWindowProperites.isSel = textEdit->textCursor().hasSelection();
    mdiWindowProperites.cursorPos = textEdit->textCursor().position(); //textCursor().blockNumber();
-   mdiWindowProperites.geometry = saveGeometry();
-   QRect rect = frameGeometry();
-   QPoint position = QPoint(rect.x(), rect.y());
-   mdiWindowProperites.winPos = position;
+   mdiWindowProperites.geometry = parentWidget()->saveGeometry();
+   //QRect rect = frameGeometry();
+   //QPoint position = QPoint(rect.x(), rect.y());
+   //mdiWindowProperites.winPos = position;
    mdiWindowProperites.fileName = curFile;
    return(mdiWindowProperites);
 }
@@ -469,12 +482,25 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
    {
        if ( ev->type() == QEvent::KeyPress )
        {
-          QKeyEvent *k = (QKeyEvent*)ev;
+          QKeyEvent *k = (QKeyEvent*) ev;
 
-          if((k->key() == Qt::Key_Comma) && (k->modifiers() == Qt::KeypadModifier))
+          QTextCursor cr = textEdit->textCursor(); //Underline changes
+          QTextCharFormat format = cr.charFormat();
+          format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+          format.setUnderlineColor(Qt::green);
+          format.setFontWeight(QFont::Bold);
+          cr.mergeCharFormat(format);
+          textEdit->setTextCursor(cr);
+
+
+          if(k->key() == Qt::Key_Comma) //Keypad comma always prints period
           {
-             textEdit->insertPlainText(".");
-             return TRUE;
+             if(k->modifiers() == Qt::KeypadModifier) // !!! Not working for keypad comma !!!
+             {
+                textEdit->insertPlainText(".");
+                return TRUE;
+             };
+
           };
 
           if(mdiWindowProperites.intCapsLock)

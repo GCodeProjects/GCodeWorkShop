@@ -51,7 +51,7 @@ typedef struct _editor_properites
    bool ins;
    bool modified;
    int cursorPos;
-   QPoint winPos;
+   //QPoint winPos;
    QString lastDir, dotAdr, i2mAdr;
    QString fileName;
    bool atEnd, dotAfter;
