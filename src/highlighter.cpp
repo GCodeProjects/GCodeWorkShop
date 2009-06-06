@@ -23,13 +23,25 @@
 
 #include "highlighter.h"
 
-Highlighter::Highlighter(QTextDocument *parent, const _h_colors hColors)
-    : QSyntaxHighlighter(parent)
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 {
     
-    font = parent->defaultFont();
-    highlightColors = hColors;
     
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
+{
+   font = fnt;
+   highlightColors = hColors;
 }
 
 //**************************************************************************************************
@@ -44,7 +56,6 @@ void Highlighter::highlightBlock( const QString &tx)
   QChar ch;
   QString adrress, val;
   QTextCharFormat format;
-
 
 
   format.setFontWeight(QFont::Normal);
@@ -227,6 +238,12 @@ void Highlighter::highlightBlock( const QString &tx)
                  case 'N'         : color = highlightColors.nColor;
                                     break;
                  case 'L'         : color = highlightColors.lColor;
+                                    break;
+                 case 'A'         : color = highlightColors.aColor;
+                                    break;
+                 case 'B'         : color = highlightColors.bColor;
+                                    break;
+                 case 'Z'         : color = highlightColors.zColor;
                                     break;
                  case 'F'         :
                  case 'S'         : color = highlightColors.fsColor;
@@ -428,6 +445,12 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
                  case 'N'         : color = highlightColors.nColor;
                                     break;
                  case 'L'         : color = highlightColors.lColor;
+                                    break;
+                 case 'A'         : color = highlightColors.aColor;
+                                    break;
+                 case 'B'         : color = highlightColors.bColor;
+                                    break;
+                 case 'Z'         : color = highlightColors.zColor;
                                     break;
                  case 'F'         :
                  case 'S'         : color = highlightColors.fsColor;

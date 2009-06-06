@@ -38,6 +38,10 @@ typedef struct _h_colors
    int keyWordColor;
    int progNameColor;
    int operatorColor;
+   int zColor;
+   int aColor;
+   int bColor;
+
 };
 
 //**************************************************************************************************
@@ -51,7 +55,6 @@ typedef struct _editor_properites
    bool ins;
    bool modified;
    int cursorPos;
-   //QPoint winPos;
    QString lastDir, dotAdr, i2mAdr;
    QString fileName;
    bool atEnd, dotAfter;
@@ -65,6 +68,10 @@ typedef struct _editor_properites
    _h_colors hColors;
    QByteArray geometry;
    bool maximized;
+   bool underlineChanges;
+   int lineColor;
+   int underlineColor;
+   bool tabbedMode;
 };
 
 

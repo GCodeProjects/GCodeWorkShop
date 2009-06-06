@@ -115,9 +115,12 @@ FDialogPreview::FDialogPreview(QWidget *pa) : QTextEdit(pa)
 void FDialogPreview::setHColors(const _h_colors colors)
 {
    if(highlighter <= 0)
-     highlighter = new Highlighter(document(), colors);
+     highlighter = new Highlighter(document());
    if(highlighter > 0)
-     highlighter->rehighlight();
+   {
+      highlighter->setHColors(colors, font());
+      highlighter->rehighlight();
+   };
 }
 
 //**************************************************************************************************

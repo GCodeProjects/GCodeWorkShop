@@ -36,12 +36,18 @@
          <property name="editable">
           <bool>true</bool>
          </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAtTop</enum>
+         </property>
         </widget>
        </item>
        <item row="2" column="1">
         <widget class="QComboBox" name="fileComboBox">
          <property name="editable">
           <bool>true</bool>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAtTop</enum>
          </property>
          <item>
           <property name="text">
@@ -54,6 +60,9 @@
         <widget class="QComboBox" name="directoryComboBox">
          <property name="editable">
           <bool>true</bool>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAtTop</enum>
          </property>
         </widget>
        </item>
@@ -124,6 +133,13 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="wholeWordsCheckBox">
+         <property name="text">
+          <string>Whole words</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
@@ -132,6 +148,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QTableWidget" name="filesTable">
+       <property name="contextMenuPolicy">
+        <enum>Qt::NoContextMenu</enum>
+       </property>
+       <property name="toolTip">
+        <string>Oneclick - preview, doubleclick - opens file in editor.</string>
+       </property>
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
        </property>
@@ -140,6 +162,9 @@
        </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
        </property>
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
@@ -156,12 +181,6 @@
        <property name="columnCount">
         <number>3</number>
        </property>
-       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-        <bool>true</bool>
-       </attribute>
-       <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-        <bool>false</bool>
-       </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>true</bool>
        </attribute>

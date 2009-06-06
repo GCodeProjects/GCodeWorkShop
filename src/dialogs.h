@@ -25,6 +25,8 @@
 #include <QtGui>
 #include <QTextDocument>
 
+#include "commoninc.h"
+
 #include "ui_i2mdialog.h"
 #include "ui_feedsdialog.h"
 #include "ui_renumberdialog.h"
@@ -32,8 +34,11 @@
 #include "ui_triangledialog.h"
 #include "ui_bhctabform.h"
 #include "ui_bhcdialog.h"
+#include "ui_chamferdialog.h"
+#include "ui_i2mprogdialog.h"
+#include "ui_setupdialog.h"
 
-#define BHC_WIN_NAME      "_BHCD_DRAWING_WINDOW_"
+
 
 struct SSearchOptions
 {
@@ -57,7 +62,7 @@ class FindDialog : public QDialog
   Q_OBJECT
 
   public:
-    FindDialog(QWidget *parent = 0);
+    FindDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~FindDialog();
 
@@ -97,7 +102,7 @@ class ReplaceDialog : public QDialog
   Q_OBJECT
 
   public:
-    ReplaceDialog( QWidget * parent = 0);
+    ReplaceDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~ReplaceDialog();
 
@@ -138,7 +143,7 @@ class ReplaceConfirmDialog : public QDialog
   Q_OBJECT
 
   public:
-    ReplaceConfirmDialog(const QString *text, QWidget * parent = 0);
+    ReplaceConfirmDialog(const QString *text, QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~ReplaceConfirmDialog();
 
@@ -178,7 +183,7 @@ class I2MDialog : public QDialog, private Ui::I2MDialog
   Q_OBJECT
 
   public:
-    I2MDialog(QWidget * parent = 0);
+    I2MDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~I2MDialog();
 
@@ -208,7 +213,7 @@ class FeedsDialog : public QDialog, private Ui::FeedsDialog
   Q_OBJECT
 
   public:
-    FeedsDialog( QWidget * parent = 0);
+    FeedsDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~FeedsDialog();
 
@@ -239,7 +244,7 @@ class RenumberDialog : public QDialog, private Ui::RenumberDialog
   Q_OBJECT
 
   public:
-    RenumberDialog(QWidget * parent = 0);
+    RenumberDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~RenumberDialog();
 
@@ -274,7 +279,7 @@ class DotDialog : public QDialog, private Ui::DotDialog
   Q_OBJECT
 
   public:
-    DotDialog(QWidget * parent = 0);
+    DotDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~DotDialog();
 
@@ -311,7 +316,7 @@ class TriangleDialog : public QDialog, private Ui::TriangleDialog
   Q_OBJECT
 
   public:
-    TriangleDialog( QWidget * parent = 0);
+    TriangleDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~TriangleDialog();
 
@@ -426,7 +431,7 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
   Q_OBJECT
 
   public:
-    BHCDialog( QWidget * parent = 0);
+    BHCDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~BHCDialog();
 
@@ -454,6 +459,30 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+class ChamferDialog : public QDialog, private Ui::ChamferDialog
+{
+  Q_OBJECT
+
+  public:
+    ChamferDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
+
+    ~ChamferDialog();
+
+
+  public:
+
+
+  protected slots:
+    void inputChanged();
+    void checkBoxToggled();
+
+
+  private slots:
+    void computeButtonClicked();
+
+  private:
+
+};
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================
@@ -461,6 +490,104 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+class I2MProgDialog : public QDialog, private Ui::I2MProgDialog
+{
+  Q_OBJECT
+
+  public:
+    I2MProgDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
+
+    ~I2MProgDialog();
+
+
+  public slots:
+    void getState(QString &txt, int &x, bool &in);
+    void setState(const QString &txt, int x, bool in);
+
+  protected slots:
+
+  private slots:
+    void inputChanged();
+    void okButtonClicked();
+
+  private:
+
+};
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+class SetupDialog : public QDialog, private Ui::SetupDialog
+{
+  Q_OBJECT
+
+  public:
+    SetupDialog( QWidget* parent = 0, const _editor_properites* prop = 0, Qt::WindowFlags f = Qt::Dialog);
+
+    ~SetupDialog();
+
+
+  public slots:
+    _editor_properites getSettings();
+
+  protected slots:
+
+
+  private slots:
+    void changeFont();
+    void changeColor(QAbstractButton *button);
+    void setDefaultProp();
+
+
+  private:
+    _editor_properites editProp;
+    QButtonGroup *colorButtons;
+
+
+
+};
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
 

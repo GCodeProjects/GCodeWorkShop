@@ -29,4 +29,8 @@ FORMS += i2mdialog.ui \
     bhctabform.ui \
     bhcdialog.ui \
     mdichildform.ui \
-    findinfilesdialog.ui
+    findinfilesdialog.ui \
+    chamferdialog.ui \
+    i2mprogdialog.ui \
+    setupdialog.ui
+TRANSLATIONS = edytornc_pl.ts

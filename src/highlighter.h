@@ -37,7 +37,8 @@ class Highlighter : public QSyntaxHighlighter
     Q_OBJECT
 
 public:
-    Highlighter(QTextDocument *parent, const _h_colors hColors);
+    Highlighter(QTextDocument *parent);
+    void setHColors(const _h_colors hColors, const QFont fnt);
 
 protected:
     void highlightBlock(const QString &text);

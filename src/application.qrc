@@ -46,5 +46,7 @@
         <file>images/trig1.png</file>
         <file>images/trig.png</file>
         <file>images/edytornc.ico</file>
+        <file>images/chamfer_big.png</file>
+        <file>images/fileopen_preview.png</file>
     </qresource>
 </RCC>

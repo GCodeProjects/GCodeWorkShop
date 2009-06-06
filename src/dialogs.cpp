@@ -51,7 +51,7 @@ QString removeZeros(QString str)
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-FindDialog::FindDialog(QWidget *parent): QDialog(parent)
+FindDialog::FindDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 
    setWindowTitle(tr("Find text..."));
@@ -196,7 +196,7 @@ void FindDialog::getFindOpt(SSearchOptions &s)
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-ReplaceDialog::ReplaceDialog( QWidget * parent) : QDialog(parent)
+ReplaceDialog::ReplaceDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 
    setWindowTitle(tr("Find & replace text"));
@@ -351,7 +351,7 @@ void ReplaceDialog::getFindOpt(SSearchOptions &s)
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-ReplaceConfirmDialog::ReplaceConfirmDialog(const QString *text, QWidget * parent) : QDialog(parent)
+ReplaceConfirmDialog::ReplaceConfirmDialog(const QString *text, QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
    setAttribute(Qt::WA_DeleteOnClose);
    setWindowTitle(tr("Find & replace"));
@@ -457,7 +457,7 @@ void ReplaceConfirmDialog::findNextButtonClicked()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-I2MDialog::I2MDialog(QWidget * parent) : QDialog(parent)
+I2MDialog::I2MDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 
    setupUi(this);
@@ -613,7 +613,7 @@ void I2MDialog::checkBoxToggled()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-FeedsDialog::FeedsDialog( QWidget * parent) : QDialog(parent)
+FeedsDialog::FeedsDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
    setupUi(this);
 
@@ -793,7 +793,7 @@ void FeedsDialog::inputChanged()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-RenumberDialog::RenumberDialog(QWidget * parent) : QDialog(parent)
+RenumberDialog::RenumberDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 
    setupUi(this);
@@ -942,7 +942,7 @@ void RenumberDialog::removeAllClicked()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-DotDialog::DotDialog(QWidget * parent) : QDialog(parent)
+DotDialog::DotDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
    setupUi(this);
 
@@ -1066,7 +1066,7 @@ void DotDialog::spinBoxVal(int val)
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-TriangleDialog::TriangleDialog( QWidget * parent) : QDialog(parent)
+TriangleDialog::TriangleDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 
    setupUi(this);
@@ -2040,7 +2040,7 @@ void BHCDraw::drawLines()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-BHCDialog::BHCDialog(QWidget *parent) : QDialog(parent)
+BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
    setupUi(this);
    setAttribute(Qt::WA_DeleteOnClose);
@@ -2471,6 +2471,729 @@ void BHCDialog::computeButtonClicked()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+ChamferDialog::ChamferDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
+{
+
+   setupUi(this);
+   setAttribute(Qt::WA_DeleteOnClose);
+   setWindowTitle(tr("Chamfer"));
+
+
+   connect(angCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   QValidator *angInputValid = new QDoubleValidator( 0.1, 90, 3, this);
+   angInput->setValidator(angInputValid);
+   connect(zlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   QValidator *zlInputValid = new QDoubleValidator( 0.1, 1000, 3, this);
+   zlInput->setValidator(zlInputValid);
+   connect(dlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   QValidator *dlInputValid = new QDoubleValidator( 0.1, 1000, 3, this);
+   dlInput->setValidator(dlInputValid);
+   connect(xoCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   QValidator *xoInputValid = new QDoubleValidator( 0, 2000, 3, this);
+   xoInput->setValidator(xoInputValid);
+   connect(xdCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   QValidator *xdInputValid = new QDoubleValidator( 0.001, 2000, 3, this);
+   xdInput->setValidator(xdInputValid);
+
+
+   connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
+   connect(closeButton, SIGNAL(clicked()), SLOT(close()));
+
+
+   //inputChanged();
+
+   //setMaximumSize(width(), height());
+
+   connect(angInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(zlInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(dlInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(xdInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(xoInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+
+   checkBoxToggled();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+ChamferDialog::~ChamferDialog()
+{
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void ChamferDialog::computeButtonClicked()
+{
+   double ZL, XL, X1, X2, ang;
+   bool ok;
+
+
+   if(angCheckBox->isChecked() && zlCheckBox->isChecked())
+   {
+      if(!zlInput->hasAcceptableInput() || !angInput->hasAcceptableInput())
+        return;
+
+      ang = angInput->text().toDouble(&ok);
+      ZL = zlInput->text().toDouble(&ok);
+
+      XL = tan((M_PIl/180) * ang) * (ZL * 2);
+      dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
+
+      if(xoCheckBox->isChecked() && xoInput->hasAcceptableInput())
+      {
+         X1 = xoInput->text().toDouble(&ok);
+         X2 = X1 + XL;
+         xdInput->setText(QString("%1").arg(X2, 0, 'f', 3));
+
+      };
+
+      if(xdCheckBox->isChecked() && xdInput->hasAcceptableInput())
+      {
+         X2 = xdInput->text().toDouble(&ok);
+         X1 = X2 - XL;
+         xoInput->setText(QString("%1").arg(X1, 0, 'f', 3));
+
+      };
+      return;
+   };
+
+
+   if(angCheckBox->isChecked() && dlCheckBox->isChecked())
+   {
+      if(!dlInput->hasAcceptableInput() || !angInput->hasAcceptableInput())
+        return;
+
+      ang = angInput->text().toDouble(&ok);
+      XL = dlInput->text().toDouble(&ok);
+
+      ZL = (XL / 2) / tan((M_PIl/180) * ang) ;
+      zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
+
+
+      return;
+   };
+
+   if(angCheckBox->isChecked() && xoCheckBox->isChecked() && xdCheckBox->isChecked())
+   {
+      if(!xdInput->hasAcceptableInput() || !xoInput->hasAcceptableInput() || !angInput->hasAcceptableInput())
+        return;
+
+      ang = angInput->text().toDouble(&ok);
+      X1 = xoInput->text().toDouble(&ok);
+      X2 = xdInput->text().toDouble(&ok);
+      XL = X2 - X1;
+      dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
+      ZL = (XL / 2) / tan((M_PIl/180) * ang) ;
+      zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
+
+
+      return;
+   };
+
+   if(zlCheckBox->isChecked() && dlCheckBox->isChecked())
+   {
+      if(!zlInput->hasAcceptableInput() || !dlInput->hasAcceptableInput())
+        return;
+
+      XL = dlInput->text().toDouble(&ok);
+      ZL = zlInput->text().toDouble(&ok);
+      ang = (atan((XL / 2) / ZL)) / (M_PIl/180);
+
+      angInput->setText(QString("%1").arg(ang, 0, 'f', 3));
+
+      return;
+   };
+
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void ChamferDialog::checkBoxToggled()
+{
+   bool ena;
+
+
+   ena = (angCheckBox->isChecked() && zlCheckBox->isChecked());
+   dlCheckBox->setEnabled(!ena && (!xdCheckBox->isChecked() || !xoCheckBox->isChecked()));
+
+   ena = (angCheckBox->isChecked() && dlCheckBox->isChecked());
+   zlCheckBox->setEnabled(!ena && (!xdCheckBox->isChecked() || !xoCheckBox->isChecked()));
+
+   //zlCheckBox->setEnabled(!xdCheckBox->isChecked() || !xoCheckBox->isChecked());
+   //dlCheckBox->setEnabled(!xdCheckBox->isChecked() || !xoCheckBox->isChecked());
+
+   xoCheckBox->setEnabled((!xdCheckBox->isChecked()) || !zlCheckBox->isChecked());
+   xdCheckBox->setEnabled((!xoCheckBox->isChecked()) || !zlCheckBox->isChecked());
+
+   if(dlCheckBox->isChecked())
+   {
+      xoCheckBox->setEnabled(FALSE);
+      xdCheckBox->setEnabled(FALSE);
+   };
+
+   angCheckBox->setEnabled(!zlCheckBox->isChecked() || !dlCheckBox->isChecked());
+
+
+   if(!angCheckBox->isEnabled())
+   {
+     angCheckBox->setChecked(FALSE);
+     angInput->setText("0");
+   };
+   if(!zlCheckBox->isEnabled())
+   {
+     zlCheckBox->setChecked(FALSE);
+     zlInput->setText("0");
+   };
+   if(!dlCheckBox->isEnabled())
+   {
+     dlCheckBox->setChecked(FALSE);
+     dlInput->setText("0");
+   };
+   if(!xdCheckBox->isEnabled())
+   {
+     xdCheckBox->setChecked(FALSE);
+     xdInput->setText("0");
+   };
+   if(!xoCheckBox->isEnabled())
+   {
+     xoCheckBox->setChecked(FALSE);
+     xoInput->setText("0");
+   };
+
+   angInput->setReadOnly(!angCheckBox->isChecked());
+   zlInput->setReadOnly(!zlCheckBox->isChecked());
+   dlInput->setReadOnly(!dlCheckBox->isChecked());
+   xdInput->setReadOnly(!xdCheckBox->isChecked());
+   xoInput->setReadOnly(!xoCheckBox->isChecked());
+
+   computeButton->setEnabled(FALSE);
+
+   inputChanged();
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void ChamferDialog::inputChanged()
+{
+   QPalette palette;
+   palette.setColor(angInput->foregroundRole(), Qt::red);
+
+   if(angInput->hasAcceptableInput())
+     angInput->setPalette(QPalette());
+   else
+     angInput->setPalette(palette);
+
+   if(zlInput->hasAcceptableInput())
+     zlInput->setPalette(QPalette());
+   else
+     zlInput->setPalette(palette);
+
+   if(dlInput->hasAcceptableInput())
+     dlInput->setPalette(QPalette());
+   else
+     dlInput->setPalette(palette);
+
+   if(xdInput->hasAcceptableInput())
+     xdInput->setPalette(QPalette());
+   else
+     xdInput->setPalette(palette);
+
+   if(xoInput->hasAcceptableInput())
+     xoInput->setPalette(QPalette());
+   else
+     xoInput->setPalette(palette);
+
+
+   if(angCheckBox->isChecked() && zlCheckBox->isChecked())
+     if(zlInput->hasAcceptableInput() && angInput->hasAcceptableInput())
+     {
+        computeButton->setEnabled(TRUE);
+        return;
+     };
+
+
+   if(angCheckBox->isChecked() && dlCheckBox->isChecked())
+     if(dlInput->hasAcceptableInput() && angInput->hasAcceptableInput())
+     {
+        computeButton->setEnabled(TRUE);
+        return;
+     };
+
+   if(angCheckBox->isChecked() && xoCheckBox->isChecked() && xdCheckBox->isChecked())
+     if(xdInput->hasAcceptableInput() && xoInput->hasAcceptableInput() && angInput->hasAcceptableInput())
+     {
+        computeButton->setEnabled(TRUE);
+        return;
+     };
+
+   if(zlCheckBox->isChecked() && dlCheckBox->isChecked())
+     if(zlInput->hasAcceptableInput() && dlInput->hasAcceptableInput())
+     {
+        computeButton->setEnabled(TRUE);
+        return;
+     };
+
+   computeButton->setEnabled(FALSE);
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+I2MProgDialog::I2MProgDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
+{
+
+   setupUi(this);
+   setWindowTitle(tr("Convert program inch to metric"));
+
+
+   connect(mInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
+
+
+   connect(okButton, SIGNAL(clicked()), SLOT(accept()));
+   connect(closeButton, SIGNAL(clicked()), SLOT(close()));
+
+
+   //setMaximumSize(width(), height());
+
+   setFocusProxy(mInput);
+   inputChanged();
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+I2MProgDialog::~I2MProgDialog()
+{
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void I2MProgDialog::inputChanged()
+{
+   okButton->setEnabled(mInput->hasAcceptableInput());
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void I2MProgDialog::okButtonClicked()
+{
+   accept();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void I2MProgDialog::getState(QString &txt, int &x, bool &in)
+{
+   txt = mInput->text();
+   txt.remove(' ');
+   x = precInput->value();
+   in = inchCheckBox->isChecked();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void I2MProgDialog::setState(const QString &txt, int x, bool in)
+{
+   mInput->setText(txt);
+   mInput->selectAll();
+   inchCheckBox->setChecked(in);
+   mmCheckBox->setChecked(!in);
+   precInput->setValue(x);
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::WindowFlags f) : QDialog(parent, f)
+{
+
+   QPalette palette;
+
+
+   setupUi(this);
+   setWindowTitle(tr("EdytorNC configuration"));
+
+   editProp = *prop;
+
+
+   fontLabel->setText(QString(tr("Current font : <b>\"%1\", %2 pt.<\b>")
+                      .arg(editProp.fontName).arg(editProp.fontSize)));
+   fontLabel->setFont(QFont(editProp.fontName, editProp.fontSize));
+
+
+   connect(changeFontButton, SIGNAL(clicked()), SLOT(changeFont()));
+
+
+   colorButtons = new QButtonGroup(this);
+   connect(colorButtons, SIGNAL(buttonClicked(QAbstractButton *)), SLOT(changeColor(QAbstractButton *)));
+
+   commentColorButton->setBackgroundRole(QPalette::Base);
+   QColor color = palette.color(QPalette::Background);
+   palette.setColor(QPalette::Button, color);
+   palette.setColor(QPalette::Light, color);
+   palette.setColor(QPalette::Dark, color);
+   palette.setColor(QPalette::Shadow, color);
+   palette.setColor(QPalette::Midlight, color);
+
+   palette.setColor(commentColorButton->foregroundRole(), prop->hColors.commentColor);
+   commentColorButton->setPalette(palette);
+   commentColorButton->setAutoFillBackground(TRUE);
+   colorButtons->addButton(commentColorButton);
+
+   palette.setColor(gColorButton->foregroundRole(), prop->hColors.gColor);
+   gColorButton->setPalette(palette);
+   gColorButton->setAutoFillBackground(TRUE);
+   gColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(gColorButton);
+
+   palette.setColor(mColorButton->foregroundRole(), prop->hColors.mColor);
+   mColorButton->setPalette(palette);
+   mColorButton->setAutoFillBackground(TRUE);
+   mColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(mColorButton);
+
+   palette.setColor(nColorButton->foregroundRole(), prop->hColors.nColor);
+   nColorButton->setPalette(palette);
+   nColorButton->setAutoFillBackground(TRUE);
+   nColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(nColorButton);
+
+   palette.setColor(lColorButton->foregroundRole(), prop->hColors.lColor);
+   lColorButton->setPalette(palette);
+   lColorButton->setAutoFillBackground(TRUE);
+   lColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(lColorButton);
+
+   palette.setColor(fsColorButton->foregroundRole(), prop->hColors.fsColor);
+   fsColorButton->setPalette(palette);
+   fsColorButton->setAutoFillBackground(TRUE);
+   fsColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(fsColorButton);
+
+   palette.setColor(dhtColorButton->foregroundRole(), prop->hColors.dhtColor);
+   dhtColorButton->setPalette(palette);
+   dhtColorButton->setAutoFillBackground(TRUE);
+   dhtColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(dhtColorButton);
+
+   palette.setColor(rColorButton->foregroundRole(), prop->hColors.rColor);
+   rColorButton->setPalette(palette);
+   rColorButton->setAutoFillBackground(TRUE);
+   rColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(rColorButton);
+
+   palette.setColor(macroColorButton->foregroundRole(), prop->hColors.macroColor);
+   macroColorButton->setPalette(palette);
+   macroColorButton->setAutoFillBackground(TRUE);
+   macroColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(macroColorButton);
+
+   palette.setColor(keyWordColorButton->foregroundRole(), prop->hColors.keyWordColor);
+   keyWordColorButton->setPalette(palette);
+   keyWordColorButton->setAutoFillBackground(TRUE);
+   keyWordColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(keyWordColorButton);
+
+   palette.setColor(progNameColorButton->foregroundRole(), prop->hColors.progNameColor);
+   progNameColorButton->setPalette(palette);
+   progNameColorButton->setAutoFillBackground(TRUE);
+   progNameColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(progNameColorButton);
+
+   palette.setColor(operatorColorButton->foregroundRole(), prop->hColors.operatorColor);
+   operatorColorButton->setPalette(palette);
+   operatorColorButton->setAutoFillBackground(TRUE);
+   operatorColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(operatorColorButton);
+
+   palette.setColor(zColorButton->foregroundRole(), prop->hColors.zColor);
+   zColorButton->setPalette(palette);
+   zColorButton->setAutoFillBackground(TRUE);
+   zColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(zColorButton);
+
+   palette.setColor(aColorButton->foregroundRole(), prop->hColors.aColor);
+   aColorButton->setPalette(palette);
+   aColorButton->setAutoFillBackground(TRUE);
+   aColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(aColorButton);
+
+   palette.setColor(bColorButton->foregroundRole(), prop->hColors.bColor);
+   bColorButton->setPalette(palette);
+   bColorButton->setAutoFillBackground(TRUE);
+   bColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(bColorButton);
+
+   palette.setColor(underlineColorButton->foregroundRole(), prop->underlineColor);
+   underlineColorButton->setPalette(palette);
+   underlineColorButton->setAutoFillBackground(TRUE);
+   underlineColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(underlineColorButton);
+
+   palette.setColor(curLineColorButton->foregroundRole(), prop->lineColor);
+   curLineColorButton->setPalette(palette);
+   curLineColorButton->setAutoFillBackground(TRUE);
+   curLineColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(curLineColorButton);
+
+   capsLockCheckBox->setChecked(editProp.intCapsLock);
+   syntaxHCheckBox->setChecked(editProp.syntaxH);
+   underlineCheckBox->setChecked(editProp.underlineChanges);
+   tabbedModecheckBox->setChecked(editProp.tabbedMode);
+
+
+   connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
+   connect(okButton, SIGNAL(clicked()), SLOT(accept()));
+   connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
+
+   adjustSize();
+   setMaximumSize(width(), height());
+
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+SetupDialog::~SetupDialog()
+{
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SetupDialog::changeFont()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok, QFont( editProp.fontName, editProp.fontSize ), this);
+    if(ok)
+    {
+       editProp.fontName = font.family();
+       editProp.fontSize = font.pointSize();
+       fontLabel->setText(QString(tr("Current font : <b>\"%1\", %2 pt.<\b>")
+                          .arg(editProp.fontName).arg(editProp.fontSize)));
+       fontLabel->setFont(QFont(editProp.fontName, editProp.fontSize));
+    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+_editor_properites SetupDialog::getSettings()
+{
+   QPalette palette;
+   int r, g, b;
+
+
+   editProp.intCapsLock = capsLockCheckBox->isChecked();
+   editProp.syntaxH = syntaxHCheckBox->isChecked();
+   editProp.underlineChanges = underlineCheckBox->isChecked();
+   editProp.tabbedMode = tabbedModecheckBox->isChecked();
+
+   palette = commentColorButton->palette();
+   palette.color(commentColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.commentColor = (r << 16) + (g << 8) + b;
+
+   palette = gColorButton->palette();
+   palette.color(gColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.gColor = (r << 16) + (g << 8) + b;
+
+   palette = mColorButton->palette();
+   palette.color(mColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.mColor = (r << 16) + (g << 8) + b;
+
+   palette = nColorButton->palette();
+   palette.color(nColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.nColor = (r << 16) + (g << 8) + b;
+
+   palette = lColorButton->palette();
+   palette.color(lColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.lColor = (r << 16) + (g << 8) + b;
+
+   palette = fsColorButton->palette();
+   palette.color(fsColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.fsColor = (r << 16) + (g << 8) + b;
+
+   palette = dhtColorButton->palette();
+   palette.color(dhtColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.dhtColor = (r << 16) + (g << 8) + b;
+
+   palette = rColorButton->palette();
+   palette.color(rColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.rColor = (r << 16) + (g << 8) + b;
+
+   palette = macroColorButton->palette();
+   palette.color(macroColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.macroColor = (r << 16) + (g << 8) + b;
+
+   palette = keyWordColorButton->palette();
+   palette.color(keyWordColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.keyWordColor = (r << 16) + (g << 8) + b;
+
+   palette = progNameColorButton->palette();
+   palette.color(progNameColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.progNameColor = (r << 16) + (g << 8) + b;
+
+   palette = operatorColorButton->palette();
+   palette.color(operatorColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.operatorColor = (r << 16) + (g << 8) + b;
+
+   palette = zColorButton->palette();
+   palette.color(zColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.zColor = (r << 16) + (g << 8) + b;
+
+   palette = aColorButton->palette();
+   palette.color(aColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.aColor = (r << 16) + (g << 8) + b;
+
+   palette = bColorButton->palette();
+   palette.color(bColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.bColor = (r << 16) + (g << 8) + b;
+
+   palette = underlineColorButton->palette();
+   palette.color(underlineColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.underlineColor = (r << 16) + (g << 8) + b;
+
+   palette = curLineColorButton->palette();
+   palette.color(curLineColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.lineColor = (r << 16) + (g << 8) + b;
+
+   return(editProp);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SetupDialog::changeColor(QAbstractButton *button)
+{
+   QPalette palette;
+
+   palette = button->palette();
+
+   QColor color = QColorDialog::getColor(palette.color(button->foregroundRole()), this);
+   if(color.isValid())
+   {
+      palette.setColor(button->foregroundRole(), color);
+      button->setPalette(palette);
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SetupDialog::setDefaultProp()
+{
+   QPalette palette;
+
+   palette.setColor(commentColorButton->foregroundRole(), 0xde0020);
+   commentColorButton->setPalette(palette);
+
+   palette.setColor(gColorButton->foregroundRole(), 0x1600ee);
+   gColorButton->setPalette(palette);
+
+   palette.setColor(mColorButton->foregroundRole(), 0x80007d);
+   mColorButton->setPalette(palette);
+
+   palette.setColor(nColorButton->foregroundRole(), Qt::darkGray);
+   nColorButton->setPalette(palette);
+
+   palette.setColor(lColorButton->foregroundRole(), 0x535b5f);
+   lColorButton->setPalette(palette);
+
+   palette.setColor(fsColorButton->foregroundRole(), 0x516600);
+   fsColorButton->setPalette(palette);
+
+   palette.setColor(dhtColorButton->foregroundRole(), 0x660033);
+   dhtColorButton->setPalette(palette);
+
+   palette.setColor(rColorButton->foregroundRole(), 0x24576f);
+   rColorButton->setPalette(palette);
+
+   palette.setColor(macroColorButton->foregroundRole(), 0x000080);
+   macroColorButton->setPalette(palette);
+
+   palette.setColor(keyWordColorButton->foregroundRole(), 0x1d8000);
+   keyWordColorButton->setPalette(palette);
+
+   palette.setColor(progNameColorButton->foregroundRole(), Qt::black);
+   progNameColorButton->setPalette(palette);
+
+   palette.setColor(operatorColorButton->foregroundRole(), 0x9a2200);
+   operatorColorButton->setPalette(palette);
+
+   palette.setColor(zColorButton->foregroundRole(), Qt::black);
+   zColorButton->setPalette(palette);
+
+   palette.setColor(aColorButton->foregroundRole(), Qt::black);
+   aColorButton->setPalette(palette);
+
+   palette.setColor(bColorButton->foregroundRole(), Qt::black);
+   bColorButton->setPalette(palette);
+
+   palette.setColor(underlineColorButton->foregroundRole(), Qt::green);
+   underlineColorButton->setPalette(palette);
+
+   palette.setColor(curLineColorButton->foregroundRole(), 0xFEFFB6);
+   curLineColorButton->setPalette(palette);
+
+
+   syntaxHCheckBox->setChecked(TRUE);
+   capsLockCheckBox->setChecked(TRUE);
+   underlineCheckBox->setChecked(TRUE);
+   tabbedModecheckBox->setChecked(FALSE);
+   editProp.fontName = "Courier";
+   editProp.fontSize = 12;
+
+   fontLabel->setText(QString(tr("Current font : <b>\"%1\", %2 pt.<\b>")
+                      .arg(editProp.fontName).arg(editProp.fontSize)));
+   fontLabel->setFont(QFont(editProp.fontName, editProp.fontSize));
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
 
@@ -2481,6 +3204,23 @@ void BHCDialog::computeButtonClicked()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
 

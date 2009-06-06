@@ -60,9 +60,9 @@ FindInFiles::FindInFiles(QWidget *parent): QDialog(parent)
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Find Files"));
 
-    connect( browseButton, SIGNAL(clicked()), SLOT(browse()));
-    connect( findButton, SIGNAL(clicked()), SLOT(find()));
-    connect( closeButton, SIGNAL(clicked()), SLOT(close()));
+    connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
+    connect(findButton, SIGNAL(clicked()), SLOT(find()));
+    connect(closeButton, SIGNAL(clicked()), SLOT(close()));
 
     createFilesTable();
 
@@ -133,7 +133,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     QStringList foundFiles;
 
 
-
+    exp.setCaseSensitivity(Qt::CaseInsensitive);
     exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
 
     for (int i = 0; i < files.size(); ++i)
@@ -153,10 +153,11 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
         {  
             QTextStream in(&file);
             founded = false;
-            while (!in.atEnd())
+            while(!in.atEnd())
             {
-                if (progressDialog.wasCanceled())
+                if(progressDialog.wasCanceled())
                     break;
+                qApp->processEvents();
 
                 line = in.readLine();
                 pos = 0;
@@ -165,14 +166,13 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                    pos = line.indexOf(exp, pos);
                    if(pos >= 0)
                    {
-                      founded = true;
                       f_tx = line.mid(pos, exp.matchedLength());
                       if(!(f_tx.mid(0, 2) == ";$"))
                       {
                          f_tx.remove('(');
                          f_tx.remove(')');
                          f_tx.remove(';');
-
+                         founded = true;
                       };
                    };
                 };
@@ -183,10 +183,10 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                     size = file.size();
 
                     QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
-                    fileNameItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                    fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
                     QTableWidgetItem *infoNameItem = new QTableWidgetItem(f_tx);
-                    infoNameItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                    infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
                     QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB")
                                              .arg(int((size + 1023) / 1024)));
@@ -231,16 +231,21 @@ void FindInFiles::createFilesTable()
 void FindInFiles::closeEvent(QCloseEvent *event)
 {
    QStringList list;
+   QString item;
 
    QSettings settings("Trolltech", "EdytorNC");
-   settings.beginGroup("FindDialog" );
+   settings.beginGroup("FindFileDialog");
 
+   settings.setValue("CaseSensitive", wholeWordsCheckBox->isChecked());
 
    list.clear();
-   for(int i = 0; i < directoryComboBox->count(); i++)
+   list.prepend(directoryComboBox->currentText());
+   for(int i = 0; i <= directoryComboBox->count(); i++)
    {
-      if(!directoryComboBox->itemText(i).isEmpty())
-        list.prepend(directoryComboBox->itemText(i));
+      item = directoryComboBox->itemText(i);
+      if(!item.isEmpty())
+        if(!list.contains(item))
+          list.prepend(item);
    };
    
    while(list.size() > MAXLISTS)
@@ -248,12 +253,16 @@ void FindInFiles::closeEvent(QCloseEvent *event)
       list.removeLast();
    };
    settings.setValue("Dirs", list);
+   settings.setValue("SelectedDir", directoryComboBox->currentText());
 
    list.clear();
-   for(int i = 0; i < fileComboBox->count(); i++)
+   list.prepend(fileComboBox->currentText());
+   for(int i = 0; i <= fileComboBox->count(); i++)
    {
-      if(!fileComboBox->itemText(i).isEmpty())
-        list.prepend(fileComboBox->itemText(i));
+      item = fileComboBox->itemText(i);
+      if(!item.isEmpty())
+        if(!list.contains(item))
+          list.prepend(item);
    };
 
    while(list.size() > MAXLISTS)
@@ -261,12 +270,16 @@ void FindInFiles::closeEvent(QCloseEvent *event)
       list.removeLast();
    };
    settings.setValue("Filters", list);
+   settings.setValue("SelectedFilter", fileComboBox->currentText());
    
    list.clear();
-   for(int i = 0; i < textComboBox->count(); i++)
+   list.prepend(textComboBox->currentText());
+   for(int i = 0; i <= textComboBox->count(); i++)
    {
-      if(!textComboBox->itemText(i).isEmpty())
-        list.prepend(textComboBox->itemText(i));
+      item = textComboBox->itemText(i);
+      if(!item.isEmpty())
+        if(!list.contains(item, Qt::CaseInsensitive))
+          list.prepend(item);
    };
 
    while(list.size() > MAXLISTS)
@@ -274,6 +287,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
       list.removeLast();
    }; 
    settings.setValue("Texts", list);
+   settings.setValue("SelectedText", textComboBox->currentText());
 
    settings.endGroup();
 
@@ -287,6 +301,8 @@ void FindInFiles::closeEvent(QCloseEvent *event)
 void FindInFiles::readSettings()
 {
    QStringList list;
+   QString item;
+   int i;
    
 
    textComboBox->clear(); 
@@ -294,16 +310,27 @@ void FindInFiles::readSettings()
    fileComboBox->clear(); 
 
    QSettings settings("Trolltech", "EdytorNC");
-   settings.beginGroup("FindDialog" );
+   settings.beginGroup("FindFileDialog" );
+
+   wholeWordsCheckBox->setChecked(settings.value("CaseSensitive", FALSE).toBool());
 
    list = settings.value("Dirs", QStringList(QDir::homePath())).toStringList();
    directoryComboBox->addItems(list);
+   item = settings.value("SelectedDir", QString(QDir::homePath())).toString();
+   i = directoryComboBox->findText(item);
+   directoryComboBox->setCurrentIndex(i);
 
    list = settings.value("Filters", "*.nc").toStringList();
    fileComboBox->addItems(list);
+   item = settings.value("SelectedFilter", QString("*.nc")).toString();
+   i = fileComboBox->findText(item);
+   fileComboBox->setCurrentIndex(i);
 
    list = settings.value("Texts", QStringList()).toStringList();
    textComboBox->addItems(list);
+   item = settings.value("SelectedText", QString("")).toString();
+   i = textComboBox->findText(item, Qt::MatchExactly);
+   textComboBox->setCurrentIndex(i);
 
    settings.endGroup();
 }
@@ -330,7 +357,7 @@ void FindInFiles::filesTableClicked(int x, int y)
 void FindInFiles::filePreview(int x, int y)
 {
 
-   QTableWidgetItem *item = filesTable->item(x, 0);
+      QTableWidgetItem *item = filesTable->item(x, 0);
 
 
       QString dir = directoryComboBox->currentText();
@@ -344,23 +371,25 @@ void FindInFiles::filePreview(int x, int y)
          file.close();
          qApp->processEvents();
 
-         if(!textComboBox->currentText().isEmpty())
+         if((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*"))
          {
             QTextCursor cr = preview->textCursor();
 
             while(!cr.isNull() && !cr.atEnd())
             {
-               cr = preview->document()->find(textComboBox->currentText(), cr);
+               if(wholeWordsCheckBox->isChecked())
+                 cr = preview->document()->find(textComboBox->currentText(), cr, QTextDocument::FindWholeWords);
+               else
+                 cr = preview->document()->find(textComboBox->currentText(), cr);
 
                if(!cr.isNull())
                {
-
                   QTextCharFormat format = cr.charFormat();
                   format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
                   format.setUnderlineColor(Qt::green);
                   format.setFontPointSize(16);
+                  qApp->processEvents();
                   cr.mergeCharFormat(format);
-                  //preview->setTextCursor(cr);
                   qApp->processEvents();
                };
 
@@ -377,7 +406,8 @@ void FindInFiles::filePreview(int x, int y)
  
 void FindInFiles::setHighlightColors(const _h_colors colors)
 {
-   highlighter = new Highlighter(preview->document(), colors);
+   highlighter = new Highlighter(preview->document());
+   highlighter->setHColors(colors, preview->font());
 }
 
 //**************************************************************************************************

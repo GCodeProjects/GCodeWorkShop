@@ -37,10 +37,9 @@ edytornc::edytornc()
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
 
-    mdiArea = new QMdiArea(this);
+    mdiArea = new QMdiArea;
     setCentralWidget(mdiArea);
 
-    mdiArea->setViewMode(QMdiArea::SubWindowView);
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
@@ -49,7 +48,7 @@ edytornc::edytornc()
     createActions();
     createMenus();
     createToolBars();
-    createStatusBar();
+
     updateMenus();
 
     searchOptions.options = 0;
@@ -58,8 +57,14 @@ edytornc::edytornc()
 
     readSettings();
 
+    if(tabbedView)
+      mdiArea->setViewMode(QMdiArea::TabbedView);
+    else
+      mdiArea->setViewMode(QMdiArea::SubWindowView);
+
     setWindowTitle(tr("EdytorNC"));
     setWindowIcon(QIcon(":/images/edytornc.png"));
+    createStatusBar();
 }
 
 //**************************************************************************************************
@@ -84,16 +89,9 @@ edytornc::~edytornc()
 void edytornc::closeEvent(QCloseEvent *event)
 {
 
-    //foreach (QMdiSubWindow *window, mdiArea->subWindowList()) 
-   // {
-   //     MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-   //     if (mdiChild->currentFile() == canonicalFilePath)
-   //         return window;
-   // }
-
     writeSettings();
 
-    foreach (QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
+    foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
     {
        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
        if(mdiChild->textEdit->document()->isModified())
@@ -123,15 +121,19 @@ void edytornc::closeEvent(QCloseEvent *event)
 void edytornc::newFile()
 {
     MdiChild *child = createMdiChild();
+
     child->newFile();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.readOnly = FALSE;
     defaultMdiWindowProperites.maximized = FALSE;
     defaultMdiWindowProperites.geometry = QByteArray();
     child->setMdiWindowProperites(defaultMdiWindowProperites);
-    child->show();
-}
 
+    if(mdiArea->subWindowList().isEmpty())
+      child->showMaximized();
+    else
+      child->show();
+}
 
 //**************************************************************************************************
 //
@@ -523,9 +525,9 @@ void edytornc::replace()
           mdiChild->textEdit->setTextCursor(searchOptions.cursor);
           ReplaceConfirmDialog *confirmationDialog = new ReplaceConfirmDialog(&QString(tr("Searching text '%1' was found. What to do now ?").arg(searchOptions.expr)), this);
 
-          connect( confirmationDialog, SIGNAL(replaceSignal(bool &)), this, SLOT(replaceSlot(bool &)));
-          connect( confirmationDialog, SIGNAL(replaceAllSignal(bool &)), this, SLOT(replaceAllSlot(bool &)));
-          connect( confirmationDialog, SIGNAL(findNextSignal(bool &)), this, SLOT(replaceFindSlot(bool &)));
+          connect(confirmationDialog, SIGNAL(replaceSignal(bool &)), this, SLOT(replaceSlot(bool &)));
+          connect(confirmationDialog, SIGNAL(replaceAllSignal(bool &)), this, SLOT(replaceAllSlot(bool &)));
+          connect(confirmationDialog, SIGNAL(findNextSignal(bool &)), this, SLOT(replaceFindSlot(bool &)));
 
           confirmationDialog->show();
        }
@@ -572,7 +574,37 @@ void edytornc::zoomOut()
 
 void edytornc::config()
 {
-   
+   _editor_properites opt;
+   MdiChild *mdiChild;
+
+   defaultMdiWindowProperites.tabbedMode = tabbedView;
+   SetupDialog *setUpDialog = new SetupDialog(this, &defaultMdiWindowProperites);
+
+
+   if(setUpDialog->exec() == QDialog::Accepted)
+   {
+      defaultMdiWindowProperites = setUpDialog->getSettings();
+
+      foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
+      {
+         mdiChild = qobject_cast<MdiChild *>(window->widget());
+         opt = mdiChild->getMdiWindowProperites();
+
+         opt.fontName = defaultMdiWindowProperites.fontName;
+         opt.fontSize = defaultMdiWindowProperites.fontSize;
+         opt.syntaxH = defaultMdiWindowProperites.syntaxH;
+         opt.hColors = defaultMdiWindowProperites.hColors;
+         opt.intCapsLock = defaultMdiWindowProperites.intCapsLock;
+         opt.lineColor = defaultMdiWindowProperites.lineColor;
+         opt.underlineColor = defaultMdiWindowProperites.underlineColor;
+         opt.underlineChanges = defaultMdiWindowProperites.underlineChanges;
+         tabbedView = defaultMdiWindowProperites.tabbedMode;
+
+         mdiChild->setMdiWindowProperites(opt);
+      };
+
+   };
+   delete setUpDialog;
 }
 
 //**************************************************************************************************
@@ -598,8 +630,8 @@ void edytornc::doBhc()
    {
       BHCDialog *bhcDialog = new BHCDialog(this);
 
-      bhcDialog->show();
       bhcDialog->move((geometry().x() + width() - 10) - bhcDialog->width(), geometry().y()+35);
+      bhcDialog->show();
    };
 }
 
@@ -694,9 +726,8 @@ void edytornc::doSpeedFeed()
    if(!feedsDialog)
    {
       FeedsDialog *feedsDialog = new FeedsDialog(this);
-
-      feedsDialog->show();
       feedsDialog->move((geometry().x() + width() - 10) - feedsDialog->width(), geometry().y()+35);
+      feedsDialog->show();
    };
 }
 
@@ -706,7 +737,9 @@ void edytornc::doSpeedFeed()
 
 void edytornc::doChamfer()
 {
-   
+   ChamferDialog *chamferDialog = new ChamferDialog(this);
+   chamferDialog->move((geometry().x() + width()) - chamferDialog->width(), geometry().y()+35);
+   chamferDialog->show();
 }
 
 //**************************************************************************************************
@@ -720,9 +753,8 @@ void edytornc::doTriangles()
    if(!triangleDialog)
    {
       TriangleDialog *triangleDialog = new TriangleDialog(this);
-
-      triangleDialog->show();
       triangleDialog->move((geometry().x() + width() - 10) - triangleDialog->width(), geometry().y()+35);
+      triangleDialog->show();
    };
 }
 
@@ -738,9 +770,8 @@ void edytornc::doConvert()
    if(!i2MDialog)
    {
       I2MDialog *i2MDialog = new I2MDialog(this);
-
-      i2MDialog->show();
       i2MDialog->move((geometry().x() + width() - 10) - i2MDialog->width(), geometry().y()+35);
+      i2MDialog->show();
    };
 }
 
@@ -750,7 +781,26 @@ void edytornc::doConvert()
 
 void edytornc::doConvertProg()
 {
-   
+   MdiChild *child;
+
+   I2MProgDialog *i2mProgDialog = new I2MProgDialog(this);
+   i2mProgDialog->setState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec, defaultMdiWindowProperites.inch);
+
+   child = activeMdiChild();
+
+   if(i2mProgDialog->exec() == QDialog::Accepted)
+   {
+      if(child)
+      {
+         defaultMdiWindowProperites = child->getMdiWindowProperites();
+         i2mProgDialog->getState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec, defaultMdiWindowProperites.inch);
+         child->setMdiWindowProperites(defaultMdiWindowProperites);
+         child->doI2M();
+      };
+   };
+
+
+   delete(i2mProgDialog);
 }
 
 //**************************************************************************************************
@@ -845,6 +895,7 @@ void edytornc::about()
 {
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers."
+                               "<P>Version 2009.00"
                                "<P>Copyright (C) 1998 - 2009 by <urllink href='mailto:artkoz@poczta.onet.pl'>Artur Koziol</urllink> (artkoz@poczta.onet.pl)"
                                "<P>http://sourceforge.net/projects/edytornc"
                                "<P><i>This program is free software; you can redistribute it and/or modify"
@@ -857,57 +908,92 @@ void edytornc::about()
 
 void edytornc::updateMenus()
 {
-    bool hasMdiChild = (activeMdiChild() != 0);
-    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
-    saveAct->setEnabled(hasMdiChild);
-    saveAsAct->setEnabled(hasMdiChild);
-    pasteAct->setEnabled(hasMdiChild);
-    closeAct->setEnabled(hasMdiChild);
-    closeAllAct->setEnabled(hasMdiChild);
-    tileAct->setEnabled(hasMdiChild);
-    cascadeAct->setEnabled(hasMdiChild);
-    nextAct->setEnabled(hasMdiChild);
-    previousAct->setEnabled(hasMdiChild);
-    separatorAct->setVisible(hasMdiChild);
-    selAllAct->setEnabled(hasMdiChildNotReadOnly);
-    findAct->setEnabled(hasMdiChild);
-    if(!hasMdiChild)
-      findNextAct->setEnabled(FALSE);
-    replaceAct->setEnabled(hasMdiChildNotReadOnly);
-    zoomInAct->setEnabled(hasMdiChild);
-    zoomOutAct->setEnabled(hasMdiChild);
-    readOnlyAct->setEnabled(hasMdiChild);
-    renumberAct->setEnabled(hasMdiChildNotReadOnly);
-    insertDotAct->setEnabled(hasMdiChildNotReadOnly);
-    insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
-    removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
-    convertProgAct->setEnabled(hasMdiChildNotReadOnly);
+   QTextBlock b,cb;
+   int column = 1;
+   int line = 1;
+
+   bool hasMdiChild = (activeMdiChild() != 0);
+   bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
+   saveAct->setEnabled(hasMdiChild);
+   saveAsAct->setEnabled(hasMdiChild);
+   pasteAct->setEnabled(hasMdiChild);
+   closeAct->setEnabled(hasMdiChild);
+   closeAllAct->setEnabled(hasMdiChild);
+   tileAct->setEnabled(hasMdiChild);
+   cascadeAct->setEnabled(hasMdiChild);
+   nextAct->setEnabled(hasMdiChild);
+   previousAct->setEnabled(hasMdiChild);
+   separatorAct->setVisible(hasMdiChild);
+   selAllAct->setEnabled(hasMdiChildNotReadOnly);
+   findAct->setEnabled(hasMdiChild);
+   if(!hasMdiChild)
+     findNextAct->setEnabled(FALSE);
+   replaceAct->setEnabled(hasMdiChildNotReadOnly);
+   zoomInAct->setEnabled(hasMdiChild);
+   zoomOutAct->setEnabled(hasMdiChild);
+   readOnlyAct->setEnabled(hasMdiChild);
+   renumberAct->setEnabled(hasMdiChildNotReadOnly);
+   insertDotAct->setEnabled(hasMdiChildNotReadOnly);
+   insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
+   removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
+   convertProgAct->setEnabled(hasMdiChildNotReadOnly);
 
 
-    if(activeMdiChild() && activeMdiChild()->textEdit->isReadOnly())
-    {
-       readOnlyAct->setChecked(TRUE);
-       readOnlyAct->setIcon(QIcon(":/images/lock.png"));
-    }
-    else
-    {
-       readOnlyAct->setChecked(FALSE);
-       readOnlyAct->setIcon(QIcon(":/images/unlock.png"));
-    };
+   if(activeMdiChild() && activeMdiChild()->textEdit->isReadOnly())
+   {
+      readOnlyAct->setChecked(TRUE);
+      readOnlyAct->setIcon(QIcon(":/images/lock.png"));
+   }
+   else
+   {
+      readOnlyAct->setChecked(FALSE);
+      readOnlyAct->setIcon(QIcon(":/images/unlock.png"));
+   };
 
-    bool hasSelection = (activeMdiChild() && activeMdiChild()->textEdit->textCursor().hasSelection());
-    cutAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
-    copyAct->setEnabled(hasSelection);
-    deleteAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
+   bool hasSelection = (activeMdiChild() && activeMdiChild()->textEdit->textCursor().hasSelection());
+   cutAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
+   copyAct->setEnabled(hasSelection);
+   deleteAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
  
-    pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
+   pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
-
-    //undoAct->setEnabled(activeMdiChild() && activeMdiChild()->document()->isUndoAvailable());
-    //redoAct->setEnabled(activeMdiChild() && activeMdiChild()->document()->isRedoAvailable());
- 
-
+   updateStatusBar();
     
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::updateStatusBar()
+{
+   QTextBlock b,cb;
+   int column = 1;
+   int line = 1;
+
+   bool hasMdiChild = (activeMdiChild() != 0);
+   bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
+
+   if(hasMdiChild)
+   {
+      b = activeMdiChild()->textEdit->textCursor().block();
+      column = activeMdiChild()->textEdit->textCursor().position() - b.position();
+      cb = activeMdiChild()->textEdit->textCursor().block();
+      for(b = activeMdiChild()->textEdit->document()->begin(); b != activeMdiChild()->textEdit->document()->end(); b = b.next())
+      {
+         if(b == cb)
+         {
+            break;
+         };
+         line++;
+      };
+
+      labelStat1->setText(tr(" Line: ") + QString::number(line) +
+                          tr("  Col: ") + QString::number(column + 1) +
+                          (activeMdiChild()->textEdit->document()->isModified() ? tr("  <b>Modified</b>  "): " ") +
+                          (!hasMdiChildNotReadOnly ? tr(" Read only  "): " ") +
+                          (activeMdiChild()->textEdit->overwriteMode() ? tr(" Overwrite  "): tr(" Insert ")));
+   };
 }
 
 //**************************************************************************************************
@@ -956,15 +1042,26 @@ void edytornc::updateWindowMenu()
 
 MdiChild *edytornc::createMdiChild()
 {
-    MdiChild *child = new MdiChild(this);
+    MdiChild *child = new MdiChild();
     mdiArea->addSubWindow(child);
+
+
+    //connect( w, SIGNAL(updateMenu()), this, SLOT(updateStatusBar()));
+    //connect( w, SIGNAL(windowClosed(bool)), this, SLOT(updateFileMenu(bool)));
+
+    //connect( w, SIGNAL(statChanged()), this, SLOT(updateStatusBar()));
 
     connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(copyAvailable(bool)), copyAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
+    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
+
+    connect(child->textEdit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(updateStatusBar()));
+
     connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
+    connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
 
     return child;
 }
@@ -984,6 +1081,10 @@ void edytornc::createActions()
     openAct->setShortcut(tr("Ctrl+O"));
     openAct->setStatusTip(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
+
+    openWPvAct = new QAction(QIcon(":/images/fileopen_preview.png"), tr("&Open file with preview"), this);
+    openWPvAct->setStatusTip(tr("Open an existing file (Openfile dialog with preview)"));
+    connect(openWPvAct, SIGNAL(triggered()), this, SLOT(openWithPreview()));
 
     saveAct = new QAction(QIcon(":/images/filesave.png"), tr("&Save"), this);
     saveAct->setShortcut(tr("Ctrl+S"));
@@ -1084,7 +1185,7 @@ void edytornc::createActions()
     configAct = new QAction(QIcon(":/images/configure.png"), tr("Configuration"), this);
     //configAct->setShortcut(tr("Ctrl+R"));
     configAct->setStatusTip(tr("Open configuration dialog"));
-    connect(replaceAct, SIGNAL(triggered()), this, SLOT(config()));
+    connect(configAct, SIGNAL(triggered()), this, SLOT(config()));
 
 
 
@@ -1197,6 +1298,7 @@ void edytornc::createMenus()
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
+    fileMenu->addAction(openWPvAct);
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
     fileMenu->addSeparator();
@@ -1204,6 +1306,10 @@ void edytornc::createMenus()
     fileMenu->addSeparator();
     recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
     recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
+    fileMenu->addSeparator();
+
+    fileMenu->addAction(closeAct);
+    fileMenu->addAction(closeAllAct);
     fileMenu->addSeparator();
 
     fileMenu->addAction(exitAct);
@@ -1274,6 +1380,7 @@ void edytornc::createToolBars()
     fileToolBar->setObjectName("File");
     fileToolBar->addAction(newAct);
     fileToolBar->addAction(openAct);
+    //fileToolBar->addAction(openWPvAct);
     fileToolBar->addAction(saveAct);
     fileToolBar->addAction(saveAsAct);
     fileToolBar->addSeparator();
@@ -1334,7 +1441,19 @@ void edytornc::createToolBars()
 
 void edytornc::createStatusBar()
 {
-    statusBar()->showMessage(tr("Ready"));
+
+   labelStat1 = new QLabel("    ");
+   labelStat2 = new QLabel("  ");
+   
+   labelStat1->setFrameShadow(QFrame::Sunken);
+   labelStat1->setFrameShape(QFrame::Box);
+
+   statusBar()->addPermanentWidget((labelStat1));
+   statusBar()->addPermanentWidget((labelStat2));
+   statusBar()->setSizeGripEnabled(TRUE);
+
+
+   statusBar()->showMessage(tr("Ready"));
 }
 
 //**************************************************************************************************
@@ -1345,8 +1464,8 @@ void edytornc::readSettings()
 {
     QSettings settings("Trolltech", "EdytorNC");
 
-    QPoint pos = settings.value("Pos", QPoint(200, 200)).toPoint();
-    QSize size = settings.value("Size", QSize(700, 600)).toSize();
+    QPoint pos = settings.value("Pos", QPoint(0, 0)).toPoint();
+    QSize size = settings.value("Size", QSize(800, 600)).toSize();
     move(pos);
     resize(size);
 
@@ -1370,6 +1489,11 @@ void edytornc::readSettings()
     defaultMdiWindowProperites.fontName = settings.value("FontName", "Courier").toString();
     defaultMdiWindowProperites.fontSize = settings.value("FontSize", 12).toInt();
     defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", TRUE).toBool();
+    defaultMdiWindowProperites.underlineChanges = settings.value("UnderlineChanges", TRUE).toBool();
+    tabbedView = settings.value("TabbedView", FALSE).toBool();
+
+    defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
+    defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", Qt::green).toInt();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray(); 
 
@@ -1392,16 +1516,14 @@ void edytornc::readSettings()
     defaultMdiWindowProperites.hColors.keyWordColor = settings.value("KeyWordColor", 0x1d8000).toInt();
     defaultMdiWindowProperites.hColors.progNameColor = settings.value("ProgNameColor", 0x000000).toInt();
     defaultMdiWindowProperites.hColors.operatorColor = settings.value("OperatorColor", 0x9a2200).toInt();
+    defaultMdiWindowProperites.hColors.zColor = settings.value("ZColor", Qt::blue).toInt();
+    defaultMdiWindowProperites.hColors.aColor = settings.value("AColor", Qt::black).toInt();
+    defaultMdiWindowProperites.hColors.bColor = settings.value("BColor", Qt::black).toInt();
 
 
     settings.endGroup();
 
-
     settings.beginGroup("LastDoc" );
-    //
-
-    //defaultMdiWindowProperites.cursorPos = 0;
-    //defaultMdiWindowProperites.readOnly = FALSE;
 
     int max = settings.value("OpenedFileCount", 0 ).toInt();
     for(int i = 1; i < max; ++i) 
@@ -1424,8 +1546,6 @@ void edytornc::readSettings()
 
 
     settings.endGroup();
-
-
 
 }
 
@@ -1452,7 +1572,6 @@ void edytornc::writeSettings()
         settings.remove( "Size_" + QString::number(i));
         settings.remove( "Geometry_" + QString::number(i));
         settings.remove( "Maximized_" + QString::number(i));
-
     };
     settings.endGroup();
 
@@ -1480,11 +1599,15 @@ void edytornc::writeSettings()
     settings.setValue("FontName", defaultMdiWindowProperites.fontName);
     settings.setValue("FontSize", defaultMdiWindowProperites.fontSize);
     settings.setValue("IntCapsLock", defaultMdiWindowProperites.intCapsLock);
+    settings.setValue("UnderlineChanges", defaultMdiWindowProperites.underlineChanges);
+    settings.setValue("TabbedView", tabbedView);
+    settings.setValue("LineColor", defaultMdiWindowProperites.lineColor);
+    settings.setValue("UnderlineColor", defaultMdiWindowProperites.underlineColor);
+
     
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue( "RecentFiles", m_recentFiles);
 
-    //settings.endGroup();
 
     settings.beginGroup("Highlight" );
     settings.setValue("HighlightOn", defaultMdiWindowProperites.syntaxH);
@@ -1501,6 +1624,9 @@ void edytornc::writeSettings()
     settings.setValue("KeyWordColor", defaultMdiWindowProperites.hColors.keyWordColor);
     settings.setValue("ProgNameColor", defaultMdiWindowProperites.hColors.progNameColor);
     settings.setValue("OperatorColor", defaultMdiWindowProperites.hColors.operatorColor);
+    settings.setValue("BColor", defaultMdiWindowProperites.hColors.bColor);
+    settings.setValue("AColor", defaultMdiWindowProperites.hColors.aColor);
+    settings.setValue("ZColor", defaultMdiWindowProperites.hColors.zColor);
 
     settings.endGroup();
 
@@ -1597,7 +1723,7 @@ void edytornc::loadFile(_editor_properites options)
        child->newFile();
        child->loadFile(options.fileName);
        child->setMdiWindowProperites(options);
-
+       child->parentWidget()->restoreGeometry(options.geometry);
        if(defaultMdiWindowProperites.maximized)
          child->showMaximized();
        else
@@ -1611,9 +1737,6 @@ void edytornc::loadFile(_editor_properites options)
 
 void edytornc::updateRecentFiles( const QString &filename )
 {
-    //if(m_recentFiles.indexOf( filename ) != m_recentFiles.end())
-      //return;
-
     m_recentFiles.prepend( filename );
     if ( m_recentFiles.size() > MAX_RECENTFILES )
         m_recentFiles.removeLast();
@@ -1630,7 +1753,6 @@ void edytornc::fileOpenRecent( QAction *act )
     defaultMdiWindowProperites.readOnly = FALSE;
     defaultMdiWindowProperites.maximized = FALSE;
     defaultMdiWindowProperites.cursorPos = 0;
-    //defaultMdiWindowProperites.cursorPosY = 0;
     defaultMdiWindowProperites.fileName = m_recentFiles[act->data().toInt()];
     loadFile(defaultMdiWindowProperites);
 }

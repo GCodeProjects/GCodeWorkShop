@@ -30,6 +30,8 @@
 
 #include "ui_mdichildform.h"
 
+
+
 class MdiChild : public QWidget, public Ui::MdiChild
 {
     Q_OBJECT
@@ -43,7 +45,6 @@ public:
     bool saveAs();
     bool saveAsWithPreview();
     bool saveFile(const QString &fileName);
-    //QString userFriendlyCurrentFile();
     QString currentFile() { return curFile; }
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
@@ -51,6 +52,7 @@ public:
     void doRemoveSpace();
     void doInsertSpace();
     void doInsertDot();
+    void doI2M();
 
 
 protected:
@@ -66,6 +68,7 @@ private:
     void setCurrentFile(const QString &fileName, const QString &text);
     QString strippedName(const QString &fullFileName);
 
+
     QString curFile;
     QString saveFileFilter;
     QByteArray saveDialogState;
@@ -73,6 +76,11 @@ private:
     Highlighter *highlighter;
     _editor_properites mdiWindowProperites;
 
+private slots :
+    void highlightCurrentLine();
+
+signals:
+    void message(const QString&, int );
 
 };
 

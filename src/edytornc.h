@@ -102,6 +102,7 @@ private slots:
     void replaceSlot(bool &found);
     void replaceFindSlot(bool &found);
     void replaceAllSlot(bool &found);
+    void updateStatusBar();
     
 
 private:
@@ -118,6 +119,8 @@ private:
     FindInFiles *findFiles;
     FindDialog *findDialog;
     SSearchOptions searchOptions;
+    bool tabbedView;
+
 
     QClipboard *clipboard;
     QByteArray fileDialogState;
@@ -141,6 +144,7 @@ private:
 
     QAction *newAct;
     QAction *openAct;
+    QAction *openWPvAct;
     QAction *saveAct;
     QAction *saveAsAct;
     QAction *exitAct;
@@ -185,6 +189,9 @@ private:
 
     QProcess *proc;
     QDir lastDir;
+
+    QLabel *labelStat1;
+    QLabel *labelStat2;
 
 
 };

@@ -23,11 +23,19 @@
 #include "edytornc.h"
 
 int main(int argc, char *argv[])
-{
-      Q_INIT_RESOURCE(application);
-      QApplication app(argc, argv);
-      edytornc * mw = new edytornc();
-      mw->show();
-      return app.exec();
+{   
+    Q_INIT_RESOURCE(application);
+    QApplication app(argc, argv);
+    QTranslator qtTranslator;
+    qtTranslator.load("qt_" + QLocale::system().name(),
+                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    app.installTranslator(&qtTranslator);
+    QTranslator myappTranslator;
+    myappTranslator.load("edytornc_" + QLocale::system().name());
+    app.installTranslator(&myappTranslator);
+    app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+    edytornc *mw = new edytornc();
+    mw->show();
+    return app.exec();
 }
 
