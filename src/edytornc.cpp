@@ -599,6 +599,10 @@ void edytornc::config()
          opt.underlineColor = defaultMdiWindowProperites.underlineColor;
          opt.underlineChanges = defaultMdiWindowProperites.underlineChanges;
          tabbedView = defaultMdiWindowProperites.tabbedMode;
+         if(tabbedView)
+           mdiArea->setViewMode(QMdiArea::TabbedView);
+         else
+           mdiArea->setViewMode(QMdiArea::SubWindowView);
 
          mdiChild->setMdiWindowProperites(opt);
       };
@@ -1207,7 +1211,7 @@ void edytornc::createActions()
 
     insertDotAct = new QAction(QIcon(":/images/dots.png"), tr("Insert dots"), this);
     insertDotAct->setShortcut(tr("F6"));
-    insertDotAct->setStatusTip(tr("Incrase font size"));
+    insertDotAct->setStatusTip(tr("Inserts decimal dot"));
     connect(insertDotAct, SIGNAL(triggered()), this, SLOT(doInsertDot()));
 
     renumberAct = new QAction(QIcon(":/images/renumber.png"), tr("Renumber"), this);

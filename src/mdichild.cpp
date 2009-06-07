@@ -332,7 +332,7 @@ bool MdiChild::maybeSave()
    {
       QMessageBox msgBox;
       msgBox.setText(tr("<b>File : \"%1\"\n has been modified.</b>").arg(curFile));
-      msgBox.setInformativeText("Do you want to save your changes ?");
+      msgBox.setInformativeText(tr("Do you want to save your changes ?"));
       msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
       msgBox.setDefaultButton(QMessageBox::Save);
       msgBox.setIcon(QMessageBox::Warning);
@@ -504,17 +504,19 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 
           if(mdiWindowProperites.intCapsLock)
           {
-             if((k->text().toAscii() >= QByteArray("a")) && (k->text().toAscii() <= QByteArray("z")))
-             {
-                textEdit->insertPlainText(k->text().toUpper());
-                return TRUE;
+             if((k->text().toAscii() >= QByteArray("a")) && (k->text().toAscii() <= QByteArray("z"))
+                && ((k->modifiers() == Qt::NoModifier)))
+             {  
+                QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+                return true;
+
              };
 
-             if(((k->text().toAscii() >= QByteArray("A")) && (k->text().toAscii() <= QByteArray("Z"))) 
+             if(((k->text().toAscii() >= QByteArray("A")) && (k->text().toAscii() <= QByteArray("Z")))
                 && (k->modifiers() == Qt::ShiftModifier))
              {
-                textEdit->insertPlainText(k->text().toLower());
-                return TRUE;
+                QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+                return true;
              };
           };
        };

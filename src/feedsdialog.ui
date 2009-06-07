@@ -245,7 +245,7 @@
          <item>
           <widget class="QLabel" name="label_3">
            <property name="toolTip">
-            <string>Spindle spee</string>
+            <string>Spindle speed</string>
            </property>
            <property name="text">
             <string>S :</string>
