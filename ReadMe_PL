@@ -1,0 +1,26 @@
+EdytorNC jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.
+
+Dostępne funkcje :
+	Obliczanie współrzędnych otworów rozmieszczonych na okręgu. Współrzędne można bezpośrednio kopiować do programu. Do współrzędnych mogą zostać dołączone komentarze.
+	Obliczenia boków i kątów w trójkątach.
+	Obliczenia parametrów skrawania.
+	Przeliczanie cale/mm (także cały program). Cale zapisane ułamkami można wpisywać w formacie 1.1/2 , 3/4 itp.
+	Pierwszy komentarz umieszczony w programie jest wyświetlany w pasku tytułu, obok nazwy pliku. W tym komentarzu najlepiej umieścić informacje identyfikującą obrabiany detal.
+	Pierwszy komentarz zapisany w formacie dd-mm-rrrr lub ddm.m.rrrr np. (12-02-2009) lub ;09-11-2009 zamieniany jest na aktualną datę przy zapisie pliku.
+	Kolorowanie tekstu – ułatwia poruszanie się po programie.
+	Dodawanie usuwanie spacji – przydatne do programów FANUC.
+	Numerowanie linii – cały program lub zaznaczony fragment.
+
+
+
+
+EdytorNC został napisany przy użyciu narzędzia 'QT Creator' oraz bibliotek 'Qt 4.5' : http://www.qtsoftware.com/products/developer-tools
+
+Instalatory dla systemów Linux oraz Windows zostały stworzone przez 'BitRock InstallBuilder for Qt' : http://installbuilder.bitrock.com
+
+
+Jeśli znalazłeś jakiś błąd w programie/opisach, masz pomysły na nowe funkcje – pisz  artkoz at poczta.onet.pl
+
+
+
+
