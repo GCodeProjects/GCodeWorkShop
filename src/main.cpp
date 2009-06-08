@@ -1,8 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Artur Kozioł                                    *
+ *   Copyright (C) 2006-2009 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
+ *   This file is part of EdytorNC.                                        *
+ *                                                                         *
+ *   EdytorNC is free software; you can redistribute it and/or modify      *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
@@ -35,6 +37,10 @@ int main(int argc, char *argv[])
     app.installTranslator(&myappTranslator);
     app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
     edytornc *mw = new edytornc();
+
+    if(argc > 0)
+      mw->openFile(argv[1]);
+
     mw->show();
     return app.exec();
 }

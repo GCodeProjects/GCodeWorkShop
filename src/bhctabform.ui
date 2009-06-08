@@ -244,7 +244,7 @@
            </size>
           </property>
           <property name="text">
-           <string>6</string>
+           <string>0</string>
           </property>
           <property name="maxLength">
            <number>3</number>
@@ -266,7 +266,7 @@
            </size>
           </property>
           <property name="text">
-           <string>400</string>
+           <string>0</string>
           </property>
           <property name="maxLength">
            <number>8</number>

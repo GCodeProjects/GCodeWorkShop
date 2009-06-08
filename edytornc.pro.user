@@ -62,14 +62,14 @@
     <value type="QString" >COLORTERM=1</value>
     <value type="QString" >CPU=i686</value>
     <value type="QString" >CSHEDIT=emacs</value>
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-6AGfk5OqEl,guid=de266d9391b65505e58b5e2e4a2b7138</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-AlcTzCprlE,guid=6766b2040d69cb051ebf0d0f4a2cb553</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
     <value type="QString" >ENV=/etc/bash.bashrc</value>
     <value type="QString" >FROM_HEADER=</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-6ZwhdZ/S.gpg-agent:3314:1</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-1Q360q/S.gpg-agent:5013:1</value>
     <value type="QString" >GS_LIB=/home/artur/.fonts</value>
     <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-kde4:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
     <value type="QString" >GTK_IM_MODULE=cedilla</value>
@@ -93,7 +93,6 @@
     <value type="QString" >KDE_SESSION_UID=1000</value>
     <value type="QString" >KDE_SESSION_VERSION=4</value>
     <value type="QString" >LANG=pl_PL.UTF-8</value>
-    <value type="QString" >LANGUAGE=</value>
     <value type="QString" >LD_LIBRARY_PATH=/usr/lib/qtcreator:</value>
     <value type="QString" >LESS=-M -I</value>
     <value type="QString" >LESSCLOSE=lessclose.sh %s %s</value>
@@ -121,12 +120,12 @@
     <value type="QString" >QT_IM_SWITCHER=imsw-multi</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/artur/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
     <value type="QString" >QT_SYSTEM_DIR=/usr/share/desktop-data</value>
-    <value type="QString" >SESSION_MANAGER=local/laptop:@/tmp/.ICE-unix/3428,unix/laptop:/tmp/.ICE-unix/3428</value>
+    <value type="QString" >SESSION_MANAGER=local/laptop:@/tmp/.ICE-unix/5142,unix/laptop:/tmp/.ICE-unix/5142</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=3315</value>
+    <value type="QString" >SSH_AGENT_PID=5015</value>
     <value type="QString" >SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-tYOfS3163/agent.3163</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-MwyfY4881/agent.4881</value>
     <value type="QString" >TERM=xterm</value>
     <value type="QString" >TMPDIR=/tmp</value>
     <value type="QString" >USER=artur</value>
@@ -137,7 +136,7 @@
     <value type="QString" >XCURSOR_THEME=DMZ</value>
     <value type="QString" >XDG_CONFIG_DIRS=/etc/xdg</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/etc/opt/kde3/share:/opt/kde3/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=6569d80d17bd3a5ee8c684c9493eedd8-1244361013.220039-1839979568</value>
+    <value type="QString" >XDG_SESSION_COOKIE=6569d80d17bd3a5ee8c684c9493eedd8-1244443986.279968-2007559968</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
     <value type="QString" >XKEYSYMDB=/usr/share/X11/XKeysymDB</value>
     <value type="QString" >XMODIFIERS=@im=local</value>
@@ -168,14 +167,14 @@
     <value type="QString" >COLORTERM=1</value>
     <value type="QString" >CPU=i686</value>
     <value type="QString" >CSHEDIT=emacs</value>
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-6AGfk5OqEl,guid=de266d9391b65505e58b5e2e4a2b7138</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-AlcTzCprlE,guid=6766b2040d69cb051ebf0d0f4a2cb553</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
     <value type="QString" >ENV=/etc/bash.bashrc</value>
     <value type="QString" >FROM_HEADER=</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-6ZwhdZ/S.gpg-agent:3314:1</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-1Q360q/S.gpg-agent:5013:1</value>
     <value type="QString" >GS_LIB=/home/artur/.fonts</value>
     <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-kde4:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
     <value type="QString" >GTK_IM_MODULE=cedilla</value>
@@ -199,7 +198,6 @@
     <value type="QString" >KDE_SESSION_UID=1000</value>
     <value type="QString" >KDE_SESSION_VERSION=4</value>
     <value type="QString" >LANG=pl_PL.UTF-8</value>
-    <value type="QString" >LANGUAGE=</value>
     <value type="QString" >LD_LIBRARY_PATH=/usr/lib/qtcreator:</value>
     <value type="QString" >LESS=-M -I</value>
     <value type="QString" >LESSCLOSE=lessclose.sh %s %s</value>
@@ -227,12 +225,12 @@
     <value type="QString" >QT_IM_SWITCHER=imsw-multi</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/artur/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
     <value type="QString" >QT_SYSTEM_DIR=/usr/share/desktop-data</value>
-    <value type="QString" >SESSION_MANAGER=local/laptop:@/tmp/.ICE-unix/3428,unix/laptop:/tmp/.ICE-unix/3428</value>
+    <value type="QString" >SESSION_MANAGER=local/laptop:@/tmp/.ICE-unix/5142,unix/laptop:/tmp/.ICE-unix/5142</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=3315</value>
+    <value type="QString" >SSH_AGENT_PID=5015</value>
     <value type="QString" >SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-tYOfS3163/agent.3163</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-MwyfY4881/agent.4881</value>
     <value type="QString" >TERM=xterm</value>
     <value type="QString" >TMPDIR=/tmp</value>
     <value type="QString" >USER=artur</value>
@@ -243,7 +241,7 @@
     <value type="QString" >XCURSOR_THEME=DMZ</value>
     <value type="QString" >XDG_CONFIG_DIRS=/etc/xdg</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/etc/opt/kde3/share:/opt/kde3/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=6569d80d17bd3a5ee8c684c9493eedd8-1244361013.220039-1839979568</value>
+    <value type="QString" >XDG_SESSION_COOKIE=6569d80d17bd3a5ee8c684c9493eedd8-1244443986.279968-2007559968</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
     <value type="QString" >XKEYSYMDB=/usr/share/X11/XKeysymDB</value>
     <value type="QString" >XMODIFIERS=@im=local</value>

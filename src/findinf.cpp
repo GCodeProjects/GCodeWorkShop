@@ -1,8 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Artur Kozioł                                    *
+ *   Copyright (C) 2006-2009 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
+ *   This file is part of EdytorNC.                                        *
+ *                                                                         *
+ *   EdytorNC is free software; you can redistribute it and/or modify      *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
@@ -233,7 +235,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    QStringList list;
    QString item;
 
-   QSettings settings("Trolltech", "EdytorNC");
+   QSettings settings("EdytorNC", "EdytorNC");
    settings.beginGroup("FindFileDialog");
 
    settings.setValue("CaseSensitive", wholeWordsCheckBox->isChecked());
@@ -309,7 +311,7 @@ void FindInFiles::readSettings()
    directoryComboBox->clear(); 
    fileComboBox->clear(); 
 
-   QSettings settings("Trolltech", "EdytorNC");
+   QSettings settings("EdytorNC", "EdytorNC");
    settings.beginGroup("FindFileDialog" );
 
    wholeWordsCheckBox->setChecked(settings.value("CaseSensitive", FALSE).toBool());

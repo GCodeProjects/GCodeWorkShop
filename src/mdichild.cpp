@@ -1,8 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Artur Kozioł                                    *
+ *   Copyright (C) 2006-2009 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
+ *   This file is part of EdytorNC.                                        *
+ *                                                                         *
+ *   EdytorNC is free software; you can redistribute it and/or modify      *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
@@ -43,9 +45,8 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 
     marginWidget->setAutoFillBackground(TRUE);
     marginWidget->setBackgroundRole(QPalette::Base);
-
     textEdit->installEventFilter(this);
-
+    setWindowIcon(QIcon(":/images/ncfile.png"));
 }
 
 //**************************************************************************************************
@@ -60,7 +61,6 @@ void MdiChild::newFile()
     curFile = tr("document%1.nc").arg(sequenceNumber++);
     setWindowTitle(curFile + "[*]");
 
-    setWindowIcon(QIcon(":/images/ncfile.png"));
     connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 }
 
@@ -90,7 +90,6 @@ bool MdiChild::loadFile(const QString &fileName)
     QApplication::restoreOverrideCursor();
 
     setCurrentFile(fileName, tex);
-
     connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 
     return true;
@@ -957,7 +956,7 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 
  void MdiChild::doI2M()
 {
-   int pos, c, count;
+   int pos, count;
    QString tx, f_tx;
    QRegExp exp;
    double it;

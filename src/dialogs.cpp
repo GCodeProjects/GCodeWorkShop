@@ -1,8 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Artur Kozioł                                    *
+ *   Copyright (C) 2006-2009 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
+ *   This file is part of EdytorNC.                                        *
+ *                                                                         *
+ *   EdytorNC is free software; you can redistribute it and/or modify      *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
@@ -1736,7 +1738,6 @@ void BHCTab::sellAll()
 void BHCTab::copySelection()
 {
    int i;
-   int pos;
    QString selText, tmp;
    QRegExp exp;
    QStringList list;
@@ -2540,7 +2541,7 @@ void ChamferDialog::computeButtonClicked()
       ang = angInput->text().toDouble(&ok);
       ZL = zlInput->text().toDouble(&ok);
 
-      XL = tan((M_PIl/180) * ang) * (ZL * 2);
+      XL = tan((M_PI/180) * ang) * (ZL * 2);
       dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
 
       if(xoCheckBox->isChecked() && xoInput->hasAcceptableInput())
@@ -2570,7 +2571,7 @@ void ChamferDialog::computeButtonClicked()
       ang = angInput->text().toDouble(&ok);
       XL = dlInput->text().toDouble(&ok);
 
-      ZL = (XL / 2) / tan((M_PIl/180) * ang) ;
+      ZL = (XL / 2) / tan((M_PI/180) * ang) ;
       zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
 
 
@@ -2587,7 +2588,7 @@ void ChamferDialog::computeButtonClicked()
       X2 = xdInput->text().toDouble(&ok);
       XL = X2 - X1;
       dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
-      ZL = (XL / 2) / tan((M_PIl/180) * ang) ;
+      ZL = (XL / 2) / tan((M_PI/180) * ang) ;
       zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
 
 
@@ -2601,7 +2602,7 @@ void ChamferDialog::computeButtonClicked()
 
       XL = dlInput->text().toDouble(&ok);
       ZL = zlInput->text().toDouble(&ok);
-      ang = (atan((XL / 2) / ZL)) / (M_PIl/180);
+      ang = (atan((XL / 2) / ZL)) / (M_PI/180);
 
       angInput->setText(QString("%1").arg(ang, 0, 'f', 3));
 

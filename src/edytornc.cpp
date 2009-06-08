@@ -1,8 +1,10 @@
 /***************************************************************************
- *   Copyright (C) 2009 by Artur Kozioł                                    *
+ *   Copyright (C) 2006-2009 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
+ *   This file is part of EdytorNC.                                        *
+ *                                                                         *
+ *   EdytorNC is free software; you can redistribute it and/or modify      *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
@@ -167,12 +169,12 @@ void edytornc::open()
 
 
     QStringList::Iterator it = files.begin();
-    while( it != files.end() )
+    while(it != files.end())
     {
        file.setFile(*it);
        QMdiSubWindow *existing = findMdiChild(*it);
 
-       if((file.exists ()) && (file.isReadable ()) && !existing)
+       if((file.exists()) && (file.isReadable()) && !existing)
        {
           lastDir = file.absoluteDir();
           MdiChild *child = createMdiChild();
@@ -194,6 +196,38 @@ void edytornc::open()
        ++it;
     };
     statusBar()->showMessage(tr("File loaded"), 2000);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::openFile(const QString fileName)
+{
+   QFileInfo file;
+
+   file.setFile(fileName);
+
+   QMdiSubWindow *existing = findMdiChild(fileName);
+
+   if((file.exists()) && (file.isReadable()) && !existing)
+   {
+      lastDir = file.absoluteDir();
+      MdiChild *child = createMdiChild();
+      if(child->loadFile(fileName))
+      {
+         defaultMdiWindowProperites.cursorPos = 0;
+         defaultMdiWindowProperites.readOnly = FALSE;
+         defaultMdiWindowProperites.maximized = FALSE;
+         defaultMdiWindowProperites.geometry = QByteArray();
+         child->setMdiWindowProperites(defaultMdiWindowProperites);
+         child->show();
+      }
+      else
+      {
+         child->close();
+      };
+   };
 }
 
 //**************************************************************************************************
@@ -270,8 +304,8 @@ void edytornc::openWithPreview()
 
 void edytornc::save()
 {
-    if (activeMdiChild() && activeMdiChild()->save())
-        statusBar()->showMessage(tr("File saved"), 2000);
+    if(activeMdiChild() && activeMdiChild()->save())
+      statusBar()->showMessage(tr("File saved"), 2000);
 }
 
 //**************************************************************************************************
@@ -280,8 +314,8 @@ void edytornc::save()
 
 void edytornc::saveAs()
 {
-    if (activeMdiChild() && activeMdiChild()->saveAs())
-        statusBar()->showMessage(tr("File saved"), 2000);
+    if(activeMdiChild() && activeMdiChild()->saveAs())
+      statusBar()->showMessage(tr("File saved"), 2000);
 }
 
 //**************************************************************************************************
@@ -633,9 +667,8 @@ void edytornc::doBhc()
    if(!bhcDialog)
    {
       BHCDialog *bhcDialog = new BHCDialog(this);
-
-      bhcDialog->move((geometry().x() + width() - 10) - bhcDialog->width(), geometry().y()+35);
       bhcDialog->show();
+      bhcDialog->move((geometry().x() + width() - 10) - bhcDialog->width(), geometry().y()+35);
    };
 }
 
@@ -857,7 +890,7 @@ void edytornc::deleteText()
 
 void edytornc::paste()
 {
-    if (activeMdiChild())
+    if(activeMdiChild())
         activeMdiChild()->textEdit->paste();
 }
 
@@ -867,7 +900,7 @@ void edytornc::paste()
 
 void edytornc::undo()
 {
-    if (activeMdiChild())
+    if(activeMdiChild())
         activeMdiChild()->textEdit->document()->undo();
 }
 
@@ -877,7 +910,7 @@ void edytornc::undo()
 
 void edytornc::redo()
 {
-    if (activeMdiChild())
+    if(activeMdiChild())
         activeMdiChild()->textEdit->document()->redo();
 }
 
@@ -899,10 +932,14 @@ void edytornc::about()
 {
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers."
-                               "<P>Version 2009.00"
-                               "<P>Copyright (C) 1998 - 2009 by <urllink href='mailto:artkoz@poczta.onet.pl'>Artur Koziol</urllink> (artkoz@poczta.onet.pl)"
-                               "<P>http://sourceforge.net/projects/edytornc"
-                               "<P><i>This program is free software; you can redistribute it and/or modify"
+                               "<P>Version: "
+                               "2009.00 Beta"
+                               "<P>Copyright (C) 1998 - 2009 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>"
+                               "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
+                               "<P>"
+                               "<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>"
+                               "<P>"
+                               "<P><i>EdytorNC is free software; you can redistribute it and/or modify"
                                "it under the terms of the GNU General Public License.</i>"));
 }
 
@@ -912,10 +949,8 @@ void edytornc::about()
 
 void edytornc::updateMenus()
 {
-   QTextBlock b,cb;
-   int column = 1;
-   int line = 1;
-
+   bool av;
+   
    bool hasMdiChild = (activeMdiChild() != 0);
    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
    saveAct->setEnabled(hasMdiChild);
@@ -941,6 +976,9 @@ void edytornc::updateMenus()
    insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
    removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
    convertProgAct->setEnabled(hasMdiChildNotReadOnly);
+
+   redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
+   undoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isUndoAvailable());
 
 
    if(activeMdiChild() && activeMdiChild()->textEdit->isReadOnly())
@@ -992,8 +1030,8 @@ void edytornc::updateStatusBar()
          line++;
       };
 
-      labelStat1->setText(tr(" Line: ") + QString::number(line) +
-                          tr("  Col: ") + QString::number(column + 1) +
+      labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
+                          tr("  Line: ") + QString::number(line) +
                           (activeMdiChild()->textEdit->document()->isModified() ? tr("  <b>Modified</b>  "): " ") +
                           (!hasMdiChildNotReadOnly ? tr(" Read only  "): " ") +
                           (activeMdiChild()->textEdit->overwriteMode() ? tr(" Overwrite  "): tr(" Insert ")));
@@ -1049,21 +1087,13 @@ MdiChild *edytornc::createMdiChild()
     MdiChild *child = new MdiChild();
     mdiArea->addSubWindow(child);
 
-
-    //connect( w, SIGNAL(updateMenu()), this, SLOT(updateStatusBar()));
-    //connect( w, SIGNAL(windowClosed(bool)), this, SLOT(updateFileMenu(bool)));
-
-    //connect( w, SIGNAL(statChanged()), this, SLOT(updateStatusBar()));
-
     connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(copyAvailable(bool)), copyAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
-
     connect(child->textEdit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(updateStatusBar()));
-
     connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
 
@@ -1466,7 +1496,7 @@ void edytornc::createStatusBar()
 
 void edytornc::readSettings()
 {
-    QSettings settings("Trolltech", "EdytorNC");
+    QSettings settings("EdytorNC", "EdytorNC");
 
     QPoint pos = settings.value("Pos", QPoint(0, 0)).toPoint();
     QSize size = settings.value("Size", QSize(800, 600)).toSize();
@@ -1497,7 +1527,7 @@ void edytornc::readSettings()
     tabbedView = settings.value("TabbedView", FALSE).toBool();
 
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
-    defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", Qt::green).toInt();
+    defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray(); 
 
@@ -1520,9 +1550,9 @@ void edytornc::readSettings()
     defaultMdiWindowProperites.hColors.keyWordColor = settings.value("KeyWordColor", 0x1d8000).toInt();
     defaultMdiWindowProperites.hColors.progNameColor = settings.value("ProgNameColor", 0x000000).toInt();
     defaultMdiWindowProperites.hColors.operatorColor = settings.value("OperatorColor", 0x9a2200).toInt();
-    defaultMdiWindowProperites.hColors.zColor = settings.value("ZColor", Qt::blue).toInt();
-    defaultMdiWindowProperites.hColors.aColor = settings.value("AColor", Qt::black).toInt();
-    defaultMdiWindowProperites.hColors.bColor = settings.value("BColor", Qt::black).toInt();
+    defaultMdiWindowProperites.hColors.zColor = settings.value("ZColor", 0x000080).toInt();
+    defaultMdiWindowProperites.hColors.aColor = settings.value("AColor", 0x000000).toInt();
+    defaultMdiWindowProperites.hColors.bColor = settings.value("BColor", 0x000000).toInt();
 
 
     settings.endGroup();
@@ -1535,10 +1565,10 @@ void edytornc::readSettings()
 
        defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
 
-       defaultMdiWindowProperites.fileName = settings.value( "OpenedFile_" + QString::number(i) ).toString();
+       defaultMdiWindowProperites.fileName = settings.value("OpenedFile_" + QString::number(i) ).toString();
        if(!defaultMdiWindowProperites.fileName.isEmpty())
        {
-          defaultMdiWindowProperites.cursorPos = settings.value( "Cursor_" + QString::number(i), 1).toInt();
+          defaultMdiWindowProperites.cursorPos = settings.value("Cursor_" + QString::number(i), 1).toInt();
           defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly_" + QString::number(i), FALSE).toBool();
           defaultMdiWindowProperites.geometry = settings.value("Geometry_" + QString::number(i), QByteArray()).toByteArray();
           defaultMdiWindowProperites.maximized = settings.value("Maximized_" + QString::number(i), FALSE).toBool();
@@ -1562,20 +1592,20 @@ void edytornc::writeSettings()
     int i = 1;
     MdiChild *mdiChild;
    
-    QSettings settings("Trolltech", "EdytorNC");
+    QSettings settings("EdytorNC", "EdytorNC");
 
     //cleanup old settings
     settings.beginGroup("LastDoc" );
     int max = settings.value("OpenedFileCount", 0 ).toInt();
     for(int i = 1; i < max; ++i)
     {
-        settings.remove( "OpenedFile_" + QString::number(i));
-        settings.remove( "Cursor_" + QString::number(i));
-        settings.remove( "ReadOnly_" + QString::number(i));
-        settings.remove( "Pos_" + QString::number(i));
-        settings.remove( "Size_" + QString::number(i));
-        settings.remove( "Geometry_" + QString::number(i));
-        settings.remove( "Maximized_" + QString::number(i));
+        settings.remove("OpenedFile_" + QString::number(i));
+        settings.remove("Cursor_" + QString::number(i));
+        settings.remove("ReadOnly_" + QString::number(i));
+        settings.remove("Pos_" + QString::number(i));
+        settings.remove("Size_" + QString::number(i));
+        settings.remove("Geometry_" + QString::number(i));
+        settings.remove("Maximized_" + QString::number(i));
     };
     settings.endGroup();
 
@@ -1634,23 +1664,23 @@ void edytornc::writeSettings()
 
     settings.endGroup();
 
-    settings.beginGroup("LastDoc" );
+    settings.beginGroup("LastDoc");
 
     foreach (QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder)) 
     {
         mdiChild = qobject_cast<MdiChild *>(window->widget());
         _editor_properites Opt = mdiChild->getMdiWindowProperites();
 
-        settings.setValue( "OpenedFile_" + QString::number(i), Opt.fileName);
-        settings.setValue( "Cursor_" + QString::number(i), Opt.cursorPos);
-        settings.setValue( "ReadOnly_" + QString::number(i), Opt.readOnly);
+        settings.setValue("OpenedFile_" + QString::number(i), Opt.fileName);
+        settings.setValue("Cursor_" + QString::number(i), Opt.cursorPos);
+        settings.setValue("ReadOnly_" + QString::number(i), Opt.readOnly);
         settings.setValue("Geometry_" + QString::number(i), mdiChild->parentWidget()->saveGeometry());
         settings.setValue("Maximized_" + QString::number(i), mdiChild->parentWidget()->isMaximized());
 
         i++;
     };
     
-    settings.setValue( "OpenedFileCount", (i)); 
+    settings.setValue("OpenedFileCount", (i));
     settings.endGroup();
 
 }
@@ -1739,7 +1769,7 @@ void edytornc::loadFile(_editor_properites options)
 //
 //**************************************************************************************************
 
-void edytornc::updateRecentFiles( const QString &filename )
+void edytornc::updateRecentFiles(const QString &filename)
 {
     m_recentFiles.prepend( filename );
     if ( m_recentFiles.size() > MAX_RECENTFILES )
@@ -1752,7 +1782,7 @@ void edytornc::updateRecentFiles( const QString &filename )
 //
 //**************************************************************************************************
 
-void edytornc::fileOpenRecent( QAction *act )
+void edytornc::fileOpenRecent(QAction *act)
 {
     defaultMdiWindowProperites.readOnly = FALSE;
     defaultMdiWindowProperites.maximized = FALSE;
@@ -1771,7 +1801,7 @@ void edytornc::updateRecentFilesMenu()
   
   
     recentFileMenu->clear();
-    for ( int i = 0; i < MAX_RECENTFILES; ++i )
+    for(int i = 0; i < MAX_RECENTFILES; ++i)
     {
         if(i < int(m_recentFiles.size()))
         {

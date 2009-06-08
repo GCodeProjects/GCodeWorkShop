@@ -173,7 +173,7 @@
      <item>
       <widget class="QPushButton" name="closeButton">
        <property name="text">
-        <string>&amp;Cancel</string>
+        <string>&amp;Close</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>

@@ -48,5 +48,6 @@
         <file>images/edytornc.ico</file>
         <file>images/chamfer_big.png</file>
         <file>images/fileopen_preview.png</file>
+        <file>images/edytornc48.ico</file>
     </qresource>
 </RCC>
