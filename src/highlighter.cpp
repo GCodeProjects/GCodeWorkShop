@@ -50,7 +50,7 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
 //
 //**************************************************************************************************
 
-void Highlighter::highlightBlock( const QString &tx)
+void Highlighter::highlightBlock(const QString &tx)
 {
   uint pos, count;
   int sellen;
@@ -65,23 +65,21 @@ void Highlighter::highlightBlock( const QString &tx)
 
   if(previousBlockState() == 1)
   {
-     if((sellen = tx.indexOf(')', pos)) <= 0)
+     if((sellen = tx.indexOf(')', pos)) < 0)
      {
         setCurrentBlockState(1);
-        sellen = (tx.length() - pos);
+        sellen = tx.length();
         setFormat(pos, sellen, QColor(highlightColors.commentColor));
-     }
-     else
-     {
-       sellen = (sellen - pos) + 1;
+        return;
      };
+
+     sellen = sellen + 1;
      setFormat(pos, sellen, QColor(highlightColors.commentColor));
-     //setFormat(pos, sellen, highlightColors.commentColor);
+     setCurrentBlockState(0);
      pos = pos + sellen;
   };
 
-  //
-//setCurrentBlockState(0);
+
  
   while(pos < tx.length())
   {
@@ -90,6 +88,7 @@ void Highlighter::highlightBlock( const QString &tx)
      sellen = 1;
      while(TRUE)
      {
+        setCurrentBlockState(0);
         if(ch == ';')
         {
            sellen = (tx.length() - pos);
@@ -120,7 +119,7 @@ void Highlighter::highlightBlock( const QString &tx)
                 count++;
               else
                 if(ch == ')')
-                   count--;
+                  count--;
 
            }while(count > 0);
 
@@ -400,7 +399,7 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
      sellen = 1;
      while(TRUE)
      {
-
+        setCurrentBlockState(0);
 
 //***********************************************************************
 

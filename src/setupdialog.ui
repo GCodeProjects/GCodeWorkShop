@@ -243,8 +243,17 @@
         </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="curLineColorButton">
+          <property name="toolTip">
+           <string>Highlighed current line color</string>
+          </property>
           <property name="text">
            <string>Hi&amp;ghlighed current line color</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -277,8 +286,17 @@
         </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="underlineColorButton">
+          <property name="toolTip">
+           <string>Underline color</string>
+          </property>
           <property name="text">
            <string>U&amp;nderline color</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -382,6 +400,33 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>changeFontButton</tabstop>
+  <tabstop>rColorButton</tabstop>
+  <tabstop>lColorButton</tabstop>
+  <tabstop>operatorColorButton</tabstop>
+  <tabstop>mColorButton</tabstop>
+  <tabstop>progNameColorButton</tabstop>
+  <tabstop>keyWordColorButton</tabstop>
+  <tabstop>aColorButton</tabstop>
+  <tabstop>dhtColorButton</tabstop>
+  <tabstop>bColorButton</tabstop>
+  <tabstop>macroColorButton</tabstop>
+  <tabstop>gColorButton</tabstop>
+  <tabstop>nColorButton</tabstop>
+  <tabstop>fsColorButton</tabstop>
+  <tabstop>zColorButton</tabstop>
+  <tabstop>commentColorButton</tabstop>
+  <tabstop>capsLockCheckBox</tabstop>
+  <tabstop>curLineColorButton</tabstop>
+  <tabstop>syntaxHCheckBox</tabstop>
+  <tabstop>tabbedModecheckBox</tabstop>
+  <tabstop>underlineCheckBox</tabstop>
+  <tabstop>underlineColorButton</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>defaultButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

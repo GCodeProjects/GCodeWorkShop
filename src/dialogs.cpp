@@ -1746,7 +1746,7 @@ void BHCTab::copySelection()
 
 
    if(addCommentsId->isChecked())
-     selText = QString(tr("(Diameter: %1, no. of holes: %2)\n")).arg(diaInput->text()).arg(holesInput->text());
+     selText = QString(tr("(Diameter: %1, no. of holes: %2, start angle: %3)\n")).arg(diaInput->text()).arg(holesInput->text()).arg(angleStartInput->text());
    else
      selText = "";
 
@@ -1757,7 +1757,7 @@ void BHCTab::copySelection()
       {
          it = resultTable->item(i, 0);
          selText += "X" + it->text();
-         it = resultTable->item(i, 0);
+         it = resultTable->item(i, 1);
          selText += " Y" + it->text();
 
          if(addCommentsId->isChecked())
@@ -3155,7 +3155,7 @@ void SetupDialog::setDefaultProp()
    palette.setColor(operatorColorButton->foregroundRole(), 0x9a2200);
    operatorColorButton->setPalette(palette);
 
-   palette.setColor(zColorButton->foregroundRole(), Qt::black);
+   palette.setColor(zColorButton->foregroundRole(), 0x000080);
    zColorButton->setPalette(palette);
 
    palette.setColor(aColorButton->foregroundRole(), Qt::black);

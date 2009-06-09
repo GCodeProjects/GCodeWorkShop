@@ -251,6 +251,23 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>rightTriangleCheckBox</tabstop>
+  <tabstop>aCheckBox</tabstop>
+  <tabstop>aInput</tabstop>
+  <tabstop>bCheckBox</tabstop>
+  <tabstop>bInput</tabstop>
+  <tabstop>cCheckBox</tabstop>
+  <tabstop>cInput</tabstop>
+  <tabstop>aACheckBox</tabstop>
+  <tabstop>aAInput</tabstop>
+  <tabstop>aBCheckBox</tabstop>
+  <tabstop>aBInput</tabstop>
+  <tabstop>aCCheckBox</tabstop>
+  <tabstop>aCInput</tabstop>
+  <tabstop>computeButton</tabstop>
+  <tabstop>closeButton</tabstop>
+ </tabstops>
  <resources>
   <include location="application.qrc"/>
  </resources>

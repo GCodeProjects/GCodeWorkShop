@@ -104,11 +104,11 @@ bool MdiChild::save()
     setFocus();
     if(isUntitled) 
     {
-      return saveAs();
+       return saveAs();
     } 
     else 
     {
-      return saveFile(curFile);
+       return saveFile(curFile);
     }
 }
 
@@ -135,7 +135,7 @@ bool MdiChild::saveAs()
                          this,
                          tr("Save file as..."),
                          curFile,
-                         filters, &saveFileFilter);
+                         filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
 
        
     if((QFile(file).exists()))
@@ -330,7 +330,7 @@ bool MdiChild::maybeSave()
    if(textEdit->document()->isModified())
    {
       QMessageBox msgBox;
-      msgBox.setText(tr("<b>File : \"%1\"\n has been modified.</b>").arg(curFile));
+      msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(curFile));
       msgBox.setInformativeText(tr("Do you want to save your changes ?"));
       msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
       msgBox.setDefaultButton(QMessageBox::Save);
@@ -473,8 +473,8 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
           {
              QTextCursor cr = textEdit->textCursor(); //Underline changes
              QTextCharFormat format = cr.charFormat();
-             if((((!(k->key() == Qt::Key_Space)) && (k->modifiers() == Qt::NoModifier))
-                || (k->modifiers() == Qt::ShiftModifier) || (k->modifiers() == Qt::KeypadModifier)))
+
+             if((k->text()[0].isPrint()) && !(k->text()[0].isSpace()))
              {
                 format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
                 format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
@@ -490,29 +490,26 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
              };
           };
 
-
           if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
           {
-             if((k->modifiers() == Qt::KeypadModifier) || (k->nativeModifiers() == 0x85)) // !!! Not working for keypad comma !!!
+             if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
              {
-                textEdit->insertPlainText(".");
-                return TRUE;
+                QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+                return true;
              };
 
           };
 
           if(mdiWindowProperites.intCapsLock)
           {
-             if((k->text().toAscii() >= QByteArray("a")) && (k->text().toAscii() <= QByteArray("z"))
-                && ((k->modifiers() == Qt::NoModifier)))
+             if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
              {  
                 QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
                 return true;
 
              };
 
-             if(((k->text().toAscii() >= QByteArray("A")) && (k->text().toAscii() <= QByteArray("Z")))
-                && (k->modifiers() == Qt::ShiftModifier))
+             if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
              {
                 QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
                 return true;

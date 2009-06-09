@@ -119,21 +119,23 @@ void FindInFiles::find()
 //**************************************************************************************************
 
 QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &files,
-                              const QString &text)
+                                   const QString &text)
 {
+    int pos;
+    QRegExp exp;
+    QString f_tx;
+    qint64 size;
+    bool founded, word;
+    QString line;
+    QStringList foundFiles;
+
     QProgressDialog progressDialog(this);
     progressDialog.setCancelButtonText(tr("&Cancel"));
     progressDialog.setRange(0, files.size());
     progressDialog.setWindowTitle(tr("Find Files"));
 
-    int pos;
-    QRegExp exp;
-    QString f_tx;
-    qint64 size;
-    bool founded;
-    QString line;
-    QStringList foundFiles;
-
+    findButton->setEnabled(FALSE);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     exp.setCaseSensitivity(Qt::CaseInsensitive);
     exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
@@ -179,8 +181,25 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                    };
                 };
 
-                if(line.contains(text, Qt::CaseInsensitive))
+                pos = line.indexOf(text, 0, Qt::CaseInsensitive);
+                word = false;
+                founded = (pos >= 0);
+
+                if(founded && wholeWordsCheckBox->isChecked())
                 {
+                   if(pos > 0)
+                     if(line[pos - 1].isLetterOrNumber())
+                       word = true;
+                   pos = pos + text.size();
+                   if(pos < line.size())
+                     if(line[pos + 1].isLetterOrNumber())
+                       word = true;
+                };
+
+                if((founded && (!wholeWordsCheckBox->isChecked())) ||
+                   (founded&& (wholeWordsCheckBox->isChecked() && word)))
+                {
+
                     founded = false;
                     size = file.size();
 
@@ -210,6 +229,8 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     }
 
     //filesTable->adjustSize();
+    findButton->setEnabled(TRUE);
+    QApplication::restoreOverrideCursor();
     return foundFiles;
 }
 

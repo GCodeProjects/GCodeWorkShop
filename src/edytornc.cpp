@@ -949,8 +949,6 @@ void edytornc::about()
 
 void edytornc::updateMenus()
 {
-   bool av;
-   
    bool hasMdiChild = (activeMdiChild() != 0);
    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
    saveAct->setEnabled(hasMdiChild);

@@ -29,8 +29,11 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(application);
     QApplication app(argc, argv);
     QTranslator qtTranslator;
-    qtTranslator.load("qt_" + QLocale::system().name(),
-                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    if(QLibraryInfo::location(QLibraryInfo::TranslationsPath).isEmpty())
+      qtTranslator.load("qt_" + QLocale::system().name());
+    else
+      qtTranslator.load("qt_" + QLocale::system().name(),
+                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&qtTranslator);
     QTranslator myappTranslator;
     myappTranslator.load("edytornc_" + QLocale::system().name());

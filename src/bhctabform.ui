@@ -375,6 +375,19 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>xCenterInput</tabstop>
+  <tabstop>yCenterInput</tabstop>
+  <tabstop>diaInput</tabstop>
+  <tabstop>holesInput</tabstop>
+  <tabstop>angleStartInput</tabstop>
+  <tabstop>angleBeetwenInput</tabstop>
+  <tabstop>roateInput</tabstop>
+  <tabstop>mirrorX</tabstop>
+  <tabstop>mirrorY</tabstop>
+  <tabstop>all</tabstop>
+  <tabstop>resultTable</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
