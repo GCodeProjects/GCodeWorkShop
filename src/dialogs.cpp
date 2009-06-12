@@ -1744,7 +1744,6 @@ void BHCTab::copySelection()
    QTableWidgetItem *it;
 
 
-
    if(addCommentsId->isChecked())
      selText = QString(tr("(Diameter: %1, no. of holes: %2, start angle: %3)\n")).arg(diaInput->text()).arg(holesInput->text()).arg(angleStartInput->text());
    else
@@ -1766,6 +1765,7 @@ void BHCTab::copySelection()
             tmp = it->text();
             tmp.remove(")");
             tmp.replace("(", "- ");
+            tmp = tmp.simplified();
             selText += " (" + tmp + ")\n";
          }
          else

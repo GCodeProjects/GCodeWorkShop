@@ -364,11 +364,6 @@
      <attribute name="verticalHeaderCascadingSectionResizes">
       <bool>false</bool>
      </attribute>
-     <row>
-      <property name="text">
-       <string>0000.000</string>
-      </property>
-     </row>
      <column/>
      <column/>
     </widget>

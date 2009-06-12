@@ -55,6 +55,9 @@ public:
     void openFile(const QString fileName);
     enum { MAX_RECENTFILES = 9 };
 
+public slots:
+    void messReceived(const QString &text = "");
+
 protected:
     void closeEvent(QCloseEvent *event);
 
@@ -64,6 +67,7 @@ private slots:
     void openWithPreview();
     void save();
     void saveAs();
+    void printFile();
     void cut();
     void undo();
     void redo();
@@ -106,7 +110,10 @@ private slots:
     void replaceFindSlot(bool &found);
     void replaceAllSlot(bool &found);
     void updateStatusBar();
-    
+    void cancelUnderline();
+
+ signals:
+    void needToShow();
 
 private:
     void createActions();
@@ -152,6 +159,7 @@ private:
     QAction *saveAsAct;
     QAction *exitAct;
     QAction *findFilesAct;
+    QAction *printAct;
     QAction *cutAct;
     QAction *copyAct;
     QAction *pasteAct;

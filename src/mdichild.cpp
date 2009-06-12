@@ -53,6 +53,16 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 //
 //**************************************************************************************************
 
+MdiChild::~MdiChild()
+{
+    if(highlighter > 0)
+      delete highlighter;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void MdiChild::newFile()
 {
     static int sequenceNumber = 1;
@@ -557,7 +567,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
    count = 0;
    while(1)
    {
-      if(mode == 3)
+      if(mode == 3) //remove all
       {
          pos = 0;
          num = 0;
@@ -576,7 +586,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
          break;
       };
 
-      if(mode == 1)
+      if(mode == 1) //renumber all
       {
          pos = 0;
          num = startAt;
@@ -585,12 +595,19 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
          {
             f_tx = tx.mid(pos, exp.matchedLength());
 
-            if((f_tx.contains(' ') == 0) && (f_tx.contains('\n') == 0))
+            if(pos > 0)
+              if(tx[pos - 1].isLetterOrNumber())
+               {
+                  pos += exp.matchedLength();
+                  continue;
+               };
+
+            if((!f_tx.contains(' ')) && (!f_tx.contains('\n')))
               i = exp.matchedLength();
             else
               i = exp.matchedLength() - 1;
 
-            if(((f_tx.contains('(') == 0) && (f_tx.contains('\'') == 0) && (f_tx.contains(';') == 0)))
+            if((!(f_tx.contains('(')) && (!f_tx.contains('\'')) && (!f_tx.contains(';'))))
             {
                 f_tx.remove(0, 1);
                 f_tx.remove(' ');
@@ -638,7 +655,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                {
                   i_tx = line.mid(pos, exp.matchedLength());
 
-                  if(((i_tx.contains('(') == 0) && (i_tx.contains('\'') == 0) && (i_tx.contains(';') == 0)))
+                  if((!(i_tx.contains('(')) && !(i_tx.contains('\'')) && (!i_tx.contains(';'))))
                   {
                      f_tx = QString("N%1").arg(num, prec);
                      f_tx.replace(' ', '0');

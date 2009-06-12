@@ -21,19 +21,29 @@
  ***************************************************************************/
 
 
-#include <QApplication>
+//#include <QApplication>
 #include "edytornc.h"
+#include "qtsingleapplication.h"
 
 int main(int argc, char *argv[])
 {   
     Q_INIT_RESOURCE(application);
-    QApplication app(argc, argv);
+    QtSingleApplication app("EdytorNC", argc, argv);
+
+    QString txMessage;
+    for(int i = 1; i < argc; ++i)
+    {
+        txMessage += argv[i];
+        if(i < argc - 1)
+          txMessage += ";";
+    };
+
+    if(app.sendMessage(txMessage))
+        return 0;
+
     QTranslator qtTranslator;
-    if(QLibraryInfo::location(QLibraryInfo::TranslationsPath).isEmpty())
+    if(!qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
       qtTranslator.load("qt_" + QLocale::system().name());
-    else
-      qtTranslator.load("qt_" + QLocale::system().name(),
-                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&qtTranslator);
     QTranslator myappTranslator;
     myappTranslator.load("edytornc_" + QLocale::system().name());
@@ -41,10 +51,19 @@ int main(int argc, char *argv[])
     app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
     edytornc *mw = new edytornc();
 
-    if(argc > 0)
-      mw->openFile(argv[1]);
+    for(int i = 1; i < argc; ++i)
+      mw->openFile(argv[i]);
 
     mw->show();
+
+    app.setActivationWindow(mw, false);
+
+    QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
+                     mw, SLOT(messReceived(const QString&)));
+
+    QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
+
     return app.exec();
+
 }
 

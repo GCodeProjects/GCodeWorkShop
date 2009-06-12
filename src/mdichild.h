@@ -40,6 +40,7 @@ class MdiChild : public QWidget, public Ui::MdiChild
 
 public:
     MdiChild(QWidget *parent = 0, Qt::WindowFlags f = Qt::SubWindow);
+    ~MdiChild();
 
     void newFile();
     bool loadFile(const QString &fileName);

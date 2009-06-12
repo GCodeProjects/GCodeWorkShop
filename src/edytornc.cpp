@@ -97,11 +97,15 @@ void edytornc::closeEvent(QCloseEvent *event)
     {
        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
        if(mdiChild->textEdit->document()->isModified())
-         if(!mdiChild->close())
-          {
-             event->ignore();
-             return;
-          };
+       {
+          mdiChild->activateWindow();
+          mdiChild->raise();
+          if(!mdiChild->close())
+           {
+              event->ignore();
+              return;
+           };
+       };
     };
 
     mdiArea->closeAllSubWindows();
@@ -316,6 +320,25 @@ void edytornc::saveAs()
 {
     if(activeMdiChild() && activeMdiChild()->saveAs())
       statusBar()->showMessage(tr("File saved"), 2000);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::printFile()
+{
+   if(activeMdiChild())
+   {
+      QTextDocument *document = activeMdiChild()->textEdit->document();
+      QPrinter printer;
+
+      QPrintDialog *dlg = new QPrintDialog(&printer, this);
+      if(dlg->exec() != QDialog::Accepted)
+        return;
+
+      document->print(&printer);
+   };
 }
 
 //**************************************************************************************************
@@ -857,16 +880,10 @@ void edytornc::doCalc()
    name = "calc.exe";
 #endif
 
-
-   //proc = (QProcess *) qt_find_obj_child(this, "QProcess", "_calc_procces_");
    if(!proc && !name.isNull())
    {
       proc = new QProcess(this);
       proc->start(name);
-
-
-      //proc->setCommunication(QProcess::Stdout);
-      //proc->start();
    }
    else
      if(!proc->pid() && !name.isNull())
@@ -891,7 +908,7 @@ void edytornc::deleteText()
 void edytornc::paste()
 {
     if(activeMdiChild())
-        activeMdiChild()->textEdit->paste();
+      activeMdiChild()->textEdit->paste();
 }
 
 //**************************************************************************************************
@@ -901,7 +918,7 @@ void edytornc::paste()
 void edytornc::undo()
 {
     if(activeMdiChild())
-        activeMdiChild()->textEdit->document()->undo();
+      activeMdiChild()->textEdit->document()->undo();
 }
 
 //**************************************************************************************************
@@ -911,7 +928,7 @@ void edytornc::undo()
 void edytornc::redo()
 {
     if(activeMdiChild())
-        activeMdiChild()->textEdit->document()->redo();
+      activeMdiChild()->textEdit->document()->redo();
 }
 
 //**************************************************************************************************
@@ -1005,6 +1022,30 @@ void edytornc::updateMenus()
 //
 //**************************************************************************************************
 
+void edytornc::cancelUnderline()
+{
+   bool hasMdiChild = (activeMdiChild() != 0);
+
+   if(hasMdiChild)
+   {
+      QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
+
+      if(format.underlineStyle() != QTextCharFormat::NoUnderline)
+      {
+         format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+         activeMdiChild()->textEdit->setCurrentCharFormat(format);
+      };
+
+   };
+
+   updateStatusBar();
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void edytornc::updateStatusBar()
 {
    QTextBlock b,cb;
@@ -1033,6 +1074,7 @@ void edytornc::updateStatusBar()
                           (activeMdiChild()->textEdit->document()->isModified() ? tr("  <b>Modified</b>  "): " ") +
                           (!hasMdiChildNotReadOnly ? tr(" Read only  "): " ") +
                           (activeMdiChild()->textEdit->overwriteMode() ? tr(" Overwrite  "): tr(" Insert ")));
+
    };
 }
 
@@ -1090,7 +1132,7 @@ MdiChild *edytornc::createMdiChild()
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
-    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
+    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cancelUnderline()));
     connect(child->textEdit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(updateStatusBar()));
     connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
@@ -1136,6 +1178,11 @@ void edytornc::createActions()
     //openAct->setShortcut(tr("Ctrl+"));
     findFilesAct->setStatusTip(tr("Find files"));
     connect(findFilesAct, SIGNAL(triggered()), this, SLOT(findInFl()));
+
+    printAct = new QAction(QIcon(":/images/document-print.png"), tr("&Print"), this);
+    printAct->setShortcut(tr("Ctrl+P"));
+    printAct->setStatusTip(tr("Print file"));
+    connect(printAct, SIGNAL(triggered()), this, SLOT(printFile()));
 
   
     
@@ -1339,7 +1386,9 @@ void edytornc::createMenus()
     recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
     recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
     fileMenu->addSeparator();
+    fileMenu->addAction(printAct);
 
+    fileMenu->addSeparator();
     fileMenu->addAction(closeAct);
     fileMenu->addAction(closeAllAct);
     fileMenu->addSeparator();
@@ -1417,6 +1466,8 @@ void edytornc::createToolBars()
     fileToolBar->addAction(saveAsAct);
     fileToolBar->addSeparator();
     fileToolBar->addAction(findFilesAct);
+    fileToolBar->addSeparator();
+    fileToolBar->addAction(printAct);
 
     editToolBar = addToolBar(tr("Edit"));
     editToolBar->setObjectName("Edit");
@@ -1441,7 +1492,7 @@ void edytornc::createToolBars()
 
 
     toolsToolBar = new QToolBar(tr("Tools"));
-    addToolBar(Qt::RightToolBarArea,toolsToolBar);
+    addToolBar(Qt::LeftToolBarArea, toolsToolBar);
     toolsToolBar->setObjectName("Tools");
     toolsToolBar->addAction(insertSpcAct);
     toolsToolBar->addAction(removeSpcAct);
@@ -1844,7 +1895,14 @@ void edytornc::loadFoundedFile(const QString &fileName)
 //
 //**************************************************************************************************
 
-
+void edytornc::messReceived(const QString &text)
+{
+    QString str = text;
+    QStringList list1 = str.split(";", QString::SkipEmptyParts);
+    for (int i = 0; i < list1.size(); ++i)
+        openFile(list1.at(i));
+    emit needToShow();
+}
 
 //**************************************************************************************************
 //

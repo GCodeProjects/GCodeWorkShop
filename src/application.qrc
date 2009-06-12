@@ -50,5 +50,6 @@
         <file>images/fileopen_preview.png</file>
         <file>images/edytornc48.ico</file>
         <file>images/ncfile.ico</file>
+        <file>images/document-print.png</file>
     </qresource>
 </RCC>
