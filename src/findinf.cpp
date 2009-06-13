@@ -125,7 +125,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     QRegExp exp;
     QString f_tx;
     qint64 size;
-    bool textFounded, word, notFound;
+    bool textFounded, word, notFound, commentFounded;
     QString line;
     QStringList foundFiles;
 
@@ -135,7 +135,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     progressDialog.setWindowTitle(tr("Find Files"));
 
     findButton->setEnabled(FALSE);
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    QApplication::setOverrideCursor(Qt::BusyCursor);
 
     exp.setCaseSensitivity(Qt::CaseInsensitive);
     exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
@@ -145,7 +145,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     for (int i = 0; i < files.size(); ++i)
     {
         progressDialog.setValue(i);
-        progressDialog.setLabelText(tr("Searching file number %1 of %2...")
+        progressDialog.setLabelText(tr("Searching file number %1 of %2")
                                     .arg(i).arg(files.size()));
         qApp->processEvents();
 
@@ -158,7 +158,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
         if(file.open(QIODevice::ReadOnly))
         {  
             QTextStream in(&file);
-            textFounded = false;
+            commentFounded = false;
             while(!in.atEnd())
             {
                 if(progressDialog.wasCanceled())
@@ -167,7 +167,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
 
                 line = in.readLine();
                 pos = 0;
-                if(!textFounded)
+                if(!commentFounded) //find first comment
                 {
                    pos = line.indexOf(exp, pos);
                    if(pos >= 0)
@@ -178,15 +178,26 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                          f_tx.remove('(');
                          f_tx.remove(')');
                          f_tx.remove(';');
-                         textFounded = true;
+                         commentFounded = true;
                       };
                    };
                 };
 
-                pos = line.indexOf(text, 0, Qt::CaseInsensitive);
-                word = false;
-                textFounded = (pos >= 0);
+                if(text == "*") //files containing anything
+                {
+                   if(commentFounded || in.atEnd()) //try find first comment
+                   {
+                      pos = 0;
+                      textFounded = true;
+                   };
+                }
+                else
+                {
+                   pos = line.indexOf(text, 0, Qt::CaseInsensitive);
+                   textFounded = (pos >= 0);
+                };
 
+                word = false;
                 if(textFounded && wholeWordsCheckBox->isChecked())
                 {
                    if(pos > 0)
@@ -369,7 +380,7 @@ void FindInFiles::readSettings()
 
    list = settings.value("Texts", QStringList()).toStringList();
    textComboBox->addItems(list);
-   item = settings.value("SelectedText", QString("")).toString();
+   item = settings.value("SelectedText", QString("*")).toString();
    i = textComboBox->findText(item, Qt::MatchExactly);
    textComboBox->setCurrentIndex(i);
 
@@ -382,6 +393,8 @@ void FindInFiles::readSettings()
 
 void FindInFiles::filesTableClicked(int x, int y)
 {
+   Q_UNUSED(y);
+   
    QTableWidgetItem *item = filesTable->item(x, 0);
 
    QString dir = directoryComboBox->currentText();
@@ -397,6 +410,7 @@ void FindInFiles::filesTableClicked(int x, int y)
 
 void FindInFiles::filePreview(int x, int y)
 {
+      Q_UNUSED(y);
 
       QTableWidgetItem *item = filesTable->item(x, 0);
 

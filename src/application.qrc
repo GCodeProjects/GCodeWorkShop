@@ -17,7 +17,6 @@
         <file>images/bhc.png</file>
         <file>images/fileclose.png</file>
         <file>images/filesaveas.png</file>
-        <file>images/edit-find.png</file>
         <file>images/window-close.png</file>
         <file>images/editdelete.png</file>
         <file>images/edit-select-all.png</file>
@@ -51,5 +50,8 @@
         <file>images/edytornc48.ico</file>
         <file>images/ncfile.ico</file>
         <file>images/document-print.png</file>
+        <file>images/arrow-left.png</file>
+        <file>images/arrow-right.png</file>
+        <file>images/arrow-right-double.png</file>
     </qresource>
 </RCC>

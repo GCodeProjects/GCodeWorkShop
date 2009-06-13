@@ -36,6 +36,7 @@ edytornc::edytornc()
 {
     setAttribute(Qt::WA_DeleteOnClose);
 
+    findToolBar = 0;
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
 
@@ -52,10 +53,6 @@ edytornc::edytornc()
     createToolBars();
 
     updateMenus();
-
-    searchOptions.options = 0;
-    searchOptions.cursor.setPosition(0);
-    searchOptions.fromCursor = TRUE;
 
     readSettings();
 
@@ -90,6 +87,8 @@ edytornc::~edytornc()
 
 void edytornc::closeEvent(QCloseEvent *event)
 {
+    //if(findToolBar > 0)
+      //findToolBar->close();
 
     writeSettings();
 
@@ -110,7 +109,7 @@ void edytornc::closeEvent(QCloseEvent *event)
 
     mdiArea->closeAllSubWindows();
 
-    if(currentMdiChild()) 
+    if(activeMdiChild())
     {
        event->ignore();
     } 
@@ -390,209 +389,144 @@ void edytornc::findInFl()
 //
 //**************************************************************************************************
 
-void edytornc::find()
+bool edytornc::findNext()
 {
-   if(currentMdiChild())
-   {  
-      searchOptions.expr = currentMdiChild()->textEdit->textCursor().selectedText();
-   }
-   else
-     return;
+   bool hasMdiChild = (activeMdiChild() != 0);
+   bool found = false;
+   QTextCursor cursor, cursorOld;
 
-   FindDialog *findDialog = new FindDialog(this);
-
-   findDialog->setFindOpt(searchOptions);
-   if(findDialog->exec() == QDialog::Accepted)
+   if(!findEdit->text().isEmpty() && hasMdiChild)
    {
-      findDialog->getFindOpt(searchOptions);
-      findSlot(searchOptions, true);
-   };
-
-   delete findDialog;
-
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void edytornc::findSlot(SSearchOptions &s, bool findFirst)
-{
-    
-    MdiChild *mdiChild = currentMdiChild();  
-    if(!mdiChild) 
-      return;
-
-    if((s.fromCursor || !findFirst) || (s.options & QTextDocument::FindBackward))
-    {
-       s.cursor = currentMdiChild()->textEdit->textCursor();
-       s.cursor = mdiChild->textEdit->document()->find(s.expr, s.cursor, s.options);
-    }
-    else
-    {
-       s.cursor.setPosition(0);
-       s.cursor = mdiChild->textEdit->document()->find(s.expr, s.cursor, s.options);
-    };
-
-    searchOptions = s;
-    
-    if(!s.cursor.isNull())
-    {  
-       mdiChild->textEdit->setTextCursor(s.cursor);
-    }
-    else
-      QMessageBox::information( this, tr("EdytorNC"), QString(tr("Can't find : '%1'.")).arg(searchOptions.expr));
-
-    findNextAct->setEnabled(!s.cursor.isNull());
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void edytornc::findNext()
-{
-   findSlot(searchOptions, false);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void edytornc::replaceSlot(bool &found)
-{
-   MdiChild *mdiChild = currentMdiChild();
-   if(mdiChild)
-   {
-      if(searchOptions.cursor != currentMdiChild()->textEdit->textCursor())
+      found = activeMdiChild()->textEdit->find(findEdit->text(),
+                                ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+      if(!found)
       {
-         replaceFindSlot(found);
-         return;
+         cursor = activeMdiChild()->textEdit->textCursor();
+         cursorOld = cursor;
+         cursor.movePosition(QTextCursor::Start);
+         activeMdiChild()->textEdit->setTextCursor(cursor);
+         found = activeMdiChild()->textEdit->find(findEdit->text(),
+                                   ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                   (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+         if(!found)
+           activeMdiChild()->textEdit->setTextCursor(cursorOld);
       };
-      if(!searchOptions.cursor.isNull())
-      {  
-         //searchOptions.cursor = currentMdiChild()->textCursor();
-         searchOptions.cursor.beginEditBlock();
-         searchOptions.cursor.removeSelectedText();
-         searchOptions.cursor.insertText(searchOptions.replaceText);
-         searchOptions.cursor.endEditBlock();
-         mdiChild->textEdit->setTextCursor(searchOptions.cursor);
-      };
-      replaceFindSlot(found);
-      if(found)
-        mdiChild->textEdit->setTextCursor(searchOptions.cursor);
+      return found;
    };
+   return false;
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-void edytornc::replaceFindSlot(bool &found)
+bool edytornc::findPrevious()
 {
-   QTextCursor curTmp;    
+   bool hasMdiChild = (activeMdiChild() != 0);
+   bool found = false;
+   QTextCursor cursor, cursorOld;
 
-   MdiChild *mdiChild = currentMdiChild();
-   if(mdiChild)
-   { 
-      curTmp = searchOptions.cursor;
-      searchOptions.cursor = mdiChild->textEdit->document()->find(searchOptions.expr, currentMdiChild()->textEdit->textCursor(),
-                                                        searchOptions.options); 
-      found = !searchOptions.cursor.isNull();
-      if(found)
-        mdiChild->textEdit->setTextCursor(searchOptions.cursor);
-      else 
-        searchOptions.cursor = curTmp; 
-         
-   };
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void edytornc::replaceAllSlot(bool &found)
-{
-   MdiChild *mdiChild = currentMdiChild();
-   
-   if(mdiChild)
+   if(!findEdit->text().isEmpty() && hasMdiChild)
    {
-      if(searchOptions.cursor != currentMdiChild()->textEdit->textCursor())
+      found = activeMdiChild()->textEdit->find(findEdit->text(), QTextDocument::FindBackward |
+                               ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+      if(!found)
       {
-         replaceFindSlot(found);
-         return;
-      };  
-      do
-      {
-         if(!searchOptions.cursor.isNull())
-         {  
-            searchOptions.cursor = currentMdiChild()->textEdit->textCursor();
-            searchOptions.cursor.beginEditBlock();
-            searchOptions.cursor.removeSelectedText();
-            searchOptions.cursor.insertText(searchOptions.replaceText);
-            searchOptions.cursor.endEditBlock();
-            mdiChild->textEdit->setTextCursor(searchOptions.cursor);
-         };
-         replaceFindSlot(found);;
-         if(found)
-         mdiChild->textEdit->setTextCursor(searchOptions.cursor);
-      }while(found);
+         cursor = activeMdiChild()->textEdit->textCursor();
+         cursorOld = cursor;
+         cursor.movePosition(QTextCursor::End);
+         activeMdiChild()->textEdit->setTextCursor(cursor);
+         found = activeMdiChild()->textEdit->find(findEdit->text(), QTextDocument::FindBackward |
+                                   ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                   (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+         if(!found)
+           activeMdiChild()->textEdit->setTextCursor(cursorOld);
+      };
+      return found;
    };
+   return false;
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-void edytornc::replace()
+void edytornc::replaceNext()
 {
-    QString tx;
+   bool hasMdiChild = (activeMdiChild() != 0);
+   bool found = false;
 
-    MdiChild *mdiChild = currentMdiChild();
+   if(!replaceEdit->text().isEmpty() && hasMdiChild)
+   {
+      if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
+        found = true;
+      else
+        found = findNext();
 
-    if(!mdiChild)
-      return;
+      if(found)
+      {
+         activeMdiChild()->textEdit->insertPlainText(replaceEdit->text());
+         findNext();
+      };
 
+   };
 
-    tx = mdiChild->textEdit->textCursor().selectedText();
-    if(!tx.isEmpty())
-      searchOptions.expr = tx;
+}
 
-    ReplaceDialog *replaceDialog = new ReplaceDialog(this);
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
-    replaceDialog->setFindOpt(searchOptions);
-    if(replaceDialog->exec() == QDialog::Accepted)
-    {
-       replaceDialog->getFindOpt(searchOptions);
+void edytornc::replacePrevious()
+{
+   bool hasMdiChild = (activeMdiChild() != 0);
+   bool found = false;
 
-       if(searchOptions.fromCursor)
+   if(!replaceEdit->text().isEmpty() && hasMdiChild)
+   {
+      if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
+        found = true;
+      else
+        found = findPrevious();
+
+      if(found)
        {
-          searchOptions.cursor = currentMdiChild()->textEdit->textCursor();
-          searchOptions.cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::MoveAnchor);
-          searchOptions.cursor = mdiChild->textEdit->document()->find(searchOptions.expr, searchOptions.cursor, searchOptions.options);
-       }
-       else
-       {
-          searchOptions.cursor.setPosition(0);
-          searchOptions.cursor = mdiChild->textEdit->document()->find(searchOptions.expr, searchOptions.cursor, searchOptions.options);
-       }
+         activeMdiChild()->textEdit->insertPlainText(replaceEdit->text());
+         findPrevious();
+      };
 
-       if(!searchOptions.cursor.isNull())
-       {
-          mdiChild->textEdit->setTextCursor(searchOptions.cursor);
-          ReplaceConfirmDialog *confirmationDialog = new ReplaceConfirmDialog(&QString(tr("Searching text '%1' was found. What to do now ?").arg(searchOptions.expr)), this);
+   };
 
-          connect(confirmationDialog, SIGNAL(replaceSignal(bool &)), this, SLOT(replaceSlot(bool &)));
-          connect(confirmationDialog, SIGNAL(replaceAllSignal(bool &)), this, SLOT(replaceAllSlot(bool &)));
-          connect(confirmationDialog, SIGNAL(findNextSignal(bool &)), this, SLOT(replaceFindSlot(bool &)));
+}
 
-          confirmationDialog->show();
-       }
-       else
-         QMessageBox::information( this, tr("EdytorNc"), QString(tr("Unable to find : '%1'.")).arg(searchOptions.expr));
-    };
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
-    delete replaceDialog;
+void edytornc::replaceAll()
+{
+   bool hasMdiChild = (activeMdiChild() != 0);
+   bool found = false;
+
+   if(!replaceEdit->text().isEmpty() && hasMdiChild)
+   {
+      if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
+        found = true;
+      else
+        found = findNext();
+
+      while(found)
+      {
+         activeMdiChild()->textEdit->insertPlainText(replaceEdit->text());
+         found = findNext();
+         if(!found)
+           found = findPrevious();
+      };
+
+   };
+
 }
 
 //**************************************************************************************************
@@ -935,10 +869,12 @@ void edytornc::redo()
 //
 //**************************************************************************************************
 
-void edytornc::activeWindowChanged(QMdiSubWindow * window)
+void edytornc::activeWindowChanged(QMdiSubWindow *window)
 {
-    if(activeMdiChild())
-      statusBar()->showMessage(activeMdiChild()->currentFile(), 0);
+   Q_UNUSED(window);
+
+   if(activeMdiChild())
+     statusBar()->showMessage(activeMdiChild()->currentFile(), 0);
 }
 
 //**************************************************************************************************
@@ -980,8 +916,7 @@ void edytornc::updateMenus()
    separatorAct->setVisible(hasMdiChild);
    selAllAct->setEnabled(hasMdiChildNotReadOnly);
    findAct->setEnabled(hasMdiChild);
-   if(!hasMdiChild)
-     findNextAct->setEnabled(FALSE);
+
    replaceAct->setEnabled(hasMdiChildNotReadOnly);
    zoomInAct->setEnabled(hasMdiChild);
    zoomOutAct->setEnabled(hasMdiChild);
@@ -1134,7 +1069,7 @@ MdiChild *edytornc::createMdiChild()
     connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cancelUnderline()));
     connect(child->textEdit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(updateStatusBar()));
-    connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
+    //connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
 
     return child;
@@ -1220,19 +1155,12 @@ void edytornc::createActions()
     findAct = new QAction(QIcon(":/images/find.png"), tr("&Find"), this);
     findAct->setShortcut(tr("Ctrl+F"));
     findAct->setStatusTip(tr("Find text"));
-    connect(findAct, SIGNAL(triggered()), this, SLOT(find()));
-
-    findNextAct = new QAction(QIcon(":/images/findnext.png"), tr("Find &next"), this);
-    findNextAct->setShortcut(tr("F3"));
-    findNextAct->setStatusTip(tr("Find next text"));
-    findNextAct->setEnabled(FALSE);
-    connect(findNextAct, SIGNAL(triggered()), this, SLOT(findNext()));
+    connect(findAct, SIGNAL(triggered()), this, SLOT(createFindToolBar()));
 
     replaceAct = new QAction(QIcon(":/images/replace.png"), tr("&Replace"), this);
     replaceAct->setShortcut(tr("Ctrl+R"));
     replaceAct->setStatusTip(tr("Find and replace text"));
-    connect(replaceAct, SIGNAL(triggered()), this, SLOT(replace()));
-
+    connect(replaceAct, SIGNAL(triggered()), this, SLOT(createFindToolBar()));
 
 
     deleteAct = new QAction(QIcon(":/images/editdelete.png"), tr("&Delete"), this);
@@ -1409,7 +1337,6 @@ void edytornc::createMenus()
     editMenu->addAction(selAllAct);
     editMenu->addSeparator();
     editMenu->addAction(findAct);
-    editMenu->addAction(findNextAct);
     editMenu->addAction(replaceAct);
     editMenu->addSeparator();
     editMenu->addAction(readOnlyAct);
@@ -1483,8 +1410,6 @@ void edytornc::createToolBars()
     editToolBar->addAction(selAllAct);
     editToolBar->addSeparator();
     editToolBar->addAction(findAct);
-    editToolBar->addAction(findNextAct);
-    editToolBar->addSeparator();
     editToolBar->addAction(replaceAct);
     editToolBar->addSeparator();
     editToolBar->addAction(zoomInAct);
@@ -1749,17 +1674,6 @@ MdiChild *edytornc::activeMdiChild()
 //
 //**************************************************************************************************
 
-MdiChild *edytornc::currentMdiChild()
-{
-    if(QMdiSubWindow *currentSubWindow = mdiArea->currentSubWindow())
-      return qobject_cast<MdiChild *>(currentSubWindow->widget());
-    return 0;
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 QMdiSubWindow *edytornc::findMdiChild(const QString &fileName)
 {
     QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
@@ -1899,9 +1813,183 @@ void edytornc::messReceived(const QString &text)
 {
     QString str = text;
     QStringList list1 = str.split(";", QString::SkipEmptyParts);
-    for (int i = 0; i < list1.size(); ++i)
-        openFile(list1.at(i));
+    for(int i = 0; i < list1.size(); ++i)
+      openFile(list1.at(i));
     emit needToShow();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::createFindToolBar()
+{
+   QString selText;
+   QTextCursor cursor;
+
+   if(findToolBar <= 0)
+   {
+      findToolBar = new QToolBar(tr("Find"));
+      addToolBar(Qt::BottomToolBarArea, findToolBar);
+      findToolBar->setObjectName("Find");
+
+      findNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Find next"), this);
+      findNextAct->setShortcut(tr("F3"));
+      findNextAct->setStatusTip(tr("Find next"));
+      connect(findNextAct, SIGNAL(triggered()), this, SLOT(findNext()));
+
+      findPreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Find previous"), this);
+      findPreviousAct->setShortcut(tr("Shift+F3"));
+      findPreviousAct->setStatusTip(tr("Find previous"));
+      connect(findPreviousAct, SIGNAL(triggered()), this, SLOT(findPrevious()));
+
+      replaceNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Replace && find next"), this);
+      //replaceNextAct->setShortcut(tr("F3"));
+      replaceNextAct->setStatusTip(tr("Replace && find next"));
+      connect(replaceNextAct, SIGNAL(triggered()), this, SLOT(replaceNext()));
+
+      replacePreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Replace && find previous"), this);
+      //replacePreviousAct->setShortcut(tr("F3"));
+      replacePreviousAct->setStatusTip(tr("Replace && find previous"));
+      connect(replacePreviousAct, SIGNAL(triggered()), this, SLOT(replacePrevious()));
+
+      replaceAllAct = new QAction(QIcon(":/images/arrow-right-double.png"), tr("Replace all"), this);
+      //replaceAllAct->setShortcut(tr("F3"));
+      replaceAllAct->setStatusTip(tr("Replace all"));
+      connect(replaceAllAct, SIGNAL(triggered()), this, SLOT(replaceAll()));
+
+      findCloseAct = new QAction(QIcon(":/images/window-close.png"), tr("Close find toolbar"), this);
+      //findCloseAct->setShortcut(tr("F3"));
+      findCloseAct->setStatusTip(tr("Close find toolbar"));
+      connect(findCloseAct, SIGNAL(triggered()), findToolBar, SLOT(close()));
+
+      findLabel = new QLabel(tr("Find:"));
+      findToolBar->addWidget(findLabel);
+      findEdit = new QLineEdit();
+      findEdit->installEventFilter(this);
+      findToolBar->addWidget(findEdit);
+      findToolBar->addAction(findPreviousAct);
+      findToolBar->addAction(findNextAct);   
+      findToolBar->addSeparator();
+
+      replaceLabel = new QLabel(tr("Replace with:"));
+      findToolBar->addWidget(replaceLabel);
+      replaceEdit = new QLineEdit();
+      replaceEdit->installEventFilter(this);
+      findToolBar->addWidget(replaceEdit);
+      findToolBar->addAction(replacePreviousAct);
+      findToolBar->addAction(replaceNextAct);
+      findToolBar->addAction(replaceAllAct);
+      findToolBar->addSeparator();
+
+      mCheckIgnoreCase = new QCheckBox(tr("Ignore c&ase"));
+      mCheckIgnoreCase->setChecked(TRUE);
+      connect(mCheckIgnoreCase, SIGNAL(clicked()), this, SLOT(findTextChanged()));
+      findToolBar->addWidget(mCheckIgnoreCase);
+      mCheckFindWholeWords = new QCheckBox(tr("&Whole words only"));
+      connect(mCheckFindWholeWords, SIGNAL(clicked()), this, SLOT(findTextChanged()));
+      findToolBar->addWidget(mCheckFindWholeWords);
+      findToolBar->addSeparator();
+      findToolBar->addAction(findCloseAct);
+   }
+   else
+     findToolBar->show();
+
+   disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
+
+   if(!activeMdiChild()->textEdit->textCursor().hasSelection())
+   {
+      cursor = activeMdiChild()->textEdit->textCursor();
+      cursor.select(QTextCursor::WordUnderCursor);
+      selText = cursor.selectedText();
+      if((selText.size() > 32) || (selText.size() < 2))
+        cursor.clearSelection();
+      activeMdiChild()->textEdit->setTextCursor(cursor);
+   };
+
+   cursor = activeMdiChild()->textEdit->textCursor();
+
+   if(cursor.hasSelection())
+   {
+      selText = cursor.selectedText();
+
+      if((selText.size() < 32))
+        findEdit->setText(selText);
+      else
+      {
+         cursor.clearSelection();
+         activeMdiChild()->textEdit->setTextCursor(cursor);
+      };
+   };
+
+   connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
+   findEdit->setFocus(Qt::BacktabFocusReason);
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::findTextChanged()
+{
+   bool hasMdiChild = (activeMdiChild() != 0);
+   QTextCursor cursor;
+   int pos;
+
+   if(!findEdit->text().isEmpty() && hasMdiChild)
+   {
+      cursor = activeMdiChild()->textEdit->textCursor();
+      pos = cursor.position() - findEdit->text().size();
+      if(pos < 0)
+        pos = 0;
+      do
+      {
+         cursor.movePosition(QTextCursor::Left);  //cursor.movePosition(QTextCursor::StartOfWord)
+      }while((pos <= cursor.position()) && (cursor.position() > 0));
+
+      activeMdiChild()->textEdit->setTextCursor(cursor);
+
+      findNext();
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool edytornc::eventFilter(QObject *obj, QEvent *ev)
+{
+   if((obj == findEdit) || (obj == replaceEdit))
+   {
+       if( ev->type() == QEvent::KeyPress )
+       {
+          QKeyEvent *k = (QKeyEvent*) ev;
+
+          if(defaultMdiWindowProperites.intCapsLock)
+          {
+             if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
+             {
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+                return true;
+
+             };
+
+             if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
+             {
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+                return true;
+             };
+          };
+       };
+
+       return FALSE;
+   }
+   else
+   {
+      // pass the event on to the parent class
+      return eventFilter(obj, ev);
+   };
 }
 
 //**************************************************************************************************

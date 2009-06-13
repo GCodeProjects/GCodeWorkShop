@@ -490,13 +490,6 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
                 format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
                 cr.mergeCharFormat(format);
                 textEdit->setTextCursor(cr);
-             }
-             else
-             {
-                if(k->key() == Qt::Key_Space)
-                  format.setUnderlineStyle(QTextCharFormat::NoUnderline);
-                cr.mergeCharFormat(format);
-                textEdit->setTextCursor(cr);
              };
           };
 
@@ -710,7 +703,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
    };
 
    textEdit->setTextCursor(cursor);
-
+   return count;
 }
 
 //**************************************************************************************************
@@ -1021,6 +1014,11 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 //
 //**************************************************************************************************
 
+void MdiChild::resizeEvent(QResizeEvent *event)
+{
+   Q_UNUSED(event);
+   textEdit->ensureCursorVisible();
+}
 
 //**************************************************************************************************
 //

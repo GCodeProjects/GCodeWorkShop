@@ -60,6 +60,7 @@ public slots:
 
 protected:
     void closeEvent(QCloseEvent *event);
+    bool eventFilter(QObject *obj, QEvent *ev);
 
 private slots:
     void newFile();
@@ -85,9 +86,11 @@ private slots:
     void activeWindowChanged(QMdiSubWindow * window);
     void deleteText();
     void findInFl();
-    void find();
-    void findNext();
-    void replace();
+    bool findNext();
+    bool findPrevious();
+    void replaceNext();
+    void replacePrevious();
+    void replaceAll();
     void selAll();
     void zoomIn();
     void zoomOut();
@@ -105,15 +108,16 @@ private slots:
     void readOnly();
     void doCalc();
     void loadFoundedFile(const QString &fileName);
-    void findSlot(SSearchOptions &s, bool findFirst);
-    void replaceSlot(bool &found);
-    void replaceFindSlot(bool &found);
-    void replaceAllSlot(bool &found);
     void updateStatusBar();
     void cancelUnderline();
+    void createFindToolBar();
+    void findTextChanged();
+
+
 
  signals:
     void needToShow();
+
 
 private:
     void createActions();
@@ -123,12 +127,9 @@ private:
     void readSettings();
     void writeSettings();
     MdiChild *activeMdiChild();
-    MdiChild *currentMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     _editor_properites defaultMdiWindowProperites;
     FindInFiles *findFiles;
-    FindDialog *findDialog;
-    SSearchOptions searchOptions;
     bool tabbedView;
 
 
@@ -176,7 +177,6 @@ private:
     QAction *redoAct;
 
     QAction *findAct;
-    QAction *findNextAct;
     QAction *replaceAct;
     QAction *deleteAct;
     QAction *selAllAct;
@@ -203,6 +203,21 @@ private:
 
     QLabel *labelStat1;
     QLabel *labelStat2;
+
+
+    QToolBar *findToolBar;
+    QLineEdit *findEdit;
+    QLineEdit *replaceEdit;
+    QLabel *findLabel;
+    QLabel *replaceLabel;
+    QAction *findNextAct;
+    QAction *findPreviousAct;
+    QAction *replaceNextAct;
+    QAction *replacePreviousAct;
+    QAction *replaceAllAct;
+    QAction *findCloseAct;
+    QCheckBox *mCheckFindWholeWords;
+    QCheckBox *mCheckIgnoreCase;
 
 
 };
