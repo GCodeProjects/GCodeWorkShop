@@ -50,6 +50,10 @@
        <property name="text">
         <string>&amp;Compute</string>
        </property>
+       <property name="icon">
+        <iconset resource="application.qrc">
+         <normaloff>:/images/funct.png</normaloff>:/images/funct.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -70,6 +74,10 @@
        <property name="text">
         <string>Cl&amp;ose</string>
        </property>
+       <property name="icon">
+        <iconset resource="application.qrc">
+         <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -89,6 +97,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>

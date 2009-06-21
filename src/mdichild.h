@@ -23,8 +23,7 @@
 #ifndef MDICHILD_H
 #define MDICHILD_H
 
-#include <QTextEdit>
-#include <QMainWindow>
+#include <QtGui>
 
 #include "highlighter.h"
 #include "commoninc.h"

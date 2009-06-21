@@ -277,7 +277,7 @@ CustomFDialog::CustomFDialog(QWidget *parent, int flags) : QDialog(parent, Qt::D
  
 void CustomFDialog::resizeEvent(QResizeEvent *event)
 {
-   ;
+   Q_UNUSED(event);
    pw->setMinimumSize(QSize(300, fileDialog->height() - 50));
    pw->setMaximumSize(QSize(300, fileDialog->height() - 50));
 

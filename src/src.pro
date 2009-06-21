@@ -9,7 +9,10 @@ SOURCES += edytornc.cpp \
     qtlocalpeer.cpp \
     qtlockedfile_win.cpp \
     qtlockedfile_unix.cpp \
-    qtlockedfile.cpp
+    qtlockedfile.cpp \
+    serialtransmission.cpp \
+    qextserialbase.cpp \
+    qextserialport.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -19,7 +22,10 @@ HEADERS += edytornc.h \
     findinf.h \
     qtsingleapplication.h \
     qtlockedfile.h \
-    qtlocalpeer.h
+    qtlocalpeer.h \
+    serialtransmission.h \
+    qextserialbase.h \
+    qextserialport.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \
@@ -41,5 +47,16 @@ FORMS += i2mdialog.ui \
     findinfilesdialog.ui \
     chamferdialog.ui \
     i2mprogdialog.ui \
-    setupdialog.ui
+    setupdialog.ui \
+    spconfigdialog.ui \
+    transmissiondialog.ui
 TRANSLATIONS = edytornc_pl.ts
+OBJECTS_DIR = build/obj
+MOC_DIR = build/moc
+unix:HEADERS += posix_qextserialport.h
+unix:SOURCES += posix_qextserialport.cpp
+unix:DEFINES += _TTY_POSIX_
+win32:HEADERS += win_qextserialport.h
+win32:SOURCES += win_qextserialport.cpp
+win32:DEFINES += _TTY_WIN_
+unix:VERSION = 2009.00

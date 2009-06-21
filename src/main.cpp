@@ -43,12 +43,15 @@ int main(int argc, char *argv[])
 
     QTranslator qtTranslator;
     if(!qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-      qtTranslator.load("qt_" + QLocale::system().name());
+      qtTranslator.load("qt_" + QLocale::system().name(), app.applicationDirPath());
     app.installTranslator(&qtTranslator);
+
     QTranslator myappTranslator;
-    myappTranslator.load("edytornc_" + QLocale::system().name());
+    myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
     app.installTranslator(&myappTranslator);
-    app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+
+    //app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+
     edytornc *mw = new edytornc();
 
     for(int i = 1; i < argc; ++i)

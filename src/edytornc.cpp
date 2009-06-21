@@ -37,6 +37,7 @@ edytornc::edytornc()
     setAttribute(Qt::WA_DeleteOnClose);
 
     findToolBar = 0;
+    serialToolBar = 0;
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
 
@@ -47,6 +48,8 @@ edytornc::edytornc()
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
+    
+
 
     createActions();
     createMenus();
@@ -78,7 +81,6 @@ edytornc::~edytornc()
       proc->close();
       delete(proc);
    };
-  
 }    
 
 //**************************************************************************************************
@@ -87,9 +89,6 @@ edytornc::~edytornc()
 
 void edytornc::closeEvent(QCloseEvent *event)
 {
-    //if(findToolBar > 0)
-      //findToolBar->close();
-
     writeSettings();
 
     foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
@@ -99,7 +98,7 @@ void edytornc::closeEvent(QCloseEvent *event)
        {
           mdiChild->activateWindow();
           mdiChild->raise();
-          if(!mdiChild->close())
+          if(!mdiChild->parentWidget()->close())
            {
               event->ignore();
               return;
@@ -130,14 +129,14 @@ void edytornc::newFile()
     child->newFile();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.readOnly = FALSE;
-    defaultMdiWindowProperites.maximized = FALSE;
+    //defaultMdiWindowProperites.maximized = FALSE;
     defaultMdiWindowProperites.geometry = QByteArray();
     child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-    if(mdiArea->subWindowList().isEmpty())
+    if(defaultMdiWindowProperites.maximized)
       child->showMaximized();
     else
-      child->show();
+      child->showNormal();
 }
 
 //**************************************************************************************************
@@ -185,15 +184,18 @@ void edytornc::open()
           {
              defaultMdiWindowProperites.cursorPos = 0;
              defaultMdiWindowProperites.readOnly = FALSE;
-             defaultMdiWindowProperites.maximized = FALSE;
+             //defaultMdiWindowProperites.maximized = FALSE;
              defaultMdiWindowProperites.geometry = QByteArray();
              child->setMdiWindowProperites(defaultMdiWindowProperites);
-             child->show();
+             if(defaultMdiWindowProperites.maximized)
+               child->showMaximized();
+             else
+               child->showNormal();
              updateRecentFiles(*it);
           }
           else
           {
-             child->close();
+             child->parentWidget()->close();
           };
        };
        ++it;
@@ -221,14 +223,17 @@ void edytornc::openFile(const QString fileName)
       {
          defaultMdiWindowProperites.cursorPos = 0;
          defaultMdiWindowProperites.readOnly = FALSE;
-         defaultMdiWindowProperites.maximized = FALSE;
+         //defaultMdiWindowProperites.maximized = FALSE;
          defaultMdiWindowProperites.geometry = QByteArray();
          child->setMdiWindowProperites(defaultMdiWindowProperites);
-         child->show();
+         if(defaultMdiWindowProperites.maximized)
+           child->showMaximized();
+         else
+           child->showNormal();
       }
       else
       {
-         child->close();
+         child->parentWidget()->close();
       };
    };
 }
@@ -283,15 +288,18 @@ void edytornc::openWithPreview()
              {
                 defaultMdiWindowProperites.cursorPos = 0;
                 defaultMdiWindowProperites.readOnly = FALSE;
-                defaultMdiWindowProperites.maximized = FALSE;
+                //defaultMdiWindowProperites.maximized = FALSE;
                 defaultMdiWindowProperites.geometry = QByteArray();
                 child->setMdiWindowProperites(defaultMdiWindowProperites);
-                child->show();
+                if(defaultMdiWindowProperites.maximized)
+                  child->showMaximized();
+                else
+                  child->showNormal();
                 updateRecentFiles(*it);
              }
              else
              {
-                child->close();
+                child->parentWidget()->close();
              };
           };
           ++it;
@@ -455,10 +463,10 @@ bool edytornc::findPrevious()
 
 void edytornc::replaceNext()
 {
-   bool hasMdiChild = (activeMdiChild() != 0);
+   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
 
-   if(!replaceEdit->text().isEmpty() && hasMdiChild)
+   if(!replaceEdit->text().isEmpty() && hasMdiChildNotReadOnly)
    {
       if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
         found = true;
@@ -467,7 +475,16 @@ void edytornc::replaceNext()
 
       if(found)
       {
-         activeMdiChild()->textEdit->insertPlainText(replaceEdit->text());
+         QTextCursor cr = activeMdiChild()->textEdit->textCursor();
+         if(defaultMdiWindowProperites.underlineChanges)
+         {
+            QTextCharFormat format = cr.charFormat();
+            format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
+            cr.setCharFormat(format);
+         };
+         cr.insertText(replaceEdit->text());
+         activeMdiChild()->textEdit->setTextCursor(cr);
          findNext();
       };
 
@@ -481,10 +498,10 @@ void edytornc::replaceNext()
 
 void edytornc::replacePrevious()
 {
-   bool hasMdiChild = (activeMdiChild() != 0);
+   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
 
-   if(!replaceEdit->text().isEmpty() && hasMdiChild)
+   if(!replaceEdit->text().isEmpty() && hasMdiChildNotReadOnly)
    {
       if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
         found = true;
@@ -493,7 +510,16 @@ void edytornc::replacePrevious()
 
       if(found)
        {
-         activeMdiChild()->textEdit->insertPlainText(replaceEdit->text());
+         QTextCursor cr = activeMdiChild()->textEdit->textCursor();
+         if(defaultMdiWindowProperites.underlineChanges)
+         {
+            QTextCharFormat format = cr.charFormat();
+            format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
+            cr.setCharFormat(format);
+         };
+         cr.insertText(replaceEdit->text());
+         activeMdiChild()->textEdit->setTextCursor(cr);
          findPrevious();
       };
 
@@ -507,24 +533,42 @@ void edytornc::replacePrevious()
 
 void edytornc::replaceAll()
 {
-   bool hasMdiChild = (activeMdiChild() != 0);
+   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
+   QTextCursor startCursor, cr;
+   QTextCharFormat format;
 
-   if(!replaceEdit->text().isEmpty() && hasMdiChild)
+   if(!replaceEdit->text().isEmpty() && hasMdiChildNotReadOnly)
    {
+      QApplication::setOverrideCursor(Qt::BusyCursor);
       if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
         found = true;
       else
         found = findNext();
 
+      startCursor = activeMdiChild()->textEdit->textCursor();
+
       while(found)
       {
-         activeMdiChild()->textEdit->insertPlainText(replaceEdit->text());
-         found = findNext();
-         if(!found)
-           found = findPrevious();
-      };
+         cr = activeMdiChild()->textEdit->textCursor();
+         cr.beginEditBlock();
+         if(defaultMdiWindowProperites.underlineChanges)
+         {
+            format = cr.charFormat();
+            format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
+            cr.setCharFormat(format);
+         };
+         cr.insertText(replaceEdit->text());
+         cr.endEditBlock();
+         activeMdiChild()->textEdit->setTextCursor(cr);
 
+         found = findNext();
+         if(startCursor.position() == activeMdiChild()->textEdit->textCursor().position())
+           break;
+         qApp->processEvents();
+      };
+      QApplication::restoreOverrideCursor();
    };
 
 }
@@ -872,9 +916,17 @@ void edytornc::redo()
 void edytornc::activeWindowChanged(QMdiSubWindow *window)
 {
    Q_UNUSED(window);
+   MdiChild *mdiChild;
 
-   if(activeMdiChild())
-     statusBar()->showMessage(activeMdiChild()->currentFile(), 0);
+   if(mdiArea->subWindowList().count() <= 1)
+     defaultMdiWindowProperites.maximized = TRUE;
+
+   mdiChild = activeMdiChild();
+   if(mdiChild)
+   {
+      defaultMdiWindowProperites.maximized = mdiChild->parentWidget()->isMaximized();
+      statusBar()->showMessage(mdiChild->currentFile(), 0);
+   };
 }
 
 //**************************************************************************************************
@@ -904,6 +956,8 @@ void edytornc::updateMenus()
 {
    bool hasMdiChild = (activeMdiChild() != 0);
    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
+   bool hasSelection = (hasMdiChild && activeMdiChild()->textEdit->textCursor().hasSelection());
+
    saveAct->setEnabled(hasMdiChild);
    saveAsAct->setEnabled(hasMdiChild);
    pasteAct->setEnabled(hasMdiChild);
@@ -931,7 +985,7 @@ void edytornc::updateMenus()
    undoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isUndoAvailable());
 
 
-   if(activeMdiChild() && activeMdiChild()->textEdit->isReadOnly())
+   if(!hasMdiChildNotReadOnly)
    {
       readOnlyAct->setChecked(TRUE);
       readOnlyAct->setIcon(QIcon(":/images/lock.png"));
@@ -942,10 +996,11 @@ void edytornc::updateMenus()
       readOnlyAct->setIcon(QIcon(":/images/unlock.png"));
    };
 
-   bool hasSelection = (activeMdiChild() && activeMdiChild()->textEdit->textCursor().hasSelection());
+
    cutAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
-   copyAct->setEnabled(hasSelection);
    deleteAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
+   copyAct->setEnabled(hasSelection);
+
  
    pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
@@ -965,7 +1020,8 @@ void edytornc::cancelUnderline()
    {
       QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
 
-      if(format.underlineStyle() != QTextCharFormat::NoUnderline)
+      if((format.underlineStyle() != QTextCharFormat::NoUnderline) &&
+         !activeMdiChild()->textEdit->textCursor().hasSelection())
       {
          format.setUnderlineStyle(QTextCharFormat::NoUnderline);
          activeMdiChild()->textEdit->setCurrentCharFormat(format);
@@ -983,7 +1039,7 @@ void edytornc::cancelUnderline()
 
 void edytornc::updateStatusBar()
 {
-   QTextBlock b,cb;
+   QTextBlock b, cb;
    int column = 1;
    int line = 1;
 
@@ -1062,15 +1118,16 @@ MdiChild *edytornc::createMdiChild()
     MdiChild *child = new MdiChild();
     mdiArea->addSubWindow(child);
 
-    connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
-    connect(child->textEdit, SIGNAL(copyAvailable(bool)), copyAct, SLOT(setEnabled(bool)));
+    connect(child->textEdit, SIGNAL(copyAvailable(bool)), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cancelUnderline()));
     connect(child->textEdit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(updateStatusBar()));
-    //connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
+
+    //connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
+    //connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
 
     return child;
 }
@@ -1252,7 +1309,11 @@ void edytornc::createActions()
     calcAct->setStatusTip(tr("Run calculator"));
     connect(calcAct, SIGNAL(triggered()), this, SLOT(doCalc()));
 
-
+    showSerialToolBarAct = new QAction(QIcon(":/images/serial.png"), tr("Serial port send/recive"), this);
+    //showSerialToolBarAct->setShortcut(tr("F9"));
+    showSerialToolBarAct->setCheckable(TRUE);
+    showSerialToolBarAct->setStatusTip(tr("Serial port send/recive"));
+    connect(showSerialToolBarAct, SIGNAL(triggered()), this, SLOT(createSerialToolBar()));
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
     closeAct->setShortcut(tr("Ctrl+F4"));
@@ -1349,6 +1410,8 @@ void edytornc::createMenus()
 
 
     toolsMenu = menuBar()->addMenu(tr("&Tools"));
+    toolsMenu->addAction(showSerialToolBarAct);
+    toolsMenu->addSeparator();
     toolsMenu->addAction(insertSpcAct);
     toolsMenu->addAction(removeSpcAct);
     toolsMenu->addSeparator();
@@ -1419,6 +1482,8 @@ void edytornc::createToolBars()
     toolsToolBar = new QToolBar(tr("Tools"));
     addToolBar(Qt::LeftToolBarArea, toolsToolBar);
     toolsToolBar->setObjectName("Tools");
+    toolsToolBar->addAction(showSerialToolBarAct);
+    toolsToolBar->addSeparator();
     toolsToolBar->addAction(insertSpcAct);
     toolsToolBar->addAction(removeSpcAct);
     toolsToolBar->addSeparator();
@@ -1451,13 +1516,15 @@ void edytornc::createStatusBar()
 {
 
    labelStat1 = new QLabel("    ");
-   labelStat2 = new QLabel("  ");
    
    labelStat1->setFrameShadow(QFrame::Sunken);
    labelStat1->setFrameShape(QFrame::Box);
 
+   readOnlyButton = new QToolButton();
+   readOnlyButton->setDefaultAction(readOnlyAct);
+
    statusBar()->addPermanentWidget((labelStat1));
-   statusBar()->addPermanentWidget((labelStat2));
+   statusBar()->addPermanentWidget(readOnlyButton);
    statusBar()->setSizeGripEnabled(TRUE);
 
 
@@ -1508,6 +1575,8 @@ void edytornc::readSettings()
     m_recentFiles = settings.value( "RecentFiles").toStringList();
     updateRecentFilesMenu();
 
+    defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", TRUE).toBool();
+
 
     settings.beginGroup("Highlight" );
     defaultMdiWindowProperites.syntaxH = settings.value("HighlightOn", TRUE).toBool();
@@ -1527,8 +1596,6 @@ void edytornc::readSettings()
     defaultMdiWindowProperites.hColors.zColor = settings.value("ZColor", 0x000080).toInt();
     defaultMdiWindowProperites.hColors.aColor = settings.value("AColor", 0x000000).toInt();
     defaultMdiWindowProperites.hColors.bColor = settings.value("BColor", 0x000000).toInt();
-
-
     settings.endGroup();
 
     settings.beginGroup("LastDoc" );
@@ -1545,7 +1612,6 @@ void edytornc::readSettings()
           defaultMdiWindowProperites.cursorPos = settings.value("Cursor_" + QString::number(i), 1).toInt();
           defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly_" + QString::number(i), FALSE).toBool();
           defaultMdiWindowProperites.geometry = settings.value("Geometry_" + QString::number(i), QByteArray()).toByteArray();
-          defaultMdiWindowProperites.maximized = settings.value("Maximized_" + QString::number(i), FALSE).toBool();
           loadFile(defaultMdiWindowProperites);
            
        };
@@ -1565,6 +1631,7 @@ void edytornc::writeSettings()
 {
     int i = 1;
     MdiChild *mdiChild;
+    bool maximized = false;
    
     QSettings settings("EdytorNC", "EdytorNC");
 
@@ -1579,7 +1646,6 @@ void edytornc::writeSettings()
         settings.remove("Pos_" + QString::number(i));
         settings.remove("Size_" + QString::number(i));
         settings.remove("Geometry_" + QString::number(i));
-        settings.remove("Maximized_" + QString::number(i));
     };
     settings.endGroup();
 
@@ -1649,13 +1715,17 @@ void edytornc::writeSettings()
         settings.setValue("Cursor_" + QString::number(i), Opt.cursorPos);
         settings.setValue("ReadOnly_" + QString::number(i), Opt.readOnly);
         settings.setValue("Geometry_" + QString::number(i), mdiChild->parentWidget()->saveGeometry());
-        settings.setValue("Maximized_" + QString::number(i), mdiChild->parentWidget()->isMaximized());
+        if(mdiChild->parentWidget()->isMaximized())
+          maximized =  true;
 
         i++;
     };
     
     settings.setValue("OpenedFileCount", (i));
     settings.endGroup();
+
+    settings.setValue("MaximizedMdi", maximized);
+
 
 }
 
@@ -1696,6 +1766,7 @@ void edytornc::setActiveSubWindow(QWidget *window)
     if(!window)
       return;
     mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
+
 }
 
 
@@ -1734,9 +1805,10 @@ void edytornc::loadFile(_editor_properites options)
 
 void edytornc::updateRecentFiles(const QString &filename)
 {
-    m_recentFiles.prepend( filename );
-    if ( m_recentFiles.size() > MAX_RECENTFILES )
+    m_recentFiles.prepend(filename);
+    if(m_recentFiles.size() > MAX_RECENTFILES)
         m_recentFiles.removeLast();
+    m_recentFiles.removeDuplicates();
 
     updateRecentFilesMenu();
 }
@@ -1748,7 +1820,7 @@ void edytornc::updateRecentFiles(const QString &filename)
 void edytornc::fileOpenRecent(QAction *act)
 {
     defaultMdiWindowProperites.readOnly = FALSE;
-    defaultMdiWindowProperites.maximized = FALSE;
+    //defaultMdiWindowProperites.maximized = FALSE;
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.fileName = m_recentFiles[act->data().toInt()];
     loadFile(defaultMdiWindowProperites);
@@ -1796,12 +1868,15 @@ void edytornc::loadFoundedFile(const QString &fileName)
        MdiChild *child = createMdiChild();
        child->newFile();
        child->loadFile(fileName);
-       defaultMdiWindowProperites.maximized = FALSE;
+       //defaultMdiWindowProperites.maximized = FALSE;
        defaultMdiWindowProperites.cursorPos = 0;
        defaultMdiWindowProperites.readOnly = FALSE;
        defaultMdiWindowProperites.geometry = QByteArray();
        child->setMdiWindowProperites(defaultMdiWindowProperites);
-       child->show();
+       if(defaultMdiWindowProperites.maximized)
+         child->showMaximized();
+       else
+         child->showNormal();
     };
 }
 
@@ -1858,8 +1933,7 @@ void edytornc::createFindToolBar()
       replaceAllAct->setStatusTip(tr("Replace all"));
       connect(replaceAllAct, SIGNAL(triggered()), this, SLOT(replaceAll()));
 
-      findCloseAct = new QAction(QIcon(":/images/window-close.png"), tr("Close find toolbar"), this);
-      //findCloseAct->setShortcut(tr("F3"));
+      findCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close find toolbar"), this);
       findCloseAct->setStatusTip(tr("Close find toolbar"));
       connect(findCloseAct, SIGNAL(triggered()), findToolBar, SLOT(close()));
 
@@ -1995,6 +2069,442 @@ bool edytornc::eventFilter(QObject *obj, QEvent *ev)
 //**************************************************************************************************
 //
 //**************************************************************************************************
+
+void edytornc::createSerialToolBar()
+{
+   if(serialToolBar <= 0)
+   {
+      serialToolBar = new QToolBar(tr("Serial port toolbar"));
+      addToolBar(serialToolBar);
+      serialToolBar->setObjectName("SerialToolBar");
+
+      configPortAct = new QAction(QIcon(":/images/serialconfig.png"), tr("Serial port configuration"), this);
+      //configPortAct->setShortcut(tr("F3"));
+      configPortAct->setStatusTip(tr("Serial port configuration"));
+      connect(configPortAct, SIGNAL(triggered()), this, SLOT(serialConfig()));
+
+      reciveAct = new QAction(QIcon(":/images/recive.png"), tr("Recive new file"), this);
+      //reciveAct->setShortcut(tr("Shift+F3"));
+      reciveAct->setStatusTip(tr("Recive new file"));
+      connect(reciveAct, SIGNAL(triggered()), this, SLOT(reciveButtonClicked()));
+
+      sendAct = new QAction(QIcon(":/images/send.png"), tr("Send current file"), this);
+      //sendAct->setShortcut(tr("F3"));
+      sendAct->setStatusTip(tr("Send current file"));
+      connect(sendAct, SIGNAL(triggered()), this, SLOT(sendButtonClicked()));
+
+      serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/recive toolbar"), this);
+      serialCloseAct->setStatusTip(tr("Close find toolbar"));
+      connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
+
+
+      configBox = new QComboBox();
+      configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+      serialToolBar->addWidget(configBox);
+      serialToolBar->addAction(configPortAct);
+      serialToolBar->addSeparator();
+      serialToolBar->addAction(reciveAct);
+      serialToolBar->addSeparator();
+      serialToolBar->addAction(sendAct);
+      serialToolBar->addSeparator();
+      serialToolBar->addAction(serialCloseAct);
+   }
+   else
+     if(!showSerialToolBarAct->isChecked())
+     {
+        closeSerialToolbar();
+        return;
+     }
+     else
+     {
+        serialToolBar->show();
+        showSerialToolBarAct->setChecked(TRUE);
+     };
+
+   comPort = new QextSerialPort();
+   stop = true;
+
+   loadSerialConfignames();
+   configBox->adjustSize();
+   loadConfig();
+   //connect(configBox, SIGNAL(currentIndexChanged(int)), SLOT(loadConfig()));
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::closeSerialToolbar()
+{
+   stop = true;
+   comPort->close();
+   delete(comPort);
+
+   serialToolBar->close();
+   delete(serialToolBar);
+   showSerialToolBarAct->setChecked(FALSE);
+   serialToolBar = 0;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::serialConfig()
+{
+   SPConfigDialog *serialConfigDialog = new SPConfigDialog(this);
+
+   serialConfigDialog->show();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::loadSerialConfignames()
+{
+    int id;
+    QStringList list;
+    QString item;
+
+    QSettings settings("EdytorNC", "EdytorNC");
+
+    settings.beginGroup("SerialPortConfigs");
+
+
+    configBox->clear();
+    list = settings.value("SettingsList", QStringList(tr("Default"))).toStringList();
+    configBox->addItems(list);
+    item = settings.value("CurrentSerialPortSettings", tr("Default")).toString();
+    id = configBox->findText(item);
+    configBox->setCurrentIndex(id);
+
+
+
+    settings.endGroup();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::serialConfigTest()
+{
+   TransmissionDialog *trDialog = new TransmissionDialog(this);
+
+   trDialog->show();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::loadConfig()
+{
+    QString port, fTx, nTx;
+    int pos;
+    QRegExp exp;
+    char chr;
+    bool ok;
+
+
+    stop = true;
+    QSettings settings("EdytorNC", "EdytorNC");
+
+    settings.beginGroup("SerialPortConfigs");
+
+#ifdef Q_OS_WIN32
+       port = "COM1";
+#else
+       port = "/dev/ttyS0";
+#endif
+
+    settings.beginGroup(configBox->currentText());
+
+    portName = settings.value("PortName", port).toString();
+    baudRate = settings.value("BaudRate", BAUD9600).toInt();
+    dataBits = settings.value("DataBits", DATA_8).toInt();
+    stopBits = settings.value("StopBits", STOP_2).toInt();
+    parity = settings.value("Parity", PAR_NONE).toInt();
+    flowControl = settings.value("FlowControl", FLOW_HARDWARE).toInt();
+
+    sendAtEnd = settings.value("SendAtEnd", "").toString();
+    sendAtBegining = settings.value("SendAtBegining", "").toString();
+
+    settings.endGroup();
+    settings.endGroup();
+
+    comPort->setPortName(portName);
+    comPort->setBaudRate(BaudRateType(baudRate));
+    comPort->setDataBits(DataBitsType(dataBits));
+    comPort->setFlowControl(FlowType(flowControl));
+    comPort->setParity(ParityType(parity));
+    comPort->setStopBits(StopBitsType(stopBits));
+
+
+    exp.setPattern("0x[0-9a-fA-F]{1,2}");
+    pos = 0;
+    while((pos = sendAtBegining.indexOf(exp, pos)) >= 0)
+    {
+       fTx = sendAtBegining.mid(pos, exp.matchedLength());
+       chr = fTx.toInt(&ok, 16);
+       sendAtBegining.replace(pos, exp.matchedLength(), QString(chr));
+    };
+    sendAtBegining.remove(" ");
+
+    pos = 0;
+    while((pos = sendAtEnd.indexOf(exp, pos)) >= 0)
+    {
+       fTx = sendAtEnd.mid(pos, exp.matchedLength());
+       chr = fTx.toInt(&ok, 16);
+       sendAtEnd.replace(pos, exp.matchedLength(), QString(chr));
+    };
+    sendAtEnd.remove(" ");
+
+    //comPort->setTimeout(0,100);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::sendButtonClicked()
+{
+   int i;
+   QString tx;
+   QTextCursor cursor, prevCursor;
+   MdiChild *activeWindow;
+
+   activeWindow = activeMdiChild();
+   if(!(activeWindow != 0))
+     return;
+
+   loadConfig();
+   if(comPort->open(QIODevice::ReadWrite))
+     stop = false;
+   else
+   {
+      stop = true;
+      showError(E_INVALID_FD);
+      return;
+   };
+   comPort->flush();
+   comPort->reset();
+
+   showError(E_NO_ERROR);
+   reciveAct->setEnabled(FALSE);
+   sendAct->setEnabled(FALSE);
+   QApplication::setOverrideCursor(Qt::BusyCursor);
+
+   cursor = activeWindow->textEdit->textCursor();
+   prevCursor = cursor;
+   cursor.movePosition(QTextCursor::Start);
+   activeWindow->textEdit->setTextCursor(cursor);
+
+   tx = sendAtBegining;
+   tx.append(activeWindow->textEdit->toPlainText());
+   tx.append(sendAtEnd);
+   if(!tx.contains("\r\n"))
+      tx.replace("\n", "\r\n");
+
+   QProgressDialog progressDialog(this);
+   progressDialog.setRange(0, tx.size());
+   progressDialog.setModal(TRUE);
+   progressDialog.open();
+   qApp->processEvents();
+
+   i = 0;
+   while(i < tx.size())
+   {
+      qApp->processEvents();
+
+      if(progressDialog.wasCanceled())
+        break;
+
+      if(stop)
+        break;
+
+      progressDialog.setValue(i);
+      if(comPort->bytesToWrite() == 0)
+      {
+         if(!comPort->putChar(tx[i].toAscii()))
+         {
+            stop = true;
+            showError(comPort->lastError());
+            break;
+         };
+         cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+         activeWindow->textEdit->setTextCursor(cursor);
+         progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i).arg(tx.size()));
+         i++;
+      };
+   };
+
+   comPort->flush();
+   comPort->close();
+   progressDialog.close();
+   activeWindow->textEdit->setTextCursor(prevCursor);
+   reciveAct->setEnabled(TRUE);
+   sendAct->setEnabled(TRUE);
+   QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::reciveButtonClicked()
+{
+   QString tx;
+   int count, i;
+   char buf[1024];
+   MdiChild *activeWindow;
+
+
+   showError(E_NO_ERROR);
+   count = 0;
+
+   loadConfig();
+   if(comPort->open(QIODevice::ReadWrite))
+     stop = false;
+   else
+   {
+      stop = true;
+      showError(E_INVALID_FD);
+      return;
+   };
+   comPort->flush();
+   comPort->reset();
+
+   newFile();
+   activeWindow = activeMdiChild();
+   if(!(activeWindow != 0))
+     return;
+
+   reciveAct->setEnabled(FALSE);
+   sendAct->setEnabled(FALSE);
+   QApplication::setOverrideCursor(Qt::BusyCursor);
+
+   QProgressDialog progressDialog(this);
+   progressDialog.setRange(0, 32768);
+   progressDialog.setModal(TRUE);
+   progressDialog.setLabelText(tr("Waiting for data..."));
+   progressDialog.open();
+   qApp->processEvents();
+
+   tx.clear();
+   while(!stop)
+   {
+      //progressDialog.setValue(count);
+
+      qApp->processEvents();
+
+      if(progressDialog.wasCanceled())
+      {
+         if(!tx.isEmpty())
+           activeWindow->textEdit->insertPlainText(tx);
+         break;
+      };
+
+      progressDialog.setValue(count);
+
+      i = comPort->bytesAvailable();
+      if(i > 0)
+      {
+         i = comPort->readLine(buf, sizeof(buf));
+         if(i < 0)
+         {
+            stop = true;
+            showError(comPort->lastError());
+            break;
+         };
+         count += i;
+         tx.append(buf);
+         progressDialog.setLabelText(tr("Reciving byte %1").arg(count));
+         if(tx.contains("\n"))
+         {
+            activeWindow->textEdit->insertPlainText(tx);
+            tx.clear();
+         };
+         activeWindow->textEdit->ensureCursorVisible();
+         qApp->processEvents();
+      };
+
+   };
+
+   comPort->flush();
+   comPort->close();
+   progressDialog.close();
+   reciveAct->setEnabled(TRUE);
+   sendAct->setEnabled(TRUE);
+   QApplication::restoreOverrideCursor();
+   if(activeWindow)
+     if(activeWindow->textEdit->document()->isEmpty())
+     {
+        activeWindow->parentWidget()->close();
+     };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::stopButtonClicked()
+{
+   stop = true;
+   qApp->processEvents();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::showError(int error)
+{
+   switch(error)
+   {
+      case E_INVALID_FD                   : statusBar()->showMessage(tr("Invalid file descriptor (port was not opened correctly)"));
+                                            break;
+      case E_NO_MEMORY                    : statusBar()->showMessage(tr("Unable to allocate memory tables"));
+                                            break;
+      case E_CAUGHT_NON_BLOCKED_SIGNAL    : statusBar()->showMessage(tr("Caught a non-blocked signal"));
+                                            break;
+      case E_PORT_TIMEOUT                 : statusBar()->showMessage(tr("Operation timed out"));
+                                            break;
+      case E_INVALID_DEVICE               : statusBar()->showMessage(tr("The file opened by the port is not a character device"));
+                                            break;
+      case E_BREAK_CONDITION              : statusBar()->showMessage(tr("The port detected a break condition"));
+                                            break;
+      case E_FRAMING_ERROR                : statusBar()->showMessage(tr("The port detected a framing error (incorrect baud rate settings ?)"));
+                                            break;
+      case E_IO_ERROR                     : statusBar()->showMessage(tr("There was an I/O error while communicating with the port"));
+                                            break;
+      case E_BUFFER_OVERRUN               : statusBar()->showMessage(tr("Character buffer overrun"));
+                                            break;
+      case E_RECEIVE_OVERFLOW             : statusBar()->showMessage(tr("Receive buffer overflow"));
+                                            break;
+      case E_RECEIVE_PARITY_ERROR         : statusBar()->showMessage(tr("The port detected a parity error in the received data"));
+                                            break;
+      case E_TRANSMIT_OVERFLOW            : statusBar()->showMessage(tr("Transmit buffer overflow"));
+                                            break;
+      case E_READ_FAILED                  : statusBar()->showMessage(tr("General read operation failure"));
+                                            break;
+      case E_WRITE_FAILED                 : statusBar()->showMessage(tr("General write operation failure"));
+                                            break;
+      case E_NO_ERROR                     : statusBar()->showMessage(tr("No Error has occured"));
+                                            break;
+      default                             : statusBar()->showMessage(tr("Unknown error"));
+   };
+
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+
 
 
 //**************************************************************************************************

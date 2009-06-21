@@ -77,6 +77,10 @@
          <property name="text">
           <string>&amp;Browse</string>
          </property>
+         <property name="icon">
+          <iconset resource="application.qrc">
+           <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
+         </property>
          <property name="autoDefault">
           <bool>false</bool>
          </property>
@@ -217,6 +221,10 @@
        <property name="text">
         <string>&amp;Find files</string>
        </property>
+       <property name="icon">
+        <iconset resource="application.qrc">
+         <normaloff>:/images/findnext.png</normaloff>:/images/findnext.png</iconset>
+       </property>
        <property name="autoDefault">
         <bool>false</bool>
        </property>
@@ -243,6 +251,10 @@
        <property name="text">
         <string>C&amp;ose</string>
        </property>
+       <property name="icon">
+        <iconset resource="application.qrc">
+         <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
+       </property>
        <property name="autoDefault">
         <bool>false</bool>
        </property>
@@ -265,6 +277,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>

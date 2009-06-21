@@ -25,25 +25,16 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QProcess>
+#include <QtGui>
 
 #include "commoninc.h"
 #include "customfiledialog.h"
+#include "mdichild.h"
 #include "findinf.h"
 #include "dialogs.h"
+#include "serialtransmission.h"
 
 
-
-class MdiChild;
-QT_BEGIN_NAMESPACE
-class QAction;
-class QMenu;
-class QMdiArea;
-class QMdiSubWindow;
-class QSignalMapper;
-class QTextEdit;
-QT_END_NAMESPACE
 
 class edytornc : public QMainWindow
 {
@@ -53,7 +44,7 @@ public:
     edytornc();
     ~edytornc();
     void openFile(const QString fileName);
-    enum { MAX_RECENTFILES = 9 };
+    enum { MAX_RECENTFILES = 16 };
 
 public slots:
     void messReceived(const QString &text = "");
@@ -112,6 +103,14 @@ private slots:
     void cancelUnderline();
     void createFindToolBar();
     void findTextChanged();
+    void createSerialToolBar();
+    void serialConfig();
+    void serialConfigTest();
+    void loadConfig();
+    void closeSerialToolbar();
+    void sendButtonClicked();
+    void reciveButtonClicked();
+    void stopButtonClicked();
 
 
 
@@ -126,6 +125,11 @@ private:
     void createStatusBar();
     void readSettings();
     void writeSettings();
+    void loadSerialConfignames();
+    void showError(int error);
+
+
+
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     _editor_properites defaultMdiWindowProperites;
@@ -202,7 +206,7 @@ private:
     QDir lastDir;
 
     QLabel *labelStat1;
-    QLabel *labelStat2;
+    QToolButton *readOnlyButton;
 
 
     QToolBar *findToolBar;
@@ -218,6 +222,24 @@ private:
     QAction *findCloseAct;
     QCheckBox *mCheckFindWholeWords;
     QCheckBox *mCheckIgnoreCase;
+
+
+    QToolBar *serialToolBar;
+    QAction *showSerialToolBarAct;
+    QAction *configPortAct;
+    QAction *reciveAct;
+    QAction *sendAct;
+    QAction *serialCloseAct;
+    QComboBox *configBox;
+
+    bool stop;
+    QString portName, sendAtEnd, sendAtBegining;
+    int baudRate;
+    int dataBits;
+    int stopBits;
+    int parity;
+    int flowControl;
+    QextSerialPort *comPort;
 
 
 };

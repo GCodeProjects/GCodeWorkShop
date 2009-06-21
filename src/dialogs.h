@@ -212,6 +212,9 @@ class TriangleDialog : public QDialog, private Ui::TriangleDialog
     uint mode;
     QPixmap *pic1;
     QPixmap *pic2;
+    QDoubleValidator *aAInputValid;
+    QDoubleValidator *aBInputValid;
+    QDoubleValidator *aCInputValid;
 
 };
 

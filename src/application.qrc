@@ -53,5 +53,18 @@
         <file>images/arrow-left.png</file>
         <file>images/arrow-right.png</file>
         <file>images/arrow-right-double.png</file>
+        <file>images/cancel.png</file>
+        <file>images/serialconfig.png</file>
+        <file>images/start.png</file>
+        <file>images/ok.png</file>
+        <file>images/funct.png</file>
+        <file>images/browse.png</file>
+        <file>images/default.png</file>
+        <file>images/stop.png</file>
+        <file>images/recive.png</file>
+        <file>images/send.png</file>
+        <file>images/serial.png</file>
+        <file>images/close_small.png</file>
+        <file>images/led.png</file>
     </qresource>
 </RCC>

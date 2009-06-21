@@ -53,7 +53,7 @@
 #include "findinf.h"
 
 
-#define MAXLISTS        10
+#define MAXLISTS        16
 
 
 FindInFiles::FindInFiles(QWidget *parent): QDialog(parent)
@@ -97,21 +97,28 @@ void FindInFiles::browse()
 
 void FindInFiles::find()
 {
+    QStringList files;
+
     filesTable->setRowCount(0);
 
     QString fileName = fileComboBox->currentText();
     QString text = textComboBox->currentText();
     QString path = directoryComboBox->currentText();
 
+    findButton->setEnabled(FALSE);
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+
     QDir directory = QDir(path);
-    QStringList files;
+
     if(fileName.isEmpty())
-        fileName = "*";
+      fileName = "*";
     files = directory.entryList(QStringList(fileName), QDir::Files | QDir::NoSymLinks);
 
     if(!text.isEmpty())
       files = findFiles(directory, files, text);
 
+    findButton->setEnabled(TRUE);
+    QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -134,23 +141,19 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     progressDialog.setRange(0, files.size());
     progressDialog.setWindowTitle(tr("Find Files"));
 
-    findButton->setEnabled(FALSE);
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-
     exp.setCaseSensitivity(Qt::CaseInsensitive);
     exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
 
     notFound = true;
 
-    for (int i = 0; i < files.size(); ++i)
+    for(int i = 0; i < files.size(); ++i)
     {
-        progressDialog.setValue(i);
         progressDialog.setLabelText(tr("Searching file number %1 of %2")
                                     .arg(i).arg(files.size()));
         qApp->processEvents();
+        progressDialog.setValue(i);
 
-
-        if (progressDialog.wasCanceled())
+        if(progressDialog.wasCanceled())
             break;
 
         QFile file(directory.absoluteFilePath(files[i]));
@@ -159,6 +162,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
         {  
             QTextStream in(&file);
             commentFounded = false;
+            textFounded = false;
             while(!in.atEnd())
             {
                 if(progressDialog.wasCanceled())
@@ -258,8 +262,6 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
        filesTable->resizeRowsToContents();
     };
 
-    findButton->setEnabled(TRUE);
-    QApplication::restoreOverrideCursor();
     return foundFiles;
 }
 
@@ -288,7 +290,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    QSettings settings("EdytorNC", "EdytorNC");
    settings.beginGroup("FindFileDialog");
 
-   settings.setValue("CaseSensitive", wholeWordsCheckBox->isChecked());
+   settings.setValue("WholeWords", wholeWordsCheckBox->isChecked());
 
    list.clear();
    list.prepend(directoryComboBox->currentText());
@@ -364,7 +366,7 @@ void FindInFiles::readSettings()
    QSettings settings("EdytorNC", "EdytorNC");
    settings.beginGroup("FindFileDialog" );
 
-   wholeWordsCheckBox->setChecked(settings.value("CaseSensitive", FALSE).toBool());
+   wholeWordsCheckBox->setChecked(settings.value("WholeWords", FALSE).toBool());
 
    list = settings.value("Dirs", QStringList(QDir::homePath())).toStringList();
    directoryComboBox->addItems(list);

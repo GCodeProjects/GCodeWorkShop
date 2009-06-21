@@ -544,12 +544,12 @@ DotDialog::DotDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 
    setWindowTitle(tr("Insert dots"));
 
-   connect( mInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged(const QString &)) );
-   connect( mCheckAtEnd, SIGNAL(clicked()), this, SLOT(atEndClicked()));
-   connect( mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
-   connect( mSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxVal(int)));
-   connect( okButton, SIGNAL(clicked()), SLOT(okButtonClicked()) );
-   connect( cancelButton, SIGNAL(clicked()), SLOT(close()) );
+   connect(mInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged(const QString &)) );
+   connect(mCheckAtEnd, SIGNAL(clicked()), this, SLOT(atEndClicked()));
+   connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
+   connect(mSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxVal(int)));
+   connect(okButton, SIGNAL(clicked()), SLOT(okButtonClicked()) );
+   connect(cancelButton, SIGNAL(clicked()), SLOT(close()) );
 
    setMaximumSize(width(), height());
    okButton->setEnabled(mInput->hasAcceptableInput());
@@ -679,44 +679,44 @@ TriangleDialog::TriangleDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(p
    picLabel->adjustSize();
 
 
-   connect( rightTriangleCheckBox, SIGNAL(toggled(bool)), SLOT(rightTriangleCheckBoxToggled()));
-   connect( aCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( bCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( cCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( aACheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( aBCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( aCCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-   connect( closeButton, SIGNAL(clicked()), SLOT(close()));
+   connect(rightTriangleCheckBox, SIGNAL(toggled(bool)), SLOT(rightTriangleCheckBoxToggled()));
+   connect(aCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(bCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(cCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(aACheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(aBCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(aCCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
+   connect(closeButton, SIGNAL(clicked()), SLOT(close()));
 
 
-   QValidator *aInputValid = new QDoubleValidator( 0, 10000, 3, this );
+   QValidator *aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
    aInput->setValidator(aInputValid);
 
-   QValidator *bInputValid = new QDoubleValidator( 0, 10000, 3, this );
+   QValidator *bInputValid = new QDoubleValidator(0.001, 9999, 3, this);
    bInput->setValidator(bInputValid);
 
-   QValidator *cInputValid = new QDoubleValidator( 0, 10000, 3, this );
+   QValidator *cInputValid = new QDoubleValidator(0.001, 9999, 3, this);
    cInput->setValidator(cInputValid);
 
-   QValidator *aAInputValid = new QDoubleValidator( 0, 180, 3, this );
+   aAInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
    aAInput->setValidator(aAInputValid);
 
-   QValidator *aBInputValid = new QDoubleValidator( 0, 180, 3, this );
+   aBInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
    aBInput->setValidator(aBInputValid);
 
-   QValidator *aCInputValid = new QDoubleValidator( 0, 180, 3, this );
+   aCInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
    aCInput->setValidator(aCInputValid);
 
 
    setMaximumSize(width(), height());
 
-   //connect( aInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   //connect( bInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   //connect( cInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   //connect( aAInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   //connect( aBInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   //connect( aCInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(aInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(bInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(cInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(aAInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(aBInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(aCInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
 
    rightTriangleCheckBoxToggled();
    checkBoxToggled();
@@ -735,8 +735,90 @@ TriangleDialog::~TriangleDialog()
 //
 //**************************************************************************************************
 
+void TriangleDialog::inputChanged()
+{
+   QPalette paletteRed, paletteBlue;
+
+   paletteRed.setColor(aInput->foregroundRole(), Qt::red);
+   paletteBlue.setColor(aInput->foregroundRole(), Qt::blue);
+
+   if(aInput->hasAcceptableInput())
+   {
+      if(aInput->isReadOnly())
+        aInput->setPalette(paletteBlue);
+      else
+        aInput->setPalette(QPalette());
+   }
+   else
+     aInput->setPalette(paletteRed);
+
+   if(bInput->hasAcceptableInput())
+   {
+      if(bInput->isReadOnly())
+        bInput->setPalette(paletteBlue);
+      else
+        bInput->setPalette(QPalette());
+   }
+   else
+     bInput->setPalette(paletteRed);
+
+   if(cInput->hasAcceptableInput())
+   {
+      if(cInput->isReadOnly())
+        cInput->setPalette(paletteBlue);
+      else
+        cInput->setPalette(QPalette());
+   }
+   else
+     cInput->setPalette(paletteRed);
+
+   if(aAInput->hasAcceptableInput())
+   {
+      if(aAInput->isReadOnly())
+        aAInput->setPalette(paletteBlue);
+      else
+        aAInput->setPalette(QPalette());
+   }
+   else
+     aAInput->setPalette(paletteRed);
+
+   if(aBInput->hasAcceptableInput())
+   {
+      if(aBInput->isReadOnly())
+        aBInput->setPalette(paletteBlue);
+      else
+        aBInput->setPalette(QPalette());
+   }
+   else
+     aBInput->setPalette(paletteRed);
+
+   if(aCInput->hasAcceptableInput())
+   {
+      if(aCInput->isReadOnly())
+        aCInput->setPalette(paletteBlue);
+      else
+        aCInput->setPalette(QPalette());
+   }
+   else
+     aCInput->setPalette(paletteRed);
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void TriangleDialog::computeButtonClicked()
 {
+   double angle1, angle2, angle3;
+   bool ok;
+
+   angle1 = aAInput->text().toDouble(&ok);
+   angle2 = aBInput->text().toDouble(&ok);
+   angle3 = aCInput->text().toDouble(&ok);
+
+   if((angle1 + angle2 + angle3) > 180)
+     return;
 
    if(option1() == 0) return;
    if(option2() == 0) return;
@@ -1095,10 +1177,7 @@ void TriangleDialog::checkBoxToggled()
       else
       {
          aInput->setReadOnly(FALSE);
-
-         //palette = aInput->palette();
-         //palette.setColor( QColorGroup::Text, Qt::black );
-         aInput->setPalette( palette );
+         aInput->setPalette(palette);
       };
 
       if(!(mode & 0x02))
@@ -1106,9 +1185,7 @@ void TriangleDialog::checkBoxToggled()
       else
       {
          bInput->setReadOnly(FALSE);
-         //palette = bInput->palette();
-         //palette.setColor( QColorGroup::Text, Qt::black );
-         bInput->setPalette( palette );
+         bInput->setPalette(palette);
       };
 
       if(!(mode & 0x04))
@@ -1116,9 +1193,7 @@ void TriangleDialog::checkBoxToggled()
       else
       {
          cInput->setReadOnly(FALSE);
-         //palette = cInput->palette();
-         //palette.setColor( QColorGroup::Text, Qt::black );
-         cInput->setPalette( palette );
+         cInput->setPalette(palette);
       };
 
 
@@ -1129,9 +1204,7 @@ void TriangleDialog::checkBoxToggled()
          if(!rightTriangleCheckBox->isChecked())
          {
             aAInput->setReadOnly(FALSE);
-            //palette = aAInput->palette();
-            //palette.setColor( QColorGroup::Text, Qt::black );
-            aAInput->setPalette( palette );
+            aAInput->setPalette(palette);
          };
       };
 
@@ -1140,9 +1213,7 @@ void TriangleDialog::checkBoxToggled()
       else
       {
          aBInput->setReadOnly(FALSE);
-         //palette = aBInput->palette();
-         //palette.setColor( QColorGroup::Text, Qt::black );
-         aBInput->setPalette( palette );
+         aBInput->setPalette(palette);
       };
 
       if(!(mode & 0x40))
@@ -1150,9 +1221,7 @@ void TriangleDialog::checkBoxToggled()
       else
       {
          aCInput->setReadOnly(FALSE);
-         //palette = aCInput->palette();
-         //palette.setColor( QColorGroup::Text, Qt::black );
-         aCInput->setPalette( palette );
+         aCInput->setPalette(palette);
       };
    }
    else
@@ -1174,31 +1243,17 @@ void TriangleDialog::checkBoxToggled()
       aCCheckBox->setEnabled(TRUE);
       aCInput->setReadOnly(TRUE);
 
-      //palette = aInput->palette();
       palette.setColor(aInput->foregroundRole(), Qt::blue);
-      //palette.setColor( QColorGroup::Text, Qt::blue );
-      aInput->setPalette( palette );
-      bInput->setPalette( palette );
-      cInput->setPalette( palette );
-      aAInput->setPalette( palette );
-      aBInput->setPalette( palette );
-      aCInput->setPalette( palette );
+      aInput->setPalette(palette);
+      bInput->setPalette(palette);
+      cInput->setPalette(palette);
+      aAInput->setPalette(palette);
+      aBInput->setPalette(palette);
+      aCInput->setPalette(palette);
 
       computeButton->setEnabled(FALSE);
 
    };
-
-
-
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TriangleDialog::inputChanged()
-{
-
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1211,20 +1266,18 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
 {
 
    setupUi(this);
-   //setAttribute(Qt::WA_DeleteOnClose);
-   //setWindowTitle(tr("Solution of triangles"));
 
-   QValidator *xCenterInputValid = new QDoubleValidator( -9999, 9999, 3, this );
+   QValidator *xCenterInputValid = new QDoubleValidator(-9999, 9999, 3, this);
    xCenterInput->setValidator(xCenterInputValid);
-   QValidator *yCenterInputValid = new QDoubleValidator( -9999, 9999, 3, this );
+   QValidator *yCenterInputValid = new QDoubleValidator(-9999, 9999, 3, this);
    yCenterInput->setValidator(yCenterInputValid);
-   QValidator *diaInputValid = new QDoubleValidator( 1, 9999, 3, this );
+   QValidator *diaInputValid = new QDoubleValidator(1, 9999, 3, this);
    diaInput->setValidator(diaInputValid);
-   QValidator *holesInputValid = new QIntValidator( 1, 360, this );
+   QValidator *holesInputValid = new QIntValidator(1, 360, this);
    holesInput->setValidator(holesInputValid);
-   QValidator *angleStartInputValid = new QDoubleValidator( 0, 360, 3, this );
+   QValidator *angleStartInputValid = new QDoubleValidator(0, 360, 3, this);
    angleStartInput->setValidator(angleStartInputValid);
-   QValidator *angleBeetwenInputValid = new QDoubleValidator( 0, 360, 3, this );
+   QValidator *angleBeetwenInputValid = new QDoubleValidator(0, 360, 3, this);
    angleBeetwenInput->setValidator(angleBeetwenInputValid);
 
    connect(roateInput, SIGNAL(valueChanged(int)), SLOT(inputChk()));
@@ -1232,9 +1285,24 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
    connect(mirrorY, SIGNAL(toggled(bool)), SLOT(inputChk()));
 
    contextMenu = new QMenu(this);
-   contextMenu->addAction(tr("Copy"), this, SLOT(copySelection()), Qt::CTRL+Qt::Key_C);
+
+
+   QAction *copyAct = new QAction(QIcon(":/images/editcopy.png"), tr("&Copy"), this);
+   copyAct->setShortcut(tr("Ctrl+C"));
+   copyAct->setStatusTip(tr("Copy the current selection's contents to the "
+                             "clipboard"));
+   connect(copyAct, SIGNAL(triggered()), this, SLOT(copySelection()));
+   resultTable->addAction(copyAct);
+
+   QAction *selAllAct = new QAction(QIcon(":/images/edit-select-all.png"), tr("&Select all"), this);
+   selAllAct->setShortcut(tr("Ctrl+A"));
+   selAllAct->setStatusTip(tr("Select all"));
+   connect(selAllAct, SIGNAL(triggered()), this, SLOT(sellAll()));
+   resultTable->addAction(selAllAct);
+
+   contextMenu->addAction(copyAct);
    contextMenu->addSeparator();
-   contextMenu->addAction(tr("Select all"), this, SLOT(sellAll()), Qt::CTRL+Qt::Key_A);
+   contextMenu->addAction(selAllAct);
    contextMenu->addSeparator();
    addCommentsId = contextMenu->addAction(tr("Add comments"));
    addCommentsId->setCheckable(TRUE);
@@ -1401,7 +1469,7 @@ void BHCTab::inputChk()
 BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
 
-    setWindowTitle(tr("Bold circle - preview"));
+    setWindowTitle(tr("Bolt circle - preview"));
     setAttribute(Qt::WA_DeleteOnClose);
 
     setBackgroundRole(QPalette::Shadow); //setBackgroundMode( Qt::NoBackground );
@@ -1641,7 +1709,7 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
    setupUi(this);
    setAttribute(Qt::WA_DeleteOnClose);
-   setWindowTitle(tr("Bold circle"));
+   setWindowTitle(tr("Bolt circle"));
    //setFocusPolicy(QWidget::StrongFocus);
 
    tabBar = new QTabWidget(this);
@@ -2069,7 +2137,7 @@ void BHCDialog::computeButtonClicked()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-ChamferDialog::ChamferDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
+ChamferDialog::ChamferDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 
    setupUi(this);
