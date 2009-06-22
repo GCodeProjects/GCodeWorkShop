@@ -2121,10 +2121,7 @@ void BHCDialog::computeButtonClicked()
       };
 
    };
-
-
-
-   drawing->setUpdatesEnabled( TRUE );
+   drawing->setUpdatesEnabled(TRUE);
    drawing->update();
 
    //adjustSize();

@@ -11,7 +11,9 @@ Dostępne funkcje :
 	Dodawanie usuwanie spacji – przydatne do programów FANUC.
 	Numerowanie linii – cały program lub zaznaczony fragment.
 
-
+Funkcje eksperymentalne :
+	Wysyłanie/odbieranie programu przez port szeregowy.
+	Programowanie parametryczne (makro). Zabacz przykłady w katalogu EXAMPLES.
 
 
 EdytorNC został napisany przy użyciu narzędzia 'QT Creator' oraz bibliotek 'Qt 4.5' : http://www.qtsoftware.com/products/developer-tools

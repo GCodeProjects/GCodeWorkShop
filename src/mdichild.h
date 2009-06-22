@@ -28,8 +28,16 @@
 #include "highlighter.h"
 #include "commoninc.h"
 #include "customfiledialog.h"
+#include "basic_interpreter.h"
 
 #include "ui_mdichildform.h"
+
+
+#define ERR_NO_BRAC       -1
+#define ERR_NO_PARAM      -2
+#define ERR_CONVERT       -3
+#define ERR_UNKNOWN_FUNC  -4
+#define ERR_DOUBLE_DOT    -5
 
 
 
@@ -55,6 +63,7 @@ public:
     void doInsertSpace();
     void doInsertDot();
     void doI2M();
+    void compileMacro();
 
 
 protected:
@@ -70,6 +79,10 @@ private:
     bool maybeSave();
     void setCurrentFile(const QString &fileName, const QString &text);
     QString strippedName(const QString &fullFileName);
+    int processBrc(QString *str);
+    int compute(QString *str);
+    void macroShowError(int error);
+    void macroShowBasicError(int error);
 
 
     QString curFile;

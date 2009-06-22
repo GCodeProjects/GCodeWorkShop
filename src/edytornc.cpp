@@ -89,6 +89,7 @@ edytornc::~edytornc()
 
 void edytornc::closeEvent(QCloseEvent *event)
 {
+    setUpdatesEnabled(FALSE);
     writeSettings();
 
     foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
@@ -96,13 +97,15 @@ void edytornc::closeEvent(QCloseEvent *event)
        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
        if(mdiChild->textEdit->document()->isModified())
        {
+          setUpdatesEnabled(TRUE);
           mdiChild->activateWindow();
           mdiChild->raise();
           if(!mdiChild->parentWidget()->close())
-           {
+          {
               event->ignore();
               return;
-           };
+          };
+          setUpdatesEnabled(FALSE);
        };
     };
 
@@ -116,6 +119,7 @@ void edytornc::closeEvent(QCloseEvent *event)
     {  
        event->accept();
     }
+    setUpdatesEnabled(TRUE);
 }
 
 //**************************************************************************************************
@@ -146,6 +150,9 @@ void edytornc::newFile()
 void edytornc::open()
 {
     QFileInfo file;
+    QMdiSubWindow *existing;
+
+    existing = 0;
 
 #ifdef Q_OS_LINUX
     QString filters = tr("CNC programs files *.nc (*.nc);;"
@@ -155,8 +162,8 @@ void edytornc::open()
 
 #ifdef Q_OS_WIN32
   QString filters = tr("CNC programs files (*.nc);;"
-                         "CNC programs files (*.nc *.min *.anc *.cnc);;"
-                         "Text files (*.txt);; All files (*.* *)");
+                       "CNC programs files (*.nc *.min *.anc *.cnc);;"
+                       "Text files (*.txt);; All files (*.* *)");
 #endif
 
 
@@ -174,7 +181,7 @@ void edytornc::open()
     while(it != files.end())
     {
        file.setFile(*it);
-       QMdiSubWindow *existing = findMdiChild(*it);
+       existing = findMdiChild(*it);
 
        if((file.exists()) && (file.isReadable()) && !existing)
        {
@@ -184,7 +191,6 @@ void edytornc::open()
           {
              defaultMdiWindowProperites.cursorPos = 0;
              defaultMdiWindowProperites.readOnly = FALSE;
-             //defaultMdiWindowProperites.maximized = FALSE;
              defaultMdiWindowProperites.geometry = QByteArray();
              child->setMdiWindowProperites(defaultMdiWindowProperites);
              if(defaultMdiWindowProperites.maximized)
@@ -200,6 +206,9 @@ void edytornc::open()
        };
        ++it;
     };
+    if(existing)
+      mdiArea->setActiveSubWindow(existing);
+
     statusBar()->showMessage(tr("File loaded"), 2000);
 }
 
@@ -402,6 +411,7 @@ bool edytornc::findNext()
    bool hasMdiChild = (activeMdiChild() != 0);
    bool found = false;
    QTextCursor cursor, cursorOld;
+   QPalette palette;
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
@@ -420,6 +430,15 @@ bool edytornc::findNext()
          if(!found)
            activeMdiChild()->textEdit->setTextCursor(cursorOld);
       };
+
+
+      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(140));
+
+      if(found)
+        findEdit->setPalette(QPalette());
+      else
+        findEdit->setPalette(palette);
+      
       return found;
    };
    return false;
@@ -434,6 +453,7 @@ bool edytornc::findPrevious()
    bool hasMdiChild = (activeMdiChild() != 0);
    bool found = false;
    QTextCursor cursor, cursorOld;
+   QPalette palette;
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
@@ -452,6 +472,14 @@ bool edytornc::findPrevious()
          if(!found)
            activeMdiChild()->textEdit->setTextCursor(cursorOld);
       };
+
+      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(140));
+
+      if(found)
+        findEdit->setPalette(QPalette());
+      else
+        findEdit->setPalette(palette);
+
       return found;
    };
    return false;
@@ -466,7 +494,7 @@ void edytornc::replaceNext()
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
 
-   if(!replaceEdit->text().isEmpty() && hasMdiChildNotReadOnly)
+   if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
       if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
         found = true;
@@ -501,7 +529,7 @@ void edytornc::replacePrevious()
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
 
-   if(!replaceEdit->text().isEmpty() && hasMdiChildNotReadOnly)
+   if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
       if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
         found = true;
@@ -538,7 +566,7 @@ void edytornc::replaceAll()
    QTextCursor startCursor, cr;
    QTextCharFormat format;
 
-   if(!replaceEdit->text().isEmpty() && hasMdiChildNotReadOnly)
+   if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
       QApplication::setOverrideCursor(Qt::BusyCursor);
       if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
@@ -802,7 +830,6 @@ void edytornc::doTriangles()
 
 void edytornc::doConvert()
 {
-
    I2MDialog *i2MDialog;
    i2MDialog = findChild<I2MDialog *>();
    if(!i2MDialog)
@@ -938,7 +965,7 @@ void edytornc::about()
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers."
                                "<P>Version: "
-                               "2009.00 Beta"
+                               "2009.00 Beta 1"
                                "<P>Copyright (C) 1998 - 2009 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>"
                                "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
                                "<P>"
@@ -980,6 +1007,7 @@ void edytornc::updateMenus()
    insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
    removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
    convertProgAct->setEnabled(hasMdiChildNotReadOnly);
+   cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
 
    redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
    undoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isUndoAvailable());
@@ -1177,6 +1205,7 @@ void edytornc::createActions()
     connect(printAct, SIGNAL(triggered()), this, SLOT(printFile()));
 
   
+
     
     undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
     undoAct->setShortcut(tr("Ctrl+Z"));
@@ -1254,7 +1283,8 @@ void edytornc::createActions()
 
 
 
-    bhcAct = new QAction(QIcon(":/images/bhc.png"), tr("&BHC"), this);
+
+    bhcAct = new QAction(QIcon(":/images/bhc.png"), tr("&Bolt hole circle"), this);
     bhcAct->setShortcut(tr("F8"));
     bhcAct->setStatusTip(tr("Calculate bolt hole's positions"));
     connect(bhcAct, SIGNAL(triggered()), this, SLOT(doBhc()));
@@ -1309,11 +1339,19 @@ void edytornc::createActions()
     calcAct->setStatusTip(tr("Run calculator"));
     connect(calcAct, SIGNAL(triggered()), this, SLOT(doCalc()));
 
-    showSerialToolBarAct = new QAction(QIcon(":/images/serial.png"), tr("Serial port send/recive"), this);
+    showSerialToolBarAct = new QAction(QIcon(":/images/serial.png"), tr("Serial port send/receive - experimental"), this);
     //showSerialToolBarAct->setShortcut(tr("F9"));
     showSerialToolBarAct->setCheckable(TRUE);
-    showSerialToolBarAct->setStatusTip(tr("Serial port send/recive"));
+    showSerialToolBarAct->setStatusTip(tr("Serial port send/receive"));
     connect(showSerialToolBarAct, SIGNAL(triggered()), this, SLOT(createSerialToolBar()));
+
+    cmpMacroAct = new QAction(QIcon(":/images/compfile.png"), tr("Compile macro - experimental"), this);
+    //cmpMacroAct->setShortcut(tr("F9"));
+    cmpMacroAct->setStatusTip(tr("Translate EdytorNC macro into CNC program"));
+    connect(cmpMacroAct, SIGNAL(triggered()), this, SLOT(doCmpMacro()));
+
+
+
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
     closeAct->setShortcut(tr("Ctrl+F4"));
@@ -1337,8 +1375,7 @@ void edytornc::createActions()
     connect(nextAct, SIGNAL(triggered()), mdiArea, SLOT(activateNextSubWindow()));
 
     previousAct = new QAction(QIcon(":/images/go-previous.png"), tr("Pre&vious"), this);
-    previousAct->setStatusTip(tr("Move the focus to the previous "
-                                 "window"));
+    previousAct->setStatusTip(tr("Move the focus to the previous window"));
     connect(previousAct, SIGNAL(triggered()), mdiArea, SLOT(activatePreviousSubWindow()));
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(activeWindowChanged(QMdiSubWindow *)));
@@ -1426,6 +1463,8 @@ void edytornc::createMenus()
     toolsMenu->addAction(convertAct);
     toolsMenu->addAction(convertProgAct);
     toolsMenu->addSeparator();
+    toolsMenu->addAction(cmpMacroAct);
+    toolsMenu->addSeparator();
     toolsMenu->addAction(calcAct);
  
 
@@ -1497,6 +1536,8 @@ void edytornc::createToolBars()
     toolsToolBar->addAction(chamferAct);
     toolsToolBar->addAction(convertAct);
     toolsToolBar->addAction(convertProgAct);
+    toolsToolBar->addSeparator();
+    toolsToolBar->addAction(cmpMacroAct);
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(calcAct);
 
@@ -1769,7 +1810,6 @@ void edytornc::setActiveSubWindow(QWidget *window)
 
 }
 
-
 //**************************************************************************************************
 //
 //**************************************************************************************************
@@ -1935,7 +1975,7 @@ void edytornc::createFindToolBar()
 
       findCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close find toolbar"), this);
       findCloseAct->setStatusTip(tr("Close find toolbar"));
-      connect(findCloseAct, SIGNAL(triggered()), findToolBar, SLOT(close()));
+      connect(findCloseAct, SIGNAL(triggered()), this, SLOT(closeFindToolBar()));
 
       findLabel = new QLabel(tr("Find:"));
       findToolBar->addWidget(findLabel);
@@ -1996,9 +2036,21 @@ void edytornc::createFindToolBar()
       };
    };
 
+   findEdit->setPalette(QPalette());
    connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
-   findEdit->setFocus(Qt::BacktabFocusReason);
+   findEdit->setFocus(Qt::MouseFocusReason);
 
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::closeFindToolBar()
+{
+   if(activeMdiChild())
+     activeMdiChild()->setFocus(Qt::MouseFocusReason);
+   findToolBar->close();
 }
 
 //**************************************************************************************************
@@ -2083,17 +2135,17 @@ void edytornc::createSerialToolBar()
       configPortAct->setStatusTip(tr("Serial port configuration"));
       connect(configPortAct, SIGNAL(triggered()), this, SLOT(serialConfig()));
 
-      reciveAct = new QAction(QIcon(":/images/recive.png"), tr("Recive new file"), this);
-      //reciveAct->setShortcut(tr("Shift+F3"));
-      reciveAct->setStatusTip(tr("Recive new file"));
-      connect(reciveAct, SIGNAL(triggered()), this, SLOT(reciveButtonClicked()));
+      receiveAct = new QAction(QIcon(":/images/receive.png"), tr("Receive new file"), this);
+      //receiveAct->setShortcut(tr("Shift+F3"));
+      receiveAct->setStatusTip(tr("Receive new file"));
+      connect(receiveAct, SIGNAL(triggered()), this, SLOT(receiveButtonClicked()));
 
       sendAct = new QAction(QIcon(":/images/send.png"), tr("Send current file"), this);
       //sendAct->setShortcut(tr("F3"));
       sendAct->setStatusTip(tr("Send current file"));
       connect(sendAct, SIGNAL(triggered()), this, SLOT(sendButtonClicked()));
 
-      serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/recive toolbar"), this);
+      serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/receive toolbar"), this);
       serialCloseAct->setStatusTip(tr("Close find toolbar"));
       connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
 
@@ -2104,7 +2156,7 @@ void edytornc::createSerialToolBar()
       serialToolBar->addWidget(configBox);
       serialToolBar->addAction(configPortAct);
       serialToolBar->addSeparator();
-      serialToolBar->addAction(reciveAct);
+      serialToolBar->addAction(receiveAct);
       serialToolBar->addSeparator();
       serialToolBar->addAction(sendAct);
       serialToolBar->addSeparator();
@@ -2293,7 +2345,7 @@ void edytornc::sendButtonClicked()
    comPort->reset();
 
    showError(E_NO_ERROR);
-   reciveAct->setEnabled(FALSE);
+   receiveAct->setEnabled(FALSE);
    sendAct->setEnabled(FALSE);
    QApplication::setOverrideCursor(Qt::BusyCursor);
 
@@ -2345,7 +2397,7 @@ void edytornc::sendButtonClicked()
    comPort->close();
    progressDialog.close();
    activeWindow->textEdit->setTextCursor(prevCursor);
-   reciveAct->setEnabled(TRUE);
+   receiveAct->setEnabled(TRUE);
    sendAct->setEnabled(TRUE);
    QApplication::restoreOverrideCursor();
 }
@@ -2354,7 +2406,7 @@ void edytornc::sendButtonClicked()
 //
 //**************************************************************************************************
 
-void edytornc::reciveButtonClicked()
+void edytornc::receiveButtonClicked()
 {
    QString tx;
    int count, i;
@@ -2382,7 +2434,7 @@ void edytornc::reciveButtonClicked()
    if(!(activeWindow != 0))
      return;
 
-   reciveAct->setEnabled(FALSE);
+   receiveAct->setEnabled(FALSE);
    sendAct->setEnabled(FALSE);
    QApplication::setOverrideCursor(Qt::BusyCursor);
 
@@ -2436,7 +2488,7 @@ void edytornc::reciveButtonClicked()
    comPort->flush();
    comPort->close();
    progressDialog.close();
-   reciveAct->setEnabled(TRUE);
+   receiveAct->setEnabled(TRUE);
    sendAct->setEnabled(TRUE);
    QApplication::restoreOverrideCursor();
    if(activeWindow)
@@ -2498,6 +2550,16 @@ void edytornc::showError(int error)
    };
 
 
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::doCmpMacro()
+{
+   if(activeMdiChild())
+     activeMdiChild()->compileMacro();
 }
 
 //**************************************************************************************************

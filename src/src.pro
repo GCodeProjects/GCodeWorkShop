@@ -12,7 +12,8 @@ SOURCES += edytornc.cpp \
     qtlockedfile.cpp \
     serialtransmission.cpp \
     qextserialbase.cpp \
-    qextserialport.cpp
+    qextserialport.cpp \
+    basic_interpreter.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -25,7 +26,8 @@ HEADERS += edytornc.h \
     qtlocalpeer.h \
     serialtransmission.h \
     qextserialbase.h \
-    qextserialport.h
+    qextserialport.h \
+    basic_interpreter.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \

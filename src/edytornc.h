@@ -102,6 +102,7 @@ private slots:
     void updateStatusBar();
     void cancelUnderline();
     void createFindToolBar();
+    void closeFindToolBar();
     void findTextChanged();
     void createSerialToolBar();
     void serialConfig();
@@ -109,8 +110,9 @@ private slots:
     void loadConfig();
     void closeSerialToolbar();
     void sendButtonClicked();
-    void reciveButtonClicked();
+    void receiveButtonClicked();
     void stopButtonClicked();
+    void doCmpMacro();
 
 
 
@@ -201,6 +203,7 @@ private:
     QAction *trianglesAct;
     QAction *convertAct;
     QAction *convertProgAct;
+    QAction *cmpMacroAct;
 
     QProcess *proc;
     QDir lastDir;
@@ -227,7 +230,7 @@ private:
     QToolBar *serialToolBar;
     QAction *showSerialToolBarAct;
     QAction *configPortAct;
-    QAction *reciveAct;
+    QAction *receiveAct;
     QAction *sendAct;
     QAction *serialCloseAct;
     QComboBox *configBox;

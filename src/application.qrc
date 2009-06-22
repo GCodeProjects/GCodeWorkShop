@@ -61,10 +61,11 @@
         <file>images/browse.png</file>
         <file>images/default.png</file>
         <file>images/stop.png</file>
-        <file>images/recive.png</file>
         <file>images/send.png</file>
         <file>images/serial.png</file>
         <file>images/close_small.png</file>
         <file>images/led.png</file>
+        <file>images/compfile.png</file>
+        <file>images/receive.png</file>
     </qresource>
 </RCC>

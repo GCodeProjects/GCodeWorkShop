@@ -1024,6 +1024,606 @@ void MdiChild::resizeEvent(QResizeEvent *event)
 //
 //**************************************************************************************************
 
+int MdiChild::compute(QString *str)
+{
+
+   QRegExp exp;
+   QString val1, val2, partmp;
+   QString oper;
+   int pos, i, j, err;
+   double result = 0;
+   bool ok, ok1, dot, minus;
+
+   pos = 0;
+   exp.setPattern("[$A-Z]+");
+
+   while((pos = str->indexOf(exp, pos)) > 0)
+   {
+      j = pos;
+      oper = str->mid(pos, exp.matchedLength());
+      pos += exp.matchedLength();
+      val1 = "";
+      dot = false;
+      minus = false;
+      while((str->at(pos) == '-') || (str->at(pos) == '.') || (str->at(pos).isDigit()))
+      {
+         if(str->at(pos) == '.')
+         {
+            if((dot))
+              return(ERR_DOUBLE_DOT);
+            dot = true;
+         };
+
+         if(str->at(pos) == '-')
+         {
+            if(minus || dot)
+            {
+               break;
+            };
+            minus = true;
+         };
+
+         val1 += str->at(pos);
+         pos++;
+      };
+
+      //pos--;
+      if(val1.isEmpty())
+        return(ERR_NO_PARAM);
+
+      err = processBrc(&val1);
+      if(err < 0)
+        return(err);
+
+      if(val1.isEmpty())
+        val1 = "0";
+
+      result = val1.toDouble(&ok);
+      if(!ok)
+        return(ERR_CONVERT);
+
+      while(1)
+      {
+         if(oper == "SIN")
+         {
+            result = sin((M_PI/180) * result);
+            break;
+         };
+
+         if(oper == "COS")
+         {
+            result = cos((M_PI/180) * result);
+            break;
+         };
+
+         if(oper == "TAN")
+         {
+            result = tan((M_PI/180) * result);
+            break;
+         };
+
+         if(oper == "SQRT")
+         {
+            result = sqrt(result);
+            break;
+         };
+
+         if(oper == "SQR")
+         {
+            result = pow(result, 2);
+            break;
+         };
+
+         if(oper == "ABS")
+         {
+            result = abs(result);
+            break;
+         };
+
+         if(oper == "TRUNC")
+         {
+            result = trunc(result);
+            break;
+         };
+
+         if(oper == "PI")
+         {
+            result = M_PI;
+            break;
+         };
+
+         return(ERR_UNKNOWN_FUNC);
+      };
+
+      partmp.number(result, 'g', 3);
+      str->replace(j, pos - j, QString( "%1" ).arg( result, 0, 'f', 3 ));
+
+   };
+
+   pos = 0;
+   exp.setPattern("[/*]{1,1}");
+
+   while((pos = str->indexOf(exp, pos)) > 0)
+   {
+      oper = str->mid(pos, 1);
+
+      val2 = "";
+      dot = false;
+      minus = false;
+
+      for(i = pos+1; i <= str->length(); i++)
+      {
+         if((str->at(i) == '.'))
+         {
+            if((dot))
+              return(ERR_DOUBLE_DOT);
+            dot = true;
+         };
+
+         if((str->at(i) == '-'))
+         {
+            if(minus || dot)
+            {
+               break;
+            };
+            minus = true;
+         };
+
+         if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
+           break;
+         val2 += str->at(i);
+      };
+      i--;
+
+
+      val1 = "";
+
+      dot = false;
+      minus = false;
+
+      for(j = pos-1; j >= 0; j--)
+      {
+         if((str->at(j) == '.'))
+         {
+            if((dot))
+            {
+               return(ERR_DOUBLE_DOT);
+            };
+            dot = true;
+         };
+
+         if((str->at(j) == '-'))
+         {
+            if((minus))
+            {
+               break;
+            };
+            minus = true;
+         };
+
+         if(!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-'))))
+           break;
+         val1.prepend(str->at(j));
+      };
+      j++;
+
+      if(val1.isEmpty())
+        return(ERR_NO_PARAM);  // val1 = "0";
+
+      if(val2.isEmpty())
+        return(ERR_NO_PARAM);  // val2 = "0";
+
+
+      while(1)
+      {
+         if(oper.at(0) == '*')
+         {
+            result = val1.toDouble(&ok) * val2.toDouble(&ok1);
+            break;
+         };
+
+         if(oper.at(0) == '/')
+         {
+            result = val1.toDouble(&ok) / val2.toDouble(&ok1);
+            break;
+         };
+         break;
+
+      };
+      if(!ok || !ok1)
+        return(ERR_CONVERT);
+
+      pos++;
+
+      partmp.number(result, 'g', 3);
+      str->replace(j, (i-j)+1, QString( "%1" ).arg( result, 3, 'f', 3 ));
+   };
+
+
+   pos = 0;
+   exp.setPattern("[+-]{1,1}");
+
+   while((pos = str->indexOf(exp, pos)) > 0)
+   {
+      oper = str->mid(pos, 1);
+
+      val2 = "";
+      dot = false;
+      minus = false;
+
+      for(i = pos+1; i <= str->length(); i++)
+      {
+         if((str->at(i) == '.'))
+         {
+            if((dot))
+              return(ERR_DOUBLE_DOT);
+            dot = true;
+         };
+
+         if((str->at(i) == '-'))
+         {
+            if(minus || dot)
+            {
+               break;
+            };
+            minus = true;
+         };
+
+         if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
+           break;
+         val2 += str->at(i);
+      };
+      i--;
+
+      val1 = "";
+
+      dot = false;
+      minus = false;
+
+      for(j = pos-1; j >= 0; j--)
+      {
+         if((str->at(j) == '.'))
+         {
+            if((dot))
+            {
+               return(ERR_DOUBLE_DOT);
+            };
+            dot = true;
+         };
+
+         if((str->at(j) == '-'))
+         {
+            if((minus))
+            {
+               break;
+            };
+            minus = true;
+         };
+
+         if(!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-'))))
+           break;
+         val1.prepend(str->at(j));
+      };
+      j++;
+
+
+      if(val1.isEmpty())
+        val1 = "0";  //return(ERR_NO_PARAM);
+
+      if(val2.isEmpty())
+        return(ERR_NO_PARAM); //val2 = "0";
+
+      while(1)
+      {
+         if(oper.at(0) == '-')
+         {
+            result = val1.toDouble(&ok) - val2.toDouble(&ok1);
+            break;
+         };
+
+         result = val1.toDouble(&ok) + val2.toDouble(&ok1);
+         break;
+
+      };
+      if(!ok || !ok1)
+        return(ERR_CONVERT);
+
+      pos++;
+
+      partmp.number(result, 'g', 3);
+      str->replace(j, (i-j)+1, QString( "%1" ).arg( result, 0, 'f', 3 ));
+   };
+
+   str->remove('(');
+   str->remove(')');
+   return(0);
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+int MdiChild::processBrc(QString *str)
+{
+
+   QRegExp exp;
+   QString par, val, partmp;
+   int pos, err;
+
+
+   if(str->contains(')') != str->contains('('))
+     return(ERR_NO_BRAC);
+
+
+   pos = 0;
+   exp.setPattern("\\([-+/*.0-9A-Z]*\\b[.]*\\)");
+
+   while((pos = str->indexOf(exp, pos)) > 0)
+   {
+      par = str->mid(pos, exp.matchedLength());
+      partmp = par;
+      pos += exp.matchedLength();
+
+      par.remove(' ');
+
+      err = compute(&par);
+      if(err < 0)
+        return(err);
+
+      str->replace(str->indexOf(partmp, 0), partmp.length(), par);
+      par.remove(' ');
+      err = processBrc(str);
+      if(err < 0)
+        return(err);
+   };
+
+   err = compute(str);
+   return(err);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::compileMacro()
+{
+   QRegExp exp;
+   int defBegin, defEnd, pos, i, len, error;
+   QString param, text, val;
+   QTextCursor cursor;
+   QString basicCode, basicSubs;
+   BasicInterpreter basicInterpreter;
+
+
+   text = textEdit->toPlainText();
+   pos = 0;
+   exp.setCaseSensitivity(Qt::CaseInsensitive);
+   //exp.setWildcard(FALSE);
+
+   exp.setPattern("\\{BEGIN\\}");
+   defBegin = exp.indexIn(text, pos);
+
+   exp.setPattern("\\{END\\}");
+   defEnd = exp.indexIn(text, defBegin);
+
+   if((defBegin < 0) || (defEnd <  0))
+   {
+      QMessageBox::warning( this, tr("EdytorNc - compile macro"), tr("No constant definition .\n{BEGIN}\n...\n{END}"));
+      return;
+   };
+
+   //defEnd -= exp.matchedLength();
+
+
+   pos = defBegin + 7;
+
+   while(pos < defEnd)
+   {
+      exp.setPattern("\\{\\$[A-Z0-9\\s]*\\b[=\\n\\r]");
+      pos = text.indexOf(exp, pos);
+      if (pos < 0) break;
+      param = "";
+
+      param = text.mid(pos, exp.matchedLength());
+      pos +=  exp.matchedLength();
+
+      param.remove(' ');
+      param.remove('{');
+      param.remove('=');
+
+      val = "";
+
+      do
+      {
+         val = val + text.at(pos);
+         pos++;
+         if(text.at(pos) == '\n' || text.at(pos) == '{')
+         {
+            cursor = textEdit->textCursor();
+            cursor.setPosition(0);
+            textEdit->setTextCursor(cursor);
+            QMessageBox::warning( this, tr("EdytorNC - compile macro"), tr("Param list: no bracket \'}\' !"));
+            return;
+         };
+      }while((text.at(pos) != '}'));
+
+      val.remove(' ');
+
+      i = defEnd;
+
+      while((i = text.indexOf(param, i)) > 0)
+      {
+         text.replace(i, param.length(), val);
+      };
+   };
+
+   text.remove(defBegin, (defEnd + 5) - defBegin);
+
+   pos = 0;
+   exp.setPattern("\\{[-+*=.()$/0-9A-Z\\s]*\\b[-+*=.()$/0-9A-Z\\s]*[}]");
+
+   while((pos = text.indexOf(exp, 0)) > 0)
+   {
+      i = pos;
+      param = "";
+      do
+      {
+         param = param + text.at(pos);
+         pos++;
+      }while(text.at(pos) != '}');
+
+      param.insert(param.length(), '}');
+
+
+      len = param.length();
+      param.remove(' ');
+      if(!param.isEmpty())
+      {
+         error = processBrc(&param);
+         if(error < 0)
+         {
+            macroShowError(error);
+            return;
+         };
+
+         error = compute(&param);
+         if(error < 0)
+         {
+            macroShowError(error);
+            return;
+         };
+
+         val = param;
+         val.remove('{');
+         val.remove('}');
+         text.replace(i, len, val);
+
+      };
+   };
+
+   defBegin = 0;
+   exp.setPattern("\\{BEGIN_SUBS\\}");
+   defBegin = exp.indexIn(text, defBegin);
+   len = exp.matchedLength();
+
+   exp.setPattern("\\{END_SUBS\\}");
+   defEnd = exp.indexIn(text, defBegin);
+
+   if((defBegin >= 0) && (defEnd > defBegin))
+   {
+      basicSubs = text.mid(defBegin + len, defEnd - (defBegin + len));
+      text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin);
+   };
+
+   defBegin = 0;
+   do
+   {
+      exp.setPattern("\\{BEGIN_BASIC\\}");
+      defBegin = exp.indexIn(text, defBegin);
+      len = exp.matchedLength();
+
+      exp.setPattern("\\{END_BASIC\\}");
+      defEnd = exp.indexIn(text, defBegin);
+
+      if((defBegin >= 0) && (defEnd > defBegin))
+      {
+         basicCode = text.mid(defBegin + len, defEnd - (defBegin + len));
+         text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin);
+         basicCode.append(basicSubs);
+
+         error = basicInterpreter.interpretBasic(basicCode);
+         if(error > 0)
+         {
+            macroShowBasicError(error);
+            return;
+         };
+         text.insert(defBegin, basicCode);
+
+      };
+   }while((defBegin >= 0) && (defEnd > defBegin));
+
+
+
+   cleanUp(&text);
+   textEdit->selectAll();
+   textEdit->insertPlainText(text);
+   cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+   textEdit->setTextCursor(cursor);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::macroShowError(int error)
+{
+   QString errText;
+
+   if(error < 0)
+   {
+      switch(error)
+      {
+         case ERR_NO_BRAC       : errText = tr("No ( or ) !");
+                                  break;
+         case ERR_NO_PARAM      : errText = tr("Function parameter not found ! \n Check +-*/.");
+                                  break;
+         case ERR_CONVERT       : errText = tr("Wrong number !");
+                                  break;
+         case ERR_UNKNOWN_FUNC  : errText = tr("Unknown math function !");
+                                  break;
+         case ERR_DOUBLE_DOT    : errText = tr("Decimal point or minus writed two times !");
+                                  break;
+         default                : errText = tr("Unknown error !");
+      };
+
+      QMessageBox::warning(this, tr("EdytorNc - compile macro"), errText);
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::macroShowBasicError(int error)
+{
+   QString errText;
+
+   switch(error)
+   {
+      case 0  : errText = tr("Syntax error");
+                break;
+      case 1  : errText = tr("Unbalanced parentheses");
+                break;
+      case 2  : errText = tr("No expression present");
+                break;
+      case 3  : errText = tr("Equals sign expected");
+                break;
+      case 4  : errText = tr("Not a variable");
+                break;
+      case 5  : errText = tr("Label table full");
+                break;
+      case 6  : errText = tr("Duplicate label");
+                break;
+      case 7  : errText = tr("Undefined label");
+                break;
+      case 8  : errText = tr("THEN expected");
+                break;
+      case 9  : errText = tr("TO expected");
+                break;
+      case 10 : errText = tr("Too many nested FOR loops");
+                break;
+      case 11 : errText = tr("NEXT without FOR");
+                break;
+      case 12 : errText = tr("Too many nested GOSUBs");
+                break;
+      case 13 : errText = tr("RETURN without GOSUBs");
+                break;
+      default : errText = tr("Unknown error");
+   };
+   QMessageBox::warning(this, tr("EdytorNc - compile basic"), errText);
+}
 
 //**************************************************************************************************
 //
