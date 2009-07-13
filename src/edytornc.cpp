@@ -432,7 +432,7 @@ bool edytornc::findNext()
       };
 
 
-      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(140));
+      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
       if(found)
         findEdit->setPalette(QPalette());
@@ -473,7 +473,7 @@ bool edytornc::findPrevious()
            activeMdiChild()->textEdit->setTextCursor(cursorOld);
       };
 
-      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(140));
+      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
       if(found)
         findEdit->setPalette(QPalette());
@@ -609,26 +609,6 @@ void edytornc::selAll()
 {
    if(activeMdiChild())
       activeMdiChild()->textEdit->selectAll();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void edytornc::zoomIn()
-{
-   if(activeMdiChild())
-      activeMdiChild()->textEdit->zoomIn();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void edytornc::zoomOut()
-{
-   if(activeMdiChild())
-      activeMdiChild()->textEdit->zoomOut();
 }
 
 //**************************************************************************************************
@@ -999,8 +979,6 @@ void edytornc::updateMenus()
    findAct->setEnabled(hasMdiChild);
 
    replaceAct->setEnabled(hasMdiChildNotReadOnly);
-   zoomInAct->setEnabled(hasMdiChild);
-   zoomOutAct->setEnabled(hasMdiChild);
    readOnlyAct->setEnabled(hasMdiChild);
    renumberAct->setEnabled(hasMdiChildNotReadOnly);
    insertDotAct->setEnabled(hasMdiChildNotReadOnly);
@@ -1054,7 +1032,6 @@ void edytornc::cancelUnderline()
          format.setUnderlineStyle(QTextCharFormat::NoUnderline);
          activeMdiChild()->textEdit->setCurrentCharFormat(format);
       };
-
    };
 
    updateStatusBar();
@@ -1151,7 +1128,7 @@ MdiChild *edytornc::createMdiChild()
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cancelUnderline()));
-    connect(child->textEdit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(updateStatusBar()));
+    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateStatusBar()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
 
     //connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
@@ -1264,16 +1241,6 @@ void edytornc::createActions()
     readOnlyAct->setCheckable(TRUE);
     readOnlyAct->setStatusTip(tr("Makes text read only"));
     connect(readOnlyAct, SIGNAL(triggered()), this, SLOT(readOnly()));
-
-    zoomInAct = new QAction(QIcon(":/images/zoom-in.png"), tr("&Zoom in"), this);
-    zoomInAct->setShortcut(tr("Ctrl+PgUp"));
-    zoomInAct->setStatusTip(tr("Incrase font size"));
-    connect(zoomInAct, SIGNAL(triggered()), this, SLOT(zoomIn()));
-
-    zoomOutAct = new QAction(QIcon(":/images/zoom-out.png"), tr("Zoom out"), this);
-    zoomOutAct->setShortcut(tr("Ctrl+PgDown"));
-    zoomOutAct->setStatusTip(tr("Decrease font size"));
-    connect(zoomOutAct, SIGNAL(triggered()), this, SLOT(zoomOut()));
 
     configAct = new QAction(QIcon(":/images/configure.png"), tr("Configuration"), this);
     //configAct->setShortcut(tr("Ctrl+R"));
@@ -1413,15 +1380,12 @@ void edytornc::createMenus()
     recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
     fileMenu->addSeparator();
     fileMenu->addAction(printAct);
-
     fileMenu->addSeparator();
     fileMenu->addAction(closeAct);
     fileMenu->addAction(closeAllAct);
     fileMenu->addSeparator();
-
     fileMenu->addAction(exitAct);
 
-    
 
     editMenu = menuBar()->addMenu(tr("&Edit"));
     editMenu->addAction(undoAct);
@@ -1439,12 +1403,7 @@ void edytornc::createMenus()
     editMenu->addSeparator();
     editMenu->addAction(readOnlyAct);
     editMenu->addSeparator();
-    editMenu->addAction(zoomInAct);
-    editMenu->addAction(zoomOutAct);
-    editMenu->addSeparator();
     editMenu->addAction(configAct);
-
-
 
     toolsMenu = menuBar()->addMenu(tr("&Tools"));
     toolsMenu->addAction(showSerialToolBarAct);
@@ -1466,8 +1425,6 @@ void edytornc::createMenus()
     toolsMenu->addAction(cmpMacroAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(calcAct);
- 
-
 
     windowMenu = menuBar()->addMenu(tr("&Window"));
     updateWindowMenu();
@@ -1513,9 +1470,6 @@ void edytornc::createToolBars()
     editToolBar->addSeparator();
     editToolBar->addAction(findAct);
     editToolBar->addAction(replaceAct);
-    editToolBar->addSeparator();
-    editToolBar->addAction(zoomInAct);
-    editToolBar->addAction(zoomOutAct);
 
 
     toolsToolBar = new QToolBar(tr("Tools"));
@@ -2063,20 +2017,29 @@ void edytornc::findTextChanged()
    QTextCursor cursor;
    int pos;
 
-   if(!findEdit->text().isEmpty() && hasMdiChild)
+   if(hasMdiChild)
    {
       cursor = activeMdiChild()->textEdit->textCursor();
-      pos = cursor.position() - findEdit->text().size();
-      if(pos < 0)
-        pos = 0;
-      do
+      if(!findEdit->text().isEmpty())
       {
-         cursor.movePosition(QTextCursor::Left);  //cursor.movePosition(QTextCursor::StartOfWord)
-      }while((pos <= cursor.position()) && (cursor.position() > 0));
+         pos = cursor.position() - findEdit->text().size();
+         if(pos < 0)
+           pos = 0;
+         do
+         {
+            cursor.movePosition(QTextCursor::Left);  //cursor.movePosition(QTextCursor::StartOfWord)
+         }while((pos <= cursor.position()) && (cursor.position() > 0));
 
-      activeMdiChild()->textEdit->setTextCursor(cursor);
+         activeMdiChild()->textEdit->setTextCursor(cursor);
 
-      findNext();
+         findNext();
+      }
+      else
+      {
+         findEdit->setPalette(QPalette());
+         cursor.clearSelection();
+         activeMdiChild()->textEdit->setTextCursor(cursor);
+      };
    };
 }
 
@@ -2091,6 +2054,16 @@ bool edytornc::eventFilter(QObject *obj, QEvent *ev)
        if( ev->type() == QEvent::KeyPress )
        {
           QKeyEvent *k = (QKeyEvent*) ev;
+
+          if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
+          {
+             if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
+             {
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+                return true;
+             };
+
+          };
 
           if(defaultMdiWindowProperites.intCapsLock)
           {

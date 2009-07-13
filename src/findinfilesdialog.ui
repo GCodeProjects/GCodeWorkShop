@@ -197,7 +197,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="preview"/>
+      <widget class="QPlainTextEdit" name="preview"/>
      </item>
     </layout>
    </item>

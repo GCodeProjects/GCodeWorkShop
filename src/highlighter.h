@@ -49,6 +49,33 @@ private:
     void highlightInside(const QString &tx, int pos, int maxlen);
     _h_colors highlightColors;
     QFont font;
+
+
+
+
+    struct HighlightingRule
+     {
+         QRegExp pattern;
+         QTextCharFormat format;
+     };
+     QVector<HighlightingRule> highlightingRules;
+     QVector<HighlightingRule> progNameHighlightingRules;
+
+
+     QTextCharFormat keywordFormat;
+     QTextCharFormat classFormat;
+     QTextCharFormat singleLineCommentFormat;
+     QTextCharFormat multiLineCommentFormat;
+     QTextCharFormat quotationFormat;
+     QTextCharFormat functionFormat;
+
+     QTextCharFormat operatorFormat;
+     QTextCharFormat progNameFormat;
+     QTextCharFormat adressFormat;
+     QTextCharFormat identiferFormat;
+
+
+
 };
 
 #endif

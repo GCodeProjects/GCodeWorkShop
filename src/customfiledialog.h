@@ -44,7 +44,7 @@
 #include <QFileIconProvider>
 #include <QLabel>
 #include <QFileDialog>
-#include <QTextEdit>
+#include <QPlainTextEdit>
 
 #include "highlighter.h"
 #include "commoninc.h"
@@ -91,7 +91,7 @@ public:
 //
 //**************************************************************************************************
 
-class FDialogPreview : public QTextEdit
+class FDialogPreview : public QPlainTextEdit
 {
     Q_OBJECT
 public:

@@ -44,6 +44,63 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
 {
    font = fnt;
    highlightColors = hColors;
+
+   HighlightingRule rule;
+
+   keywordFormat.setForeground(QColor(highlightColors.macroColor));
+   keywordFormat.setFontWeight(QFont::Bold);
+   QStringList keywordPatterns;
+   keywordPatterns << "\\b(OR|XOR|AND|NOT|EOR)\\b"
+                   << "\\b(EQ|NE|GT|LT|GE|LE)\\b"
+                   << "\\b(SQRT|SQR)\\b" 
+                   << "\\b(SIN|COS|ATAN|TAN)\\b"
+                   << "\\b(BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
+                   << "\\b(TRUNC|ROUND|ABS|FIX)\\b"
+                   << "\\b(IF|THEN|ELSE|ENDIF|END|BEGIN)\\b"
+                   << "\\bGOTO[BCF]{0,1}\\b"
+                   << "\\b(BLK|CYCL|MAX|LBL)\\b"
+                   << "\\b(FORM|CLEAR|DRAW|CHUCK|WORK)\\b"
+                   << "\\b(GOSUB|RETURN|RETURN|RET|RTS|MODIN|MODOUT|GET|PUT|READ|WRITE|NOEX)\\b"
+                   << "\\b(DO|WHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN)\\b"
+                   << "\\b(VC)[0-9]{1,3}\\b"
+                   << "\\b(PROC|SUPA|STOPRE|MSG|SAVE|DISPLOF|SBLOF|PGM)\\b"
+                   << "\\b(DEF|VAR|REAL|INT|AXIS|BOOL|CHAR|STRING|FRAME)\\b"
+                   << "\\b(MCALL|CALL)\\b" 
+                   << "\\b(TLID|TLFON)\\b"
+                   << "\\bV[A-Z]{1,4}\\b" 
+                   << "\\b(AP|RP)\\b"
+                   << "\\bDIAMO(N|F)\\b" 
+                   << "\\b[A]{0,1}(MIRROR|SCALE|ROT|TRANS)\\b"
+                   << "\\b[AC]{0,1}(ROTS)\\b"
+                   << "\\bPSELECT|PRINT\\b";
+   foreach(const QString &pattern, keywordPatterns)
+   {
+      rule.pattern = QRegExp(pattern);
+      rule.format = keywordFormat;
+      highlightingRules.append(rule);
+   };
+
+
+   progNameFormat.setForeground(QColor(highlightColors.progNameColor));
+   progNameFormat.setFontWeight(QFont::Bold);
+   QStringList progNamePatterns;
+   progNamePatterns << "%\\b(MPF|SPF)[\\s]{0,3}[0-9]{1,4}$\\b"
+                    << "^\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB)"
+                    << "^(%_N_)[A-Z]{1,1}[A-Z0-9_]{0,30}_(MPF|SPF)$"
+                    << "\\b^O[0-9]{1,}\\b"
+                    << "^%PM$"
+                    << "^;\\$PATH=/[A-Z0-9_]{1,}$"
+                    << "^(:)[0-9]{1,}"
+                    << "\\b^O[A-Z0-9]{2,}\\b"
+                    << "[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|LIB|SUB)($|\\s)";
+   foreach(const QString &pattern, progNamePatterns)
+   {
+      rule.pattern = QRegExp(pattern);
+      rule.format = progNameFormat;
+      progNameHighlightingRules.append(rule);
+   };
+
+
 }
 
 //**************************************************************************************************
@@ -52,9 +109,8 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
 
 void Highlighter::highlightBlock(const QString &tx)
 {
-  uint pos, count;
+  int pos, count;
   int sellen;
-  QColor color;
   QChar ch;
   QString adrress, val;
   QTextCharFormat format;
@@ -80,7 +136,6 @@ void Highlighter::highlightBlock(const QString &tx)
   };
 
 
- 
   while(pos < tx.length())
   {
 
@@ -92,10 +147,7 @@ void Highlighter::highlightBlock(const QString &tx)
         if(ch == ';')
         {
            sellen = (tx.length() - pos);
-           if(tx.mid(0, 2) == ";$")
-             color = highlightColors.progNameColor;
-           else
-             color = highlightColors.commentColor;
+           format.setForeground(QColor( highlightColors.commentColor));
            break;
         };
 
@@ -123,13 +175,13 @@ void Highlighter::highlightBlock(const QString &tx)
 
            }while(count > 0);
 
-           color = highlightColors.commentColor;
+           format.setForeground(QColor( highlightColors.commentColor));
            break;
         };
 
 //***********************************************************************
 
-        if((ch >= 'A' && ch <= 'Z') || (ch == '#') || (ch == '@') || (ch == '_'))
+        if((ch >= 'A' && ch <= 'Z') || (ch == '#') || (ch == '@')|| (ch == '_'))
         {
            adrress = "";
            do
@@ -138,7 +190,7 @@ void Highlighter::highlightBlock(const QString &tx)
               if((adrress.length() + pos) >= tx.length())
                 break;
               ch = tx.at(adrress.length() + pos).toUpper(); 
-           }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
+           }while((ch >= 'A' && ch <= 'Z')|| (ch == '_'));
            sellen = adrress.length();
 
            val = "";
@@ -156,7 +208,6 @@ void Highlighter::highlightBlock(const QString &tx)
 
            if(adrress.length() > 1)
            {
-              //ch = tx.at(sellen + pos).upper();
               if(ch == '(')
               {
                  setFormat(pos, sellen, highlightColors.macroColor);
@@ -183,46 +234,42 @@ void Highlighter::highlightBlock(const QString &tx)
                  }while(count > 0);
 
                  highlightInside(tx, pos, pos + sellen);
-                 //color = highlightColors.keyWordColor;
                  pos = pos + sellen;
                  sellen = 0;
               };
 
               do
               {
-                 if(adrress.at(0) == 'N')
+
+                 format.setForeground(QColor(highlightColors.keyWordColor)); 
+                 format.setFontWeight(QFont::Normal);
+                 
+                 foreach(const HighlightingRule &rule, progNameHighlightingRules)
                  {
-                    color = highlightColors.nColor;
-                    break;
-                 };
-                 if((adrress.at(0) == '_' && adrress.at(1) == 'N' && adrress.at(2) == '_'))
-                 {
-                    sellen--;
-                    do
+                    QRegExp expression(rule.pattern);
+                    expression.setCaseSensitivity(Qt::CaseInsensitive);
+
+                    if(adrress.contains(expression))
                     {
-                       sellen++;
-                       if((sellen + pos) >= tx.length())
-                         break;
-                       ch = tx.at(sellen + pos).toUpper();
-                       if(ch == ' ')
-                       {
-                          break;
-                       };
-                    }while(TRUE);
-                    color = highlightColors.progNameColor;
-                    format.setFontWeight(QFont::Bold);
-                    break;
+                       format = rule.format;
+                       break;
+                    };
+
                  };
 
-                 if((adrress == "MPF") || (adrress == "SPF") || (adrress.at(0) == 'O') || (adrress.at(0) == '$') ||
-                   (adrress.at(0) == '_' && adrress.at(1) == 'N'&& adrress.at(2) == '_'))
+                 foreach(const HighlightingRule &rule, highlightingRules)
                  {
-                    color = highlightColors.progNameColor;
-                    format.setFontWeight(QFont::Bold);
-                    break;
+                    QRegExp expression(rule.pattern);
+                    expression.setCaseSensitivity(Qt::CaseInsensitive);
+
+                    if(adrress.contains(expression))
+                    {
+                       format = rule.format;
+                       break;
+                    };
+
                  };
 
-                 color = highlightColors.keyWordColor;   //Qt::darkBlue;
               }while(FALSE);
 
 
@@ -232,37 +279,33 @@ void Highlighter::highlightBlock(const QString &tx)
               ch = adrress.at(0);
               switch(ch.toAscii())
               {
-                 case 'G'         : color = highlightColors.gColor;
+                 case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                     break;
-                 case 'M'         : color = highlightColors.mColor;
+                 case 'M'         : format.setForeground(QColor(highlightColors.mColor));
                                     break;
-                 case 'N'         : color = highlightColors.nColor;
+                 case 'N'         : format.setForeground(QColor(highlightColors.nColor));
                                     break;
-                 case 'L'         : color = highlightColors.lColor;
+                 case 'L'         : format.setForeground(QColor(highlightColors.lColor));
                                     break;
-                 case 'A'         : color = highlightColors.aColor;
+                 case 'A'         : format.setForeground(QColor(highlightColors.aColor));
                                     break;
-                 case 'B'         : color = highlightColors.bColor;
+                 case 'B'         : format.setForeground(QColor(highlightColors.bColor));
                                     break;
-                 case 'Z'         : color = highlightColors.zColor;
+                 case 'Z'         : format.setForeground(QColor(highlightColors.zColor));
                                     break;
                  case 'F'         :
-                 case 'S'         : color = highlightColors.fsColor;
+                 case 'S'         : format.setForeground(QColor(highlightColors.fsColor));
                                     break;
                  case 'D'         :
                  case 'H'         :
-                 case 'T'         : color = highlightColors.dhtColor;
+                 case 'T'         : format.setForeground(QColor(highlightColors.dhtColor));
                                     break;
                  case '#'         :
                  case 'V'         :
                  case '@'         :
-                 case 'R'         : color = highlightColors.rColor;
+                 case 'R'         : format.setForeground(QColor(highlightColors.rColor));
                                     break;
-                 case '%'         :
-                 case 'O'         : color = highlightColors.progNameColor;
-                                    format.setFontWeight(QFont::Bold);
-                                    break;
-                 default          : color = Qt::black;
+                 default          : format.setForeground(Qt::black);
               };
 
            };
@@ -308,7 +351,7 @@ void Highlighter::highlightBlock(const QString &tx)
                  sellen = 0;
            }
            else
-             color = highlightColors.operatorColor;
+             format.setForeground(QColor(highlightColors.operatorColor));
            break;
 
         };
@@ -317,28 +360,9 @@ void Highlighter::highlightBlock(const QString &tx)
 
         if((ch == '[') || (ch == ']') || (ch == ',') || (ch == '{') || (ch == '}'))
         {
-           color = highlightColors.operatorColor;
+           format.setForeground(QColor(highlightColors.operatorColor));
            break;
         };
-
-//***********************************************************************
-
-        if((ch == ':'))
-        {
-           sellen--;
-           do
-           {
-              sellen++;
-              if((sellen + pos) >= tx.length())
-                break;
-              ch = tx.at(sellen + pos).toUpper();
-           }while((ch >= '0' && ch <= '9') || (ch == '.'));
-
-           color = highlightColors.progNameColor;
-           format.setFontWeight(QFont::Bold);
-           break;
-        };
-
 
 //***********************************************************************
 
@@ -353,32 +377,37 @@ void Highlighter::highlightBlock(const QString &tx)
 
            }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
            sellen++;
-           color = highlightColors.commentColor;
+           format.setForeground(QColor(highlightColors.commentColor));
            break;
         };
 
 
 //***********************************************************************
 
-        color = Qt::black;
+        format.setForeground(Qt::black);
         format.setFontWeight(QFont::Normal);
         break;
 
      };
 
-     
-     
-     format.setForeground(QColor(color));
      setFormat(pos, sellen, format);
-     //setFormat(pos, sellen, font);
-     //setFormat(pos, sellen, QColor(color));
      
-
      pos = pos + sellen;
      format.setFontWeight(QFont::Normal);
 
   };
 
+  foreach(const HighlightingRule &rule, progNameHighlightingRules)
+  {
+     QRegExp expression(rule.pattern);
+     int index = expression.indexIn(tx);
+     while (index >= 0)
+     {
+        int length = expression.matchedLength();
+        setFormat(index, length, rule.format);
+        index = expression.indexIn(tx, index + length);
+     };
+  };
 }
 
 //**************************************************************************************************
@@ -388,9 +417,9 @@ void Highlighter::highlightBlock(const QString &tx)
 void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
 {
   int sellen;
-  QColor color;
   QChar ch;
   QString adrress, val;
+  QTextCharFormat format;
 
 
   while(pos < maxlen)
@@ -432,39 +461,53 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
 
            if(adrress.length() > 1)
            {
-              color = highlightColors.keyWordColor;   //Qt::darkBlue;
+              format.setForeground(QColor(highlightColors.keyWordColor)); 
+              format.setFontWeight(QFont::Normal);
+
+              foreach(const HighlightingRule &rule, highlightingRules)
+              {
+                 QRegExp expression(rule.pattern);
+                 expression.setCaseSensitivity(Qt::CaseInsensitive);
+
+                 if(adrress.contains(expression))
+                 {
+                    format = rule.format;
+                    break;
+                 };
+
+              };
            }
            else
            {
               ch = adrress.at(0);
               switch(ch.toAscii())
               {
-                 case 'G'         : color = highlightColors.gColor;
+                 case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                     break;
-                 case 'M'         : color = highlightColors.mColor;
+                 case 'M'         : format.setForeground(QColor(highlightColors.mColor));
                                     break;
-                 case 'N'         : color = highlightColors.nColor;
+                 case 'N'         : format.setForeground(QColor(highlightColors.nColor));
                                     break;
-                 case 'L'         : color = highlightColors.lColor;
+                 case 'L'         : format.setForeground(QColor(highlightColors.lColor));
                                     break;
-                 case 'A'         : color = highlightColors.aColor;
+                 case 'A'         : format.setForeground(QColor(highlightColors.aColor));
                                     break;
-                 case 'B'         : color = highlightColors.bColor;
+                 case 'B'         : format.setForeground(QColor(highlightColors.bColor));
                                     break;
-                 case 'Z'         : color = highlightColors.zColor;
+                 case 'Z'         : format.setForeground(QColor(highlightColors.zColor));
                                     break;
                  case 'F'         :
-                 case 'S'         : color = highlightColors.fsColor;
+                 case 'S'         : format.setForeground(QColor(highlightColors.fsColor));
                                     break;
                  case 'D'         :
                  case 'H'         :
-                 case 'T'         : color = highlightColors.dhtColor;
+                 case 'T'         : format.setForeground(QColor(highlightColors.dhtColor));
                                     break;
                  case '#'         :
                  case '@'         :
-                 case 'R'         : color = highlightColors.rColor;
+                 case 'R'         : format.setForeground(QColor(highlightColors.rColor));
                                     break;
-                 default          : color = Qt::black;
+                 default          : format.setForeground(Qt::black);
               };
 
            };
@@ -478,7 +521,7 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
         if((ch == '/') || (ch == '*') || (ch == '-') || (ch == '+') || (ch == '$') || (ch == '<') || (ch == '>')
             || (ch == '='))
         {
-           color = highlightColors.operatorColor;
+           format.setForeground(QColor(highlightColors.operatorColor));
            break;
 
         };
@@ -487,7 +530,7 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
 
         if((ch == '[') || (ch == ']') || (ch == ',') || (ch == '{') || (ch == '}') || (ch == '(') || (ch == ')'))
         {
-           color = highlightColors.operatorColor;
+           format.setForeground(QColor(highlightColors.operatorColor));
            break;
         };
 
@@ -504,20 +547,64 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
 
            }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
            sellen++;
-           color = highlightColors.commentColor;
+           format.setForeground(QColor( highlightColors.commentColor));
            break;
         };
 
 //***********************************************************************
 
-        color = Qt::black;
+        format.setForeground(Qt::black);
         break;
 
      };
 
-     setFormat(pos, sellen, color);
+     setFormat(pos, sellen, format);
      pos = pos + sellen;
 
   };
 
 }
+
+ //**************************************************************************************************
+//
+//**************************************************************************************************
+
+ /*void Highlighter::highlightBlock(const QString &text)
+ {
+    foreach(const HighlightingRule &rule, highlightingRules)
+    {
+         QRegExp expression(rule.pattern);
+         expression.setCaseSensitivity(Qt::CaseInsensitive);
+
+         int index = expression.indexIn(text);
+         while (index >= 0) {
+             int length = expression.matchedLength();
+             setFormat(index, length, rule.format);
+             index = expression.indexIn(text, index + length);
+         }
+     }
+     setCurrentBlockState(0);
+
+     int startIndex = 0;
+     if (previousBlockState() != 1)
+         startIndex = commentStartExpression.indexIn(text);
+
+     while (startIndex >= 0)
+     {
+         int endIndex = commentEndExpression.indexIn(text, startIndex);
+         int commentLength;
+         if (endIndex == -1)
+         {
+             setCurrentBlockState(1);
+             commentLength = text.length() - startIndex;
+         } else
+         {
+             commentLength = endIndex - startIndex
+                             + commentEndExpression.matchedLength();
+         }
+         setFormat(startIndex, commentLength, multiLineCommentFormat);
+         startIndex = commentStartExpression.indexIn(text, startIndex + commentLength);
+     }
+ }*/
+
+

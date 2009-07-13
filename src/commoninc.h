@@ -26,7 +26,7 @@
 #include<QString>
 
 
-typedef struct _h_colors
+struct _h_colors
 {
    int commentColor;
    int gColor;
@@ -50,7 +50,7 @@ typedef struct _h_colors
 //
 //**************************************************************************************************
 
-typedef struct _editor_properites
+struct _editor_properites
 {
    bool isRedo, isUndo, isSel;
    bool readOnly;

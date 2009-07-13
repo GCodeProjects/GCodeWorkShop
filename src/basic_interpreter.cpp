@@ -433,7 +433,7 @@ void BasicInterpreter::assignment()
 void BasicInterpreter::print()
 {
    double answer;
-   int len = 0, spaces;
+   int len = 0;
    char last_delim;
    QString str;
 

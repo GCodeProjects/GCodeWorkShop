@@ -100,12 +100,14 @@ void FindInFiles::find()
     QStringList files;
 
     filesTable->setRowCount(0);
+    preview->clear();
 
     QString fileName = fileComboBox->currentText();
     QString text = textComboBox->currentText();
     QString path = directoryComboBox->currentText();
 
     findButton->setEnabled(FALSE);
+    closeButton->setEnabled(FALSE);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     QDir directory = QDir(path);
@@ -118,6 +120,7 @@ void FindInFiles::find()
       files = findFiles(directory, files, text);
 
     findButton->setEnabled(TRUE);
+    closeButton->setEnabled(TRUE);
     QApplication::restoreOverrideCursor();
 }
 
@@ -163,6 +166,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
             QTextStream in(&file);
             commentFounded = false;
             textFounded = false;
+            word = false;
             while(!in.atEnd())
             {
                 if(progressDialog.wasCanceled())
@@ -201,7 +205,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                    textFounded = (pos >= 0);
                 };
 
-                word = false;
+
                 if(textFounded && wholeWordsCheckBox->isChecked())
                 {
                    if(pos > 0)
@@ -209,16 +213,16 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                        word = true;
                    pos = pos + text.size();
                    if(pos < line.size())
-                     if(line[pos + 1].isLetterOrNumber())
+                     if(line[pos].isLetterOrNumber())
                        word = true;
                 };
 
                 if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
-                   (textFounded && (wholeWordsCheckBox->isChecked() && word)))
+                   (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
                 {
-
                     notFound = false;
                     textFounded = false;
+                    word = false;
                     size = file.size();
 
                     QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
@@ -236,14 +240,11 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                     filesTable->setItem(row, 0, fileNameItem);
                     filesTable->setItem(row, 1, infoNameItem);
                     filesTable->setItem(row, 2, sizeItem);
-                    filesTable->resizeColumnsToContents();
-                    filesTable->resizeRowsToContents();
-
                     break;
                 }
             };
             file.close();
-        };
+        };   
     };
 
     if(notFound)
@@ -258,10 +259,10 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
        filesTable->setItem(0, 0, fileNameItem);
        filesTable->setItem(0, 1, infoNameItem);
        filesTable->setItem(0, 2, sizeItem);
-       filesTable->resizeColumnsToContents();
-       filesTable->resizeRowsToContents();
     };
 
+    filesTable->resizeColumnsToContents();
+    filesTable->resizeRowsToContents();
     return foundFiles;
 }
 

@@ -40,7 +40,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     isUntitled = true;
     textEdit->setWordWrapMode(QTextOption::NoWrap);
     highlighter = 0;
-    textEdit->setAcceptRichText(FALSE);
+    //textEdit->setAcceptRichText(FALSE);
     setFocusProxy(textEdit);
 
     marginWidget->setAutoFillBackground(TRUE);
@@ -541,6 +541,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
    bool ok, selection;
    QTextCursor cursor;
 
+   QApplication::setOverrideCursor(Qt::BusyCursor);
    exp.setCaseSensitivity (Qt::CaseInsensitive);
 
    cursor = textEdit->textCursor();
@@ -703,6 +704,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
    };
 
    textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
    return count;
 }
 
@@ -715,9 +717,10 @@ void MdiChild::doRemoveSpace()
    int i;
    QString tx;
 
+   QApplication::setOverrideCursor(Qt::BusyCursor);
    tx = textEdit->toPlainText();
 
-   for(i = 0; i <              tx.length(); i++)
+   for(i = 0; i < tx.length(); i++)
    {
       if(tx.at(i) == '(')
         do
@@ -755,6 +758,7 @@ void MdiChild::doRemoveSpace()
    QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(0);
    textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -767,6 +771,7 @@ void MdiChild::doInsertSpace()
    QString tx;
    QRegExp exp;
 
+   QApplication::setOverrideCursor(Qt::BusyCursor);
    exp.setCaseSensitivity (Qt::CaseInsensitive);
 
    exp.setPattern("[A-Z]+|[#@;:(\\']");
@@ -849,6 +854,7 @@ void MdiChild::doInsertSpace()
    QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(0);
    textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -863,6 +869,7 @@ void MdiChild::doInsertDot()
    double it;
    bool ok;
 
+   QApplication::setOverrideCursor(Qt::BusyCursor);
    exp.setCaseSensitivity(Qt::CaseInsensitive);
 
    exp.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(mdiWindowProperites.dotAdr));
@@ -909,6 +916,7 @@ void MdiChild::doInsertDot()
   QTextCursor cursor = textEdit->textCursor();
   cursor.setPosition(0);
   textEdit->setTextCursor(cursor);
+  QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -939,28 +947,6 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 //
 //**************************************************************************************************
 
- void MdiChild::highlightCurrentLine()
- {
-     QList<QTextEdit::ExtraSelection> extraSelections;
-
-     if (!textEdit->isReadOnly())
-     {
-         QTextEdit::ExtraSelection selection;
-
-         selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
-         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-         selection.cursor = textEdit->textCursor();
-         selection.cursor.clearSelection();
-         extraSelections.append(selection);
-     }
-
-     textEdit->setExtraSelections(extraSelections);
- }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
  void MdiChild::doI2M()
 {
    int pos, count;
@@ -968,6 +954,8 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
    QRegExp exp;
    double it;
    bool ok;
+
+   QApplication::setOverrideCursor(Qt::BusyCursor);
 
    exp.setCaseSensitivity(Qt::CaseInsensitive);
    exp.setPattern(QString("[%1]{1,1}[-.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(mdiWindowProperites.i2mAdr));
@@ -1001,13 +989,14 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
      };
   };
 
-  emit message( QString(tr("Converted : %1 numbers.")).arg(count), 6000 );
+  emit message(QString(tr("Converted : %1 numbers.")).arg(count), 6000);
   cleanUp(&tx);
   textEdit->selectAll();
   textEdit->insertPlainText(tx);
   QTextCursor cursor = textEdit->textCursor();
   cursor.setPosition(0);
   textEdit->setTextCursor(cursor);
+  QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -1136,7 +1125,7 @@ int MdiChild::compute(QString *str)
       };
 
       partmp.number(result, 'g', 3);
-      str->replace(j, pos - j, QString( "%1" ).arg( result, 0, 'f', 3 ));
+      str->replace(j, pos - j, QString("%1").arg(result, 0, 'f', 3));
 
    };
 
@@ -1390,11 +1379,12 @@ void MdiChild::compileMacro()
 {
    QRegExp exp;
    int defBegin, defEnd, pos, i, len, error;
-   QString param, text, val;
+   QString param, text, val, paramTmp;
    QTextCursor cursor;
    QString basicCode, basicSubs;
    BasicInterpreter basicInterpreter;
 
+   QApplication::setOverrideCursor(Qt::BusyCursor);
 
    text = textEdit->toPlainText();
    pos = 0;
@@ -1409,7 +1399,7 @@ void MdiChild::compileMacro()
 
    if((defBegin < 0) || (defEnd <  0))
    {
-      QMessageBox::warning( this, tr("EdytorNc - compile macro"), tr("No constant definition .\n{BEGIN}\n...\n{END}"));
+      QMessageBox::warning( this, tr("EdytorNc - compile macro"), tr("No constant definition .\n{BEGIN}\n...\n{END}\n No macro ?"));
       return;
    };
 
@@ -1480,18 +1470,31 @@ void MdiChild::compileMacro()
       param.remove(' ');
       if(!param.isEmpty())
       {
+         paramTmp = param;
          error = processBrc(&param);
          if(error < 0)
          {
-            macroShowError(error);
+            cursor = textEdit->textCursor();
+            cursor.setPosition(0);
+            textEdit->setTextCursor(cursor);
+            textEdit->find(paramTmp);
+            macroShowError(error, paramTmp);
             return;
          };
 
-         error = compute(&param);
-         if(error < 0)
+         if(!param.isEmpty())
          {
-            macroShowError(error);
-            return;
+            paramTmp = param;
+            error = processBrc(&param);
+            if(error < 0)
+            {
+               cursor = textEdit->textCursor();
+               cursor.setPosition(0);
+               textEdit->setTextCursor(cursor);
+               textEdit->find(paramTmp);
+               macroShowError(error, paramTmp);
+               return;
+            };
          };
 
          val = param;
@@ -1513,7 +1516,7 @@ void MdiChild::compileMacro()
    if((defBegin >= 0) && (defEnd > defBegin))
    {
       basicSubs = text.mid(defBegin + len, defEnd - (defBegin + len));
-      text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin);
+      text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin + 1);
    };
 
    defBegin = 0;
@@ -1529,7 +1532,7 @@ void MdiChild::compileMacro()
       if((defBegin >= 0) && (defEnd > defBegin))
       {
          basicCode = text.mid(defBegin + len, defEnd - (defBegin + len));
-         text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin);
+         text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin + 1);
          basicCode.append(basicSubs);
 
          error = basicInterpreter.interpretBasic(basicCode);
@@ -1551,13 +1554,14 @@ void MdiChild::compileMacro()
    cursor = textEdit->textCursor();
    cursor.setPosition(0);
    textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-void MdiChild::macroShowError(int error)
+void MdiChild::macroShowError(int error, QString tx)
 {
    QString errText;
 
@@ -1567,13 +1571,13 @@ void MdiChild::macroShowError(int error)
       {
          case ERR_NO_BRAC       : errText = tr("No ( or ) !");
                                   break;
-         case ERR_NO_PARAM      : errText = tr("Function parameter not found ! \n Check +-*/.");
+         case ERR_NO_PARAM      : errText = tr("Function parameter not found ! \n Check +-*/.\n\"%1\"").arg(tx);
                                   break;
          case ERR_CONVERT       : errText = tr("Wrong number !");
                                   break;
-         case ERR_UNKNOWN_FUNC  : errText = tr("Unknown math function !");
+         case ERR_UNKNOWN_FUNC  : errText = tr("Unknown math function !\n\"%1\"").arg(tx);
                                   break;
-         case ERR_DOUBLE_DOT    : errText = tr("Decimal point or minus writed two times !");
+         case ERR_DOUBLE_DOT    : errText = tr("Decimal point or minus writed two times !\n\"%1\"").arg(tx);
                                   break;
          default                : errText = tr("Unknown error !");
       };
@@ -1629,6 +1633,144 @@ void MdiChild::macroShowBasicError(int error)
 //
 //**************************************************************************************************
 
+void MdiChild::highlightCurrentLine()
+{
+    extraSelections.clear();
+    textEdit->setExtraSelections(extraSelections);
+
+    if(!textEdit->isReadOnly())
+    {
+      selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
+      selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+      selection.cursor = textEdit->textCursor();
+      selection.cursor.clearSelection();
+      extraSelections.append(selection);
+    }
+    textEdit->setExtraSelections(extraSelections);
+    QColor lineColor = QColor(mdiWindowProperites.lineColor).darker(108);
+    selection.format.setBackground(lineColor);
+
+    QTextDocument *doc = textEdit->document();
+    QTextCursor cursor = textEdit->textCursor();
+    QTextCursor beforeCursor = cursor;
+
+    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+    QString brace = cursor.selectedText();
+
+    beforeCursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+    QString beforeBrace = beforeCursor.selectedText();
+
+    if((brace != "{") && (brace != "}") && (brace != "[") && (brace != "]") && (brace != "(")
+        && (brace != ")") && (brace != "\"")) {
+        if((beforeBrace == "{") || (beforeBrace == "}") || (beforeBrace == "[")
+            || (beforeBrace == "]")
+            || (beforeBrace == "(")
+            || (beforeBrace == ")")
+            || (beforeBrace == "\"")) {
+            cursor = beforeCursor;
+            brace = cursor.selectedText();
+        } else {
+            return;
+        }
+    }
+
+    QTextCharFormat format;
+    format.setForeground(Qt::red);
+    format.setFontWeight(QFont::Bold);
+
+    QString openBrace;
+    QString closeBrace;
+
+    if((brace == "{") || (brace == "}")) {
+        openBrace = "{";
+        closeBrace = "}";
+    }
+
+    if((brace == "[") || (brace == "]")) {
+        openBrace = "[";
+        closeBrace = "]";
+    }
+
+    if((brace == "(") || (brace == ")")) {
+        openBrace = "(";
+        closeBrace = ")";
+    }
+
+    if((brace == "\""))
+    {
+       selection.cursor = cursor;
+       extraSelections.append(selection);
+       QTextCursor cursor1 = doc->find("\"", cursor);
+       if(!cursor1.isNull() && (cursor1 != cursor))
+       {
+          selection.cursor = cursor1;
+          extraSelections.append(selection);
+          textEdit->setExtraSelections(extraSelections);
+       }
+       else
+       {
+          QTextCursor cursor2 = doc->find("\"", cursor, QTextDocument::FindBackward);
+          if(!cursor2.isNull())
+          {
+             selection.cursor = cursor2;
+             extraSelections.append(selection);
+             textEdit->setExtraSelections(extraSelections);
+          };
+       }
+       return;
+    }
+
+    if(brace == openBrace) {
+        QTextCursor cursor1 = doc->find(closeBrace, cursor);
+        QTextCursor cursor2 = doc->find(openBrace, cursor);
+        if(cursor2.isNull()) {
+            selection.cursor = cursor;
+            extraSelections.append(selection);
+            selection.cursor = cursor1;
+            extraSelections.append(selection);
+            textEdit->setExtraSelections(extraSelections);
+        } else {
+
+            while(cursor1.position() > cursor2.position()) {
+                cursor1 = doc->find(closeBrace, cursor1);
+                cursor2 = doc->find(openBrace, cursor2);
+                if(cursor2.isNull()) {
+                    break;
+                }
+            }
+            selection.cursor = cursor;
+            extraSelections.append(selection);
+            selection.cursor = cursor1;
+            extraSelections.append(selection);
+            textEdit->setExtraSelections(extraSelections);
+        }
+    } else {
+        if(brace == closeBrace) {
+            QTextCursor cursor1 = doc->find(openBrace, cursor, QTextDocument::FindBackward);
+            QTextCursor cursor2 = doc->find(closeBrace, cursor, QTextDocument::FindBackward);
+            if(cursor2.isNull()) {
+                selection.cursor = cursor;
+                extraSelections.append(selection);
+                selection.cursor = cursor1;
+                extraSelections.append(selection);
+                textEdit->setExtraSelections(extraSelections);
+            } else {
+                while(cursor1.position() < cursor2.position()) {
+                    cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward);
+                    cursor2 = doc->find(closeBrace, cursor2, QTextDocument::FindBackward);
+                    if(cursor2.isNull()) {
+                        break;
+                    }
+                }
+                selection.cursor = cursor;
+                extraSelections.append(selection);
+                selection.cursor = cursor1;
+                extraSelections.append(selection);
+                textEdit->setExtraSelections(extraSelections);
+            }
+        }
+    }
+}
 
 //**************************************************************************************************
 //

@@ -1682,17 +1682,17 @@ void BHCDraw::drawLines()
 {
     QPainter *paint = new QPainter(pm);
     paint->save();
-    paint->setWindow(-(geometry().width()/2), -(geometry().height()/2), geometry().width(), geometry().height());
+    paint->setWindow(-(geometry().width() / 2), -(geometry().height() / 2), geometry().width(), geometry().height());
     QRect v = paint->viewport();
     int d = qMin( v.width(), v.height() );
-    paint->setViewport( v.left() + (v.width()-d)/2, v.top() + (v.height()-d)/2, d, d );
+    paint->setViewport( v.left() + (v.width()-d) / 2, v.top() + (v.height()-d) / 2, d, d );
     //paint->scale(vp, vp);
 
     paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
 
     v = paint->viewport();
-    paint->drawLine(0, (v.height()/2) - 5, 0, 5-(v.height()/2));
-    paint->drawLine((v.width()/2) - 5, 0, 5-(v.width()/2), 0);
+    paint->drawLine(0, (v.height() / 2) - 5, 0, 5 - (v.height() / 2));
+    paint->drawLine((v.width() / 2) - 5, 0, 5 - (v.width() / 2), 0);
 
     paint->restore();
     paint->end();
@@ -2061,17 +2061,17 @@ void BHCDialog::computeButtonClicked()
 
       switch(tabId)
       {
-         case 1: col = Qt::blue;
+         case 1:  col = Qt::blue;
                   textPosX = 8;
                   textPosY = drawing->height();
                   dir = 4;
                   break;
-         case 2: col = Qt::red;
+         case 2:  col = Qt::red;
                   textPosX = (drawing->width()/2)+16;
                   textPosY = 0;
                   dir = -1;
                   break;
-         case 3: col = Qt::yellow;
+         case 3:  col = Qt::yellow;
                   textPosX = (drawing->width()/2)+16;
                   textPosY = drawing->height();
                   dir = 4;

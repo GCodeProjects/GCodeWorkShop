@@ -78,7 +78,7 @@
 #define PI           20
 
 
-typedef struct for_stack
+struct for_stack
 {
    int var; /* counter variable */
    char *loc;

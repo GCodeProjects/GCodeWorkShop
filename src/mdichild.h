@@ -66,6 +66,7 @@ public:
     void compileMacro();
 
 
+
 protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
@@ -75,13 +76,14 @@ private slots:
     void documentWasModified();
     void cleanUp(QString *str);
 
+
 private:
     bool maybeSave();
     void setCurrentFile(const QString &fileName, const QString &text);
     QString strippedName(const QString &fullFileName);
     int processBrc(QString *str);
     int compute(QString *str);
-    void macroShowError(int error);
+    void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
 
 
@@ -91,6 +93,8 @@ private:
     bool isUntitled;
     Highlighter *highlighter;
     _editor_properites mdiWindowProperites;
+    QList<QTextEdit::ExtraSelection> extraSelections;
+    QTextEdit::ExtraSelection selection;
 
 private slots :
     void highlightCurrentLine();

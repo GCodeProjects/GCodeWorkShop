@@ -83,8 +83,6 @@ private slots:
     void replacePrevious();
     void replaceAll();
     void selAll();
-    void zoomIn();
-    void zoomOut();
     void config();
     void doBhc();
     void doInsertSpaces();
@@ -187,8 +185,6 @@ private:
     QAction *deleteAct;
     QAction *selAllAct;
     QAction *readOnlyAct;
-    QAction *zoomInAct;
-    QAction *zoomOutAct;
 
     QAction *configAct;
 

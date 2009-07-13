@@ -48,7 +48,6 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QPushButton>
-#include <QPushButton>
 #include <QVBoxLayout>
 #include <QTextStream>
 
@@ -76,7 +75,6 @@ QIcon ImIconProvider::icon(const QFileInfo &fi) const
     if (ext.isEmpty())
         return QFileIconProvider::icon(fi);
 
-
         ext = fi.completeSuffix().toLower();
         if (ext.endsWith("nc", Qt::CaseInsensitive))
             return ncpm;
@@ -98,15 +96,14 @@ QIcon ImIconProvider::icon(const QFileInfo &fi) const
 //
 //**************************************************************************************************
 
-FDialogPreview::FDialogPreview(QWidget *pa) : QTextEdit(pa)
+FDialogPreview::FDialogPreview(QWidget *pa) : QPlainTextEdit(pa)
 {
 
     setWordWrapMode(QTextOption::NoWrap);
-    setAcceptRichText(FALSE);
     setReadOnly(TRUE);
     highlighter = 0;
     setFont(QFont("Courier", 10, QFont::Normal));
-    setFixedSize(QSize( 300, 200 ));
+    setFixedSize(QSize(300, 200));
 
 }
 
@@ -146,11 +143,11 @@ void FDialogPreview::setHColors(const _h_colors colors)
  {
 
     QFileInfo fi = QFileInfo(name);
-    if (fi.isDir())
+    if(fi.isDir())
          return;
 
      QFile file(name);
-     if(file.open(QFile::ReadOnly | QFile::Text)) 
+     if(file.open(QFile::ReadOnly))
      {
         QTextStream in(&file);
         setPlainText(in.readAll());
@@ -195,13 +192,13 @@ CustomFDialog::CustomFDialog(QWidget *parent, int flags) : QDialog(parent, Qt::D
      hboxLayout1->setSpacing(5);
      hboxLayout1->setContentsMargins(9, 0, 0, 0);
      showPreview = new QCheckBox(this);
-     showPreview->setText( tr("Show Preview"));
+     showPreview->setText(tr("Show Preview"));
      showPreview->setChecked(true);
      previewIsShown = true;
      hboxLayout1->addWidget(showPreview);
      QSpacerItem *spacerItem = new QSpacerItem(2, 2, QSizePolicy::Expanding, QSizePolicy::Minimum);
      hboxLayout1->addItem(spacerItem);
-     if (flags & fdExistingFiles)
+     if(flags & fdExistingFiles)
      {
         OKButton = new QPushButton( tr("&Open"), this);
         setWindowTitle(tr("Open file..."));
@@ -215,34 +212,34 @@ CustomFDialog::CustomFDialog(QWidget *parent, int flags) : QDialog(parent, Qt::D
         fileDialog->setConfirmOverwrite(TRUE);
      };
 
-     OKButton->setDefault( true );
-     hboxLayout1->addWidget( OKButton );
-     CancelB = new QPushButton( tr("&Cancel"), this);
-     CancelB->setAutoDefault( false );
-     hboxLayout1->addWidget( CancelB );
+     OKButton->setDefault(true);
+     hboxLayout1->addWidget(OKButton);
+     CancelB = new QPushButton(tr("&Cancel"), this);
+     CancelB->setAutoDefault(false);
+     hboxLayout1->addWidget(CancelB);
      vboxLayout->addLayout(hboxLayout1);
 
-     if (flags & fdDirectoriesOnly)
+     if(flags & fdDirectoriesOnly)
      {
          Layout = new QFrame(this);
          Layout1 = new QHBoxLayout(Layout);
-         Layout1->setSpacing( 0 );
+         Layout1->setSpacing(0);
          Layout1->setContentsMargins(9, 0, 0, 0);
-         SaveZip = new QCheckBox( tr( "&Compress File" ), Layout);
+         SaveZip = new QCheckBox(tr("&Compress File"), Layout);
          Layout1->addWidget(SaveZip, Qt::AlignLeft);
-         QSpacerItem* spacer = new QSpacerItem( 2, 2, QSizePolicy::Expanding, QSizePolicy::Minimum );
-         Layout1->addItem( spacer );
+         QSpacerItem* spacer = new QSpacerItem(2, 2, QSizePolicy::Expanding, QSizePolicy::Minimum );
+         Layout1->addItem(spacer);
          vboxLayout->addWidget(Layout);
          LayoutC = new QFrame(this);
          Layout1C = new QHBoxLayout(LayoutC);
-         Layout1C->setSpacing( 0 );
+         Layout1C->setSpacing(0);
          Layout1C->setContentsMargins(9, 0, 0, 0);
-         WithFonts = new QCheckBox( tr( "&Include Fonts" ), LayoutC);
+         WithFonts = new QCheckBox(tr("&Include Fonts"), LayoutC);
          Layout1C->addWidget(WithFonts, Qt::AlignLeft);
-         WithProfiles = new QCheckBox( tr( "&Include Color Profiles" ), LayoutC);
+         WithProfiles = new QCheckBox(tr("&Include Color Profiles"), LayoutC);
          Layout1C->addWidget(WithProfiles, Qt::AlignLeft);
-         QSpacerItem* spacer2 = new QSpacerItem( 2, 2, QSizePolicy::Expanding, QSizePolicy::Minimum );
-         Layout1C->addItem( spacer2 );
+         QSpacerItem* spacer2 = new QSpacerItem(2, 2, QSizePolicy::Expanding, QSizePolicy::Minimum);
+         Layout1C->addItem(spacer2);
          vboxLayout->addWidget(LayoutC);
          fileDialog->setFileMode(QFileDialog::DirectoryOnly);
          pw->hide();
@@ -268,7 +265,7 @@ CustomFDialog::CustomFDialog(QWidget *parent, int flags) : QDialog(parent, Qt::D
      connect(fileDialog, SIGNAL(rejected()), this, SLOT(reject()));
      resize(minimumSizeHint());
      
-     setMinimumSize(parent->width()*0.85, height());
+     setMinimumSize(parent->width()*0.8, height());
 }
 
 //**************************************************************************************************
@@ -484,7 +481,7 @@ ScFileWidget::ScFileWidget(QWidget * parent) : QFileDialog(parent, Qt::Widget)
    QListIterator<QPushButton *> i(b);
    while (i.hasNext())
      i.next()->setVisible(false);
-   setMinimumSize(QSize(480, 310));
+   setMinimumSize(QSize(400, 300));
    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 }
 
