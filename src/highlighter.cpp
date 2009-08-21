@@ -50,29 +50,22 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
    keywordFormat.setForeground(QColor(highlightColors.macroColor));
    keywordFormat.setFontWeight(QFont::Bold);
    QStringList keywordPatterns;
-   keywordPatterns << "\\b(OR|XOR|AND|NOT|EOR)\\b"
-                   << "\\b(EQ|NE|GT|LT|GE|LE)\\b"
-                   << "\\b(SQRT|SQR)\\b" 
-                   << "\\b(SIN|COS|ATAN|TAN)\\b"
+   keywordPatterns << "\\b(OR|XOR|AND|NOT|EOR|EQ|NE|GT|LT|GE|LE)\\b"
+                   << "\\b(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR)\\b"
                    << "\\b(BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
-                   << "\\b(TRUNC|ROUND|ABS|FIX)\\b"
                    << "\\b(IF|THEN|ELSE|ENDIF|END|BEGIN)\\b"
                    << "\\bGOTO[BCF]{0,1}\\b"
-                   << "\\b(BLK|CYCL|MAX|LBL)\\b"
-                   << "\\b(FORM|CLEAR|DRAW|CHUCK|WORK)\\b"
+                   << "\\b(FORM|CLEAR|DRAW|CHUCK|WORK|BLK|CYCL|MAX|LBL)\\b"
                    << "\\b(GOSUB|RETURN|RETURN|RET|RTS|MODIN|MODOUT|GET|PUT|READ|WRITE|NOEX)\\b"
                    << "\\b(DO|WHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN)\\b"
                    << "\\b(VC)[0-9]{1,3}\\b"
                    << "\\b(PROC|SUPA|STOPRE|MSG|SAVE|DISPLOF|SBLOF|PGM)\\b"
                    << "\\b(DEF|VAR|REAL|INT|AXIS|BOOL|CHAR|STRING|FRAME)\\b"
-                   << "\\b(MCALL|CALL)\\b" 
-                   << "\\b(TLID|TLFON)\\b"
+                   << "\\b(MCALL|CALL|TLID|TLFON|AP|RP|PSELECT|PRINT)\\b"
                    << "\\bV[A-Z]{1,4}\\b" 
-                   << "\\b(AP|RP)\\b"
                    << "\\bDIAMO(N|F)\\b" 
                    << "\\b[A]{0,1}(MIRROR|SCALE|ROT|TRANS)\\b"
-                   << "\\b[AC]{0,1}(ROTS)\\b"
-                   << "\\bPSELECT|PRINT\\b";
+                   << "\\b[AC]{0,1}(ROTS)\\b";
    foreach(const QString &pattern, keywordPatterns)
    {
       rule.pattern = QRegExp(pattern);
@@ -92,6 +85,8 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
                     << "^;\\$PATH=/[A-Z0-9_]{1,}$"
                     << "^(:)[0-9]{1,}"
                     << "\\b^O[A-Z0-9]{2,}\\b"
+                    << "(%M)[0-9]{1,4}"
+                    << "(BEGIN|END)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"
                     << "[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|LIB|SUB)($|\\s)";
    foreach(const QString &pattern, progNamePatterns)
    {
@@ -194,7 +189,7 @@ void Highlighter::highlightBlock(const QString &tx)
            sellen = adrress.length();
 
            val = "";
-           while((ch >= '0' && ch <= '9') || (ch == '.'))
+           while((ch >= '0' && ch <= '9') || (ch == '.') || (ch == '-'))
            {
               val.append(ch);
               if((sellen + val.length() + pos) >= tx.length())
@@ -240,10 +235,9 @@ void Highlighter::highlightBlock(const QString &tx)
 
               do
               {
-
                  format.setForeground(QColor(highlightColors.keyWordColor)); 
                  format.setFontWeight(QFont::Normal);
-                 
+
                  foreach(const HighlightingRule &rule, progNameHighlightingRules)
                  {
                     QRegExp expression(rule.pattern);
@@ -301,6 +295,7 @@ void Highlighter::highlightBlock(const QString &tx)
                  case 'T'         : format.setForeground(QColor(highlightColors.dhtColor));
                                     break;
                  case '#'         :
+                 case 'Q'         :
                  case 'V'         :
                  case '@'         :
                  case 'R'         : format.setForeground(QColor(highlightColors.rColor));
@@ -447,7 +442,7 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
 
 
            val = "";
-           while((ch >= '0' && ch <= '9') || (ch == '.'))
+           while((ch >= '0' && ch <= '9') || (ch == '.') || (ch == '-'))
            {
               val.append(ch);
               if((sellen + val.length() + pos) >= tx.length())
@@ -504,6 +499,7 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
                  case 'T'         : format.setForeground(QColor(highlightColors.dhtColor));
                                     break;
                  case '#'         :
+                 case 'Q'         :
                  case '@'         :
                  case 'R'         : format.setForeground(QColor(highlightColors.rColor));
                                     break;

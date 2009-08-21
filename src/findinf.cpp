@@ -133,7 +133,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
 {
     int pos;
     QRegExp exp;
-    QString f_tx;
+    QString comment_tx;
     qint64 size;
     bool textFounded, word, notFound, commentFounded;
     QString line;
@@ -145,7 +145,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     progressDialog.setWindowTitle(tr("Find Files"));
 
     exp.setCaseSensitivity(Qt::CaseInsensitive);
-    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
+    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
 
     notFound = true;
 
@@ -164,84 +164,71 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
         if(file.open(QIODevice::ReadOnly))
         {  
             QTextStream in(&file);
-            commentFounded = false;
+
             textFounded = false;
             word = false;
-            while(!in.atEnd())
+            line = in.readAll();
+
+            if(text == "*") //files containing anything
             {
-                if(progressDialog.wasCanceled())
-                    break;
-                qApp->processEvents();
 
-                line = in.readLine();
-                pos = 0;
-                if(!commentFounded) //find first comment
-                {
-                   pos = line.indexOf(exp, pos);
-                   if(pos >= 0)
-                   {
-                      f_tx = line.mid(pos, exp.matchedLength());
-                      if(!(f_tx.mid(0, 2) == ";$"))
-                      {
-                         f_tx.remove('(');
-                         f_tx.remove(')');
-                         f_tx.remove(';');
-                         commentFounded = true;
-                      };
-                   };
-                };
+               textFounded = true;
 
-                if(text == "*") //files containing anything
-                {
-                   if(commentFounded || in.atEnd()) //try find first comment
-                   {
-                      pos = 0;
-                      textFounded = true;
-                   };
-                }
-                else
-                {
-                   pos = line.indexOf(text, 0, Qt::CaseInsensitive);
-                   textFounded = (pos >= 0);
-                };
+            }
+            else
+            {
+               pos = line.indexOf(text, 0, Qt::CaseInsensitive);
+               textFounded = (pos >= 0);
+            };
 
 
-                if(textFounded && wholeWordsCheckBox->isChecked())
-                {
-                   if(pos > 0)
-                     if(line[pos - 1].isLetterOrNumber())
-                       word = true;
-                   pos = pos + text.size();
-                   if(pos < line.size())
-                     if(line[pos].isLetterOrNumber())
-                       word = true;
-                };
+            if(textFounded && wholeWordsCheckBox->isChecked())
+            {
+               if(pos > 0)
+                 if(line[pos - 1].isLetterOrNumber())
+                   word = true;
+                 pos = pos + text.size();
+                 if(pos < line.size())
+                   if(line[pos].isLetterOrNumber())
+                     word = true;
+            };
 
-                if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
-                   (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
-                {
-                    notFound = false;
-                    textFounded = false;
-                    word = false;
-                    size = file.size();
+            if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
+              (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
+            {
+               notFound = false;
+               textFounded = false;
+               word = false;
+               size = file.size();
 
-                    QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
-                    fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+               pos = 0;
+               while((pos = line.indexOf(exp, pos)) >= 0)
+               {
+                  comment_tx = line.mid(pos, exp.matchedLength());
+                  pos += exp.matchedLength();
+                  if(!comment_tx.contains(";$"))
+                  {
+                     comment_tx.remove('(');
+                     comment_tx.remove(')');
+                     comment_tx.remove(';');
+                     break;
+                  };
+               };
 
-                    QTableWidgetItem *infoNameItem = new QTableWidgetItem(f_tx);
-                    infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+               QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
+               fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-                    QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB")
-                                             .arg(int((size + 1023) / 1024)));
-                    sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+               QTableWidgetItem *infoNameItem = new QTableWidgetItem(comment_tx);
+               infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-                    int row = filesTable->rowCount();
-                    filesTable->insertRow(row);
-                    filesTable->setItem(row, 0, fileNameItem);
-                    filesTable->setItem(row, 1, infoNameItem);
-                    filesTable->setItem(row, 2, sizeItem);
-                    break;
-                }
+               QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
+               sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+               int row = filesTable->rowCount();
+               filesTable->insertRow(row);
+               filesTable->setItem(row, 0, fileNameItem);
+               filesTable->setItem(row, 1, infoNameItem);
+               filesTable->setItem(row, 2, sizeItem);
             };
             file.close();
         };   
@@ -417,6 +404,7 @@ void FindInFiles::filePreview(int x, int y)
 
       QTableWidgetItem *item = filesTable->item(x, 0);
 
+      QApplication::setOverrideCursor(Qt::BusyCursor);
 
       QString dir = directoryComboBox->currentText();
       if(!dir.endsWith("/"))
@@ -455,7 +443,7 @@ void FindInFiles::filePreview(int x, int y)
          };
       };
 
-
+      QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************

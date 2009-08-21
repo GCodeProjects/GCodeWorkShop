@@ -397,12 +397,13 @@ RenumberDialog::RenumberDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(pa
    //setAttribute(Qt::WA_DeleteOnClose);
    setWindowTitle(tr("Renumber lines"));
 
-   connect( mRenumLines, SIGNAL(clicked()), this, SLOT(renumClicked()));
-   connect( mAllLines, SIGNAL(clicked()), this, SLOT(allLinesClicked()));
-   connect( mRemoveAll, SIGNAL(clicked()), this, SLOT(removeAllClicked()));
-   connect( mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
-   connect( okButton, SIGNAL(clicked()), SLOT(okButtonClicked()) );
-   connect( cancelButton, SIGNAL(clicked()), SLOT(close()) );
+   connect(mRenumLines, SIGNAL(clicked()), this, SLOT(renumClicked()));
+   connect(mAllLines, SIGNAL(clicked()), this, SLOT(allLinesClicked()));
+   connect(mRemoveAll, SIGNAL(clicked()), this, SLOT(removeAllClicked()));
+   connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
+   connect(okButton, SIGNAL(clicked()), SLOT(okButtonClicked()));
+   connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
+   connect(mRenumHe, SIGNAL(clicked()), this, SLOT(mRenumHeClicked()));
 
    setMaximumSize(width(), height());
    //okButton->setEnabled(formInput->hasAcceptableInput());
@@ -449,6 +450,9 @@ void RenumberDialog::getState(int &mode, int &startAt, int &from, int &prec, int
    else
      if(mRemoveAll->isChecked())
        mode = 3;
+     else
+       if(mRenumHe->isChecked())
+         mode = 4;
 
 }
 
@@ -482,6 +486,9 @@ void RenumberDialog::renumClicked()
    startAtInput->setEnabled(TRUE);
    incInput->setEnabled(TRUE);
 
+   startAtInput->setValue(10);
+   incInput->setValue(10);
+
    mRenumLines->setChecked(TRUE);
    mAllLines->setChecked(FALSE);
    mRemoveAll->setChecked(FALSE);
@@ -496,15 +503,41 @@ void RenumberDialog::renumClicked()
 //
 //**************************************************************************************************
 
+void RenumberDialog::mRenumHeClicked()
+{
+   formInput->setEnabled(FALSE);
+   startAtInput->setEnabled(TRUE);
+   incInput->setEnabled(TRUE);
+
+   startAtInput->setValue(0);
+   incInput->setValue(1);
+
+   //mRenumLines->setChecked(TRUE);
+   //mAllLines->setChecked(FALSE);
+   //mRemoveAll->setChecked(FALSE);
+
+   mRenumWithComm->setEnabled(FALSE);
+   mRenumEmpty->setEnabled(TRUE);
+
+   mCheckDivide->setEnabled(FALSE);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void RenumberDialog::allLinesClicked()
 {
    formInput->setEnabled(FALSE);
    startAtInput->setEnabled(TRUE);
    incInput->setEnabled(TRUE);
 
-   mRenumLines->setChecked(FALSE);
-   mAllLines->setChecked(TRUE);
-   mRemoveAll->setChecked(FALSE);
+   startAtInput->setValue(10);
+   incInput->setValue(10);
+
+   //mRenumLines->setChecked(FALSE);
+   //mAllLines->setChecked(TRUE);
+   //mRemoveAll->setChecked(FALSE);
 
    mRenumWithComm->setEnabled(TRUE);
    mRenumEmpty->setEnabled(TRUE);
@@ -522,9 +555,9 @@ void RenumberDialog::removeAllClicked()
    startAtInput->setEnabled(FALSE);
    incInput->setEnabled(FALSE);
 
-   mRenumLines->setChecked(FALSE);
-   mAllLines->setChecked(FALSE);
-   mRemoveAll->setChecked(TRUE);
+   //mRenumLines->setChecked(FALSE);
+  // mAllLines->setChecked(FALSE);
+   //mRemoveAll->setChecked(TRUE);
 
    mRenumWithComm->setEnabled(FALSE);
    mRenumEmpty->setEnabled(FALSE);

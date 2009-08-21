@@ -85,7 +85,7 @@ bool MdiChild::loadFile(const QString &fileName)
     if(!file.open(QIODevice::ReadOnly))
     {
        QMessageBox::warning(this, tr("EdytorNC"),
-                            tr("Cannot read file %1:\n%2.")
+                            tr("Cannot read file \"%1\".\n %2")
                             .arg(fileName)
                             .arg(file.errorString()));
        return false;
@@ -152,8 +152,8 @@ bool MdiChild::saveAs()
     {
 
        QMessageBox msgBox;
-       msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(curFile));
-       msgBox.setInformativeText("Do you want overwrite it ?");
+       msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(file));
+       msgBox.setInformativeText(tr("Do you want overwrite it ?"));
        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
        msgBox.setDefaultButton(QMessageBox::Discard);
        msgBox.setIcon(QMessageBox::Warning);
@@ -244,7 +244,7 @@ bool MdiChild::saveFile(const QString &fileName)
     if(!file.open(QIODevice::WriteOnly))
     {
        QMessageBox::warning(this, tr("EdytorNC"),
-                            tr("Cannot write file %1:\n%2.")
+                            tr("Cannot write file \"%1\".\n %2")
                             .arg(fileName)
                             .arg(file.errorString()));
        return false;
@@ -561,6 +561,41 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
    count = 0;
    while(1)
    {
+      if(mode == 4) //renumber lines without N
+      {
+         num = startAt;
+         for(i = 0; i < (textEdit->document()->lineCount() - 1); i++)
+         {
+            line = tx.section('\n', i, i);
+
+            i_tx = QString("%1").arg(num, prec);
+            i_tx.replace(' ', '0');
+            i_tx += "  ";
+
+            exp.setPattern("^[0-9]{1,4}\\s\\s");
+            pos = line.indexOf(exp, 0);
+            if(pos >= 0)
+            {
+               line.replace(pos, exp.matchedLength(), i_tx);
+               num += inc;
+               count++;
+            }
+            else
+            {
+               if(renumEmpty)
+               {
+                  line.insert(0, i_tx);
+                  num += inc;
+                  count++;
+               };
+            };
+            new_tx += line + '\n';
+         };
+         tx = new_tx;
+         break;
+      };
+
+
       if(mode == 3) //remove all
       {
          pos = 0;

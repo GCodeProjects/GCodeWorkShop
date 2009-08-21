@@ -134,6 +134,7 @@ class RenumberDialog : public QDialog, private Ui::RenumberDialog
     void renumClicked();
     void allLinesClicked();
     void removeAllClicked();
+    void mRenumHeClicked();
 
   private:
 
