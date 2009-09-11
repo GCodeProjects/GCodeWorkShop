@@ -58,12 +58,14 @@ public:
     QString currentFile() { return curFile; }
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
-    int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, bool &renumEmpty, bool &renumComm);
+    int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm);
     void doRemoveSpace();
+    void doRemoveEmptyLines();
     void doInsertSpace();
     void doInsertDot();
     void doI2M();
     void compileMacro();
+    void highlightFindText(QString searchString);
 
 
 
@@ -87,6 +89,7 @@ private:
     void macroShowBasicError(int error);
 
 
+
     QString curFile;
     QString saveFileFilter;
     QByteArray saveDialogState;
@@ -94,6 +97,7 @@ private:
     Highlighter *highlighter;
     _editor_properites mdiWindowProperites;
     QList<QTextEdit::ExtraSelection> extraSelections;
+    QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
 
 private slots :

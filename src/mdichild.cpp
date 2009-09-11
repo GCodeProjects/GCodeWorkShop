@@ -131,14 +131,20 @@ bool MdiChild::saveAs()
 
 #ifdef Q_OS_LINUX
     QString filters = tr("CNC programs files *.nc (*.nc);;"
-                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
-                         "Text files *.txt (*.txt);; All files (*.* *)");
+                         "CNC programs files *.anc (*.anc);;"
+                         "CNC programs files *.min (*.min);;"
+                         "CNC programs files *.cnc (*.cnc);;"
+                         "Text files *.txt (*.txt);;"
+                         "All files (*.* *)");
 #endif
 
 #ifdef Q_OS_WIN32
     QString filters = tr("CNC programs files (*.nc);;"
-                         "CNC programs files (*.nc *.min *.anc *.cnc);;"
-                         "Text files (*.txt);; All files (*.* *)");
+                         "CNC programs files (*.anc);;"
+                         "CNC programs files (*.min);;"
+                         "CNC programs files (*.cnc);;"
+                         "Text files (*.txt);;"
+                         "All files (*.* *)");
 #endif
 
     QString file = QFileDialog::getSaveFileName(
@@ -217,7 +223,7 @@ bool MdiChild::saveAsWithPreview()
 
        if((QFile(fileName).exists()))
        {
-          switch( QMessageBox::warning(this, tr("Warning"), tr("File : %1 exists. Overwrite ?").arg(fileName),
+          switch(QMessageBox::warning(this, tr("Warning"), tr("File : %1 exists. Overwrite ?").arg(fileName),
                                        tr("Yes"), tr("No")))
           {
              case 0:  break;
@@ -460,7 +466,7 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(mdiWindowProperites.cursorPos);
    textEdit->setTextCursor(cursor);
-   textEdit->ensureCursorVisible();
+   textEdit->centerCursor();
 
 }
 
@@ -533,7 +539,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 //
 //**************************************************************************************************
 
-int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, bool &renumEmpty, bool &renumComm)
+int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm)
 {
    int pos, i, num, it, count;
    QString tx, f_tx, line, i_tx, new_tx;
@@ -644,7 +650,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                   it = f_tx.toInt(&ok);
                 else
                   it = 0;
-                if((it >= from))
+                if((it >= from) && (it < to))
                 {
                    f_tx = QString("N%1").arg(num, prec);
                    f_tx.replace(' ', '0');
@@ -800,6 +806,34 @@ void MdiChild::doRemoveSpace()
 //
 //**************************************************************************************************
 
+void MdiChild::doRemoveEmptyLines()
+{
+   int i;
+   QString tx, line, newTx;
+
+   QApplication::setOverrideCursor(Qt::BusyCursor);
+   tx = textEdit->toPlainText();
+
+   for(i = 0; i < (textEdit->document()->lineCount() - 1); i++)
+   {
+      line = tx.section('\n', i, i);
+      line.simplified();
+      if(!line.isEmpty())
+       newTx.append(line + '\n');
+   };
+
+   textEdit->selectAll();
+   textEdit->insertPlainText(newTx);
+   QTextCursor cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+   textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void MdiChild::doInsertSpace()
 {
    int pos;
@@ -821,7 +855,7 @@ void MdiChild::doInsertSpace()
 
          if(tx.at(pos) == '(')
          {
-            if((tx.at(pos-1) != ' ') && (tx.at(pos-1) != '\n'))
+            if((tx.at(pos - 1) != ' ') && (tx.at(pos - 1) != '\n'))
             {
                tx.insert(pos, ' ');
                pos++;
@@ -837,7 +871,7 @@ void MdiChild::doInsertSpace()
 
          if(tx.at(pos) == ';')
          {
-            if((tx.at(pos-1) != ' ') && (tx.at(pos-1) != '\n'))
+            if((tx.at(pos - 1) != ' ') && (tx.at(pos - 1) != '\n'))
             {
                tx.insert(pos, ' ');
                pos++;
@@ -872,7 +906,7 @@ void MdiChild::doInsertSpace()
             break;
          };
 
-         if((tx.at(pos-1) != ' ') && (tx.at(pos-1) != '\n'))
+         if((tx.at(pos - 1) != ' ') && (tx.at(pos - 1) != '\n'))
          {
             tx.insert(pos, ' ');
             pos++;
@@ -1041,7 +1075,7 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 void MdiChild::resizeEvent(QResizeEvent *event)
 {
    Q_UNUSED(event);
-   textEdit->ensureCursorVisible();
+   textEdit->centerCursor();
 }
 
 //**************************************************************************************************
@@ -1670,8 +1704,14 @@ void MdiChild::macroShowBasicError(int error)
 
 void MdiChild::highlightCurrentLine()
 {
+    QList<QTextEdit::ExtraSelection> tmpSelections;
+
+
+    tmpSelections.clear();
     extraSelections.clear();
-    textEdit->setExtraSelections(extraSelections);
+    //tmpSelections.append(extraSelections);
+    tmpSelections.append(findTextExtraSelections);
+    textEdit->setExtraSelections(tmpSelections);
 
     if(!textEdit->isReadOnly())
     {
@@ -1681,7 +1721,7 @@ void MdiChild::highlightCurrentLine()
       selection.cursor.clearSelection();
       extraSelections.append(selection);
     }
-    textEdit->setExtraSelections(extraSelections);
+
     QColor lineColor = QColor(mdiWindowProperites.lineColor).darker(108);
     selection.format.setBackground(lineColor);
 
@@ -1704,8 +1744,11 @@ void MdiChild::highlightCurrentLine()
             || (beforeBrace == "\"")) {
             cursor = beforeCursor;
             brace = cursor.selectedText();
-        } else {
-            return;
+        } else
+        {
+           tmpSelections.append(extraSelections);
+           textEdit->setExtraSelections(tmpSelections);
+           return;
         }
     }
 
@@ -1740,7 +1783,6 @@ void MdiChild::highlightCurrentLine()
        {
           selection.cursor = cursor1;
           extraSelections.append(selection);
-          textEdit->setExtraSelections(extraSelections);
        }
        else
        {
@@ -1749,9 +1791,11 @@ void MdiChild::highlightCurrentLine()
           {
              selection.cursor = cursor2;
              extraSelections.append(selection);
-             textEdit->setExtraSelections(extraSelections);
           };
        }
+
+       tmpSelections.append(extraSelections);
+       textEdit->setExtraSelections(tmpSelections);
        return;
     }
 
@@ -1763,7 +1807,6 @@ void MdiChild::highlightCurrentLine()
             extraSelections.append(selection);
             selection.cursor = cursor1;
             extraSelections.append(selection);
-            textEdit->setExtraSelections(extraSelections);
         } else {
 
             while(cursor1.position() > cursor2.position()) {
@@ -1777,7 +1820,6 @@ void MdiChild::highlightCurrentLine()
             extraSelections.append(selection);
             selection.cursor = cursor1;
             extraSelections.append(selection);
-            textEdit->setExtraSelections(extraSelections);
         }
     } else {
         if(brace == closeBrace) {
@@ -1788,7 +1830,6 @@ void MdiChild::highlightCurrentLine()
                 extraSelections.append(selection);
                 selection.cursor = cursor1;
                 extraSelections.append(selection);
-                textEdit->setExtraSelections(extraSelections);
             } else {
                 while(cursor1.position() < cursor2.position()) {
                     cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward);
@@ -1801,16 +1842,47 @@ void MdiChild::highlightCurrentLine()
                 extraSelections.append(selection);
                 selection.cursor = cursor1;
                 extraSelections.append(selection);
-                textEdit->setExtraSelections(extraSelections);
             }
         }
     }
+    tmpSelections.append(extraSelections);
+    textEdit->setExtraSelections(tmpSelections);
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
+void MdiChild::highlightFindText(QString searchString)
+ {
+    QList<QTextEdit::ExtraSelection> tmpSelections;
+
+
+    tmpSelections.clear();
+    findTextExtraSelections.clear();
+    tmpSelections.append(extraSelections);
+    QColor lineColor = QColor(Qt::yellow).lighter(155);
+    selection.format.setBackground(lineColor);
+
+    QTextDocument *doc = textEdit->document();
+    QTextCursor cursor = textEdit->textCursor();
+    cursor.setPosition(0);
+
+    do
+    {
+       cursor = doc->find(searchString, cursor);
+       if(!cursor.isNull())
+       {
+          selection.cursor = cursor;
+          findTextExtraSelections.append(selection);
+
+       };
+    } while(!cursor.isNull());
+
+    tmpSelections.append(findTextExtraSelections);
+    textEdit->setExtraSelections(tmpSelections);
+
+ }
 
 //**************************************************************************************************
 //

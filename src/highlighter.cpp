@@ -176,7 +176,7 @@ void Highlighter::highlightBlock(const QString &tx)
 
 //***********************************************************************
 
-        if((ch >= 'A' && ch <= 'Z') || (ch == '#') || (ch == '@')|| (ch == '_'))
+        if((ch >= 'A' && ch <= 'Z') || (ch == '#') || (ch == '@') || (ch == '_'))
         {
            adrress = "";
            do
@@ -189,7 +189,7 @@ void Highlighter::highlightBlock(const QString &tx)
            sellen = adrress.length();
 
            val = "";
-           while((ch >= '0' && ch <= '9') || (ch == '.') || (ch == '-'))
+           while((ch >= '0' && ch <= '9') || (ch == '.') || (((ch == '-') || (ch == '+')) && (sellen == 1)))
            {
               val.append(ch);
               if((sellen + val.length() + pos) >= tx.length())
@@ -440,9 +440,8 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
            sellen = adrress.length();
 
 
-
            val = "";
-           while((ch >= '0' && ch <= '9') || (ch == '.') || (ch == '-'))
+           while((ch >= '0' && ch <= '9') || (ch == '.') || (((ch == '-') || (ch == '+')) && (sellen == 1)))
            {
               val.append(ch);
               if((sellen + val.length() + pos) >= tx.length())

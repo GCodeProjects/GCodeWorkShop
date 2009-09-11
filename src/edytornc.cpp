@@ -705,6 +705,16 @@ void edytornc::doRemoveSpaces()
 //
 //**************************************************************************************************
 
+void edytornc::doRemoveEmptyLines()
+{
+   if(activeMdiChild())
+      activeMdiChild()->doRemoveEmptyLines();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void edytornc::doInsertDot()
 {
    MdiChild *child;
@@ -734,7 +744,7 @@ void edytornc::doInsertDot()
 void edytornc::doRenumber()
 {
 
-   int startAt, inc, from, prec, mode;
+   int startAt, inc, to, from, prec, mode;
    bool renumEmpty, renumComm;
    MdiChild *child;
    
@@ -745,10 +755,10 @@ void edytornc::doRenumber()
 
    if(renumberDialog->exec() == QDialog::Accepted)
    {
-      renumberDialog->getState(mode, startAt, from, prec, inc, renumEmpty, renumComm);
+      renumberDialog->getState(mode, startAt, from, prec, inc, to, renumEmpty, renumComm);
       if(child)
       {
-         inc = child->doRenumber(mode, startAt, from, prec, inc, renumEmpty, renumComm);
+         inc = child->doRenumber(mode, startAt, from, prec, inc, to, renumEmpty, renumComm);
          if(mode == 3)
            statusBar()->showMessage(QString(tr("Removed : %1 line numbers.")).arg(inc), 9000);
          else
@@ -945,7 +955,7 @@ void edytornc::about()
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers."
                                "<P>Version: "
-                               "2009.00 Beta 1"
+                               "2009.09"
                                "<P>Copyright (C) 1998 - 2009 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>"
                                "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
                                "<P>"
@@ -984,6 +994,7 @@ void edytornc::updateMenus()
    insertDotAct->setEnabled(hasMdiChildNotReadOnly);
    insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
    removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
+   removeEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
    convertProgAct->setEnabled(hasMdiChildNotReadOnly);
    cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
 
@@ -1266,6 +1277,11 @@ void edytornc::createActions()
     removeSpcAct->setStatusTip(tr("Removes spaces"));
     connect(removeSpcAct, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
 
+    removeEmptyLinesAct = new QAction(QIcon(":/images/removeemptylines.png"), tr("Remove empty lines"), this);
+    //removeEmptyLinesAct->setShortcut(tr("F5"));
+    removeEmptyLinesAct->setStatusTip(tr("Removes empty lines"));
+    connect(removeEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
+
     insertDotAct = new QAction(QIcon(":/images/dots.png"), tr("Insert dots"), this);
     insertDotAct->setShortcut(tr("F6"));
     insertDotAct->setStatusTip(tr("Inserts decimal dot"));
@@ -1411,6 +1427,8 @@ void edytornc::createMenus()
     toolsMenu->addAction(insertSpcAct);
     toolsMenu->addAction(removeSpcAct);
     toolsMenu->addSeparator();
+    toolsMenu->addAction(removeEmptyLinesAct);
+    toolsMenu->addSeparator();
     toolsMenu->addAction(insertDotAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(renumberAct);
@@ -1479,6 +1497,8 @@ void edytornc::createToolBars()
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(insertSpcAct);
     toolsToolBar->addAction(removeSpcAct);
+    toolsToolBar->addSeparator();
+    toolsToolBar->addAction(removeEmptyLinesAct);
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(insertDotAct);
     toolsToolBar->addSeparator();
@@ -1993,6 +2013,7 @@ void edytornc::createFindToolBar()
    findEdit->setPalette(QPalette());
    connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
    findEdit->setFocus(Qt::MouseFocusReason);
+   activeMdiChild()->highlightFindText(findEdit->text());
 
 }
 
@@ -2003,7 +2024,11 @@ void edytornc::createFindToolBar()
 void edytornc::closeFindToolBar()
 {
    if(activeMdiChild())
-     activeMdiChild()->setFocus(Qt::MouseFocusReason);
+   {
+      activeMdiChild()->setFocus(Qt::MouseFocusReason);
+      activeMdiChild()->highlightFindText("");
+      activeMdiChild()->textEdit->centerCursor();
+   };
    findToolBar->close();
 }
 
@@ -2019,9 +2044,10 @@ void edytornc::findTextChanged()
 
    if(hasMdiChild)
    {
-      cursor = activeMdiChild()->textEdit->textCursor();
+      activeMdiChild()->highlightFindText(findEdit->text());
       if(!findEdit->text().isEmpty())
       {
+         cursor = activeMdiChild()->textEdit->textCursor();
          pos = cursor.position() - findEdit->text().size();
          if(pos < 0)
            pos = 0;
@@ -2040,6 +2066,7 @@ void edytornc::findTextChanged()
          cursor.clearSelection();
          activeMdiChild()->textEdit->setTextCursor(cursor);
       };
+
    };
 }
 
@@ -2452,7 +2479,7 @@ void edytornc::receiveButtonClicked()
             activeWindow->textEdit->insertPlainText(tx);
             tx.clear();
          };
-         activeWindow->textEdit->ensureCursorVisible();
+         activeWindow->textEdit->centerCursor();
          qApp->processEvents();
       };
 

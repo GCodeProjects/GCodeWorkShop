@@ -120,7 +120,7 @@ class RenumberDialog : public QDialog, private Ui::RenumberDialog
     ~RenumberDialog();
 
   public slots:
-    void getState(int &mode, int &startAt, int &from, int &prec, int &inc, bool &renumEmpty, bool &renumComm);
+    void getState(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm);
 
 
   protected:

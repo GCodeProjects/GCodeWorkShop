@@ -431,13 +431,14 @@ void RenumberDialog::okButtonClicked()
 //
 //**************************************************************************************************
 
-void RenumberDialog::getState(int &mode, int &startAt, int &from, int &prec, int &inc, bool &renumEmpty, bool &renumComm)
+void RenumberDialog::getState(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm)
 {
    startAt = startAtInput->value();
    from = formInput->value();
    inc = incInput->value();
    renumEmpty = mRenumEmpty->isChecked();
    renumComm = !mRenumWithComm->isChecked();
+   to = toInput->value();
 
    if(mCheckDivide->isChecked())
      prec = mSpinBox->value();
@@ -485,9 +486,11 @@ void RenumberDialog::renumClicked()
    formInput->setEnabled(TRUE);
    startAtInput->setEnabled(TRUE);
    incInput->setEnabled(TRUE);
+   toInput->setEnabled(TRUE);
 
    startAtInput->setValue(10);
    incInput->setValue(10);
+   toInput->setValue(8000);
 
    mRenumLines->setChecked(TRUE);
    mAllLines->setChecked(FALSE);
@@ -508,6 +511,7 @@ void RenumberDialog::mRenumHeClicked()
    formInput->setEnabled(FALSE);
    startAtInput->setEnabled(TRUE);
    incInput->setEnabled(TRUE);
+   toInput->setEnabled(FALSE);
 
    startAtInput->setValue(0);
    incInput->setValue(1);
@@ -531,6 +535,7 @@ void RenumberDialog::allLinesClicked()
    formInput->setEnabled(FALSE);
    startAtInput->setEnabled(TRUE);
    incInput->setEnabled(TRUE);
+   toInput->setEnabled(FALSE);
 
    startAtInput->setValue(10);
    incInput->setValue(10);
@@ -554,6 +559,7 @@ void RenumberDialog::removeAllClicked()
    formInput->setEnabled(FALSE);
    startAtInput->setEnabled(FALSE);
    incInput->setEnabled(FALSE);
+   toInput->setEnabled(FALSE);
 
    //mRenumLines->setChecked(FALSE);
   // mAllLines->setChecked(FALSE);

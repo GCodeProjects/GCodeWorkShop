@@ -135,7 +135,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     QRegExp exp;
     QString comment_tx;
     qint64 size;
-    bool textFounded, word, notFound, commentFounded;
+    bool textFounded, word, notFound;
     QString line;
     QStringList foundFiles;
 
@@ -148,7 +148,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
 
     notFound = true;
-
+    pos = 0;
     for(int i = 0; i < files.size(); ++i)
     {
         progressDialog.setLabelText(tr("Searching file number %1 of %2")
