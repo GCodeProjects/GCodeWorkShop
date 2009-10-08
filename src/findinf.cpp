@@ -419,7 +419,11 @@ void FindInFiles::filePreview(int x, int y)
 
          if((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*"))
          {
-            QTextCursor cr = preview->textCursor();
+            highlightFindText(textComboBox->currentText());
+
+
+
+            /*QTextCursor cr = preview->textCursor();
 
             while(!cr.isNull() && !cr.atEnd())
             {
@@ -433,13 +437,13 @@ void FindInFiles::filePreview(int x, int y)
                   QTextCharFormat format = cr.charFormat();
                   format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
                   format.setUnderlineColor(Qt::green);
-                  format.setFontPointSize(16);
+                  //format.setFontPointSize(16);
                   qApp->processEvents();
                   cr.mergeCharFormat(format);
                   qApp->processEvents();
                };
 
-            };
+            };*/
          };
       };
 
@@ -465,6 +469,43 @@ void FindInFiles::setDir(const QString dir)
    directoryComboBox->addItem(dir);
    directoryComboBox->setCurrentIndex(directoryComboBox->count()-1);
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void FindInFiles::highlightFindText(QString searchString, QTextDocument::FindFlags options)
+ {
+    findTextExtraSelections.clear();
+    QColor lineColor = QColor(Qt::yellow).lighter(155);
+    selection.format.setBackground(lineColor);
+
+    QTextDocument *doc = preview->document();
+    QTextCursor cursor = preview->textCursor();
+    cursor.setPosition(0);
+
+    do
+    {
+       cursor = doc->find(searchString, cursor, options);
+       if(!cursor.isNull())
+       {
+          selection.cursor = cursor;
+          
+          QTextCharFormat format = cursor.charFormat();
+          //format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+          //format.setUnderlineColor(Qt::green);
+          format.setFontPointSize(16);
+          qApp->processEvents();
+          cursor.mergeCharFormat(format);
+
+          findTextExtraSelections.append(selection);
+
+       };
+    } while(!cursor.isNull());
+
+    preview->setExtraSelections(findTextExtraSelections);
+
+ }
 
 //**************************************************************************************************
 //

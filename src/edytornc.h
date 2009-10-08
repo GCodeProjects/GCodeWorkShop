@@ -112,6 +112,7 @@ private slots:
     void receiveButtonClicked();
     void stopButtonClicked();
     void doCmpMacro();
+    void lineDelaySlot();
 
 
 
@@ -240,7 +241,9 @@ private:
     int stopBits;
     int parity;
     int flowControl;
+    double lineDelay;
     QextSerialPort *comPort;
+    bool readyCont;
 
 
 };

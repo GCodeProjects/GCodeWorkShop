@@ -111,8 +111,12 @@ private:
     void showFiles(const QDir &directory, const QStringList &files);
     void createFilesTable();
     void readSettings();
+    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
 
     Highlighter *highlighter;
+    QList<QTextEdit::ExtraSelection> findTextExtraSelections;
+    QTextEdit::ExtraSelection selection;
+
 
 signals:
     void fileClicket(const QString&);

@@ -1853,7 +1853,7 @@ void MdiChild::highlightCurrentLine()
 //
 //**************************************************************************************************
 
-void MdiChild::highlightFindText(QString searchString)
+void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags options)
  {
     QList<QTextEdit::ExtraSelection> tmpSelections;
 
@@ -1870,7 +1870,7 @@ void MdiChild::highlightFindText(QString searchString)
 
     do
     {
-       cursor = doc->find(searchString, cursor);
+       cursor = doc->find(searchString, cursor, options);
        if(!cursor.isNull())
        {
           selection.cursor = cursor;

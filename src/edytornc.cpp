@@ -415,6 +415,9 @@ bool edytornc::findNext()
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
+      activeMdiChild()->highlightFindText(findEdit->text(),
+                                          ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                          (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
       found = activeMdiChild()->textEdit->find(findEdit->text(),
                                 ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
                                 (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
@@ -457,6 +460,9 @@ bool edytornc::findPrevious()
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
+      activeMdiChild()->highlightFindText(findEdit->text(),
+                                          ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                          (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
       found = activeMdiChild()->textEdit->find(findEdit->text(), QTextDocument::FindBackward |
                                ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
                                (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
@@ -504,6 +510,7 @@ void edytornc::replaceNext()
       if(found)
       {
          QTextCursor cr = activeMdiChild()->textEdit->textCursor();
+         cr.beginEditBlock();
          if(defaultMdiWindowProperites.underlineChanges)
          {
             QTextCharFormat format = cr.charFormat();
@@ -512,6 +519,7 @@ void edytornc::replaceNext()
             cr.setCharFormat(format);
          };
          cr.insertText(replaceEdit->text());
+         cr.endEditBlock();
          activeMdiChild()->textEdit->setTextCursor(cr);
          findNext();
       };
@@ -539,6 +547,7 @@ void edytornc::replacePrevious()
       if(found)
        {
          QTextCursor cr = activeMdiChild()->textEdit->textCursor();
+         cr.beginEditBlock();
          if(defaultMdiWindowProperites.underlineChanges)
          {
             QTextCharFormat format = cr.charFormat();
@@ -547,6 +556,7 @@ void edytornc::replacePrevious()
             cr.setCharFormat(format);
          };
          cr.insertText(replaceEdit->text());
+         cr.beginEditBlock();
          activeMdiChild()->textEdit->setTextCursor(cr);
          findPrevious();
       };
@@ -912,8 +922,11 @@ void edytornc::paste()
 
 void edytornc::undo()
 {
-    if(activeMdiChild())
-      activeMdiChild()->textEdit->document()->undo();
+   if(activeMdiChild())
+   {
+      activeMdiChild()->textEdit->undo();
+      activeMdiChild()->textEdit->ensureCursorVisible();
+   };
 }
 
 //**************************************************************************************************
@@ -922,8 +935,11 @@ void edytornc::undo()
 
 void edytornc::redo()
 {
-    if(activeMdiChild())
-      activeMdiChild()->textEdit->document()->redo();
+   if(activeMdiChild())
+   {
+      activeMdiChild()->textEdit->redo();
+      activeMdiChild()->textEdit->ensureCursorVisible();
+   };
 }
 
 //**************************************************************************************************
@@ -2013,8 +2029,8 @@ void edytornc::createFindToolBar()
    findEdit->setPalette(QPalette());
    connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
    findEdit->setFocus(Qt::MouseFocusReason);
-   activeMdiChild()->highlightFindText(findEdit->text());
 
+   activeMdiChild()->highlightFindText(findEdit->text());
 }
 
 //**************************************************************************************************
@@ -2044,7 +2060,9 @@ void edytornc::findTextChanged()
 
    if(hasMdiChild)
    {
-      activeMdiChild()->highlightFindText(findEdit->text());
+      //activeMdiChild()->highlightFindText(findEdit->text(),
+      //                                   ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+      //                                   (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
       if(!findEdit->text().isEmpty())
       {
          cursor = activeMdiChild()->textEdit->textCursor();
@@ -2280,6 +2298,7 @@ void edytornc::loadConfig()
     stopBits = settings.value("StopBits", STOP_2).toInt();
     parity = settings.value("Parity", PAR_NONE).toInt();
     flowControl = settings.value("FlowControl", FLOW_HARDWARE).toInt();
+    lineDelay = settings.value("LineDelay", 0).toDouble();
 
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
@@ -2315,6 +2334,15 @@ void edytornc::loadConfig()
     sendAtEnd.remove(" ");
 
     //comPort->setTimeout(0,100);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::lineDelaySlot()
+{
+   readyCont = true;
 }
 
 //**************************************************************************************************
@@ -2386,9 +2414,26 @@ void edytornc::sendButtonClicked()
             showError(comPort->lastError());
             break;
          };
-         cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+
+         if(tx[i].toAscii() != '\r')
+           cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+
          activeWindow->textEdit->setTextCursor(cursor);
          progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i).arg(tx.size()));
+
+         if(lineDelay > 0)
+         {
+            if(tx[i].toAscii() == '\n')
+            {
+               readyCont = false;
+               QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
+               while(!readyCont)
+               {
+                  qApp->processEvents();
+               };
+            };
+         };
+
          i++;
       };
    };
@@ -2471,6 +2516,7 @@ void edytornc::receiveButtonClicked()
             showError(comPort->lastError());
             break;
          };
+         buf[i] = '\0';
          count += i;
          tx.append(buf);
          progressDialog.setLabelText(tr("Reciving byte %1").arg(count));

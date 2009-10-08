@@ -65,7 +65,7 @@ public:
     void doInsertDot();
     void doI2M();
     void compileMacro();
-    void highlightFindText(QString searchString);
+    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
 
 
 

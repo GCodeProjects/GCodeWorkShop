@@ -72,8 +72,6 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(par
    parityGroup->addButton(p1CheckBox, PAR_NONE);
    parityGroup->addButton(p2CheckBox, PAR_ODD);
    parityGroup->addButton(p3CheckBox, PAR_EVEN);
-   parityGroup->addButton(p4CheckBox, PAR_MARK);
-   parityGroup->addButton(p5CheckBox, PAR_SPACE);
 
 
 
@@ -215,6 +213,7 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("FlowControl", flowCtlGroup->checkedId());
     settings.setValue("SendAtEnd", eotInput->text());
     settings.setValue("SendAtBegining", stInput->text());
+    settings.setValue("LineDelay", delayDoubleSpinBox->value());
 
     settings.endGroup();
     settings.endGroup();
@@ -290,10 +289,6 @@ void SPConfigDialog::changeSettings()
            case PAR_ODD   : p2CheckBox->setChecked(TRUE);
                             break;
            case PAR_EVEN  : p3CheckBox->setChecked(TRUE);
-                            break;
-           case PAR_MARK  : p4CheckBox->setChecked(TRUE);
-                            break;
-           case PAR_SPACE : p5CheckBox->setChecked(TRUE);
                             break;
     };
 
@@ -418,10 +413,6 @@ void SPConfigDialog::loadSettings()
                             break;
            case PAR_EVEN  : p3CheckBox->setChecked(TRUE);
                             break;
-           case PAR_MARK  : p4CheckBox->setChecked(TRUE);
-                            break;
-           case PAR_SPACE : p5CheckBox->setChecked(TRUE);
-                            break;
     };
 
     id = settings.value("FlowControl", FLOW_HARDWARE).toInt();
@@ -437,6 +428,8 @@ void SPConfigDialog::loadSettings()
 
     eotInput->setText(settings.value("SendAtEnd", "").toString());
     stInput->setText(settings.value("SendAtBegining", "").toString());
+
+    delayDoubleSpinBox->setValue(settings.value("LineDelay", 0).toDouble());
 
     settings.endGroup();
     settings.endGroup();
