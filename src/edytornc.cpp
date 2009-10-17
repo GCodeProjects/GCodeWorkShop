@@ -1059,6 +1059,8 @@ void edytornc::cancelUnderline()
          format.setUnderlineStyle(QTextCharFormat::NoUnderline);
          activeMdiChild()->textEdit->setCurrentCharFormat(format);
       };
+      if(findToolBar > 0)
+        activeMdiChild()->highlightFindText(findEdit->text());
    };
 
    updateStatusBar();

@@ -281,13 +281,13 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    settings.setValue("WholeWords", wholeWordsCheckBox->isChecked());
 
    list.clear();
-   list.prepend(directoryComboBox->currentText());
+   list.append(directoryComboBox->currentText());
    for(int i = 0; i <= directoryComboBox->count(); i++)
    {
       item = directoryComboBox->itemText(i);
       if(!item.isEmpty())
         if(!list.contains(item))
-          list.prepend(item);
+          list.append(item);
    };
    
    while(list.size() > MAXLISTS)
@@ -298,13 +298,13 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    settings.setValue("SelectedDir", directoryComboBox->currentText());
 
    list.clear();
-   list.prepend(fileComboBox->currentText());
+   list.append(fileComboBox->currentText());
    for(int i = 0; i <= fileComboBox->count(); i++)
    {
       item = fileComboBox->itemText(i);
       if(!item.isEmpty())
         if(!list.contains(item))
-          list.prepend(item);
+          list.append(item);
    };
 
    while(list.size() > MAXLISTS)
@@ -315,13 +315,13 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    settings.setValue("SelectedFilter", fileComboBox->currentText());
    
    list.clear();
-   list.prepend(textComboBox->currentText());
+   list.append(textComboBox->currentText());
    for(int i = 0; i <= textComboBox->count(); i++)
    {
       item = textComboBox->itemText(i);
       if(!item.isEmpty())
         if(!list.contains(item, Qt::CaseInsensitive))
-          list.prepend(item);
+          list.append(item);
    };
 
    while(list.size() > MAXLISTS)
