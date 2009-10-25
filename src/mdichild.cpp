@@ -47,6 +47,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     marginWidget->setBackgroundRole(QPalette::Base);
     textEdit->installEventFilter(this);
     setWindowIcon(QIcon(":/images/ncfile.png"));
+
 }
 
 //**************************************************************************************************
@@ -442,10 +443,13 @@ _editor_properites MdiChild::getMdiWindowProperites()
 
 void MdiChild::setMdiWindowProperites(_editor_properites opt)
 {
+   disconnect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+   connect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+
    mdiWindowProperites = opt;
    textEdit->setReadOnly(mdiWindowProperites.readOnly);
    setFont(QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
-   connect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+
    if(mdiWindowProperites.syntaxH)
    {
       if(highlighter <= 0)
@@ -467,7 +471,6 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    cursor.setPosition(mdiWindowProperites.cursorPos);
    textEdit->setTextCursor(cursor);
    textEdit->centerCursor();
-
 }
 
 //**************************************************************************************************
@@ -1715,11 +1718,11 @@ void MdiChild::highlightCurrentLine()
 
     if(!textEdit->isReadOnly())
     {
-      selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
-      selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-      selection.cursor = textEdit->textCursor();
-      selection.cursor.clearSelection();
-      extraSelections.append(selection);
+       selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
+       selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+       selection.cursor = textEdit->textCursor();
+       selection.cursor.clearSelection();
+       extraSelections.append(selection);
     }
 
     QColor lineColor = QColor(mdiWindowProperites.lineColor).darker(108);
@@ -1884,6 +1887,27 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
 
  }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::doUndo()
+{
+   textEdit->undo();
+   textEdit->ensureCursorVisible();
+   highlightCurrentLine();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::doRedo()
+{
+   textEdit->redo();
+   textEdit->ensureCursorVisible();
+   highlightCurrentLine();
+}
 //**************************************************************************************************
 //
 //**************************************************************************************************

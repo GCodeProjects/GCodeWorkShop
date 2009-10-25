@@ -66,6 +66,8 @@ public:
     void doI2M();
     void compileMacro();
     void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
+    void doUndo();
+    void doRedo();
 
 
 

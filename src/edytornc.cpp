@@ -36,8 +36,8 @@ edytornc::edytornc()
 {
     setAttribute(Qt::WA_DeleteOnClose);
 
-    findToolBar = 0;
-    serialToolBar = 0;
+    findToolBar = NULL;
+    serialToolBar = NULL;
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
 
@@ -924,8 +924,9 @@ void edytornc::undo()
 {
    if(activeMdiChild())
    {
-      activeMdiChild()->textEdit->undo();
-      activeMdiChild()->textEdit->ensureCursorVisible();
+      activeMdiChild()->doUndo();
+      //activeMdiChild()->textEdit->undo();
+      //activeMdiChild()->textEdit->ensureCursorVisible();
    };
 }
 
@@ -937,8 +938,9 @@ void edytornc::redo()
 {
    if(activeMdiChild())
    {
-      activeMdiChild()->textEdit->redo();
-      activeMdiChild()->textEdit->ensureCursorVisible();
+      activeMdiChild()->doRedo();
+      //activeMdiChild()->textEdit->redo();
+      //activeMdiChild()->textEdit->ensureCursorVisible();
    };
 }
 
@@ -1059,8 +1061,11 @@ void edytornc::cancelUnderline()
          format.setUnderlineStyle(QTextCharFormat::NoUnderline);
          activeMdiChild()->textEdit->setCurrentCharFormat(format);
       };
-      if(findToolBar > 0)
-        activeMdiChild()->highlightFindText(findEdit->text());
+
+      if(findToolBar != NULL)
+        activeMdiChild()->highlightFindText(findEdit->text()); //findEdit->text()
+      else
+        activeMdiChild()->highlightFindText("");
    };
 
    updateStatusBar();
@@ -1934,11 +1939,13 @@ void edytornc::createFindToolBar()
    QString selText;
    QTextCursor cursor;
 
-   if(findToolBar <= 0)
+   if(findToolBar == NULL)
    {
       findToolBar = new QToolBar(tr("Find"));
       addToolBar(Qt::BottomToolBarArea, findToolBar);
       findToolBar->setObjectName("Find");
+
+      findToolBar->setAttribute(Qt::WA_DeleteOnClose);
 
       findNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Find next"), this);
       findNextAct->setShortcut(tr("F3"));
@@ -2048,6 +2055,7 @@ void edytornc::closeFindToolBar()
       activeMdiChild()->textEdit->centerCursor();
    };
    findToolBar->close();
+   findToolBar = NULL;
 }
 
 //**************************************************************************************************
@@ -2144,7 +2152,7 @@ bool edytornc::eventFilter(QObject *obj, QEvent *ev)
 
 void edytornc::createSerialToolBar()
 {
-   if(serialToolBar <= 0)
+   if(serialToolBar == NULL)
    {
       serialToolBar = new QToolBar(tr("Serial port toolbar"));
       addToolBar(serialToolBar);
@@ -2216,7 +2224,7 @@ void edytornc::closeSerialToolbar()
    serialToolBar->close();
    delete(serialToolBar);
    showSerialToolBarAct->setChecked(FALSE);
-   serialToolBar = 0;
+   serialToolBar = NULL;
 }
 
 //**************************************************************************************************
