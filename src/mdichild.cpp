@@ -542,18 +542,21 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 //
 //**************************************************************************************************
 
-int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm)
+int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked)
 {
    int pos, i, num, it, count;
    QString tx, f_tx, line, i_tx, new_tx;
    QRegExp exp;
-   bool ok, selection;
+   bool ok, selection, insertSpace;
    QTextCursor cursor;
 
    QApplication::setOverrideCursor(Qt::BusyCursor);
    exp.setCaseSensitivity (Qt::CaseInsensitive);
 
    cursor = textEdit->textCursor();
+   QTextCharFormat format = cursor.charFormat();
+   format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+   cursor.mergeCharFormat(format);
 
    if(cursor.hasSelection())
    {
@@ -624,7 +627,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
          break;
       };
 
-      if(mode == 1) //renumber all
+      if(mode == 1) //renumber all with N
       {
          pos = 0;
          num = startAt;
@@ -640,10 +643,18 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                   continue;
                };
 
+            insertSpace = true;
+            if(f_tx.endsWith(' '))
+               insertSpace = false;
+
             if((!f_tx.contains(' ')) && (!f_tx.contains('\n')))
-              i = exp.matchedLength();
+            {
+               i = exp.matchedLength();
+            }
             else
-              i = exp.matchedLength() - 1;
+            {
+               i = exp.matchedLength() - 1;
+            };
 
             if((!(f_tx.contains('(')) && (!f_tx.contains('\'')) && (!f_tx.contains(';'))))
             {
@@ -653,10 +664,12 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                   it = f_tx.toInt(&ok);
                 else
                   it = 0;
-                if((it >= from) && (it < to))
+                if(((it >= from) || (renumMarked && it == 0)) && (it < to))
                 {
                    f_tx = QString("N%1").arg(num, prec);
                    f_tx.replace(' ', '0');
+                   if(insertSpace)
+                     f_tx.append(" ");
                    tx.replace(pos, i, f_tx);
                    num += inc;
                    count++;
@@ -667,13 +680,13 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
          break;
       };
 
-      if(mode == 2)
+      if(mode == 2) //renumber all
       {
          num = startAt;
-         for(i = 0; i < (textEdit->document()->lineCount() - 1); i++)
+         for(i = 0; i < (textEdit->document()->lineCount()); i++)
          {
             line = tx.section('\n', i, i);
-            exp.setPattern("[N]{1,1}[0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+            exp.setPattern("[N]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
             pos = 0;
             while(1)
             {
@@ -699,6 +712,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                      f_tx.replace(' ', '0');
                      num += inc;
                      count++;
+                     f_tx.append(" ");
                      line.replace(i_tx, f_tx);
                      break;
                   }
@@ -713,6 +727,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                   f_tx.replace(' ', '0');
                   num += inc;
                   count++;
+                  f_tx.append(" ");
                   line.replace(0, 1, f_tx);
                   break;
                };
@@ -723,6 +738,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                   f_tx.replace(' ', '0');
                   num += inc;
                   count++;
+                  f_tx.append(" ");
                   line.insert(0, f_tx);
                   break;
                };
@@ -735,6 +751,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       };
       break;
    };
+
 
    if(selection)
    {

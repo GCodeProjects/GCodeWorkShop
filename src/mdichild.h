@@ -58,7 +58,7 @@ public:
     QString currentFile() { return curFile; }
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
-    int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm);
+    int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked);
     void doRemoveSpace();
     void doRemoveEmptyLines();
     void doInsertSpace();

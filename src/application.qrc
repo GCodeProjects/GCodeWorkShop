@@ -66,5 +66,6 @@
         <file>images/compfile.png</file>
         <file>images/receive.png</file>
         <file>images/removeemptylines.png</file>
+        <file>images/hide.png</file>
     </qresource>
 </RCC>

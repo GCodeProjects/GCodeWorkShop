@@ -58,21 +58,23 @@ private:
          QRegExp pattern;
          QTextCharFormat format;
      };
-     QVector<HighlightingRule> highlightingRules;
-     QVector<HighlightingRule> progNameHighlightingRules;
+     QVector<HighlightingRule> highlightRules;
+     QVector<HighlightingRule> progNameHighlightRules;
+     QVector<HighlightingRule> commentHighlightRules;
+
+     QRegExp commentStartExpression;
+     QRegExp commentEndExpression;
 
 
      QTextCharFormat keywordFormat;
-     QTextCharFormat classFormat;
-     QTextCharFormat singleLineCommentFormat;
-     QTextCharFormat multiLineCommentFormat;
-     QTextCharFormat quotationFormat;
-     QTextCharFormat functionFormat;
+
+     QTextCharFormat commentFormat;
+
 
      QTextCharFormat operatorFormat;
      QTextCharFormat progNameFormat;
-     QTextCharFormat adressFormat;
-     QTextCharFormat identiferFormat;
+     //QTextCharFormat adressFormat;
+
 
 
 

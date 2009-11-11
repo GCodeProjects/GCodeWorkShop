@@ -70,7 +70,7 @@ private slots:
     void updateWindowMenu();
     MdiChild *createMdiChild();
     void setActiveSubWindow(QWidget *window);
-    void loadFile(_editor_properites options);
+    void loadFile(_editor_properites options, bool checkAlreadyLoaded = true);
     void updateRecentFiles( const QString& filename );
     void fileOpenRecent( QAction *act );
     void updateRecentFilesMenu();

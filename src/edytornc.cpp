@@ -386,6 +386,7 @@ void edytornc::findInFl()
 
    if((findFiles = findChild<FindInFiles *>()) != 0)
    { 
+      findFiles->show();
       return;
    };
    findFiles = new FindInFiles(this);
@@ -556,7 +557,7 @@ void edytornc::replacePrevious()
             cr.setCharFormat(format);
          };
          cr.insertText(replaceEdit->text());
-         cr.beginEditBlock();
+         cr.endEditBlock();
          activeMdiChild()->textEdit->setTextCursor(cr);
          findPrevious();
       };
@@ -755,7 +756,7 @@ void edytornc::doRenumber()
 {
 
    int startAt, inc, to, from, prec, mode;
-   bool renumEmpty, renumComm;
+   bool renumEmpty, renumComm, renumMarked;
    MdiChild *child;
    
    child = activeMdiChild();
@@ -765,10 +766,10 @@ void edytornc::doRenumber()
 
    if(renumberDialog->exec() == QDialog::Accepted)
    {
-      renumberDialog->getState(mode, startAt, from, prec, inc, to, renumEmpty, renumComm);
+      renumberDialog->getState(mode, startAt, from, prec, inc, to, renumEmpty, renumComm, renumMarked);
       if(child)
       {
-         inc = child->doRenumber(mode, startAt, from, prec, inc, to, renumEmpty, renumComm);
+         inc = child->doRenumber(mode, startAt, from, prec, inc, to, renumEmpty, renumComm, renumMarked);
          if(mode == 3)
            statusBar()->showMessage(QString(tr("Removed : %1 line numbers.")).arg(inc), 9000);
          else
@@ -973,7 +974,7 @@ void edytornc::about()
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers."
                                "<P>Version: "
-                               "2009.09"
+                               "2009.11.10"
                                "<P>Copyright (C) 1998 - 2009 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>"
                                "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
                                "<P>"
@@ -1063,7 +1064,9 @@ void edytornc::cancelUnderline()
       };
 
       if(findToolBar != NULL)
-        activeMdiChild()->highlightFindText(findEdit->text()); //findEdit->text()
+        activeMdiChild()->highlightFindText(findEdit->text(),
+                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
       else
         activeMdiChild()->highlightFindText("");
    };
@@ -1650,7 +1653,7 @@ void edytornc::readSettings()
           defaultMdiWindowProperites.cursorPos = settings.value("Cursor_" + QString::number(i), 1).toInt();
           defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly_" + QString::number(i), FALSE).toBool();
           defaultMdiWindowProperites.geometry = settings.value("Geometry_" + QString::number(i), QByteArray()).toByteArray();
-          loadFile(defaultMdiWindowProperites);
+          loadFile(defaultMdiWindowProperites, false);
            
        };
         
@@ -1811,29 +1814,32 @@ void edytornc::setActiveSubWindow(QWidget *window)
 //
 //**************************************************************************************************
 
-void edytornc::loadFile(_editor_properites options)
+void edytornc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
 {
-    QFileInfo file;
+   QFileInfo file;
 
-    QMdiSubWindow *existing = findMdiChild(options.fileName);
-    if(existing)
-    {
-       mdiArea->setActiveSubWindow(existing);
-       return;
-    };
-    file.setFile(options.fileName);
-    if((file.exists()) && (file.isReadable()))
-    {
-       MdiChild *child = createMdiChild();
-       child->newFile();
-       child->loadFile(options.fileName);
-       child->setMdiWindowProperites(options);
-       child->parentWidget()->restoreGeometry(options.geometry);
-       if(defaultMdiWindowProperites.maximized)
+
+   QMdiSubWindow *existing = findMdiChild(options.fileName);
+   if(existing)
+   {
+      if(checkAlreadyLoaded)
+         mdiArea->setActiveSubWindow(existing);
+      return;
+   };
+
+   file.setFile(options.fileName);
+   if((file.exists()) && (file.isReadable()))
+   {
+      MdiChild *child = createMdiChild();
+      child->newFile();
+      child->loadFile(options.fileName);
+      child->setMdiWindowProperites(options);
+      child->parentWidget()->restoreGeometry(options.geometry);
+      if(defaultMdiWindowProperites.maximized)
          child->showMaximized();
-       else
+      else
          child->showNormal();
-    };
+   };
 }
 
 //**************************************************************************************************
@@ -2039,7 +2045,11 @@ void edytornc::createFindToolBar()
    connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
    findEdit->setFocus(Qt::MouseFocusReason);
 
-   activeMdiChild()->highlightFindText(findEdit->text());
+   activeMdiChild()->highlightFindText(findEdit->text(),
+                                      ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                      (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+   findEdit->selectAll();
 }
 
 //**************************************************************************************************

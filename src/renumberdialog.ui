@@ -29,13 +29,13 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>Options</string>
+      <string/>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
        <widget class="QRadioButton" name="mRenumLines">
         <property name="text">
-         <string>Renumber only line's with N</string>
+         <string>Renumber only line's with 'N'</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -100,11 +100,14 @@
       </item>
       <item row="2" column="1">
        <widget class="QSpinBox" name="formInput">
+        <property name="minimum">
+         <number>1</number>
+        </property>
         <property name="maximum">
          <number>9999</number>
         </property>
         <property name="value">
-         <number>0</number>
+         <number>10</number>
         </property>
        </widget>
       </item>
@@ -158,23 +161,13 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="7" column="0">
        <widget class="QCheckBox" name="mRenumWithComm">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="text">
          <string>Renumber lines with comment</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QCheckBox" name="mRenumEmpty">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Renumber empty lines</string>
         </property>
        </widget>
       </item>
@@ -195,6 +188,29 @@
        <widget class="QLabel" name="toLabel">
         <property name="text">
          <string>Don't renumber greaher than :</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QCheckBox" name="mRenumEmpty">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Renumber empty lines</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="mRenumMarked">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Renumber lines marked 'N'</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

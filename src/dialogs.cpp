@@ -407,6 +407,46 @@ RenumberDialog::RenumberDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(pa
 
    setMaximumSize(width(), height());
    //okButton->setEnabled(formInput->hasAcceptableInput());
+
+
+   QSettings settings("EdytorNC", "EdytorNC");
+   settings.beginGroup("RenumberDialog" );
+
+
+   startAtInput->setValue(settings.value("StartAt", 10).toInt());
+   formInput->setValue(settings.value("From", 10).toInt());
+   incInput->setValue(settings.value("Inc", 10).toInt());
+   toInput->setValue(settings.value("To", 8000).toInt());
+   mSpinBox->setValue(settings.value("Prec", 4).toInt());
+
+   mRenumEmpty->setChecked(settings.value("RenumEmpty", FALSE).toBool());
+   mRenumWithComm->setChecked(settings.value("RenumWithComm", FALSE).toBool());
+   mRenumMarked->setChecked(settings.value("RenumMarked", TRUE).toBool());
+   mCheckDivide->setChecked(settings.value("CheckDivide", FALSE).toBool());
+
+   if(mCheckDivide->isChecked())
+     divideClicked();
+
+   int mode = settings.value("Mode", 1).toInt();
+   switch(mode)
+   {
+      case 1 :  mRenumLines->setChecked(true);
+                renumClicked();
+                break;
+      case 2 :  mAllLines->setChecked(true);
+                allLinesClicked();
+                break;
+      case 3 :  mRemoveAll->setChecked(true);
+                removeAllClicked();
+                break;
+      case 4 :  mRenumHe->setChecked(true);
+                mRenumHeClicked();
+                break;
+   };
+
+   settings.endGroup();
+
+
 }
 
 //**************************************************************************************************
@@ -424,6 +464,37 @@ RenumberDialog::~RenumberDialog()
 
 void RenumberDialog::okButtonClicked()
 {
+
+   QSettings settings("EdytorNC", "EdytorNC");
+   settings.beginGroup("RenumberDialog" );
+
+   settings.setValue("StartAt", startAtInput->value());
+   settings.setValue("From", formInput->value());
+   settings.setValue("Inc", incInput->value());
+   settings.setValue("To", toInput->value());
+   settings.setValue("Prec", mSpinBox->value());
+
+   settings.setValue("RenumEmpty", mRenumEmpty->isChecked());
+   settings.setValue("RenumWithComm", mRenumWithComm->isChecked());
+   settings.setValue("RenumMarked", mRenumMarked->isChecked());
+   settings.setValue("CheckDivide", mCheckDivide->isChecked());
+
+
+   int mode = 1;
+   if(mAllLines->isChecked())
+     mode = 2;
+   else
+     if(mRemoveAll->isChecked())
+       mode = 3;
+     else
+       if(mRenumHe->isChecked())
+         mode = 4;
+
+   settings.setValue("Mode", mode);
+
+   settings.endGroup();
+
+
    accept();
 }
 
@@ -431,13 +502,15 @@ void RenumberDialog::okButtonClicked()
 //
 //**************************************************************************************************
 
-void RenumberDialog::getState(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm)
+void RenumberDialog::getState(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked)
 {
    startAt = startAtInput->value();
    from = formInput->value();
    inc = incInput->value();
    renumEmpty = mRenumEmpty->isChecked();
    renumComm = !mRenumWithComm->isChecked();
+   renumMarked = mRenumMarked->isChecked();
+
    to = toInput->value();
 
    if(mCheckDivide->isChecked())
@@ -488,9 +561,9 @@ void RenumberDialog::renumClicked()
    incInput->setEnabled(TRUE);
    toInput->setEnabled(TRUE);
 
-   startAtInput->setValue(10);
-   incInput->setValue(10);
-   toInput->setValue(8000);
+   //startAtInput->setValue(10);
+   //incInput->setValue(10);
+   //toInput->setValue(8000);
 
    mRenumLines->setChecked(TRUE);
    mAllLines->setChecked(FALSE);
@@ -513,8 +586,8 @@ void RenumberDialog::mRenumHeClicked()
    incInput->setEnabled(TRUE);
    toInput->setEnabled(FALSE);
 
-   startAtInput->setValue(0);
-   incInput->setValue(1);
+   //startAtInput->setValue(0);
+   //incInput->setValue(1);
 
    //mRenumLines->setChecked(TRUE);
    //mAllLines->setChecked(FALSE);
@@ -537,8 +610,8 @@ void RenumberDialog::allLinesClicked()
    incInput->setEnabled(TRUE);
    toInput->setEnabled(FALSE);
 
-   startAtInput->setValue(10);
-   incInput->setValue(10);
+   //startAtInput->setValue(10);
+   //incInput->setValue(10);
 
    //mRenumLines->setChecked(FALSE);
    //mAllLines->setChecked(TRUE);

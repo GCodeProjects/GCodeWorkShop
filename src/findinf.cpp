@@ -59,12 +59,13 @@
 FindInFiles::FindInFiles(QWidget *parent): QDialog(parent)
 {
     setupUi(this);
-    setAttribute(Qt::WA_DeleteOnClose);
+    //setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Find Files"));
 
     connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
     connect(findButton, SIGNAL(clicked()), SLOT(find()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(close()));
+    connect(closeButton, SIGNAL(clicked()), SLOT(closeDialog()));
+    connect(hideButton, SIGNAL(clicked()), SLOT(close()));
 
     createFilesTable();
 
@@ -81,13 +82,23 @@ FindInFiles::FindInFiles(QWidget *parent): QDialog(parent)
 //
 //**************************************************************************************************
 
+void FindInFiles::closeDialog()
+{
+    setAttribute(Qt::WA_DeleteOnClose);
+    close();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void FindInFiles::browse()
 {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Find Files"), directoryComboBox->currentText());
-    if (!directory.isEmpty()) 
+    if(!directory.isEmpty())
     {
        directoryComboBox->addItem(directory);
-       directoryComboBox->setCurrentIndex(directoryComboBox->count() - 1);
+       directoryComboBox->setCurrentIndex(directoryComboBox->findText(directory));
     }
 }
 
@@ -420,30 +431,6 @@ void FindInFiles::filePreview(int x, int y)
          if((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*"))
          {
             highlightFindText(textComboBox->currentText());
-
-
-
-            /*QTextCursor cr = preview->textCursor();
-
-            while(!cr.isNull() && !cr.atEnd())
-            {
-               if(wholeWordsCheckBox->isChecked())
-                 cr = preview->document()->find(textComboBox->currentText(), cr, QTextDocument::FindWholeWords);
-               else
-                 cr = preview->document()->find(textComboBox->currentText(), cr);
-
-               if(!cr.isNull())
-               {
-                  QTextCharFormat format = cr.charFormat();
-                  format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
-                  format.setUnderlineColor(Qt::green);
-                  //format.setFontPointSize(16);
-                  qApp->processEvents();
-                  cr.mergeCharFormat(format);
-                  qApp->processEvents();
-               };
-
-            };*/
          };
       };
 
@@ -467,7 +454,7 @@ void FindInFiles::setHighlightColors(const _h_colors colors)
 void FindInFiles::setDir(const QString dir)
 {
    directoryComboBox->addItem(dir);
-   directoryComboBox->setCurrentIndex(directoryComboBox->count()-1);
+   directoryComboBox->setCurrentIndex(directoryComboBox->findText(dir));
 }
 
 //**************************************************************************************************
