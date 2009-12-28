@@ -11,9 +11,10 @@ SOURCES += edytornc.cpp \
     qtlockedfile_unix.cpp \
     qtlockedfile.cpp \
     serialtransmission.cpp \
-    qextserialbase.cpp \
+    basic_interpreter.cpp \
     qextserialport.cpp \
-    basic_interpreter.cpp
+    qextserialenumerator.cpp
+
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -25,19 +26,20 @@ HEADERS += edytornc.h \
     qtlockedfile.h \
     qtlocalpeer.h \
     serialtransmission.h \
-    qextserialbase.h \
+    basic_interpreter.h \
     qextserialport.h \
-    basic_interpreter.h
+    qextserialenumerator.h
+
 TEMPLATE = app
 CONFIG += warn_on \
     thread \
     qt \
     debug
+CONFIG -= release
 QT *= network
 TARGET = ../bin/edytornc
 RESOURCES = application.qrc
 RC_FILE = edytornc.rc
-CONFIG -= release
 FORMS += i2mdialog.ui \
     feedsdialog.ui \
     renumberdialog.ui \
@@ -55,10 +57,17 @@ FORMS += i2mdialog.ui \
 TRANSLATIONS = edytornc_pl.ts
 OBJECTS_DIR = build/obj
 MOC_DIR = build/moc
-unix:HEADERS += posix_qextserialport.h
-unix:SOURCES += posix_qextserialport.cpp
-unix:DEFINES += _TTY_POSIX_
-win32:HEADERS += win_qextserialport.h
-win32:SOURCES += win_qextserialport.cpp
-win32:DEFINES += _TTY_WIN_
-unix:VERSION = 2009.00
+
+unix:SOURCES           += posix_qextserialport.cpp
+macx: LIBS             += -framework IOKit
+
+win32:SOURCES          += win_qextserialport.cpp
+win32:DEFINES          += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
+win32:LIBS             += -lsetupapi
+
+
+unix:VERSION = 2009.12
+
+
+
+

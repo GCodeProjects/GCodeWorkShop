@@ -42,10 +42,15 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
 void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
 {
+   
+   QStringList keywords;
+   QStringList keywordPatterns;
+   HighlightingRule rule;
+   
    font = fnt;
    highlightColors = hColors;
-
-   HighlightingRule rule;
+   
+   keywordPatterns.clear();
 
    commentFormat.setForeground(QColor(highlightColors.commentColor));
    commentFormat.setFontWeight(QFont::Normal);
@@ -56,22 +61,67 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
    rule.format = keywordFormat;
    highlightRules.append(rule);
 
-   keywordFormat.setForeground(QColor(highlightColors.macroColor));
-   keywordFormat.setFontWeight(QFont::Bold);
-   QStringList keywordPatterns;
-   keywordPatterns << "\\b(OR|XOR|AND|NOT|EOR|EQ|NE|GT|LT|GE|LE|IF|THEN|ELSE|ENDIF|END|BEGIN)\\b"
+
+
+//   keywordPatterns << "\\b(OR|XOR|AND|NOT|EOR|EQ|NE|GT|LT|GE|LE|IF|THEN|ELSE|ENDIF|END|BEGIN)\\b"
+//         << "\\b(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
+//         << "\\bGOTO[BCF]{0,1}\\b"
+//         << "\\b(FORM|CLEAR|DRAW|CHUCK|WORK|BLK|CYCL|MAX|LBL|DO|WHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN)\\b"
+//         << "\\b(GOSUB|RETURN|RETURN|RET|RTS|MODIN|MODOUT|GET|PUT|READ|WRITE|NOEX)\\b"
+//         << "\\b(VC)[0-9]{1,3}\\b"
+//         << "\\b(PROC|SUPA|STOPRE|MSG|SAVE|DISPLOF|SBLOF|PGM|ANG|AR|CHR|RND|AC)\\b"
+//         << "\\b(BHC|SQRX|LAA|TG|OG)\\b"
+//         << "\\b(DEF|TOOL DEF|TOOL CALL|VAR|REAL|INT|AXIS|BOOL|CHAR|STRING|FRAME|MCALL|CALL|TLID|TLFON|AP|RP|PSELECT|PRINT|EMPTY)\\b"
+//         << "\\bV[A-Z]{1,4}|V[A-Z]{1,3}[0-9]{1,1}\\b"
+//         << "\\bDIAMO(N|F)\\b"
+//         << "\\b[A]{0,1}(MIRROR|SCALE|ROT|TRANS)\\b"
+//         << "\\b[AC]{0,1}(ROTS)\\b";
+
+
+
+   //OKUMA
+   keywords << "\\b(OR|XOR|AND|NOT|EOR|EQ|NE|GT|LT|GE|LE|IF|THEN|ELSE|ENDIF|END|BEGIN)\\b"
          << "\\b(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
-         << "\\bGOTO[BCF]{0,1}\\b"
-         << "\\b(FORM|CLEAR|DRAW|CHUCK|WORK|BLK|CYCL|MAX|LBL|DO|WHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN)\\b"
-         << "\\b(GOSUB|RETURN|RETURN|RET|RTS|MODIN|MODOUT|GET|PUT|READ|WRITE|NOEX)\\b"
+         << "\\bGOTO\\b"
+         << "\\b(RTS|MODIN|MODOUT|NOEX|NOCYL)\\b"
          << "\\b(VC)[0-9]{1,3}\\b"
+         << "\\b(BHC |SQRX |LAA |TG|OG)\\b"
+         << "\\b(CLEAR|DRAW|DEF WORK|DIREC|CYLNDR|PT|LF|LC)\\b"
+         << "\\b(CALL|TLID|TLFON|TLFOFF|PSELECT|PRINT|EMPTY)\\b"
+         << "\\bV[A-Z]{1,4}|V[A-Z]{1,3}[0-9]{1,1}\\b";
+   keywordPatterns.append(keywords);
+   
+   //SINUMERIK 840D
+   keywords << "\\b(OR|XOR|AND|NOT|EOR|IF|THEN|ELSE|ENDIF|END|BEGIN)\\b"
+         << "\\b(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
+         << "\\b(DO|WHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN)\\b"
+         << "\\b(GOSUB|RETURN|RETURN|RET|GET|PUT|READ|WRITE)\\b"
          << "\\b(PROC|SUPA|STOPRE|MSG|SAVE|DISPLOF|SBLOF|PGM|ANG|AR|CHR|RND|AC)\\b"
-         << "\\b(BHC|SQRX|LAA)\\b"
-         << "\\b(DEF|VAR|REAL|INT|AXIS|BOOL|CHAR|STRING|FRAME|MCALL|CALL|TLID|TLFON|AP|RP|PSELECT|PRINT|EMPTY)\\b"
-         << "\\bV[A-Z]{1,4}\\b"
+         << "\\b(VAR|MCALL|CALL|AP|RP|PRINT)\\b"
+         << "\\b(DEF )(REAL |INT |AXIS |BOOL |CHAR |STRING |FRAME )\\b"
          << "\\bDIAMO(N|F)\\b"
          << "\\b[A]{0,1}(MIRROR|SCALE|ROT|TRANS)\\b"
          << "\\b[AC]{0,1}(ROTS)\\b";
+   keywordPatterns.append(keywords);
+
+
+
+   //HEIDENHAIN
+   keywords << "\\b(CALL PGM |CALL LBL |TOOL CALL |BLK FORM |LBL )\\b"
+         << "\\b(CYCL DEF|SET UP|DEPTH|PECKG|RADIUS|DWELL|PECKING|CIRCULAR|POCKET|POS.-CYCLE CIRCLE)\\b"
+         << "\\b(CONTOUR|GEOM|MILLG|LABEL|SLOT|ROUGH-OUT|ALLOW|ANGLE|ROTATION|IROT|REP|TRAIN|IMAGE)\\b"
+         << "\\b(CYLINDER SURFACE|DATUM|SHIFT)\\b"
+         << "\\b(TOOL DEF|CC|FN|CT|LP|PR|IPA|PA|RR|RL|DR|DL|CR|LEN|DEP|LN|APPR|CP|FL)\\b"
+         << "\\b(FC|FSELECT|FPOL|CTP|CHF|LCT|DEP|FCT|AN|ERROR)\\b"
+         << "\\b(EQU|NE|GT|LT|GE|LE|GOTO|IF)\\b"
+         //<< "\\b(DR|DL)[+- ]{1,1}\\b"
+         << "\\b(MAX)\\b";
+   keywordPatterns.append(keywords);
+   
+   
+   
+   keywordFormat.setForeground(QColor(highlightColors.macroColor));
+   keywordFormat.setFontWeight(QFont::Bold);
    foreach(const QString &pattern, keywordPatterns)
    {
       rule.pattern = QRegExp(pattern);
@@ -156,8 +206,8 @@ void Highlighter::highlightBlock(const QString &tx)
       {
          int length = expression.matchedLength();
          setFormat(index, length, rule.format);
-         if((index + length) >= tx.length())
-           return;
+         //if((index + length) >= tx.length())
+           //return;
 
          index = expression.indexIn(tx, index + length);
       };
@@ -198,8 +248,10 @@ void Highlighter::highlightBlock(const QString &tx)
       {
          if(ch == ';')
          {
+            if(tx.at(pos + 1) == '$') 
+              break;
             sellen = (tx.length() - pos);
-            format.setForeground(QColor( highlightColors.commentColor));
+            format.setForeground(QColor(highlightColors.commentColor));
             setFormat(pos, sellen, format);
             break;
          };
@@ -240,7 +292,7 @@ void Highlighter::highlightBlock(const QString &tx)
                if((adrress.length() + pos) >= tx.length())
                   break;
                ch = tx.at(adrress.length() + pos);
-            }while((ch >= 'A' && ch <= 'Z')|| (ch == '_'));
+            }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
 
             val = "";
@@ -352,7 +404,7 @@ void Highlighter::highlightBlock(const QString &tx)
 
          //***********************************************************************
 
-         if((ch == '/') || (ch == '*') || (ch == '-') || (ch == '+') || (ch == '<') || (ch == '>') || (ch == '$')
+         if((ch == '/') || (ch == '*') || (ch == '-') || (ch == '+') || (ch == '<') || (ch == '>')
             || (ch == '='))
             {
 

@@ -26,7 +26,7 @@
 #include <QtGui>
 
 
-#include <qextserialport.h>
+#include "qextserialport.h"
 
 #include "ui_spconfigdialog.h"
 #include "ui_transmissiondialog.h"
@@ -37,7 +37,7 @@ class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
    Q_OBJECT
 
    public:
-     SPConfigDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+     SPConfigDialog(QWidget *parent = 0, QString confName = "", Qt::WindowFlags f = Qt::Dialog);
      ~SPConfigDialog();
 
    public slots:
@@ -65,6 +65,7 @@ class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
      QButtonGroup *stopBitsGroup;
      QButtonGroup *parityGroup;
      QButtonGroup *flowCtlGroup;
+     QString configName;
 
 };
 

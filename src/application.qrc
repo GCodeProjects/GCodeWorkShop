@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/" >
+    <qresource prefix="/">
         <file>images/editcopy.png</file>
         <file>images/editcut.png</file>
         <file>images/filenew.png</file>
@@ -67,5 +67,6 @@
         <file>images/receive.png</file>
         <file>images/removeemptylines.png</file>
         <file>images/hide.png</file>
+        <file>images/attach.png</file>
     </qresource>
 </RCC>

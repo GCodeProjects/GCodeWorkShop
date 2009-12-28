@@ -34,6 +34,18 @@ QT_BEGIN_NAMESPACE
 class QTextDocument;
 QT_END_NAMESPACE
 
+
+
+#define MODE_ALL                 0xFFFF
+#define MODE_OKUMA               0xFFFF
+#define MODE_FANUC               0xFFFF
+#define MODE_HEIDENHAIN          0xFFFF
+#define MODE_SINUMERIK           0xFFFF
+#define MODE_SINUMERIK_840       0xFFFF
+
+
+
+
 class Highlighter : public QSyntaxHighlighter
 {
     Q_OBJECT

@@ -422,6 +422,15 @@ QString MdiChild::strippedName(const QString &fullFileName)
 //
 //**************************************************************************************************
 
+QString MdiChild::filePath()
+{
+    return QFileInfo(curFile).absolutePath();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 _editor_properites MdiChild::getMdiWindowProperites()
 {
    mdiWindowProperites.isRedo = textEdit->document()->isRedoAvailable();

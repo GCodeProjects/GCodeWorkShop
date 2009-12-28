@@ -27,7 +27,6 @@
 
 
 
-
 //**************************************************************************************************
 //
 //**************************************************************************************************
@@ -177,8 +176,9 @@ void edytornc::open()
     //qDebug()<< openFileFilter;
 
 
-    QStringList::Iterator it = files.begin();
-    while(it != files.end())
+    QStringList list = files;
+    QStringList::Iterator it = list.begin();
+    while(it != list.end())
     {
        file.setFile(*it);
        existing = findMdiChild(*it);
@@ -974,11 +974,15 @@ void edytornc::about()
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers."
                                "<P>Version: "
-                               "2009.11.10"
-                               "<P>Copyright (C) 1998 - 2009 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>"
+                               "2009.12.30"
+                               "<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>"
                                "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
                                "<P>"
                                "<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>"
+                               "<P>"
+                               "<P>EdytorNC wins <a href=\"http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/\">\"100% FREE award granted by Softpedia\"</a>"
+                               "<P>"
+                               "<P>EdytorNC contains pieces of code from other Open Source projects."
                                "<P>"
                                "<P><i>EdytorNC is free software; you can redistribute it and/or modify"
                                "it under the terms of the GNU General Public License.</i>"));
@@ -1041,7 +1045,38 @@ void edytornc::updateMenus()
    pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
    updateStatusBar();
-    
+   updateCurrentSerialConfig();
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::updateCurrentSerialConfig()
+{
+   bool hasMdiChild = (activeMdiChild() != 0);
+   if(hasMdiChild && (serialToolBar > NULL))
+   {
+      QDir dir;
+      dir.setPath(activeMdiChild()->filePath());
+      dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+      dir.setSorting(QDir::Name);
+      dir.setNameFilters(QStringList("*.ini"));
+
+      QFileInfoList list = dir.entryInfoList();
+
+      if(!list.isEmpty())
+      {
+         QFileInfo name = list.at(0);
+         qDebug() << name.baseName();
+         int id = configBox->findText(name.baseName());
+         qDebug() << id;
+         if(id >= 0)
+            configBox->setCurrentIndex(id);
+      };
+
+   };
 }
 
 //**************************************************************************************************
@@ -1747,7 +1782,7 @@ void edytornc::writeSettings()
 
     settings.beginGroup("LastDoc");
 
-    foreach (QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder)) 
+    foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
     {
         mdiChild = qobject_cast<MdiChild *>(window->widget());
         _editor_properites Opt = mdiChild->getMdiWindowProperites();
@@ -2165,8 +2200,9 @@ void edytornc::createSerialToolBar()
    if(serialToolBar == NULL)
    {
       serialToolBar = new QToolBar(tr("Serial port toolbar"));
-      addToolBar(serialToolBar);
+      addToolBar(Qt::TopToolBarArea, serialToolBar);
       serialToolBar->setObjectName("SerialToolBar");
+
 
       configPortAct = new QAction(QIcon(":/images/serialconfig.png"), tr("Serial port configuration"), this);
       //configPortAct->setShortcut(tr("F3"));
@@ -2183,6 +2219,11 @@ void edytornc::createSerialToolBar()
       sendAct->setStatusTip(tr("Send current file"));
       connect(sendAct, SIGNAL(triggered()), this, SLOT(sendButtonClicked()));
 
+      attachToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current settings to current directory"), this);
+      //attachToDirAct->setShortcut(tr("F3"));
+      attachToDirAct->setStatusTip(tr("Attach current settings to current directory"));
+      connect(attachToDirAct, SIGNAL(triggered()), this, SLOT(attachToDirButtonClicked()));
+
       serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/receive toolbar"), this);
       serialCloseAct->setStatusTip(tr("Close find toolbar"));
       connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
@@ -2190,13 +2231,18 @@ void edytornc::createSerialToolBar()
 
       configBox = new QComboBox();
       configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+      configBox->setDuplicatesEnabled(false);
 
+
+      //serialToolBar->addSeparator();
+      serialToolBar->addAction(attachToDirAct);
       serialToolBar->addWidget(configBox);
       serialToolBar->addAction(configPortAct);
       serialToolBar->addSeparator();
       serialToolBar->addAction(receiveAct);
       serialToolBar->addSeparator();
       serialToolBar->addAction(sendAct);
+
       serialToolBar->addSeparator();
       serialToolBar->addAction(serialCloseAct);
    }
@@ -2212,13 +2258,13 @@ void edytornc::createSerialToolBar()
         showSerialToolBarAct->setChecked(TRUE);
      };
 
-   comPort = new QextSerialPort();
+   //comPort = new QextSerialPort();
    stop = true;
 
    loadSerialConfignames();
    configBox->adjustSize();
-   loadConfig();
-   //connect(configBox, SIGNAL(currentIndexChanged(int)), SLOT(loadConfig()));
+   updateCurrentSerialConfig();
+
 }
 
 //**************************************************************************************************
@@ -2228,13 +2274,52 @@ void edytornc::createSerialToolBar()
 void edytornc::closeSerialToolbar()
 {
    stop = true;
-   comPort->close();
-   delete(comPort);
 
    serialToolBar->close();
    delete(serialToolBar);
-   showSerialToolBarAct->setChecked(FALSE);
    serialToolBar = NULL;
+   showSerialToolBarAct->setChecked(FALSE);
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::attachToDirButtonClicked()
+{
+   QFileInfo fileInfo;
+   QFile file;
+   int i;
+
+
+   bool hasMdiChild = (activeMdiChild() != 0);
+   if(hasMdiChild && (serialToolBar > NULL))
+   {
+      QDir dir;
+      dir.setPath(activeMdiChild()->filePath());
+      dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+      dir.setSorting(QDir::Name);
+      dir.setNameFilters(QStringList("*.ini"));
+
+      QFileInfoList list = dir.entryInfoList();
+
+      if(!list.isEmpty())
+      {
+         for(i = 0; i < list.count(); i++)
+         {
+            fileInfo = (QFileInfo)list.at(i);
+            file.setFileName(fileInfo.absoluteFilePath());
+            qDebug() << "Deleted file: " << file.fileName();
+            file.remove();
+         };
+      };
+      file.setFileName(activeMdiChild()->filePath() + "/" + configBox->currentText() + ".ini");
+      file.open(QIODevice::ReadWrite);
+      file.close();
+      qDebug() << "New file: " <<  file.fileName();
+
+   };
 }
 
 //**************************************************************************************************
@@ -2243,9 +2328,10 @@ void edytornc::closeSerialToolbar()
 
 void edytornc::serialConfig()
 {
-   SPConfigDialog *serialConfigDialog = new SPConfigDialog(this);
+   SPConfigDialog *serialConfigDialog = new SPConfigDialog(this, configBox->currentText());
 
-   serialConfigDialog->show();
+   if(serialConfigDialog->exec() == QDialog::Accepted)
+      loadSerialConfignames();
 }
 
 //**************************************************************************************************
@@ -2265,6 +2351,7 @@ void edytornc::loadSerialConfignames()
 
     configBox->clear();
     list = settings.value("SettingsList", QStringList(tr("Default"))).toStringList();
+    list.sort();
     configBox->addItems(list);
     item = settings.value("CurrentSerialPortSettings", tr("Default")).toString();
     id = configBox->findText(item);
@@ -2312,13 +2399,16 @@ void edytornc::loadConfig()
 
     settings.beginGroup(configBox->currentText());
 
+
     portName = settings.value("PortName", port).toString();
-    baudRate = settings.value("BaudRate", BAUD9600).toInt();
-    dataBits = settings.value("DataBits", DATA_8).toInt();
-    stopBits = settings.value("StopBits", STOP_2).toInt();
-    parity = settings.value("Parity", PAR_NONE).toInt();
-    flowControl = settings.value("FlowControl", FLOW_HARDWARE).toInt();
+    portSettings.BaudRate = (BaudRateType) settings.value("BaudRate", BAUD9600).toInt();
+    portSettings.DataBits = (DataBitsType) settings.value("DataBits", DATA_8).toInt();
+    portSettings.StopBits = (StopBitsType) settings.value("StopBits", STOP_2).toInt();
+    portSettings.Parity = (ParityType) settings.value("Parity", PAR_NONE).toInt();
+    portSettings.FlowControl = (FlowType) settings.value("FlowControl", FLOW_HARDWARE).toInt();
     lineDelay = settings.value("LineDelay", 0).toDouble();
+    portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
+    portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
 
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
@@ -2326,13 +2416,7 @@ void edytornc::loadConfig()
     settings.endGroup();
     settings.endGroup();
 
-    comPort->setPortName(portName);
-    comPort->setBaudRate(BaudRateType(baudRate));
-    comPort->setDataBits(DataBitsType(dataBits));
-    comPort->setFlowControl(FlowType(flowControl));
-    comPort->setParity(ParityType(parity));
-    comPort->setStopBits(StopBitsType(stopBits));
-
+    portSettings.Timeout_Millisec = 50;
 
     exp.setPattern("0x[0-9a-fA-F]{1,2}");
     pos = 0;
@@ -2371,24 +2455,31 @@ void edytornc::lineDelaySlot()
 
 void edytornc::sendButtonClicked()
 {
-   int i;
+   int i, bytesToWrite;
    QString tx;
    QTextCursor cursor, prevCursor;
    MdiChild *activeWindow;
+   char controlChar;
 
    activeWindow = activeMdiChild();
    if(!(activeWindow != 0))
      return;
 
    loadConfig();
-   if(comPort->open(QIODevice::ReadWrite))
+
+   comPort = new QextSerialPort(portName, portSettings);
+
+   if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
      stop = false;
    else
    {
       stop = true;
       showError(E_INVALID_FD);
+      delete(comPort);
       return;
    };
+
+
    comPort->flush();
    comPort->reset();
 
@@ -2412,11 +2503,15 @@ void edytornc::sendButtonClicked()
    progressDialog.setRange(0, tx.size());
    progressDialog.setModal(TRUE);
    progressDialog.open();
+   progressDialog.setLabelText(tr("Waiting..."));
    qApp->processEvents();
 
    i = 0;
+   xoffReceived = true;
    while(i < tx.size())
    {
+      if(xoffReceived)
+        progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
       qApp->processEvents();
 
       if(progressDialog.wasCanceled())
@@ -2425,21 +2520,43 @@ void edytornc::sendButtonClicked()
       if(stop)
         break;
 
-      progressDialog.setValue(i);
-      if(comPort->bytesToWrite() == 0)
+      if(portSettings.FlowControl == FLOW_XONXOFF)
+      {
+         controlChar = 0;
+         if(comPort->bytesAvailable() > 0)
+         {
+            comPort->getChar(&controlChar);
+            qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
+         };
+
+         if(controlChar == portSettings.Xoff)
+            xoffReceived = true;
+         if(controlChar == portSettings.Xon)
+            xoffReceived = false;
+      }
+      else
+         xoffReceived = false;
+
+      bytesToWrite = comPort->bytesToWrite();
+
+#ifdef Q_OS_UNIX
+      usleep(2000);
+#endif
+
+      qDebug() << "Bytes to write: " << bytesToWrite;
+
+      if((bytesToWrite == 0) && (!xoffReceived))
       {
          if(!comPort->putChar(tx[i].toAscii()))
-         {
-            stop = true;
             showError(comPort->lastError());
-            break;
-         };
 
          if(tx[i].toAscii() != '\r')
            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
 
          activeWindow->textEdit->setTextCursor(cursor);
+         progressDialog.setValue(i);
          progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i).arg(tx.size()));
+         qApp->processEvents();
 
          if(lineDelay > 0)
          {
@@ -2458,8 +2575,14 @@ void edytornc::sendButtonClicked()
       };
    };
 
-   comPort->flush();
+
+   while(comPort->bytesToWrite() > 0)
+   {
+      qApp->processEvents();
+   };
+
    comPort->close();
+   delete(comPort);
    progressDialog.close();
    activeWindow->textEdit->setTextCursor(prevCursor);
    receiveAct->setEnabled(TRUE);
@@ -2483,21 +2606,25 @@ void edytornc::receiveButtonClicked()
    count = 0;
 
    loadConfig();
-   if(comPort->open(QIODevice::ReadWrite))
+   comPort = new QextSerialPort(portName, portSettings);
+   if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
      stop = false;
    else
    {
       stop = true;
       showError(E_INVALID_FD);
+      delete(comPort);
       return;
    };
    comPort->flush();
    comPort->reset();
 
+   i = configBox->currentIndex();
    newFile();
    activeWindow = activeMdiChild();
    if(!(activeWindow != 0))
      return;
+   configBox->setCurrentIndex(i);
 
    receiveAct->setEnabled(FALSE);
    sendAct->setEnabled(FALSE);
@@ -2510,31 +2637,36 @@ void edytornc::receiveButtonClicked()
    progressDialog.open();
    qApp->processEvents();
 
+   if(portSettings.FlowControl == FLOW_XONXOFF)
+   {
+      comPort->putChar(portSettings.Xon);
+   };
+
    tx.clear();
-   while(!stop)
+   while(1)
    {
       //progressDialog.setValue(count);
 
-      qApp->processEvents();
-
-      if(progressDialog.wasCanceled())
-      {
-         if(!tx.isEmpty())
-           activeWindow->textEdit->insertPlainText(tx);
-         break;
-      };
-
-      progressDialog.setValue(count);
+#ifdef Q_OS_UNIX
+      usleep(2000);
+#endif
 
       i = comPort->bytesAvailable();
       if(i > 0)
       {
-         i = comPort->readLine(buf, sizeof(buf));
+         qDebug() << "Bytes available: " << i;
+         i = comPort->readLine(buf, sizeof(buf) - 1);  //readLine
+
+         qApp->processEvents();
+
          if(i < 0)
          {
             stop = true;
+            if(portSettings.FlowControl == FLOW_XONXOFF)
+            {
+               comPort->putChar(portSettings.Xoff);
+            };
             showError(comPort->lastError());
-            break;
          };
          buf[i] = '\0';
          count += i;
@@ -2545,14 +2677,32 @@ void edytornc::receiveButtonClicked()
             activeWindow->textEdit->insertPlainText(tx);
             tx.clear();
          };
-         activeWindow->textEdit->centerCursor();
+         activeWindow->textEdit->ensureCursorVisible();
          qApp->processEvents();
+
+      };
+      if(stop)
+      {
+         if(!tx.isEmpty())
+            activeWindow->textEdit->insertPlainText(tx);
+         break;
+      };
+      progressDialog.setValue(count);
+      qApp->processEvents();
+      if(progressDialog.wasCanceled())
+      {
+         stop = true;
+         if(portSettings.FlowControl == FLOW_XONXOFF)
+         {
+            comPort->putChar(portSettings.Xoff);
+         };
+
       };
 
    };
 
-   comPort->flush();
    comPort->close();
+   delete(comPort);
    progressDialog.close();
    receiveAct->setEnabled(TRUE);
    sendAct->setEnabled(TRUE);
@@ -2580,41 +2730,50 @@ void edytornc::stopButtonClicked()
 
 void edytornc::showError(int error)
 {
+   QString text;
+   QMessageBox msgBox;
+   
    switch(error)
    {
-      case E_INVALID_FD                   : statusBar()->showMessage(tr("Invalid file descriptor (port was not opened correctly)"));
+      case E_INVALID_FD                   : text = tr("Invalid file descriptor (port was not opened correctly)");
                                             break;
-      case E_NO_MEMORY                    : statusBar()->showMessage(tr("Unable to allocate memory tables"));
+      case E_NO_MEMORY                    : text = tr("Unable to allocate memory tables");
                                             break;
-      case E_CAUGHT_NON_BLOCKED_SIGNAL    : statusBar()->showMessage(tr("Caught a non-blocked signal"));
+      case E_CAUGHT_NON_BLOCKED_SIGNAL    : text = tr("Caught a non-blocked signal");
                                             break;
-      case E_PORT_TIMEOUT                 : statusBar()->showMessage(tr("Operation timed out"));
+      case E_PORT_TIMEOUT                 : text = tr("Operation timed out");
                                             break;
-      case E_INVALID_DEVICE               : statusBar()->showMessage(tr("The file opened by the port is not a character device"));
+      case E_INVALID_DEVICE               : text = tr("The file opened by the port is not a character device");
                                             break;
-      case E_BREAK_CONDITION              : statusBar()->showMessage(tr("The port detected a break condition"));
+      case E_BREAK_CONDITION              : text = tr("The port detected a break condition");
                                             break;
-      case E_FRAMING_ERROR                : statusBar()->showMessage(tr("The port detected a framing error (incorrect baud rate settings ?)"));
+      case E_FRAMING_ERROR                : text = tr("The port detected a framing error (incorrect baud rate settings ?)");
                                             break;
-      case E_IO_ERROR                     : statusBar()->showMessage(tr("There was an I/O error while communicating with the port"));
+      case E_IO_ERROR                     : text = tr("There was an I/O error while communicating with the port");
                                             break;
-      case E_BUFFER_OVERRUN               : statusBar()->showMessage(tr("Character buffer overrun"));
+      case E_BUFFER_OVERRUN               : text = tr("Character buffer overrun");
                                             break;
-      case E_RECEIVE_OVERFLOW             : statusBar()->showMessage(tr("Receive buffer overflow"));
+      case E_RECEIVE_OVERFLOW             : text = tr("Receive buffer overflow");
                                             break;
-      case E_RECEIVE_PARITY_ERROR         : statusBar()->showMessage(tr("The port detected a parity error in the received data"));
+      case E_RECEIVE_PARITY_ERROR         : text = tr("The port detected a parity error in the received data");
                                             break;
-      case E_TRANSMIT_OVERFLOW            : statusBar()->showMessage(tr("Transmit buffer overflow"));
+      case E_TRANSMIT_OVERFLOW            : text = tr("Transmit buffer overflow");
                                             break;
-      case E_READ_FAILED                  : statusBar()->showMessage(tr("General read operation failure"));
+      case E_READ_FAILED                  : text = tr("General read operation failure");
                                             break;
-      case E_WRITE_FAILED                 : statusBar()->showMessage(tr("General write operation failure"));
+      case E_WRITE_FAILED                 : text = tr("General write operation failure");
                                             break;
-      case E_NO_ERROR                     : statusBar()->showMessage(tr("No Error has occured"));
-                                            break;
-      default                             : statusBar()->showMessage(tr("Unknown error"));
+      case E_NO_ERROR                     : text = tr("No Error has occured");
+                                            statusBar()->showMessage(text);
+                                            return;
+      default                             : text = tr("Unknown error");
    };
 
+    
+   statusBar()->showMessage(text);
+   msgBox.setText(text);
+   msgBox.setIcon(QMessageBox::Warning);
+   msgBox.exec();
 
 }
 

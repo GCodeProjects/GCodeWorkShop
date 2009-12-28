@@ -9,9 +9,9 @@ INPUT(
 ./build/obj/qtsingleapplication.o
 ./build/obj/qtlocalpeer.o
 ./build/obj/serialtransmission.o
-./build/obj/qextserialbase.o
-./build/obj/qextserialport.o
 ./build/obj/basic_interpreter.o
+./build/obj/qextserialport.o
+./build/obj/qextserialenumerator.o
 ./build/obj/win_qextserialport.o
 ./build/obj/moc_edytornc.o
 ./build/obj/moc_highlighter.o
@@ -22,5 +22,7 @@ INPUT(
 ./build/obj/moc_qtsingleapplication.o
 ./build/obj/moc_qtlocalpeer.o
 ./build/obj/moc_serialtransmission.o
+./build/obj/moc_qextserialport.o
+./build/obj/moc_qextserialenumerator.o
 ./build/obj/qrc_application.o
 );

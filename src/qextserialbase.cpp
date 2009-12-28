@@ -1,17 +1,4 @@
-
 #include "qextserialbase.h"
-
-/*!
-\class QextSerialBase
-\version 1.0.0
-\author Stefan Sander
-
-A common base class for Win_QextSerialBase, Posix_QextSerialBase and QextSerialPort.
-*/
-#ifdef QT_THREAD_SUPPORT
-QMutex* QextSerialBase::mutex=NULL;
-unsigned long QextSerialBase::refCount=0;
-#endif
 
 /*!
 \fn QextSerialBase::QextSerialBase()
@@ -39,6 +26,9 @@ QextSerialBase::QextSerialBase()
 #elif defined(_TTY_FREEBSD_)
     setPortName("/dev/ttyd1");
 
+#elif defined(_TTY_OPENBSD_)
+    setPortName("/dev/tty00");
+
 #else
     setPortName("/dev/ttyS0");
 #endif
@@ -63,40 +53,30 @@ Standard destructor.
 */
 QextSerialBase::~QextSerialBase()
 {
-
-#ifdef QT_THREAD_SUPPORT
-    refCount--;
-    if (mutex && refCount==0) {
-        delete mutex;
-        mutex=NULL;
-    }
-#endif
-
+    delete mutex;
 }
 
 /*!
 \fn void QextSerialBase::construct()
 Common constructor function for setting up default port settings.
-(115200 Baud, 8N1, Hardware flow control where supported, otherwise no flow control, and 500 ms timeout).
+(115200 Baud, 8N1, Hardware flow control where supported, otherwise no flow control, and 0 ms timeout).
 */
 void QextSerialBase::construct()
 {
+    lastErr = E_NO_ERROR;
     Settings.BaudRate=BAUD115200;
     Settings.DataBits=DATA_8;
     Settings.Parity=PAR_NONE;
     Settings.StopBits=STOP_1;
     Settings.FlowControl=FLOW_HARDWARE;
-    Settings.Timeout_Sec=0;
     Settings.Timeout_Millisec=500;
+    mutex = new QMutex( QMutex::Recursive );
+    setOpenMode(QIODevice::NotOpen);
+}
 
-#ifdef QT_THREAD_SUPPORT
-    if (!mutex) {
-        mutex=new QMutex( QMutex::Recursive );
-    }
-    refCount++;
-#endif
-
-	setOpenMode(QIODevice::NotOpen);
+void QextSerialBase::setQueryMode(QueryMode mechanism)
+{
+    _queryMode = mechanism;
 }
 
 /*!
@@ -170,12 +150,12 @@ FlowType QextSerialBase::flowControl() const
 /*!
 \fn bool QextSerialBase::isSequential() const
 Returns true if device is sequential, otherwise returns false. Serial port is sequential device
-so this function always returns true. Check QIODevice::isSequential() documentation for more 
+so this function always returns true. Check QIODevice::isSequential() documentation for more
 information.
 */
 bool QextSerialBase::isSequential() const
 {
-	return true;
+    return true;
 }
 
 /*!
@@ -202,8 +182,8 @@ qint64 QextSerialBase::readLine(char * data, qint64 maxSize)
     qint64 numBytes = bytesAvailable();
     char* pData = data;
 
-	if (maxSize < 2)	//maxSize must be larger than 1
-		return -1;
+    if (maxSize < 2)	//maxSize must be larger than 1
+        return -1;
 
     /*read a byte at a time for MIN(bytesAvail, maxSize - 1) iterations, or until a newline*/
     while (pData<(data+numBytes) && --maxSize) {

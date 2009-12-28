@@ -68,6 +68,7 @@ public:
     void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
     void doUndo();
     void doRedo();
+    QString filePath();
 
 
 

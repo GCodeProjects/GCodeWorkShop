@@ -28,7 +28,7 @@
 
 
 
-SPConfigDialog::SPConfigDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlags f) : QDialog(parent, f)
 {
    setupUi(this);
    setAttribute(Qt::WA_DeleteOnClose);
@@ -39,6 +39,7 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(par
    //portNameComboBox->setAutoCompletion(TRUE);
    //configNameBox->setAutoCompletion(TRUE);
 
+   configName = confName;
 
    baudGroup = new QButtonGroup(this);
    baudGroup->setExclusive(TRUE);
@@ -118,6 +119,7 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(par
 
    connect(configNameBox, SIGNAL(currentIndexChanged(int)), SLOT(changeSettings()));
 
+   setResult(QDialog::Rejected);
    //setMaximumSize(width(), height());
 
 }
@@ -144,7 +146,7 @@ void SPConfigDialog::browseButtonClicked()
                          this,
                          tr("Select serial port device"),
                          portNameComboBox->currentText(),
-                         tr("All files (*.* *)"));
+                         tr("All files (*)"));
 
    file.setFile(fileName);
 
@@ -162,29 +164,13 @@ void SPConfigDialog::browseButtonClicked()
 void SPConfigDialog::saveButtonClicked()
 {
     QStringList list;
-    QString item;
+    QString item, curItem;
 
     QSettings settings("EdytorNC", "EdytorNC");
 
     settings.beginGroup("SerialPortConfigs");
 
-    list.clear();
-    list.prepend(configNameBox->currentText());
-    for(int i = 0; i <= configNameBox->count(); i++)
-    {
-       item = configNameBox->itemText(i);
-       if(!item.isEmpty())
-         if(!list.contains(item))
-           list.prepend(item);
-    };
-
-    while(list.size() > 64)
-    {
-       list.removeLast();
-    };
-    settings.setValue("SettingsList", list);
-    settings.setValue("CurrentSerialPortSettings", configNameBox->currentText());
-
+    curItem = configNameBox->currentText();
 
     list.clear();
     list.prepend(portNameComboBox->currentText());
@@ -202,6 +188,25 @@ void SPConfigDialog::saveButtonClicked()
     };
     settings.setValue("PortNameList", list);
 
+    list.clear();
+    list.prepend(configNameBox->currentText());
+    for(int i = 0; i <= configNameBox->count(); i++)
+    {
+       item = configNameBox->itemText(i);
+       if(!item.isEmpty())
+         if(!list.contains(item))
+           list.prepend(item);
+    };
+
+    while(list.size() > 64)
+    {
+       list.removeLast();
+    };
+    list.sort();
+
+    settings.setValue("SettingsList", list);
+    settings.setValue("CurrentSerialPortSettings", configNameBox->currentText());
+
 
     settings.beginGroup(configNameBox->currentText());
 
@@ -214,10 +219,22 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("SendAtEnd", eotInput->text());
     settings.setValue("SendAtBegining", stInput->text());
     settings.setValue("LineDelay", delayDoubleSpinBox->value());
+    settings.setValue("Xon", xonInput->text());
+    settings.setValue("Xoff", xoffInput->text());
+
 
     settings.endGroup();
     settings.endGroup();
+
+
+    configNameBox->clear();
+    configNameBox->addItems(list);
+    int id = configNameBox->findText(curItem);
+    if(id >= 0)
+       configNameBox->setCurrentIndex(id);
+
 }
+
 
 //**************************************************************************************************
 //
@@ -226,6 +243,7 @@ void SPConfigDialog::saveButtonClicked()
 void SPConfigDialog::changeSettings()
 {
     int id;
+    QString item, port;
 
     QSettings settings("EdytorNC", "EdytorNC");
 
@@ -235,124 +253,10 @@ void SPConfigDialog::changeSettings()
 
     settings.beginGroup(configNameBox->currentText());
 
-
-    id = settings.value("BaudRate", BAUD9600).toInt();
-    switch(id)
-    {
-           case BAUD300    : b1CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD600    : b2CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD1200   : b3CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD2400   : b4CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD4800   : b5CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD9600   : b6CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD19200  : b7CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD38400  : b8CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD57600  : b9CheckBox->setChecked(TRUE);
-                             break;
-    };
-
-    id = settings.value("DataBits", DATA_8).toInt();
-    switch(id)
-    {
-           case DATA_5    : d1CheckBox->setChecked(TRUE);
-                            break;
-           case DATA_6    : d2CheckBox->setChecked(TRUE);
-                            break;
-           case DATA_7    : d3CheckBox->setChecked(TRUE);
-                            break;
-           case DATA_8    : d4CheckBox->setChecked(TRUE);
-                            break;
-    };
-
-    id = settings.value("StopBits", STOP_2).toInt();
-    switch(id)
-    {
-           case STOP_1    : s1CheckBox->setChecked(TRUE);
-                            break;
-           case STOP_2    : s2CheckBox->setChecked(TRUE);
-                            break;
-    };
-
-    id = settings.value("Parity", PAR_NONE).toInt();
-    switch(id)
-    {
-           case PAR_NONE  : p1CheckBox->setChecked(TRUE);
-                            break;
-           case PAR_ODD   : p2CheckBox->setChecked(TRUE);
-                            break;
-           case PAR_EVEN  : p3CheckBox->setChecked(TRUE);
-                            break;
-    };
-
-    id = settings.value("FlowControl", FLOW_HARDWARE).toInt();
-    switch(id)
-    {
-           case FLOW_OFF       : f1CheckBox->setChecked(TRUE);
-                                 break;
-           case FLOW_HARDWARE  : f2CheckBox->setChecked(TRUE);
-                                 break;
-           case FLOW_XONXOFF   : f3CheckBox->setChecked(TRUE);
-                                 break;
-    };
-
-    eotInput->setText(settings.value("SendAtEnd", "").toString());
-    stInput->setText(settings.value("SendAtBegining", "").toString());
-
-    settings.endGroup();
-    settings.endGroup();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void SPConfigDialog::loadSettings()
-{
-    int id;
-    QStringList list;
-    QString item, port;
-
-    QSettings settings("EdytorNC", "EdytorNC");
-
-    settings.beginGroup("SerialPortConfigs");
-
-    portNameComboBox->clear();
-
 #ifdef Q_OS_WIN32
-       list << "COM1" << "COM2" << "COM3" << "COM4" <<
-              "COM5" << "COM6" << "COM7" << "COM8";
+    port = "COM1";
 #else
-       list << "/dev/ttyS0" << "/dev/ttyS1" << "/dev/ttyS2" << "/dev/ttyS3" <<
-              "/dev/ttyUSB0" << "/dev/ttyUSB1" << "/dev/ttyUSB2" << "/dev/ttyUSB3";
-
-#endif
-    list = settings.value("PortNameList", list).toStringList();
-    portNameComboBox->addItems(list);
-
-
-    configNameBox->clear();
-    list = settings.value("SettingsList", tr("Default")).toStringList();
-    configNameBox->addItems(list);
-    item = settings.value("CurrentSerialPortSettings", tr("Default")).toString();
-    id = configNameBox->findText(item);
-    configNameBox->setCurrentIndex(id);
-
-
-    settings.beginGroup(item);
-
-#ifdef Q_OS_WIN32
-       port = "COM1";
-#else
-       port = "/dev/ttyS0";
-
+    port = "/dev/ttyS0";
 #endif
 
     item = settings.value("PortName", port).toString();
@@ -428,11 +332,51 @@ void SPConfigDialog::loadSettings()
 
     eotInput->setText(settings.value("SendAtEnd", "").toString());
     stInput->setText(settings.value("SendAtBegining", "").toString());
-
-    delayDoubleSpinBox->setValue(settings.value("LineDelay", 0).toDouble());
+    xonInput->setText(settings.value("Xon", "17").toString());
+    xoffInput->setText(settings.value("Xoff", "19").toString());
 
     settings.endGroup();
     settings.endGroup();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SPConfigDialog::loadSettings()
+{
+    int id;
+    QStringList list;
+
+    QSettings settings("EdytorNC", "EdytorNC");
+
+    settings.beginGroup("SerialPortConfigs");
+
+    portNameComboBox->clear();
+
+#ifdef Q_OS_WIN32
+       list << "COM1" << "COM2" << "COM3" << "COM4" <<
+              "COM5" << "COM6" << "COM7" << "COM8";
+#else
+       list << "/dev/ttyS0" << "/dev/ttyS1" << "/dev/ttyS2" << "/dev/ttyS3" <<
+              "/dev/ttyUSB0" << "/dev/ttyUSB1" << "/dev/ttyUSB2" << "/dev/ttyUSB3";
+
+#endif
+    list = settings.value("PortNameList", list).toStringList();
+    list.sort();
+    portNameComboBox->addItems(list);
+
+
+    configNameBox->clear();
+    list = settings.value("SettingsList", tr("Default")).toStringList();
+    list.sort();
+    configNameBox->addItems(list);
+    //item = settings.value("CurrentSerialPortSettings", tr("Default")).toString();
+    id = configNameBox->findText(configName);
+    configNameBox->setCurrentIndex(id);
+    settings.endGroup();
+
+    changeSettings();
 }
 
 //**************************************************************************************************
@@ -454,6 +398,8 @@ void SPConfigDialog::deleteButtonClicked()
     settings.remove("StopBits");
     settings.remove("Parity");
     settings.remove("FlowControl");
+    settings.remove("Xon");
+    settings.remove("Xoff");
 
     settings.endGroup();
     settings.remove(configNameBox->currentText());
@@ -477,6 +423,17 @@ void SPConfigDialog::closeButtonClicked()
    settings.endGroup();
 
    close();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SPConfigDialog::saveCloseButtonClicked()
+{
+   saveButtonClicked();
+   closeButtonClicked();
+   accept();
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -757,7 +714,7 @@ void TransmissionDialog::changeSettings()
     comPort->setParity(ParityType(parity));
     comPort->setStopBits(StopBitsType(stopBits));
 
-    comPort->setTimeout(0,100);
+    //comPort->setTimeout(0,100);
 }
 
 //**************************************************************************************************
@@ -783,15 +740,6 @@ void TransmissionDialog::loadSerialConfignames()
     settings.endGroup();
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void SPConfigDialog::saveCloseButtonClicked()
-{
-   saveButtonClicked();
-   closeButtonClicked();
-}
 
 //**************************************************************************************************
 //

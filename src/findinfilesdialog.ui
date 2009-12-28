@@ -218,6 +218,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="hideButton">
+       <property name="toolTip">
+        <string>Hide dialog</string>
+       </property>
        <property name="text">
         <string>&amp;Hide</string>
        </property>
@@ -275,6 +278,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="closeButton">
+       <property name="toolTip">
+        <string>Close dialog</string>
+       </property>
        <property name="text">
         <string>C&amp;ose</string>
        </property>

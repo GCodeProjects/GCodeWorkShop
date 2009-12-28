@@ -119,6 +119,7 @@ void FindInFiles::find()
 
     findButton->setEnabled(FALSE);
     closeButton->setEnabled(FALSE);
+    hideButton->setEnabled(FALSE);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     QDir directory = QDir(path);
@@ -132,6 +133,7 @@ void FindInFiles::find()
 
     findButton->setEnabled(TRUE);
     closeButton->setEnabled(TRUE);
+    hideButton->setEnabled(TRUE);
     QApplication::restoreOverrideCursor();
 }
 
@@ -182,9 +184,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
 
             if(text == "*") //files containing anything
             {
-
                textFounded = true;
-
             }
             else
             {
@@ -430,7 +430,7 @@ void FindInFiles::filePreview(int x, int y)
 
          if((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*"))
          {
-            highlightFindText(textComboBox->currentText());
+            highlightFindText(textComboBox->currentText(), (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)));
          };
       };
 

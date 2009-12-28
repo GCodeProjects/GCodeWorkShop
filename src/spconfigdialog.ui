@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>340</height>
+    <width>648</width>
+    <height>368</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -516,6 +516,58 @@ p, li { white-space: pre-wrap; }
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="3" column="5">
+       <widget class="QLineEdit" name="xonInput">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="inputMask">
+         <string>90; </string>
+        </property>
+        <property name="text">
+         <string>17</string>
+        </property>
+        <property name="maxLength">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="5">
+       <widget class="QLineEdit" name="xoffInput">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="inputMask">
+         <string>90; </string>
+        </property>
+        <property name="text">
+         <string>19</string>
+        </property>
+        <property name="maxLength">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLabel" name="label_5">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>XON character:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="label_6">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>XOFF character:</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

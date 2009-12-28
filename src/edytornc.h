@@ -113,6 +113,7 @@ private slots:
     void stopButtonClicked();
     void doCmpMacro();
     void lineDelaySlot();
+    void attachToDirButtonClicked();
 
 
 
@@ -129,6 +130,7 @@ private:
     void writeSettings();
     void loadSerialConfignames();
     void showError(int error);
+    void updateCurrentSerialConfig();
 
 
 
@@ -231,6 +233,7 @@ private:
     QAction *configPortAct;
     QAction *receiveAct;
     QAction *sendAct;
+    QAction *attachToDirAct;
     QAction *serialCloseAct;
     QComboBox *configBox;
 
@@ -244,6 +247,9 @@ private:
     double lineDelay;
     QextSerialPort *comPort;
     bool readyCont;
+    bool xoffReceived;
+
+    PortSettings portSettings;
 
 
 };
