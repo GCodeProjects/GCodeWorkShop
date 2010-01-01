@@ -515,7 +515,7 @@ void edytornc::replaceNext()
          if(defaultMdiWindowProperites.underlineChanges)
          {
             QTextCharFormat format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+            format.setUnderlineStyle(QTextCharFormat::DotLine);
             format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
             cr.setCharFormat(format);
          };
@@ -552,7 +552,7 @@ void edytornc::replacePrevious()
          if(defaultMdiWindowProperites.underlineChanges)
          {
             QTextCharFormat format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+            format.setUnderlineStyle(QTextCharFormat::DotLine);
             format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
             cr.setCharFormat(format);
          };
@@ -594,7 +594,7 @@ void edytornc::replaceAll()
          if(defaultMdiWindowProperites.underlineChanges)
          {
             format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+            format.setUnderlineStyle(QTextCharFormat::DotLine);
             format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
             cr.setCharFormat(format);
          };
@@ -913,8 +913,18 @@ void edytornc::deleteText()
 
 void edytornc::paste()
 {
-    if(activeMdiChild())
+   if(activeMdiChild())
+   {
+      if(defaultMdiWindowProperites.underlineChanges)
+      {
+         QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
+         format.setUnderlineStyle(QTextCharFormat::DotLine);
+         format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
+         activeMdiChild()->textEdit->setCurrentCharFormat(format);
+      };
+
       activeMdiChild()->textEdit->paste();
+   };
 }
 
 //**************************************************************************************************
@@ -963,6 +973,7 @@ void edytornc::activeWindowChanged(QMdiSubWindow *window)
       defaultMdiWindowProperites.maximized = mdiChild->parentWidget()->isMaximized();
       statusBar()->showMessage(mdiChild->currentFile(), 0);
    };
+   updateCurrentSerialConfig();
 }
 
 //**************************************************************************************************
@@ -972,20 +983,25 @@ void edytornc::activeWindowChanged(QMdiSubWindow *window)
 void edytornc::about()
 {
    QMessageBox::about(this, tr("About EdytorNC"),
-                            tr("The <b>EdytorNC</b> is text editor for CNC programmers."
-                               "<P>Version: "
-                               "2009.12.30"
-                               "<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>"
-                               "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
-                               "<P>"
-                               "<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>"
-                               "<P>"
-                               "<P>EdytorNC wins <a href=\"http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/\">\"100% FREE award granted by Softpedia\"</a>"
-                               "<P>"
-                               "<P>EdytorNC contains pieces of code from other Open Source projects."
-                               "<P>"
-                               "<P><i>EdytorNC is free software; you can redistribute it and/or modify"
-                               "it under the terms of the GNU General Public License.</i>"));
+                            tr("The <b>EdytorNC</b> is text editor for CNC programmers.") +
+                            tr("<P>Version: ") +
+                               "2010.01" +
+                            tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
+                            tr("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
+                            tr("<P>") +
+                            tr("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
+                            tr("<P>") +
+                            tr("<P>EdytorNC wins <a href=\"http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/\">\"100% FREE award granted by Softpedia\"</a>") +
+                            tr("<P>") +
+                            tr("<P>EdytorNC contains pieces of code from other Open Source projects.") +
+                            tr("<P>") +
+                            tr("<P><i>EdytorNC is free software; you can redistribute it and/or modify"
+                               "it under the terms of the GNU General Public License  as published by"
+                               "the Free Software Foundation; either version 2 of the License, or"
+                               "(at your option) any later version.</i>") +
+                            tr("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
+                               "INCLUDING THE WARRANTY OF DESIGN,"
+                               "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
 }
 
 //**************************************************************************************************
@@ -1045,7 +1061,6 @@ void edytornc::updateMenus()
    pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
    updateStatusBar();
-   updateCurrentSerialConfig();
 
 }
 
@@ -1055,10 +1070,12 @@ void edytornc::updateMenus()
 
 void edytornc::updateCurrentSerialConfig()
 {
+   int id;
+   QDir dir;
+
    bool hasMdiChild = (activeMdiChild() != 0);
    if(hasMdiChild && (serialToolBar > NULL))
    {
-      QDir dir;
       dir.setPath(activeMdiChild()->filePath());
       dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
       dir.setSorting(QDir::Name);
@@ -1069,13 +1086,10 @@ void edytornc::updateCurrentSerialConfig()
       if(!list.isEmpty())
       {
          QFileInfo name = list.at(0);
-         qDebug() << name.baseName();
-         int id = configBox->findText(name.baseName());
-         qDebug() << id;
+         id = configBox->findText(name.baseName());
          if(id >= 0)
             configBox->setCurrentIndex(id);
       };
-
    };
 }
 
@@ -1089,14 +1103,14 @@ void edytornc::cancelUnderline()
 
    if(hasMdiChild)
    {
-      QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
-
-      if((format.underlineStyle() != QTextCharFormat::NoUnderline) &&
-         !activeMdiChild()->textEdit->textCursor().hasSelection())
-      {
-         format.setUnderlineStyle(QTextCharFormat::NoUnderline);
-         activeMdiChild()->textEdit->setCurrentCharFormat(format);
-      };
+//      QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
+//
+//      if((format.underlineStyle() != QTextCharFormat::NoUnderline) &&
+//         !activeMdiChild()->textEdit->textCursor().hasSelection())
+//      {
+//         format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+//         activeMdiChild()->textEdit->setCurrentCharFormat(format);
+//      };
 
       if(findToolBar != NULL)
         activeMdiChild()->highlightFindText(findEdit->text(),
@@ -1216,12 +1230,12 @@ MdiChild *edytornc::createMdiChild()
 void edytornc::createActions()
 {
     newAct = new QAction(QIcon(":/images/filenew.png"), tr("&New"), this);
-    newAct->setShortcut(tr("Ctrl+N"));
+    newAct->setShortcut(QKeySequence::New);
     newAct->setStatusTip(tr("Create a new file"));
     connect(newAct, SIGNAL(triggered()), this, SLOT(newFile()));
 
     openAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open..."), this);
-    openAct->setShortcut(tr("Ctrl+O"));
+    openAct->setShortcut(QKeySequence::Open);
     openAct->setStatusTip(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
@@ -1230,16 +1244,17 @@ void edytornc::createActions()
     connect(openWPvAct, SIGNAL(triggered()), this, SLOT(openWithPreview()));
 
     saveAct = new QAction(QIcon(":/images/filesave.png"), tr("&Save"), this);
-    saveAct->setShortcut(tr("Ctrl+S"));
+    saveAct->setShortcut(QKeySequence::Save);
     saveAct->setStatusTip(tr("Save the document to disk"));
     connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
 
     saveAsAct = new QAction(QIcon(":/images/filesaveas.png"), tr("Save &As..."), this);
+    saveAsAct->setShortcut(QKeySequence::SaveAs);
     saveAsAct->setStatusTip(tr("Save the document under a new name"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
     exitAct = new QAction(QIcon(":/images/exit.png"), tr("E&xit"), this);
-    exitAct->setShortcut(tr("Ctrl+Q"));
+    exitAct->setShortcut(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
     
@@ -1249,7 +1264,7 @@ void edytornc::createActions()
     connect(findFilesAct, SIGNAL(triggered()), this, SLOT(findInFl()));
 
     printAct = new QAction(QIcon(":/images/document-print.png"), tr("&Print"), this);
-    printAct->setShortcut(tr("Ctrl+P"));
+    printAct->setShortcut(QKeySequence::Print);
     printAct->setStatusTip(tr("Print file"));
     connect(printAct, SIGNAL(triggered()), this, SLOT(printFile()));
 
@@ -1257,38 +1272,38 @@ void edytornc::createActions()
 
     
     undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
-    undoAct->setShortcut(tr("Ctrl+Z"));
+    undoAct->setShortcut(QKeySequence::Undo);
     undoAct->setStatusTip(tr("Undo last operation"));
     connect(undoAct, SIGNAL(triggered()), this, SLOT(undo()));
     undoAct->setEnabled(FALSE);
 
     redoAct = new QAction(QIcon(":/images/redo.png"), tr("&Redo"), this);
-    redoAct->setShortcut(tr("Ctrl+Shift+Z"));
+    redoAct->setShortcut(QKeySequence::Redo);
     redoAct->setStatusTip(tr("Redo last operation"));
     connect(redoAct, SIGNAL(triggered()), this, SLOT(redo()));
     redoAct->setEnabled(FALSE);
 
     cutAct = new QAction(QIcon(":/images/editcut.png"), tr("Cu&t"), this);
-    cutAct->setShortcut(tr("Ctrl+X"));
+    cutAct->setShortcut(QKeySequence::Cut);
     cutAct->setStatusTip(tr("Cut the current selection's contents to the "
                             "clipboard"));
     connect(cutAct, SIGNAL(triggered()), this, SLOT(cut()));
 
     copyAct = new QAction(QIcon(":/images/editcopy.png"), tr("&Copy"), this);
-    copyAct->setShortcut(tr("Ctrl+C"));
+    copyAct->setShortcut(QKeySequence::Copy);
     copyAct->setStatusTip(tr("Copy the current selection's contents to the "
                              "clipboard"));
     connect(copyAct, SIGNAL(triggered()), this, SLOT(copy()));
 
     pasteAct = new QAction(QIcon(":/images/editpaste.png"), tr("&Paste"), this);
-    pasteAct->setShortcut(tr("Ctrl+V"));
+    pasteAct->setShortcut(QKeySequence::Paste);
     pasteAct->setStatusTip(tr("Paste the clipboard's contents into the current "
                               "selection"));
     connect(pasteAct, SIGNAL(triggered()), this, SLOT(paste()));
 
 
     findAct = new QAction(QIcon(":/images/find.png"), tr("&Find"), this);
-    findAct->setShortcut(tr("Ctrl+F"));
+    findAct->setShortcut(QKeySequence::Find);
     findAct->setStatusTip(tr("Find text"));
     connect(findAct, SIGNAL(triggered()), this, SLOT(createFindToolBar()));
 
@@ -1299,12 +1314,12 @@ void edytornc::createActions()
 
 
     deleteAct = new QAction(QIcon(":/images/editdelete.png"), tr("&Delete"), this);
-    //deleteAct->setShortcut(tr("Del"));
+    deleteAct->setShortcut(QKeySequence::Delete);
     deleteAct->setStatusTip(tr("Removes selected text"));
     connect(deleteAct, SIGNAL(triggered()), this, SLOT(deleteText()));
     
     selAllAct = new QAction(QIcon(":/images/edit-select-all.png"), tr("&Select all"), this);
-    selAllAct->setShortcut(tr("Ctrl+A"));
+    selAllAct->setShortcut(QKeySequence::SelectAll);
     selAllAct->setStatusTip(tr("Select all text"));
     connect(selAllAct, SIGNAL(triggered()), this, SLOT(selAll()));
 
@@ -1989,12 +2004,12 @@ void edytornc::createFindToolBar()
       findToolBar->setAttribute(Qt::WA_DeleteOnClose);
 
       findNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Find next"), this);
-      findNextAct->setShortcut(tr("F3"));
+      findNextAct->setShortcut(QKeySequence::FindNext);
       findNextAct->setStatusTip(tr("Find next"));
       connect(findNextAct, SIGNAL(triggered()), this, SLOT(findNext()));
 
       findPreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Find previous"), this);
-      findPreviousAct->setShortcut(tr("Shift+F3"));
+      findPreviousAct->setShortcut(QKeySequence::FindPrevious);
       findPreviousAct->setStatusTip(tr("Find previous"));
       connect(findPreviousAct, SIGNAL(triggered()), this, SLOT(findPrevious()));
 
@@ -2219,10 +2234,20 @@ void edytornc::createSerialToolBar()
       sendAct->setStatusTip(tr("Send current file"));
       connect(sendAct, SIGNAL(triggered()), this, SLOT(sendButtonClicked()));
 
-      attachToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current settings to current directory"), this);
+      attachToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current port settings to current directory of programs"), this);
       //attachToDirAct->setShortcut(tr("F3"));
-      attachToDirAct->setStatusTip(tr("Attach current settings to current directory"));
+      attachToDirAct->setStatusTip(tr("Attach current port settings to current directory of programs"));
       connect(attachToDirAct, SIGNAL(triggered()), this, SLOT(attachToDirButtonClicked()));
+
+      deAttachToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove settings from the directory"), this);
+      //deAttachToDirAct->setShortcut(tr("F3"));
+      deAttachToDirAct->setStatusTip(tr("Remove settings from the directory"));
+      connect(deAttachToDirAct, SIGNAL(triggered()), this, SLOT(deAttachToDirButtonClicked()));
+
+      diagAct = new QAction(QIcon(":/images/serialtest.png"), tr("Check serial port settings"), this);
+      //diagAct->setShortcut(tr("F3"));
+      diagAct->setStatusTip(tr("Check serial port settings"));
+      connect(diagAct, SIGNAL(triggered()), this, SLOT(serialConfigTest()));
 
       serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/receive toolbar"), this);
       serialCloseAct->setStatusTip(tr("Close find toolbar"));
@@ -2236,6 +2261,9 @@ void edytornc::createSerialToolBar()
 
       //serialToolBar->addSeparator();
       serialToolBar->addAction(attachToDirAct);
+      serialToolBar->addAction(deAttachToDirAct);
+      serialToolBar->addSeparator();
+      serialToolBar->addAction(diagAct);
       serialToolBar->addWidget(configBox);
       serialToolBar->addAction(configPortAct);
       serialToolBar->addSeparator();
@@ -2286,7 +2314,7 @@ void edytornc::closeSerialToolbar()
 //
 //**************************************************************************************************
 
-void edytornc::attachToDirButtonClicked()
+void edytornc::attachToDirButtonClicked(bool attach)
 {
    QFileInfo fileInfo;
    QFile file;
@@ -2310,16 +2338,27 @@ void edytornc::attachToDirButtonClicked()
          {
             fileInfo = (QFileInfo)list.at(i);
             file.setFileName(fileInfo.absoluteFilePath());
-            qDebug() << "Deleted file: " << file.fileName();
             file.remove();
          };
       };
-      file.setFileName(activeMdiChild()->filePath() + "/" + configBox->currentText() + ".ini");
-      file.open(QIODevice::ReadWrite);
-      file.close();
-      qDebug() << "New file: " <<  file.fileName();
+
+      if(attach)
+      {
+         file.setFileName(activeMdiChild()->filePath() + "/" + configBox->currentText() + ".ini");
+         file.open(QIODevice::ReadWrite);
+         file.close();;
+      };
 
    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::deAttachToDirButtonClicked()
+{
+   attachToDirButtonClicked(false);
 }
 
 //**************************************************************************************************
@@ -2555,7 +2594,7 @@ void edytornc::sendButtonClicked()
 
          activeWindow->textEdit->setTextCursor(cursor);
          progressDialog.setValue(i);
-         progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i).arg(tx.size()));
+         progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
          qApp->processEvents();
 
          if(lineDelay > 0)

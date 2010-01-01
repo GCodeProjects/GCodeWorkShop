@@ -66,7 +66,7 @@ win32:DEFINES          += WINVER=0x0501 # needed for mingw to pull in appropriat
 win32:LIBS             += -lsetupapi
 
 
-unix:VERSION = 2009.12
+unix:VERSION = 2010.01
 
 
 

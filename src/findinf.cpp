@@ -121,6 +121,7 @@ void FindInFiles::find()
     closeButton->setEnabled(FALSE);
     hideButton->setEnabled(FALSE);
     QApplication::setOverrideCursor(Qt::BusyCursor);
+    qApp->processEvents();
 
     QDir directory = QDir(path);
 
@@ -156,6 +157,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     progressDialog.setCancelButtonText(tr("&Cancel"));
     progressDialog.setRange(0, files.size());
     progressDialog.setWindowTitle(tr("Find Files"));
+    qApp->processEvents();
 
     exp.setCaseSensitivity(Qt::CaseInsensitive);
     exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
@@ -363,23 +365,29 @@ void FindInFiles::readSettings()
    fileComboBox->clear(); 
 
    QSettings settings("EdytorNC", "EdytorNC");
-   settings.beginGroup("FindFileDialog" );
+   settings.beginGroup("FindFileDialog");
 
    wholeWordsCheckBox->setChecked(settings.value("WholeWords", FALSE).toBool());
 
    list = settings.value("Dirs", QStringList(QDir::homePath())).toStringList();
+   list.removeDuplicates();
+   list.sort();
    directoryComboBox->addItems(list);
    item = settings.value("SelectedDir", QString(QDir::homePath())).toString();
    i = directoryComboBox->findText(item);
    directoryComboBox->setCurrentIndex(i);
 
    list = settings.value("Filters", "*.nc").toStringList();
+   list.removeDuplicates();
+   list.sort();
    fileComboBox->addItems(list);
    item = settings.value("SelectedFilter", QString("*.nc")).toString();
    i = fileComboBox->findText(item);
    fileComboBox->setCurrentIndex(i);
 
    list = settings.value("Texts", QStringList()).toStringList();
+   list.removeDuplicates();
+   list.sort();
    textComboBox->addItems(list);
    item = settings.value("SelectedText", QString("*")).toString();
    i = textComboBox->findText(item, Qt::MatchExactly);

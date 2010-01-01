@@ -23,6 +23,8 @@
 #include "dialogs.h"
 
 
+
+
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================
 
@@ -1400,14 +1402,14 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
 
 
    QAction *copyAct = new QAction(QIcon(":/images/editcopy.png"), tr("&Copy"), this);
-   copyAct->setShortcut(tr("Ctrl+C"));
+   copyAct->setShortcut(QKeySequence::Copy);
    copyAct->setStatusTip(tr("Copy the current selection's contents to the "
                              "clipboard"));
    connect(copyAct, SIGNAL(triggered()), this, SLOT(copySelection()));
    resultTable->addAction(copyAct);
 
    QAction *selAllAct = new QAction(QIcon(":/images/edit-select-all.png"), tr("&Select all"), this);
-   selAllAct->setShortcut(tr("Ctrl+A"));
+   selAllAct->setShortcut(QKeySequence::SelectAll);
    selAllAct->setStatusTip(tr("Select all"));
    connect(selAllAct, SIGNAL(triggered()), this, SLOT(sellAll()));
    resultTable->addAction(selAllAct);
@@ -1427,14 +1429,14 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
    connect(resultTable, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(contextMenuReq(const QPoint &)));
    resultTable->setSelectionBehavior(QAbstractItemView::SelectRows);
    resultTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-   //adjustSize();
+;
 
-   connect( xCenterInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
-   connect( yCenterInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
-   connect( diaInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
-   connect( holesInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
-   connect( angleStartInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
-   connect( angleBeetwenInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
+   connect(xCenterInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
+   connect(yCenterInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
+   connect(diaInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
+   connect(holesInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
+   connect(angleStartInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
+   connect(angleBeetwenInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
 
 }
 
@@ -1604,18 +1606,15 @@ BHCDraw::~BHCDraw()
 //
 //**************************************************************************************************
 
-void BHCDraw::init(int h, int w)
+void BHCDraw::init(int w, int h)
 {
-    int b;
-
     scale = 1;
-    b = qMin(h, w);
 
-    resize(b, b);
+    resize(w, h);
     setMaximumSize(width(), height());
     setMinimumSize(width(), height());
 
-    pm = new QPixmap( width(), height() );
+    pm = new QPixmap(width(), height());
     pm->fill(Qt::black);
     drawLines();
 }
@@ -1656,51 +1655,32 @@ void BHCDraw::focusOutEvent(QFocusEvent *)
 //
 //**************************************************************************************************
 
-void BHCDraw::drawHole(double ang, double dia, bool first, bool last, QColor color)
+void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color)
 {
-    double x, y, x1, y1;
+    qreal x, y, x1, y1, sca, d;
 
     QPainter *paint = new QPainter(pm);
-    //paint->begin(pm);
-    paint->save();
-    paint->setWindow(-(geometry().width()/2), -(geometry().height()/2), geometry().width(), geometry().height());
-    QRect v = paint->viewport();
-    int c = qMin(v.width(), v.height());
-    paint->setViewport(v.left() + (v.width() - c) / 2, v.top() + (v.height() - c) / 2, c, c);
-    paint->scale(scale, scale);
+    QFont font = paint->font();
+    font.setPointSize(10);
+    paint->setFont(font);
+    QFontMetrics fm = paint->fontMetrics();
 
-    //paint->setRasterOp(Qt::OrROP);
+    paint->save();
+    int c = qMin(geometry().width(), geometry().height());
+    c = c + (fm.lineSpacing() * 8);
+
+    paint->setWindow(-(c / 2), -(c / 2), c, c);
+    QRect v = paint->viewport();
+    c = qMin(v.width(), v.height());
+    paint->setViewport(v.left() + (v.width() - c) / 2, v.top() + (v.height() - c) / 2, c, c);
+
+    sca = ((c - 20) / 2) / (scale / 2);
+
+    paint->scale(sca, sca);
 
     paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
     paint->setBrush(Qt::NoBrush);
-    paint->drawEllipse(trunc(-dia), trunc(-dia), trunc(dia*2), trunc(dia*2));
-
-    if(last)
-    {
-       QBrush brush( Qt::green, Qt::SolidPattern );
-       brush.setColor( color );
-       paint->setBrush( brush );
-    }
-    else
-      paint->setBrush(Qt::NoBrush);
-
-    if(first)
-      paint->setPen(QPen(color, 3, Qt::SolidLine));
-    else
-      paint->setPen(QPen(color, 1, Qt::SolidLine));
-
-
-    x = dia * cos((M_PI/180) * ang);
-    y = dia * sin((M_PI/180) * ang);
-
-    double sca, d;
-    if(scale > 1)
-      sca = scale/1.2;
-    else
-      sca = scale;
-
-    d = 14 / sca;
-    paint->drawEllipse(trunc(x-(d/2)), trunc(-y-(d/2)), trunc(d), trunc(d));
+    paint->drawEllipse(QPointF(v.x() / 2, -v.y() / 2), dia, dia);
 
     d = 10 / sca;
     x = (dia + (d)) * cos((M_PI/180) * ang);
@@ -1711,33 +1691,59 @@ void BHCDraw::drawHole(double ang, double dia, bool first, bool last, QColor col
 
 
     paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
-    paint->drawLine(trunc(x), trunc(-y), trunc(x1), trunc(-y1));
+    paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
+
+    if(last)
+    {
+       QBrush brush(Qt::green, Qt::SolidPattern);
+       brush.setColor(color);
+       paint->setBrush(brush);
+    }
+    else
+      paint->setBrush(Qt::NoBrush);
+
+    if(first)
+      paint->setPen(QPen(color.darker(65), 0, Qt::SolidLine));
+    else
+      paint->setPen(QPen(color, 0, Qt::SolidLine));
+
+
+    x = dia * cos((M_PI/180) * ang);
+    y = dia * sin((M_PI/180) * ang);
+
+    d = 8 / sca;
+    paint->drawEllipse(QPointF(x, -y), d, d);
 
 
     paint->restore();
     paint->end();
-
-    //update();
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-void BHCDraw::drawLines(double dia, double ang, QColor cl)
+void BHCDraw::drawLines(qreal dia, qreal ang, QColor cl)
 {
-    double x, y, x1, y1;
+    qreal x, y, x1, y1;
 
     dia = dia / 2;
 
     QPainter *paint = new QPainter(pm);
+    QFont font = paint->font();
+    font.setPointSize(10);
+    paint->setFont(font);
+    QFontMetrics fm = paint->fontMetrics();
+
     paint->save();
 
-    paint->setWindow(-(geometry().width()/2), -(geometry().height()/2), geometry().width(), geometry().height());
+    int d = qMin(geometry().width(), geometry().height());
+    d = d + (fm.lineSpacing() * 6);
+    paint->setWindow(-(d / 2), -(d / 2), d, d);
     QRect v = paint->viewport();
-    int d = qMin( v.width(), v.height() );
-    paint->setViewport( v.left() + (v.width()-d)/2, v.top() + (v.height()-d)/2, d, d );
+    d = qMin( v.width(), v.height() );
+    paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
     //paint->scale(vp, vp);
 
     //paint->setRasterOp(Qt::OrROP);
@@ -1747,13 +1753,13 @@ void BHCDraw::drawLines(double dia, double ang, QColor cl)
     y = (dia + 4) * sin((M_PI/180) * ang);
     x1 = (dia + 4) * cos((M_PI/180) * (ang + 180));
     y1 = (dia + 4) * sin((M_PI/180) * (ang + 180));
-    paint->drawLine(round(x), round(-y), round(x1), round(-y1));
+    paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
     x = (dia + 4) * cos((M_PI/180) * (ang + 90));
     y = (dia + 4) * sin((M_PI/180) * (ang + 90));
     x1 = (dia + 4) * cos((M_PI/180) * (ang + 270));
     y1 = (dia + 4) * sin((M_PI/180) * (ang + 270));
-    paint->drawLine(round(x), round(-y), round(x1), round(-y1));
+    paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
     paint->restore();
     paint->end();
@@ -1777,11 +1783,14 @@ void BHCDraw::clear()
 void BHCDraw::printText(int x, int y, int line, const QString &text, QColor color)
 {
    QPainter *paint = new QPainter(pm);
+   QFont font = paint->font();
+   font.setPointSize(10);
+   paint->setFont(font);
    QFontMetrics fm = paint->fontMetrics();
 
    paint->save();
    paint->setPen(QPen(color, 0, Qt::SolidLine));
-   paint->drawText(x, y+(fm.lineSpacing()*line), text);
+   paint->drawText(x, y + (fm.lineSpacing() * line), text);
    paint->restore();
    paint->end();
 }
@@ -1793,18 +1802,26 @@ void BHCDraw::printText(int x, int y, int line, const QString &text, QColor colo
 void BHCDraw::drawLines()
 {
     QPainter *paint = new QPainter(pm);
+    QFont font = paint->font();
+    font.setPointSize(10);
+    paint->setFont(font);
+    QFontMetrics fm = paint->fontMetrics();
+
     paint->save();
-    paint->setWindow(-(geometry().width() / 2), -(geometry().height() / 2), geometry().width(), geometry().height());
+
+    int d = qMin(geometry().width(), geometry().height());
+    d = d + (fm.lineSpacing() * 6);
+    paint->setWindow(-(d / 2), -(d / 2), d, d);
     QRect v = paint->viewport();
-    int d = qMin( v.width(), v.height() );
-    paint->setViewport( v.left() + (v.width()-d) / 2, v.top() + (v.height()-d) / 2, d, d );
+    d = qMin(v.width(), v.height());
+    paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
     //paint->scale(vp, vp);
 
     paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
 
     v = paint->viewport();
-    paint->drawLine(0, (v.height() / 2) - 5, 0, 5 - (v.height() / 2));
-    paint->drawLine((v.width() / 2) - 5, 0, 5 - (v.width() / 2), 0);
+    paint->drawLine(QPointF(0, (v.height() / 2) - 5), QPointF(0, 5 - (v.height() / 2)));
+    paint->drawLine(QPointF((v.width() / 2) - 5, 0), QPointF(5 - (v.width() / 2), 0));
 
     paint->restore();
     paint->end();
@@ -1823,6 +1840,9 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
    setAttribute(Qt::WA_DeleteOnClose);
    setWindowTitle(tr("Bolt circle"));
    //setFocusPolicy(QWidget::StrongFocus);
+
+   parentHeight = parent->height();
+   parentWidth = parent->width();
 
    tabBar = new QTabWidget(this);
    pageLayout->addWidget(tabBar);
@@ -1847,7 +1867,7 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 
    //setFocusProxy(page1);
    //setMaximumSize(width(), height());
-   //adjustSize();
+   adjustSize();
 }
 
 //**************************************************************************************************
@@ -1932,8 +1952,8 @@ void BHCDialog::computeButtonClicked()
    QColor col;
    int tabId, i, textPosY, textPosX, dir;
    bool ok;
-   int holeCount, dim;
-   double dia, firstAngle, angleBeetwen, roate, x, y, ang, xCenter, yCenter;
+   int holeCount;
+   qreal dia, firstAngle, angleBeetwen, roate, x, y, ang, xCenter, yCenter;
    double maxDia;
 
 
@@ -1944,7 +1964,7 @@ void BHCDialog::computeButtonClicked()
       if(tab == 0)
         continue;
 
-      maxDia = qMax( maxDia, tab->diaInput->text().toDouble(&ok));
+      maxDia = qMax(maxDia, tab->diaInput->text().toDouble(&ok));
 
    };
 
@@ -2063,34 +2083,30 @@ void BHCDialog::computeButtonClicked()
          //yItem->setFlags(Qt::ItemIsEnabled);
 
 
-         QTableWidgetItem *hdr = new QTableWidgetItem(removeZeros(QString("%1 - %2  ").arg(i+1).arg(ang, 0, 'f', 3)));
+         QTableWidgetItem *hdr = new QTableWidgetItem(removeZeros(QString("%1 - %2 ").arg(i+1).arg(ang, 0, 'f', 3)));
          tab->resultTable->setVerticalHeaderItem(i, hdr);
          tab->resultTable->setItem(i, 0, xItem);
          tab->resultTable->setItem(i, 1, yItem);
       };
 
-      tab->resultTable->resizeColumnsToContents();
-      tab->resultTable->resizeRowsToContents();
-      tab->resultTable->adjustSize();
+      //tab->resultTable->resizeColumnsToContents();
+      //tab->resultTable->resizeRowsToContents();
+      //tab->resultTable->adjustSize();
       //tab->adjustSize();
 
    };
 
-   //adjustSize();
+
 
    drawing = (BHCDraw *) findChild<BHCDraw *>();
    if(!drawing)
    {
       drawing = new BHCDraw(this);
-      dim = this->x();
-      drawing->init(dim, dim);
+      drawing->init(parentWidth - this->width(), parentHeight - this->y());
       drawing->move((this->x()) - drawing->width(), this->y());
    };
 
-   if(maxDia > (this->x()/2.2))
-     drawing->setScale(double(this->x() / (maxDia+(maxDia/2.3))));
-   else
-     drawing->setScale(1.5);
+   drawing->setScale(maxDia);
 
    drawing->show();
    drawing->setUpdatesEnabled(FALSE);
@@ -2179,12 +2195,12 @@ void BHCDialog::computeButtonClicked()
                   dir = 4;
                   break;
          case 2:  col = Qt::red;
-                  textPosX = (drawing->width()/2)+16;
+                  textPosX = (drawing->width()/2) + drawing->width()/4;
                   textPosY = 0;
                   dir = -1;
                   break;
          case 3:  col = Qt::yellow;
-                  textPosX = (drawing->width()/2)+16;
+                  textPosX = (drawing->width()/2) + drawing->width()/4;
                   textPosY = drawing->height();
                   dir = 4;
                   break;
@@ -2749,7 +2765,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
 
    adjustSize();
-   setMaximumSize(width(), height());
+   //setMaximumSize(width(), height());
 
 
 }

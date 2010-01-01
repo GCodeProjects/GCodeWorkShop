@@ -68,5 +68,9 @@
         <file>images/removeemptylines.png</file>
         <file>images/hide.png</file>
         <file>images/attach.png</file>
+        <file>images/deattach.png</file>
+        <file>images/serialtest.png</file>
+        <file>images/connect_established.png</file>
+        <file>images/connect_no.png</file>
     </qresource>
 </RCC>

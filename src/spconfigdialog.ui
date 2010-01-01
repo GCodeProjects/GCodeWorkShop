@@ -66,7 +66,7 @@
         <string>&amp;Save</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
        </property>
        <property name="autoDefault">
@@ -83,7 +83,7 @@
         <string>Delete</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/editdelete.png</normaloff>:/images/editdelete.png</iconset>
        </property>
        <property name="autoDefault">
@@ -143,7 +143,7 @@
         <string>&amp;Browse</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
        </property>
       </widget>
@@ -439,7 +439,7 @@
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>Pause before sending next block (s):</string>
+         <string>Delay before sending the next block (s)</string>
         </property>
        </widget>
       </item>
@@ -493,6 +493,9 @@ p, li { white-space: pre-wrap; }
       </item>
       <item row="2" column="5">
        <widget class="QDoubleSpinBox" name="delayDoubleSpinBox">
+        <property name="toolTip">
+         <string>Seconds</string>
+        </property>
         <property name="decimals">
          <number>1</number>
         </property>
@@ -520,7 +523,7 @@ p, li { white-space: pre-wrap; }
       <item row="3" column="5">
        <widget class="QLineEdit" name="xonInput">
         <property name="toolTip">
-         <string/>
+         <string>XON 17 Dec. 0x11 Hex.</string>
         </property>
         <property name="inputMask">
          <string>90; </string>
@@ -536,7 +539,7 @@ p, li { white-space: pre-wrap; }
       <item row="4" column="5">
        <widget class="QLineEdit" name="xoffInput">
         <property name="toolTip">
-         <string/>
+         <string>XOFF 19 Dec. 0x13 Hex.</string>
         </property>
         <property name="inputMask">
          <string>90; </string>
@@ -612,7 +615,7 @@ p, li { white-space: pre-wrap; }
         <string>&amp;Save &amp;&amp; close</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
        </property>
        <property name="autoDefault">
@@ -639,7 +642,7 @@ p, li { white-space: pre-wrap; }
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
        </property>
        <property name="autoDefault">
@@ -651,8 +654,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="application.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

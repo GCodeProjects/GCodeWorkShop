@@ -95,32 +95,39 @@ class TransmissionDialog : public QDialog, private Ui::TransmissionDialog
    private slots:
      void closeButtonClicked();
      void clearButtonClicked();
-     void sendButtonClicked();
-     void reciveButtonClicked();
+     void connectButtonToggled(bool tg);
      void configButtonClicked();
-     void stopButtonClicked();
      void changeSettings();
      void updateLeds();
      void setRtsButtonClicked();
      void setDtrButtonClicked();
-
+     void sendTextEditChanged();
+     void lineDelaySlot();
+     void setXonButtonClicked();
+     void setXoffButtonClicked();
+     void textEditScroll(int pos);
+     void hexTextEditScroll(int pos);
 
 
 
    private:
      void loadSerialConfignames();
      void showError(int error);
+     void sendText(QString tx);
 
 
      bool stop;
-     QString portName, sendAtEnd, sendAtBegining;
-     int baudRate;
-     int dataBits;
-     int stopBits;
-     int parity;
-     int flowControl;
+     QString portName;
+     QString sendAtEnd;
+     QString sendAtBegining;
+
      QextSerialPort *comPort;
      QTimer *timer;
+     long int count;
+     double lineDelay;
+     bool readyCont;
+     PortSettings portSettings;
+
 
 
 };

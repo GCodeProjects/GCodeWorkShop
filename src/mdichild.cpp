@@ -48,6 +48,8 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     textEdit->installEventFilter(this);
     setWindowIcon(QIcon(":/images/ncfile.png"));
 
+    //textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+    //setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 //**************************************************************************************************
@@ -499,14 +501,13 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 
           if(mdiWindowProperites.underlineChanges)
           {
-             QTextCursor cr = textEdit->textCursor(); //Underline changes
-             QTextCharFormat format = cr.charFormat();
-
              if((k->text()[0].isPrint()) && !(k->text()[0].isSpace()))
              {
-                format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
+                QTextCursor cr = textEdit->textCursor(); //Underline changes
+                QTextCharFormat format = cr.charFormat();
+                format.setUnderlineStyle(QTextCharFormat::DotLine);
                 format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
-                cr.mergeCharFormat(format);
+                cr.setCharFormat(format);
                 textEdit->setTextCursor(cr);
              };
           };
@@ -524,7 +525,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
           if(mdiWindowProperites.intCapsLock)
           {
              if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
-             {  
+             {
                 QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
                 return true;
 

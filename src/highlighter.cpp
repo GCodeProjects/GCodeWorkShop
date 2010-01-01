@@ -57,6 +57,7 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
 
 
    keywordFormat.setForeground(QColor(highlightColors.keyWordColor));
+   keywordFormat.setFontWeight(QFont::Normal);
    rule.pattern = QRegExp("\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_]{0,}\\b");
    rule.format = keywordFormat;
    highlightRules.append(rule);
@@ -248,8 +249,9 @@ void Highlighter::highlightBlock(const QString &tx)
       {
          if(ch == ';')
          {
-            if(tx.at(pos + 1) == '$') 
-              break;
+            if(tx.length() >= (pos + 2))
+               if(tx.at(pos + 1) == '$') 
+                  break;
             sellen = (tx.length() - pos);
             format.setForeground(QColor(highlightColors.commentColor));
             setFormat(pos, sellen, format);
@@ -341,6 +343,8 @@ void Highlighter::highlightBlock(const QString &tx)
             }
             else
             {
+               if(tx.isEmpty())
+                  break;
                ch = adrress.at(0);
                switch(ch.toAscii())
                {
@@ -395,7 +399,6 @@ void Highlighter::highlightBlock(const QString &tx)
                                      break;
                   default          : ;
                };
-
 
                break;
             };
@@ -477,13 +480,14 @@ void Highlighter::highlightBlock(const QString &tx)
 
          //***********************************************************************
 
-         format.setForeground(Qt::black);
-         format.setFontWeight(QFont::Normal);
+
          //setFormat(pos, sellen, format);
          break;
 
       };
 
+      format.setForeground(Qt::black);
+      format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
       format.setFontWeight(QFont::Normal);
 
@@ -556,6 +560,8 @@ void Highlighter::highlightInside(const QString &tx, int pos, int maxlen)
             }
             else
             {
+               if(tx.isEmpty())
+                  break;
                ch = adrress.at(0);
                switch(ch.toAscii())
                {

@@ -277,9 +277,9 @@ class BHCDraw : public QWidget
   public slots:
     void clear();
     void printText(int x, int y, int line, const QString &text, QColor color);
-    void drawHole(double ang, double dia, bool first = FALSE, bool last = FALSE, QColor color = Qt::green);
-    void init(int h, int w);
-    void drawLines(double dia, double ang, QColor cl);
+    void drawHole(qreal ang, qreal dia, bool first = FALSE, bool last = FALSE, QColor color = Qt::green);
+    void init(int w, int h);
+    void drawLines(qreal dia, qreal ang, QColor cl);
     void setScale(double sc);
 
   private slots:
@@ -325,7 +325,8 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
     QTabWidget *tabBar;
     BHCDraw *drawing;
 
-    int drawingSize;
+    int parentHeight;
+    int parentWidth;
 };
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

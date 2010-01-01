@@ -113,7 +113,8 @@ private slots:
     void stopButtonClicked();
     void doCmpMacro();
     void lineDelaySlot();
-    void attachToDirButtonClicked();
+    void attachToDirButtonClicked(bool attach = true);
+    void deAttachToDirButtonClicked();
 
 
 
@@ -234,6 +235,8 @@ private:
     QAction *receiveAct;
     QAction *sendAct;
     QAction *attachToDirAct;
+    QAction *deAttachToDirAct;
+    QAction *diagAct;
     QAction *serialCloseAct;
     QComboBox *configBox;
 
