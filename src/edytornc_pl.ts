@@ -2402,7 +2402,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="edytornc.cpp" line="987"/>
         <source>&lt;P&gt;Version: </source>
-        <translation>&lt;P&gt;Wersja:</translation>
+        <translation>&lt;P&gt;Wersja: </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="989"/>
@@ -2435,7 +2435,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="edytornc.cpp" line="996"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation>&lt;P&gt;EdytorNC zawiera fragmęty kodu z innych projektów Wolnego Oprogramowania.</translation>
+        <translation>&lt;P&gt;EdytorNC zawiera fragmenty kodu z innych projektów Wolnego Oprogramowania.</translation>
     </message>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND,</source>

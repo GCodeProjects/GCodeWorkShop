@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2009 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2010 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -1582,15 +1582,10 @@ void BHCTab::inputChk()
 
 BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
-
     setWindowTitle(tr("Bolt circle - preview"));
     setAttribute(Qt::WA_DeleteOnClose);
 
-    setBackgroundRole(QPalette::Shadow); //setBackgroundMode( Qt::NoBackground );
-    //setFocusPolicy(QWidget::StrongFocus);
-    //clearFocus();
-
-
+    setBackgroundRole(QPalette::Shadow);
 }
 
 //**************************************************************************************************
@@ -1841,8 +1836,8 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
    setWindowTitle(tr("Bolt circle"));
    //setFocusPolicy(QWidget::StrongFocus);
 
-   parentHeight = parent->height();
-   parentWidth = parent->width();
+   parentHeight = parent->height() - 10;
+   parentWidth = parent->width() - 15;
 
    tabBar = new QTabWidget(this);
    pageLayout->addWidget(tabBar);
@@ -2195,12 +2190,12 @@ void BHCDialog::computeButtonClicked()
                   dir = 4;
                   break;
          case 2:  col = Qt::red;
-                  textPosX = (drawing->width()/2) + drawing->width()/4;
+                  textPosX = (drawing->width()/2) + drawing->width()/6;
                   textPosY = 0;
                   dir = -1;
                   break;
          case 3:  col = Qt::yellow;
-                  textPosX = (drawing->width()/2) + drawing->width()/4;
+                  textPosX = (drawing->width()/2) + drawing->width()/6;
                   textPosY = drawing->height();
                   dir = 4;
                   break;

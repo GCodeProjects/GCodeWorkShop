@@ -34,6 +34,9 @@
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
        <widget class="QRadioButton" name="mRenumLines">
+        <property name="toolTip">
+         <string>Renumber lines that already have line numbers</string>
+        </property>
         <property name="text">
          <string>Renumber only line's with 'N'</string>
         </property>
@@ -46,6 +49,9 @@
        <widget class="QRadioButton" name="mAllLines">
         <property name="enabled">
          <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Renumber all lines</string>
         </property>
         <property name="text">
          <string>Renumber all line's</string>
@@ -205,6 +211,9 @@
        <widget class="QCheckBox" name="mRenumMarked">
         <property name="enabled">
          <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Just write N at begining of line and use this function to replace N with correct line number</string>
         </property>
         <property name="text">
          <string>Renumber lines marked 'N'</string>
