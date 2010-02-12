@@ -288,6 +288,7 @@ class BHCDraw : public QWidget
   protected:
     void paintEvent(QPaintEvent *);
     void focusOutEvent(QFocusEvent *);
+    void mousePressEvent(QMouseEvent *event);
 
   private:
     double scale;
@@ -314,7 +315,7 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
   public slots:
 
   protected:
-    void windowActivationChange(bool oldActive);
+    //void windowActivationChange(bool oldActive);
 
   private slots:
     void comChk();

@@ -58,14 +58,15 @@ edytornc::edytornc()
 
     readSettings();
 
+    setWindowTitle(tr("EdytorNC"));
+    setWindowIcon(QIcon(":/images/edytornc.png"));
+    createStatusBar();
+    
     if(tabbedView)
       mdiArea->setViewMode(QMdiArea::TabbedView);
     else
       mdiArea->setViewMode(QMdiArea::SubWindowView);
-
-    setWindowTitle(tr("EdytorNC"));
-    setWindowIcon(QIcon(":/images/edytornc.png"));
-    createStatusBar();
+    
 }
 
 //**************************************************************************************************

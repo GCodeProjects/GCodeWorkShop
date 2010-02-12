@@ -1585,7 +1585,11 @@ BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     setWindowTitle(tr("Bolt circle - preview"));
     setAttribute(Qt::WA_DeleteOnClose);
 
+    setToolTip(tr("Click to close"));
+
     setBackgroundRole(QPalette::Shadow);
+
+    //connect(this, SIGNAL(fileClicket()), this, SLOT(close()));
 }
 
 //**************************************************************************************************
@@ -1596,6 +1600,18 @@ BHCDraw::~BHCDraw()
 {
 
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void BHCDraw::mousePressEvent(QMouseEvent *event)
+ {
+   if(event->button() == Qt::LeftButton)
+   {
+      close();
+   };
+ }
 
 //**************************************************************************************************
 //
@@ -1878,14 +1894,14 @@ BHCDialog::~BHCDialog()
 //
 //**************************************************************************************************
 
-void BHCDialog::windowActivationChange(bool oldActive)
-{
-    Q_UNUSED(oldActive);
-    drawing = (BHCDraw *) findChild<BHCDraw *>();
-    if(drawing > 0)
-      if(!this->isActiveWindow())
-         drawing->close();
-}
+//void BHCDialog::windowActivationChange(bool oldActive)
+//{
+//    Q_UNUSED(oldActive);
+//    drawing = (BHCDraw *) findChild<BHCDraw *>();
+//    if(drawing > 0)
+//      if(!this->isActiveWindow())
+//         drawing->close();
+//}
 
 //**************************************************************************************************
 //
