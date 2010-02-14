@@ -53,7 +53,8 @@ FORMS += i2mdialog.ui \
     setupdialog.ui \
     spconfigdialog.ui \
     transmissiondialog.ui
-TRANSLATIONS = edytornc_pl.ts
+TRANSLATIONS = edytornc_pl.ts \
+    edytornc_ca.ts
 OBJECTS_DIR = build/obj
 MOC_DIR = build/moc
 

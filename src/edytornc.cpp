@@ -988,6 +988,7 @@ void edytornc::about()
                             tr("<P>Version: ") +
                                "2010.01" +
                             tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
+                            tr("<P>Catalan translation thanks to Jordi Sayol") +
                             tr("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             tr("<P>") +
                             tr("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
@@ -1255,7 +1256,8 @@ void edytornc::createActions()
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
     exitAct = new QAction(QIcon(":/images/exit.png"), tr("E&xit"), this);
-    exitAct->setShortcut(QKeySequence::Quit);
+    //exitAct->setShortcut(QKeySequence::Quit);
+    exitAct->setShortcut(tr("Ctrl+Q"));
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
     
