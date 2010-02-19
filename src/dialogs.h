@@ -282,6 +282,7 @@ class BHCDraw : public QWidget
     void drawLines(qreal dia, qreal ang, QColor cl);
     void setScale(double sc);
 
+
   private slots:
     void drawLines();
 

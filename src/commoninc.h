@@ -74,6 +74,9 @@ struct _editor_properites
    int lineColor;
    int underlineColor;
    bool tabbedMode;
+   QString calcBinary;
+   bool clearUndoHistory;
+   bool clearUnderlineHistory;
 };
 
 

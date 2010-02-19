@@ -75,7 +75,7 @@ public:
 protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
-    void resizeEvent(QResizeEvent *event);
+    //void resizeEvent(QResizeEvent *event);
 
 private slots:
     void documentWasModified();

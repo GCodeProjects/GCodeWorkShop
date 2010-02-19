@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>452</width>
-    <height>343</height>
+    <width>553</width>
+    <height>377</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -98,40 +98,10 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="operatorColorButton">
-          <property name="text">
-           <string>+-=/*</string>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="keyWordColorButton">
           <property name="text">
            <string>SPFA</string>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="lColorButton">
-          <property name="text">
-           <string>L100</string>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="rColorButton">
-          <property name="text">
-           <string>R10</string>
           </property>
           <property name="flat">
            <bool>true</bool>
@@ -168,32 +138,6 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
-         <widget class="QPushButton" name="progNameColorButton">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>%1000 O1234</string>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="mColorButton">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>M3 M8</string>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1">
          <widget class="QPushButton" name="aColorButton">
           <property name="text">
@@ -208,6 +152,62 @@
          <widget class="QPushButton" name="macroColorButton">
           <property name="text">
            <string>SIN() ABS()</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QPushButton" name="progNameColorButton">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>%1000 O1234</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="mColorButton">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>M3 M8</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="operatorColorButton">
+          <property name="text">
+           <string>+-=/*</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="lColorButton">
+          <property name="text">
+           <string>L100</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="rColorButton">
+          <property name="text">
+           <string>R10</string>
           </property>
           <property name="flat">
            <bool>true</bool>
@@ -300,6 +300,46 @@
           </property>
          </widget>
         </item>
+        <item row="5" column="1">
+         <widget class="QLineEdit" name="calcLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Calculator executable</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Calculator executable :</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="clearUndocheckBox">
+          <property name="toolTip">
+           <string>Clear undo/redo history on save</string>
+          </property>
+          <property name="text">
+           <string>Clear undo/redo history on save</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="clearUnderlinecheckBox">
+          <property name="toolTip">
+           <string>Clear underline changes on save</string>
+          </property>
+          <property name="text">
+           <string>Clear underline on save</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -333,7 +373,7 @@
         <string>&amp;Ok</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/ok.png</normaloff>:/images/ok.png</iconset>
        </property>
        <property name="default">
@@ -360,7 +400,7 @@
         <string>&amp;Default</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/default.png</normaloff>:/images/default.png</iconset>
        </property>
        <property name="autoDefault">
@@ -387,7 +427,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
        </property>
        <property name="autoDefault">
@@ -414,11 +454,6 @@
  </widget>
  <tabstops>
   <tabstop>changeFontButton</tabstop>
-  <tabstop>rColorButton</tabstop>
-  <tabstop>lColorButton</tabstop>
-  <tabstop>operatorColorButton</tabstop>
-  <tabstop>mColorButton</tabstop>
-  <tabstop>progNameColorButton</tabstop>
   <tabstop>keyWordColorButton</tabstop>
   <tabstop>aColorButton</tabstop>
   <tabstop>dhtColorButton</tabstop>
@@ -434,13 +469,10 @@
   <tabstop>syntaxHCheckBox</tabstop>
   <tabstop>tabbedModecheckBox</tabstop>
   <tabstop>underlineCheckBox</tabstop>
-  <tabstop>underlineColorButton</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>defaultButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>
- <resources>
-  <include location="application.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

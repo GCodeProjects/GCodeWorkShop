@@ -114,15 +114,50 @@ bool MdiChild::loadFile(const QString &fileName)
 
 bool MdiChild::save()
 {
-    setFocus();
-    if(isUntitled) 
-    {
-       return saveAs();
-    } 
-    else 
-    {
-       return saveFile(curFile);
-    }
+   bool result;
+   setFocus();
+   if(isUntitled)
+   {
+      result = saveAs();
+   }
+   else
+   {
+      result = saveFile(curFile);
+   };
+
+   if(result)
+   {
+      if(mdiWindowProperites.clearUndoHistory)
+      {
+         textEdit->setUndoRedoEnabled(false);  //clear undo/redo history
+         textEdit->setUndoRedoEnabled(true);
+      };
+
+      if(mdiWindowProperites.clearUnderlineHistory)
+      {
+         
+         QTextCursor cursorPos = textEdit->textCursor();
+         textEdit->blockSignals(true);
+         textEdit->selectAll();
+         if(mdiWindowProperites.underlineChanges)
+         {
+            QTextCursor cr = textEdit->textCursor(); // Clear underline
+            QTextCharFormat format = cr.charFormat();
+            format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+            cr.setCharFormat(format);
+
+            textEdit->setTextCursor(cr);
+         };
+         textEdit->setTextCursor(cursorPos);
+
+         textEdit->document()->setModified(false);
+         documentWasModified();
+         textEdit->blockSignals(false);
+      };
+   };
+
+
+   return result;
 }
 
 //**************************************************************************************************
@@ -1102,11 +1137,11 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 //
 //**************************************************************************************************
 
-void MdiChild::resizeEvent(QResizeEvent *event)
-{
-   Q_UNUSED(event);
-   textEdit->centerCursor();
-}
+//void MdiChild::resizeEvent(QResizeEvent *event)
+//{
+//   Q_UNUSED(event);
+//   //textEdit->centerCursor();
+//}
 
 //**************************************************************************************************
 //

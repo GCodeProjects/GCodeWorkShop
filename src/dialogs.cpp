@@ -25,6 +25,7 @@
 
 
 
+
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================
 
@@ -1588,8 +1589,6 @@ BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     setToolTip(tr("Click to close"));
 
     setBackgroundRole(QPalette::Shadow);
-
-    //connect(this, SIGNAL(fileClicket()), this, SLOT(close()));
 }
 
 //**************************************************************************************************
@@ -1643,14 +1642,14 @@ void BHCDraw::setScale(double sc)
 //
 //**************************************************************************************************
 
-void BHCDraw::paintEvent( QPaintEvent * )
+void BHCDraw::paintEvent(QPaintEvent *)
 {
     //bitBlt( this, 0, 0, pm );
     if(pm->isNull())
       return;
+
     QPainter painter(this);
     painter.drawPixmap(0, 0, *pm);
-
 }
 
 //**************************************************************************************************
@@ -1676,6 +1675,7 @@ void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color
     paint->setFont(font);
     QFontMetrics fm = paint->fontMetrics();
 
+    //paint->setRenderHint(QPainter::Antialiasing);
     paint->save();
     int c = qMin(geometry().width(), geometry().height());
     c = c + (fm.lineSpacing() * 8);
@@ -1683,17 +1683,19 @@ void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color
     paint->setWindow(-(c / 2), -(c / 2), c, c);
     QRect v = paint->viewport();
     c = qMin(v.width(), v.height());
+
     paint->setViewport(v.left() + (v.width() - c) / 2, v.top() + (v.height() - c) / 2, c, c);
 
     sca = ((c - 20) / 2) / (scale / 2);
 
     paint->scale(sca, sca);
 
+
     paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
     paint->setBrush(Qt::NoBrush);
     paint->drawEllipse(QPointF(v.x() / 2, -v.y() / 2), dia, dia);
 
-    d = 10 / sca;
+    d = 12 / sca;
     x = (dia + (d)) * cos((M_PI/180) * ang);
     y = (dia + (d)) * sin((M_PI/180) * ang);
 
@@ -1724,11 +1726,16 @@ void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color
     y = dia * sin((M_PI/180) * ang);
 
     d = 8 / sca;
+
     paint->drawEllipse(QPointF(x, -y), d, d);
 
 
+    v = paint->viewport();
+        c = qMin(v.width(), v.height());
+
     paint->restore();
     paint->end();
+
 }
 
 //**************************************************************************************************
@@ -1747,6 +1754,7 @@ void BHCDraw::drawLines(qreal dia, qreal ang, QColor cl)
     paint->setFont(font);
     QFontMetrics fm = paint->fontMetrics();
 
+    //paint->setRenderHint(QPainter::Antialiasing);
     paint->save();
 
     int d = qMin(geometry().width(), geometry().height());
@@ -1799,6 +1807,7 @@ void BHCDraw::printText(int x, int y, int line, const QString &text, QColor colo
    paint->setFont(font);
    QFontMetrics fm = paint->fontMetrics();
 
+   //paint->setRenderHint(QPainter::Antialiasing);
    paint->save();
    paint->setPen(QPen(color, 0, Qt::SolidLine));
    paint->drawText(x, y + (fm.lineSpacing() * line), text);
@@ -2770,6 +2779,10 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    underlineCheckBox->setChecked(editProp.underlineChanges);
    tabbedModecheckBox->setChecked(editProp.tabbedMode);
 
+   calcLineEdit->setText(editProp.calcBinary);
+   clearUndocheckBox->setChecked(editProp.clearUndoHistory);
+   clearUnderlinecheckBox->setChecked(editProp.clearUnderlineHistory);
+
 
    connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
@@ -2822,6 +2835,9 @@ _editor_properites SetupDialog::getSettings()
    editProp.syntaxH = syntaxHCheckBox->isChecked();
    editProp.underlineChanges = underlineCheckBox->isChecked();
    editProp.tabbedMode = tabbedModecheckBox->isChecked();
+   editProp.calcBinary = calcLineEdit->text();
+   editProp.clearUndoHistory = clearUndocheckBox->isChecked();
+   editProp.clearUnderlineHistory = clearUnderlinecheckBox->isChecked();
 
    palette = commentColorButton->palette();
    palette.color(commentColorButton->foregroundRole()).getRgb(&r, &g, &b);
@@ -2978,6 +2994,17 @@ void SetupDialog::setDefaultProp()
    tabbedModecheckBox->setChecked(FALSE);
    editProp.fontName = "Courier";
    editProp.fontSize = 12;
+
+   clearUndocheckBox->setChecked(FALSE);
+   clearUnderlinecheckBox->setChecked(FALSE);
+
+#ifdef Q_OS_LINUX
+   editProp.calcBinary = "kcalc";
+#endif
+
+#ifdef Q_OS_WIN32
+   editProp.calcBinary = "calc.exe";
+#endif
 
    fontLabel->setText(QString(tr("Current font : <b>\"%1\", %2 pt.<\b>")
                       .arg(editProp.fontName).arg(editProp.fontSize)));

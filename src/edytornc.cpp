@@ -653,6 +653,9 @@ void edytornc::config()
          opt.lineColor = defaultMdiWindowProperites.lineColor;
          opt.underlineColor = defaultMdiWindowProperites.underlineColor;
          opt.underlineChanges = defaultMdiWindowProperites.underlineChanges;
+         opt.clearUnderlineHistory = defaultMdiWindowProperites.clearUnderlineHistory;
+         opt.clearUndoHistory = defaultMdiWindowProperites.clearUndoHistory;
+
          tabbedView = defaultMdiWindowProperites.tabbedMode;
          if(tabbedView)
            mdiArea->setViewMode(QMdiArea::TabbedView);
@@ -877,24 +880,24 @@ void edytornc::doConvertProg()
 void edytornc::doCalc()
 {
    proc = findChild<QProcess *>();
-   QString name = "";
+//   QString name = "";
+//
+//#ifdef Q_OS_LINUX
+//   name = "kcalc";
+//#endif
+//
+//#ifdef Q_OS_WIN32
+//   name = "calc.exe";
+//#endif
 
-#ifdef Q_OS_LINUX
-   name = "kcalc";
-#endif
-
-#ifdef Q_OS_WIN32
-   name = "calc.exe";
-#endif
-
-   if(!proc && !name.isNull())
+   if(!proc && !defaultMdiWindowProperites.calcBinary.isNull())
    {
       proc = new QProcess(this);
-      proc->start(name);
+      proc->start(defaultMdiWindowProperites.calcBinary);
    }
    else
-     if(!proc->pid() && !name.isNull())
-       proc->start(name);
+     if(!proc->pid() && !defaultMdiWindowProperites.calcBinary.isNull())
+       proc->start(defaultMdiWindowProperites.calcBinary);
 
 }
 
@@ -989,6 +992,7 @@ void edytornc::about()
                                "2010.01" +
                             tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             tr("<P>Catalan translation thanks to Jordi Sayol") +
+                            tr("<P>German translation thanks to Michael Numberger") +
                             tr("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             tr("<P>") +
                             tr("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
@@ -1660,11 +1664,22 @@ void edytornc::readSettings()
     defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", TRUE).toBool();
     defaultMdiWindowProperites.underlineChanges = settings.value("UnderlineChanges", TRUE).toBool();
     tabbedView = settings.value("TabbedView", FALSE).toBool();
+    defaultMdiWindowProperites.clearUndoHistory = settings.value("ClearUndoRedo", FALSE).toBool();
+    defaultMdiWindowProperites.clearUnderlineHistory = settings.value("ClearUnderline", FALSE).toBool();
 
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray(); 
+
+#ifdef Q_OS_LINUX
+   defaultMdiWindowProperites.calcBinary = "kcalc";
+#endif
+
+#ifdef Q_OS_WIN32
+   defaultMdiWindowProperites.calcBinary = "calc.exe";
+#endif
+    defaultMdiWindowProperites.calcBinary = settings.value("CalcBinary", defaultMdiWindowProperites.calcBinary).toString();
 
     m_recentFiles = settings.value( "RecentFiles").toStringList();
     updateRecentFilesMenu();
@@ -1771,7 +1786,9 @@ void edytornc::writeSettings()
     settings.setValue("TabbedView", tabbedView);
     settings.setValue("LineColor", defaultMdiWindowProperites.lineColor);
     settings.setValue("UnderlineColor", defaultMdiWindowProperites.underlineColor);
-
+    settings.setValue("CalcBinary", defaultMdiWindowProperites.calcBinary);
+    settings.setValue("ClearUndoRedo", defaultMdiWindowProperites.clearUndoHistory);
+    settings.setValue("ClearUnderline", defaultMdiWindowProperites.clearUnderlineHistory);
     
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue( "RecentFiles", m_recentFiles);

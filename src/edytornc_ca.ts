@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name>BHCDialog</name>
     <message>
@@ -1054,16 +1056,16 @@ Verifica +-*/.
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:<byte value="x9"/>&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;<byte value="x9"/>&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Podeu escriure text sense format o/i codis hexadecimals de caràcters ASCII. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Exemple:<byte value="x9"/>&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % i el caràcter de línia nova&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;<byte value="x9"/>&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - caràcter d&apos;espai i de línia nova&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Exemple:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % i el caràcter de línia nova&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - caràcter d&apos;espai i de línia nova&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt; El caràcter d&apos;espai només es pot escriure com un número hexadecimal - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -1256,6 +1258,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Current font : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</source>
         <translation>Font actual: &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Calculator executable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculator executable :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear undo/redo history on save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear underline changes on save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear underline on save</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2169,6 +2191,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Unknown error</source>
         <translation>Error desconegut</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Catalan translation thanks to Jordi Sayol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;German translation thanks to Michael Numberger</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
