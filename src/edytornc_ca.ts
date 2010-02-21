@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="ca">
 <context>
     <name>BHCDialog</name>
     <message>
@@ -175,11 +175,11 @@
     </message>
     <message>
         <source>Chamfer length in X : XL</source>
-        <translation>Longitut del xanfrà en X: XL</translation>
+        <translation>Longitut del xamfrà en X: XL</translation>
     </message>
     <message>
         <source>Chamfer length in Z : ZL</source>
-        <translation>Longitut del xanfrà en Z: ZL</translation>
+        <translation>Longitut del xamfrà en Z: ZL</translation>
     </message>
     <message>
         <source>45</source>
@@ -199,7 +199,7 @@
     </message>
     <message>
         <source>Chamfer</source>
-        <translation>Xanfrà</translation>
+        <translation>Xamfrà</translation>
     </message>
 </context>
 <context>
@@ -1261,23 +1261,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Calculator executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Executable de calculadora</translation>
     </message>
     <message>
         <source>Calculator executable :</source>
-        <translation type="unfinished"></translation>
+        <translation>Executable de calculadora:</translation>
     </message>
     <message>
         <source>Clear undo/redo history on save</source>
-        <translation type="unfinished"></translation>
+        <translation>Esborra l&apos;historial de desfés/refés en desar</translation>
     </message>
     <message>
         <source>Clear underline changes on save</source>
-        <translation type="unfinished"></translation>
+        <translation>Esborra els subratllats de canvis en desar</translation>
     </message>
     <message>
         <source>Clear underline on save</source>
-        <translation type="unfinished"></translation>
+        <translation>Esborra el subratllat en desar</translation>
     </message>
 </context>
 <context>
@@ -1602,27 +1602,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> Col: </source>
-        <translation>Columna:</translation>
+        <translation> Columna: </translation>
     </message>
     <message>
         <source>  Line: </source>
-        <translation>Línia: </translation>
+        <translation>  Línia: </translation>
     </message>
     <message>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
-        <translation>&lt;b&gt;Modificat&lt;/b&gt;</translation>
+        <translation>  &lt;b&gt;Modificat&lt;/b&gt;  </translation>
     </message>
     <message>
         <source> Read only  </source>
-        <translation>Només lectura</translation>
+        <translation> Només lectura  </translation>
     </message>
     <message>
         <source> Overwrite  </source>
-        <translation>Sobreescriu</translation>
+        <translation> Sobreescriu  </translation>
     </message>
     <message>
         <source> Insert </source>
-        <translation>Insereix</translation>
+        <translation> Insereix </translation>
     </message>
     <message>
         <source>&amp;%1 %2</source>
@@ -2194,15 +2194,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;P&gt;Catalan translation thanks to Jordi Sayol</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Traducció al Català gràcies a en Jordi Sayol</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <source>&lt;P&gt;German translation thanks to Michael Numberger</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Traducció a l&apos;Alemany gràcies a en Michael Numberger</translation>
     </message>
 </context>
 </TS>
