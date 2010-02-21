@@ -87,7 +87,7 @@
       <enum>QPlainTextEdit::NoWrap</enum>
      </property>
      <property name="centerOnScroll">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </item>

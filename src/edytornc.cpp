@@ -989,7 +989,7 @@ void edytornc::about()
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             tr("<P>Version: ") +
-                               "2010.01" +
+                               "2010.03" +
                             tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             tr("<P>Catalan translation thanks to Jordi Sayol") +
                             tr("<P>German translation thanks to Michael Numberger") +
@@ -1405,7 +1405,7 @@ void edytornc::createActions()
     calcAct->setStatusTip(tr("Run calculator"));
     connect(calcAct, SIGNAL(triggered()), this, SLOT(doCalc()));
 
-    showSerialToolBarAct = new QAction(QIcon(":/images/serial.png"), tr("Serial port send/receive - experimental"), this);
+    showSerialToolBarAct = new QAction(QIcon(":/images/serial.png"), tr("Serial port send/receive"), this);
     //showSerialToolBarAct->setShortcut(tr("F9"));
     showSerialToolBarAct->setCheckable(TRUE);
     showSerialToolBarAct->setStatusTip(tr("Serial port send/receive"));
@@ -1643,6 +1643,12 @@ void edytornc::readSettings()
     resize(size);
 
 
+    if(settings.value("SerialToolbarShown", FALSE).toBool())
+    {
+       createSerialToolBar();
+       showSerialToolBarAct->setChecked(true);
+    };
+
     restoreState(settings.value("State", QByteArray()).toByteArray());
 
 
@@ -1669,6 +1675,7 @@ void edytornc::readSettings()
 
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
+
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray(); 
 
@@ -1791,7 +1798,9 @@ void edytornc::writeSettings()
     settings.setValue("ClearUnderline", defaultMdiWindowProperites.clearUnderlineHistory);
     
     settings.setValue("FileDialogState", fileDialogState);
-    settings.setValue( "RecentFiles", m_recentFiles);
+    settings.setValue("RecentFiles", m_recentFiles);
+
+    settings.setValue("SerialToolbarShown", (serialToolBar != NULL));
 
 
     settings.beginGroup("Highlight" );
