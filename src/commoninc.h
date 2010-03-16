@@ -43,6 +43,7 @@ struct _h_colors
    int zColor;
    int aColor;
    int bColor;
+   int highlightMode;
 
 };
 
@@ -77,6 +78,7 @@ struct _editor_properites
    QString calcBinary;
    bool clearUndoHistory;
    bool clearUnderlineHistory;
+   bool editorToolTips;
 };
 
 

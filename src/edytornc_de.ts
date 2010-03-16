@@ -315,7 +315,7 @@
     <message>
         <location filename="dotdialog.ui" line="25"/>
         <source>Insert &amp;dot at address</source>
-        <translation>Füge Punkt an Adresse ein</translation>
+        <translation>Füge &amp;Punkt an Adresse ein</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="32"/>
@@ -330,7 +330,7 @@
     <message>
         <location filename="dotdialog.ui" line="62"/>
         <source>&amp;Divide numbers by :</source>
-        <translation>&amp;Teile Zahlen durch</translation>
+        <translation>&amp;Teile Zahlen durch :</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="69"/>

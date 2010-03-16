@@ -115,6 +115,8 @@ private slots:
     void lineDelaySlot();
     void attachToDirButtonClicked(bool attach = true);
     void deAttachToDirButtonClicked();
+    void setHighLightMode(int mode);
+    void createToolTipsFile();
 
 
 
@@ -182,6 +184,7 @@ private:
     QAction *separatorAct;
     QAction *aboutAct;
     QAction *aboutQtAct;
+    QAction *createToolTipsAct;
     QAction *undoAct;
     QAction *redoAct;
 
@@ -212,6 +215,7 @@ private:
 
     QLabel *labelStat1;
     QToolButton *readOnlyButton;
+    QComboBox *highlightTypeCombo;
 
 
     QToolBar *findToolBar;

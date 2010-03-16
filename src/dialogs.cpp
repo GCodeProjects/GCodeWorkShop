@@ -67,12 +67,12 @@ I2MDialog::I2MDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 
    inputChanged();
 
-   setMaximumSize(width(), height());
+   //setMaximumSize(width(), height());
 
-   connect( inchInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   connect( inchCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( mmCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-   connect( closePushButton, SIGNAL(clicked()), SLOT(close()));
+   connect(inchInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(inchCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(mmCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+   connect(closePushButton, SIGNAL(clicked()), SLOT(close()));
 
    setFocusProxy(inchInput);
 
@@ -932,8 +932,26 @@ void TriangleDialog::computeButtonClicked()
    angle2 = aBInput->text().toDouble(&ok);
    angle3 = aCInput->text().toDouble(&ok);
 
+   if(!aCheckBox->isChecked())
+      aInput->setText("--");
+
+   if(!bCheckBox->isChecked())
+      bInput->setText("--");
+
+   if(!cCheckBox->isChecked())
+      cInput->setText("--");
+
+   if(!aACheckBox->isChecked())
+      aAInput->setText("--");
+
+   if(!aBCheckBox->isChecked())
+      aBInput->setText("--");
+
+   if(!aCCheckBox->isChecked())
+      aCInput->setText("--");
+
    if((angle1 + angle2 + angle3) > 180)
-     return;
+      return;
 
    if(option1() == 0) return;
    if(option2() == 0) return;
@@ -2782,6 +2800,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    calcLineEdit->setText(editProp.calcBinary);
    clearUndocheckBox->setChecked(editProp.clearUndoHistory);
    clearUnderlinecheckBox->setChecked(editProp.clearUnderlineHistory);
+   editorToolTipsCheckBox->setChecked(editProp.editorToolTips);
 
 
    connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
@@ -2838,6 +2857,7 @@ _editor_properites SetupDialog::getSettings()
    editProp.calcBinary = calcLineEdit->text();
    editProp.clearUndoHistory = clearUndocheckBox->isChecked();
    editProp.clearUnderlineHistory = clearUnderlinecheckBox->isChecked();
+   editProp.editorToolTips = editorToolTipsCheckBox->isChecked();
 
    palette = commentColorButton->palette();
    palette.color(commentColorButton->foregroundRole()).getRgb(&r, &g, &b);
@@ -2992,6 +3012,7 @@ void SetupDialog::setDefaultProp()
    capsLockCheckBox->setChecked(TRUE);
    underlineCheckBox->setChecked(TRUE);
    tabbedModecheckBox->setChecked(FALSE);
+   editorToolTipsCheckBox->setChecked(TRUE);
    editProp.fontName = "Courier";
    editProp.fontSize = 12;
 

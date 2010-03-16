@@ -34,12 +34,17 @@ FindInFiles::FindInFiles(QWidget *parent): QDialog(parent)
     //setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Find Files"));
 
+    highlighter = NULL;
+    highligh = false;
+
     connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
     connect(findButton, SIGNAL(clicked()), SLOT(find()));
     connect(closeButton, SIGNAL(clicked()), SLOT(closeDialog()));
     connect(hideButton, SIGNAL(clicked()), SLOT(close()));
 
     createFilesTable();
+
+    textComboBox->installEventFilter(this);
 
     preview->setReadOnly(TRUE);
     preview->setWordWrapMode(QTextOption::NoWrap);
@@ -209,11 +214,15 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
                QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
                sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
+               QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
+               dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
                int row = filesTable->rowCount();
                filesTable->insertRow(row);
                filesTable->setItem(row, 0, fileNameItem);
                filesTable->setItem(row, 1, infoNameItem);
                filesTable->setItem(row, 2, sizeItem);
+               filesTable->setItem(row, 3, dateItem);
             };
             file.close();
         };   
@@ -245,7 +254,7 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
 void FindInFiles::createFilesTable()
 {
     QStringList labels;
-    labels << tr("File Name") << tr("Info") << tr("Size");
+    labels << tr("File Name") << tr("Info") << tr("Size") << tr("Modified");
     filesTable->setHorizontalHeaderLabels(labels);
     connect(filesTable, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(filesTableClicked(int, int)));
     connect(filesTable, SIGNAL(cellClicked(int, int)), this, SLOT(filePreview(int, int)));
@@ -337,6 +346,9 @@ void FindInFiles::readSettings()
    fileComboBox->clear(); 
 
    QSettings settings("EdytorNC", "EdytorNC");
+
+   intCapsLock = settings.value("IntCapsLock", TRUE).toBool();
+
    settings.beginGroup("FindFileDialog");
 
    wholeWordsCheckBox->setChecked(settings.value("WholeWords", FALSE).toBool());
@@ -406,6 +418,19 @@ void FindInFiles::filePreview(int x, int y)
          QTextStream in(&file);
          preview->setPlainText(in.readAll());
          file.close();
+
+         if(highligh)
+         {
+            if(highlighter == NULL)
+              highlighter = new Highlighter(preview->document());
+
+            if(highlighter != NULL)
+            {
+               highlighterColors.highlightMode = autoDetectHighligthMode(preview->toPlainText());
+               highlighter->setHColors(highlighterColors, preview->font());
+               highlighter->rehighlight();
+            };
+         };
          qApp->processEvents();
 
          if((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*"))
@@ -423,8 +448,8 @@ void FindInFiles::filePreview(int x, int y)
  
 void FindInFiles::setHighlightColors(const _h_colors colors)
 {
-   highlighter = new Highlighter(preview->document());
-   highlighter->setHColors(colors, preview->font());
+   highligh = true;
+   highlighterColors = colors;
 }
 
 //**************************************************************************************************
@@ -477,4 +502,53 @@ void FindInFiles::highlightFindText(QString searchString, QTextDocument::FindFla
 //**************************************************************************************************
 //
 //**************************************************************************************************
+
+bool FindInFiles::eventFilter(QObject *obj, QEvent *ev)
+{
+   if((obj == textComboBox))
+   {
+       if( ev->type() == QEvent::KeyPress )
+       {
+          QKeyEvent *k = (QKeyEvent*) ev;
+
+          if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
+          {
+             if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
+             {
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+                return true;
+             };
+
+          };
+
+          if(intCapsLock)
+          {
+             if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
+             {
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+                return true;
+
+             };
+
+             if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
+             {
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+                return true;
+             };
+          };
+       };
+
+       return FALSE;
+   }
+   else
+   {
+      // pass the event on to the parent class
+      return eventFilter(obj, ev);
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 

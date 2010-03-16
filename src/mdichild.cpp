@@ -39,14 +39,14 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     setAttribute(Qt::WA_DeleteOnClose);
     isUntitled = true;
     textEdit->setWordWrapMode(QTextOption::NoWrap);
-    highlighter = 0;
-    //textEdit->setAcceptRichText(FALSE);
+    highlighter = NULL;
     setFocusProxy(textEdit);
 
     marginWidget->setAutoFillBackground(TRUE);
     marginWidget->setBackgroundRole(QPalette::Base);
     textEdit->installEventFilter(this);
     setWindowIcon(QIcon(":/images/ncfile.png"));
+
 
     //textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     //setContextMenuPolicy(Qt::CustomContextMenu);
@@ -58,7 +58,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 
 MdiChild::~MdiChild()
 {
-    if(highlighter > 0)
+   if(highlighter != NULL)
       delete highlighter;
 }
 
@@ -105,6 +105,7 @@ bool MdiChild::loadFile(const QString &fileName)
     setCurrentFile(fileName, tex);
     connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 
+    //detectHighligthMode();
     return true;
 }
 
@@ -156,7 +157,7 @@ bool MdiChild::save()
       };
    };
 
-
+   detectHighligthMode();
    return result;
 }
 
@@ -498,19 +499,17 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
 
    if(mdiWindowProperites.syntaxH)
    {
-      if(highlighter <= 0)
+      if(highlighter == NULL)
         highlighter = new Highlighter(textEdit->document());
-      if(highlighter > 0)
-      {
-         highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
-         highlighter->rehighlight();
-      };
+
+      if(highlighter != NULL)
+         detectHighligthMode();
    }
    else
    {
-      if(highlighter > 0)
+      if(highlighter != NULL)
         delete(highlighter);
-      highlighter = 0;
+      highlighter = NULL;
    };
     
    QTextCursor cursor = textEdit->textCursor();
@@ -578,7 +577,6 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
    }
    else
    {
-      // pass the event on to the parent class
       return textEdit->eventFilter(obj, ev);
    };
 }
@@ -1137,11 +1135,136 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 //
 //**************************************************************************************************
 
-//void MdiChild::resizeEvent(QResizeEvent *event)
-//{
-//   Q_UNUSED(event);
-//   //textEdit->centerCursor();
-//}
+bool MdiChild::event(QEvent *event)
+{
+   QString group, key, text;
+   QTextCursor cursor;
+   QString fileName;
+
+   if(!mdiWindowProperites.editorToolTips)
+      return QWidget::event(event);
+
+   fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".ini";
+
+   //qDebug() << fileName;
+
+   if(!QFile::exists(fileName))
+      fileName = QApplication::applicationDirPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".ini";
+
+   //qDebug() << fileName;
+
+   if(!QFile::exists(fileName))
+      return QWidget::event(event);
+
+   QSettings settings(fileName, QSettings::IniFormat);
+
+   switch(mdiWindowProperites.hColors.highlightMode)
+   {
+      case MODE_OKUMA            : group = "OKUMA";
+                                   break;
+      case MODE_FANUC            : group = "FANUC";
+                                   break;
+      case MODE_SINUMERIK_840    : group = "SINUMERIK_840";
+                                   break;
+      case MODE_PHILIPS          :
+      case MODE_SINUMERIK        : group = "SINUMERIK";
+                                   break;
+      case MODE_HEIDENHAIN       : group = "HEIDENHAIN";
+                                   break;
+      case MODE_HEIDENHAIN_ISO   : group = "HEIDENHAIN_ISO";
+                                   break;
+      default                    : group = "";
+
+   };
+
+   if(group.isEmpty())
+      return QWidget::event(event);
+
+   if(event->type() == QEvent::ToolTip)
+   {
+      QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+
+      cursor = textEdit->cursorForPosition(helpEvent->pos());
+
+      if(mdiWindowProperites.hColors.highlightMode == MODE_FANUC)
+      {
+         do
+         {
+            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+            key = cursor.selectedText();
+
+         }while(key.at(0).isLetter() && !key.isEmpty());
+
+         cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
+         do
+         {
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            key = cursor.selectedText();
+
+         }while(key.at(key.length() - 1).isLetter() && !key.isEmpty());
+
+         cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+
+         if(key.length() < 3)
+         {
+            cursor = textEdit->cursorForPosition(helpEvent->pos());
+            do
+            {
+               cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+               key = cursor.selectedText();
+
+            }while(!key.at(0).isLetter() && !key.isEmpty());
+
+            cursor.clearSelection();
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            do
+            {
+               cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+               key = cursor.selectedText();
+
+            }while(key.at(key.length() - 1).isDigit() && !key.isEmpty());
+
+            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+         };
+
+      }
+      else
+      {
+
+         cursor.movePosition(QTextCursor::PreviousWord, QTextCursor::MoveAnchor);
+         cursor.movePosition(QTextCursor::EndOfWord,  QTextCursor::KeepAnchor);
+      };
+
+      key = cursor.selectedText();
+      settings.beginGroup(group);
+
+      if(key.length() == 2)
+      {
+         if((key.at(0) == 'G') || (key.at(0) == 'M'))
+            if(!key.at(1).isLetter())
+               key.insert(1, "0");
+      };
+
+      text = settings.value(key, "").toString();
+
+
+      if(!text.isEmpty())
+         QToolTip::showText(helpEvent->globalPos(), "<p style='white-space:pre'>" + text, this, QRect());
+      else
+      {
+         QToolTip::hideText();
+         event->ignore();
+         //if(key.length() >= 1 && !(key.contains(" ")))
+            //settings.setValue(key, "");
+      };
+      settings.endGroup();
+
+      qDebug() << "Full key: " << key;
+
+      return true;
+    };
+    return QWidget::event(event);
+ }
 
 //**************************************************************************************************
 //
@@ -1518,7 +1641,7 @@ void MdiChild::compileMacro()
    QString basicCode, basicSubs;
    BasicInterpreter basicInterpreter;
 
-   QApplication::setOverrideCursor(Qt::BusyCursor);
+
 
    text = textEdit->toPlainText();
    pos = 0;
@@ -1539,6 +1662,7 @@ void MdiChild::compileMacro()
 
    //defEnd -= exp.matchedLength();
 
+   QApplication::setOverrideCursor(Qt::BusyCursor);
 
    pos = defBegin + 7;
 
@@ -1970,9 +2094,54 @@ void MdiChild::doRedo()
    textEdit->ensureCursorVisible();
    highlightCurrentLine();
 }
+
 //**************************************************************************************************
 //
 //**************************************************************************************************
+
+void MdiChild::detectHighligthMode()
+{
+   QString text;
+
+   if(!mdiWindowProperites.syntaxH)
+      return;
+
+   text = textEdit->toPlainText();
+
+
+   if((!text.isEmpty()) && (mdiWindowProperites.hColors.highlightMode == MODE_AUTO))
+   { 
+      mdiWindowProperites.hColors.highlightMode = autoDetectHighligthMode(text);
+   };
+
+
+   if(highlighter != NULL)
+   {
+      highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
+      highlighter->rehighlight();
+   };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::setHighligthMode(int mod)
+{
+
+   mdiWindowProperites.hColors.highlightMode = mod;
+   detectHighligthMode();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+int MdiChild::getHighligthMode()
+{
+   return mdiWindowProperites.hColors.highlightMode;
+}
 
 
 //**************************************************************************************************

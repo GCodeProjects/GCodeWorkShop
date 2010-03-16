@@ -30,6 +30,7 @@
 
 #include "ui_spconfigdialog.h"
 #include "ui_transmissiondialog.h"
+#include "ui_transprogressdialog.h"
 
 
 class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
@@ -138,9 +139,50 @@ class TransmissionDialog : public QDialog, private Ui::TransmissionDialog
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
+{
+   Q_OBJECT
+
+   public:
+     TransProgressDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+     ~TransProgressDialog();
+
+   public slots:
+     void setLabelText(const QString text);
+     void open(QextSerialPort *port, char cxon = 0, char cxoff = 0);
+     bool wasCanceled();
+     void setRange(int min, int max);
+     void setValue(int val);
+
+
+   protected:
+
+   signals :
 
 
 
+   private slots:
+     void cancelButtonClicked();
+     void updateLeds();
+     void setRtsButtonClicked();
+     void setDtrButtonClicked();
+     void setXonButtonClicked();
+     void setXoffButtonClicked();
+
+
+
+
+   private:
+     QextSerialPort *comPort;
+     bool canceled;
+     char xon, xoff;
+
+     QTimer *timer;
+
+
+
+
+};
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================

@@ -36,15 +36,17 @@ QT_END_NAMESPACE
 
 
 
-#define MODE_ALL                 0xFFFF
-#define MODE_OKUMA               0xFFFF
-#define MODE_FANUC               0xFFFF
-#define MODE_HEIDENHAIN          0xFFFF
-#define MODE_SINUMERIK           0xFFFF
-#define MODE_SINUMERIK_840       0xFFFF
+#define MODE_AUTO                0x00
+#define MODE_OKUMA               0x02
+#define MODE_FANUC               0x03
+#define MODE_HEIDENHAIN          0x04
+#define MODE_SINUMERIK           0x05
+#define MODE_SINUMERIK_840       0x06
+#define MODE_PHILIPS             0x07
+#define MODE_HEIDENHAIN_ISO      0x08
 
 
-
+int autoDetectHighligthMode(const QString text);
 
 class Highlighter : public QSyntaxHighlighter
 {
@@ -59,20 +61,38 @@ protected:
 
 private:
     void highlightInside(const QString &tx, int pos, int maxlen);
+    void loadRules();
+    void highlightBlockSinuRule(const QString &text);
+    void highlightBlockFanucRule(const QString &text);
+    void highlightBlockOkumaRule(const QString &text);
+    void highlightBlockSinuOldRule(const QString &text);
+    void highlightBlockHeidRule(const QString &text);
+    void highlightBlockHeidIsoRule(const QString &text);
     _h_colors highlightColors;
     QFont font;
+    int mode;
 
 
 
 
-    struct HighlightingRule
+     struct HighlightingRule
      {
-         QRegExp pattern;
-         QTextCharFormat format;
+        QRegExp pattern;
+        QTextCharFormat format;
      };
+
      QVector<HighlightingRule> highlightRules;
-     QVector<HighlightingRule> progNameHighlightRules;
      QVector<HighlightingRule> commentHighlightRules;
+
+
+     struct ProgNameHighlightingRule
+     {
+        QRegExp pattern;
+        QTextCharFormat format;
+        int mode;
+     };
+
+     QVector<ProgNameHighlightingRule> progNameHighlightRules;
 
      QRegExp commentStartExpression;
      QRegExp commentEndExpression;

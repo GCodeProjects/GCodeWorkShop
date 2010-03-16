@@ -50,7 +50,8 @@ FORMS += i2mdialog.ui \
     i2mprogdialog.ui \
     setupdialog.ui \
     spconfigdialog.ui \
-    transmissiondialog.ui
+    transmissiondialog.ui \
+    transprogressdialog.ui
 TRANSLATIONS = edytornc_pl.ts \
     edytornc_ca.ts \
     edytornc_de.ts

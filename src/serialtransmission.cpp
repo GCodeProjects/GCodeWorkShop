@@ -475,6 +475,7 @@ TransmissionDialog::~TransmissionDialog()
 
 void TransmissionDialog::textEditScroll(int pos)
 {
+   Q_UNUSED(pos);
    hexTextEdit->verticalScrollBar()->setSliderPosition(textEdit->verticalScrollBar()->sliderPosition());
 }
 
@@ -484,6 +485,7 @@ void TransmissionDialog::textEditScroll(int pos)
 
 void TransmissionDialog::hexTextEditScroll(int pos)
 {
+   Q_UNUSED(pos);
    textEdit->verticalScrollBar()->setSliderPosition(hexTextEdit->verticalScrollBar()->sliderPosition());
 }
 
@@ -991,6 +993,271 @@ void TransmissionDialog::sendText(QString tx)
 void TransmissionDialog::lineDelaySlot()
 {
    readyCont = true;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+{
+   setupUi(this);
+   //setWindowTitle(tr("Serial transmission"));
+
+   comPort = NULL;
+
+   canceled = true;
+   xon = 0;
+   xoff = 0;
+
+   connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
+
+   connect(setRtsButton, SIGNAL(clicked()), SLOT(setRtsButtonClicked()));
+   connect(setDtrButton, SIGNAL(clicked()), SLOT(setDtrButtonClicked()));
+
+   timer = new QTimer(this);
+   connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
+
+   connect(setXonButton, SIGNAL(clicked()), SLOT(setXonButtonClicked()));
+   connect(setXoffButton, SIGNAL(clicked()), SLOT(setXoffButtonClicked()));
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+TransProgressDialog::~TransProgressDialog()
+{
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::cancelButtonClicked()
+{
+   canceled = true;
+   close();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool TransProgressDialog::wasCanceled()
+{
+   return canceled;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::setLabelText(const QString text)
+{
+   label->setText(text);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::setValue(int val)
+{
+   progressBar->setValue(val);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::setRange(int min, int max)
+{
+   if(max == 0)
+      progressBar->hide();
+   else
+      progressBar->setRange(min, max);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::open(QextSerialPort *port, char cxon, char cxoff)
+{
+   if(port != NULL)
+   {
+      canceled = false;
+      show();
+      comPort = port;
+
+      xon = cxon;
+      xoff = cxoff;
+
+      timer->start(20);
+
+      setDtrButton->setEnabled(true);
+      setDtrButton->setChecked(false);
+      setRtsButton->setEnabled(true);
+      setRtsButton->setChecked(false);
+
+      setXonButton->setEnabled(xon > 0);
+      setXoffButton->setEnabled(xoff > 0);
+
+   };
+
+
+//   if(tg)
+//   {
+//
+//
+//      count = 0;
+//
+//      if(comPort != NULL)
+//      {
+//         comPort->reset();
+//         comPort->close();
+//         delete(comPort);
+//      };
+//
+//      comPort = new QextSerialPort(portName, portSettings);
+//      if(!comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
+//      {
+//         showError(E_INVALID_FD);
+//         //showError(comPort->lastError());
+//         delete(comPort);
+//         comPort = NULL;
+//         connectButton->setChecked(false);
+//         return;
+//      };
+//
+//      comPort->reset();
+//      comPort->flush();
+//      comPort->reset();
+//
+//
+//
+//      setDtrButton->setEnabled(true);
+//      setDtrButton->setChecked(false);
+//      setRtsButton->setEnabled(true);
+//      setRtsButton->setChecked(false);
+//
+//      configBox->setEnabled(false);
+//      configButton->setEnabled(false);
+//
+//
+//      bool comPort->flowControl();
+//      setXonButton->setEnabled(en);
+//      setXoffButton->setEnabled(en);
+//
+//      sendLineEdit->setReadOnly(false);
+//      sendLineEdit->setFocus(Qt::MouseFocusReason);
+//
+//      showError(comPort->lastError());
+//
+//      stop = false;
+//      timer->start(20);
+//
+//   }
+//   else
+//   {
+//      timer->stop();
+//
+//      stop = true;
+//      qApp->processEvents();
+//      setDtrButton->setEnabled(false);
+//      setRtsButton->setEnabled(false);
+//      setXonButton->setEnabled(false);
+//      setXoffButton->setEnabled(false);
+//
+//      ctsLabel->setEnabled(false);
+//      dsrLabel->setEnabled(false);
+//      dcdLabel->setEnabled(false);
+//      rtsLabel->setEnabled(false);
+//      dtrLabel->setEnabled(false);
+//
+//      connectButton->setChecked(false);
+//
+//      configBox->setEnabled(true);
+//      configButton->setEnabled(true);
+//
+//      sendLineEdit->setReadOnly(true);
+//   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::setXonButtonClicked()
+{
+   if(comPort->isOpen())
+     comPort->putChar(xon);
+   setXonButton->setChecked(false);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::setXoffButtonClicked()
+{
+   if(comPort->isOpen())
+     comPort->putChar(xoff);
+   setXoffButton->setChecked(false);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::setDtrButtonClicked()
+{
+   if(comPort->isOpen())
+     comPort->setDtr(setDtrButton->isChecked());
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::setRtsButtonClicked()
+{
+   if(comPort->isOpen())
+     comPort->setRts(setRtsButton->isChecked());
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::updateLeds()
+{
+   ulong status;
+
+   timer->stop();
+   if(comPort == NULL)
+      return;
+
+   if(!comPort->isOpen())
+      return;
+
+   status = comPort->lineStatus();
+
+   ctsLabel->setEnabled(status & LS_CTS);
+   dsrLabel->setEnabled(status & LS_DSR);
+   dcdLabel->setEnabled(status & LS_DCD);
+   rtsLabel->setEnabled(status & LS_RTS);
+   setRtsButton->setChecked(status & LS_RTS);
+   dtrLabel->setEnabled(status & LS_DTR);
+   setDtrButton->setChecked(status & LS_DTR);
+
+
+   timer->start();
 }
 
 //**************************************************************************************************

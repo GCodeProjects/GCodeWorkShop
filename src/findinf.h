@@ -63,6 +63,7 @@ private slots:
 
 protected:
     void closeEvent(QCloseEvent *event);
+    bool eventFilter(QObject *obj, QEvent *ev);
 
 private:
     QStringList findFiles(const QDir &directory, const QStringList &files,
@@ -75,6 +76,9 @@ private:
     Highlighter *highlighter;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
+    bool intCapsLock;
+    _h_colors highlighterColors;
+    bool highligh;
 
 
 signals:

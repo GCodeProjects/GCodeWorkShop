@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>288</width>
-    <height>148</height>
+    <width>344</width>
+    <height>153</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,10 +32,13 @@
         <item>
          <widget class="QLineEdit" name="mInput">
           <property name="inputMask">
-           <string>Aaaaaaaaaaaaaaaaaaaaa;_</string>
+           <string>Aaaaaaaaaaaaaaa;_</string>
           </property>
           <property name="text">
-           <string>XYZB</string>
+           <string>XYZ</string>
+          </property>
+          <property name="cursorPosition">
+           <number>0</number>
           </property>
          </widget>
         </item>

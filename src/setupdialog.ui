@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>553</width>
-    <height>377</height>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -340,6 +340,16 @@
           </property>
          </widget>
         </item>
+        <item row="6" column="0">
+         <widget class="QCheckBox" name="editorToolTipsCheckBox">
+          <property name="text">
+           <string>Show editor tooltips</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -373,7 +383,7 @@
         <string>&amp;Ok</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/ok.png</normaloff>:/images/ok.png</iconset>
        </property>
        <property name="default">
@@ -400,7 +410,7 @@
         <string>&amp;Default</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/default.png</normaloff>:/images/default.png</iconset>
        </property>
        <property name="autoDefault">
@@ -427,7 +437,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
        </property>
        <property name="autoDefault">
@@ -473,6 +483,8 @@
   <tabstop>defaultButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>

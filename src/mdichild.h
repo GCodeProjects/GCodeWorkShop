@@ -69,13 +69,15 @@ public:
     void doUndo();
     void doRedo();
     QString filePath();
+    void setHighligthMode(int mod);
+    int getHighligthMode();
 
 
 
 protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
-    //void resizeEvent(QResizeEvent *event);
+    bool event(QEvent *event);
 
 private slots:
     void documentWasModified();
@@ -90,6 +92,7 @@ private:
     int compute(QString *str);
     void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
+    void detectHighligthMode();
 
 
 
@@ -102,6 +105,7 @@ private:
     QList<QTextEdit::ExtraSelection> extraSelections;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
+
 
 private slots :
     void highlightCurrentLine();
