@@ -28,3 +28,19 @@ Cross platform installer made by BitRock InstallBuilder for Qt : http://installb
 
 If you have any suggestion (bug/translations mistakes) about EdytorNC please email me - artkoz(at)poczta.onet.pl
 
+
+To compile EdytorNC :
+- install Qt SDK
+- go to the edytornc src directory.
+- run qmake (this creates proper Makefile)
+- go to edytornc directory
+- run qmake
+- run make clean
+- run make (there is no make install)
+
+
+To translate EdytorNC to your language you may use "Qt Linguist Download"
+http://qt-apps.org/content/show.php/Qt+Linguist+Download?content=89360
+More about translations : http://doc.trolltech.org/4.6/internationalization.html
+
+ 

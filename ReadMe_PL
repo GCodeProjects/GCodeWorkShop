@@ -28,4 +28,11 @@ Jeśli znalazłeś jakiś błąd w programie/opisach, masz pomysły na nowe funk
 
 
 
-
+Aby skompilować EdytorNC :
+- zainstaluj Qt SDK
+- wejdź do katalogu edytornc/src
+- uruchom qmake (to utworzy właściwy plik Makefile)
+- przejdź do katalogu edytornc
+- uruchom qmake
+- uruchom make clean
+- uruchom make
