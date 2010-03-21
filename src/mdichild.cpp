@@ -1144,12 +1144,12 @@ bool MdiChild::event(QEvent *event)
    if(!mdiWindowProperites.editorToolTips)
       return QWidget::event(event);
 
-   fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".ini";
+   fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
 
    //qDebug() << fileName;
 
    if(!QFile::exists(fileName))
-      fileName = QApplication::applicationDirPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".ini";
+      fileName = QApplication::applicationDirPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
 
    //qDebug() << fileName;
 
@@ -1246,18 +1246,20 @@ bool MdiChild::event(QEvent *event)
       };
 
       text = settings.value(key, "").toString();
-
+      settings.endGroup();
 
       if(!text.isEmpty())
-         QToolTip::showText(helpEvent->globalPos(), "<p style='white-space:pre'>" + text, this, QRect());
+      {
+         key = "<p style='white-space:pre'>";
+         if(text.length() > 128)
+            key = "<p style='white-space:normal'>";
+         QToolTip::showText(helpEvent->globalPos(), key + text, this, QRect());
+      }
       else
       {
          QToolTip::hideText();
          event->ignore();
-         //if(key.length() >= 1 && !(key.contains(" ")))
-            //settings.setValue(key, "");
       };
-      settings.endGroup();
 
       qDebug() << "Full key: " << key;
 

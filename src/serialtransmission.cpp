@@ -1031,7 +1031,7 @@ TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : Q
 
 TransProgressDialog::~TransProgressDialog()
 {
-
+   timer->stop();
 }
 
 //**************************************************************************************************
@@ -1040,6 +1040,7 @@ TransProgressDialog::~TransProgressDialog()
 
 void TransProgressDialog::cancelButtonClicked()
 {
+   timer->stop();
    canceled = true;
    close();
 }
@@ -1078,7 +1079,11 @@ void TransProgressDialog::setValue(int val)
 void TransProgressDialog::setRange(int min, int max)
 {
    if(max == 0)
+   {
       progressBar->hide();
+      cancelButton->setText(tr("&Close"));
+      cancelButton->setIcon(QIcon(":/images/window-close.png"));
+   }
    else
       progressBar->setRange(min, max);
 }
@@ -1100,93 +1105,13 @@ void TransProgressDialog::open(QextSerialPort *port, char cxon, char cxoff)
 
       timer->start(20);
 
-      setDtrButton->setEnabled(true);
       setDtrButton->setChecked(false);
-      setRtsButton->setEnabled(true);
       setRtsButton->setChecked(false);
 
       setXonButton->setEnabled(xon > 0);
       setXoffButton->setEnabled(xoff > 0);
 
    };
-
-
-//   if(tg)
-//   {
-//
-//
-//      count = 0;
-//
-//      if(comPort != NULL)
-//      {
-//         comPort->reset();
-//         comPort->close();
-//         delete(comPort);
-//      };
-//
-//      comPort = new QextSerialPort(portName, portSettings);
-//      if(!comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
-//      {
-//         showError(E_INVALID_FD);
-//         //showError(comPort->lastError());
-//         delete(comPort);
-//         comPort = NULL;
-//         connectButton->setChecked(false);
-//         return;
-//      };
-//
-//      comPort->reset();
-//      comPort->flush();
-//      comPort->reset();
-//
-//
-//
-//      setDtrButton->setEnabled(true);
-//      setDtrButton->setChecked(false);
-//      setRtsButton->setEnabled(true);
-//      setRtsButton->setChecked(false);
-//
-//      configBox->setEnabled(false);
-//      configButton->setEnabled(false);
-//
-//
-//      bool comPort->flowControl();
-//      setXonButton->setEnabled(en);
-//      setXoffButton->setEnabled(en);
-//
-//      sendLineEdit->setReadOnly(false);
-//      sendLineEdit->setFocus(Qt::MouseFocusReason);
-//
-//      showError(comPort->lastError());
-//
-//      stop = false;
-//      timer->start(20);
-//
-//   }
-//   else
-//   {
-//      timer->stop();
-//
-//      stop = true;
-//      qApp->processEvents();
-//      setDtrButton->setEnabled(false);
-//      setRtsButton->setEnabled(false);
-//      setXonButton->setEnabled(false);
-//      setXoffButton->setEnabled(false);
-//
-//      ctsLabel->setEnabled(false);
-//      dsrLabel->setEnabled(false);
-//      dcdLabel->setEnabled(false);
-//      rtsLabel->setEnabled(false);
-//      dtrLabel->setEnabled(false);
-//
-//      connectButton->setChecked(false);
-//
-//      configBox->setEnabled(true);
-//      configButton->setEnabled(true);
-//
-//      sendLineEdit->setReadOnly(true);
-//   };
 }
 
 //**************************************************************************************************
@@ -1197,7 +1122,7 @@ void TransProgressDialog::setXonButtonClicked()
 {
    if(comPort->isOpen())
      comPort->putChar(xon);
-   setXonButton->setChecked(false);
+   //setXonButton->setChecked(false);
 }
 
 //**************************************************************************************************
@@ -1208,7 +1133,7 @@ void TransProgressDialog::setXoffButtonClicked()
 {
    if(comPort->isOpen())
      comPort->putChar(xoff);
-   setXoffButton->setChecked(false);
+   //setXoffButton->setChecked(false);
 }
 
 //**************************************************************************************************

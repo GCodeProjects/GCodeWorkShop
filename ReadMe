@@ -9,7 +9,7 @@ Some features :
   comment with date will be replaced with current date on file save. Comment format (dd-mm-yyyy) or ;dd-mm-yyyy
   block renumbering - whole program or selection
   code colorizing. Now with help function - click on "Help"->"Create cnc tooltips" and put mouse pointer above G, M or other codes - should appear tooltip with short information about pointed code. 
-		   Default tooltips are in file "cnc_tooltips_(lang_code).ini" (lang_code = pl_PL - for polish) in folder with EdytorNC binary. 
+		   Default tooltips are in file "cnc_tooltips_lang_code.txt" (lang_code = pl_PL - for polish) in folder with EdytorNC binary. 
 		   You may copy it to folder with cnc programs and customize for your machine. 
 		   Currently tooltip file contains some information about codes for OKUMA, SINUMERIK 850 and FANUC.
 		   Code colorizing dedects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC

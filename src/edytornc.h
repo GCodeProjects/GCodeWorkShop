@@ -117,6 +117,8 @@ private slots:
     void deAttachToDirButtonClicked();
     void setHighLightMode(int mode);
     void createToolTipsFile();
+    void attachHighlightToDirActClicked();
+    void deAttachHighlightToDirActClicked();
 
 
 
@@ -134,6 +136,8 @@ private:
     void loadSerialConfignames();
     void showError(int error);
     void updateCurrentSerialConfig();
+    void attachHighlighterToDirButtonClicked(bool attach);
+    int defaultHighlightMode(QString filePath);
 
 
 
@@ -216,6 +220,10 @@ private:
     QLabel *labelStat1;
     QToolButton *readOnlyButton;
     QComboBox *highlightTypeCombo;
+    QAction *attachHighlightToDirAct;
+    QToolButton *attachHighlightButton;
+    QAction *deAttachHighlightToDirAct;
+    QToolButton *deAttachHighlightButton;
 
 
     QToolBar *findToolBar;

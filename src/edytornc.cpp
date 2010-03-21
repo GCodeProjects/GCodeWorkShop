@@ -193,7 +193,7 @@ void edytornc::open()
              defaultMdiWindowProperites.cursorPos = 0;
              defaultMdiWindowProperites.readOnly = FALSE;
              defaultMdiWindowProperites.geometry = QByteArray();
-             defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+             defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
              defaultMdiWindowProperites.editorToolTips = true;
              child->setMdiWindowProperites(defaultMdiWindowProperites);
              if(defaultMdiWindowProperites.maximized)
@@ -237,7 +237,7 @@ void edytornc::openFile(const QString fileName)
          defaultMdiWindowProperites.readOnly = FALSE;
          //defaultMdiWindowProperites.maximized = FALSE;
          defaultMdiWindowProperites.geometry = QByteArray();
-         defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+         defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
          defaultMdiWindowProperites.editorToolTips = true;
          child->setMdiWindowProperites(defaultMdiWindowProperites);
          if(defaultMdiWindowProperites.maximized)
@@ -304,7 +304,7 @@ void edytornc::openWithPreview()
                 defaultMdiWindowProperites.readOnly = FALSE;
                 //defaultMdiWindowProperites.maximized = FALSE;
                 defaultMdiWindowProperites.geometry = QByteArray();
-                defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+                defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
                 defaultMdiWindowProperites.editorToolTips = true;
                 child->setMdiWindowProperites(defaultMdiWindowProperites);
                 if(defaultMdiWindowProperites.maximized)
@@ -661,6 +661,7 @@ void edytornc::config()
          opt.underlineChanges = defaultMdiWindowProperites.underlineChanges;
          opt.clearUnderlineHistory = defaultMdiWindowProperites.clearUnderlineHistory;
          opt.clearUndoHistory = defaultMdiWindowProperites.clearUndoHistory;
+         opt.editorToolTips = defaultMdiWindowProperites.editorToolTips;
 
          tabbedView = defaultMdiWindowProperites.tabbedMode;
          if(tabbedView)
@@ -989,7 +990,7 @@ void edytornc::about()
                                "2010.03" +
                             tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             tr("<P>Catalan translation thanks to Jordi Sayol") +
-                            tr("<P>German translation thanks to Michael Numberger") +
+                            tr("<br />German translation thanks to Michael Numberger") +
                             tr("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             tr("<P>") +
                             tr("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
@@ -1457,7 +1458,7 @@ void edytornc::createActions()
 
 
     createToolTipsAct = new QAction(tr("&Create cnc tooltips"), this);
-    createToolTipsAct->setStatusTip(tr("Create cnc tooltips file"));
+    createToolTipsAct->setStatusTip(tr("Create default cnc tooltips file"));
     connect(createToolTipsAct, SIGNAL(triggered()), this, SLOT(createToolTipsFile()));
 
     aboutAct = new QAction(tr("&About"), this);
@@ -1645,12 +1646,28 @@ void edytornc::createStatusBar()
 
    connect(highlightTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setHighLightMode(int)));
 
+   attachHighlightToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current highlight setting to current directory of programs"), this);
+   attachHighlightToDirAct->setStatusTip(tr("Attach current highlight setting to current directory of programs"));
+   connect(attachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(attachHighlightToDirActClicked()));
+
+   attachHighlightButton = new QToolButton();
+   attachHighlightButton->setDefaultAction(attachHighlightToDirAct);
+
+   deAttachHighlightToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove highlight settings from the directory"), this);
+   deAttachHighlightToDirAct->setStatusTip(tr("Remove highlight settings from the directory"));
+   connect(deAttachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(deAttachHighlightToDirActClicked()));
+
+   deAttachHighlightButton = new QToolButton();
+   deAttachHighlightButton->setDefaultAction(deAttachHighlightToDirAct);
+
    readOnlyButton = new QToolButton();
    readOnlyButton->setDefaultAction(readOnlyAct);
 
    //statusBar()->addPermanentWidget(highlightLabel);
    statusBar()->addPermanentWidget(labelStat1);
    statusBar()->addPermanentWidget(highlightTypeCombo);
+   statusBar()->addPermanentWidget(attachHighlightButton);
+   statusBar()->addPermanentWidget(deAttachHighlightButton);
    statusBar()->addPermanentWidget(readOnlyButton);
    statusBar()->setSizeGripEnabled(true);
 
@@ -1947,7 +1964,6 @@ void edytornc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
 {
    QFileInfo file;
 
-
    QMdiSubWindow *existing = findMdiChild(options.fileName);
    if(existing)
    {
@@ -1994,9 +2010,9 @@ void edytornc::fileOpenRecent(QAction *act)
     defaultMdiWindowProperites.readOnly = FALSE;
     //defaultMdiWindowProperites.maximized = FALSE;
     defaultMdiWindowProperites.cursorPos = 0;
-    defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
     defaultMdiWindowProperites.editorToolTips = true;
     defaultMdiWindowProperites.fileName = m_recentFiles[act->data().toInt()];
+    defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
     loadFile(defaultMdiWindowProperites);
 }
 
@@ -2047,7 +2063,7 @@ void edytornc::loadFoundedFile(const QString &fileName)
        defaultMdiWindowProperites.cursorPos = 0;
        defaultMdiWindowProperites.readOnly = FALSE;
        defaultMdiWindowProperites.geometry = QByteArray();
-       defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+       defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
        defaultMdiWindowProperites.editorToolTips = true;
        child->setMdiWindowProperites(defaultMdiWindowProperites);
        if(defaultMdiWindowProperites.maximized)
@@ -2626,7 +2642,7 @@ void edytornc::sendButtonClicked()
    progressDialog.setRange(0, tx.size());
    progressDialog.setModal(true);
    progressDialog.setWindowTitle(tr("Sending..."));
-   progressDialog.open(comPort, portSettings.Xon, portSettings.Xoff);
+   progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
    progressDialog.setLabelText(tr("Waiting..."));
    qApp->processEvents();
 
@@ -2922,35 +2938,14 @@ void edytornc::createToolTipsFile()
 {
    QString fileName;
 
-   //QSettings settings(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "CNC_TIPS_" + QLocale::system().name());
-
-   fileName = QApplication::applicationDirPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".ini";
-
-   qDebug() << fileName;
+   fileName = QApplication::applicationDirPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
 
    QSettings settings(fileName, QSettings::IniFormat);
 
-//   switch(mdiWindowProperites.hColors.highlightMode)
-//   {
-//      case MODE_OKUMA            : ;
-//                                   break;
-//      case MODE_FANUC            : group = "FANUC";
-//                                   break;
-//      case MODE_SINUMERIK_840    : group = "SIMUMERIK_840";
-//                                   break;
-//      case MODE_PHILIPS          :
-//      case MODE_SINUMERIK        : group = "SINUMERIK";
-//                                   break;
-//      case MODE_HEIDENHAIN       : group = "HEIDENHAIN";
-//                                   break;
-//      case MODE_HEIDENHAIN_ISO   : group = "HEIDENHAIN_ISO";
-//                                   break;
-//      default                    : "";
-//
-//   };
 
-
+ //******************************************************************//
    settings.beginGroup("OKUMA");
+ //******************************************************************//
    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
    settings.setValue("M02", tr("<b>M02</b> - end of program"));
@@ -2966,141 +2961,194 @@ void edytornc::createToolTipsFile()
    settings.setValue("M15", tr("<b>M15</b> - B or C-axis positioning, plus direction CW"));
    settings.setValue("M16", tr("<b>M16</b> - B or C-axis positioning, minus direction CCW"));
    settings.setValue("M19", tr("<b>M19</b> - oriented spindle stop"));
+   settings.setValue("M20", tr("<b>M20</b> - tailstock barrier OFF"));
+   settings.setValue("M21", tr("<b>M21</b> - tailstock barrier ON"));
+   settings.setValue("M22", tr("<b>M22</b> - chamfering OFF (for thread cutting cycle)"));
+   settings.setValue("M23", tr("<b>M23</b> - chamfering ON (for thread cutting cycle)"));
+   settings.setValue("M24", tr("<b>M24</b> - chuck barrier OFF"));
+   settings.setValue("M25", tr("<b>M25</b> - chuck barrier ON"));
+   settings.setValue("M26", tr("<b>M26</b> - thread lead along Z-axis"));
+   settings.setValue("M27", tr("<b>M27</b> - thread lead along X-axis"));
+   settings.setValue("M28", tr("<b>M28</b> - tool interference check function OFF"));
+   settings.setValue("M29", tr("<b>M28</b> - tool interference check function ON"));
+   settings.setValue("M30", tr("<b>M30</b> - end of program"));
 
    settings.setValue("M40", tr("<b>M40</b> - spindle gear range neutral"));
    settings.setValue("M41", tr("<b>M41</b> - spindle gear range 1"));
    settings.setValue("M42", tr("<b>M42</b> - spindle gear range 2"));
+   settings.setValue("M43", tr("<b>M43</b> - spindle gear range 3"));
+   settings.setValue("M44", tr("<b>M42</b> - spindle gear range 4"));
    settings.setValue("M48", tr("<b>M48</b> - spindle speed override ignore cancel"));
    settings.setValue("M49", tr("<b>M49</b> - spindle speed override ignore"));
 
    settings.setValue("M52", tr("<i>v.M</i> <b>M52</b> - mode of return to upper limit level") +
-                            tr("<P><i>v.L</i> <b>M52</b> - "));
+                            tr("<br /><i>v.L</i> <b>M52</b> - "));
    settings.setValue("M53", tr("<i>v.M</i> <b>M53</b> - mode of return to a specified point level set by G71") +
-                            tr("<P><i>v.L</i> <b>M52</b> - "));
+                            tr("<br /><i>v.L</i> <b>M52</b> - "));
    settings.setValue("M54", tr("<i>v.M</i> <b>M54</b> - mode of return to the point R level") +
-                            tr("<P><i>v.L</i> <b>M52</b> - "));
+                            tr("<br /><i>v.L</i> <b>M52</b> - "));
 
    settings.setValue("M55", tr("<b>M55</b> - tailstock spindle retract"));
    settings.setValue("M56", tr("<b>M56</b> - tailstock spindle advanced"));
    settings.setValue("M58", tr("<b>M58</b> - chucking pressure low"));
    settings.setValue("M59", tr("<b>M59</b> - chucking pressure high"));
+
+   settings.setValue("M60", tr("<b>M60</b> - cancel of M61"));
+   settings.setValue("M61", tr("<b>M61</b> - Ignoring fixed rpm arrival in constant speed cutting"));
+   settings.setValue("M62", tr("<b>M62</b> - cancel of M64"));
+   settings.setValue("M63", tr("<b>M63</b> - ignoring spindle rotation M code answer"));
+   settings.setValue("M64", tr("<b>M64</b> - ignoring general M code answer"));
+   settings.setValue("M65", tr("<b>M65</b> - ignoring T code answer"));
+   settings.setValue("M66", tr("<b>M66</b> - turret indexing position free"));
+
    settings.setValue("M78", tr("<b>M78</b> - steady rest unclamp"));
    settings.setValue("M79", tr("<b>M79</b> - steady rest clamp"));
    settings.setValue("M83", tr("<b>M83</b> - chuck clamp"));
    settings.setValue("M84", tr("<b>M84</b> - chuck unclamp"));
    settings.setValue("M85", tr("<b>M85</b> - no return to the cutting starting point after the completion of rough turning cycle (LAP)"));
+   settings.setValue("M88", tr("<b>M88</b> - air blower OFF"));
+   settings.setValue("M89", tr("<b>M89</b> - air blower ON"));
+   settings.setValue("M90", tr("<b>M90</b> - door/cover close"));
+   settings.setValue("M91", tr("<b>M91</b> - door/cover open"));
 
    settings.setValue("M98", tr("<b>M98</b> - tailstock spindle thrust low"));
    settings.setValue("M99", tr("<b>M99</b> - tailstock spindle thrust high"));
    settings.setValue("M109", tr("<b>M109</b> - cancel of M110"));
    settings.setValue("M110", tr("<b>M110</b> - C-axis joint"));
+
+   settings.setValue("M122", tr("<b>M122</b> - work rest retraction"));
+   settings.setValue("M123", tr("<b>M123</b> - Cwork rest advance"));
+
    settings.setValue("M130", tr("<b>M130</b> - cutting feed; spindle rotating condition OFF"));
    settings.setValue("M131", tr("<b>M131</b> - cutting feed; spindle rotating condition ON"));
    settings.setValue("M132", tr("<b>M132</b> - single block ineffective"));
    settings.setValue("M133", tr("<b>M133</b> - single block effective"));
    settings.setValue("M136", tr("<b>M136</b> - feedrate override ineffective"));
    settings.setValue("M137", tr("<i>v.M</i> <b>M137</b> - feedrate override effective") +
-                             tr("<P><i>v.L</i> <b>M137</b> - touch setter interlock release ON"));
+                             tr("<br /><i>v.L</i> <b>M137</b> - touch setter interlock release ON"));
    settings.setValue("M138", tr("<i>v.M</i> <b>M138</b> - dry run ineffective") +
-                             tr("<P><i>v.L</i> <b>M138</b> - touch setter interlock release OFF"));
+                             tr("<br /><i>v.L</i> <b>M138</b> - touch setter interlock release OFF"));
    settings.setValue("M139", tr("<b>M139</b> - dry run effective"));
-   settings.setValue("M140", tr("<b>M140</b> - slide hold ineffective"));
-   settings.setValue("M141", tr("<b>M141</b> - slide hold effective"));
-
+   settings.setValue("M140", tr("<i>v.M</i> <b>M140</b> - slide hold ineffective") +
+                             tr("<br /><i>v.L</i> <b>M140</b> - main motor overload monitoring OFF"));
+   settings.setValue("M141", tr("<i>v.M</i> <b>M141</b> - slide hold effective") +
+                             tr("<br /><i>v.L</i> <b>M141</b> - main motor overload monitoring ON"));
    settings.setValue("M142", tr("<b>M142</b> - coolant pressure low"));
    settings.setValue("M143", tr("<b>M143</b> - coolant pressure high"));
+   settings.setValue("M144", tr("<b>M144</b> - additional coolant 1 OFF"));
+   settings.setValue("M145", tr("<b>M145</b> - additional coolant 1 ON"));
    settings.setValue("M146", tr("<b>M146</b> - C-axis unclamp"));
    settings.setValue("M147", tr("<b>M147</b> - C-axis clamp"));
    settings.setValue("M152", tr("<b>M152</b> - M-tools spindle interlock ON"));
    settings.setValue("M153", tr("<b>M153</b> - M-tools spindle interlock OFF"));
+   settings.setValue("M156", tr("<b>M156</b> - center work interlock OFF"));
+   settings.setValue("M157", tr("<b>M157</b> - center work interlock ON"));
    settings.setValue("M161", tr("<b>M161</b> - feedrate override fix (100%)"));
    settings.setValue("M162", tr("<b>M162</b> - cancel of M163"));
    settings.setValue("M163", tr("<b>M163</b> - M-tools spindle speed override fix (100%)"));
 
+   settings.setValue("M184", tr("<b>M184</b> - chuck internal interlock release OFF"));
+   settings.setValue("M185", tr("<b>M185</b> - chuck internal interlock release ON"));
+   settings.setValue("M186", tr("<b>M186</b> - work rest base unclamp"));
+   settings.setValue("M187", tr("<b>M187</b> - work rest base clamp"));
+   settings.setValue("M215", tr("<b>M215</b> - load monitor G00 ignore OFF"));
+   settings.setValue("M216", tr("<b>M216</b> - load monitor G00 ignore ON"));
+
    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02 X Z [I K or L]</b> - circular interpolation CW"));
-   settings.setValue("G03", tr("<b>G03 X Z [I K or L]</b> - circular interpolation CCW"));
+   settings.setValue("G02", tr("<b>G02 X Y Z [I J K</b> | <b>L]</b> - circular interpolation CW"));
+   settings.setValue("G03", tr("<b>G03 X Y Z [I J K</b> | <b>L]</b> - circular interpolation CCW"));
    settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+   settings.setValue("G09", tr("<b>G09</b> - exact stop"));
+   settings.setValue("G10", tr("<b>G10</b> - cancel of G11"));
+   settings.setValue("G11", tr("<b>G11</b> - parallel and rotation shift of coordinate system"));
+
+   settings.setValue("G13", tr("<b>G13</b> - turret selection: Turret A"));
+   settings.setValue("G14", tr("<b>G14</b> - turret selection: Turret B"));
    settings.setValue("G15", tr("<b>G15 H</b>xx - selection of work coordinate system no. xx, modal"));
    settings.setValue("G16", tr("<b>G15 H</b>xx - selection of work coordinate system no. xx, one-shot"));
 
    settings.setValue("G17", tr("<b>G17</b> - XY plane"));
    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
+   settings.setValue("G20", tr("<b>G20</b> - inch input confirmation"));
+   settings.setValue("G21", tr("<b>G21</b> - metric input confirmation"));
 
-   settings.setValue("G40", tr("<b>G40</b> - tool [nose] radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool [nose] radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool [nose] radius compensation right"));
+   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
    settings.setValue("G50", tr("<i>v.L</i> <b>G50 S</b>xxxx - maximum spindle speed") +
-                            tr("<P><i>v.L</i> <b>G50 X Z</b> - zero point shift"));
+                            tr("<br /><i>v.L</i> <b>G50 X Z</b> - zero point shift"));
 
    settings.setValue("G53", tr("<i>v.M</i> <b>G53</b> - cancel tool length offset") +
-                            tr("<P><i>v.L</i> <b>G53</b> - "));
+                            tr("<br /><i>v.L</i> <b>G53</b> - "));
    settings.setValue("G54", tr("<i>v.M</i> <b>G54 H</b>xx - tool length offset X-axis, xx - offset no.") +
-                            tr("<P><i>v.L</i> <b>G54</b> - "));
+                            tr("<br /><i>v.L</i> <b>G54</b> - "));
    settings.setValue("G55", tr("<i>v.M</i> <b>G55 H</b>xx - tool length offset Y-axis, xx - offset no.") +
-                            tr("<P><i>v.L</i> <b>G55</b> - "));
+                            tr("<br /><i>v.L</i> <b>G55</b> - "));
    settings.setValue("G56", tr("<i>v.M</i> <b>G56 H</b>xx - tool length offset Z-axis, xx - offset no.") +
-                            tr("<P><i>v.L</i> <b>G56</b> - "));
+                            tr("<br /><i>v.L</i> <b>G56</b> - "));
    settings.setValue("G57", tr("<i>v.M</i> <b>G57 H</b>xx - tool length offset 4-axis, xx - offset no.") +
-                            tr("<P><i>v.L</i> <b>G57</b> - "));
+                            tr("<br /><i>v.L</i> <b>G57</b> - "));
    settings.setValue("G58", tr("<i>v.M</i> <b>G58 H</b>xx - tool length offset 5-axis, xx - offset no.") +
-                            tr("<P><i>v.L</i> <b>G58</b> - "));
+                            tr("<br /><i>v.L</i> <b>G58</b> - "));
    settings.setValue("G59", tr("<i>v.M</i> <b>G59 H</b>xx - tool length offset 6-axis, xx - offset no.") +
-                            tr("<P><i>v.L</i> <b>G59</b> - "));
+                            tr("<br /><i>v.L</i> <b>G59</b> - "));
+
+   settings.setValue("G61", tr("<b>G61</b> - exact stop mode"));
+   settings.setValue("G62", tr("<b>G62</b> - programmable mirror image function"));
+   settings.setValue("G17", tr("<b>G17</b> - cutting mode"));
 
 
    settings.setValue("G71", tr("<i>v.M</i> <b>G71 Z</b>xx - return level xx command") +
-                            tr("<P><i>v.L</i> <b>G71</b> - "));
+                            tr("<br /><i>v.L</i> <b>G71</b> - "));
    settings.setValue("G73", tr("<i>v.M</i> <b>G73</b> - high speed deep hole drilling") +
-                            tr("<P><i>v.L</i> <b>G73</b> - "));
+                            tr("<br /><i>v.L</i> <b>G73</b> - "));
    settings.setValue("G74", tr("<i>v.M</i> <b>G74</b> - reverse tapping") +
-                            tr("<P><i>v.L</i> <b>G74</b> - "));
+                            tr("<br /><i>v.L</i> <b>G74</b> - "));
    settings.setValue("G76", tr("<i>v.M</i> <b>G76</b> - fine boring") +
-                            tr("<P><i>v.L</i> <b>G76</b> - "));
-   settings.setValue("G75", tr("<i>v.L</i> <b>G75 G01 [X or Z] L</b>xxxx - chamfering 45deg. xxxx - direction and size"));
-   settings.setValue("G76", tr("<i>v.L</i> <b>G76 G01 [X or Z] L</b>xxxx - rounding. xxxx - direction and size"));
+                            tr("<br /><i>v.L</i> <b>G76</b> - "));
+   settings.setValue("G75", tr("<i>v.L</i> <b>G75 G01 [X</b> | <b>Z] L</b>xxxx - chamfering 45deg. xxxx - direction and size"));
+   settings.setValue("G76", tr("<i>v.L</i> <b>G76 G01 [X</b> | <b>Z] L</b>xxxx - rounding. xxxx - direction and size"));
 
    settings.setValue("G80", tr("<i>v.M</i> <b>G80</b> - fixed cycle mode cancel") +
-                            tr("<P><i>v.L</i> <b>G80</b> - end of shape designation (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G80</b> - end of shape designation (LAP)"));
 
    settings.setValue("G81", tr("<i>v.M</i> <b>G81 R X Y Z</b> - drilling cycle") +
-                            tr("<P><i>v.L</i> <b>G81</b> - start of longitudinal shape designation (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G81</b> - start of longitudinal shape designation (LAP)"));
 
    settings.setValue("G82", tr("<i>v.M</i> <b>G82 R X Y Z</b> - counter bore cycle") +
-                            tr("<P><i>v.L</i> <b>G82</b> - start of transverse shape designation (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G82</b> - start of transverse shape designation (LAP)"));
 
    settings.setValue("G83", tr("<i>v.M</i> <b>G83 R X Y Z</b> - deep hole drilling cycle") +
-                            tr("<P><i>v.L</i> <b>G83</b> - start of blank material shape definition (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G83</b> - start of blank material shape definition (LAP)"));
 
    settings.setValue("G84", tr("<i>v.M</i> <b>G84 R X Y Z</b> - tapping cycle") +
-                            tr("<P><i>v.L</i> <b>G84</b> -   change of cutting conditions in bar turning cycle (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G84</b> -   change of cutting conditions in bar turning cycle (LAP)"));
 
    settings.setValue("G85", tr("<i>v.M</i> <b>G85 R X Y Z</b> - boring cycle") +
-                            tr("<P><i>v.L</i> <b>G85</b> - call of rough bar turning cycle (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G85</b> - call of rough bar turning cycle (LAP)"));
 
    settings.setValue("G86", tr("<i>v.M</i> <b>G86 R X Y Z</b> - boring cycle") +
-                            tr("<P><i>v.L</i> <b>G86</b> - call of rough copy turning cycle (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G86</b> - call of rough copy turning cycle (LAP)"));
 
    settings.setValue("G87", tr("<i>v.M</i> <b>G87 R X Y Z</b> - back boring cycle") +
-                            tr("<P><i>v.L</i> <b>G87</b> - call finish turning cycle (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G87</b> - call finish turning cycle (LAP)"));
 
    settings.setValue("G88", tr("<i>v.M</i> <b>G88 R X Y Z</b> - drilling cycle") +
-                            tr("<P><i>v.L</i> <b>G88</b> - call of continuous thread cutting cycle (LAP)"));
+                            tr("<br /><i>v.L</i> <b>G88</b> - call of continuous thread cutting cycle (LAP)"));
 
    settings.setValue("G89", tr("<i>v.M</i> <b>G89 R X Y Z</b> - boring cycle") +
-                            tr("<P><i>v.L</i> <b>G89</b> - "));
+                            tr("<br /><i>v.L</i> <b>G89</b> - "));
 
 
    settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
    settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
+   settings.setValue("G92", tr("<b>G92</b> - setting of work coordinate system"));
    settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
    settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
    settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
    settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
-
-   settings.setValue("BHC", tr("<b>BHC X Y I J K </b> - bolt hole circle, X Y - circle center, I - radius, J - angle of first hole, K - no. of holes"));
 
    settings.setValue("NCYL", tr("<b>NCYL</b> - if specified in fixed cycle, positioning to the definied hole position is performed, but the cycle axis does not operate"));
    settings.setValue("NOEX", tr("<b>NOEX</b> - if specified in fixed cycle, no axis movements may be performed"));
@@ -3127,6 +3175,19 @@ void edytornc::createToolTipsFile()
 
    settings.setValue("MODIN", tr("<b>MODIN O</b>nnnn [<b>Q</b>]xx - subprogram call after axis movement, nnnn - prog. name, xx - number of repetitions"));
    settings.setValue("MODOUT", tr("<b>MODOUT</b> - cancels last MODIN command"));
+
+   settings.setValue("OMIT", tr("<b>OMIT</b> - coordinate calculation function, omit"));
+   settings.setValue("RSTRT", tr("<b>RSTRT</b> - coordinate calculation function, restart"));
+
+   settings.setValue("LAA", tr("<b>LAA</b> - line at angle"));
+   settings.setValue("ARC", tr("<b>ARC</b> - arc"));
+   settings.setValue("GRDX", tr("<b>GRDX</b> - grid X"));
+   settings.setValue("GRDY", tr("<b>GRDY</b> - grid Y"));
+   settings.setValue("DGRDX", tr("<b>DGRDX</b> - double grid X"));
+   settings.setValue("DGRDY", tr("<b>DGRDY</b> - double grid Y"));
+   settings.setValue("SQRX", tr("<b>SQRX</b> - square X"));
+   settings.setValue("SQRY", tr("<b>SQRY</b> - square Y"));
+   settings.setValue("BHC", tr("<b>BHC X Y I J K </b> - bolt hole circle, X Y - circle center, I - radius, J - angle of first hole, K - no. of holes"));
 
    settings.setValue("EQ", tr("<b>EQ</b> - equal to"));
    settings.setValue("NE", tr("<b>NE</b> - not equal to"));
@@ -3167,9 +3228,9 @@ void edytornc::createToolTipsFile()
    settings.setValue("VACOD", tr("<b>VACOD</b> - coordinate system number"));
 
    settings.setValue("VZOFX", tr("<i>v.M</i> <b>VZOFX[</b>xx<b>]</b> - zero offset no. xx of X-axis") +
-                              tr("<P><i>v.L</i> <b>VZOFX</b> - zero offset of X-axis"));
+                              tr("<br /><i>v.L</i> <b>VZOFX</b> - zero offset of X-axis"));
    settings.setValue("VZOFZ", tr("<i>v.M</i> <b>VZOFZ[</b>xx<b>]</b> - zero offset no. xx of Z-axis") +
-                              tr("<P><i>v.L</i> <b>VZOFZ</b> - zero offset of Z-axis"));
+                              tr("<br /><i>v.L</i> <b>VZOFZ</b> - zero offset of Z-axis"));
    settings.setValue("VZOFY", tr("<i>v.M</i> <b>VZOFY[</b>xx<b>]</b> - zero offset no. xx of Y-axis"));
    settings.setValue("VZOFW", tr("<i>v.L</i> <b>VZOFW</b> - zero offset of W-axis"));
    settings.setValue("VZOFC", tr("<i>v.L</i> <b>VZOFC</b> - zero offset of C-axis"));
@@ -3190,6 +3251,7 @@ void edytornc::createToolTipsFile()
 
 //******************************************************************//
    settings.beginGroup("FANUC");
+//******************************************************************//
    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
@@ -3199,29 +3261,59 @@ void edytornc::createToolTipsFile()
    settings.setValue("M08", tr("<b>M08</b> - coolant on"));
    settings.setValue("M09", tr("<b>M09</b> - coolant off"));
    settings.setValue("M30", tr("<b>M30</b> - end of program"));
+   settings.setValue("M98", tr("<b>M98 P</b>xxxx - macro xxxx call"));
    settings.setValue("M99", tr("<b>M99</b> - subprogram end"));
 
    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02 X Z U W I K R F</b> - circular interpolation CW; XZ - end point (absolute); UW - end point (incremental); IK - distance from start point to center; R - radius of arc"));
-   settings.setValue("G03", tr("<b>G03 X Z U W I K R F</b> - circular interpolation CCW; XZ - end point (absolute); UW - end point (incremental); IK - distance from start point to center; R - radius of arc"));
+   settings.setValue("G02", tr("<b>G02 {X Y Z</b> | <b>U V W} {I J K</b> | <b>R} F</b> - circular interpolation CW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc"));
+   settings.setValue("G03", tr("<b>G03 {X Y Z</b> | <b>U V W} {I J K</b> | <b>R} F</b> - circular interpolation CCW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc"));
    settings.setValue("G04", tr("<b>G04 X U P</b> - dwell XU - in seconds; P - in microseconds"));
+
+   settings.setValue("G10", tr("<b>G10 P X Z Y R Q</b> - change of offset value by program"));
 
    settings.setValue("G17", tr("<b>G17</b> - XY plane"));
    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
 
+   settings.setValue("G20", tr("<b>G20</b> - inch input"));
+   settings.setValue("G21", tr("<b>G21</b> - metric input"));
+   settings.setValue("G27", tr("<b>G27</b> - reference point return check"));
+   settings.setValue("G28", tr("<b>G28</b> - reference point return"));
    settings.setValue("G30", tr("<b>G30 P</b>x - x = 2nd, 3rd, 4th reference point return"));
+   settings.setValue("G31", tr("<b>G31</b> - skip function"));
 
-   settings.setValue("G40", tr("<b>G40</b> - tool [nose] radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool [nose] radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool [nose] radius compensation right"));
+   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
 
    settings.setValue("G50", tr("<i>v.T</i> <b>G50 S</b>xxxx - maximum spindle speed") +
-                            tr("<P><b>G50 X Z</b> - zero point shift"));
+                            tr("<br /><b>G50 X Z</b> - zero point shift"));
+   settings.setValue("G53", tr("<b>G53</b> - machine coordinate system"));
+   settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
+   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
+   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
+   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
+   settings.setValue("G58", tr("<b>G58</b> - settable zero offset 5"));
+   settings.setValue("G59", tr("<b>G59</b> - settable zero offset 6"));
+
    settings.setValue("G65", tr("<b>G65 P</b>xxxx - macro xxxx call"));
    settings.setValue("G66", tr("<b>G66 P</b>xxxx - macro xxxx modal call"));
    settings.setValue("G67", tr("<b>G67</b> - macro modal call cancel"));
+
+   settings.setValue("G70", tr("<i>v.T</i> <b>G70 P Q</b> - finishing cycle; P - sequence number of the first block of finishing shape, Q - sequence number of last block"));
+   settings.setValue("G71", tr("<i>v.T</i> <b>G71 U R</b> - U - depth of cut, Q - escaping amount") +
+                            tr("<br /><i>v.T</i> <b>G71 P Q U W</b> - stock removal in turning; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance"));
+   settings.setValue("G72", tr("<i>v.T</i> <b>G72 W R</b> - U - depth of cut, Q - escaping amount") +
+                            tr("<br /><i>v.T</i> <b>G72 P Q U W</b> - stock removal in facing; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance"));
+   settings.setValue("G73", tr("<i>v.T</i> <b>G73 W R</b>") +
+                            tr("<br /><i>v.T</i> <b>G73 P Q U W</b> - pattern repeating"));
+   settings.setValue("G74", tr("<i>v.T</i> <b>G74 R</b>") +
+                            tr("<br /><i>v.T</i> <b>G74 {X Z U W} P Q R</b> - end face peck drilling cycle"));
+   settings.setValue("G75", tr("<i>v.T</i> <b>G75 R</b>") +
+                            tr("<br /><i>v.T</i> <b>G75 {X Z U W} P Q U W</b> - outer/internal diameter drilling cycle"));
+   settings.setValue("G76", tr("<i>v.T</i> <b>G76 P Q R</b>") +
+                            tr("<br /><i>v.T</i> <b>G76 {X Z U W} P Q U W</b> - multiple thread cutting cycle"));
 
    settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
    settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
@@ -3242,12 +3334,34 @@ void edytornc::createToolTipsFile()
    settings.setValue("IF", tr("<b>IF[</b>condition<b>]</b>do something - if condition is true do something"));
    settings.setValue("GOTO", tr("<b>GOTO</b>nnnn - jump to block nnnn"));
 
+   settings.setValue("WHILE", tr("<b>WHILE[</b>condition<b>] DO</b>n <br />...<br />commands<br />... <br /><b>END</b>n  - loop - while condition true do commands beetwen DOn and ENDn"));
+   settings.setValue("END", tr("<b>END</b>n - end of WHILE DOn loop"));
+
+   settings.setValue("EOR", tr("<b>EOR</b> - exclusive OR"));
+   settings.setValue("OR", tr("<b>OR</b> - logical OR"));
+   settings.setValue("AND", tr("<b>AND</b> - logical AND"));
+   settings.setValue("NOT", tr("<b>NOT</b> - negation"));
+
+   settings.setValue("SIN", tr("<b>SIN[</b>angle<b>]</b> - sine"));
+   settings.setValue("COS", tr("<b>COS[</b>angle<b>]</b> - cosine"));
+   settings.setValue("TAN", tr("<b>TAN[</b>angle<b>]</b> - tangent"));
+   settings.setValue("ATAN", tr("<b>ATAN[</b>angle<b>]</b> - arctangent 1 or 2"));
+   settings.setValue("SQRT", tr("<b>SQRT[</b>val<b>]</b> - square root"));
+   settings.setValue("ABS", tr("<b>ABS[</b>val<b>]</b> - absolute value"));
+   settings.setValue("BIN", tr("<b>BIN[</b>val<b>]</b> - decimal to binary conversion"));
+   settings.setValue("BCD", tr("<b>BCD[</b>val<b>]</b> - binary to decimal conversion"));
+   settings.setValue("ROUND", tr("<b>ROUND[</b>val<b>]</b> - integer implementation (rounding)"));
+   settings.setValue("FIX", tr("<b>FIX[</b>val<b>]</b> - integer implementation (truncation)"));
+   settings.setValue("FUP", tr("<b>FUP[</b>val<b>]</b> - integer implementation (raising)"));
+
+
 
 
    settings.endGroup();
 
 //******************************************************************//
    settings.beginGroup("SINUMERIK");
+//******************************************************************//
    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
@@ -3269,15 +3383,15 @@ void edytornc::createToolTipsFile()
    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
 
-   settings.setValue("G40", tr("<b>G40</b> - tool [nose] radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool [nose] radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool [nose] radius compensation right"));
+   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
 
    settings.setValue("G53", tr("<b>G53</b> - machine coordinate system"));
    settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
-   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 1"));
-   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 1"));
-   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 1"));
+   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
+   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
+   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
    settings.setValue("G58", tr("<b>G58</b> - programmable offset, absolute axial substitution"));
    settings.setValue("G59", tr("<b>G59</b> - programmable offset, additive axial substitution"));
 
@@ -3307,10 +3421,13 @@ void edytornc::createToolTipsFile()
 
    settings.setValue("@714", tr("<b>@714</b> - stop decoding, until buffer is empty"));
 
+
+
    settings.endGroup();
 
 //******************************************************************//
    settings.beginGroup("SINUMERIK_840");
+//******************************************************************//
    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
@@ -3335,16 +3452,16 @@ void edytornc::createToolTipsFile()
 
    settings.setValue("G53", tr("<b>G53</b> - Suppression of current frames: Programmable frame including system frame for TOROT and TOFRAME and active settable frame G54 ... G599."));
    settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
-   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 1"));
-   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 1"));
-   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 1"));
+   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
+   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
+   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
    settings.setValue("G58", tr("<b>G58</b> - programmable offset, absolute axial substitution"));
    settings.setValue("G59", tr("<b>G59</b> - programmable offset, additive axial substitution"));
 
 
-   settings.setValue("G40", tr("<b>G40</b> - tool [nose] radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool [nose] radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool [nose] radius compensation right"));
+   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
 
    settings.setValue("G60", tr("<b>G60</b> - Velocity reduction, exact positioning"));
    settings.setValue("G64", tr("<b>G64</b> - Continuous-path mode"));
@@ -3361,10 +3478,10 @@ void edytornc::createToolTipsFile()
 
    settings.setValue("SUPA", tr("<b>SUPA</b> - suppression as for G153 and including system frames for actual-value setting, scratching, zero offset external, PAROT including handwheel offsets (DRF), [zero offset external], overlaid motion"));
 
-   settings.setValue("IF", tr("<b>IF(</b>condition<b>)</b> xxxx - if condition is true goto block xxxx or label xxxx:"));
-   settings.setValue("GOTO", tr("<b>GOTO</b> nnnn - jump forward and if block not found jump backward to block nnnn or label xxxx:"));
-   settings.setValue("GOTOF", tr("<b>GOTOF</b> nnnn - jump forward to block nnnn or label xxxx:"));
-   settings.setValue("GOTOB", tr("<b>GOTOB</b> nnnn - jump backward to block nnnn or label xxxx:"));
+   settings.setValue("IF", tr("<b>IF(</b>condition<b>)</b> nnnn - if condition is true goto block nnnn or label nnnn:"));
+   settings.setValue("GOTO", tr("<b>GOTO</b> nnnn - jump forward and if block not found jump backward to block nnnn or label nnnn:"));
+   settings.setValue("GOTOF", tr("<b>GOTOF</b> nnnn - jump forward to block nnnn or label nnnn:"));
+   settings.setValue("GOTOB", tr("<b>GOTOB</b> nnnn - jump backward to block nnnn or label nnnn:"));
 
    settings.setValue("STOPRE", tr("<b>STOPRE</b> - stop decoding, until buffer is empty"));
 
@@ -3380,12 +3497,162 @@ void edytornc::createToolTipsFile()
 
    settings.endGroup();
 
+
+//******************************************************************//
+   settings.beginGroup("HEIDENHAIN");
+//******************************************************************//
+   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+   settings.setValue("M06", tr("<b>M06</b> - tool change"));
+   settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
+   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+   settings.setValue("M30", tr("<b>M30</b> - end of program"));
+   settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
+
+   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+   settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
+   settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
+   settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+
+
+
+
+
+
+
+
+   settings.endGroup();
+
+
+
+//******************************************************************//
+   settings.beginGroup("HEIDENHAIN_ISO");
+//******************************************************************//
+   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+   settings.setValue("M06", tr("<b>M06</b> - tool change"));
+   settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
+   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+   settings.setValue("M30", tr("<b>M30</b> - end of program"));
+   settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
+
+   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+   settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
+   settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
+   settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+
+   settings.setValue("G17", tr("<b>G17</b> - XY plane"));
+   settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
+   settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
+
+
+
+
+
+      settings.endGroup();
+
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
+void edytornc::attachHighlighterToDirButtonClicked(bool attach)
+{
+   QFileInfo fileInfo;
+   QFile file;
+   int i;
+
+
+   bool hasMdiChild = (activeMdiChild() != 0);
+   if(hasMdiChild)
+   {
+      QDir dir;
+      dir.setPath(activeMdiChild()->filePath());
+      dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+      dir.setSorting(QDir::Name);
+      dir.setNameFilters(QStringList("*.cfg"));
+
+      QFileInfoList list = dir.entryInfoList();
+
+      if(!list.isEmpty())
+      {
+         for(i = 0; i < list.count(); i++)
+         {
+            fileInfo = (QFileInfo)list.at(i);
+            file.setFileName(fileInfo.absoluteFilePath());
+            file.remove();
+         };
+      };
+
+      if(attach)
+      {
+         file.setFileName(activeMdiChild()->filePath() + "/" + highlightTypeCombo->currentText() + ".cfg");
+         file.open(QIODevice::ReadWrite);
+         file.close();;
+      };
+
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::attachHighlightToDirActClicked()
+{
+   attachHighlighterToDirButtonClicked(true);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::deAttachHighlightToDirActClicked()
+{
+   attachHighlighterToDirButtonClicked(false);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+int edytornc::defaultHighlightMode(QString filePath)
+{
+   int id;
+   QDir dir;
+   bool ok;
+
+   dir.setPath(filePath);
+   dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+   dir.setSorting(QDir::Name);
+   dir.setNameFilters(QStringList("*.cfg"));
+
+   QFileInfoList list = dir.entryInfoList();
+
+   if(!list.isEmpty())
+   {
+      QFileInfo name = list.at(0);
+      id = highlightTypeCombo->findText(name.baseName());
+      if(id >= 0)
+      {
+         //highlightTypeCombo->setCurrentIndex(id);
+         return(highlightTypeCombo->itemData(id).toInt(&ok));
+      };
+   };
+
+   return MODE_AUTO;
+};
 
 //**************************************************************************************************
 //
