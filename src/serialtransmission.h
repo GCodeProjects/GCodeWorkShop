@@ -156,6 +156,7 @@ class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
 
 
    protected:
+     void closeEvent(QCloseEvent *event);
 
    signals :
 
@@ -164,12 +165,6 @@ class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
    private slots:
      void cancelButtonClicked();
      void updateLeds();
-     void setRtsButtonClicked();
-     void setDtrButtonClicked();
-     void setXonButtonClicked();
-     void setXoffButtonClicked();
-
-
 
 
    private:

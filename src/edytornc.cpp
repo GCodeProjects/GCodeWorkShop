@@ -135,6 +135,8 @@ void edytornc::newFile()
     defaultMdiWindowProperites.readOnly = FALSE;
     //defaultMdiWindowProperites.maximized = FALSE;
     defaultMdiWindowProperites.geometry = QByteArray();
+    defaultMdiWindowProperites.editorToolTips = true;
+    defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
     child->setMdiWindowProperites(defaultMdiWindowProperites);
 
     if(defaultMdiWindowProperites.maximized)
@@ -2549,8 +2551,12 @@ void edytornc::loadConfig()
     portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
     portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
 
+
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
+
+    deleteControlChars = settings.value("DeleteControlChars", true).toBool();
+
 
     settings.endGroup();
     settings.endGroup();
@@ -2600,6 +2606,9 @@ void edytornc::sendButtonClicked()
    MdiChild *activeWindow;
    char controlChar;
 
+
+   bytesToWrite = 0;
+
    activeWindow = activeMdiChild();
    if(!(activeWindow != 0))
      return;
@@ -2617,7 +2626,6 @@ void edytornc::sendButtonClicked()
       delete(comPort);
       return;
    };
-
 
    comPort->flush();
    comPort->reset();
@@ -2646,8 +2654,18 @@ void edytornc::sendButtonClicked()
    progressDialog.setLabelText(tr("Waiting..."));
    qApp->processEvents();
 
+   if(portSettings.FlowControl == FLOW_HARDWARE)
+   {
+      ulong status = comPort->lineStatus();
+      if(!(status & LS_CTS))
+         xoffReceived = true;
+   }
+   else
+      xoffReceived = false;
+
+   qDebug() << "xoffReceived: " << xoffReceived;
+
    i = 0;
-   xoffReceived = false;
    while(i < tx.size())
    {
       if(xoffReceived)
@@ -2660,22 +2678,29 @@ void edytornc::sendButtonClicked()
       if(stop)
         break;
 
-      if(portSettings.FlowControl == FLOW_XONXOFF)
+      if(portSettings.FlowControl == FLOW_HARDWARE)
       {
-         controlChar = 0;
-         if(comPort->bytesAvailable() > 0)
-         {
-            comPort->getChar(&controlChar);
-            qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
-         };
-
-         if(controlChar == portSettings.Xoff)
-            xoffReceived = true;
-         if(controlChar == portSettings.Xon)
-            xoffReceived = false;
+         xoffReceived = !(comPort->lineStatus() & LS_CTS);
       }
       else
-         xoffReceived = false;
+      {
+         if(portSettings.FlowControl == FLOW_XONXOFF)
+         {
+            controlChar = 0;
+            if(comPort->bytesAvailable() > 0)
+            {
+               comPort->getChar(&controlChar);
+               qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
+            };
+
+            if(controlChar == portSettings.Xoff)
+               xoffReceived = true;
+            if(controlChar == portSettings.Xon)
+               xoffReceived = false;
+         }
+         else
+            xoffReceived = false;
+      };
 
       bytesToWrite = comPort->bytesToWrite();
 
@@ -2683,12 +2708,13 @@ void edytornc::sendButtonClicked()
       usleep(2000);
 #endif
 
-      qDebug() << "Bytes to write: " << bytesToWrite;
-
       if((bytesToWrite == 0) && (!xoffReceived))
       {
          if(!comPort->putChar(tx[i].toAscii()))
-            showError(comPort->lastError());
+         {
+            //showError(comPort->lastError());
+            //break;
+         };
 
          if(tx[i].toAscii() != '\r')
            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
@@ -2715,12 +2741,13 @@ void edytornc::sendButtonClicked()
       };
    };
 
-
    while(comPort->bytesToWrite() > 0)
    {
       qApp->processEvents();
+      qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
    };
 
+   comPort->flush();
    comPort->close();
    delete(comPort);
    progressDialog.close();
@@ -2737,7 +2764,7 @@ void edytornc::sendButtonClicked()
 void edytornc::receiveButtonClicked()
 {
    QString tx;
-   int count, i;
+   int count, i, j;
    char buf[1024];
    MdiChild *activeWindow;
 
@@ -2783,7 +2810,11 @@ void edytornc::receiveButtonClicked()
       comPort->putChar(portSettings.Xon);
    }
    else
-      comPort->setRts(true);
+      if(portSettings.FlowControl == FLOW_HARDWARE)
+      {
+         comPort->setRts(true);
+         comPort->setDtr(true);
+      };
 
    tx.clear();
    while(1)
@@ -2813,32 +2844,54 @@ void edytornc::receiveButtonClicked()
          };
          buf[i] = '\0';
          count += i;
-         tx.append(buf);
+
+         if(deleteControlChars)
+            for(j = 0; j < i; j++)
+            {
+               if(((buf[j] > 0x1F) || (buf[j] < 0x7F)) && ((buf[j] != '\n')))
+                  tx.append(buf[j]);
+            }
+         else
+            for(j = 0; j < i; j++)
+            {
+               if(buf[j] != 0x0D)
+                  tx.append(buf[j]);
+            }
+
          progressDialog.setLabelText(tr("Reciving byte %1").arg(count));
-         if(tx.contains("\n"))
-         {
-            activeWindow->textEdit->insertPlainText(tx);
-            tx.clear();
-         };
+
+         activeWindow->textEdit->insertPlainText(tx);
+         tx.clear();
+
          activeWindow->textEdit->ensureCursorVisible();
          qApp->processEvents();
 
       };
+
       if(stop)
       {
          if(!tx.isEmpty())
             activeWindow->textEdit->insertPlainText(tx);
          break;
       };
+
       progressDialog.setValue(count);
       qApp->processEvents();
+
       if(progressDialog.wasCanceled())
       {
          stop = true;
+
          if(portSettings.FlowControl == FLOW_XONXOFF)
          {
             comPort->putChar(portSettings.Xoff);
-         };
+         }
+         else
+            if(portSettings.FlowControl == FLOW_HARDWARE)
+            {
+               comPort->setRts(false);
+               comPort->setDtr(false);
+            };
 
       };
 
@@ -2850,6 +2903,7 @@ void edytornc::receiveButtonClicked()
    receiveAct->setEnabled(TRUE);
    sendAct->setEnabled(TRUE);
    QApplication::restoreOverrideCursor();
+
    if(activeWindow)
      if(activeWindow->textEdit->document()->isEmpty())
      {

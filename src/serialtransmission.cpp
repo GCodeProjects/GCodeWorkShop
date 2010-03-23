@@ -202,6 +202,8 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("LineDelay", delayDoubleSpinBox->value());
     settings.setValue("Xon", xonInput->text());
     settings.setValue("Xoff", xoffInput->text());
+    settings.setValue("DeleteControlChars", deleteControlChars->isChecked());
+
 
 
     settings.endGroup();
@@ -315,6 +317,8 @@ void SPConfigDialog::changeSettings()
     xoffInput->setText(settings.value("Xoff", "19").toString());
     delayDoubleSpinBox->setValue(settings.value("LineDelay", 0).toDouble());
 
+    deleteControlChars->setChecked(settings.value("DeleteControlChars", true).toBool());
+
     settings.endGroup();
     settings.endGroup();
 }
@@ -381,6 +385,7 @@ void SPConfigDialog::deleteButtonClicked()
     settings.remove("Xon");
     settings.remove("Xoff");
     settings.remove("LineDelay");
+    settings.remove("DeleteControlChars");
 
     settings.endGroup();
     settings.remove(configNameBox->currentText());
@@ -1014,15 +1019,8 @@ TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : Q
 
    connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
 
-   connect(setRtsButton, SIGNAL(clicked()), SLOT(setRtsButtonClicked()));
-   connect(setDtrButton, SIGNAL(clicked()), SLOT(setDtrButtonClicked()));
-
    timer = new QTimer(this);
    connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
-
-   connect(setXonButton, SIGNAL(clicked()), SLOT(setXonButtonClicked()));
-   connect(setXoffButton, SIGNAL(clicked()), SLOT(setXoffButtonClicked()));
-
 }
 
 //**************************************************************************************************
@@ -1032,6 +1030,17 @@ TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : Q
 TransProgressDialog::~TransProgressDialog()
 {
    timer->stop();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void TransProgressDialog::closeEvent(QCloseEvent *event)
+{
+   timer->stop();
+   canceled = true;
+   event->accept();
 }
 
 //**************************************************************************************************
@@ -1086,6 +1095,8 @@ void TransProgressDialog::setRange(int min, int max)
    }
    else
       progressBar->setRange(min, max);
+
+   progressBar->setValue(0);
 }
 
 //**************************************************************************************************
@@ -1105,55 +1116,8 @@ void TransProgressDialog::open(QextSerialPort *port, char cxon, char cxoff)
 
       timer->start(20);
 
-      setDtrButton->setChecked(false);
-      setRtsButton->setChecked(false);
-
-      setXonButton->setEnabled(xon > 0);
-      setXoffButton->setEnabled(xoff > 0);
 
    };
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::setXonButtonClicked()
-{
-   if(comPort->isOpen())
-     comPort->putChar(xon);
-   //setXonButton->setChecked(false);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::setXoffButtonClicked()
-{
-   if(comPort->isOpen())
-     comPort->putChar(xoff);
-   //setXoffButton->setChecked(false);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::setDtrButtonClicked()
-{
-   if(comPort->isOpen())
-     comPort->setDtr(setDtrButton->isChecked());
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::setRtsButtonClicked()
-{
-   if(comPort->isOpen())
-     comPort->setRts(setRtsButton->isChecked());
 }
 
 //**************************************************************************************************
@@ -1177,9 +1141,7 @@ void TransProgressDialog::updateLeds()
    dsrLabel->setEnabled(status & LS_DSR);
    dcdLabel->setEnabled(status & LS_DCD);
    rtsLabel->setEnabled(status & LS_RTS);
-   setRtsButton->setChecked(status & LS_RTS);
    dtrLabel->setEnabled(status & LS_DTR);
-   setDtrButton->setChecked(status & LS_DTR);
 
 
    timer->start();

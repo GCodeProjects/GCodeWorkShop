@@ -263,6 +263,7 @@ private:
     QextSerialPort *comPort;
     bool readyCont;
     bool xoffReceived;
+    bool deleteControlChars;
 
     PortSettings portSettings;
 

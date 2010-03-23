@@ -10,14 +10,14 @@
     <x>0</x>
     <y>0</y>
     <width>409</width>
-    <height>160</height>
+    <height>127</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="application.qrc">
     <normaloff>:/images/serial.png</normaloff>:/images/serial.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -54,7 +54,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/images/led.png</pixmap>
+        <pixmap resource="application.qrc">:/images/led.png</pixmap>
        </property>
       </widget>
      </item>
@@ -76,7 +76,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/images/led.png</pixmap>
+        <pixmap resource="application.qrc">:/images/led.png</pixmap>
        </property>
       </widget>
      </item>
@@ -111,7 +111,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/images/led.png</pixmap>
+        <pixmap resource="application.qrc">:/images/led.png</pixmap>
        </property>
       </widget>
      </item>
@@ -146,7 +146,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/images/led.png</pixmap>
+        <pixmap resource="application.qrc">:/images/led.png</pixmap>
        </property>
       </widget>
      </item>
@@ -181,7 +181,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/images/led.png</pixmap>
+        <pixmap resource="application.qrc">:/images/led.png</pixmap>
        </property>
       </widget>
      </item>
@@ -195,80 +195,6 @@
        </property>
        <property name="text">
         <string>DTR</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="1">
-      <widget class="QPushButton" name="setXoffButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Send XOFF</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="setRtsButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="toolTip">
-        <string>Request To Send</string>
-       </property>
-       <property name="text">
-        <string>Set RTS</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QPushButton" name="setDtrButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="toolTip">
-        <string>Data Terminal Ready</string>
-       </property>
-       <property name="text">
-        <string>Set DTR</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="setXonButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Send XON</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -323,7 +249,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
        </property>
        <property name="autoDefault">
@@ -348,6 +274,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>

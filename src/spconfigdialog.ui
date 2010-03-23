@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
+    <width>663</width>
     <height>368</height>
    </rect>
   </property>
@@ -66,7 +66,7 @@
         <string>&amp;Save</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
        </property>
        <property name="autoDefault">
@@ -83,7 +83,7 @@
         <string>Delete</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/editdelete.png</normaloff>:/images/editdelete.png</iconset>
        </property>
        <property name="autoDefault">
@@ -143,7 +143,7 @@
         <string>&amp;Browse</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
        </property>
       </widget>
@@ -572,6 +572,20 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="deleteControlChars">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Delete control chars</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -615,7 +629,7 @@ p, li { white-space: pre-wrap; }
         <string>&amp;Save &amp;&amp; close</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
        </property>
        <property name="autoDefault">
@@ -642,7 +656,7 @@ p, li { white-space: pre-wrap; }
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
        </property>
        <property name="autoDefault">
@@ -654,6 +668,8 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>
