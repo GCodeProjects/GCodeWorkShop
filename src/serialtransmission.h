@@ -58,6 +58,7 @@ class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
      void closeButtonClicked();
      void deleteButtonClicked();
      void saveCloseButtonClicked();
+     void flowCtlGroupReleased();
 
 
    private:

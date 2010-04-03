@@ -1149,7 +1149,12 @@ bool MdiChild::event(QEvent *event)
    //qDebug() << fileName;
 
    if(!QFile::exists(fileName))
-      fileName = QApplication::applicationDirPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
+   {
+      QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
+      QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
+
+      fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+   };
 
    //qDebug() << fileName;
 

@@ -35,10 +35,6 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
    setWindowTitle(tr("Serial port configuration"));
    setModal(TRUE);
 
-
-   //portNameComboBox->setAutoCompletion(TRUE);
-   //configNameBox->setAutoCompletion(TRUE);
-
    configName = confName;
 
    baudGroup = new QButtonGroup(this);
@@ -91,18 +87,17 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
 
    connect(saveButton, SIGNAL(clicked()), SLOT(saveButtonClicked()));
    connect(saveCloseButton, SIGNAL(clicked()), SLOT(saveCloseButtonClicked()));
-   //connect(loadButton, SIGNAL(clicked()), SLOT(loadButtonClicked()));
    connect(deleteButton, SIGNAL(clicked()), SLOT(deleteButtonClicked()));
    connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
 
+   connect(flowCtlGroup, SIGNAL(buttonReleased(int)), SLOT(flowCtlGroupReleased()));
 
    loadSettings();
+   flowCtlGroupReleased();
 
    connect(configNameBox, SIGNAL(currentIndexChanged(int)), SLOT(changeSettings()));
 
    setResult(QDialog::Rejected);
-   //setMaximumSize(width(), height());
-
 }
 
 //**************************************************************************************************
@@ -112,6 +107,21 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
 SPConfigDialog::~SPConfigDialog()
 {
 
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SPConfigDialog::flowCtlGroupReleased()
+{
+   if(f2CheckBox->isChecked())
+   {
+      startDelaySpinBox->setEnabled(false);
+      startDelaySpinBox->setValue(0);
+   }
+   else
+      startDelaySpinBox->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -203,7 +213,8 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("Xon", xonInput->text());
     settings.setValue("Xoff", xoffInput->text());
     settings.setValue("DeleteControlChars", deleteControlChars->isChecked());
-
+    //settings.setValue("StartAfterXONCTS", startAfterXONCTS->isChecked());
+    settings.setValue("SendingStartDelay", startDelaySpinBox->value());
 
 
     settings.endGroup();
@@ -316,8 +327,10 @@ void SPConfigDialog::changeSettings()
     xonInput->setText(settings.value("Xon", "17").toString());
     xoffInput->setText(settings.value("Xoff", "19").toString());
     delayDoubleSpinBox->setValue(settings.value("LineDelay", 0).toDouble());
-
     deleteControlChars->setChecked(settings.value("DeleteControlChars", true).toBool());
+    //startAfterXONCTS->setChecked(settings.value("StartAfterXONCTS", true).toBool());
+    startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
+
 
     settings.endGroup();
     settings.endGroup();
@@ -386,6 +399,9 @@ void SPConfigDialog::deleteButtonClicked()
     settings.remove("Xoff");
     settings.remove("LineDelay");
     settings.remove("DeleteControlChars");
+    settings.remove("SendingStartDelay");
+    settings.remove("StartAfterXONCTS");
+
 
     settings.endGroup();
     settings.remove(configNameBox->currentText());

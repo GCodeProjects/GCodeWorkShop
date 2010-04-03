@@ -989,7 +989,7 @@ void edytornc::about()
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             tr("<P>Version: ") +
-                               "2010.03" +
+                               "2010.03.25 BETA" +
                             tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             tr("<P>Catalan translation thanks to Jordi Sayol") +
                             tr("<br />German translation thanks to Michael Numberger") +
@@ -1780,12 +1780,11 @@ void edytornc::readSettings()
     defaultMdiWindowProperites.hColors.bColor = settings.value("BColor", 0x000000).toInt();
     settings.endGroup();
 
-    settings.beginGroup("LastDoc");
-
-    int max = settings.value("OpenedFileCount", 0).toInt();
-    for(int i = 1; i < max; ++i) 
+    int max = settings.beginReadArray("LastDoc");
+    for(int i = 0; i < max; ++i)
     {
 
+       settings.setArrayIndex(i);
        defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
 
        defaultMdiWindowProperites.fileName = settings.value("OpenedFile_" + QString::number(i)).toString();
@@ -1800,9 +1799,7 @@ void edytornc::readSettings()
        };
         
     };
-
-
-    settings.endGroup();
+    settings.endArray();
 
 }
 
@@ -1812,25 +1809,13 @@ void edytornc::readSettings()
 
 void edytornc::writeSettings()
 {
-    int i = 1;
     MdiChild *mdiChild;
     bool maximized = false;
    
     QSettings settings("EdytorNC", "EdytorNC");
 
     //cleanup old settings
-    settings.beginGroup("LastDoc" );
-    int max = settings.value("OpenedFileCount", 0 ).toInt();
-    for(int i = 1; i < max; ++i)
-    {
-        settings.remove("OpenedFile_" + QString::number(i));
-        settings.remove("Cursor_" + QString::number(i));
-        settings.remove("ReadOnly_" + QString::number(i));
-        settings.remove("Pos_" + QString::number(i));
-        settings.remove("Size_" + QString::number(i));
-        settings.remove("Geometry_" + QString::number(i));
-    };
-    settings.endGroup();
+    settings.remove("LastDoc");
 
 
     settings.setValue("Pos", pos());
@@ -1838,7 +1823,6 @@ void edytornc::writeSettings()
 
 
     settings.setValue("State", saveState());
-
 
     settings.setValue("LastDir", lastDir.path());
     
@@ -1892,13 +1876,15 @@ void edytornc::writeSettings()
 
     settings.endGroup();
 
-    settings.beginGroup("LastDoc");
 
+    settings.beginWriteArray("LastDoc");
+    int i = 0;
     foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
     {
         mdiChild = qobject_cast<MdiChild *>(window->widget());
         _editor_properites Opt = mdiChild->getMdiWindowProperites();
 
+        settings.setArrayIndex(i);
         settings.setValue("OpenedFile_" + QString::number(i), Opt.fileName);
         settings.setValue("Cursor_" + QString::number(i), Opt.cursorPos);
         settings.setValue("ReadOnly_" + QString::number(i), Opt.readOnly);
@@ -1909,9 +1895,8 @@ void edytornc::writeSettings()
 
         i++;
     };
-    
-    settings.setValue("OpenedFileCount", (i));
-    settings.endGroup();
+    settings.endArray();
+
 
     settings.setValue("MaximizedMdi", maximized);
 
@@ -2550,12 +2535,11 @@ void edytornc::loadConfig()
     lineDelay = settings.value("LineDelay", 0).toDouble();
     portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
     portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
-
-
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
-
     deleteControlChars = settings.value("DeleteControlChars", true).toBool();
+
+    sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
 
 
     settings.endGroup();
@@ -2605,6 +2589,7 @@ void edytornc::sendButtonClicked()
    QTextCursor cursor, prevCursor;
    MdiChild *activeWindow;
    char controlChar;
+   QTimer *sendStartDelayTimer = NULL;
 
 
    bytesToWrite = 0;
@@ -2663,13 +2648,28 @@ void edytornc::sendButtonClicked()
    else
       xoffReceived = false;
 
-   qDebug() << "xoffReceived: " << xoffReceived;
+
+   if(sendStartDelay > 0 && portSettings.FlowControl != FLOW_HARDWARE)
+   {
+      sendStartDelayTimer = new QTimer(this);
+      connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
+      sendStartDelayTimer->setInterval(1000);
+      xoffReceived = true;
+      sendStartDelayTimer->start();
+   };
+
+
+   qDebug() << "xoffReceived: " << xoffReceived << "sendStartDelayTimer: " << sendStartDelay;
 
    i = 0;
    while(i < tx.size())
    {
-      if(xoffReceived)
-        progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
+      if(sendStartDelay > 0)
+         progressDialog.setLabelText(tr("Start in %1s").arg(sendStartDelay));
+      else
+         if(xoffReceived)
+            progressDialog.setLabelText(tr("Waiting for a signal readiness..."));;
+
       qApp->processEvents();
 
       if(progressDialog.wasCanceled())
@@ -2696,10 +2696,13 @@ void edytornc::sendButtonClicked()
             if(controlChar == portSettings.Xoff)
                xoffReceived = true;
             if(controlChar == portSettings.Xon)
-               xoffReceived = false;
+            {
+                sendStartDelay = 0;
+                xoffReceived = false;
+            };
          }
-         else
-            xoffReceived = false;
+//         else
+//            xoffReceived = false;
       };
 
       bytesToWrite = comPort->bytesToWrite();
@@ -2747,6 +2750,12 @@ void edytornc::sendButtonClicked()
       qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
    };
 
+   if(sendStartDelayTimer != NULL)
+   {
+      sendStartDelayTimer->stop();
+      delete(sendStartDelayTimer);
+   };
+
    comPort->flush();
    comPort->close();
    delete(comPort);
@@ -2755,6 +2764,21 @@ void edytornc::sendButtonClicked()
    receiveAct->setEnabled(TRUE);
    sendAct->setEnabled(TRUE);
    QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::sendStartDelayTimeout()
+{
+   if(sendStartDelay > 0)
+      sendStartDelay--;
+   else
+      xoffReceived = false;
+
+   qDebug() << "xoffReceived: " << xoffReceived << "sendStartDelayTimer: " << sendStartDelay;
+
 }
 
 //**************************************************************************************************
@@ -2848,13 +2872,13 @@ void edytornc::receiveButtonClicked()
          if(deleteControlChars)
             for(j = 0; j < i; j++)
             {
-               if(((buf[j] > 0x1F) || (buf[j] < 0x7F)) && ((buf[j] != '\n')))
+               if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0D)))
                   tx.append(buf[j]);
             }
          else
             for(j = 0; j < i; j++)
             {
-               if(buf[j] != 0x0D)
+               if(buf[j] != 0x0A)
                   tx.append(buf[j]);
             }
 
@@ -2990,9 +3014,10 @@ void edytornc::doCmpMacro()
 
 void edytornc::createToolTipsFile()
 {
-   QString fileName;
+   QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
+   QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
 
-   fileName = QApplication::applicationDirPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
+   QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
 
    QSettings settings(fileName, QSettings::IniFormat);
 

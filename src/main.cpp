@@ -21,9 +21,15 @@
  ***************************************************************************/
 
 
-//#include <QApplication>
+
 #include "edytornc.h"
 #include "qtsingleapplication.h"
+
+
+#define LOCALE_PATH         "/usr/share/edytornc/lang/"
+
+
+
 
 int main(int argc, char *argv[])
 {   
@@ -41,16 +47,15 @@ int main(int argc, char *argv[])
     if(app.sendMessage(txMessage))
         return 0;
 
-    QTranslator qtTranslator;
+    QTranslator qtTranslator; // Try to load Qt translations from QLibraryInfo::TranslationsPath if this fails looks for translations in app dir.
     if(!qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
       qtTranslator.load("qt_" + QLocale::system().name(), app.applicationDirPath());
     app.installTranslator(&qtTranslator);
 
-    QTranslator myappTranslator;
-    myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
+    QTranslator myappTranslator; // Try to load EdytorNC translations from LOCALE_PATH if this fails looks for translations in app dir.
+    if(!myappTranslator.load("edytornc_" + QLocale::system().name(), LOCALE_PATH))
+       myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
     app.installTranslator(&myappTranslator);
-
-    //app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 
     edytornc *mw = new edytornc();
 

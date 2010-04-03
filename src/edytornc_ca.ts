@@ -499,7 +499,7 @@
     </message>
     <message>
         <source>Modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Modificat</translation>
     </message>
 </context>
 <context>
@@ -589,11 +589,11 @@
     </message>
     <message>
         <source>Aaaaaaaaaaaaaaa;_</source>
-        <translation type="unfinished"></translation>
+        <translation>Aaaaaaaaaaaaaaa;_</translation>
     </message>
     <message>
         <source>XYZ</source>
-        <translation type="unfinished"></translation>
+        <translation>XYZ</translation>
     </message>
 </context>
 <context>
@@ -1293,82 +1293,82 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show editor tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra indicadors de funció de l&apos;editor</translation>
     </message>
 </context>
 <context>
     <name>TransProgressDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Diàleg</translation>
+        <translation>Diàleg</translation>
     </message>
     <message>
         <source>Clear To Send</source>
-        <translation type="unfinished">Llest per enviar</translation>
+        <translation>Llest per enviar</translation>
     </message>
     <message>
         <source>CTS</source>
-        <translation type="unfinished">CTS</translation>
+        <translation>CTS</translation>
     </message>
     <message>
         <source>Data Set Ready </source>
-        <translation type="unfinished">Conjunt de dades llest</translation>
+        <translation>Conjunt de dades preparat</translation>
     </message>
     <message>
         <source>DSR</source>
-        <translation type="unfinished">DSR</translation>
+        <translation>DSR</translation>
     </message>
     <message>
         <source>Data Carrier Detect</source>
-        <translation type="unfinished">Detecció de portadora de dades</translation>
+        <translation>Detecció de portadora de dades</translation>
     </message>
     <message>
         <source>DCD</source>
-        <translation type="unfinished">DCD</translation>
+        <translation>DCD</translation>
     </message>
     <message>
         <source>Request To Send</source>
-        <translation type="unfinished">Petició d&apos;enviament</translation>
+        <translation>Petició d&apos;enviament</translation>
     </message>
     <message>
         <source>RTS</source>
-        <translation type="unfinished">RTS</translation>
+        <translation>RTS</translation>
     </message>
     <message>
         <source>Data Terminal Ready</source>
-        <translation type="unfinished">Terminal de dades llest</translation>
+        <translation>Terminal de dades preparat</translation>
     </message>
     <message>
         <source>DTR</source>
-        <translation type="unfinished">DTR</translation>
+        <translation>DTR</translation>
     </message>
     <message>
         <source>Send XOFF</source>
-        <translation type="unfinished">Envia XOFF</translation>
+        <translation>Envia XOFF</translation>
     </message>
     <message>
         <source>Set RTS</source>
-        <translation type="unfinished">Estableix RTS</translation>
+        <translation>Estableix RTS</translation>
     </message>
     <message>
         <source>Set DTR</source>
-        <translation type="unfinished">Estableix DTR</translation>
+        <translation>Estableix DTR</translation>
     </message>
     <message>
         <source>Send XON</source>
-        <translation type="unfinished">Envia XON</translation>
+        <translation>Envia XON</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de text</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Canceŀla</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Tanca</translation>
+        <translation>&amp;Tanca</translation>
     </message>
 </context>
 <context>
@@ -2297,15 +2297,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Traducció a l&apos;alemany gràcies a en Michael Numberger</translation>
     </message>
     <message>
         <source>&amp;Create cnc tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Crea indicadors de funció de CNC</translation>
     </message>
     <message>
         <source>Highlight style</source>
-        <translation type="unfinished"></translation>
+        <translation>Estil ressaltat</translation>
     </message>
     <message>
         <source>AUTO</source>
@@ -2341,11 +2341,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Sending...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviant...</translation>
     </message>
     <message>
         <source>Receiving...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rebent...</translation>
     </message>
     <message>
         <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>

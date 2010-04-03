@@ -119,6 +119,7 @@ private slots:
     void createToolTipsFile();
     void attachHighlightToDirActClicked();
     void deAttachHighlightToDirActClicked();
+    void sendStartDelayTimeout();
 
 
 
@@ -264,6 +265,7 @@ private:
     bool readyCont;
     bool xoffReceived;
     bool deleteControlChars;
+    int sendStartDelay;
 
     PortSettings portSettings;
 
