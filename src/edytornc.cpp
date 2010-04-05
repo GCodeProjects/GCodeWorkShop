@@ -653,6 +653,8 @@ void edytornc::config()
          mdiChild = qobject_cast<MdiChild *>(window->widget());
          opt = mdiChild->getMdiWindowProperites();
 
+         defaultMdiWindowProperites.hColors.highlightMode = opt.hColors.highlightMode;
+
          opt.fontName = defaultMdiWindowProperites.fontName;
          opt.fontSize = defaultMdiWindowProperites.fontSize;
          opt.syntaxH = defaultMdiWindowProperites.syntaxH;
@@ -888,17 +890,23 @@ void edytornc::doConvertProg()
 
 void edytornc::doCalc()
 {
+   if(defaultMdiWindowProperites.calcBinary.isNull()  || defaultMdiWindowProperites.calcBinary.isEmpty())
+   {
+      QMessageBox::information(this, tr("Information"),
+                               tr("Set correct calculator program name in configuration dialog."));
+      return;
+   };
+
    proc = findChild<QProcess *>();
 
-   if(!proc && !defaultMdiWindowProperites.calcBinary.isNull())
+   if(!proc)
    {
       proc = new QProcess(this);
       proc->start(defaultMdiWindowProperites.calcBinary);
    }
    else
-     if(!proc->pid() && !defaultMdiWindowProperites.calcBinary.isNull())
-       proc->start(defaultMdiWindowProperites.calcBinary);
-
+      if(proc->pid() == 0)
+         proc->start(defaultMdiWindowProperites.calcBinary);
 }
 
 //**************************************************************************************************
@@ -940,8 +948,6 @@ void edytornc::undo()
    if(activeMdiChild())
    {
       activeMdiChild()->doUndo();
-      //activeMdiChild()->textEdit->undo();
-      //activeMdiChild()->textEdit->ensureCursorVisible();
    };
 }
 
@@ -954,8 +960,6 @@ void edytornc::redo()
    if(activeMdiChild())
    {
       activeMdiChild()->doRedo();
-      //activeMdiChild()->textEdit->redo();
-      //activeMdiChild()->textEdit->ensureCursorVisible();
    };
 }
 
@@ -989,9 +993,9 @@ void edytornc::about()
    QMessageBox::about(this, tr("About EdytorNC"),
                             tr("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             tr("<P>Version: ") +
-                               "2010.03.25 BETA" +
+                               "2010.04" +
                             tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
-                            tr("<P>Catalan translation thanks to Jordi Sayol") +
+                            tr("<P>Catalan translation and deb package thanks to Jordi Sayol") +
                             tr("<br />German translation thanks to Michael Numberger") +
                             tr("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             tr("<P>") +
@@ -1635,7 +1639,7 @@ void edytornc::createStatusBar()
    //QLabel *highlightLabel = new QLabel();
    //highlightLabel->setText(tr("Highlight:"));
    highlightTypeCombo = new QComboBox();
-   highlightTypeCombo->setToolTip(tr("Highlight style"));
+   highlightTypeCombo->setToolTip(tr("Highlight style and tooltip mode"));
    highlightTypeCombo->setEditable(false);
    highlightTypeCombo->addItem(tr("AUTO"), MODE_AUTO);  
    highlightTypeCombo->addItem(tr("FANUC"), MODE_FANUC);
@@ -2217,9 +2221,6 @@ void edytornc::findTextChanged()
 
    if(hasMdiChild)
    {
-      //activeMdiChild()->highlightFindText(findEdit->text(),
-      //                                   ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-      //                                   (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
       if(!findEdit->text().isEmpty())
       {
          cursor = activeMdiChild()->textEdit->textCursor();
