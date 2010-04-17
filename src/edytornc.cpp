@@ -26,6 +26,8 @@
 #include "mdichild.h"
 
 
+#define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
+
 
 //**************************************************************************************************
 //
@@ -37,12 +39,23 @@ edytornc::edytornc()
 
     findToolBar = NULL;
     serialToolBar = NULL;
+    diffApp = NULL;
+    findFiles = NULL;
+
+    openExampleAct = NULL;
+
+
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
 
-    mdiArea = new QMdiArea;
-    setCentralWidget(mdiArea);
+    splitter = new QSplitter(Qt::Vertical, this);
+    setCentralWidget(splitter);
 
+    mdiArea = new QMdiArea;
+    //setCentralWidget(mdiArea);
+
+    splitter->addWidget(mdiArea);
+    splitter->setChildrenCollapsible(false);
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
@@ -176,8 +189,6 @@ void edytornc::open()
                          lastDir.absolutePath(),
                          filters, &openFileFilter);
 
-    //qDebug()<< openFileFilter;
-
 
     QStringList list = files;
     QStringList::Iterator it = list.begin();
@@ -195,7 +206,7 @@ void edytornc::open()
              defaultMdiWindowProperites.cursorPos = 0;
              defaultMdiWindowProperites.readOnly = FALSE;
              defaultMdiWindowProperites.geometry = QByteArray();
-             defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
+             defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
              defaultMdiWindowProperites.editorToolTips = true;
              child->setMdiWindowProperites(defaultMdiWindowProperites);
              if(defaultMdiWindowProperites.maximized)
@@ -215,6 +226,77 @@ void edytornc::open()
       mdiArea->setActiveSubWindow(existing);
 
     statusBar()->showMessage(tr("File loaded"), 2000);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::openExample()
+{
+   QFileInfo file;
+   QMdiSubWindow *existing;
+   QString dir;
+
+   existing = 0;
+
+
+   if(QDir(EXAMPLES_PATH).exists())
+      dir = EXAMPLES_PATH;
+   else
+      dir = QApplication::applicationDirPath() + "/" + "EXAMPLES";
+
+
+
+   QString filters = tr("CNC programs files *.nc (*.nc);;"
+                        "All files (*.* *)");
+
+
+
+
+   QStringList files = QFileDialog::getOpenFileNames(
+                        this,
+                        tr("Select one or more files to open"),
+                        dir,
+                        filters, &openFileFilter);
+
+
+   QStringList list = files;
+   QStringList::Iterator it = list.begin();
+   while(it != list.end())
+   {
+      file.setFile(*it);
+      existing = findMdiChild(*it);
+
+      if((file.exists()) && (file.isReadable()) && !existing)
+      {
+         lastDir = file.absoluteDir();
+         MdiChild *child = createMdiChild();
+         if(child->loadFile(*it))
+         {
+            defaultMdiWindowProperites.cursorPos = 0;
+            defaultMdiWindowProperites.readOnly = FALSE;
+            defaultMdiWindowProperites.geometry = QByteArray();
+            defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
+            defaultMdiWindowProperites.editorToolTips = true;
+            child->setMdiWindowProperites(defaultMdiWindowProperites);
+            if(defaultMdiWindowProperites.maximized)
+              child->showMaximized();
+            else
+              child->showNormal();
+            updateRecentFiles(*it);
+         }
+         else
+         {
+            child->parentWidget()->close();
+         };
+      };
+      ++it;
+   };
+   if(existing)
+     mdiArea->setActiveSubWindow(existing);
+
+   statusBar()->showMessage(tr("File loaded"), 2000);
 }
 
 //**************************************************************************************************
@@ -392,24 +474,36 @@ void edytornc::copy()
 
 void edytornc::findInFl()
 {
+   if(findFiles == NULL)
+   {
+      findFiles = new FindInFiles(splitter);
+      qApp->processEvents();
+      splitter->updateGeometry();
 
-   if((findFiles = findChild<FindInFiles *>()) != 0)
-   { 
-      findFiles->show();
-      return;
-   };
-   findFiles = new FindInFiles(this);
+      if(defaultMdiWindowProperites.syntaxH)
+         findFiles->setHighlightColors(defaultMdiWindowProperites.hColors);
 
-   if(defaultMdiWindowProperites.syntaxH)
-     findFiles->setHighlightColors(defaultMdiWindowProperites.hColors);
+      if(activeMdiChild())
+         findFiles->setDir(QFileInfo(activeMdiChild()->currentFile()).canonicalPath());
 
-   if(activeMdiChild())
-     findFiles->setDir(QFileInfo(activeMdiChild()->currentFile()).canonicalPath());
+      connect(findFiles, SIGNAL(fileClicket(QString)), this, SLOT(loadFoundedFile(QString)));
 
-   connect(findFiles, SIGNAL(fileClicket(QString)), this, SLOT(loadFoundedFile(QString)));
-   findFiles->show();
+      qApp->processEvents();
 
+      findFiles->hideDialog(false);
 
+   }
+   else
+     if(!findFilesAct->isChecked())
+     {
+        findFiles->close();
+        findFiles = NULL;
+     }
+     else
+     {
+        findFiles->show();
+        findFilesAct->setChecked(true);
+     };
 }
 
 //**************************************************************************************************
@@ -725,6 +819,76 @@ void edytornc::doRemoveSpaces()
 {
    if(activeMdiChild())
       activeMdiChild()->doRemoveSpace();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::doDiffL()
+{
+   if(diffApp == NULL)
+   {
+      diffApp = new KDiff3App(splitter, "DiffApp");
+   };
+
+   if(diffApp != NULL)
+   {
+      diffAct->setChecked(true);
+      if(activeMdiChild())
+      {
+         QString fileName = activeMdiChild()->currentFile();
+         diffApp->completeInit("", fileName);
+      };
+   };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::doDiffR()
+{
+   if(diffApp == NULL)
+   {
+      diffApp = new KDiff3App(splitter, "DiffApp");
+   };
+
+   if(diffApp != NULL)
+   {
+      diffAct->setChecked(true);
+      if(activeMdiChild())
+      {
+         QString fileName = activeMdiChild()->currentFile();
+         diffApp->completeInit(fileName, "");
+      };
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void edytornc::doDiff()
+{
+   if(diffApp == NULL)
+   {
+      diffApp = new KDiff3App(splitter, "DiffApp");
+
+      if(activeMdiChild())
+      {
+         QString fileName = activeMdiChild()->currentFile();
+         diffApp->completeInit(QFileInfo(fileName).canonicalPath(), QFileInfo(fileName).canonicalPath());
+      };
+   }
+   else
+      if(!diffAct->isChecked())
+      {
+         diffAct->setChecked(false);
+         diffApp->close();
+         diffApp = NULL;
+      };
 }
 
 //**************************************************************************************************
@@ -1257,6 +1421,13 @@ void edytornc::createActions()
     openAct->setStatusTip(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
+    if(QDir(EXAMPLES_PATH).exists() || QDir(QApplication::applicationDirPath() + "/" + "EXAMPLES").exists())
+    {
+       openExampleAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open example..."), this);
+       openExampleAct->setStatusTip(tr("Open an example file"));
+       connect(openExampleAct, SIGNAL(triggered()), this, SLOT(openExample()));
+    };
+
     openWPvAct = new QAction(QIcon(":/images/fileopen_preview.png"), tr("&Open file with preview"), this);
     openWPvAct->setStatusTip(tr("Open an existing file (Openfile dialog with preview)"));
     connect(openWPvAct, SIGNAL(triggered()), this, SLOT(openWithPreview()));
@@ -1279,6 +1450,7 @@ void edytornc::createActions()
     
     findFilesAct = new QAction(QIcon(":/images/filefind.png"), tr("&Find files..."), this);
     //openAct->setShortcut(tr("Ctrl+"));
+    findFilesAct->setCheckable(true);
     findFilesAct->setStatusTip(tr("Find files"));
     connect(findFilesAct, SIGNAL(triggered()), this, SLOT(findInFl()));
 
@@ -1419,7 +1591,7 @@ void edytornc::createActions()
 
     showSerialToolBarAct = new QAction(QIcon(":/images/serial.png"), tr("Serial port send/receive"), this);
     //showSerialToolBarAct->setShortcut(tr("F9"));
-    showSerialToolBarAct->setCheckable(TRUE);
+    showSerialToolBarAct->setCheckable(true);
     showSerialToolBarAct->setStatusTip(tr("Serial port send/receive"));
     connect(showSerialToolBarAct, SIGNAL(triggered()), this, SLOT(createSerialToolBar()));
 
@@ -1427,6 +1599,19 @@ void edytornc::createActions()
     //cmpMacroAct->setShortcut(tr("F9"));
     cmpMacroAct->setStatusTip(tr("Translate EdytorNC macro into CNC program"));
     connect(cmpMacroAct, SIGNAL(triggered()), this, SLOT(doCmpMacro()));
+
+    diffRAct = new QAction(QIcon(":/images/diffr.png"), tr("Show diff - open current file in right diff window"), this);
+    diffRAct->setStatusTip(tr("Show diff - open current file in right diff window"));
+    connect(diffRAct, SIGNAL(triggered()), this, SLOT(doDiffR()));
+
+    diffLAct = new QAction(QIcon(":/images/diffl.png"), tr("Show diff - open current file in left diff window"), this);
+    diffLAct->setStatusTip(tr("Show diff - open current file in left diff window"));
+    connect(diffLAct, SIGNAL(triggered()), this, SLOT(doDiffL()));
+
+    diffAct = new QAction(QIcon(":/images/diff.png"), tr("On/off diff window"), this);
+    diffAct->setCheckable(true);
+    diffAct->setStatusTip(tr("Show diff window"));
+    connect(diffAct, SIGNAL(triggered()), this, SLOT(doDiff()));
 
 
 
@@ -1486,9 +1671,12 @@ void edytornc::createMenus()
     fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
     fileMenu->addAction(openWPvAct);
+    if(openExampleAct != NULL)
+       fileMenu->addAction(openExampleAct);
+    fileMenu->addSeparator();
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
-    fileMenu->addSeparator();
+    fileMenu->addSeparator();    
     fileMenu->addAction(findFilesAct);
     fileMenu->addSeparator();
     recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
@@ -1516,6 +1704,11 @@ void edytornc::createMenus()
     editMenu->addAction(findAct);
     editMenu->addAction(replaceAct);
     editMenu->addSeparator();
+    editMenu->addSeparator();
+    editMenu->addAction(diffAct);
+    editMenu->addSeparator();
+    editMenu->addAction(diffLAct);
+    editMenu->addAction(diffRAct);
     editMenu->addAction(readOnlyAct);
     editMenu->addSeparator();
     editMenu->addAction(configAct);
@@ -1589,6 +1782,11 @@ void edytornc::createToolBars()
     editToolBar->addSeparator();
     editToolBar->addAction(findAct);
     editToolBar->addAction(replaceAct);
+    editToolBar->addSeparator();
+    editToolBar->addAction(diffAct);
+    editToolBar->addSeparator();
+    editToolBar->addAction(diffRAct);
+    editToolBar->addAction(diffLAct);
 
 
     toolsToolBar = new QToolBar(tr("Tools"));
@@ -1615,7 +1813,7 @@ void edytornc::createToolBars()
     toolsToolBar->addAction(cmpMacroAct);
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(calcAct);
-
+    toolsToolBar->addSeparator();
 
     windowToolBar = addToolBar(tr("Window"));
     windowToolBar->setObjectName("Window");
@@ -1955,12 +2153,14 @@ void edytornc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
 {
    QFileInfo file;
 
-   QMdiSubWindow *existing = findMdiChild(options.fileName);
-   if(existing)
+   if(checkAlreadyLoaded)
    {
-      if(checkAlreadyLoaded)
+      QMdiSubWindow *existing = findMdiChild(options.fileName);
+      if(existing)
+      {
          mdiArea->setActiveSubWindow(existing);
-      return;
+         return;
+      };
    };
 
    file.setFile(options.fileName);

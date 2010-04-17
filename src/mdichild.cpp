@@ -46,6 +46,8 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     marginWidget->setBackgroundRole(QPalette::Base);
     textEdit->installEventFilter(this);
     setWindowIcon(QIcon(":/images/ncfile.png"));
+    splitterH->setBackgroundRole(QPalette::Base);
+    //splitterV->setBackgroundRole(QPalette::Base);
 
 
     //textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -105,7 +107,6 @@ bool MdiChild::loadFile(const QString &fileName)
     setCurrentFile(fileName, tex);
     connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 
-    //detectHighligthMode();
     return true;
 }
 
@@ -491,8 +492,7 @@ _editor_properites MdiChild::getMdiWindowProperites()
 void MdiChild::setMdiWindowProperites(_editor_properites opt)
 {
    disconnect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-   connect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-
+   
    mdiWindowProperites = opt;
    textEdit->setReadOnly(mdiWindowProperites.readOnly);
    setFont(QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
@@ -516,6 +516,7 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    cursor.setPosition(mdiWindowProperites.cursorPos);
    textEdit->setTextCursor(cursor);
    textEdit->centerCursor();
+   connect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 }
 
 //**************************************************************************************************
@@ -1141,52 +1142,46 @@ bool MdiChild::event(QEvent *event)
    QTextCursor cursor;
    QString fileName;
 
-   if(!mdiWindowProperites.editorToolTips)
-      return QWidget::event(event);
-
-   fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
-
-   //qDebug() << fileName;
-
-   if(!QFile::exists(fileName))
+   if((event->type() == QEvent::ToolTip) && mdiWindowProperites.editorToolTips)
    {
-      QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-      QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
 
-      fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
-   };
+      fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
+      if(!QFile::exists(fileName))
+      {
+         QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
+         QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
 
-   //qDebug() << fileName;
+         fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+      };
 
-   if(!QFile::exists(fileName))
-      return QWidget::event(event);
+      if(!QFile::exists(fileName))
+      {
+         event->accept();
+         return true;
+      };
 
-   QSettings settings(fileName, QSettings::IniFormat);
+      QSettings settings(fileName, QSettings::IniFormat);
 
-   switch(mdiWindowProperites.hColors.highlightMode)
-   {
-      case MODE_OKUMA            : group = "OKUMA";
-                                   break;
-      case MODE_FANUC            : group = "FANUC";
-                                   break;
-      case MODE_SINUMERIK_840    : group = "SINUMERIK_840";
-                                   break;
-      case MODE_PHILIPS          :
-      case MODE_SINUMERIK        : group = "SINUMERIK";
-                                   break;
-      case MODE_HEIDENHAIN       : group = "HEIDENHAIN";
-                                   break;
-      case MODE_HEIDENHAIN_ISO   : group = "HEIDENHAIN_ISO";
-                                   break;
-      default                    : group = "";
+      switch(mdiWindowProperites.hColors.highlightMode)
+      {
+         case MODE_OKUMA            : group = "OKUMA";
+                                      break;
+         case MODE_FANUC            : group = "FANUC";
+                                      break;
+         case MODE_SINUMERIK_840    : group = "SINUMERIK_840";
+                                      break;
+         case MODE_PHILIPS          :
+         case MODE_SINUMERIK        : group = "SINUMERIK";
+                                      break;
+         case MODE_HEIDENHAIN       : group = "HEIDENHAIN";
+                                      break;
+         case MODE_HEIDENHAIN_ISO   : group = "HEIDENHAIN_ISO";
+                                      break;
+         default                    : event->accept();
+                                      return true;
 
-   };
+      };
 
-   if(group.isEmpty())
-      return QWidget::event(event);
-
-   if(event->type() == QEvent::ToolTip)
-   {
       QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
 
       cursor = textEdit->cursorForPosition(helpEvent->pos());
@@ -1198,7 +1193,7 @@ bool MdiChild::event(QEvent *event)
             cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
             key = cursor.selectedText();
 
-         }while(key.at(0).isLetter() && !key.isEmpty());
+         }while(key.at(0).isLetter() && !key.isEmpty() && !cursor.atStart());
 
          cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
          do
@@ -1206,7 +1201,7 @@ bool MdiChild::event(QEvent *event)
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
             key = cursor.selectedText();
 
-         }while(key.at(key.length() - 1).isLetter() && !key.isEmpty());
+         }while(key.at(key.length() - 1).isLetter() && !key.isEmpty() && !cursor.atBlockEnd());
 
          cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
 
@@ -1218,7 +1213,7 @@ bool MdiChild::event(QEvent *event)
                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
                key = cursor.selectedText();
 
-            }while(!key.at(0).isLetter() && !key.isEmpty());
+            }while(!((key.at(0) == '#') || key.at(0).isLetter()) && !key.isEmpty() && !cursor.atStart());
 
             cursor.clearSelection();
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
@@ -1227,7 +1222,7 @@ bool MdiChild::event(QEvent *event)
                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                key = cursor.selectedText();
 
-            }while(key.at(key.length() - 1).isDigit() && !key.isEmpty());
+            }while(key.at(key.length() - 1).isDigit() && !key.isEmpty() && !cursor.atEnd());
 
             cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
          };
@@ -1250,6 +1245,8 @@ bool MdiChild::event(QEvent *event)
                key.insert(1, "0");
       };
 
+      qDebug() << "Full key: " << key;
+
       text = settings.value(key, "").toString();
       settings.endGroup();
 
@@ -1265,8 +1262,6 @@ bool MdiChild::event(QEvent *event)
          QToolTip::hideText();
          event->ignore();
       };
-
-      qDebug() << "Full key: " << key;
 
       return true;
     };
@@ -2113,21 +2108,17 @@ void MdiChild::detectHighligthMode()
    if(!mdiWindowProperites.syntaxH)
       return;
 
-   text = textEdit->toPlainText();
+   if(highlighter == NULL)
+     return;
 
-
-   if((!text.isEmpty()) && (mdiWindowProperites.hColors.highlightMode == MODE_AUTO))
+   if(mdiWindowProperites.hColors.highlightMode == MODE_AUTO)
    { 
+      text = textEdit->toPlainText();
       mdiWindowProperites.hColors.highlightMode = autoDetectHighligthMode(text);
    };
 
-
-   if(highlighter != NULL)
-   {
-      highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
-      highlighter->rehighlight();
-   };
-
+   highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
+   highlighter->rehighlight();
 }
 
 //**************************************************************************************************
@@ -2136,7 +2127,6 @@ void MdiChild::detectHighligthMode()
 
 void MdiChild::setHighligthMode(int mod)
 {
-
    mdiWindowProperites.hColors.highlightMode = mod;
    detectHighligthMode();
 }
@@ -2149,6 +2139,69 @@ int MdiChild::getHighligthMode()
 {
    return mdiWindowProperites.hColors.highlightMode;
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::doDiff()
+{
+
+//   setUpdatesEnabled(false);
+//
+////   if(diffSplitter > 0)
+////      return;
+////
+////   diffSplitter = new QSplitter(Qt::Horizontal, this);
+////   diffSplitter->setBackgroundRole(QPalette::Base);
+//
+//   //splitterV->setEnabled(true);
+//
+//   diffApp = new KDiff3App(splitterV, "DiffApp");
+//
+//   diffApp->completeInit(curFile, QFileInfo(curFile).canonicalPath());
+//
+////   QList<int> list;
+////   list << 200 << 200;
+////   splitterV->setSizes(list);
+////   splitterV->adjustSize();
+//
+//   //diffSplitter->addWidget(splitter);
+//
+//   //diffSplitter->show();
+//
+//
+//   //diffApp->resize(width()/2, height());
+//   //diffApp->show();
+//   //diffApp->adjustSize();
+//   //diffApp->resize(800,600);
+//   //splitter->adjustSize();
+//
+//   setUpdatesEnabled(true);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::diffInit()
+{
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+//void MdiChild::getHighligthMode()
+//{
+//
+//}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 
 
 //**************************************************************************************************

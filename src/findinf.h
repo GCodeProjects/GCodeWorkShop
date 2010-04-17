@@ -43,16 +43,17 @@ class QTableWidget;
 QT_END_NAMESPACE
 
 
-class FindInFiles : public QDialog, private Ui::FindInFiles
+class FindInFiles : public QWidget, private Ui::FindInFiles
 {
     Q_OBJECT
 
 public:
-    FindInFiles(QWidget *parent = 0);
+    FindInFiles(QSplitter *parent = 0);
 
 public slots:
     void setHighlightColors(const _h_colors colors);
     void setDir(const QString dir);
+    void hideDialog(bool hide);
 
 private slots:
     void browse();
@@ -60,6 +61,8 @@ private slots:
     void closeDialog();
     void filesTableClicked(int x, int y);
     void filePreview(int x, int y);
+    void hideDlg();
+
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -79,6 +82,9 @@ private:
     bool intCapsLock;
     _h_colors highlighterColors;
     bool highligh;
+    QList<int> currentHeight;
+
+    QSplitter *f_parent;
 
 
 signals:

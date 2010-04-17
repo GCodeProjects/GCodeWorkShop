@@ -28,31 +28,34 @@
 #define MAXLISTS        16
 
 
-FindInFiles::FindInFiles(QWidget *parent): QDialog(parent)
+FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
 {
-    setupUi(this);
-    //setAttribute(Qt::WA_DeleteOnClose);
-    setWindowTitle(tr("Find Files"));
 
-    highlighter = NULL;
-    highligh = false;
+   f_parent = parent;
+   setupUi(this);
+   setAttribute(Qt::WA_DeleteOnClose);
+   setObjectName("FindInFiles");
 
-    connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
-    connect(findButton, SIGNAL(clicked()), SLOT(find()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(closeDialog()));
-    connect(hideButton, SIGNAL(clicked()), SLOT(close()));
+   splitter->hide();
+   frame->hide();
 
-    createFilesTable();
+   highlighter = NULL;
+   highligh = false;
 
-    textComboBox->installEventFilter(this);
+   connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
+   connect(findButton, SIGNAL(clicked()), SLOT(find()));
+   connect(hideToolButton, SIGNAL(clicked()), SLOT(hideDlg()));
 
-    preview->setReadOnly(TRUE);
-    preview->setWordWrapMode(QTextOption::NoWrap);
-    preview->setFont(QFont("Courier", 10, QFont::Normal));
 
-    resize(parent->width() * 0.8, parent->height() * 0.6);
+   createFilesTable();
 
-    readSettings();
+   textComboBox->installEventFilter(this);
+
+   preview->setReadOnly(TRUE);
+   preview->setWordWrapMode(QTextOption::NoWrap);
+   preview->setFont(QFont("Courier", 12, QFont::Normal));
+
+   readSettings();
 }
 
 //**************************************************************************************************
@@ -63,6 +66,63 @@ void FindInFiles::closeDialog()
 {
     setAttribute(Qt::WA_DeleteOnClose);
     close();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void FindInFiles::hideDialog(bool hide)
+{
+   if(hide)
+   {
+      splitter->hide();
+      frame->hide();
+      hideToolButton->setChecked(true);
+   }
+   else
+   {
+      splitter->show();
+      frame->show();
+      hideToolButton->setChecked(false);
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void FindInFiles::hideDlg()
+{
+
+   QList<int> list;
+   list = f_parent->sizes();
+   int id = f_parent->indexOf(this);
+
+   qDebug() << "size " << list << "id " << id;
+
+
+   if(hideToolButton->isChecked())
+   {
+      currentHeight = list;
+      list[id] = 18;
+      list[0] = list[0] + (currentHeight[id] - list[id]);
+      splitter->hide();
+      frame->hide();
+      hideToolButton->setChecked(true);
+   }
+   else
+   {
+      list = currentHeight;
+      splitter->show();
+      frame->show();
+      hideToolButton->setChecked(false);
+   };
+   qApp->processEvents();
+   f_parent->setSizes(list);
+   f_parent->updateGeometry();
+   qApp->processEvents();
+   qDebug() << "size " << f_parent->sizes() << list;
 }
 
 //**************************************************************************************************
@@ -95,8 +155,8 @@ void FindInFiles::find()
     QString path = directoryComboBox->currentText();
 
     findButton->setEnabled(FALSE);
-    closeButton->setEnabled(FALSE);
-    hideButton->setEnabled(FALSE);
+    //closeButton->setEnabled(FALSE);
+    //hideButton->setEnabled(FALSE);
     QApplication::setOverrideCursor(Qt::BusyCursor);
     qApp->processEvents();
 
@@ -110,8 +170,8 @@ void FindInFiles::find()
       files = findFiles(directory, files, text);
 
     findButton->setEnabled(TRUE);
-    closeButton->setEnabled(TRUE);
-    hideButton->setEnabled(TRUE);
+    //closeButton->setEnabled(TRUE);
+    //hideButton->setEnabled(TRUE);
     QApplication::restoreOverrideCursor();
 }
 
@@ -510,6 +570,12 @@ bool FindInFiles::eventFilter(QObject *obj, QEvent *ev)
        if( ev->type() == QEvent::KeyPress )
        {
           QKeyEvent *k = (QKeyEvent*) ev;
+
+          if((k->key() == Qt::Key_Return))
+          {
+             find();
+             return false;
+          };
 
           if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
           {

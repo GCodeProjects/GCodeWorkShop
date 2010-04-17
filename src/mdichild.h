@@ -71,6 +71,7 @@ public:
     QString filePath();
     void setHighligthMode(int mod);
     int getHighligthMode();
+    void doDiff();
 
 
 
@@ -93,6 +94,7 @@ private:
     void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
     void detectHighligthMode();
+    void diffInit();
 
 
 
@@ -105,6 +107,8 @@ private:
     QList<QTextEdit::ExtraSelection> extraSelections;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
+
+
 
 
 private slots :

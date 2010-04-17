@@ -33,6 +33,7 @@
 #include "findinf.h"
 #include "dialogs.h"
 #include "serialtransmission.h"
+#include "kdiff3.h"
 
 
 
@@ -56,6 +57,7 @@ protected:
 private slots:
     void newFile();
     void open();
+    void openExample();
     void openWithPreview();
     void save();
     void saveAs();
@@ -74,7 +76,7 @@ private slots:
     void updateRecentFiles( const QString& filename );
     void fileOpenRecent( QAction *act );
     void updateRecentFilesMenu();
-    void activeWindowChanged(QMdiSubWindow * window);
+    void activeWindowChanged(QMdiSubWindow *window);
     void deleteText();
     void findInFl();
     bool findNext();
@@ -120,6 +122,9 @@ private slots:
     void attachHighlightToDirActClicked();
     void deAttachHighlightToDirActClicked();
     void sendStartDelayTimeout();
+    void doDiffL();
+    void doDiffR();
+    void doDiff();
 
 
 
@@ -141,7 +146,6 @@ private:
     int defaultHighlightMode(QString filePath);
 
 
-
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     _editor_properites defaultMdiWindowProperites;
@@ -154,6 +158,9 @@ private:
     QString openFileFilter;
 
     QMdiArea *mdiArea;
+    QSplitter *splitter;
+    KDiff3App *diffApp;
+
     QSignalMapper *windowMapper;
     QStringList m_recentFiles;
 
@@ -171,6 +178,7 @@ private:
 
     QAction *newAct;
     QAction *openAct;
+    QAction *openExampleAct;
     QAction *openWPvAct;
     QAction *saveAct;
     QAction *saveAsAct;
@@ -214,6 +222,9 @@ private:
     QAction *convertAct;
     QAction *convertProgAct;
     QAction *cmpMacroAct;
+    QAction *diffLAct;
+    QAction *diffRAct;
+    QAction *diffAct;
 
     QProcess *proc;
     QDir lastDir;

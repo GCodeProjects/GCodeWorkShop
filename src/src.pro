@@ -13,7 +13,18 @@ SOURCES += edytornc.cpp \
     serialtransmission.cpp \
     basic_interpreter.cpp \
     qextserialport.cpp \
-    qextserialenumerator.cpp
+    qextserialenumerator.cpp \
+    difftextwindow.cpp \
+    diff.cpp \
+    merger.cpp \
+    optiondialog.cpp \
+    common.cpp \
+    fileaccess.cpp \
+    kdiff3.cpp \
+    gnudiff_xmalloc.cpp \
+    gnudiff_io.cpp \
+    gnudiff_analyze.cpp \
+    pdiff.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -27,7 +38,16 @@ HEADERS += edytornc.h \
     serialtransmission.h \
     basic_interpreter.h \
     qextserialport.h \
-    qextserialenumerator.h
+    qextserialenumerator.h \
+    difftextwindow.h \
+    diff.h \
+    merger.h \
+    optiondialog.h \
+    common.h \
+    fileaccess.h \
+    kdiff3.h \
+    gnudiff_system.h \
+    gnudiff_diff.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \
@@ -67,4 +87,4 @@ win32:SOURCES += win_qextserialport.cpp
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
-VERSION = 2010.03
+VERSION = 2010.04

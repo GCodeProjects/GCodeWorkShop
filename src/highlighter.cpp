@@ -95,7 +95,9 @@ void Highlighter::loadRules()
 //      commentHighlightRules.append(rule);
 //   };
 
-   if(highlightColors.highlightMode == MODE_OKUMA || highlightColors.highlightMode == MODE_PHILIPS || highlightColors.highlightMode == MODE_FANUC || highlightColors.highlightMode == MODE_SINUMERIK)  // () comment
+   if(highlightColors.highlightMode == MODE_OKUMA || highlightColors.highlightMode == MODE_PHILIPS
+      || highlightColors.highlightMode == MODE_FANUC || highlightColors.highlightMode == MODE_SINUMERIK
+      || highlightColors.highlightMode == MODE_AUTO)  // () comment
    {
       commentStartExpression = QRegExp("\\s\\(|^\\(");
       commentEndExpression = QRegExp("\\)");
@@ -106,7 +108,7 @@ void Highlighter::loadRules()
       commentEndExpression = QRegExp("][");
    };
 
-   if(highlightColors.highlightMode == MODE_FANUC)  //FANUC
+   if(highlightColors.highlightMode == MODE_FANUC || highlightColors.highlightMode == MODE_AUTO)  //FANUC
    {
       keywords << "(OR|XOR|AND|NOT|EOR|EQ|NE|GT|LT|GE|LE|IF|THEN|ELSE)"
                << "(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)"
@@ -149,6 +151,7 @@ void Highlighter::loadRules()
                << "\\b(DFUP|GRDX|NE|RTMCR)\\b"
                << "\\b(VC)[0-9]{1,3}\\b"
                << "\\b(TG|OG)\\b"
+               << "\\b(NOEX|NCYL)\\b"
                << "\\b(CLEAR|DRAW|DEF WORK|DIREC|CYLNDR|PT|LF|LC)\\b"
                << "\\b(PSELECT)\\b"
                << "\\bV[A-Z]{1,4}|V[A-Z]{1,3}[0-9]{1,1}\\b";
@@ -172,7 +175,7 @@ void Highlighter::loadRules()
    {
       keywords << "\\b(OR|XOR|AND|NOT|EOR|IF|THEN|ELSE|ENDIF|END|BEGIN|DEFINE|AS)\\b"
                << "\\b(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
-               << "\\b(DO|WHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN)\\b"
+               << "\\b(DO|WHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN|ENDFOR|LOOP|ENDLOOP)\\b"
                << "\\b(GOSUB|RETURN|RETURN|RET|GET|PUT|READ|WRITE)\\b"
                << "\\b(PROC|SUPA|STOPRE|MSG|SAVE|DISPLOF|SBLOF|PGM|ANG|AR|CHR|RND|AC)\\b"
                << "\\b(VAR|MCALL|CALL|AP|RP|PRINT)\\b"
@@ -2357,7 +2360,7 @@ int autoDetectHighligthMode(const QString text)
       };
    };
 
-   return MODE_SINUMERIK;
+   return MODE_AUTO;
 
 //   progNameFormat.setForeground(QColor(highlightColors.progNameColor));
 //   progNameFormat.setFontWeight(QFont::Bold);
