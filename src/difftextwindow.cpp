@@ -38,42 +38,6 @@
 #include <assert.h>
 
 
-/// Converts the cursor-posOnScreen into a text index, considering tabulators.
-int convertToPosInText( const QString& s, int posOnScreen, int tabSize )
-{
-   int localPosOnScreen = 0;
-   int size=s.length();
-   for ( int i=0; i<size; ++i )
-   {
-      if ( localPosOnScreen>=posOnScreen )
-         return i;
-
-      // All letters except tabulator have width one.
-      int letterWidth = s[i]!='\t' ? 1 : tabber( localPosOnScreen, tabSize );
-
-      localPosOnScreen += letterWidth;
-
-      if ( localPosOnScreen>posOnScreen )
-         return i;
-   }
-   return size;
-}
-
-
-/// Converts the index into the text to a cursor-posOnScreen considering tabulators.
-int convertToPosOnScreen( const QString& p, int posInText, int tabSize )
-{
-   int posOnScreen = 0;
-   for ( int i=0; i<posInText; ++i )
-   {
-      // All letters except tabulator have width one.
-      int letterWidth = p[i]!='\t' ? 1 : tabber( posOnScreen, tabSize );
-
-      posOnScreen += letterWidth;
-   }
-   return posOnScreen;
-}
-
 class DiffTextWindowData
 {
 public:
@@ -378,24 +342,6 @@ int DiffTextWindow::convertDiff3LineIdxToLine( int d3lIdx )
       return d3lIdx;
 }
 
-/** Returns a line number where the linerange [line, line+nofLines] can
-    be displayed best. If it fits into the currently visible range then
-    the returned value is the current firstLine.
-*/
-int getBestFirstLine( int line, int nofLines, int firstLine, int visibleLines )
-{
-   int newFirstLine = firstLine;
-   if ( line < firstLine  ||  line + nofLines + 2 > firstLine + visibleLines )
-   {
-      if ( nofLines > visibleLines || nofLines <= ( 2*visibleLines / 3 - 1)  )
-         newFirstLine = line - visibleLines/3;
-      else
-         newFirstLine = line - (visibleLines - nofLines);
-   }
-
-   return newFirstLine;
-}
-
 
 void DiffTextWindow::setFastSelectorRange( int line1, int nofLines )
 {
@@ -417,6 +363,7 @@ void DiffTextWindow::setFastSelectorRange( int line1, int nofLines )
       update();
    }
 }
+
 
 
 void DiffTextWindow::showStatusLine(int line )
@@ -1042,7 +989,7 @@ void DiffTextWindowData::writeLine(
       int rangeLine2 = -1;
       if (m_winIdx==1 ) { rangeLine1 = mdhe.lineA1; rangeLine2= mdhe.lineA2; }
       if (m_winIdx==2 ) { rangeLine1 = mdhe.lineB1; rangeLine2= mdhe.lineB2; }
-      if (m_winIdx==3 ) { rangeLine1 = mdhe.lineC1; rangeLine2= mdhe.lineC2; }
+      //if (m_winIdx==3 ) { rangeLine1 = mdhe.lineC1; rangeLine2= mdhe.lineC2; }
       if ( rangeLine1>=0 && rangeLine2>=0 && srcLineIdx >= rangeLine1 && srcLineIdx <= rangeLine2 )
       {
          p.fillRect( xOffset - fontWidth, yOffset, fontWidth-1, fontHeight, m_pOptionDialog->m_manualHelpRangeColor ); //m_pOptionDialog->m_manualHelpRangeColor
@@ -1703,6 +1650,7 @@ DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, OptionDialog* pOptio
    d->m_pBrowseButton->setIcon(QIcon(":/images/fileopen.png"));
    d->m_pBrowseButton->setToolTip(tr("Open file..."));
    d->m_pBrowseButton->setFixedWidth( 30 );
+   d->m_pBrowseButton->setFlat(true);
    connect(d->m_pBrowseButton,SIGNAL(clicked()), this, SLOT(slotBrowseButtonClicked()));
    connect(d->m_pFileSelection,SIGNAL(returnPressed()), this, SLOT(slotReturnPressed()));
 

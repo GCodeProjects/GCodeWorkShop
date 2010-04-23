@@ -19,6 +19,7 @@
 #define KDIFF3_H
 
 #include "diff.h"
+#include "mergeresultwindow.h"
 
 //#include <config-kdiff3.h>
 
@@ -35,17 +36,12 @@ class FindDialog;
 class ManualDiffHelpDialog;
 class DiffTextWindow;
 class DiffTextWindowFrame;
-//class MergeResultWindow;
+class MergeResultWindow;
 //class WindowTitleWidget;
-//class Overview;
+
 
 class QScrollBar;
 class QSplitter;
-
-
-//class KDiff3Part;
-//class DirectoryMergeWindow;
-//class DirectoryMergeInfo;
 
 
 class ReversibleScrollBar : public QScrollBar
@@ -118,6 +114,7 @@ class KDiff3App : public QWidget
 
   signals:
      void createNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 );
+
   protected:
     void initDirectoryMergeActions();
     /** sets up the statusbar for the main window by initialzing a statuslabel. */
@@ -155,7 +152,7 @@ class KDiff3App : public QWidget
     void slotEditCopy();
     /** paste the clipboard into the document
      */
-    //void slotEditPaste();
+    void slotEditPaste();
     /** toggles the toolbar
      */
     //void slotViewToolBar();
@@ -167,7 +164,10 @@ class KDiff3App : public QWidget
      */
    // void slotStatusMsg(const QString &text);
 
-  private:
+ private slots:
+
+
+ private:
     /** the configuration object of the application */
     //KConfig *config;
 
@@ -242,7 +242,7 @@ class KDiff3App : public QWidget
 
     //QSplitter*  m_pMainSplitter;
     //QWidget*    m_pMainWidget;
-    QWidget*    m_pMergeWindowFrame;
+    //QWidget*    m_pMergeWindowFrame;
     ReversibleScrollBar* m_pHScrollBar;
     QScrollBar* m_pDiffVScrollBar;
     QScrollBar* m_pMergeVScrollBar;
@@ -255,7 +255,7 @@ class KDiff3App : public QWidget
     //DiffTextWindowFrame* m_pDiffTextWindowFrame3;
     QSplitter* m_pDiffWindowSplitter;
 
-    //MergeResultWindow* m_pMergeResultWindow;
+    MergeResultWindow* m_pMergeResultWindow;
     //WindowTitleWidget* m_pMergeResultWindowTitle;
     bool m_bTripleDiff;
 
@@ -264,7 +264,7 @@ class KDiff3App : public QWidget
     //DirectoryMergeInfo* m_pDirectoryMergeInfo;
     bool m_bDirCompare;
 
-    //Overview* m_pOverview;
+    Overview* m_pOverview;
 
     QWidget* m_pCornerWidget;
 
@@ -385,8 +385,8 @@ public slots:
    void slotWinFocusNext();
    void slotWinFocusPrev();
    void slotWinToggleSplitterOrientation();
-//   void slotOverviewNormal();
-//   void slotOverviewAB();
+   void slotOverviewNormal();
+   void slotOverviewAB();
 //   void slotOverviewAC();
 //   void slotOverviewBC();
    void slotSplitDiff();

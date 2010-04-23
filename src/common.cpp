@@ -349,3 +349,22 @@ QPoint      ValueMap::readEntry(const QString& s, const QPoint defaultVal ){ ret
 bool        ValueMap::readEntry (const QString& s, bool bDefault ){ return readBoolEntry(s,bDefault); }
 int         ValueMap::readEntry  (const QString& s, int iDefault ){ return readNumEntry(s,iDefault); }
 QStringList ValueMap::readEntry (const QString& s, const QStringList& defaultVal, char separator ){ return readListEntry(s,defaultVal,separator); }
+
+
+/** Returns a line number where the linerange [line, line+nofLines] can
+    be displayed best. If it fits into the currently visible range then
+    the returned value is the current firstLine.
+*/
+int getBestFirstLine( int line, int nofLines, int firstLine, int visibleLines )
+{
+   int newFirstLine = firstLine;
+   if ( line < firstLine  ||  line + nofLines + 2 > firstLine + visibleLines )
+   {
+      if ( nofLines > visibleLines || nofLines <= ( 2*visibleLines / 3 - 1)  )
+         newFirstLine = line - visibleLines/3;
+      else
+         newFirstLine = line - (visibleLines - nofLines);
+   }
+
+   return newFirstLine;
+}

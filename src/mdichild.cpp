@@ -442,9 +442,13 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
        pos = text.indexOf(exp, pos);
 
     };
-   
- 
-    setWindowTitle(QString("%2 ----> %1 [*]").arg(curFile).arg(f_tx.simplified()));
+
+    if(!f_tx.isEmpty())
+       curFileInfo = f_tx.simplified();
+    else
+       curFileInfo = "";
+
+    setWindowTitle(QString("%2 ---> %1 [*]").arg(curFile).arg(curFileInfo));
 
 }
 
@@ -1145,23 +1149,6 @@ bool MdiChild::event(QEvent *event)
    if((event->type() == QEvent::ToolTip) && mdiWindowProperites.editorToolTips)
    {
 
-      fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
-      if(!QFile::exists(fileName))
-      {
-         QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-         QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
-
-         fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
-      };
-
-      if(!QFile::exists(fileName))
-      {
-         event->accept();
-         return true;
-      };
-
-      QSettings settings(fileName, QSettings::IniFormat);
-
       switch(mdiWindowProperites.hColors.highlightMode)
       {
          case MODE_OKUMA            : group = "OKUMA";
@@ -1181,6 +1168,8 @@ bool MdiChild::event(QEvent *event)
                                       return true;
 
       };
+
+
 
       QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
 
@@ -1236,7 +1225,6 @@ bool MdiChild::event(QEvent *event)
       };
 
       key = cursor.selectedText();
-      settings.beginGroup(group);
 
       if(key.length() == 2)
       {
@@ -1247,8 +1235,35 @@ bool MdiChild::event(QEvent *event)
 
       qDebug() << "Full key: " << key;
 
-      text = settings.value(key, "").toString();
-      settings.endGroup();
+      fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips.txt";
+      if(QFile::exists(fileName))
+      {
+         QSettings settings(fileName, QSettings::IniFormat);
+         settings.beginGroup(group);
+         text = settings.value(key, "").toString();
+         settings.endGroup();
+      };
+
+      if(text.isEmpty() || text.isNull())
+      {
+         QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
+         QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
+
+         fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+
+         if(QFile::exists(fileName))
+         {
+            QSettings settings(fileName, QSettings::IniFormat);
+            settings.beginGroup(group);
+            text = settings.value(key, "").toString();
+            settings.endGroup();
+         }
+         else
+         {
+            event->accept();
+            return true;
+         };
+      };
 
       if(!text.isEmpty())
       {
@@ -2184,9 +2199,9 @@ void MdiChild::doDiff()
 //
 //**************************************************************************************************
 
-void MdiChild::diffInit()
+QString MdiChild::getCurrentFileInfo()
 {
-
+   return curFileInfo;
 }
 
 //**************************************************************************************************

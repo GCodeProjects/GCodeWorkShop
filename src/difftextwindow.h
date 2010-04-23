@@ -19,12 +19,35 @@
 #define DIFFTEXTWINDOW_H
 
 #include "diff.h"
+#include "mergeresultwindow.h"
 
 #include <QWidget>
 
 class OptionDialog;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
+
+
+//enum e_MergeDetails
+//{
+//   eDefault,
+//   eNoChange,
+//   eBChanged,
+//   eCChanged,
+//   eBCChanged,         // conflict
+//   eBCChangedAndEqual, // possible conflict
+//   eBDeleted,
+//   eCDeleted,
+//   eBCDeleted,         // possible conflict
+//
+//   eBChanged_CDeleted, // conflict
+//   eCChanged_BDeleted, // conflict
+//   eBAdded,
+//   eCAdded,
+//   eBCAdded,           // conflict
+//   eBCAddedAndEqual    // possible conflict
+//};
+
 
 class DiffTextWindow : public QWidget
 {
@@ -136,6 +159,9 @@ private:
    DiffTextWindowFrameData* d;
 
 };
+
+
+
 
 
 #endif

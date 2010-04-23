@@ -384,23 +384,23 @@
     <value type="QString">COLORTERM=1</value>
     <value type="QString">CPU=x86_64</value>
     <value type="QString">CSHEDIT=emacs</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-rRrghk9rSb,guid=139b74aff2b2e46893d9faf44bc96954</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Ti085uxKo6,guid=a631e68e217e541800a19ae34bd1a2cf</value>
     <value type="QString">DESKTOP_SESSION=default</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
     <value type="QString">ENV=/etc/bash.bashrc</value>
     <value type="QString">FROM_HEADER=</value>
-    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-9A1n2o/S.gpg-agent:1658:1</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-M7YZDx/S.gpg-agent:1988:1</value>
     <value type="QString">GS_LIB=/home/artur/.fonts</value>
-    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-kde4:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
     <value type="QString">GTK_IM_MODULE=cedilla</value>
     <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/artur/.gtkrc::/home/artur/.kde4/share/config/gtkrc</value>
     <value type="QString">G_BROKEN_FILENAMES=1</value>
     <value type="QString">G_FILENAME_ENCODING=@locale,UTF-8,ISO-8859-2,CP1250</value>
     <value type="QString">HISTSIZE=1000</value>
     <value type="QString">HOME=/home/artur</value>
-    <value type="QString">HOST=laptop-acer</value>
-    <value type="QString">HOSTNAME=laptop-acer</value>
+    <value type="QString">HOST=matrix</value>
+    <value type="QString">HOSTNAME=matrix</value>
     <value type="QString">HOSTTYPE=x86_64</value>
     <value type="QString">INPUTRC=/home/artur/.inputrc</value>
     <value type="QString">JAVA_BINDIR=/usr/lib64/jvm/jre/bin</value>
@@ -409,18 +409,15 @@
     <value type="QString">JRE_HOME=/usr/lib64/jvm/jre</value>
     <value type="QString">KDE_FULL_SESSION=true</value>
     <value type="QString">KDE_MULTIHEAD=false</value>
-    <value type="QString">KDE_NO_IPV6=1</value>
     <value type="QString">KDE_SESSION_UID=1000</value>
     <value type="QString">KDE_SESSION_VERSION=4</value>
     <value type="QString">LANG=pl_PL.UTF-8</value>
     <value type="QString">LANGUAGE=</value>
-    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator:</value>
     <value type="QString">LESS=-M -I</value>
     <value type="QString">LESSCLOSE=lessclose.sh %s %s</value>
     <value type="QString">LESSKEY=/etc/lesskey.bin</value>
     <value type="QString">LESSOPEN=lessopen.sh %s</value>
     <value type="QString">LESS_ADVANCED_PREPROCESSOR=no</value>
-    <value type="QString">LIBXCB_ALLOW_SLOPPY_LOCK=1</value>
     <value type="QString">LOGNAME=artur</value>
     <value type="QString">LS_COLORS=no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tbz=00;31:*.tgz=00;31:*.rpm=00;31:*.deb=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.lzma=00;31:*.zip=00;31:*.zoo=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.tb2=00;31:*.tz2=00;31:*.tbz2=00;31:*.xz=00;31:*.avi=01;35:*.bmp=01;35:*.fli=01;35:*.gif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mng=01;35:*.mov=01;35:*.mpg=01;35:*.pcx=01;35:*.pbm=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.tga=01;35:*.tif=01;35:*.xbm=01;35:*.xpm=01;35:*.dl=01;35:*.gl=01;35:*.wmv=01;35:*.aiff=00;32:*.au=00;32:*.mid=00;32:*.mp3=00;32:*.ogg=00;32:*.voc=00;32:*.wav=00;32:</value>
     <value type="QString">LS_OPTIONS=-N --color=tty -T 0</value>
@@ -434,35 +431,36 @@
     <value type="QString">PAGER=less</value>
     <value type="QString">PATH=/usr/bin:/home/artur/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/opt/kde3/bin:/usr/lib64/jvm/jre/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin</value>
     <value type="QString">PROFILEREAD=true</value>
-    <value type="QString">PWD=/home/artur/Dokumenty</value>
+    <value type="QString">PWD=/home/artur</value>
     <value type="QString">PYTHONSTARTUP=/etc/pythonstart</value>
     <value type="QString">QTDIR=/usr/share/qt4/</value>
     <value type="QString">QT_IM_MODULE=xim</value>
     <value type="QString">QT_IM_SWITCHER=imsw-multi</value>
     <value type="QString">QT_PLUGIN_PATH=/home/artur/.kde4/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
     <value type="QString">QT_SYSTEM_DIR=/usr/share/desktop-data</value>
-    <value type="QString">SESSION_MANAGER=local/laptop-acer:@/tmp/.ICE-unix/1792,unix/laptop-acer:/tmp/.ICE-unix/1792</value>
+    <value type="QString">SESSION_MANAGER=local/matrix:@/tmp/.ICE-unix/2711,unix/matrix:/tmp/.ICE-unix/2711</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
-    <value type="QString">SSH_AGENT_PID=1659</value>
+    <value type="QString">SSH_AGENT_PID=1998</value>
     <value type="QString">SSH_ASKPASS=/usr/lib64/ssh/x11-ssh-askpass</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-FzEai1588/agent.1588</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-jsIfJ1869/agent.1869</value>
     <value type="QString">TERM=xterm</value>
     <value type="QString">TMPDIR=/tmp</value>
     <value type="QString">USER=artur</value>
     <value type="QString">USE_FAM=</value>
     <value type="QString">WINDOWMANAGER=/usr/bin/startkde</value>
     <value type="QString">WINDOWPATH=7</value>
-    <value type="QString">XAUTHLOCALHOSTNAME=laptop-acer</value>
+    <value type="QString">XAUTHLOCALHOSTNAME=matrix</value>
     <value type="QString">XCURSOR_THEME=DMZ</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg</value>
-    <value type="QString">XDG_DATA_DIRS=/usr/share:/etc/opt/kde3/share:/opt/kde3/share</value>
-    <value type="QString">XDG_SESSION_COOKIE=bb8a098b5d04224d403dcb714aef6f78-1271490897.628914-510171542</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=bb8a098b5d04224d403dcb714aef6f78-1272029900.359981-554329296</value>
     <value type="QString">XDM_MANAGED=method=classic,auto</value>
     <value type="QString">XKEYSYMDB=/usr/share/X11/XKeysymDB</value>
     <value type="QString">XMODIFIERS=@im=local</value>
     <value type="QString">XNLSPATH=/usr/share/X11/nls</value>
     <value type="QString">XSESSION_IS_UP=yes</value>
+    <value type="QString">_=/usr/lib64/kde4/libexec/start_kdeinit_wrapper</value>
     <value type="QString">mc=() {  . /usr/share/mc/bin/mc-wrapper.sh
 }</value>
    </valuelist>
@@ -487,23 +485,23 @@
     <value type="QString">COLORTERM=1</value>
     <value type="QString">CPU=x86_64</value>
     <value type="QString">CSHEDIT=emacs</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-rRrghk9rSb,guid=139b74aff2b2e46893d9faf44bc96954</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Ti085uxKo6,guid=a631e68e217e541800a19ae34bd1a2cf</value>
     <value type="QString">DESKTOP_SESSION=default</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
     <value type="QString">ENV=/etc/bash.bashrc</value>
     <value type="QString">FROM_HEADER=</value>
-    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-9A1n2o/S.gpg-agent:1658:1</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-M7YZDx/S.gpg-agent:1988:1</value>
     <value type="QString">GS_LIB=/home/artur/.fonts</value>
-    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-kde4:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
     <value type="QString">GTK_IM_MODULE=cedilla</value>
     <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/artur/.gtkrc::/home/artur/.kde4/share/config/gtkrc</value>
     <value type="QString">G_BROKEN_FILENAMES=1</value>
     <value type="QString">G_FILENAME_ENCODING=@locale,UTF-8,ISO-8859-2,CP1250</value>
     <value type="QString">HISTSIZE=1000</value>
     <value type="QString">HOME=/home/artur</value>
-    <value type="QString">HOST=laptop-acer</value>
-    <value type="QString">HOSTNAME=laptop-acer</value>
+    <value type="QString">HOST=matrix</value>
+    <value type="QString">HOSTNAME=matrix</value>
     <value type="QString">HOSTTYPE=x86_64</value>
     <value type="QString">INPUTRC=/home/artur/.inputrc</value>
     <value type="QString">JAVA_BINDIR=/usr/lib64/jvm/jre/bin</value>
@@ -512,18 +510,15 @@
     <value type="QString">JRE_HOME=/usr/lib64/jvm/jre</value>
     <value type="QString">KDE_FULL_SESSION=true</value>
     <value type="QString">KDE_MULTIHEAD=false</value>
-    <value type="QString">KDE_NO_IPV6=1</value>
     <value type="QString">KDE_SESSION_UID=1000</value>
     <value type="QString">KDE_SESSION_VERSION=4</value>
     <value type="QString">LANG=pl_PL.UTF-8</value>
     <value type="QString">LANGUAGE=</value>
-    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator:</value>
     <value type="QString">LESS=-M -I</value>
     <value type="QString">LESSCLOSE=lessclose.sh %s %s</value>
     <value type="QString">LESSKEY=/etc/lesskey.bin</value>
     <value type="QString">LESSOPEN=lessopen.sh %s</value>
     <value type="QString">LESS_ADVANCED_PREPROCESSOR=no</value>
-    <value type="QString">LIBXCB_ALLOW_SLOPPY_LOCK=1</value>
     <value type="QString">LOGNAME=artur</value>
     <value type="QString">LS_COLORS=no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tbz=00;31:*.tgz=00;31:*.rpm=00;31:*.deb=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.lzma=00;31:*.zip=00;31:*.zoo=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.tb2=00;31:*.tz2=00;31:*.tbz2=00;31:*.xz=00;31:*.avi=01;35:*.bmp=01;35:*.fli=01;35:*.gif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mng=01;35:*.mov=01;35:*.mpg=01;35:*.pcx=01;35:*.pbm=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.tga=01;35:*.tif=01;35:*.xbm=01;35:*.xpm=01;35:*.dl=01;35:*.gl=01;35:*.wmv=01;35:*.aiff=00;32:*.au=00;32:*.mid=00;32:*.mp3=00;32:*.ogg=00;32:*.voc=00;32:*.wav=00;32:</value>
     <value type="QString">LS_OPTIONS=-N --color=tty -T 0</value>
@@ -537,35 +532,36 @@
     <value type="QString">PAGER=less</value>
     <value type="QString">PATH=/usr/bin:/home/artur/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/opt/kde3/bin:/usr/lib64/jvm/jre/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin</value>
     <value type="QString">PROFILEREAD=true</value>
-    <value type="QString">PWD=/home/artur/Dokumenty</value>
+    <value type="QString">PWD=/home/artur</value>
     <value type="QString">PYTHONSTARTUP=/etc/pythonstart</value>
     <value type="QString">QTDIR=/usr/share/qt4/</value>
     <value type="QString">QT_IM_MODULE=xim</value>
     <value type="QString">QT_IM_SWITCHER=imsw-multi</value>
     <value type="QString">QT_PLUGIN_PATH=/home/artur/.kde4/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
     <value type="QString">QT_SYSTEM_DIR=/usr/share/desktop-data</value>
-    <value type="QString">SESSION_MANAGER=local/laptop-acer:@/tmp/.ICE-unix/1792,unix/laptop-acer:/tmp/.ICE-unix/1792</value>
+    <value type="QString">SESSION_MANAGER=local/matrix:@/tmp/.ICE-unix/2711,unix/matrix:/tmp/.ICE-unix/2711</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
-    <value type="QString">SSH_AGENT_PID=1659</value>
+    <value type="QString">SSH_AGENT_PID=1998</value>
     <value type="QString">SSH_ASKPASS=/usr/lib64/ssh/x11-ssh-askpass</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-FzEai1588/agent.1588</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-jsIfJ1869/agent.1869</value>
     <value type="QString">TERM=xterm</value>
     <value type="QString">TMPDIR=/tmp</value>
     <value type="QString">USER=artur</value>
     <value type="QString">USE_FAM=</value>
     <value type="QString">WINDOWMANAGER=/usr/bin/startkde</value>
     <value type="QString">WINDOWPATH=7</value>
-    <value type="QString">XAUTHLOCALHOSTNAME=laptop-acer</value>
+    <value type="QString">XAUTHLOCALHOSTNAME=matrix</value>
     <value type="QString">XCURSOR_THEME=DMZ</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg</value>
-    <value type="QString">XDG_DATA_DIRS=/usr/share:/etc/opt/kde3/share:/opt/kde3/share</value>
-    <value type="QString">XDG_SESSION_COOKIE=bb8a098b5d04224d403dcb714aef6f78-1271490897.628914-510171542</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=bb8a098b5d04224d403dcb714aef6f78-1272029900.359981-554329296</value>
     <value type="QString">XDM_MANAGED=method=classic,auto</value>
     <value type="QString">XKEYSYMDB=/usr/share/X11/XKeysymDB</value>
     <value type="QString">XMODIFIERS=@im=local</value>
     <value type="QString">XNLSPATH=/usr/share/X11/nls</value>
     <value type="QString">XSESSION_IS_UP=yes</value>
+    <value type="QString">_=/usr/lib64/kde4/libexec/start_kdeinit_wrapper</value>
     <value type="QString">mc=() {  . /usr/share/mc/bin/mc-wrapper.sh
 }</value>
    </valuelist>
@@ -590,23 +586,23 @@
     <value type="QString">COLORTERM=1</value>
     <value type="QString">CPU=x86_64</value>
     <value type="QString">CSHEDIT=emacs</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-J7hiV31NyD,guid=09db41701b93f1b9deeaf1924bc8b60e</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-b1n9aNfGxB,guid=3b96b430e960092c8bce1fa64bcdadf4</value>
     <value type="QString">DESKTOP_SESSION=default</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
     <value type="QString">ENV=/etc/bash.bashrc</value>
     <value type="QString">FROM_HEADER=</value>
-    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-V8Uiav/S.gpg-agent:1608:1</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-S7aF5n/S.gpg-agent:2006:1</value>
     <value type="QString">GS_LIB=/home/artur/.fonts</value>
-    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-kde4:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/usr/share/themes//QtCurve/gtk-2.0/gtkrc:/home/artur/.gtkrc-2.0-qtengine:/home/artur/.gtkrc-2.0:/home/artur/.kde4/share/config/gtkrc-2.0</value>
     <value type="QString">GTK_IM_MODULE=cedilla</value>
     <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/artur/.gtkrc::/home/artur/.kde4/share/config/gtkrc</value>
     <value type="QString">G_BROKEN_FILENAMES=1</value>
     <value type="QString">G_FILENAME_ENCODING=@locale,UTF-8,ISO-8859-2,CP1250</value>
     <value type="QString">HISTSIZE=1000</value>
     <value type="QString">HOME=/home/artur</value>
-    <value type="QString">HOST=laptop-acer</value>
-    <value type="QString">HOSTNAME=laptop-acer</value>
+    <value type="QString">HOST=matrix</value>
+    <value type="QString">HOSTNAME=matrix</value>
     <value type="QString">HOSTTYPE=x86_64</value>
     <value type="QString">INPUTRC=/home/artur/.inputrc</value>
     <value type="QString">JAVA_BINDIR=/usr/lib64/jvm/jre/bin</value>
@@ -615,17 +611,14 @@
     <value type="QString">JRE_HOME=/usr/lib64/jvm/jre</value>
     <value type="QString">KDE_FULL_SESSION=true</value>
     <value type="QString">KDE_MULTIHEAD=false</value>
-    <value type="QString">KDE_NO_IPV6=1</value>
     <value type="QString">KDE_SESSION_UID=1000</value>
     <value type="QString">KDE_SESSION_VERSION=4</value>
     <value type="QString">LANG=pl_PL.UTF-8</value>
-    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator:</value>
     <value type="QString">LESS=-M -I</value>
     <value type="QString">LESSCLOSE=lessclose.sh %s %s</value>
     <value type="QString">LESSKEY=/etc/lesskey.bin</value>
     <value type="QString">LESSOPEN=lessopen.sh %s</value>
     <value type="QString">LESS_ADVANCED_PREPROCESSOR=no</value>
-    <value type="QString">LIBXCB_ALLOW_SLOPPY_LOCK=1</value>
     <value type="QString">LOGNAME=artur</value>
     <value type="QString">LS_COLORS=no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tbz=00;31:*.tgz=00;31:*.rpm=00;31:*.deb=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.lzma=00;31:*.zip=00;31:*.zoo=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.tb2=00;31:*.tz2=00;31:*.tbz2=00;31:*.xz=00;31:*.avi=01;35:*.bmp=01;35:*.fli=01;35:*.gif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mng=01;35:*.mov=01;35:*.mpg=01;35:*.pcx=01;35:*.pbm=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.tga=01;35:*.tif=01;35:*.xbm=01;35:*.xpm=01;35:*.dl=01;35:*.gl=01;35:*.wmv=01;35:*.aiff=00;32:*.au=00;32:*.mid=00;32:*.mp3=00;32:*.ogg=00;32:*.voc=00;32:*.wav=00;32:</value>
     <value type="QString">LS_OPTIONS=-N --color=tty -T 0</value>
@@ -639,35 +632,36 @@
     <value type="QString">PAGER=less</value>
     <value type="QString">PATH=/usr/bin:/home/artur/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/opt/kde3/bin:/usr/lib64/jvm/jre/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin</value>
     <value type="QString">PROFILEREAD=true</value>
-    <value type="QString">PWD=/home/artur/Dokumenty</value>
+    <value type="QString">PWD=/home/artur</value>
     <value type="QString">PYTHONSTARTUP=/etc/pythonstart</value>
     <value type="QString">QTDIR=/usr/share/qt4/</value>
     <value type="QString">QT_IM_MODULE=xim</value>
     <value type="QString">QT_IM_SWITCHER=imsw-multi</value>
     <value type="QString">QT_PLUGIN_PATH=/home/artur/.kde4/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
     <value type="QString">QT_SYSTEM_DIR=/usr/share/desktop-data</value>
-    <value type="QString">SESSION_MANAGER=local/laptop-acer:@/tmp/.ICE-unix/1803,unix/laptop-acer:/tmp/.ICE-unix/1803</value>
+    <value type="QString">SESSION_MANAGER=local/matrix:@/tmp/.ICE-unix/2482,unix/matrix:/tmp/.ICE-unix/2482</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
-    <value type="QString">SSH_AGENT_PID=1609</value>
+    <value type="QString">SSH_AGENT_PID=2012</value>
     <value type="QString">SSH_ASKPASS=/usr/lib64/ssh/x11-ssh-askpass</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-Mewjl1538/agent.1538</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-JuUlg1888/agent.1888</value>
     <value type="QString">TERM=xterm</value>
     <value type="QString">TMPDIR=/tmp</value>
     <value type="QString">USER=artur</value>
     <value type="QString">USE_FAM=</value>
     <value type="QString">WINDOWMANAGER=/usr/bin/startkde</value>
     <value type="QString">WINDOWPATH=7</value>
-    <value type="QString">XAUTHLOCALHOSTNAME=laptop-acer</value>
+    <value type="QString">XAUTHLOCALHOSTNAME=matrix</value>
     <value type="QString">XCURSOR_THEME=DMZ</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg</value>
-    <value type="QString">XDG_DATA_DIRS=/usr/share:/etc/opt/kde3/share:/opt/kde3/share</value>
-    <value type="QString">XDG_SESSION_COOKIE=bb8a098b5d04224d403dcb714aef6f78-1271444996.493665-1461903083</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=bb8a098b5d04224d403dcb714aef6f78-1271770609.270325-1771463432</value>
     <value type="QString">XDM_MANAGED=method=classic,auto</value>
     <value type="QString">XKEYSYMDB=/usr/share/X11/XKeysymDB</value>
     <value type="QString">XMODIFIERS=@im=local</value>
     <value type="QString">XNLSPATH=/usr/share/X11/nls</value>
     <value type="QString">XSESSION_IS_UP=yes</value>
+    <value type="QString">_=/usr/lib64/kde4/libexec/start_kdeinit_wrapper</value>
     <value type="QString">mc=() {  . /usr/share/mc/bin/mc-wrapper.sh
 }</value>
    </valuelist>

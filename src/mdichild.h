@@ -72,6 +72,7 @@ public:
     void setHighligthMode(int mod);
     int getHighligthMode();
     void doDiff();
+    QString getCurrentFileInfo();
 
 
 
@@ -94,10 +95,11 @@ private:
     void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
     void detectHighligthMode();
-    void diffInit();
 
 
 
+
+    QString curFileInfo;
     QString curFile;
     QString saveFileFilter;
     QByteArray saveDialogState;

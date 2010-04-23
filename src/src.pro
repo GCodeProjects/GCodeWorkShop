@@ -24,7 +24,8 @@ SOURCES += edytornc.cpp \
     gnudiff_xmalloc.cpp \
     gnudiff_io.cpp \
     gnudiff_analyze.cpp \
-    pdiff.cpp
+    pdiff.cpp \
+    mergeresultwindow.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -47,7 +48,8 @@ HEADERS += edytornc.h \
     fileaccess.h \
     kdiff3.h \
     gnudiff_system.h \
-    gnudiff_diff.h
+    gnudiff_diff.h \
+    mergeresultwindow.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \

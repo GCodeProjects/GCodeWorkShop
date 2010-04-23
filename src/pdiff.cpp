@@ -388,13 +388,9 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 
    //m_bOutputModified = bVisibleMergeResultWindow;
 
-//   m_pMergeResultWindow->init(
-//      m_sd1.getLineDataForDisplay(), m_sd1.getSizeLines(),
-//      m_sd2.getLineDataForDisplay(), m_sd2.getSizeLines(),
-//      m_bTripleDiff ? m_sd3.getLineDataForDisplay() : 0, m_sd3.getSizeLines(),
-//      &m_diff3LineList,
-//      pTotalDiffStatus
-//      );
+   m_pMergeResultWindow->init(
+      m_sd1.getLineDataForDisplay(), m_sd1.getSizeLines(),
+      m_sd2.getLineDataForDisplay(), m_sd2.getSizeLines(), &m_diff3LineList, pTotalDiffStatus);
 //   m_pMergeResultWindowTitle->setFileName( m_outputFilename.isEmpty() ? QString("unnamed.txt") : m_outputFilename );
 
 //   if ( !bGUI )
@@ -406,7 +402,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 //      return;
 //   }
 
-   //m_pOverview->init(&m_diff3LineList, m_bTripleDiff );
+   m_pOverview->init(&m_diff3LineList, m_bTripleDiff );
    //m_pDiffVScrollBar->setValue( 0 );
    m_pHScrollBar->setValue( 0 );
    //m_pMergeVScrollBar->setValue( 0 );
@@ -414,7 +410,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    m_pDiffTextWindow1->setPaintingAllowed( true );
    m_pDiffTextWindow2->setPaintingAllowed( true );
    //m_pDiffTextWindow3->setPaintingAllowed( true );
-   //m_pOverview->setPaintingAllowed( true );
+   m_pOverview->setPaintingAllowed( true );
    //m_pMergeResultWindow->setPaintingAllowed( true );
 
 
@@ -562,7 +558,7 @@ void KDiff3App::resizeDiffTextWindow(int /*newWidth*/, int newHeight)
 
    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - newHeight) );
    m_pDiffVScrollBar->setPageStep( newHeight );
-   //m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
+   m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
 
    setHScrollBarRange();
 }
@@ -581,7 +577,7 @@ void KDiff3App::scrollDiffTextWindow( int deltaX, int deltaY )
    if ( deltaY!= 0 )
    {
       m_pDiffVScrollBar->setValue( m_pDiffVScrollBar->value() + deltaY );
-      //m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
+      m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
    }
    if ( deltaX!= 0)
       m_pHScrollBar->QScrollBar::setValue( m_pHScrollBar->value() + deltaX );
@@ -669,10 +665,10 @@ void KDiff3App::initView()
    pDiffHLayout->addWidget( m_pDiffWindowSplitter );
    //m_pDiffWindowSplitter->show();
 
-   //m_pOverview = new Overview( m_pOptionDialog );
-   //m_pOverview->setObjectName("Overview");
-   //pDiffHLayout->addWidget(m_pOverview);
-   //connect( m_pOverview, SIGNAL(setLine(int)), this, SLOT(setDiff3Line(int)) );
+   m_pOverview = new Overview( m_pOptionDialog );
+   m_pOverview->setObjectName("Overview");
+   pDiffHLayout->addWidget(m_pOverview);
+   connect( m_pOverview, SIGNAL(setLine(int)), this, SLOT(setDiff3Line(int)) );
    //connect( m_pOverview, SIGNAL(afterFirstPaint()), this, SLOT(slotAfterFirstPaint()));
 
    m_pDiffVScrollBar = new QScrollBar( Qt::Vertical, pDiffWindowFrame );
@@ -694,7 +690,7 @@ void KDiff3App::initView()
    //connect(m_pDiffTextWindowFrame3, SIGNAL(fileNameChanged(const QString&,int)), this, SLOT(slotFileNameChanged(const QString&,int)));
 
    // Merge window
-//   m_pMergeWindowFrame = new QWidget( pVSplitter );
+   //m_pMergeWindowFrame = new QWidget( pVSplitter );
 //   m_pMergeWindowFrame->setObjectName("MergeWindowFrame");
 //   pVSplitter->addWidget(m_pMergeWindowFrame);
 //   QHBoxLayout* pMergeHLayout = new QHBoxLayout( m_pMergeWindowFrame );
@@ -706,7 +702,7 @@ void KDiff3App::initView()
 //   //m_pMergeResultWindowTitle = new WindowTitleWidget(m_pOptionDialog);
 //   //pMergeVLayout->addWidget( m_pMergeResultWindowTitle );
 //
-//   //m_pMergeResultWindow = new MergeResultWindow( m_pMergeWindowFrame, m_pOptionDialog, statusBar() );
+     m_pMergeResultWindow = new MergeResultWindow( this, m_pOptionDialog);
 //   //pMergeVLayout->addWidget( m_pMergeResultWindow, 1 );
 //
 //   m_pMergeVScrollBar = new QScrollBar( Qt::Vertical, m_pMergeWindowFrame );
@@ -739,7 +735,7 @@ void KDiff3App::initView()
    pHScrollBarLayout->addWidget( m_pCornerWidget );
 
 
-   //connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pOverview, SLOT(setFirstLine(int)));
+   connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pOverview, SLOT(setFirstLine(int)));
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow1, SLOT(setFirstLine(int)));
    connect( m_pHScrollBar, SIGNAL(valueChanged2(int)), m_pDiffTextWindow1, SLOT(setFirstColumn(int)));
    connect( m_pDiffTextWindow1, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
@@ -762,14 +758,14 @@ void KDiff3App::initView()
 //   m_pDiffTextWindow3->installEventFilter( this );
 
 
-   //MergeResultWindow* p = m_pMergeResultWindow;
+   MergeResultWindow* p = m_pMergeResultWindow;
    //connect( m_pMergeVScrollBar, SIGNAL(valueChanged(int)), p, SLOT(setFirstLine(int)));
 
    //connect( m_pHScrollBar,      SIGNAL(valueChanged2(int)), p, SLOT(setFirstColumn(int)));
    //connect( p, SIGNAL(scroll(int,int)), this, SLOT(scrollMergeResultWindow(int,int)));
    //connect( p, SIGNAL(sourceMask(int,int)), this, SLOT(sourceMask(int,int)));
    //connect( p, SIGNAL( resizeSignal() ),this, SLOT(resizeMergeResultWindow()));
-   //connect( p, SIGNAL( selectionEnd() ), this, SLOT( slotSelectionEnd() ) );
+   connect( p, SIGNAL( selectionEnd() ), this, SLOT( slotSelectionEnd() ) );
    //connect( p, SIGNAL( newSelection() ), this, SLOT( slotSelectionStart() ) );
    //connect( p, SIGNAL( modifiedChanged(bool) ), this, SLOT( slotOutputModified(bool) ) );
    //connect( p, SIGNAL( modifiedChanged(bool) ), m_pMergeResultWindowTitle, SLOT( slotSetModified(bool) ) );
@@ -779,14 +775,14 @@ void KDiff3App::initView()
    //sourceMask(0,0);
 
 
-   //connect( p, SIGNAL(setFastSelectorRange(int,int)), m_pDiffTextWindow1, SLOT(setFastSelectorRange(int,int)));
-   //connect( p, SIGNAL(setFastSelectorRange(int,int)), m_pDiffTextWindow2, SLOT(setFastSelectorRange(int,int)));
+   connect( p, SIGNAL(setFastSelectorRange(int,int)), m_pDiffTextWindow1, SLOT(setFastSelectorRange(int,int)));
+   connect( p, SIGNAL(setFastSelectorRange(int,int)), m_pDiffTextWindow2, SLOT(setFastSelectorRange(int,int)));
    //connect( p, SIGNAL(setFastSelectorRange(int,int)), m_pDiffTextWindow3, SLOT(setFastSelectorRange(int,int)));
-   //connect(m_pDiffTextWindow1, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
-   //connect(m_pDiffTextWindow2, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
+   connect(m_pDiffTextWindow1, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
+   connect(m_pDiffTextWindow2, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
    //connect(m_pDiffTextWindow3, SIGNAL(setFastSelectorLine(int)), p, SLOT(slotSetFastSelectorLine(int)));
-   //connect(m_pDiffTextWindow1, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
-   //connect(m_pDiffTextWindow2, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
+   connect(m_pDiffTextWindow1, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
+   connect(m_pDiffTextWindow2, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
    //connect(m_pDiffTextWindow3, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
    //connect(m_pDirectoryMergeInfo, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
 
@@ -827,7 +823,7 @@ void KDiff3App::slotAfterFirstPaint()
 
    m_pDiffVScrollBar->setRange(0, max2(0, m_neededLines+1 - newHeight) );
    m_pDiffVScrollBar->setPageStep( newHeight );
-   //m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
+   m_pOverview->setRange( m_pDiffVScrollBar->value(), m_pDiffVScrollBar->pageStep() );
 
    int d3l=-1;
    if ( ! m_manualDiffHelpList.empty() )
@@ -906,16 +902,16 @@ bool KDiff3App::eventFilter( QObject* o, QEvent* e )
 //       }
 
        bool bCtrl = (k->QInputEvent::modifiers() & Qt::ControlModifier) != 0;
-       if (k->key()==Qt::Key_Insert &&  bCtrl )
+       if (k->key()==Qt::Key_C &&  bCtrl )
        {
           slotEditCopy();
           return true;
        }
-//       if (k->key()==Qt::Key_Insert &&  (k->QInputEvent::modifiers() & Qt::ShiftModifier)!=0 )
-//       {
-//          //slotEditPaste();
-//          return true;
-//       }
+       if (k->key()==Qt::Key_V &&  bCtrl )
+       {
+          slotEditPaste();
+          return true;
+       }
        int deltaX=0;
        int deltaY=0;
        int pageSize =  m_DTWHeight;
@@ -1196,35 +1192,35 @@ void KDiff3App::slotEditCopy()
    //slotStatusMsg(tr("Ready."));
 }
 
-//void KDiff3App::slotEditPaste()
-//{
-//   slotStatusMsg(tr("Inserting clipboard contents..."));
-//
+void KDiff3App::slotEditPaste()
+{
+   //slotStatusMsg(tr("Inserting clipboard contents..."));
+
 //   if ( m_pMergeResultWindow!=0 && m_pMergeResultWindow->isVisible() )
 //   {
 //      m_pMergeResultWindow->pasteClipboard(false);
 //   }
 //   else if ( canContinue() )
-//   {
-//      if ( m_pDiffTextWindow1->hasFocus() )
-//      {
-//         m_sd1.setData( QApplication::clipboard()->text(QClipboard::Clipboard) );
-//         init();
-//      }
-//      else if ( m_pDiffTextWindow2->hasFocus() )
-//      {
-//         m_sd2.setData( QApplication::clipboard()->text(QClipboard::Clipboard) );
-//         init();
-//      }
+   {
+      if ( m_pDiffTextWindow1->hasFocus() )
+      {
+         m_sd1.setData( QApplication::clipboard()->text(QClipboard::Clipboard) );
+         init();
+      }
+      else if ( m_pDiffTextWindow2->hasFocus() )
+      {
+         m_sd2.setData( QApplication::clipboard()->text(QClipboard::Clipboard) );
+         init();
+      }
 //      else if ( m_pDiffTextWindow3->hasFocus() )
 //      {
 //         m_sd3.setData( QApplication::clipboard()->text(QClipboard::Clipboard) );
 //         init();
 //      }
-//   }
-//
-//   slotStatusMsg(tr("Ready."));
-//}
+   }
+
+   //slotStatusMsg(tr("Ready."));
+}
 
 //void KDiff3App::slotEditSelectAll()
 //{
@@ -1580,8 +1576,8 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
    if (bPrinting)
       return;
 
-   /*if (m_pOverview)
-      m_pOverview->slotRedraw()*/;
+   if (m_pOverview)
+      m_pOverview->slotRedraw();
    if ( m_pDiffTextWindow1 )
    {
       m_pDiffTextWindow1->setFirstLine( m_pDiffTextWindow1->convertDiff3LineIdxToLine( firstD3LIdx ) );
@@ -1620,7 +1616,7 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
 //      m_pDiffTextWindow2->update();
 //   if ( m_pDiffTextWindow3!=0 )
 //      m_pDiffTextWindow3->update();
-//   //if ( m_pOverview!=0 )
+//   //if ( !=0 )
 //      //m_pOverview->slotRedraw();
 //}
 
@@ -2034,22 +2030,22 @@ void KDiff3App::slotWinToggleSplitterOrientation()
    }
 }
 
-//void KDiff3App::slotOverviewNormal()
-//{
-////   if ( m_pOverview != 0 )
-////      m_pOverview->setOverviewMode( Overview::eOMNormal );
-////   if ( m_pMergeResultWindow !=0 )
-////      m_pMergeResultWindow->setOverviewMode( Overview::eOMNormal );
-////   slotUpdateAvailabilities();
-//}
+void KDiff3App::slotOverviewNormal()
+{
+   if ( m_pOverview != 0 )
+      m_pOverview->setOverviewMode( Overview::eOMNormal );
+//   if (  !=0 )
+//      ->setOverviewMode( Overview::eOMNormal );
+   slotUpdateAvailabilities();
+}
 
-//void KDiff3App::slotOverviewAB()
-//{
-////   if ( m_pOverview != 0 )
-////      m_pOverview->setOverviewMode( Overview::eOMAvsB );
-////   m_pMergeResultWindow->setOverviewMode( Overview::eOMAvsB );
-////   slotUpdateAvailabilities();
-//}
+void KDiff3App::slotOverviewAB()
+{
+   if ( m_pOverview != 0 )
+      m_pOverview->setOverviewMode( Overview::eOMAvsB );
+   //->setOverviewMode( Overview::eOMAvsB );
+   slotUpdateAvailabilities();
+}
 
 //void KDiff3App::slotOverviewAC()
 //{
@@ -2062,11 +2058,11 @@ void KDiff3App::slotWinToggleSplitterOrientation()
 
 //void KDiff3App::slotOverviewBC()
 //{
-////   if ( m_pOverview != 0 )
-////      m_pOverview->setOverviewMode( Overview::eOMBvsC );
-////   if ( m_pMergeResultWindow !=0 )
-////      m_pMergeResultWindow->setOverviewMode( Overview::eOMBvsC );
-////   slotUpdateAvailabilities();
+//   if ( m_pOverview != 0 )
+//      m_pOverview->setOverviewMode( Overview::eOMBvsC );
+//   if ( m_pMergeResultWindow !=0 )
+//      m_pMergeResultWindow->setOverviewMode( Overview::eOMBvsC );
+//   slotUpdateAvailabilities();
 //}
 
 void KDiff3App::slotNoRelevantChangesDetected()
@@ -2272,3 +2268,5 @@ void KDiff3App::slotUpdateAvailabilities()
 
    //winToggleSplitOrientation->setEnabled( bDiffWindowVisible && m_pDiffWindowSplitter!=0 );
 }
+
+

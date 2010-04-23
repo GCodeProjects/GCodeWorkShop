@@ -36,16 +36,12 @@ FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
    setAttribute(Qt::WA_DeleteOnClose);
    setObjectName("FindInFiles");
 
-   splitter->hide();
-   frame->hide();
-
    highlighter = NULL;
    highligh = false;
 
    connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
    connect(findButton, SIGNAL(clicked()), SLOT(find()));
    connect(hideToolButton, SIGNAL(clicked()), SLOT(hideDlg()));
-
 
    createFilesTable();
 
@@ -72,35 +68,11 @@ void FindInFiles::closeDialog()
 //
 //**************************************************************************************************
 
-void FindInFiles::hideDialog(bool hide)
-{
-   if(hide)
-   {
-      splitter->hide();
-      frame->hide();
-      hideToolButton->setChecked(true);
-   }
-   else
-   {
-      splitter->show();
-      frame->show();
-      hideToolButton->setChecked(false);
-   };
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void FindInFiles::hideDlg()
 {
-
    QList<int> list;
    list = f_parent->sizes();
    int id = f_parent->indexOf(this);
-
-   qDebug() << "size " << list << "id " << id;
-
 
    if(hideToolButton->isChecked())
    {
@@ -122,7 +94,6 @@ void FindInFiles::hideDlg()
    f_parent->setSizes(list);
    f_parent->updateGeometry();
    qApp->processEvents();
-   qDebug() << "size " << f_parent->sizes() << list;
 }
 
 //**************************************************************************************************
@@ -302,8 +273,9 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
        filesTable->setItem(0, 2, sizeItem);
     };
 
-    filesTable->resizeColumnsToContents();
     filesTable->resizeRowsToContents();
+    filesTable->resizeColumnsToContents();
+
     return foundFiles;
 }
 
@@ -544,8 +516,6 @@ void FindInFiles::highlightFindText(QString searchString, QTextDocument::FindFla
           selection.cursor = cursor;
           
           QTextCharFormat format = cursor.charFormat();
-          //format.setUnderlineStyle(QTextCharFormat::WaveUnderline);
-          //format.setUnderlineColor(Qt::green);
           format.setFontPointSize(16);
           qApp->processEvents();
           cursor.mergeCharFormat(format);
@@ -571,7 +541,7 @@ bool FindInFiles::eventFilter(QObject *obj, QEvent *ev)
        {
           QKeyEvent *k = (QKeyEvent*) ev;
 
-          if((k->key() == Qt::Key_Return))
+          if((k->key() == Qt::Key_Return) || (k->key() == Qt::Key_Enter))
           {
              find();
              return false;

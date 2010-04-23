@@ -77,10 +77,10 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* ): QWidget(pParent)
    m_pDiffTextWindowFrame2 = 0;
    //m_pDiffTextWindowFrame3 = 0;
    m_pDiffWindowSplitter = 0;
-   //m_pOverview        = 0;
+   m_pOverview = 0;
    m_bTripleDiff = false;
-   //m_pMergeResultWindow = 0;
-   m_pMergeWindowFrame = 0;
+   m_pMergeResultWindow = 0;
+   //m_pMergeWindowFrame = 0;
    m_bOutputModified = false;
    m_bFileSaved = false;
    m_bTimerBlock = false;
@@ -405,6 +405,8 @@ void KDiff3App::completeInit( const QString& fn1, const QString& fn2)
    //slotClipboardChanged(); // For initialisation.
 
    slotUpdateAvailabilities();
+
+   //slotOverviewAB();
 
    if ( true )
    {
@@ -1009,4 +1011,16 @@ void KDiff3App::slotFileQuit()
 
 
 
-//#include "kdiff3.moc"
+
+
+
+
+
+
+
+
+
+
+
+
+

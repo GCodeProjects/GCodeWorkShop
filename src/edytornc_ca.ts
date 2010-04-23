@@ -242,6 +242,44 @@
     </message>
 </context>
 <context>
+    <name>DiffTextWindow</name>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Fitxer</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line not available</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DiffTextWindowFrame</name>
+    <message>
+        <source>Open file...</source>
+        <translation type="unfinished">Obre fitxer...</translation>
+    </message>
+    <message>
+        <source>Top line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
+        <translation type="unfinished">Fitxers de programes CNC (*.nc);;Fitxers de programes CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Fitxers de text *.txt (*.txt);;Tots els fitxers (*.* *)</translation>
+    </message>
+    <message>
+        <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
+        <translation type="unfinished">Fitxers de programes CNC (*.nc);;Fitxers de programes CNC (*.nc *.min *.anc *.cnc);;Fitxers de text (*.txt);;Tots els fitxers (*.* *)</translation>
+    </message>
+</context>
+<context>
     <name>DotDialog</name>
     <message>
         <source>Dialog</source>
@@ -400,6 +438,13 @@
     </message>
 </context>
 <context>
+    <name>FileAccessJobHandler</name>
+    <message>
+        <source>Reading directory: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FindInFiles</name>
     <message>
         <source>Dialog</source>
@@ -407,7 +452,7 @@
     </message>
     <message>
         <source>Find files </source>
-        <translation>Cerca fitxers</translation>
+        <translation type="obsolete">Cerca fitxers</translation>
     </message>
     <message>
         <source>*.nc</source>
@@ -439,11 +484,11 @@
     </message>
     <message>
         <source>Hide dialog</source>
-        <translation>Amaga el diàleg</translation>
+        <translation type="obsolete">Amaga el diàleg</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation>&amp;Amaga</translation>
+        <translation type="obsolete">&amp;Amaga</translation>
     </message>
     <message>
         <source>&amp;Find files</source>
@@ -451,11 +496,11 @@
     </message>
     <message>
         <source>Close dialog</source>
-        <translation>Tanca el diàleg</translation>
+        <translation type="obsolete">Tanca el diàleg</translation>
     </message>
     <message>
         <source>C&amp;ose</source>
-        <translation>&amp;Tanca</translation>
+        <translation type="obsolete">&amp;Tanca</translation>
     </message>
     <message>
         <source>Find Files</source>
@@ -500,6 +545,18 @@
     <message>
         <source>Modified</source>
         <translation>Modificat</translation>
+    </message>
+    <message>
+        <source>Find files</source>
+        <translation type="unfinished">Cerca fitxers</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -594,6 +651,61 @@
     <message>
         <source>XYZ</source>
         <translation>XYZ</translation>
+    </message>
+</context>
+<context>
+    <name>KDiff3App</name>
+    <message>
+        <source>Option --auto used, but no output file specified.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opening of these files failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diff: A &lt;-&gt; B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Linediff: A &lt;-&gt; B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All input files are binary equal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All input files contain the same text, but are not binary equal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Files %1 and %2 are binary equal.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Files %1 and %2 have equal text, but are not binary equal. 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Diff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some inputfiles don&apos;t seem to be pure textfiles.
+Note that the KDiff3-merge was not meant for binary data.
+Continue at your own risk.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -819,6 +931,32 @@ Verifica +-*/.
     <message>
         <source>EdytorNc - compile basic</source>
         <translation>EdytorNC - compilat bàsic</translation>
+    </message>
+</context>
+<context>
+    <name>OptionEncodingComboBox</name>
+    <message>
+        <source>Unicode, 8 bit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unicode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latin1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change this if non-ASCII characters are not displayed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProgressDialog</name>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1140,6 +1278,18 @@ p, li { white-space: pre-wrap; }
         <source>All files (*)</source>
         <translation>TotTots els fitxers (*.* *)</translation>
     </message>
+    <message>
+        <source>Delete control chars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start sending after (s):</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SetupDialog</name>
@@ -1297,6 +1447,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>SourceData</name>
+    <message>
+        <source>From Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TransProgressDialog</name>
     <message>
         <source>Dialog</source>
@@ -1344,19 +1501,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Send XOFF</source>
-        <translation>Envia XOFF</translation>
+        <translation type="obsolete">Envia XOFF</translation>
     </message>
     <message>
         <source>Set RTS</source>
-        <translation>Estableix RTS</translation>
+        <translation type="obsolete">Estableix RTS</translation>
     </message>
     <message>
         <source>Set DTR</source>
-        <translation>Estableix DTR</translation>
+        <translation type="obsolete">Estableix DTR</translation>
     </message>
     <message>
         <source>Send XON</source>
-        <translation>Envia XON</translation>
+        <translation type="obsolete">Envia XON</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -2285,7 +2442,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;P&gt;Catalan translation thanks to Jordi Sayol</source>
-        <translation>&lt;P&gt;Traducció al Català gràcies a en Jordi Sayol</translation>
+        <translation type="obsolete">&lt;P&gt;Traducció al Català gràcies a en Jordi Sayol</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
@@ -2305,7 +2462,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Highlight style</source>
-        <translation>Estil ressaltat</translation>
+        <translation type="obsolete">Estil ressaltat</translation>
     </message>
     <message>
         <source>AUTO</source>
@@ -3705,6 +3862,54 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G76 G01 [X&lt;/b&gt; | &lt;b&gt;Z] L&lt;/b&gt;xxxx - rounding. xxxx - direction and size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CNC programs files *.nc (*.nc);;All files (*.* *)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set correct calculator program name in configuration dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open example...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open an example file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show diff - open current file in right diff window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show diff - open current file in left diff window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On/off diff window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show diff window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Highlight style and tooltip mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start in %1s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

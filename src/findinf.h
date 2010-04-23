@@ -53,7 +53,6 @@ public:
 public slots:
     void setHighlightColors(const _h_colors colors);
     void setDir(const QString dir);
-    void hideDialog(bool hide);
 
 private slots:
     void browse();
@@ -83,7 +82,6 @@ private:
     _h_colors highlighterColors;
     bool highligh;
     QList<int> currentHeight;
-
     QSplitter *f_parent;
 
 

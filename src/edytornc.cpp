@@ -55,7 +55,7 @@ edytornc::edytornc()
     //setCentralWidget(mdiArea);
 
     splitter->addWidget(mdiArea);
-    splitter->setChildrenCollapsible(false);
+    splitter->setChildrenCollapsible(true);
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
@@ -477,8 +477,6 @@ void edytornc::findInFl()
    if(findFiles == NULL)
    {
       findFiles = new FindInFiles(splitter);
-      qApp->processEvents();
-      splitter->updateGeometry();
 
       if(defaultMdiWindowProperites.syntaxH)
          findFiles->setHighlightColors(defaultMdiWindowProperites.hColors);
@@ -487,11 +485,6 @@ void edytornc::findInFl()
          findFiles->setDir(QFileInfo(activeMdiChild()->currentFile()).canonicalPath());
 
       connect(findFiles, SIGNAL(fileClicket(QString)), this, SLOT(loadFoundedFile(QString)));
-
-      qApp->processEvents();
-
-      findFiles->hideDialog(false);
-
    }
    else
      if(!findFilesAct->isChecked())
@@ -827,6 +820,8 @@ void edytornc::doRemoveSpaces()
 
 void edytornc::doDiffL()
 {
+   QString fileName;
+
    if(diffApp == NULL)
    {
       diffApp = new KDiff3App(splitter, "DiffApp");
@@ -834,12 +829,21 @@ void edytornc::doDiffL()
 
    if(diffApp != NULL)
    {
+      diffLAct->setEnabled(false);
+      diffRAct->setEnabled(false);
+      diffAct->setEnabled(false);
+
       diffAct->setChecked(true);
+
       if(activeMdiChild())
-      {
-         QString fileName = activeMdiChild()->currentFile();
-         diffApp->completeInit("", fileName);
-      };
+         fileName = activeMdiChild()->currentFile();
+      if(fileName.isEmpty())
+         fileName = lastDir.canonicalPath();
+      diffApp->completeInit("", fileName);
+
+      diffLAct->setEnabled(true);
+      diffRAct->setEnabled(true);
+      diffAct->setEnabled(true);
    };
 
 }
@@ -850,6 +854,8 @@ void edytornc::doDiffL()
 
 void edytornc::doDiffR()
 {
+   QString fileName;
+
    if(diffApp == NULL)
    {
       diffApp = new KDiff3App(splitter, "DiffApp");
@@ -857,12 +863,21 @@ void edytornc::doDiffR()
 
    if(diffApp != NULL)
    {
+      diffLAct->setEnabled(false);
+      diffRAct->setEnabled(false);
+      diffAct->setEnabled(false);
+
       diffAct->setChecked(true);
+
       if(activeMdiChild())
-      {
-         QString fileName = activeMdiChild()->currentFile();
-         diffApp->completeInit(fileName, "");
-      };
+         fileName = activeMdiChild()->currentFile();
+      if(fileName.isEmpty())
+         fileName = lastDir.canonicalPath();
+      diffApp->completeInit(fileName, "");
+
+      diffLAct->setEnabled(true);
+      diffRAct->setEnabled(true);
+      diffAct->setEnabled(true);
    };
 }
 
@@ -872,15 +887,18 @@ void edytornc::doDiffR()
 
 void edytornc::doDiff()
 {
+   QString fileName;
+
    if(diffApp == NULL)
    {
       diffApp = new KDiff3App(splitter, "DiffApp");
 
       if(activeMdiChild())
-      {
-         QString fileName = activeMdiChild()->currentFile();
-         diffApp->completeInit(QFileInfo(fileName).canonicalPath(), QFileInfo(fileName).canonicalPath());
-      };
+         fileName = activeMdiChild()->currentFile();
+      if(fileName.isEmpty())
+         fileName = lastDir.canonicalPath();
+      diffApp->completeInit(QFileInfo(fileName).canonicalPath(), QFileInfo(fileName).canonicalPath());
+
    }
    else
       if(!diffAct->isChecked())
@@ -1154,28 +1172,28 @@ void edytornc::activeWindowChanged(QMdiSubWindow *window)
 
 void edytornc::about()
 {
-   QMessageBox::about(this, tr("About EdytorNC"),
-                            tr("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                            tr("<P>Version: ") +
-                               "2010.04" +
-                            tr("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
-                            tr("<P>Catalan translation and deb package thanks to Jordi Sayol") +
-                            tr("<br />German translation thanks to Michael Numberger") +
-                            tr("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
-                            tr("<P>") +
-                            tr("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
-                            tr("<P>") +
-                            tr("<P>EdytorNC wins <a href=\"http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/\">\"100% FREE award granted by Softpedia\"</a>") +
-                            tr("<P>") +
-                            tr("<P>EdytorNC contains pieces of code from other Open Source projects.") +
-                            tr("<P>") +
-                            tr("<P><i>EdytorNC is free software; you can redistribute it and/or modify"
-                               "it under the terms of the GNU General Public License  as published by"
-                               "the Free Software Foundation; either version 2 of the License, or"
-                               "(at your option) any later version.</i>") +
-                            tr("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
-                               "INCLUDING THE WARRANTY OF DESIGN,"
-                               "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
+   QMessageBox::about(this, trUtf8("About EdytorNC"),
+                            trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
+                            trUtf8("<P>Version: ") +
+                                   "2010.04.19 BETA" +
+                            trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
+                            trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
+                            trUtf8("<br />German translation thanks to Michael Numberger") +
+                            trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
+                            trUtf8("<P>") +
+                            trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
+                            trUtf8("<P>") +
+                            trUtf8("<P>EdytorNC wins <a href=\"http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/\">\"100% FREE award granted by Softpedia\"</a>") +
+                            trUtf8("<P>") +
+                            trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
+                            trUtf8("<P>") +
+                            trUtf8("<P><i>EdytorNC is free software; you can redistribute it and/or modify"
+                                   "it under the terms of the GNU General Public License  as published by"
+                                   "the Free Software Foundation; either version 2 of the License, or"
+                                   "(at your option) any later version.</i>") +
+                            trUtf8("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
+                                   "INCLUDING THE WARRANTY OF DESIGN,"
+                                   "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
 }
 
 //**************************************************************************************************
@@ -1359,6 +1377,8 @@ void edytornc::updateWindowMenu()
     windowMenu->addAction(previousAct);
     windowMenu->addAction(separatorAct);
 
+    windowMenu->setAttribute(Qt::WA_AlwaysShowToolTips, true);
+
     QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
     separatorAct->setVisible(!windows.isEmpty());
 
@@ -1367,16 +1387,20 @@ void edytornc::updateWindowMenu()
         MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
 
         QString text;
-        if (i < 9) {
+        if (i < 9)
+        {
             text = tr("&%1 %2").arg(i + 1)
                                .arg(child->currentFile());
-        } else {
+        } else
+        {
             text = tr("%1 %2").arg(i + 1)
                               .arg(child->currentFile());
         }
-        QAction *action  = windowMenu->addAction(text);
+        QAction *action = windowMenu->addAction(text);
         action->setCheckable(true);
         action->setChecked(child == activeMdiChild());
+        action->setStatusTip(child->getCurrentFileInfo());
+        qDebug() << child->getCurrentFileInfo();
         connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
         windowMapper->setMapping(action, windows.at(i));
     };
@@ -1674,13 +1698,13 @@ void edytornc::createMenus()
     if(openExampleAct != NULL)
        fileMenu->addAction(openExampleAct);
     fileMenu->addSeparator();
+    recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
+    recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
+    fileMenu->addSeparator();
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
     fileMenu->addSeparator();    
     fileMenu->addAction(findFilesAct);
-    fileMenu->addSeparator();
-    recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
-    recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
     fileMenu->addSeparator();
     fileMenu->addAction(printAct);
     fileMenu->addSeparator();
@@ -1709,6 +1733,7 @@ void edytornc::createMenus()
     editMenu->addSeparator();
     editMenu->addAction(diffLAct);
     editMenu->addAction(diffRAct);
+    editMenu->addSeparator();
     editMenu->addAction(readOnlyAct);
     editMenu->addSeparator();
     editMenu->addAction(configAct);
@@ -2099,10 +2124,7 @@ void edytornc::writeSettings()
     };
     settings.endArray();
 
-
     settings.setValue("MaximizedMdi", maximized);
-
-
 }
 
 //**************************************************************************************************
@@ -2199,7 +2221,7 @@ void edytornc::updateRecentFiles(const QString &filename)
 void edytornc::fileOpenRecent(QAction *act)
 {
     defaultMdiWindowProperites.readOnly = FALSE;
-    //defaultMdiWindowProperites.maximized = FALSE;
+    defaultMdiWindowProperites.geometry = QByteArray();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.editorToolTips = true;
     defaultMdiWindowProperites.fileName = m_recentFiles[act->data().toInt()];
@@ -2213,18 +2235,17 @@ void edytornc::fileOpenRecent(QAction *act)
 
 void edytornc::updateRecentFilesMenu()
 {
-    QAction *newAct;
-  
+    QAction *newAc;
   
     recentFileMenu->clear();
     for(int i = 0; i < MAX_RECENTFILES; ++i)
     {
         if(i < int(m_recentFiles.size()))
         {
-            newAct = recentFileMenu->addAction(QIcon(":/images/document-open-recent.png"), 
-                                               QString( "&%1 - %2" ).arg( i + 1 ).arg(m_recentFiles[i]));
+            newAc = recentFileMenu->addAction(QIcon(":/images/document-open-recent.png"),
+                                              QString( "&%1 - %2" ).arg( i + 1 ).arg(m_recentFiles[i]));
             connect(recentFileMenu, SIGNAL(triggered(QAction *)), this, SLOT(fileOpenRecent(QAction *)));
-            newAct->setData(i);
+            newAc->setData(i);
         };
     }
 }
