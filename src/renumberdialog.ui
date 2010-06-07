@@ -97,7 +97,7 @@
          <number>0</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>999999</number>
         </property>
         <property name="value">
          <number>10</number>
@@ -110,7 +110,7 @@
          <number>1</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>999999</number>
         </property>
         <property name="value">
          <number>10</number>
@@ -123,7 +123,7 @@
          <number>1</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>99</number>
         </property>
         <property name="value">
          <number>10</number>
@@ -183,7 +183,7 @@
          <number>1</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>999999</number>
         </property>
         <property name="value">
          <number>8000</number>
@@ -247,7 +247,7 @@
         <string>&amp;Start</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/start.png</normaloff>:/images/start.png</iconset>
        </property>
       </widget>
@@ -271,7 +271,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
        </property>
        <property name="autoDefault">
@@ -296,8 +296,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="application.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -25,7 +25,7 @@
 #include "findinf.h"
 
 
-#define MAXLISTS        16
+#define MAXLISTS        20
 
 
 FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
@@ -42,6 +42,7 @@ FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
    connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
    connect(findButton, SIGNAL(clicked()), SLOT(find()));
    connect(hideToolButton, SIGNAL(clicked()), SLOT(hideDlg()));
+   //connect(closeToolButton, SIGNAL(clicked()), SLOT(close()));
 
    createFilesTable();
 
@@ -126,7 +127,7 @@ void FindInFiles::find()
     QString path = directoryComboBox->currentText();
 
     findButton->setEnabled(FALSE);
-    //closeButton->setEnabled(FALSE);
+    //closeToolButton->setEnabled(FALSE);
     //hideButton->setEnabled(FALSE);
     QApplication::setOverrideCursor(Qt::BusyCursor);
     qApp->processEvents();
@@ -141,7 +142,7 @@ void FindInFiles::find()
       files = findFiles(directory, files, text);
 
     findButton->setEnabled(TRUE);
-    //closeButton->setEnabled(TRUE);
+    //closeToolButton->setEnabled(TRUE);
     //hideButton->setEnabled(TRUE);
     QApplication::restoreOverrideCursor();
 }

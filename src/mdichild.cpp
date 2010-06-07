@@ -592,7 +592,8 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 
 int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked)
 {
-   int pos, i, num, it, count;
+   int pos, count, lineCount, matchedLength;
+   long int i, num, it;
    QString tx, f_tx, line, i_tx, new_tx;
    QRegExp exp;
    bool ok, selection, insertSpace;
@@ -624,7 +625,8 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       if(mode == 4) //renumber lines without N
       {
          num = startAt;
-         for(i = 0; i < (textEdit->document()->lineCount() - 1); i++)
+         lineCount = textEdit->document()->lineCount() - 1;
+         for(i = 0; i < lineCount; i++)
          {
             line = tx.section('\n', i, i);
 
@@ -632,7 +634,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
             i_tx.replace(' ', '0');
             i_tx += "  ";
 
-            exp.setPattern("^[0-9]{1,4}\\s\\s");
+            exp.setPattern("^[0-9]{1,9}\\s\\s");
             pos = line.indexOf(exp, 0);
             if(pos >= 0)
             {
@@ -663,14 +665,18 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
          exp.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
          while((pos = tx.indexOf(exp, pos)) >= 0)
          {
-            f_tx = tx.mid(pos, exp.matchedLength());
+            matchedLength = exp.matchedLength();
+            f_tx = tx.mid(pos, matchedLength);
+
+            //qDebug() << f_tx;
+
             if(((f_tx.contains('(') == 0) && (f_tx.contains('\'') == 0) && (f_tx.contains(';') == 0)))
             {
-               tx.remove(pos, exp.matchedLength());
+               tx.remove(pos, matchedLength);
                num++;
             }
             else
-              pos += exp.matchedLength();
+              pos += matchedLength;
          };
          break;
       };
@@ -682,12 +688,15 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
          exp.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
          while((pos = tx.indexOf(exp, pos)) >= 0)
          {
-            f_tx = tx.mid(pos, exp.matchedLength());
+            matchedLength = exp.matchedLength();
+            f_tx = tx.mid(pos, matchedLength);
+
+            qDebug() << f_tx;
 
             if(pos > 0)
               if(tx[pos - 1].isLetterOrNumber())
                {
-                  pos += exp.matchedLength();
+                  pos += matchedLength;
                   continue;
                };
 
@@ -697,11 +706,11 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
 
             if((!f_tx.contains(' ')) && (!f_tx.contains('\n')))
             {
-               i = exp.matchedLength();
+               i = matchedLength;
             }
             else
             {
-               i = exp.matchedLength() - 1;
+               i = matchedLength - 1;
             };
 
             if((!(f_tx.contains('(')) && (!f_tx.contains('\'')) && (!f_tx.contains(';'))))
@@ -723,7 +732,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                    count++;
                 };
             };
-            pos += exp.matchedLength();
+            pos += matchedLength;
          };
          break;
       };
@@ -731,10 +740,14 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       if(mode == 2) //renumber all
       {
          num = startAt;
-         for(i = 0; i < (textEdit->document()->lineCount()); i++)
+         exp.setPattern("[N]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+         lineCount = textEdit->document()->lineCount();
+         for(i = 0; i < lineCount; i++)
          {
             line = tx.section('\n', i, i);
-            exp.setPattern("[N]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+
+            //qDebug() << line;
+
             pos = 0;
             while(1)
             {

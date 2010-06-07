@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>779</width>
-    <height>400</height>
+    <width>736</width>
+    <height>417</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -98,7 +98,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>30</width>
          <height>20</height>
         </size>
        </property>
@@ -152,12 +152,21 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QGroupBox" name="groupBox">
        <property name="title">
         <string>Baud rate</string>
        </property>
        <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
         <item row="0" column="0">
          <widget class="QCheckBox" name="b1CheckBox">
           <property name="text">
@@ -178,6 +187,16 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="2">
+         <widget class="QCheckBox" name="b11CheckBox">
+          <property name="text">
+           <string>115200</string>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="0">
          <widget class="QCheckBox" name="b3CheckBox">
           <property name="text">
@@ -188,7 +207,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="3" column="0">
          <widget class="QCheckBox" name="b4CheckBox">
           <property name="text">
            <string>2400</string>
@@ -198,17 +217,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
-         <widget class="QCheckBox" name="b7CheckBox">
-          <property name="text">
-           <string>19200</string>
-          </property>
-          <property name="autoExclusive">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
+        <item row="0" column="1">
          <widget class="QCheckBox" name="b5CheckBox">
           <property name="text">
            <string>4800</string>
@@ -218,7 +227,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="1" column="1">
          <widget class="QCheckBox" name="b6CheckBox">
           <property name="text">
            <string>9600</string>
@@ -231,7 +240,17 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="b7CheckBox">
+          <property name="text">
+           <string>19200</string>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
          <widget class="QCheckBox" name="b8CheckBox">
           <property name="text">
            <string>38400</string>
@@ -241,10 +260,20 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
+        <item row="1" column="2">
          <widget class="QCheckBox" name="b9CheckBox">
           <property name="text">
            <string>57600</string>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QCheckBox" name="b10CheckBox">
+          <property name="text">
+           <string>56000</string>
           </property>
           <property name="autoExclusive">
            <bool>true</bool>
@@ -260,6 +289,12 @@
         <string>Data bit's</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
         <item row="0" column="1">
          <widget class="QCheckBox" name="d3CheckBox">
           <property name="text">
@@ -312,6 +347,12 @@
         <string>Stop bit's</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
         <item row="0" column="0">
          <widget class="QCheckBox" name="s1CheckBox">
           <property name="text">
@@ -344,6 +385,12 @@
         <string>Parity</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_4">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
         <item row="0" column="0">
          <widget class="QCheckBox" name="p1CheckBox">
           <property name="text">
@@ -386,6 +433,12 @@
         <string>Flow control</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_5">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
         <item row="0" column="0">
          <widget class="QCheckBox" name="f1CheckBox">
           <property name="text">
@@ -433,7 +486,7 @@
       <string/>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
-      <item row="2" column="4">
+      <item row="3" column="4">
        <widget class="QLabel" name="label_4">
         <property name="enabled">
          <bool>true</bool>
@@ -443,7 +496,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="6">
+      <item row="3" column="6">
        <widget class="QDoubleSpinBox" name="delayDoubleSpinBox">
         <property name="toolTip">
          <string>Seconds</string>
@@ -459,7 +512,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
+      <item row="3" column="2">
        <spacer name="horizontalSpacer_5">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -471,30 +524,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item row="0" column="6">
-       <widget class="QLineEdit" name="eotInput">
-        <property name="toolTip">
-         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="maxLength">
-         <number>128</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Send at end:</string>
-        </property>
-       </widget>
       </item>
       <item row="0" column="2">
        <widget class="QLineEdit" name="stInput">
@@ -520,33 +549,7 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>XON character:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLineEdit" name="xonInput">
-        <property name="toolTip">
-         <string>XON 17 Dec. 0x11 Hex.</string>
-        </property>
-        <property name="inputMask">
-         <string>90; </string>
-        </property>
-        <property name="text">
-         <string>17</string>
-        </property>
-        <property name="maxLength">
-         <number>2</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
+      <item row="2" column="4">
        <widget class="QLabel" name="label_6">
         <property name="enabled">
          <bool>true</bool>
@@ -556,7 +559,7 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="1" column="6">
+      <item row="2" column="6">
        <widget class="QLineEdit" name="xoffInput">
         <property name="toolTip">
          <string>XOFF 19 Dec. 0x13 Hex.</string>
@@ -572,7 +575,7 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="label_7">
         <property name="toolTip">
          <string/>
@@ -585,7 +588,7 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="3" column="1">
        <widget class="QCheckBox" name="deleteControlChars">
         <property name="toolTip">
          <string>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</string>
@@ -598,14 +601,14 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="3" column="4">
+      <item row="4" column="4">
        <widget class="QLabel" name="label_8">
         <property name="text">
          <string>Start sending after (s):</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="6">
+      <item row="4" column="6">
        <widget class="QSpinBox" name="startDelaySpinBox">
         <property name="maximum">
          <number>60</number>
@@ -622,11 +625,87 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
+          <width>10</width>
           <height>20</height>
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLineEdit" name="eotInput">
+        <property name="toolTip">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="maxLength">
+         <number>128</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Send at end:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_5">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>XON character:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLineEdit" name="xonInput">
+        <property name="toolTip">
+         <string>XON 17 Dec. 0x11 Hex.</string>
+        </property>
+        <property name="inputMask">
+         <string>90; </string>
+        </property>
+        <property name="text">
+         <string>17</string>
+        </property>
+        <property name="maxLength">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="doNotShowProgressInEditor">
+        <property name="toolTip">
+         <string>Enable this option for lower transmission latency on high baud rate</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>Disable text selection</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -639,7 +718,7 @@ p, li { white-space: pre-wrap; }
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>20</height>
+       <height>10</height>
       </size>
      </property>
     </spacer>

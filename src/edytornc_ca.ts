@@ -934,6 +934,21 @@ Verifica +-*/.
     </message>
 </context>
 <context>
+    <name>MergeResultWindow</name>
+    <message>
+        <source>&lt;No src line&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Merge Conflict (Whitespace only)&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Merge Conflict&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OptionEncodingComboBox</name>
     <message>
         <source>Unicode, 8 bit</source>
@@ -1288,6 +1303,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Start sending after (s):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>115200</source>
+        <translation type="unfinished">115200</translation>
+    </message>
+    <message>
+        <source>56000</source>
+        <translation type="unfinished">56000</translation>
+    </message>
+    <message>
+        <source>Enable this option for lower transmission latency on high baud rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable text selection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1752,6 +1783,29 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Solution of triangles</source>
         <translation>Solució de triangles</translation>
+    </message>
+</context>
+<context>
+    <name>WindowTitleWidget</name>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[Modified]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encoding for saving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line end style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codec from</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

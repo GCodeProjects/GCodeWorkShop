@@ -277,6 +277,7 @@ private:
     bool xoffReceived;
     bool deleteControlChars;
     int sendStartDelay;
+    bool doNotShowProgressInEditor;
 
     PortSettings portSettings;
 

@@ -23,6 +23,7 @@ INPUT(
 ./build/obj/gnudiff_io.o
 ./build/obj/gnudiff_analyze.o
 ./build/obj/pdiff.o
+./build/obj/mergeresultwindow.o
 ./build/obj/win_qextserialport.o
 ./build/obj/moc_edytornc.o
 ./build/obj/moc_highlighter.o
@@ -40,5 +41,6 @@ INPUT(
 ./build/obj/moc_optiondialog.o
 ./build/obj/moc_fileaccess.o
 ./build/obj/moc_kdiff3.o
+./build/obj/moc_mergeresultwindow.o
 ./build/obj/qrc_application.o
 );

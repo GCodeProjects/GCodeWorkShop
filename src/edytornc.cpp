@@ -1175,10 +1175,11 @@ void edytornc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.04.19 BETA" +
+                                   "2010.05.09 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
+                            trUtf8("<br />Czech translation thanks to Pavel Fric") +
                             trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             trUtf8("<P>") +
                             trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
@@ -1400,7 +1401,7 @@ void edytornc::updateWindowMenu()
         action->setCheckable(true);
         action->setChecked(child == activeMdiChild());
         action->setStatusTip(child->getCurrentFileInfo());
-        qDebug() << child->getCurrentFileInfo();
+        //qDebug() << child->getCurrentFileInfo();
         connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
         windowMapper->setMapping(action, windows.at(i));
     };
@@ -2727,7 +2728,7 @@ void edytornc::serialConfigTest()
 
 void edytornc::loadConfig()
 {
-    QString port, fTx, nTx;
+    QString port, fTx;
     int pos;
     QRegExp exp;
     char chr;
@@ -2762,6 +2763,7 @@ void edytornc::loadConfig()
     deleteControlChars = settings.value("DeleteControlChars", true).toBool();
 
     sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
+    doNotShowProgressInEditor = settings.value("DoNotShowProgressInEditor", false).toBool();
 
 
     settings.endGroup();
@@ -2859,7 +2861,7 @@ void edytornc::sendButtonClicked()
    progressDialog.setWindowTitle(tr("Sending..."));
    progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
    progressDialog.setLabelText(tr("Waiting..."));
-   qApp->processEvents();
+   //qApp->processEvents();
 
    if(portSettings.FlowControl == FLOW_HARDWARE)
    {
@@ -2881,7 +2883,7 @@ void edytornc::sendButtonClicked()
    };
 
 
-   qDebug() << "xoffReceived: " << xoffReceived << "sendStartDelayTimer: " << sendStartDelay;
+   //qDebug() << "xoffReceived: " << xoffReceived << "sendStartDelayTimer: " << sendStartDelay;
 
    i = 0;
    while(i < tx.size())
@@ -2912,7 +2914,7 @@ void edytornc::sendButtonClicked()
             if(comPort->bytesAvailable() > 0)
             {
                comPort->getChar(&controlChar);
-               qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
+               //qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
             };
 
             if(controlChar == portSettings.Xoff)
@@ -2935,19 +2937,20 @@ void edytornc::sendButtonClicked()
 
       if((bytesToWrite == 0) && (!xoffReceived))
       {
-         if(!comPort->putChar(tx[i].toAscii()))
+//         if(!comPort->putChar(tx[i].toAscii()))
+//         {
+//            showError(comPort->lastError());
+//            break;
+//         };
+         if(!doNotShowProgressInEditor)
          {
-            //showError(comPort->lastError());
-            //break;
+            if(tx[i].toAscii() != '\r')
+               cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            activeWindow->textEdit->setTextCursor(cursor);
          };
-
-         if(tx[i].toAscii() != '\r')
-           cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-
-         activeWindow->textEdit->setTextCursor(cursor);
          progressDialog.setValue(i);
          progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
-         qApp->processEvents();
+         //qApp->processEvents();
 
          if(lineDelay > 0)
          {
@@ -2969,7 +2972,7 @@ void edytornc::sendButtonClicked()
    while(comPort->bytesToWrite() > 0)
    {
       qApp->processEvents();
-      qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
+      //qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
    };
 
    if(sendStartDelayTimer != NULL)
@@ -2999,7 +3002,7 @@ void edytornc::sendStartDelayTimeout()
    else
       xoffReceived = false;
 
-   qDebug() << "xoffReceived: " << xoffReceived << "sendStartDelayTimer: " << sendStartDelay;
+   //qDebug() << "xoffReceived: " << xoffReceived << "sendStartDelayTimer: " << sendStartDelay;
 
 }
 
@@ -3029,8 +3032,8 @@ void edytornc::receiveButtonClicked()
       delete(comPort);
       return;
    };
-   comPort->flush();
-   comPort->reset();
+   //comPort->flush();
+   //comPort->reset();
 
    i = configBox->currentIndex();
    newFile();
@@ -3074,7 +3077,7 @@ void edytornc::receiveButtonClicked()
       i = comPort->bytesAvailable();
       if(i > 0)
       {
-         qDebug() << "Bytes available: " << i;
+         //qDebug() << "Bytes available: " << i;
          i = comPort->readLine(buf, sizeof(buf) - 1);  //readLine
 
          qApp->processEvents();
@@ -3109,10 +3112,13 @@ void edytornc::receiveButtonClicked()
          activeWindow->textEdit->insertPlainText(tx);
          tx.clear();
 
-         activeWindow->textEdit->ensureCursorVisible();
+         if(!doNotShowProgressInEditor)
+         {
+            activeWindow->textEdit->ensureCursorVisible();
+         };
+      }
+      else
          qApp->processEvents();
-
-      };
 
       if(stop)
       {
@@ -3122,7 +3128,7 @@ void edytornc::receiveButtonClicked()
       };
 
       progressDialog.setValue(count);
-      qApp->processEvents();
+      //qApp->processEvents();
 
       if(progressDialog.wasCanceled())
       {

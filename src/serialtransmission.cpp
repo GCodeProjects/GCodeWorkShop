@@ -48,6 +48,9 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
    baudGroup->addButton(b7CheckBox, BAUD19200);
    baudGroup->addButton(b8CheckBox, BAUD38400);
    baudGroup->addButton(b9CheckBox, BAUD57600);
+   baudGroup->addButton(b10CheckBox, BAUD56000);
+   baudGroup->addButton(b11CheckBox, BAUD115200);
+
 
 
    dataBitsGroup = new QButtonGroup(this);
@@ -80,9 +83,10 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
 
 
 #ifdef Q_OS_WIN32
-   browseButton->setEnabled(FALSE);
+   browseButton->setEnabled(false);
 #else
    connect(browseButton, SIGNAL(clicked()), SLOT(browseButtonClicked()));
+   b10CheckBox->setEnabled(false);
 #endif
 
    connect(saveButton, SIGNAL(clicked()), SLOT(saveButtonClicked()));
@@ -215,6 +219,8 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("DeleteControlChars", deleteControlChars->isChecked());
     //settings.setValue("StartAfterXONCTS", startAfterXONCTS->isChecked());
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
+    settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());
+
 
 
     settings.endGroup();
@@ -276,6 +282,10 @@ void SPConfigDialog::changeSettings()
                              break;
            case BAUD57600  : b9CheckBox->setChecked(TRUE);
                              break;
+           case BAUD56000  : b10CheckBox->setChecked(TRUE);
+                             break;
+           case BAUD115200 : b11CheckBox->setChecked(TRUE);
+                             break;
     };
 
     id = settings.value("DataBits", DATA_8).toInt();
@@ -330,7 +340,7 @@ void SPConfigDialog::changeSettings()
     deleteControlChars->setChecked(settings.value("DeleteControlChars", true).toBool());
     //startAfterXONCTS->setChecked(settings.value("StartAfterXONCTS", true).toBool());
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
-
+    doNotShowProgressInEditor->setChecked(settings.value("DoNotShowProgressInEditor", false).toBool());
 
     settings.endGroup();
     settings.endGroup();
@@ -387,24 +397,25 @@ void SPConfigDialog::deleteButtonClicked()
 
     settings.beginGroup("SerialPortConfigs");
 
-    settings.beginGroup(configNameBox->currentText());
-
-    settings.remove("PortName");
-    settings.remove("BaudRate");
-    settings.remove("DataBits");
-    settings.remove("StopBits");
-    settings.remove("Parity");
-    settings.remove("FlowControl");
-    settings.remove("Xon");
-    settings.remove("Xoff");
-    settings.remove("LineDelay");
-    settings.remove("DeleteControlChars");
-    settings.remove("SendingStartDelay");
-    settings.remove("StartAfterXONCTS");
-
-
-    settings.endGroup();
     settings.remove(configNameBox->currentText());
+
+//    settings.remove("PortName");
+//    settings.remove("BaudRate");
+//    settings.remove("DataBits");
+//    settings.remove("StopBits");
+//    settings.remove("Parity");
+//    settings.remove("FlowControl");
+//    settings.remove("Xon");
+//    settings.remove("Xoff");
+//    settings.remove("LineDelay");
+//    settings.remove("DeleteControlChars");
+//    settings.remove("SendingStartDelay");
+//    settings.remove("StartAfterXONCTS");
+//      settings.remove("DoNotShowProgressInEditor");
+
+
+//    settings.endGroup();
+//    settings.remove(configNameBox->currentText());
 
     settings.endGroup();
 
