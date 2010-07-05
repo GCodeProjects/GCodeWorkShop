@@ -19,10 +19,6 @@
         <translation>&amp;Zamknij</translation>
     </message>
     <message>
-        <source>Bold circle</source>
-        <translation type="obsolete">Rozmieszczenie otworów na okręgu</translation>
-    </message>
-    <message>
         <location filename="dialogs.cpp" line="1879"/>
         <source>Bolt circle</source>
         <translation>Rozmieszczenie otworów na okręgu</translation>
@@ -79,10 +75,6 @@
         <location filename="dialogs.cpp" line="1607"/>
         <source>Click to close</source>
         <translation>Kliknij aby zamknąć</translation>
-    </message>
-    <message>
-        <source>Bold circle - preview</source>
-        <translation type="obsolete">Rozmieszczenie otworów na okręgu - podgląd</translation>
     </message>
 </context>
 <context>
@@ -408,10 +400,6 @@
         <translation>&amp;Start</translation>
     </message>
     <message>
-        <source>&amp;Ok</source>
-        <translation type="obsolete">&amp;Ok</translation>
-    </message>
-    <message>
         <location filename="dotdialog.ui" line="123"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Anuluj</translation>
@@ -577,45 +565,6 @@
     </message>
 </context>
 <context>
-    <name>FindDialog</name>
-    <message>
-        <source>Find text...</source>
-        <translation type="obsolete">Znajdź tekst...</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Znajdź</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opcje</translation>
-    </message>
-    <message>
-        <source>&amp;From cursor</source>
-        <translation type="obsolete">&amp;Od kursora</translation>
-    </message>
-    <message>
-        <source>Ignore c&amp;ase</source>
-        <translation type="obsolete">&amp;Ignoruj wielkość znaków</translation>
-    </message>
-    <message>
-        <source>&amp;Whole words only</source>
-        <translation type="obsolete">&amp;Tylko całe wyrazy</translation>
-    </message>
-    <message>
-        <source>&amp;Backwards</source>
-        <translation type="obsolete">&amp;Do tyłu</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Znajdź</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Anuluj</translation>
-    </message>
-</context>
-<context>
     <name>FindInFiles</name>
     <message>
         <location filename="findinf.cpp" line="106"/>
@@ -627,10 +576,6 @@
         <location filename="findinf.cpp" line="166"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zamknij</translation>
-    </message>
-    <message>
-        <source>Searching file number %1 of %2...</source>
-        <translation type="obsolete">Przeszukiwanie pliku %1 z %2 ...</translation>
     </message>
     <message>
         <location filename="findinf.cpp" line="178"/>
@@ -683,10 +628,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>Find files </source>
-        <translation type="obsolete">Znajdź pliki </translation>
-    </message>
-    <message>
         <location filename="findinfilesdialog.ui" line="242"/>
         <source>*.nc</source>
         <translation></translation>
@@ -737,25 +678,9 @@
         <translation>Pojedyńcze kliknięcie na liście - otwiera podgląd pliku, podwójne kliknięcie otwiera plik w edytorze.</translation>
     </message>
     <message>
-        <source>Hide dialog</source>
-        <translation type="obsolete">Ukryj dialog</translation>
-    </message>
-    <message>
-        <source>&amp;Hide</source>
-        <translation type="obsolete">&amp;Ukryj</translation>
-    </message>
-    <message>
         <location filename="findinfilesdialog.ui" line="279"/>
         <source>&amp;Find files</source>
         <translation>Zna&amp;jdź</translation>
-    </message>
-    <message>
-        <source>Close dialog</source>
-        <translation type="obsolete">&amp;Zamknij</translation>
-    </message>
-    <message>
-        <source>C&amp;ose</source>
-        <translation type="obsolete">&amp;Zamknij</translation>
     </message>
 </context>
 <context>
@@ -964,14 +889,6 @@ Continue at your own risk.</source>
 %2 </translation>
     </message>
     <message>
-        <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programy CNC *.nc (*.nc);;Programy CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Pliki tekstowe *.txt (*.txt);;Wszystkie pliki (*.* *)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programy CNC (*.nc);;Programy CNC (*.nc *.min *.anc *.cnc);;Pliki tekstowe (*.txt);;Wszystkie pliki (*.* *)</translation>
-    </message>
-    <message>
         <location filename="mdichild.cpp" line="173"/>
         <source>CNC programs files *.nc (*.nc);;CNC programs files *.anc (*.anc);;CNC programs files *.min (*.min);;CNC programs files *.cnc (*.cnc);;Text files *.txt (*.txt);;All files (*.* *)</source>
         <translation>Programy CNC *.nc (*.nc);;Programy CNC *.anc (*.anc);;Programy CNC *.min (*.min);;Programy CNC *.cnc (*.cnc);;Pliki tekstowe *.txt (*.txt);;Wszystkie pliki (*.* *)</translation>
@@ -1116,17 +1033,6 @@ To nie jest program makro ?</translation>
         <source>Decimal point or minus writed two times !
 &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No constant definition .
-{BEGIN}
-...
-{END}</source>
-        <translation type="obsolete">Brak definicji .
-{BEGIN}
-...
-{END}
-To nie jest program makro ?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1724"/>
@@ -1302,10 +1208,6 @@ To nie jest program makro ?</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Options</source>
-        <translation type="obsolete">Opcje</translation>
-    </message>
-    <message>
         <location filename="renumberdialog.ui" line="41"/>
         <source>Renumber only line&apos;s with &apos;N&apos;</source>
         <oldsource>Renumber only line&apos;s with N</oldsource>
@@ -1393,72 +1295,6 @@ To nie jest program makro ?</translation>
     </message>
 </context>
 <context>
-    <name>ReplaceConfirmDialog</name>
-    <message>
-        <source>Find &amp; replace</source>
-        <translation type="obsolete">Znajdź i zamień</translation>
-    </message>
-    <message>
-        <source>&amp;Replace</source>
-        <translation type="obsolete">&amp;Zamień</translation>
-    </message>
-    <message>
-        <source>R&amp;eplace all</source>
-        <translation type="obsolete">Z&amp;amień wszystkie</translation>
-    </message>
-    <message>
-        <source>&amp;Find Next</source>
-        <translation type="obsolete">&amp;Znajdź następny</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Zamknij</translation>
-    </message>
-</context>
-<context>
-    <name>ReplaceDialog</name>
-    <message>
-        <source>Find &amp; replace text</source>
-        <translation type="obsolete">Znajdź i zamień tekst</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Znajdź</translation>
-    </message>
-    <message>
-        <source>Replace</source>
-        <translation type="obsolete">Zamień</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opcje</translation>
-    </message>
-    <message>
-        <source>&amp;From cursor</source>
-        <translation type="obsolete">&amp;Od kursora</translation>
-    </message>
-    <message>
-        <source>Ignore c&amp;ase</source>
-        <translation type="obsolete">&amp;Ignoruj wielkość znaków</translation>
-    </message>
-    <message>
-        <source>&amp;Whole words only</source>
-        <translation type="obsolete">&amp;Tylko całe wyrazy</translation>
-    </message>
-    <message>
-        <source>&amp;Backwards</source>
-        <translation type="obsolete">&amp;Do tyłu</translation>
-    </message>
-    <message>
-        <source>&amp;Replace</source>
-        <translation type="obsolete">&amp;Zamień</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Anuluj</translation>
-    </message>
-</context>
-<context>
     <name>SPConfigDialog</name>
     <message>
         <location filename="serialtransmission.cpp" line="35"/>
@@ -1474,10 +1310,6 @@ To nie jest program makro ?</translation>
         <location filename="serialtransmission.cpp" line="144"/>
         <source>All files (*)</source>
         <translation>Wszystkie pliki (*)</translation>
-    </message>
-    <message>
-        <source>All files (*.* *)</source>
-        <translation type="obsolete">Wszystkie pliki (*.* *)</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="38"/>
@@ -1798,10 +1630,6 @@ p, li { white-space: pre-wrap; }
         <source>&amp;Cancel</source>
         <translation>&amp;Anuluj</translation>
     </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Zamknij</translation>
-    </message>
 </context>
 <context>
     <name>SetupDialog</name>
@@ -2070,22 +1898,6 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>Send XOFF</source>
-        <translation type="obsolete">Wyślij XOFF</translation>
-    </message>
-    <message>
-        <source>Set RTS</source>
-        <translation type="obsolete">Ustaw RTS</translation>
-    </message>
-    <message>
-        <source>Set DTR</source>
-        <translation type="obsolete">Ustaw DTR</translation>
-    </message>
-    <message>
-        <source>Send XON</source>
-        <translation type="obsolete">Wyślij XON</translation>
-    </message>
-    <message>
         <location filename="transprogressdialog.ui" line="213"/>
         <source>TextLabel</source>
         <translation></translation>
@@ -2107,10 +1919,6 @@ p, li { white-space: pre-wrap; }
         <location filename="serialtransmission.cpp" line="462"/>
         <source>Serial transmission test</source>
         <translation>Test transmisji szeregowej</translation>
-    </message>
-    <message>
-        <source>Send: %1 bytes.</source>
-        <translation type="obsolete">Wysłano %1 bajtów.</translation>
     </message>
     <message>
         <location filename="serialtransmission.cpp" line="774"/>
@@ -2489,18 +2297,6 @@ p, li { white-space: pre-wrap; }
         <translation>Plik zapisany</translation>
     </message>
     <message>
-        <source>Can&apos;t find : &apos;%1&apos;.</source>
-        <translation type="obsolete">Nie mogę znaleźć : &apos;%1&apos; .</translation>
-    </message>
-    <message>
-        <source>Searching text &apos;%1&apos; was found. What to do now ?</source>
-        <translation type="obsolete">Szukany tekst &apos;%1&apos; został znaleziony. Co teraz ?</translation>
-    </message>
-    <message>
-        <source>Unable to find : &apos;%1&apos;.</source>
-        <translation type="obsolete">Nie mogę znaleźć : &apos;%1&apos; .</translation>
-    </message>
-    <message>
         <location filename="edytornc.cpp" line="971"/>
         <source>Removed : %1 line numbers.</source>
         <translation>Usunięto : %1 numerów linii.</translation>
@@ -2516,297 +2312,244 @@ p, li { white-space: pre-wrap; }
         <translation>O EdytorNC</translation>
     </message>
     <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.&lt;P&gt;Version 2009.00&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;urllink href=&apos;mailto:artkoz@poczta.onet.pl&apos;&gt;Artur Koziol&lt;/urllink&gt; (artkoz@poczta.onet.pl)&lt;P&gt;http://sourceforge.net/projects/edytornc&lt;P&gt;&lt;i&gt;This program is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License.&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.&lt;P&gt;Wersja 2009.00&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;i&gt;Niniejszy program jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.&lt;P&gt;Version 2009.00&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;i&gt;This program is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License.&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.&lt;P&gt;Wersja 2009.00&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;i&gt;Niniejszy program jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <source> Line: </source>
-        <translation type="obsolete"> Wiersz: </translation>
-    </message>
-    <message>
-        <source>  Col: </source>
-        <translation type="obsolete">  Kolumna: </translation>
-    </message>
-    <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.&lt;P&gt;Version: 2009.00 Beta 1&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;&lt;P&gt;&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License.&lt;/i&gt;</source>
-        <oldsource>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.&lt;P&gt;Version: 2009.00 Beta&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;&lt;P&gt;&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License.&lt;/i&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.&lt;P&gt;Wersja 2009.00 Beta 1&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;P&gt;Wieloplatformowy instalator dzięki &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;&lt;P&gt;&lt;P&gt;&lt;i&gt;EdytorNC jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1354"/>
+        <location filename="edytornc.cpp" line="1355"/>
         <source> Col: </source>
         <translation> Kolumna: </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1355"/>
+        <location filename="edytornc.cpp" line="1356"/>
         <source>  Line: </source>
         <translation>  Wiersz: </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1356"/>
+        <location filename="edytornc.cpp" line="1357"/>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
         <translation>  &lt;b&gt;Zmieniony&lt;/b&gt;  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1357"/>
+        <location filename="edytornc.cpp" line="1358"/>
         <source> Read only  </source>
         <translation> Tylko do odczytu  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1358"/>
+        <location filename="edytornc.cpp" line="1359"/>
         <source> Overwrite  </source>
         <translation> Nadpisz  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1358"/>
+        <location filename="edytornc.cpp" line="1359"/>
         <source> Insert </source>
         <translation> Wstaw  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1392"/>
+        <location filename="edytornc.cpp" line="1393"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1396"/>
+        <location filename="edytornc.cpp" line="1397"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1438"/>
+        <location filename="edytornc.cpp" line="1439"/>
         <source>&amp;New</source>
         <translation>&amp;Nowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1440"/>
+        <location filename="edytornc.cpp" line="1441"/>
         <source>Create a new file</source>
         <translation>Utwórz nowy plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1443"/>
+        <location filename="edytornc.cpp" line="1444"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otwórz...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1445"/>
+        <location filename="edytornc.cpp" line="1446"/>
         <source>Open an existing file</source>
         <translation>Otwórz istniejący plik...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1455"/>
+        <location filename="edytornc.cpp" line="1456"/>
         <source>&amp;Open file with preview</source>
         <translation>O&amp;twórz plik z podglądem</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1456"/>
+        <location filename="edytornc.cpp" line="1457"/>
         <source>Open an existing file (Openfile dialog with preview)</source>
         <translation>Otwórz istniejący plik... (z podglądem pliku)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1459"/>
+        <location filename="edytornc.cpp" line="1460"/>
         <source>&amp;Save</source>
         <translation>&amp;Zapisz</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1461"/>
+        <location filename="edytornc.cpp" line="1462"/>
         <source>Save the document to disk</source>
         <translation>Zapisz plik na dysku</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1464"/>
+        <location filename="edytornc.cpp" line="1465"/>
         <source>Save &amp;As...</source>
         <translation>Zapisz &amp;jako...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1466"/>
+        <location filename="edytornc.cpp" line="1467"/>
         <source>Save the document under a new name</source>
         <translation>Zapisz plik pod nową nazwą</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1469"/>
+        <location filename="edytornc.cpp" line="1470"/>
         <source>E&amp;xit</source>
         <translation>Z&amp;amknij edytor</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1472"/>
+        <location filename="edytornc.cpp" line="1473"/>
         <source>Exit the application</source>
         <translation>Zamknięcie edytora</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1475"/>
+        <location filename="edytornc.cpp" line="1476"/>
         <source>&amp;Find files...</source>
         <translation>&amp;Znajdź pliki...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1478"/>
+        <location filename="edytornc.cpp" line="1479"/>
         <source>Find files</source>
         <translation>Znajdź w plikach (znajdź pliki)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1481"/>
+        <location filename="edytornc.cpp" line="1482"/>
         <source>&amp;Print</source>
         <translation>Wy&amp;drukuj...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1483"/>
+        <location filename="edytornc.cpp" line="1484"/>
         <source>Print file</source>
         <translation>Wydrukuj plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1489"/>
+        <location filename="edytornc.cpp" line="1490"/>
         <source>&amp;Undo</source>
         <translation>&amp;Cofnij</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1491"/>
+        <location filename="edytornc.cpp" line="1492"/>
         <source>Undo last operation</source>
         <translation>Cofnij ostatnią operację</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1495"/>
+        <location filename="edytornc.cpp" line="1496"/>
         <source>&amp;Redo</source>
         <translation>&amp;Przywróć</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1497"/>
+        <location filename="edytornc.cpp" line="1498"/>
         <source>Redo last operation</source>
         <translation>Przywróć ostatnią operację</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1501"/>
+        <location filename="edytornc.cpp" line="1502"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Wy&amp;tnij</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1503"/>
+        <location filename="edytornc.cpp" line="1504"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Wycina aktualnie zaznaczony tekst do schowka</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1507"/>
+        <location filename="edytornc.cpp" line="1508"/>
         <source>&amp;Copy</source>
         <translation>S&amp;kopiuj</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1509"/>
+        <location filename="edytornc.cpp" line="1510"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopiuje aktualnie zaznaczony tekst do schowka</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1513"/>
+        <location filename="edytornc.cpp" line="1514"/>
         <source>&amp;Paste</source>
         <translation>Wk&amp;lej</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1515"/>
+        <location filename="edytornc.cpp" line="1516"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Wstawia tekst ze schowka</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1520"/>
+        <location filename="edytornc.cpp" line="1521"/>
         <source>&amp;Find</source>
         <translation>&amp;Znajdź</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1522"/>
+        <location filename="edytornc.cpp" line="1523"/>
         <source>Find text</source>
         <translation>Znajdź tekst</translation>
     </message>
     <message>
-        <source>Find &amp;next</source>
-        <translation type="obsolete">Znajdź &amp;następny</translation>
-    </message>
-    <message>
-        <source>Find next text</source>
-        <translation type="obsolete">Znajdź następny tekst</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1525"/>
+        <location filename="edytornc.cpp" line="1526"/>
         <source>&amp;Replace</source>
         <translation>Za&amp;mień</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1526"/>
+        <location filename="edytornc.cpp" line="1527"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1527"/>
+        <location filename="edytornc.cpp" line="1528"/>
         <source>Find and replace text</source>
         <translation>Znajdź i zamień tekst</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1531"/>
+        <location filename="edytornc.cpp" line="1532"/>
         <source>&amp;Delete</source>
         <translation>&amp;Usuń</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1533"/>
+        <location filename="edytornc.cpp" line="1534"/>
         <source>Removes selected text</source>
         <translation>Usuwa zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1536"/>
+        <location filename="edytornc.cpp" line="1537"/>
         <source>&amp;Select all</source>
         <translation>Zaznacz &amp;wszystko</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1538"/>
+        <location filename="edytornc.cpp" line="1539"/>
         <source>Select all text</source>
         <translation>Zaznacza cały tekst</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1541"/>
+        <location filename="edytornc.cpp" line="1542"/>
         <source>Read &amp;only</source>
         <translation>Tylko do odczyt&amp;u</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1542"/>
+        <location filename="edytornc.cpp" line="1543"/>
         <source>F12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1544"/>
+        <location filename="edytornc.cpp" line="1545"/>
         <source>Makes text read only</source>
         <translation>Blokuje możliwość edytowania tekstu</translation>
     </message>
     <message>
-        <source>&amp;Zoom in</source>
-        <translation type="obsolete">&amp;Powiększ</translation>
-    </message>
-    <message>
-        <source>Incrase font size</source>
-        <translation type="obsolete">Zwiększa rozmiar trzcionki</translation>
-    </message>
-    <message>
-        <source>Zoom out</source>
-        <translation type="obsolete">Pomniejsz</translation>
-    </message>
-    <message>
-        <source>Decrease font size</source>
-        <translation type="obsolete">Zmniejsza rozmiar trzcionki</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1547"/>
+        <location filename="edytornc.cpp" line="1548"/>
         <source>Configuration</source>
         <translation>Konfiguracja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1549"/>
+        <location filename="edytornc.cpp" line="1550"/>
         <source>Open configuration dialog</source>
         <translation>Ustawienia edytora</translation>
-    </message>
-    <message>
-        <source>&amp;BHC</source>
-        <translation type="obsolete">&amp;Otwory na okręgu</translation>
-    </message>
-    <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.&lt;P&gt;Version: 2009.12.30&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;&lt;P&gt;&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;&lt;P&gt;&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.&lt;P&gt;&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License.&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.&lt;P&gt;Wersja 2009.12.30&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;EdytorNC zdobył &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;&lt;P&gt;&lt;P&gt;EdytorNC zawiera fragmenty kodu z innych projektów Wolnego Oprogramowania.&lt;P&gt;&lt;P&gt;&lt;i&gt;Niniejszy program jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1176"/>
@@ -2824,203 +2567,181 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
-        <source>&lt;P&gt;Catalan translation thanks to Jordi Sayol</source>
-        <translation type="obsolete">&lt;P&gt;Tłumaczenie na język kataloński Jordi Sayol</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1182"/>
+        <location filename="edytornc.cpp" line="1183"/>
         <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1183"/>
-        <location filename="edytornc.cpp" line="1185"/>
-        <location filename="edytornc.cpp" line="1187"/>
-        <location filename="edytornc.cpp" line="1189"/>
+        <location filename="edytornc.cpp" line="1184"/>
+        <location filename="edytornc.cpp" line="1186"/>
+        <location filename="edytornc.cpp" line="1188"/>
+        <location filename="edytornc.cpp" line="1190"/>
         <source>&lt;P&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1184"/>
+        <location filename="edytornc.cpp" line="1185"/>
         <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
         <translation>&lt;P&gt;Wieloplatformowy instalator dzięki &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1186"/>
+        <location filename="edytornc.cpp" line="1187"/>
         <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
         <translation>&lt;P&gt;EdytorNC zdobył &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1188"/>
+        <location filename="edytornc.cpp" line="1189"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
         <translation>&lt;P&gt;EdytorNC zawiera fragmenty kodu z innych projektów Wolnego Oprogramowania.</translation>
     </message>
     <message>
-        <source>The program is provided AS IS with NO WARRANTY OF ANY KIND,</source>
-        <translation type="obsolete">Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on 
-użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej 
-gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH 
-ZASTOSOWAŃ. W celu uzyskania bliższych informacji - Powszechna 
-Licencja Publiczna GNU.</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1190"/>
+        <location filename="edytornc.cpp" line="1191"/>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
         <oldsource>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.</oldsource>
         <translation>&lt;P&gt;&lt;i&gt;EdytorNC jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU, wydanej przez Fundację Wolnego Oprogramowania - według wersji 2-giej tej Licencji lub którejś z późniejszych wersji.&lt;/i&gt;</translation>
     </message>
     <message>
-        <source>The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <oldsource>The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE&lt;/i&gt;</oldsource>
-        <translation type="obsolete">Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych informacji - Powszechna Licencja Publiczna GNU.</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1194"/>
+        <location filename="edytornc.cpp" line="1195"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation>&lt;P&gt;&lt;i&gt;Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych informacji - Powszechna Licencja Publiczna GNU.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1471"/>
+        <location filename="edytornc.cpp" line="1472"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1557"/>
+        <location filename="edytornc.cpp" line="1558"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1558"/>
+        <location filename="edytornc.cpp" line="1559"/>
         <source>Calculate bolt hole&apos;s positions</source>
         <translation>Oblicz współrzędne otworów rozmieszczonych na okręgu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1561"/>
+        <location filename="edytornc.cpp" line="1562"/>
         <source>&amp;Insert spaces</source>
         <translation>&amp;Wstaw spacje</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1562"/>
+        <location filename="edytornc.cpp" line="1563"/>
         <source>F4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1563"/>
+        <location filename="edytornc.cpp" line="1564"/>
         <source>Inserts spaces</source>
         <translation>Wstawia spacje do programu </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1566"/>
+        <location filename="edytornc.cpp" line="1567"/>
         <source>Remove spaces</source>
         <translation>Usuń spacje</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1567"/>
+        <location filename="edytornc.cpp" line="1568"/>
         <source>F5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1568"/>
+        <location filename="edytornc.cpp" line="1569"/>
         <source>Removes spaces</source>
         <translation>Usuwa spacje z programu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1571"/>
+        <location filename="edytornc.cpp" line="1572"/>
         <source>Remove empty lines</source>
         <translation>Usuń puste linie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1573"/>
+        <location filename="edytornc.cpp" line="1574"/>
         <source>Removes empty lines</source>
         <translation>Usuń puste linie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1576"/>
+        <location filename="edytornc.cpp" line="1577"/>
         <source>Insert dots</source>
         <translation>Wstaw kropki</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1577"/>
+        <location filename="edytornc.cpp" line="1578"/>
         <source>F6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1578"/>
+        <location filename="edytornc.cpp" line="1579"/>
         <source>Inserts decimal dot</source>
         <translation>Wstaw kropki dziesiętne</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1581"/>
+        <location filename="edytornc.cpp" line="1582"/>
         <source>Renumber</source>
         <translation>Przenumeruj</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1582"/>
+        <location filename="edytornc.cpp" line="1583"/>
         <source>F7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1583"/>
+        <location filename="edytornc.cpp" line="1584"/>
         <source>Renumber program blocks</source>
         <translation>Przenumeruj linie programu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1586"/>
+        <location filename="edytornc.cpp" line="1587"/>
         <source>Feed&apos;s speed&apos;s</source>
         <translation>Parametry skrawania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1587"/>
+        <location filename="edytornc.cpp" line="1588"/>
         <source>F9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1588"/>
+        <location filename="edytornc.cpp" line="1589"/>
         <source>Calculate speed, feed, cutting speed</source>
         <translation>Obliczanie parametrów skrawania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1591"/>
+        <location filename="edytornc.cpp" line="1592"/>
         <source>Chamfer</source>
         <translation>Zfazowanie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1593"/>
+        <location filename="edytornc.cpp" line="1594"/>
         <source>Calculate chamfer</source>
         <translation>Obliczenia zfazowania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1596"/>
-        <location filename="edytornc.cpp" line="1598"/>
+        <location filename="edytornc.cpp" line="1597"/>
+        <location filename="edytornc.cpp" line="1599"/>
         <source>Solution of triangles</source>
         <translation>Obliczenia trójkątów</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1601"/>
-        <location filename="edytornc.cpp" line="1603"/>
+        <location filename="edytornc.cpp" line="1602"/>
+        <location filename="edytornc.cpp" line="1604"/>
         <source>Convert inch &lt;-&gt; mm</source>
         <translation>Przelicz mm &lt;-&gt; cale</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1606"/>
-        <location filename="edytornc.cpp" line="1608"/>
+        <location filename="edytornc.cpp" line="1607"/>
+        <location filename="edytornc.cpp" line="1609"/>
         <source>Convert program inch &lt;-&gt; mm</source>
         <translation>Zamień program cale &lt;-&gt; mm</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1611"/>
+        <location filename="edytornc.cpp" line="1612"/>
         <source>Calculator</source>
         <translation>Kalkulator</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1613"/>
+        <location filename="edytornc.cpp" line="1614"/>
         <source>Run calculator</source>
         <translation>Uruchom kalkulator</translation>
-    </message>
-    <message>
-        <source>Serial port send/receive - experimental</source>
-        <oldsource>Serial port send/recive - experimental</oldsource>
-        <translation type="obsolete">Wysyłanie/odbieranie przez port szeregowy - funkcja eksperymentalna</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1181"/>
@@ -3028,330 +2749,316 @@ Licencja Publiczna GNU.</translation>
         <translation type="unfinished">&lt;br /&gt;Tłumaczenie na język niemiecki Michael Numberger</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1616"/>
-        <location filename="edytornc.cpp" line="1619"/>
+        <location filename="edytornc.cpp" line="1617"/>
+        <location filename="edytornc.cpp" line="1620"/>
         <source>Serial port send/receive</source>
         <oldsource>Serial port send/recive</oldsource>
         <translation>Wysyłanie/odbieranie przez port szeregowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1622"/>
+        <location filename="edytornc.cpp" line="1623"/>
         <source>Compile macro - experimental</source>
         <translation>Kompiluj makro - funkcja eksperymentalna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1624"/>
+        <location filename="edytornc.cpp" line="1625"/>
         <source>Translate EdytorNC macro into CNC program</source>
         <translation>Przetłumacz makro EdytorNC na program CNC</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1643"/>
+        <location filename="edytornc.cpp" line="1644"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Zamknij</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1644"/>
+        <location filename="edytornc.cpp" line="1645"/>
         <source>Ctrl+F4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1645"/>
+        <location filename="edytornc.cpp" line="1646"/>
         <source>Close the active window</source>
         <translation>Zamknij aktywne okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1648"/>
+        <location filename="edytornc.cpp" line="1649"/>
         <source>Close &amp;All</source>
         <translation>Zamknij &amp;wszystkie okna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1649"/>
+        <location filename="edytornc.cpp" line="1650"/>
         <source>Close all the windows</source>
         <translation>Zamknij wszystkie okna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1652"/>
+        <location filename="edytornc.cpp" line="1653"/>
         <source>&amp;Tile</source>
         <translation>Rozmieść &amp;kafelkowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1653"/>
+        <location filename="edytornc.cpp" line="1654"/>
         <source>Tile the windows</source>
         <translation>Rozmieść okna kafelkowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1656"/>
+        <location filename="edytornc.cpp" line="1657"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Rozmieść kaskadowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1657"/>
+        <location filename="edytornc.cpp" line="1658"/>
         <source>Cascade the windows</source>
         <translation>Rozmieść okna kaskadowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1660"/>
+        <location filename="edytornc.cpp" line="1661"/>
         <source>Ne&amp;xt</source>
         <translation>&amp;Następne</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1661"/>
+        <location filename="edytornc.cpp" line="1662"/>
         <source>Move the focus to the next window</source>
         <translation>Uaktywnia kolejne okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1664"/>
+        <location filename="edytornc.cpp" line="1665"/>
         <source>Pre&amp;vious</source>
         <translation>&amp;Poprzednie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1665"/>
+        <location filename="edytornc.cpp" line="1666"/>
         <source>Move the focus to the previous window</source>
         <translation>Uaktywnia poprzednie okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1675"/>
+        <location filename="edytornc.cpp" line="1676"/>
         <source>&amp;Create cnc tooltips</source>
         <translation type="unfinished">&amp;Utwórz podpowiedzi CNC</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1676"/>
+        <location filename="edytornc.cpp" line="1677"/>
         <source>Create default cnc tooltips file</source>
         <oldsource>Create cnc tooltips file</oldsource>
         <translation>Tworzy dmoyślny plik z podpowiedziami CNC</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1679"/>
+        <location filename="edytornc.cpp" line="1680"/>
         <source>&amp;About</source>
         <translation>&amp;O edytorze</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1680"/>
+        <location filename="edytornc.cpp" line="1681"/>
         <source>Show the application&apos;s About box</source>
         <translation>Wyświetla okienko inforacyjne o programie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1683"/>
+        <location filename="edytornc.cpp" line="1684"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1684"/>
+        <location filename="edytornc.cpp" line="1685"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>Wyświetla okienko inforacyjne o biblotekach Qt</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1694"/>
+        <location filename="edytornc.cpp" line="1695"/>
         <source>&amp;File</source>
         <translation>&amp;Plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1701"/>
+        <location filename="edytornc.cpp" line="1702"/>
         <source>&amp;Recent files</source>
         <translation>O&amp;statnio otwarte</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1717"/>
+        <location filename="edytornc.cpp" line="1718"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edycja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1741"/>
+        <location filename="edytornc.cpp" line="1742"/>
         <source>&amp;Tools</source>
         <translation>&amp;Narzędzia</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1764"/>
+        <location filename="edytornc.cpp" line="1765"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1770"/>
+        <location filename="edytornc.cpp" line="1771"/>
         <source>&amp;Help</source>
         <translation>&amp;Pomoc</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1783"/>
+        <location filename="edytornc.cpp" line="1784"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1795"/>
+        <location filename="edytornc.cpp" line="1796"/>
         <source>Edit</source>
         <translation>Edycja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1817"/>
+        <location filename="edytornc.cpp" line="1818"/>
         <source>Tools</source>
         <translation>Narzędzia</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1843"/>
+        <location filename="edytornc.cpp" line="1844"/>
         <source>Window</source>
         <translation>Okno</translation>
     </message>
     <message>
-        <source>Highlight style</source>
-        <translation type="obsolete">Styl podświetlenia</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1867"/>
+        <location filename="edytornc.cpp" line="1868"/>
         <source>AUTO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1868"/>
+        <location filename="edytornc.cpp" line="1869"/>
         <source>FANUC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1869"/>
+        <location filename="edytornc.cpp" line="1870"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1870"/>
+        <location filename="edytornc.cpp" line="1871"/>
         <source>HEIDENHAIN ISO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1871"/>
+        <location filename="edytornc.cpp" line="1872"/>
         <source>OKUMA OSP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1872"/>
+        <location filename="edytornc.cpp" line="1873"/>
         <source>PHILIPS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1873"/>
+        <location filename="edytornc.cpp" line="1874"/>
         <source>SINUMERIK OLD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1874"/>
+        <location filename="edytornc.cpp" line="1875"/>
         <source>SINUMERIK NEW</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1878"/>
         <location filename="edytornc.cpp" line="1879"/>
+        <location filename="edytornc.cpp" line="1880"/>
         <source>Attach current highlight setting to current directory of programs</source>
         <oldsource>Attach current highlight stting to current directory of programs</oldsource>
         <translation type="unfinished">Powiąż aktualne ustawienia podświetlania z aktualnym katalogiem programów</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1885"/>
         <location filename="edytornc.cpp" line="1886"/>
+        <location filename="edytornc.cpp" line="1887"/>
         <source>Remove highlight settings from the directory</source>
         <translation>Usuń informacje o stylu podświetlania z bierzącego katalogu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1904"/>
+        <location filename="edytornc.cpp" line="1905"/>
         <source>Ready</source>
         <translation>Gotowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2312"/>
+        <location filename="edytornc.cpp" line="2313"/>
         <source>Find</source>
         <translation>Znajdź</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2318"/>
-        <location filename="edytornc.cpp" line="2320"/>
+        <location filename="edytornc.cpp" line="2319"/>
+        <location filename="edytornc.cpp" line="2321"/>
         <source>Find next</source>
         <translation>Znajdź następny</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2323"/>
-        <location filename="edytornc.cpp" line="2325"/>
+        <location filename="edytornc.cpp" line="2324"/>
+        <location filename="edytornc.cpp" line="2326"/>
         <source>Find previous</source>
         <translation>Znajdź poprzedni</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2328"/>
-        <location filename="edytornc.cpp" line="2330"/>
+        <location filename="edytornc.cpp" line="2329"/>
+        <location filename="edytornc.cpp" line="2331"/>
         <source>Replace &amp;&amp; find next</source>
         <translation>Znajdź i zamień następny</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2333"/>
-        <location filename="edytornc.cpp" line="2335"/>
+        <location filename="edytornc.cpp" line="2334"/>
+        <location filename="edytornc.cpp" line="2336"/>
         <source>Replace &amp;&amp; find previous</source>
         <translation>Znajdź i zamień poprzedni</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2338"/>
-        <location filename="edytornc.cpp" line="2340"/>
+        <location filename="edytornc.cpp" line="2339"/>
+        <location filename="edytornc.cpp" line="2341"/>
         <source>Replace all</source>
         <translation>Zamień wszysko</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2343"/>
         <location filename="edytornc.cpp" line="2344"/>
-        <location filename="edytornc.cpp" line="2562"/>
+        <location filename="edytornc.cpp" line="2345"/>
+        <location filename="edytornc.cpp" line="2563"/>
         <source>Close find toolbar</source>
         <translation>Zamknij pasek wyszukiwania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2347"/>
+        <location filename="edytornc.cpp" line="2348"/>
         <source>Find:</source>
         <translation>Znajdź:</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2356"/>
+        <location filename="edytornc.cpp" line="2357"/>
         <source>Replace with:</source>
         <translation>Zamień na:</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2366"/>
+        <location filename="edytornc.cpp" line="2367"/>
         <source>Ignore c&amp;ase</source>
         <translation>&amp;Ignoruj wielkość znaków</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2370"/>
+        <location filename="edytornc.cpp" line="2371"/>
         <source>&amp;Whole words only</source>
         <translation>&amp;Tylko całe wyrazy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2526"/>
+        <location filename="edytornc.cpp" line="2527"/>
         <source>Serial port toolbar</source>
         <translation>Pasek narzędzi port szeregowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2531"/>
-        <location filename="edytornc.cpp" line="2533"/>
+        <location filename="edytornc.cpp" line="2532"/>
+        <location filename="edytornc.cpp" line="2534"/>
         <source>Serial port configuration</source>
         <translation>Konfiguracja portu szeregowego</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2536"/>
-        <location filename="edytornc.cpp" line="2538"/>
+        <location filename="edytornc.cpp" line="2537"/>
+        <location filename="edytornc.cpp" line="2539"/>
         <source>Receive new file</source>
         <oldsource>Recive new file</oldsource>
         <translation>Odbierz nowy plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2541"/>
-        <location filename="edytornc.cpp" line="2543"/>
+        <location filename="edytornc.cpp" line="2542"/>
+        <location filename="edytornc.cpp" line="2544"/>
         <source>Send current file</source>
         <translation>Wyślij aktualny plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2860"/>
+        <location filename="edytornc.cpp" line="2861"/>
         <source>Sending...</source>
         <translation>Wysyłanie...</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3255"/>
-        <location filename="edytornc.cpp" line="3561"/>
-        <location filename="edytornc.cpp" line="3671"/>
-        <location filename="edytornc.cpp" line="3737"/>
-        <location filename="edytornc.cpp" line="3810"/>
-        <location filename="edytornc.cpp" line="3842"/>
-        <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3256"/>
@@ -3360,22 +3067,22 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3738"/>
         <location filename="edytornc.cpp" line="3811"/>
         <location filename="edytornc.cpp" line="3843"/>
-        <source>&lt;b&gt;M01&lt;/b&gt; - optional program stop</source>
+        <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3257"/>
-        <source>&lt;b&gt;M02&lt;/b&gt; - end of program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3258"/>
         <location filename="edytornc.cpp" line="3563"/>
         <location filename="edytornc.cpp" line="3673"/>
         <location filename="edytornc.cpp" line="3739"/>
         <location filename="edytornc.cpp" line="3812"/>
         <location filename="edytornc.cpp" line="3844"/>
-        <source>&lt;b&gt;M03&lt;/b&gt; - start spindle CW</source>
+        <source>&lt;b&gt;M01&lt;/b&gt; - optional program stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3258"/>
+        <source>&lt;b&gt;M02&lt;/b&gt; - end of program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3385,7 +3092,7 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3740"/>
         <location filename="edytornc.cpp" line="3813"/>
         <location filename="edytornc.cpp" line="3845"/>
-        <source>&lt;b&gt;M04&lt;/b&gt; - start spindle CCW</source>
+        <source>&lt;b&gt;M03&lt;/b&gt; - start spindle CW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3395,7 +3102,7 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3741"/>
         <location filename="edytornc.cpp" line="3814"/>
         <location filename="edytornc.cpp" line="3846"/>
-        <source>&lt;b&gt;M05&lt;/b&gt; - spindle stop</source>
+        <source>&lt;b&gt;M04&lt;/b&gt; - start spindle CCW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3405,17 +3112,17 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3742"/>
         <location filename="edytornc.cpp" line="3815"/>
         <location filename="edytornc.cpp" line="3847"/>
-        <source>&lt;b&gt;M06&lt;/b&gt; - tool change</source>
+        <source>&lt;b&gt;M05&lt;/b&gt; - spindle stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3262"/>
         <location filename="edytornc.cpp" line="3567"/>
         <location filename="edytornc.cpp" line="3677"/>
-        <location filename="edytornc.cpp" line="3744"/>
-        <location filename="edytornc.cpp" line="3817"/>
-        <location filename="edytornc.cpp" line="3849"/>
-        <source>&lt;b&gt;M08&lt;/b&gt; - coolant on</source>
+        <location filename="edytornc.cpp" line="3743"/>
+        <location filename="edytornc.cpp" line="3816"/>
+        <location filename="edytornc.cpp" line="3848"/>
+        <source>&lt;b&gt;M06&lt;/b&gt; - tool change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3425,379 +3132,379 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3745"/>
         <location filename="edytornc.cpp" line="3818"/>
         <location filename="edytornc.cpp" line="3850"/>
-        <source>&lt;b&gt;M09&lt;/b&gt; - coolant off</source>
+        <source>&lt;b&gt;M08&lt;/b&gt; - coolant on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3264"/>
-        <source>&lt;b&gt;M12&lt;/b&gt; - M-tool spindle STOP</source>
+        <location filename="edytornc.cpp" line="3569"/>
+        <location filename="edytornc.cpp" line="3679"/>
+        <location filename="edytornc.cpp" line="3746"/>
+        <location filename="edytornc.cpp" line="3819"/>
+        <location filename="edytornc.cpp" line="3851"/>
+        <source>&lt;b&gt;M09&lt;/b&gt; - coolant off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3265"/>
-        <source>&lt;b&gt;M13&lt;/b&gt; - M-tool spindle CW</source>
+        <source>&lt;b&gt;M12&lt;/b&gt; - M-tool spindle STOP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3266"/>
-        <source>&lt;b&gt;M14&lt;/b&gt; - M-tool spindle CCW</source>
+        <source>&lt;b&gt;M13&lt;/b&gt; - M-tool spindle CW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3267"/>
-        <source>&lt;b&gt;M15&lt;/b&gt; - B or C-axis positioning, plus direction CW</source>
+        <source>&lt;b&gt;M14&lt;/b&gt; - M-tool spindle CCW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3268"/>
-        <source>&lt;b&gt;M16&lt;/b&gt; - B or C-axis positioning, minus direction CCW</source>
+        <source>&lt;b&gt;M15&lt;/b&gt; - B or C-axis positioning, plus direction CW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3269"/>
-        <source>&lt;b&gt;M19&lt;/b&gt; - oriented spindle stop</source>
+        <source>&lt;b&gt;M16&lt;/b&gt; - B or C-axis positioning, minus direction CCW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3270"/>
-        <source>&lt;b&gt;M20&lt;/b&gt; - tailstock barrier OFF</source>
+        <source>&lt;b&gt;M19&lt;/b&gt; - oriented spindle stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3271"/>
-        <source>&lt;b&gt;M21&lt;/b&gt; - tailstock barrier ON</source>
+        <source>&lt;b&gt;M20&lt;/b&gt; - tailstock barrier OFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3272"/>
-        <source>&lt;b&gt;M22&lt;/b&gt; - chamfering OFF (for thread cutting cycle)</source>
+        <source>&lt;b&gt;M21&lt;/b&gt; - tailstock barrier ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3273"/>
-        <source>&lt;b&gt;M23&lt;/b&gt; - chamfering ON (for thread cutting cycle)</source>
+        <source>&lt;b&gt;M22&lt;/b&gt; - chamfering OFF (for thread cutting cycle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3274"/>
-        <source>&lt;b&gt;M24&lt;/b&gt; - chuck barrier OFF</source>
+        <source>&lt;b&gt;M23&lt;/b&gt; - chamfering ON (for thread cutting cycle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3275"/>
-        <source>&lt;b&gt;M25&lt;/b&gt; - chuck barrier ON</source>
+        <source>&lt;b&gt;M24&lt;/b&gt; - chuck barrier OFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3276"/>
-        <source>&lt;b&gt;M26&lt;/b&gt; - thread lead along Z-axis</source>
+        <source>&lt;b&gt;M25&lt;/b&gt; - chuck barrier ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3277"/>
-        <source>&lt;b&gt;M27&lt;/b&gt; - thread lead along X-axis</source>
+        <source>&lt;b&gt;M26&lt;/b&gt; - thread lead along Z-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3278"/>
-        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function OFF</source>
+        <source>&lt;b&gt;M27&lt;/b&gt; - thread lead along X-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3279"/>
+        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3280"/>
         <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3282"/>
+        <location filename="edytornc.cpp" line="3283"/>
         <source>&lt;b&gt;M40&lt;/b&gt; - spindle gear range neutral</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3283"/>
+        <location filename="edytornc.cpp" line="3284"/>
         <source>&lt;b&gt;M41&lt;/b&gt; - spindle gear range 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3284"/>
+        <location filename="edytornc.cpp" line="3285"/>
         <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3285"/>
+        <location filename="edytornc.cpp" line="3286"/>
         <source>&lt;b&gt;M43&lt;/b&gt; - spindle gear range 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3286"/>
+        <location filename="edytornc.cpp" line="3287"/>
         <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3287"/>
+        <location filename="edytornc.cpp" line="3288"/>
         <source>&lt;b&gt;M48&lt;/b&gt; - spindle speed override ignore cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3288"/>
+        <location filename="edytornc.cpp" line="3289"/>
         <source>&lt;b&gt;M49&lt;/b&gt; - spindle speed override ignore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3290"/>
+        <location filename="edytornc.cpp" line="3291"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - mode of return to upper limit level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3291"/>
-        <location filename="edytornc.cpp" line="3293"/>
-        <location filename="edytornc.cpp" line="3295"/>
+        <location filename="edytornc.cpp" line="3292"/>
+        <location filename="edytornc.cpp" line="3294"/>
+        <location filename="edytornc.cpp" line="3296"/>
         <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3292"/>
+        <location filename="edytornc.cpp" line="3293"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - mode of return to a specified point level set by G71</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3294"/>
+        <location filename="edytornc.cpp" line="3295"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - mode of return to the point R level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3297"/>
+        <location filename="edytornc.cpp" line="3298"/>
         <source>&lt;b&gt;M55&lt;/b&gt; - tailstock spindle retract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3298"/>
+        <location filename="edytornc.cpp" line="3299"/>
         <source>&lt;b&gt;M56&lt;/b&gt; - tailstock spindle advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3299"/>
+        <location filename="edytornc.cpp" line="3300"/>
         <source>&lt;b&gt;M58&lt;/b&gt; - chucking pressure low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3300"/>
+        <location filename="edytornc.cpp" line="3301"/>
         <source>&lt;b&gt;M59&lt;/b&gt; - chucking pressure high</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3302"/>
+        <location filename="edytornc.cpp" line="3303"/>
         <source>&lt;b&gt;M60&lt;/b&gt; - cancel of M61</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3303"/>
+        <location filename="edytornc.cpp" line="3304"/>
         <source>&lt;b&gt;M61&lt;/b&gt; - Ignoring fixed rpm arrival in constant speed cutting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3304"/>
+        <location filename="edytornc.cpp" line="3305"/>
         <source>&lt;b&gt;M62&lt;/b&gt; - cancel of M64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3305"/>
+        <location filename="edytornc.cpp" line="3306"/>
         <source>&lt;b&gt;M63&lt;/b&gt; - ignoring spindle rotation M code answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3306"/>
+        <location filename="edytornc.cpp" line="3307"/>
         <source>&lt;b&gt;M64&lt;/b&gt; - ignoring general M code answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3307"/>
+        <location filename="edytornc.cpp" line="3308"/>
         <source>&lt;b&gt;M65&lt;/b&gt; - ignoring T code answer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3308"/>
+        <location filename="edytornc.cpp" line="3309"/>
         <source>&lt;b&gt;M66&lt;/b&gt; - turret indexing position free</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3310"/>
+        <location filename="edytornc.cpp" line="3311"/>
         <source>&lt;b&gt;M78&lt;/b&gt; - steady rest unclamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3311"/>
+        <location filename="edytornc.cpp" line="3312"/>
         <source>&lt;b&gt;M79&lt;/b&gt; - steady rest clamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3312"/>
+        <location filename="edytornc.cpp" line="3313"/>
         <source>&lt;b&gt;M83&lt;/b&gt; - chuck clamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3313"/>
+        <location filename="edytornc.cpp" line="3314"/>
         <source>&lt;b&gt;M84&lt;/b&gt; - chuck unclamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3314"/>
+        <location filename="edytornc.cpp" line="3315"/>
         <source>&lt;b&gt;M85&lt;/b&gt; - no return to the cutting starting point after the completion of rough turning cycle (LAP)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3315"/>
+        <location filename="edytornc.cpp" line="3316"/>
         <source>&lt;b&gt;M88&lt;/b&gt; - air blower OFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3316"/>
+        <location filename="edytornc.cpp" line="3317"/>
         <source>&lt;b&gt;M89&lt;/b&gt; - air blower ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3317"/>
+        <location filename="edytornc.cpp" line="3318"/>
         <source>&lt;b&gt;M90&lt;/b&gt; - door/cover close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3318"/>
+        <location filename="edytornc.cpp" line="3319"/>
         <source>&lt;b&gt;M91&lt;/b&gt; - door/cover open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3320"/>
+        <location filename="edytornc.cpp" line="3321"/>
         <source>&lt;b&gt;M98&lt;/b&gt; - tailstock spindle thrust low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3321"/>
+        <location filename="edytornc.cpp" line="3322"/>
         <source>&lt;b&gt;M99&lt;/b&gt; - tailstock spindle thrust high</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3322"/>
+        <location filename="edytornc.cpp" line="3323"/>
         <source>&lt;b&gt;M109&lt;/b&gt; - cancel of M110</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3323"/>
+        <location filename="edytornc.cpp" line="3324"/>
         <source>&lt;b&gt;M110&lt;/b&gt; - C-axis joint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3325"/>
+        <location filename="edytornc.cpp" line="3326"/>
         <source>&lt;b&gt;M122&lt;/b&gt; - work rest retraction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3326"/>
+        <location filename="edytornc.cpp" line="3327"/>
         <source>&lt;b&gt;M123&lt;/b&gt; - Cwork rest advance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3328"/>
+        <location filename="edytornc.cpp" line="3329"/>
         <source>&lt;b&gt;M130&lt;/b&gt; - cutting feed; spindle rotating condition OFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3329"/>
+        <location filename="edytornc.cpp" line="3330"/>
         <source>&lt;b&gt;M131&lt;/b&gt; - cutting feed; spindle rotating condition ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3330"/>
+        <location filename="edytornc.cpp" line="3331"/>
         <source>&lt;b&gt;M132&lt;/b&gt; - single block ineffective</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3331"/>
+        <location filename="edytornc.cpp" line="3332"/>
         <source>&lt;b&gt;M133&lt;/b&gt; - single block effective</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3332"/>
+        <location filename="edytornc.cpp" line="3333"/>
         <source>&lt;b&gt;M136&lt;/b&gt; - feedrate override ineffective</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3333"/>
+        <location filename="edytornc.cpp" line="3334"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M137&lt;/b&gt; - feedrate override effective</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3334"/>
+        <location filename="edytornc.cpp" line="3335"/>
         <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M137&lt;/b&gt; - touch setter interlock release ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3335"/>
+        <location filename="edytornc.cpp" line="3336"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M138&lt;/b&gt; - dry run ineffective</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3336"/>
+        <location filename="edytornc.cpp" line="3337"/>
         <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M138&lt;/b&gt; - touch setter interlock release OFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3337"/>
+        <location filename="edytornc.cpp" line="3338"/>
         <source>&lt;b&gt;M139&lt;/b&gt; - dry run effective</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3342"/>
+        <location filename="edytornc.cpp" line="3343"/>
         <source>&lt;b&gt;M142&lt;/b&gt; - coolant pressure low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3343"/>
+        <location filename="edytornc.cpp" line="3344"/>
         <source>&lt;b&gt;M143&lt;/b&gt; - coolant pressure high</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3346"/>
+        <location filename="edytornc.cpp" line="3347"/>
         <source>&lt;b&gt;M146&lt;/b&gt; - C-axis unclamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3347"/>
+        <location filename="edytornc.cpp" line="3348"/>
         <source>&lt;b&gt;M147&lt;/b&gt; - C-axis clamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3348"/>
+        <location filename="edytornc.cpp" line="3349"/>
         <source>&lt;b&gt;M152&lt;/b&gt; - M-tools spindle interlock ON</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3349"/>
+        <location filename="edytornc.cpp" line="3350"/>
         <source>&lt;b&gt;M153&lt;/b&gt; - M-tools spindle interlock OFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3352"/>
+        <location filename="edytornc.cpp" line="3353"/>
         <source>&lt;b&gt;M161&lt;/b&gt; - feedrate override fix (100%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3353"/>
+        <location filename="edytornc.cpp" line="3354"/>
         <source>&lt;b&gt;M162&lt;/b&gt; - cancel of M163</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3354"/>
+        <location filename="edytornc.cpp" line="3355"/>
         <source>&lt;b&gt;M163&lt;/b&gt; - M-tools spindle speed override fix (100%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3363"/>
-        <location filename="edytornc.cpp" line="3573"/>
-        <location filename="edytornc.cpp" line="3682"/>
-        <location filename="edytornc.cpp" line="3749"/>
-        <location filename="edytornc.cpp" line="3822"/>
-        <location filename="edytornc.cpp" line="3854"/>
-        <source>&lt;b&gt;G00&lt;/b&gt; - rapid move - positioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3807,50 +3514,51 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3750"/>
         <location filename="edytornc.cpp" line="3823"/>
         <location filename="edytornc.cpp" line="3855"/>
+        <source>&lt;b&gt;G00&lt;/b&gt; - rapid move - positioning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3365"/>
+        <location filename="edytornc.cpp" line="3575"/>
+        <location filename="edytornc.cpp" line="3684"/>
+        <location filename="edytornc.cpp" line="3751"/>
+        <location filename="edytornc.cpp" line="3824"/>
+        <location filename="edytornc.cpp" line="3856"/>
         <source>&lt;b&gt;G01&lt;/b&gt; - linear interpolation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3367"/>
-        <location filename="edytornc.cpp" line="3686"/>
-        <location filename="edytornc.cpp" line="3753"/>
-        <location filename="edytornc.cpp" line="3826"/>
-        <location filename="edytornc.cpp" line="3858"/>
+        <location filename="edytornc.cpp" line="3368"/>
+        <location filename="edytornc.cpp" line="3687"/>
+        <location filename="edytornc.cpp" line="3754"/>
+        <location filename="edytornc.cpp" line="3827"/>
+        <location filename="edytornc.cpp" line="3859"/>
         <source>&lt;b&gt;G04 F&lt;/b&gt;xxxx - dwell xxxx seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3368"/>
+        <location filename="edytornc.cpp" line="3369"/>
         <source>&lt;b&gt;G09&lt;/b&gt; - exact stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3369"/>
+        <location filename="edytornc.cpp" line="3370"/>
         <source>&lt;b&gt;G10&lt;/b&gt; - cancel of G11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3370"/>
+        <location filename="edytornc.cpp" line="3371"/>
         <source>&lt;b&gt;G11&lt;/b&gt; - parallel and rotation shift of coordinate system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3374"/>
+        <location filename="edytornc.cpp" line="3375"/>
         <source>&lt;b&gt;G15 H&lt;/b&gt;xx - selection of work coordinate system no. xx, modal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3375"/>
+        <location filename="edytornc.cpp" line="3376"/>
         <source>&lt;b&gt;G15 H&lt;/b&gt;xx - selection of work coordinate system no. xx, one-shot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3377"/>
-        <location filename="edytornc.cpp" line="3581"/>
-        <location filename="edytornc.cpp" line="3688"/>
-        <location filename="edytornc.cpp" line="3755"/>
-        <location filename="edytornc.cpp" line="3860"/>
-        <source>&lt;b&gt;G17&lt;/b&gt; - XY plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3859,7 +3567,7 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3689"/>
         <location filename="edytornc.cpp" line="3756"/>
         <location filename="edytornc.cpp" line="3861"/>
-        <source>&lt;b&gt;G18&lt;/b&gt; - ZX plane</source>
+        <source>&lt;b&gt;G17&lt;/b&gt; - XY plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3868,21 +3576,30 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3690"/>
         <location filename="edytornc.cpp" line="3757"/>
         <location filename="edytornc.cpp" line="3862"/>
-        <source>&lt;b&gt;G19&lt;/b&gt; - YZ plane</source>
+        <source>&lt;b&gt;G18&lt;/b&gt; - ZX plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3380"/>
-        <source>&lt;b&gt;G20&lt;/b&gt; - inch input confirmation</source>
+        <location filename="edytornc.cpp" line="3584"/>
+        <location filename="edytornc.cpp" line="3691"/>
+        <location filename="edytornc.cpp" line="3758"/>
+        <location filename="edytornc.cpp" line="3863"/>
+        <source>&lt;b&gt;G19&lt;/b&gt; - YZ plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3381"/>
+        <source>&lt;b&gt;G20&lt;/b&gt; - inch input confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3382"/>
         <source>&lt;b&gt;G21&lt;/b&gt; - metric input confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3345"/>
+        <location filename="edytornc.cpp" line="3346"/>
         <source>&lt;b&gt;M145&lt;/b&gt; - additional coolant 1 ON</source>
         <oldsource>&lt;b&gt;G40&lt;/b&gt; - tool [nose] radius compensation cancel</oldsource>
         <translation type="unfinished"></translation>
@@ -3909,853 +3626,50 @@ Licencja Publiczna GNU.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1450"/>
-        <source>&amp;Open example...</source>
+        <location filename="edytornc.cpp" line="1182"/>
+        <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1451"/>
+        <source>&amp;Open example...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="1452"/>
         <source>Open an example file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1627"/>
         <location filename="edytornc.cpp" line="1628"/>
+        <location filename="edytornc.cpp" line="1629"/>
         <source>Show diff - open current file in right diff window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1631"/>
         <location filename="edytornc.cpp" line="1632"/>
+        <location filename="edytornc.cpp" line="1633"/>
         <source>Show diff - open current file in left diff window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1635"/>
+        <location filename="edytornc.cpp" line="1636"/>
         <source>On/off diff window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1637"/>
+        <location filename="edytornc.cpp" line="1638"/>
         <source>Show diff window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1865"/>
+        <location filename="edytornc.cpp" line="1866"/>
         <source>Highlight style and tooltip mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2891"/>
+        <location filename="edytornc.cpp" line="2892"/>
         <source>Start in %1s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3383"/>
-        <location filename="edytornc.cpp" line="3592"/>
-        <location filename="edytornc.cpp" line="3692"/>
-        <location filename="edytornc.cpp" line="3768"/>
-        <source>&lt;b&gt;G40&lt;/b&gt; - tool nose/cutter radius compensation cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3386"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G50 S&lt;/b&gt;xxxx - maximum spindle speed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3387"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G50 X Z&lt;/b&gt; - zero point shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3389"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G53&lt;/b&gt; - cancel tool length offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3390"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G53&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3391"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G54 H&lt;/b&gt;xx - tool length offset X-axis, xx - offset no.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3392"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G54&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3393"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G55 H&lt;/b&gt;xx - tool length offset Y-axis, xx - offset no.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3394"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G55&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3395"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G56 H&lt;/b&gt;xx - tool length offset Z-axis, xx - offset no.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3396"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G56&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3397"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G57 H&lt;/b&gt;xx - tool length offset 4-axis, xx - offset no.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3398"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G57&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3399"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G58 H&lt;/b&gt;xx - tool length offset 5-axis, xx - offset no.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3400"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G58&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3401"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G59 H&lt;/b&gt;xx - tool length offset 6-axis, xx - offset no.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3402"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G59&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3404"/>
-        <source>&lt;b&gt;G61&lt;/b&gt; - exact stop mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3405"/>
-        <source>&lt;b&gt;G62&lt;/b&gt; - programmable mirror image function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3406"/>
-        <source>&lt;b&gt;G17&lt;/b&gt; - cutting mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3409"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G71 Z&lt;/b&gt;xx - return level xx command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3410"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G71&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3411"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G73&lt;/b&gt; - high speed deep hole drilling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3412"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G73&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3413"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G74&lt;/b&gt; - reverse tapping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3414"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G74&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3415"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G76&lt;/b&gt; - fine boring</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3416"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G76&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3420"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G80&lt;/b&gt; - fixed cycle mode cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3421"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G80&lt;/b&gt; - end of shape designation (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3423"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G81 R X Y Z&lt;/b&gt; - drilling cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3424"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G81&lt;/b&gt; - start of longitudinal shape designation (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3426"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G82 R X Y Z&lt;/b&gt; - counter bore cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3427"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G82&lt;/b&gt; - start of transverse shape designation (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3429"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G83 R X Y Z&lt;/b&gt; - deep hole drilling cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3430"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G83&lt;/b&gt; - start of blank material shape definition (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3432"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G84 R X Y Z&lt;/b&gt; - tapping cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3433"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G84&lt;/b&gt; -   change of cutting conditions in bar turning cycle (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3435"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G85 R X Y Z&lt;/b&gt; - boring cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3436"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G85&lt;/b&gt; - call of rough bar turning cycle (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3438"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G86 R X Y Z&lt;/b&gt; - boring cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3439"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G86&lt;/b&gt; - call of rough copy turning cycle (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3441"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G87 R X Y Z&lt;/b&gt; - back boring cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3442"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G87&lt;/b&gt; - call finish turning cycle (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3444"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G88 R X Y Z&lt;/b&gt; - drilling cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3445"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G88&lt;/b&gt; - call of continuous thread cutting cycle (LAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3447"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G89 R X Y Z&lt;/b&gt; - boring cycle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3448"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G89&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3451"/>
-        <location filename="edytornc.cpp" line="3624"/>
-        <location filename="edytornc.cpp" line="3704"/>
-        <location filename="edytornc.cpp" line="3775"/>
-        <source>&lt;b&gt;G90&lt;/b&gt; - absolute programming</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3452"/>
-        <location filename="edytornc.cpp" line="3625"/>
-        <location filename="edytornc.cpp" line="3705"/>
-        <location filename="edytornc.cpp" line="3776"/>
-        <source>&lt;b&gt;G91&lt;/b&gt; - incremental programming</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3453"/>
-        <source>&lt;b&gt;G92&lt;/b&gt; - setting of work coordinate system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3454"/>
-        <location filename="edytornc.cpp" line="3627"/>
-        <location filename="edytornc.cpp" line="3706"/>
-        <location filename="edytornc.cpp" line="3777"/>
-        <source>&lt;b&gt;G94&lt;/b&gt; - feed per minute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3455"/>
-        <location filename="edytornc.cpp" line="3628"/>
-        <location filename="edytornc.cpp" line="3707"/>
-        <location filename="edytornc.cpp" line="3778"/>
-        <source>&lt;b&gt;G95&lt;/b&gt; - feed per revolution</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3456"/>
-        <location filename="edytornc.cpp" line="3629"/>
-        <location filename="edytornc.cpp" line="3708"/>
-        <location filename="edytornc.cpp" line="3779"/>
-        <source>&lt;b&gt;G96 S&lt;/b&gt;xx - constant cutting speed xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3457"/>
-        <location filename="edytornc.cpp" line="3630"/>
-        <location filename="edytornc.cpp" line="3709"/>
-        <location filename="edytornc.cpp" line="3780"/>
-        <source>&lt;b&gt;G97 S&lt;/b&gt;xx - constant spindle speed xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3459"/>
-        <source>&lt;b&gt;NCYL&lt;/b&gt; - if specified in fixed cycle, positioning to the definied hole position is performed, but the cycle axis does not operate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3460"/>
-        <source>&lt;b&gt;NOEX&lt;/b&gt; - if specified in fixed cycle, no axis movements may be performed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3462"/>
-        <location filename="edytornc.cpp" line="3651"/>
-        <source>&lt;b&gt;SIN[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - sine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3463"/>
-        <location filename="edytornc.cpp" line="3652"/>
-        <source>&lt;b&gt;COS[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - cosine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3464"/>
-        <location filename="edytornc.cpp" line="3653"/>
-        <source>&lt;b&gt;TAN[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - tangent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3465"/>
-        <location filename="edytornc.cpp" line="3654"/>
-        <source>&lt;b&gt;ATAN[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - arctangent 1 or 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3466"/>
-        <location filename="edytornc.cpp" line="3655"/>
-        <source>&lt;b&gt;SQRT[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - square root</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3467"/>
-        <location filename="edytornc.cpp" line="3656"/>
-        <source>&lt;b&gt;ABS[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - absolute value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3468"/>
-        <location filename="edytornc.cpp" line="3657"/>
-        <source>&lt;b&gt;BIN[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - decimal to binary conversion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3469"/>
-        <location filename="edytornc.cpp" line="3658"/>
-        <source>&lt;b&gt;BCD[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - binary to decimal conversion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3470"/>
-        <location filename="edytornc.cpp" line="3659"/>
-        <source>&lt;b&gt;ROUND[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - integer implementation (rounding)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3471"/>
-        <location filename="edytornc.cpp" line="3660"/>
-        <source>&lt;b&gt;FIX[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - integer implementation (truncation)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3472"/>
-        <location filename="edytornc.cpp" line="3661"/>
-        <source>&lt;b&gt;FUP[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - integer implementation (raising)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3473"/>
-        <source>&lt;b&gt;DROUND[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - unit integer implementation (rounding)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3474"/>
-        <source>&lt;b&gt;DFIX[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - unit integer implementation (truncation)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3475"/>
-        <source>&lt;b&gt;DFUP[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - unit integer implementation (raising)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3476"/>
-        <source>&lt;b&gt;MOD[&lt;/b&gt;val&lt;b&gt;,&lt;/b&gt;yy&lt;b&gt;]&lt;/b&gt; - remainder of val/yy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3478"/>
-        <source>&lt;b&gt;VDIN[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - imput variable no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3479"/>
-        <source>&lt;b&gt;VDOUT[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - output variable no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3480"/>
-        <source>&lt;b&gt;VUACM[&lt;/b&gt;n&lt;b&gt;]=&apos;&lt;/b&gt;text&lt;b&gt;&apos;&lt;/b&gt; - sub message for user definied alarms, n - subscript expression, text - max. 16 chracters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3482"/>
-        <source>&lt;b&gt;MODIN O&lt;/b&gt;nnnn [&lt;b&gt;Q&lt;/b&gt;]xx - subprogram call after axis movement, nnnn - prog. name, xx - number of repetitions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3483"/>
-        <source>&lt;b&gt;MODOUT&lt;/b&gt; - cancels last MODIN command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3485"/>
-        <source>&lt;b&gt;OMIT&lt;/b&gt; - coordinate calculation function, omit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3486"/>
-        <source>&lt;b&gt;RSTRT&lt;/b&gt; - coordinate calculation function, restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3488"/>
-        <source>&lt;b&gt;LAA&lt;/b&gt; - line at angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3489"/>
-        <source>&lt;b&gt;ARC&lt;/b&gt; - arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3490"/>
-        <source>&lt;b&gt;GRDX&lt;/b&gt; - grid X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3491"/>
-        <source>&lt;b&gt;GRDY&lt;/b&gt; - grid Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3492"/>
-        <source>&lt;b&gt;DGRDX&lt;/b&gt; - double grid X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3493"/>
-        <source>&lt;b&gt;DGRDY&lt;/b&gt; - double grid Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3494"/>
-        <source>&lt;b&gt;SQRX&lt;/b&gt; - square X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3495"/>
-        <source>&lt;b&gt;SQRY&lt;/b&gt; - square Y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3496"/>
-        <source>&lt;b&gt;BHC X Y I J K &lt;/b&gt; - bolt hole circle, X Y - circle center, I - radius, J - angle of first hole, K - no. of holes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3498"/>
-        <location filename="edytornc.cpp" line="3634"/>
-        <source>&lt;b&gt;EQ&lt;/b&gt; - equal to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3499"/>
-        <location filename="edytornc.cpp" line="3635"/>
-        <source>&lt;b&gt;NE&lt;/b&gt; - not equal to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3500"/>
-        <location filename="edytornc.cpp" line="3636"/>
-        <source>&lt;b&gt;GT&lt;/b&gt; - greather than</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3501"/>
-        <location filename="edytornc.cpp" line="3637"/>
-        <source>&lt;b&gt;LE&lt;/b&gt; - less than or equal to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3502"/>
-        <location filename="edytornc.cpp" line="3638"/>
-        <source>&lt;b&gt;LT&lt;/b&gt; - less than</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3503"/>
-        <location filename="edytornc.cpp" line="3639"/>
-        <source>&lt;b&gt;GE&lt;/b&gt; - greather than or equal to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3504"/>
-        <source>&lt;b&gt;IF[&lt;/b&gt;condition&lt;b&gt;] N&lt;/b&gt;xxxx - if condition is true goto block xxxx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3506"/>
-        <source>&lt;b&gt;TLFON&lt;/b&gt; - tool life on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3507"/>
-        <source>&lt;b&gt;EMPTY&lt;/b&gt; - &apos;empty&apos; value </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3509"/>
-        <source>&lt;b&gt;SB=&lt;/b&gt;xxxx - M-tool spindle speed xxxx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3510"/>
-        <source>&lt;b&gt;TG=&lt;/b&gt;xx - tool group no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3511"/>
-        <source>&lt;b&gt;OG=&lt;/b&gt;xx - offset group no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3512"/>
-        <source>&lt;b&gt;GOTO N&lt;/b&gt;nnnn - jump to nnnn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3513"/>
-        <source>&lt;b&gt;CALL O&lt;/b&gt;nnnn [&lt;b&gt;Q&lt;/b&gt;xx] - call subprogram nnnn, repeat it xx times</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3514"/>
-        <source>&lt;b&gt;RTS&lt;/b&gt; - subprogram end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3515"/>
-        <source>&lt;b&gt;VLMON[&lt;/b&gt;xx&lt;b&gt;]=&lt;/b&gt;yy - load monitor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3518"/>
-        <source>&lt;b&gt;VATOL&lt;/b&gt; - active tool number, tool kind + tool number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3519"/>
-        <source>&lt;b&gt;VNTOL&lt;/b&gt; - next tool number, tool kind + tool number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3520"/>
-        <source>&lt;b&gt;VMLOK&lt;/b&gt; - equal zero if not in machine lock status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3521"/>
-        <source>&lt;b&gt;VPPCP&lt;/b&gt; - PPC parameter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3522"/>
-        <source>&lt;b&gt;VPLNO&lt;/b&gt; - PPC pallet number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3523"/>
-        <source>&lt;b&gt;VPLDT&lt;/b&gt; - PPC parameter bit data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3524"/>
-        <source>&lt;b&gt;VTLCN&lt;/b&gt; - active tool number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3525"/>
-        <source>&lt;b&gt;VTLNN&lt;/b&gt; - next tool number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3528"/>
-        <source>&lt;b&gt;VMCOD[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - present M code of group no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3529"/>
-        <source>&lt;b&gt;VSCOD&lt;/b&gt; - command value of present spindle speed S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3530"/>
-        <source>&lt;b&gt;VDCOD&lt;/b&gt; - present cutter radius compensation offset number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3531"/>
-        <source>&lt;b&gt;VFCOD&lt;/b&gt; - command value of present feedrate F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3532"/>
-        <source>&lt;b&gt;VGCOD[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - present G code of group no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3533"/>
-        <source>&lt;b&gt;VHCOD&lt;/b&gt; - present tool length offset number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3534"/>
-        <source>&lt;b&gt;VACOD&lt;/b&gt; - coordinate system number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3536"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VZOFX[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - zero offset no. xx of X-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3537"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFX&lt;/b&gt; - zero offset of X-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3538"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VZOFZ[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - zero offset no. xx of Z-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3539"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFZ&lt;/b&gt; - zero offset of Z-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3540"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VZOFY[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - zero offset no. xx of Y-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3541"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFW&lt;/b&gt; - zero offset of W-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3542"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFC&lt;/b&gt; - zero offset of C-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3543"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZSHZ&lt;/b&gt; - zero shift of Z-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3544"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZSHX&lt;/b&gt; - zero shift of X-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3545"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZSHC&lt;/b&gt; - zero shift of C-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3546"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VTOFZ[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - tool offset no. xx of Z-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3547"/>
-        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VTOFX[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - tool offset no. xx of X-axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3548"/>
-        <source>&lt;b&gt;VRSTT&lt;/b&gt; - equal zero if not in restart state</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3549"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VTOFH[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - tool length, offset no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3550"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VTOFD[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - cutter radius, offset no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3551"/>
-        <source>&lt;b&gt;VNCOM[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - communication for automation, no. xx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3280"/>
-        <location filename="edytornc.cpp" line="3569"/>
-        <location filename="edytornc.cpp" line="3679"/>
-        <location filename="edytornc.cpp" line="3746"/>
-        <location filename="edytornc.cpp" line="3819"/>
-        <location filename="edytornc.cpp" line="3851"/>
-        <source>&lt;b&gt;M30&lt;/b&gt; - end of program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3338"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M140&lt;/b&gt; - slide hold ineffective</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3339"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M140&lt;/b&gt; - main motor overload monitoring OFF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3340"/>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M141&lt;/b&gt; - slide hold effective</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3341"/>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M141&lt;/b&gt; - main motor overload monitoring ON</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3344"/>
-        <source>&lt;b&gt;M144&lt;/b&gt; - additional coolant 1 OFF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3350"/>
-        <source>&lt;b&gt;M156&lt;/b&gt; - center work interlock OFF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3351"/>
-        <source>&lt;b&gt;M157&lt;/b&gt; - center work interlock ON</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3356"/>
-        <source>&lt;b&gt;M184&lt;/b&gt; - chuck internal interlock release OFF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3357"/>
-        <source>&lt;b&gt;M185&lt;/b&gt; - chuck internal interlock release ON</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3358"/>
-        <source>&lt;b&gt;M186&lt;/b&gt; - work rest base unclamp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3359"/>
-        <source>&lt;b&gt;M187&lt;/b&gt; - work rest base clamp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3360"/>
-        <source>&lt;b&gt;M215&lt;/b&gt; - load monitor G00 ignore OFF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3361"/>
-        <source>&lt;b&gt;M216&lt;/b&gt; - load monitor G00 ignore ON</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3365"/>
-        <source>&lt;b&gt;G02 X Y Z [I J K&lt;/b&gt; | &lt;b&gt;L]&lt;/b&gt; - circular interpolation CW</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3366"/>
-        <source>&lt;b&gt;G03 X Y Z [I J K&lt;/b&gt; | &lt;b&gt;L]&lt;/b&gt; - circular interpolation CCW</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3372"/>
-        <source>&lt;b&gt;G13&lt;/b&gt; - turret selection: Turret A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3373"/>
-        <source>&lt;b&gt;G14&lt;/b&gt; - turret selection: Turret B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4763,7 +3677,807 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3593"/>
         <location filename="edytornc.cpp" line="3693"/>
         <location filename="edytornc.cpp" line="3769"/>
-        <source>&lt;b&gt;G41&lt;/b&gt; - tool nose/cutter radius compensation left</source>
+        <source>&lt;b&gt;G40&lt;/b&gt; - tool nose/cutter radius compensation cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3387"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G50 S&lt;/b&gt;xxxx - maximum spindle speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3388"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G50 X Z&lt;/b&gt; - zero point shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3390"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G53&lt;/b&gt; - cancel tool length offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3391"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G53&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3392"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G54 H&lt;/b&gt;xx - tool length offset X-axis, xx - offset no.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3393"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G54&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3394"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G55 H&lt;/b&gt;xx - tool length offset Y-axis, xx - offset no.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3395"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G55&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3396"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G56 H&lt;/b&gt;xx - tool length offset Z-axis, xx - offset no.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3397"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G56&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3398"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G57 H&lt;/b&gt;xx - tool length offset 4-axis, xx - offset no.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3399"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G57&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3400"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G58 H&lt;/b&gt;xx - tool length offset 5-axis, xx - offset no.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3401"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G58&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3402"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G59 H&lt;/b&gt;xx - tool length offset 6-axis, xx - offset no.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3403"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G59&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3405"/>
+        <source>&lt;b&gt;G61&lt;/b&gt; - exact stop mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3406"/>
+        <source>&lt;b&gt;G62&lt;/b&gt; - programmable mirror image function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3407"/>
+        <source>&lt;b&gt;G17&lt;/b&gt; - cutting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3410"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G71 Z&lt;/b&gt;xx - return level xx command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3411"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G71&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3412"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G73&lt;/b&gt; - high speed deep hole drilling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3413"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G73&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3414"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G74&lt;/b&gt; - reverse tapping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3415"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G74&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3416"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G76&lt;/b&gt; - fine boring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3417"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G76&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3421"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G80&lt;/b&gt; - fixed cycle mode cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3422"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G80&lt;/b&gt; - end of shape designation (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3424"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G81 R X Y Z&lt;/b&gt; - drilling cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3425"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G81&lt;/b&gt; - start of longitudinal shape designation (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3427"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G82 R X Y Z&lt;/b&gt; - counter bore cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3428"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G82&lt;/b&gt; - start of transverse shape designation (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3430"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G83 R X Y Z&lt;/b&gt; - deep hole drilling cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3431"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G83&lt;/b&gt; - start of blank material shape definition (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3433"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G84 R X Y Z&lt;/b&gt; - tapping cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3434"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G84&lt;/b&gt; -   change of cutting conditions in bar turning cycle (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3436"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G85 R X Y Z&lt;/b&gt; - boring cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3437"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G85&lt;/b&gt; - call of rough bar turning cycle (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3439"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G86 R X Y Z&lt;/b&gt; - boring cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3440"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G86&lt;/b&gt; - call of rough copy turning cycle (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3442"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G87 R X Y Z&lt;/b&gt; - back boring cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3443"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G87&lt;/b&gt; - call finish turning cycle (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3445"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G88 R X Y Z&lt;/b&gt; - drilling cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3446"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G88&lt;/b&gt; - call of continuous thread cutting cycle (LAP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3448"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;G89 R X Y Z&lt;/b&gt; - boring cycle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3449"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G89&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3452"/>
+        <location filename="edytornc.cpp" line="3625"/>
+        <location filename="edytornc.cpp" line="3705"/>
+        <location filename="edytornc.cpp" line="3776"/>
+        <source>&lt;b&gt;G90&lt;/b&gt; - absolute programming</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3453"/>
+        <location filename="edytornc.cpp" line="3626"/>
+        <location filename="edytornc.cpp" line="3706"/>
+        <location filename="edytornc.cpp" line="3777"/>
+        <source>&lt;b&gt;G91&lt;/b&gt; - incremental programming</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3454"/>
+        <source>&lt;b&gt;G92&lt;/b&gt; - setting of work coordinate system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3455"/>
+        <location filename="edytornc.cpp" line="3628"/>
+        <location filename="edytornc.cpp" line="3707"/>
+        <location filename="edytornc.cpp" line="3778"/>
+        <source>&lt;b&gt;G94&lt;/b&gt; - feed per minute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3456"/>
+        <location filename="edytornc.cpp" line="3629"/>
+        <location filename="edytornc.cpp" line="3708"/>
+        <location filename="edytornc.cpp" line="3779"/>
+        <source>&lt;b&gt;G95&lt;/b&gt; - feed per revolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3457"/>
+        <location filename="edytornc.cpp" line="3630"/>
+        <location filename="edytornc.cpp" line="3709"/>
+        <location filename="edytornc.cpp" line="3780"/>
+        <source>&lt;b&gt;G96 S&lt;/b&gt;xx - constant cutting speed xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3458"/>
+        <location filename="edytornc.cpp" line="3631"/>
+        <location filename="edytornc.cpp" line="3710"/>
+        <location filename="edytornc.cpp" line="3781"/>
+        <source>&lt;b&gt;G97 S&lt;/b&gt;xx - constant spindle speed xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3460"/>
+        <source>&lt;b&gt;NCYL&lt;/b&gt; - if specified in fixed cycle, positioning to the definied hole position is performed, but the cycle axis does not operate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3461"/>
+        <source>&lt;b&gt;NOEX&lt;/b&gt; - if specified in fixed cycle, no axis movements may be performed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3463"/>
+        <location filename="edytornc.cpp" line="3652"/>
+        <source>&lt;b&gt;SIN[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3464"/>
+        <location filename="edytornc.cpp" line="3653"/>
+        <source>&lt;b&gt;COS[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - cosine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3465"/>
+        <location filename="edytornc.cpp" line="3654"/>
+        <source>&lt;b&gt;TAN[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3466"/>
+        <location filename="edytornc.cpp" line="3655"/>
+        <source>&lt;b&gt;ATAN[&lt;/b&gt;angle&lt;b&gt;]&lt;/b&gt; - arctangent 1 or 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3467"/>
+        <location filename="edytornc.cpp" line="3656"/>
+        <source>&lt;b&gt;SQRT[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - square root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3468"/>
+        <location filename="edytornc.cpp" line="3657"/>
+        <source>&lt;b&gt;ABS[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - absolute value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3469"/>
+        <location filename="edytornc.cpp" line="3658"/>
+        <source>&lt;b&gt;BIN[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - decimal to binary conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3470"/>
+        <location filename="edytornc.cpp" line="3659"/>
+        <source>&lt;b&gt;BCD[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - binary to decimal conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3471"/>
+        <location filename="edytornc.cpp" line="3660"/>
+        <source>&lt;b&gt;ROUND[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - integer implementation (rounding)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3472"/>
+        <location filename="edytornc.cpp" line="3661"/>
+        <source>&lt;b&gt;FIX[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - integer implementation (truncation)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3473"/>
+        <location filename="edytornc.cpp" line="3662"/>
+        <source>&lt;b&gt;FUP[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - integer implementation (raising)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3474"/>
+        <source>&lt;b&gt;DROUND[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - unit integer implementation (rounding)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3475"/>
+        <source>&lt;b&gt;DFIX[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - unit integer implementation (truncation)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3476"/>
+        <source>&lt;b&gt;DFUP[&lt;/b&gt;val&lt;b&gt;]&lt;/b&gt; - unit integer implementation (raising)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3477"/>
+        <source>&lt;b&gt;MOD[&lt;/b&gt;val&lt;b&gt;,&lt;/b&gt;yy&lt;b&gt;]&lt;/b&gt; - remainder of val/yy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3479"/>
+        <source>&lt;b&gt;VDIN[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - imput variable no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3480"/>
+        <source>&lt;b&gt;VDOUT[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - output variable no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3481"/>
+        <source>&lt;b&gt;VUACM[&lt;/b&gt;n&lt;b&gt;]=&apos;&lt;/b&gt;text&lt;b&gt;&apos;&lt;/b&gt; - sub message for user definied alarms, n - subscript expression, text - max. 16 chracters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3483"/>
+        <source>&lt;b&gt;MODIN O&lt;/b&gt;nnnn [&lt;b&gt;Q&lt;/b&gt;]xx - subprogram call after axis movement, nnnn - prog. name, xx - number of repetitions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3484"/>
+        <source>&lt;b&gt;MODOUT&lt;/b&gt; - cancels last MODIN command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3486"/>
+        <source>&lt;b&gt;OMIT&lt;/b&gt; - coordinate calculation function, omit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3487"/>
+        <source>&lt;b&gt;RSTRT&lt;/b&gt; - coordinate calculation function, restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3489"/>
+        <source>&lt;b&gt;LAA&lt;/b&gt; - line at angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3490"/>
+        <source>&lt;b&gt;ARC&lt;/b&gt; - arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3491"/>
+        <source>&lt;b&gt;GRDX&lt;/b&gt; - grid X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3492"/>
+        <source>&lt;b&gt;GRDY&lt;/b&gt; - grid Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3493"/>
+        <source>&lt;b&gt;DGRDX&lt;/b&gt; - double grid X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3494"/>
+        <source>&lt;b&gt;DGRDY&lt;/b&gt; - double grid Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3495"/>
+        <source>&lt;b&gt;SQRX&lt;/b&gt; - square X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3496"/>
+        <source>&lt;b&gt;SQRY&lt;/b&gt; - square Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3497"/>
+        <source>&lt;b&gt;BHC X Y I J K &lt;/b&gt; - bolt hole circle, X Y - circle center, I - radius, J - angle of first hole, K - no. of holes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3499"/>
+        <location filename="edytornc.cpp" line="3635"/>
+        <source>&lt;b&gt;EQ&lt;/b&gt; - equal to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3500"/>
+        <location filename="edytornc.cpp" line="3636"/>
+        <source>&lt;b&gt;NE&lt;/b&gt; - not equal to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3501"/>
+        <location filename="edytornc.cpp" line="3637"/>
+        <source>&lt;b&gt;GT&lt;/b&gt; - greather than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3502"/>
+        <location filename="edytornc.cpp" line="3638"/>
+        <source>&lt;b&gt;LE&lt;/b&gt; - less than or equal to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3503"/>
+        <location filename="edytornc.cpp" line="3639"/>
+        <source>&lt;b&gt;LT&lt;/b&gt; - less than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3504"/>
+        <location filename="edytornc.cpp" line="3640"/>
+        <source>&lt;b&gt;GE&lt;/b&gt; - greather than or equal to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3505"/>
+        <source>&lt;b&gt;IF[&lt;/b&gt;condition&lt;b&gt;] N&lt;/b&gt;xxxx - if condition is true goto block xxxx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3507"/>
+        <source>&lt;b&gt;TLFON&lt;/b&gt; - tool life on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3508"/>
+        <source>&lt;b&gt;EMPTY&lt;/b&gt; - &apos;empty&apos; value </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3510"/>
+        <source>&lt;b&gt;SB=&lt;/b&gt;xxxx - M-tool spindle speed xxxx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3511"/>
+        <source>&lt;b&gt;TG=&lt;/b&gt;xx - tool group no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3512"/>
+        <source>&lt;b&gt;OG=&lt;/b&gt;xx - offset group no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3513"/>
+        <source>&lt;b&gt;GOTO N&lt;/b&gt;nnnn - jump to nnnn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3514"/>
+        <source>&lt;b&gt;CALL O&lt;/b&gt;nnnn [&lt;b&gt;Q&lt;/b&gt;xx] - call subprogram nnnn, repeat it xx times</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3515"/>
+        <source>&lt;b&gt;RTS&lt;/b&gt; - subprogram end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3516"/>
+        <source>&lt;b&gt;VLMON[&lt;/b&gt;xx&lt;b&gt;]=&lt;/b&gt;yy - load monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3519"/>
+        <source>&lt;b&gt;VATOL&lt;/b&gt; - active tool number, tool kind + tool number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3520"/>
+        <source>&lt;b&gt;VNTOL&lt;/b&gt; - next tool number, tool kind + tool number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3521"/>
+        <source>&lt;b&gt;VMLOK&lt;/b&gt; - equal zero if not in machine lock status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3522"/>
+        <source>&lt;b&gt;VPPCP&lt;/b&gt; - PPC parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3523"/>
+        <source>&lt;b&gt;VPLNO&lt;/b&gt; - PPC pallet number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3524"/>
+        <source>&lt;b&gt;VPLDT&lt;/b&gt; - PPC parameter bit data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3525"/>
+        <source>&lt;b&gt;VTLCN&lt;/b&gt; - active tool number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3526"/>
+        <source>&lt;b&gt;VTLNN&lt;/b&gt; - next tool number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3529"/>
+        <source>&lt;b&gt;VMCOD[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - present M code of group no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3530"/>
+        <source>&lt;b&gt;VSCOD&lt;/b&gt; - command value of present spindle speed S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3531"/>
+        <source>&lt;b&gt;VDCOD&lt;/b&gt; - present cutter radius compensation offset number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3532"/>
+        <source>&lt;b&gt;VFCOD&lt;/b&gt; - command value of present feedrate F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3533"/>
+        <source>&lt;b&gt;VGCOD[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - present G code of group no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3534"/>
+        <source>&lt;b&gt;VHCOD&lt;/b&gt; - present tool length offset number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3535"/>
+        <source>&lt;b&gt;VACOD&lt;/b&gt; - coordinate system number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3537"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VZOFX[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - zero offset no. xx of X-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3538"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFX&lt;/b&gt; - zero offset of X-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3539"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VZOFZ[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - zero offset no. xx of Z-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3540"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFZ&lt;/b&gt; - zero offset of Z-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3541"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VZOFY[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - zero offset no. xx of Y-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3542"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFW&lt;/b&gt; - zero offset of W-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3543"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZOFC&lt;/b&gt; - zero offset of C-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3544"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZSHZ&lt;/b&gt; - zero shift of Z-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3545"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZSHX&lt;/b&gt; - zero shift of X-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3546"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VZSHC&lt;/b&gt; - zero shift of C-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3547"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VTOFZ[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - tool offset no. xx of Z-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3548"/>
+        <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;VTOFX[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - tool offset no. xx of X-axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3549"/>
+        <source>&lt;b&gt;VRSTT&lt;/b&gt; - equal zero if not in restart state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3550"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VTOFH[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - tool length, offset no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3551"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;VTOFD[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - cutter radius, offset no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3552"/>
+        <source>&lt;b&gt;VNCOM[&lt;/b&gt;xx&lt;b&gt;]&lt;/b&gt; - communication for automation, no. xx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3281"/>
+        <location filename="edytornc.cpp" line="3570"/>
+        <location filename="edytornc.cpp" line="3680"/>
+        <location filename="edytornc.cpp" line="3747"/>
+        <location filename="edytornc.cpp" line="3820"/>
+        <location filename="edytornc.cpp" line="3852"/>
+        <source>&lt;b&gt;M30&lt;/b&gt; - end of program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3339"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M140&lt;/b&gt; - slide hold ineffective</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3340"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M140&lt;/b&gt; - main motor overload monitoring OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3341"/>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M141&lt;/b&gt; - slide hold effective</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3342"/>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M141&lt;/b&gt; - main motor overload monitoring ON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3345"/>
+        <source>&lt;b&gt;M144&lt;/b&gt; - additional coolant 1 OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3351"/>
+        <source>&lt;b&gt;M156&lt;/b&gt; - center work interlock OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3352"/>
+        <source>&lt;b&gt;M157&lt;/b&gt; - center work interlock ON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3357"/>
+        <source>&lt;b&gt;M184&lt;/b&gt; - chuck internal interlock release OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3358"/>
+        <source>&lt;b&gt;M185&lt;/b&gt; - chuck internal interlock release ON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3359"/>
+        <source>&lt;b&gt;M186&lt;/b&gt; - work rest base unclamp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3360"/>
+        <source>&lt;b&gt;M187&lt;/b&gt; - work rest base clamp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3361"/>
+        <source>&lt;b&gt;M215&lt;/b&gt; - load monitor G00 ignore OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3362"/>
+        <source>&lt;b&gt;M216&lt;/b&gt; - load monitor G00 ignore ON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3366"/>
+        <source>&lt;b&gt;G02 X Y Z [I J K&lt;/b&gt; | &lt;b&gt;L]&lt;/b&gt; - circular interpolation CW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3367"/>
+        <source>&lt;b&gt;G03 X Y Z [I J K&lt;/b&gt; | &lt;b&gt;L]&lt;/b&gt; - circular interpolation CCW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3373"/>
+        <source>&lt;b&gt;G13&lt;/b&gt; - turret selection: Turret A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3374"/>
+        <source>&lt;b&gt;G14&lt;/b&gt; - turret selection: Turret B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4771,279 +4485,279 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3594"/>
         <location filename="edytornc.cpp" line="3694"/>
         <location filename="edytornc.cpp" line="3770"/>
+        <source>&lt;b&gt;G41&lt;/b&gt; - tool nose/cutter radius compensation left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3386"/>
+        <location filename="edytornc.cpp" line="3595"/>
+        <location filename="edytornc.cpp" line="3695"/>
+        <location filename="edytornc.cpp" line="3771"/>
         <source>&lt;b&gt;G42&lt;/b&gt; - tool nose/cutter radius compensation right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3417"/>
+        <location filename="edytornc.cpp" line="3418"/>
         <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G75 G01 [X&lt;/b&gt; | &lt;b&gt;Z] L&lt;/b&gt;xxxx - chamfering 45deg. xxxx - direction and size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3418"/>
+        <location filename="edytornc.cpp" line="3419"/>
         <source>&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;G76 G01 [X&lt;/b&gt; | &lt;b&gt;Z] L&lt;/b&gt;xxxx - rounding. xxxx - direction and size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3570"/>
+        <location filename="edytornc.cpp" line="3571"/>
         <source>&lt;b&gt;M98 P&lt;/b&gt;xxxx - macro xxxx call</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3571"/>
+        <location filename="edytornc.cpp" line="3572"/>
         <source>&lt;b&gt;M99&lt;/b&gt; - subprogram end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3575"/>
+        <location filename="edytornc.cpp" line="3576"/>
         <source>&lt;b&gt;G02 {X Y Z&lt;/b&gt; | &lt;b&gt;U V W} {I J K&lt;/b&gt; | &lt;b&gt;R} F&lt;/b&gt; - circular interpolation CW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3576"/>
+        <location filename="edytornc.cpp" line="3577"/>
         <source>&lt;b&gt;G03 {X Y Z&lt;/b&gt; | &lt;b&gt;U V W} {I J K&lt;/b&gt; | &lt;b&gt;R} F&lt;/b&gt; - circular interpolation CCW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3577"/>
+        <location filename="edytornc.cpp" line="3578"/>
         <source>&lt;b&gt;G04 X U P&lt;/b&gt; - dwell XU - in seconds; P - in microseconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3579"/>
+        <location filename="edytornc.cpp" line="3580"/>
         <source>&lt;b&gt;G10 P X Z Y R Q&lt;/b&gt; - change of offset value by program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3585"/>
+        <location filename="edytornc.cpp" line="3586"/>
         <source>&lt;b&gt;G20&lt;/b&gt; - inch input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3586"/>
+        <location filename="edytornc.cpp" line="3587"/>
         <source>&lt;b&gt;G21&lt;/b&gt; - metric input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3587"/>
+        <location filename="edytornc.cpp" line="3588"/>
         <source>&lt;b&gt;G27&lt;/b&gt; - reference point return check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3588"/>
+        <location filename="edytornc.cpp" line="3589"/>
         <source>&lt;b&gt;G28&lt;/b&gt; - reference point return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3589"/>
+        <location filename="edytornc.cpp" line="3590"/>
         <source>&lt;b&gt;G30 P&lt;/b&gt;x - x = 2nd, 3rd, 4th reference point return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3590"/>
+        <location filename="edytornc.cpp" line="3591"/>
         <source>&lt;b&gt;G31&lt;/b&gt; - skip function</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3596"/>
+        <location filename="edytornc.cpp" line="3597"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G50 S&lt;/b&gt;xxxx - maximum spindle speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3597"/>
-        <source>&lt;br /&gt;&lt;b&gt;G50 X Z&lt;/b&gt; - zero point shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="edytornc.cpp" line="3598"/>
-        <location filename="edytornc.cpp" line="3696"/>
-        <source>&lt;b&gt;G53&lt;/b&gt; - machine coordinate system</source>
+        <source>&lt;br /&gt;&lt;b&gt;G50 X Z&lt;/b&gt; - zero point shift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3599"/>
         <location filename="edytornc.cpp" line="3697"/>
-        <location filename="edytornc.cpp" line="3760"/>
-        <source>&lt;b&gt;G54&lt;/b&gt; - settable zero offset 1</source>
+        <source>&lt;b&gt;G53&lt;/b&gt; - machine coordinate system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3600"/>
         <location filename="edytornc.cpp" line="3698"/>
         <location filename="edytornc.cpp" line="3761"/>
-        <source>&lt;b&gt;G55&lt;/b&gt; - settable zero offset 2</source>
+        <source>&lt;b&gt;G54&lt;/b&gt; - settable zero offset 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3601"/>
         <location filename="edytornc.cpp" line="3699"/>
         <location filename="edytornc.cpp" line="3762"/>
-        <source>&lt;b&gt;G56&lt;/b&gt; - settable zero offset 3</source>
+        <source>&lt;b&gt;G55&lt;/b&gt; - settable zero offset 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3602"/>
         <location filename="edytornc.cpp" line="3700"/>
         <location filename="edytornc.cpp" line="3763"/>
-        <source>&lt;b&gt;G57&lt;/b&gt; - settable zero offset 4</source>
+        <source>&lt;b&gt;G56&lt;/b&gt; - settable zero offset 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3603"/>
-        <source>&lt;b&gt;G58&lt;/b&gt; - settable zero offset 5</source>
+        <location filename="edytornc.cpp" line="3701"/>
+        <location filename="edytornc.cpp" line="3764"/>
+        <source>&lt;b&gt;G57&lt;/b&gt; - settable zero offset 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3604"/>
+        <source>&lt;b&gt;G58&lt;/b&gt; - settable zero offset 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3605"/>
         <source>&lt;b&gt;G59&lt;/b&gt; - settable zero offset 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3606"/>
+        <location filename="edytornc.cpp" line="3607"/>
         <source>&lt;b&gt;G65 P&lt;/b&gt;xxxx - macro xxxx call</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3607"/>
+        <location filename="edytornc.cpp" line="3608"/>
         <source>&lt;b&gt;G66 P&lt;/b&gt;xxxx - macro xxxx modal call</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3608"/>
+        <location filename="edytornc.cpp" line="3609"/>
         <source>&lt;b&gt;G67&lt;/b&gt; - macro modal call cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3610"/>
+        <location filename="edytornc.cpp" line="3611"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G70 P Q&lt;/b&gt; - finishing cycle; P - sequence number of the first block of finishing shape, Q - sequence number of last block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3611"/>
+        <location filename="edytornc.cpp" line="3612"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G71 U R&lt;/b&gt; - U - depth of cut, Q - escaping amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3612"/>
+        <location filename="edytornc.cpp" line="3613"/>
         <source>&lt;br /&gt;&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G71 P Q U W&lt;/b&gt; - stock removal in turning; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3613"/>
+        <location filename="edytornc.cpp" line="3614"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G72 W R&lt;/b&gt; - U - depth of cut, Q - escaping amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3614"/>
+        <location filename="edytornc.cpp" line="3615"/>
         <source>&lt;br /&gt;&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G72 P Q U W&lt;/b&gt; - stock removal in facing; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3615"/>
+        <location filename="edytornc.cpp" line="3616"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G73 W R&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3616"/>
+        <location filename="edytornc.cpp" line="3617"/>
         <source>&lt;br /&gt;&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G73 P Q U W&lt;/b&gt; - pattern repeating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3617"/>
+        <location filename="edytornc.cpp" line="3618"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G74 R&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3618"/>
+        <location filename="edytornc.cpp" line="3619"/>
         <source>&lt;br /&gt;&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G74 {X Z U W} P Q R&lt;/b&gt; - end face peck drilling cycle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3619"/>
+        <location filename="edytornc.cpp" line="3620"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G75 R&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3620"/>
+        <location filename="edytornc.cpp" line="3621"/>
         <source>&lt;br /&gt;&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G75 {X Z U W} P Q U W&lt;/b&gt; - outer/internal diameter drilling cycle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3621"/>
+        <location filename="edytornc.cpp" line="3622"/>
         <source>&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G76 P Q R&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3622"/>
+        <location filename="edytornc.cpp" line="3623"/>
         <source>&lt;br /&gt;&lt;i&gt;v.T&lt;/i&gt; &lt;b&gt;G76 {X Z U W} P Q U W&lt;/b&gt; - multiple thread cutting cycle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3626"/>
+        <location filename="edytornc.cpp" line="3627"/>
         <source>&lt;b&gt;G92 X Z&lt;/b&gt; - coordinate system setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3631"/>
+        <location filename="edytornc.cpp" line="3632"/>
         <source>&lt;b&gt;G98&lt;/b&gt; - return to initial level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3632"/>
+        <location filename="edytornc.cpp" line="3633"/>
         <source>&lt;b&gt;G99&lt;/b&gt; - return to R level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3640"/>
+        <location filename="edytornc.cpp" line="3641"/>
         <source>&lt;b&gt;IF[&lt;/b&gt;condition&lt;b&gt;]&lt;/b&gt;do something - if condition is true do something</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3641"/>
+        <location filename="edytornc.cpp" line="3642"/>
         <source>&lt;b&gt;GOTO&lt;/b&gt;nnnn - jump to block nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3643"/>
+        <location filename="edytornc.cpp" line="3644"/>
         <source>&lt;b&gt;WHILE[&lt;/b&gt;condition&lt;b&gt;] DO&lt;/b&gt;n &lt;br /&gt;...&lt;br /&gt;commands&lt;br /&gt;... &lt;br /&gt;&lt;b&gt;END&lt;/b&gt;n  - loop - while condition true do commands beetwen DOn and ENDn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3644"/>
+        <location filename="edytornc.cpp" line="3645"/>
         <source>&lt;b&gt;END&lt;/b&gt;n - end of WHILE DOn loop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3646"/>
+        <location filename="edytornc.cpp" line="3647"/>
         <source>&lt;b&gt;EOR&lt;/b&gt; - exclusive OR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3647"/>
+        <location filename="edytornc.cpp" line="3648"/>
         <source>&lt;b&gt;OR&lt;/b&gt; - logical OR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3648"/>
+        <location filename="edytornc.cpp" line="3649"/>
         <source>&lt;b&gt;AND&lt;/b&gt; - logical AND</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3649"/>
+        <location filename="edytornc.cpp" line="3650"/>
         <source>&lt;b&gt;NOT&lt;/b&gt; - negation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3680"/>
+        <location filename="edytornc.cpp" line="3681"/>
         <source>&lt;b&gt;M51&lt;/b&gt; - thro spindle coolant on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="3684"/>
-        <location filename="edytornc.cpp" line="3751"/>
-        <location filename="edytornc.cpp" line="3824"/>
-        <location filename="edytornc.cpp" line="3856"/>
-        <source>&lt;b&gt;G02&lt;/b&gt; - circular interpolation CW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5051,335 +4765,335 @@ Licencja Publiczna GNU.</translation>
         <location filename="edytornc.cpp" line="3752"/>
         <location filename="edytornc.cpp" line="3825"/>
         <location filename="edytornc.cpp" line="3857"/>
-        <source>&lt;b&gt;G03&lt;/b&gt; - circular interpolation CCW</source>
+        <source>&lt;b&gt;G02&lt;/b&gt; - circular interpolation CW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3701"/>
-        <location filename="edytornc.cpp" line="3764"/>
-        <source>&lt;b&gt;G58&lt;/b&gt; - programmable offset, absolute axial substitution</source>
+        <location filename="edytornc.cpp" line="3686"/>
+        <location filename="edytornc.cpp" line="3753"/>
+        <location filename="edytornc.cpp" line="3826"/>
+        <location filename="edytornc.cpp" line="3858"/>
+        <source>&lt;b&gt;G03&lt;/b&gt; - circular interpolation CCW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3702"/>
         <location filename="edytornc.cpp" line="3765"/>
+        <source>&lt;b&gt;G58&lt;/b&gt; - programmable offset, absolute axial substitution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="3703"/>
+        <location filename="edytornc.cpp" line="3766"/>
         <source>&lt;b&gt;G59&lt;/b&gt; - programmable offset, additive axial substitution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3712"/>
+        <location filename="edytornc.cpp" line="3713"/>
         <source>&lt;b&gt;@100 K&lt;/b&gt;nnnn - jump to block number nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3713"/>
+        <location filename="edytornc.cpp" line="3714"/>
         <source>&lt;b&gt;@121 R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;xx &lt;b&gt;K&lt;/b&gt;nnnn - if yy not equal to xx jump to nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3714"/>
+        <location filename="edytornc.cpp" line="3715"/>
         <source>&lt;b&gt;@122 R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;xx &lt;b&gt;K&lt;/b&gt;nnnn - if yy equal to xx jump to nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3715"/>
+        <location filename="edytornc.cpp" line="3716"/>
         <source>&lt;b&gt;@123 R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;xx &lt;b&gt;K&lt;/b&gt;nnnn - if yy is less than or equal to xx jump to nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3716"/>
+        <location filename="edytornc.cpp" line="3717"/>
         <source>&lt;b&gt;@124 R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;xx &lt;b&gt;K&lt;/b&gt;nnnn - if yy is less than xx jump to nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3717"/>
+        <location filename="edytornc.cpp" line="3718"/>
         <source>&lt;b&gt;@125 R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;xx &lt;b&gt;K&lt;/b&gt;nnnn - if yy is greather than or equal to xx jump to nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3718"/>
+        <location filename="edytornc.cpp" line="3719"/>
         <source>&lt;b&gt;@126 R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;xx &lt;b&gt;K&lt;/b&gt;nnnn - if yy is greather than xx jump to nnnn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3720"/>
+        <location filename="edytornc.cpp" line="3721"/>
         <source>&lt;b&gt;@620 R&lt;/b&gt;xx - increment value in param. xx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3721"/>
+        <location filename="edytornc.cpp" line="3722"/>
         <source>&lt;b&gt;@621 R&lt;/b&gt;xx - decrement value in param. xx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3722"/>
+        <location filename="edytornc.cpp" line="3723"/>
         <source>&lt;b&gt;@622 R&lt;/b&gt;xx - &apos;trunc&apos; value in param. xx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3723"/>
+        <location filename="edytornc.cpp" line="3724"/>
         <source>&lt;b&gt;@630 R&lt;/b&gt;xx &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy - sine of angle yy is stored in param. xx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3724"/>
+        <location filename="edytornc.cpp" line="3725"/>
         <source>&lt;b&gt;@630 R&lt;/b&gt;xx &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy - cosine of angle yy is stored in param. xx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3725"/>
+        <location filename="edytornc.cpp" line="3726"/>
         <source>&lt;b&gt;@630 R&lt;/b&gt;xx &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy - tangent of angle yy is stored in param. xx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3726"/>
+        <location filename="edytornc.cpp" line="3727"/>
         <source>&lt;b&gt;@634 R&lt;/b&gt;xx &lt;b&gt;R&lt;/b&gt;|&lt;b&gt;K&lt;/b&gt;yy - arc sine of angle yy is stored in param. xx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3728"/>
+        <location filename="edytornc.cpp" line="3729"/>
         <source>&lt;b&gt;@714&lt;/b&gt; - stop decoding, until buffer is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3743"/>
-        <location filename="edytornc.cpp" line="3816"/>
-        <location filename="edytornc.cpp" line="3848"/>
+        <location filename="edytornc.cpp" line="3744"/>
+        <location filename="edytornc.cpp" line="3817"/>
+        <location filename="edytornc.cpp" line="3849"/>
         <source>&lt;b&gt;M07&lt;/b&gt; - thro spindle coolant on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3747"/>
-        <location filename="edytornc.cpp" line="3820"/>
-        <location filename="edytornc.cpp" line="3852"/>
+        <location filename="edytornc.cpp" line="3748"/>
+        <location filename="edytornc.cpp" line="3821"/>
+        <location filename="edytornc.cpp" line="3853"/>
         <source>&lt;b&gt;M50&lt;/b&gt; - shower coolant on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3759"/>
+        <location filename="edytornc.cpp" line="3760"/>
         <source>&lt;b&gt;G53&lt;/b&gt; - Suppression of current frames: Programmable frame including system frame for TOROT and TOFRAME and active settable frame G54 ... G599.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3772"/>
+        <location filename="edytornc.cpp" line="3773"/>
         <source>&lt;b&gt;G60&lt;/b&gt; - Velocity reduction, exact positioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3773"/>
+        <location filename="edytornc.cpp" line="3774"/>
         <source>&lt;b&gt;G64&lt;/b&gt; - Continuous-path mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3782"/>
+        <location filename="edytornc.cpp" line="3783"/>
         <source>&lt;b&gt;G153&lt;/b&gt; - suppression as for G53 and including all channel-specific and/or NCU-global basic frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3783"/>
+        <location filename="edytornc.cpp" line="3784"/>
         <source>&lt;b&gt;G500&lt;/b&gt; - deactivate all settable G54-G57 frames if G500 does not contain a value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3785"/>
+        <location filename="edytornc.cpp" line="3786"/>
         <source>&lt;b&gt;SUPA&lt;/b&gt; - suppression as for G153 and including system frames for actual-value setting, scratching, zero offset external, PAROT including handwheel offsets (DRF), [zero offset external], overlaid motion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3787"/>
+        <location filename="edytornc.cpp" line="3788"/>
         <source>&lt;b&gt;IF(&lt;/b&gt;condition&lt;b&gt;)&lt;/b&gt; nnnn - if condition is true goto block nnnn or label nnnn:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3788"/>
+        <location filename="edytornc.cpp" line="3789"/>
         <source>&lt;b&gt;GOTO&lt;/b&gt; nnnn - jump forward and if block not found jump backward to block nnnn or label nnnn:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3789"/>
+        <location filename="edytornc.cpp" line="3790"/>
         <source>&lt;b&gt;GOTOF&lt;/b&gt; nnnn - jump forward to block nnnn or label nnnn:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3790"/>
+        <location filename="edytornc.cpp" line="3791"/>
         <source>&lt;b&gt;GOTOB&lt;/b&gt; nnnn - jump backward to block nnnn or label nnnn:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3792"/>
+        <location filename="edytornc.cpp" line="3793"/>
         <source>&lt;b&gt;STOPRE&lt;/b&gt; - stop decoding, until buffer is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3794"/>
+        <location filename="edytornc.cpp" line="3795"/>
         <source>&lt;b&gt;DIAMOF&lt;/b&gt; - diameter programming OFF; radius programming for G90/G91</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3795"/>
+        <location filename="edytornc.cpp" line="3796"/>
         <source>&lt;b&gt;DIAMON&lt;/b&gt; - diameter programming ON; diameter programming for G90/G91</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3796"/>
+        <location filename="edytornc.cpp" line="3797"/>
         <source>&lt;b&gt;DIAM90&lt;/b&gt; - diameter programming for G90; radius programming for G91</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3799"/>
+        <location filename="edytornc.cpp" line="3800"/>
         <source>&lt;b&gt;RET&lt;/b&gt; - subprogram end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Attach current settings to current directory</source>
-        <translation type="obsolete">Powiąż aktualne ustawienia portu z aktualnym katalogiem programów</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="2862"/>
+        <location filename="edytornc.cpp" line="2863"/>
         <source>Waiting...</source>
         <translation>Czekam...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2894"/>
+        <location filename="edytornc.cpp" line="2895"/>
         <source>Waiting for a signal readiness...</source>
         <translation>Czekam na sygnał gotowości...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2951"/>
+        <location filename="edytornc.cpp" line="2952"/>
         <source>Sending byte %1 of %2</source>
         <translation>Wysyłanie bajtu %1 z %2</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3051"/>
+        <location filename="edytornc.cpp" line="3052"/>
         <source>Receiving...</source>
         <translation>Odbieranie...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3052"/>
+        <location filename="edytornc.cpp" line="3053"/>
         <source>Waiting for data...</source>
         <translation>Oczekiwanie na dane...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3109"/>
+        <location filename="edytornc.cpp" line="3110"/>
         <source>Reciving byte %1</source>
         <translation>Odbieranie bajtu %1</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3186"/>
+        <location filename="edytornc.cpp" line="3187"/>
         <source>Invalid file descriptor (port was not opened correctly)</source>
         <translation>Port nie został otwarty prawidłowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3188"/>
+        <location filename="edytornc.cpp" line="3189"/>
         <source>Unable to allocate memory tables</source>
         <translation>Nie można przydzielić pamięci</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3190"/>
+        <location filename="edytornc.cpp" line="3191"/>
         <source>Caught a non-blocked signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3192"/>
+        <location filename="edytornc.cpp" line="3193"/>
         <source>Operation timed out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3194"/>
+        <location filename="edytornc.cpp" line="3195"/>
         <source>The file opened by the port is not a character device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3196"/>
+        <location filename="edytornc.cpp" line="3197"/>
         <source>The port detected a break condition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3198"/>
+        <location filename="edytornc.cpp" line="3199"/>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3200"/>
+        <location filename="edytornc.cpp" line="3201"/>
         <source>There was an I/O error while communicating with the port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3202"/>
+        <location filename="edytornc.cpp" line="3203"/>
         <source>Character buffer overrun</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3204"/>
+        <location filename="edytornc.cpp" line="3205"/>
         <source>Receive buffer overflow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3206"/>
+        <location filename="edytornc.cpp" line="3207"/>
         <source>The port detected a parity error in the received data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3208"/>
+        <location filename="edytornc.cpp" line="3209"/>
         <source>Transmit buffer overflow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3210"/>
+        <location filename="edytornc.cpp" line="3211"/>
         <source>General read operation failure</source>
         <translation>Błąd podczas odczytu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3212"/>
+        <location filename="edytornc.cpp" line="3213"/>
         <source>General write operation failure</source>
         <translation>Błąd podczas zapisu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3214"/>
+        <location filename="edytornc.cpp" line="3215"/>
         <source>No Error has occured</source>
         <translation>Brak błędu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3217"/>
+        <location filename="edytornc.cpp" line="3218"/>
         <source>Unknown error</source>
         <translation>Nieznany błąd</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2561"/>
+        <location filename="edytornc.cpp" line="2562"/>
         <source>Close send/receive toolbar</source>
         <oldsource>Close send/recive toolbar</oldsource>
         <translation>Zamknij pasek wysyłania/odbierania przez port szeregowy</translation>
     </message>
     <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.&lt;P&gt;Version: 2009.09&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;&lt;P&gt;&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License.&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.&lt;P&gt;Wersja 2009.09&lt;P&gt;Copyright (C) 1998 - 2009 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;&lt;P&gt;&lt;P&gt;Wieloplatformowy instalator dzięki &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;&lt;P&gt;&lt;P&gt;&lt;i&gt;EdytorNC jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1556"/>
+        <location filename="edytornc.cpp" line="1557"/>
         <source>&amp;Bolt hole circle</source>
         <translation>&amp;Otwory na okręgu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2546"/>
-        <location filename="edytornc.cpp" line="2548"/>
+        <location filename="edytornc.cpp" line="2547"/>
+        <location filename="edytornc.cpp" line="2549"/>
         <source>Attach current port settings to current directory of programs</source>
         <translation>Powiąż aktualne ustawienia portu z aktualnym katalogiem programów</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2551"/>
-        <location filename="edytornc.cpp" line="2553"/>
+        <location filename="edytornc.cpp" line="2552"/>
+        <location filename="edytornc.cpp" line="2554"/>
         <source>Remove settings from the directory</source>
         <translation>Usuń informacje o konfiguracji poru z bierzącego katalogu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2556"/>
-        <location filename="edytornc.cpp" line="2558"/>
+        <location filename="edytornc.cpp" line="2557"/>
+        <location filename="edytornc.cpp" line="2559"/>
         <source>Check serial port settings</source>
         <translation>Testowanie ustawień portu szeregowego</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2701"/>
-        <location filename="edytornc.cpp" line="2704"/>
+        <location filename="edytornc.cpp" line="2702"/>
+        <location filename="edytornc.cpp" line="2705"/>
         <source>Default</source>
         <translation>Domyślne</translation>
     </message>
