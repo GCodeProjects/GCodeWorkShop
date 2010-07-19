@@ -35,17 +35,19 @@
 #include "serialtransmission.h"
 #include "kdiff3.h"
 
+#include "ui_edytornc.h"
 
 
-class edytornc : public QMainWindow
+class EdytorNc : public QMainWindow, public Ui::EdytorNc
 {
     Q_OBJECT
 
 public:
-    edytornc();
-    ~edytornc();
+    EdytorNc();
+    ~EdytorNc();
     void openFile(const QString fileName);
     enum { MAX_RECENTFILES = 16 };
+
 
 public slots:
     void messReceived(const QString &text = "");
@@ -125,6 +127,14 @@ private slots:
     void doDiffL();
     void doDiffR();
     void doDiff();
+    void projectAdd();
+    void projectSave(bool saveAs = false);
+    void projectNew();
+    void projectTreeViewDoubleClicked(const QModelIndex & index);
+    void fileTreeViewDoubleClicked(const QModelIndex & index);
+    void projectLoad();
+    void hidePanel();
+    void projectTreeRemoveItem();
 
 
 
@@ -144,7 +154,7 @@ private:
     void updateCurrentSerialConfig();
     void attachHighlighterToDirButtonClicked(bool attach);
     int defaultHighlightMode(QString filePath);
-
+    QString projectSelectName();
 
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
@@ -152,14 +162,25 @@ private:
     FindInFiles *findFiles;
     bool tabbedView;
 
+    bool panelHidden;
+    QByteArray panelState;
+
 
     QClipboard *clipboard;
     QByteArray fileDialogState;
     QString openFileFilter;
 
-    QMdiArea *mdiArea;
-    QSplitter *splitter;
+    //QMdiArea *mdiArea;
+    //QSplitter *leftSplitter;
+    //QSplitter *splitter;
     KDiff3App *diffApp;
+
+    QFileSystemModel *dirModel;
+    QStandardItemModel *model;
+    QStandardItem *currentProject;
+    bool currentProjectModified;
+    QString currentProjectName;
+
 
     QSignalMapper *windowMapper;
     QStringList m_recentFiles;
@@ -174,7 +195,7 @@ private:
     QToolBar *fileToolBar;
     QToolBar *editToolBar;
     QToolBar *windowToolBar;
-    QToolBar *toolsToolBar;
+    QToolBar *toolsToolBar;   
 
     QAction *newAct;
     QAction *openAct;
@@ -263,6 +284,12 @@ private:
     QAction *diagAct;
     QAction *serialCloseAct;
     QComboBox *configBox;
+
+
+    QDockWidget *projectBrowdeDock;
+    QToolBar *projectToolBar;
+
+
 
     bool stop;
     QString portName, sendAtEnd, sendAtBegining;

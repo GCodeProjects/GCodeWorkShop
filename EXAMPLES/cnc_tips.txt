@@ -1,0 +1,31 @@
+[FANUC]
+#501=<b>#501</b> - flange dia. 
+#502=<b>#502</b> - flange clearence depth 
+#503=<b>#503</b> - flange face
+#504=<b>#504</b> - spigot dia
+#505=<b>#505</b> - datum/spigot face
+#506=<b>#506</b> - spigot id clearence 
+#507=<b>#507</b> - shaft od clearence 
+#508=<b>#508</b> - shaft face 
+#509=<b>#509</b> - shaft dia
+T0101=<b>T0101</b> - rough od
+T0303=<b>T0303</b> - finish od
+T0505=<b>T0505</b> - rough id
+[OKUMA]
+PRES=<b>PRES</b> - chuck pressure *** low:0 - high:1
+FLAN=<b>FLAN</b> - flange dia
+FLFA=<b>FLFA</b> - flange face
+SPIG=<b>SPIG</b> - spigot dia
+SPFA=<b>SPFA</b> - spigot face
+SPCL=<b>SPCL</b> - spigot id clearence dia
+CLCL=<b>CLCL</b> - bearing boss od clearence
+CLFA=<b>CLFA</b> - bearing boss face
+BDIA=<b>BDIA</b> - bearing dia
+BDFA=<b>BDFA</b> - bearing landing face
+GDIA=<b>GDIA</b> - grease cavity dia
+GRFA=<b>GRFA</b> - grease cavity face
+SHAF=<b>SHAF</b> - shaft dia
+SDIA=<b>SDIA</b> - oilseal dia
+SHFA=<b>SHFA</b> - oilseal face
+SHCL=<b>SHCL</b> - shaft depth clearence
+RAD1=<b>RAD1</b> - rough grease cavity radius g76

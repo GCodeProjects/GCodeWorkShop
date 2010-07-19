@@ -33,9 +33,11 @@
 //
 //**************************************************************************************************
 
-edytornc::edytornc()
+EdytorNc::EdytorNc()
 {
     setAttribute(Qt::WA_DeleteOnClose);
+
+    setupUi(this);
 
     findToolBar = NULL;
     serialToolBar = NULL;
@@ -48,19 +50,27 @@ edytornc::edytornc()
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
 
-    splitter = new QSplitter(Qt::Vertical, this);
-    setCentralWidget(splitter);
-
-    mdiArea = new QMdiArea;
-    //setCentralWidget(mdiArea);
-
-    splitter->addWidget(mdiArea);
-    splitter->setChildrenCollapsible(true);
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
     
+    model = new QStandardItemModel();
+    projectTreeView->setModel(model);
+    currentProject = NULL;
+
+    connect(projectTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(projectTreeViewDoubleClicked(QModelIndex)));
+    connect(projectNewButton, SIGNAL(clicked()), this, SLOT(projectNew()));
+    connect(projectAddButton, SIGNAL(clicked()), this, SLOT(projectAdd()));
+    connect(projectSaveButton, SIGNAL(clicked()), this, SLOT(projectSave()));
+    connect(projectLoadButton, SIGNAL(clicked()), this, SLOT(projectLoad()));
+    connect(projectRemoveButton, SIGNAL(clicked()), this, SLOT(projectTreeRemoveItem()));
+
+    connect(hideButton, SIGNAL(clicked()), this, SLOT(hidePanel()));
+
+
+    currentProjectModified = false;
+
 
 
     createActions();
@@ -71,6 +81,27 @@ edytornc::edytornc()
 
     readSettings();
 
+    currentProjectName = lastDir.canonicalPath();
+
+    dirModel = new QFileSystemModel();
+    dirModel->setResolveSymlinks(true);
+
+    //dirModel->setRootPath(lastDir.canonicalPath());
+    //dirModel->sort(0, Qt::AscendingOrder);
+
+    fileTreeView->setModel(dirModel);
+    //fileTreeView->setRootIndex(dirModel->index(lastDir.canonicalPath()));
+    fileTreeView->setIndentation(20);
+
+    fileTreeView->adjustSize();
+    fileTreeView->sortByColumn(0, Qt::AscendingOrder);
+    fileTreeView->expand(dirModel->index(lastDir.canonicalPath()));
+
+    connect(fileTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(fileTreeViewDoubleClicked(QModelIndex)));
+
+
+    //qDebug() << lastDir.canonicalPath() << QDir::currentPath();
+
     setWindowTitle(tr("EdytorNC"));
     setWindowIcon(QIcon(":/images/edytornc.png"));
     createStatusBar();
@@ -79,14 +110,14 @@ edytornc::edytornc()
       mdiArea->setViewMode(QMdiArea::TabbedView);
     else
       mdiArea->setViewMode(QMdiArea::SubWindowView);
-    
+
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-edytornc::~edytornc()
+EdytorNc::~EdytorNc()
 {
    proc = findChild<QProcess *>();
    if(proc)
@@ -100,7 +131,7 @@ edytornc::~edytornc()
 //
 //**************************************************************************************************
 
-void edytornc::closeEvent(QCloseEvent *event)
+void EdytorNc::closeEvent(QCloseEvent *event)
 {
     setUpdatesEnabled(FALSE);
     writeSettings();
@@ -139,7 +170,7 @@ void edytornc::closeEvent(QCloseEvent *event)
 //
 //**************************************************************************************************
 
-void edytornc::newFile()
+void EdytorNc::newFile()
 {
     MdiChild *child = createMdiChild();
 
@@ -162,7 +193,7 @@ void edytornc::newFile()
 //
 //**************************************************************************************************
 
-void edytornc::open()
+void EdytorNc::open()
 {
     QFileInfo file;
     QMdiSubWindow *existing;
@@ -232,7 +263,7 @@ void edytornc::open()
 //
 //**************************************************************************************************
 
-void edytornc::openExample()
+void EdytorNc::openExample()
 {
    QFileInfo file;
    QMdiSubWindow *existing;
@@ -303,7 +334,7 @@ void edytornc::openExample()
 //
 //**************************************************************************************************
 
-void edytornc::openFile(const QString fileName)
+void EdytorNc::openFile(const QString fileName)
 {
    QFileInfo file;
 
@@ -340,7 +371,7 @@ void edytornc::openFile(const QString fileName)
 //
 //**************************************************************************************************
 
-void edytornc::openWithPreview()
+void EdytorNc::openWithPreview()
 {
 
     CustomFDialog *fileDialog;
@@ -413,7 +444,7 @@ void edytornc::openWithPreview()
 //
 //**************************************************************************************************
 
-void edytornc::save()
+void EdytorNc::save()
 {
     if(activeMdiChild() && activeMdiChild()->save())
       statusBar()->showMessage(tr("File saved"), 2000);
@@ -423,7 +454,7 @@ void edytornc::save()
 //
 //**************************************************************************************************
 
-void edytornc::saveAs()
+void EdytorNc::saveAs()
 {
     if(activeMdiChild() && activeMdiChild()->saveAs())
       statusBar()->showMessage(tr("File saved"), 2000);
@@ -433,7 +464,7 @@ void edytornc::saveAs()
 //
 //**************************************************************************************************
 
-void edytornc::printFile()
+void EdytorNc::printFile()
 {
    if(activeMdiChild())
    {
@@ -452,7 +483,7 @@ void edytornc::printFile()
 //
 //**************************************************************************************************
 
-void edytornc::cut()
+void EdytorNc::cut()
 {
     if(activeMdiChild())
       activeMdiChild()->textEdit->cut();
@@ -462,7 +493,7 @@ void edytornc::cut()
 //
 //**************************************************************************************************
 
-void edytornc::copy()
+void EdytorNc::copy()
 {
     if(activeMdiChild())
       activeMdiChild()->textEdit->copy();
@@ -472,7 +503,7 @@ void edytornc::copy()
 //
 //**************************************************************************************************
 
-void edytornc::findInFl()
+void EdytorNc::findInFl()
 {
    if(findFiles == NULL)
    {
@@ -503,7 +534,7 @@ void edytornc::findInFl()
 //
 //**************************************************************************************************
 
-bool edytornc::findNext()
+bool EdytorNc::findNext()
 {
    bool hasMdiChild = (activeMdiChild() != 0);
    bool found = false;
@@ -548,7 +579,7 @@ bool edytornc::findNext()
 //
 //**************************************************************************************************
 
-bool edytornc::findPrevious()
+bool EdytorNc::findPrevious()
 {
    bool hasMdiChild = (activeMdiChild() != 0);
    bool found = false;
@@ -592,7 +623,7 @@ bool edytornc::findPrevious()
 //
 //**************************************************************************************************
 
-void edytornc::replaceNext()
+void EdytorNc::replaceNext()
 {
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
@@ -629,7 +660,7 @@ void edytornc::replaceNext()
 //
 //**************************************************************************************************
 
-void edytornc::replacePrevious()
+void EdytorNc::replacePrevious()
 {
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
@@ -666,7 +697,7 @@ void edytornc::replacePrevious()
 //
 //**************************************************************************************************
 
-void edytornc::replaceAll()
+void EdytorNc::replaceAll()
 {
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
@@ -699,7 +730,7 @@ void edytornc::replaceAll()
          activeMdiChild()->textEdit->setTextCursor(cr);
 
          found = findNext();
-         if(startCursor.position() == activeMdiChild()->textEdit->textCursor().position())
+         if(startCursor.blockNumber() == activeMdiChild()->textEdit->textCursor().blockNumber())
            break;
          qApp->processEvents();
       };
@@ -712,7 +743,7 @@ void edytornc::replaceAll()
 //
 //**************************************************************************************************
 
-void edytornc::selAll()
+void EdytorNc::selAll()
 {
    if(activeMdiChild())
       activeMdiChild()->textEdit->selectAll();
@@ -722,7 +753,7 @@ void edytornc::selAll()
 //
 //**************************************************************************************************
 
-void edytornc::config()
+void EdytorNc::config()
 {
    _editor_properites opt;
    MdiChild *mdiChild;
@@ -771,7 +802,7 @@ void edytornc::config()
 //
 //**************************************************************************************************
 
-void edytornc::readOnly()
+void EdytorNc::readOnly()
 {
     if(activeMdiChild())
       activeMdiChild()->textEdit->setReadOnly(readOnlyAct->isChecked());
@@ -782,7 +813,7 @@ void edytornc::readOnly()
 //
 //**************************************************************************************************
 
-void edytornc::doBhc()
+void EdytorNc::doBhc()
 {
    BHCDialog *bhcDialog;
    bhcDialog = findChild<BHCDialog *>();
@@ -798,7 +829,7 @@ void edytornc::doBhc()
 //
 //**************************************************************************************************
 
-void edytornc::doInsertSpaces()
+void EdytorNc::doInsertSpaces()
 {
    if(activeMdiChild())
       activeMdiChild()->doInsertSpace();
@@ -808,7 +839,7 @@ void edytornc::doInsertSpaces()
 //
 //**************************************************************************************************
 
-void edytornc::doRemoveSpaces()
+void EdytorNc::doRemoveSpaces()
 {
    if(activeMdiChild())
       activeMdiChild()->doRemoveSpace();
@@ -818,7 +849,7 @@ void edytornc::doRemoveSpaces()
 //
 //**************************************************************************************************
 
-void edytornc::doDiffL()
+void EdytorNc::doDiffL()
 {
    QString fileName;
 
@@ -852,7 +883,7 @@ void edytornc::doDiffL()
 //
 //**************************************************************************************************
 
-void edytornc::doDiffR()
+void EdytorNc::doDiffR()
 {
    QString fileName;
 
@@ -885,7 +916,7 @@ void edytornc::doDiffR()
 //
 //**************************************************************************************************
 
-void edytornc::doDiff()
+void EdytorNc::doDiff()
 {
    QString fileName;
 
@@ -913,7 +944,7 @@ void edytornc::doDiff()
 //
 //**************************************************************************************************
 
-void edytornc::doRemoveEmptyLines()
+void EdytorNc::doRemoveEmptyLines()
 {
    if(activeMdiChild())
       activeMdiChild()->doRemoveEmptyLines();
@@ -923,7 +954,7 @@ void edytornc::doRemoveEmptyLines()
 //
 //**************************************************************************************************
 
-void edytornc::doInsertDot()
+void EdytorNc::doInsertDot()
 {
    MdiChild *child;
 
@@ -949,7 +980,7 @@ void edytornc::doInsertDot()
 //
 //**************************************************************************************************
 
-void edytornc::doRenumber()
+void EdytorNc::doRenumber()
 {
 
    int startAt, inc, to, from, prec, mode;
@@ -983,7 +1014,7 @@ void edytornc::doRenumber()
 //
 //**************************************************************************************************
 
-void edytornc::doSpeedFeed()
+void EdytorNc::doSpeedFeed()
 {
    FeedsDialog *feedsDialog;
    feedsDialog = findChild<FeedsDialog *>();
@@ -999,7 +1030,7 @@ void edytornc::doSpeedFeed()
 //
 //**************************************************************************************************
 
-void edytornc::doChamfer()
+void EdytorNc::doChamfer()
 {
    ChamferDialog *chamferDialog = new ChamferDialog(this);
    chamferDialog->move((geometry().x() + width()) - chamferDialog->width(), geometry().y()+35);
@@ -1010,7 +1041,7 @@ void edytornc::doChamfer()
 //
 //**************************************************************************************************
 
-void edytornc::doTriangles()
+void EdytorNc::doTriangles()
 {
    TriangleDialog *triangleDialog;
    triangleDialog = findChild<TriangleDialog *>();
@@ -1026,7 +1057,7 @@ void edytornc::doTriangles()
 //
 //**************************************************************************************************
 
-void edytornc::doConvert()
+void EdytorNc::doConvert()
 {
    I2MDialog *i2MDialog;
    i2MDialog = findChild<I2MDialog *>();
@@ -1042,7 +1073,7 @@ void edytornc::doConvert()
 //
 //**************************************************************************************************
 
-void edytornc::doConvertProg()
+void EdytorNc::doConvertProg()
 {
    MdiChild *child;
 
@@ -1070,7 +1101,7 @@ void edytornc::doConvertProg()
 //
 //**************************************************************************************************
 
-void edytornc::doCalc()
+void EdytorNc::doCalc()
 {
    if(defaultMdiWindowProperites.calcBinary.isNull()  || defaultMdiWindowProperites.calcBinary.isEmpty())
    {
@@ -1095,7 +1126,7 @@ void edytornc::doCalc()
 //
 //**************************************************************************************************
 
-void edytornc::deleteText()
+void EdytorNc::deleteText()
 {
     if(activeMdiChild())
       activeMdiChild()->textEdit->textCursor().removeSelectedText();
@@ -1105,7 +1136,7 @@ void edytornc::deleteText()
 //
 //**************************************************************************************************
 
-void edytornc::paste()
+void EdytorNc::paste()
 {
    if(activeMdiChild())
    {
@@ -1125,7 +1156,7 @@ void edytornc::paste()
 //
 //**************************************************************************************************
 
-void edytornc::undo()
+void EdytorNc::undo()
 {
    if(activeMdiChild())
    {
@@ -1137,7 +1168,7 @@ void edytornc::undo()
 //
 //**************************************************************************************************
 
-void edytornc::redo()
+void EdytorNc::redo()
 {
    if(activeMdiChild())
    {
@@ -1149,7 +1180,7 @@ void edytornc::redo()
 //
 //**************************************************************************************************
 
-void edytornc::activeWindowChanged(QMdiSubWindow *window)
+void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
 {
    Q_UNUSED(window);
    MdiChild *mdiChild;
@@ -1170,16 +1201,17 @@ void edytornc::activeWindowChanged(QMdiSubWindow *window)
 //
 //**************************************************************************************************
 
-void edytornc::about()
+void EdytorNc::about()
 {
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.05.09 BETA" +
+                                   "2010.07.19 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
                             trUtf8("<br />Czech translation thanks to Pavel Fric") +
+                            trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                             trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             trUtf8("<P>") +
                             trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
@@ -1201,7 +1233,7 @@ void edytornc::about()
 //
 //**************************************************************************************************
 
-void edytornc::updateMenus()
+void EdytorNc::updateMenus()
 {
    bool hasMdiChild = (activeMdiChild() != 0);
    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
@@ -1261,7 +1293,7 @@ void edytornc::updateMenus()
 //
 //**************************************************************************************************
 
-void edytornc::updateCurrentSerialConfig()
+void EdytorNc::updateCurrentSerialConfig()
 {
    int id;
    QDir dir;
@@ -1290,7 +1322,7 @@ void edytornc::updateCurrentSerialConfig()
 //
 //**************************************************************************************************
 
-void edytornc::cancelUnderline()
+void EdytorNc::cancelUnderline()
 {
    bool hasMdiChild = (activeMdiChild() != 0);
 
@@ -1321,7 +1353,7 @@ void edytornc::cancelUnderline()
 //
 //**************************************************************************************************
 
-void edytornc::updateStatusBar()
+void EdytorNc::updateStatusBar()
 {
    QTextBlock b, cb;
    int column = 1;
@@ -1365,7 +1397,7 @@ void edytornc::updateStatusBar()
 //
 //**************************************************************************************************
 
-void edytornc::updateWindowMenu()
+void EdytorNc::updateWindowMenu()
 {
     windowMenu->clear();
     windowMenu->addAction(closeAct);
@@ -1411,7 +1443,7 @@ void edytornc::updateWindowMenu()
 //
 //**************************************************************************************************
 
-MdiChild *edytornc::createMdiChild()
+MdiChild *EdytorNc::createMdiChild()
 {
     MdiChild *child = new MdiChild();
     mdiArea->addSubWindow(child);
@@ -1434,7 +1466,7 @@ MdiChild *edytornc::createMdiChild()
 //
 //**************************************************************************************************
 
-void edytornc::createActions()
+void EdytorNc::createActions()
 {
     newAct = new QAction(QIcon(":/images/filenew.png"), tr("&New"), this);
     newAct->setShortcut(QKeySequence::New);
@@ -1690,7 +1722,7 @@ void edytornc::createActions()
 //
 //**************************************************************************************************
 
-void edytornc::createMenus()
+void EdytorNc::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newAct);
@@ -1779,7 +1811,7 @@ void edytornc::createMenus()
 //
 //**************************************************************************************************
 
-void edytornc::createToolBars()
+void EdytorNc::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->setObjectName("File");
@@ -1852,7 +1884,7 @@ void edytornc::createToolBars()
 //
 //**************************************************************************************************
 
-void edytornc::createStatusBar()
+void EdytorNc::createStatusBar()
 {
 
    labelStat1 = new QLabel("    ");
@@ -1909,7 +1941,7 @@ void edytornc::createStatusBar()
 //
 //**************************************************************************************************
 
-void edytornc::setHighLightMode(int mode)
+void EdytorNc::setHighLightMode(int mode)
 {  
    bool ok;
    bool hasMdiChild = (activeMdiChild() != 0);
@@ -1926,7 +1958,7 @@ void edytornc::setHighLightMode(int mode)
 //
 //**************************************************************************************************
 
-void edytornc::readSettings()
+void EdytorNc::readSettings()
 {
     QSettings settings("EdytorNC", "EdytorNC");
 
@@ -1971,7 +2003,8 @@ void edytornc::readSettings()
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
 
 
-    fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray(); 
+    fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
+
 
 #ifdef Q_OS_LINUX
    defaultMdiWindowProperites.calcBinary = "kcalc";
@@ -2025,9 +2058,20 @@ void edytornc::readSettings()
           loadFile(defaultMdiWindowProperites, false);
            
        };
-        
     };
     settings.endArray();
+
+
+    panelState = settings.value("ProjectPanelState", QByteArray()).toByteArray();
+    hSplitter->restoreState(panelState);
+    panelHidden = settings.value("PanelHidden", false).toBool();
+    if(panelHidden)
+    {
+       tabWidget->hide();
+       frame->setMaximumWidth(24);
+       hideButton->setText(">>");
+    };
+
 
 }
 
@@ -2035,15 +2079,12 @@ void edytornc::readSettings()
 //
 //**************************************************************************************************
 
-void edytornc::writeSettings()
+void EdytorNc::writeSettings()
 {
     MdiChild *mdiChild;
     bool maximized = false;
    
     QSettings settings("EdytorNC", "EdytorNC");
-
-    //cleanup old settings
-    settings.remove("LastDoc");
 
 
     settings.setValue("Pos", pos());
@@ -2082,6 +2123,13 @@ void edytornc::writeSettings()
 
     settings.setValue("SerialToolbarShown", (serialToolBar != NULL));
 
+    if(panelHidden)
+      settings.setValue("ProjectPanelState", panelState);
+    else
+       settings.setValue("ProjectPanelState", hSplitter->saveState());
+
+    settings.setValue("PanelHidden", panelHidden);
+
 
     settings.beginGroup("Highlight" );
     settings.setValue("HighlightOn", defaultMdiWindowProperites.syntaxH);
@@ -2104,6 +2152,8 @@ void edytornc::writeSettings()
 
     settings.endGroup();
 
+    //cleanup old settings
+    settings.remove("LastDoc");
 
     settings.beginWriteArray("LastDoc");
     int i = 0;
@@ -2132,7 +2182,7 @@ void edytornc::writeSettings()
 //
 //**************************************************************************************************
 
-MdiChild *edytornc::activeMdiChild()
+MdiChild *EdytorNc::activeMdiChild()
 {
     if(QMdiSubWindow *activeSubWindow = mdiArea->activeSubWindow())
       return qobject_cast<MdiChild *>(activeSubWindow->widget());
@@ -2143,7 +2193,7 @@ MdiChild *edytornc::activeMdiChild()
 //
 //**************************************************************************************************
 
-QMdiSubWindow *edytornc::findMdiChild(const QString &fileName)
+QMdiSubWindow *EdytorNc::findMdiChild(const QString &fileName)
 {
     QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
 
@@ -2160,7 +2210,7 @@ QMdiSubWindow *edytornc::findMdiChild(const QString &fileName)
 //
 //**************************************************************************************************
 
-void edytornc::setActiveSubWindow(QWidget *window)
+void EdytorNc::setActiveSubWindow(QWidget *window)
 {
     if(!window)
       return;
@@ -2172,7 +2222,7 @@ void edytornc::setActiveSubWindow(QWidget *window)
 //
 //**************************************************************************************************
 
-void edytornc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
+void EdytorNc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
 {
    QFileInfo file;
 
@@ -2205,7 +2255,7 @@ void edytornc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
 //
 //**************************************************************************************************
 
-void edytornc::updateRecentFiles(const QString &filename)
+void EdytorNc::updateRecentFiles(const QString &filename)
 {
     m_recentFiles.prepend(filename);
     if(m_recentFiles.size() > MAX_RECENTFILES)
@@ -2219,7 +2269,7 @@ void edytornc::updateRecentFiles(const QString &filename)
 //
 //**************************************************************************************************
 
-void edytornc::fileOpenRecent(QAction *act)
+void EdytorNc::fileOpenRecent(QAction *act)
 {
     defaultMdiWindowProperites.readOnly = FALSE;
     defaultMdiWindowProperites.geometry = QByteArray();
@@ -2234,7 +2284,7 @@ void edytornc::fileOpenRecent(QAction *act)
 //
 //**************************************************************************************************
 
-void edytornc::updateRecentFilesMenu()
+void EdytorNc::updateRecentFilesMenu()
 {
     QAction *newAc;
   
@@ -2255,7 +2305,7 @@ void edytornc::updateRecentFilesMenu()
 //
 //**************************************************************************************************
 
-void edytornc::loadFoundedFile(const QString &fileName)
+void EdytorNc::loadFoundedFile(const QString &fileName)
 {
     QFileInfo file;
 
@@ -2290,7 +2340,7 @@ void edytornc::loadFoundedFile(const QString &fileName)
 //
 //**************************************************************************************************
 
-void edytornc::messReceived(const QString &text)
+void EdytorNc::messReceived(const QString &text)
 {
     QString str = text;
     QStringList list1 = str.split(";", QString::SkipEmptyParts);
@@ -2303,7 +2353,7 @@ void edytornc::messReceived(const QString &text)
 //
 //**************************************************************************************************
 
-void edytornc::createFindToolBar()
+void EdytorNc::createFindToolBar()
 {
    QString selText;
    QTextCursor cursor;
@@ -2419,7 +2469,7 @@ void edytornc::createFindToolBar()
 //
 //**************************************************************************************************
 
-void edytornc::closeFindToolBar()
+void EdytorNc::closeFindToolBar()
 {
    if(activeMdiChild())
    {
@@ -2435,7 +2485,7 @@ void edytornc::closeFindToolBar()
 //
 //**************************************************************************************************
 
-void edytornc::findTextChanged()
+void EdytorNc::findTextChanged()
 {
    bool hasMdiChild = (activeMdiChild() != 0);
    QTextCursor cursor;
@@ -2472,7 +2522,7 @@ void edytornc::findTextChanged()
 //
 //**************************************************************************************************
 
-bool edytornc::eventFilter(QObject *obj, QEvent *ev)
+bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
 {
    if((obj == findEdit) || (obj == replaceEdit))
    {
@@ -2520,7 +2570,7 @@ bool edytornc::eventFilter(QObject *obj, QEvent *ev)
 //
 //**************************************************************************************************
 
-void edytornc::createSerialToolBar()
+void EdytorNc::createSerialToolBar()
 {
    if(serialToolBar == NULL)
    {
@@ -2609,7 +2659,7 @@ void edytornc::createSerialToolBar()
 //
 //**************************************************************************************************
 
-void edytornc::closeSerialToolbar()
+void EdytorNc::closeSerialToolbar()
 {
    stop = true;
 
@@ -2624,7 +2674,7 @@ void edytornc::closeSerialToolbar()
 //
 //**************************************************************************************************
 
-void edytornc::attachToDirButtonClicked(bool attach)
+void EdytorNc::attachToDirButtonClicked(bool attach)
 {
    QFileInfo fileInfo;
    QFile file;
@@ -2666,7 +2716,7 @@ void edytornc::attachToDirButtonClicked(bool attach)
 //
 //**************************************************************************************************
 
-void edytornc::deAttachToDirButtonClicked()
+void EdytorNc::deAttachToDirButtonClicked()
 {
    attachToDirButtonClicked(false);
 }
@@ -2675,7 +2725,7 @@ void edytornc::deAttachToDirButtonClicked()
 //
 //**************************************************************************************************
 
-void edytornc::serialConfig()
+void EdytorNc::serialConfig()
 {
    SPConfigDialog *serialConfigDialog = new SPConfigDialog(this, configBox->currentText());
 
@@ -2687,7 +2737,7 @@ void edytornc::serialConfig()
 //
 //**************************************************************************************************
 
-void edytornc::loadSerialConfignames()
+void EdytorNc::loadSerialConfignames()
 {
     int id;
     QStringList list;
@@ -2715,7 +2765,7 @@ void edytornc::loadSerialConfignames()
 //
 //**************************************************************************************************
 
-void edytornc::serialConfigTest()
+void EdytorNc::serialConfigTest()
 {
    TransmissionDialog *trDialog = new TransmissionDialog(this);
 
@@ -2726,7 +2776,7 @@ void edytornc::serialConfigTest()
 //
 //**************************************************************************************************
 
-void edytornc::loadConfig()
+void EdytorNc::loadConfig()
 {
     QString port, fTx;
     int pos;
@@ -2797,7 +2847,7 @@ void edytornc::loadConfig()
 //
 //**************************************************************************************************
 
-void edytornc::lineDelaySlot()
+void EdytorNc::lineDelaySlot()
 {
    readyCont = true;
 }
@@ -2806,7 +2856,7 @@ void edytornc::lineDelaySlot()
 //
 //**************************************************************************************************
 
-void edytornc::sendButtonClicked()
+void EdytorNc::sendButtonClicked()
 {
    int i, bytesToWrite;
    QString tx;
@@ -2995,7 +3045,7 @@ void edytornc::sendButtonClicked()
 //
 //**************************************************************************************************
 
-void edytornc::sendStartDelayTimeout()
+void EdytorNc::sendStartDelayTimeout()
 {
    if(sendStartDelay > 0)
       sendStartDelay--;
@@ -3010,7 +3060,7 @@ void edytornc::sendStartDelayTimeout()
 //
 //**************************************************************************************************
 
-void edytornc::receiveButtonClicked()
+void EdytorNc::receiveButtonClicked()
 {
    QString tx;
    int count, i, j;
@@ -3167,7 +3217,7 @@ void edytornc::receiveButtonClicked()
 //
 //**************************************************************************************************
 
-void edytornc::stopButtonClicked()
+void EdytorNc::stopButtonClicked()
 {
    stop = true;
    qApp->processEvents();
@@ -3177,7 +3227,7 @@ void edytornc::stopButtonClicked()
 //
 //**************************************************************************************************
 
-void edytornc::showError(int error)
+void EdytorNc::showError(int error)
 {
    QString text;
    QMessageBox msgBox;
@@ -3230,7 +3280,7 @@ void edytornc::showError(int error)
 //
 //**************************************************************************************************
 
-void edytornc::doCmpMacro()
+void EdytorNc::doCmpMacro()
 {
    if(activeMdiChild())
      activeMdiChild()->compileMacro();
@@ -3240,7 +3290,7 @@ void edytornc::doCmpMacro()
 //
 //**************************************************************************************************
 
-void edytornc::createToolTipsFile()
+void EdytorNc::createToolTipsFile()
 {
    QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
    QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
@@ -3866,7 +3916,7 @@ void edytornc::createToolTipsFile()
 
 
 
-      settings.endGroup();
+   settings.endGroup();
 
 }
 
@@ -3874,7 +3924,7 @@ void edytornc::createToolTipsFile()
 //
 //**************************************************************************************************
 
-void edytornc::attachHighlighterToDirButtonClicked(bool attach)
+void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 {
    QFileInfo fileInfo;
    QFile file;
@@ -3916,7 +3966,7 @@ void edytornc::attachHighlighterToDirButtonClicked(bool attach)
 //
 //**************************************************************************************************
 
-void edytornc::attachHighlightToDirActClicked()
+void EdytorNc::attachHighlightToDirActClicked()
 {
    attachHighlighterToDirButtonClicked(true);
 }
@@ -3925,7 +3975,7 @@ void edytornc::attachHighlightToDirActClicked()
 //
 //**************************************************************************************************
 
-void edytornc::deAttachHighlightToDirActClicked()
+void EdytorNc::deAttachHighlightToDirActClicked()
 {
    attachHighlighterToDirButtonClicked(false);
 }
@@ -3934,7 +3984,7 @@ void edytornc::deAttachHighlightToDirActClicked()
 //
 //**************************************************************************************************
 
-int edytornc::defaultHighlightMode(QString filePath)
+int EdytorNc::defaultHighlightMode(QString filePath)
 {
    int id;
    QDir dir;
@@ -3964,4 +4014,444 @@ int edytornc::defaultHighlightMode(QString filePath)
 //**************************************************************************************************
 //
 //**************************************************************************************************
+
+void EdytorNc::projectAdd()
+{
+   QFileInfo file;
+   QStandardItem *item;
+   QIcon icon;
+
+   if(currentProject == NULL)
+      return;
+
+#ifdef Q_OS_LINUX
+   QString filters = tr("All files (*.* *);; CNC programs files *.nc (*.nc);;"
+                        "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
+                        "Text files *.txt (*.txt)");
+#endif
+
+#ifdef Q_OS_WIN32
+   QString filters = tr("All files (*.* *);; CNC programs files (*.nc);;"
+                      "CNC programs files (*.nc *.min *.anc *.cnc);;"
+                      "Text files (*.txt)");
+#endif
+
+
+
+   QStringList files = QFileDialog::getOpenFileNames(
+                        this,
+                        tr("Add files to project"),
+                        lastDir.absolutePath(),
+                        filters, &openFileFilter);
+
+
+   QStringList list = files;
+   QStringList::Iterator it = list.begin();
+
+   QStandardItem *parentItem = currentProject;
+
+   if(it != list.end())
+   {
+      file.setFile(*it);
+      if((file.absoluteDir().exists()) && (file.absoluteDir().isReadable()))
+      {
+
+         QList<QStandardItem *> items = model->findItems(file.absoluteDir().canonicalPath(), Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
+
+         if(!items.isEmpty())
+         {
+            item = items.at(0);
+            if(item->text() != file.absoluteDir().canonicalPath())
+            {
+               item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
+               parentItem->appendRow(item);
+            };
+         }
+         else
+         {
+            item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
+            parentItem->appendRow(item);
+         };
+
+         parentItem = item;
+
+      }
+      else
+         return;
+   };
+
+   QFileSystemModel *fModel = new QFileSystemModel;
+
+   while(it != list.end())
+   {
+      file.setFile(*it);
+
+      if((file.exists()) && (file.isReadable()))
+      {
+         icon = fModel->iconProvider()->icon(file);
+
+         if(icon.isNull())
+            icon = QIcon(":/images/ncfile.png");
+
+         item = new QStandardItem(icon, file.fileName());
+         parentItem->appendRow(item);
+      };
+      ++it;
+   };
+   projectTreeView->expandAll(); //model->indexFromItem(currentProject));
+
+   currentProjectModified = true;
+   statusBar()->showMessage(tr("Project opened"), 2000);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectSave(bool saveAs)
+{
+   QString path, fileName;
+   int fileCount;
+   QStandardItem *item;
+
+
+   if(currentProjectName.isEmpty() || currentProject == NULL)
+      return;
+
+   QSettings settings(currentProjectName, QSettings::IniFormat);
+
+   settings.remove("ProjectFiles");
+   settings.beginWriteArray("ProjectFiles");
+
+   fileCount = 0;
+   for(int i = 0; i < currentProject->rowCount(); i++)
+   {
+      item = currentProject->child(i, 0);
+      path = item->text();
+      for(int j = 0; j < item->rowCount(); j++)
+      {
+         fileName = item->child(j,0)->text();
+
+         qDebug() << path;
+         qDebug() << fileName;
+         settings.setArrayIndex(fileCount);
+         settings.setValue("File", QFileInfo(path, fileName).absoluteFilePath());
+         fileCount++;
+      };
+   };
+
+   settings.endArray();
+
+
+   if(settings.status() == QSettings::NoError)
+   {
+      currentProjectModified = false;
+      statusBar()->showMessage(tr("Project saved"), 5000);
+   };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectNew()
+{
+
+   QString fileName = projectSelectName();
+
+   if(fileName.isEmpty())
+      return;
+
+   currentProjectName = fileName;
+
+
+   QStandardItem *parentItem = model->invisibleRootItem();
+   QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"), QFileInfo(currentProjectName).fileName());
+
+   parentItem->appendRow(item);
+
+   currentProject = item;
+   currentProjectModified = true;
+
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex & index)
+{
+   QFileInfo file;
+
+   if((!index.isValid()))
+      return;
+
+   QStandardItem *item = model->itemFromIndex(index);
+
+   if(item == NULL)
+      return;
+
+   if(item->hasChildren())
+      return;
+
+
+   file.setFile(item->parent()->text(), item->text());
+
+   qDebug() << item->parent()->text() << "  " << item->text();
+
+   if((file.exists()) && (file.isReadable()))
+   {
+      if(file.suffix() == "nc")
+      {
+         defaultMdiWindowProperites.fileName = file.absoluteFilePath();
+         defaultMdiWindowProperites.readOnly = FALSE;
+         defaultMdiWindowProperites.geometry = QByteArray();
+         defaultMdiWindowProperites.cursorPos = 0;
+         defaultMdiWindowProperites.editorToolTips = true;
+         defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
+         loadFile(defaultMdiWindowProperites);
+      }
+      else
+      {
+         QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
+      };
+
+   };
+
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex & index)
+{
+   QFileInfo file;
+
+   if(!index.isValid())
+      return;
+
+   file.setFile(dirModel->filePath(index));
+
+   if((file.exists()) && (file.isReadable()))
+   {
+      if(file.suffix() == "nc")
+      {
+         defaultMdiWindowProperites.fileName = file.absoluteFilePath();
+         defaultMdiWindowProperites.readOnly = FALSE;
+         defaultMdiWindowProperites.geometry = QByteArray();
+         defaultMdiWindowProperites.cursorPos = 0;
+         defaultMdiWindowProperites.editorToolTips = true;
+         defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
+         loadFile(defaultMdiWindowProperites);
+      }
+      else
+      {
+         QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
+      };
+
+   };
+
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+QString EdytorNc::projectSelectName()
+{
+
+#ifdef Q_OS_LINUX
+   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
+#endif
+
+#ifdef Q_OS_WIN32
+   QString filters = tr("EdytorNC project file (*.ncp)");
+#endif
+
+   QString file = QFileDialog::getSaveFileName(
+                         this,
+                         tr("Select the project name and location..."),
+                         currentProjectName,
+                         filters);
+
+   return file;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectLoad()
+{
+   QFileInfo file;
+   QIcon icon;
+
+
+#ifdef Q_OS_LINUX
+   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
+#endif
+
+#ifdef Q_OS_WIN32
+   QString filters = tr("EdytorNC project file (*.ncp)");
+#endif
+
+   QString fileName = QFileDialog::getOpenFileName(
+                         this,
+                         tr("Open the project file..."),
+                         currentProjectName,
+                         filters);
+
+
+
+   if(fileName.isEmpty())
+      return;
+
+   currentProjectName = fileName;
+
+   model->clear();
+
+   QSettings settings(currentProjectName, QSettings::IniFormat);
+
+
+
+   QStandardItem *parentItem = model->invisibleRootItem();
+   QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"), QFileInfo(currentProjectName).fileName());
+   item->setToolTip(currentProjectName);
+
+   parentItem->appendRow(item);
+
+   currentProject = item;
+   parentItem = item;
+
+   QFileSystemModel *fModel = new QFileSystemModel;
+
+   int max = settings.beginReadArray("ProjectFiles");
+   for(int i = 0; i < max; ++i)
+   {
+
+      settings.setArrayIndex(i);
+
+
+      file.setFile(settings.value("File", "").toString());
+
+
+      if((file.absoluteDir().exists()) && (file.absoluteDir().isReadable()))
+      {
+
+         QList<QStandardItem *> items = model->findItems(file.absoluteDir().canonicalPath(), Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
+
+         if(!items.isEmpty())
+         {
+            item = items.at(0);
+            if(item->text() != file.absoluteDir().canonicalPath())
+            {
+               item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
+               item->setToolTip(file.absoluteDir().canonicalPath());
+               currentProject->appendRow(item);
+            };
+         }
+         else
+         {
+            item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
+            item->setToolTip(file.absoluteDir().canonicalPath());
+            currentProject->appendRow(item);
+         };
+
+         parentItem = item;
+
+         if((file.exists()) && (file.isReadable()))
+         {
+            icon = fModel->iconProvider()->icon(file);
+
+            if(icon.isNull())
+               icon = QIcon(":/images/ncfile.png");
+
+            item = new QStandardItem(icon, file.fileName());
+            item->setToolTip(file.fileName());
+            parentItem->appendRow(item);
+         };
+
+      };
+
+
+   };
+   settings.endArray();
+
+
+   projectTreeView->expandAll();
+
+
+
+   currentProjectModified = false;
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::hidePanel()
+{
+   hSplitter->setUpdatesEnabled(false);
+
+   if(!panelHidden)
+   {
+      panelState = hSplitter->saveState();
+      frame->setMaximumWidth(24);
+      tabWidget->hide();
+      hideButton->setText(">>");
+      panelHidden = true;
+   }
+   else
+   {
+      frame->setMaximumWidth(16777215);
+      tabWidget->show();
+      hideButton->setText("<<");
+      panelHidden = false;
+      hSplitter->restoreState(panelState);
+   };
+
+   hSplitter->updateGeometry();
+   hSplitter->setUpdatesEnabled(true);
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectTreeRemoveItem()
+{
+   QFileInfo file;
+   QStandardItem *item;
+
+   QModelIndexList list = projectTreeView->selectionModel()->selectedIndexes();
+   QModelIndexList::Iterator it = list.begin();
+
+
+   while(it != list.end())
+   {
+      item = model->itemFromIndex(*it);
+
+      if(item == NULL)
+         return;
+
+      if(!item->hasChildren())
+      {
+         currentProjectModified = model->removeRow(item->row(), model->indexFromItem(item->parent()));
+      };
+
+      ++it;
+   };
+
+
+}
+
+
+
 

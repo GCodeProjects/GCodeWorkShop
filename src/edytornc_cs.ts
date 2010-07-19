@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>BHCDialog</name>
     <message>
         <location filename="bhcdialog.ui" line="26"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="bhcdialog.ui" line="64"/>
         <source>&amp;Compute</source>
-        <translation>&amp;Oblicz</translation>
+        <translation>&amp;Spočítat</translation>
     </message>
     <message>
         <location filename="bhcdialog.ui" line="88"/>
         <source>Cl&amp;ose</source>
-        <translation>&amp;Zamknij</translation>
+        <translation>Za&amp;vřít</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1879"/>
         <source>Bolt circle</source>
-        <translation>Rozmieszczenie otworów na okręgu</translation>
+        <translation>Kruh šroubu</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1901"/>
         <source>Circle 1 - green</source>
-        <translation>Okrąg 1 - zielony</translation>
+        <translation>Kruh 1 - zelený</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1902"/>
         <source>Circle 2 - blue</source>
-        <translation>Okrąg 2 - niebieski</translation>
+        <translation>Kruh 2 - modrý</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1903"/>
         <source>Circle 3 - red</source>
-        <translation>Okrąg 3 - czerwony</translation>
+        <translation>Kruh 3 - červený</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1904"/>
         <source>Circle 4 - yellow</source>
-        <translation>Okrąg 4 - żółty</translation>
+        <translation>Kruh 4 - žlutý</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="2252"/>
         <source>Diameter : %1</source>
-        <translation>Średnica: %1</translation>
+        <translation>Průměr: %1</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="2253"/>
         <source>Number of holes : %1</source>
-        <translation>Ilość otworów: %1</translation>
+        <translation>Počet otvorů: %1</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="2254"/>
         <source>Angle of first hole : %1</source>
-        <translation>Kątowe położenie pierwszego otworu: %1</translation>
+        <translation>Úhel prvního otvoru: %1</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="2255"/>
         <source>Angle beetwen holes : %1</source>
-        <translation>Kąt pomiędzy otworami: %1</translation>
+        <translation>Úhel mezi otvory: %1</translation>
     </message>
 </context>
 <context>
@@ -69,12 +69,12 @@
     <message>
         <location filename="dialogs.cpp" line="1604"/>
         <source>Bolt circle - preview</source>
-        <translation>Rozmieszczenie otworów na okręgu - podgląd</translation>
+        <translation>Kruh šroubu - náhled</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1607"/>
         <source>Click to close</source>
-        <translation>Kliknij aby zamknąć</translation>
+        <translation>Klepněte pro uzavření</translation>
     </message>
 </context>
 <context>
@@ -82,52 +82,52 @@
     <message>
         <location filename="bhctabform.ui" line="20"/>
         <source>Form</source>
-        <translation></translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="52"/>
         <source>X Center :</source>
-        <translation>Środek X:</translation>
+        <translation>Střed X:</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="68"/>
         <source>Y Center :</source>
-        <translation>Środek Y:</translation>
+        <translation>Střed Y:</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="84"/>
         <source>Roate by (x0.1) :</source>
-        <translation>Obrót o (x0.1):</translation>
+        <translation>Otočit o (x0.1):</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="100"/>
         <source>Diameter :</source>
-        <translation>Średnica:</translation>
+        <translation>Průměr:</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="116"/>
         <source>No. of holes :</source>
-        <translation>Ilość otworów:</translation>
+        <translation>Počet otvorů:</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="132"/>
         <source>Start angle :</source>
-        <translation>Kąt pierwszego otworu:</translation>
+        <translation>Počáteční úhel:</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="148"/>
         <source>Angle beetwen holes :</source>
-        <translation>Kąt pomiędzy otworami:</translation>
+        <translation>Úhel mezi otvory:</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="158"/>
         <source>Mirror &amp;X</source>
-        <translation>Odbicie &amp;X</translation>
+        <translation>Zrcadlit &amp;X</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="165"/>
         <source>Mirror &amp;Y</source>
-        <translation>Odbicie &amp;Y</translation>
+        <translation>Zrcadlit &amp;Y</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="209"/>
@@ -137,61 +137,58 @@
         <location filename="bhctabform.ui" line="297"/>
         <location filename="bhctabform.ui" line="319"/>
         <source>0</source>
-        <translation></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="331"/>
         <source>Common mirror and roate</source>
-        <translation>Wspólne obracanie i odbicie</translation>
+        <translation>Běžné zrcadlení a otočení</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="384"/>
         <source>1</source>
-        <translation></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="389"/>
         <source>X</source>
-        <translation></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="394"/>
         <source>Y</source>
-        <translation></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1423"/>
         <source>&amp;Copy</source>
-        <oldsource>Copy</oldsource>
-        <translation>S&amp;kopiuj</translation>
+        <translation>&amp;Kopírovat</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1425"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation>Kopiuje aktualnie zaznaczony tekst do schowka</translation>
+        <translation>Kopírovat obsah nynějšího výběru do schránky</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1430"/>
         <source>&amp;Select all</source>
-        <translation>Zaznacz &amp;wszystko</translation>
+        <translation>&amp;Vybrat vše</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1432"/>
         <source>Select all</source>
-        <translation>Zaznacz wszystko</translation>
+        <translation>Vybrat vše</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1440"/>
         <source>Add comments</source>
-        <translation>Dodaj komentarze</translation>
+        <translation>Přidat poznámky</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1545"/>
         <source>(Diameter: %1, no. of holes: %2, start angle: %3)
 </source>
-        <oldsource>(Diameter: %1, no. of holes: %2)
-</oldsource>
-        <translation>(Średnica: %1, ilość otworów: %2, kąt początkowy: %3)
+        <translation>(Průměr: %1, počet otvorů: %2, počáteční úhel: %3)
 </translation>
     </message>
 </context>
@@ -200,42 +197,42 @@
     <message>
         <location filename="chamferdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="38"/>
         <source>Known data</source>
-        <translation>Znane wymiary</translation>
+        <translation>Známá data</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="46"/>
         <source>Angle: B</source>
-        <translation>Kąt : B</translation>
+        <translation>Úhel: B</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="53"/>
         <source>Diameter 2: X2</source>
-        <translation>Średnica 2 : X2</translation>
+        <translation>Průměr 2: X2</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="60"/>
         <source>Diameter 1: X1</source>
-        <translation>Średnica 1 : X1</translation>
+        <translation>Průměr 1: X1</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="67"/>
         <source>Chamfer length in X : XL</source>
-        <translation>Długość fazki w X : XL</translation>
+        <translation>Délka zkosené hrany v X : XL</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="74"/>
         <source>Chamfer length in Z : ZL</source>
-        <translation>Długość fazki w Z : ZL</translation>
+        <translation>Délka zkosené hrany v Z : ZL</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="81"/>
         <source>45</source>
-        <translation></translation>
+        <translation>45</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="91"/>
@@ -243,23 +240,22 @@
         <location filename="chamferdialog.ui" line="111"/>
         <location filename="chamferdialog.ui" line="121"/>
         <source>0</source>
-        <translation></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="153"/>
         <source>C&amp;ompute</source>
-        <translation>&amp;Oblicz</translation>
+        <translation>Sp&amp;očítat</translation>
     </message>
     <message>
         <location filename="chamferdialog.ui" line="180"/>
         <source>&amp;Close</source>
-        <oldsource>&amp;Cancel</oldsource>
-        <translation>&amp;Zamknij</translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="2308"/>
         <source>Chamfer</source>
-        <translation>Obliczenia fazowania</translation>
+        <translation>Zkosení</translation>
     </message>
 </context>
 <context>
@@ -267,47 +263,47 @@
     <message>
         <location filename="customfiledialog.cpp" line="195"/>
         <source>Show Preview</source>
-        <translation>Pokarz podgląd</translation>
+        <translation>Ukázat náhled</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="203"/>
         <source>&amp;Open</source>
-        <translation>&amp;Otwórz</translation>
+        <translation>&amp;Otevřít</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="204"/>
         <source>Open file...</source>
-        <translation>Otwórz plik...</translation>
+        <translation>Otevřít soubor...</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="210"/>
         <source>&amp;Save</source>
-        <translation>&amp;Zapisz</translation>
+        <translation>&amp;Uložit</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="211"/>
         <source>Save file as...</source>
-        <translation>Zapisz plik jako...</translation>
+        <translation>Uložit soubor jako...</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="217"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Anuluj</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="228"/>
         <source>&amp;Compress File</source>
-        <translation>&amp;Skompresuj plik</translation>
+        <translation>&amp;Stlačit soubor</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="237"/>
         <source>&amp;Include Fonts</source>
-        <translation></translation>
+        <translation>&amp;Zahrnout písma</translation>
     </message>
     <message>
         <location filename="customfiledialog.cpp" line="239"/>
         <source>&amp;Include Color Profiles</source>
-        <translation></translation>
+        <translation>&amp;Zahrnout profily barev</translation>
     </message>
 </context>
 <context>
@@ -315,17 +311,17 @@
     <message>
         <location filename="difftextwindow.cpp" line="379"/>
         <source>File</source>
-        <translation type="unfinished">Plik</translation>
+        <translation>Soubor</translation>
     </message>
     <message>
         <location filename="difftextwindow.cpp" line="381"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Řádek</translation>
     </message>
     <message>
         <location filename="difftextwindow.cpp" line="383"/>
         <source>Line not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Řádek není dostupný</translation>
     </message>
 </context>
 <context>
@@ -334,45 +330,40 @@
         <location filename="difftextwindow.cpp" line="1651"/>
         <location filename="difftextwindow.cpp" line="1833"/>
         <source>Open file...</source>
-        <translation type="unfinished">Otwórz plik...</translation>
+        <translation>Otevřít soubor...</translation>
     </message>
     <message>
         <location filename="difftextwindow.cpp" line="1740"/>
         <source>Top line</source>
-        <translation type="unfinished"></translation>
+        <translation>Horní řádek</translation>
     </message>
     <message>
         <location filename="difftextwindow.cpp" line="1750"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec</translation>
     </message>
     <message>
         <location filename="difftextwindow.cpp" line="1822"/>
         <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
-        <translation type="unfinished">Programy CNC *.nc (*.nc);;Programy CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Pliki tekstowe *.txt (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation>Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="difftextwindow.cpp" line="1828"/>
         <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="unfinished">Programy CNC (*.nc);;Programy CNC (*.nc *.min *.anc *.cnc);;Pliki tekstowe (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation>Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.min *.anc *.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
 </context>
 <context>
     <name>DotDialog</name>
     <message>
-        <location filename="dialogs.cpp" line="660"/>
-        <source>Insert dots</source>
-        <translation>Wstaw kropki dziesiętne</translation>
-    </message>
-    <message>
         <location filename="dotdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="25"/>
         <source>Insert &amp;dot at address</source>
-        <translation>Wstaw kropki przy adresach</translation>
+        <translation>Vložit &amp;tečku do adresy</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="32"/>
@@ -382,27 +373,32 @@
     <message>
         <location filename="dotdialog.ui" line="41"/>
         <source>Dot</source>
-        <translation>Kropki</translation>
+        <translation>Tečka</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="62"/>
         <source>&amp;Divide numbers by :</source>
-        <translation>&amp;Podziel liczby przez:</translation>
+        <translation>&amp;Rozdělit čísla podle:</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="69"/>
         <source>J&amp;ust insert at end</source>
-        <translation>&amp;Wstaw na końcu</translation>
+        <translation>Po&amp;uze vložit na konec</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="96"/>
         <source>&amp;Start</source>
-        <translation>&amp;Start</translation>
+        <translation>&amp;Spustit</translation>
     </message>
     <message>
         <location filename="dotdialog.ui" line="123"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Anuluj</translation>
+        <translation>&amp;Zrušit</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="660"/>
+        <source>Insert dots</source>
+        <translation>Vložit tečky</translation>
     </message>
 </context>
 <context>
@@ -461,111 +457,111 @@
     <message>
         <location filename="edytornc.cpp" line="105"/>
         <source>EdytorNC</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">EdytorNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="204"/>
         <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
-        <translation type="unfinished">Programy CNC *.nc (*.nc);;Programy CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Pliki tekstowe *.txt (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation type="unfinished">Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="210"/>
         <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="unfinished">Programy CNC (*.nc);;Programy CNC (*.nc *.min *.anc *.cnc);;Pliki tekstowe (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation type="unfinished">Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.min *.anc *.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="219"/>
         <location filename="edytornc.cpp" line="290"/>
         <source>Select one or more files to open</source>
-        <translation type="unfinished">Otwórz plik(i)...</translation>
+        <translation type="unfinished">Vyberte jeden nebo více souborů k otevření</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="259"/>
         <location filename="edytornc.cpp" line="330"/>
         <location filename="edytornc.cpp" line="438"/>
         <source>File loaded</source>
-        <translation type="unfinished">Plik otwarty</translation>
+        <translation type="unfinished">Soubor nahrán</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="282"/>
         <source>CNC programs files *.nc (*.nc);;All files (*.* *)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Programové soubory CNC *.nc (*.nc);;Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="386"/>
         <source>CNC programs files (*.nc)</source>
-        <translation type="unfinished">Programy CNC (*.nc)</translation>
+        <translation type="unfinished">Programové soubory CNC (*.nc)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="387"/>
         <source>CNC programs files (*.nc *.min *.anc *.cnc)</source>
-        <translation type="unfinished">Programy CNC (*.nc *.min *.anc *.cnc)</translation>
+        <translation type="unfinished">Programové soubory CNC (*.nc *.min *.anc *.cnc)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="388"/>
         <source>Text files (*.txt)</source>
-        <translation type="unfinished">Pliki tekstowe (*.txt)</translation>
+        <translation type="unfinished">Textové soubory (*.txt)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="389"/>
         <source>All files (*.* *)</source>
-        <translation type="unfinished">Wszystkie pliki (*.* *)</translation>
+        <translation type="unfinished">Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="450"/>
         <location filename="edytornc.cpp" line="460"/>
         <source>File saved</source>
-        <translation type="unfinished">Plik zapisany</translation>
+        <translation type="unfinished">Soubor uložen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1002"/>
         <source>Removed : %1 line numbers.</source>
-        <translation type="unfinished">Usunięto : %1 numerów linii.</translation>
+        <translation type="unfinished">Odstraněno: %1 čísel řádků.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1004"/>
         <source>Renumbered : %1 lines.</source>
-        <translation type="unfinished">Przenumerowano : %1 linii.</translation>
+        <translation type="unfinished">Přečíslováno: %1 řádků.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1108"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Informace</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1109"/>
         <source>Set correct calculator program name in configuration dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">V dialogu nastavení nastavit správný název programu pro výpočty.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1206"/>
         <source>About EdytorNC</source>
-        <translation type="unfinished">O EdytorNC</translation>
+        <translation type="unfinished">O programu EdytorNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1207"/>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation type="unfinished">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.</translation>
+        <translation type="unfinished">&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1208"/>
         <source>&lt;P&gt;Version: </source>
-        <translation type="unfinished">&lt;P&gt;Wersja: </translation>
+        <translation type="unfinished">&lt;P&gt;Verze: </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1210"/>
         <source>&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
+        <translation type="unfinished">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</translation>
     </message>
     <message utf8="true">
         <location filename="edytornc.cpp" line="1211"/>
         <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;P&gt;Poděkování Jordi Sayol i Salomó za překlad do katalánštiny a balíček pro Debian</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1212"/>
         <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
-        <translation type="unfinished">&lt;br /&gt;Tłumaczenie na język niemiecki Michael Numberger</translation>
+        <translation type="unfinished">&lt;P&gt;Poděkování Michaelovi Numbergerovi za překlad do němčiny</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1213"/>
@@ -580,7 +576,7 @@
     <message>
         <location filename="edytornc.cpp" line="1215"/>
         <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1216"/>
@@ -593,57 +589,57 @@
     <message>
         <location filename="edytornc.cpp" line="1217"/>
         <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;P&gt;Wieloplatformowy instalator dzięki &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
+        <translation type="unfinished">&lt;P&gt;Instalátor pro více operačních systémů vytvořen &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1219"/>
         <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;P&gt;EdytorNC zdobył &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</translation>
+        <translation type="unfinished">&lt;P&gt;EdytorNC získal &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE cenu poskytnutou Softpedií&quot;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1221"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation type="unfinished">&lt;P&gt;EdytorNC zawiera fragmenty kodu z innych projektów Wolnego Oprogramowania.</translation>
+        <translation type="unfinished">&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1223"/>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation type="unfinished">&lt;P&gt;&lt;i&gt;EdytorNC jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU, wydanej przez Fundację Wolnego Oprogramowania - według wersji 2-giej tej Licencji lub którejś z późniejszych wersji.&lt;/i&gt;</translation>
+        <translation type="unfinished">&lt;P&gt;&lt;i&gt;EdytorNC je svobodný program. Můžete jej šířit a/nebo upravovat za podmínek GNU General Public License, jak jsou zveřejněny Free Software Foundation; buď ve verzi 2 tohoto povolení, nebo (podle svého uvážení) v jakékoli pozdější verzi.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1227"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="unfinished">&lt;P&gt;&lt;i&gt;Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych informacji - Powszechna Licencja Publiczna GNU.&lt;/i&gt;</translation>
+        <translation type="unfinished">&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1387"/>
         <source> Col: </source>
-        <translation type="unfinished"> Kolumna: </translation>
+        <translation type="unfinished"> Sloupec: </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1388"/>
         <source>  Line: </source>
-        <translation type="unfinished">  Wiersz: </translation>
+        <translation type="unfinished"> Řádek: </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1389"/>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
-        <translation type="unfinished">  &lt;b&gt;Zmieniony&lt;/b&gt;  </translation>
+        <translation type="unfinished">  &lt;b&gt;Upraveno&lt;/b&gt;  </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1390"/>
         <source> Read only  </source>
-        <translation type="unfinished"> Tylko do odczytu  </translation>
+        <translation type="unfinished">Pouze pro čtení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1391"/>
         <source> Overwrite  </source>
-        <translation type="unfinished"> Nadpisz  </translation>
+        <translation type="unfinished"> Přepsat  </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1391"/>
         <source> Insert </source>
-        <translation type="unfinished"> Wstaw  </translation>
+        <translation type="unfinished"> Vložit </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1425"/>
@@ -653,483 +649,483 @@
     <message>
         <location filename="edytornc.cpp" line="1429"/>
         <source>%1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 %2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1471"/>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nowy</translation>
+        <translation type="unfinished">&amp;Nový</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1473"/>
         <source>Create a new file</source>
-        <translation type="unfinished">Utwórz nowy plik</translation>
+        <translation type="unfinished">Vytvořit nový soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1476"/>
         <source>&amp;Open...</source>
-        <translation type="unfinished">&amp;Otwórz...</translation>
+        <translation type="unfinished">&amp;Otevřít...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1478"/>
         <source>Open an existing file</source>
-        <translation type="unfinished">Otwórz istniejący plik...</translation>
+        <translation type="unfinished">Otevřít stávající soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1483"/>
         <source>&amp;Open example...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Otevřít příklad...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1484"/>
         <source>Open an example file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Otevřít soubor s příkladem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1488"/>
         <source>&amp;Open file with preview</source>
-        <translation type="unfinished">O&amp;twórz plik z podglądem</translation>
+        <translation type="unfinished">&amp;Otevřít soubor s náhledem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1489"/>
         <source>Open an existing file (Openfile dialog with preview)</source>
-        <translation type="unfinished">Otwórz istniejący plik... (z podglądem pliku)</translation>
+        <translation type="unfinished">Otevřít stávající soubor (dialog otevření souboru s náhledem)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1492"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Zapisz</translation>
+        <translation type="unfinished">&amp;Uložit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1494"/>
         <source>Save the document to disk</source>
-        <translation type="unfinished">Zapisz plik na dysku</translation>
+        <translation type="unfinished">Uložit dokument na disk</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1497"/>
         <source>Save &amp;As...</source>
-        <translation type="unfinished">Zapisz &amp;jako...</translation>
+        <translation type="unfinished">Uložit &amp;jako...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1499"/>
         <source>Save the document under a new name</source>
-        <translation type="unfinished">Zapisz plik pod nową nazwą</translation>
+        <translation type="unfinished">Uložit dokument pod novým názvem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1502"/>
         <source>E&amp;xit</source>
-        <translation type="unfinished">Z&amp;amknij edytor</translation>
+        <translation type="unfinished">&amp;Ukončit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1504"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ctrl+Q</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1505"/>
         <source>Exit the application</source>
-        <translation type="unfinished">Zamknięcie edytora</translation>
+        <translation type="unfinished">Ukončit program</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1508"/>
         <source>&amp;Find files...</source>
-        <translation type="unfinished">&amp;Znajdź pliki...</translation>
+        <translation type="unfinished">&amp;Hledat soubory...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1511"/>
         <source>Find files</source>
-        <translation type="unfinished">Znajdź w plikach (znajdź pliki)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1514"/>
         <source>&amp;Print</source>
-        <translation type="unfinished">Wy&amp;drukuj...</translation>
+        <translation type="unfinished">&amp;Tisk</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1516"/>
         <source>Print file</source>
-        <translation type="unfinished">Wydrukuj plik</translation>
+        <translation type="unfinished">Vytisknout soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1522"/>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Cofnij</translation>
+        <translation type="unfinished">&amp;Zpět</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1524"/>
         <source>Undo last operation</source>
-        <translation type="unfinished">Cofnij ostatnią operację</translation>
+        <translation type="unfinished">Zpět poslední operaci</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1528"/>
         <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Przywróć</translation>
+        <translation type="unfinished">&amp;Znovu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1530"/>
         <source>Redo last operation</source>
-        <translation type="unfinished">Przywróć ostatnią operację</translation>
+        <translation type="unfinished">Znovu poslední operaci</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1534"/>
         <source>Cu&amp;t</source>
-        <translation type="unfinished">&amp;Wy&amp;tnij</translation>
+        <translation type="unfinished">Vyj&amp;mout</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1536"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
-        <translation type="unfinished">Wycina aktualnie zaznaczony tekst do schowka</translation>
+        <translation type="unfinished">Vyjmout obsah nynějšího výběru do schránky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1540"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">S&amp;kopiuj</translation>
+        <translation type="unfinished">&amp;Kopírovat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1542"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation type="unfinished">Kopiuje aktualnie zaznaczony tekst do schowka</translation>
+        <translation type="unfinished">Kopírovat obsah nynějšího výběru do schránky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1546"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished">Wk&amp;lej</translation>
+        <translation type="unfinished">&amp;Vložit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1548"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
-        <translation type="unfinished">Wstawia tekst ze schowka</translation>
+        <translation type="unfinished">Vložit obsah schránky do nynějšího výběru</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1553"/>
         <source>&amp;Find</source>
-        <translation type="unfinished">&amp;Znajdź</translation>
+        <translation type="unfinished">&amp;Najít</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1555"/>
         <source>Find text</source>
-        <translation type="unfinished">Znajdź tekst</translation>
+        <translation type="unfinished">Najít text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1558"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished">Za&amp;mień</translation>
+        <translation type="unfinished">&amp;Nahradit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1559"/>
         <source>Ctrl+R</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ctrl+R</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1560"/>
         <source>Find and replace text</source>
-        <translation type="unfinished">Znajdź i zamień tekst</translation>
+        <translation type="unfinished">Najít a nahradit text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1564"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Usuń</translation>
+        <translation type="unfinished">&amp;Smazat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1566"/>
         <source>Removes selected text</source>
-        <translation type="unfinished">Usuwa zaznaczony tekst</translation>
+        <translation type="unfinished">Odstraní vybraný text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1569"/>
         <source>&amp;Select all</source>
-        <translation type="unfinished">Zaznacz &amp;wszystko</translation>
+        <translation type="unfinished">&amp;Vybrat vše</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1571"/>
         <source>Select all text</source>
-        <translation type="unfinished">Zaznacza cały tekst</translation>
+        <translation type="unfinished">Vybrat všechen text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1574"/>
         <source>Read &amp;only</source>
-        <translation type="unfinished">Tylko do odczyt&amp;u</translation>
+        <translation type="unfinished">&amp;Pouze pro čtení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1575"/>
         <source>F12</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F12</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1577"/>
         <source>Makes text read only</source>
-        <translation type="unfinished">Blokuje możliwość edytowania tekstu</translation>
+        <translation type="unfinished">Udělá text pouze pro čtení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1580"/>
         <source>Configuration</source>
-        <translation type="unfinished">Konfiguracja</translation>
+        <translation type="unfinished">Nastavení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1582"/>
         <source>Open configuration dialog</source>
-        <translation type="unfinished">Ustawienia edytora</translation>
+        <translation type="unfinished">Otevřít dialog nastavení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1589"/>
         <source>&amp;Bolt hole circle</source>
-        <translation type="unfinished">&amp;Otwory na okręgu</translation>
+        <translation type="unfinished">&amp;Kruh otvoru šroubu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1590"/>
         <source>F8</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F8</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1591"/>
         <source>Calculate bolt hole&apos;s positions</source>
-        <translation type="unfinished">Oblicz współrzędne otworów rozmieszczonych na okręgu</translation>
+        <translation type="unfinished">Spočítat polohy otvorů šroubu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1594"/>
         <source>&amp;Insert spaces</source>
-        <translation type="unfinished">&amp;Wstaw spacje</translation>
+        <translation type="unfinished">&amp;Vložit mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1595"/>
         <source>F4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F4</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1596"/>
         <source>Inserts spaces</source>
-        <translation type="unfinished">Wstawia spacje do programu </translation>
+        <translation type="unfinished">Vložit mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1599"/>
         <source>Remove spaces</source>
-        <translation type="unfinished">Usuń spacje</translation>
+        <translation type="unfinished">Odstranit mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1600"/>
         <source>F5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F5</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1601"/>
         <source>Removes spaces</source>
-        <translation type="unfinished">Usuwa spacje z programu</translation>
+        <translation type="unfinished">Odstraní mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1604"/>
         <source>Remove empty lines</source>
-        <translation type="unfinished">Usuń puste linie</translation>
+        <translation type="unfinished">Odstranit prázdné řádky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1606"/>
         <source>Removes empty lines</source>
-        <translation type="unfinished">Usuń puste linie</translation>
+        <translation type="unfinished">Odstraní prázdné řádky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1609"/>
         <source>Insert dots</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vložit tečky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1610"/>
         <source>F6</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F6</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1611"/>
         <source>Inserts decimal dot</source>
-        <translation type="unfinished">Wstaw kropki dziesiętne</translation>
+        <translation type="unfinished">Vložit desetinnou tečku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1614"/>
         <source>Renumber</source>
-        <translation type="unfinished">Przenumeruj</translation>
+        <translation type="unfinished">Přečíslovat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1615"/>
         <source>F7</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F7</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1616"/>
         <source>Renumber program blocks</source>
-        <translation type="unfinished">Przenumeruj linie programu</translation>
+        <translation type="unfinished">Přečíslovat programové bloky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1619"/>
         <source>Feed&apos;s speed&apos;s</source>
-        <translation type="unfinished">Parametry skrawania</translation>
+        <translation type="unfinished">Počet otáček + Posun</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1620"/>
         <source>F9</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F9</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1621"/>
         <source>Calculate speed, feed, cutting speed</source>
-        <translation type="unfinished">Obliczanie parametrów skrawania</translation>
+        <translation type="unfinished">Spočítat počet otáček, posun a rychlost řezání</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1624"/>
         <source>Chamfer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zkosení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1626"/>
         <source>Calculate chamfer</source>
-        <translation type="unfinished">Obliczenia zfazowania</translation>
+        <translation type="unfinished">Spočítat zkosení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1629"/>
         <location filename="edytornc.cpp" line="1631"/>
         <source>Solution of triangles</source>
-        <translation type="unfinished">Obliczenia trójkątów</translation>
+        <translation type="unfinished">Spočítat trojúhelníky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1634"/>
         <location filename="edytornc.cpp" line="1636"/>
         <source>Convert inch &lt;-&gt; mm</source>
-        <translation type="unfinished">Przelicz mm &lt;-&gt; cale</translation>
+        <translation type="unfinished">Převést inch &lt;-&gt; mm</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1639"/>
         <location filename="edytornc.cpp" line="1641"/>
         <source>Convert program inch &lt;-&gt; mm</source>
-        <translation type="unfinished">Zamień program cale &lt;-&gt; mm</translation>
+        <translation type="unfinished">Převáděcí program inch &lt;-&gt; mm (palce &lt;-&gt; milimetry)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1644"/>
         <source>Calculator</source>
-        <translation type="unfinished">Kalkulator</translation>
+        <translation type="unfinished">Kalkulačka</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1646"/>
         <source>Run calculator</source>
-        <translation type="unfinished">Uruchom kalkulator</translation>
+        <translation type="unfinished">Spustit kalkulačku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1649"/>
         <location filename="edytornc.cpp" line="1652"/>
         <source>Serial port send/receive</source>
-        <translation type="unfinished">Wysyłanie/odbieranie przez port szeregowy</translation>
+        <translation type="unfinished">Sériová přípojka poslat/přijmout</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1655"/>
         <source>Compile macro - experimental</source>
-        <translation type="unfinished">Kompiluj makro - funkcja eksperymentalna</translation>
+        <translation type="unfinished">Sestavit makra - pokusná funkce</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1657"/>
         <source>Translate EdytorNC macro into CNC program</source>
-        <translation type="unfinished">Przetłumacz makro EdytorNC na program CNC</translation>
+        <translation type="unfinished">Přeložit makro EdytorNC do programu CNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1660"/>
         <location filename="edytornc.cpp" line="1661"/>
         <source>Show diff - open current file in right diff window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ukázat rozdíly - otevřít nynější soubor v pravém okně s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1664"/>
         <location filename="edytornc.cpp" line="1665"/>
         <source>Show diff - open current file in left diff window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ukázat rozdíly - otevřít nynější soubor v levém okně s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1668"/>
         <source>On/off diff window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zapnout/Vypnout okno s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1670"/>
         <source>Show diff window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ukázat okno s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1676"/>
         <source>Cl&amp;ose</source>
-        <translation type="unfinished">&amp;Zamknij</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1677"/>
         <source>Ctrl+F4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ctrl+F4</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1678"/>
         <source>Close the active window</source>
-        <translation type="unfinished">Zamknij aktywne okno</translation>
+        <translation type="unfinished">Zavřít činné okno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1681"/>
         <source>Close &amp;All</source>
-        <translation type="unfinished">Zamknij &amp;wszystkie okna</translation>
+        <translation type="unfinished">Zavřít &amp;vše</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1682"/>
         <source>Close all the windows</source>
-        <translation type="unfinished">Zamknij wszystkie okna</translation>
+        <translation type="unfinished">Zavřít všechna okna</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1685"/>
         <source>&amp;Tile</source>
-        <translation type="unfinished">Rozmieść &amp;kafelkowo</translation>
+        <translation type="unfinished">Klást jedno &amp;vedle druhého</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1686"/>
         <source>Tile the windows</source>
-        <translation type="unfinished">Rozmieść okna kafelkowo</translation>
+        <translation type="unfinished">Klást jedno okno vedle druhého</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1689"/>
         <source>&amp;Cascade</source>
-        <translation type="unfinished">&amp;Rozmieść kaskadowo</translation>
+        <translation type="unfinished">&amp;Překrývat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1690"/>
         <source>Cascade the windows</source>
-        <translation type="unfinished">Rozmieść okna kaskadowo</translation>
+        <translation type="unfinished">Překrývat okna</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1693"/>
         <source>Ne&amp;xt</source>
-        <translation type="unfinished">&amp;Następne</translation>
+        <translation type="unfinished">Da&amp;lší</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1694"/>
         <source>Move the focus to the next window</source>
-        <translation type="unfinished">Uaktywnia kolejne okno</translation>
+        <translation type="unfinished">Přesunout pozornost na další okno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1697"/>
         <source>Pre&amp;vious</source>
-        <translation type="unfinished">&amp;Poprzednie</translation>
+        <translation type="unfinished">Před&amp;chozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1698"/>
         <source>Move the focus to the previous window</source>
-        <translation type="unfinished">Uaktywnia poprzednie okno</translation>
+        <translation type="unfinished">Přesunout pozornost na předchozí okno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1708"/>
         <source>&amp;Create cnc tooltips</source>
-        <translation type="unfinished">&amp;Utwórz podpowiedzi CNC</translation>
+        <translation type="unfinished">&amp;Vytvořit nástrojové rady CNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1709"/>
         <source>Create default cnc tooltips file</source>
-        <translation type="unfinished">Tworzy dmoyślny plik z podpowiedziami CNC</translation>
+        <translation type="unfinished">Vytvořit soubor s výchozími nástrojovými radami CNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1712"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;O edytorze</translation>
+        <translation type="unfinished">&amp;O programu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1713"/>
         <source>Show the application&apos;s About box</source>
-        <translation type="unfinished">Wyświetla okienko inforacyjne o programie</translation>
+        <translation type="unfinished">Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1716"/>
@@ -1139,27 +1135,27 @@
     <message>
         <location filename="edytornc.cpp" line="1717"/>
         <source>Show the Qt library&apos;s About box</source>
-        <translation type="unfinished">Wyświetla okienko inforacyjne o biblotekach Qt</translation>
+        <translation type="unfinished">Ukázat dialog &quot;O Qt&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1727"/>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Plik</translation>
+        <translation type="unfinished">&amp;Soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1734"/>
         <source>&amp;Recent files</source>
-        <translation type="unfinished">O&amp;statnio otwarte</translation>
+        <translation type="unfinished">&amp;Naposledy otevřené soubory</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1750"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Edycja</translation>
+        <translation type="unfinished">&amp;Úpravy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1774"/>
         <source>&amp;Tools</source>
-        <translation type="unfinished">&amp;Narzędzia</translation>
+        <translation type="unfinished">&amp;Nástroje</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1797"/>
@@ -1169,22 +1165,22 @@
     <message>
         <location filename="edytornc.cpp" line="1803"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Pomoc</translation>
+        <translation type="unfinished">&amp;Nápověda</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1816"/>
         <source>File</source>
-        <translation type="unfinished">Plik</translation>
+        <translation type="unfinished">Soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1828"/>
         <source>Edit</source>
-        <translation type="unfinished">Edycja</translation>
+        <translation type="unfinished">Úpravy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1850"/>
         <source>Tools</source>
-        <translation type="unfinished">Narzędzia</translation>
+        <translation type="unfinished">Nástroje</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1876"/>
@@ -1194,7 +1190,7 @@
     <message>
         <location filename="edytornc.cpp" line="1898"/>
         <source>Highlight style and tooltip mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zvýraznit režim stylu a nástrojových rad</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1900"/>
@@ -1229,263 +1225,263 @@
     <message>
         <location filename="edytornc.cpp" line="1906"/>
         <source>SINUMERIK OLD</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">STARÝ SINUMERIK</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1907"/>
         <source>SINUMERIK NEW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">NOVÝ SINUMERIK</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1911"/>
         <location filename="edytornc.cpp" line="1912"/>
         <source>Attach current highlight setting to current directory of programs</source>
-        <translation type="unfinished">Powiąż aktualne ustawienia podświetlania z aktualnym katalogiem programów</translation>
+        <translation type="unfinished">Přiložit současné nastavení zvýrazňování do nynějšího adresáře s programem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1918"/>
         <location filename="edytornc.cpp" line="1919"/>
         <source>Remove highlight settings from the directory</source>
-        <translation type="unfinished">Usuń informacje o stylu podświetlania z bierzącego katalogu</translation>
+        <translation type="unfinished">Odstranit nastavení zvýrazňování z adresáře s programem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1937"/>
         <source>Ready</source>
-        <translation type="unfinished">Gotowy</translation>
+        <translation type="unfinished">Připraven</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2363"/>
         <source>Find</source>
-        <translation type="unfinished">Znajdź</translation>
+        <translation type="unfinished">Najít</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2369"/>
         <location filename="edytornc.cpp" line="2371"/>
         <source>Find next</source>
-        <translation type="unfinished">Znajdź następny</translation>
+        <translation type="unfinished">Najít další</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2374"/>
         <location filename="edytornc.cpp" line="2376"/>
         <source>Find previous</source>
-        <translation type="unfinished">Znajdź poprzedni</translation>
+        <translation type="unfinished">Najít předchozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2379"/>
         <location filename="edytornc.cpp" line="2381"/>
         <source>Replace &amp;&amp; find next</source>
-        <translation type="unfinished">Znajdź i zamień następny</translation>
+        <translation type="unfinished">Nahradit a najít další</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2384"/>
         <location filename="edytornc.cpp" line="2386"/>
         <source>Replace &amp;&amp; find previous</source>
-        <translation type="unfinished">Znajdź i zamień poprzedni</translation>
+        <translation type="unfinished">Nahradit a najít předchozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2389"/>
         <location filename="edytornc.cpp" line="2391"/>
         <source>Replace all</source>
-        <translation type="unfinished">Zamień wszysko</translation>
+        <translation type="unfinished">Nahradit vše</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2394"/>
         <location filename="edytornc.cpp" line="2395"/>
         <location filename="edytornc.cpp" line="2613"/>
         <source>Close find toolbar</source>
-        <translation type="unfinished">Zamknij pasek wyszukiwania</translation>
+        <translation type="unfinished">Zavřít nástrojový pruh pro hledání</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2398"/>
         <source>Find:</source>
-        <translation type="unfinished">Znajdź:</translation>
+        <translation type="unfinished">Hledat:</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2407"/>
         <source>Replace with:</source>
-        <translation type="unfinished">Zamień na:</translation>
+        <translation type="unfinished">Nahradit:</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2417"/>
         <source>Ignore c&amp;ase</source>
-        <translation type="unfinished">&amp;Ignoruj wielkość znaków</translation>
+        <translation type="unfinished">Nevšímat si psaní v&amp;elkých a malých písmen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2421"/>
         <source>&amp;Whole words only</source>
-        <translation type="unfinished">&amp;Tylko całe wyrazy</translation>
+        <translation type="unfinished">Pouze celá &amp;slova</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2577"/>
         <source>Serial port toolbar</source>
-        <translation type="unfinished">Pasek narzędzi port szeregowy</translation>
+        <translation type="unfinished">Nástrojový pruh pro sériovou přípojku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2582"/>
         <location filename="edytornc.cpp" line="2584"/>
         <source>Serial port configuration</source>
-        <translation type="unfinished">Konfiguracja portu szeregowego</translation>
+        <translation type="unfinished">Nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2587"/>
         <location filename="edytornc.cpp" line="2589"/>
         <source>Receive new file</source>
-        <translation type="unfinished">Odbierz nowy plik</translation>
+        <translation type="unfinished">Přijmout nový soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2592"/>
         <location filename="edytornc.cpp" line="2594"/>
         <source>Send current file</source>
-        <translation type="unfinished">Wyślij aktualny plik</translation>
+        <translation type="unfinished">Poslat nynější soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2597"/>
         <location filename="edytornc.cpp" line="2599"/>
         <source>Attach current port settings to current directory of programs</source>
-        <translation type="unfinished">Powiąż aktualne ustawienia portu z aktualnym katalogiem programów</translation>
+        <translation type="unfinished">Přiložit současné nastavení přípojky do nynějšího adresáře s programem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2602"/>
         <location filename="edytornc.cpp" line="2604"/>
         <source>Remove settings from the directory</source>
-        <translation type="unfinished">Usuń informacje o konfiguracji poru z bierzącego katalogu</translation>
+        <translation type="unfinished">Odstranit nastavení z adresáře s programem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2607"/>
         <location filename="edytornc.cpp" line="2609"/>
         <source>Check serial port settings</source>
-        <translation type="unfinished">Testowanie ustawień portu szeregowego</translation>
+        <translation type="unfinished">Prověřit nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2612"/>
         <source>Close send/receive toolbar</source>
-        <translation type="unfinished">Zamknij pasek wysyłania/odbierania przez port szeregowy</translation>
+        <translation type="unfinished">Zavřít nástrojový pruh poslat/přijmout</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2752"/>
         <location filename="edytornc.cpp" line="2755"/>
         <source>Default</source>
-        <translation type="unfinished">Domyślne</translation>
+        <translation type="unfinished">Výchozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2911"/>
         <source>Sending...</source>
-        <translation type="unfinished">Wysyłanie...</translation>
+        <translation type="unfinished">Posílá se...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2913"/>
         <source>Waiting...</source>
-        <translation type="unfinished">Czekam...</translation>
+        <translation type="unfinished">Čeká se...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2942"/>
         <source>Start in %1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Začátek za %1s</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2945"/>
         <source>Waiting for a signal readiness...</source>
-        <translation type="unfinished">Czekam na sygnał gotowości...</translation>
+        <translation type="unfinished">Čeká se na připravenost signálu...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3002"/>
         <source>Sending byte %1 of %2</source>
-        <translation type="unfinished">Wysyłanie bajtu %1 z %2</translation>
+        <translation type="unfinished">Posílají se byty: %1 z %2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3102"/>
         <source>Receiving...</source>
-        <translation type="unfinished">Odbieranie...</translation>
+        <translation type="unfinished">Přijímá se...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3103"/>
         <source>Waiting for data...</source>
-        <translation type="unfinished">Oczekiwanie na dane...</translation>
+        <translation type="unfinished">Čeká se na data...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3160"/>
         <source>Reciving byte %1</source>
-        <translation type="unfinished">Odbieranie bajtu %1</translation>
+        <translation type="unfinished">Přijímají se byty %1</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3237"/>
         <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="unfinished">Port nie został otwarty prawidłowo</translation>
+        <translation type="unfinished">Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3239"/>
         <source>Unable to allocate memory tables</source>
-        <translation type="unfinished">Nie można przydzielić pamięci</translation>
+        <translation type="unfinished">Nelze přidělit paměťové tabulky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3241"/>
         <source>Caught a non-blocked signal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zachycen ne-blokovaný signál</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3243"/>
         <source>Operation timed out</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Překročení času u operace</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3245"/>
         <source>The file opened by the port is not a character device</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soubor otevřený přípojkou není typickým zařízením</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3247"/>
         <source>The port detected a break condition</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Přípojka zjistila podmínku přerušení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3249"/>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3251"/>
         <source>There was an I/O error while communicating with the port</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3253"/>
         <source>Character buffer overrun</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Překročení vyrovnávací paměti znaku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3255"/>
         <source>Receive buffer overflow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Přetečení vyrovnávací paměti pro příjem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3257"/>
         <source>The port detected a parity error in the received data</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3259"/>
         <source>Transmit buffer overflow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Přetečení vyrovnávací paměti pro přenos</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3261"/>
         <source>General read operation failure</source>
-        <translation type="unfinished">Błąd podczas odczytu</translation>
+        <translation type="unfinished">Selhání operace běžného čtení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3263"/>
         <source>General write operation failure</source>
-        <translation type="unfinished">Błąd podczas zapisu</translation>
+        <translation type="unfinished">Selhání operace běžného zápisu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3265"/>
         <source>No Error has occured</source>
-        <translation type="unfinished">Brak błędu</translation>
+        <translation type="unfinished">Nevyskytla se žádná chyba</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3268"/>
         <source>Unknown error</source>
-        <translation type="unfinished">Nieznany błąd</translation>
+        <translation type="unfinished">Neznámá chyba</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3306"/>
@@ -1495,7 +1491,7 @@
         <location filename="edytornc.cpp" line="3861"/>
         <location filename="edytornc.cpp" line="3893"/>
         <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M00&lt;/b&gt; - zastavení programu, naprosté</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3307"/>
@@ -1505,12 +1501,12 @@
         <location filename="edytornc.cpp" line="3862"/>
         <location filename="edytornc.cpp" line="3894"/>
         <source>&lt;b&gt;M01&lt;/b&gt; - optional program stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M01&lt;/b&gt; - volitelné zastavení programu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3308"/>
         <source>&lt;b&gt;M02&lt;/b&gt; - end of program</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M02&lt;/b&gt; - ukončení programu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3309"/>
@@ -1520,7 +1516,7 @@
         <location filename="edytornc.cpp" line="3863"/>
         <location filename="edytornc.cpp" line="3895"/>
         <source>&lt;b&gt;M03&lt;/b&gt; - start spindle CW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M03&lt;/b&gt; - spuštění hřídele CW (po směru hodinových ručiček)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3310"/>
@@ -1530,7 +1526,7 @@
         <location filename="edytornc.cpp" line="3864"/>
         <location filename="edytornc.cpp" line="3896"/>
         <source>&lt;b&gt;M04&lt;/b&gt; - start spindle CCW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M04&lt;/b&gt; - spuštění hřídele CCW (proti směru hodinových ručiček)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3311"/>
@@ -1540,7 +1536,7 @@
         <location filename="edytornc.cpp" line="3865"/>
         <location filename="edytornc.cpp" line="3897"/>
         <source>&lt;b&gt;M05&lt;/b&gt; - spindle stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M05&lt;/b&gt; - zastavení hřídele</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3312"/>
@@ -1550,7 +1546,7 @@
         <location filename="edytornc.cpp" line="3866"/>
         <location filename="edytornc.cpp" line="3898"/>
         <source>&lt;b&gt;M06&lt;/b&gt; - tool change</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M06&lt;/b&gt; - změna nástroje</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3313"/>
@@ -1560,7 +1556,7 @@
         <location filename="edytornc.cpp" line="3868"/>
         <location filename="edytornc.cpp" line="3900"/>
         <source>&lt;b&gt;M08&lt;/b&gt; - coolant on</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M08&lt;/b&gt; - zapnutí chladicí kapaliny/směsi/média</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3314"/>
@@ -1570,87 +1566,87 @@
         <location filename="edytornc.cpp" line="3869"/>
         <location filename="edytornc.cpp" line="3901"/>
         <source>&lt;b&gt;M09&lt;/b&gt; - coolant off</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M09&lt;/b&gt; - vypnutí chladicí kapaliny/směsi/média</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3315"/>
         <source>&lt;b&gt;M12&lt;/b&gt; - M-tool spindle STOP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M12&lt;/b&gt; - M-nástroj ZASTAVENÍ hřídele</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3316"/>
         <source>&lt;b&gt;M13&lt;/b&gt; - M-tool spindle CW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M13&lt;/b&gt; - M-nástroj hřídele CW (po směru hodinových ručiček)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3317"/>
         <source>&lt;b&gt;M14&lt;/b&gt; - M-tool spindle CCW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M14&lt;/b&gt; - M-nástroj hřídele CCW (proti směru hodinových ručiček)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3318"/>
         <source>&lt;b&gt;M15&lt;/b&gt; - B or C-axis positioning, plus direction CW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M15&lt;/b&gt; - polohování osy B nebo C, plus směr CW (po směru hodinových ručiček)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3319"/>
         <source>&lt;b&gt;M16&lt;/b&gt; - B or C-axis positioning, minus direction CCW</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M16&lt;/b&gt; - polohování osy B nebo C, minus směr CCW (proti směru hodinových ručiček)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3320"/>
         <source>&lt;b&gt;M19&lt;/b&gt; - oriented spindle stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M19&lt;/b&gt; - zaměřené zastavení hřídele</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3321"/>
         <source>&lt;b&gt;M20&lt;/b&gt; - tailstock barrier OFF</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M20&lt;/b&gt; - zábrana koníka VYPNUTA</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3322"/>
         <source>&lt;b&gt;M21&lt;/b&gt; - tailstock barrier ON</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M21&lt;/b&gt; - zábrana koníka ZAPNUTA</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3323"/>
         <source>&lt;b&gt;M22&lt;/b&gt; - chamfering OFF (for thread cutting cycle)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M22&lt;/b&gt; - zkosení VYPNUTO (pro periodu řezání závitu)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3324"/>
         <source>&lt;b&gt;M23&lt;/b&gt; - chamfering ON (for thread cutting cycle)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M23&lt;/b&gt; - zkosení ZAPNUTO (pro periodu řezání závitu)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3325"/>
         <source>&lt;b&gt;M24&lt;/b&gt; - chuck barrier OFF</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M24&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) VYPNUTA</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3326"/>
         <source>&lt;b&gt;M25&lt;/b&gt; - chuck barrier ON</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M25&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) ZAPNUTA</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3327"/>
         <source>&lt;b&gt;M26&lt;/b&gt; - thread lead along Z-axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M26&lt;/b&gt; - vedení závitu podél osy Z</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3328"/>
         <source>&lt;b&gt;M27&lt;/b&gt; - thread lead along X-axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M27&lt;/b&gt; - vedení závitu podél osy X</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3329"/>
         <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function OFF</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje VYPNUTA</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3330"/>
         <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function ON</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje ZAPNUTA</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3331"/>
@@ -1660,139 +1656,139 @@
         <location filename="edytornc.cpp" line="3870"/>
         <location filename="edytornc.cpp" line="3902"/>
         <source>&lt;b&gt;M30&lt;/b&gt; - end of program</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M30&lt;/b&gt; - ukončení programu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3333"/>
         <source>&lt;b&gt;M40&lt;/b&gt; - spindle gear range neutral</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M40&lt;/b&gt; - neutrální rozsah převodu osy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3334"/>
         <source>&lt;b&gt;M41&lt;/b&gt; - spindle gear range 1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M41&lt;/b&gt; - rozsah převodu osy 1</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3335"/>
         <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3336"/>
         <source>&lt;b&gt;M43&lt;/b&gt; - spindle gear range 3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M43&lt;/b&gt; - rozsah převodu osy 3</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3337"/>
         <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 4</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3338"/>
         <source>&lt;b&gt;M48&lt;/b&gt; - spindle speed override ignore cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M48&lt;/b&gt; - zrušení opomíjení potlačení automatického ovládání rychlosti osy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3339"/>
         <source>&lt;b&gt;M49&lt;/b&gt; - spindle speed override ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M49&lt;/b&gt; -opomíjení potlačení automatického ovládání rychlosti osy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3341"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - mode of return to upper limit level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - režim návratu k horní úrovni omezení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3342"/>
         <location filename="edytornc.cpp" line="3344"/>
         <location filename="edytornc.cpp" line="3346"/>
         <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3343"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - mode of return to a specified point level set by G71</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - režim návratu k stanovené bodové úrovni nastavené G71</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3345"/>
         <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - mode of return to the point R level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - režim návratu k bodové úrovni R</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3348"/>
         <source>&lt;b&gt;M55&lt;/b&gt; - tailstock spindle retract</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M55&lt;/b&gt; - zatáhnutí osy koníka</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3349"/>
         <source>&lt;b&gt;M56&lt;/b&gt; - tailstock spindle advanced</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M56&lt;/b&gt; - předsunutí osy koníka</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3350"/>
         <source>&lt;b&gt;M58&lt;/b&gt; - chucking pressure low</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M58&lt;/b&gt; - nízký tlak svírací čelisti</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3351"/>
         <source>&lt;b&gt;M59&lt;/b&gt; - chucking pressure high</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M59&lt;/b&gt; - vysoký tlak svírací čelisti</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3353"/>
         <source>&lt;b&gt;M60&lt;/b&gt; - cancel of M61</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M60&lt;/b&gt; - zrušení M61</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3354"/>
         <source>&lt;b&gt;M61&lt;/b&gt; - Ignoring fixed rpm arrival in constant speed cutting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M61&lt;/b&gt; - opomíjí se pevný příjezd rpm při řezání stálou rychlostí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3355"/>
         <source>&lt;b&gt;M62&lt;/b&gt; - cancel of M64</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M62&lt;/b&gt; - zrušení M64</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3356"/>
         <source>&lt;b&gt;M63&lt;/b&gt; - ignoring spindle rotation M code answer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M63&lt;/b&gt; - opomíjí se odpověď kódu M otáčení osy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3357"/>
         <source>&lt;b&gt;M64&lt;/b&gt; - ignoring general M code answer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M64&lt;/b&gt; - opomíjí se obecná odpověď kódu M</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3358"/>
         <source>&lt;b&gt;M65&lt;/b&gt; - ignoring T code answer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M65&lt;/b&gt; - opomíjí se odpověď kódu T</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3359"/>
         <source>&lt;b&gt;M66&lt;/b&gt; - turret indexing position free</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M66&lt;/b&gt; -volná poloha indexace revolverové hlavy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3361"/>
         <source>&lt;b&gt;M78&lt;/b&gt; - steady rest unclamp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M78&lt;/b&gt; - stálé povolení svorky opěrky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3362"/>
         <source>&lt;b&gt;M79&lt;/b&gt; - steady rest clamp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M79&lt;/b&gt; - stálé sevření opěrky svorkou</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3363"/>
         <source>&lt;b&gt;M83&lt;/b&gt; - chuck clamp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M83&lt;/b&gt; - sevření svíracích čelistí svorkou</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3364"/>
         <source>&lt;b&gt;M84&lt;/b&gt; - chuck unclamp</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M84&lt;/b&gt; - povolení svorky svíracích čelistí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3365"/>
@@ -1832,7 +1828,7 @@
     <message>
         <location filename="edytornc.cpp" line="3373"/>
         <source>&lt;b&gt;M109&lt;/b&gt; - cancel of M110</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M62&lt;/b&gt; - zrušení M110 {109&lt;?}</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3374"/>
@@ -1977,7 +1973,7 @@
     <message>
         <location filename="edytornc.cpp" line="3404"/>
         <source>&lt;b&gt;M162&lt;/b&gt; - cancel of M163</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;M62&lt;/b&gt; - zrušení M163 {162&lt;?}</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3405"/>
@@ -2061,7 +2057,7 @@
     <message>
         <location filename="edytornc.cpp" line="3420"/>
         <source>&lt;b&gt;G10&lt;/b&gt; - cancel of G11</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;G10&lt;/b&gt; - zrušení G11</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3421"/>
@@ -3356,29 +3352,24 @@
 <context>
     <name>FeedsDialog</name>
     <message>
-        <location filename="dialogs.cpp" line="220"/>
-        <source>Cutting parameters</source>
-        <translation>Parametry skrawania</translation>
-    </message>
-    <message>
         <location filename="feedsdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="28"/>
         <source>Cutting speed</source>
-        <translation>Prędkość skrawania</translation>
+        <translation>Rychlost řezání</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="31"/>
         <source> Vc :</source>
-        <translation></translation>
+        <translation>Rychlost řezání:</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="38"/>
         <source>Cutting speed (m/min)</source>
-        <translation>Prędkość skrawania (m/min)</translation>
+        <translation>Rychlost řezání (m/min)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="41"/>
@@ -3388,120 +3379,124 @@
     <message>
         <location filename="feedsdialog.ui" line="54"/>
         <source>Feed per tooth</source>
-        <translation>Posuw na ostrze</translation>
+        <translation>Posun na zub</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="57"/>
         <source>Fz :</source>
-        <translation></translation>
+        <translation>Posun na zub:</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="64"/>
         <source>Feed per tooth (mm)</source>
-        <translation>Posuw na ząb (mm)</translation>
+        <translation>Posun na zub (mm)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="67"/>
         <source>0.2</source>
-        <translation></translation>
+        <translation>0.2</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="89"/>
         <source>Tool diameter</source>
-        <translation>Średnica narzędzia</translation>
+        <translation>Průměr nástroje</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="92"/>
         <source>D :</source>
-        <translation></translation>
+        <translation>Průměr nástroje:</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="99"/>
         <source>Tool diameter (mm)</source>
-        <translation>Średnica narzędzia (mm)</translation>
+        <translation>Průměr nástroje (mm)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="102"/>
         <source>10</source>
-        <translation></translation>
+        <translation>10</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="115"/>
         <location filename="feedsdialog.ui" line="125"/>
         <source>Number of toot&apos;s</source>
-        <translation>Ilość ostrzy</translation>
+        <translation>Počet zubů</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="118"/>
         <source>z :</source>
-        <translation></translation>
+        <translation>Počet zubů:</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="128"/>
         <source>1</source>
-        <translation></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="150"/>
         <source>Spindle speed</source>
-        <oldsource>Spindle spee</oldsource>
-        <translation>Obroty wrzeciona</translation>
+        <translation>Rychlost osy</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="153"/>
         <source>S :</source>
-        <translation></translation>
+        <translation>Rychlost osy:</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="160"/>
         <source>Spindle speed (r/min)</source>
-        <translation>Obroty wrzeciona (obr/min)</translation>
+        <translation>Rychlost osy (r/min)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="163"/>
         <location filename="feedsdialog.ui" line="189"/>
         <source>0</source>
-        <translation></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="176"/>
         <source>Table feed</source>
-        <translation>Posuw stołu</translation>
+        <translation>Posun stolu</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="179"/>
         <source>F :</source>
-        <translation></translation>
+        <translation>Posun stolu:</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="186"/>
         <source>Table feed (mm/min)</source>
-        <translation>Posuw stołu (mm/min)</translation>
+        <translation>Posun stolu (mm/min)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="225"/>
         <source>Compute spindle speed and table feed</source>
-        <translation>Oblicz obroty wrzeciona i posuw</translation>
+        <translation>Spočítat rychlost osy a posun stolu</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="228"/>
         <source>&amp;S, F</source>
-        <translation></translation>
+        <translation>&amp;Rychlost, Posun</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="255"/>
         <source>Cl&amp;ose</source>
-        <translation>&amp;Zamknij</translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="285"/>
         <source>Compute cutting speed and feed per tooth</source>
-        <translation>Oblicz prędkość skrawania i posuw na ostrze</translation>
+        <translation>Spočítat rychlost řezání a posun na zub</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="288"/>
         <source>&amp;Vc, Fz</source>
-        <translation></translation>
+        <translation>&amp;Rychlost řezání, Posun na zub</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="220"/>
+        <source>Cutting parameters</source>
+        <translation>Parametry řezání</translation>
     </message>
 </context>
 <context>
@@ -3509,71 +3504,35 @@
     <message>
         <location filename="fileaccess.cpp" line="1219"/>
         <source>Reading directory: </source>
-        <translation type="unfinished"></translation>
+        <translation>Adresář pro čtení:</translation>
     </message>
 </context>
 <context>
     <name>FindInFiles</name>
     <message>
-        <location filename="findinf.cpp" line="108"/>
-        <location filename="findinf.cpp" line="170"/>
-        <source>Find Files</source>
-        <translation>Znajdź pliki</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="168"/>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Zamknij</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="180"/>
-        <source>Searching file number %1 of %2</source>
-        <translation>Przeszukiwanie pliku %1 z %2</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="248"/>
-        <source>%1 KB</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="267"/>
-        <source>No</source>
-        <translation>Nie</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="269"/>
-        <source>files</source>
-        <translation>znaleziono</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="271"/>
-        <source>found.</source>
-        <translation>plików.</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="292"/>
-        <source>File Name</source>
-        <translation>Nazwa pliku</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="292"/>
-        <source>Info</source>
-        <translation>Opis</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="292"/>
-        <source>Size</source>
-        <translation>Rozmiar</translation>
-    </message>
-    <message>
-        <location filename="findinf.cpp" line="292"/>
-        <source>Modified</source>
-        <translation>Zmieniony</translation>
-    </message>
-    <message>
         <location filename="findinfilesdialog.ui" line="20"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="69"/>
+        <source>Oneclick - preview, doubleclick - opens file in editor.</source>
+        <translation>Jedno klepnutí - náhled, dvojité klepnutí - otevře soubor v editoru.</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="161"/>
+        <source>Whole words</source>
+        <translation>Celá slova</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="180"/>
+        <source>&amp;Browse</source>
+        <translation>&amp;Procházet</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="222"/>
+        <source>In directory :</source>
+        <translation>V adresáři:</translation>
     </message>
     <message>
         <location filename="findinfilesdialog.ui" line="242"/>
@@ -3581,68 +3540,140 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="findinfilesdialog.ui" line="180"/>
-        <source>&amp;Browse</source>
-        <translation>&amp;Przeglądaj</translation>
-    </message>
-    <message>
-        <location filename="findinfilesdialog.ui" line="222"/>
-        <source>In directory :</source>
-        <translation>w katalogu :</translation>
-    </message>
-    <message>
         <location filename="findinfilesdialog.ui" line="256"/>
         <source>Named :</source>
-        <translation>nazwane :</translation>
-    </message>
-    <message>
-        <location filename="findinfilesdialog.ui" line="302"/>
-        <source>Containing text :</source>
-        <translation>zawierające tekst :</translation>
-    </message>
-    <message>
-        <location filename="findinfilesdialog.ui" line="367"/>
-        <source>Find files</source>
-        <translation type="unfinished">Znajdź w plikach (znajdź pliki)</translation>
-    </message>
-    <message>
-        <location filename="findinfilesdialog.ui" line="382"/>
-        <source>Hide</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="findinfilesdialog.ui" line="385"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="findinfilesdialog.ui" line="161"/>
-        <source>Whole words</source>
-        <translation>Tylko całe wyrazy</translation>
-    </message>
-    <message>
-        <location filename="findinfilesdialog.ui" line="69"/>
-        <source>Oneclick - preview, doubleclick - opens file in editor.</source>
-        <translation>Pojedyńcze kliknięcie na liście - otwiera podgląd pliku, podwójne kliknięcie otwiera plik w edytorze.</translation>
+        <translation>S názvem souboru:</translation>
     </message>
     <message>
         <location filename="findinfilesdialog.ui" line="279"/>
         <source>&amp;Find files</source>
-        <translation>Zna&amp;jdź</translation>
+        <translation>&amp;Najít soubory</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="302"/>
+        <source>Containing text :</source>
+        <translation>Obsahuje text:</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="367"/>
+        <source>Find files</source>
+        <translation>Najít soubory</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="382"/>
+        <source>Hide</source>
+        <translation>Skrýt</translation>
+    </message>
+    <message>
+        <location filename="findinfilesdialog.ui" line="385"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="108"/>
+        <location filename="findinf.cpp" line="170"/>
+        <source>Find Files</source>
+        <translation>Najít soubory</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="168"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Zrušit</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="180"/>
+        <source>Searching file number %1 of %2</source>
+        <translation>Hledá se soubor číslo %1 z %2</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="248"/>
+        <source>%1 KB</source>
+        <translation>%1 KB</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="267"/>
+        <source>No</source>
+        <translation>Ne</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="269"/>
+        <source>files</source>
+        <translation>souborů</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="271"/>
+        <source>found.</source>
+        <translation>nalezeno.</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="292"/>
+        <source>File Name</source>
+        <translation>Název souboru</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="292"/>
+        <source>Info</source>
+        <translation>Informace</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="292"/>
+        <source>Size</source>
+        <translation>Velikost</translation>
+    </message>
+    <message>
+        <location filename="findinf.cpp" line="292"/>
+        <source>Modified</source>
+        <translation>Upraveno</translation>
     </message>
 </context>
 <context>
     <name>I2MDialog</name>
     <message>
+        <location filename="i2mdialog.ui" line="20"/>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
+    </message>
+    <message>
+        <location filename="i2mdialog.ui" line="46"/>
+        <source>Inch :</source>
+        <translation>Palec:</translation>
+    </message>
+    <message>
+        <location filename="i2mdialog.ui" line="59"/>
+        <location filename="i2mdialog.ui" line="85"/>
+        <source>0</source>
+        <translation>0</translation>
+    </message>
+    <message>
+        <location filename="i2mdialog.ui" line="72"/>
+        <source>mm :</source>
+        <translation>mm:</translation>
+    </message>
+    <message>
+        <location filename="i2mdialog.ui" line="101"/>
+        <source>&amp;Inch to mm</source>
+        <translation>&amp;Palce na mm</translation>
+    </message>
+    <message>
+        <location filename="i2mdialog.ui" line="114"/>
+        <source>&amp;mm to inch</source>
+        <translation>&amp;mm na palce</translation>
+    </message>
+    <message>
+        <location filename="i2mdialog.ui" line="144"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Zavřít</translation>
+    </message>
+    <message>
         <location filename="dialogs.cpp" line="65"/>
         <source>Inch to metric</source>
-        <translation>Przelicz cale &lt;-&gt; mm</translation>
+        <translation>Palec na metriku</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="195"/>
         <location filename="dialogs.cpp" line="201"/>
         <source>Inch</source>
-        <translation>Cale</translation>
+        <translation>Palec</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="196"/>
@@ -3650,96 +3681,58 @@
         <source>mm</source>
         <translation>mm</translation>
     </message>
-    <message>
-        <location filename="i2mdialog.ui" line="20"/>
-        <source>Dialog</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="i2mdialog.ui" line="46"/>
-        <source>Inch :</source>
-        <translation>Cale :</translation>
-    </message>
-    <message>
-        <location filename="i2mdialog.ui" line="59"/>
-        <location filename="i2mdialog.ui" line="85"/>
-        <source>0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="i2mdialog.ui" line="72"/>
-        <source>mm :</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="i2mdialog.ui" line="114"/>
-        <source>&amp;mm to inch</source>
-        <translation>&amp;mm na cale</translation>
-    </message>
-    <message>
-        <location filename="i2mdialog.ui" line="101"/>
-        <source>&amp;Inch to mm</source>
-        <translation>&amp;cale na mm</translation>
-    </message>
-    <message>
-        <location filename="i2mdialog.ui" line="144"/>
-        <source>&amp;Close</source>
-        <translation>&amp;Zamknij</translation>
-    </message>
 </context>
 <context>
     <name>I2MProgDialog</name>
     <message>
-        <location filename="dialogs.cpp" line="2588"/>
-        <source>Convert program inch to metric</source>
-        <translation>Zamień w programie cale &lt;-&gt; mm</translation>
-    </message>
-    <message>
         <location filename="i2mprogdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="i2mprogdialog.ui" line="28"/>
         <source>Convert numbers at address :</source>
-        <translation>Zamień przy adresach :</translation>
+        <translation>Převést čísla na adresu:</translation>
     </message>
     <message>
         <location filename="i2mprogdialog.ui" line="35"/>
         <source>Aaaaaaaaaaaaaaa;_</source>
-        <oldsource>Aaaaaaaaaaaaaaaaaaaaa;_</oldsource>
         <translation></translation>
     </message>
     <message>
         <location filename="i2mprogdialog.ui" line="38"/>
         <source>XYZ</source>
-        <oldsource>XYZB</oldsource>
         <translation></translation>
     </message>
     <message>
         <location filename="i2mprogdialog.ui" line="50"/>
         <source>Prec. :</source>
-        <translation>Dokładność :</translation>
-    </message>
-    <message>
-        <location filename="i2mprogdialog.ui" line="94"/>
-        <source>&amp;mm to inch</source>
-        <translation>&amp;mm na cale</translation>
+        <translation>Počet desetinných míst:</translation>
     </message>
     <message>
         <location filename="i2mprogdialog.ui" line="81"/>
         <source>&amp;Inch to mm</source>
-        <translation>&amp;cale na mm</translation>
+        <translation>&amp;Palce na mm</translation>
+    </message>
+    <message>
+        <location filename="i2mprogdialog.ui" line="94"/>
+        <source>&amp;mm to inch</source>
+        <translation>&amp;mm na palce</translation>
     </message>
     <message>
         <location filename="i2mprogdialog.ui" line="137"/>
         <source>&amp;Start</source>
-        <translation>&amp;Start</translation>
+        <translation>&amp;Spustit</translation>
     </message>
     <message>
         <location filename="i2mprogdialog.ui" line="161"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Anuluj</translation>
+        <translation>&amp;Zrušit</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="2588"/>
+        <source>Convert program inch to metric</source>
+        <translation>Převáděcí program pro palce &lt;-&gt; milimetry</translation>
     </message>
 </context>
 <context>
@@ -3747,43 +3740,43 @@
     <message>
         <location filename="kdiff3.cpp" line="165"/>
         <source>Option --auto used, but no output file specified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Volba --auto se používá, ale není zadán žádný výstupní soubor.</translation>
     </message>
     <message>
         <location filename="kdiff3.cpp" line="417"/>
         <location filename="pdiff.cpp" line="1130"/>
         <source>Opening of these files failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se otevřít tyto soubory:</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="298"/>
         <source>Loading A</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrává se A</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="302"/>
         <source>Loading B</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrává se B</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="315"/>
         <source>Diff: A &lt;-&gt; B</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdíly: A &lt;-&gt; B</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="321"/>
         <source>Linediff: A &lt;-&gt; B</source>
-        <translation type="unfinished"></translation>
+        <translation>Řádkové rozdíly: A &lt;-&gt; B</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="477"/>
         <source>All input files are binary equal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny vstupní soubory jsou binárně stejné.</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="479"/>
         <source>All input files contain the same text, but are not binary equal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny vstupní soubory obsahují tentýž text, ale nejsou binárně stejné.</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="481"/>
@@ -3791,7 +3784,8 @@
         <location filename="pdiff.cpp" line="485"/>
         <source>Files %1 and %2 are binary equal.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory %1 a %2 jsou binárně stejné.
+</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="482"/>
@@ -3799,27 +3793,35 @@
         <location filename="pdiff.cpp" line="486"/>
         <source>Files %1 and %2 have equal text, but are not binary equal. 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory %1 a %2 obsahují tentýž text, ale nejsou binárně stejné.
+</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="495"/>
         <source>Diff</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdíly</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="495"/>
         <source>Some inputfiles don&apos;t seem to be pure textfiles.
 Note that the KDiff3-merge was not meant for binary data.
 Continue at your own risk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Některé vstupní soubory vypadají, že nejsou jako soubory čistě textové.
+Všimněte si, že KDiff3-merge nebyl zamýšlen pro práci s binárními daty.
+Pokračujte na vlastní nebezpečí.</translation>
     </message>
 </context>
 <context>
     <name>MdiChild</name>
     <message>
+        <location filename="mdichildform.ui" line="29"/>
+        <source>Form</source>
+        <translation>Formulář</translation>
+    </message>
+    <message>
         <location filename="mdichild.cpp" line="76"/>
         <source>document%1.nc</source>
-        <translation>program%1.nc</translation>
+        <translation>dokument%1.nc</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="92"/>
@@ -3831,124 +3833,118 @@ Continue at your own risk.</source>
         <location filename="mdichild.cpp" line="93"/>
         <source>Cannot read file &quot;%1&quot;.
  %2</source>
-        <oldsource>Cannot read file %1:
-%2.</oldsource>
-        <translation>Nie mogę odczytać pliku &apos;%1&apos;:
-%2 </translation>
+        <translation>Nelze přečíst soubor &quot;%1&quot;.
+ %2</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="173"/>
         <source>CNC programs files *.nc (*.nc);;CNC programs files *.anc (*.anc);;CNC programs files *.min (*.min);;CNC programs files *.cnc (*.cnc);;Text files *.txt (*.txt);;All files (*.* *)</source>
-        <translation>Programy CNC *.nc (*.nc);;Programy CNC *.anc (*.anc);;Programy CNC *.min (*.min);;Programy CNC *.cnc (*.cnc);;Pliki tekstowe *.txt (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation>Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="182"/>
         <source>CNC programs files (*.nc);;CNC programs files (*.anc);;CNC programs files (*.min);;CNC programs files (*.cnc);;Text files (*.txt);;All files (*.* *)</source>
-        <translation>Programy CNC (*.nc);;Programy CNC (*.anc);;Programy CNC (*.min);;Programy CNC (*.cnc);;Pliki tekstowe (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation>Programové soubory (*.nc);;Programové soubory CNC (*.anc);;Programové soubory CNC (*.min);;Programové soubory CNC (*.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="192"/>
         <source>Save file as...</source>
-        <translation>Zapisz plik jako...</translation>
+        <translation>Uložit soubor jako...</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="201"/>
         <source>&lt;b&gt;File &quot;%1&quot; exists.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Plik &quot;%1&quot; istnieje.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Soubor &quot;%1&quot; existuje.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="202"/>
         <source>Do you want overwrite it ?</source>
-        <translation>Czy chcesz go zastąpić ?</translation>
+        <translation>Chcete jej přepsat?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="240"/>
         <source>CNC programs files (*.nc)</source>
-        <translation>Programy CNC (*.nc)</translation>
+        <translation>Programové soubory CNC (*.nc)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="241"/>
         <source>CNC programs files (*.min)</source>
-        <translation>Programy CNC (*.min)</translation>
+        <translation>Programové soubory CNC (*.min)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="242"/>
         <source>CNC programs files (*.anc)</source>
-        <translation>Programy CNC (*.anc)</translation>
+        <translation>Programové soubory CNC (*.anc)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="243"/>
         <source>CNC programs files (*.cnc)</source>
-        <translation>Programy CNC (*.cnc)</translation>
+        <translation>Programové soubory CNC (*.cnc)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="244"/>
         <source>Text files (*.txt)</source>
-        <translation>Pliki tekstowe (*.txt)</translation>
+        <translation>Textové soubory (*.txt)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="245"/>
         <source>All files (*.* *)</source>
-        <translation>Wszystkie pliki (*.* *)</translation>
+        <translation>Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="266"/>
         <source>Warning</source>
-        <translation>Ostrzeżenie</translation>
+        <translation>Varování</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="266"/>
         <source>File : %1 exists. Overwrite ?</source>
-        <translation>&lt;b&gt;Plik : %1 istnieje.&lt;/b&gt; Zastąpić ?</translation>
+        <translation>Soubor: &quot;%1&quot; existuje. Přepsat?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="267"/>
         <source>Yes</source>
-        <translation>Tak</translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="267"/>
         <source>No</source>
-        <translation>Nie</translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="293"/>
         <source>Cannot write file &quot;%1&quot;.
  %2</source>
-        <oldsource>Cannot write file %1:
-%2.</oldsource>
-        <translation>Nie można zapisać do pliku %1:
-%2</translation>
+        <translation>Nelze zapsat soubor &quot;%1&quot;.
+ %2</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="389"/>
         <source>&lt;b&gt;File: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;File : &quot;%1&quot;
- has been modified.&lt;/b&gt;</oldsource>
-        <translation>&lt;b&gt;Plik : &quot;%1&quot;
-został zmieniony.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Soubor: &quot;%1&quot;
+ byl upraven.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="390"/>
         <source>Do you want to save your changes ?</source>
-        <translation>Czy chcesz zachować zmiany ?</translation>
+        <translation>Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1062"/>
         <source>Inserted : %1 dots.</source>
-        <translation>Wstawiono : %1 kropek.</translation>
+        <translation>Vloženo: %1 teček.</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1142"/>
         <source>Converted : %1 numbers.</source>
-        <translation>Przeliczono : %1 liczb.</translation>
+        <translation>Převedeno: %1 čísel.</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1689"/>
         <location filename="mdichild.cpp" line="1873"/>
         <source>EdytorNc - compile macro</source>
-        <translation>EdytorNC - kompiluj makro</translation>
+        <translation>EdytorNc - sestavit makro</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1689"/>
@@ -3957,140 +3953,139 @@ został zmieniony.&lt;/b&gt;</translation>
 ...
 {END}
  No macro ?</source>
-        <translation>Brak definicji .
+        <translation>Žádné vymezení konstanty.
 {BEGIN}
 ...
 {END}
-To nie jest program makro ?</translation>
+ Žádné makro ?</translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="1724"/>
+        <source>EdytorNC - compile macro</source>
+        <translation>EdytorNc - sestavit makro</translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="1724"/>
+        <source>Param list: no bracket &apos;}&apos; !</source>
+        <translation>Seznam parametrů: žádné závorky &apos;}&apos;!</translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="1860"/>
+        <source>No ( or ) !</source>
+        <translation>Žádné (or - nebo)!</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1862"/>
         <source>Function parameter not found ! 
  Check +-*/.
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametr funkce nenalezen!
+Prověřte +-*/.
+&quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="1864"/>
+        <source>Wrong number !</source>
+        <translation>Nesprávné číslo!</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1866"/>
         <source>Unknown math function !
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámá matematická funkce!
+&quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1868"/>
         <source>Decimal point or minus writed two times !
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mdichild.cpp" line="1724"/>
-        <source>EdytorNC - compile macro</source>
-        <translation>EdytorNC - kompiluj makro</translation>
-    </message>
-    <message>
-        <location filename="mdichild.cpp" line="1724"/>
-        <source>Param list: no bracket &apos;}&apos; !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mdichild.cpp" line="1860"/>
-        <source>No ( or ) !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mdichild.cpp" line="1864"/>
-        <source>Wrong number !</source>
-        <translation type="unfinished"></translation>
+        <translation>Desetinná tečka nebo mínus zapsáno dvakrát!
+&quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1870"/>
         <source>Unknown error !</source>
-        <translation>Nieznany błąd !</translation>
+        <translation>Neznámá chyba!</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1887"/>
         <source>Syntax error</source>
-        <translation>Błąd składni</translation>
+        <translation>Chyba ve skladbě</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1889"/>
         <source>Unbalanced parentheses</source>
-        <translation>Bark otwierającego/zamykającego nawiasu</translation>
+        <translation>Nevyrovnané závorky</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1891"/>
         <source>No expression present</source>
-        <translation>Nie znaleziono wyrażenia</translation>
+        <translation>Není přítomen žádný výraz</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1893"/>
         <source>Equals sign expected</source>
-        <translation>Spodziewano się znaku równości</translation>
+        <translation>Očekáváno znaménko rovnosti (rovnítko)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1895"/>
         <source>Not a variable</source>
-        <translation>To nie jest zmienna</translation>
+        <translation>Není proměnná</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1897"/>
         <source>Label table full</source>
-        <translation>Pełna tabela etykiet</translation>
+        <translation>Oblast proměnných plná</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1899"/>
         <source>Duplicate label</source>
-        <translation>Podana etykieta już istnieje</translation>
+        <translation>Zdvojené označení</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1901"/>
         <source>Undefined label</source>
-        <translation>Nieznana etykieta</translation>
+        <translation>Nestanovené označení</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1903"/>
         <source>THEN expected</source>
-        <translation>Spodziewano się THEN</translation>
+        <translation>Očekáváno THEN</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1905"/>
         <source>TO expected</source>
-        <translation>Spodziewano się TO</translation>
+        <translation>Očekáváno TO</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1907"/>
         <source>Too many nested FOR loops</source>
-        <translation>Za dużo pętli FOR</translation>
+        <translation>Příliš mnoho členitých smyček (FOR)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1909"/>
         <source>NEXT without FOR</source>
-        <translation>Podano NEXT ale brakuje FOR</translation>
+        <translation>NEXT bez FOR</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1911"/>
         <source>Too many nested GOSUBs</source>
-        <translation>Za dużo wywołań GOSUB</translation>
+        <translation>Příliš mnoho členitých GOSUBs</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1913"/>
         <source>RETURN without GOSUBs</source>
-        <translation>Podano RETURN ale brakuje GOSUB</translation>
+        <translation>RETURN bez GOSUBs</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1915"/>
         <source>Unknown error</source>
-        <translation>Nieznany błąd</translation>
+        <translation>Neznámá chyba</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="1917"/>
         <source>EdytorNc - compile basic</source>
-        <translation>EdytorNC - kompiluj basic</translation>
-    </message>
-    <message>
-        <location filename="mdichildform.ui" line="29"/>
-        <source>Form</source>
-        <translation></translation>
+        <translation>EdytorNc - sestavit základy</translation>
     </message>
 </context>
 <context>
@@ -4098,18 +4093,18 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="mergeresultwindow.cpp" line="1700"/>
         <source>&lt;No src line&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Žádný řádek src&gt;</translation>
     </message>
     <message>
         <location filename="mergeresultwindow.cpp" line="1708"/>
         <source>&lt;Merge Conflict (Whitespace only)&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Střet při sloučení (pouze prázdná místa)&gt;</translation>
     </message>
     <message>
         <location filename="mergeresultwindow.cpp" line="1710"/>
         <location filename="mergeresultwindow.cpp" line="2489"/>
         <source>&lt;Merge Conflict&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Střet při sloučení&gt;</translation>
     </message>
 </context>
 <context>
@@ -4117,22 +4112,22 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="optiondialog.cpp" line="367"/>
         <source>Unicode, 8 bit</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode, 8 bitů</translation>
     </message>
     <message>
         <location filename="optiondialog.cpp" line="368"/>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="optiondialog.cpp" line="369"/>
         <source>Latin1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="optiondialog.cpp" line="387"/>
         <source>Change this if non-ASCII characters are not displayed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto změňte v případě, že se ne-ASCII znaky nezobrazují správně.</translation>
     </message>
 </context>
 <context>
@@ -4140,166 +4135,150 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="fileaccess.cpp" line="1477"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zrušit</translation>
     </message>
 </context>
 <context>
     <name>RenumberDialog</name>
     <message>
-        <location filename="dialogs.cpp" line="401"/>
-        <source>Renumber lines</source>
-        <translation>Przenumeruj linie</translation>
-    </message>
-    <message>
         <location filename="renumberdialog.ui" line="23"/>
         <source>Dialog</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="41"/>
-        <source>Renumber only line&apos;s with &apos;N&apos;</source>
-        <oldsource>Renumber only line&apos;s with N</oldsource>
-        <translation>Przenumeruj tylko linie z &apos;N&apos;</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="54"/>
-        <source>Renumber all lines</source>
-        <translation>Przenumeruj wszystkie linie</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="57"/>
-        <source>Renumber all line&apos;s</source>
-        <translation>Przenumeruj wszystkie linie</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="67"/>
-        <source>Remove all line numbers</source>
-        <translation>Usuń wszystkie numery linii</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="74"/>
-        <source>Renumber lines without N (Heidenhain)</source>
-        <translation>Przenumeruj linie bez N (Heidenhain)</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="90"/>
-        <source>Start from new nr.:</source>
-        <translation>Zacznij od nowego numeru :</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="152"/>
-        <source>Start from old nr.:</source>
-        <translation>Zacznij od starego numeru linii :</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="159"/>
-        <source>Increment numbers by :</source>
-        <translation>Numeruj co :</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="166"/>
-        <source>Min. numbers length (digits) :</source>
-        <translation>Min. liczba cyfr :</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="176"/>
-        <source>Renumber lines with comment</source>
-        <translation>Przenumeruj linie z komentarzem</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="206"/>
-        <source>Renumber empty lines</source>
-        <translation>Przenumeruj puste linie</translation>
-    </message>
-    <message>
-        <location filename="renumberdialog.ui" line="196"/>
-        <source>Don&apos;t renumber greaher than :</source>
-        <translation>Nie numeruj lini większych niż :</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="renumberdialog.ui" line="38"/>
         <source>Renumber lines that already have line numbers</source>
-        <translation>Przenumeruj tylko linie, które już zawierają numer linii</translation>
+        <translation>Pročíslovat znovu řádky, které už čísla řádků mají</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="41"/>
+        <source>Renumber only line&apos;s with &apos;N&apos;</source>
+        <translation>Pročíslovat znovu pouze řádky s &apos;N&apos;</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="54"/>
+        <source>Renumber all lines</source>
+        <translation>Pročíslovat znovu všechny řádky</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="57"/>
+        <source>Renumber all line&apos;s</source>
+        <translation>Pročíslovat znovu všechny řádky</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="67"/>
+        <source>Remove all line numbers</source>
+        <translation>Odstranit všechna čísla řádků</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="74"/>
+        <source>Renumber lines without N (Heidenhain)</source>
+        <translation>Pročíslovat znovu řádky bez &apos;N&apos; (Heidenhain)</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="90"/>
+        <source>Start from new nr.:</source>
+        <translation>Začít od nového čísla:</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="152"/>
+        <source>Start from old nr.:</source>
+        <translation>Začít od starého čísla:</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="159"/>
+        <source>Increment numbers by :</source>
+        <translation>Zvýšit čísla o:</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="166"/>
+        <source>Min. numbers length (digits) :</source>
+        <translation>Nejmenší délka čísel (počet míst):</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="176"/>
+        <source>Renumber lines with comment</source>
+        <translation>Pročíslovat znovu řádky s poznámkou</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="196"/>
+        <source>Don&apos;t renumber greaher than :</source>
+        <translation>Nepročíslovat znovu řádky vyšší než:</translation>
+    </message>
+    <message>
+        <location filename="renumberdialog.ui" line="206"/>
+        <source>Renumber empty lines</source>
+        <translation>Pročíslovat znovu prázdné řádky</translation>
     </message>
     <message>
         <location filename="renumberdialog.ui" line="216"/>
         <source>Just write N at begining of line and use this function to replace N with correct line number</source>
-        <translation>Wpisz N na początku lini i użyj tej funkcji aby zastąpić N kolejnym numerem linii</translation>
+        <translation>N zapsat pouze na začátek řádku a tuto funkci použít pro nahrazení N správným číslem řádku</translation>
     </message>
     <message>
         <location filename="renumberdialog.ui" line="219"/>
         <source>Renumber lines marked &apos;N&apos;</source>
-        <translation>Przenumeruj tylko linie oznaczone &apos;N&apos;</translation>
+        <translation>Pročíslovat znovu řádky označené &apos;N&apos;</translation>
     </message>
     <message>
         <location filename="renumberdialog.ui" line="247"/>
         <source>&amp;Start</source>
-        <translation>&amp;Start</translation>
+        <translation>&amp;Spustit</translation>
     </message>
     <message>
         <location filename="renumberdialog.ui" line="271"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Anuluj</translation>
+        <translation>&amp;Zrušit</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="401"/>
+        <source>Renumber lines</source>
+        <translation>Pročíslovat znovu řádky</translation>
     </message>
 </context>
 <context>
     <name>SPConfigDialog</name>
     <message>
-        <location filename="serialtransmission.cpp" line="35"/>
-        <source>Serial port configuration</source>
-        <translation>Konfiguracja portu szeregowego</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="142"/>
-        <source>Select serial port device</source>
-        <translation>Wybierz port szeregowy</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="144"/>
-        <source>All files (*)</source>
-        <translation>Wszystkie pliki (*)</translation>
+        <location filename="spconfigdialog.ui" line="20"/>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="38"/>
         <location filename="serialtransmission.cpp" line="378"/>
         <source>Default</source>
-        <translation>Domyślne</translation>
-    </message>
-    <message>
-        <location filename="spconfigdialog.ui" line="20"/>
-        <source>Dialog</source>
-        <translation></translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="46"/>
         <source>Settings file:</source>
-        <translation>Plik ustawień:</translation>
+        <translation>Soubor s nastavením:</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="53"/>
         <source>Serial port :</source>
-        <translation>Port szeregowy:</translation>
+        <translation>Sériová přípojka:</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="60"/>
         <location filename="spconfigdialog.ui" line="744"/>
         <source>Save configuration</source>
-        <translation>Zapisz ustawienia</translation>
+        <translation>Uložit nastavení</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="66"/>
         <source>&amp;Save</source>
-        <translation>&amp;Zapisz</translation>
+        <translation>&amp;Uložit</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="80"/>
         <source>Delete configuration</source>
-        <translation>Usuń zapisane ustawienia</translation>
+        <translation>Smazat nastavení</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="83"/>
         <source>Delete</source>
-        <translation>Usuń</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="120"/>
@@ -4324,12 +4303,12 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="spconfigdialog.ui" line="143"/>
         <source>&amp;Browse</source>
-        <translation>&amp;Przeglądaj</translation>
+        <translation>&amp;Procházet</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="161"/>
         <source>Baud rate</source>
-        <translation>Prędkość transmisji</translation>
+        <translation>Rychlost přenosu dat (bit/s) pro modemy (baud rate)</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="173"/>
@@ -4339,6 +4318,11 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="spconfigdialog.ui" line="183"/>
         <source>600</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="193"/>
+        <source>115200</source>
         <translation></translation>
     </message>
     <message>
@@ -4352,23 +4336,18 @@ To nie jest program makro ?</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="246"/>
-        <source>19200</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="spconfigdialog.ui" line="223"/>
         <source>4800</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="193"/>
-        <source>115200</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="spconfigdialog.ui" line="233"/>
         <source>9600</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="246"/>
+        <source>19200</source>
         <translation></translation>
     </message>
     <message>
@@ -4384,87 +4363,97 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="spconfigdialog.ui" line="276"/>
         <source>56000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="289"/>
         <source>Data bit&apos;s</source>
-        <translation>Bity danych</translation>
+        <translation>Datové bity</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="301"/>
         <source>7</source>
-        <translation></translation>
+        <translation>7</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="311"/>
         <source>5</source>
-        <translation></translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="321"/>
         <source>8</source>
-        <translation></translation>
+        <translation>8</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="334"/>
         <source>6</source>
-        <translation></translation>
+        <translation>6</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="347"/>
         <source>Stop bit&apos;s</source>
-        <translation>Bity stopu</translation>
+        <translation>Zastavovací bity</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="359"/>
         <source>1</source>
-        <translation></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="369"/>
         <source>2</source>
-        <translation></translation>
+        <translation>2</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="385"/>
         <source>Parity</source>
-        <translation>Parzystość</translation>
+        <translation>Rovnost</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="397"/>
         <source>None</source>
-        <translation>Brak</translation>
+        <translation>Žádný</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="410"/>
         <source>Even</source>
-        <translation></translation>
+        <translation>Sudý</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="420"/>
         <source>Odd</source>
-        <translation></translation>
+        <translation>Lichý</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="433"/>
         <source>Flow control</source>
-        <translation>Sterowanie przepływem</translation>
+        <translation>Ovládání toku</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="445"/>
         <source>Off</source>
-        <translation>Wyłączone</translation>
+        <translation>Vypnuto</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="455"/>
         <source>Hardware</source>
-        <translation>Sprzętowe</translation>
+        <translation>Technické vybavení (hardware)</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="471"/>
         <source>XON, XOFF</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="495"/>
+        <source>Delay before sending the next block (s)</source>
+        <translation>Zpoždění před odesláním dalšího bloku (s)</translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="502"/>
+        <source>Seconds</source>
+        <translation>Sekundy</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="531"/>
@@ -4481,35 +4470,24 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Możesz wpiasc zwykły tekst i/lub szesnastkowe kody znaków ASCII. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Przykład:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - znak % i znaki nowego wiersza&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - znak spacji  i znaki nowego wiersza&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Spacje mogą być tylko zapisane jako szesnastkowe kody - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="spconfigdialog.ui" line="654"/>
-        <source>Send at end:</source>
-        <translation>Wyślij na końcu:</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Příklad:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % a znaky pro nový řádek&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - znak pro mezeru a znaky pro nový řádek&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Znak pro mezeru lze zapsat pouze jako šestnáctkové číslo (hex) - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="548"/>
         <source>Send at start:</source>
-        <translation>Wyślij na początku:</translation>
+        <translation>Poslat na začátku:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="495"/>
-        <source>Delay before sending the next block (s)</source>
-        <oldsource>Pause before sending next block (s):</oldsource>
-        <translation>Opóźnienie przed wysłaniem kolejnego bloku (s)</translation>
+        <location filename="spconfigdialog.ui" line="558"/>
+        <source>XOFF character:</source>
+        <translation>Znak XOFF:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="502"/>
-        <source>Seconds</source>
-        <translation>Sekundy</translation>
-    </message>
-    <message>
-        <location filename="spconfigdialog.ui" line="671"/>
-        <source>XON 17 Dec. 0x11 Hex.</source>
+        <location filename="spconfigdialog.ui" line="565"/>
+        <source>XOFF 19 Dec. 0x13 Hex.</source>
         <translation></translation>
     </message>
     <message>
@@ -4519,19 +4497,29 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="677"/>
-        <source>17</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="spconfigdialog.ui" line="565"/>
-        <source>XOFF 19 Dec. 0x13 Hex.</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="spconfigdialog.ui" line="571"/>
         <source>19</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="587"/>
+        <source>Delete control chars</source>
+        <translation>Smazat ovládací znaky</translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="594"/>
+        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
+        <translation>Smazat všechny ovládací znaky (&lt;0x3F; &gt;0x7F) z přijatého souboru</translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="607"/>
+        <source>Start sending after (s):</source>
+        <translation>Začít posílat po (s):</translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="654"/>
+        <source>Send at end:</source>
+        <translation>Poslat na konec:</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="664"/>
@@ -4539,79 +4527,72 @@ p, li { white-space: pre-wrap; }
         <translation>Znak XON:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="558"/>
-        <source>XOFF character:</source>
-        <translation>Znak XOFF:</translation>
+        <location filename="spconfigdialog.ui" line="671"/>
+        <source>XON 17 Dec. 0x11 Hex.</source>
+        <translation></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="587"/>
-        <source>Delete control chars</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="spconfigdialog.ui" line="594"/>
-        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="spconfigdialog.ui" line="607"/>
-        <source>Start sending after (s):</source>
-        <translation type="unfinished"></translation>
+        <location filename="spconfigdialog.ui" line="677"/>
+        <source>17</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="687"/>
         <source>Enable this option for lower transmission latency on high baud rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuto volbu povolte kvůli menší prodlevě při přenosu při vysoké rychlosti přenosu dat (bit/s) pro modemy (baud rate)</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="706"/>
         <source>Disable text selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakázat výběr textu</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="750"/>
         <source>&amp;Save &amp;&amp; close</source>
-        <translation>&amp;Zapisz i zakończ</translation>
+        <translation>&amp;Uložit a zavřít</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="777"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Anuluj</translation>
+        <translation>&amp;Zrušit</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="35"/>
+        <source>Serial port configuration</source>
+        <translation>Nastavení sériové přípojky</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="142"/>
+        <source>Select serial port device</source>
+        <translation>Vybrat zařízení se sériovou přípojkou</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="144"/>
+        <source>All files (*)</source>
+        <translation>Všechny soubory (*)</translation>
     </message>
 </context>
 <context>
     <name>SetupDialog</name>
     <message>
-        <location filename="dialogs.cpp" line="2670"/>
-        <source>EdytorNC configuration</source>
-        <translation>Konfiguracja edytora</translation>
-    </message>
-    <message>
-        <location filename="dialogs.cpp" line="2675"/>
-        <location filename="dialogs.cpp" line="2837"/>
-        <location filename="dialogs.cpp" line="3030"/>
-        <source>Current font : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</source>
-        <translation>Aktualna trzcionka : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;\b&gt;</translation>
-    </message>
-    <message>
         <location filename="setupdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="28"/>
         <source>Current font :</source>
-        <translation></translation>
+        <translation>Nynější písmo:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="47"/>
         <source>Change &amp;font</source>
-        <translation>&amp;Zmień trzcionkę</translation>
+        <translation>Změnit &amp;písmo</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="56"/>
         <source>Syntax highlight colors</source>
-        <translation>Kolory podświetlanego tekstu</translation>
+        <translation>Barevné zvýraznění skladby</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="64"/>
@@ -4634,23 +4615,8 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="setupdialog.ui" line="190"/>
-        <source>+-=/*</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="setupdialog.ui" line="104"/>
         <source>SPFA</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="setupdialog.ui" line="200"/>
-        <source>L100</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="setupdialog.ui" line="210"/>
-        <source>R10</source>
         <translation></translation>
     </message>
     <message>
@@ -4666,17 +4632,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setupdialog.ui" line="134"/>
         <source>(Comment)</source>
-        <translation>(Komentarz)</translation>
-    </message>
-    <message>
-        <location filename="setupdialog.ui" line="167"/>
-        <source>%1000 O1234</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="setupdialog.ui" line="180"/>
-        <source>M3 M8</source>
-        <translation></translation>
+        <translation>(Poznámka)</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="144"/>
@@ -4689,90 +4645,127 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
+        <location filename="setupdialog.ui" line="167"/>
+        <source>%1000 O1234</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="setupdialog.ui" line="180"/>
+        <source>M3 M8</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="setupdialog.ui" line="190"/>
+        <source>+-=/*</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="setupdialog.ui" line="200"/>
+        <source>L100</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="setupdialog.ui" line="210"/>
+        <source>R10</source>
+        <translation></translation>
+    </message>
+    <message>
         <location filename="setupdialog.ui" line="233"/>
         <source>&amp;Internal CAPS LOCK</source>
-        <translation>&amp;Wewnętrzny CAPS LOCK</translation>
+        <translation>Zapnout &amp;vnitřně nastavovací tlačítko (CAPS LOCK)</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="240"/>
         <source>&amp;Syntax highlight</source>
-        <translation>&amp;Kolorowanie tekstu</translation>
+        <translation>&amp;Zvýraznění skladby</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="247"/>
         <source>Highlighed current line color</source>
-        <translation>Kolor podświetlenia aktualnej linii</translation>
+        <translation>Barevné zvýraznění nynějšího řádku</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="250"/>
         <source>Hi&amp;ghlighed current line color</source>
-        <translation>Kolor podświetlenia aktualnej linii</translation>
+        <translation>Barevné zvý&amp;raznění nynějšího řádku</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="263"/>
         <source>&amp;Editor tabbed mode</source>
-        <translation>Tryb zakładkowy</translation>
+        <translation>&amp;Editor v režimu s kartami</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="283"/>
         <source>Underline changes</source>
-        <translation>Podkreślaj zmiany</translation>
+        <translation>Podtrhnout změny</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="290"/>
         <source>Underline color</source>
-        <translation>Kolor podkreślenia</translation>
+        <translation>Podtrhnout barvu</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="293"/>
         <source>U&amp;nderline color</source>
-        <translation>Kolor podkreślenia</translation>
+        <translation>Pod&amp;trhnout barvu</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="312"/>
         <source>Calculator executable</source>
-        <translation>Plik wykonywalny edytora</translation>
+        <translation>Spustitelný soubor kalkulačky</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="319"/>
         <source>Calculator executable :</source>
-        <translation>Plik wykonywalny edytora:</translation>
+        <translation>Spustitelný soubor kalkulačky:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="326"/>
         <location filename="setupdialog.ui" line="329"/>
         <source>Clear undo/redo history on save</source>
-        <translation>Wyczyść historię powtórz/ponów</translation>
+        <translation>Vyprázdnit při uložení historii kroků Zpět/Znovu</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="336"/>
         <source>Clear underline changes on save</source>
-        <translation>Wyczyść podkreślenia zmian przy zapisie pliku</translation>
+        <translation>Vyprázdnit při uložení podtržení změn</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="339"/>
         <source>Clear underline on save</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyprázdnit při uložení podtržení</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="346"/>
         <source>Show editor tooltips</source>
-        <translation>Pokaż podpowiedzi w edytorze</translation>
+        <translation>Ukázat nástrojové rady k editoru</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="383"/>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="410"/>
         <source>&amp;Default</source>
-        <translation>&amp;Domyślne</translation>
+        <translation>&amp;Výchozí</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="437"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Anuluj</translation>
+        <translation>&amp;Zrušit</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="2670"/>
+        <source>EdytorNC configuration</source>
+        <translation>Nastavení programu EdytorNC</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="2675"/>
+        <location filename="dialogs.cpp" line="2837"/>
+        <location filename="dialogs.cpp" line="3030"/>
+        <source>Current font : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</source>
+        <translation>Nynější písmo: &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</translation>
     </message>
 </context>
 <context>
@@ -4780,7 +4773,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="diff.cpp" line="251"/>
         <source>From Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Ze schránky</translation>
     </message>
 </context>
 <context>
@@ -4788,13 +4781,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transprogressdialog.ui" line="17"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="transprogressdialog.ui" line="32"/>
         <location filename="transprogressdialog.ui" line="51"/>
         <source>Clear To Send</source>
-        <translation>Gotowość wysyłania</translation>
+        <translation>Vyprázdnit &apos;Poslat&apos;</translation>
     </message>
     <message>
         <location filename="transprogressdialog.ui" line="35"/>
@@ -4805,7 +4798,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transprogressdialog.ui" line="73"/>
         <location filename="transprogressdialog.ui" line="89"/>
         <source>Data Set Ready </source>
-        <translation>Gotowość &quot;użądzenia&quot; 1)</translation>
+        <translation>Soubor dat připraven</translation>
     </message>
     <message>
         <location filename="transprogressdialog.ui" line="92"/>
@@ -4816,7 +4809,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transprogressdialog.ui" line="108"/>
         <location filename="transprogressdialog.ui" line="124"/>
         <source>Data Carrier Detect</source>
-        <translation>Sygnał wykrycia nośnej</translation>
+        <translation>Zjištění přepravce dat</translation>
     </message>
     <message>
         <location filename="transprogressdialog.ui" line="127"/>
@@ -4827,7 +4820,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transprogressdialog.ui" line="143"/>
         <location filename="transprogressdialog.ui" line="159"/>
         <source>Request To Send</source>
-        <translation>Żądanie wysyłania</translation>
+        <translation>Požadavek na &apos;Poslat&apos;</translation>
     </message>
     <message>
         <location filename="transprogressdialog.ui" line="162"/>
@@ -4838,7 +4831,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transprogressdialog.ui" line="178"/>
         <location filename="transprogressdialog.ui" line="194"/>
         <source>Data Terminal Ready</source>
-        <translation>Gotowość terminala 1)</translation>
+        <translation>Datový terminál připraven</translation>
     </message>
     <message>
         <location filename="transprogressdialog.ui" line="197"/>
@@ -4848,159 +4841,49 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transprogressdialog.ui" line="213"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation>Textový štítek</translation>
     </message>
     <message>
         <location filename="transprogressdialog.ui" line="249"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Anuluj</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <location filename="serialtransmission.cpp" line="1120"/>
         <source>&amp;Close</source>
-        <translation>&amp;Zamknij</translation>
+        <translation>&amp;Zavřít</translation>
     </message>
 </context>
 <context>
     <name>TransmissionDialog</name>
     <message>
-        <location filename="serialtransmission.cpp" line="462"/>
-        <source>Serial transmission test</source>
-        <translation>Test transmisji szeregowej</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="774"/>
-        <source>Recived: %1 bytes.</source>
-        <translation>Odebrano %1 bajtów.</translation>
+        <location filename="transmissiondialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="33"/>
         <location filename="serialtransmission.cpp" line="878"/>
         <location filename="serialtransmission.cpp" line="881"/>
         <source>Default</source>
-        <translation>Domyślne</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="602"/>
-        <source>&amp;Disconnect</source>
-        <translation>&amp;Rozłącz</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="896"/>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation>Port nie został otwarty prawidłowo</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="898"/>
-        <source>Unable to allocate memory tables</source>
-        <translation>Nie można przydzielić pamięci</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="900"/>
-        <source>Caught a non-blocked signal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="902"/>
-        <source>Operation timed out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="904"/>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="906"/>
-        <source>The port detected a break condition</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="908"/>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="910"/>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="912"/>
-        <source>Character buffer overrun</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="914"/>
-        <source>Receive buffer overflow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="916"/>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="918"/>
-        <source>Transmit buffer overflow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="920"/>
-        <source>General read operation failure</source>
-        <translation>Błąd podczas odczytu</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="922"/>
-        <source>General write operation failure</source>
-        <translation>Błąd podczas zapisu</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="924"/>
-        <source>No Error has occured</source>
-        <translation>Brak błędu</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="926"/>
-        <source>Unknown error</source>
-        <translation>Nieznany błąd</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="953"/>
-        <source>Waiting...</source>
-        <translation>Czekam...</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="961"/>
-        <source>Waiting for a signal readiness...</source>
-        <translation>Czekam na sygnał gotowości...</translation>
-    </message>
-    <message>
-        <location filename="serialtransmission.cpp" line="998"/>
-        <source>Sending byte %1 of %2</source>
-        <translation>Wysyłanie bajtu %1 z %2</translation>
-    </message>
-    <message>
-        <location filename="transmissiondialog.ui" line="14"/>
-        <source>Dialog</source>
-        <translation></translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="41"/>
         <source>...</source>
-        <translation></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="68"/>
         <location filename="serialtransmission.cpp" line="664"/>
         <source>&amp;Connect</source>
-        <translation>&amp;Połącz</translation>
+        <translation>&amp;Spojit</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="128"/>
         <location filename="transmissiondialog.ui" line="147"/>
         <source>Clear To Send</source>
-        <translation>Gotowość wysyłania</translation>
+        <translation>Vyprázdnit &apos;Poslat&apos;</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="131"/>
@@ -5011,7 +4894,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transmissiondialog.ui" line="169"/>
         <location filename="transmissiondialog.ui" line="185"/>
         <source>Data Set Ready </source>
-        <translation>Gotowość &quot;użądzenia&quot; 1)</translation>
+        <translation>Soubor dat připraven</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="188"/>
@@ -5022,7 +4905,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transmissiondialog.ui" line="204"/>
         <location filename="transmissiondialog.ui" line="220"/>
         <source>Data Carrier Detect</source>
-        <translation>Sygnał wykrycia nośnej</translation>
+        <translation>Zjištění přepravce dat</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="223"/>
@@ -5034,7 +4917,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transmissiondialog.ui" line="255"/>
         <location filename="transmissiondialog.ui" line="338"/>
         <source>Request To Send</source>
-        <translation>Żądanie wysyłania</translation>
+        <translation>Požadavek na &apos;Poslat&apos;</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="258"/>
@@ -5046,7 +4929,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transmissiondialog.ui" line="290"/>
         <location filename="transmissiondialog.ui" line="303"/>
         <source>Data Terminal Ready</source>
-        <translation>Gotowość terminala 1)</translation>
+        <translation>Datový terminál připraven</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="293"/>
@@ -5054,87 +4937,192 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
+        <location filename="transmissiondialog.ui" line="306"/>
+        <source>Set DTR</source>
+        <translation>Nastavit DTR</translation>
+    </message>
+    <message>
         <location filename="transmissiondialog.ui" line="322"/>
         <source>Send XON</source>
-        <translation>Wyślij XON</translation>
+        <translation>Poslat XON</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="341"/>
         <source>Set RTS</source>
-        <translation>Ustaw RTS</translation>
+        <translation>Nastavit RTS</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="357"/>
         <source>Send XOFF</source>
-        <translation>Wyślij XOFF</translation>
-    </message>
-    <message>
-        <location filename="transmissiondialog.ui" line="306"/>
-        <source>Set DTR</source>
-        <translation>Ustaw DTR</translation>
+        <translation>Poslat XOFF</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="425"/>
         <source>C&amp;lear text</source>
-        <translation>Wyczyść tekst</translation>
+        <translation>&amp;Smazat text</translation>
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="452"/>
         <source>&amp;Close</source>
-        <translation>&amp;Zamknij</translation>
+        <translation>&amp;Zavřít</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="462"/>
+        <source>Serial transmission test</source>
+        <translation>Zkouška sériového přenosu</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="602"/>
+        <source>&amp;Disconnect</source>
+        <translation>&amp;Odpojit</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="774"/>
+        <source>Recived: %1 bytes.</source>
+        <translation>Přijato: %1 bytů.</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="896"/>
+        <source>Invalid file descriptor (port was not opened correctly)</source>
+        <translation>Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="898"/>
+        <source>Unable to allocate memory tables</source>
+        <translation>Nelze přidělit paměťové tabulky</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="900"/>
+        <source>Caught a non-blocked signal</source>
+        <translation>Zachycen ne-blokovaný signál</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="902"/>
+        <source>Operation timed out</source>
+        <translation>Překročení času u operace</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="904"/>
+        <source>The file opened by the port is not a character device</source>
+        <translation>Soubor otevřený přípojkou není typickým zařízením</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="906"/>
+        <source>The port detected a break condition</source>
+        <translation>Přípojka zjistila podmínku přerušení</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="908"/>
+        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
+        <translation>Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="910"/>
+        <source>There was an I/O error while communicating with the port</source>
+        <translation>Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="912"/>
+        <source>Character buffer overrun</source>
+        <translation>Překročení vyrovnávací paměti znaku</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="914"/>
+        <source>Receive buffer overflow</source>
+        <translation>Přetečení vyrovnávací paměti pro příjem</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="916"/>
+        <source>The port detected a parity error in the received data</source>
+        <translation>Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="918"/>
+        <source>Transmit buffer overflow</source>
+        <translation>Přetečení vyrovnávací paměti pro přenos</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="920"/>
+        <source>General read operation failure</source>
+        <translation>Selhání operace běžného čtení</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="922"/>
+        <source>General write operation failure</source>
+        <translation>Selhání operace běžného zápisu</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="924"/>
+        <source>No Error has occured</source>
+        <translation>Nevyskytla se žádná chyba</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="926"/>
+        <source>Unknown error</source>
+        <translation>Neznámá chyba</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="953"/>
+        <source>Waiting...</source>
+        <translation>Čeká se...</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="961"/>
+        <source>Waiting for a signal readiness...</source>
+        <translation>Čeká se na připravenost signálu...</translation>
+    </message>
+    <message>
+        <location filename="serialtransmission.cpp" line="998"/>
+        <source>Sending byte %1 of %2</source>
+        <translation>Posílají se byty: %1 z %2</translation>
     </message>
 </context>
 <context>
     <name>TriangleDialog</name>
     <message>
-        <location filename="dialogs.cpp" line="786"/>
-        <source>Solution of triangles</source>
-        <translation>Obliczenia trójkątów</translation>
-    </message>
-    <message>
         <location filename="triangledialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="47"/>
         <source>Known data</source>
-        <translation>Znane wymiary</translation>
+        <translation>Známá data</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="53"/>
         <source>&amp;Right angled triangle</source>
-        <translation>&amp;Trójkąt prostokątny</translation>
+        <translation>&amp;Pravoúhlý trojúhelník</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="62"/>
         <source>Side a</source>
-        <translation>Bok a</translation>
+        <translation>Strana a</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="69"/>
         <source>Side b</source>
-        <translation>Bok b</translation>
+        <translation>Strana b</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="76"/>
         <source>Side c</source>
-        <translation>Bok c</translation>
+        <translation>Strana c</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="83"/>
         <source>Angle A</source>
-        <translation>Kąt A</translation>
+        <translation>Úhel A</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="90"/>
         <source>Angle B</source>
-        <translation>Kąt B</translation>
+        <translation>Úhel B</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="97"/>
         <source>Angle C</source>
-        <translation>Kąt C</translation>
+        <translation>Úhel C</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="104"/>
@@ -5144,17 +5132,22 @@ p, li { white-space: pre-wrap; }
         <location filename="triangledialog.ui" line="156"/>
         <location filename="triangledialog.ui" line="169"/>
         <source>0</source>
-        <translation></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="207"/>
         <source>&amp;Compute</source>
-        <translation>&amp;Oblicz</translation>
+        <translation>&amp;Spočítat</translation>
     </message>
     <message>
         <location filename="triangledialog.ui" line="234"/>
         <source>Cl&amp;ose</source>
-        <translation>&amp;Zamknij</translation>
+        <translation>&amp;Zavřít</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="786"/>
+        <source>Solution of triangles</source>
+        <translation>Spočítat trojúhelníky</translation>
     </message>
 </context>
 <context>
@@ -5162,452 +5155,545 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mergeresultwindow.cpp" line="3094"/>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Výstup</translation>
     </message>
     <message>
         <location filename="mergeresultwindow.cpp" line="3106"/>
         <location filename="mergeresultwindow.cpp" line="3286"/>
         <source>[Modified]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Upraveno]</translation>
     </message>
     <message>
         <location filename="mergeresultwindow.cpp" line="3113"/>
         <source>Encoding for saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Kódování pro uložení</translation>
     </message>
     <message>
         <location filename="mergeresultwindow.cpp" line="3121"/>
         <source>Line end style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Čára a styl:</translation>
     </message>
     <message>
         <location filename="mergeresultwindow.cpp" line="3233"/>
         <location filename="mergeresultwindow.cpp" line="3235"/>
         <location filename="mergeresultwindow.cpp" line="3237"/>
         <source>Codec from</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodek od</translation>
     </message>
 </context>
 <context>
     <name>edytornc</name>
     <message>
+        <source>EdytorNC</source>
+        <translation type="obsolete">EdytorNC</translation>
+    </message>
+    <message>
         <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programy CNC *.nc (*.nc);;Programy CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Pliki tekstowe *.txt (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programy CNC (*.nc);;Programy CNC (*.nc *.min *.anc *.cnc);;Pliki tekstowe (*.txt);;Wszystkie pliki (*.* *)</translation>
+        <translation type="obsolete">Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.min *.anc *.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <source>Select one or more files to open</source>
-        <translation type="obsolete">Otwórz plik(i)...</translation>
+        <translation type="obsolete">Vyberte jeden nebo více souborů k otevření</translation>
     </message>
     <message>
         <source>File loaded</source>
-        <translation type="obsolete">Plik otwarty</translation>
+        <translation type="obsolete">Soubor nahrán</translation>
+    </message>
+    <message>
+        <source>CNC programs files *.nc (*.nc);;All files (*.* *)</source>
+        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <source>CNC programs files (*.nc)</source>
-        <translation type="obsolete">Programy CNC (*.nc)</translation>
+        <translation type="obsolete">Programové soubory CNC (*.nc)</translation>
     </message>
     <message>
         <source>CNC programs files (*.nc *.min *.anc *.cnc)</source>
-        <translation type="obsolete">Programy CNC (*.nc *.min *.anc *.cnc)</translation>
+        <translation type="obsolete">Programové soubory CNC (*.nc *.min *.anc *.cnc)</translation>
     </message>
     <message>
         <source>Text files (*.txt)</source>
-        <translation type="obsolete">Pliki tekstowe (*.txt)</translation>
+        <translation type="obsolete">Textové soubory (*.txt)</translation>
     </message>
     <message>
         <source>All files (*.* *)</source>
-        <translation type="obsolete">Wszystkie pliki (*.* *)</translation>
+        <translation type="obsolete">Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="obsolete">Plik zapisany</translation>
+        <translation type="obsolete">Soubor uložen</translation>
     </message>
     <message>
         <source>Removed : %1 line numbers.</source>
-        <translation type="obsolete">Usunięto : %1 numerów linii.</translation>
+        <translation type="obsolete">Odstraněno: %1 čísel řádků.</translation>
     </message>
     <message>
         <source>Renumbered : %1 lines.</source>
-        <translation type="obsolete">Przenumerowano : %1 linii.</translation>
+        <translation type="obsolete">Přečíslováno: %1 řádků.</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="obsolete">Informace</translation>
+    </message>
+    <message>
+        <source>Set correct calculator program name in configuration dialog.</source>
+        <translation type="obsolete">V dialogu nastavení nastavit správný název programu pro výpočty.</translation>
     </message>
     <message>
         <source>About EdytorNC</source>
-        <translation type="obsolete">O EdytorNC</translation>
-    </message>
-    <message>
-        <source> Col: </source>
-        <translation type="obsolete"> Kolumna: </translation>
-    </message>
-    <message>
-        <source>  Line: </source>
-        <translation type="obsolete">  Wiersz: </translation>
-    </message>
-    <message>
-        <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
-        <translation type="obsolete">  &lt;b&gt;Zmieniony&lt;/b&gt;  </translation>
-    </message>
-    <message>
-        <source> Read only  </source>
-        <translation type="obsolete"> Tylko do odczytu  </translation>
-    </message>
-    <message>
-        <source> Overwrite  </source>
-        <translation type="obsolete"> Nadpisz  </translation>
-    </message>
-    <message>
-        <source> Insert </source>
-        <translation type="obsolete"> Wstaw  </translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="obsolete">&amp;Nowy</translation>
-    </message>
-    <message>
-        <source>Create a new file</source>
-        <translation type="obsolete">Utwórz nowy plik</translation>
-    </message>
-    <message>
-        <source>&amp;Open...</source>
-        <translation type="obsolete">&amp;Otwórz...</translation>
-    </message>
-    <message>
-        <source>Open an existing file</source>
-        <translation type="obsolete">Otwórz istniejący plik...</translation>
-    </message>
-    <message>
-        <source>&amp;Open file with preview</source>
-        <translation type="obsolete">O&amp;twórz plik z podglądem</translation>
-    </message>
-    <message>
-        <source>Open an existing file (Openfile dialog with preview)</source>
-        <translation type="obsolete">Otwórz istniejący plik... (z podglądem pliku)</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Zapisz</translation>
-    </message>
-    <message>
-        <source>Save the document to disk</source>
-        <translation type="obsolete">Zapisz plik na dysku</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="obsolete">Zapisz &amp;jako...</translation>
-    </message>
-    <message>
-        <source>Save the document under a new name</source>
-        <translation type="obsolete">Zapisz plik pod nową nazwą</translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation type="obsolete">Z&amp;amknij edytor</translation>
-    </message>
-    <message>
-        <source>Exit the application</source>
-        <translation type="obsolete">Zamknięcie edytora</translation>
-    </message>
-    <message>
-        <source>&amp;Find files...</source>
-        <translation type="obsolete">&amp;Znajdź pliki...</translation>
-    </message>
-    <message>
-        <source>Find files</source>
-        <translation type="obsolete">Znajdź w plikach (znajdź pliki)</translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation type="obsolete">Wy&amp;drukuj...</translation>
-    </message>
-    <message>
-        <source>Print file</source>
-        <translation type="obsolete">Wydrukuj plik</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <translation type="obsolete">&amp;Cofnij</translation>
-    </message>
-    <message>
-        <source>Undo last operation</source>
-        <translation type="obsolete">Cofnij ostatnią operację</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">&amp;Przywróć</translation>
-    </message>
-    <message>
-        <source>Redo last operation</source>
-        <translation type="obsolete">Przywróć ostatnią operację</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t</source>
-        <translation type="obsolete">&amp;Wy&amp;tnij</translation>
-    </message>
-    <message>
-        <source>Cut the current selection&apos;s contents to the clipboard</source>
-        <translation type="obsolete">Wycina aktualnie zaznaczony tekst do schowka</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">S&amp;kopiuj</translation>
-    </message>
-    <message>
-        <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation type="obsolete">Kopiuje aktualnie zaznaczony tekst do schowka</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">Wk&amp;lej</translation>
-    </message>
-    <message>
-        <source>Paste the clipboard&apos;s contents into the current selection</source>
-        <translation type="obsolete">Wstawia tekst ze schowka</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Znajdź</translation>
-    </message>
-    <message>
-        <source>Find text</source>
-        <translation type="obsolete">Znajdź tekst</translation>
-    </message>
-    <message>
-        <source>&amp;Replace</source>
-        <translation type="obsolete">Za&amp;mień</translation>
-    </message>
-    <message>
-        <source>Find and replace text</source>
-        <translation type="obsolete">Znajdź i zamień tekst</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Usuń</translation>
-    </message>
-    <message>
-        <source>Removes selected text</source>
-        <translation type="obsolete">Usuwa zaznaczony tekst</translation>
-    </message>
-    <message>
-        <source>&amp;Select all</source>
-        <translation type="obsolete">Zaznacz &amp;wszystko</translation>
-    </message>
-    <message>
-        <source>Select all text</source>
-        <translation type="obsolete">Zaznacza cały tekst</translation>
-    </message>
-    <message>
-        <source>Read &amp;only</source>
-        <translation type="obsolete">Tylko do odczyt&amp;u</translation>
-    </message>
-    <message>
-        <source>Makes text read only</source>
-        <translation type="obsolete">Blokuje możliwość edytowania tekstu</translation>
-    </message>
-    <message>
-        <source>Configuration</source>
-        <translation type="obsolete">Konfiguracja</translation>
-    </message>
-    <message>
-        <source>Open configuration dialog</source>
-        <translation type="obsolete">Ustawienia edytora</translation>
+        <translation type="obsolete">O programu EdytorNC</translation>
     </message>
     <message>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.</translation>
+        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
     </message>
     <message>
         <source>&lt;P&gt;Version: </source>
-        <translation type="obsolete">&lt;P&gt;Wersja: </translation>
+        <translation type="obsolete">&lt;P&gt;Verze: </translation>
     </message>
     <message>
         <source>&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
+        <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</translation>
     </message>
-    <message>
-        <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;Wieloplatformowy instalator dzięki &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;EdytorNC zdobył &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation type="obsolete">&lt;P&gt;EdytorNC zawiera fragmenty kodu z innych projektów Wolnego Oprogramowania.</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <oldsource>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.</oldsource>
-        <translation type="obsolete">&lt;P&gt;&lt;i&gt;EdytorNC jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU, wydanej przez Fundację Wolnego Oprogramowania - według wersji 2-giej tej Licencji lub którejś z późniejszych wersji.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;P&gt;&lt;i&gt;Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych informacji - Powszechna Licencja Publiczna GNU.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <source>Calculate bolt hole&apos;s positions</source>
-        <translation type="obsolete">Oblicz współrzędne otworów rozmieszczonych na okręgu</translation>
-    </message>
-    <message>
-        <source>&amp;Insert spaces</source>
-        <translation type="obsolete">&amp;Wstaw spacje</translation>
-    </message>
-    <message>
-        <source>Inserts spaces</source>
-        <translation type="obsolete">Wstawia spacje do programu </translation>
-    </message>
-    <message>
-        <source>Remove spaces</source>
-        <translation type="obsolete">Usuń spacje</translation>
-    </message>
-    <message>
-        <source>Removes spaces</source>
-        <translation type="obsolete">Usuwa spacje z programu</translation>
-    </message>
-    <message>
-        <source>Remove empty lines</source>
-        <translation type="obsolete">Usuń puste linie</translation>
-    </message>
-    <message>
-        <source>Removes empty lines</source>
-        <translation type="obsolete">Usuń puste linie</translation>
-    </message>
-    <message>
-        <source>Insert dots</source>
-        <translation type="obsolete">Wstaw kropki</translation>
-    </message>
-    <message>
-        <source>Inserts decimal dot</source>
-        <translation type="obsolete">Wstaw kropki dziesiętne</translation>
-    </message>
-    <message>
-        <source>Renumber</source>
-        <translation type="obsolete">Przenumeruj</translation>
-    </message>
-    <message>
-        <source>Renumber program blocks</source>
-        <translation type="obsolete">Przenumeruj linie programu</translation>
-    </message>
-    <message>
-        <source>Feed&apos;s speed&apos;s</source>
-        <translation type="obsolete">Parametry skrawania</translation>
-    </message>
-    <message>
-        <source>Calculate speed, feed, cutting speed</source>
-        <translation type="obsolete">Obliczanie parametrów skrawania</translation>
-    </message>
-    <message>
-        <source>Chamfer</source>
-        <translation type="obsolete">Zfazowanie</translation>
-    </message>
-    <message>
-        <source>Calculate chamfer</source>
-        <translation type="obsolete">Obliczenia zfazowania</translation>
-    </message>
-    <message>
-        <source>Solution of triangles</source>
-        <translation type="obsolete">Obliczenia trójkątów</translation>
-    </message>
-    <message>
-        <source>Convert inch &lt;-&gt; mm</source>
-        <translation type="obsolete">Przelicz mm &lt;-&gt; cale</translation>
-    </message>
-    <message>
-        <source>Convert program inch &lt;-&gt; mm</source>
-        <translation type="obsolete">Zamień program cale &lt;-&gt; mm</translation>
-    </message>
-    <message>
-        <source>Calculator</source>
-        <translation type="obsolete">Kalkulator</translation>
-    </message>
-    <message>
-        <source>Run calculator</source>
-        <translation type="obsolete">Uruchom kalkulator</translation>
+    <message utf8="true">
+        <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
+        <translation type="obsolete">&lt;P&gt;Poděkování Jordi Sayol i Salomó za překlad do katalánštiny a balíček pro Debian</translation>
     </message>
     <message>
         <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
-        <translation type="obsolete">&lt;br /&gt;Tłumaczenie na język niemiecki Michael Numberger</translation>
+        <translation type="obsolete">&lt;P&gt;Poděkování Michaelovi Numbergerovi za překlad do němčiny</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
+        <translation type="obsolete">&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
+        <translation type="obsolete">&lt;P&gt;Instalátor pro více operačních systémů vytvořen &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
+        <translation type="obsolete">&lt;P&gt;EdytorNC získal &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE cenu poskytnutou Softpedií&quot;&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
+        <translation type="obsolete">&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
+        <translation type="obsolete">&lt;P&gt;&lt;i&gt;EdytorNC je svobodný program. Můžete jej šířit a/nebo upravovat za podmínek GNU General Public License, jak jsou zveřejněny Free Software Foundation; buď ve verzi 2 tohoto povolení, nebo (podle svého uvážení) v jakékoli pozdější verzi.&lt;/i&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <translation type="obsolete">&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
+    </message>
+    <message>
+        <source> Col: </source>
+        <translation type="obsolete"> Sloupec: </translation>
+    </message>
+    <message>
+        <source>  Line: </source>
+        <translation type="obsolete"> Řádek: </translation>
+    </message>
+    <message>
+        <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
+        <translation type="obsolete">  &lt;b&gt;Upraveno&lt;/b&gt;  </translation>
+    </message>
+    <message>
+        <source> Read only  </source>
+        <translation type="obsolete">Pouze pro čtení</translation>
+    </message>
+    <message>
+        <source> Overwrite  </source>
+        <translation type="obsolete"> Přepsat  </translation>
+    </message>
+    <message>
+        <source> Insert </source>
+        <translation type="obsolete"> Vložit </translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <translation type="obsolete">%1 %2</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="obsolete">&amp;Nový</translation>
+    </message>
+    <message>
+        <source>Create a new file</source>
+        <translation type="obsolete">Vytvořit nový soubor</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation type="obsolete">&amp;Otevřít...</translation>
+    </message>
+    <message>
+        <source>Open an existing file</source>
+        <translation type="obsolete">Otevřít stávající soubor</translation>
+    </message>
+    <message>
+        <source>&amp;Open example...</source>
+        <translation type="obsolete">&amp;Otevřít příklad...</translation>
+    </message>
+    <message>
+        <source>Open an example file</source>
+        <translation type="obsolete">Otevřít soubor s příkladem</translation>
+    </message>
+    <message>
+        <source>&amp;Open file with preview</source>
+        <translation type="obsolete">&amp;Otevřít soubor s náhledem</translation>
+    </message>
+    <message>
+        <source>Open an existing file (Openfile dialog with preview)</source>
+        <translation type="obsolete">Otevřít stávající soubor (dialog otevření souboru s náhledem)</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="obsolete">&amp;Uložit</translation>
+    </message>
+    <message>
+        <source>Save the document to disk</source>
+        <translation type="obsolete">Uložit dokument na disk</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation type="obsolete">Uložit &amp;jako...</translation>
+    </message>
+    <message>
+        <source>Save the document under a new name</source>
+        <translation type="obsolete">Uložit dokument pod novým názvem</translation>
+    </message>
+    <message>
+        <source>E&amp;xit</source>
+        <translation type="obsolete">&amp;Ukončit</translation>
+    </message>
+    <message>
+        <source>Ctrl+Q</source>
+        <translation type="obsolete">Ctrl+Q</translation>
+    </message>
+    <message>
+        <source>Exit the application</source>
+        <translation type="obsolete">Ukončit program</translation>
+    </message>
+    <message>
+        <source>&amp;Find files...</source>
+        <translation type="obsolete">&amp;Hledat soubory...</translation>
+    </message>
+    <message>
+        <source>Find files</source>
+        <translation type="obsolete">Hledat soubory</translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation type="obsolete">&amp;Tisk</translation>
+    </message>
+    <message>
+        <source>Print file</source>
+        <translation type="obsolete">Vytisknout soubor</translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation type="obsolete">&amp;Zpět</translation>
+    </message>
+    <message>
+        <source>Undo last operation</source>
+        <translation type="obsolete">Zpět poslední operaci</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation type="obsolete">&amp;Znovu</translation>
+    </message>
+    <message>
+        <source>Redo last operation</source>
+        <translation type="obsolete">Znovu poslední operaci</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation type="obsolete">Vyj&amp;mout</translation>
+    </message>
+    <message>
+        <source>Cut the current selection&apos;s contents to the clipboard</source>
+        <translation type="obsolete">Vyjmout obsah nynějšího výběru do schránky</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation type="obsolete">&amp;Kopírovat</translation>
+    </message>
+    <message>
+        <source>Copy the current selection&apos;s contents to the clipboard</source>
+        <translation type="obsolete">Kopírovat obsah nynějšího výběru do schránky</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation type="obsolete">&amp;Vložit</translation>
+    </message>
+    <message>
+        <source>Paste the clipboard&apos;s contents into the current selection</source>
+        <translation type="obsolete">Vložit obsah schránky do nynějšího výběru</translation>
+    </message>
+    <message>
+        <source>&amp;Find</source>
+        <translation type="obsolete">&amp;Najít</translation>
+    </message>
+    <message>
+        <source>Find text</source>
+        <translation type="obsolete">Najít text</translation>
+    </message>
+    <message>
+        <source>&amp;Replace</source>
+        <translation type="obsolete">&amp;Nahradit</translation>
+    </message>
+    <message>
+        <source>Ctrl+R</source>
+        <translation type="obsolete">Ctrl+R</translation>
+    </message>
+    <message>
+        <source>Find and replace text</source>
+        <translation type="obsolete">Najít a nahradit text</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="obsolete">&amp;Smazat</translation>
+    </message>
+    <message>
+        <source>Removes selected text</source>
+        <translation type="obsolete">Odstraní vybraný text</translation>
+    </message>
+    <message>
+        <source>&amp;Select all</source>
+        <translation type="obsolete">&amp;Vybrat vše</translation>
+    </message>
+    <message>
+        <source>Select all text</source>
+        <translation type="obsolete">Vybrat všechen text</translation>
+    </message>
+    <message>
+        <source>Read &amp;only</source>
+        <translation type="obsolete">&amp;Pouze pro čtení</translation>
+    </message>
+    <message>
+        <source>F12</source>
+        <translation type="obsolete">F12</translation>
+    </message>
+    <message>
+        <source>Makes text read only</source>
+        <translation type="obsolete">Udělá text pouze pro čtení</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="obsolete">Nastavení</translation>
+    </message>
+    <message>
+        <source>Open configuration dialog</source>
+        <translation type="obsolete">Otevřít dialog nastavení</translation>
+    </message>
+    <message>
+        <source>&amp;Bolt hole circle</source>
+        <translation type="obsolete">&amp;Kruh otvoru šroubu</translation>
+    </message>
+    <message>
+        <source>F8</source>
+        <translation type="obsolete">F8</translation>
+    </message>
+    <message>
+        <source>Calculate bolt hole&apos;s positions</source>
+        <translation type="obsolete">Spočítat polohy otvorů šroubu</translation>
+    </message>
+    <message>
+        <source>&amp;Insert spaces</source>
+        <translation type="obsolete">&amp;Vložit mezery</translation>
+    </message>
+    <message>
+        <source>F4</source>
+        <translation type="obsolete">F4</translation>
+    </message>
+    <message>
+        <source>Inserts spaces</source>
+        <translation type="obsolete">Vložit mezery</translation>
+    </message>
+    <message>
+        <source>Remove spaces</source>
+        <translation type="obsolete">Odstranit mezery</translation>
+    </message>
+    <message>
+        <source>F5</source>
+        <translation type="obsolete">F5</translation>
+    </message>
+    <message>
+        <source>Removes spaces</source>
+        <translation type="obsolete">Odstraní mezery</translation>
+    </message>
+    <message>
+        <source>Remove empty lines</source>
+        <translation type="obsolete">Odstranit prázdné řádky</translation>
+    </message>
+    <message>
+        <source>Removes empty lines</source>
+        <translation type="obsolete">Odstraní prázdné řádky</translation>
+    </message>
+    <message>
+        <source>Insert dots</source>
+        <translation type="obsolete">Vložit tečky</translation>
+    </message>
+    <message>
+        <source>F6</source>
+        <translation type="obsolete">F6</translation>
+    </message>
+    <message>
+        <source>Inserts decimal dot</source>
+        <translation type="obsolete">Vložit desetinnou tečku</translation>
+    </message>
+    <message>
+        <source>Renumber</source>
+        <translation type="obsolete">Přečíslovat</translation>
+    </message>
+    <message>
+        <source>F7</source>
+        <translation type="obsolete">F7</translation>
+    </message>
+    <message>
+        <source>Renumber program blocks</source>
+        <translation type="obsolete">Přečíslovat programové bloky</translation>
+    </message>
+    <message>
+        <source>Feed&apos;s speed&apos;s</source>
+        <translation type="obsolete">Počet otáček + Posun</translation>
+    </message>
+    <message>
+        <source>F9</source>
+        <translation type="obsolete">F9</translation>
+    </message>
+    <message>
+        <source>Calculate speed, feed, cutting speed</source>
+        <translation type="obsolete">Spočítat počet otáček, posun a rychlost řezání</translation>
+    </message>
+    <message>
+        <source>Chamfer</source>
+        <translation type="obsolete">Zkosení</translation>
+    </message>
+    <message>
+        <source>Calculate chamfer</source>
+        <translation type="obsolete">Spočítat zkosení</translation>
+    </message>
+    <message>
+        <source>Solution of triangles</source>
+        <translation type="obsolete">Spočítat trojúhelníky</translation>
+    </message>
+    <message>
+        <source>Convert inch &lt;-&gt; mm</source>
+        <translation type="obsolete">Převést inch &lt;-&gt; mm</translation>
+    </message>
+    <message>
+        <source>Convert program inch &lt;-&gt; mm</source>
+        <translation type="obsolete">Převáděcí program inch &lt;-&gt; mm (palce &lt;-&gt; milimetry)</translation>
+    </message>
+    <message>
+        <source>Calculator</source>
+        <translation type="obsolete">Kalkulačka</translation>
+    </message>
+    <message>
+        <source>Run calculator</source>
+        <translation type="obsolete">Spustit kalkulačku</translation>
     </message>
     <message>
         <source>Serial port send/receive</source>
-        <oldsource>Serial port send/recive</oldsource>
-        <translation type="obsolete">Wysyłanie/odbieranie przez port szeregowy</translation>
+        <translation type="obsolete">Sériová přípojka poslat/přijmout</translation>
     </message>
     <message>
         <source>Compile macro - experimental</source>
-        <translation type="obsolete">Kompiluj makro - funkcja eksperymentalna</translation>
+        <translation type="obsolete">Sestavit makra - pokusná funkce</translation>
     </message>
     <message>
         <source>Translate EdytorNC macro into CNC program</source>
-        <translation type="obsolete">Przetłumacz makro EdytorNC na program CNC</translation>
+        <translation type="obsolete">Přeložit makro EdytorNC do programu CNC</translation>
+    </message>
+    <message>
+        <source>Show diff - open current file in right diff window</source>
+        <translation type="obsolete">Ukázat rozdíly - otevřít nynější soubor v pravém okně s rozdíly</translation>
+    </message>
+    <message>
+        <source>Show diff - open current file in left diff window</source>
+        <translation type="obsolete">Ukázat rozdíly - otevřít nynější soubor v levém okně s rozdíly</translation>
+    </message>
+    <message>
+        <source>On/off diff window</source>
+        <translation type="obsolete">Zapnout/Vypnout okno s rozdíly</translation>
+    </message>
+    <message>
+        <source>Show diff window</source>
+        <translation type="obsolete">Ukázat okno s rozdíly</translation>
     </message>
     <message>
         <source>Cl&amp;ose</source>
-        <translation type="obsolete">&amp;Zamknij</translation>
+        <translation type="obsolete">Za&amp;vřít</translation>
+    </message>
+    <message>
+        <source>Ctrl+F4</source>
+        <translation type="obsolete">Ctrl+F4</translation>
     </message>
     <message>
         <source>Close the active window</source>
-        <translation type="obsolete">Zamknij aktywne okno</translation>
+        <translation type="obsolete">Zavřít činné okno</translation>
     </message>
     <message>
         <source>Close &amp;All</source>
-        <translation type="obsolete">Zamknij &amp;wszystkie okna</translation>
+        <translation type="obsolete">Zavřít &amp;vše</translation>
     </message>
     <message>
         <source>Close all the windows</source>
-        <translation type="obsolete">Zamknij wszystkie okna</translation>
+        <translation type="obsolete">Zavřít všechna okna</translation>
     </message>
     <message>
         <source>&amp;Tile</source>
-        <translation type="obsolete">Rozmieść &amp;kafelkowo</translation>
+        <translation type="obsolete">Klást jedno &amp;vedle druhého</translation>
     </message>
     <message>
         <source>Tile the windows</source>
-        <translation type="obsolete">Rozmieść okna kafelkowo</translation>
+        <translation type="obsolete">Klást jedno okno vedle druhého</translation>
     </message>
     <message>
         <source>&amp;Cascade</source>
-        <translation type="obsolete">&amp;Rozmieść kaskadowo</translation>
+        <translation type="obsolete">&amp;Překrývat</translation>
     </message>
     <message>
         <source>Cascade the windows</source>
-        <translation type="obsolete">Rozmieść okna kaskadowo</translation>
+        <translation type="obsolete">Překrývat okna</translation>
     </message>
     <message>
         <source>Ne&amp;xt</source>
-        <translation type="obsolete">&amp;Następne</translation>
+        <translation type="obsolete">Da&amp;lší</translation>
     </message>
     <message>
         <source>Move the focus to the next window</source>
-        <translation type="obsolete">Uaktywnia kolejne okno</translation>
+        <translation type="obsolete">Přesunout pozornost na další okno</translation>
     </message>
     <message>
         <source>Pre&amp;vious</source>
-        <translation type="obsolete">&amp;Poprzednie</translation>
+        <translation type="obsolete">Před&amp;chozí</translation>
     </message>
     <message>
         <source>Move the focus to the previous window</source>
-        <translation type="obsolete">Uaktywnia poprzednie okno</translation>
+        <translation type="obsolete">Přesunout pozornost na předchozí okno</translation>
     </message>
     <message>
         <source>&amp;Create cnc tooltips</source>
-        <translation type="obsolete">&amp;Utwórz podpowiedzi CNC</translation>
+        <translation type="obsolete">&amp;Vytvořit nástrojové rady CNC</translation>
     </message>
     <message>
         <source>Create default cnc tooltips file</source>
-        <oldsource>Create cnc tooltips file</oldsource>
-        <translation type="obsolete">Tworzy dmoyślny plik z podpowiedziami CNC</translation>
+        <translation type="obsolete">Vytvořit soubor s výchozími nástrojovými radami CNC</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="obsolete">&amp;O edytorze</translation>
+        <translation type="obsolete">&amp;O programu</translation>
     </message>
     <message>
         <source>Show the application&apos;s About box</source>
-        <translation type="obsolete">Wyświetla okienko inforacyjne o programie</translation>
+        <translation type="obsolete">Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -5615,23 +5701,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show the Qt library&apos;s About box</source>
-        <translation type="obsolete">Wyświetla okienko inforacyjne o biblotekach Qt</translation>
+        <translation type="obsolete">Ukázat dialog &quot;O Qt&quot;</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="obsolete">&amp;Plik</translation>
+        <translation type="obsolete">&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;Recent files</source>
-        <translation type="obsolete">O&amp;statnio otwarte</translation>
+        <translation type="obsolete">&amp;Naposledy otevřené soubory</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Edycja</translation>
+        <translation type="obsolete">&amp;Úpravy</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation type="obsolete">&amp;Narzędzia</translation>
+        <translation type="obsolete">&amp;Nástroje</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -5639,174 +5725,443 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="obsolete">&amp;Pomoc</translation>
+        <translation type="obsolete">&amp;Nápověda</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="obsolete">Plik</translation>
+        <translation type="obsolete">Soubor</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="obsolete">Edycja</translation>
+        <translation type="obsolete">Úpravy</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="obsolete">Narzędzia</translation>
+        <translation type="obsolete">Nástroje</translation>
     </message>
     <message>
         <source>Window</source>
         <translation type="obsolete">Okno</translation>
     </message>
     <message>
+        <source>Highlight style and tooltip mode</source>
+        <translation type="obsolete">Zvýraznit režim stylu a nástrojových rad</translation>
+    </message>
+    <message>
+        <source>SINUMERIK OLD</source>
+        <translation type="obsolete">STARÝ SINUMERIK</translation>
+    </message>
+    <message>
+        <source>SINUMERIK NEW</source>
+        <translation type="obsolete">NOVÝ SINUMERIK</translation>
+    </message>
+    <message>
         <source>Attach current highlight setting to current directory of programs</source>
-        <oldsource>Attach current highlight stting to current directory of programs</oldsource>
-        <translation type="obsolete">Powiąż aktualne ustawienia podświetlania z aktualnym katalogiem programów</translation>
+        <translation type="obsolete">Přiložit současné nastavení zvýrazňování do nynějšího adresáře s programem</translation>
     </message>
     <message>
         <source>Remove highlight settings from the directory</source>
-        <translation type="obsolete">Usuń informacje o stylu podświetlania z bierzącego katalogu</translation>
+        <translation type="obsolete">Odstranit nastavení zvýrazňování z adresáře s programem</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="obsolete">Gotowy</translation>
+        <translation type="obsolete">Připraven</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="obsolete">Znajdź</translation>
+        <translation type="obsolete">Najít</translation>
     </message>
     <message>
         <source>Find next</source>
-        <translation type="obsolete">Znajdź następny</translation>
+        <translation type="obsolete">Najít další</translation>
     </message>
     <message>
         <source>Find previous</source>
-        <translation type="obsolete">Znajdź poprzedni</translation>
+        <translation type="obsolete">Najít předchozí</translation>
     </message>
     <message>
         <source>Replace &amp;&amp; find next</source>
-        <translation type="obsolete">Znajdź i zamień następny</translation>
+        <translation type="obsolete">Nahradit a najít další</translation>
     </message>
     <message>
         <source>Replace &amp;&amp; find previous</source>
-        <translation type="obsolete">Znajdź i zamień poprzedni</translation>
+        <translation type="obsolete">Nahradit a najít předchozí</translation>
     </message>
     <message>
         <source>Replace all</source>
-        <translation type="obsolete">Zamień wszysko</translation>
+        <translation type="obsolete">Nahradit vše</translation>
     </message>
     <message>
         <source>Close find toolbar</source>
-        <translation type="obsolete">Zamknij pasek wyszukiwania</translation>
+        <translation type="obsolete">Zavřít nástrojový pruh pro hledání</translation>
     </message>
     <message>
         <source>Find:</source>
-        <translation type="obsolete">Znajdź:</translation>
+        <translation type="obsolete">Hledat:</translation>
     </message>
     <message>
         <source>Replace with:</source>
-        <translation type="obsolete">Zamień na:</translation>
+        <translation type="obsolete">Nahradit:</translation>
     </message>
     <message>
         <source>Ignore c&amp;ase</source>
-        <translation type="obsolete">&amp;Ignoruj wielkość znaków</translation>
+        <translation type="obsolete">Nevšímat si psaní v&amp;elkých a malých písmen</translation>
     </message>
     <message>
         <source>&amp;Whole words only</source>
-        <translation type="obsolete">&amp;Tylko całe wyrazy</translation>
+        <translation type="obsolete">Pouze celá &amp;slova</translation>
     </message>
     <message>
         <source>Serial port toolbar</source>
-        <translation type="obsolete">Pasek narzędzi port szeregowy</translation>
+        <translation type="obsolete">Nástrojový pruh pro sériovou přípojku</translation>
     </message>
     <message>
         <source>Serial port configuration</source>
-        <translation type="obsolete">Konfiguracja portu szeregowego</translation>
+        <translation type="obsolete">Nastavení sériové přípojky</translation>
     </message>
     <message>
         <source>Receive new file</source>
-        <oldsource>Recive new file</oldsource>
-        <translation type="obsolete">Odbierz nowy plik</translation>
+        <translation type="obsolete">Přijmout nový soubor</translation>
     </message>
     <message>
         <source>Send current file</source>
-        <translation type="obsolete">Wyślij aktualny plik</translation>
-    </message>
-    <message>
-        <source>Sending...</source>
-        <translation type="obsolete">Wysyłanie...</translation>
-    </message>
-    <message>
-        <source>Waiting...</source>
-        <translation type="obsolete">Czekam...</translation>
-    </message>
-    <message>
-        <source>Waiting for a signal readiness...</source>
-        <translation type="obsolete">Czekam na sygnał gotowości...</translation>
-    </message>
-    <message>
-        <source>Sending byte %1 of %2</source>
-        <translation type="obsolete">Wysyłanie bajtu %1 z %2</translation>
-    </message>
-    <message>
-        <source>Receiving...</source>
-        <translation type="obsolete">Odbieranie...</translation>
-    </message>
-    <message>
-        <source>Waiting for data...</source>
-        <translation type="obsolete">Oczekiwanie na dane...</translation>
-    </message>
-    <message>
-        <source>Reciving byte %1</source>
-        <translation type="obsolete">Odbieranie bajtu %1</translation>
-    </message>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="obsolete">Port nie został otwarty prawidłowo</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="obsolete">Nie można przydzielić pamięci</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="obsolete">Błąd podczas odczytu</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="obsolete">Błąd podczas zapisu</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="obsolete">Brak błędu</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="obsolete">Nieznany błąd</translation>
-    </message>
-    <message>
-        <source>Close send/receive toolbar</source>
-        <oldsource>Close send/recive toolbar</oldsource>
-        <translation type="obsolete">Zamknij pasek wysyłania/odbierania przez port szeregowy</translation>
-    </message>
-    <message>
-        <source>&amp;Bolt hole circle</source>
-        <translation type="obsolete">&amp;Otwory na okręgu</translation>
+        <translation type="obsolete">Poslat nynější soubor</translation>
     </message>
     <message>
         <source>Attach current port settings to current directory of programs</source>
-        <translation type="obsolete">Powiąż aktualne ustawienia portu z aktualnym katalogiem programów</translation>
+        <translation type="obsolete">Přiložit současné nastavení přípojky do nynějšího adresáře s programem</translation>
     </message>
     <message>
         <source>Remove settings from the directory</source>
-        <translation type="obsolete">Usuń informacje o konfiguracji poru z bierzącego katalogu</translation>
+        <translation type="obsolete">Odstranit nastavení z adresáře s programem</translation>
     </message>
     <message>
         <source>Check serial port settings</source>
-        <translation type="obsolete">Testowanie ustawień portu szeregowego</translation>
+        <translation type="obsolete">Prověřit nastavení sériové přípojky</translation>
+    </message>
+    <message>
+        <source>Close send/receive toolbar</source>
+        <translation type="obsolete">Zavřít nástrojový pruh poslat/přijmout</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="obsolete">Domyślne</translation>
+        <translation type="obsolete">Výchozí</translation>
+    </message>
+    <message>
+        <source>Sending...</source>
+        <translation type="obsolete">Posílá se...</translation>
+    </message>
+    <message>
+        <source>Waiting...</source>
+        <translation type="obsolete">Čeká se...</translation>
+    </message>
+    <message>
+        <source>Start in %1s</source>
+        <translation type="obsolete">Začátek za %1s</translation>
+    </message>
+    <message>
+        <source>Waiting for a signal readiness...</source>
+        <translation type="obsolete">Čeká se na připravenost signálu...</translation>
+    </message>
+    <message>
+        <source>Sending byte %1 of %2</source>
+        <translation type="obsolete">Posílají se byty: %1 z %2</translation>
+    </message>
+    <message>
+        <source>Receiving...</source>
+        <translation type="obsolete">Přijímá se...</translation>
+    </message>
+    <message>
+        <source>Waiting for data...</source>
+        <translation type="obsolete">Čeká se na data...</translation>
+    </message>
+    <message>
+        <source>Reciving byte %1</source>
+        <translation type="obsolete">Přijímají se byty %1</translation>
+    </message>
+    <message>
+        <source>Invalid file descriptor (port was not opened correctly)</source>
+        <translation type="obsolete">Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
+    </message>
+    <message>
+        <source>Unable to allocate memory tables</source>
+        <translation type="obsolete">Nelze přidělit paměťové tabulky</translation>
+    </message>
+    <message>
+        <source>Caught a non-blocked signal</source>
+        <translation type="obsolete">Zachycen ne-blokovaný signál</translation>
+    </message>
+    <message>
+        <source>Operation timed out</source>
+        <translation type="obsolete">Překročení času u operace</translation>
+    </message>
+    <message>
+        <source>The file opened by the port is not a character device</source>
+        <translation type="obsolete">Soubor otevřený přípojkou není typickým zařízením</translation>
+    </message>
+    <message>
+        <source>The port detected a break condition</source>
+        <translation type="obsolete">Přípojka zjistila podmínku přerušení</translation>
+    </message>
+    <message>
+        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
+        <translation type="obsolete">Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
+    </message>
+    <message>
+        <source>There was an I/O error while communicating with the port</source>
+        <translation type="obsolete">Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
+    </message>
+    <message>
+        <source>Character buffer overrun</source>
+        <translation type="obsolete">Překročení vyrovnávací paměti znaku</translation>
+    </message>
+    <message>
+        <source>Receive buffer overflow</source>
+        <translation type="obsolete">Přetečení vyrovnávací paměti pro příjem</translation>
+    </message>
+    <message>
+        <source>The port detected a parity error in the received data</source>
+        <translation type="obsolete">Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
+    </message>
+    <message>
+        <source>Transmit buffer overflow</source>
+        <translation type="obsolete">Přetečení vyrovnávací paměti pro přenos</translation>
+    </message>
+    <message>
+        <source>General read operation failure</source>
+        <translation type="obsolete">Selhání operace běžného čtení</translation>
+    </message>
+    <message>
+        <source>General write operation failure</source>
+        <translation type="obsolete">Selhání operace běžného zápisu</translation>
+    </message>
+    <message>
+        <source>No Error has occured</source>
+        <translation type="obsolete">Nevyskytla se žádná chyba</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation type="obsolete">Neznámá chyba</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
+        <translation type="obsolete">&lt;b&gt;M00&lt;/b&gt; - zastavení programu, naprosté</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M01&lt;/b&gt; - optional program stop</source>
+        <translation type="obsolete">&lt;b&gt;M01&lt;/b&gt; - volitelné zastavení programu</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M02&lt;/b&gt; - end of program</source>
+        <translation type="obsolete">&lt;b&gt;M02&lt;/b&gt; - ukončení programu</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M03&lt;/b&gt; - start spindle CW</source>
+        <translation type="obsolete">&lt;b&gt;M03&lt;/b&gt; - spuštění hřídele CW (po směru hodinových ručiček)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M04&lt;/b&gt; - start spindle CCW</source>
+        <translation type="obsolete">&lt;b&gt;M04&lt;/b&gt; - spuštění hřídele CCW (proti směru hodinových ručiček)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M05&lt;/b&gt; - spindle stop</source>
+        <translation type="obsolete">&lt;b&gt;M05&lt;/b&gt; - zastavení hřídele</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M06&lt;/b&gt; - tool change</source>
+        <translation type="obsolete">&lt;b&gt;M06&lt;/b&gt; - změna nástroje</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M08&lt;/b&gt; - coolant on</source>
+        <translation type="obsolete">&lt;b&gt;M08&lt;/b&gt; - zapnutí chladicí kapaliny/směsi/média</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M09&lt;/b&gt; - coolant off</source>
+        <translation type="obsolete">&lt;b&gt;M09&lt;/b&gt; - vypnutí chladicí kapaliny/směsi/média</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M12&lt;/b&gt; - M-tool spindle STOP</source>
+        <translation type="obsolete">&lt;b&gt;M12&lt;/b&gt; - M-nástroj ZASTAVENÍ hřídele</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M13&lt;/b&gt; - M-tool spindle CW</source>
+        <translation type="obsolete">&lt;b&gt;M13&lt;/b&gt; - M-nástroj hřídele CW (po směru hodinových ručiček)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M14&lt;/b&gt; - M-tool spindle CCW</source>
+        <translation type="obsolete">&lt;b&gt;M14&lt;/b&gt; - M-nástroj hřídele CCW (proti směru hodinových ručiček)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M15&lt;/b&gt; - B or C-axis positioning, plus direction CW</source>
+        <translation type="obsolete">&lt;b&gt;M15&lt;/b&gt; - polohování osy B nebo C, plus směr CW (po směru hodinových ručiček)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M16&lt;/b&gt; - B or C-axis positioning, minus direction CCW</source>
+        <translation type="obsolete">&lt;b&gt;M16&lt;/b&gt; - polohování osy B nebo C, minus směr CCW (proti směru hodinových ručiček)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M19&lt;/b&gt; - oriented spindle stop</source>
+        <translation type="obsolete">&lt;b&gt;M19&lt;/b&gt; - zaměřené zastavení hřídele</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M20&lt;/b&gt; - tailstock barrier OFF</source>
+        <translation type="obsolete">&lt;b&gt;M20&lt;/b&gt; - zábrana koníka VYPNUTA</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M21&lt;/b&gt; - tailstock barrier ON</source>
+        <translation type="obsolete">&lt;b&gt;M21&lt;/b&gt; - zábrana koníka ZAPNUTA</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M22&lt;/b&gt; - chamfering OFF (for thread cutting cycle)</source>
+        <translation type="obsolete">&lt;b&gt;M22&lt;/b&gt; - zkosení VYPNUTO (pro periodu řezání závitu)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M23&lt;/b&gt; - chamfering ON (for thread cutting cycle)</source>
+        <translation type="obsolete">&lt;b&gt;M23&lt;/b&gt; - zkosení ZAPNUTO (pro periodu řezání závitu)</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M24&lt;/b&gt; - chuck barrier OFF</source>
+        <translation type="obsolete">&lt;b&gt;M24&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) VYPNUTA</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M25&lt;/b&gt; - chuck barrier ON</source>
+        <translation type="obsolete">&lt;b&gt;M25&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) ZAPNUTA</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M26&lt;/b&gt; - thread lead along Z-axis</source>
+        <translation type="obsolete">&lt;b&gt;M26&lt;/b&gt; - vedení závitu podél osy Z</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M27&lt;/b&gt; - thread lead along X-axis</source>
+        <translation type="obsolete">&lt;b&gt;M27&lt;/b&gt; - vedení závitu podél osy X</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function OFF</source>
+        <translation type="obsolete">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje VYPNUTA</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function ON</source>
+        <translation type="obsolete">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje ZAPNUTA</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M30&lt;/b&gt; - end of program</source>
+        <translation type="obsolete">&lt;b&gt;M30&lt;/b&gt; - ukončení programu</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M40&lt;/b&gt; - spindle gear range neutral</source>
+        <translation type="obsolete">&lt;b&gt;M40&lt;/b&gt; - neutrální rozsah převodu osy</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M41&lt;/b&gt; - spindle gear range 1</source>
+        <translation type="obsolete">&lt;b&gt;M41&lt;/b&gt; - rozsah převodu osy 1</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 2</source>
+        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 2</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M43&lt;/b&gt; - spindle gear range 3</source>
+        <translation type="obsolete">&lt;b&gt;M43&lt;/b&gt; - rozsah převodu osy 3</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 4</source>
+        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 4</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M48&lt;/b&gt; - spindle speed override ignore cancel</source>
+        <translation type="obsolete">&lt;b&gt;M48&lt;/b&gt; - zrušení opomíjení potlačení automatického ovládání rychlosti osy</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M49&lt;/b&gt; - spindle speed override ignore</source>
+        <translation type="obsolete">&lt;b&gt;M49&lt;/b&gt; -opomíjení potlačení automatického ovládání rychlosti osy</translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - mode of return to upper limit level</source>
+        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - režim návratu k horní úrovni omezení</translation>
+    </message>
+    <message>
+        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </source>
+        <translation type="obsolete">&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - mode of return to a specified point level set by G71</source>
+        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - režim návratu k stanovené bodové úrovni nastavené G71</translation>
+    </message>
+    <message>
+        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - mode of return to the point R level</source>
+        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - režim návratu k bodové úrovni R</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M55&lt;/b&gt; - tailstock spindle retract</source>
+        <translation type="obsolete">&lt;b&gt;M55&lt;/b&gt; - zatáhnutí osy koníka</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M56&lt;/b&gt; - tailstock spindle advanced</source>
+        <translation type="obsolete">&lt;b&gt;M56&lt;/b&gt; - předsunutí osy koníka</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M58&lt;/b&gt; - chucking pressure low</source>
+        <translation type="obsolete">&lt;b&gt;M58&lt;/b&gt; - nízký tlak svírací čelisti</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M59&lt;/b&gt; - chucking pressure high</source>
+        <translation type="obsolete">&lt;b&gt;M59&lt;/b&gt; - vysoký tlak svírací čelisti</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M60&lt;/b&gt; - cancel of M61</source>
+        <translation type="obsolete">&lt;b&gt;M60&lt;/b&gt; - zrušení M61</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M61&lt;/b&gt; - Ignoring fixed rpm arrival in constant speed cutting</source>
+        <translation type="obsolete">&lt;b&gt;M61&lt;/b&gt; - opomíjí se pevný příjezd rpm při řezání stálou rychlostí</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M62&lt;/b&gt; - cancel of M64</source>
+        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M64</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M63&lt;/b&gt; - ignoring spindle rotation M code answer</source>
+        <translation type="obsolete">&lt;b&gt;M63&lt;/b&gt; - opomíjí se odpověď kódu M otáčení osy</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M64&lt;/b&gt; - ignoring general M code answer</source>
+        <translation type="obsolete">&lt;b&gt;M64&lt;/b&gt; - opomíjí se obecná odpověď kódu M</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M65&lt;/b&gt; - ignoring T code answer</source>
+        <translation type="obsolete">&lt;b&gt;M65&lt;/b&gt; - opomíjí se odpověď kódu T</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M66&lt;/b&gt; - turret indexing position free</source>
+        <translation type="obsolete">&lt;b&gt;M66&lt;/b&gt; -volná poloha indexace revolverové hlavy</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M78&lt;/b&gt; - steady rest unclamp</source>
+        <translation type="obsolete">&lt;b&gt;M78&lt;/b&gt; - stálé povolení svorky opěrky</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M79&lt;/b&gt; - steady rest clamp</source>
+        <translation type="obsolete">&lt;b&gt;M79&lt;/b&gt; - stálé sevření opěrky svorkou</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M83&lt;/b&gt; - chuck clamp</source>
+        <translation type="obsolete">&lt;b&gt;M83&lt;/b&gt; - sevření svíracích čelistí svorkou</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M84&lt;/b&gt; - chuck unclamp</source>
+        <translation type="obsolete">&lt;b&gt;M84&lt;/b&gt; - povolení svorky svíracích čelistí</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M109&lt;/b&gt; - cancel of M110</source>
+        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M110 {109&lt;?}</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;M162&lt;/b&gt; - cancel of M163</source>
+        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M163 {162&lt;?}</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;G10&lt;/b&gt; - cancel of G11</source>
+        <translation type="obsolete">&lt;b&gt;G10&lt;/b&gt; - zrušení G11</translation>
     </message>
 </context>
 </TS>

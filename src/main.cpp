@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
        myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
     app.installTranslator(&myappTranslator);
 
-    edytornc *mw = new edytornc();
+    EdytorNc *mw = new EdytorNc();
 
     for(int i = 1; i < argc; ++i)
       mw->openFile(argv[i]);

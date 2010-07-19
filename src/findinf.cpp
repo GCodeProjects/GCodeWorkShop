@@ -75,6 +75,8 @@ void FindInFiles::hideDlg()
    list = f_parent->sizes();
    int id = f_parent->indexOf(this);
 
+   f_parent->setUpdatesEnabled(false);
+
    if(hideToolButton->isChecked())
    {
       currentHeight = list;
@@ -91,10 +93,10 @@ void FindInFiles::hideDlg()
       frame->show();
       hideToolButton->setChecked(false);
    };
-   qApp->processEvents();
+   //qApp->processEvents();
    f_parent->setSizes(list);
    f_parent->updateGeometry();
-   qApp->processEvents();
+   f_parent->setUpdatesEnabled(true);
 }
 
 //**************************************************************************************************

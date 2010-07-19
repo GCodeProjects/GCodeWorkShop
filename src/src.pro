@@ -72,11 +72,12 @@ FORMS += i2mdialog.ui \
     setupdialog.ui \
     spconfigdialog.ui \
     transmissiondialog.ui \
-    transprogressdialog.ui
+    transprogressdialog.ui \
+    edytornc.ui
 TRANSLATIONS = edytornc_pl.ts \
     edytornc_ca.ts \
     edytornc_de.ts \
-    edytornc_cz.ts
+    edytornc_cs.ts
 OBJECTS_DIR = build/obj
 MOC_DIR = build/moc
 unix:SOURCES += posix_qextserialport.cpp
@@ -89,4 +90,4 @@ win32:SOURCES += win_qextserialport.cpp
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
-VERSION = 2010.05
+VERSION = 2010.08
