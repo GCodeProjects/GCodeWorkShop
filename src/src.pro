@@ -77,7 +77,7 @@ FORMS += i2mdialog.ui \
 TRANSLATIONS = edytornc_pl.ts \
     edytornc_ca.ts \
     edytornc_de.ts \
-    edytornc_cs.ts
+    edytornc_cs_CZ.ts
 OBJECTS_DIR = build/obj
 MOC_DIR = build/moc
 unix:SOURCES += posix_qextserialport.cpp

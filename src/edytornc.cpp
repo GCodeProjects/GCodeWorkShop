@@ -63,7 +63,7 @@ EdytorNc::EdytorNc()
     connect(projectNewButton, SIGNAL(clicked()), this, SLOT(projectNew()));
     connect(projectAddButton, SIGNAL(clicked()), this, SLOT(projectAdd()));
     connect(projectSaveButton, SIGNAL(clicked()), this, SLOT(projectSave()));
-    connect(projectLoadButton, SIGNAL(clicked()), this, SLOT(projectLoad()));
+    connect(projectLoadButton, SIGNAL(clicked()), this, SLOT(projectOpen()));
     connect(projectRemoveButton, SIGNAL(clicked()), this, SLOT(projectTreeRemoveItem()));
 
     connect(hideButton, SIGNAL(clicked()), this, SLOT(hidePanel()));
@@ -81,26 +81,8 @@ EdytorNc::EdytorNc()
 
     readSettings();
 
-    currentProjectName = lastDir.canonicalPath();
+    createFileBrowseTabs();
 
-    dirModel = new QFileSystemModel();
-    dirModel->setResolveSymlinks(true);
-
-    //dirModel->setRootPath(lastDir.canonicalPath());
-    //dirModel->sort(0, Qt::AscendingOrder);
-
-    fileTreeView->setModel(dirModel);
-    //fileTreeView->setRootIndex(dirModel->index(lastDir.canonicalPath()));
-    fileTreeView->setIndentation(20);
-
-    fileTreeView->adjustSize();
-    fileTreeView->sortByColumn(0, Qt::AscendingOrder);
-    fileTreeView->expand(dirModel->index(lastDir.canonicalPath()));
-
-    connect(fileTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(fileTreeViewDoubleClicked(QModelIndex)));
-
-
-    //qDebug() << lastDir.canonicalPath() << QDir::currentPath();
 
     setWindowTitle(tr("EdytorNC"));
     setWindowIcon(QIcon(":/images/edytornc.png"));
@@ -135,6 +117,12 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 {
     setUpdatesEnabled(FALSE);
     writeSettings();
+
+    if(!maybeSaveProject())
+    {
+       event->ignore();
+       return;
+    };
 
     foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
     {
@@ -1206,7 +1194,7 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.07.19 BETA" +
+                                   "2010.07.21 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1286,6 +1274,7 @@ void EdytorNc::updateMenus()
    pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
    updateStatusBar();
+   updateOpenFileList();
 
 }
 
@@ -1399,6 +1388,8 @@ void EdytorNc::updateStatusBar()
 
 void EdytorNc::updateWindowMenu()
 {
+    QString text;
+
     windowMenu->clear();
     windowMenu->addAction(closeAct);
     windowMenu->addAction(closeAllAct);
@@ -1419,7 +1410,6 @@ void EdytorNc::updateWindowMenu()
     {
         MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
 
-        QString text;
         if (i < 9)
         {
             text = tr("&%1 %2").arg(i + 1)
@@ -1433,9 +1423,9 @@ void EdytorNc::updateWindowMenu()
         action->setCheckable(true);
         action->setChecked(child == activeMdiChild());
         action->setStatusTip(child->getCurrentFileInfo());
-        //qDebug() << child->getCurrentFileInfo();
         connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
         windowMapper->setMapping(action, windows.at(i));
+
     };
 }
 
@@ -2061,14 +2051,20 @@ void EdytorNc::readSettings()
     };
     settings.endArray();
 
+    fileTreeView->header()->restoreState(settings.value("FileTreeViewState", QByteArray()).toByteArray());
+
+    vSplitter->restoreState(settings.value("VSplitterState", QByteArray()).toByteArray());
+
+    currentProjectName = settings.value("CurrentProjectName", "").toString();
+    projectLoad(currentProjectName);
 
     panelState = settings.value("ProjectPanelState", QByteArray()).toByteArray();
     hSplitter->restoreState(panelState);
     panelHidden = settings.value("PanelHidden", false).toBool();
     if(panelHidden)
     {
-       tabWidget->hide();
-       frame->setMaximumWidth(24);
+       vSplitter->hide();
+       frame->setMaximumWidth(hideButton->width());
        hideButton->setText(">>");
     };
 
@@ -2122,6 +2118,11 @@ void EdytorNc::writeSettings()
     settings.setValue("RecentFiles", m_recentFiles);
 
     settings.setValue("SerialToolbarShown", (serialToolBar != NULL));
+
+    settings.setValue("CurrentProjectName", currentProjectName);
+
+    settings.setValue("FileTreeViewState", fileTreeView->header()->saveState());
+    settings.setValue("VSplitterState", vSplitter->saveState());
 
     if(panelHidden)
       settings.setValue("ProjectPanelState", panelState);
@@ -4025,15 +4026,21 @@ void EdytorNc::projectAdd()
       return;
 
 #ifdef Q_OS_LINUX
-   QString filters = tr("All files (*.* *);; CNC programs files *.nc (*.nc);;"
+   QString filters = tr("All files (*.* *);;"
+                        "CNC programs files *.nc (*.nc);;"
                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
+                        "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
+                        "Pictures *.jpg *.bmp (*.jpg *.bmp);;"
                         "Text files *.txt (*.txt)");
 #endif
 
 #ifdef Q_OS_WIN32
-   QString filters = tr("All files (*.* *);; CNC programs files (*.nc);;"
-                      "CNC programs files (*.nc *.min *.anc *.cnc);;"
-                      "Text files (*.txt)");
+   QString filters = tr("All files (*.* *);;"
+                        "CNC programs files (*.nc);;"
+                        "CNC programs files (*.nc *.min *.anc *.cnc);;"
+                        "Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
+                        "Pictures (*.jpg *.bmp);;"
+                        "Text files (*.txt)");
 #endif
 
 
@@ -4046,6 +4053,10 @@ void EdytorNc::projectAdd()
 
 
    QStringList list = files;
+
+   if(list.isEmpty())
+      return;
+
    QStringList::Iterator it = list.begin();
 
    QStandardItem *parentItem = currentProject;
@@ -4157,6 +4168,9 @@ void EdytorNc::projectSave(bool saveAs)
 
 void EdytorNc::projectNew()
 {
+
+   if(!maybeSaveProject())
+      return;
 
    QString fileName = projectSelectName();
 
@@ -4286,10 +4300,11 @@ QString EdytorNc::projectSelectName()
 //
 //**************************************************************************************************
 
-void EdytorNc::projectLoad()
+void EdytorNc::projectOpen()
 {
-   QFileInfo file;
-   QIcon icon;
+
+   if(!maybeSaveProject())
+      return;
 
 
 #ifdef Q_OS_LINUX
@@ -4311,13 +4326,89 @@ void EdytorNc::projectLoad()
    if(fileName.isEmpty())
       return;
 
-   currentProjectName = fileName;
+   projectLoad(fileName);
+
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::hidePanel()
+{
+   hSplitter->setUpdatesEnabled(false);
+
+   if(!panelHidden)
+   {
+      panelState = hSplitter->saveState();
+      frame->setMaximumWidth(hideButton->width());
+      vSplitter->hide();
+      //openFileTableWidget->hide();
+      hideButton->setText(">>");
+      panelHidden = true;
+   }
+   else
+   {
+      frame->setMaximumWidth(16777215);
+      vSplitter->show();
+      //openFileTableWidget->show();
+      hideButton->setText("<<");
+      panelHidden = false;
+      hSplitter->restoreState(panelState);
+   };
+
+   hSplitter->updateGeometry();
+   hSplitter->setUpdatesEnabled(true);
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectTreeRemoveItem()
+{
+   QStandardItem *item;
+
+   QModelIndexList list = projectTreeView->selectionModel()->selectedIndexes();
+   QModelIndexList::Iterator it = list.begin();
+
+
+   while(it != list.end())
+   {
+      item = model->itemFromIndex(*it);
+
+      if(item == NULL)
+         return;
+
+      if(!item->hasChildren())
+      {
+         currentProjectModified = model->removeRow(item->row(), model->indexFromItem(item->parent()));
+      };
+
+      ++it;
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectLoad(QString projectName)
+{
+   QFileInfo file;
+   QIcon icon;
+
+
+   if(projectName.isEmpty())
+      return;
+
+   currentProjectName = projectName;
 
    model->clear();
 
    QSettings settings(currentProjectName, QSettings::IniFormat);
-
-
 
    QStandardItem *parentItem = model->invisibleRootItem();
    QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"), QFileInfo(currentProjectName).fileName());
@@ -4333,16 +4424,11 @@ void EdytorNc::projectLoad()
    int max = settings.beginReadArray("ProjectFiles");
    for(int i = 0; i < max; ++i)
    {
-
       settings.setArrayIndex(i);
-
-
       file.setFile(settings.value("File", "").toString());
-
 
       if((file.absoluteDir().exists()) && (file.absoluteDir().isReadable()))
       {
-
          QList<QStandardItem *> items = model->findItems(file.absoluteDir().canonicalPath(), Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
 
          if(!items.isEmpty())
@@ -4375,17 +4461,11 @@ void EdytorNc::projectLoad()
             item->setToolTip(file.fileName());
             parentItem->appendRow(item);
          };
-
       };
-
-
    };
    settings.endArray();
 
-
    projectTreeView->expandAll();
-
-
 
    currentProjectModified = false;
 
@@ -4395,29 +4475,33 @@ void EdytorNc::projectLoad()
 //
 //**************************************************************************************************
 
-void EdytorNc::hidePanel()
+bool EdytorNc::maybeSaveProject()
 {
-   hSplitter->setUpdatesEnabled(false);
-
-   if(!panelHidden)
+   if(currentProjectModified)
    {
-      panelState = hSplitter->saveState();
-      frame->setMaximumWidth(24);
-      tabWidget->hide();
-      hideButton->setText(">>");
-      panelHidden = true;
-   }
-   else
-   {
-      frame->setMaximumWidth(16777215);
-      tabWidget->show();
-      hideButton->setText("<<");
-      panelHidden = false;
-      hSplitter->restoreState(panelState);
+      QMessageBox msgBox;
+      msgBox.setText(tr("<b>Project: \"%1\"\n has been modified.</b>").arg(currentProjectName));
+      msgBox.setInformativeText(tr("Do you want to save your changes ?"));
+      msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+      msgBox.setDefaultButton(QMessageBox::Save);
+      msgBox.setIcon(QMessageBox::Warning);
+      int ret = msgBox.exec();
+      switch (ret)
+      {
+         case QMessageBox::Save    : projectSave(false);
+                                     return true;
+                                     break;
+         case QMessageBox::Discard : currentProjectModified = false;
+                                     return true;
+                                     break;
+         case QMessageBox::Cancel  : return false;
+                                     break;
+         default                   : return true;
+                                     break;
+      } ;
    };
+   return true;
 
-   hSplitter->updateGeometry();
-   hSplitter->setUpdatesEnabled(true);
 
 }
 
@@ -4425,33 +4509,92 @@ void EdytorNc::hidePanel()
 //
 //**************************************************************************************************
 
-void EdytorNc::projectTreeRemoveItem()
+void EdytorNc::createFileBrowseTabs()
 {
-   QFileInfo file;
-   QStandardItem *item;
+   dirModel = new QFileSystemModel();
+   dirModel->setResolveSymlinks(true);
 
-   QModelIndexList list = projectTreeView->selectionModel()->selectedIndexes();
-   QModelIndexList::Iterator it = list.begin();
+   dirModel->setRootPath(lastDir.canonicalPath());
+   //dirModel->sort(0, Qt::AscendingOrder);
+
+   dirModel->setNameFilters(QStringList("*.nc"));
+   dirModel->setNameFilterDisables(false);
+
+   fileTreeView->setModel(dirModel);
+   fileTreeView->setRootIndex(dirModel->index(lastDir.canonicalPath()));
+   fileTreeView->setIndentation(18);
+   fileTreeView->setToolTip(lastDir.canonicalPath());
+
+   fileTreeView->sortByColumn(0, Qt::AscendingOrder);
+   //fileTreeView->expand(dirModel->index(lastDir.canonicalPath(), 0).parent());
+   //fileTreeView->setExpanded(dirModel->index(lastDir.canonicalPath(), 0), true);
+
+   fileTreeView->adjustSize();
+   connect(fileTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(fileTreeViewDoubleClicked(QModelIndex)));
+   connect(openFileTableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(openFileTableWidgetClicked(int, int)));
 
 
-   while(it != list.end())
-   {
-      item = model->itemFromIndex(*it);
 
-      if(item == NULL)
-         return;
-
-      if(!item->hasChildren())
-      {
-         currentProjectModified = model->removeRow(item->row(), model->indexFromItem(item->parent()));
-      };
-
-      ++it;
-   };
 
 
 }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::updateOpenFileList()
+{
+   QTableWidgetItem *newItem;
+   QFileInfo file;
+   QStringList labels;
+
+   openFileTableWidget->clear();
+
+   labels << tr("Info") << tr("File Name");
+   openFileTableWidget->setHorizontalHeaderLabels(labels);
+
+   QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
 
 
+   openFileTableWidget->setRowCount(windows.size());
+   for (int i = 0; i < windows.size(); ++i)
+   {
+       MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
 
+       file.setFile(child->currentFile());
+
+       newItem = new QTableWidgetItem(child->getCurrentFileInfo());
+       newItem->setToolTip(file.canonicalFilePath());
+       openFileTableWidget->setItem(i, 0, newItem);
+
+       newItem = new QTableWidgetItem(file.fileName());
+       newItem->setToolTip(file.canonicalFilePath());
+       openFileTableWidget->setItem(i, 1, newItem);
+
+       if(child == activeMdiChild())
+          openFileTableWidget->selectRow(i);
+   };
+
+   openFileTableWidget->resizeRowsToContents();
+   openFileTableWidget->resizeColumnsToContents();
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::openFileTableWidgetClicked(int x, int y)
+{
+   Q_UNUSED(y);
+
+   QTableWidgetItem *item = openFileTableWidget->item(x, 1);
+
+   QMdiSubWindow *existing = findMdiChild(item->toolTip());
+   if(existing)
+   {
+      mdiArea->setActiveSubWindow(existing);
+      return;
+   };
+}

@@ -132,9 +132,12 @@ private slots:
     void projectNew();
     void projectTreeViewDoubleClicked(const QModelIndex & index);
     void fileTreeViewDoubleClicked(const QModelIndex & index);
-    void projectLoad();
     void hidePanel();
     void projectTreeRemoveItem();
+    void projectLoad(QString projectName);
+    void projectOpen();
+    void updateOpenFileList();
+    void openFileTableWidgetClicked(int x, int y);
 
 
 
@@ -155,6 +158,9 @@ private:
     void attachHighlighterToDirButtonClicked(bool attach);
     int defaultHighlightMode(QString filePath);
     QString projectSelectName();
+    bool maybeSaveProject();
+    void createFileBrowseTabs();
+
 
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
@@ -284,10 +290,6 @@ private:
     QAction *diagAct;
     QAction *serialCloseAct;
     QComboBox *configBox;
-
-
-    QDockWidget *projectBrowdeDock;
-    QToolBar *projectToolBar;
 
 
 
