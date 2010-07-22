@@ -59,14 +59,14 @@
             <enum>QTabWidget::Rounded</enum>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="documentMode">
             <bool>false</bool>
            </property>
            <widget class="QWidget" name="projectTab">
             <attribute name="icon">
-             <iconset resource="application.qrc">
+             <iconset>
               <normaloff>:/images/project_new.png</normaloff>:/images/project_new.png</iconset>
             </attribute>
             <attribute name="title">
@@ -97,7 +97,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="application.qrc">
+                   <iconset>
                     <normaloff>:/images/project_new.png</normaloff>:/images/project_new.png</iconset>
                   </property>
                  </widget>
@@ -114,7 +114,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="application.qrc">
+                   <iconset>
                     <normaloff>:/images/project_open.png</normaloff>:/images/project_open.png</iconset>
                   </property>
                  </widget>
@@ -131,7 +131,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="application.qrc">
+                   <iconset>
                     <normaloff>:/images/project_save.png</normaloff>:/images/project_save.png</iconset>
                   </property>
                  </widget>
@@ -148,7 +148,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="application.qrc">
+                   <iconset>
                     <normaloff>:/images/project_add.png</normaloff>:/images/project_add.png</iconset>
                   </property>
                  </widget>
@@ -165,7 +165,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="application.qrc">
+                   <iconset>
                     <normaloff>:/images/project_remove.png</normaloff>:/images/project_remove.png</iconset>
                   </property>
                  </widget>
@@ -212,17 +212,26 @@
                <attribute name="headerDefaultSectionSize">
                 <number>150</number>
                </attribute>
+               <attribute name="headerDefaultSectionSize">
+                <number>150</number>
+               </attribute>
+               <attribute name="headerVisible">
+                <bool>false</bool>
+               </attribute>
               </widget>
              </item>
             </layout>
            </widget>
            <widget class="QWidget" name="FileTab">
             <attribute name="icon">
-             <iconset resource="application.qrc">
+             <iconset>
               <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
             </attribute>
             <attribute name="title">
              <string/>
+            </attribute>
+            <attribute name="toolTip">
+             <string>Browse files</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <property name="spacing">
@@ -248,6 +257,22 @@
                <attribute name="headerMinimumSectionSize">
                 <number>50</number>
                </attribute>
+               <attribute name="headerMinimumSectionSize">
+                <number>50</number>
+               </attribute>
+               <attribute name="headerHighlightSections">
+                <bool>true</bool>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CurrentPathCheckBox">
+               <property name="toolTip">
+                <string>If checked, show the list of files in the current directory, otherwise the last opened directory</string>
+               </property>
+               <property name="text">
+                <string>Current directory</string>
+               </property>
               </widget>
              </item>
             </layout>
@@ -275,15 +300,15 @@
            <property name="gridStyle">
             <enum>Qt::NoPen</enum>
            </property>
-           <property name="sortingEnabled">
-            <bool>true</bool>
-           </property>
            <property name="wordWrap">
             <bool>false</bool>
            </property>
            <property name="cornerButtonEnabled">
             <bool>false</bool>
            </property>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
@@ -338,8 +363,6 @@
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="application.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

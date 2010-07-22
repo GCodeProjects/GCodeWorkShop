@@ -160,6 +160,7 @@ private:
     QString projectSelectName();
     bool maybeSaveProject();
     void createFileBrowseTabs();
+    void fileTreeViewChangeRootDir();
 
 
     MdiChild *activeMdiChild();

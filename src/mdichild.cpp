@@ -1203,13 +1203,14 @@ bool MdiChild::event(QEvent *event)
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
             key = cursor.selectedText();
 
-         }while(key.at(key.length() - 1).isLetter() && !key.isEmpty() && !cursor.atBlockEnd());
+         }while((key.length() > 0 ? key.at(key.length() - 1).isLetter(): false) && !key.isEmpty() && !cursor.atBlockEnd());
 
          cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
 
          if(key.length() < 3)
          {
             cursor = textEdit->cursorForPosition(helpEvent->pos());
+
             do
             {
                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
@@ -1223,7 +1224,6 @@ bool MdiChild::event(QEvent *event)
             {
                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                key = cursor.selectedText();
-
             }while(key.at(key.length() - 1).isDigit() && !key.isEmpty() && !cursor.atEnd());
 
             cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
@@ -1232,6 +1232,9 @@ bool MdiChild::event(QEvent *event)
       }
       else
       {
+
+         if(cursor.atEnd())
+            return true;
 
          cursor.movePosition(QTextCursor::PreviousWord, QTextCursor::MoveAnchor);
          cursor.movePosition(QTextCursor::EndOfWord,  QTextCursor::KeepAnchor);

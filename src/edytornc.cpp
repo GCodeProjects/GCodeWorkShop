@@ -43,7 +43,7 @@ EdytorNc::EdytorNc()
     serialToolBar = NULL;
     diffApp = NULL;
     findFiles = NULL;
-
+    dirModel = NULL;
     openExampleAct = NULL;
 
 
@@ -219,6 +219,7 @@ void EdytorNc::open()
        if((file.exists()) && (file.isReadable()) && !existing)
        {
           lastDir = file.absoluteDir();
+          fileTreeViewChangeRootDir();
           MdiChild *child = createMdiChild();
           if(child->loadFile(*it))
           {
@@ -290,6 +291,7 @@ void EdytorNc::openExample()
       if((file.exists()) && (file.isReadable()) && !existing)
       {
          lastDir = file.absoluteDir();
+         fileTreeViewChangeRootDir();
          MdiChild *child = createMdiChild();
          if(child->loadFile(*it))
          {
@@ -333,6 +335,7 @@ void EdytorNc::openFile(const QString fileName)
    if((file.exists()) && (file.isReadable()) && !existing)
    {
       lastDir = file.absoluteDir();
+      fileTreeViewChangeRootDir();
       MdiChild *child = createMdiChild();
       if(child->loadFile(fileName))
       {
@@ -1194,7 +1197,7 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.07.21 BETA" +
+                                   "2010.07.22 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1275,6 +1278,7 @@ void EdytorNc::updateMenus()
 
    updateStatusBar();
    updateOpenFileList();
+   fileTreeViewChangeRootDir();
 
 }
 
@@ -2011,7 +2015,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", TRUE).toBool();
 
 
-    settings.beginGroup("Highlight" );
+    settings.beginGroup("Highlight");
     defaultMdiWindowProperites.syntaxH = settings.value("HighlightOn", TRUE).toBool();
 
     defaultMdiWindowProperites.hColors.commentColor = settings.value("CommentColor", 0xde0020).toInt();
@@ -2038,13 +2042,13 @@ void EdytorNc::readSettings()
        settings.setArrayIndex(i);
        defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
 
-       defaultMdiWindowProperites.fileName = settings.value("OpenedFile_" + QString::number(i)).toString();
+       defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
        if(!defaultMdiWindowProperites.fileName.isEmpty())
        {
-          defaultMdiWindowProperites.cursorPos = settings.value("Cursor_" + QString::number(i), 1).toInt();
-          defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly_" + QString::number(i), FALSE).toBool();
-          defaultMdiWindowProperites.geometry = settings.value("Geometry_" + QString::number(i), QByteArray()).toByteArray();
-          defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode_" + QString::number(i), MODE_AUTO).toInt();
+          defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
+          defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly", FALSE).toBool();
+          defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
+          defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
           loadFile(defaultMdiWindowProperites, false);
            
        };
@@ -2067,6 +2071,9 @@ void EdytorNc::readSettings()
        frame->setMaximumWidth(hideButton->width());
        hideButton->setText(">>");
     };
+
+    tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt());
+    CurrentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir", false).toBool());
 
 
 }
@@ -2123,6 +2130,7 @@ void EdytorNc::writeSettings()
 
     settings.setValue("FileTreeViewState", fileTreeView->header()->saveState());
     settings.setValue("VSplitterState", vSplitter->saveState());
+    settings.setValue("TabCurrentIndex", tabWidget->currentIndex());
 
     if(panelHidden)
       settings.setValue("ProjectPanelState", panelState);
@@ -2130,6 +2138,7 @@ void EdytorNc::writeSettings()
        settings.setValue("ProjectPanelState", hSplitter->saveState());
 
     settings.setValue("PanelHidden", panelHidden);
+    settings.setValue("FileBrowserShowCurrentFileDir", CurrentPathCheckBox->isChecked());
 
 
     settings.beginGroup("Highlight" );
@@ -2164,11 +2173,11 @@ void EdytorNc::writeSettings()
         _editor_properites Opt = mdiChild->getMdiWindowProperites();
 
         settings.setArrayIndex(i);
-        settings.setValue("OpenedFile_" + QString::number(i), Opt.fileName);
-        settings.setValue("Cursor_" + QString::number(i), Opt.cursorPos);
-        settings.setValue("ReadOnly_" + QString::number(i), Opt.readOnly);
-        settings.setValue("Geometry_" + QString::number(i), mdiChild->parentWidget()->saveGeometry());
-        settings.setValue("HighlightMode_" + QString::number(i), Opt.hColors.highlightMode);
+        settings.setValue("OpenedFile", Opt.fileName);
+        settings.setValue("Cursor", Opt.cursorPos);
+        settings.setValue("ReadOnly", Opt.readOnly);
+        settings.setValue("Geometry", mdiChild->parentWidget()->saveGeometry());
+        settings.setValue("HighlightMode", Opt.hColors.highlightMode);
         if(mdiChild->parentWidget()->isMaximized())
           maximized =  true;
 
@@ -4513,25 +4522,20 @@ void EdytorNc::createFileBrowseTabs()
 {
    dirModel = new QFileSystemModel();
    dirModel->setResolveSymlinks(true);
-
-   dirModel->setRootPath(lastDir.canonicalPath());
-   //dirModel->sort(0, Qt::AscendingOrder);
+   
+   //dirModel->setRootPath(lastDir.absolutePath());
+   //fileTreeViewChangeRootDir();
 
    dirModel->setNameFilters(QStringList("*.nc"));
    dirModel->setNameFilterDisables(false);
 
    fileTreeView->setModel(dirModel);
-   fileTreeView->setRootIndex(dirModel->index(lastDir.canonicalPath()));
-   fileTreeView->setIndentation(18);
-   fileTreeView->setToolTip(lastDir.canonicalPath());
+   fileTreeViewChangeRootDir();
 
-   fileTreeView->sortByColumn(0, Qt::AscendingOrder);
-   //fileTreeView->expand(dirModel->index(lastDir.canonicalPath(), 0).parent());
-   //fileTreeView->setExpanded(dirModel->index(lastDir.canonicalPath(), 0), true);
 
-   fileTreeView->adjustSize();
    connect(fileTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(fileTreeViewDoubleClicked(QModelIndex)));
    connect(openFileTableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(openFileTableWidgetClicked(int, int)));
+   openFileTableWidget->setToolTip(tr("Open files"));
 
 
 
@@ -4556,7 +4560,6 @@ void EdytorNc::updateOpenFileList()
 
    QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
 
-
    openFileTableWidget->setRowCount(windows.size());
    for (int i = 0; i < windows.size(); ++i)
    {
@@ -4564,18 +4567,20 @@ void EdytorNc::updateOpenFileList()
 
        file.setFile(child->currentFile());
 
-       newItem = new QTableWidgetItem(child->getCurrentFileInfo());
-       newItem->setToolTip(file.canonicalFilePath());
-       openFileTableWidget->setItem(i, 0, newItem);
-
        newItem = new QTableWidgetItem(file.fileName());
        newItem->setToolTip(file.canonicalFilePath());
        openFileTableWidget->setItem(i, 1, newItem);
 
-       if(child == activeMdiChild())
-          openFileTableWidget->selectRow(i);
-   };
+       newItem = new QTableWidgetItem(child->getCurrentFileInfo());
+       newItem->setToolTip(file.canonicalFilePath());
+       openFileTableWidget->setItem(i, 0, newItem);
 
+       if(child == activeMdiChild())
+       {
+          openFileTableWidget->selectRow(i);
+       };
+   };
+   
    openFileTableWidget->resizeRowsToContents();
    openFileTableWidget->resizeColumnsToContents();
 
@@ -4597,4 +4602,44 @@ void EdytorNc::openFileTableWidgetClicked(int x, int y)
       mdiArea->setActiveSubWindow(existing);
       return;
    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::fileTreeViewChangeRootDir()
+{
+   QString path;
+
+   if(!isVisible())
+      return;
+
+   if(fileTreeView == NULL || dirModel == NULL)
+      return;
+
+   if(CurrentPathCheckBox->isChecked())
+   {
+      if(activeMdiChild() == 0)
+         return;
+      path = activeMdiChild()->currentFile();
+      path = QFileInfo(path).canonicalPath();
+   }
+   else
+      path = lastDir.canonicalPath();
+
+   if(path.isEmpty())
+      return;
+
+   fileTreeView->setRootIndex(dirModel->index(path));
+   dirModel->setRootPath(path);
+   fileTreeView->setToolTip(path);
+   fileTreeView->setSortingEnabled(true);
+   fileTreeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+   fileTreeView->resizeColumnToContents(0);
+   fileTreeView->resizeColumnToContents(1);
+   fileTreeView->setColumnHidden(2, true);
+   fileTreeView->resizeColumnToContents(3);
+
+
 }
