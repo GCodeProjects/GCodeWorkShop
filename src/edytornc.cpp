@@ -20,8 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui>
-
 #include "edytornc.h"
 #include "mdichild.h"
 
@@ -1186,6 +1184,8 @@ void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
       statusBar()->showMessage(mdiChild->currentFile(), 0);
    };
    updateCurrentSerialConfig();
+   updateOpenFileList();
+   fileTreeViewChangeRootDir();
 }
 
 //**************************************************************************************************
@@ -1197,7 +1197,7 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.07.22 BETA" +
+                                   "2010.08.29 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1226,6 +1226,7 @@ void EdytorNc::about()
 
 void EdytorNc::updateMenus()
 {
+
    bool hasMdiChild = (activeMdiChild() != 0);
    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
    bool hasSelection = (hasMdiChild && activeMdiChild()->textEdit->textCursor().hasSelection());
@@ -1276,9 +1277,19 @@ void EdytorNc::updateMenus()
  
    pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
+
+   if(hasMdiChild)
+   {
+      if(findToolBar != NULL)
+        activeMdiChild()->highlightFindText(findEdit->text(),
+                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+      else
+        activeMdiChild()->highlightFindText("");
+   };
+
+
    updateStatusBar();
-   updateOpenFileList();
-   fileTreeViewChangeRootDir();
 
 }
 
@@ -1315,40 +1326,9 @@ void EdytorNc::updateCurrentSerialConfig()
 //
 //**************************************************************************************************
 
-void EdytorNc::cancelUnderline()
-{
-   bool hasMdiChild = (activeMdiChild() != 0);
-
-   if(hasMdiChild)
-   {
-//      QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
-//
-//      if((format.underlineStyle() != QTextCharFormat::NoUnderline) &&
-//         !activeMdiChild()->textEdit->textCursor().hasSelection())
-//      {
-//         format.setUnderlineStyle(QTextCharFormat::NoUnderline);
-//         activeMdiChild()->textEdit->setCurrentCharFormat(format);
-//      };
-
-      if(findToolBar != NULL)
-        activeMdiChild()->highlightFindText(findEdit->text(),
-                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
-      else
-        activeMdiChild()->highlightFindText("");
-   };
-
-   updateStatusBar();
-
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void EdytorNc::updateStatusBar()
 {
-   QTextBlock b, cb;
+   QTextBlock b;
    int column = 1;
    int line = 1;
    int id;
@@ -1366,16 +1346,18 @@ void EdytorNc::updateStatusBar()
 
 
       b = activeMdiChild()->textEdit->textCursor().block();
+      line = b.firstLineNumber() + 1;
       column = activeMdiChild()->textEdit->textCursor().position() - b.position();
-      cb = activeMdiChild()->textEdit->textCursor().block();
-      for(b = activeMdiChild()->textEdit->document()->begin(); b != activeMdiChild()->textEdit->document()->end(); b = b.next())
-      {
-         if(b == cb)
-         {
-            break;
-         };
-         line++;
-      };
+//      cb = b;
+//      for(b = activeMdiChild()->textEdit->document()->begin(); b != activeMdiChild()->textEdit->document()->end(); b = b.next())
+//      {
+//         if(b == cb)
+//         {
+//            break;
+//         };
+//         line++;
+//      };
+
 
       labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
                           tr("  Line: ") + QString::number(line) +
@@ -1445,8 +1427,8 @@ MdiChild *EdytorNc::createMdiChild()
     connect(child->textEdit, SIGNAL(copyAvailable(bool)), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-    connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
-    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cancelUnderline()));
+    //connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
+    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateStatusBar()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
 
@@ -2073,8 +2055,8 @@ void EdytorNc::readSettings()
     };
 
     tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt());
-    CurrentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir", false).toBool());
-
+    currentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir", false).toBool());
+    filePreviewSpinBox->setValue(settings.value("FilePreviewNo", 10).toInt());
 
 }
 
@@ -2131,6 +2113,7 @@ void EdytorNc::writeSettings()
     settings.setValue("FileTreeViewState", fileTreeView->header()->saveState());
     settings.setValue("VSplitterState", vSplitter->saveState());
     settings.setValue("TabCurrentIndex", tabWidget->currentIndex());
+    settings.setValue("FilePreviewNo", filePreviewSpinBox->value());
 
     if(panelHidden)
       settings.setValue("ProjectPanelState", panelState);
@@ -2138,7 +2121,7 @@ void EdytorNc::writeSettings()
        settings.setValue("ProjectPanelState", hSplitter->saveState());
 
     settings.setValue("PanelHidden", panelHidden);
-    settings.setValue("FileBrowserShowCurrentFileDir", CurrentPathCheckBox->isChecked());
+    settings.setValue("FileBrowserShowCurrentFileDir", currentPathCheckBox->isChecked());
 
 
     settings.beginGroup("Highlight" );
@@ -2567,7 +2550,7 @@ bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
           };
        };
 
-       return FALSE;
+       return false;
    }
    else
    {
@@ -2824,6 +2807,7 @@ void EdytorNc::loadConfig()
 
     sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
     doNotShowProgressInEditor = settings.value("DoNotShowProgressInEditor", false).toBool();
+    recieveTimeout = settings.value("RecieveTimeout", 0).toInt();
 
 
     settings.endGroup();
@@ -2921,7 +2905,7 @@ void EdytorNc::sendButtonClicked()
    progressDialog.setWindowTitle(tr("Sending..."));
    progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
    progressDialog.setLabelText(tr("Waiting..."));
-   //qApp->processEvents();
+   qApp->processEvents();
 
    if(portSettings.FlowControl == FLOW_HARDWARE)
    {
@@ -2997,11 +2981,11 @@ void EdytorNc::sendButtonClicked()
 
       if((bytesToWrite == 0) && (!xoffReceived))
       {
-//         if(!comPort->putChar(tx[i].toAscii()))
-//         {
+         if(!comPort->putChar(tx[i].toAscii()))
+         {
 //            showError(comPort->lastError());
 //            break;
-//         };
+         };
          if(!doNotShowProgressInEditor)
          {
             if(tx[i].toAscii() != '\r')
@@ -3076,10 +3060,12 @@ void EdytorNc::receiveButtonClicked()
    int count, i, j;
    char buf[1024];
    MdiChild *activeWindow;
+   QTimer *recieveTimeoutTimer;
 
 
    showError(E_NO_ERROR);
    count = 0;
+   recieveTimeoutTimer = NULL;
 
    loadConfig();
    comPort = new QextSerialPort(portName, portSettings);
@@ -3107,6 +3093,15 @@ void EdytorNc::receiveButtonClicked()
    QApplication::setOverrideCursor(Qt::BusyCursor);
 
    TransProgressDialog progressDialog(this);
+
+   if(recieveTimeout > 0)
+   {
+      recieveTimeoutTimer = new QTimer(this);
+      connect(recieveTimeoutTimer, SIGNAL(timeout()), &progressDialog, SLOT(close()));
+      recieveTimeoutTimer->setInterval(recieveTimeout * 1000);
+      recieveTimeoutTimer->setSingleShot(true);
+   };
+
    progressDialog.setRange(0, 0);
    progressDialog.setModal(true);
    progressDialog.setWindowTitle(tr("Receiving..."));
@@ -3139,6 +3134,9 @@ void EdytorNc::receiveButtonClicked()
       {
          //qDebug() << "Bytes available: " << i;
          i = comPort->readLine(buf, sizeof(buf) - 1);  //readLine
+
+         if(recieveTimeoutTimer > NULL)
+            recieveTimeoutTimer->start();
 
          qApp->processEvents();
 
@@ -3214,13 +3212,19 @@ void EdytorNc::receiveButtonClicked()
    progressDialog.close();
    receiveAct->setEnabled(TRUE);
    sendAct->setEnabled(TRUE);
+   if(recieveTimeoutTimer > NULL)
+      delete(recieveTimeoutTimer);
    QApplication::restoreOverrideCursor();
 
    if(activeWindow)
+   {
      if(activeWindow->textEdit->document()->isEmpty())
      {
         activeWindow->parentWidget()->close();
-     };
+     }
+     else
+        activeWindow->setHighligthMode(MODE_AUTO);
+   };
 }
 
 //**************************************************************************************************
@@ -4359,11 +4363,12 @@ void EdytorNc::hidePanel()
    }
    else
    {
+      panelHidden = false;
+      fileTreeViewChangeRootDir();
       frame->setMaximumWidth(16777215);
       vSplitter->show();
       //openFileTableWidget->show();
       hideButton->setText("<<");
-      panelHidden = false;
       hSplitter->restoreState(panelState);
    };
 
@@ -4537,10 +4542,6 @@ void EdytorNc::createFileBrowseTabs()
    connect(openFileTableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(openFileTableWidgetClicked(int, int)));
    openFileTableWidget->setToolTip(tr("Open files"));
 
-
-
-
-
 }
 
 //**************************************************************************************************
@@ -4552,6 +4553,8 @@ void EdytorNc::updateOpenFileList()
    QTableWidgetItem *newItem;
    QFileInfo file;
    QStringList labels;
+
+   openFileTableWidget->setUpdatesEnabled(false);
 
    openFileTableWidget->clear();
 
@@ -4567,7 +4570,8 @@ void EdytorNc::updateOpenFileList()
 
        file.setFile(child->currentFile());
 
-       newItem = new QTableWidgetItem(file.fileName());
+       newItem = new QTableWidgetItem(file.fileName() + (child->textEdit->document()->isModified() ? "*": ""));
+
        newItem->setToolTip(file.canonicalFilePath());
        openFileTableWidget->setItem(i, 1, newItem);
 
@@ -4583,6 +4587,9 @@ void EdytorNc::updateOpenFileList()
    
    openFileTableWidget->resizeRowsToContents();
    openFileTableWidget->resizeColumnsToContents();
+
+   openFileTableWidget->setUpdatesEnabled(true);
+
 
 }
 
@@ -4612,13 +4619,13 @@ void EdytorNc::fileTreeViewChangeRootDir()
 {
    QString path;
 
-   if(!isVisible())
+   if((!isVisible()) || panelHidden)
       return;
 
    if(fileTreeView == NULL || dirModel == NULL)
       return;
 
-   if(CurrentPathCheckBox->isChecked())
+   if(currentPathCheckBox->isChecked())
    {
       if(activeMdiChild() == 0)
          return;
@@ -4631,9 +4638,12 @@ void EdytorNc::fileTreeViewChangeRootDir()
    if(path.isEmpty())
       return;
 
+   if(dirModel->rootPath() == path)
+      return;
+
    fileTreeView->setRootIndex(dirModel->index(path));
    dirModel->setRootPath(path);
-   fileTreeView->setToolTip(path);
+   //fileTreeView->setToolTip(path);
    fileTreeView->setSortingEnabled(true);
    fileTreeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
    fileTreeView->resizeColumnToContents(0);
@@ -4642,4 +4652,80 @@ void EdytorNc::fileTreeViewChangeRootDir()
    fileTreeView->resizeColumnToContents(3);
 
 
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool EdytorNc::event(QEvent *event)
+{
+   QString key, text;
+   QModelIndex index;
+   QFile file;
+   QString fileName;
+   char buf[1024];
+   qint64 lineLength;
+
+
+   if((event->type() == QEvent::ToolTip))
+   {
+      if(panelHidden)
+         return true;
+
+      QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+
+
+      QPoint pos = fileTreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
+
+      if((pos.y() >= fileTreeView->viewport()->height()) ||
+         (pos.x() >= fileTreeView->viewport()->width()) || (tabWidget->currentIndex() != 1))
+      {
+         return true;
+      };
+
+      index = fileTreeView->indexAt(pos);
+
+      if(!index.isValid())
+         return true;
+
+      fileName = dirModel->filePath(index);
+      file.setFileName(fileName);
+      text = "<b>" + fileName + "</b>";
+
+      if(filePreviewSpinBox->value() > 0)
+      {
+         text.append("<br />");
+         if(file.open(QIODevice::ReadOnly))
+         {
+            for(int i = 0; i < filePreviewSpinBox->value(); i++)
+            {
+               lineLength = file.readLine(buf, sizeof(buf));
+               if (lineLength != -1)
+               {
+                  text.append(buf);
+               };
+            };
+            file.close();
+            if(text.endsWith('\n'))
+               text.remove(text.size() - 1, 1);
+         };
+      };
+
+      if(!text.isEmpty())
+      {
+         if(text.length() < fileName.size())
+            key = "<p style='white-space:normal'>";
+         else
+            key = "<p style='white-space:pre'>";
+         QToolTip::showText(helpEvent->globalPos(), key + text, this, QRect());
+      }
+      else
+      {
+         QToolTip::hideText();
+         event->ignore();
+      };
+      return true;
+   };
+   return QWidget::event(event);
 }

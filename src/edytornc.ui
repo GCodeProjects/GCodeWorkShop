@@ -222,7 +222,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="FileTab">
+           <widget class="QWidget" name="fileTab">
             <attribute name="icon">
              <iconset>
               <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
@@ -266,14 +266,44 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="CurrentPathCheckBox">
-               <property name="toolTip">
-                <string>If checked, show the list of files in the current directory, otherwise the last opened directory</string>
-               </property>
-               <property name="text">
-                <string>Current directory</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QCheckBox" name="currentPathCheckBox">
+                 <property name="toolTip">
+                  <string>If checked, show the list of files in the current directory, otherwise the last opened directory</string>
+                 </property>
+                 <property name="text">
+                  <string>Current directory</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="filePreviewSpinBox">
+                 <property name="toolTip">
+                  <string>Preview no. of file lines</string>
+                 </property>
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                 <property name="value">
+                  <number>10</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>

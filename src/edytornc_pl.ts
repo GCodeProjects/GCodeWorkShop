@@ -596,7 +596,7 @@
     <message>
         <location filename="edytornc.cpp" line="1205"/>
         <source>&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski</source>
-        <translation>Nowa ikona EdytorNC dzięki Jakub Gajewski</translation>
+        <translation type="unfinished">&lt;P&gt;Nowa ikona EdytorNC dzięki Jakub Gajewski</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1206"/>

@@ -55,6 +55,7 @@ public slots:
 protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
+    bool event(QEvent *event);
 
 private slots:
     void newFile();
@@ -103,7 +104,6 @@ private slots:
     void doCalc();
     void loadFoundedFile(const QString &fileName);
     void updateStatusBar();
-    void cancelUnderline();
     void createFindToolBar();
     void closeFindToolBar();
     void findTextChanged();
@@ -308,6 +308,7 @@ private:
     bool deleteControlChars;
     int sendStartDelay;
     bool doNotShowProgressInEditor;
+    int recieveTimeout;
 
     PortSettings portSettings;
 

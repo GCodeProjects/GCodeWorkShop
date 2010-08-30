@@ -23,9 +23,7 @@
 #ifndef FINDINFILES_H
 #define FINDINFILES_H
 
-#include <QDialog>
-#include <QTableWidget>
-#include <QTextEdit>
+#include <QtGui>
 
 
 #include "commoninc.h"

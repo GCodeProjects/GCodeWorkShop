@@ -219,7 +219,8 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("DeleteControlChars", deleteControlChars->isChecked());
     //settings.setValue("StartAfterXONCTS", startAfterXONCTS->isChecked());
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
-    settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());
+    settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());    
+    settings.setValue("RecieveTimeout", recieveTimeoutSpinBox->value());
 
 
 
@@ -341,6 +342,7 @@ void SPConfigDialog::changeSettings()
     //startAfterXONCTS->setChecked(settings.value("StartAfterXONCTS", true).toBool());
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
     doNotShowProgressInEditor->setChecked(settings.value("DoNotShowProgressInEditor", false).toBool());
+    recieveTimeoutSpinBox->setValue(settings.value("RecieveTimeout", 0).toInt());
 
     settings.endGroup();
     settings.endGroup();
@@ -853,7 +855,7 @@ void TransmissionDialog::changeSettings()
     portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
-    lineDelay = settings.value("LineDelay", 0).toDouble();
+    lineDelay = settings.value("LineDelay", 0).toDouble(); 
 
 
     settings.endGroup();

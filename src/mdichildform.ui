@@ -26,7 +26,7 @@
    <enum>Qt::WheelFocus</enum>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>MdiChild</string>
   </property>
   <property name="windowIcon">
    <iconset resource="application.qrc">
@@ -92,14 +92,6 @@
         <height>0</height>
        </size>
       </property>
-      <property name="font">
-       <font>
-        <stylestrategy>PreferDefault</stylestrategy>
-       </font>
-      </property>
-      <property name="autoFillBackground">
-       <bool>true</bool>
-      </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
       </property>
@@ -111,9 +103,6 @@
       </property>
       <property name="lineWrapMode">
        <enum>QPlainTextEdit::NoWrap</enum>
-      </property>
-      <property name="centerOnScroll">
-       <bool>false</bool>
       </property>
      </widget>
     </widget>

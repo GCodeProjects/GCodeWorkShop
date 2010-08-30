@@ -492,14 +492,20 @@
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>Delay before sending the next block (s)</string>
+         <string>Delay before sending the next block:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="6">
        <widget class="QDoubleSpinBox" name="delayDoubleSpinBox">
         <property name="toolTip">
-         <string>Seconds</string>
+         <string/>
+        </property>
+        <property name="prefix">
+         <string/>
+        </property>
+        <property name="suffix">
+         <string>s</string>
         </property>
         <property name="decimals">
          <number>1</number>
@@ -601,23 +607,6 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="4" column="4">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>Start sending after (s):</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="6">
-       <widget class="QSpinBox" name="startDelaySpinBox">
-        <property name="maximum">
-         <number>60</number>
-        </property>
-        <property name="value">
-         <number>15</number>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="3">
        <spacer name="horizontalSpacer_4">
         <property name="orientation">
@@ -704,6 +693,49 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="text">
          <string>Disable text selection</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="4">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Start sending after:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="6">
+       <widget class="QSpinBox" name="startDelaySpinBox">
+        <property name="suffix">
+         <string>s</string>
+        </property>
+        <property name="maximum">
+         <number>60</number>
+        </property>
+        <property name="value">
+         <number>15</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>Recieve timeout:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="6">
+       <widget class="QSpinBox" name="recieveTimeoutSpinBox">
+        <property name="toolTip">
+         <string>Close the recieve dialog after this timetimeout</string>
+        </property>
+        <property name="suffix">
+         <string>s</string>
+        </property>
+        <property name="maximum">
+         <number>300</number>
+        </property>
+        <property name="value">
+         <number>0</number>
         </property>
        </widget>
       </item>

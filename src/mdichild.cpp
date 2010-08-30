@@ -20,9 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui>
-
-
 
 #include "mdichild.h"
 
@@ -311,10 +308,12 @@ bool MdiChild::saveFile(const QString &fileName)
     if(!cursor.isNull())
     {
        textEdit->setUpdatesEnabled(FALSE);
+       cursor.beginEditBlock();
        cursor.removeSelectedText();
        cursor.insertText(dat.toString("dd.MM.yyyy"));
+       cursor.endEditBlock();
 
-       textEdit->setUpdatesEnabled( TRUE );
+       textEdit->setUpdatesEnabled(TRUE);
        textEdit->repaint();
     }
     else
@@ -325,11 +324,13 @@ bool MdiChild::saveFile(const QString &fileName)
        cursor = textEdit->document()->find(exp, cursor);
        if(!cursor.isNull())
        {
-          textEdit->setUpdatesEnabled( FALSE );
+          textEdit->setUpdatesEnabled(FALSE);
+          cursor.beginEditBlock();
           cursor.removeSelectedText();
           cursor.insertText(dat.toString("dd.MM.yyyy"));
+          cursor.endEditBlock();
 
-          textEdit->setUpdatesEnabled( TRUE );
+          textEdit->setUpdatesEnabled(TRUE);
           textEdit->repaint();
        }
 
