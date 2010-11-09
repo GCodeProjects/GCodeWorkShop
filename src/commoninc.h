@@ -25,6 +25,10 @@
 
 #include<QString>
 
+#define TABBED_MODE       0x01
+#define SHOW_FILENAME     0x02
+#define SHOW_FILEPATH     0x04
+#define SHOW_PROGTITLE    0x08
 
 struct _h_colors
 {
@@ -74,11 +78,12 @@ struct _editor_properites
    bool underlineChanges;
    int lineColor;
    int underlineColor;
-   bool tabbedMode;
+   int windowMode;
    QString calcBinary;
    bool clearUndoHistory;
    bool clearUnderlineHistory;
    bool editorToolTips;
+   bool defaultReadOnly;
 };
 
 

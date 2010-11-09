@@ -48,7 +48,7 @@ FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
 
    textComboBox->installEventFilter(this);
 
-   preview->setReadOnly(TRUE);
+   preview->setReadOnly(true);
    preview->setWordWrapMode(QTextOption::NoWrap);
    preview->setFont(QFont("Courier", 12, QFont::Normal));
 
@@ -118,149 +118,37 @@ void FindInFiles::browse()
 //**************************************************************************************************
 
 void FindInFiles::find()
-{
-    QStringList files;
+{;
+    bool notFound;
+
+    QString text = textComboBox->currentText();
+    if(text.isEmpty())
+       return;
 
     filesTable->setRowCount(0);
     preview->clear();
 
     QString fileName = fileComboBox->currentText();
-    QString text = textComboBox->currentText();
-    QString path = directoryComboBox->currentText();
+    QString path = QDir(directoryComboBox->currentText()).absolutePath();
 
     findButton->setEnabled(FALSE);
-    //closeToolButton->setEnabled(FALSE);
-    //hideButton->setEnabled(FALSE);
     QApplication::setOverrideCursor(Qt::BusyCursor);
     qApp->processEvents();
 
-    QDir directory = QDir(path);
 
     if(fileName.isEmpty())
       fileName = "*";
-    files = directory.entryList(QStringList(fileName), QDir::Files | QDir::NoSymLinks);
 
-    if(!text.isEmpty())
-      files = findFiles(directory, files, text);
-
-    findButton->setEnabled(TRUE);
-    //closeToolButton->setEnabled(TRUE);
-    //hideButton->setEnabled(TRUE);
-    QApplication::restoreOverrideCursor();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &files,
-                                   const QString &text)
-{
-    int pos;
-    QRegExp exp;
-    QString comment_tx;
-    qint64 size;
-    bool textFounded, word, notFound;
-    QString line;
-    QStringList foundFiles;
-
-    QProgressDialog progressDialog(this);
-    progressDialog.setCancelButtonText(tr("&Cancel"));
-    progressDialog.setRange(0, files.size());
-    progressDialog.setWindowTitle(tr("Find Files"));
+    QProgressDialog *progressDialog = new QProgressDialog(this);
+    progressDialog->setCancelButtonText(tr("&Cancel"));
+    progressDialog->setRange(0, 100);
+    progressDialog->setWindowTitle(tr("Find Files"));
+    //progressDialog->setLabelText(tr("Searching in folder: \"%1\"").arg(QDir(path).absolutePath()));
     qApp->processEvents();
 
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
-    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
+    notFound = findFiles(path, path, true, text, fileName, progressDialog);
 
-    notFound = true;
-    pos = 0;
-    for(int i = 0; i < files.size(); ++i)
-    {
-        progressDialog.setLabelText(tr("Searching file number %1 of %2")
-                                    .arg(i).arg(files.size()));
-        qApp->processEvents();
-        progressDialog.setValue(i);
-
-        if(progressDialog.wasCanceled())
-            break;
-
-        QFile file(directory.absoluteFilePath(files[i]));
-
-        if(file.open(QIODevice::ReadOnly))
-        {  
-            QTextStream in(&file);
-
-            textFounded = false;
-            word = false;
-            line = in.readAll();
-
-            if(text == "*") //files containing anything
-            {
-               textFounded = true;
-            }
-            else
-            {
-               pos = line.indexOf(text, 0, Qt::CaseInsensitive);
-               textFounded = (pos >= 0);
-            };
-
-
-            if(textFounded && wholeWordsCheckBox->isChecked())
-            {
-               if(pos > 0)
-                 if(line[pos - 1].isLetterOrNumber())
-                   word = true;
-                 pos = pos + text.size();
-                 if(pos < line.size())
-                   if(line[pos].isLetterOrNumber())
-                     word = true;
-            };
-
-            if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
-              (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
-            {
-               notFound = false;
-               textFounded = false;
-               word = false;
-               size = file.size();
-
-               pos = 0;
-               while((pos = line.indexOf(exp, pos)) >= 0)
-               {
-                  comment_tx = line.mid(pos, exp.matchedLength());
-                  pos += exp.matchedLength();
-                  if(!comment_tx.contains(";$"))
-                  {
-                     comment_tx.remove('(');
-                     comment_tx.remove(')');
-                     comment_tx.remove(';');
-                     break;
-                  };
-               };
-
-               QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
-               fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-
-               QTableWidgetItem *infoNameItem = new QTableWidgetItem(comment_tx);
-               infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-
-               QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
-               sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-
-               QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
-               dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-
-               int row = filesTable->rowCount();
-               filesTable->insertRow(row);
-               filesTable->setItem(row, 0, fileNameItem);
-               filesTable->setItem(row, 1, infoNameItem);
-               filesTable->setItem(row, 2, sizeItem);
-               filesTable->setItem(row, 3, dateItem);
-            };
-            file.close();
-        };   
-    };
+    progressDialog->close();
 
     if(notFound)
     {
@@ -279,7 +167,144 @@ QStringList FindInFiles::findFiles(const QDir &directory, const QStringList &fil
     filesTable->resizeRowsToContents();
     filesTable->resizeColumnsToContents();
 
-    return foundFiles;
+
+    findButton->setEnabled(TRUE);
+    QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFound,
+                            const QString findText, QString fileFilter, QProgressDialog *progressDialog)
+{
+    int pos;
+    QRegExp exp;
+    QString comment_tx;
+    qint64 size;
+    bool textFounded, word;
+    QString line;
+    QStringList files;
+    QStringList dirs;
+
+
+    if(progressDialog->wasCanceled())
+       return notFound;
+
+    exp.setCaseSensitivity(Qt::CaseInsensitive);
+    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
+
+    pos = 0;
+
+    dirs.clear();
+
+    QDir directory = QDir(startDir);
+    //qDebug() << startDir << directory.absolutePath();
+
+    if(subFoldersCheckBox->isChecked())
+      dirs.append(directory.entryList(QStringList("*"), QDir::AllDirs | QDir::NoSymLinks | QDir::Readable | QDir::NoDotAndDotDot));
+
+    foreach(const QString &dirName, dirs)
+    {
+       notFound = findFiles(directory.absolutePath() + QDir::separator() + dirName, mainDir, notFound, findText, fileFilter, progressDialog);
+    };
+
+    files = directory.entryList(QStringList(fileFilter), QDir::Files | QDir::NoSymLinks | QDir::Readable);
+
+    progressDialog->setLabelText(tr("Searching in folder: \"%1\"").arg(directory.absolutePath()));
+
+    for(int i = 0; i < files.size(); ++i)
+    {
+       progressDialog->setRange(0, files.size());
+       progressDialog->setValue(i);
+       qApp->processEvents();
+
+       if(progressDialog->wasCanceled())
+          break;
+
+       QFile file(directory.absoluteFilePath(files[i]));
+
+       if(file.open(QIODevice::ReadOnly))
+       {
+          QTextStream in(&file);
+
+          textFounded = false;
+          word = false;
+          line = in.readAll();
+
+          if(findText == "*") //files containing anything
+          {
+             textFounded = true;
+          }
+          else
+          {
+             pos = line.indexOf(findText, 0, Qt::CaseInsensitive);
+             textFounded = (pos >= 0);
+          };
+
+          if(textFounded && wholeWordsCheckBox->isChecked())
+          {
+             if(pos > 0)
+                if(line[pos - 1].isLetterOrNumber())
+                   word = true;
+             pos = pos + findText.size();
+             if(pos < line.size())
+                if(line[pos].isLetterOrNumber())
+                   word = true;
+          };
+
+          if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
+             (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
+          {
+             notFound = false;
+             textFounded = false;
+             word = false;
+             size = file.size();
+
+             pos = 0;
+             while((pos = line.indexOf(exp, pos)) >= 0)
+             {
+                comment_tx = line.mid(pos, exp.matchedLength());
+                pos += exp.matchedLength();
+                if(!comment_tx.contains(";$"))
+                {
+                   comment_tx.remove('(');
+                   comment_tx.remove(')');
+                   comment_tx.remove(';');
+                   break;
+                };
+             };
+
+             QString subDir = startDir;
+             subDir.remove(mainDir);
+             if(!subDir.isEmpty())
+               subDir += QDir::separator();
+
+             QTableWidgetItem *fileNameItem = new QTableWidgetItem(subDir + files[i]);
+             fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+             QTableWidgetItem *infoNameItem = new QTableWidgetItem(comment_tx);
+             infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+             QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
+             sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+             QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
+             dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+             int row = filesTable->rowCount();
+             filesTable->insertRow(row);
+             filesTable->setItem(row, 0, fileNameItem);
+             filesTable->setItem(row, 1, infoNameItem);
+             filesTable->setItem(row, 2, sizeItem);
+             filesTable->setItem(row, 3, dateItem);
+          };
+          file.close();
+       };
+    };
+
+    return notFound;
 }
 
 //**************************************************************************************************
@@ -308,6 +333,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    settings.beginGroup("FindFileDialog");
 
    settings.setValue("WholeWords", wholeWordsCheckBox->isChecked());
+   settings.setValue("SubFolders", subFoldersCheckBox->isChecked());
 
    list.clear();
    list.append(directoryComboBox->currentText());
@@ -387,6 +413,7 @@ void FindInFiles::readSettings()
    settings.beginGroup("FindFileDialog");
 
    wholeWordsCheckBox->setChecked(settings.value("WholeWords", FALSE).toBool());
+   subFoldersCheckBox->setChecked(settings.value("SubFolders", FALSE).toBool());
 
    list = settings.value("Dirs", QStringList(QDir::homePath())).toStringList();
    list.removeDuplicates();
@@ -426,8 +453,8 @@ void FindInFiles::filesTableClicked(int x, int y)
    QTableWidgetItem *item = filesTable->item(x, 0);
 
    QString dir = directoryComboBox->currentText();
-   if(!dir.endsWith("/"))
-     dir = dir + "/";
+   if(!dir.endsWith(QDir::separator()))
+     dir = dir + QDir::separator();
    emit fileClicket(dir + item->text());
 
 }
@@ -444,9 +471,18 @@ void FindInFiles::filePreview(int x, int y)
 
       QApplication::setOverrideCursor(Qt::BusyCursor);
 
+      QTextCursor cursor = preview->textCursor();
+      if(!cursor.isNull())
+      {
+         QTextCharFormat format = cursor.charFormat();
+         format.setFontPointSize(12);
+         cursor.mergeCharFormat(format);
+         preview->setTextCursor(cursor);
+      };
+
       QString dir = directoryComboBox->currentText();
-      if(!dir.endsWith("/"))
-         dir = dir + "/";
+      if(!dir.endsWith(QDir::separator()))
+         dir = dir + QDir::separator();
       QFile file(dir + item->text());
       if(file.open(QIODevice::ReadOnly))
       {
@@ -471,6 +507,8 @@ void FindInFiles::filePreview(int x, int y)
          if((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*"))
          {
             highlightFindText(textComboBox->currentText(), (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)));
+            if(preview->find(textComboBox->currentText(), (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0))))
+               preview->centerCursor();
          };
       };
 

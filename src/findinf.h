@@ -66,8 +66,8 @@ protected:
     bool eventFilter(QObject *obj, QEvent *ev);
 
 private:
-    QStringList findFiles(const QDir &directory, const QStringList &files,
-                          const QString &text);
+    bool findFiles(const QString startDir, QString mainDir, bool notFound,
+                    const QString findText, QString fileFilter, QProgressDialog *progressDialog);
     void showFiles(const QDir &directory, const QStringList &files);
     void createFilesTable();
     void readSettings();

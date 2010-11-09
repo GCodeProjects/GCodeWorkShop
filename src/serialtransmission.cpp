@@ -167,6 +167,7 @@ void SPConfigDialog::saveButtonClicked()
 
     curItem = configNameBox->currentText();
 
+#ifndef Q_OS_WIN32
     list.clear();
     list.prepend(portNameComboBox->currentText());
     for(int i = 0; i <= portNameComboBox->count(); i++)
@@ -177,11 +178,12 @@ void SPConfigDialog::saveButtonClicked()
            list.prepend(item);
     };
 
-    while(list.size() > 32)
+    while(list.size() > 64)
     {
        list.removeLast();
     };
     settings.setValue("PortNameList", list);
+#endif
 
     list.clear();
     list.prepend(configNameBox->currentText());
@@ -198,7 +200,6 @@ void SPConfigDialog::saveButtonClicked()
        list.removeLast();
     };
     list.sort();
-
     settings.setValue("SettingsList", list);
     settings.setValue("CurrentSerialPortSettings", configNameBox->currentText());
 
@@ -364,15 +365,18 @@ void SPConfigDialog::loadSettings()
     portNameComboBox->clear();
 
 #ifdef Q_OS_WIN32
-       list << "COM1" << "COM2" << "COM3" << "COM4" <<
-              "COM5" << "COM6" << "COM7" << "COM8";
-#else
-       list << "/dev/ttyS0" << "/dev/ttyS1" << "/dev/ttyS2" << "/dev/ttyS3" <<
-              "/dev/ttyUSB0" << "/dev/ttyUSB1" << "/dev/ttyUSB2" << "/dev/ttyUSB3";
+    for(int i = 1; i <= 64; i++)
+      list.append(QString("COM%1").arg(i));
+    portNameComboBox->setEditable(false);
 
-#endif
+#else
+    list << "/dev/ttyS0" << "/dev/ttyS1" << "/dev/ttyS2" << "/dev/ttyS3" <<
+            "/dev/ttyUSB0" << "/dev/ttyUSB1" << "/dev/ttyUSB2" << "/dev/ttyUSB3";
     list = settings.value("PortNameList", list).toStringList();
     list.sort();
+
+#endif
+
     portNameComboBox->addItems(list);
 
 
@@ -398,27 +402,7 @@ void SPConfigDialog::deleteButtonClicked()
     QSettings settings("EdytorNC", "EdytorNC");
 
     settings.beginGroup("SerialPortConfigs");
-
     settings.remove(configNameBox->currentText());
-
-//    settings.remove("PortName");
-//    settings.remove("BaudRate");
-//    settings.remove("DataBits");
-//    settings.remove("StopBits");
-//    settings.remove("Parity");
-//    settings.remove("FlowControl");
-//    settings.remove("Xon");
-//    settings.remove("Xoff");
-//    settings.remove("LineDelay");
-//    settings.remove("DeleteControlChars");
-//    settings.remove("SendingStartDelay");
-//    settings.remove("StartAfterXONCTS");
-//      settings.remove("DoNotShowProgressInEditor");
-
-
-//    settings.endGroup();
-//    settings.remove(configNameBox->currentText());
-
     settings.endGroup();
 
     int id = configNameBox->findText(configNameBox->currentText());

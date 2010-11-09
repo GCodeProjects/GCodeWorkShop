@@ -59,14 +59,14 @@
             <enum>QTabWidget::Rounded</enum>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="documentMode">
             <bool>false</bool>
            </property>
            <widget class="QWidget" name="projectTab">
             <attribute name="icon">
-             <iconset>
+             <iconset resource="application.qrc">
               <normaloff>:/images/project_new.png</normaloff>:/images/project_new.png</iconset>
             </attribute>
             <attribute name="title">
@@ -97,7 +97,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_new.png</normaloff>:/images/project_new.png</iconset>
                   </property>
                  </widget>
@@ -114,7 +114,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_open.png</normaloff>:/images/project_open.png</iconset>
                   </property>
                  </widget>
@@ -131,10 +131,43 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_save.png</normaloff>:/images/project_save.png</iconset>
                   </property>
                  </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="projectSaveAsButton">
+                  <property name="toolTip">
+                   <string>Save project as...</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Save project</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="application.qrc">
+                    <normaloff>:/images/project_save_as.png</normaloff>:/images/project_save_as.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::MinimumExpanding</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>5</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                 <item>
                  <widget class="QToolButton" name="projectAddButton">
@@ -148,7 +181,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_add.png</normaloff>:/images/project_add.png</iconset>
                   </property>
                  </widget>
@@ -165,7 +198,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_remove.png</normaloff>:/images/project_remove.png</iconset>
                   </property>
                  </widget>
@@ -224,7 +257,7 @@
            </widget>
            <widget class="QWidget" name="fileTab">
             <attribute name="icon">
-             <iconset>
+             <iconset resource="application.qrc">
               <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
             </attribute>
             <attribute name="title">
@@ -393,6 +426,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>

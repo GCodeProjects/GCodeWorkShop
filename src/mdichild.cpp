@@ -280,7 +280,6 @@ bool MdiChild::saveFile(const QString &fileName)
 {
     int curPos;
     QRegExp exp;
-    QString f_tx;
     QTextCursor cursor;
 
     QFile file(fileName);
@@ -415,7 +414,6 @@ bool MdiChild::maybeSave()
 
 void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
 {
-
     int pos;
     QRegExp exp;
     QString f_tx;
@@ -441,7 +439,6 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
        };
        pos += exp.matchedLength();
        pos = text.indexOf(exp, pos);
-
     };
 
     if(!f_tx.isEmpty())
@@ -449,8 +446,35 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
     else
        curFileInfo = "";
 
-    setWindowTitle(QString("%2 ---> %1 [*]").arg(curFile).arg(curFileInfo));
+    updateWindowTitle();
 
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::updateWindowTitle()
+{
+   QString title = "";
+
+   if((mdiWindowProperites.windowMode & SHOW_PROGTITLE))
+      title = curFileInfo;
+
+   if(!title.isEmpty() && ((mdiWindowProperites.windowMode & SHOW_FILEPATH) || (mdiWindowProperites.windowMode & SHOW_FILENAME)))
+      title += " ---> ";
+
+   if((mdiWindowProperites.windowMode & SHOW_FILEPATH))
+      title += QFileInfo(curFile).canonicalPath() + QDir::separator();
+
+   if((mdiWindowProperites.windowMode & SHOW_FILENAME))
+      title += QFileInfo(curFile).fileName();
+
+   if(title.isEmpty())
+      title += QFileInfo(curFile).fileName();
+
+   title += "[*]";
+   setWindowTitle(title);
 }
 
 //**************************************************************************************************
@@ -459,7 +483,7 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
 
 QString MdiChild::strippedName(const QString &fullFileName)
 {
-    return QFileInfo(fullFileName).fileName();
+   return QFileInfo(fullFileName).fileName();
 }
 
 //**************************************************************************************************
@@ -468,7 +492,7 @@ QString MdiChild::strippedName(const QString &fullFileName)
 
 QString MdiChild::filePath()
 {
-    return QFileInfo(curFile).absolutePath();
+   return QFileInfo(curFile).absolutePath();
 }
 
 //**************************************************************************************************
@@ -522,6 +546,7 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    textEdit->setTextCursor(cursor);
    textEdit->centerCursor();
    connect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+   updateWindowTitle();
 }
 
 //**************************************************************************************************
@@ -1178,6 +1203,8 @@ bool MdiChild::event(QEvent *event)
                                       break;
          case MODE_HEIDENHAIN_ISO   : group = "HEIDENHAIN_ISO";
                                       break;
+         case MODE_TOOLTIPS         : group = "TOOLTIP";
+                                      break;
          default                    : event->accept();
                                       return true;
 
@@ -1252,7 +1279,7 @@ bool MdiChild::event(QEvent *event)
 
       qDebug() << "Full key: " << key;
 
-      fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips.txt";
+      fileName = QFileInfo(curFile).canonicalPath() + QDir::separator() + "cnc_tips.txt";
       if(QFile::exists(fileName))
       {
          QSettings settings(fileName, QSettings::IniFormat);
@@ -1264,7 +1291,7 @@ bool MdiChild::event(QEvent *event)
       if(text.isEmpty() || text.isNull())
       {
          QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-         QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
+         QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + QDir::separator();
 
          fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
 

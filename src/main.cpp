@@ -25,6 +25,8 @@
 #include "edytornc.h"
 #include "qtsingleapplication.h"
 
+//#include <QMessageBox>
+
 
 #define LOCALE_PATH         "/usr/share/edytornc/lang/"
 
@@ -44,6 +46,7 @@ int main(int argc, char *argv[])
           txMessage += ";";
     };
 
+    //qDebug() << argc << argv << txMessage;
     if(app.sendMessage(txMessage))
         return 0;
 
@@ -60,7 +63,12 @@ int main(int argc, char *argv[])
     EdytorNc *mw = new EdytorNc();
 
     for(int i = 1; i < argc; ++i)
-      mw->openFile(argv[i]);
+    {
+       //qDebug() << argc << argv[i] << i;
+       mw->openFile(argv[i]);
+    };
+
+    //QMessageBox::information(mv, "Debug", txMessage);
 
     mw->show();
 

@@ -2671,6 +2671,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
 
    editProp = *prop;
 
+   readOnlyModeCheckBox->setChecked(editProp.defaultReadOnly);
 
    fontLabel->setText(QString(tr("Current font : <b>\"%1\", %2 pt.<\b>")
                       .arg(editProp.fontName).arg(editProp.fontSize)));
@@ -2795,7 +2796,12 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    capsLockCheckBox->setChecked(editProp.intCapsLock);
    syntaxHCheckBox->setChecked(editProp.syntaxH);
    underlineCheckBox->setChecked(editProp.underlineChanges);
-   tabbedModecheckBox->setChecked(editProp.tabbedMode);
+
+
+   tabbedModecheckBox->setChecked(editProp.windowMode & TABBED_MODE);
+   fileNameCheckBox->setChecked(editProp.windowMode & SHOW_FILENAME);
+   filePathCheckBox->setChecked(editProp.windowMode & SHOW_FILEPATH);
+   titleCheckBox->setChecked(editProp.windowMode & SHOW_PROGTITLE);
 
    calcLineEdit->setText(editProp.calcBinary);
    clearUndocheckBox->setChecked(editProp.clearUndoHistory);
@@ -2807,7 +2813,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
 
-   adjustSize();
+   //adjustSize();
    //setMaximumSize(width(), height());
 
 
@@ -2849,15 +2855,25 @@ _editor_properites SetupDialog::getSettings()
    QPalette palette;
    int r, g, b;
 
+   r = 0;
+   if(tabbedModecheckBox->isChecked())
+     r |= TABBED_MODE;
+   if(fileNameCheckBox->isChecked())
+     r |= SHOW_FILENAME;
+   if(filePathCheckBox->isChecked())
+     r |= SHOW_FILEPATH;
+   if(titleCheckBox->isChecked())
+     r |= SHOW_PROGTITLE;
 
+   editProp.windowMode = r;
    editProp.intCapsLock = capsLockCheckBox->isChecked();
    editProp.syntaxH = syntaxHCheckBox->isChecked();
    editProp.underlineChanges = underlineCheckBox->isChecked();
-   editProp.tabbedMode = tabbedModecheckBox->isChecked();
    editProp.calcBinary = calcLineEdit->text();
    editProp.clearUndoHistory = clearUndocheckBox->isChecked();
    editProp.clearUnderlineHistory = clearUnderlinecheckBox->isChecked();
    editProp.editorToolTips = editorToolTipsCheckBox->isChecked();
+   editProp.defaultReadOnly = readOnlyModeCheckBox->isChecked();
 
    palette = commentColorButton->palette();
    palette.color(commentColorButton->foregroundRole()).getRgb(&r, &g, &b);
@@ -3008,16 +3024,20 @@ void SetupDialog::setDefaultProp()
    curLineColorButton->setPalette(palette);
 
 
-   syntaxHCheckBox->setChecked(TRUE);
-   capsLockCheckBox->setChecked(TRUE);
-   underlineCheckBox->setChecked(TRUE);
-   tabbedModecheckBox->setChecked(FALSE);
-   editorToolTipsCheckBox->setChecked(TRUE);
+   syntaxHCheckBox->setChecked(true);
+   capsLockCheckBox->setChecked(true);
+   underlineCheckBox->setChecked(true);
+   tabbedModecheckBox->setChecked(false);
+   fileNameCheckBox->setChecked(true);
+   filePathCheckBox->setChecked(false);
+   titleCheckBox->setChecked(false);
+   editorToolTipsCheckBox->setChecked(true);
+   readOnlyModeCheckBox->setChecked(false);
    editProp.fontName = "Courier";
    editProp.fontSize = 12;
 
-   clearUndocheckBox->setChecked(FALSE);
-   clearUnderlinecheckBox->setChecked(FALSE);
+   clearUndocheckBox->setChecked(false);
+   clearUnderlinecheckBox->setChecked(true);
 
 #ifdef Q_OS_LINUX
    editProp.calcBinary = "kcalc";

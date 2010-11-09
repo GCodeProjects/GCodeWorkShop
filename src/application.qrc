@@ -84,5 +84,6 @@
         <file>images/project_remove.png</file>
         <file>images/folder.png</file>
         <file>images/project_save.png</file>
+        <file>images/project_save_as.png</file>
     </qresource>
 </RCC>

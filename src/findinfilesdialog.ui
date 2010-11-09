@@ -183,7 +183,7 @@
          <string>&amp;Browse</string>
         </property>
         <property name="icon">
-         <iconset resource="application.qrc">
+         <iconset>
           <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
         </property>
         <property name="autoDefault">
@@ -282,7 +282,7 @@
          <string>&amp;Find files</string>
         </property>
         <property name="icon">
-         <iconset resource="application.qrc">
+         <iconset>
           <normaloff>:/images/findnext.png</normaloff>:/images/findnext.png</iconset>
         </property>
         <property name="autoDefault">
@@ -338,6 +338,16 @@
         </property>
        </spacer>
       </item>
+      <item row="3" column="4">
+       <widget class="QCheckBox" name="subFoldersCheckBox">
+        <property name="toolTip">
+         <string>Search subfolders</string>
+        </property>
+        <property name="text">
+         <string>Subfolders</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -370,7 +380,7 @@
         <string>Find files</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/filefind.png</normaloff>
          <disabledoff>:/images/filefind.png</disabledoff>:/images/filefind.png</iconset>
        </property>
@@ -388,7 +398,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/arrow-down.png</normaloff>
          <normalon>:/images/arrow-up.png</normalon>:/images/arrow-down.png</iconset>
        </property>
@@ -404,8 +414,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="application.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

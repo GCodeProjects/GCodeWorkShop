@@ -120,7 +120,8 @@ private slots:
     void attachToDirButtonClicked(bool attach = true);
     void deAttachToDirButtonClicked();
     void setHighLightMode(int mode);
-    void createToolTipsFile();
+    void createGlobalToolTipsFile();
+    void createUserToolTipsFile();
     void attachHighlightToDirActClicked();
     void deAttachHighlightToDirActClicked();
     void sendStartDelayTimeout();
@@ -128,7 +129,8 @@ private slots:
     void doDiffR();
     void doDiff();
     void projectAdd();
-    void projectSave(bool saveAs = false);
+    void projectSave();
+    void projectSaveAs();
     void projectNew();
     void projectTreeViewDoubleClicked(const QModelIndex & index);
     void fileTreeViewDoubleClicked(const QModelIndex & index);
@@ -163,11 +165,12 @@ private:
     void fileTreeViewChangeRootDir();
 
 
+
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     _editor_properites defaultMdiWindowProperites;
     FindInFiles *findFiles;
-    bool tabbedView;
+    //bool tabbedView;
 
     bool panelHidden;
     QByteArray panelState;
@@ -225,7 +228,8 @@ private:
     QAction *separatorAct;
     QAction *aboutAct;
     QAction *aboutQtAct;
-    QAction *createToolTipsAct;
+    QAction *createGlobalToolTipsAct;
+    QAction *createUserToolTipsAct;
     QAction *undoAct;
     QAction *redoAct;
 
@@ -279,6 +283,7 @@ private:
     QAction *findCloseAct;
     QCheckBox *mCheckFindWholeWords;
     QCheckBox *mCheckIgnoreCase;
+    QCheckBox *mCheckIgnoreComments;
 
 
     QToolBar *serialToolBar;

@@ -61,6 +61,7 @@ EdytorNc::EdytorNc()
     connect(projectNewButton, SIGNAL(clicked()), this, SLOT(projectNew()));
     connect(projectAddButton, SIGNAL(clicked()), this, SLOT(projectAdd()));
     connect(projectSaveButton, SIGNAL(clicked()), this, SLOT(projectSave()));
+    connect(projectSaveAsButton, SIGNAL(clicked()), this, SLOT(projectSaveAs()));
     connect(projectLoadButton, SIGNAL(clicked()), this, SLOT(projectOpen()));
     connect(projectRemoveButton, SIGNAL(clicked()), this, SLOT(projectTreeRemoveItem()));
 
@@ -86,11 +87,10 @@ EdytorNc::EdytorNc()
     setWindowIcon(QIcon(":/images/edytornc.png"));
     createStatusBar();
     
-    if(tabbedView)
+    if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
       mdiArea->setViewMode(QMdiArea::TabbedView);
     else
       mdiArea->setViewMode(QMdiArea::SubWindowView);
-
 }
 
 //**************************************************************************************************
@@ -222,7 +222,7 @@ void EdytorNc::open()
           if(child->loadFile(*it))
           {
              defaultMdiWindowProperites.cursorPos = 0;
-             defaultMdiWindowProperites.readOnly = FALSE;
+             defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
              defaultMdiWindowProperites.geometry = QByteArray();
              defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
              defaultMdiWindowProperites.editorToolTips = true;
@@ -262,7 +262,7 @@ void EdytorNc::openExample()
    if(QDir(EXAMPLES_PATH).exists())
       dir = EXAMPLES_PATH;
    else
-      dir = QApplication::applicationDirPath() + "/" + "EXAMPLES";
+      dir = QApplication::applicationDirPath() + QDir::separator() + "EXAMPLES";
 
 
 
@@ -294,7 +294,7 @@ void EdytorNc::openExample()
          if(child->loadFile(*it))
          {
             defaultMdiWindowProperites.cursorPos = 0;
-            defaultMdiWindowProperites.readOnly = FALSE;
+            defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
             defaultMdiWindowProperites.geometry = QByteArray();
             defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
             defaultMdiWindowProperites.editorToolTips = true;
@@ -338,7 +338,7 @@ void EdytorNc::openFile(const QString fileName)
       if(child->loadFile(fileName))
       {
          defaultMdiWindowProperites.cursorPos = 0;
-         defaultMdiWindowProperites.readOnly = FALSE;
+         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
          //defaultMdiWindowProperites.maximized = FALSE;
          defaultMdiWindowProperites.geometry = QByteArray();
          defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
@@ -405,7 +405,7 @@ void EdytorNc::openWithPreview()
              if(child->loadFile(*it))
              {
                 defaultMdiWindowProperites.cursorPos = 0;
-                defaultMdiWindowProperites.readOnly = FALSE;
+                defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
                 //defaultMdiWindowProperites.maximized = FALSE;
                 defaultMdiWindowProperites.geometry = QByteArray();
                 defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
@@ -529,28 +529,119 @@ bool EdytorNc::findNext()
    bool found = false;
    QTextCursor cursor, cursorOld;
    QPalette palette;
+   bool inComment = false;
+   QString cur_line;
+   int cur_line_column;
+   int commentPos, id;
+
+   findNextAct->setEnabled(false);
+   findPreviousAct->setEnabled(false);
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
       activeMdiChild()->highlightFindText(findEdit->text(),
                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
-      found = activeMdiChild()->textEdit->find(findEdit->text(),
-                                ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+      do
+      {
+         found = activeMdiChild()->textEdit->find(findEdit->text(),
+                                                  ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                                   (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+         if(found && mCheckIgnoreComments->isChecked())
+         {
+            cursor = activeMdiChild()->textEdit->textCursor();
+            cur_line = cursor.block().text().trimmed();
+
+            cur_line_column = cursor.columnNumber();
+
+            id = MODE_AUTO;
+            if(activeMdiChild() != 0)
+              id = activeMdiChild()->getHighligthMode();
+
+            if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
+               commentPos  = cur_line.indexOf(";", 0);
+            else
+            {
+               if((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS))
+                 commentPos  = cur_line.indexOf("(", 0);
+               else
+               {
+                  commentPos  = cur_line.indexOf("(", 0);
+                  if(commentPos < 0)
+                     commentPos  = cur_line.indexOf(";", 0);
+               };
+            };
+
+            //qDebug() << commentPos << id;
+
+            if(commentPos < 0)
+              commentPos = cur_line_column + 1;
+
+            inComment = (commentPos < cur_line_column);
+
+            if(inComment)
+              found = false;
+         }
+         else
+           inComment = false;
+
+      }while(inComment);
+
       if(!found)
       {
          cursor = activeMdiChild()->textEdit->textCursor();
          cursorOld = cursor;
          cursor.movePosition(QTextCursor::Start);
          activeMdiChild()->textEdit->setTextCursor(cursor);
-         found = activeMdiChild()->textEdit->find(findEdit->text(),
-                                   ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                   (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+         do
+         {
+            found = activeMdiChild()->textEdit->find(findEdit->text(),
+                                                     ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                                      (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+            if(found && mCheckIgnoreComments->isChecked())
+            {
+               cursor = activeMdiChild()->textEdit->textCursor();
+               cur_line = cursor.block().text().trimmed();
+
+               cur_line_column = cursor.columnNumber();
+
+               id = MODE_AUTO;
+               if(activeMdiChild() != 0)
+                 id = activeMdiChild()->getHighligthMode();
+
+               if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
+                  commentPos  = cur_line.indexOf(";", 0);
+               else
+               {
+                  if((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS))
+                    commentPos  = cur_line.indexOf("(", 0);
+                  else
+                  {
+                     commentPos  = cur_line.indexOf("(", 0);
+                     if(commentPos < 0)
+                        commentPos  = cur_line.indexOf(";", 0);
+                  };
+               };
+               if(commentPos < 0)
+                 commentPos = cur_line_column + 1;
+
+               inComment = (commentPos < cur_line_column);
+
+               if(inComment)
+                 found = false;
+            }
+            else
+              inComment = false;
+
+         }while(inComment);
+
          if(!found)
            activeMdiChild()->textEdit->setTextCursor(cursorOld);
       };
-
 
       palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
@@ -558,10 +649,11 @@ bool EdytorNc::findNext()
         findEdit->setPalette(QPalette());
       else
         findEdit->setPalette(palette);
-      
-      return found;
    };
-   return false;
+
+   findNextAct->setEnabled(true);
+   findPreviousAct->setEnabled(true);
+   return found;
 }
 
 //**************************************************************************************************
@@ -574,24 +666,109 @@ bool EdytorNc::findPrevious()
    bool found = false;
    QTextCursor cursor, cursorOld;
    QPalette palette;
+   bool inComment = false;
+   QString cur_line;
+   int cur_line_column;
+   int commentPos, id;
+
+   findNextAct->setEnabled(false);
+   findPreviousAct->setEnabled(false);
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
       activeMdiChild()->highlightFindText(findEdit->text(),
                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
-      found = activeMdiChild()->textEdit->find(findEdit->text(), QTextDocument::FindBackward |
-                               ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+      do
+      {
+         found = activeMdiChild()->textEdit->find(findEdit->text(), QTextDocument::FindBackward |
+                                  ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                  (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+         if(found && mCheckIgnoreComments->isChecked())
+         {
+            cursor = activeMdiChild()->textEdit->textCursor();
+            cur_line = cursor.block().text().trimmed();
+
+            cur_line_column = cursor.columnNumber();
+
+            id = MODE_AUTO;
+            if(activeMdiChild() != 0)
+              id = activeMdiChild()->getHighligthMode();
+
+            if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
+               commentPos  = cur_line.indexOf(";", 0);
+            else
+            {
+               if((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS))
+                 commentPos  = cur_line.indexOf("(", 0);
+               else
+               {
+                  commentPos  = cur_line.indexOf("(", 0);
+                  if(commentPos < 0)
+                     commentPos  = cur_line.indexOf(";", 0);
+               };
+            };
+            if(commentPos < 0)
+              commentPos = cur_line_column + 1;
+
+            inComment = (commentPos < cur_line_column);
+         }
+         else
+           inComment = false;
+
+      }while(inComment);
+
       if(!found)
       {
          cursor = activeMdiChild()->textEdit->textCursor();
          cursorOld = cursor;
          cursor.movePosition(QTextCursor::End);
          activeMdiChild()->textEdit->setTextCursor(cursor);
-         found = activeMdiChild()->textEdit->find(findEdit->text(), QTextDocument::FindBackward |
-                                   ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                   (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+         do
+         {
+            found = activeMdiChild()->textEdit->find(findEdit->text(), QTextDocument::FindBackward |
+                                     ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                     (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+
+            if(found && mCheckIgnoreComments->isChecked())
+            {
+               cursor = activeMdiChild()->textEdit->textCursor();
+               cur_line = cursor.block().text().trimmed();
+
+               cur_line_column = cursor.columnNumber();
+
+               id = MODE_AUTO;
+               if(activeMdiChild() != 0)
+                 id = activeMdiChild()->getHighligthMode();
+
+               if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
+                  commentPos  = cur_line.indexOf(";", 0);
+               else
+               {
+                  if((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS))
+                    commentPos  = cur_line.indexOf("(", 0);
+                  else
+                  {
+                     commentPos  = cur_line.indexOf("(", 0);
+                     if(commentPos < 0)
+                        commentPos  = cur_line.indexOf(";", 0);
+                  };
+               };
+               if(commentPos < 0)
+                 commentPos = cur_line_column + 1;
+
+               inComment = (commentPos < cur_line_column);
+            }
+            else
+              inComment = false;
+
+         qDebug() << inComment << found;
+
+         }while(inComment);
+
          if(!found)
            activeMdiChild()->textEdit->setTextCursor(cursorOld);
       };
@@ -602,10 +779,12 @@ bool EdytorNc::findPrevious()
         findEdit->setPalette(QPalette());
       else
         findEdit->setPalette(palette);
-
-      return found;
    };
-   return false;
+
+   findNextAct->setEnabled(true);
+   findPreviousAct->setEnabled(true);
+
+   return found;
 }
 
 //**************************************************************************************************
@@ -616,6 +795,10 @@ void EdytorNc::replaceNext()
 {
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
+
+   replaceNextAct->setEnabled(false);
+   replacePreviousAct->setEnabled(false);
+   replaceAllAct->setEnabled(false);
 
    if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
@@ -643,6 +826,9 @@ void EdytorNc::replaceNext()
 
    };
 
+   replaceNextAct->setEnabled(true);
+   replacePreviousAct->setEnabled(true);
+   replaceAllAct->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -653,6 +839,10 @@ void EdytorNc::replacePrevious()
 {
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
+
+   replaceNextAct->setEnabled(false);
+   replacePreviousAct->setEnabled(false);
+   replaceAllAct->setEnabled(false);
 
    if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
@@ -680,6 +870,9 @@ void EdytorNc::replacePrevious()
 
    };
 
+   replaceNextAct->setEnabled(true);
+   replacePreviousAct->setEnabled(true);
+   replaceAllAct->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -688,10 +881,15 @@ void EdytorNc::replacePrevious()
 
 void EdytorNc::replaceAll()
 {
-   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
-   bool found = false;
    QTextCursor startCursor, cr;
    QTextCharFormat format;
+
+   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
+   bool found = false;
+
+   replaceNextAct->setEnabled(false);
+   replacePreviousAct->setEnabled(false);
+   replaceAllAct->setEnabled(false);
 
    if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
@@ -726,6 +924,9 @@ void EdytorNc::replaceAll()
       QApplication::restoreOverrideCursor();
    };
 
+   replaceNextAct->setEnabled(true);
+   replacePreviousAct->setEnabled(true);
+   replaceAllAct->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -747,13 +948,17 @@ void EdytorNc::config()
    _editor_properites opt;
    MdiChild *mdiChild;
 
-   defaultMdiWindowProperites.tabbedMode = tabbedView;
    SetupDialog *setUpDialog = new SetupDialog(this, &defaultMdiWindowProperites);
 
 
    if(setUpDialog->exec() == QDialog::Accepted)
    {
       defaultMdiWindowProperites = setUpDialog->getSettings();
+
+      if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
+        mdiArea->setViewMode(QMdiArea::TabbedView);
+      else
+        mdiArea->setViewMode(QMdiArea::SubWindowView);
 
       foreach(QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
       {
@@ -773,16 +978,11 @@ void EdytorNc::config()
          opt.clearUnderlineHistory = defaultMdiWindowProperites.clearUnderlineHistory;
          opt.clearUndoHistory = defaultMdiWindowProperites.clearUndoHistory;
          opt.editorToolTips = defaultMdiWindowProperites.editorToolTips;
-
-         tabbedView = defaultMdiWindowProperites.tabbedMode;
-         if(tabbedView)
-           mdiArea->setViewMode(QMdiArea::TabbedView);
-         else
-           mdiArea->setViewMode(QMdiArea::SubWindowView);
+         opt.windowMode = defaultMdiWindowProperites.windowMode;
+         opt.readOnly = defaultMdiWindowProperites.defaultReadOnly;
 
          mdiChild->setMdiWindowProperites(opt);
       };
-
    };
    delete setUpDialog;
 }
@@ -1197,7 +1397,7 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.08.29 BETA" +
+                                   "2010.11.10 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1226,7 +1426,6 @@ void EdytorNc::about()
 
 void EdytorNc::updateMenus()
 {
-
    bool hasMdiChild = (activeMdiChild() != 0);
    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
    bool hasSelection = (hasMdiChild && activeMdiChild()->textEdit->textCursor().hasSelection());
@@ -1454,7 +1653,7 @@ void EdytorNc::createActions()
     openAct->setStatusTip(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
-    if(QDir(EXAMPLES_PATH).exists() || QDir(QApplication::applicationDirPath() + "/" + "EXAMPLES").exists())
+    if(QDir(EXAMPLES_PATH).exists() || QDir(QApplication::applicationDirPath() + QDir::separator() + "EXAMPLES").exists())
     {
        openExampleAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open example..."), this);
        openExampleAct->setStatusTip(tr("Open an example file"));
@@ -1681,9 +1880,13 @@ void EdytorNc::createActions()
 
 
 
-    createToolTipsAct = new QAction(tr("&Create cnc tooltips"), this);
-    createToolTipsAct->setStatusTip(tr("Create default cnc tooltips file"));
-    connect(createToolTipsAct, SIGNAL(triggered()), this, SLOT(createToolTipsFile()));
+    createGlobalToolTipsAct = new QAction(tr("&Create global cnc tooltips"), this);
+    createGlobalToolTipsAct->setStatusTip(tr("Create default global cnc tooltips file"));
+    connect(createGlobalToolTipsAct, SIGNAL(triggered()), this, SLOT(createGlobalToolTipsFile()));
+
+    createUserToolTipsAct = new QAction(tr("&Create user cnc tooltips"), this);
+    createUserToolTipsAct->setStatusTip(tr("Create/edit user cnc tooltips file"));
+    connect(createUserToolTipsAct, SIGNAL(triggered()), this, SLOT(createUserToolTipsFile()));
 
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
@@ -1777,7 +1980,8 @@ void EdytorNc::createMenus()
     menuBar()->addSeparator();
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
-    helpMenu->addAction(createToolTipsAct);
+    helpMenu->addAction(createGlobalToolTipsAct);
+    helpMenu->addAction(createUserToolTipsAct);
     helpMenu->addSeparator();
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(aboutQtAct);
@@ -1881,6 +2085,7 @@ void EdytorNc::createStatusBar()
    highlightTypeCombo->addItem(tr("PHILIPS"), MODE_PHILIPS);
    highlightTypeCombo->addItem(tr("SINUMERIK OLD"), MODE_SINUMERIK);
    highlightTypeCombo->addItem(tr("SINUMERIK NEW"), MODE_SINUMERIK_840);
+   highlightTypeCombo->addItem(tr("TOOLTIPS"), MODE_TOOLTIPS);
 
    connect(highlightTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setHighLightMode(int)));
 
@@ -1952,7 +2157,6 @@ void EdytorNc::readSettings()
 
     restoreState(settings.value("State", QByteArray()).toByteArray());
 
-
     lastDir = settings.value("LastDir", QString(getenv("HOME"))).toString();
 
     openFileFilter = settings.value("FileOpenFilter", "*.nc").toString();
@@ -1970,7 +2174,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.fontSize = settings.value("FontSize", 12).toInt();
     defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", TRUE).toBool();
     defaultMdiWindowProperites.underlineChanges = settings.value("UnderlineChanges", TRUE).toBool();
-    tabbedView = settings.value("TabbedView", FALSE).toBool();
+    defaultMdiWindowProperites.windowMode = settings.value("WindowMode", 0x0E).toInt();
     defaultMdiWindowProperites.clearUndoHistory = settings.value("ClearUndoRedo", FALSE).toBool();
     defaultMdiWindowProperites.clearUnderlineHistory = settings.value("ClearUnderline", FALSE).toBool();
     defaultMdiWindowProperites.editorToolTips = settings.value("EditorToolTips", TRUE).toBool();
@@ -1978,6 +2182,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
 
+    defaultMdiWindowProperites.defaultReadOnly = settings.value("ViewerMode", FALSE).toBool();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
 
@@ -1989,13 +2194,13 @@ void EdytorNc::readSettings()
 #ifdef Q_OS_WIN32
    defaultMdiWindowProperites.calcBinary = "calc.exe";
 #endif
+
     defaultMdiWindowProperites.calcBinary = settings.value("CalcBinary", defaultMdiWindowProperites.calcBinary).toString();
 
     m_recentFiles = settings.value("RecentFiles").toStringList();
     updateRecentFilesMenu();
 
     defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", TRUE).toBool();
-
 
     settings.beginGroup("Highlight");
     defaultMdiWindowProperites.syntaxH = settings.value("HighlightOn", TRUE).toBool();
@@ -2020,7 +2225,6 @@ void EdytorNc::readSettings()
     int max = settings.beginReadArray("LastDoc");
     for(int i = 0; i < max; ++i)
     {
-
        settings.setArrayIndex(i);
        defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
 
@@ -2028,11 +2232,10 @@ void EdytorNc::readSettings()
        if(!defaultMdiWindowProperites.fileName.isEmpty())
        {
           defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
-          defaultMdiWindowProperites.readOnly = settings.value( "ReadOnly", FALSE).toBool();
+          defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", FALSE).toBool();
           defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
           defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
-          loadFile(defaultMdiWindowProperites, false);
-           
+          loadFile(defaultMdiWindowProperites, false);   
        };
     };
     settings.endArray();
@@ -2057,7 +2260,6 @@ void EdytorNc::readSettings()
     tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt());
     currentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir", false).toBool());
     filePreviewSpinBox->setValue(settings.value("FilePreviewNo", 10).toInt());
-
 }
 
 //**************************************************************************************************
@@ -2095,13 +2297,14 @@ void EdytorNc::writeSettings()
     settings.setValue("FontSize", defaultMdiWindowProperites.fontSize);
     settings.setValue("IntCapsLock", defaultMdiWindowProperites.intCapsLock);
     settings.setValue("UnderlineChanges", defaultMdiWindowProperites.underlineChanges);
-    settings.setValue("TabbedView", tabbedView);
+    settings.setValue("WindowMode", defaultMdiWindowProperites.windowMode);
     settings.setValue("LineColor", defaultMdiWindowProperites.lineColor);
     settings.setValue("UnderlineColor", defaultMdiWindowProperites.underlineColor);
     settings.setValue("CalcBinary", defaultMdiWindowProperites.calcBinary);
     settings.setValue("ClearUndoRedo", defaultMdiWindowProperites.clearUndoHistory);
     settings.setValue("ClearUnderline", defaultMdiWindowProperites.clearUnderlineHistory);
     settings.setValue("EditorToolTips", defaultMdiWindowProperites.editorToolTips);
+    settings.setValue("ViewerMode", defaultMdiWindowProperites.defaultReadOnly);
     
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
@@ -2264,7 +2467,7 @@ void EdytorNc::updateRecentFiles(const QString &filename)
 
 void EdytorNc::fileOpenRecent(QAction *act)
 {
-    defaultMdiWindowProperites.readOnly = FALSE;
+    defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
     defaultMdiWindowProperites.geometry = QByteArray();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.editorToolTips = true;
@@ -2317,7 +2520,7 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
        updateRecentFiles(fileName);
        //defaultMdiWindowProperites.maximized = FALSE;
        defaultMdiWindowProperites.cursorPos = 0;
-       defaultMdiWindowProperites.readOnly = FALSE;
+       defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
        defaultMdiWindowProperites.geometry = QByteArray();
        defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
        defaultMdiWindowProperites.editorToolTips = true;
@@ -2414,6 +2617,11 @@ void EdytorNc::createFindToolBar()
       mCheckFindWholeWords = new QCheckBox(tr("&Whole words only"));
       connect(mCheckFindWholeWords, SIGNAL(clicked()), this, SLOT(findTextChanged()));
       findToolBar->addWidget(mCheckFindWholeWords);
+      //findToolBar->addSeparator();
+      mCheckIgnoreComments = new QCheckBox(tr("Ignore c&omments"));
+      mCheckIgnoreComments->setChecked(true);
+      connect(mCheckIgnoreComments, SIGNAL(clicked()), this, SLOT(findTextChanged()));
+      findToolBar->addWidget(mCheckIgnoreComments);
       findToolBar->addSeparator();
       findToolBar->addAction(findCloseAct);
    }
@@ -2697,7 +2905,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 
       if(attach)
       {
-         file.setFileName(activeMdiChild()->filePath() + "/" + configBox->currentText() + ".ini");
+         file.setFileName(activeMdiChild()->filePath() + QDir::separator() + configBox->currentText() + ".ini");
          file.open(QIODevice::ReadWrite);
          file.close();;
       };
@@ -3223,7 +3431,11 @@ void EdytorNc::receiveButtonClicked()
         activeWindow->parentWidget()->close();
      }
      else
+     {
         activeWindow->setHighligthMode(MODE_AUTO);
+        if(defaultMdiWindowProperites.defaultReadOnly)
+           activeWindow->textEdit->isReadOnly();
+     };
    };
 }
 
@@ -3304,10 +3516,60 @@ void EdytorNc::doCmpMacro()
 //
 //**************************************************************************************************
 
-void EdytorNc::createToolTipsFile()
+void EdytorNc::createUserToolTipsFile()
+{
+   QString fileName;
+
+   if(activeMdiChild())
+     fileName = QFileInfo(activeMdiChild()->currentFile()).canonicalPath();
+   else
+     return;
+
+   fileName += "/cnc_tips.txt";
+
+   if(QFileInfo(fileName).exists())
+      openFile(fileName);
+   else
+   {
+         QFile file(fileName);
+         if(!file.open(QIODevice::ReadWrite | QIODevice::Text))
+           return;
+
+         qDebug() << fileName;
+
+         QTextStream out(&file);
+         out << "# " << fileName << "\n" << "\n";
+         out << "#+++++++++++++++++++++++++++++++++\n";
+         out << tr("# ++++++ EXAMPLE ++++++") << "\n";
+         out << "# [OKUMA]" << "\n";
+         out << tr("# M00=\"<b>M00</b> - program stop, unconditional\"") << "\n";
+         out << "#+++++++++++++++++++++++++++++++++\n\n";
+
+         out << "[OKUMA]" << "\n" << "\n" << "\n";
+         out << "[FANUC]" << "\n" << "\n" << "\n";
+         out << "[SINUMERIK]" << "\n" << "\n" << "\n";
+         out << "[SINUMERIK_840]" << "\n" << "\n" << "\n";
+         out << "[PHILIPS]" << "\n" << "\n" << "\n";
+         out << "[HEIDENHAIN]" << "\n" << "\n" << "\n";
+         out << "[HEIDENHAIN_ISO]" << "\n" << "\n" << "\n";
+         file.close();
+         openFile(fileName);      
+   };
+   QMdiSubWindow *existing = findMdiChild(fileName);
+   if(existing)
+   {
+      mdiArea->setActiveSubWindow(existing);
+   };
+};
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::createGlobalToolTipsFile()
 {
    QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-   QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
+   QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + QDir::separator();
 
    QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
 
@@ -3932,6 +4194,13 @@ void EdytorNc::createToolTipsFile()
 
    settings.endGroup();
 
+   if(QFileInfo(fileName).exists())
+      openFile(fileName);
+   QMdiSubWindow *existing = findMdiChild(fileName);
+   if(existing)
+   {
+      mdiArea->setActiveSubWindow(existing);
+   };
 }
 
 //**************************************************************************************************
@@ -3968,7 +4237,7 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 
       if(attach)
       {
-         file.setFileName(activeMdiChild()->filePath() + "/" + highlightTypeCombo->currentText() + ".cfg");
+         file.setFileName(activeMdiChild()->filePath() + QDir::separator() + highlightTypeCombo->currentText() + ".cfg");
          file.open(QIODevice::ReadWrite);
          file.close();;
       };
@@ -4043,7 +4312,8 @@ void EdytorNc::projectAdd()
                         "CNC programs files *.nc (*.nc);;"
                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
                         "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
-                        "Pictures *.jpg *.bmp (*.jpg *.bmp);;"
+                        "Drawings *.dwg *.dxf (*.dwg *.dxf);;"
+                        "Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;"
                         "Text files *.txt (*.txt)");
 #endif
 
@@ -4052,7 +4322,8 @@ void EdytorNc::projectAdd()
                         "CNC programs files (*.nc);;"
                         "CNC programs files (*.nc *.min *.anc *.cnc);;"
                         "Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
-                        "Pictures (*.jpg *.bmp);;"
+                        "Drawings (*.dwg *.dxf);;"
+                        "Pictures (*.jpg *.bmp *.svg);;"
                         "Text files (*.txt)");
 #endif
 
@@ -4132,7 +4403,7 @@ void EdytorNc::projectAdd()
 //
 //**************************************************************************************************
 
-void EdytorNc::projectSave(bool saveAs)
+void EdytorNc::projectSave()
 {
    QString path, fileName;
    int fileCount;
@@ -4154,10 +4425,10 @@ void EdytorNc::projectSave(bool saveAs)
       path = item->text();
       for(int j = 0; j < item->rowCount(); j++)
       {
-         fileName = item->child(j,0)->text();
+         fileName = item->child(j, 0)->text();
 
-         qDebug() << path;
-         qDebug() << fileName;
+         //qDebug() << path;
+         //qDebug() << fileName;
          settings.setArrayIndex(fileCount);
          settings.setValue("File", QFileInfo(path, fileName).absoluteFilePath());
          fileCount++;
@@ -4172,6 +4443,25 @@ void EdytorNc::projectSave(bool saveAs)
       currentProjectModified = false;
       statusBar()->showMessage(tr("Project saved"), 5000);
    };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::projectSaveAs()
+{
+   QString fileName = projectSelectName();
+
+   if(fileName.isEmpty())
+      return;
+
+   currentProjectName = fileName;
+   QStandardItem *parentItem = model->invisibleRootItem();
+   parentItem->child(0, 0)->setText(QFileInfo(currentProjectName).fileName());
+   parentItem->child(0, 0)->setToolTip(QFileInfo(currentProjectName).absoluteFilePath());
+   projectSave();
 
 }
 
@@ -4200,8 +4490,6 @@ void EdytorNc::projectNew()
 
    currentProject = item;
    currentProjectModified = true;
-
-
 }
 
 //**************************************************************************************************
@@ -4226,14 +4514,14 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex & index)
 
    file.setFile(item->parent()->text(), item->text());
 
-   qDebug() << item->parent()->text() << "  " << item->text();
+   //qDebug() << item->parent()->text() << "  " << item->text();
 
    if((file.exists()) && (file.isReadable()))
    {
       if(file.suffix() == "nc")
       {
          defaultMdiWindowProperites.fileName = file.absoluteFilePath();
-         defaultMdiWindowProperites.readOnly = FALSE;
+         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
          defaultMdiWindowProperites.geometry = QByteArray();
          defaultMdiWindowProperites.cursorPos = 0;
          defaultMdiWindowProperites.editorToolTips = true;
@@ -4246,7 +4534,6 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex & index)
       };
 
    };
-
 
 }
 
@@ -4268,7 +4555,7 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex & index)
       if(file.suffix() == "nc")
       {
          defaultMdiWindowProperites.fileName = file.absoluteFilePath();
-         defaultMdiWindowProperites.readOnly = FALSE;
+         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
          defaultMdiWindowProperites.geometry = QByteArray();
          defaultMdiWindowProperites.cursorPos = 0;
          defaultMdiWindowProperites.editorToolTips = true;
@@ -4281,7 +4568,6 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex & index)
       };
 
    };
-
 
 }
 
@@ -4502,7 +4788,7 @@ bool EdytorNc::maybeSaveProject()
       int ret = msgBox.exec();
       switch (ret)
       {
-         case QMessageBox::Save    : projectSave(false);
+         case QMessageBox::Save    : projectSave();
                                      return true;
                                      break;
          case QMessageBox::Discard : currentProjectModified = false;
@@ -4619,16 +4905,14 @@ void EdytorNc::fileTreeViewChangeRootDir()
 {
    QString path;
 
-   if((!isVisible()) || panelHidden)
+   if(panelHidden)  //if((!isVisible()) || panelHidden)
       return;
 
    if(fileTreeView == NULL || dirModel == NULL)
       return;
 
-   if(currentPathCheckBox->isChecked())
+   if(currentPathCheckBox->isChecked() && (activeMdiChild() != 0))
    {
-      if(activeMdiChild() == 0)
-         return;
       path = activeMdiChild()->currentFile();
       path = QFileInfo(path).canonicalPath();
    }

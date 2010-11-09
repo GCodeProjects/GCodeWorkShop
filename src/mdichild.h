@@ -103,6 +103,7 @@ private:
     QString curFile;
     QString saveFileFilter;
     QByteArray saveDialogState;
+    void updateWindowTitle();
     bool isUntitled;
     Highlighter *highlighter;
     _editor_properites mdiWindowProperites;
