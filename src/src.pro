@@ -2,7 +2,6 @@ SOURCES += edytornc.cpp \
     main.cpp \
     highlighter.cpp \
     mdichild.cpp \
-    customfiledialog.cpp \
     dialogs.cpp \
     findinf.cpp \
     qtsingleapplication.cpp \
@@ -30,7 +29,6 @@ HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
     commoninc.h \
-    customfiledialog.h \
     dialogs.h \
     findinf.h \
     qtsingleapplication.h \

@@ -35,51 +35,64 @@
 
 int main(int argc, char *argv[])
 {   
-    Q_INIT_RESOURCE(application);
-    QtSingleApplication app("EdytorNC", argc, argv);
+   bool argProccesed;
 
-    QString txMessage;
-    for(int i = 1; i < argc; ++i)
-    {
-        txMessage += argv[i];
-        if(i < argc - 1)
-          txMessage += ";";
-    };
+   Q_INIT_RESOURCE(application);
+   QtSingleApplication app("EdytorNC", argc, argv);
 
-    //qDebug() << argc << argv << txMessage;
-    if(app.sendMessage(txMessage))
-        return 0;
+   QString txMessage;
+   for(int i = 1; i < argc; ++i)
+   {
+      txMessage += argv[i];
+      if(i < argc - 1)
+         txMessage += ";";
+   };
 
-    QTranslator qtTranslator; // Try to load Qt translations from QLibraryInfo::TranslationsPath if this fails looks for translations in app dir.
-    if(!qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+   //qDebug() << argc << argv << txMessage;
+   if(app.sendMessage(txMessage))
+      return 0;
+
+   QTranslator qtTranslator; // Try to load Qt translations from QLibraryInfo::TranslationsPath if this fails looks for translations in app dir.
+   if(!qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
       qtTranslator.load("qt_" + QLocale::system().name(), app.applicationDirPath());
-    app.installTranslator(&qtTranslator);
+   app.installTranslator(&qtTranslator);
 
-    QTranslator myappTranslator; // Try to load EdytorNC translations from LOCALE_PATH if this fails looks for translations in app dir.
-    if(!myappTranslator.load("edytornc_" + QLocale::system().name(), LOCALE_PATH))
-       myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
-    app.installTranslator(&myappTranslator);
+   QTranslator myappTranslator; // Try to load EdytorNC translations from LOCALE_PATH if this fails looks for translations in app dir.
+   if(!myappTranslator.load("edytornc_" + QLocale::system().name(), LOCALE_PATH))
+      myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
+   app.installTranslator(&myappTranslator);
 
-    EdytorNc *mw = new EdytorNc();
+   EdytorNc *mw = new EdytorNc();
 
-    for(int i = 1; i < argc; ++i)
-    {
-       //qDebug() << argc << argv[i] << i;
-       mw->openFile(argv[i]);
-    };
+   argProccesed = false;
+   if(argc >= 3)
+   {
+      if(QString(argv[1]).trimmed() == "-diff")
+      {  
+         mw->diffTwoFiles(QString(argv[2]).trimmed(), QString(argv[3]).trimmed());
+         argProccesed = true;
+      };
+   };
 
-    //QMessageBox::information(mv, "Debug", txMessage);
+   if(!argProccesed)
+   {
+      for(int i = 1; i < argc; ++i)
+      {
+         //qDebug() << argc << argv[i] << i;
+         mw->openFile(argv[i]);
+      };
+   };
 
-    mw->show();
+   mw->show();
 
-    app.setActivationWindow(mw, false);
+   app.setActivationWindow(mw, false);
 
-    QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
-                     mw, SLOT(messReceived(const QString&)));
+   QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
+                    mw, SLOT(messReceived(const QString&)));
 
-    QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
+   QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
 
-    return app.exec();
+   return app.exec();
 
 }
 

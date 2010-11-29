@@ -2677,9 +2677,8 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
                       .arg(editProp.fontName).arg(editProp.fontSize)));
    fontLabel->setFont(QFont(editProp.fontName, editProp.fontSize));
 
-
    connect(changeFontButton, SIGNAL(clicked()), SLOT(changeFont()));
-
+   connect(browseButton, SIGNAL(clicked()), SLOT(browseButtonClicked()));
 
    colorButtons = new QButtonGroup(this);
    connect(colorButtons, SIGNAL(buttonClicked(QAbstractButton *)), SLOT(changeColor(QAbstractButton *)));
@@ -2844,6 +2843,33 @@ void SetupDialog::changeFont()
                           .arg(editProp.fontName).arg(editProp.fontSize)));
        fontLabel->setFont(QFont(editProp.fontName, editProp.fontSize));
     };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SetupDialog::browseButtonClicked()
+{
+
+#ifdef Q_OS_WIN32
+   QString filter = tr("Executables (*.exe)");
+#else
+   QString filter = tr("All files (*)");
+#endif
+
+   QString fileName = QFileDialog::getOpenFileName(
+                         this,
+                         tr("Select calculator executable"),
+                         calcLineEdit->text(),
+                         filter);
+
+   QFileInfo file(fileName);
+
+   if((file.exists()) && (file.isReadable()))
+   {
+      calcLineEdit->setText(file.canonicalFilePath());
+   };
 }
 
 //**************************************************************************************************
@@ -3046,6 +3072,8 @@ void SetupDialog::setDefaultProp()
 #ifdef Q_OS_WIN32
    editProp.calcBinary = "calc.exe";
 #endif
+
+   calcLineEdit->setText(editProp.calcBinary);
 
    fontLabel->setText(QString(tr("Current font : <b>\"%1\", %2 pt.<\b>")
                       .arg(editProp.fontName).arg(editProp.fontSize)));

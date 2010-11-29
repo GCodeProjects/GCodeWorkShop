@@ -1,25 +1,31 @@
 EdytorNC is text editor for CNC programmers.
+http://sourceforge.net/projects/edytornc/
 
 Some features :
   bolt holes calculation
   solutions of triangles calculation
   speed, feed calculation
+  send/receive through serial port
   conversion inch/mm, mm/inch. You can write inches in format 1.3/4  1/4 ...
+  find in files
+  simple project managment - you can keep links to (almost) all files related to your part programm in one place. 
   first comment in program is displayed in title bar. In first comment you can write part name.
   comment with date will be replaced with current date on file save. Comment format (dd-mm-yyyy) or ;dd-mm-yyyy
   block renumbering - whole program or selection
   code colorizing. Now with help function - click on "Help"->"Create cnc tooltips" and put mouse pointer above G, M or other codes - should appear tooltip with short information about pointed code. 
                    Default tooltips are in file "cnc_tooltips_lang_code.txt" (lang_code = pl_PL - for polish) in folder with application settings (~.config on Linux. C:\Documents and Settings\USERNAME\Application Data\EdytorNC on Windows).
-		   You may copy it to folder with cnc programs and customize for your machine. File must be renamed to "cnc_tips.txt".
+		   You may copy it to folder with cnc programs and customize for your machine. File must be renamed to "cnc_tips.txt". Now this is done by functions in help menu.
 		   Currently tooltip file contains some information about codes for OKUMA, SINUMERIK 850 and FANUC.
 		   Code colorizing detects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC
   
  
 Experimental features :
-  send/receive through serial port
   macro program - parametric programming. See EXAMPLES dir.
+  split file - if file contains more than one program this function tries to split it into separate files. No auto save yet.
 
-
+Command line options:
+open file -> edytornc file.nc
+diff two files -> edytornc -diff file1.nc file2.nc
 
 
 EdytorNC is developed in QT Creator (best for compile EdytorNC) (libs Qt 4.6, should compile without problems under Qt 4.5) : http://www.qtsoftware.com/products/developer-tools

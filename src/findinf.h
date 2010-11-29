@@ -72,6 +72,7 @@ private:
     void createFilesTable();
     void readSettings();
     void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
+    bool findText(const QString & exp, QTextDocument::FindFlags options, bool ignoreComments = true);
 
     Highlighter *highlighter;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;

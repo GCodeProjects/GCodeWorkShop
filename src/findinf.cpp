@@ -30,7 +30,6 @@
 
 FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
 {
-
    f_parent = parent;
    setupUi(this);
    setAttribute(Qt::WA_DeleteOnClose);
@@ -108,8 +107,8 @@ void FindInFiles::browse()
     QString directory = QFileDialog::getExistingDirectory(this, tr("Find Files"), directoryComboBox->currentText());
     if(!directory.isEmpty())
     {
-       directoryComboBox->addItem(directory);
-       directoryComboBox->setCurrentIndex(directoryComboBox->findText(directory));
+       directoryComboBox->addItem(QDir::toNativeSeparators(directory));
+       directoryComboBox->setCurrentIndex(directoryComboBox->findText(QDir::toNativeSeparators(directory)));
     }
 }
 
@@ -179,132 +178,175 @@ void FindInFiles::find()
 bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFound,
                             const QString findText, QString fileFilter, QProgressDialog *progressDialog)
 {
-    int pos;
-    QRegExp exp;
-    QString comment_tx;
-    qint64 size;
-    bool textFounded, word;
-    QString line;
-    QStringList files;
-    QStringList dirs;
+   int pos;
+   QRegExp exp;
+   QString comment_tx;
+   qint64 size;
+   bool textFounded, word;
+   QString line;
+   QStringList files;
+   QStringList dirs;
+   bool inComment = false;
+   int commentPos;
 
 
-    if(progressDialog->wasCanceled())
-       return notFound;
+   if(progressDialog->wasCanceled())
+      return notFound;
 
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
-    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
+   exp.setCaseSensitivity(Qt::CaseInsensitive);
+   exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
 
-    pos = 0;
+   pos = 0;
 
-    dirs.clear();
+   dirs.clear();
 
-    QDir directory = QDir(startDir);
-    //qDebug() << startDir << directory.absolutePath();
+   QDir directory = QDir(startDir);
+   //qDebug() << startDir << directory.absolutePath();
 
-    if(subFoldersCheckBox->isChecked())
+   if(subFoldersCheckBox->isChecked())
       dirs.append(directory.entryList(QStringList("*"), QDir::AllDirs | QDir::NoSymLinks | QDir::Readable | QDir::NoDotAndDotDot));
 
-    foreach(const QString &dirName, dirs)
-    {
-       notFound = findFiles(directory.absolutePath() + QDir::separator() + dirName, mainDir, notFound, findText, fileFilter, progressDialog);
-    };
+   foreach(const QString &dirName, dirs)
+   {
+      notFound = findFiles(directory.absolutePath() + "/" + dirName, mainDir, notFound, findText, fileFilter, progressDialog);
+   };
 
-    files = directory.entryList(QStringList(fileFilter), QDir::Files | QDir::NoSymLinks | QDir::Readable);
+   files = directory.entryList(QStringList(fileFilter), QDir::Files | QDir::NoSymLinks | QDir::Readable);
 
-    progressDialog->setLabelText(tr("Searching in folder: \"%1\"").arg(directory.absolutePath()));
+   progressDialog->setLabelText(tr("Searching in folder: \"%1\"").arg(QDir::toNativeSeparators(directory.absolutePath())));
 
-    for(int i = 0; i < files.size(); ++i)
-    {
-       progressDialog->setRange(0, files.size());
-       progressDialog->setValue(i);
-       qApp->processEvents();
+   for(int i = 0; i < files.size(); ++i)
+   {
+      progressDialog->setRange(0, files.size());
+      progressDialog->setValue(i);
+      qApp->processEvents();
 
-       if(progressDialog->wasCanceled())
-          break;
+      if(progressDialog->wasCanceled())
+         break;
 
-       QFile file(directory.absoluteFilePath(files[i]));
+      QFile file(directory.absoluteFilePath(files[i]));
 
-       if(file.open(QIODevice::ReadOnly))
-       {
-          QTextStream in(&file);
+      if(file.open(QIODevice::ReadOnly))
+      {
+         QTextStream in(&file);
 
-          textFounded = false;
-          word = false;
-          line = in.readAll();
+         textFounded = false;
+         word = false;
+         line = in.readAll();
 
-          if(findText == "*") //files containing anything
-          {
-             textFounded = true;
-          }
-          else
-          {
-             pos = line.indexOf(findText, 0, Qt::CaseInsensitive);
-             textFounded = (pos >= 0);
-          };
+         if(findText == "*") //files containing anything
+         {
+            textFounded = true;
+         }
+         else
+         {
+            commentPos = -1;
+            pos = 0;
+            do
+            {
+               pos = line.indexOf(findText, pos, Qt::CaseInsensitive);
+               textFounded = (pos >= 0);
 
-          if(textFounded && wholeWordsCheckBox->isChecked())
-          {
-             if(pos > 0)
-                if(line[pos - 1].isLetterOrNumber())
-                   word = true;
-             pos = pos + findText.size();
-             if(pos < line.size())
-                if(line[pos].isLetterOrNumber())
-                   word = true;
-          };
+               if(textFounded && (commentStyle1CheckBox->isChecked() || commentStyle2CheckBox->isChecked()))
+               {
+                  int lineStartPos = line.lastIndexOf('\n', pos);
+                  if(lineStartPos < 0)
+                     lineStartPos = pos;
 
-          if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
-             (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
-          {
-             notFound = false;
-             textFounded = false;
-             word = false;
-             size = file.size();
+                  if(commentStyle1CheckBox->isChecked() && commentStyle2CheckBox->isChecked())
+                  {
+                     commentPos  = line.indexOf('(', lineStartPos);
+                     if(commentPos > pos)
+                        commentPos = -1;
 
-             pos = 0;
-             while((pos = line.indexOf(exp, pos)) >= 0)
-             {
-                comment_tx = line.mid(pos, exp.matchedLength());
-                pos += exp.matchedLength();
-                if(!comment_tx.contains(";$"))
-                {
-                   comment_tx.remove('(');
-                   comment_tx.remove(')');
-                   comment_tx.remove(';');
-                   break;
-                };
-             };
+                     if(commentPos < 0)
+                        commentPos  = line.indexOf(';', lineStartPos);
+                  }
+                  else
+                  {
+                     if(commentStyle2CheckBox->isChecked())
+                        commentPos  = line.indexOf('(', lineStartPos);
 
-             QString subDir = startDir;
-             subDir.remove(mainDir);
-             if(!subDir.isEmpty())
-               subDir += QDir::separator();
+                     if(commentStyle1CheckBox->isChecked())
+                        commentPos  = line.indexOf(';', lineStartPos);
+                  };
 
-             QTableWidgetItem *fileNameItem = new QTableWidgetItem(subDir + files[i]);
-             fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+                  if(commentPos < 0)
+                     commentPos = pos + 1;
 
-             QTableWidgetItem *infoNameItem = new QTableWidgetItem(comment_tx);
-             infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+                  inComment = (commentPos < pos);
 
-             QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
-             sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+               }
+               else
+                  inComment = false;
+               pos++;
 
-             QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
-             dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+            }while(inComment);
+         };
 
-             int row = filesTable->rowCount();
-             filesTable->insertRow(row);
-             filesTable->setItem(row, 0, fileNameItem);
-             filesTable->setItem(row, 1, infoNameItem);
-             filesTable->setItem(row, 2, sizeItem);
-             filesTable->setItem(row, 3, dateItem);
-          };
-          file.close();
-       };
-    };
+         pos--;
+         if(textFounded && wholeWordsCheckBox->isChecked())
+         {
+            if(pos > 0)
+               if(line[pos - 1].isLetterOrNumber())
+                  word = true;
+            pos = pos + findText.size();
+            if(pos < line.size())
+               if(line[pos].isLetterOrNumber())
+                  word = true;
+         };
 
-    return notFound;
+         if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
+            (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
+         {
+            notFound = false;
+            textFounded = false;
+            word = false;
+            size = file.size();
+
+            pos = 0;
+            while((pos = line.indexOf(exp, pos)) >= 0)
+            {
+               comment_tx = line.mid(pos, exp.matchedLength());
+               pos += exp.matchedLength();
+               if(!comment_tx.contains(";$"))
+               {
+                  comment_tx.remove('(');
+                  comment_tx.remove(')');
+                  comment_tx.remove(';');
+                  break;
+               };
+            };
+
+            QString subDir = startDir;
+            subDir.remove(mainDir);
+            if(!subDir.isEmpty())
+               subDir += "/";
+
+            QTableWidgetItem *fileNameItem = new QTableWidgetItem(QDir::toNativeSeparators(subDir) + files[i]);
+            fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+            QTableWidgetItem *infoNameItem = new QTableWidgetItem(comment_tx);
+            infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+            QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
+            sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+            QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
+            dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+            int row = filesTable->rowCount();
+            filesTable->insertRow(row);
+            filesTable->setItem(row, 0, fileNameItem);
+            filesTable->setItem(row, 1, infoNameItem);
+            filesTable->setItem(row, 2, sizeItem);
+            filesTable->setItem(row, 3, dateItem);
+         };
+         file.close();
+      };
+   };
+
+   return notFound;
 }
 
 //**************************************************************************************************
@@ -334,6 +376,8 @@ void FindInFiles::closeEvent(QCloseEvent *event)
 
    settings.setValue("WholeWords", wholeWordsCheckBox->isChecked());
    settings.setValue("SubFolders", subFoldersCheckBox->isChecked());
+   settings.setValue("CommentStyle1", commentStyle1CheckBox->isChecked());
+   settings.setValue("CommentStyle2", commentStyle2CheckBox->isChecked());
 
    list.clear();
    list.append(directoryComboBox->currentText());
@@ -414,12 +458,14 @@ void FindInFiles::readSettings()
 
    wholeWordsCheckBox->setChecked(settings.value("WholeWords", FALSE).toBool());
    subFoldersCheckBox->setChecked(settings.value("SubFolders", FALSE).toBool());
+   commentStyle1CheckBox->setChecked(settings.value("CommentStyle1", FALSE).toBool());
+   commentStyle2CheckBox->setChecked(settings.value("CommentStyle2", FALSE).toBool());
 
    list = settings.value("Dirs", QStringList(QDir::homePath())).toStringList();
    list.removeDuplicates();
    list.sort();
    directoryComboBox->addItems(list);
-   item = settings.value("SelectedDir", QString(QDir::homePath())).toString();
+   item = settings.value("SelectedDir", QDir::toNativeSeparators(QDir::homePath())).toString();
    i = directoryComboBox->findText(item);
    directoryComboBox->setCurrentIndex(i);
 
@@ -453,8 +499,8 @@ void FindInFiles::filesTableClicked(int x, int y)
    QTableWidgetItem *item = filesTable->item(x, 0);
 
    QString dir = directoryComboBox->currentText();
-   if(!dir.endsWith(QDir::separator()))
-     dir = dir + QDir::separator();
+   if(!dir.endsWith("/"))
+     dir = dir + "/";
    emit fileClicket(dir + item->text());
 
 }
@@ -481,8 +527,8 @@ void FindInFiles::filePreview(int x, int y)
       };
 
       QString dir = directoryComboBox->currentText();
-      if(!dir.endsWith(QDir::separator()))
-         dir = dir + QDir::separator();
+      if(!dir.endsWith("/"))
+         dir = dir + "/";
       QFile file(dir + item->text());
       if(file.open(QIODevice::ReadOnly))
       {
@@ -507,12 +553,75 @@ void FindInFiles::filePreview(int x, int y)
          if((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*"))
          {
             highlightFindText(textComboBox->currentText(), (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)));
-            if(preview->find(textComboBox->currentText(), (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0))))
+            if(findText(textComboBox->currentText(), (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0))),
+               (commentStyle1CheckBox->isChecked() || commentStyle2CheckBox->isChecked()))
                preview->centerCursor();
          };
       };
 
       QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool FindInFiles::findText(const QString & exp, QTextDocument::FindFlags options, bool ignoreComments)
+{
+   bool found = false;
+   QTextCursor cursor;
+   bool inComment = false;
+   QString cur_line;
+   int cur_line_column;
+   int commentPos;
+
+   preview->setUpdatesEnabled(false);
+
+   commentPos = -1;
+   do
+   {
+      found = preview->find(exp, options);
+
+      if(found && ignoreComments)
+      {
+         cursor = preview->textCursor();
+         cur_line = cursor.block().text();
+
+         cur_line_column = cursor.columnNumber();
+
+         if(commentStyle1CheckBox->isChecked() && commentStyle2CheckBox->isChecked())
+         {
+            commentPos  = cur_line.indexOf(';', 0);
+            if(commentPos < 0)
+               commentPos  = cur_line.indexOf('(', 0);
+         }
+         else
+         {
+            if(commentStyle2CheckBox->isChecked())
+               commentPos  = cur_line.indexOf('(', 0);
+
+            if(commentStyle1CheckBox->isChecked())
+               commentPos  = cur_line.indexOf(';', 0);
+         };
+
+         if(commentPos < 0)
+            commentPos = cur_line_column + 1;
+
+         inComment = (commentPos < cur_line_column);
+      }
+      else
+         inComment = false;
+
+   }while(inComment);
+
+   if(!found)
+   {
+      cursor.clearSelection();
+      preview->setTextCursor(cursor);
+   };
+
+   preview->setUpdatesEnabled(true);
+   return found;
 }
 
 //**************************************************************************************************
@@ -531,8 +640,8 @@ void FindInFiles::setHighlightColors(const _h_colors colors)
  
 void FindInFiles::setDir(const QString dir)
 {
-   directoryComboBox->addItem(dir);
-   directoryComboBox->setCurrentIndex(directoryComboBox->findText(dir));
+   directoryComboBox->addItem(QDir::toNativeSeparators(dir));
+   directoryComboBox->setCurrentIndex(directoryComboBox->findText(QDir::toNativeSeparators(dir)));
 }
 
 //**************************************************************************************************

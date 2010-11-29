@@ -28,7 +28,6 @@
 #include <QtGui>
 
 #include "commoninc.h"
-#include "customfiledialog.h"
 #include "mdichild.h"
 #include "findinf.h"
 #include "dialogs.h"
@@ -46,6 +45,8 @@ public:
     EdytorNc();
     ~EdytorNc();
     void openFile(const QString fileName);
+    void diffTwoFiles(const QString filename1, const QString filename2);
+
     enum { MAX_RECENTFILES = 16 };
 
 
@@ -61,7 +62,6 @@ private slots:
     void newFile();
     void open();
     void openExample();
-    void openWithPreview();
     void save();
     void saveAs();
     void printFile();
@@ -140,6 +140,7 @@ private slots:
     void projectOpen();
     void updateOpenFileList();
     void openFileTableWidgetClicked(int x, int y);
+    void splitPrograms();
 
 
 
@@ -170,7 +171,6 @@ private:
     QMdiSubWindow *findMdiChild(const QString &fileName);
     _editor_properites defaultMdiWindowProperites;
     FindInFiles *findFiles;
-    //bool tabbedView;
 
     bool panelHidden;
     QByteArray panelState;
@@ -180,9 +180,6 @@ private:
     QByteArray fileDialogState;
     QString openFileFilter;
 
-    //QMdiArea *mdiArea;
-    //QSplitter *leftSplitter;
-    //QSplitter *splitter;
     KDiff3App *diffApp;
 
     QFileSystemModel *dirModel;
@@ -210,7 +207,6 @@ private:
     QAction *newAct;
     QAction *openAct;
     QAction *openExampleAct;
-    QAction *openWPvAct;
     QAction *saveAct;
     QAction *saveAsAct;
     QAction *exitAct;
@@ -247,6 +243,7 @@ private:
     QAction *insertDotAct;
     QAction *removeSpcAct;
     QAction *removeEmptyLinesAct;
+    QAction *splittAct;
     QAction *insertSpcAct;
     QAction *speedFeedAct;
     QAction *chamferAct;

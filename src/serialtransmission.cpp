@@ -89,6 +89,11 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
    b10CheckBox->setEnabled(false);
 #endif
 
+
+   connect(browse1PushButton, SIGNAL(clicked()), SLOT(browse1ButtonClicked()));
+   connect(browse2PushButton, SIGNAL(clicked()), SLOT(browse2ButtonClicked()));
+   connect(browse3PushButton, SIGNAL(clicked()), SLOT(browse3ButtonClicked()));
+
    connect(saveButton, SIGNAL(clicked()), SLOT(saveButtonClicked()));
    connect(saveCloseButton, SIGNAL(clicked()), SLOT(saveCloseButtonClicked()));
    connect(deleteButton, SIGNAL(clicked()), SLOT(deleteButtonClicked()));
@@ -125,7 +130,9 @@ void SPConfigDialog::flowCtlGroupReleased()
       startDelaySpinBox->setValue(0);
    }
    else
+   {
       startDelaySpinBox->setEnabled(true);
+   };
 }
 
 //**************************************************************************************************
@@ -134,16 +141,13 @@ void SPConfigDialog::flowCtlGroupReleased()
 
 void SPConfigDialog::browseButtonClicked()
 {
-
-   QFileInfo file;
-
    QString fileName = QFileDialog::getOpenFileName(
                          this,
                          tr("Select serial port device"),
                          portNameComboBox->currentText(),
                          tr("All files (*)"));
 
-   file.setFile(fileName);
+   QFileInfo file(fileName);
 
    if((file.exists()) && (file.isReadable()))
    {
@@ -222,7 +226,6 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
     settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());    
     settings.setValue("RecieveTimeout", recieveTimeoutSpinBox->value());
-
 
 
     settings.endGroup();
@@ -434,6 +437,59 @@ void SPConfigDialog::saveCloseButtonClicked()
    closeButtonClicked();
    accept();
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+QString SPConfigDialog::browseForDir(const QString dir)
+{
+   QString dirName = QFileDialog::getExistingDirectory(
+                         this,
+                         tr("Select serial port device"),
+                         dir,
+                         QFileDialog::ShowDirsOnly);
+
+   QFileInfo file(dirName);
+
+   if((file.exists()) && (file.isReadable()))
+   {
+      return file.canonicalPath();
+   };
+
+   return "";
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SPConfigDialog::browse1ButtonClicked()
+{
+   path1LineEdit->setText(browseForDir(path1LineEdit->text()));
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SPConfigDialog::browse2ButtonClicked()
+{
+   path2LineEdit->setText(browseForDir(path2LineEdit->text()));
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SPConfigDialog::browse3ButtonClicked()
+{
+   path3LineEdit->setText(browseForDir(path3LineEdit->text()));
+}
+
+
+
+
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================

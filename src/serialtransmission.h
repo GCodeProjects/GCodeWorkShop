@@ -59,9 +59,14 @@ class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
      void deleteButtonClicked();
      void saveCloseButtonClicked();
      void flowCtlGroupReleased();
+     void browse1ButtonClicked();
+     void browse2ButtonClicked();
+     void browse3ButtonClicked();
 
 
    private:
+     QString browseForDir(const QString dir);
+
      QButtonGroup *baudGroup;
      QButtonGroup *dataBitsGroup;
      QButtonGroup *stopBitsGroup;

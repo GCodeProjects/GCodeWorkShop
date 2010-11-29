@@ -418,6 +418,7 @@ class SetupDialog : public QDialog, private Ui::SetupDialog
     void changeFont();
     void changeColor(QAbstractButton *button);
     void setDefaultProp();
+    void browseButtonClicked();
 
 
   private:

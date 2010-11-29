@@ -186,7 +186,7 @@ void Highlighter::loadRules()
                << "\\$\\b[MSTPAV]{1,1}[NCADM]{0,1}(_)[A-Z0-9_]{1,}\\b";
       keywordPatterns.append(keywords);
 
-      pattern = "^(%_N_)[A-Z]{1,1}[A-Z0-9_]{0,30}_(MPF|SPF|TEA|COM|INI|PLC|DEF)$"; // SINUMERIK >=810D
+      pattern = "^(%_N_)[a-zA-Z0-9]{1,1}[a-zA-Z0-9_]{0,30}_(MPF|SPF|TEA|COM|INI|PLC|DEF)$"; // SINUMERIK >=810D
       pogRule.pattern = QRegExp(pattern);
       progNameHighlightRules.append(pogRule);
 
@@ -1804,10 +1804,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
 
 void Highlighter::highlightBlockToolTipsRule(const QString &tx)
 {
-   int pos, count;
-   int sellen;
-   QChar ch;
-   QString adrress, val;
+   int pos;
    QTextCharFormat format;
    HighlightingRule ruleP;
 
@@ -1916,7 +1913,7 @@ int autoDetectHighligthMode(const QString text)
 
    if(!text.isEmpty())
    {
-      if(text.contains(QRegExp("^(%_N_)[A-Z]{1,1}[A-Z0-9_]{0,30}_(MPF|SPF|TEA|COM|PLC|DEF|INI)\\n"))
+      if(text.contains(QRegExp("^(%_N_)[a-zA-Z0-9]{1,1}[a-zA-Z0-9_]{0,30}_(MPF|SPF|TEA|COM|PLC|DEF|INI)\\n"))
          || text.contains(QRegExp("^;\\$PATH=/[A-Z0-9_//]{1,}\\n")))
       {
          return MODE_SINUMERIK_840;
@@ -1928,7 +1925,7 @@ int autoDetectHighligthMode(const QString text)
          return MODE_OKUMA;
       };
 
-      if(text.contains(QRegExp("(:)[0-9]{1,}"))
+      if(text.contains(QRegExp(":[0-9]{1,}"))
          || text.contains(QRegExp("\\bO[0-9]{1,}\\b")))
       {
          return MODE_FANUC;
@@ -1939,7 +1936,7 @@ int autoDetectHighligthMode(const QString text)
          return MODE_SINUMERIK;
       };
 
-      if(text.contains(QRegExp("%F[0-9]{1,4}")))
+      if(text.contains(QRegExp("%[a-zA-Z0-9_]{1,30}(\\s)")))
       {
          return MODE_HEIDENHAIN_ISO;
       };
@@ -1949,7 +1946,7 @@ int autoDetectHighligthMode(const QString text)
          return MODE_HEIDENHAIN;
       };
 
-      if(text.contains(QRegExp("^%PM$")))   // PHILIPS
+      if(text.contains(QRegExp("^%PM")))   // PHILIPS
       {
          return MODE_PHILIPS;
       };

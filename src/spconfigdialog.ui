@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>674</width>
-    <height>288</height>
+    <width>589</width>
+    <height>323</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -507,6 +507,19 @@
          </item>
         </layout>
        </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="optionTab">
@@ -514,31 +527,7 @@
        <string>Options</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="stInput">
-         <property name="toolTip">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="maxLength">
-          <number>128</number>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Send at start:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
+       <item row="2" column="3">
         <widget class="QLabel" name="label_5">
          <property name="enabled">
           <bool>true</bool>
@@ -548,7 +537,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
+       <item row="2" column="4">
         <widget class="QLineEdit" name="xonInput">
          <property name="toolTip">
           <string>XON 17 Dec. 0x11 Hex.</string>
@@ -564,31 +553,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Send at end:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="eotInput">
-         <property name="toolTip">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="maxLength">
-          <number>128</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
+       <item row="3" column="3">
         <widget class="QLabel" name="label_6">
          <property name="enabled">
           <bool>true</bool>
@@ -598,7 +563,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
+       <item row="3" column="4">
         <widget class="QLineEdit" name="xoffInput">
          <property name="toolTip">
           <string>XOFF 19 Dec. 0x13 Hex.</string>
@@ -614,33 +579,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="text">
-          <string>Delete control chars</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="deleteControlChars">
-         <property name="toolTip">
-          <string>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
+       <item row="4" column="3">
         <widget class="QLabel" name="label_4">
          <property name="enabled">
           <bool>true</bool>
@@ -650,7 +589,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="4">
+       <item row="4" column="4">
         <widget class="QDoubleSpinBox" name="delayDoubleSpinBox">
          <property name="toolTip">
           <string/>
@@ -672,41 +611,18 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_10">
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="statusTip">
-          <string/>
-         </property>
-         <property name="text">
-          <string>Disable text selection</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="doNotShowProgressInEditor">
-         <property name="toolTip">
-          <string>Enable this option for lower transmission latency on high baud rate</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
+       <item row="5" column="3">
         <widget class="QLabel" name="label_8">
          <property name="text">
           <string>Start sending after:</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="4">
+       <item row="5" column="4">
         <widget class="QSpinBox" name="startDelaySpinBox">
+         <property name="toolTip">
+          <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON  wich one  first </string>
+         </property>
          <property name="suffix">
           <string>s</string>
          </property>
@@ -718,21 +634,95 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
+       <item row="2" column="2">
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
+           <width>5</width>
            <height>20</height>
           </size>
          </property>
         </spacer>
        </item>
-       <item row="5" column="2">
-        <spacer name="verticalSpacer">
+       <item row="0" column="4">
+        <widget class="QLineEdit" name="stInput">
+         <property name="toolTip">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="maxLength">
+          <number>128</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Send at start:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLineEdit" name="eotInput">
+         <property name="toolTip">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="maxLength">
+          <number>128</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Send at end:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="deleteControlChars">
+         <property name="toolTip">
+          <string>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</string>
+         </property>
+         <property name="text">
+          <string>Delete control chars</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="doNotShowProgressInEditor">
+         <property name="toolTip">
+          <string>Enable this option for lower transmission latency on high baud rate</string>
+         </property>
+         <property name="text">
+          <string>Disable text selection</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -796,50 +786,64 @@ p, li { white-space: pre-wrap; }
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Path 1</string>
+            <string>Main program path</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="type1ComboBox"/>
-         </item>
-         <item row="0" column="2">
           <widget class="QLineEdit" name="path1LineEdit">
            <property name="text">
             <string>Under construction</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="3">
+         <item row="0" column="2">
           <widget class="QPushButton" name="browse1PushButton">
            <property name="text">
             <string>Browse</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
+         <item row="0" column="3">
           <widget class="QComboBox" name="ext1ComboBox"/>
          </item>
-         <item row="1" column="4">
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="path3LineEdit"/>
+         </item>
+         <item row="5" column="2">
+          <widget class="QPushButton" name="browse3PushButton">
+           <property name="text">
+            <string>Browse</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>All other path</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="3">
+          <widget class="QComboBox" name="ext3ComboBox"/>
+         </item>
+         <item row="3" column="3">
           <widget class="QComboBox" name="ext2ComboBox"/>
          </item>
-         <item row="1" column="3">
+         <item row="3" column="2">
           <widget class="QPushButton" name="browse2PushButton">
            <property name="text">
             <string>Browse</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
+         <item row="3" column="1">
           <widget class="QLineEdit" name="path2LineEdit"/>
          </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="type2ComboBox"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_13">
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_14">
            <property name="text">
-            <string>Path 2</string>
+            <string>Sub program path</string>
            </property>
           </widget>
          </item>
@@ -864,6 +868,42 @@ p, li { white-space: pre-wrap; }
              <widget class="QCheckBox" name="renameCheckBox">
               <property name="text">
                <string>Rename</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_6">
+           <property name="title">
+            <string>File name</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_11">
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="spinBox">
+              <property name="minimum">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>8</number>
+              </property>
+              <property name="value">
+               <number>4</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>No. of digits</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="checkBox_2">
+              <property name="text">
+               <string>Remowe letters</string>
               </property>
              </widget>
             </item>

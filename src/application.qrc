@@ -45,7 +45,6 @@
         <file>images/trig.png</file>
         <file>images/edytornc.ico</file>
         <file>images/chamfer_big.png</file>
-        <file>images/fileopen_preview.png</file>
         <file>images/edytornc48.ico</file>
         <file>images/ncfile.ico</file>
         <file>images/document-print.png</file>
@@ -85,5 +84,7 @@
         <file>images/folder.png</file>
         <file>images/project_save.png</file>
         <file>images/project_save_as.png</file>
+        <file>images/fileclose_small.png</file>
+        <file>images/split_prog.png</file>
     </qresource>
 </RCC>
