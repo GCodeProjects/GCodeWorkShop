@@ -48,7 +48,6 @@ int main(int argc, char *argv[])
          txMessage += ";";
    };
 
-   //qDebug() << argc << argv << txMessage;
    if(app.sendMessage(txMessage))
       return 0;
 

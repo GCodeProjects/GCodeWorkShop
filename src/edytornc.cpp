@@ -1154,14 +1154,7 @@ void EdytorNc::doCalc()
       QMessageBox::information(this, tr("Information"),
                                tr("Set correct calculator program name in configuration dialog."));
       return;
-   }
-   else
-      if(!QFileInfo(defaultMdiWindowProperites.calcBinary).isExecutable())
-      {
-         QMessageBox::information(this, tr("Information"),
-                                  tr("The file is not executable."));
-         return;
-      };
+   };
 
    proc = findChild<QProcess *>();
 
