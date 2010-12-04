@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mergeresultwindow.h  -  description
+    orginal file:        mergeresultwindow.h  -  description
                              -------------------
     begin                : Mon Mar 18 2002
     copyright            : (C) 2002-2007 by Joachim Eibl

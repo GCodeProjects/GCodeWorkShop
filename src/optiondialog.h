@@ -49,7 +49,7 @@ class OptionDialog : public QTabWidget
 
 public:
 
-    OptionDialog( bool bShowDirMergeSettings, QWidget *parent = 0, char *name = 0 );
+    OptionDialog(QWidget *parent = 0);
     ~OptionDialog( void );
     QString parseOptions( const QStringList& optionList );
     QString calcOptionHelp();

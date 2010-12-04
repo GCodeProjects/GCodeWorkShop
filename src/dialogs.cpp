@@ -2868,7 +2868,7 @@ void SetupDialog::browseButtonClicked()
 
    if((file.exists()) && (file.isReadable()))
    {
-      calcLineEdit->setText(file.canonicalFilePath());
+       calcLineEdit->setText(QDir::toNativeSeparators(file.canonicalFilePath()));
    };
 }
 

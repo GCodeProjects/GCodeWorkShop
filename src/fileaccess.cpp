@@ -633,128 +633,7 @@ bool FileAccessJobHandler::stat( int detail, bool bWantToWrite )
 //   return m_bSuccess;
 }
 
-//void FileAccessJobHandler::slotStatResult(KJob* pJob)
-//{
-//   if ( pJob->error() )
-//   {
-//      //pJob->uiDelegate()->showErrorMessage();
-//      m_pFileAccess->m_bExists = false;
-//      m_bSuccess = true;
-//   }
-//   else
-//   {
-//      m_bSuccess = true;
-//
-//      m_pFileAccess->m_bValidData = true;
-//      const KIO::UDSEntry e = static_cast<KIO::StatJob*>(pJob)->statResult();
-//
-//      m_pFileAccess->setUdsEntry( e );
-//   }
-//
-//   g_pProgressDialog->exitEventLoop();
-//}
 
-
-//bool FileAccessJobHandler::get(void* pDestBuffer, long maxLength )
-//{
-//   ProgressProxy pp; // Implicitly used in slotPercent()
-//   if ( maxLength>0 && !pp.wasCancelled() )
-//   {
-//      KIO::TransferJob* pJob = KIO::get( m_pFileAccess->m_url, KIO::NoReload );
-//      m_transferredBytes = 0;
-//      m_pTransferBuffer = (char*)pDestBuffer;
-//      m_maxLength = maxLength;
-//      m_bSuccess = false;
-//      m_pFileAccess->m_statusText = QString();
-//
-//      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotSimpleJobResult(KJob*)));
-//      connect( pJob, SIGNAL(data(KJob*,const QByteArray &)), this, SLOT(slotGetData(KJob*, const QByteArray&)));
-//      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
-//
-//      g_pProgressDialog->enterEventLoop( pJob, i18n("Reading file: %1",m_pFileAccess->prettyAbsPath()) );
-//      return m_bSuccess;
-//   }
-//   else
-//      return true;
-//}
-
-//void FileAccessJobHandler::slotGetData( KJob* pJob, const QByteArray& newData )
-//{
-//   if ( pJob->error() )
-//   {
-//      pJob->uiDelegate()->showErrorMessage();
-//   }
-//   else
-//   {
-//      long length = min2( long(newData.size()), m_maxLength - m_transferredBytes );
-//      ::memcpy( m_pTransferBuffer + m_transferredBytes, newData.data(), newData.size() );
-//      m_transferredBytes += length;
-//   }
-//}
-
-//bool FileAccessJobHandler::put(const void* pSrcBuffer, long maxLength, bool bOverwrite, bool bResume, int permissions )
-//{
-//   if ( maxLength>0 )
-//   {
-//      KIO::TransferJob* pJob = KIO::put( m_pFileAccess->m_url, permissions,
-//         KIO::HideProgressInfo | (bOverwrite ? KIO::Overwrite : KIO::DefaultFlags) | (bResume ? KIO::Resume : KIO::DefaultFlags) );
-//      m_transferredBytes = 0;
-//      m_pTransferBuffer = (char*)pSrcBuffer;
-//      m_maxLength = maxLength;
-//      m_bSuccess = false;
-//      m_pFileAccess->m_statusText = QString();
-//
-//      connect( pJob, SIGNAL(result(KJob*)), this, SLOT(slotPutJobResult(KJob*)));
-//      connect( pJob, SIGNAL(dataReq(KJob*, QByteArray&)), this, SLOT(slotPutData(KJob*, QByteArray&)));
-//      connect( pJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
-//
-//      g_pProgressDialog->enterEventLoop( pJob, i18n("Writing file: %1",m_pFileAccess->prettyAbsPath()) );
-//      return m_bSuccess;
-//   }
-//   else
-//      return true;
-//}
-
-//void FileAccessJobHandler::slotPutData( KJob* pJob, QByteArray& data )
-//{
-//   if ( pJob->error() )
-//   {
-//      pJob->uiDelegate()->showErrorMessage();
-//   }
-//   else
-//   {
-//      long maxChunkSize = 100000;
-//      long length = min2( maxChunkSize, m_maxLength - m_transferredBytes );
-//      data.resize( length );
-//      if ( data.size()==length )
-//      {
-//         if ( length>0 )
-//         {
-//            ::memcpy( data.data(), m_pTransferBuffer + m_transferredBytes, data.size() );
-//            m_transferredBytes += length;
-//         }
-//      }
-//      else
-//      {
-//         KMessageBox::error( g_pProgressDialog, i18n("Out of memory") );
-//         data.resize(0);
-//         m_bSuccess = false;
-//      }
-//   }
-//}
-
-//void FileAccessJobHandler::slotPutJobResult(KJob* pJob)
-//{
-//   if ( pJob->error() )
-//   {
-//      pJob->uiDelegate()->showErrorMessage();
-//   }
-//   else
-//   {
-//      m_bSuccess = (m_transferredBytes == m_maxLength); // Special success condition
-//   }
-//   g_pProgressDialog->exitEventLoop();  // Close the dialog, return from exec()
-//}
 
 bool FileAccessJobHandler::mkDir( const QString& dirName )
 {
@@ -854,18 +733,7 @@ bool FileAccessJobHandler::rename( const QString& dest )
 //   }
 }
 
-//void FileAccessJobHandler::slotSimpleJobResult(KJob* pJob)
-//{
-//   if ( pJob->error() )
-//   {
-//      pJob->uiDelegate()->showErrorMessage();
-//   }
-//   else
-//   {
-//      m_bSuccess = true;
-//   }
-//   g_pProgressDialog->exitEventLoop();  // Close the dialog, return from exec()
-//}
+
 
 
 // Copy local or remote files.

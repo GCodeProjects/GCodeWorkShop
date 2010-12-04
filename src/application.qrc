@@ -86,5 +86,6 @@
         <file>images/project_save_as.png</file>
         <file>images/fileclose_small.png</file>
         <file>images/split_prog.png</file>
+        <file>images/diff_editor.png</file>
     </qresource>
 </RCC>

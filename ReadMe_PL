@@ -1,5 +1,8 @@
 EdytorNC jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.
 
+Kod źródłowy EdytorNC można pobrać z repozytorium SVN : http://edytornc.svn.sourceforge.net/viewvc/edytornc/?view=tar
+
+
 Dostępne funkcje :
 	Obliczanie współrzędnych otworów rozmieszczonych na okręgu. Współrzędne można bezpośrednio kopiować do programu. Do współrzędnych mogą zostać dołączone komentarze.
 	Obliczenia boków i kątów w trójkątach.

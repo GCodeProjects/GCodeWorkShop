@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mergeresultwindow.cpp  -  description
+    orginal file:        mergeresultwindow.cpp  -  description
                              -------------------
     begin                : Sun Apr 14 2002
     copyright            : (C) 2002-2007 by Joachim Eibl
@@ -133,9 +133,6 @@ void MergeResultWindow::init(
    g_bAutoSolve = true;
    update();
    updateSourceMask();
-
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
 
 }
 
@@ -951,10 +948,6 @@ void MergeResultWindow::choose( int selector )
    update();
    updateSourceMask();
    emit updateAvailabilities();
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-//   m_pStatusBar->showMessage( tr("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-//         ,nofUnsolved,wsc) );
 }
 
 // bConflictsOnly: automatically choose for conflicts only (true) or for everywhere (false)
@@ -965,10 +958,6 @@ void MergeResultWindow::chooseGlobal(int selector, bool bConflictsOnly, bool bWh
    merge( false, selector, bConflictsOnly, bWhiteSpaceOnly );
    setModified( true );
    update();
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-//   m_pStatusBar->showMessage( tr("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-//         ,nofUnsolved,wsc) );
 }
 
 void MergeResultWindow::slotAutoSolve()
@@ -977,10 +966,6 @@ void MergeResultWindow::slotAutoSolve()
    merge( true, -1 );
    setModified( true );
    update();
-   int wsc;
-   int nofUnsolved = getNrOfUnsolvedConflicts(&wsc);
-//   m_pStatusBar->showMessage( tr("Number of remaining unsolved conflicts: %1 (of which %2 are whitespace)"
-//         ,nofUnsolved,wsc) );
 }
 
 void MergeResultWindow::slotUnsolve()

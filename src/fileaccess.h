@@ -18,10 +18,6 @@
 #include <QProgressBar>
  #include <QUrl>
 
-//#include <kprogressdialog.h>
-//#include <kio/job.h>
-//#include <kio/jobclasses.h>
-
 #include <list>
 
 bool wildcardMultiMatch( const QString& wildcard, const QString& testString, bool bCaseSensitive );
@@ -159,17 +155,7 @@ private:
    bool scanLocalDirectory( const QString& dirName, t_DirectoryList* dirList );
 
 private slots:
-   //void slotStatResult( KJob* );
-   //void slotSimpleJobResult( KJob* pJob );
-   //void slotPutJobResult( KJob* pJob );
 
-   //void slotGetData(KJob*,const QByteArray&);
-   //void slotPutData(KJob*, QByteArray&);
-
-   //void slotListDirInfoMessage( KJob*, const QString& msg );
-   //void slotListDirProcessNewEntries( KIO::Job *, const KIO::UDSEntryList& l );
-
-   //void slotPercent( KJob* pJob, unsigned long percent );
 };
 
 class ProgressDialog : public QDialog

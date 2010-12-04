@@ -141,6 +141,7 @@ private slots:
     void updateOpenFileList();
     void openFileTableWidgetClicked(int x, int y);
     void splitPrograms();
+    void diffEditorFile();
 
 
 
@@ -254,6 +255,7 @@ private:
     QAction *diffLAct;
     QAction *diffRAct;
     QAction *diffAct;
+    QAction *diffEditorAct;
 
     QProcess *proc;
     QDir lastDir;

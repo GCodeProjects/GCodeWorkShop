@@ -901,19 +901,63 @@ void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
       sizes.clear();
       sizes.append(0);
       sizes.append(splitter->height());
-
-
-//      //rect.setHeight(splitter->height());
-//
-//      qDebug() << sizes;
-//
-//      if(sizes.size() > 1)
-//      {
-//         sizes.removeAt(1);
-//         sizes.prepend(splitter->height());
-//      };
       splitter->setSizes(sizes);
-      qDebug() << sizes;
+   };
+}
+
+//**************************************************************************************************
+// Shows diff of currently edited file and file on disk
+//**************************************************************************************************
+
+void EdytorNc::diffEditorFile()
+{
+   MdiChild *child = activeMdiChild();
+   if(!child)
+      return;
+
+   if(diffApp == NULL)
+   {
+      diffApp = new KDiff3App(splitter, "DiffApp");
+   };
+
+   if(diffApp != NULL)
+   {
+      QString fileName = child->currentFile();
+      if(fileName.isEmpty())
+         return;
+
+      QString fileName1 = QDir::tempPath() + QDir::separator() + QFileInfo(fileName).baseName() + ".tmp";
+      //qDebug() << fileName << fileName1;
+
+      QFile file(fileName1);
+      if(!file.open(QIODevice::WriteOnly))
+      {
+         QMessageBox::warning(this, tr("EdytorNC"),
+                              tr("Cannot write tmp file \"%1\".\n %2")
+                              .arg(QDir::toNativeSeparators(fileName1))
+                              .arg(file.errorString()));
+         return;
+      };
+
+      QTextStream out(&file);
+
+      QString tex = child->textEdit->toPlainText();
+      if(!tex.contains(QLatin1String("\r\n")))
+        tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
+      out << tex;
+      file.close();
+
+      diffAct->setChecked(true);
+      diffApp->completeInit(fileName, fileName1);
+
+      if(file.exists())
+         file.remove();
+
+//      QList<int> sizes;
+//      sizes.clear();
+//      sizes.append(0);
+//      sizes.append(splitter->height());
+//      splitter->setSizes(sizes);
    };
 }
 
@@ -1217,7 +1261,7 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.11.29 BETA" +
+                                   "2010.11.30 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1262,6 +1306,10 @@ void EdytorNc::updateMenus()
    separatorAct->setVisible(hasMdiChild);
    selAllAct->setEnabled(hasMdiChildNotReadOnly);
    findAct->setEnabled(hasMdiChild);
+
+   diffLAct->setEnabled(hasMdiChild);
+   diffRAct->setEnabled(hasMdiChild);
+   diffEditorAct->setEnabled(hasMdiChildNotReadOnly);
 
    replaceAct->setEnabled(hasMdiChildNotReadOnly);
    readOnlyAct->setEnabled(hasMdiChild);
@@ -1643,6 +1691,10 @@ void EdytorNc::createActions()
     diffAct->setStatusTip(tr("Show diff window"));
     connect(diffAct, SIGNAL(triggered()), this, SLOT(doDiff()));
 
+    diffEditorAct = new QAction(QIcon(":/images/diff_editor.png"), tr("Show unsaved changes"), this);
+    diffEditorAct->setStatusTip(tr("Show diff of currently edited file and file on disk"));
+    connect(diffEditorAct, SIGNAL(triggered()), this, SLOT(diffEditorFile()));
+
     splittAct = new QAction(QIcon(":/images/split_prog.png"), tr("Split file"), this);
     splittAct->setStatusTip(tr("Split file"));
     connect(splittAct, SIGNAL(triggered()), this, SLOT(splitPrograms()));
@@ -1745,6 +1797,7 @@ void EdytorNc::createMenus()
     editMenu->addSeparator();
     editMenu->addAction(diffLAct);
     editMenu->addAction(diffRAct);
+    editMenu->addAction(diffEditorAct);
     editMenu->addSeparator();
     editMenu->addAction(readOnlyAct);
     editMenu->addSeparator();
@@ -1825,6 +1878,7 @@ void EdytorNc::createToolBars()
     editToolBar->addSeparator();
     editToolBar->addAction(diffRAct);
     editToolBar->addAction(diffLAct);
+    editToolBar->addAction(diffEditorAct);
 
 
     toolsToolBar = new QToolBar(tr("Tools"));
