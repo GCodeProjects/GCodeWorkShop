@@ -1830,6 +1830,12 @@ void DiffTextWindowFrame::slotBrowseButtonClicked()
                        "Text files (*.txt);; All files (*.* *)");
 #endif
 
+#ifdef Q_OS_MACX
+    QString filters = tr("CNC programs files *.nc (*.nc);;"
+                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
+                         "Text files *.txt (*.txt);; All files (*.* *)");
+#endif
+
    QString directory = QFileDialog::getOpenFileName(this, tr("Open file..."), current, filters);
    if(!directory.isEmpty())
    {

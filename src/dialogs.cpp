@@ -1748,8 +1748,8 @@ void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color
     paint->drawEllipse(QPointF(x, -y), d, d);
 
 
-    v = paint->viewport();
-        c = qMin(v.width(), v.height());
+    //v = paint->viewport();
+    //c = qMin(v.width(), v.height());
 
     paint->restore();
     paint->end();

@@ -1,7 +1,7 @@
 <project>
     <shortName>EdytorNC</shortName>
     <fullName>EdytorNC</fullName>
-    <version>2010.11.30 BETA</version>
+    <version>2010.12.21 BETA</version>
     <readmeFile>/home/artur/Dokumenty/Projekty/edytornc/ReadMe</readmeFile>
     <licenseFile>/home/artur/Dokumenty/Projekty/edytornc/COPYING</licenseFile>
     <logoImage>/home/artur/Dokumenty/Projekty/edytornc/src/images/edytornc48.png</logoImage>
@@ -103,6 +103,7 @@
                     <name>EdytorNC</name>
                     <path>${installdir}/</path>
                     <platforms>all</platforms>
+                    <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/edytornc.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
@@ -156,6 +157,7 @@
                             <name>Uninstall ${product_shortname}</name>
                             <path>${installdir}</path>
                             <platforms>all</platforms>
+                            <runAsAdmin>0</runAsAdmin>
                             <runInTerminal>0</runInTerminal>
                             <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
                             <windowsExecArgs></windowsExecArgs>
@@ -322,6 +324,7 @@
                 <startMenuShortcut>
                     <comment>Uninstall ${product_shortname}</comment>
                     <name>Uninstall ${product_shortname}</name>
+                    <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
@@ -331,6 +334,7 @@
                 <startMenuShortcut>
                     <comment>Text editor for CNC programmers</comment>
                     <name>EdytorNC</name>
+                    <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/edytornc.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>

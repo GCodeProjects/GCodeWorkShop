@@ -206,6 +206,13 @@ void EdytorNc::open()
                        "Text files (*.txt);; All files (*.* *)");
 #endif
 
+#ifdef Q_OS_MACX
+  QString filters = tr("CNC programs files (*.nc);;"
+                       "CNC programs files (*.nc *.min *.anc *.cnc);;"
+                       "Text files (*.txt);; All files (*.* *)");
+#endif
+
+
 
 
     QStringList files = QFileDialog::getOpenFileNames(
@@ -1003,6 +1010,16 @@ void EdytorNc::doRemoveEmptyLines()
 //
 //**************************************************************************************************
 
+void EdytorNc::doInsertEmptyLines()
+{
+   if(activeMdiChild())
+      activeMdiChild()->doInsertEmptyLines();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void EdytorNc::doInsertDot()
 {
    MdiChild *child;
@@ -1254,17 +1271,16 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2010.11.30 BETA" +
-                            trUtf8("<P>Copyright (C) 1998 - 2010 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
+                                   "2011.01.27 BETA" +
+                            trUtf8("<P>Copyright (C) 1998 - 2011 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
                             trUtf8("<br />Czech translation thanks to Pavel Fric") +
+                            trUtf8("<br />OS X patch thanks to Janne Mäntyharju") +
                             trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                             trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             trUtf8("<P>") +
                             trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
-                            trUtf8("<P>") +
-                            trUtf8("<P>EdytorNC wins <a href=\"http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/\">\"100% FREE award granted by Softpedia\"</a>") +
                             trUtf8("<P>") +
                             trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
                             trUtf8("<P>") +
@@ -1311,6 +1327,7 @@ void EdytorNc::updateMenus()
    insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
    removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
    removeEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
+   insertEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
    splittAct->setEnabled(hasMdiChildNotReadOnly);
    convertProgAct->setEnabled(hasMdiChildNotReadOnly);
    cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
@@ -1620,6 +1637,11 @@ void EdytorNc::createActions()
     removeEmptyLinesAct->setStatusTip(tr("Removes empty lines"));
     connect(removeEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
 
+    insertEmptyLinesAct = new QAction(QIcon(":/images/insertemptylines.png"), tr("Insert empty lines"), this);
+    //insertEmptyLinesAct->setShortcut(tr("F5"));
+    insertEmptyLinesAct->setStatusTip(tr("Insert empty lines"));
+    connect(insertEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
+
     insertDotAct = new QAction(QIcon(":/images/dots.png"), tr("Insert dots"), this);
     insertDotAct->setShortcut(tr("F6"));
     insertDotAct->setStatusTip(tr("Inserts decimal dot"));
@@ -1802,6 +1824,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(insertSpcAct);
     toolsMenu->addAction(removeSpcAct);
     toolsMenu->addSeparator();
+    toolsMenu->addAction(insertEmptyLinesAct);
     toolsMenu->addAction(removeEmptyLinesAct);
     toolsMenu->addAction(splittAct);
     toolsMenu->addSeparator();
@@ -3464,7 +3487,7 @@ void EdytorNc::createGlobalToolTipsFile()
    settings.setValue("M41", tr("<b>M41</b> - spindle gear range 1"));
    settings.setValue("M42", tr("<b>M42</b> - spindle gear range 2"));
    settings.setValue("M43", tr("<b>M43</b> - spindle gear range 3"));
-   settings.setValue("M44", tr("<b>M42</b> - spindle gear range 4"));
+   settings.setValue("M44", tr("<b>M44</b> - spindle gear range 4"));
    settings.setValue("M48", tr("<b>M48</b> - spindle speed override ignore cancel"));
    settings.setValue("M49", tr("<b>M49</b> - spindle speed override ignore"));
 
@@ -4180,6 +4203,16 @@ void EdytorNc::projectAdd()
                         "Text files (*.txt)");
 #endif
 
+#ifdef Q_OS_MACX
+   QString filters = tr("All files (*.* *);;"
+                        "CNC programs files *.nc (*.nc);;"
+                        "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
+                        "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
+                        "Drawings *.dwg *.dxf (*.dwg *.dxf);;"
+                        "Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;"
+                        "Text files *.txt (*.txt)");
+#endif
+
 
 
    QStringList files = QFileDialog::getOpenFileNames(
@@ -4430,6 +4463,10 @@ QString EdytorNc::projectSelectName()
    QString filters = tr("EdytorNC project file (*.ncp)");
 #endif
 
+#ifdef Q_OS_MACX
+   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
+#endif
+
    QString file = QFileDialog::getSaveFileName(
                          this,
                          tr("Select the project name and location..."),
@@ -4456,6 +4493,10 @@ void EdytorNc::projectOpen()
 
 #ifdef Q_OS_WIN32
    QString filters = tr("EdytorNC project file (*.ncp)");
+#endif
+
+#ifdef Q_OS_MACX
+   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
 #endif
 
    QString fileName = QFileDialog::getOpenFileName(

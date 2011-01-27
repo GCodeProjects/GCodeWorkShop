@@ -93,6 +93,7 @@ private slots:
     void doInsertSpaces();
     void doRemoveSpaces();
     void doRemoveEmptyLines();
+    void doInsertEmptyLines();
     void doInsertDot();
     void doRenumber();
     void doSpeedFeed();
@@ -244,6 +245,7 @@ private:
     QAction *insertDotAct;
     QAction *removeSpcAct;
     QAction *removeEmptyLinesAct;
+    QAction *insertEmptyLinesAct;
     QAction *splittAct;
     QAction *insertSpcAct;
     QAction *speedFeedAct;

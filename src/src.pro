@@ -82,10 +82,9 @@ unix:SOURCES += posix_qextserialport.cpp
 unix:TARGET = ../bin/edytornc
 unix:UNAME = $$system(uname -a)
 unix:contains( UNAME, x86_64 ):TARGET = ../bin/x86_64/edytornc
-macx:LIBS += -framework \
-    IOKit
+macx:LIBS += -framework IOKit -framework CoreFoundation
 win32:SOURCES += win_qextserialport.cpp
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
-VERSION = 2010.08
+VERSION = 2011.01

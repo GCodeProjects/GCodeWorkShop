@@ -186,6 +186,15 @@ bool MdiChild::saveAs()
                          "All files (*.* *)");
 #endif
 
+#ifdef Q_OS_MACX
+    QString filters = tr("CNC programs files *.nc (*.nc);;"
+                         "CNC programs files *.anc (*.anc);;"
+                         "CNC programs files *.min (*.min);;"
+                         "CNC programs files *.cnc (*.cnc);;"
+                         "Text files *.txt (*.txt);;"
+                         "All files (*.* *)");
+#endif
+
     if(isUntitled)
       fileName = guessFileName();
     else
@@ -861,7 +870,7 @@ void MdiChild::doRemoveSpace()
 }
 
 //**************************************************************************************************
-//
+// Deletes empty lines
 //**************************************************************************************************
 
 void MdiChild::doRemoveEmptyLines()
@@ -882,6 +891,31 @@ void MdiChild::doRemoveEmptyLines()
 
    textEdit->selectAll();
    textEdit->insertPlainText(newTx);
+   QTextCursor cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+   textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+// Add empty line after each block
+//**************************************************************************************************
+
+void MdiChild::doInsertEmptyLines()
+{
+   QString tx;
+
+   QApplication::setOverrideCursor(Qt::BusyCursor);
+   tx = textEdit->toPlainText();
+
+   if(tx.contains(QLatin1String("\r\n")))
+     tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
+   else
+     tx.replace(QLatin1String("\n"), QLatin1String("\n\n"));
+
+
+   textEdit->selectAll();
+   textEdit->insertPlainText(tx);
    QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(0);
    textEdit->setTextCursor(cursor);

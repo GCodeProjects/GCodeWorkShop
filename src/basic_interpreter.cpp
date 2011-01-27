@@ -434,7 +434,7 @@ void BasicInterpreter::print()
 {
    double answer;
    int len = 0;
-   char last_delim;
+   char last_delim = 0;
    QString str;
 
    do

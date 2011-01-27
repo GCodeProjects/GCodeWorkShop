@@ -26,12 +26,6 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
-//#include <klocale.h>
-//#include <ktemporaryfile.h>
-//#include <kio/global.h>
-//#include <kmessagebox.h>
-//#include <kio/jobuidelegate.h>
-//#include <kio/copyjob.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>

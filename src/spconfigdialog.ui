@@ -621,7 +621,7 @@
        <item row="5" column="4">
         <widget class="QSpinBox" name="startDelaySpinBox">
          <property name="toolTip">
-          <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON  wich one  first </string>
+          <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</string>
          </property>
          <property name="suffix">
           <string>s</string>

@@ -69,6 +69,7 @@ public:
     int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked);
     void doRemoveSpace();
     void doRemoveEmptyLines();
+    void doInsertEmptyLines();
     void doInsertSpace();
     void doInsertDot();
     void doI2M();

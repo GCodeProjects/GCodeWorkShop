@@ -87,5 +87,6 @@
         <file>images/fileclose_small.png</file>
         <file>images/split_prog.png</file>
         <file>images/diff_editor.png</file>
+        <file>images/insertemptylines.png</file>
     </qresource>
 </RCC>
