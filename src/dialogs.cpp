@@ -2814,15 +2814,22 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    edtSaveExtension->setText(editProp.saveExtension);
    edtSaveDirectory->setText(editProp.saveDirectory);
 
+   highlightModeComboBox->addItem(tr("AUTO"), MODE_AUTO);
+   highlightModeComboBox->addItem(tr("FANUC"), MODE_FANUC);
+   highlightModeComboBox->addItem(tr("HEIDENHAIN DIALOG"), MODE_HEIDENHAIN);
+   highlightModeComboBox->addItem(tr("HEIDENHAIN ISO"), MODE_HEIDENHAIN_ISO);
+   highlightModeComboBox->addItem(tr("OKUMA OSP"), MODE_OKUMA);
+   highlightModeComboBox->addItem(tr("PHILIPS"), MODE_PHILIPS);
+   highlightModeComboBox->addItem(tr("SINUMERIK OLD"), MODE_SINUMERIK);
+   highlightModeComboBox->addItem(tr("SINUMERIK NEW"), MODE_SINUMERIK_840);
+   highlightModeComboBox->addItem(tr("TOOLTIPS"), MODE_TOOLTIPS);
+
+   int id = highlightModeComboBox->findData(editProp.defaultHighlightMode);
+   highlightModeComboBox->setCurrentIndex(id);
 
    connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
-
-   //adjustSize();
-   //setMaximumSize(width(), height());
-
-
 }
 
 //**************************************************************************************************
@@ -2887,6 +2894,7 @@ _editor_properites SetupDialog::getSettings()
 {
    QPalette palette;
    int r, g, b;
+   bool ok;
 
    r = 0;
    if(tabbedModecheckBox->isChecked())
@@ -2907,6 +2915,12 @@ _editor_properites SetupDialog::getSettings()
    editProp.clearUnderlineHistory = clearUnderlinecheckBox->isChecked();
    editProp.editorToolTips = editorToolTipsCheckBox->isChecked();
    editProp.defaultReadOnly = readOnlyModeCheckBox->isChecked();
+
+   int id = highlightModeComboBox->currentIndex();
+   if(id >= 0)
+   {
+      editProp.defaultHighlightMode = highlightModeComboBox->itemData(id).toInt(&ok);
+   };
 
    palette = commentColorButton->palette();
    palette.color(commentColorButton->foregroundRole()).getRgb(&r, &g, &b);
@@ -3078,6 +3092,10 @@ void SetupDialog::setDefaultProp()
    editProp.fontName = "Courier";
    editProp.fontSize = 12;
 
+   editProp.defaultHighlightMode = MODE_AUTO;
+   int id = highlightModeComboBox->findData(editProp.defaultHighlightMode);
+   highlightModeComboBox->setCurrentIndex(id);
+
    clearUndocheckBox->setChecked(false);
    clearUnderlinecheckBox->setChecked(true);
 
@@ -3101,6 +3119,10 @@ void SetupDialog::setDefaultProp()
    edtSaveExtension->setText(".nc");
 }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void SetupDialog::on_btnAddExtension_clicked()
 {
     if(edtExtension->text()=="")
@@ -3109,10 +3131,18 @@ void SetupDialog::on_btnAddExtension_clicked()
     edtExtension->setText("");
 }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void SetupDialog::on_btnDeleteExtension_clicked()
 {
     qDeleteAll(lstExtensions->selectedItems());
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
 void SetupDialog::on_btnBrowseDirectory_clicked()
 {
@@ -3121,3 +3151,7 @@ void SetupDialog::on_btnBrowseDirectory_clicked()
                           tr("Select default save directory"),
                           edtSaveDirectory->text()));
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************

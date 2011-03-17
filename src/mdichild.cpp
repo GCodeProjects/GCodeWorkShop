@@ -2290,6 +2290,8 @@ void MdiChild::detectHighligthMode()
    { 
       text = textEdit->toPlainText();
       mdiWindowProperites.hColors.highlightMode = autoDetectHighligthMode(text);
+      if(mdiWindowProperites.hColors.highlightMode == MODE_AUTO)
+         mdiWindowProperites.hColors.highlightMode = mdiWindowProperites.defaultHighlightMode;
    };
 
    highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));

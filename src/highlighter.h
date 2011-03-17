@@ -36,16 +36,6 @@ QT_END_NAMESPACE
 
 
 
-#define MODE_AUTO                0x00
-#define MODE_OKUMA               0x02
-#define MODE_FANUC               0x03
-#define MODE_HEIDENHAIN          0x04
-#define MODE_SINUMERIK           0x05
-#define MODE_SINUMERIK_840       0x06
-#define MODE_PHILIPS             0x07
-#define MODE_HEIDENHAIN_ISO      0x08
-#define MODE_TOOLTIPS            0x09
-
 int autoDetectHighligthMode(const QString text);
 
 class Highlighter : public QSyntaxHighlighter

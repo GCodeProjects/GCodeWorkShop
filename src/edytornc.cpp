@@ -2098,6 +2098,8 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
 
     defaultMdiWindowProperites.defaultReadOnly = settings.value("ViewerMode", FALSE).toBool();
+    defaultMdiWindowProperites.defaultHighlightMode = settings.value("DefaultHighlightMode", MODE_AUTO).toInt();
+
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
 
@@ -2222,6 +2224,7 @@ void EdytorNc::writeSettings()
     settings.setValue("ClearUnderline", defaultMdiWindowProperites.clearUnderlineHistory);
     settings.setValue("EditorToolTips", defaultMdiWindowProperites.editorToolTips);
     settings.setValue("ViewerMode", defaultMdiWindowProperites.defaultReadOnly);
+    settings.setValue("DefaultHighlightMode", defaultMdiWindowProperites.defaultHighlightMode);
     
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
