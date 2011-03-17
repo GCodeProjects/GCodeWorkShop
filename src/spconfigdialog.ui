@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>589</width>
-    <height>323</height>
+    <width>625</width>
+    <height>369</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -59,7 +59,7 @@
         <string>&amp;Save</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
        </property>
        <property name="autoDefault">
@@ -76,7 +76,7 @@
         <string>Delete</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/editdelete.png</normaloff>:/images/editdelete.png</iconset>
        </property>
        <property name="autoDefault">
@@ -102,7 +102,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -157,7 +157,7 @@
             <string>&amp;Browse</string>
            </property>
            <property name="icon">
-            <iconset resource="application.qrc">
+            <iconset>
              <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
            </property>
           </widget>
@@ -734,6 +734,29 @@ p, li { white-space: pre-wrap; }
          </property>
         </spacer>
        </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="removeEmptyLines">
+         <property name="toolTip">
+          <string>Remove empty lines after receive is complete</string>
+         </property>
+         <property name="text">
+          <string>Remove empty lines</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="removeBefore">
+         <property name="toolTip">
+          <string>When sending, discard all characters before %</string>
+         </property>
+         <property name="text">
+          <string>Remove characters before %</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="autoSaveTab">
@@ -950,7 +973,7 @@ p, li { white-space: pre-wrap; }
         <string>&amp;Save &amp;&amp; close</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/filesave.png</normaloff>:/images/filesave.png</iconset>
        </property>
        <property name="autoDefault">
@@ -977,7 +1000,7 @@ p, li { white-space: pre-wrap; }
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
        </property>
        <property name="autoDefault">
@@ -989,8 +1012,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="application.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

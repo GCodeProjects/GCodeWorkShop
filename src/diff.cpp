@@ -1196,13 +1196,13 @@ static bool isValidMove( ManualDiffHelpList* pManualDiffHelpList, int line1, int
 
          if ( l1>=0 && l2>=0 )
          {
-            if ( line1>=l1 && line2<l2 || line1<l1 && line2>=l2 )
+            if ( (line1>=l1 && line2<l2) || (line1<l1 && line2>=l2) )
                return false;
             l1 = winIdx1 == 1 ? mdhe.lineA2 : winIdx1==2 ? mdhe.lineB2 : mdhe.lineC2 ;
             l2 = winIdx2 == 1 ? mdhe.lineA2 : winIdx2==2 ? mdhe.lineB2 : mdhe.lineC2 ;
             ++l1;
             ++l2;
-            if ( line1>=l1 && line2<l2 || line1<l1 && line2>=l2 )
+            if ( (line1>=l1 && line2<l2) || (line1<l1 && line2>=l2) )
                return false;
          }
       }
@@ -1401,9 +1401,9 @@ void calcDiff3LineListTrim(
    {
       if ( iMDHL!=pManualDiffHelpList->end() )
       {
-         if ( i3->lineA >= 0 && i3->lineA==iMDHL->lineA1 || 
-              i3->lineB >= 0 && i3->lineB==iMDHL->lineB1 || 
-              i3->lineC >= 0 && i3->lineC==iMDHL->lineC1 )
+         if ( (i3->lineA >= 0 && i3->lineA==iMDHL->lineA1) ||
+              (i3->lineB >= 0 && i3->lineB==iMDHL->lineB1) ||
+              (i3->lineC >= 0 && i3->lineC==iMDHL->lineC1) )
          {
             i3A = i3;
             i3B = i3;
@@ -1864,6 +1864,7 @@ void fineDiff(
    int k1=0;
    int k2=0;
    bTextsTotalEqual = true;
+   //int listSize = diff3LineList.size();
    int listIdx = 0;
    for( i= diff3LineList.begin(); i!= diff3LineList.end(); ++i)
    {
@@ -1871,7 +1872,7 @@ void fineDiff(
       else if (selector==2){ k1=i->lineB; k2=i->lineC; }
       else if (selector==3){ k1=i->lineC; k2=i->lineA; }
       else assert(false);
-      if( k1==-1 && k2!=-1  ||  k1!=-1 && k2==-1 ) bTextsTotalEqual=false;
+      if( (k1==-1 && k2!=-1)  ||  (k1!=-1 && k2==-1) ) bTextsTotalEqual=false;
       if( k1!=-1 && k2!=-1 )
       {
          if ( v1[k1].size != v2[k2].size || memcmp( v1[k1].pLine, v2[k2].pLine, v1[k1].size<<1)!=0 )

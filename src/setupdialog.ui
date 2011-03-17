@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>483</width>
-    <height>227</height>
+    <width>512</width>
+    <height>266</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="fontColorTab">
       <attribute name="title">
@@ -362,20 +362,130 @@
          </property>
         </widget>
        </item>
-       <item row="9" column="2">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+       <item row="8" column="0" colspan="3">
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Default save directory:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="edtSaveDirectory"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnBrowseDirectory">
+           <property name="text">
+            <string>Browse...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
+     </widget>
+     <widget class="QWidget" name="extensionsTab">
+      <property name="accessibleName">
+       <string/>
+      </property>
+      <attribute name="title">
+       <string>File extensions</string>
+      </attribute>
+      <widget class="QWidget" name="horizontalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>301</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QListWidget" name="lstExtensions">
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDeleteExtension">
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="horizontalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>301</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Extension to add: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="edtExtension"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnAddExtension">
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="horizontalLayoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>329</x>
+         <y>40</y>
+         <width>151</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Save extension:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="edtSaveExtension">
+          <property name="toolTip">
+           <string>Extension to be added to filename when saving</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="Line" name="line">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>10</y>
+         <width>20</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="otherTab">
       <attribute name="title">
@@ -404,7 +514,7 @@
             <string>&amp;Browse</string>
            </property>
            <property name="icon">
-            <iconset resource="application.qrc">
+            <iconset>
              <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
            </property>
           </widget>
@@ -522,7 +632,7 @@
         <string>&amp;Ok</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/ok.png</normaloff>:/images/ok.png</iconset>
        </property>
        <property name="default">
@@ -549,7 +659,7 @@
         <string>&amp;Default</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/default.png</normaloff>:/images/default.png</iconset>
        </property>
        <property name="autoDefault">
@@ -576,7 +686,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset>
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
        </property>
        <property name="autoDefault">
@@ -617,8 +727,6 @@
   <tabstop>defaultButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>
- <resources>
-  <include location="application.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

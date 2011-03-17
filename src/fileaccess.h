@@ -16,7 +16,7 @@
 #include <QEventLoop>
 #include <QLabel>
 #include <QProgressBar>
- #include <QUrl>
+#include <QUrl>
 
 #include <list>
 

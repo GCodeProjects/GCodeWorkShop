@@ -41,8 +41,8 @@
 
 #define FILENAME_SINU840     "%_N_[a-zA-Z0-9_]{1,31}_(MPF|SPF|TEA|COM|PLC|DEF|INI)\\n"
 #define FILENAME_OSP         "\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"
-#define FILENAME_FANUC1      "[%\\s]{1,}:[0-9]{1,}"
-#define FILENAME_FANUC2      "[%\\s]{1,}O[0-9]{1,}"
+#define FILENAME_FANUC1      ":[0-9]{1,}"
+#define FILENAME_FANUC2      "O[0-9]{1,}"
 #define FILENAME_SINU        "%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b"
 #define FILENAME_HEID1       "%[a-zA-Z0-9_]{1,30}(\\s)"
 #define FILENAME_HEID2       "(BEGIN)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"
@@ -74,7 +74,7 @@ public:
     void doInsertDot();
     void doI2M();
     void compileMacro();
-    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
+    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
     void doUndo();
     void doRedo();
     QString filePath();
@@ -82,9 +82,10 @@ public:
     int getHighligthMode();
     void doDiff();
     QString getCurrentFileInfo();
-    bool findText(const QString & exp, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
+    bool findText(const QString &text, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
     QString guessFileName();
     QStringList splitFile();
+    bool findTextMatched(QString pattern, QString text);
 
 
 

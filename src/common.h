@@ -120,5 +120,6 @@ public:
 
 QStringList safeStringSplit(const QString& s, char sepChar=',', char metaChar='\\' );
 QString safeStringJoin(const QStringList& sl, char sepChar=',', char metaChar='\\' );
+QString* getFilters(QStringList extensions);
 
 #endif

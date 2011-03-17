@@ -26,10 +26,20 @@
 #include <qpoint.h>
 #include <qstringlist.h>
 #include <qtextstream.h>
+#include <QObject>
+
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
 ValueMap::ValueMap()
 {
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
 ValueMap::~ValueMap()
 {
@@ -186,6 +196,21 @@ static int num( QString& s, int idx )
 {
    return subSection( s, idx, ',').toInt();
 }
+
+QString* getFilters(QStringList extensions)
+{
+    QString *filters = new(QString);
+
+    *filters = QObject::tr("CNC programs files (");
+
+    foreach(QString str, extensions)
+        *filters += str += " ";
+    *filters += QObject::tr(");;"
+        "Text files (*.txt);; All files (*.* *)");
+
+    return filters;
+}
+
 
 void ValueMap::writeEntry(const QString& k, const QFont& v )
 {

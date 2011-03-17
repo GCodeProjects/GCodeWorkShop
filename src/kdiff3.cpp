@@ -57,7 +57,7 @@ bool KDiff3App::isDirComparison()
    return m_bDirCompare;
 }
 
-KDiff3App::KDiff3App(QWidget* pParent, const char* ): QWidget(pParent)
+KDiff3App::KDiff3App(QWidget* pParent, const char* , QStringList extensions): QWidget(pParent)
 {
    setObjectName( "KDiff3App" );
    setAttribute(Qt::WA_DeleteOnClose);
@@ -79,6 +79,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* ): QWidget(pParent)
    m_pHScrollBar = 0;
    m_pDiffVScrollBar = 0;
    m_pMergeVScrollBar = 0;
+   m_extensions = extensions;
 
    // Needed before any file operations via FileAccess happen.
    if (!g_pProgressDialog)

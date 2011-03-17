@@ -222,6 +222,8 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("Xon", xonInput->text());
     settings.setValue("Xoff", xoffInput->text());
     settings.setValue("DeleteControlChars", deleteControlChars->isChecked());
+    settings.setValue("RemoveEmptyLines", removeEmptyLines->isChecked());
+    settings.setValue("RemoveBefore",removeBefore->isChecked());
     //settings.setValue("StartAfterXONCTS", startAfterXONCTS->isChecked());
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
     settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());    
@@ -343,6 +345,8 @@ void SPConfigDialog::changeSettings()
     xoffInput->setText(settings.value("Xoff", "19").toString());
     delayDoubleSpinBox->setValue(settings.value("LineDelay", 0).toDouble());
     deleteControlChars->setChecked(settings.value("DeleteControlChars", true).toBool());
+    removeEmptyLines->setChecked(settings.value("RemoveEmptyLines", true).toBool());
+    removeBefore->setChecked(settings.value("RemoveBefore", false).toBool());
     //startAfterXONCTS->setChecked(settings.value("StartAfterXONCTS", true).toBool());
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
     doNotShowProgressInEditor->setChecked(settings.value("DoNotShowProgressInEditor", false).toBool());

@@ -84,7 +84,7 @@ class KDiff3App : public QWidget
 public:
    /** constructor of KDiff3App, calls all init functions to create the application.
      */
-   KDiff3App( QWidget* parent, const char* name);
+   KDiff3App( QWidget* parent, const char* name, QStringList extensions);
    ~KDiff3App();
 
    bool isPart();
@@ -128,7 +128,7 @@ private slots:
 
 
 private:
-
+   QStringList m_extensions;
    ReversibleScrollBar* m_pHScrollBar;
    QScrollBar* m_pDiffVScrollBar;
    QScrollBar* m_pMergeVScrollBar;

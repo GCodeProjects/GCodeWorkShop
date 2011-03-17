@@ -22,6 +22,7 @@
 
 
 #include "mdichild.h"
+#include "edytornc.h"
 
 
 
@@ -32,23 +33,23 @@
 
 MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
-    setupUi(this);
-    setAttribute(Qt::WA_DeleteOnClose);
-    isUntitled = true;
-    textEdit->setWordWrapMode(QTextOption::NoWrap);
-    highlighter = NULL;
-    setFocusProxy(textEdit);
+   setupUi(this);
+   setAttribute(Qt::WA_DeleteOnClose);
+   isUntitled = true;
+   textEdit->setWordWrapMode(QTextOption::NoWrap);
+   highlighter = NULL;
+   setFocusProxy(textEdit);
 
-    marginWidget->setAutoFillBackground(TRUE);
-    marginWidget->setBackgroundRole(QPalette::Base);
-    textEdit->installEventFilter(this);
-    setWindowIcon(QIcon(":/images/ncfile.png"));
-    splitterH->setBackgroundRole(QPalette::Base);
-    //splitterV->setBackgroundRole(QPalette::Base);
+   marginWidget->setAutoFillBackground(TRUE);
+   marginWidget->setBackgroundRole(QPalette::Base);
+   textEdit->installEventFilter(this);
+   setWindowIcon(QIcon(":/images/ncfile.png"));
+   splitterH->setBackgroundRole(QPalette::Base);
+   //splitterV->setBackgroundRole(QPalette::Base);
 
 
-    //textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
-    //setContextMenuPolicy(Qt::CustomContextMenu);
+   //textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+   //setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 //**************************************************************************************************
@@ -67,14 +68,14 @@ MdiChild::~MdiChild()
 
 void MdiChild::newFile()
 {
-    static int sequenceNumber = 1;
+   static int sequenceNumber = 1;
 
-    isUntitled = true;
-    curFile = tr("document%1.nc").arg(sequenceNumber++);
-    setWindowTitle(curFile + "[*]");
-    curFileInfo = curFile;
+   isUntitled = true;
+   curFile = tr("document%1.nc").arg(sequenceNumber++);
+   setWindowTitle(curFile + "[*]");
+   curFileInfo = curFile;
 
-    connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+   connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 }
 
 //**************************************************************************************************
@@ -84,28 +85,28 @@ void MdiChild::newFile()
 bool MdiChild::loadFile(const QString &fileName)
 {
 
-    QFile file(fileName);
-    if(!file.open(QIODevice::ReadOnly))
-    {
-       QMessageBox::warning(this, tr("EdytorNC"),
-                            tr("Cannot read file \"%1\".\n %2")
-                            .arg(fileName)
-                            .arg(file.errorString()));
-       return false;
-    }
+   QFile file(fileName);
+   if(!file.open(QIODevice::ReadOnly))
+   {
+      QMessageBox::warning(this, tr("EdytorNC"),
+                           tr("Cannot read file \"%1\".\n %2")
+                           .arg(fileName)
+                           .arg(file.errorString()));
+      return false;
+   }
 
-    QTextStream in(&file);
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+   QTextStream in(&file);
+   QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    QString tex = in.readAll();
-    textEdit->setPlainText(tex);
-    file.close();
-    QApplication::restoreOverrideCursor();
+   QString tex = in.readAll();
+   textEdit->setPlainText(tex);
+   file.close();
+   QApplication::restoreOverrideCursor();
 
-    setCurrentFile(fileName, tex);
-    connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+   setCurrentFile(fileName, tex);
+   connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 
-    return true;
+   return true;
 }
 
 //**************************************************************************************************
@@ -169,67 +170,67 @@ bool MdiChild::saveAs()
    QString fileName;
 
 #ifdef Q_OS_LINUX
-    QString filters = tr("CNC programs files *.nc (*.nc);;"
-                         "CNC programs files *.anc (*.anc);;"
-                         "CNC programs files *.min (*.min);;"
-                         "CNC programs files *.cnc (*.cnc);;"
-                         "Text files *.txt (*.txt);;"
-                         "All files (*.* *)");
+   QString filters = tr("CNC programs files *.nc (*.nc);;"
+                        "CNC programs files *.anc (*.anc);;"
+                        "CNC programs files *.min (*.min);;"
+                        "CNC programs files *.cnc (*.cnc);;"
+                        "Text files *.txt (*.txt);;"
+                        "All files (*.* *)");
 #endif
 
 #ifdef Q_OS_WIN32
-    QString filters = tr("CNC programs files (*.nc);;"
-                         "CNC programs files (*.anc);;"
-                         "CNC programs files (*.min);;"
-                         "CNC programs files (*.cnc);;"
-                         "Text files (*.txt);;"
-                         "All files (*.* *)");
+   QString filters = tr("CNC programs files (*.nc);;"
+                        "CNC programs files (*.anc);;"
+                        "CNC programs files (*.min);;"
+                        "CNC programs files (*.cnc);;"
+                        "Text files (*.txt);;"
+                        "All files (*.* *)");
 #endif
 
 #ifdef Q_OS_MACX
-    QString filters = tr("CNC programs files *.nc (*.nc);;"
-                         "CNC programs files *.anc (*.anc);;"
-                         "CNC programs files *.min (*.min);;"
-                         "CNC programs files *.cnc (*.cnc);;"
-                         "Text files *.txt (*.txt);;"
-                         "All files (*.* *)");
+   QString filters = tr("CNC programs files *.nc (*.nc);;"
+                        "CNC programs files *.anc (*.anc);;"
+                        "CNC programs files *.min (*.min);;"
+                        "CNC programs files *.cnc (*.cnc);;"
+                        "Text files *.txt (*.txt);;"
+                        "All files (*.* *)");
 #endif
 
-    if(isUntitled)
+   if(isUntitled)
       fileName = guessFileName();
-    else
+   else
       fileName = curFile;
 
-    QString file = QFileDialog::getSaveFileName(
-                         this,
-                         tr("Save file as..."),
-                         fileName,
-                         filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
+   QString file = QFileDialog::getSaveFileName(
+            this,
+            tr("Save file as..."),
+            fileName,
+            filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
 
-       
-    if((QFile(file).exists()))
-    {
-       QMessageBox msgBox;
-       msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(file));
-       msgBox.setInformativeText(tr("Do you want overwrite it ?"));
-       msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
-       msgBox.setDefaultButton(QMessageBox::Discard);
-       msgBox.setIcon(QMessageBox::Warning);
-       int ret = msgBox.exec();
-       switch (ret)
-       {
-          case QMessageBox::Save    : break;
-          case QMessageBox::Discard : return false;
-                                      break;
-          default                   : return false;
-                                      break;
-       } ;
 
-    };
+   if((QFile(file).exists()))
+   {
+      QMessageBox msgBox;
+      msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(file));
+      msgBox.setInformativeText(tr("Do you want overwrite it ?"));
+      msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
+      msgBox.setDefaultButton(QMessageBox::Discard);
+      msgBox.setIcon(QMessageBox::Warning);
+      int ret = msgBox.exec();
+      switch (ret)
+      {
+      case QMessageBox::Save    : break;
+      case QMessageBox::Discard : return false;
+         break;
+      default                   : return false;
+         break;
+      } ;
 
-    if(file.isNull())
+   };
+
+   if(file.isNull())
       return false;
-    else
+   else
       return saveFile(file);
 
 }
@@ -240,77 +241,77 @@ bool MdiChild::saveAs()
 
 bool MdiChild::saveFile(const QString &fileName)
 {
-    int curPos;
-    QRegExp exp;
-    QTextCursor cursor;
+   int curPos;
+   QRegExp exp;
+   QTextCursor cursor;
 
-    QFile file(fileName);
-    if(!file.open(QIODevice::WriteOnly))
-    {
-       QMessageBox::warning(this, tr("EdytorNC"),
-                            tr("Cannot write file \"%1\".\n %2")
-                            .arg(fileName)
-                            .arg(file.errorString()));
-       return false;
-    };
+   QFile file(fileName);
+   if(!file.open(QIODevice::WriteOnly))
+   {
+      QMessageBox::warning(this, tr("EdytorNC"),
+                           tr("Cannot write file \"%1\".\n %2")
+                           .arg(fileName)
+                           .arg(file.errorString()));
+      return false;
+   };
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    curPos = textEdit->textCursor().position();
+   QApplication::setOverrideCursor(Qt::WaitCursor);
+   curPos = textEdit->textCursor().position();
    
-    QDate dat = QDate::currentDate();
+   QDate dat = QDate::currentDate();
 
 
-    exp.setPattern("(DATA|DATE)[:\\s]*[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
-    cursor = textEdit->textCursor();
-    cursor.setPosition(0);
-    //setTextCursor(cursor);
+   exp.setPattern("(DATA|DATE)[:\\s]*[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
+   cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+   //setTextCursor(cursor);
 
-    cursor = textEdit->document()->find(exp, cursor);
-    if(!cursor.isNull())
-    {
-       textEdit->setUpdatesEnabled(FALSE);
-       cursor.beginEditBlock();
-       cursor.removeSelectedText();
-       cursor.insertText(dat.toString("dd.MM.yyyy"));
-       cursor.endEditBlock();
+   cursor = textEdit->document()->find(exp, cursor);
+   if(!cursor.isNull())
+   {
+      textEdit->setUpdatesEnabled(FALSE);
+      cursor.beginEditBlock();
+      cursor.removeSelectedText();
+      cursor.insertText(dat.toString("dd.MM.yyyy"));
+      cursor.endEditBlock();
 
-       textEdit->setUpdatesEnabled(TRUE);
-       textEdit->repaint();
-    }
-    else
-    {
-       exp.setPattern("[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
-       cursor = textEdit->textCursor();
-       cursor.setPosition(0);
-       cursor = textEdit->document()->find(exp, cursor);
-       if(!cursor.isNull())
-       {
-          textEdit->setUpdatesEnabled(FALSE);
-          cursor.beginEditBlock();
-          cursor.removeSelectedText();
-          cursor.insertText(dat.toString("dd.MM.yyyy"));
-          cursor.endEditBlock();
+      textEdit->setUpdatesEnabled(TRUE);
+      textEdit->repaint();
+   }
+   else
+   {
+      exp.setPattern("[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
+      cursor = textEdit->textCursor();
+      cursor.setPosition(0);
+      cursor = textEdit->document()->find(exp, cursor);
+      if(!cursor.isNull())
+      {
+         textEdit->setUpdatesEnabled(FALSE);
+         cursor.beginEditBlock();
+         cursor.removeSelectedText();
+         cursor.insertText(dat.toString("dd.MM.yyyy"));
+         cursor.endEditBlock();
 
-          textEdit->setUpdatesEnabled(TRUE);
-          textEdit->repaint();
-       }
-    };
+         textEdit->setUpdatesEnabled(TRUE);
+         textEdit->repaint();
+      }
+   };
 
-    QTextStream out(&file);
+   QTextStream out(&file);
 
-    QString tex = textEdit->toPlainText();
-    if(!tex.contains(QLatin1String("\r\n")))
+   QString tex = textEdit->toPlainText();
+   if(!tex.contains(QLatin1String("\r\n")))
       tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
-    out << tex;
-    file.close();
-    QApplication::restoreOverrideCursor();
-    
-    cursor = textEdit->textCursor();
-    cursor.setPosition(curPos);
-    textEdit->setTextCursor(cursor);
-    
-    setCurrentFile(fileName, tex);
-    return true;
+   out << tex;
+   file.close();
+   QApplication::restoreOverrideCursor();
+
+   cursor = textEdit->textCursor();
+   cursor.setPosition(curPos);
+   textEdit->setTextCursor(cursor);
+
+   setCurrentFile(fileName, tex);
+   return true;
 }
 
 //**************************************************************************************************
@@ -355,15 +356,15 @@ bool MdiChild::maybeSave()
       int ret = msgBox.exec();
       switch (ret)
       {
-         case QMessageBox::Save    : return save();
-                                     break;
-         case QMessageBox::Discard : textEdit->document()->setModified(FALSE);
-                                     return TRUE;
-                                     break;
-         case QMessageBox::Cancel  : return FALSE;
-                                     break;
-         default                   : return TRUE;
-                                     break;
+      case QMessageBox::Save    : return save();
+         break;
+      case QMessageBox::Discard : textEdit->document()->setModified(FALSE);
+         return TRUE;
+         break;
+      case QMessageBox::Cancel  : return FALSE;
+         break;
+      default                   : return TRUE;
+         break;
       } ;
    };
    return TRUE;
@@ -375,39 +376,39 @@ bool MdiChild::maybeSave()
 
 void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
 {
-    int pos;
-    QRegExp exp;
-    QString f_tx;
+   int pos;
+   QRegExp exp;
+   QString f_tx;
 
 
-    curFile = QFileInfo(fileName).canonicalFilePath();
-    isUntitled = false;
-    textEdit->document()->setModified(false);
-    setWindowModified(false);
+   curFile = QFileInfo(fileName).canonicalFilePath();
+   isUntitled = false;
+   textEdit->document()->setModified(false);
+   setWindowModified(false);
 
-    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
-    pos = 0;
-    pos = text.indexOf(exp, pos);
-    while(pos != -1)
-    {
-       f_tx = text.mid(pos, exp.matchedLength());
-       if(!(f_tx.mid(0, 2) == QLatin1String(";$")))
-       {
-          f_tx.remove(QLatin1Char('('));
-          f_tx.remove(QLatin1Char(')'));
-          f_tx.remove(QLatin1Char(';'));
-          break;
-       };
-       pos += exp.matchedLength();
-       pos = text.indexOf(exp, pos);
-    };
+   exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
+   pos = 0;
+   pos = text.indexOf(exp, pos);
+   while(pos != -1)
+   {
+      f_tx = text.mid(pos, exp.matchedLength());
+      if(!(f_tx.mid(0, 2) == QLatin1String(";$")))
+      {
+         f_tx.remove(QLatin1Char('('));
+         f_tx.remove(QLatin1Char(')'));
+         f_tx.remove(QLatin1Char(';'));
+         break;
+      };
+      pos += exp.matchedLength();
+      pos = text.indexOf(exp, pos);
+   };
 
-    if(f_tx.isEmpty())
+   if(f_tx.isEmpty())
       curFileInfo = QFileInfo(curFile).fileName();
-    else
+   else
       curFileInfo = f_tx.simplified();
 
-    updateWindowTitle();
+   updateWindowTitle();
 }
 
 //**************************************************************************************************
@@ -428,7 +429,7 @@ void MdiChild::updateWindowTitle()
       title += (QFileInfo(curFile).canonicalPath().isEmpty() ? "" : (QDir::toNativeSeparators(QFileInfo(curFile).canonicalPath() + "/")));
 
    if((mdiWindowProperites.windowMode & SHOW_FILENAME))
-     title += QFileInfo(curFile).fileName();
+      title += QFileInfo(curFile).fileName();
 
    if(title.isEmpty())
       title += QFileInfo(curFile).fileName();
@@ -489,7 +490,7 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    if(mdiWindowProperites.syntaxH)
    {
       if(highlighter == NULL)
-        highlighter = new Highlighter(textEdit->document());
+         highlighter = new Highlighter(textEdit->document());
 
       if(highlighter != NULL)
          detectHighligthMode();
@@ -497,10 +498,10 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    else
    {
       if(highlighter != NULL)
-        delete(highlighter);
+         delete(highlighter);
       highlighter = NULL;
    };
-    
+
    QTextCursor cursor = textEdit->textCursor();
    cursor.setPosition(mdiWindowProperites.cursorPos);
    textEdit->setTextCursor(cursor);
@@ -517,54 +518,54 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 {
    if((obj == textEdit) && !(textEdit->isReadOnly()))
    {
-       if( ev->type() == QEvent::KeyPress )
-       {
-          QKeyEvent *k = (QKeyEvent*) ev;
+      if( ev->type() == QEvent::KeyPress )
+      {
+         QKeyEvent *k = (QKeyEvent*) ev;
 
-          if(k->key() == Qt::Key_Insert)
-             textEdit->setOverwriteMode(!textEdit->overwriteMode());
+         if(k->key() == Qt::Key_Insert)
+            textEdit->setOverwriteMode(!textEdit->overwriteMode());
 
-          if(mdiWindowProperites.underlineChanges)
-          {
-             if((k->text()[0].isPrint()) && !(k->text()[0].isSpace()))
-             {
-                QTextCursor cr = textEdit->textCursor(); //Underline changes
-                QTextCharFormat format = cr.charFormat();
-                format.setUnderlineStyle(QTextCharFormat::DotLine);
-                format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
-                cr.setCharFormat(format);
-                textEdit->setTextCursor(cr);
-             };
-          };
+         if(mdiWindowProperites.underlineChanges)
+         {
+            if((k->text()[0].isPrint()) && !(k->text()[0].isSpace()))
+            {
+               QTextCursor cr = textEdit->textCursor(); //Underline changes
+               QTextCharFormat format = cr.charFormat();
+               format.setUnderlineStyle(QTextCharFormat::DotLine);
+               format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+               cr.setCharFormat(format);
+               textEdit->setTextCursor(cr);
+            };
+         };
 
-          if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
-          {
-             if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
-             {
-                QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
-                return true;
-             };
+         if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
+         {
+            if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
+            {
+               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+               return true;
+            };
 
-          };
+         };
 
-          if(mdiWindowProperites.intCapsLock)
-          {
-             if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
-             {
-                QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
-                return true;
+         if(mdiWindowProperites.intCapsLock)
+         {
+            if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
+            {
+               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+               return true;
 
-             };
+            };
 
-             if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
-             {
-                QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
-                return true;
-             };
-          };
-       };
+            if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
+            {
+               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+               return true;
+            };
+         };
+      };
 
-       return FALSE;
+      return FALSE;
    }
    else
    {
@@ -662,7 +663,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                num++;
             }
             else
-              pos += matchedLength;
+               pos += matchedLength;
          };
          break;
       };
@@ -680,7 +681,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
             //qDebug() << f_tx;
 
             if(pos > 0)
-              if(tx[pos - 1].isLetterOrNumber())
+               if(tx[pos - 1].isLetterOrNumber())
                {
                   pos += matchedLength;
                   continue;
@@ -701,22 +702,22 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
 
             if((!(f_tx.contains(QLatin1Char('('))) && (!f_tx.contains(QLatin1Char('\''))) && (!f_tx.contains(QLatin1Char(';')))))
             {
-                f_tx.remove(0, 1);
-                f_tx.remove(QLatin1Char(' '));
-                if(!f_tx.isEmpty())
+               f_tx.remove(0, 1);
+               f_tx.remove(QLatin1Char(' '));
+               if(!f_tx.isEmpty())
                   it = f_tx.toInt(&ok);
-                else
+               else
                   it = 0;
-                if(((it >= from) || (renumMarked && it == 0)) && (it < to))
-                {
-                   f_tx = QString(QLatin1String("N%1")).arg(num, prec);
-                   f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
-                   if(insertSpace)
+               if(((it >= from) || (renumMarked && it == 0)) && (it < to))
+               {
+                  f_tx = QString(QLatin1String("N%1")).arg(num, prec);
+                  f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
+                  if(insertSpace)
                      f_tx.append(QLatin1String(" "));
-                   tx.replace(pos, i, f_tx);
-                   num += inc;
-                   count++;
-                };
+                  tx.replace(pos, i, f_tx);
+                  num += inc;
+                  count++;
+               };
             };
             pos += matchedLength;
          };
@@ -740,7 +741,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                if(line.isEmpty())
                {
                   if(!renumEmpty)
-                    break;
+                     break;
                   f_tx = QString(QLatin1String("N%1")).arg(num, prec);
                   f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
                   num += inc;
@@ -764,8 +765,8 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                      break;
                   }
                   else
-                    if(renumComm)
-                      break;
+                     if(renumComm)
+                        break;
                }
 
                if((line.at(0) == QLatin1Char('N')) && (!line.at(1).isLetter()))
@@ -831,33 +832,33 @@ void MdiChild::doRemoveSpace()
    for(i = 0; i < tx.length(); i++)
    {
       if(tx.at(i) == QLatin1Char('('))
-        do
-        {
-           i++;
-           if(i > tx.length())
-             break;
-        }while(!((tx.at(i) == QLatin1Char(')')) || (tx.at(i) == QLatin1Char('\n'))));
+         do
+      {
+         i++;
+         if(i > tx.length())
+            break;
+      }while(!((tx.at(i) == QLatin1Char(')')) || (tx.at(i) == QLatin1Char('\n'))));
 
       if(tx.at(i) == QLatin1Char('\''))
-        do
-        {
-           i++;
-           if(i > tx.length())
-             break;
-        }while(!((tx.at(i) == QLatin1Char('\'')) || (tx.at(i) == QLatin1Char('\n'))));
+         do
+      {
+         i++;
+         if(i > tx.length())
+            break;
+      }while(!((tx.at(i) == QLatin1Char('\'')) || (tx.at(i) == QLatin1Char('\n'))));
 
       if(tx.at(i) == QLatin1Char(';'))
-        do
-        {
-           i++;
-           if(i > tx.length())
-             break;
-        }while(!((tx.at(i) == QLatin1Char('\n'))));
+         do
+      {
+         i++;
+         if(i > tx.length())
+            break;
+      }while(!((tx.at(i) == QLatin1Char('\n'))));
 
       if(tx.at(i) == ' ')
       {
-          tx.remove(i, 1);
-          i--;
+         tx.remove(i, 1);
+         i--;
       };
    };
 
@@ -886,7 +887,7 @@ void MdiChild::doRemoveEmptyLines()
       line = tx.section(QLatin1Char('\n'), i, i);
       line.simplified();
       if(!line.isEmpty())
-       newTx.append(line + '\n');
+         newTx.append(line + '\n');
    };
 
    textEdit->selectAll();
@@ -909,9 +910,9 @@ void MdiChild::doInsertEmptyLines()
    tx = textEdit->toPlainText();
 
    if(tx.contains(QLatin1String("\r\n")))
-     tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
+      tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
    else
-     tx.replace(QLatin1String("\n"), QLatin1String("\n\n"));
+      tx.replace(QLatin1String("\n"), QLatin1String("\n\n"));
 
 
    textEdit->selectAll();
@@ -956,7 +957,7 @@ void MdiChild::doInsertSpace()
             {
                pos++;
                if(pos > tx.length())
-                 break;
+                  break;
             }while(!((tx.at(pos) == QLatin1Char(')')) || (tx.at(pos) == QLatin1Char('\n'))));
             break;
          };
@@ -972,7 +973,7 @@ void MdiChild::doInsertSpace()
             {
                pos++;
                if(pos > tx.length())
-                 break;
+                  break;
             }while(!((tx.at(pos) == QLatin1Char('\n'))));
             break;
          };
@@ -983,7 +984,7 @@ void MdiChild::doInsertSpace()
             {
                pos++;
                if(pos > tx.length())
-                 break;
+                  break;
             }while(!((tx.at(pos) == QLatin1Char('\'')) || (tx.at(pos) == QLatin1Char('\n'))));
             break;
          };
@@ -1065,19 +1066,19 @@ void MdiChild::doInsertDot()
             pos++;
             count++;
          };
-     }
-     else
-       pos += (exp.matchedLength());
-  };
+      }
+      else
+         pos += (exp.matchedLength());
+   };
 
-  emit message( QString(tr("Inserted : %1 dots.")).arg(count), 6000 );
-  cleanUp(&tx);
-  textEdit->selectAll();
-  textEdit->insertPlainText(tx);
-  QTextCursor cursor = textEdit->textCursor();
-  cursor.setPosition(0);
-  textEdit->setTextCursor(cursor);
-  QApplication::restoreOverrideCursor();
+   emit message( QString(tr("Inserted : %1 dots.")).arg(count), 6000 );
+   cleanUp(&tx);
+   textEdit->selectAll();
+   textEdit->insertPlainText(tx);
+   QTextCursor cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+   textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -1097,9 +1098,9 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
    while((pos = str->indexOf(exp, pos)) > 0)
    {
       if((str->at(pos + exp.matchedLength() - 1) == '0') && str->at(pos-1) != QLatin1Char(';'))
-        str->remove(pos + exp.matchedLength() - 1, 1);
+         str->remove(pos + exp.matchedLength() - 1, 1);
       else
-        pos += exp.matchedLength();
+         pos += exp.matchedLength();
    };
 
 }
@@ -1108,7 +1109,7 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 //
 //**************************************************************************************************
 
- void MdiChild::doI2M()
+void MdiChild::doI2M()
 {
    int pos, count;
    QString tx, f_tx;
@@ -1131,33 +1132,33 @@ void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 
       if(((f_tx.contains('(') == 0) && (f_tx.contains('\'') == 0) && (f_tx.contains(';') == 0)))
       {
-            f_tx.remove(0, 1);
+         f_tx.remove(0, 1);
 
-            it = f_tx.toDouble(&ok);
-            if(ok)
+         it = f_tx.toDouble(&ok);
+         if(ok)
+         {
+            if(it != 0)
             {
-               if(it != 0)
-               {
-                  if(!mdiWindowProperites.inch)
-                    it = it / 25.4;
-                  else
-                    it = it * 25.4;
-                  tx.replace(pos - (exp.matchedLength() - 1), exp.matchedLength() - 1, QString("%1").arg(it, 0, 'f', mdiWindowProperites.i2mprec));
-                  pos++;
-                  count++;
-               };
+               if(!mdiWindowProperites.inch)
+                  it = it / 25.4;
+               else
+                  it = it * 25.4;
+               tx.replace(pos - (exp.matchedLength() - 1), exp.matchedLength() - 1, QString("%1").arg(it, 0, 'f', mdiWindowProperites.i2mprec));
+               pos++;
+               count++;
             };
-     };
-  };
+         };
+      };
+   };
 
-  emit message(QString(tr("Converted : %1 numbers.")).arg(count), 6000);
-  cleanUp(&tx);
-  textEdit->selectAll();
-  textEdit->insertPlainText(tx);
-  QTextCursor cursor = textEdit->textCursor();
-  cursor.setPosition(0);
-  textEdit->setTextCursor(cursor);
-  QApplication::restoreOverrideCursor();
+   emit message(QString(tr("Converted : %1 numbers.")).arg(count), 6000);
+   cleanUp(&tx);
+   textEdit->selectAll();
+   textEdit->insertPlainText(tx);
+   QTextCursor cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+   textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -1175,23 +1176,23 @@ bool MdiChild::event(QEvent *event)
 
       switch(mdiWindowProperites.hColors.highlightMode)
       {
-         case MODE_OKUMA            : group = QLatin1String("OKUMA");
-                                      break;
-         case MODE_FANUC            : group = QLatin1String("FANUC");
-                                      break;
-         case MODE_SINUMERIK_840    : group = QLatin1String("SINUMERIK_840");
-                                      break;
-         case MODE_PHILIPS          :
-         case MODE_SINUMERIK        : group = QLatin1String("SINUMERIK");
-                                      break;
-         case MODE_HEIDENHAIN       : group = QLatin1String("HEIDENHAIN");
-                                      break;
-         case MODE_HEIDENHAIN_ISO   : group = QLatin1String("HEIDENHAIN_ISO");
-                                      break;
-         case MODE_TOOLTIPS         : group = QLatin1String("TOOLTIP");
-                                      break;
-         default                    : event->accept();
-                                      return true;
+      case MODE_OKUMA            : group = QLatin1String("OKUMA");
+         break;
+      case MODE_FANUC            : group = QLatin1String("FANUC");
+         break;
+      case MODE_SINUMERIK_840    : group = QLatin1String("SINUMERIK_840");
+         break;
+      case MODE_PHILIPS          :
+      case MODE_SINUMERIK        : group = QLatin1String("SINUMERIK");
+         break;
+      case MODE_HEIDENHAIN       : group = QLatin1String("HEIDENHAIN");
+         break;
+      case MODE_HEIDENHAIN_ISO   : group = QLatin1String("HEIDENHAIN_ISO");
+         break;
+      case MODE_TOOLTIPS         : group = QLatin1String("TOOLTIP");
+         break;
+      default                    : event->accept();
+         return true;
 
       };
 
@@ -1308,9 +1309,9 @@ bool MdiChild::event(QEvent *event)
       };
 
       return true;
-    };
-    return QWidget::event(event);
- }
+   };
+   return QWidget::event(event);
+}
 
 //**************************************************************************************************
 //
@@ -1342,7 +1343,7 @@ int MdiChild::compute(QString *str)
          if(str->at(pos) == '.')
          {
             if((dot))
-              return(ERR_DOUBLE_DOT);
+               return(ERR_DOUBLE_DOT);
             dot = true;
          };
 
@@ -1361,18 +1362,18 @@ int MdiChild::compute(QString *str)
 
       //pos--;
       if(val1.isEmpty())
-        return(ERR_NO_PARAM);
+         return(ERR_NO_PARAM);
 
       err = processBrc(&val1);
       if(err < 0)
-        return(err);
+         return(err);
 
       if(val1.isEmpty())
-        val1 = "0";
+         val1 = "0";
 
       result = val1.toDouble(&ok);
       if(!ok)
-        return(ERR_CONVERT);
+         return(ERR_CONVERT);
 
       while(1)
       {
@@ -1448,7 +1449,7 @@ int MdiChild::compute(QString *str)
          if((str->at(i) == '.'))
          {
             if((dot))
-              return(ERR_DOUBLE_DOT);
+               return(ERR_DOUBLE_DOT);
             dot = true;
          };
 
@@ -1462,7 +1463,7 @@ int MdiChild::compute(QString *str)
          };
 
          if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
-           break;
+            break;
          val2 += str->at(i);
       };
       i--;
@@ -1494,16 +1495,16 @@ int MdiChild::compute(QString *str)
          };
 
          if(!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-'))))
-           break;
+            break;
          val1.prepend(str->at(j));
       };
       j++;
 
       if(val1.isEmpty())
-        return(ERR_NO_PARAM);  // val1 = "0";
+         return(ERR_NO_PARAM);  // val1 = "0";
 
       if(val2.isEmpty())
-        return(ERR_NO_PARAM);  // val2 = "0";
+         return(ERR_NO_PARAM);  // val2 = "0";
 
 
       while(1)
@@ -1523,7 +1524,7 @@ int MdiChild::compute(QString *str)
 
       };
       if(!ok || !ok1)
-        return(ERR_CONVERT);
+         return(ERR_CONVERT);
 
       pos++;
 
@@ -1548,7 +1549,7 @@ int MdiChild::compute(QString *str)
          if((str->at(i) == '.'))
          {
             if((dot))
-              return(ERR_DOUBLE_DOT);
+               return(ERR_DOUBLE_DOT);
             dot = true;
          };
 
@@ -1562,7 +1563,7 @@ int MdiChild::compute(QString *str)
          };
 
          if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
-           break;
+            break;
          val2 += str->at(i);
       };
       i--;
@@ -1593,17 +1594,17 @@ int MdiChild::compute(QString *str)
          };
 
          if(!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-'))))
-           break;
+            break;
          val1.prepend(str->at(j));
       };
       j++;
 
 
       if(val1.isEmpty())
-        val1 = "0";  //return(ERR_NO_PARAM);
+         val1 = "0";  //return(ERR_NO_PARAM);
 
       if(val2.isEmpty())
-        return(ERR_NO_PARAM); //val2 = "0";
+         return(ERR_NO_PARAM); //val2 = "0";
 
       while(1)
       {
@@ -1618,7 +1619,7 @@ int MdiChild::compute(QString *str)
 
       };
       if(!ok || !ok1)
-        return(ERR_CONVERT);
+         return(ERR_CONVERT);
 
       pos++;
 
@@ -1645,7 +1646,7 @@ int MdiChild::processBrc(QString *str)
 
 
    if(str->contains(')') != str->contains('('))
-     return(ERR_NO_BRAC);
+      return(ERR_NO_BRAC);
 
 
    pos = 0;
@@ -1661,13 +1662,13 @@ int MdiChild::processBrc(QString *str)
 
       err = compute(&par);
       if(err < 0)
-        return(err);
+         return(err);
 
       str->replace(str->indexOf(partmp, 0), partmp.length(), par);
       par.remove(' ');
       err = processBrc(str);
       if(err < 0)
-        return(err);
+         return(err);
    };
 
    err = compute(str);
@@ -1873,17 +1874,17 @@ void MdiChild::macroShowError(int error, QString tx)
    {
       switch(error)
       {
-         case ERR_NO_BRAC       : errText = tr("No ( or ) !");
-                                  break;
-         case ERR_NO_PARAM      : errText = tr("Function parameter not found ! \n Check +-*/.\n\"%1\"").arg(tx);
-                                  break;
-         case ERR_CONVERT       : errText = tr("Wrong number !");
-                                  break;
-         case ERR_UNKNOWN_FUNC  : errText = tr("Unknown math function !\n\"%1\"").arg(tx);
-                                  break;
-         case ERR_DOUBLE_DOT    : errText = tr("Decimal point or minus writed two times !\n\"%1\"").arg(tx);
-                                  break;
-         default                : errText = tr("Unknown error !");
+      case ERR_NO_BRAC       : errText = tr("No ( or ) !");
+         break;
+      case ERR_NO_PARAM      : errText = tr("Function parameter not found ! \n Check +-*/.\n\"%1\"").arg(tx);
+         break;
+      case ERR_CONVERT       : errText = tr("Wrong number !");
+         break;
+      case ERR_UNKNOWN_FUNC  : errText = tr("Unknown math function !\n\"%1\"").arg(tx);
+         break;
+      case ERR_DOUBLE_DOT    : errText = tr("Decimal point or minus writed two times !\n\"%1\"").arg(tx);
+         break;
+      default                : errText = tr("Unknown error !");
       };
 
       QMessageBox::warning(this, tr("EdytorNc - compile macro"), errText);
@@ -1900,35 +1901,35 @@ void MdiChild::macroShowBasicError(int error)
 
    switch(error)
    {
-      case 0  : errText = tr("Syntax error");
-                break;
-      case 1  : errText = tr("Unbalanced parentheses");
-                break;
-      case 2  : errText = tr("No expression present");
-                break;
-      case 3  : errText = tr("Equals sign expected");
-                break;
-      case 4  : errText = tr("Not a variable");
-                break;
-      case 5  : errText = tr("Label table full");
-                break;
-      case 6  : errText = tr("Duplicate label");
-                break;
-      case 7  : errText = tr("Undefined label");
-                break;
-      case 8  : errText = tr("THEN expected");
-                break;
-      case 9  : errText = tr("TO expected");
-                break;
-      case 10 : errText = tr("Too many nested FOR loops");
-                break;
-      case 11 : errText = tr("NEXT without FOR");
-                break;
-      case 12 : errText = tr("Too many nested GOSUBs");
-                break;
-      case 13 : errText = tr("RETURN without GOSUBs");
-                break;
-      default : errText = tr("Unknown error");
+   case 0  : errText = tr("Syntax error");
+      break;
+   case 1  : errText = tr("Unbalanced parentheses");
+      break;
+   case 2  : errText = tr("No expression present");
+      break;
+   case 3  : errText = tr("Equals sign expected");
+      break;
+   case 4  : errText = tr("Not a variable");
+      break;
+   case 5  : errText = tr("Label table full");
+      break;
+   case 6  : errText = tr("Duplicate label");
+      break;
+   case 7  : errText = tr("Undefined label");
+      break;
+   case 8  : errText = tr("THEN expected");
+      break;
+   case 9  : errText = tr("TO expected");
+      break;
+   case 10 : errText = tr("Too many nested FOR loops");
+      break;
+   case 11 : errText = tr("NEXT without FOR");
+      break;
+   case 12 : errText = tr("Too many nested GOSUBs");
+      break;
+   case 13 : errText = tr("RETURN without GOSUBs");
+      break;
+   default : errText = tr("Unknown error");
    };
    QMessageBox::warning(this, tr("EdytorNc - compile basic"), errText);
 }
@@ -1939,200 +1940,315 @@ void MdiChild::macroShowBasicError(int error)
 
 void MdiChild::highlightCurrentLine()
 {
-    QList<QTextEdit::ExtraSelection> tmpSelections;
+   QList<QTextEdit::ExtraSelection> tmpSelections;
 
 
-    tmpSelections.clear();
-    extraSelections.clear();
-    //tmpSelections.append(extraSelections);
-    tmpSelections.append(findTextExtraSelections);
-    textEdit->setExtraSelections(tmpSelections);
+   tmpSelections.clear();
+   extraSelections.clear();
+   //tmpSelections.append(extraSelections);
+   tmpSelections.append(findTextExtraSelections);
+   textEdit->setExtraSelections(tmpSelections);
 
-    if(!textEdit->isReadOnly())
-    {
-       selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
-       selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-       selection.cursor = textEdit->textCursor();
-       selection.cursor.clearSelection();
-       extraSelections.append(selection);
-    }
+   if(!textEdit->isReadOnly())
+   {
+      selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
+      selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+      selection.cursor = textEdit->textCursor();
+      selection.cursor.clearSelection();
+      extraSelections.append(selection);
+   }
 
-    QColor lineColor = QColor(mdiWindowProperites.lineColor).darker(108);
-    selection.format.setBackground(lineColor);
+   QColor lineColor = QColor(mdiWindowProperites.lineColor).darker(108);
+   selection.format.setBackground(lineColor);
 
-    QTextDocument *doc = textEdit->document();
-    QTextCursor cursor = textEdit->textCursor();
-    QTextCursor beforeCursor = cursor;
+   QTextDocument *doc = textEdit->document();
+   QTextCursor cursor = textEdit->textCursor();
+   QTextCursor beforeCursor = cursor;
 
-    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-    QString brace = cursor.selectedText();
+   cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+   QString brace = cursor.selectedText();
 
-    beforeCursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-    QString beforeBrace = beforeCursor.selectedText();
+   beforeCursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+   QString beforeBrace = beforeCursor.selectedText();
 
-    if((brace != QLatin1String("{")) && (brace != QLatin1String("}")) && (brace != QLatin1String("[")) && (brace != QLatin1String("]")) && (brace != QLatin1String("("))
-       && (brace != QLatin1String(")")) && (brace != QLatin1String("\"")))
-    {
-       if((beforeBrace == QLatin1String("{")) || (beforeBrace == QLatin1String("}")) || (beforeBrace == QLatin1String("["))
-          || (beforeBrace == QLatin1String("]"))
-          || (beforeBrace == QLatin1String("("))
-          || (beforeBrace == QLatin1String(")"))
-          || (beforeBrace == QLatin1String("\"")))
-       {
-          cursor = beforeCursor;
-          brace = cursor.selectedText();
-       }
-       else
-       {
-          tmpSelections.append(extraSelections);
-          textEdit->setExtraSelections(tmpSelections);
-          return;
-       }
-    }
+   if((brace != QLatin1String("{")) && (brace != QLatin1String("}")) && (brace != QLatin1String("[")) && (brace != QLatin1String("]")) && (brace != QLatin1String("("))
+         && (brace != QLatin1String(")")) && (brace != QLatin1String("\"")))
+   {
+      if((beforeBrace == QLatin1String("{")) || (beforeBrace == QLatin1String("}")) || (beforeBrace == QLatin1String("["))
+            || (beforeBrace == QLatin1String("]"))
+            || (beforeBrace == QLatin1String("("))
+            || (beforeBrace == QLatin1String(")"))
+            || (beforeBrace == QLatin1String("\"")))
+      {
+         cursor = beforeCursor;
+         brace = cursor.selectedText();
+      }
+      else
+      {
+         tmpSelections.append(extraSelections);
+         textEdit->setExtraSelections(tmpSelections);
+         return;
+      }
+   }
 
-    QTextCharFormat format;
-    format.setForeground(Qt::red);
-    format.setFontWeight(QFont::Bold);
+   QTextCharFormat format;
+   format.setForeground(Qt::red);
+   format.setFontWeight(QFont::Bold);
 
-    QString openBrace;
-    QString closeBrace;
+   QString openBrace;
+   QString closeBrace;
 
-    if((brace == QLatin1String("{")) || (brace == QLatin1String("}"))) {
-        openBrace = QLatin1String("{");
-        closeBrace = QLatin1String("}");
-    }
+   if((brace == QLatin1String("{")) || (brace == QLatin1String("}"))) {
+      openBrace = QLatin1String("{");
+      closeBrace = QLatin1String("}");
+   }
 
-    if((brace == QLatin1String("[")) || (brace == QLatin1String("]"))) {
-        openBrace = QLatin1String("[");
-        closeBrace = QLatin1String("]");
-    }
+   if((brace == QLatin1String("[")) || (brace == QLatin1String("]"))) {
+      openBrace = QLatin1String("[");
+      closeBrace = QLatin1String("]");
+   }
 
-    if((brace == QLatin1String("(")) || (brace == QLatin1String(")"))) {
-        openBrace = QLatin1String("(");
-        closeBrace = QLatin1String(")");
-    }
+   if((brace == QLatin1String("(")) || (brace == QLatin1String(")"))) {
+      openBrace = QLatin1String("(");
+      closeBrace = QLatin1String(")");
+   }
 
-    if((brace == QLatin1String("\"")))
-    {
-       selection.cursor = cursor;
-       extraSelections.append(selection);
-       QTextCursor cursor1 = doc->find(QLatin1String("\""), cursor);
-       if(!cursor1.isNull() && (cursor1 != cursor))
-       {
-          selection.cursor = cursor1;
-          extraSelections.append(selection);
-       }
-       else
-       {
-          QTextCursor cursor2 = doc->find(QLatin1String("\""), cursor, QTextDocument::FindBackward);
-          if(!cursor2.isNull())
-          {
-             selection.cursor = cursor2;
-             extraSelections.append(selection);
-          };
-       }
-
-       tmpSelections.append(extraSelections);
-       textEdit->setExtraSelections(tmpSelections);
-       return;
-    }
-
-    if(brace == openBrace)
-    {
-        QTextCursor cursor1 = doc->find(closeBrace, cursor);
-        QTextCursor cursor2 = doc->find(openBrace, cursor);
-        if(cursor2.isNull())
-        {
-            selection.cursor = cursor;
+   if((brace == QLatin1String("\"")))
+   {
+      selection.cursor = cursor;
+      extraSelections.append(selection);
+      QTextCursor cursor1 = doc->find(QLatin1String("\""), cursor);
+      if(!cursor1.isNull() && (cursor1 != cursor))
+      {
+         selection.cursor = cursor1;
+         extraSelections.append(selection);
+      }
+      else
+      {
+         QTextCursor cursor2 = doc->find(QLatin1String("\""), cursor, QTextDocument::FindBackward);
+         if(!cursor2.isNull())
+         {
+            selection.cursor = cursor2;
             extraSelections.append(selection);
-            selection.cursor = cursor1;
-            extraSelections.append(selection);
-        }
-        else
-        {
+         };
+      }
 
-            while(cursor1.position() > cursor2.position())
-           {
-                cursor1 = doc->find(closeBrace, cursor1);
-                cursor2 = doc->find(openBrace, cursor2);
-                if(cursor2.isNull())
-                {
-                    break;
-                }
-            }
-            selection.cursor = cursor;
-            extraSelections.append(selection);
-            selection.cursor = cursor1;
-            extraSelections.append(selection);
-        }
-    } else {
-        if(brace == closeBrace)
-       {
-            QTextCursor cursor1 = doc->find(openBrace, cursor, QTextDocument::FindBackward);
-            QTextCursor cursor2 = doc->find(closeBrace, cursor, QTextDocument::FindBackward);
+      tmpSelections.append(extraSelections);
+      textEdit->setExtraSelections(tmpSelections);
+      return;
+   }
+
+   if(brace == openBrace)
+   {
+      QTextCursor cursor1 = doc->find(closeBrace, cursor);
+      QTextCursor cursor2 = doc->find(openBrace, cursor);
+      if(cursor2.isNull())
+      {
+         selection.cursor = cursor;
+         extraSelections.append(selection);
+         selection.cursor = cursor1;
+         extraSelections.append(selection);
+      }
+      else
+      {
+
+         while(cursor1.position() > cursor2.position())
+         {
+            cursor1 = doc->find(closeBrace, cursor1);
+            cursor2 = doc->find(openBrace, cursor2);
             if(cursor2.isNull())
             {
-                selection.cursor = cursor;
-                extraSelections.append(selection);
-                selection.cursor = cursor1;
-                extraSelections.append(selection);
+               break;
             }
-            else
+         }
+         selection.cursor = cursor;
+         extraSelections.append(selection);
+         selection.cursor = cursor1;
+         extraSelections.append(selection);
+      }
+   } else {
+      if(brace == closeBrace)
+      {
+         QTextCursor cursor1 = doc->find(openBrace, cursor, QTextDocument::FindBackward);
+         QTextCursor cursor2 = doc->find(closeBrace, cursor, QTextDocument::FindBackward);
+         if(cursor2.isNull())
+         {
+            selection.cursor = cursor;
+            extraSelections.append(selection);
+            selection.cursor = cursor1;
+            extraSelections.append(selection);
+         }
+         else
+         {
+            while(cursor1.position() < cursor2.position())
             {
-                while(cursor1.position() < cursor2.position())
+               cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward);
+               cursor2 = doc->find(closeBrace, cursor2, QTextDocument::FindBackward);
+               if(cursor2.isNull())
                {
-                    cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward);
-                    cursor2 = doc->find(closeBrace, cursor2, QTextDocument::FindBackward);
-                    if(cursor2.isNull())
-                    {
-                        break;
-                    }
-                }
-                selection.cursor = cursor;
-                extraSelections.append(selection);
-                selection.cursor = cursor1;
-                extraSelections.append(selection);
+                  break;
+               }
             }
-        }
-    }
-    tmpSelections.append(extraSelections);
-    textEdit->setExtraSelections(tmpSelections);
+            selection.cursor = cursor;
+            extraSelections.append(selection);
+            selection.cursor = cursor1;
+            extraSelections.append(selection);
+         }
+      }
+   }
+   tmpSelections.append(extraSelections);
+   textEdit->setExtraSelections(tmpSelections);
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags options)
- {
-    QList<QTextEdit::ExtraSelection> tmpSelections;
+void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags options, bool ignoreComments)
+{
+   QList<QTextEdit::ExtraSelection> tmpSelections;
+   bool found, inComment, isRegExp, isRegExpMinMax, ok;
+   QString cur_line, exp, sval;
+   int commentPos, id, cur_line_column;
+   int pos;
+   QRegExp regExp;
+   double min, max;
 
 
-    tmpSelections.clear();
-    findTextExtraSelections.clear();
-    tmpSelections.append(extraSelections);
-    QColor lineColor = QColor(Qt::yellow).lighter(155);
-    selection.format.setBackground(lineColor);
+   inComment = false;
+   found = false;
+   isRegExp = false;
+   isRegExpMinMax = false;
+   max = 0;
+   min = 0;
 
-    QTextDocument *doc = textEdit->document();
-    QTextCursor cursor = textEdit->textCursor();
-    cursor.setPosition(0);
 
-    do
-    {
-       cursor = doc->find(searchString, cursor, options);
-       if(!cursor.isNull())
-       {
-          selection.cursor = cursor;
-          findTextExtraSelections.append(selection);
+   tmpSelections.clear();
+   findTextExtraSelections.clear();
+   tmpSelections.append(extraSelections);
+   QColor lineColor = QColor(Qt::yellow).lighter(155);
+   selection.format.setBackground(lineColor);
 
-       };
-    } while(!cursor.isNull());
+   QTextDocument *doc = textEdit->document();
+   QTextCursor cursor = textEdit->textCursor();
+   cursor.setPosition(0);
 
-    tmpSelections.append(findTextExtraSelections);
-    textEdit->setExtraSelections(tmpSelections);
+   exp = searchString;
 
- }
+   if(exp.contains(QRegExp("\\$\\$")))
+   {
+      exp.remove("$$");
+      isRegExp = true;
+   }
+   else
+   {
+      pos = 0;
+      regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+      pos = regExp.indexIn(exp, 0);
+      if(pos >= 0)
+      {
+         isRegExp = true;
+         isRegExpMinMax = true;
+         cur_line = exp.mid(pos, regExp.matchedLength());
+         exp.remove(pos, regExp.matchedLength());
+
+         cur_line.remove("$");
+         max = cur_line.toDouble(&ok);
+         if(!ok)
+            max = 0;
+
+         pos = regExp.indexIn(exp, 0);
+         if(pos > 0)
+         {
+            cur_line = exp.mid(pos, regExp.matchedLength());
+            exp.remove(pos, regExp.matchedLength());
+            cur_line.remove("$");
+            min = cur_line.toDouble(&ok);
+            if(!ok)
+               min = 0;
+         };
+      };
+   };
+
+   cursor.setPosition(0);
+   do
+   {
+      if(isRegExp)
+      {
+         if(exp.isEmpty())
+            return;
+
+         regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(exp));
+
+         if(options & QTextDocument::FindCaseSensitively)
+            regExp.setCaseSensitivity(Qt::CaseSensitive);
+         else
+            regExp.setCaseSensitivity(Qt::CaseInsensitive);
+
+         cursor = doc->find(regExp, cursor, options);
+      }
+      else
+         cursor = doc->find(searchString, cursor, options);
+
+      if(!cursor.isNull())
+      {
+         cur_line = cursor.block().text();
+         cur_line_column = cursor.columnNumber();
+
+         if(ignoreComments)
+         {
+            id = getHighligthMode();
+            if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
+               commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+            else
+            {
+               if((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS))
+                  commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+               else
+               {
+                  commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+                  if(commentPos > cur_line_column)
+                     commentPos = -1;
+
+                  if(commentPos < 0)
+                     commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+               };
+            };
+
+            if(commentPos < 0)
+               commentPos = cur_line_column + 1;
+
+            inComment = (commentPos < cur_line_column);
+         }
+         else
+            inComment = false;
+
+         if(!inComment)
+         {
+            if(isRegExpMinMax)
+            {
+               sval = cursor.selectedText();
+               double val = QString(sval).remove(exp).toDouble(&ok);
+
+               if((val >= min) && (val <= max))
+               {
+                  selection.cursor = cursor;
+                  findTextExtraSelections.append(selection);
+               };
+            }
+            else
+            {
+               selection.cursor = cursor;
+               findTextExtraSelections.append(selection);
+            };
+         };
+
+      };
+   }while(!cursor.isNull());
+
+   tmpSelections.append(findTextExtraSelections);
+   textEdit->setExtraSelections(tmpSelections);
+}
 
 //**************************************************************************************************
 //
@@ -2168,7 +2284,7 @@ void MdiChild::detectHighligthMode()
       return;
 
    if(highlighter == NULL)
-     return;
+      return;
 
    if(mdiWindowProperites.hColors.highlightMode == MODE_AUTO)
    { 
@@ -2206,37 +2322,37 @@ int MdiChild::getHighligthMode()
 void MdiChild::doDiff()
 {
 
-//   setUpdatesEnabled(false);
-//
-////   if(diffSplitter > 0)
-////      return;
-////
-////   diffSplitter = new QSplitter(Qt::Horizontal, this);
-////   diffSplitter->setBackgroundRole(QPalette::Base);
-//
-//   //splitterV->setEnabled(true);
-//
-//   diffApp = new KDiff3App(splitterV, "DiffApp");
-//
-//   diffApp->completeInit(curFile, QFileInfo(curFile).canonicalPath());
-//
-////   QList<int> list;
-////   list << 200 << 200;
-////   splitterV->setSizes(list);
-////   splitterV->adjustSize();
-//
-//   //diffSplitter->addWidget(splitter);
-//
-//   //diffSplitter->show();
-//
-//
-//   //diffApp->resize(width()/2, height());
-//   //diffApp->show();
-//   //diffApp->adjustSize();
-//   //diffApp->resize(800,600);
-//   //splitter->adjustSize();
-//
-//   setUpdatesEnabled(true);
+   //   setUpdatesEnabled(false);
+   //
+   ////   if(diffSplitter > 0)
+   ////      return;
+   ////
+   ////   diffSplitter = new QSplitter(Qt::Horizontal, this);
+   ////   diffSplitter->setBackgroundRole(QPalette::Base);
+   //
+   //   //splitterV->setEnabled(true);
+   //
+   //   diffApp = new KDiff3App(splitterV, "DiffApp");
+   //
+   //   diffApp->completeInit(curFile, QFileInfo(curFile).canonicalPath());
+   //
+   ////   QList<int> list;
+   ////   list << 200 << 200;
+   ////   splitterV->setSizes(list);
+   ////   splitterV->adjustSize();
+   //
+   //   //diffSplitter->addWidget(splitter);
+   //
+   //   //diffSplitter->show();
+   //
+   //
+   //   //diffApp->resize(width()/2, height());
+   //   //diffApp->show();
+   //   //diffApp->adjustSize();
+   //   //diffApp->resize(800,600);
+   //   //splitter->adjustSize();
+   //
+   //   setUpdatesEnabled(true);
 }
 
 //**************************************************************************************************
@@ -2252,30 +2368,186 @@ QString MdiChild::getCurrentFileInfo()
 //
 //**************************************************************************************************
 
-bool MdiChild::findText(const QString &exp, QTextDocument::FindFlags options, bool ignoreComments)
+bool MdiChild::findTextMatched(QString pattern, QString text)
 {
-   bool found = false;
+   bool matched, isRegExp, isRegExpMinMax, ok;
+   int pos;
+   QString str;
+   QRegExp regExp;
+   double min, max;
+
+   matched = false;
+   isRegExp = false;
+   isRegExpMinMax = false;
+   max = 0;
+   min = 0;
+
+   if(pattern.contains(QRegExp("\\$\\$")))
+   {
+      pattern.remove("$$");
+      isRegExp = true;
+   }
+   else
+   {
+      pos = 0;
+      regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+      pos = regExp.indexIn(pattern, 0);
+      if(pos >= 0)
+      {
+         isRegExp = true;
+         isRegExpMinMax = true;
+         str = pattern.mid(pos, regExp.matchedLength());
+         pattern.remove(pos, regExp.matchedLength());
+
+         str.remove("$");
+         max = str.toDouble(&ok);
+         if(!ok)
+            max = 0;
+
+         pos = regExp.indexIn(pattern, 0);
+         if(pos > 0)
+         {
+            str = pattern.mid(pos, regExp.matchedLength());
+            pattern.remove(pos, regExp.matchedLength());
+            str.remove("$");
+            min = str.toDouble(&ok);
+            if(!ok)
+               min = 0;
+         };
+      };
+   };
+
+   if(isRegExp)
+   {
+      regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(pattern));
+
+      if(text.contains(regExp))
+      {
+         if(isRegExpMinMax)
+         {
+            double val = QString(text).remove(pattern).toDouble(&ok);
+
+            if(((val >= min) && (val <= max)))
+            {
+               matched = true;
+            };
+         }
+         else
+         {
+            matched = true;
+         };
+      };
+   }
+   else
+   {
+      matched = (pattern == text);
+   };
+
+   return matched;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, bool ignoreComments)
+{
+   bool found, inComment, isRegExp, isRegExpMinMax, ok;
    QTextCursor cursor;
-   bool inComment = false;
-   QString cur_line;
+   QString cur_line, exp, sval;
    int cur_line_column;
    int commentPos, id;
+   int pos;
+   QRegExp regExp;
+   double min, max;
+
+
+   inComment = false;
+   found = false;
+   isRegExp = false;
+   isRegExpMinMax = false;
+   max = 0;
+   min = 0;
+
+   exp = text;
+
+   if(exp.contains(QRegExp("\\$\\$")))
+   {
+      exp.remove("$$");
+      isRegExp = true;
+   }
+   else
+   {
+      pos = 0;
+      regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+      pos = regExp.indexIn(exp, 0);
+      if(pos >= 0)
+      {
+         isRegExp = true;
+         isRegExpMinMax = true;
+         cur_line = exp.mid(pos, regExp.matchedLength());
+         exp.remove(pos, regExp.matchedLength());
+
+         cur_line.remove("$");
+         max = cur_line.toDouble(&ok);
+         if(!ok)
+            max = 0;
+
+         pos = regExp.indexIn(exp, 0);
+         if(pos > 0)
+         {
+            cur_line = exp.mid(pos, regExp.matchedLength());
+            exp.remove(pos, regExp.matchedLength());
+            cur_line.remove("$");
+            min = cur_line.toDouble(&ok);
+            if(!ok)
+               min = 0;
+         };
+      };
+   };
 
    textEdit->setUpdatesEnabled(false);
 
+   if(exp.isEmpty())
+      return false;
+
+   cursor = textEdit->textCursor();
    do
    {
-      found = textEdit->find(exp, options);
+      if(isRegExp)
+      {
+         regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(exp));
+
+         if(options & QTextDocument::FindCaseSensitively)
+            regExp.setCaseSensitivity(Qt::CaseSensitive);
+         else
+            regExp.setCaseSensitivity(Qt::CaseInsensitive);
+
+         cursor = textEdit->document()->find(regExp, cursor, options);
+
+         found = !cursor.isNull();
+         if(found)
+         {
+            if(!isRegExpMinMax)
+               textEdit->setTextCursor(cursor);
+         }
+         else
+         {
+            break;
+         }
+      }
+      else
+      {
+         found = textEdit->find(exp, options);
+         cursor = textEdit->textCursor();
+      };
+
+      cur_line = cursor.block().text();
+      cur_line_column = cursor.columnNumber();     
 
       if(found && ignoreComments)
       {
-         cursor = textEdit->textCursor();
-         cur_line = cursor.block().text();
-
-         cur_line_column = cursor.columnNumber();
-
          id = getHighligthMode();
-
          if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
             commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
          else
@@ -2301,13 +2573,21 @@ bool MdiChild::findText(const QString &exp, QTextDocument::FindFlags options, bo
       else
          inComment = false;
 
-   }while(inComment);
+      if((isRegExpMinMax && found) && !inComment)
+      {
+         sval = cursor.selectedText();
+         double val = QString(sval).remove(exp).toDouble(&ok);
 
-   if(inComment)
-   {
-      textEdit->textCursor().clearSelection();
-      found = false;
-   };
+         if(((val >= min) && (val <= max)))
+         {
+            inComment = false;
+            textEdit->setTextCursor(cursor);
+         }
+         else
+            inComment = true;
+      };
+
+   }while(inComment);
 
    textEdit->setUpdatesEnabled(true);
    return found;
@@ -2370,21 +2650,21 @@ QString MdiChild::guessFileName()
 
       expression.setPattern(FILENAME_FANUC1);
       pos = text.indexOf(expression);
+      if(pos == -1) {
+          expression.setPattern(FILENAME_FANUC2);
+          pos = text.indexOf(expression);
+      }
       if(pos >= 0)
       {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QRegExp("[%\\s]{1,}:"));
+         fileName = text.mid(pos, text.indexOf("\n", pos)-pos);
+         fileName.replace('('," ");
+         fileName.replace(')'," ");
+         if(fileName.at(0)!='O')
+             fileName[0]='O';
+         if(fileName.at(0)=='O' && fileName.at(1)=='O')
+             fileName.remove(0,1);
          break;
-      };
-
-      expression.setPattern(FILENAME_FANUC2);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QRegExp("[%\\s]{1,}O"));
-         break;
-      };
+      }
 
       expression.setPattern(FILENAME_HEID1);
       pos = text.indexOf(expression);
@@ -2409,10 +2689,14 @@ QString MdiChild::guessFileName()
       fileName = "";
       break;
    };
+   
+   fileName = fileName.simplified();
+   fileName.append(mdiWindowProperites.saveExtension);
+   fileName.prepend(mdiWindowProperites.saveDirectory + "/");
 
    textEdit->setTextCursor(cursor);
 
-   return fileName.simplified();
+   return fileName;
 }
 
 //**************************************************************************************************
@@ -2451,7 +2735,7 @@ QStringList MdiChild::splitFile()
             index += expression.matchedLength();
          }
          else
-           index = 0;
+            index = 0;
 
       }while(index > 0);
    };

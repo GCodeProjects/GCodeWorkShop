@@ -138,7 +138,7 @@ class DiffTextWindowFrame : public QWidget
 {
    Q_OBJECT
 public:
-   DiffTextWindowFrame( QWidget* pParent, OptionDialog* pOptionDialog, int winIdx );
+   DiffTextWindowFrame( QWidget* pParent, OptionDialog* pOptionDialog, int winIdx, QStringList extensions);
    ~DiffTextWindowFrame();
    DiffTextWindow* getDiffTextWindow();
    void init();
@@ -157,6 +157,7 @@ private slots:
 
 private:
    DiffTextWindowFrameData* d;
+   QStringList m_extensions;
 
 };
 

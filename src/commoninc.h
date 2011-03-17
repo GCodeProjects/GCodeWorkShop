@@ -24,6 +24,7 @@
 #define COMMONINC_H
 
 #include<QString>
+#include<QRegExp>
 
 #define TABBED_MODE       0x01
 #define SHOW_FILENAME     0x02
@@ -84,8 +85,10 @@ struct _editor_properites
    bool clearUnderlineHistory;
    bool editorToolTips;
    bool defaultReadOnly;
+   QStringList extensions;
+   QString saveExtension;
+   QString saveDirectory;
 };
-
 
 
 

@@ -23,14 +23,9 @@
 #include "dialogs.h"
 
 
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
 QString removeZeros(QString str)
 {
@@ -38,7 +33,7 @@ QString removeZeros(QString str)
    int pos;
 
    pos = 1;
-   exp.setPattern("[\\d]+[.][-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$");
+   exp.setPattern("[\\d]{0,}[-.]{0,1}[-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$"); //[\\d]+[.][-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$"
 
    while((pos = str.indexOf(exp, pos)) > 0)
    {
@@ -47,8 +42,13 @@ QString removeZeros(QString str)
       else
         pos += exp.matchedLength();
    };
+
+   if(str == "-0.")
+      str = "0.";
+
    return(str);
 }
+
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================
@@ -1748,8 +1748,8 @@ void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color
     paint->drawEllipse(QPointF(x, -y), d, d);
 
 
-    //v = paint->viewport();
-    //c = qMin(v.width(), v.height());
+    v = paint->viewport();
+        c = qMin(v.width(), v.height());
 
     paint->restore();
     paint->end();
@@ -2112,11 +2112,11 @@ void BHCDialog::computeButtonClicked()
          y = yCenter + (dia * sin((M_PI/180) * ang));
 
 
-         QTableWidgetItem *xItem = new QTableWidgetItem(QString("%1").arg(x, 0, 'f', 3));
+         QTableWidgetItem *xItem = new QTableWidgetItem(removeZeros(QString("%1").arg(x, 0, 'f', 3)));
          //xItem->setFlags(Qt::ItemIsEnabled);
          xItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-         QTableWidgetItem *yItem = new QTableWidgetItem(QString("%1").arg(y, 0, 'f', 3));
+         QTableWidgetItem *yItem = new QTableWidgetItem(removeZeros(QString("%1").arg(y, 0, 'f', 3)));
          yItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
          //yItem->setFlags(Qt::ItemIsEnabled);
 
@@ -2807,6 +2807,13 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    clearUnderlinecheckBox->setChecked(editProp.clearUnderlineHistory);
    editorToolTipsCheckBox->setChecked(editProp.editorToolTips);
 
+   QStringListIterator extIterator(editProp.extensions);
+   while (extIterator.hasNext())
+       lstExtensions->addItem(extIterator.next().toLocal8Bit().constData());
+
+   edtSaveExtension->setText(editProp.saveExtension);
+   edtSaveDirectory->setText(editProp.saveDirectory);
+
 
    connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
@@ -2969,6 +2976,15 @@ _editor_properites SetupDialog::getSettings()
    palette.color(curLineColorButton->foregroundRole()).getRgb(&r, &g, &b);
    editProp.lineColor = (r << 16) + (g << 8) + b;
 
+   editProp.extensions.clear();
+   for(int row = 0; row < lstExtensions->count(); row++) {
+       QListWidgetItem *item = lstExtensions->item(row);
+       editProp.extensions.append(item->text());
+   }
+
+   editProp.saveExtension = edtSaveExtension->text();
+   editProp.saveDirectory = edtSaveDirectory->text();
+
    return(editProp);
 }
 
@@ -3078,52 +3094,30 @@ void SetupDialog::setDefaultProp()
    fontLabel->setText(QString(tr("Current font : <b>\"%1\", %2 pt.<\b>")
                       .arg(editProp.fontName).arg(editProp.fontSize)));
    fontLabel->setFont(QFont(editProp.fontName, editProp.fontSize));
+
+   lstExtensions->clear();
+   lstExtensions->addItem("*.nc");
+
+   edtSaveExtension->setText(".nc");
 }
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
+void SetupDialog::on_btnAddExtension_clicked()
+{
+    if(edtExtension->text()=="")
+        return;
+    lstExtensions->addItem(edtExtension->text());
+    edtExtension->setText("");
+}
 
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+void SetupDialog::on_btnDeleteExtension_clicked()
+{
+    qDeleteAll(lstExtensions->selectedItems());
+}
 
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+void SetupDialog::on_btnBrowseDirectory_clicked()
+{
+    edtSaveDirectory->setText(QFileDialog::getExistingDirectory(
+                          this,
+                          tr("Select default save directory"),
+                          edtSaveDirectory->text()));
+}

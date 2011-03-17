@@ -26,6 +26,12 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
+//#include <klocale.h>
+//#include <ktemporaryfile.h>
+//#include <kio/global.h>
+//#include <kmessagebox.h>
+//#include <kio/jobuidelegate.h>
+//#include <kio/copyjob.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -625,6 +631,7 @@ bool FileAccessJobHandler::stat( int detail, bool bWantToWrite )
 //   g_pProgressDialog->enterEventLoop( pStatJob, i18n("Getting file status: %1",m_pFileAccess->prettyAbsPath()) );
 //
 //   return m_bSuccess;
+    return true;
 }
 
 
@@ -647,6 +654,7 @@ bool FileAccessJobHandler::mkDir( const QString& dirName )
 //      g_pProgressDialog->enterEventLoop( pJob, i18n("Making directory: %1", dirName) );
 //      return m_bSuccess;
 //   }
+    return true;
 }
 
 bool FileAccessJobHandler::rmDir( const QString& dirName )
@@ -667,6 +675,7 @@ bool FileAccessJobHandler::rmDir( const QString& dirName )
 //      g_pProgressDialog->enterEventLoop(pJob, i18n("Removing directory: %1",dirName));
 //      return m_bSuccess;
 //   }
+    return true;
 }
 
 bool FileAccessJobHandler::removeFile( const QString& fileName )
@@ -682,6 +691,7 @@ bool FileAccessJobHandler::removeFile( const QString& fileName )
 //      g_pProgressDialog->enterEventLoop( pJob, i18n("Removing file: %1",fileName) );
 //      return m_bSuccess;
 //   }
+    return true;
 }
 
 bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& linkLocation )
@@ -698,6 +708,7 @@ bool FileAccessJobHandler::symLink( const QString& linkTarget, const QString& li
 //         i18n("Creating symbolic link: %1 -> %2",linkLocation,linkTarget) );
 //      return m_bSuccess;
 //   }
+    return true;
 }
 
 bool FileAccessJobHandler::rename( const QString& dest )
@@ -725,6 +736,7 @@ bool FileAccessJobHandler::rename( const QString& dest )
 //         i18n("Renaming file: %1 -> %2",m_pFileAccess->prettyAbsPath(),dest) );
 //      return m_bSuccess;
 //   }
+    return true;
 }
 
 

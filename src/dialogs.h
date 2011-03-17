@@ -41,6 +41,15 @@
 #include "ui_setupdialog.h"
 
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=========================================================================================
+
+=========================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+QString removeZeros(QString str);
+
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================
@@ -415,6 +424,9 @@ class SetupDialog : public QDialog, private Ui::SetupDialog
 
 
   private slots:
+    void on_btnBrowseDirectory_clicked();
+    void on_btnDeleteExtension_clicked();
+    void on_btnAddExtension_clicked();
     void changeFont();
     void changeColor(QAbstractButton *button);
     void setDefaultProp();

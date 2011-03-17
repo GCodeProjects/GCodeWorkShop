@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2010 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2010 by Artur KozioÅ                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -193,33 +193,15 @@ void EdytorNc::open()
     QMdiSubWindow *existing;
 
     existing = 0;
-
-#ifdef Q_OS_LINUX
-    QString filters = tr("CNC programs files *.nc (*.nc);;"
-                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
-                         "Text files *.txt (*.txt);; All files (*.* *)");
-#endif
-
-#ifdef Q_OS_WIN32
-  QString filters = tr("CNC programs files (*.nc);;"
-                       "CNC programs files (*.nc *.min *.anc *.cnc);;"
-                       "Text files (*.txt);; All files (*.* *)");
-#endif
-
-#ifdef Q_OS_MACX
-  QString filters = tr("CNC programs files (*.nc);;"
-                       "CNC programs files (*.nc *.min *.anc *.cnc);;"
-                       "Text files (*.txt);; All files (*.* *)");
-#endif
-
-
-
+    QString *filters = getFilters(defaultMdiWindowProperites.extensions);
 
     QStringList files = QFileDialog::getOpenFileNames(
                          this,
                          tr("Select one or more files to open"),
                          lastDir.absolutePath(),
-                         filters, &openFileFilter);
+                         *filters, 0);
+
+    delete filters;
 
 
     QStringList list = files;
@@ -281,17 +263,15 @@ void EdytorNc::openExample()
 
 
 
-   QString filters = tr("CNC programs files *.nc (*.nc);;"
-                        "All files (*.* *)");
-
-
-
+   QString *filters = getFilters(defaultMdiWindowProperites.extensions);
 
    QStringList files = QFileDialog::getOpenFileNames(
                         this,
                         tr("Select one or more files to open"),
                         dir,
-                        filters, &openFileFilter);
+                        *filters, 0);
+
+   delete filters;
 
 
    QStringList list = files;
@@ -446,7 +426,7 @@ void EdytorNc::findInFl()
       if(activeMdiChild())
          findFiles->setDir(QFileInfo(activeMdiChild()->currentFile()).canonicalPath());
 
-      connect(findFiles, SIGNAL(fileClicket(QString)), this, SLOT(loadFoundedFile(QString)));
+      connect(findFiles, SIGNAL(fileClicked(QString)), this, SLOT(loadFoundedFile(QString)));
    }
    else
      if(!findFilesAct->isChecked())
@@ -477,10 +457,6 @@ bool EdytorNc::findNext()
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
-//      activeMdiChild()->highlightFindText(findEdit->text(),
-//                                          ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-//                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
-
       found = activeMdiChild()->findText(findEdit->text(),
                                          ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
@@ -535,10 +511,6 @@ bool EdytorNc::findPrevious()
 
    if(!findEdit->text().isEmpty() && hasMdiChild)
    {
-//      activeMdiChild()->highlightFindText(findEdit->text(),
-//                                          ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-//                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
-
       found = activeMdiChild()->findText(findEdit->text(), QTextDocument::FindBackward |
                                          ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
@@ -583,6 +555,12 @@ bool EdytorNc::findPrevious()
 
 void EdytorNc::replaceNext()
 {
+   QString replacedText, foundText;
+   double val, val1;
+   bool ok;
+   QRegExp regExp;
+   QChar op;
+
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
 
@@ -592,10 +570,10 @@ void EdytorNc::replaceNext()
 
    if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
-      if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
-        found = true;
+      if(activeMdiChild()->findTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
+         found = true;
       else
-        found = findNext();
+         found = findNext();
 
       if(found)
       {
@@ -608,7 +586,36 @@ void EdytorNc::replaceNext()
             format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
             cr.setCharFormat(format);
          };
-         cr.insertText(replaceEdit->text());
+
+         replacedText = replaceEdit->text();
+
+         regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[0-9.]{1,}"));
+         if(replacedText.contains(regExp))
+         {
+            replacedText.remove("$$");
+            op = replacedText.at(0);
+            replacedText.remove(0, 1);
+            val = replacedText.toDouble(&ok);
+
+            foundText = cr.selectedText();
+            foundText.remove(QRegExp("[A-Za-z]{1,}"));
+            val1 = foundText.toDouble(&ok);
+            replacedText = cr.selectedText();
+            replacedText.remove(foundText);
+
+            if(op == '+')
+               val = val1 + val;
+            if(op == '-')
+               val = val1 - val;
+            if(op == '*')
+               val = val1 * val;
+            if(op == '/')
+               val = val1 / val;
+
+            replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+         };
+
+         cr.insertText(replacedText);
          cr.endEditBlock();
          activeMdiChild()->textEdit->setTextCursor(cr);
          findNext();
@@ -626,6 +633,12 @@ void EdytorNc::replaceNext()
 
 void EdytorNc::replacePrevious()
 {
+   QString replacedText, foundText;
+   double val, val1;
+   bool ok;
+   QRegExp regExp;
+   QChar op;
+
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
 
@@ -635,13 +648,13 @@ void EdytorNc::replacePrevious()
 
    if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
-      if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
-        found = true;
+      if(activeMdiChild()->findTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
+         found = true;
       else
-        found = findPrevious();
+         found = findPrevious();
 
       if(found)
-       {
+      {
          QTextCursor cr = activeMdiChild()->textEdit->textCursor();
          cr.beginEditBlock();
          if(defaultMdiWindowProperites.underlineChanges)
@@ -651,7 +664,36 @@ void EdytorNc::replacePrevious()
             format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
             cr.setCharFormat(format);
          };
-         cr.insertText(replaceEdit->text());
+
+         replacedText = replaceEdit->text();
+
+         regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[0-9.]{1,}"));
+         if(replacedText.contains(regExp))
+         {
+            replacedText.remove("$$");
+            op = replacedText.at(0);
+            replacedText.remove(0, 1);
+            val = replacedText.toDouble(&ok);
+
+            foundText = cr.selectedText();
+            foundText.remove(QRegExp("[A-Za-z]{1,}"));
+            val1 = foundText.toDouble(&ok);
+            replacedText = cr.selectedText();
+            replacedText.remove(foundText);
+
+            if(op == '+')
+               val = val1 + val;
+            if(op == '-')
+               val = val1 - val;
+            if(op == '*')
+               val = val1 * val;
+            if(op == '/')
+               val = val1 / val;
+
+            replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+         };
+
+         cr.insertText(replacedText);
          cr.endEditBlock();
          activeMdiChild()->textEdit->setTextCursor(cr);
          findPrevious();
@@ -831,7 +873,7 @@ void EdytorNc::doDiffL()
 
    if(diffApp == NULL)
    {
-      diffApp = new KDiff3App(splitter, "DiffApp");
+      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
    };
 
    if(diffApp != NULL)
@@ -865,7 +907,7 @@ void EdytorNc::doDiffR()
 
    if(diffApp == NULL)
    {
-      diffApp = new KDiff3App(splitter, "DiffApp");
+      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
    };
 
    if(diffApp != NULL)
@@ -896,7 +938,7 @@ void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
 {
    if(diffApp == NULL)
    {
-      diffApp = new KDiff3App(splitter, "DiffApp");
+      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
    };
 
    if(diffApp != NULL)
@@ -924,7 +966,7 @@ void EdytorNc::diffEditorFile()
 
    if(diffApp == NULL)
    {
-      diffApp = new KDiff3App(splitter, "DiffApp");
+      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
    };
 
    if(diffApp != NULL)
@@ -978,7 +1020,7 @@ void EdytorNc::doDiff()
 
    if(diffApp == NULL)
    {
-      diffApp = new KDiff3App(splitter, "DiffApp");
+      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
 
       if(activeMdiChild())
          fileName = activeMdiChild()->currentFile();
@@ -1271,12 +1313,13 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2011.01.27 BETA" +
+                                   "2011.03.17 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2011 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
                             trUtf8("<br />Czech translation thanks to Pavel Fric") +
-                            trUtf8("<br />OS X patch thanks to Janne Mäntyharju") +
+                            trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
+                            trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
                             trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                             trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                             trUtf8("<P>") +
@@ -1357,7 +1400,7 @@ void EdytorNc::updateMenus()
       if(findToolBar != NULL)
         activeMdiChild()->highlightFindText(findEdit->text(),
                                            ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
       else
         activeMdiChild()->highlightFindText("");
    };
@@ -2029,7 +2072,9 @@ void EdytorNc::readSettings()
 
     lastDir = settings.value("LastDir", QString(getenv("HOME"))).toString();
 
-    openFileFilter = settings.value("FileOpenFilter", "*.nc").toString();
+    defaultMdiWindowProperites.extensions = settings.value("Extensions", "*.nc").toStringList();
+    defaultMdiWindowProperites.saveExtension = settings.value("SaveExtension", ".nc").toString();
+    defaultMdiWindowProperites.saveDirectory = settings.value("SaveDirectory", "").toString();
 
     defaultMdiWindowProperites.dotAdr = settings.value("DotAddress", "XYZB").toString();
     defaultMdiWindowProperites.dotAftrerCount = settings.value("DotAfterCount", 1000).toInt();
@@ -2152,7 +2197,9 @@ void EdytorNc::writeSettings()
 
     settings.setValue("LastDir", lastDir.path());
     
-    settings.setValue("FileOpenFilter", openFileFilter);
+    settings.setValue("Extensions",defaultMdiWindowProperites.extensions);
+    settings.setValue("SaveExtension",defaultMdiWindowProperites.saveExtension);
+    settings.setValue("SaveDirectory",defaultMdiWindowProperites.saveDirectory);
 
     settings.setValue("DotAddress", defaultMdiWindowProperites.dotAdr);
     settings.setValue("DotAfterCount", defaultMdiWindowProperites.dotAftrerCount);
@@ -2466,6 +2513,9 @@ void EdytorNc::createFindToolBar()
       findLabel = new QLabel(tr("Find:"));
       findToolBar->addWidget(findLabel);
       findEdit = new QLineEdit();
+      findEdit->setToolTip(tr("<b>Letter$$</b> - matches any number.<p><b>Letter$max$min</b> - matches number &lt;=max &gt;=min.</p>" \
+                              "<p><b>$min</b> can be ommited, then equal 0</p>" \
+                              "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
       findEdit->installEventFilter(this);
       findToolBar->addWidget(findEdit);
       findToolBar->addAction(findPreviousAct);
@@ -2475,6 +2525,8 @@ void EdytorNc::createFindToolBar()
       replaceLabel = new QLabel(tr("Replace with:"));
       findToolBar->addWidget(replaceLabel);
       replaceEdit = new QLineEdit();
+      replaceEdit->setToolTip(tr("<b>$$OperatorNumber</b> - do some math on replaced numbers. Operator +-*/" \
+                                 "<p>$$+1 - will add 1 to replaced numbers</p>"));
       replaceEdit->installEventFilter(this);
       findToolBar->addWidget(replaceEdit);
       findToolBar->addAction(replacePreviousAct);
@@ -2536,7 +2588,7 @@ void EdytorNc::createFindToolBar()
 
    activeMdiChild()->highlightFindText(findEdit->text(),
                                       ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                      (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))));
+                                      (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
 
    findEdit->selectAll();
 }
@@ -2573,11 +2625,20 @@ void EdytorNc::findTextChanged()
    QTextCursor cursor;
    int pos;
 
+
+   if(findEdit->text().contains(QRegExp("\\$\\$")) || findEdit->text().contains(QRegExp("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}")))
+   {
+      replaceAllAct->setEnabled(false);
+   }
+   else
+      replaceAllAct->setEnabled(true);
+
+
    if(hasMdiChild)
    {
+      cursor = activeMdiChild()->textEdit->textCursor();
       if(!findEdit->text().isEmpty())
       {
-         cursor = activeMdiChild()->textEdit->textCursor();
          pos = cursor.position() - findEdit->text().size();
          if(pos < 0)
            pos = 0;
@@ -2891,6 +2952,8 @@ void EdytorNc::loadConfig()
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
     deleteControlChars = settings.value("DeleteControlChars", true).toBool();
+    removeEmptyLines = settings.value("RemoveEmptyLines", true).toBool();
+    removeBefore = settings.value("RemoveBefore", false).toBool();
 
     sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
     doNotShowProgressInEditor = settings.value("DoNotShowProgressInEditor", false).toBool();
@@ -2981,7 +3044,10 @@ void EdytorNc::sendButtonClicked()
    activeWindow->textEdit->setTextCursor(cursor);
 
    tx = sendAtBegining;
-   tx.append(activeWindow->textEdit->toPlainText());
+   if(removeBefore)
+       tx.append(activeWindow->textEdit->toPlainText().mid(activeWindow->textEdit->toPlainText().indexOf("%")));
+   else
+       tx.append(activeWindow->textEdit->toPlainText());
    tx.append(sendAtEnd);
    if(!tx.contains("\r\n"))
       tx.replace("\n", "\r\n");
@@ -3308,6 +3374,8 @@ void EdytorNc::receiveButtonClicked()
      }
      else
      {
+        if (removeEmptyLines)
+            activeWindow->doRemoveEmptyLines();
         activeWindow->setHighligthMode(MODE_AUTO);
         if(defaultMdiWindowProperites.defaultReadOnly)
            activeWindow->textEdit->isReadOnly();
@@ -4203,23 +4271,13 @@ void EdytorNc::projectAdd()
                         "Text files (*.txt)");
 #endif
 
-#ifdef Q_OS_MACX
-   QString filters = tr("All files (*.* *);;"
-                        "CNC programs files *.nc (*.nc);;"
-                        "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
-                        "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
-                        "Drawings *.dwg *.dxf (*.dwg *.dxf);;"
-                        "Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;"
-                        "Text files *.txt (*.txt)");
-#endif
-
 
 
    QStringList files = QFileDialog::getOpenFileNames(
                         this,
                         tr("Add files to project"),
                         lastDir.absolutePath(),
-                        filters, &openFileFilter);
+                        filters, 0);
 
 
    QStringList list = files;
@@ -4463,10 +4521,6 @@ QString EdytorNc::projectSelectName()
    QString filters = tr("EdytorNC project file (*.ncp)");
 #endif
 
-#ifdef Q_OS_MACX
-   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
-#endif
-
    QString file = QFileDialog::getSaveFileName(
                          this,
                          tr("Select the project name and location..."),
@@ -4493,10 +4547,6 @@ void EdytorNc::projectOpen()
 
 #ifdef Q_OS_WIN32
    QString filters = tr("EdytorNC project file (*.ncp)");
-#endif
-
-#ifdef Q_OS_MACX
-   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
 #endif
 
    QString fileName = QFileDialog::getOpenFileName(

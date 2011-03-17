@@ -495,10 +495,10 @@ void KDiff3App::initView()
    m_pDiffVScrollBar = new QScrollBar( Qt::Vertical, pDiffWindowFrame );
    pDiffHLayout->addWidget( m_pDiffVScrollBar );
 
-   m_pDiffTextWindowFrame1 = new DiffTextWindowFrame( m_pDiffWindowSplitter, m_pOptionDialog, 1 );
+   m_pDiffTextWindowFrame1 = new DiffTextWindowFrame( m_pDiffWindowSplitter, m_pOptionDialog, 1, m_extensions);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame1);
 
-   m_pDiffTextWindowFrame2 = new DiffTextWindowFrame( m_pDiffWindowSplitter, m_pOptionDialog, 2 );
+   m_pDiffTextWindowFrame2 = new DiffTextWindowFrame( m_pDiffWindowSplitter, m_pOptionDialog, 2, m_extensions);
    m_pDiffWindowSplitter->addWidget(m_pDiffTextWindowFrame2);
 
    m_pDiffTextWindow1 = m_pDiffTextWindowFrame1->getDiffTextWindow();

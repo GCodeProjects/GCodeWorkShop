@@ -85,7 +85,7 @@ private:
 
 
 signals:
-    void fileClicket(const QString&);
+    void fileClicked(const QString&);
    
 };
 

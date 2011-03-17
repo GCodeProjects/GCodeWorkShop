@@ -501,7 +501,7 @@ void FindInFiles::filesTableClicked(int x, int y)
    QString dir = directoryComboBox->currentText();
    if(!dir.endsWith("/"))
      dir = dir + "/";
-   emit fileClicket(dir + item->text());
+   emit fileClicked(dir + item->text());
 
 }
 

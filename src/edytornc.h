@@ -180,7 +180,6 @@ private:
 
     QClipboard *clipboard;
     QByteArray fileDialogState;
-    QString openFileFilter;
 
     KDiff3App *diffApp;
 
@@ -312,6 +311,8 @@ private:
     bool readyCont;
     bool xoffReceived;
     bool deleteControlChars;
+    bool removeEmptyLines;
+    bool removeBefore;
     int sendStartDelay;
     bool doNotShowProgressInEditor;
     int recieveTimeout;

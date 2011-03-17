@@ -1637,9 +1637,10 @@ public:
    int           m_winIdx;
 };
 
-DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, OptionDialog* pOptionDialog, int winIdx )
+DiffTextWindowFrame::DiffTextWindowFrame( QWidget* pParent, OptionDialog* pOptionDialog, int winIdx, QStringList extensions)
    : QWidget( pParent )
 {
+   m_extensions = extensions;
    d = new DiffTextWindowFrameData;
    d->m_winIdx = winIdx;
    setAutoFillBackground(true);
@@ -1817,29 +1818,13 @@ void DiffTextWindowFrame::slotReturnPressed()
 void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
    QString current = d->m_pFileSelection->text();
+   QString *filters = getFilters(m_extensions);
 
-#ifdef Q_OS_LINUX
-    QString filters = tr("CNC programs files *.nc (*.nc);;"
-                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
-                         "Text files *.txt (*.txt);; All files (*.* *)");
-#endif
-
-#ifdef Q_OS_WIN32
-  QString filters = tr("CNC programs files (*.nc);;"
-                       "CNC programs files (*.nc *.min *.anc *.cnc);;"
-                       "Text files (*.txt);; All files (*.* *)");
-#endif
-
-#ifdef Q_OS_MACX
-    QString filters = tr("CNC programs files *.nc (*.nc);;"
-                         "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
-                         "Text files *.txt (*.txt);; All files (*.* *)");
-#endif
-
-   QString directory = QFileDialog::getOpenFileName(this, tr("Open file..."), current, filters);
+   QString directory = QFileDialog::getOpenFileName(this, tr("Open file..."), current, *filters);
    if(!directory.isEmpty())
    {
       DiffTextWindow* pDTW = d->m_pDiffTextWindow;
       emit fileNameChanged(directory, pDTW->d->m_winIdx);
    }
+   delete filters;
 }

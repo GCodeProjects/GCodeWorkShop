@@ -269,8 +269,8 @@ bool MergeResultWindow::sameKindCheck( const MergeLine& ml1, const MergeLine& ml
    }
    else
       return (
-         !ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect ||
-         !ml1.bDelta && !ml2.bDelta
+         (!ml1.bConflict && !ml2.bConflict && ml1.bDelta && ml2.bDelta && ml1.srcSelect == ml2.srcSelect) ||
+         (!ml1.bDelta && !ml2.bDelta)
          );
 }
 
@@ -304,8 +304,8 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
          // Automatic solving for only whitespace changes.
          if ( ml.bConflict &&
-              ( m_pldC==0 && (d.bAEqB || d.bWhiteLineA && d.bWhiteLineB)  ||
-                m_pldC!=0 && (d.bAEqB && d.bAEqC || d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC ) ) )
+              ( m_pldC==0 && (d.bAEqB || (d.bWhiteLineA && d.bWhiteLineB))  ||
+                m_pldC!=0 && ((d.bAEqB && d.bAEqC) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC) ) ) )
          {
             ml.bWhiteSpaceConflict = true;
          }
@@ -575,7 +575,7 @@ void MergeResultWindow::go( e_Direction eDir, e_EndPoint eEndPoint )
          if ( eDir==eUp )  --i;
          else              ++i;
       }
-      while ( isItAtEnd(eDir!=eUp, i) && ( i->bDelta == false || checkOverviewIgnore(i) || bSkipWhiteConflicts && i->bWhiteSpaceConflict ) );
+      while ( isItAtEnd(eDir!=eUp, i) && ( i->bDelta == false || checkOverviewIgnore(i) || (bSkipWhiteConflicts && i->bWhiteSpaceConflict) ) );
    }
    else if ( eEndPoint == eConflict  &&  isItAtEnd(eDir!=eUp, i) )
    {
@@ -1144,7 +1144,7 @@ void MergeResultWindow::collectHistoryInformation(
       if (historyLead.isNull()) historyLead = calcHistoryLead(s);
       QString sLine = s.mid(historyLead.length());
       if ( ( !bUseRegExp && !sLine.trimmed().isEmpty() && bPrevLineIsEmpty )
-           || bUseRegExp && newHistoryEntry.exactMatch( sLine ) 
+           || (bUseRegExp && newHistoryEntry.exactMatch( sLine ) )
          )
       {
          if ( !key.isEmpty() && !melList.empty() )
