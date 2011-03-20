@@ -101,6 +101,7 @@ struct _editor_properites
    QString saveExtension;
    QString saveDirectory;
    int defaultHighlightMode;
+   bool startEmpty;
 };
 
 

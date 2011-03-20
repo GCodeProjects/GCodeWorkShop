@@ -1,7 +1,7 @@
 <project>
     <shortName>EdytorNC</shortName>
     <fullName>EdytorNC</fullName>
-    <version>2010.12.21 BETA</version>
+    <version>2011.03.20 BETA</version>
     <readmeFile>/home/artur/Dokumenty/Projekty/edytornc/ReadMe</readmeFile>
     <licenseFile>/home/artur/Dokumenty/Projekty/edytornc/COPYING</licenseFile>
     <logoImage>/home/artur/Dokumenty/Projekty/edytornc/src/images/edytornc48.png</logoImage>
@@ -147,6 +147,9 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>/home/artur/Dokumenty/Projekty/edytornc/src/edytornc_cs_CZ.qm</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>/home/artur/Dokumenty/Projekty/edytornc/src/edytornc_fi.qm</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shortcutList>

@@ -88,9 +88,19 @@ EdytorNc::EdytorNc()
     createStatusBar();
     
     if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
-      mdiArea->setViewMode(QMdiArea::TabbedView);
+    {
+       mdiArea->setViewMode(QMdiArea::TabbedView);
+       QTabBar* tab = mdiArea->findChild<QTabBar*>();
+       if(tab)
+       {
+          connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+          tab->setTabsClosable(true);
+          // The tabs might be very wide
+          tab->setExpanding(false);
+       };
+    }
     else
-      mdiArea->setViewMode(QMdiArea::SubWindowView);
+       mdiArea->setViewMode(QMdiArea::SubWindowView);
 
 }
 
@@ -111,6 +121,29 @@ EdytorNc::~EdytorNc()
 //**************************************************************************************************
 //
 //**************************************************************************************************
+
+void EdytorNc::closeTab(int i)
+{
+   QMdiSubWindow *sub = mdiArea->subWindowList()[i];
+   QWidget *win = sub->widget();
+   win->close();
+   mdiArea->setActiveSubWindow(sub);
+   mdiArea->closeActiveSubWindow();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::closeCurrentWindow()
+{
+   mdiArea->closeActiveSubWindow();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 
 void EdytorNc::closeEvent(QCloseEvent *event)
 {
@@ -785,7 +818,17 @@ void EdytorNc::config()
       defaultMdiWindowProperites = setUpDialog->getSettings();
 
       if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
-        mdiArea->setViewMode(QMdiArea::TabbedView);
+      {
+         mdiArea->setViewMode(QMdiArea::TabbedView);
+         QTabBar* tab = mdiArea->findChild<QTabBar*>();
+         if(tab)
+         {
+            connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+            tab->setTabsClosable(true);
+            // The tabs might be very wide
+            tab->setExpanding(false);
+         };
+      }
       else
         mdiArea->setViewMode(QMdiArea::SubWindowView);
 
@@ -1313,7 +1356,7 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2011.03.17 BETA" +
+                                   "2011.03.20 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2011 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1760,9 +1803,9 @@ void EdytorNc::createActions()
 
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
-    closeAct->setShortcut(tr("Ctrl+F4"));
+    //closeAct->setShortcut(QKeySequence::Close);
     closeAct->setStatusTip(tr("Close the active window"));
-    connect(closeAct, SIGNAL(triggered()), mdiArea, SLOT(closeActiveSubWindow()));
+    connect(closeAct, SIGNAL(triggered()), this, SLOT(closeCurrentWindow()));
 
     closeAllAct = new QAction(QIcon(":/images/window-close.png"), tr("Close &All"), this);
     closeAllAct->setStatusTip(tr("Close all the windows"));
@@ -1777,10 +1820,12 @@ void EdytorNc::createActions()
     connect(cascadeAct, SIGNAL(triggered()), mdiArea, SLOT(cascadeSubWindows()));
 
     nextAct = new QAction(QIcon(":/images/go-next.png"), tr("Ne&xt"), this);
+    nextAct->setShortcut(QKeySequence::Forward);
     nextAct->setStatusTip(tr("Move the focus to the next window"));
     connect(nextAct, SIGNAL(triggered()), mdiArea, SLOT(activateNextSubWindow()));
 
     previousAct = new QAction(QIcon(":/images/go-previous.png"), tr("Pre&vious"), this);
+    previousAct->setShortcut(QKeySequence::Back);
     previousAct->setStatusTip(tr("Move the focus to the previous window"));
     connect(previousAct, SIGNAL(triggered()), mdiArea, SLOT(activatePreviousSubWindow()));
 
@@ -2093,6 +2138,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.clearUndoHistory = settings.value("ClearUndoRedo", FALSE).toBool();
     defaultMdiWindowProperites.clearUnderlineHistory = settings.value("ClearUnderline", FALSE).toBool();
     defaultMdiWindowProperites.editorToolTips = settings.value("EditorToolTips", TRUE).toBool();
+    defaultMdiWindowProperites.startEmpty = settings.value("StartEmpty", FALSE).toBool();
 
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
@@ -2139,23 +2185,26 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.hColors.bColor = settings.value("BColor", 0x000000).toInt();
     settings.endGroup();
 
-    int max = settings.beginReadArray("LastDoc");
-    for(int i = 0; i < max; ++i)
+    if(!defaultMdiWindowProperites.startEmpty)
     {
-       settings.setArrayIndex(i);
-       defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
-
-       defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
-       if(!defaultMdiWindowProperites.fileName.isEmpty())
+       int max = settings.beginReadArray("LastDoc");
+       for(int i = 0; i < max; ++i)
        {
-          defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
-          defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", FALSE).toBool();
-          defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
-          defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
-          loadFile(defaultMdiWindowProperites, false);   
+          settings.setArrayIndex(i);
+          defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
+
+          defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
+          if(!defaultMdiWindowProperites.fileName.isEmpty())
+          {
+             defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
+             defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", FALSE).toBool();
+             defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
+             defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
+             loadFile(defaultMdiWindowProperites, false);
+          };
        };
+       settings.endArray();
     };
-    settings.endArray();
 
     fileTreeView->header()->restoreState(settings.value("FileTreeViewState", QByteArray()).toByteArray());
 
@@ -2174,7 +2223,7 @@ void EdytorNc::readSettings()
        hideButton->setText(">>");
     };
 
-    tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt());
+    tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt()); 
     currentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir", false).toBool());
     filePreviewSpinBox->setValue(settings.value("FilePreviewNo", 10).toInt());
 }
@@ -2225,6 +2274,7 @@ void EdytorNc::writeSettings()
     settings.setValue("EditorToolTips", defaultMdiWindowProperites.editorToolTips);
     settings.setValue("ViewerMode", defaultMdiWindowProperites.defaultReadOnly);
     settings.setValue("DefaultHighlightMode", defaultMdiWindowProperites.defaultHighlightMode);
+    settings.setValue("StartEmpty", defaultMdiWindowProperites.startEmpty);
     
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
@@ -3565,9 +3615,9 @@ void EdytorNc::createGlobalToolTipsFile()
    settings.setValue("M52", tr("<i>v.M</i> <b>M52</b> - mode of return to upper limit level") +
                             tr("<br /><i>v.L</i> <b>M52</b> - "));
    settings.setValue("M53", tr("<i>v.M</i> <b>M53</b> - mode of return to a specified point level set by G71") +
-                            tr("<br /><i>v.L</i> <b>M52</b> - "));
+                            tr("<br /><i>v.L</i> <b>M53</b> - "));
    settings.setValue("M54", tr("<i>v.M</i> <b>M54</b> - mode of return to the point R level") +
-                            tr("<br /><i>v.L</i> <b>M52</b> - "));
+                            tr("<br /><i>v.L</i> <b>M54</b> - "));
 
    settings.setValue("M55", tr("<b>M55</b> - tailstock spindle retract"));
    settings.setValue("M56", tr("<b>M56</b> - tailstock spindle advanced"));
@@ -4747,7 +4797,7 @@ void EdytorNc::createFileBrowseTabs()
    //dirModel->setRootPath(lastDir.absolutePath());
    //fileTreeViewChangeRootDir();
 
-   dirModel->setNameFilters(QStringList("*.nc"));
+   dirModel->setNameFilters(defaultMdiWindowProperites.extensions); //QStringList("*.nc")
    dirModel->setNameFilterDisables(false);
 
    fileTreeView->setModel(dirModel);
@@ -4849,6 +4899,9 @@ void EdytorNc::fileTreeViewChangeRootDir()
    QString path;
 
    if(panelHidden)  //if((!isVisible()) || panelHidden)
+      return;
+
+   if(tabWidget->currentIndex() != 1)
       return;
 
    if(fileTreeView == NULL || dirModel == NULL)

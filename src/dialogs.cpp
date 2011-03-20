@@ -2805,7 +2805,8 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    calcLineEdit->setText(editProp.calcBinary);
    clearUndocheckBox->setChecked(editProp.clearUndoHistory);
    clearUnderlinecheckBox->setChecked(editProp.clearUnderlineHistory);
-   editorToolTipsCheckBox->setChecked(editProp.editorToolTips);
+   editorToolTipsCheckBox->setChecked(editProp.editorToolTips);  
+   startEmptyCheckBox->setChecked(editProp.startEmpty);
 
    QStringListIterator extIterator(editProp.extensions);
    while (extIterator.hasNext())
@@ -2915,6 +2916,7 @@ _editor_properites SetupDialog::getSettings()
    editProp.clearUnderlineHistory = clearUnderlinecheckBox->isChecked();
    editProp.editorToolTips = editorToolTipsCheckBox->isChecked();
    editProp.defaultReadOnly = readOnlyModeCheckBox->isChecked();
+   editProp.startEmpty = startEmptyCheckBox->isChecked();
 
    int id = highlightModeComboBox->currentIndex();
    if(id >= 0)
@@ -3098,6 +3100,7 @@ void SetupDialog::setDefaultProp()
 
    clearUndocheckBox->setChecked(false);
    clearUnderlinecheckBox->setChecked(true);
+   startEmptyCheckBox->setChecked(false);
 
 #ifdef Q_OS_LINUX
    editProp.calcBinary = "kcalc";

@@ -143,6 +143,8 @@ private slots:
     void openFileTableWidgetClicked(int x, int y);
     void splitPrograms();
     void diffEditorFile();
+    void closeTab(int i);
+    void closeCurrentWindow();
 
 
 
@@ -166,11 +168,10 @@ private:
     bool maybeSaveProject();
     void createFileBrowseTabs();
     void fileTreeViewChangeRootDir();
-
-
-
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
+
+
     _editor_properites defaultMdiWindowProperites;
     FindInFiles *findFiles;
 
