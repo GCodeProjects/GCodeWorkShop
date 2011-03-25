@@ -4531,7 +4531,7 @@ Jatka omalla vastuullasi.</translation>
         <location filename="spconfigdialog.ui" line="624"/>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
         <oldsource>If 0 then waits for XON, if &gt;0 waits for timeout or XON  wich one  first </oldsource>
-        <translation type="unfinished">Jos 0, odotetaan XON-merkkiä.Jos suurempi kuin nolla, odotetaan valittu aika tai XON-merkki</translation>
+        <translation>Jos 0, odotetaan XON-merkkiä.Jos suurempi kuin nolla, odotetaan valittu aika tai XON-merkki.</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="653"/>
