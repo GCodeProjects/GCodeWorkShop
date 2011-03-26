@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2010 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2011 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -442,10 +442,10 @@ void MdiChild::updateWindowTitle()
 //
 //**************************************************************************************************
 
-QString MdiChild::strippedName(const QString &fullFileName)
-{
-   return QFileInfo(fullFileName).fileName();
-}
+//QString MdiChild::strippedName(const QString &fullFileName)
+//{
+//   return QFileInfo(fullFileName).fileName();
+//}
 
 //**************************************************************************************************
 //
@@ -454,6 +454,15 @@ QString MdiChild::strippedName(const QString &fullFileName)
 QString MdiChild::filePath()
 {
    return QFileInfo(curFile).absolutePath();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+QString MdiChild::fileName()
+{
+   return QFileInfo(curFile).fileName();
 }
 
 //**************************************************************************************************

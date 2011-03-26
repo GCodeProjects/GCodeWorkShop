@@ -26,6 +26,7 @@
 // include files for Qt
 #include <QSplitter>
 #include <QScrollBar>
+#include <QMenu>
 
 
 
@@ -97,6 +98,7 @@ public:
 
 signals:
    void createNewInstance( const QString& fn1, const QString& fn2, const QString& fn3 );
+   void lineClicked(QString fileName, int line);
 
 protected:
    void initDirectoryMergeActions();
@@ -125,6 +127,7 @@ public slots:
 
 
 private slots:
+   void showPopupMenu(QPoint pos);
 
 
 private:
@@ -172,6 +175,8 @@ private:
 
    OptionDialog* m_pOptionDialog;
    FindDialog*   m_pFindDialog;
+
+   QMenu *contextMenu;
 
    void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true );
 

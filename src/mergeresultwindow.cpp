@@ -45,7 +45,7 @@
 #include <QInputEvent>
 #include <QDropEvent>
 #include <QPaintEvent>
-#include <QTextStream>
+//#include <QTextStream>
 
 #include <iostream>
 
@@ -1953,7 +1953,7 @@ void MergeResultWindow::mousePressEvent ( QMouseEvent* e )
 
       if (bRMB)
       {
-         showPopupMenu( QCursor::pos() );
+         emit showPopupMenu(QCursor::pos());
       }
    }
    else if ( bLMB )                  // Normal cursor placement

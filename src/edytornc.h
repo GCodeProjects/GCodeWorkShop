@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2010 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2011 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -145,6 +145,7 @@ private slots:
     void diffEditorFile();
     void closeTab(int i);
     void closeCurrentWindow();
+    void goToLine(QString fileName, int line);
 
 
 
@@ -170,6 +171,7 @@ private:
     void fileTreeViewChangeRootDir();
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
+    void createDiffApp();
 
 
     _editor_properites defaultMdiWindowProperites;

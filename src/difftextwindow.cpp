@@ -383,7 +383,7 @@ void DiffTextWindow::showStatusLine(int line )
             s += ": " + tr("Line not available");
          //if (d->m_pStatusBar!=0) d->m_pStatusBar->showMessage(s);
 
-         emit lineClicked( d->m_winIdx, l );
+         emit lineClicked(d->m_filename, l);
       }
    }
 }
@@ -414,9 +414,12 @@ void DiffTextWindow::mousePressEvent ( QMouseEvent* e )
          d->m_bSelectionInProgress = true;
          d->m_lastKnownMousePos = e->pos();
 
-         showStatusLine( line );
+         //showStatusLine( line );
       }
    }
+   else
+      if(e->button() == Qt::RightButton)
+         emit showPopupMenu(QCursor::pos());
 }
 
 bool isCTokenChar( QChar c )
@@ -525,7 +528,7 @@ void DiffTextWindow::mouseMoveEvent ( QMouseEvent * e )
    {
       d->m_selection.end( line, pos );
 
-      showStatusLine( line );
+      //showStatusLine( line );
 
       // Scroll because mouse moved out of the window
       const QFontMetrics& fm = fontMetrics();

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2010 by Artur KozioÅ                               *
+ *   Copyright (C) 2006-2011 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -910,14 +910,48 @@ void EdytorNc::doRemoveSpaces()
 //
 //**************************************************************************************************
 
+void EdytorNc::goToLine(QString fileName, int line)
+{
+   if(activeMdiChild())
+   {
+      QString childFileName = activeMdiChild()->filePath() + "/" + activeMdiChild()->fileName();
+      childFileName =  QDir().toNativeSeparators(childFileName);
+
+      if(QDir().toNativeSeparators(fileName) != childFileName)
+         return;
+
+      QTextBlock block = activeMdiChild()->textEdit->document()->findBlockByNumber(line);
+      QTextCursor cursor = QTextCursor(block);
+      activeMdiChild()->textEdit->setTextCursor(cursor);
+      activeMdiChild()->textEdit->centerCursor();
+      activeMdiChild()->setFocus();
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::createDiffApp()
+{
+   if(diffApp == NULL)
+   {
+      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
+
+      connect(diffApp, SIGNAL(lineClicked(QString, int)), this, SLOT(goToLine(QString, int)));
+
+   };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void EdytorNc::doDiffL()
 {
    QString fileName;
 
-   if(diffApp == NULL)
-   {
-      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
-   };
+   createDiffApp();
 
    if(diffApp != NULL)
    {
@@ -948,10 +982,7 @@ void EdytorNc::doDiffR()
 {
    QString fileName;
 
-   if(diffApp == NULL)
-   {
-      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
-   };
+   createDiffApp();
 
    if(diffApp != NULL)
    {
@@ -979,10 +1010,7 @@ void EdytorNc::doDiffR()
 
 void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
 {
-   if(diffApp == NULL)
-   {
-      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
-   };
+   createDiffApp();
 
    if(diffApp != NULL)
    {
@@ -1007,10 +1035,7 @@ void EdytorNc::diffEditorFile()
    if(!child)
       return;
 
-   if(diffApp == NULL)
-   {
-      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
-   };
+   createDiffApp();
 
    if(diffApp != NULL)
    {
@@ -1063,7 +1088,7 @@ void EdytorNc::doDiff()
 
    if(diffApp == NULL)
    {
-      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
+      createDiffApp();
 
       if(activeMdiChild())
          fileName = activeMdiChild()->currentFile();

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2010 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2011 by Artur Kozioł                               *
  *   artkoz@poczta.onet.pl                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -78,6 +78,7 @@ public:
     void doUndo();
     void doRedo();
     QString filePath();
+    QString fileName();
     void setHighligthMode(int mod);
     int getHighligthMode();
     void doDiff();
@@ -102,7 +103,7 @@ private slots:
 private:
     bool maybeSave();
     void setCurrentFile(const QString &fileName, const QString &text);
-    QString strippedName(const QString &fullFileName);
+    //QString strippedName(const QString &fullFileName);
     int processBrc(QString *str);
     int compute(QString *str);
     void macroShowError(int error, QString tx);
