@@ -308,7 +308,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
       
       const ManualDiffHelpList* pMDHL = &m_manualDiffHelpList;
 
-      qDebug() << "m_sd1.getAliasName()" << m_sd1.getAliasName();
+      //qDebug() << "m_sd1.getAliasName()" << m_sd1.getAliasName();
 
       m_pDiffTextWindow1->init( m_sd1.getAliasName(), m_sd1.getEncoding(),
          m_sd1.getLineDataForDisplay(), m_sd1.getSizeLines(), &m_diff3LineVector, pMDHL, m_bTripleDiff );
@@ -467,6 +467,25 @@ void addWidget( L* layout, W* widget)
 void KDiff3App::initView()
 {
 
+   contextMenu = new QMenu(this);
+
+
+   QAction *copyAct = new QAction(QIcon(":/images/editcopy.png"), tr("&Copy"), this);
+   copyAct->setShortcut(QKeySequence::Copy);
+   copyAct->setStatusTip(tr("Copy the current selection's contents to the "
+                             "clipboard"));
+   connect(copyAct, SIGNAL(triggered()), this, SLOT(slotEditCopy()));
+
+//   QAction *selAllAct = new QAction(QIcon(":/images/edit-select-all.png"), tr("&Select all"), this);
+//   selAllAct->setShortcut(QKeySequence::SelectAll);
+//   selAllAct->setStatusTip(tr("Select all"));
+//   connect(selAllAct, SIGNAL(triggered()), this, SLOT(sellAll()));
+
+   contextMenu->addAction(copyAct);
+   //contextMenu->addSeparator();
+   //contextMenu->addAction(selAllAct);
+
+
    QVBoxLayout* pVLayout = new QVBoxLayout();
    pVLayout->setMargin(0);
    pVLayout->setSpacing(0);
@@ -526,6 +545,8 @@ void KDiff3App::initView()
    connect( m_pDiffTextWindow1, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow1, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow1, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
+   connect(m_pDiffTextWindow1, SIGNAL(lineClicked(QString, int)), this, SIGNAL(lineClicked(QString, int)));
+   connect(m_pDiffTextWindow1, SIGNAL(showPopupMenu(const QPoint&)), this, SLOT(showPopupMenu(const QPoint&)));
    m_pDiffTextWindow1->installEventFilter( this );
 
    connect( m_pDiffVScrollBar, SIGNAL(valueChanged(int)), m_pDiffTextWindow2, SLOT(setFirstLine(int)));
@@ -533,7 +554,10 @@ void KDiff3App::initView()
    connect( m_pDiffTextWindow2, SIGNAL(newSelection()), this, SLOT(slotSelectionStart()));
    connect( m_pDiffTextWindow2, SIGNAL(selectionEnd()), this, SLOT(slotSelectionEnd()));
    connect( m_pDiffTextWindow2, SIGNAL(scroll(int,int)), this, SLOT(scrollDiffTextWindow(int,int)));
+   connect(m_pDiffTextWindow2, SIGNAL(lineClicked(QString, int)), this, SIGNAL(lineClicked(QString, int)));
+   connect(m_pDiffTextWindow2, SIGNAL(showPopupMenu(const QPoint&)), this, SLOT(showPopupMenu(const QPoint&)));
    m_pDiffTextWindow2->installEventFilter( this );
+
 
 
 
@@ -541,7 +565,7 @@ void KDiff3App::initView()
 
    connect( p, SIGNAL( selectionEnd() ), this, SLOT( slotSelectionEnd() ) );
 
-   connect( p, SIGNAL( showPopupMenu(const QPoint&) ), this, SLOT(showPopupMenu(const QPoint&)));
+   //connect( p, SIGNAL( showPopupMenu(const QPoint&) ), this, SLOT(showPopupMenu(const QPoint&)));
 
 
 
@@ -553,7 +577,6 @@ void KDiff3App::initView()
 
    connect(m_pDiffTextWindow1, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
    connect(m_pDiffTextWindow2, SIGNAL(gotFocus()), p, SLOT(updateSourceMask()));
-  ;
 
    connect( m_pDiffTextWindow1, SIGNAL( resizeSignal(int,int) ),this, SLOT(resizeDiffTextWindow(int,int)));
    // The following two connects cause the wordwrap to be recalced thrice, just to make sure. Better than forgetting one.
@@ -564,6 +587,13 @@ void KDiff3App::initView()
    setMinimumSize(50,50);
    m_pCornerWidget->setFixedSize( m_pDiffVScrollBar->width(), m_pHScrollBar->height() );
 }
+
+
+void KDiff3App::showPopupMenu(QPoint pos)
+{
+   contextMenu->popup(pos);
+}
+
 
 static int calcManualDiffFirstDiff3LineIdx( const Diff3LineVector& d3lv, const ManualDiffHelpEntry& mdhe )
 {

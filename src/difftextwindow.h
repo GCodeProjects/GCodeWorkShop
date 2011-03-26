@@ -103,7 +103,8 @@ signals:
    void selectionEnd();
    void setFastSelectorLine( int line );
    void gotFocus();
-   void lineClicked( int winIdx, int line );
+   void lineClicked(QString fileName, int line);
+   void showPopupMenu(const QPoint& point);
 
 public slots:
    void setFirstLine( int line );
