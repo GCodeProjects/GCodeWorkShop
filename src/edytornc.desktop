@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=EdytorNC
+Comment=G-code QT text editor
+Exec=edytornc %f
+Icon=edytornc
+Categories=Development;
+MimeType=application/x-g-code;
