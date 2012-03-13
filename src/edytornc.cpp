@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2006-2011 by Artur Kozioł                               *
- *   artkoz@poczta.onet.pl                                                 *
+ *   Copyright (C) 2006-2012 by Artur Kozioł                               *
+ *   artkoz78@gmail.com                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
  *                                                                         *
@@ -1381,8 +1381,8 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2011.03.20 BETA" +
-                            trUtf8("<P>Copyright (C) 1998 - 2011 by <a href=\"mailto:artkoz@poczta.onet.pl\">Artur Koziol</a>") +
+                                   "2012.03.13 BETA" +
+                            trUtf8("<P>Copyright (C) 1998 - 2012 by <a href=\"mailto:artkoz78@gmail.com\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
                             trUtf8("<br />Czech translation thanks to Pavel Fric") +
