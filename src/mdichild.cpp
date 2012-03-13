@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2006-2011 by Artur Kozioł                               *
- *   artkoz@poczta.onet.pl                                                 *
+ *   Copyright (C) 2006-2012 by Artur Kozioł                               *
+ *   artkoz78@gmail.com                                                 *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
  *                                                                         *
@@ -1732,9 +1732,9 @@ void MdiChild::compileMacro()
       param = text.mid(pos, exp.matchedLength());
       pos +=  exp.matchedLength();
 
-      param.remove(' ');
-      param.remove('{');
-      param.remove('=');
+      param = param.remove(' ');
+      param = param.remove('{');
+      param = param.remove('=');
 
       val = "";
 
@@ -1748,11 +1748,12 @@ void MdiChild::compileMacro()
             cursor.setPosition(0);
             textEdit->setTextCursor(cursor);
             QMessageBox::warning( this, tr("EdytorNC - compile macro"), tr("Param list: no bracket \'}\' !"));
+            QApplication::restoreOverrideCursor();
             return;
          };
       }while((text.at(pos) != '}'));
 
-      val.remove(' ');
+      val = val.remove(' ');
 
       i = defEnd;
 
@@ -1779,9 +1780,10 @@ void MdiChild::compileMacro()
 
       param.insert(param.length(), '}');
 
-
       len = param.length();
-      param.remove(' ');
+      param = param.simplified();
+      param = param.remove(QChar(' '));
+
       if(!param.isEmpty())
       {
          paramTmp = param;
@@ -1793,6 +1795,7 @@ void MdiChild::compileMacro()
             textEdit->setTextCursor(cursor);
             textEdit->find(paramTmp);
             macroShowError(error, paramTmp);
+            QApplication::restoreOverrideCursor();
             return;
          };
 
@@ -1807,6 +1810,7 @@ void MdiChild::compileMacro()
                textEdit->setTextCursor(cursor);
                textEdit->find(paramTmp);
                macroShowError(error, paramTmp);
+               QApplication::restoreOverrideCursor();
                return;
             };
          };
@@ -1853,6 +1857,7 @@ void MdiChild::compileMacro()
          if(error > 0)
          {
             macroShowBasicError(error);
+            QApplication::restoreOverrideCursor();
             return;
          };
          text.insert(defBegin, basicCode);
