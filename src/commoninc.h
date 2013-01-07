@@ -102,6 +102,8 @@ struct _editor_properites
    QString saveDirectory;
    int defaultHighlightMode;
    bool startEmpty;
+   QString curFile;  // replace by filename
+   QString curFileInfo;
 };
 
 
