@@ -1205,7 +1205,7 @@ bool MdiChild::event(QEvent *event)
 
       };
 
-
+      key = "";
 
       QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
 
@@ -1260,10 +1260,22 @@ bool MdiChild::event(QEvent *event)
             return true;
 
          cursor.movePosition(QTextCursor::PreviousWord, QTextCursor::MoveAnchor);
+
+         cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+         key = cursor.selectedText();
+
+         if(key.at(0) != QLatin1Char('@'))
+         {
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
+            key = "";
+         }
+         else
+           cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+
          cursor.movePosition(QTextCursor::EndOfWord,  QTextCursor::KeepAnchor);
       };
 
-      key = cursor.selectedText();
+      key = key + cursor.selectedText();
 
       if(key.length() == 2)
       {
@@ -1688,7 +1700,7 @@ int MdiChild::processBrc(QString *str)
 //
 //**************************************************************************************************
 
-void MdiChild::compileMacro()
+int MdiChild::compileMacro()
 {
    QRegExp exp;
    int defBegin, defEnd, pos, i, len, error;
@@ -1712,8 +1724,8 @@ void MdiChild::compileMacro()
 
    if((defBegin < 0) || (defEnd <  0))
    {
-      QMessageBox::warning( this, tr("EdytorNc - compile macro"), tr("No constant definition .\n{BEGIN}\n...\n{END}\n No macro ?"));
-      return;
+      QMessageBox::warning(this, tr("EdytorNc - compile macro"), tr("No constant definition .\n{BEGIN}\n...\n{END}\n No macro ?"));
+      return -1;
    };
 
    //defEnd -= exp.matchedLength();
@@ -1749,7 +1761,7 @@ void MdiChild::compileMacro()
             textEdit->setTextCursor(cursor);
             QMessageBox::warning( this, tr("EdytorNC - compile macro"), tr("Param list: no bracket \'}\' !"));
             QApplication::restoreOverrideCursor();
-            return;
+            return -1;
          };
       }while((text.at(pos) != '}'));
 
@@ -1766,7 +1778,7 @@ void MdiChild::compileMacro()
    text.remove(defBegin, (defEnd + 5) - defBegin);
 
    pos = 0;
-   exp.setPattern("\\{[-+*=.()$/0-9A-Z\\s]*\\b[-+*=.()$/0-9A-Z\\s]*[}]");
+   exp.setPattern("\\{[-+*=.,()$/0-9A-Z\\s]*\\b[-+*=.,()$/0-9A-Z\\s]*[}]");
 
    while((pos = text.indexOf(exp, 0)) > 0)
    {
@@ -1783,6 +1795,7 @@ void MdiChild::compileMacro()
       len = param.length();
       param = param.simplified();
       param = param.remove(QChar(' '));
+      param = param.replace(',', '.');
 
       if(!param.isEmpty())
       {
@@ -1796,7 +1809,7 @@ void MdiChild::compileMacro()
             textEdit->find(paramTmp);
             macroShowError(error, paramTmp);
             QApplication::restoreOverrideCursor();
-            return;
+            return -1;
          };
 
          if(!param.isEmpty())
@@ -1811,13 +1824,13 @@ void MdiChild::compileMacro()
                textEdit->find(paramTmp);
                macroShowError(error, paramTmp);
                QApplication::restoreOverrideCursor();
-               return;
+               return -1;
             };
          };
 
          val = param;
-         val.remove('{');
-         val.remove('}');
+         val = val.remove('{');
+         val = val.remove('}');
          text.replace(i, len, val);
 
       };
@@ -1858,7 +1871,7 @@ void MdiChild::compileMacro()
          {
             macroShowBasicError(error);
             QApplication::restoreOverrideCursor();
-            return;
+            return -1;
          };
          text.insert(defBegin, basicCode);
 
@@ -1874,6 +1887,7 @@ void MdiChild::compileMacro()
    cursor.setPosition(0);
    textEdit->setTextCursor(cursor);
    QApplication::restoreOverrideCursor();
+   return 1;
 }
 
 //**************************************************************************************************

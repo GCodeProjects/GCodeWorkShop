@@ -73,7 +73,7 @@ public:
     void doInsertSpace();
     void doInsertDot();
     void doI2M();
-    void compileMacro();
+    int compileMacro();
     void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
     void doUndo();
     void doRedo();
@@ -87,6 +87,7 @@ public:
     QString guessFileName();
     QStringList splitFile();
     bool findTextMatched(QString pattern, QString text);
+    void setCurrentFile(const QString &fileName, const QString &text);
 
 
 
@@ -102,7 +103,6 @@ private slots:
 
 private:
     bool maybeSave();
-    void setCurrentFile(const QString &fileName, const QString &text);
     //QString strippedName(const QString &fullFileName);
     int processBrc(QString *str);
     int compute(QString *str);

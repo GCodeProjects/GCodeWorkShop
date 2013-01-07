@@ -1381,7 +1381,7 @@ void EdytorNc::about()
    QMessageBox::about(this, trUtf8("About EdytorNC"),
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
-                                   "2012.03.13 BETA" +
+                                   "2013.01.00 BETA" +
                             trUtf8("<P>Copyright (C) 1998 - 2012 by <a href=\"mailto:artkoz78@gmail.com\">Artur Koziol</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1486,7 +1486,7 @@ void EdytorNc::updateCurrentSerialConfig()
    QDir dir;
 
    bool hasMdiChild = (activeMdiChild() != 0);
-   if(hasMdiChild && (serialToolBar > NULL))
+   if(hasMdiChild && (serialToolBar > 0))
    {
       dir.setPath(activeMdiChild()->filePath());
       dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -3531,8 +3531,57 @@ void EdytorNc::showError(int error)
 
 void EdytorNc::doCmpMacro()
 {
+   QString fileName, filePath, text;
+
+
    if(activeMdiChild())
-     activeMdiChild()->compileMacro();
+   {
+//      fileName = activeMdiChild()->filePath() + "/";
+//      fileName = fileName + activeMdiChild()->fileName().remove(".nc");
+//      fileName = fileName + tr("_compiled_");
+//      fileName = fileName + QDate::currentDate().toString(Qt::ISODate) + ".nc";
+//      fileName = fileName + QTime::currentTime().toString(Qt::ISODate);
+
+      text = activeMdiChild()->textEdit->toPlainText();
+   }
+   else
+     return;
+
+
+
+
+   MdiChild *child = createMdiChild();
+
+   child->newFile();
+
+
+   child->textEdit->insertPlainText(text);
+
+   if((child->compileMacro() == -1))
+   {
+       child->textEdit->document()->setModified(false);
+       //child->close();
+       return;
+   };
+
+   defaultMdiWindowProperites.cursorPos = 0;
+   defaultMdiWindowProperites.readOnly = FALSE;
+   //defaultMdiWindowProperites.maximized = FALSE;
+   defaultMdiWindowProperites.geometry = QByteArray();
+   defaultMdiWindowProperites.editorToolTips = true;
+   defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+   //defaultMdiWindowProperites.fileName = fileName;
+   child->setMdiWindowProperites(defaultMdiWindowProperites);
+
+   //child->setCurrentFile(fileName, child->textEdit->toPlainText());
+
+   //qDebug() << tmpFileName << fileName;
+
+   if(defaultMdiWindowProperites.maximized)
+     child->showMaximized();
+   else
+     child->showNormal();
+
 }
 
 //**************************************************************************************************
