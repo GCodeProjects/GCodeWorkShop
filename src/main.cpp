@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2006-2012 by Artur Kozioł                               *
- *   artkoz78@gmail.com                                                 *
+ *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
  *                                                                         *

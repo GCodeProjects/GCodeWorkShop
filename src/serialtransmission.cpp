@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2006-2012 by Artur Kozioł                               *
- *   artkoz78@gmail.com                                                 *
+ *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
  *                                                                         *
@@ -48,7 +48,6 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
    baudGroup->addButton(b7CheckBox, BAUD19200);
    baudGroup->addButton(b8CheckBox, BAUD38400);
    baudGroup->addButton(b9CheckBox, BAUD57600);
-   baudGroup->addButton(b10CheckBox, BAUD56000);
    baudGroup->addButton(b11CheckBox, BAUD115200);
 
 
@@ -288,8 +287,6 @@ void SPConfigDialog::changeSettings()
            case BAUD38400  : b8CheckBox->setChecked(TRUE);
                              break;
            case BAUD57600  : b9CheckBox->setChecked(TRUE);
-                             break;
-           case BAUD56000  : b10CheckBox->setChecked(TRUE);
                              break;
            case BAUD115200 : b11CheckBox->setChecked(TRUE);
                              break;
@@ -1032,9 +1029,9 @@ void TransmissionDialog::sendText(QString tx)
 
          //qDebug() << "Bytes to write: " << bytesToWrite;
 
-#ifdef Q_OS_UNIX
-         usleep(2000);
-#endif
+//#ifdef Q_OS_UNIX
+//         usleep(2000);
+//#endif
 
          if((bytesToWrite == 0) && (!xoffReceived))
          {
