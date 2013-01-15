@@ -29,44 +29,44 @@
 **
 ****************************************************************************/
 
-#ifndef _QEXTSERIALENUMERATOR_H_
-#define _QEXTSERIALENUMERATOR_H_
+#ifndef QEXTSERIALPORT_GLOBAL_H
+#define QEXTSERIALPORT_GLOBAL_H
 
-#include <QtCore/QList>
-#include <QtCore/QObject>
-#include "qextserialport_global.h"
+#include <QtCore/QtGlobal>
 
-struct QextPortInfo {
-    QString portName;   ///< Port name.
-    QString physName;   ///< Physical name.
-    QString friendName; ///< Friendly name.
-    QString enumName;   ///< Enumerator name.
-    int vendorID;       ///< Vendor ID.
-    int productID;      ///< Product ID
-};
-
-class QextSerialEnumeratorPrivate;
-class QEXTSERIALPORT_EXPORT QextSerialEnumerator : public QObject
-{
-    Q_OBJECT
-    Q_DECLARE_PRIVATE(QextSerialEnumerator)
-public:
-    QextSerialEnumerator(QObject *parent=0);
-    ~QextSerialEnumerator();
-
-    static QList<QextPortInfo> getPorts();
-    void setUpNotifications();
-
-Q_SIGNALS:
-    void deviceDiscovered(const QextPortInfo &info);
-    void deviceRemoved(const QextPortInfo &info);
-
-private:
-    Q_DISABLE_COPY(QextSerialEnumerator)
-#if defined(Q_OS_LINUX) && !defined(QESP_NO_UDEV)
-    Q_PRIVATE_SLOT(d_func(), void _q_deviceEvent())
+#ifdef QEXTSERIALPORT_BUILD_SHARED
+#  define QEXTSERIALPORT_EXPORT Q_DECL_EXPORT
+#elif defined(QEXTSERIALPORT_USING_SHARED)
+#  define QEXTSERIALPORT_EXPORT Q_DECL_IMPORT
+#else
+#  define QEXTSERIALPORT_EXPORT
 #endif
-    QextSerialEnumeratorPrivate *d_ptr;
-};
 
-#endif /*_QEXTSERIALENUMERATOR_H_*/
+// ### for compatible with old version. should be removed in QESP 2.0
+#ifdef _TTY_NOWARN_
+#  define QESP_NO_WARN
+#endif
+#ifdef _TTY_NOWARN_PORT_
+#  define QESP_NO_PORTABILITY_WARN
+#endif
+
+/*if all warning messages are turned off, flag portability warnings to be turned off as well*/
+#ifdef QESP_NO_WARN
+#  define QESP_NO_PORTABILITY_WARN
+#endif
+
+/*macros for warning and debug messages*/
+#ifdef QESP_NO_PORTABILITY_WARN
+#  define QESP_PORTABILITY_WARNING  while (false)qWarning
+#else
+#  define QESP_PORTABILITY_WARNING qWarning
+#endif /*QESP_NOWARN_PORT*/
+
+#ifdef QESP_NO_WARN
+#  define QESP_WARNING while (false)qWarning
+#else
+#  define QESP_WARNING qWarning
+#endif /*QESP_NOWARN*/
+
+#endif // QEXTSERIALPORT_GLOBAL_H
+
