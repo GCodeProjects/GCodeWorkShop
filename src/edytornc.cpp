@@ -3208,9 +3208,9 @@ void EdytorNc::sendButtonClicked()
 
       bytesToWrite = comPort->bytesToWrite();
 
-#ifdef Q_OS_UNIX
-      usleep(2000);
-#endif
+//#ifdef Q_OS_UNIX
+//      usleep(2000);
+//#endif
 
       if((bytesToWrite == 0) && (!xoffReceived))
       {
@@ -3355,9 +3355,9 @@ void EdytorNc::receiveButtonClicked()
    {
       //progressDialog.setValue(count);
 
-#ifdef Q_OS_UNIX
-      usleep(2000);
-#endif
+//#ifdef Q_OS_UNIX
+//      usleep(2000);
+//#endif
 
       i = comPort->bytesAvailable();
       if(i > 0)
