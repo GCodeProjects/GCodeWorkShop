@@ -92,7 +92,7 @@ TEMPLATE = app
 CONFIG += warn_on \
     thread \
     qt
-CONFIG += release
+#CONFIG += release
 QT *= network
 RESOURCES = application.qrc
 RC_FILE = edytornc.rc

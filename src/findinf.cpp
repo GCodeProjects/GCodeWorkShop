@@ -543,7 +543,7 @@ void FindInFiles::filePreview(int x, int y)
 
             if(highlighter != NULL)
             {
-               highlighterColors.highlightMode = autoDetectHighligthMode(preview->toPlainText());
+               highlighterColors.highlightMode = autoDetectHighligthMode(preview->toPlainText().toUpper());
                highlighter->setHColors(highlighterColors, preview->font());
                highlighter->rehighlight();
             };

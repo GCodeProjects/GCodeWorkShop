@@ -2823,6 +2823,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    highlightModeComboBox->addItem(tr("PHILIPS"), MODE_PHILIPS);
    highlightModeComboBox->addItem(tr("SINUMERIK OLD"), MODE_SINUMERIK);
    highlightModeComboBox->addItem(tr("SINUMERIK NEW"), MODE_SINUMERIK_840);
+   highlightModeComboBox->addItem(tr("LinuxCNC"), MODE_LINUXCNC);
    highlightModeComboBox->addItem(tr("TOOLTIPS"), MODE_TOOLTIPS);
 
    int id = highlightModeComboBox->findData(editProp.defaultHighlightMode);

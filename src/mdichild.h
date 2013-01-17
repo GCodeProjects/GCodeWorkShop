@@ -86,7 +86,7 @@ public:
     bool findText(const QString &text, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
     QString guessFileName();
     QStringList splitFile();
-    bool findTextMatched(QString pattern, QString text);
+    bool foundTextMatched(QString pattern, QString text);
     void setCurrentFile(const QString &fileName, const QString &text);
 
 

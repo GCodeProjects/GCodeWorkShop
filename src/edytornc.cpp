@@ -603,7 +603,7 @@ void EdytorNc::replaceNext()
 
    if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
-      if(activeMdiChild()->findTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
+      if(activeMdiChild()->foundTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
          found = true;
       else
          found = findNext();
@@ -631,7 +631,7 @@ void EdytorNc::replaceNext()
             val = replacedText.toDouble(&ok);
 
             foundText = cr.selectedText();
-            foundText.remove(QRegExp("[A-Za-z]{1,}"));
+            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
             val1 = foundText.toDouble(&ok);
             replacedText = cr.selectedText();
             replacedText.remove(foundText);
@@ -645,7 +645,15 @@ void EdytorNc::replaceNext()
             if(op == '/')
                val = val1 / val;
 
-            replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+            if(replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N" || replacedText == "n")
+            {
+               replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+               if(replacedText[replacedText.length() - 1] == '.')
+                 replacedText = replacedText.remove((replacedText.length() - 1), 1);
+            }
+            else
+              replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+
          };
 
          cr.insertText(replacedText);
@@ -671,6 +679,8 @@ void EdytorNc::replacePrevious()
    bool ok;
    QRegExp regExp;
    QChar op;
+   QTextCursor cr;
+
 
    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
    bool found = false;
@@ -681,14 +691,14 @@ void EdytorNc::replacePrevious()
 
    if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
    {
-      if(activeMdiChild()->findTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
+      if(activeMdiChild()->foundTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
          found = true;
       else
          found = findPrevious();
 
       if(found)
       {
-         QTextCursor cr = activeMdiChild()->textEdit->textCursor();
+         cr = activeMdiChild()->textEdit->textCursor();
          cr.beginEditBlock();
          if(defaultMdiWindowProperites.underlineChanges)
          {
@@ -709,7 +719,7 @@ void EdytorNc::replacePrevious()
             val = replacedText.toDouble(&ok);
 
             foundText = cr.selectedText();
-            foundText.remove(QRegExp("[A-Za-z]{1,}"));
+            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
             val1 = foundText.toDouble(&ok);
             replacedText = cr.selectedText();
             replacedText.remove(foundText);
@@ -723,10 +733,19 @@ void EdytorNc::replacePrevious()
             if(op == '/')
                val = val1 / val;
 
-            replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+            if(replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N" || replacedText == "n")
+            {
+               replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+               if(replacedText[replacedText.length() - 1] == '.')
+                 replacedText = replacedText.remove((replacedText.length() - 1), 1);
+            }
+            else
+              replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+
          };
 
          cr.insertText(replacedText);
+         cr.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, replacedText.length());
          cr.endEditBlock();
          activeMdiChild()->textEdit->setTextCursor(cr);
          findPrevious();
@@ -2067,6 +2086,7 @@ void EdytorNc::createStatusBar()
    highlightTypeCombo->addItem(tr("PHILIPS"), MODE_PHILIPS);
    highlightTypeCombo->addItem(tr("SINUMERIK OLD"), MODE_SINUMERIK);
    highlightTypeCombo->addItem(tr("SINUMERIK NEW"), MODE_SINUMERIK_840);
+   highlightTypeCombo->addItem(tr("LinuxCNC"), MODE_LINUXCNC);
    highlightTypeCombo->addItem(tr("TOOLTIPS"), MODE_TOOLTIPS);
 
    connect(highlightTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setHighLightMode(int)));
@@ -2142,7 +2162,7 @@ void EdytorNc::readSettings()
 
     lastDir = settings.value("LastDir", QString(getenv("HOME"))).toString();
 
-    defaultMdiWindowProperites.extensions = settings.value("Extensions", "*.nc").toStringList();
+    defaultMdiWindowProperites.extensions = settings.value("Extensions", (QStringList() << "*.nc" << "*.anc" << "*.ngc")).toStringList();
     defaultMdiWindowProperites.saveExtension = settings.value("SaveExtension", ".nc").toString();
     defaultMdiWindowProperites.saveDirectory = settings.value("SaveDirectory", "").toString();
 
@@ -4381,7 +4401,7 @@ void EdytorNc::projectAdd()
 #ifdef Q_OS_LINUX
    QString filters = tr("All files (*.* *);;"
                         "CNC programs files *.nc (*.nc);;"
-                        "CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;"
+                        "CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;"
                         "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
                         "Drawings *.dwg *.dxf (*.dwg *.dxf);;"
                         "Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;"
@@ -4391,7 +4411,7 @@ void EdytorNc::projectAdd()
 #ifdef Q_OS_WIN32
    QString filters = tr("All files (*.* *);;"
                         "CNC programs files (*.nc);;"
-                        "CNC programs files (*.nc *.min *.anc *.cnc);;"
+                        "CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;"
                         "Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
                         "Drawings (*.dwg *.dxf);;"
                         "Pictures (*.jpg *.bmp *.svg);;"
