@@ -171,6 +171,7 @@ bool MdiChild::saveAs()
 
 #ifdef Q_OS_LINUX
    QString filters = tr("CNC programs files *.nc (*.nc);;"
+                        "CNC programs files *.ngc (*.ngc);;"
                         "CNC programs files *.anc (*.anc);;"
                         "CNC programs files *.min (*.min);;"
                         "CNC programs files *.cnc (*.cnc);;"
@@ -180,6 +181,7 @@ bool MdiChild::saveAs()
 
 #ifdef Q_OS_WIN32
    QString filters = tr("CNC programs files (*.nc);;"
+                        "CNC programs files (*.ngc);;"
                         "CNC programs files (*.anc);;"
                         "CNC programs files (*.min);;"
                         "CNC programs files (*.cnc);;"
@@ -189,6 +191,7 @@ bool MdiChild::saveAs()
 
 #ifdef Q_OS_MACX
    QString filters = tr("CNC programs files *.nc (*.nc);;"
+                        "CNC programs files *.ngc (*.ngc);;"
                         "CNC programs files *.anc (*.anc);;"
                         "CNC programs files *.min (*.min);;"
                         "CNC programs files *.cnc (*.cnc);;"
@@ -1198,6 +1201,8 @@ bool MdiChild::event(QEvent *event)
          break;
       case MODE_HEIDENHAIN_ISO   : group = QLatin1String("HEIDENHAIN_ISO");
          break;
+      case MODE_LINUXCNC         : group = QLatin1String("MODE_LINUXCNC");
+         break;
       case MODE_TOOLTIPS         : group = QLatin1String("TOOLTIP");
          break;
       default                    : event->accept();
@@ -2135,16 +2140,16 @@ void MdiChild::highlightCurrentLine()
 void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags options, bool ignoreComments)
 {
    QList<QTextEdit::ExtraSelection> tmpSelections;
-   bool found, inComment, isRegExp, isRegExpMinMax, ok;
+   bool inComment, isRegExp, isRegExpMinMax, ok;
    QString cur_line, exp, sval;
    int commentPos, id, cur_line_column;
    int pos;
    QRegExp regExp;
    double min, max;
+   Qt::CaseSensitivity caseSensitivity;
 
 
    inComment = false;
-   found = false;
    isRegExp = false;
    isRegExpMinMax = false;
    max = 0;
@@ -2163,6 +2168,11 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
 
    exp = searchString;
 
+   if(options & QTextDocument::FindCaseSensitively)
+     caseSensitivity = Qt::CaseSensitive;
+   else
+     caseSensitivity = Qt::CaseInsensitive;
+
    if(exp.contains(QRegExp("\\$\\$")))
    {
       exp.remove("$$");
@@ -2172,6 +2182,7 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
    {
       pos = 0;
       regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+      regExp.setCaseSensitivity(caseSensitivity);
       pos = regExp.indexIn(exp, 0);
       if(pos >= 0)
       {
@@ -2207,11 +2218,7 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
             return;
 
          regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(exp));
-
-         if(options & QTextDocument::FindCaseSensitively)
-            regExp.setCaseSensitivity(Qt::CaseSensitive);
-         else
-            regExp.setCaseSensitivity(Qt::CaseInsensitive);
+         regExp.setCaseSensitivity(caseSensitivity);
 
          cursor = doc->find(regExp, cursor, options);
       }
@@ -2256,7 +2263,7 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
             if(isRegExpMinMax)
             {
                sval = cursor.selectedText();
-               double val = QString(sval).remove(exp).toDouble(&ok);
+               double val = QString(sval).remove(exp, caseSensitivity).toDouble(&ok);
 
                if((val >= min) && (val <= max))
                {
@@ -2317,7 +2324,7 @@ void MdiChild::detectHighligthMode()
    if(mdiWindowProperites.hColors.highlightMode == MODE_AUTO)
    { 
       text = textEdit->toPlainText();
-      mdiWindowProperites.hColors.highlightMode = autoDetectHighligthMode(text);
+      mdiWindowProperites.hColors.highlightMode = autoDetectHighligthMode(text.toUpper());
       if(mdiWindowProperites.hColors.highlightMode == MODE_AUTO)
          mdiWindowProperites.hColors.highlightMode = mdiWindowProperites.defaultHighlightMode;
    };
@@ -2398,7 +2405,7 @@ QString MdiChild::getCurrentFileInfo()
 //
 //**************************************************************************************************
 
-bool MdiChild::findTextMatched(QString pattern, QString text)
+bool MdiChild::foundTextMatched(QString pattern, QString text)
 {
    bool matched, isRegExp, isRegExpMinMax, ok;
    int pos;
@@ -2412,6 +2419,7 @@ bool MdiChild::findTextMatched(QString pattern, QString text)
    max = 0;
    min = 0;
 
+
    if(pattern.contains(QRegExp("\\$\\$")))
    {
       pattern.remove("$$");
@@ -2421,6 +2429,7 @@ bool MdiChild::findTextMatched(QString pattern, QString text)
    {
       pos = 0;
       regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+      regExp.setCaseSensitivity(Qt::CaseInsensitive);
       pos = regExp.indexIn(pattern, 0);
       if(pos >= 0)
       {
@@ -2451,11 +2460,12 @@ bool MdiChild::findTextMatched(QString pattern, QString text)
    {
       regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(pattern));
 
+
       if(text.contains(regExp))
       {
          if(isRegExpMinMax)
          {
-            double val = QString(text).remove(pattern).toDouble(&ok);
+            double val = QString(text).remove(pattern, Qt::CaseInsensitive).toDouble(&ok);
 
             if(((val >= min) && (val <= max)))
             {
@@ -2490,6 +2500,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
    int pos;
    QRegExp regExp;
    double min, max;
+   Qt::CaseSensitivity caseSensitivity;
 
 
    inComment = false;
@@ -2498,6 +2509,11 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
    isRegExpMinMax = false;
    max = 0;
    min = 0;
+
+   if(options & QTextDocument::FindCaseSensitively)
+     caseSensitivity = Qt::CaseSensitive;
+   else
+     caseSensitivity = Qt::CaseInsensitive;
 
    exp = text;
 
@@ -2510,6 +2526,8 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
    {
       pos = 0;
       regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+      regExp.setCaseSensitivity(caseSensitivity);
+
       pos = regExp.indexIn(exp, 0);
       if(pos >= 0)
       {
@@ -2541,17 +2559,14 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
    if(exp.isEmpty())
       return false;
 
+
    cursor = textEdit->textCursor();
    do
    {
       if(isRegExp)
       {
          regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(exp));
-
-         if(options & QTextDocument::FindCaseSensitively)
-            regExp.setCaseSensitivity(Qt::CaseSensitive);
-         else
-            regExp.setCaseSensitivity(Qt::CaseInsensitive);
+         regExp.setCaseSensitivity(caseSensitivity);
 
          cursor = textEdit->document()->find(regExp, cursor, options);
 
@@ -2606,12 +2621,12 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
       if((isRegExpMinMax && found) && !inComment)
       {
          sval = cursor.selectedText();
-         double val = QString(sval).remove(exp).toDouble(&ok);
+         double val = QString(sval).remove(exp, caseSensitivity).toDouble(&ok);
 
          if(((val >= min) && (val <= max)))
          {
             inComment = false;
-            textEdit->setTextCursor(cursor);
+            textEdit->setTextCursor(cursor);           
          }
          else
             inComment = true;

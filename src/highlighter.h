@@ -59,6 +59,7 @@ private:
     void highlightBlockHeidRule(const QString &text);
     void highlightBlockHeidIsoRule(const QString &text);
     void highlightBlockToolTipsRule(const QString &text);
+    void highlightBlockLinuxCNCRule(const QString &text);
     _h_colors highlightColors;
     QFont font;
     int mode;

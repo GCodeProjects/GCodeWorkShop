@@ -41,6 +41,7 @@
 #define MODE_PHILIPS             0x07
 #define MODE_HEIDENHAIN_ISO      0x08
 #define MODE_TOOLTIPS            0x09
+#define MODE_LINUXCNC            0x0A
 
 
 struct _h_colors
