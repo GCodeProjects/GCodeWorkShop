@@ -1973,7 +1973,11 @@ void MdiChild::macroShowBasicError(int error)
 
 void MdiChild::highlightCurrentLine()
 {
+   QString openBrace;
+   QString closeBrace;
+   bool proceed;
    QList<QTextEdit::ExtraSelection> tmpSelections;
+   QTextDocument::FindFlags findOptions;
 
 
    tmpSelections.clear();
@@ -2004,32 +2008,122 @@ void MdiChild::highlightCurrentLine()
    beforeCursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
    QString beforeBrace = beforeCursor.selectedText();
 
+   proceed = true;
+   findOptions = 0;
+
    if((brace != QLatin1String("{")) && (brace != QLatin1String("}")) && (brace != QLatin1String("[")) && (brace != QLatin1String("]")) && (brace != QLatin1String("("))
-         && (brace != QLatin1String(")")) && (brace != QLatin1String("\"")))
+         && (brace != QLatin1String(")")) && (brace != QLatin1String("\""))
+         && (((brace != QLatin1String("<")) && (brace != QLatin1String(">")))))
    {
+       qDebug() << "Raz";
       if((beforeBrace == QLatin1String("{")) || (beforeBrace == QLatin1String("}")) || (beforeBrace == QLatin1String("["))
             || (beforeBrace == QLatin1String("]"))
             || (beforeBrace == QLatin1String("("))
             || (beforeBrace == QLatin1String(")"))
-            || (beforeBrace == QLatin1String("\"")))
+            || (beforeBrace == QLatin1String("\""))
+            || (((beforeBrace == QLatin1String("<"))
+            || (beforeBrace == QLatin1String(">")))))
       {
+
+          qDebug() << "Dwa";
          cursor = beforeCursor;
          brace = cursor.selectedText();
+         proceed = true;
       }
       else
       {
-         tmpSelections.append(extraSelections);
-         textEdit->setExtraSelections(tmpSelections);
-         return;
+          qDebug() << "Trzy";
+          proceed = false;
+
+          if(mdiWindowProperites.hColors.highlightMode == MODE_LINUXCNC)
+          {
+              cursor = textEdit->textCursor();
+
+              cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
+              cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
+              brace = cursor.selectedText().toUpper();
+
+              findOptions = QTextDocument::FindWholeWords;
+
+              if(brace.length() > 1)
+              {
+                  if(brace[0] == QLatin1Char('O'))
+                  {
+                      beforeCursor = cursor;
+                      openBrace = brace;
+                      closeBrace = brace;
+                      proceed = true;
+                  }
+
+                  if((brace == QLatin1String("IF")) || (brace == QLatin1String("ENDIF")))
+                  {
+                      openBrace = QLatin1String("IF");
+                      closeBrace = QLatin1String("ENDIF");
+                      proceed = true;
+                  }
+
+                  if(brace == QLatin1String("WHILE") || (brace == QLatin1String("ENDWHILE")))
+                  {
+                      openBrace = QLatin1String("WHILE");
+                      closeBrace = QLatin1String("ENDWHILE");
+                      proceed = true;
+                  }
+              }
+          };
+
+
+          if(mdiWindowProperites.hColors.highlightMode == MODE_SINUMERIK_840)
+          {
+              cursor = textEdit->textCursor();
+              qDebug() << "Sinumerik";
+              cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
+              cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
+              brace = cursor.selectedText().toUpper();
+
+              findOptions = QTextDocument::FindWholeWords;
+
+              if(brace.length() > 1)
+              {
+                  if((brace == QLatin1String("IF")) || (brace == QLatin1String("ENDIF")))
+                  {
+                      openBrace = QLatin1String("IF");
+                      closeBrace = QLatin1String("ENDIF");
+                      proceed = true;
+                  }
+
+                  if((brace == QLatin1String("REPEAT")) || (brace == QLatin1String("UNTIL")))
+                  {
+                      openBrace = QLatin1String("REPEAT");
+                      closeBrace = QLatin1String("UNTIL");
+                      proceed = true;
+                  }
+
+                  if(brace == QLatin1String("WHILE") || (brace == QLatin1String("ENDWHILE")))
+                  {
+                      openBrace = QLatin1String("WHILE");
+                      closeBrace = QLatin1String("ENDWHILE");
+                      proceed = true;
+                  }
+              }
+          };
+
       }
    }
+
+   qDebug() << brace << beforeBrace << proceed;
+
+   if(!proceed)
+   {
+       tmpSelections.append(extraSelections);
+       textEdit->setExtraSelections(tmpSelections);
+       return;
+   }
+
 
    QTextCharFormat format;
    format.setForeground(Qt::red);
    format.setFontWeight(QFont::Bold);
 
-   QString openBrace;
-   QString closeBrace;
 
    if((brace == QLatin1String("{")) || (brace == QLatin1String("}"))) {
       openBrace = QLatin1String("{");
@@ -2045,6 +2139,19 @@ void MdiChild::highlightCurrentLine()
       openBrace = QLatin1String("(");
       closeBrace = QLatin1String(")");
    }
+
+
+   if(mdiWindowProperites.hColors.highlightMode == MODE_LINUXCNC)
+   {
+       if((brace == QLatin1String("<")) || (brace == QLatin1String(">"))) {
+          openBrace = QLatin1String("<");
+          closeBrace = QLatin1String(">");
+       }
+   }
+
+
+   qDebug() << brace << openBrace << closeBrace;
+
 
    if((brace == QLatin1String("\"")))
    {
@@ -2073,8 +2180,8 @@ void MdiChild::highlightCurrentLine()
 
    if(brace == openBrace)
    {
-      QTextCursor cursor1 = doc->find(closeBrace, cursor);
-      QTextCursor cursor2 = doc->find(openBrace, cursor);
+      QTextCursor cursor1 = doc->find(closeBrace, cursor, findOptions);
+      QTextCursor cursor2 = doc->find(openBrace, cursor, findOptions);
       if(cursor2.isNull())
       {
          selection.cursor = cursor;
@@ -2087,8 +2194,8 @@ void MdiChild::highlightCurrentLine()
 
          while(cursor1.position() > cursor2.position())
          {
-            cursor1 = doc->find(closeBrace, cursor1);
-            cursor2 = doc->find(openBrace, cursor2);
+            cursor1 = doc->find(closeBrace, cursor1, findOptions);
+            cursor2 = doc->find(openBrace, cursor2, findOptions);
             if(cursor2.isNull())
             {
                break;
@@ -2102,8 +2209,8 @@ void MdiChild::highlightCurrentLine()
    } else {
       if(brace == closeBrace)
       {
-         QTextCursor cursor1 = doc->find(openBrace, cursor, QTextDocument::FindBackward);
-         QTextCursor cursor2 = doc->find(closeBrace, cursor, QTextDocument::FindBackward);
+         QTextCursor cursor1 = doc->find(openBrace, cursor, QTextDocument::FindBackward | findOptions);
+         QTextCursor cursor2 = doc->find(closeBrace, cursor, QTextDocument::FindBackward| findOptions);
          if(cursor2.isNull())
          {
             selection.cursor = cursor;
@@ -2115,8 +2222,8 @@ void MdiChild::highlightCurrentLine()
          {
             while(cursor1.position() < cursor2.position())
             {
-               cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward);
-               cursor2 = doc->find(closeBrace, cursor2, QTextDocument::FindBackward);
+               cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward | findOptions);
+               cursor2 = doc->find(closeBrace, cursor2, QTextDocument::FindBackward | findOptions);
                if(cursor2.isNull())
                {
                   break;
