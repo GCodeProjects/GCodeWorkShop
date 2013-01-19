@@ -872,6 +872,10 @@ void EdytorNc::config()
          opt.windowMode = defaultMdiWindowProperites.windowMode;
          opt.readOnly = defaultMdiWindowProperites.defaultReadOnly;
 
+         opt.saveExtension = defaultMdiWindowProperites.saveExtension;
+         opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
+         opt.extensions = defaultMdiWindowProperites.extensions;
+
          mdiChild->setMdiWindowProperites(opt);
       };
    };
@@ -2160,11 +2164,11 @@ void EdytorNc::readSettings()
 
     restoreState(settings.value("State", QByteArray()).toByteArray());
 
-    lastDir = settings.value("LastDir", QString(getenv("HOME"))).toString();
+    lastDir = settings.value("LastDir",  QDir::homePath()).toString();
 
-    defaultMdiWindowProperites.extensions = settings.value("Extensions", (QStringList() << "*.nc" << "*.anc" << "*.ngc")).toStringList();
-    defaultMdiWindowProperites.saveExtension = settings.value("SaveExtension", ".nc").toString();
-    defaultMdiWindowProperites.saveDirectory = settings.value("SaveDirectory", "").toString();
+    defaultMdiWindowProperites.extensions = settings.value("Extensions", (QStringList() << "*.nc" << "*.anc" << "*.ngc" << "*.cnc")).toStringList();
+    defaultMdiWindowProperites.saveExtension = settings.value("DefaultSaveExtension", "*.nc").toString();
+    defaultMdiWindowProperites.saveDirectory = settings.value("DefaultSaveDirectory", lastDir.absolutePath()).toString();
 
     defaultMdiWindowProperites.dotAdr = settings.value("DotAddress", "XYZB").toString();
     defaultMdiWindowProperites.dotAftrerCount = settings.value("DotAfterCount", 1000).toInt();
@@ -2293,9 +2297,9 @@ void EdytorNc::writeSettings()
 
     settings.setValue("LastDir", lastDir.path());
     
-    settings.setValue("Extensions",defaultMdiWindowProperites.extensions);
-    settings.setValue("SaveExtension",defaultMdiWindowProperites.saveExtension);
-    settings.setValue("SaveDirectory",defaultMdiWindowProperites.saveDirectory);
+    settings.setValue("Extensions", defaultMdiWindowProperites.extensions);
+    settings.setValue("DefaultSaveExtension", defaultMdiWindowProperites.saveExtension);
+    settings.setValue("DefaultSaveDirectory", defaultMdiWindowProperites.saveDirectory);
 
     settings.setValue("DotAddress", defaultMdiWindowProperites.dotAdr);
     settings.setValue("DotAfterCount", defaultMdiWindowProperites.dotAftrerCount);

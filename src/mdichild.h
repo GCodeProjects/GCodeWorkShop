@@ -41,7 +41,7 @@
 
 #define FILENAME_SINU840     "%_N_[a-zA-Z0-9_]{1,31}_(MPF|SPF|TEA|COM|PLC|DEF|INI)\\n"
 #define FILENAME_OSP         "\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"
-#define FILENAME_FANUC1      ":[0-9]{1,}"
+#define FILENAME_FANUC1      "(:|O)[0-9]{1,}"
 #define FILENAME_FANUC2      "O[0-9]{1,}"
 #define FILENAME_SINU        "%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b"
 #define FILENAME_HEID1       "%[a-zA-Z0-9_]{1,30}(\\s)"
