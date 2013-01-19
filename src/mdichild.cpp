@@ -71,7 +71,7 @@ void MdiChild::newFile()
    static int sequenceNumber = 1;
 
    isUntitled = true;
-   curFile = tr("document%1.nc").arg(sequenceNumber++);
+   curFile = tr("program%1.nc").arg(sequenceNumber++);
    setWindowTitle(curFile + "[*]");
    curFileInfo = curFile;
 
@@ -167,37 +167,41 @@ bool MdiChild::save()
 
 bool MdiChild::saveAs()
 {
-   QString fileName;
+   QString fileName, filters, saveExt;
+
+
 
 #ifdef Q_OS_LINUX
-   QString filters = tr("CNC programs files *.nc (*.nc);;"
-                        "CNC programs files *.ngc (*.ngc);;"
-                        "CNC programs files *.anc (*.anc);;"
-                        "CNC programs files *.min (*.min);;"
-                        "CNC programs files *.cnc (*.cnc);;"
-                        "Text files *.txt (*.txt);;"
-                        "All files (*.* *)");
+
+   QString extText = tr("CNC programs files %1 (%1);;");
+
 #endif
 
 #ifdef Q_OS_WIN32
-   QString filters = tr("CNC programs files (*.nc);;"
-                        "CNC programs files (*.ngc);;"
-                        "CNC programs files (*.anc);;"
-                        "CNC programs files (*.min);;"
-                        "CNC programs files (*.cnc);;"
-                        "Text files (*.txt);;"
-                        "All files (*.* *)");
+
+   QString extText = tr("CNC programs files (%1);;");
+
 #endif
 
 #ifdef Q_OS_MACX
-   QString filters = tr("CNC programs files *.nc (*.nc);;"
-                        "CNC programs files *.ngc (*.ngc);;"
-                        "CNC programs files *.anc (*.anc);;"
-                        "CNC programs files *.min (*.min);;"
-                        "CNC programs files *.cnc (*.cnc);;"
-                        "Text files *.txt (*.txt);;"
-                        "All files (*.* *)");
+
+   QString extText = tr("CNC programs files %1 (%1);;");
+
 #endif
+
+
+   filters = extText.arg(mdiWindowProperites.saveExtension);
+
+   foreach(const QString ext, mdiWindowProperites.extensions)
+   {
+      saveExt = extText.arg(ext);
+      if(ext != mdiWindowProperites.saveExtension)
+        filters.append(saveExt);
+   };
+
+   filters.append(tr("Text files (*.txt);;"
+                     "All files (*.* *)"));
+
 
    if(isUntitled)
       fileName = guessFileName();
@@ -2015,7 +2019,6 @@ void MdiChild::highlightCurrentLine()
          && (brace != QLatin1String(")")) && (brace != QLatin1String("\""))
          && (((brace != QLatin1String("<")) && (brace != QLatin1String(">")))))
    {
-       qDebug() << "Raz";
       if((beforeBrace == QLatin1String("{")) || (beforeBrace == QLatin1String("}")) || (beforeBrace == QLatin1String("["))
             || (beforeBrace == QLatin1String("]"))
             || (beforeBrace == QLatin1String("("))
@@ -2025,14 +2028,12 @@ void MdiChild::highlightCurrentLine()
             || (beforeBrace == QLatin1String(">")))))
       {
 
-          qDebug() << "Dwa";
          cursor = beforeCursor;
          brace = cursor.selectedText();
          proceed = true;
       }
       else
       {
-          qDebug() << "Trzy";
           proceed = false;
 
           if(mdiWindowProperites.hColors.highlightMode == MODE_LINUXCNC)
@@ -2062,6 +2063,13 @@ void MdiChild::highlightCurrentLine()
                       proceed = true;
                   }
 
+                  if((brace == QLatin1String("SUB")) || (brace == QLatin1String("ENDSUB")))
+                  {
+                      openBrace = QLatin1String("SUB");
+                      closeBrace = QLatin1String("ENDSUB");
+                      proceed = true;
+                  }
+
                   if(brace == QLatin1String("WHILE") || (brace == QLatin1String("ENDWHILE")))
                   {
                       openBrace = QLatin1String("WHILE");
@@ -2075,7 +2083,7 @@ void MdiChild::highlightCurrentLine()
           if(mdiWindowProperites.hColors.highlightMode == MODE_SINUMERIK_840)
           {
               cursor = textEdit->textCursor();
-              qDebug() << "Sinumerik";
+
               cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
               cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
               brace = cursor.selectedText().toUpper();
@@ -2109,8 +2117,6 @@ void MdiChild::highlightCurrentLine()
 
       }
    }
-
-   qDebug() << brace << beforeBrace << proceed;
 
    if(!proceed)
    {
@@ -2148,10 +2154,6 @@ void MdiChild::highlightCurrentLine()
           closeBrace = QLatin1String(">");
        }
    }
-
-
-   qDebug() << brace << openBrace << closeBrace;
-
 
    if((brace == QLatin1String("\"")))
    {
@@ -2808,13 +2810,15 @@ QString MdiChild::guessFileName()
       }
       if(pos >= 0)
       {
-         fileName = text.mid(pos, text.indexOf("\n", pos)-pos);
-         fileName.replace('('," ");
-         fileName.replace(')'," ");
+         fileName = text.mid(pos, expression.matchedLength());
+
          if(fileName.at(0)!='O')
              fileName[0]='O';
          if(fileName.at(0)=='O' && fileName.at(1)=='O')
              fileName.remove(0,1);
+
+         qDebug() << "Fanuc " << fileName;
+
          break;
       }
 
@@ -2843,10 +2847,14 @@ QString MdiChild::guessFileName()
    };
    
    fileName = fileName.simplified();
-   fileName.append(mdiWindowProperites.saveExtension);
+   //fileName.append(mdiWindowProperites.saveExtension);
    fileName.prepend(mdiWindowProperites.saveDirectory + "/");
 
+   fileName = QDir::cleanPath(fileName);
+
    textEdit->setTextCursor(cursor);
+
+   qDebug() << fileName << mdiWindowProperites.saveDirectory ;
 
    return fileName;
 }

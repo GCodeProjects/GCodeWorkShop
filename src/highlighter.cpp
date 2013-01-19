@@ -122,7 +122,7 @@ void Highlighter::loadRules()
       keywords << "(OR|XOR|AND|NOT|EOR|EQ|NE|GT|LT|GE|LE|IF|THEN|ELSE)"
                << "(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)"
                << "(GOTO|END|DO)[0-9]{1,5}"
-               << "(DPRINT|WHILE)";
+               << "(DPRINT|WHILE|GOTO)";
       keywordPatterns.append(keywords);
 
       pattern = "\\b^O[0-9]{1,}\\b"; // FANUC
@@ -139,7 +139,7 @@ void Highlighter::loadRules()
    {
       keywords << "\\b(OR|XOR|AND|NOT|EQ|NE|GT|LT|GE|LE)\\b"
                << "\\b(SIN|ASIN|COS|ACOS|TAN|ATAN|LN|FIX|ROUND|FUP|EXISTS|EXP|ABS|SQRT)\\b"
-               << "\\b(IF|ELSE|ENDIF|WHILE|ENDWHILE)\\b"
+               << "\\b(IF|ELSE|ENDIF|WHILE|ENDWHILE|DO|CONTINUE|RETURN)\\b"
                << "\\b(SUB|ENDSUB|CALL)\\b";
       keywordPatterns.append(keywords);
 
