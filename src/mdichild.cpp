@@ -541,6 +541,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
          if(k->key() == Qt::Key_Insert)
             textEdit->setOverwriteMode(!textEdit->overwriteMode());
 
+
          if(mdiWindowProperites.underlineChanges)
          {
             if((k->text()[0].isPrint()) && !(k->text()[0].isSpace()))
@@ -915,6 +916,35 @@ void MdiChild::doRemoveEmptyLines()
 }
 
 //**************************************************************************************************
+// Deletes text that matches the regular expression
+//**************************************************************************************************
+
+void MdiChild::doRemoveTextByRegExp(QStringList exp)
+{
+   QString tx;
+
+   QApplication::setOverrideCursor(Qt::BusyCursor);
+   tx = textEdit->toPlainText();
+
+
+   foreach(const QString expTx, exp)
+   {
+
+      tx.remove(QRegExp(expTx));
+      qDebug() << expTx;
+
+   };
+
+
+   textEdit->selectAll();
+   textEdit->insertPlainText(tx);
+   QTextCursor cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+   textEdit->setTextCursor(cursor);
+   QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
 // Add empty line after each block
 //**************************************************************************************************
 
@@ -1219,6 +1249,7 @@ bool MdiChild::event(QEvent *event)
       QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
 
       cursor = textEdit->cursorForPosition(helpEvent->pos());
+      cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, 2);  //fix cursor position
 
       if(mdiWindowProperites.hColors.highlightMode == MODE_FANUC)
       {
@@ -1235,13 +1266,14 @@ bool MdiChild::event(QEvent *event)
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
             key = cursor.selectedText();
 
-         }while((key.length() > 0 ? key.at(key.length() - 1).isLetter(): false) && !key.isEmpty() && !cursor.atBlockEnd());
+         }while((key.length() > 0 ? ((key.at(key.length() - 1).isLetter()) || (key.at(key.length() - 1) == QLatin1Char('.'))): false) && !key.isEmpty() && !cursor.atBlockEnd());
 
          cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
 
          if(key.length() < 3)
          {
             cursor = textEdit->cursorForPosition(helpEvent->pos());
+            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, 2);  //fix cursor position
 
             do
             {
@@ -1256,10 +1288,13 @@ bool MdiChild::event(QEvent *event)
             {
                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                key = cursor.selectedText();
-            }while(key.at(key.length() - 1).isDigit() && !key.isEmpty() && !cursor.atEnd());
+            }while((key.at(key.length() - 1).isDigit() || (key.at(key.length() - 1) ==  QLatin1Char('.'))) && !key.isEmpty() && !cursor.atEnd());
 
             cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+
          };
+
+         key = cursor.selectedText();
 
       }
       else
@@ -1282,9 +1317,14 @@ bool MdiChild::event(QEvent *event)
            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
 
          cursor.movePosition(QTextCursor::EndOfWord,  QTextCursor::KeepAnchor);
+
+         key = key + cursor.selectedText();
+
       };
 
-      key = key + cursor.selectedText();
+
+      key = key.simplified();
+
 
       if(key.length() == 2)
       {
@@ -1292,8 +1332,6 @@ bool MdiChild::event(QEvent *event)
             if(!key.at(1).isLetter())
                key.insert(1, "0");
       };
-
-      //qDebug() << "Full key: " << key;
 
       fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips.txt";
       if(QFile::exists(fileName))
@@ -2802,12 +2840,8 @@ QString MdiChild::guessFileName()
          break;
       };
 
-      expression.setPattern(FILENAME_FANUC1);
+      expression.setPattern(FILENAME_FANUC);
       pos = text.indexOf(expression);
-      if(pos == -1) {
-          expression.setPattern(FILENAME_FANUC2);
-          pos = text.indexOf(expression);
-      }
       if(pos >= 0)
       {
          fileName = text.mid(pos, expression.matchedLength());
@@ -2816,9 +2850,6 @@ QString MdiChild::guessFileName()
              fileName[0]='O';
          if(fileName.at(0)=='O' && fileName.at(1)=='O')
              fileName.remove(0,1);
-
-         qDebug() << "Fanuc " << fileName;
-
          break;
       }
 
@@ -2875,8 +2906,7 @@ QStringList MdiChild::splitFile()
 
    exp << FILENAME_SINU840
        << FILENAME_OSP
-       << FILENAME_FANUC1
-       << FILENAME_FANUC2
+       << FILENAME_FANUC
        << FILENAME_SINU
        << FILENAME_HEID1
        << FILENAME_HEID2
@@ -2920,6 +2950,96 @@ QStringList MdiChild::splitFile()
 
    return progs;
 }
+
+//**************************************************************************************************
+//  commrnts/uncomments selected text using ;
+//**************************************************************************************************
+
+void MdiChild::semicomment()
+{
+
+    if(textEdit->textCursor().hasSelection())
+    {
+        QTextCursor cursor = textEdit->textCursor();
+        QString selText = cursor.selectedText();
+
+        QStringList list = selText.split(QChar::ParagraphSeparator);
+        bool remove = false;
+
+        if(selText[0] == ';')
+            remove = true;
+
+        selText.clear();
+
+        foreach(QString txLine, list)
+        {
+            if(remove)
+            {
+                if(txLine.length() > 0)
+                    txLine.remove(0, 1);
+            }
+            else
+                txLine.prepend(";");
+
+            txLine.append("\n");
+            selText.append(txLine);
+        };
+
+        selText.remove(selText.length() - 1, 1);
+
+        textEdit->insertPlainText(selText);
+        textEdit->setTextCursor(cursor);
+    };
+}
+
+//**************************************************************************************************
+//  commrnts/uncomments selected text using ()
+//**************************************************************************************************
+
+void MdiChild::paracomment()
+{
+
+    if(textEdit->textCursor().hasSelection())
+    {
+        QTextCursor cursor = textEdit->textCursor();
+        QString selText = cursor.selectedText();
+
+        QStringList list = selText.split(QChar::ParagraphSeparator);
+        bool remove = false;
+
+        if(selText[0] == '(')
+            remove = true;
+
+        selText.clear();
+
+        foreach(QString txLine, list)
+        {
+            if(remove)
+            {
+                if(txLine.length() > 0)
+                {
+                    txLine.remove(0, 1);
+                    txLine.remove(txLine.length() - 1, 1);
+                };
+            }
+            else
+            {
+                txLine.prepend("(");
+                txLine.append(")");
+            };
+
+            txLine.append("\n");
+            selText.append(txLine);
+        };
+
+        selText.remove(selText.length() - 1, 1);
+
+        textEdit->insertPlainText(selText);
+        textEdit->setTextCursor(cursor);
+
+    };
+}
+
 
 //**************************************************************************************************
 //

@@ -1143,6 +1143,16 @@ void EdytorNc::doRemoveEmptyLines()
 //
 //**************************************************************************************************
 
+void EdytorNc::doRemoveByRegExp()
+{
+   if(activeMdiChild())
+       activeMdiChild()->doRemoveTextByRegExp(QStringList() << "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\)\\n)");
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void EdytorNc::doInsertEmptyLines()
 {
    if(activeMdiChild())
@@ -1848,6 +1858,16 @@ void EdytorNc::createActions()
     splittAct->setStatusTip(tr("Split file"));
     connect(splittAct, SIGNAL(triggered()), this, SLOT(splitPrograms()));
 
+    semiCommAct = new QAction(QIcon(":/images/semicomment.png"), tr("Comment ;"), this);
+    semiCommAct->setShortcut(tr("Ctrl+;"));
+    semiCommAct->setStatusTip(tr("Comment/uncomment selected text using semicolon"));
+    connect(semiCommAct, SIGNAL(triggered()), this, SLOT(doSemiComment()));
+
+    paraCommAct = new QAction(QIcon(":/images/paracomment.png"), tr("Comment ()"), this);
+    paraCommAct->setShortcut(tr("Ctrl+9"));
+    paraCommAct->setStatusTip(tr("Comment/uncomment selected text using parentheses"));
+    connect(paraCommAct, SIGNAL(triggered()), this, SLOT(doParaComment()));
+
 
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
@@ -1963,6 +1983,9 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(insertEmptyLinesAct);
     toolsMenu->addAction(removeEmptyLinesAct);
     toolsMenu->addAction(splittAct);
+    toolsMenu->addSeparator();
+    toolsMenu->addAction(semiCommAct);
+    toolsMenu->addAction(paraCommAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(insertDotAct);
     toolsMenu->addSeparator();
@@ -5142,4 +5165,24 @@ void EdytorNc::splitPrograms()
       it++;
    };
    QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doSemiComment()
+{
+   if(activeMdiChild())
+      activeMdiChild()->semicomment();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doParaComment()
+{
+   if(activeMdiChild())
+      activeMdiChild()->paracomment();
 }
