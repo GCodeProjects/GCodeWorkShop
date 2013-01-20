@@ -88,5 +88,9 @@
         <file>images/split_prog.png</file>
         <file>images/diff_editor.png</file>
         <file>images/insertemptylines.png</file>
+        <file>images/add.png</file>
+        <file>images/list-remove.png</file>
+        <file>images/semicomment.png</file>
+        <file>images/paracomment.png</file>
     </qresource>
 </RCC>

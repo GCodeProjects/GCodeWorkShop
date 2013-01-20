@@ -93,6 +93,7 @@ private slots:
     void doInsertSpaces();
     void doRemoveSpaces();
     void doRemoveEmptyLines();
+    void doRemoveByRegExp();
     void doInsertEmptyLines();
     void doInsertDot();
     void doRenumber();
@@ -146,6 +147,8 @@ private slots:
     void closeTab(int i);
     void closeCurrentWindow();
     void goToLine(QString fileName, int line);
+    void doSemiComment();
+    void doParaComment();
 
 
 
@@ -232,6 +235,9 @@ private:
     QAction *createUserToolTipsAct;
     QAction *undoAct;
     QAction *redoAct;
+
+    QAction *semiCommAct;
+    QAction *paraCommAct;
 
     QAction *findAct;
     QAction *replaceAct;

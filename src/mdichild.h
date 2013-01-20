@@ -41,8 +41,7 @@
 
 #define FILENAME_SINU840     "%_N_[a-zA-Z0-9_]{1,31}_(MPF|SPF|TEA|COM|PLC|DEF|INI)\\n"
 #define FILENAME_OSP         "\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"
-#define FILENAME_FANUC1      "(:|O)[0-9]{1,}"
-#define FILENAME_FANUC2      "O[0-9]{1,}"
+#define FILENAME_FANUC       "(:|O)[0-9]{1,}"
 #define FILENAME_SINU        "%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b"
 #define FILENAME_HEID1       "%[a-zA-Z0-9_]{1,30}(\\s)"
 #define FILENAME_HEID2       "(BEGIN)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"
@@ -69,6 +68,7 @@ public:
     int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked);
     void doRemoveSpace();
     void doRemoveEmptyLines();
+    void doRemoveTextByRegExp(QStringList exp);
     void doInsertEmptyLines();
     void doInsertSpace();
     void doInsertDot();
@@ -88,6 +88,8 @@ public:
     QStringList splitFile();
     bool foundTextMatched(QString pattern, QString text);
     void setCurrentFile(const QString &fileName, const QString &text);
+    void semicomment();
+    void paracomment();
 
 
 

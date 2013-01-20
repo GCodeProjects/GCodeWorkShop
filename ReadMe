@@ -1,7 +1,7 @@
 EdytorNC is text editor for CNC programmers.
 http://sourceforge.net/projects/edytornc/
 
-Source code of EdytorNC can from SVN : http://edytornc.svn.sourceforge.net/viewvc/edytornc/?view=tar
+Source code of EdytorNC can be downloaded from SVN server on sourceforge.net
 
 
 Some features :
@@ -20,6 +20,8 @@ Some features :
 		   You may copy it to folder with cnc programs and customize for your machine. File must be renamed to "cnc_tips.txt". Now this is done by functions in help menu.
 		   Currently tooltip file contains some information about codes for OKUMA, SINUMERIK 850 and FANUC.
 		   Code colorizing detects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC
+  ctrl+;  Comments/uncoments selected text with semicolon (;)
+  ctrl+9  Comments/uncoments selected text with parentheses ()
   
  
 Experimental features :
@@ -35,7 +37,7 @@ EdytorNC is developed in QT Creator (best for compile EdytorNC) (libs Qt 4.6, sh
 Cross platform installer made by BitRock InstallBuilder for Qt : http://installbuilder.bitrock.com
 
 
-If you have any suggestion (bug/translations mistakes) about EdytorNC please email me - artkoz(at)poczta.onet.pl
+If you have any suggestion (bug/translations mistakes) about EdytorNC please email me - artkoz78(at)gmail.com
 
 
 To compile EdytorNC :

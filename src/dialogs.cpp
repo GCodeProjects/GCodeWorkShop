@@ -3119,8 +3119,10 @@ void SetupDialog::setDefaultProp()
 
    lstExtensions->clear();
    lstExtensions->addItem("*.nc");
+   lstExtensions->addItem("*.ngc");
+   lstExtensions->addItem("*.anc");
 
-   edtSaveExtension->setText(".nc");
+   edtSaveExtension->setText("*.nc");
 }
 
 //**************************************************************************************************
@@ -3129,10 +3131,10 @@ void SetupDialog::setDefaultProp()
 
 void SetupDialog::on_btnAddExtension_clicked()
 {
-    if(edtExtension->text()=="")
+    if((edtExtension->text() == "") || (edtExtension->text() == "*."))
         return;
     lstExtensions->addItem(edtExtension->text());
-    edtExtension->setText("");
+    edtExtension->setText("*.");
 }
 
 //**************************************************************************************************
