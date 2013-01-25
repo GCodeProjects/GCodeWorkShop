@@ -23,6 +23,10 @@ Some features :
   ctrl+;  Comments/uncoments selected text with semicolon ;
   ctrl+9  Comments/uncoments selected text with parentheses ()
   
+  Find/Replace can be used to addition, subtraction, multiplication, division on numbers.
+	  in Find: Y$$ in Replace $$*2 will multiply by 2 all numbers found with Y
+	  in Find: Y$100 $10 in Replace $$*2 will multiply by 2 only numbers between 10 and 100 found with Y
+  
  
 Experimental features :
   macro program - parametric programming. See EXAMPLES dir.
