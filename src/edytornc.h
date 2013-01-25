@@ -33,6 +33,7 @@
 #include "dialogs.h"
 #include "serialtransmission.h"
 #include "kdiff3.h"
+#include "cleanupdialog.h"
 
 #include "ui_edytornc.h"
 
@@ -149,6 +150,7 @@ private slots:
     void goToLine(QString fileName, int line);
     void doSemiComment();
     void doParaComment();
+    void displayCleanUpDialog();
 
 
 
@@ -235,6 +237,7 @@ private:
     QAction *createUserToolTipsAct;
     QAction *undoAct;
     QAction *redoAct;
+    QAction *cleanUpDialogAct;
 
     QAction *semiCommAct;
     QAction *paraCommAct;
@@ -325,6 +328,7 @@ private:
     int sendStartDelay;
     bool doNotShowProgressInEditor;
     int recieveTimeout;
+    QStringList selectedExpressions;
 
     PortSettings portSettings;
 

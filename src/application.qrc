@@ -92,5 +92,6 @@
         <file>images/list-remove.png</file>
         <file>images/semicomment.png</file>
         <file>images/paracomment.png</file>
+        <file>images/cleanup.png</file>
     </qresource>
 </RCC>
