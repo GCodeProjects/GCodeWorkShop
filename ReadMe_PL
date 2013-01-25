@@ -9,7 +9,7 @@ Dostępne funkcje :
 	Obliczenia boków i kątów w trójkątach.
 	Obliczenia parametrów skrawania.
 	Przeliczanie cale/mm (także cały program). Cale zapisane ułamkami można wpisywać w formacie 1.1/2 , 3/4 itp.
-	Pierwszy komentarz umieszczony w programie jest wyświetlany w pasku tytułu, obok nazwy pliku. W tym komentarzu najlepiej umieścić informacje identyfikującą obrabiany detal.
+	Pierwszy komentarz umieszczony w programie jest wyświetlany w pasku tytułu, obok nazwy pliku. W tym komentarzu najlepiej umieścić informacje identyfikującą obrabiany detal (co wyświetlić na psaku tytułu można ustawić w konfiguracji).
 	Pierwszy komentarz zapisany w formacie dd-mm-rrrr lub ddm.m.rrrr np. (12-02-2009) lub ;09-11-2009 zamieniany jest na aktualną datę przy zapisie pliku.
 	Dodawanie usuwanie spacji – przydatne do programów FANUC.
 	Numerowanie linii – cały program lub zaznaczony fragment.
@@ -20,6 +20,13 @@ Dostępne funkcje :
 				
 	ctrl+;  komentuje/od komentuje zaznaczony tekst używając średnika ;
 	ctrl+9  komentuje/od komentuje zaznaczony tekst używając nawiasów ()
+	
+	Znajdź/zamień może być do operacji dodawania, odejmowania, mnożenia, dzielenia wartości znajdujących się przy poszukwanym znaku np :
+		w polu znajdź: Z$$ a w polu zamień: $$+5 spowoduje dodanie 5 do liczby znajdującej się przy Z
+		w polu znajdź: Z$100 $10 a w polu zamień: $$+5 spowoduje dodanie 5 do liczby znajdującej się przy Z ale tylko wtedy gdy obecna warcość mieści się w zakresie od 10 do 100
+		W przypadku wpisania w polu znajdź znaków #, N lub O jeśli wynik działania będzie liczbą całkowitą to na końcu nie zostanie dodana kropka dziesiętna.
+		
+	
 
 Funkcje eksperymentalne :
 	Wysyłanie/odbieranie programu przez port szeregowy.
