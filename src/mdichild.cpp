@@ -921,27 +921,34 @@ void MdiChild::doRemoveEmptyLines()
 
 void MdiChild::doRemoveTextByRegExp(QStringList exp)
 {
-   QString tx;
+    QString tx;
 
-   QApplication::setOverrideCursor(Qt::BusyCursor);
-   tx = textEdit->toPlainText();
+    if(exp.isEmpty())
+        return;
 
-
-   foreach(const QString expTx, exp)
-   {
-
-      tx.remove(QRegExp(expTx));
-      qDebug() << expTx;
-
-   };
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+    tx = textEdit->toPlainText();
 
 
-   textEdit->selectAll();
-   textEdit->insertPlainText(tx);
-   QTextCursor cursor = textEdit->textCursor();
-   cursor.setPosition(0);
-   textEdit->setTextCursor(cursor);
-   QApplication::restoreOverrideCursor();
+    foreach(QString expTx, exp)
+    {
+
+        if(expTx.contains('$'))
+            if(!expTx.contains("\\$"))
+                expTx.replace('$', "\\n");
+
+        tx.remove(QRegExp(expTx));
+        qDebug() << expTx;
+
+    };
+
+
+    textEdit->selectAll();
+    textEdit->insertPlainText(tx);
+    QTextCursor cursor = textEdit->textCursor();
+    cursor.setPosition(0);
+    textEdit->setTextCursor(cursor);
+    QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************

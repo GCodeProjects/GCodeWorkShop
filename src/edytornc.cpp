@@ -44,6 +44,8 @@ EdytorNc::EdytorNc()
     dirModel = NULL;
     openExampleAct = NULL;
 
+    selectedExpressions.clear();
+
 
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
@@ -1415,7 +1417,7 @@ void EdytorNc::about()
                             trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
                             trUtf8("<P>Version: ") +
                                    "2013.01.00 BETA" +
-                            trUtf8("<P>Copyright (C) 1998 - 2012 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
+                            trUtf8("<P>Copyright (C) 1998 - 2013 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                             trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                             trUtf8("<br />German translation thanks to Michael Numberger") +
                             trUtf8("<br />Czech translation thanks to Pavel Fric") +
@@ -1691,8 +1693,6 @@ void EdytorNc::createActions()
     printAct->setStatusTip(tr("Print file"));
     connect(printAct, SIGNAL(triggered()), this, SLOT(printFile()));
 
-  
-
     
     undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
     undoAct->setShortcut(QKeySequence::Undo);
@@ -1753,7 +1753,7 @@ void EdytorNc::createActions()
     connect(readOnlyAct, SIGNAL(triggered()), this, SLOT(readOnly()));
 
     configAct = new QAction(QIcon(":/images/configure.png"), tr("Configuration"), this);
-    //configAct->setShortcut(tr("Ctrl+R"));
+    configAct->setShortcut(QKeySequence::Preferences);
     configAct->setStatusTip(tr("Open configuration dialog"));
     connect(configAct, SIGNAL(triggered()), this, SLOT(config()));
 
@@ -1785,6 +1785,11 @@ void EdytorNc::createActions()
     //insertEmptyLinesAct->setShortcut(tr("F5"));
     insertEmptyLinesAct->setStatusTip(tr("Insert empty lines"));
     connect(insertEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
+
+    cleanUpDialogAct = new QAction(QIcon(":/images/cleanup.png"), tr("Clean&up"), this);
+    //cleanUpDialogAct->setShortcut(QKeySequence::Print);
+    cleanUpDialogAct->setStatusTip(tr("Remove text using regular expressions"));
+    connect(cleanUpDialogAct, SIGNAL(triggered()), this, SLOT(displayCleanUpDialog()));
 
     insertDotAct = new QAction(QIcon(":/images/dots.png"), tr("Insert dots"), this);
     insertDotAct->setShortcut(tr("F6"));
@@ -1979,6 +1984,8 @@ void EdytorNc::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction(insertSpcAct);
     toolsMenu->addAction(removeSpcAct);
+    toolsMenu->addSeparator();
+    toolsMenu->addAction(cleanUpDialogAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(insertEmptyLinesAct);
     toolsMenu->addAction(removeEmptyLinesAct);
@@ -2298,6 +2305,16 @@ void EdytorNc::readSettings()
     tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt()); 
     currentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir", false).toBool());
     filePreviewSpinBox->setValue(settings.value("FilePreviewNo", 10).toInt());
+
+
+    settings.beginGroup("CleanUpDialog");
+
+    selectedExpressions = settings.value("SelectedExpressions", (QStringList() << "")).toStringList();
+
+    settings.endGroup();
+
+
+
 }
 
 //**************************************************************************************************
@@ -2414,6 +2431,14 @@ void EdytorNc::writeSettings()
     settings.endArray();
 
     settings.setValue("MaximizedMdi", maximized);
+
+
+    settings.beginGroup("CleanUpDialog");
+
+    settings.setValue("SelectedExpressions", selectedExpressions);
+
+    settings.endGroup();
+
 }
 
 //**************************************************************************************************
@@ -5186,3 +5211,32 @@ void EdytorNc::doParaComment()
    if(activeMdiChild())
       activeMdiChild()->paracomment();
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::displayCleanUpDialog()
+{
+
+    MdiChild *editorWindow = activeMdiChild();
+
+    if(editorWindow)
+    {
+       cleanUpDialog *dialog = new cleanUpDialog(this);
+       //dialog->setText(activeMdiChild()->textEdit->toPlainText());
+
+       int result = dialog->exec(selectedExpressions, editorWindow->textEdit->toPlainText());
+
+       if(result == QDialog::Accepted)
+       {
+          selectedExpressions = dialog->getSelectedExpressions();
+          editorWindow->doRemoveTextByRegExp(selectedExpressions);
+       };
+
+       delete(dialog);
+    };
+
+
+}
+

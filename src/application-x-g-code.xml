@@ -6,5 +6,6 @@
     <glob pattern="*.nc" />
     <glob pattern="*.anc" />
     <glob pattern="*.cnc" />
+    <glob pattern="*.ngc" />
   </mime-type>
 </mime-info>
