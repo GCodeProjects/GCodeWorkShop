@@ -91,18 +91,18 @@ EdytorNc::EdytorNc()
     
     if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
     {
-       mdiArea->setViewMode(QMdiArea::TabbedView);
-       QTabBar* tab = mdiArea->findChild<QTabBar*>();
-       if(tab)
-       {
-          connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-          tab->setTabsClosable(true);
-          // The tabs might be very wide
-          tab->setExpanding(false);
-       };
+        mdiArea->setViewMode(QMdiArea::TabbedView);
+        QTabBar* tab = mdiArea->findChild<QTabBar*>();
+        if(tab)
+        {
+            connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+            tab->setTabsClosable(true);
+            // The tabs might be very wide
+            tab->setExpanding(false);
+        };
     }
     else
-       mdiArea->setViewMode(QMdiArea::SubWindowView);
+        mdiArea->setViewMode(QMdiArea::SubWindowView);
 
 }
 
@@ -112,12 +112,12 @@ EdytorNc::EdytorNc()
 
 EdytorNc::~EdytorNc()
 {
-   proc = findChild<QProcess *>();
-   if(proc)
-   {
-      proc->close();
-      delete(proc);
-   };
+    proc = findChild<QProcess *>();
+    if(proc)
+    {
+        proc->close();
+        delete(proc);
+    };
 }    
 
 //**************************************************************************************************
@@ -126,11 +126,11 @@ EdytorNc::~EdytorNc()
 
 void EdytorNc::closeTab(int i)
 {
-   QMdiSubWindow *sub = mdiArea->subWindowList()[i];
-   QWidget *win = sub->widget();
-   win->close();
-   mdiArea->setActiveSubWindow(sub);
-   mdiArea->closeActiveSubWindow();
+    QMdiSubWindow *sub = mdiArea->subWindowList()[i];
+    QWidget *win = sub->widget();
+    win->close();
+    mdiArea->setActiveSubWindow(sub);
+    mdiArea->closeActiveSubWindow();
 }
 
 //**************************************************************************************************
@@ -139,7 +139,7 @@ void EdytorNc::closeTab(int i)
 
 void EdytorNc::closeCurrentWindow()
 {
-   mdiArea->closeActiveSubWindow();
+    mdiArea->closeActiveSubWindow();
 }
 
 //**************************************************************************************************
@@ -154,43 +154,43 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 
     if(!maybeSaveProject())
     {
-       event->ignore();
-       return;
+        event->ignore();
+        return;
     };
 
     foreach(const QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
     {
-       MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-       if(mdiChild->textEdit->document()->isModified())
-       {
-          setUpdatesEnabled(TRUE);
-          mdiChild->activateWindow();
-          mdiChild->raise();
-          if(!mdiChild->parentWidget()->close())
-          {
-              event->ignore();
-              return;
-          };
-          setUpdatesEnabled(FALSE);
-       };
+        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+        if(mdiChild->textEdit->document()->isModified())
+        {
+            setUpdatesEnabled(TRUE);
+            mdiChild->activateWindow();
+            mdiChild->raise();
+            if(!mdiChild->parentWidget()->close())
+            {
+                event->ignore();
+                return;
+            };
+            setUpdatesEnabled(FALSE);
+        };
     };
 
     mdiArea->closeAllSubWindows();
 
     if(activeMdiChild())
     {
-       event->ignore();
-    } 
-    else 
-    {  
-       event->accept();
+        event->ignore();
+    }
+    else
+    {
+        event->accept();
     }
     setUpdatesEnabled(TRUE);
 
     if(findFiles != NULL)
     {
-      findFiles->close();
-      findFiles = NULL;
+        findFiles->close();
+        findFiles = NULL;
     };
 
 }
@@ -213,9 +213,9 @@ void EdytorNc::newFile()
     child->setMdiWindowProperites(defaultMdiWindowProperites);
 
     if(defaultMdiWindowProperites.maximized)
-      child->showMaximized();
+        child->showMaximized();
     else
-      child->showNormal();
+        child->showNormal();
 }
 
 //**************************************************************************************************
@@ -231,10 +231,10 @@ void EdytorNc::open()
     QString *filters = getFilters(defaultMdiWindowProperites.extensions);
 
     QStringList files = QFileDialog::getOpenFileNames(
-                         this,
-                         tr("Select one or more files to open"),
-                         lastDir.absolutePath(),
-                         *filters, 0);
+                this,
+                tr("Select one or more files to open"),
+                lastDir.absolutePath(),
+                *filters, 0);
 
     delete filters;
 
@@ -243,37 +243,37 @@ void EdytorNc::open()
     QStringList::Iterator it = list.begin();
     while(it != list.end())
     {
-       file.setFile(*it);
-       existing = findMdiChild(*it);
+        file.setFile(*it);
+        existing = findMdiChild(*it);
 
-       if((file.exists()) && (file.isReadable()) && !existing)
-       {
-          lastDir = file.absoluteDir();
-          fileTreeViewChangeRootDir();
-          MdiChild *child = createMdiChild();
-          if(child->loadFile(*it))
-          {
-             defaultMdiWindowProperites.cursorPos = 0;
-             defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-             defaultMdiWindowProperites.geometry = QByteArray();
-             defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
-             defaultMdiWindowProperites.editorToolTips = true;
-             child->setMdiWindowProperites(defaultMdiWindowProperites);
-             if(defaultMdiWindowProperites.maximized)
-               child->showMaximized();
-             else
-               child->showNormal();
-             updateRecentFiles(*it);
-          }
-          else
-          {
-             child->parentWidget()->close();
-          };
-       };
-       ++it;
+        if((file.exists()) && (file.isReadable()) && !existing)
+        {
+            lastDir = file.absoluteDir();
+            fileTreeViewChangeRootDir();
+            MdiChild *child = createMdiChild();
+            if(child->loadFile(*it))
+            {
+                defaultMdiWindowProperites.cursorPos = 0;
+                defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+                defaultMdiWindowProperites.geometry = QByteArray();
+                defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
+                defaultMdiWindowProperites.editorToolTips = true;
+                child->setMdiWindowProperites(defaultMdiWindowProperites);
+                if(defaultMdiWindowProperites.maximized)
+                    child->showMaximized();
+                else
+                    child->showNormal();
+                updateRecentFiles(*it);
+            }
+            else
+            {
+                child->parentWidget()->close();
+            };
+        };
+        ++it;
     };
     if(existing)
-      mdiArea->setActiveSubWindow(existing);
+        mdiArea->setActiveSubWindow(existing);
 
     statusBar()->showMessage(tr("File loaded"), 2000);
 }
@@ -284,68 +284,68 @@ void EdytorNc::open()
 
 void EdytorNc::openExample()
 {
-   QFileInfo file;
-   QMdiSubWindow *existing;
-   QString dir;
+    QFileInfo file;
+    QMdiSubWindow *existing;
+    QString dir;
 
-   existing = 0;
-
-
-   if(QDir(EXAMPLES_PATH).exists())
-      dir = EXAMPLES_PATH;
-   else
-      dir = QApplication::applicationDirPath() + "/" + "EXAMPLES";
+    existing = 0;
 
 
-
-   QString *filters = getFilters(defaultMdiWindowProperites.extensions);
-
-   QStringList files = QFileDialog::getOpenFileNames(
-                        this,
-                        tr("Select one or more files to open"),
-                        dir,
-                        *filters, 0);
-
-   delete filters;
+    if(QDir(EXAMPLES_PATH).exists())
+        dir = EXAMPLES_PATH;
+    else
+        dir = QApplication::applicationDirPath() + "/" + "EXAMPLES";
 
 
-   QStringList list = files;
-   QStringList::Iterator it = list.begin();
-   while(it != list.end())
-   {
-      file.setFile(*it);
-      existing = findMdiChild(*it);
 
-      if((file.exists()) && (file.isReadable()) && !existing)
-      {
-         lastDir = file.absoluteDir();
-         fileTreeViewChangeRootDir();
-         MdiChild *child = createMdiChild();
-         if(child->loadFile(*it))
-         {
-            defaultMdiWindowProperites.cursorPos = 0;
-            defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-            defaultMdiWindowProperites.geometry = QByteArray();
-            defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
-            defaultMdiWindowProperites.editorToolTips = true;
-            child->setMdiWindowProperites(defaultMdiWindowProperites);
-            if(defaultMdiWindowProperites.maximized)
-              child->showMaximized();
+    QString *filters = getFilters(defaultMdiWindowProperites.extensions);
+
+    QStringList files = QFileDialog::getOpenFileNames(
+                this,
+                tr("Select one or more files to open"),
+                dir,
+                *filters, 0);
+
+    delete filters;
+
+
+    QStringList list = files;
+    QStringList::Iterator it = list.begin();
+    while(it != list.end())
+    {
+        file.setFile(*it);
+        existing = findMdiChild(*it);
+
+        if((file.exists()) && (file.isReadable()) && !existing)
+        {
+            lastDir = file.absoluteDir();
+            fileTreeViewChangeRootDir();
+            MdiChild *child = createMdiChild();
+            if(child->loadFile(*it))
+            {
+                defaultMdiWindowProperites.cursorPos = 0;
+                defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+                defaultMdiWindowProperites.geometry = QByteArray();
+                defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
+                defaultMdiWindowProperites.editorToolTips = true;
+                child->setMdiWindowProperites(defaultMdiWindowProperites);
+                if(defaultMdiWindowProperites.maximized)
+                    child->showMaximized();
+                else
+                    child->showNormal();
+                updateRecentFiles(*it);
+            }
             else
-              child->showNormal();
-            updateRecentFiles(*it);
-         }
-         else
-         {
-            child->parentWidget()->close();
-         };
-      };
-      ++it;
-   };
-   if(existing)
-     mdiArea->setActiveSubWindow(existing);
+            {
+                child->parentWidget()->close();
+            };
+        };
+        ++it;
+    };
+    if(existing)
+        mdiArea->setActiveSubWindow(existing);
 
-   statusBar()->showMessage(tr("File loaded"), 2000);
+    statusBar()->showMessage(tr("File loaded"), 2000);
 }
 
 //**************************************************************************************************
@@ -354,36 +354,36 @@ void EdytorNc::openExample()
 
 void EdytorNc::openFile(const QString fileName)
 {
-   QFileInfo file;
+    QFileInfo file;
 
-   file.setFile(fileName);
+    file.setFile(fileName);
 
-   QMdiSubWindow *existing = findMdiChild(fileName);
+    QMdiSubWindow *existing = findMdiChild(fileName);
 
-   if((file.exists()) && (file.isReadable()) && !existing)
-   {
-      lastDir = file.absoluteDir();
-      fileTreeViewChangeRootDir();
-      MdiChild *child = createMdiChild();
-      if(child->loadFile(fileName))
-      {
-         defaultMdiWindowProperites.cursorPos = 0;
-         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-         //defaultMdiWindowProperites.maximized = FALSE;
-         defaultMdiWindowProperites.geometry = QByteArray();
-         defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
-         defaultMdiWindowProperites.editorToolTips = true;
-         child->setMdiWindowProperites(defaultMdiWindowProperites);
-         if(defaultMdiWindowProperites.maximized)
-           child->showMaximized();
-         else
-           child->showNormal();
-      }
-      else
-      {
-         child->parentWidget()->close();
-      };
-   };
+    if((file.exists()) && (file.isReadable()) && !existing)
+    {
+        lastDir = file.absoluteDir();
+        fileTreeViewChangeRootDir();
+        MdiChild *child = createMdiChild();
+        if(child->loadFile(fileName))
+        {
+            defaultMdiWindowProperites.cursorPos = 0;
+            defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+            //defaultMdiWindowProperites.maximized = FALSE;
+            defaultMdiWindowProperites.geometry = QByteArray();
+            defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
+            defaultMdiWindowProperites.editorToolTips = true;
+            child->setMdiWindowProperites(defaultMdiWindowProperites);
+            if(defaultMdiWindowProperites.maximized)
+                child->showMaximized();
+            else
+                child->showNormal();
+        }
+        else
+        {
+            child->parentWidget()->close();
+        };
+    };
 }
 
 //**************************************************************************************************
@@ -393,7 +393,7 @@ void EdytorNc::openFile(const QString fileName)
 void EdytorNc::save()
 {
     if(activeMdiChild() && activeMdiChild()->save())
-      statusBar()->showMessage(tr("File saved"), 2000);
+        statusBar()->showMessage(tr("File saved"), 2000);
 }
 
 //**************************************************************************************************
@@ -403,7 +403,7 @@ void EdytorNc::save()
 void EdytorNc::saveAs()
 {
     if(activeMdiChild() && activeMdiChild()->saveAs())
-      statusBar()->showMessage(tr("File saved"), 2000);
+        statusBar()->showMessage(tr("File saved"), 2000);
 }
 
 //**************************************************************************************************
@@ -412,17 +412,17 @@ void EdytorNc::saveAs()
 
 void EdytorNc::printFile()
 {
-   if(activeMdiChild())
-   {
-      QTextDocument *document = activeMdiChild()->textEdit->document();
-      QPrinter printer;
+    if(activeMdiChild())
+    {
+        QTextDocument *document = activeMdiChild()->textEdit->document();
+        QPrinter printer;
 
-      QPrintDialog *dlg = new QPrintDialog(&printer, this);
-      if(dlg->exec() != QDialog::Accepted)
-        return;
+        QPrintDialog *dlg = new QPrintDialog(&printer, this);
+        if(dlg->exec() != QDialog::Accepted)
+            return;
 
-      document->print(&printer);
-   };
+        document->print(&printer);
+    };
 }
 
 //**************************************************************************************************
@@ -432,7 +432,7 @@ void EdytorNc::printFile()
 void EdytorNc::cut()
 {
     if(activeMdiChild())
-      activeMdiChild()->textEdit->cut();
+        activeMdiChild()->textEdit->cut();
 }
 
 //**************************************************************************************************
@@ -442,7 +442,7 @@ void EdytorNc::cut()
 void EdytorNc::copy()
 {
     if(activeMdiChild())
-      activeMdiChild()->textEdit->copy();
+        activeMdiChild()->textEdit->copy();
 }
 
 //**************************************************************************************************
@@ -451,29 +451,29 @@ void EdytorNc::copy()
 
 void EdytorNc::findInFl()
 {
-   if(findFiles == NULL)
-   {
-      findFiles = new FindInFiles(splitter);
+    if(findFiles == NULL)
+    {
+        findFiles = new FindInFiles(splitter);
 
-      if(defaultMdiWindowProperites.syntaxH)
-         findFiles->setHighlightColors(defaultMdiWindowProperites.hColors);
+        if(defaultMdiWindowProperites.syntaxH)
+            findFiles->setHighlightColors(defaultMdiWindowProperites.hColors);
 
-      if(activeMdiChild())
-         findFiles->setDir(QFileInfo(activeMdiChild()->currentFile()).canonicalPath());
+        if(activeMdiChild())
+            findFiles->setDir(QFileInfo(activeMdiChild()->currentFile()).canonicalPath());
 
-      connect(findFiles, SIGNAL(fileClicked(QString)), this, SLOT(loadFoundedFile(QString)));
-   }
-   else
-     if(!findFilesAct->isChecked())
-     {
-        findFiles->close();
-        findFiles = NULL;
-     }
-     else
-     {
-        findFiles->show();
-        findFilesAct->setChecked(true);
-     };
+        connect(findFiles, SIGNAL(fileClicked(QString)), this, SLOT(loadFoundedFile(QString)));
+    }
+    else
+        if(!findFilesAct->isChecked())
+        {
+            findFiles->close();
+            findFiles = NULL;
+        }
+        else
+        {
+            findFiles->show();
+            findFilesAct->setChecked(true);
+        };
 }
 
 //**************************************************************************************************
@@ -482,52 +482,31 @@ void EdytorNc::findInFl()
 
 bool EdytorNc::findNext()
 {
-   bool hasMdiChild = (activeMdiChild() != 0);
-   bool found = false;
-   QTextCursor cursor, cursorOld;
-   QPalette palette;
+    bool hasMdiChild = (activeMdiChild() != 0);
+    bool found = false;
+    QPalette palette;
 
-   findNextAct->setEnabled(false);
-   findPreviousAct->setEnabled(false);
+    findNextAct->setEnabled(false);
+    findPreviousAct->setEnabled(false);
 
-   if(!findEdit->text().isEmpty() && hasMdiChild)
-   {
-      found = activeMdiChild()->findText(findEdit->text(),
-                                         ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                          (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
-                                         mCheckIgnoreComments->isChecked());
+    if(!findEdit->text().isEmpty() && hasMdiChild)
+    {
+        found = activeMdiChild()->findNext(findEdit->text(),
+                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
+                                           mCheckIgnoreComments->isChecked());
 
-      if(!found)
-      {
-         cursor = activeMdiChild()->textEdit->textCursor();
-         cursorOld = cursor;
-         cursor.movePosition(QTextCursor::Start);
-         activeMdiChild()->textEdit->setTextCursor(cursor);
+        palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
+        if(found)
+            findEdit->setPalette(QPalette());
+        else
+            findEdit->setPalette(palette);
+    };
 
-         found = activeMdiChild()->findText(findEdit->text(),
-                                            ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                             (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
-                                            mCheckIgnoreComments->isChecked());
-
-         if(!found)
-         {
-            cursorOld.clearSelection();
-            activeMdiChild()->textEdit->setTextCursor(cursorOld);
-         };
-      };
-
-      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
-
-      if(found)
-         findEdit->setPalette(QPalette());
-      else
-         findEdit->setPalette(palette);
-   };
-
-   findNextAct->setEnabled(true);
-   findPreviousAct->setEnabled(true);
-   return found;
+    findNextAct->setEnabled(true);
+    findPreviousAct->setEnabled(true);
+    return found;
 }
 
 //**************************************************************************************************
@@ -536,52 +515,32 @@ bool EdytorNc::findNext()
 
 bool EdytorNc::findPrevious()
 {
-   bool hasMdiChild = (activeMdiChild() != 0);
-   bool found = false;
-   QTextCursor cursor, cursorOld;
-   QPalette palette;
+    bool hasMdiChild = (activeMdiChild() != 0);
+    bool found = false;
+    QPalette palette;
 
-   findNextAct->setEnabled(false);
-   findPreviousAct->setEnabled(false);
+    findNextAct->setEnabled(false);
+    findPreviousAct->setEnabled(false);
 
-   if(!findEdit->text().isEmpty() && hasMdiChild)
-   {
-      found = activeMdiChild()->findText(findEdit->text(), QTextDocument::FindBackward |
-                                         ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                          (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
-                                         mCheckIgnoreComments->isChecked());
+    if(!findEdit->text().isEmpty() && hasMdiChild)
+    {
+        found = activeMdiChild()->findNext(findEdit->text(), QTextDocument::FindBackward |
+                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
+                                           mCheckIgnoreComments->isChecked());
 
-      if(!found)
-      {
-         cursor = activeMdiChild()->textEdit->textCursor();
-         cursorOld = cursor;
-         cursor.movePosition(QTextCursor::End);
-         activeMdiChild()->textEdit->setTextCursor(cursor);
+        palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
-         found = activeMdiChild()->findText(findEdit->text(), QTextDocument::FindBackward |
-                                            ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                             (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
-                                            mCheckIgnoreComments->isChecked());
+        if(found)
+            findEdit->setPalette(QPalette());
+        else
+            findEdit->setPalette(palette);
+    };
 
-         if(!found)
-         {
-            cursorOld.clearSelection();
-            activeMdiChild()->textEdit->setTextCursor(cursorOld);
-         };
-      };
+    findNextAct->setEnabled(true);
+    findPreviousAct->setEnabled(true);
 
-      palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
-
-      if(found)
-         findEdit->setPalette(QPalette());
-      else
-         findEdit->setPalette(palette);
-   };
-
-   findNextAct->setEnabled(true);
-   findPreviousAct->setEnabled(true);
-
-   return found;
+    return found;
 }
 
 //**************************************************************************************************
@@ -590,84 +549,33 @@ bool EdytorNc::findPrevious()
 
 void EdytorNc::replaceNext()
 {
-   QString replacedText, foundText;
-   double val, val1;
-   bool ok;
-   QRegExp regExp;
-   QChar op;
+    QPalette palette;
+    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
+    bool found = false;
 
-   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
-   bool found = false;
+    replaceNextAct->setEnabled(false);
+    replacePreviousAct->setEnabled(false);
+    replaceAllAct->setEnabled(false);
 
-   replaceNextAct->setEnabled(false);
-   replacePreviousAct->setEnabled(false);
-   replaceAllAct->setEnabled(false);
+    if(hasMdiChildNotReadOnly)
+    {
 
-   if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
-   {
-      if(activeMdiChild()->foundTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
-         found = true;
-      else
-         found = findNext();
+        found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
+                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
+                                              mCheckIgnoreComments->isChecked());
 
-      if(found)
-      {
-         QTextCursor cr = activeMdiChild()->textEdit->textCursor();
-         cr.beginEditBlock();
-         if(defaultMdiWindowProperites.underlineChanges)
-         {
-            QTextCharFormat format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::DotLine);
-            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
-            cr.setCharFormat(format);
-         };
+        palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
-         replacedText = replaceEdit->text();
+        if(found)
+            findEdit->setPalette(QPalette());
+        else
+            findEdit->setPalette(palette);
+    };
 
-         regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[0-9.]{1,}"));
-         if(replacedText.contains(regExp))
-         {
-            replacedText.remove("$$");
-            op = replacedText.at(0);
-            replacedText.remove(0, 1);
-            val = replacedText.toDouble(&ok);
-
-            foundText = cr.selectedText();
-            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
-            val1 = foundText.toDouble(&ok);
-            replacedText = cr.selectedText();
-            replacedText.remove(foundText);
-
-            if(op == '+')
-               val = val1 + val;
-            if(op == '-')
-               val = val1 - val;
-            if(op == '*')
-               val = val1 * val;
-            if(op == '/')
-               val = val1 / val;
-
-            if(replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N" || replacedText == "n")
-            {
-               replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
-               if(replacedText[replacedText.length() - 1] == '.')
-                 replacedText = replacedText.remove((replacedText.length() - 1), 1);
-            }
-            else
-              replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
-
-         };
-
-         cr.insertText(replacedText);
-         cr.endEditBlock();
-         activeMdiChild()->textEdit->setTextCursor(cr);
-         findNext();
-      };
-   };
-
-   replaceNextAct->setEnabled(true);
-   replacePreviousAct->setEnabled(true);
-   replaceAllAct->setEnabled(true);
+    replaceNextAct->setEnabled(true);
+    replacePreviousAct->setEnabled(true);
+    replaceAllAct->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -676,87 +584,33 @@ void EdytorNc::replaceNext()
 
 void EdytorNc::replacePrevious()
 {
-   QString replacedText, foundText;
-   double val, val1;
-   bool ok;
-   QRegExp regExp;
-   QChar op;
-   QTextCursor cr;
+    QPalette palette;
+    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
+    bool found = false;
 
+    replaceNextAct->setEnabled(false);
+    replacePreviousAct->setEnabled(false);
+    replaceAllAct->setEnabled(false);
 
-   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
-   bool found = false;
+    if(hasMdiChildNotReadOnly)
+    {
 
-   replaceNextAct->setEnabled(false);
-   replacePreviousAct->setEnabled(false);
-   replaceAllAct->setEnabled(false);
+        found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(), QTextDocument::FindBackward |
+                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
+                                              mCheckIgnoreComments->isChecked());
 
-   if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
-   {
-      if(activeMdiChild()->foundTextMatched(findEdit->text(), activeMdiChild()->textEdit->textCursor().selectedText()))
-         found = true;
-      else
-         found = findPrevious();
+        palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
-      if(found)
-      {
-         cr = activeMdiChild()->textEdit->textCursor();
-         cr.beginEditBlock();
-         if(defaultMdiWindowProperites.underlineChanges)
-         {
-            QTextCharFormat format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::DotLine);
-            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
-            cr.setCharFormat(format);
-         };
+        if(found)
+            findEdit->setPalette(QPalette());
+        else
+            findEdit->setPalette(palette);
+    };
 
-         replacedText = replaceEdit->text();
-
-         regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[0-9.]{1,}"));
-         if(replacedText.contains(regExp))
-         {
-            replacedText.remove("$$");
-            op = replacedText.at(0);
-            replacedText.remove(0, 1);
-            val = replacedText.toDouble(&ok);
-
-            foundText = cr.selectedText();
-            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
-            val1 = foundText.toDouble(&ok);
-            replacedText = cr.selectedText();
-            replacedText.remove(foundText);
-
-            if(op == '+')
-               val = val1 + val;
-            if(op == '-')
-               val = val1 - val;
-            if(op == '*')
-               val = val1 * val;
-            if(op == '/')
-               val = val1 / val;
-
-            if(replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N" || replacedText == "n")
-            {
-               replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
-               if(replacedText[replacedText.length() - 1] == '.')
-                 replacedText = replacedText.remove((replacedText.length() - 1), 1);
-            }
-            else
-              replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
-
-         };
-
-         cr.insertText(replacedText);
-         cr.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, replacedText.length());
-         cr.endEditBlock();
-         activeMdiChild()->textEdit->setTextCursor(cr);
-         findPrevious();
-      };
-   };
-
-   replaceNextAct->setEnabled(true);
-   replacePreviousAct->setEnabled(true);
-   replaceAllAct->setEnabled(true);
+    replaceNextAct->setEnabled(true);
+    replacePreviousAct->setEnabled(true);
+    replaceAllAct->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -765,52 +619,36 @@ void EdytorNc::replacePrevious()
 
 void EdytorNc::replaceAll()
 {
-   QTextCursor startCursor, cr;
-   QTextCharFormat format;
+    QPalette palette;
+    bool found = false;
+    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
 
-   bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
-   bool found = false;
+    replaceNextAct->setEnabled(false);
+    replacePreviousAct->setEnabled(false);
+    replaceAllAct->setEnabled(false);
 
-   replaceNextAct->setEnabled(false);
-   replacePreviousAct->setEnabled(false);
-   replaceAllAct->setEnabled(false);
+    if(hasMdiChildNotReadOnly)
+    {
+        QApplication::setOverrideCursor(Qt::BusyCursor);
 
-   if(hasMdiChildNotReadOnly) //!replaceEdit->text().isEmpty() &&
-   {
-      QApplication::setOverrideCursor(Qt::BusyCursor);
-      if(activeMdiChild()->textEdit->textCursor().selectedText() == findEdit->text())
-        found = true;
-      else
-        found = findNext();
+        found = activeMdiChild()->replaceAll(findEdit->text(), replaceEdit->text(),
+                                             ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                              (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))),
+                                             mCheckIgnoreComments->isChecked());
 
-      startCursor = activeMdiChild()->textEdit->textCursor();
+        palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
-      while(found)
-      {
-         cr = activeMdiChild()->textEdit->textCursor();
-         cr.beginEditBlock();
-         if(defaultMdiWindowProperites.underlineChanges)
-         {
-            format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::DotLine);
-            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
-            cr.setCharFormat(format);
-         };
-         cr.insertText(replaceEdit->text());
-         cr.endEditBlock();
-         activeMdiChild()->textEdit->setTextCursor(cr);
+        if(found)
+            findEdit->setPalette(QPalette());
+        else
+            findEdit->setPalette(palette);
 
-         found = findNext();
-         if(startCursor.blockNumber() == activeMdiChild()->textEdit->textCursor().blockNumber())
-           break;
-         qApp->processEvents();
-      };
-      QApplication::restoreOverrideCursor();
-   };
+        QApplication::restoreOverrideCursor();
+    };
 
-   replaceNextAct->setEnabled(true);
-   replacePreviousAct->setEnabled(true);
-   replaceAllAct->setEnabled(true);
+    replaceNextAct->setEnabled(true);
+    replacePreviousAct->setEnabled(true);
+    replaceAllAct->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -819,8 +657,8 @@ void EdytorNc::replaceAll()
 
 void EdytorNc::selAll()
 {
-   if(activeMdiChild())
-      activeMdiChild()->textEdit->selectAll();
+    if(activeMdiChild())
+        activeMdiChild()->textEdit->selectAll();
 }
 
 //**************************************************************************************************
@@ -829,59 +667,59 @@ void EdytorNc::selAll()
 
 void EdytorNc::config()
 {
-   _editor_properites opt;
-   MdiChild *mdiChild;
+    _editor_properites opt;
+    MdiChild *mdiChild;
 
-   SetupDialog *setUpDialog = new SetupDialog(this, &defaultMdiWindowProperites);
+    SetupDialog *setUpDialog = new SetupDialog(this, &defaultMdiWindowProperites);
 
-   if(setUpDialog->exec() == QDialog::Accepted)
-   {
-      defaultMdiWindowProperites = setUpDialog->getSettings();
+    if(setUpDialog->exec() == QDialog::Accepted)
+    {
+        defaultMdiWindowProperites = setUpDialog->getSettings();
 
-      if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
-      {
-         mdiArea->setViewMode(QMdiArea::TabbedView);
-         QTabBar* tab = mdiArea->findChild<QTabBar*>();
-         if(tab)
-         {
-            connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-            tab->setTabsClosable(true);
-            // The tabs might be very wide
-            tab->setExpanding(false);
-         };
-      }
-      else
-        mdiArea->setViewMode(QMdiArea::SubWindowView);
+        if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
+        {
+            mdiArea->setViewMode(QMdiArea::TabbedView);
+            QTabBar* tab = mdiArea->findChild<QTabBar*>();
+            if(tab)
+            {
+                connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+                tab->setTabsClosable(true);
+                // The tabs might be very wide
+                tab->setExpanding(false);
+            };
+        }
+        else
+            mdiArea->setViewMode(QMdiArea::SubWindowView);
 
-      foreach(const QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
-      {
-         mdiChild = qobject_cast<MdiChild *>(window->widget());
-         opt = mdiChild->getMdiWindowProperites();
+        foreach(const QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
+        {
+            mdiChild = qobject_cast<MdiChild *>(window->widget());
+            opt = mdiChild->getMdiWindowProperites();
 
-         defaultMdiWindowProperites.hColors.highlightMode = opt.hColors.highlightMode;
+            defaultMdiWindowProperites.hColors.highlightMode = opt.hColors.highlightMode;
 
-         opt.fontName = defaultMdiWindowProperites.fontName;
-         opt.fontSize = defaultMdiWindowProperites.fontSize;
-         opt.syntaxH = defaultMdiWindowProperites.syntaxH;
-         opt.hColors = defaultMdiWindowProperites.hColors;
-         opt.intCapsLock = defaultMdiWindowProperites.intCapsLock;
-         opt.lineColor = defaultMdiWindowProperites.lineColor;
-         opt.underlineColor = defaultMdiWindowProperites.underlineColor;
-         opt.underlineChanges = defaultMdiWindowProperites.underlineChanges;
-         opt.clearUnderlineHistory = defaultMdiWindowProperites.clearUnderlineHistory;
-         opt.clearUndoHistory = defaultMdiWindowProperites.clearUndoHistory;
-         opt.editorToolTips = defaultMdiWindowProperites.editorToolTips;
-         opt.windowMode = defaultMdiWindowProperites.windowMode;
-         opt.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+            opt.fontName = defaultMdiWindowProperites.fontName;
+            opt.fontSize = defaultMdiWindowProperites.fontSize;
+            opt.syntaxH = defaultMdiWindowProperites.syntaxH;
+            opt.hColors = defaultMdiWindowProperites.hColors;
+            opt.intCapsLock = defaultMdiWindowProperites.intCapsLock;
+            opt.lineColor = defaultMdiWindowProperites.lineColor;
+            opt.underlineColor = defaultMdiWindowProperites.underlineColor;
+            opt.underlineChanges = defaultMdiWindowProperites.underlineChanges;
+            opt.clearUnderlineHistory = defaultMdiWindowProperites.clearUnderlineHistory;
+            opt.clearUndoHistory = defaultMdiWindowProperites.clearUndoHistory;
+            opt.editorToolTips = defaultMdiWindowProperites.editorToolTips;
+            opt.windowMode = defaultMdiWindowProperites.windowMode;
+            opt.readOnly = defaultMdiWindowProperites.defaultReadOnly;
 
-         opt.saveExtension = defaultMdiWindowProperites.saveExtension;
-         opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
-         opt.extensions = defaultMdiWindowProperites.extensions;
+            opt.saveExtension = defaultMdiWindowProperites.saveExtension;
+            opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
+            opt.extensions = defaultMdiWindowProperites.extensions;
 
-         mdiChild->setMdiWindowProperites(opt);
-      };
-   };
-   delete setUpDialog;
+            mdiChild->setMdiWindowProperites(opt);
+        };
+    };
+    delete setUpDialog;
 }
 
 //**************************************************************************************************
@@ -891,7 +729,7 @@ void EdytorNc::config()
 void EdytorNc::readOnly()
 {
     if(activeMdiChild())
-      activeMdiChild()->textEdit->setReadOnly(readOnlyAct->isChecked());
+        activeMdiChild()->textEdit->setReadOnly(readOnlyAct->isChecked());
     updateMenus();
 }
 
@@ -901,14 +739,14 @@ void EdytorNc::readOnly()
 
 void EdytorNc::doBhc()
 {
-   BHCDialog *bhcDialog;
-   bhcDialog = findChild<BHCDialog *>();
-   if(!bhcDialog)
-   {
-      BHCDialog *bhcDialog = new BHCDialog(this);
-      bhcDialog->show();
-      bhcDialog->move((geometry().x() + width() - 10) - bhcDialog->width(), geometry().y()+35);
-   };
+    BHCDialog *bhcDialog;
+    bhcDialog = findChild<BHCDialog *>();
+    if(!bhcDialog)
+    {
+        BHCDialog *bhcDialog = new BHCDialog(this);
+        bhcDialog->show();
+        bhcDialog->move((geometry().x() + width() - 10) - bhcDialog->width(), geometry().y()+35);
+    };
 }
 
 //**************************************************************************************************
@@ -917,8 +755,8 @@ void EdytorNc::doBhc()
 
 void EdytorNc::doInsertSpaces()
 {
-   if(activeMdiChild())
-      activeMdiChild()->doInsertSpace();
+    if(activeMdiChild())
+        activeMdiChild()->doInsertSpace();
 }
 
 //**************************************************************************************************
@@ -927,8 +765,8 @@ void EdytorNc::doInsertSpaces()
 
 void EdytorNc::doRemoveSpaces()
 {
-   if(activeMdiChild())
-      activeMdiChild()->doRemoveSpace();
+    if(activeMdiChild())
+        activeMdiChild()->doRemoveSpace();
 }
 
 //**************************************************************************************************
@@ -937,20 +775,20 @@ void EdytorNc::doRemoveSpaces()
 
 void EdytorNc::goToLine(QString fileName, int line)
 {
-   if(activeMdiChild())
-   {
-      QString childFileName = activeMdiChild()->filePath() + "/" + activeMdiChild()->fileName();
-      childFileName =  QDir().toNativeSeparators(childFileName);
+    if(activeMdiChild())
+    {
+        QString childFileName = activeMdiChild()->filePath() + "/" + activeMdiChild()->fileName();
+        childFileName =  QDir().toNativeSeparators(childFileName);
 
-      if(QDir().toNativeSeparators(fileName) != childFileName)
-         return;
+        if(QDir().toNativeSeparators(fileName) != childFileName)
+            return;
 
-      QTextBlock block = activeMdiChild()->textEdit->document()->findBlockByNumber(line);
-      QTextCursor cursor = QTextCursor(block);
-      activeMdiChild()->textEdit->setTextCursor(cursor);
-      activeMdiChild()->textEdit->centerCursor();
-      activeMdiChild()->setFocus();
-   };
+        QTextBlock block = activeMdiChild()->textEdit->document()->findBlockByNumber(line);
+        QTextCursor cursor = QTextCursor(block);
+        activeMdiChild()->textEdit->setTextCursor(cursor);
+        activeMdiChild()->textEdit->centerCursor();
+        activeMdiChild()->setFocus();
+    };
 }
 
 //**************************************************************************************************
@@ -959,13 +797,13 @@ void EdytorNc::goToLine(QString fileName, int line)
 
 void EdytorNc::createDiffApp()
 {
-   if(diffApp == NULL)
-   {
-      diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
+    if(diffApp == NULL)
+    {
+        diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
 
-      connect(diffApp, SIGNAL(lineClicked(QString, int)), this, SLOT(goToLine(QString, int)));
+        connect(diffApp, SIGNAL(lineClicked(QString, int)), this, SLOT(goToLine(QString, int)));
 
-   };
+    };
 }
 
 //**************************************************************************************************
@@ -974,28 +812,28 @@ void EdytorNc::createDiffApp()
 
 void EdytorNc::doDiffL()
 {
-   QString fileName;
+    QString fileName;
 
-   createDiffApp();
+    createDiffApp();
 
-   if(diffApp != NULL)
-   {
-      diffLAct->setEnabled(false);
-      diffRAct->setEnabled(false);
-      diffAct->setEnabled(false);
+    if(diffApp != NULL)
+    {
+        diffLAct->setEnabled(false);
+        diffRAct->setEnabled(false);
+        diffAct->setEnabled(false);
 
-      diffAct->setChecked(true);
+        diffAct->setChecked(true);
 
-      if(activeMdiChild())
-         fileName = activeMdiChild()->currentFile();
-      if(fileName.isEmpty())
-         fileName = lastDir.canonicalPath();
-      diffApp->completeInit("", fileName);
+        if(activeMdiChild())
+            fileName = activeMdiChild()->currentFile();
+        if(fileName.isEmpty())
+            fileName = lastDir.canonicalPath();
+        diffApp->completeInit("", fileName);
 
-      diffLAct->setEnabled(true);
-      diffRAct->setEnabled(true);
-      diffAct->setEnabled(true);
-   };
+        diffLAct->setEnabled(true);
+        diffRAct->setEnabled(true);
+        diffAct->setEnabled(true);
+    };
 
 }
 
@@ -1005,28 +843,28 @@ void EdytorNc::doDiffL()
 
 void EdytorNc::doDiffR()
 {
-   QString fileName;
+    QString fileName;
 
-   createDiffApp();
+    createDiffApp();
 
-   if(diffApp != NULL)
-   {
-      diffLAct->setEnabled(false);
-      diffRAct->setEnabled(false);
-      diffAct->setEnabled(false);
+    if(diffApp != NULL)
+    {
+        diffLAct->setEnabled(false);
+        diffRAct->setEnabled(false);
+        diffAct->setEnabled(false);
 
-      diffAct->setChecked(true);
+        diffAct->setChecked(true);
 
-      if(activeMdiChild())
-         fileName = activeMdiChild()->currentFile();
-      if(fileName.isEmpty())
-         fileName = lastDir.canonicalPath();
-      diffApp->completeInit(fileName, "");
+        if(activeMdiChild())
+            fileName = activeMdiChild()->currentFile();
+        if(fileName.isEmpty())
+            fileName = lastDir.canonicalPath();
+        diffApp->completeInit(fileName, "");
 
-      diffLAct->setEnabled(true);
-      diffRAct->setEnabled(true);
-      diffAct->setEnabled(true);
-   };
+        diffLAct->setEnabled(true);
+        diffRAct->setEnabled(true);
+        diffAct->setEnabled(true);
+    };
 }
 
 //**************************************************************************************************
@@ -1035,19 +873,19 @@ void EdytorNc::doDiffR()
 
 void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
 {
-   createDiffApp();
+    createDiffApp();
 
-   if(diffApp != NULL)
-   {
-      diffAct->setChecked(true);
-      diffApp->completeInit(filename1, filename2);
+    if(diffApp != NULL)
+    {
+        diffAct->setChecked(true);
+        diffApp->completeInit(filename1, filename2);
 
-      QList<int> sizes;
-      sizes.clear();
-      sizes.append(0);
-      sizes.append(splitter->height());
-      splitter->setSizes(sizes);
-   };
+        QList<int> sizes;
+        sizes.clear();
+        sizes.append(0);
+        sizes.append(splitter->height());
+        splitter->setSizes(sizes);
+    };
 }
 
 //**************************************************************************************************
@@ -1056,51 +894,51 @@ void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
 
 void EdytorNc::diffEditorFile()
 {
-   MdiChild *child = activeMdiChild();
-   if(!child)
-      return;
+    MdiChild *child = activeMdiChild();
+    if(!child)
+        return;
 
-   createDiffApp();
+    createDiffApp();
 
-   if(diffApp != NULL)
-   {
-      QString fileName = child->currentFile();
-      if(fileName.isEmpty())
-         return;
+    if(diffApp != NULL)
+    {
+        QString fileName = child->currentFile();
+        if(fileName.isEmpty())
+            return;
 
-      QString fileName1 = QDir::tempPath() + QDir::separator() + QFileInfo(fileName).baseName() + ".tmp";
-      //qDebug() << fileName << fileName1;
+        QString fileName1 = QDir::tempPath() + QDir::separator() + QFileInfo(fileName).baseName() + ".tmp";
+        //qDebug() << fileName << fileName1;
 
-      QFile file(fileName1);
-      if(!file.open(QIODevice::WriteOnly))
-      {
-         QMessageBox::warning(this, tr("EdytorNC"),
-                              tr("Cannot write tmp file \"%1\".\n %2")
-                              .arg(QDir::toNativeSeparators(fileName1))
-                              .arg(file.errorString()));
-         return;
-      };
+        QFile file(fileName1);
+        if(!file.open(QIODevice::WriteOnly))
+        {
+            QMessageBox::warning(this, tr("EdytorNC"),
+                                 tr("Cannot write tmp file \"%1\".\n %2")
+                                 .arg(QDir::toNativeSeparators(fileName1))
+                                 .arg(file.errorString()));
+            return;
+        };
 
-      QTextStream out(&file);
+        QTextStream out(&file);
 
-      QString tex = child->textEdit->toPlainText();
-      if(!tex.contains(QLatin1String("\r\n")))
-        tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
-      out << tex;
-      file.close();
+        QString tex = child->textEdit->toPlainText();
+        if(!tex.contains(QLatin1String("\r\n")))
+            tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
+        out << tex;
+        file.close();
 
-      diffAct->setChecked(true);
-      diffApp->completeInit(fileName, fileName1);
+        diffAct->setChecked(true);
+        diffApp->completeInit(fileName, fileName1);
 
-      if(file.exists())
-         file.remove();
+        if(file.exists())
+            file.remove();
 
-//      QList<int> sizes;
-//      sizes.clear();
-//      sizes.append(0);
-//      sizes.append(splitter->height());
-//      splitter->setSizes(sizes);
-   };
+        //      QList<int> sizes;
+        //      sizes.clear();
+        //      sizes.append(0);
+        //      sizes.append(splitter->height());
+        //      splitter->setSizes(sizes);
+    };
 }
 
 //**************************************************************************************************
@@ -1109,26 +947,26 @@ void EdytorNc::diffEditorFile()
 
 void EdytorNc::doDiff()
 {
-   QString fileName;
+    QString fileName;
 
-   if(diffApp == NULL)
-   {
-      createDiffApp();
+    if(diffApp == NULL)
+    {
+        createDiffApp();
 
-      if(activeMdiChild())
-         fileName = activeMdiChild()->currentFile();
-      if(fileName.isEmpty())
-         fileName = lastDir.canonicalPath();
-      diffApp->completeInit(QFileInfo(fileName).canonicalPath(), QFileInfo(fileName).canonicalPath());
+        if(activeMdiChild())
+            fileName = activeMdiChild()->currentFile();
+        if(fileName.isEmpty())
+            fileName = lastDir.canonicalPath();
+        diffApp->completeInit(QFileInfo(fileName).canonicalPath(), QFileInfo(fileName).canonicalPath());
 
-   }
-   else
-      if(!diffAct->isChecked())
-      {
-         diffAct->setChecked(false);
-         diffApp->close();
-         diffApp = NULL;
-      };
+    }
+    else
+        if(!diffAct->isChecked())
+        {
+            diffAct->setChecked(false);
+            diffApp->close();
+            diffApp = NULL;
+        };
 }
 
 //**************************************************************************************************
@@ -1137,8 +975,8 @@ void EdytorNc::doDiff()
 
 void EdytorNc::doRemoveEmptyLines()
 {
-   if(activeMdiChild())
-      activeMdiChild()->doRemoveEmptyLines();
+    if(activeMdiChild())
+        activeMdiChild()->doRemoveEmptyLines();
 }
 
 //**************************************************************************************************
@@ -1147,8 +985,8 @@ void EdytorNc::doRemoveEmptyLines()
 
 void EdytorNc::doRemoveByRegExp()
 {
-   if(activeMdiChild())
-       activeMdiChild()->doRemoveTextByRegExp(QStringList() << "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\)\\n)");
+    if(activeMdiChild())
+        activeMdiChild()->doRemoveTextByRegExp(QStringList() << "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\)\\n)");
 }
 
 //**************************************************************************************************
@@ -1157,8 +995,8 @@ void EdytorNc::doRemoveByRegExp()
 
 void EdytorNc::doInsertEmptyLines()
 {
-   if(activeMdiChild())
-      activeMdiChild()->doInsertEmptyLines();
+    if(activeMdiChild())
+        activeMdiChild()->doInsertEmptyLines();
 }
 
 //**************************************************************************************************
@@ -1167,23 +1005,23 @@ void EdytorNc::doInsertEmptyLines()
 
 void EdytorNc::doInsertDot()
 {
-   MdiChild *child;
+    MdiChild *child;
 
-   DotDialog *dotDialog = new DotDialog(this);
-   dotDialog->setState(defaultMdiWindowProperites.dotAdr, defaultMdiWindowProperites.atEnd, defaultMdiWindowProperites.dotAfter, defaultMdiWindowProperites.dotAftrerCount);
+    DotDialog *dotDialog = new DotDialog(this);
+    dotDialog->setState(defaultMdiWindowProperites.dotAdr, defaultMdiWindowProperites.atEnd, defaultMdiWindowProperites.dotAfter, defaultMdiWindowProperites.dotAftrerCount);
 
-   child = activeMdiChild();
+    child = activeMdiChild();
 
-   if(dotDialog->exec() == QDialog::Accepted)
-   {
-      if(child)
-      {
-         defaultMdiWindowProperites = child->getMdiWindowProperites();
-         dotDialog->getState(defaultMdiWindowProperites.dotAdr, defaultMdiWindowProperites.atEnd, defaultMdiWindowProperites.dotAfter, defaultMdiWindowProperites.dotAftrerCount);
-         child->setMdiWindowProperites(defaultMdiWindowProperites);
-         child->doInsertDot();
-      };
-   };
+    if(dotDialog->exec() == QDialog::Accepted)
+    {
+        if(child)
+        {
+            defaultMdiWindowProperites = child->getMdiWindowProperites();
+            dotDialog->getState(defaultMdiWindowProperites.dotAdr, defaultMdiWindowProperites.atEnd, defaultMdiWindowProperites.dotAfter, defaultMdiWindowProperites.dotAftrerCount);
+            child->setMdiWindowProperites(defaultMdiWindowProperites);
+            child->doInsertDot();
+        };
+    };
 }
 
 //**************************************************************************************************
@@ -1193,30 +1031,30 @@ void EdytorNc::doInsertDot()
 void EdytorNc::doRenumber()
 {
 
-   int startAt, inc, to, from, prec, mode;
-   bool renumEmpty, renumComm, renumMarked;
-   MdiChild *child;
-   
-   child = activeMdiChild();
-   
-   RenumberDialog *renumberDialog = new RenumberDialog(this);
-   //renumberDialog->setState(editorOpt.dotAdr, editorOpt.atEnd, editorOpt.dotAfter, editorOpt.dotAftrerCount);
+    int startAt, inc, to, from, prec, mode;
+    bool renumEmpty, renumComm, renumMarked;
+    MdiChild *child;
 
-   if(renumberDialog->exec() == QDialog::Accepted)
-   {
-      renumberDialog->getState(mode, startAt, from, prec, inc, to, renumEmpty, renumComm, renumMarked);
-      if(child)
-      {
-         inc = child->doRenumber(mode, startAt, from, prec, inc, to, renumEmpty, renumComm, renumMarked);
-         if(mode == 3)
-           statusBar()->showMessage(QString(tr("Removed : %1 line numbers.")).arg(inc), 9000);
-         else
-           statusBar()->showMessage(QString(tr("Renumbered : %1 lines.")).arg(inc), 9000);
-      };
+    child = activeMdiChild();
 
-   };
+    RenumberDialog *renumberDialog = new RenumberDialog(this);
+    //renumberDialog->setState(editorOpt.dotAdr, editorOpt.atEnd, editorOpt.dotAfter, editorOpt.dotAftrerCount);
 
-   delete(renumberDialog);
+    if(renumberDialog->exec() == QDialog::Accepted)
+    {
+        renumberDialog->getState(mode, startAt, from, prec, inc, to, renumEmpty, renumComm, renumMarked);
+        if(child)
+        {
+            inc = child->doRenumber(mode, startAt, from, prec, inc, to, renumEmpty, renumComm, renumMarked);
+            if(mode == 3)
+                statusBar()->showMessage(QString(tr("Removed : %1 line numbers.")).arg(inc), 9000);
+            else
+                statusBar()->showMessage(QString(tr("Renumbered : %1 lines.")).arg(inc), 9000);
+        };
+
+    };
+
+    delete(renumberDialog);
 }
 
 //**************************************************************************************************
@@ -1225,14 +1063,14 @@ void EdytorNc::doRenumber()
 
 void EdytorNc::doSpeedFeed()
 {
-   FeedsDialog *feedsDialog;
-   feedsDialog = findChild<FeedsDialog *>();
-   if(!feedsDialog)
-   {
-      FeedsDialog *feedsDialog = new FeedsDialog(this);
-      feedsDialog->move((geometry().x() + width() - 10) - feedsDialog->width(), geometry().y()+35);
-      feedsDialog->show();
-   };
+    FeedsDialog *feedsDialog;
+    feedsDialog = findChild<FeedsDialog *>();
+    if(!feedsDialog)
+    {
+        FeedsDialog *feedsDialog = new FeedsDialog(this);
+        feedsDialog->move((geometry().x() + width() - 10) - feedsDialog->width(), geometry().y()+35);
+        feedsDialog->show();
+    };
 }
 
 //**************************************************************************************************
@@ -1241,9 +1079,9 @@ void EdytorNc::doSpeedFeed()
 
 void EdytorNc::doChamfer()
 {
-   ChamferDialog *chamferDialog = new ChamferDialog(this);
-   chamferDialog->move((geometry().x() + width()) - chamferDialog->width(), geometry().y()+35);
-   chamferDialog->show();
+    ChamferDialog *chamferDialog = new ChamferDialog(this);
+    chamferDialog->move((geometry().x() + width()) - chamferDialog->width(), geometry().y()+35);
+    chamferDialog->show();
 }
 
 //**************************************************************************************************
@@ -1252,14 +1090,14 @@ void EdytorNc::doChamfer()
 
 void EdytorNc::doTriangles()
 {
-   TriangleDialog *triangleDialog;
-   triangleDialog = findChild<TriangleDialog *>();
-   if(!triangleDialog)
-   {
-      TriangleDialog *triangleDialog = new TriangleDialog(this);
-      triangleDialog->move((geometry().x() + width() - 10) - triangleDialog->width(), geometry().y()+35);
-      triangleDialog->show();
-   };
+    TriangleDialog *triangleDialog;
+    triangleDialog = findChild<TriangleDialog *>();
+    if(!triangleDialog)
+    {
+        TriangleDialog *triangleDialog = new TriangleDialog(this);
+        triangleDialog->move((geometry().x() + width() - 10) - triangleDialog->width(), geometry().y()+35);
+        triangleDialog->show();
+    };
 }
 
 //**************************************************************************************************
@@ -1268,14 +1106,14 @@ void EdytorNc::doTriangles()
 
 void EdytorNc::doConvert()
 {
-   I2MDialog *i2MDialog;
-   i2MDialog = findChild<I2MDialog *>();
-   if(!i2MDialog)
-   {
-      I2MDialog *i2MDialog = new I2MDialog(this);
-      i2MDialog->move((geometry().x() + width() - 10) - i2MDialog->width(), geometry().y()+35);
-      i2MDialog->show();
-   };
+    I2MDialog *i2MDialog;
+    i2MDialog = findChild<I2MDialog *>();
+    if(!i2MDialog)
+    {
+        I2MDialog *i2MDialog = new I2MDialog(this);
+        i2MDialog->move((geometry().x() + width() - 10) - i2MDialog->width(), geometry().y()+35);
+        i2MDialog->show();
+    };
 }
 
 //**************************************************************************************************
@@ -1284,25 +1122,25 @@ void EdytorNc::doConvert()
 
 void EdytorNc::doConvertProg()
 {
-   MdiChild *child;
+    MdiChild *child;
 
-   I2MProgDialog *i2mProgDialog = new I2MProgDialog(this);
-   i2mProgDialog->setState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec, defaultMdiWindowProperites.inch);
+    I2MProgDialog *i2mProgDialog = new I2MProgDialog(this);
+    i2mProgDialog->setState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec, defaultMdiWindowProperites.inch);
 
-   child = activeMdiChild();
+    child = activeMdiChild();
 
-   if(i2mProgDialog->exec() == QDialog::Accepted)
-   {
-      if(child)
-      {
-         defaultMdiWindowProperites = child->getMdiWindowProperites();
-         i2mProgDialog->getState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec, defaultMdiWindowProperites.inch);
-         child->setMdiWindowProperites(defaultMdiWindowProperites);
-         child->doI2M();
-      };
-   };
+    if(i2mProgDialog->exec() == QDialog::Accepted)
+    {
+        if(child)
+        {
+            defaultMdiWindowProperites = child->getMdiWindowProperites();
+            i2mProgDialog->getState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec, defaultMdiWindowProperites.inch);
+            child->setMdiWindowProperites(defaultMdiWindowProperites);
+            child->doI2M();
+        };
+    };
 
-   delete(i2mProgDialog);
+    delete(i2mProgDialog);
 }
 
 //**************************************************************************************************
@@ -1311,23 +1149,23 @@ void EdytorNc::doConvertProg()
 
 void EdytorNc::doCalc()
 {
-   if(defaultMdiWindowProperites.calcBinary.isEmpty())
-   {
-      QMessageBox::information(this, tr("Information"),
-                               tr("Set correct calculator program name in configuration dialog."));
-      return;
-   };
+    if(defaultMdiWindowProperites.calcBinary.isEmpty())
+    {
+        QMessageBox::information(this, tr("Information"),
+                                 tr("Set correct calculator program name in configuration dialog."));
+        return;
+    };
 
-   proc = findChild<QProcess *>();
+    proc = findChild<QProcess *>();
 
-   if(!proc)
-   {
-      proc = new QProcess(this);
-      proc->start(defaultMdiWindowProperites.calcBinary);
-   }
-   else
-      if(proc->pid() == 0)
-         proc->start(defaultMdiWindowProperites.calcBinary);
+    if(!proc)
+    {
+        proc = new QProcess(this);
+        proc->start(defaultMdiWindowProperites.calcBinary);
+    }
+    else
+        if(proc->pid() == 0)
+            proc->start(defaultMdiWindowProperites.calcBinary);
 }
 
 //**************************************************************************************************
@@ -1337,7 +1175,7 @@ void EdytorNc::doCalc()
 void EdytorNc::deleteText()
 {
     if(activeMdiChild())
-      activeMdiChild()->textEdit->textCursor().removeSelectedText();
+        activeMdiChild()->textEdit->textCursor().removeSelectedText();
 }
 
 //**************************************************************************************************
@@ -1346,18 +1184,18 @@ void EdytorNc::deleteText()
 
 void EdytorNc::paste()
 {
-   if(activeMdiChild())
-   {
-      if(defaultMdiWindowProperites.underlineChanges)
-      {
-         QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
-         format.setUnderlineStyle(QTextCharFormat::DotLine);
-         format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
-         activeMdiChild()->textEdit->setCurrentCharFormat(format);
-      };
+    if(activeMdiChild())
+    {
+        if(defaultMdiWindowProperites.underlineChanges)
+        {
+            QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
+            format.setUnderlineStyle(QTextCharFormat::DotLine);
+            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
+            activeMdiChild()->textEdit->setCurrentCharFormat(format);
+        };
 
-      activeMdiChild()->textEdit->paste();
-   };
+        activeMdiChild()->textEdit->paste();
+    };
 }
 
 //**************************************************************************************************
@@ -1366,10 +1204,10 @@ void EdytorNc::paste()
 
 void EdytorNc::undo()
 {
-   if(activeMdiChild())
-   {
-      activeMdiChild()->doUndo();
-   };
+    if(activeMdiChild())
+    {
+        activeMdiChild()->doUndo();
+    };
 }
 
 //**************************************************************************************************
@@ -1378,10 +1216,10 @@ void EdytorNc::undo()
 
 void EdytorNc::redo()
 {
-   if(activeMdiChild())
-   {
-      activeMdiChild()->doRedo();
-   };
+    if(activeMdiChild())
+    {
+        activeMdiChild()->doRedo();
+    };
 }
 
 //**************************************************************************************************
@@ -1390,21 +1228,21 @@ void EdytorNc::redo()
 
 void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
 {
-   Q_UNUSED(window);
-   MdiChild *mdiChild;
+    Q_UNUSED(window);
+    MdiChild *mdiChild;
 
-   if(mdiArea->subWindowList().count() <= 1)
-     defaultMdiWindowProperites.maximized = TRUE;
+    if(mdiArea->subWindowList().count() <= 1)
+        defaultMdiWindowProperites.maximized = TRUE;
 
-   mdiChild = activeMdiChild();
-   if(mdiChild)
-   {
-      defaultMdiWindowProperites.maximized = mdiChild->parentWidget()->isMaximized();
-      statusBar()->showMessage(mdiChild->currentFile(), 9000);
-   };
-   updateCurrentSerialConfig();
-   updateOpenFileList();
-   fileTreeViewChangeRootDir();
+    mdiChild = activeMdiChild();
+    if(mdiChild)
+    {
+        defaultMdiWindowProperites.maximized = mdiChild->parentWidget()->isMaximized();
+        statusBar()->showMessage(mdiChild->currentFile(), 9000);
+    };
+    updateCurrentSerialConfig();
+    updateOpenFileList();
+    fileTreeViewChangeRootDir();
 }
 
 //**************************************************************************************************
@@ -1413,30 +1251,30 @@ void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
 
 void EdytorNc::about()
 {
-   QMessageBox::about(this, trUtf8("About EdytorNC"),
-                            trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                            trUtf8("<P>Version: ") +
-                                   "2013.01.00 BETA" +
-                            trUtf8("<P>Copyright (C) 1998 - 2013 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
-                            trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
-                            trUtf8("<br />German translation thanks to Michael Numberger") +
-                            trUtf8("<br />Czech translation thanks to Pavel Fric") +
-                            trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
-                            trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
-                            trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
-                            trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
-                            trUtf8("<P>") +
-                            trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
-                            trUtf8("<P>") +
-                            trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
-                            trUtf8("<P>") +
-                            trUtf8("<P><i>EdytorNC is free software; you can redistribute it and/or modify"
-                                   "it under the terms of the GNU General Public License  as published by"
-                                   "the Free Software Foundation; either version 2 of the License, or"
-                                   "(at your option) any later version.</i>") +
-                            trUtf8("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
-                                   "INCLUDING THE WARRANTY OF DESIGN,"
-                                   "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
+    QMessageBox::about(this, trUtf8("About EdytorNC"),
+                       trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
+                       trUtf8("<P>Version: ") +
+                       "2013.01.27 BETA" +
+                       trUtf8("<P>Copyright (C) 1998 - 2013 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
+                       trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
+                       trUtf8("<br />German translation thanks to Michael Numberger") +
+                       trUtf8("<br />Czech translation thanks to Pavel Fric") +
+                       trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
+                       trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
+                       trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
+                       trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
+                       trUtf8("<P>") +
+                       trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
+                       trUtf8("<P>") +
+                       trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
+                       trUtf8("<P>") +
+                       trUtf8("<P><i>EdytorNC is free software; you can redistribute it and/or modify"
+                              "it under the terms of the GNU General Public License  as published by"
+                              "the Free Software Foundation; either version 2 of the License, or"
+                              "(at your option) any later version.</i>") +
+                       trUtf8("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
+                              "INCLUDING THE WARRANTY OF DESIGN,"
+                              "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
 }
 
 //**************************************************************************************************
@@ -1445,70 +1283,70 @@ void EdytorNc::about()
 
 void EdytorNc::updateMenus()
 {
-   bool hasMdiChild = (activeMdiChild() != 0);
-   bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
-   bool hasSelection = (hasMdiChild && activeMdiChild()->textEdit->textCursor().hasSelection());
+    bool hasMdiChild = (activeMdiChild() != 0);
+    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
+    bool hasSelection = (hasMdiChild && activeMdiChild()->textEdit->textCursor().hasSelection());
 
-   saveAct->setEnabled(hasMdiChild);
-   saveAsAct->setEnabled(hasMdiChild);
-   pasteAct->setEnabled(hasMdiChild);
-   closeAct->setEnabled(hasMdiChild);
-   closeAllAct->setEnabled(hasMdiChild);
-   tileAct->setEnabled(hasMdiChild);
-   cascadeAct->setEnabled(hasMdiChild);
-   nextAct->setEnabled(hasMdiChild);
-   previousAct->setEnabled(hasMdiChild);
-   separatorAct->setVisible(hasMdiChild);
-   selAllAct->setEnabled(hasMdiChildNotReadOnly);
-   findAct->setEnabled(hasMdiChild);
+    saveAct->setEnabled(hasMdiChild);
+    saveAsAct->setEnabled(hasMdiChild);
+    pasteAct->setEnabled(hasMdiChild);
+    closeAct->setEnabled(hasMdiChild);
+    closeAllAct->setEnabled(hasMdiChild);
+    tileAct->setEnabled(hasMdiChild);
+    cascadeAct->setEnabled(hasMdiChild);
+    nextAct->setEnabled(hasMdiChild);
+    previousAct->setEnabled(hasMdiChild);
+    separatorAct->setVisible(hasMdiChild);
+    selAllAct->setEnabled(hasMdiChildNotReadOnly);
+    findAct->setEnabled(hasMdiChild);
 
-   diffLAct->setEnabled(hasMdiChild);
-   diffRAct->setEnabled(hasMdiChild);
-   diffEditorAct->setEnabled(hasMdiChildNotReadOnly);
+    diffLAct->setEnabled(hasMdiChild);
+    diffRAct->setEnabled(hasMdiChild);
+    diffEditorAct->setEnabled(hasMdiChildNotReadOnly);
 
-   replaceAct->setEnabled(hasMdiChildNotReadOnly);
-   readOnlyAct->setEnabled(hasMdiChild);
-   renumberAct->setEnabled(hasMdiChildNotReadOnly);
-   insertDotAct->setEnabled(hasMdiChildNotReadOnly);
-   insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
-   removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
-   removeEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
-   insertEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
-   splittAct->setEnabled(hasMdiChildNotReadOnly);
-   convertProgAct->setEnabled(hasMdiChildNotReadOnly);
-   cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
+    replaceAct->setEnabled(hasMdiChildNotReadOnly);
+    readOnlyAct->setEnabled(hasMdiChild);
+    renumberAct->setEnabled(hasMdiChildNotReadOnly);
+    insertDotAct->setEnabled(hasMdiChildNotReadOnly);
+    insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
+    removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
+    removeEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
+    insertEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
+    splittAct->setEnabled(hasMdiChildNotReadOnly);
+    convertProgAct->setEnabled(hasMdiChildNotReadOnly);
+    cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
 
-   redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
-   undoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isUndoAvailable());
+    redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
+    undoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isUndoAvailable());
 
-   if(!hasMdiChildNotReadOnly)
-   {
-      readOnlyAct->setChecked(TRUE);
-      readOnlyAct->setIcon(QIcon(":/images/lock.png"));
-   }
-   else
-   {
-      readOnlyAct->setChecked(FALSE);
-      readOnlyAct->setIcon(QIcon(":/images/unlock.png"));
-   };
+    if(!hasMdiChildNotReadOnly)
+    {
+        readOnlyAct->setChecked(TRUE);
+        readOnlyAct->setIcon(QIcon(":/images/lock.png"));
+    }
+    else
+    {
+        readOnlyAct->setChecked(FALSE);
+        readOnlyAct->setIcon(QIcon(":/images/unlock.png"));
+    };
 
-   cutAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
-   deleteAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
-   copyAct->setEnabled(hasSelection);
+    cutAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
+    deleteAct->setEnabled(hasSelection && hasMdiChildNotReadOnly);
+    copyAct->setEnabled(hasSelection);
 
-   pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
+    pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
-   if(hasMdiChild)
-   {
-      if(findToolBar != NULL)
-        activeMdiChild()->highlightFindText(findEdit->text(),
-                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                           (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
-      else
-        activeMdiChild()->highlightFindText("");
-   };
+    if(hasMdiChild)
+    {
+        if(findToolBar != NULL)
+            activeMdiChild()->highlightFindText(findEdit->text(),
+                                                ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                                 (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
+        else
+            activeMdiChild()->highlightFindText("");
+    };
 
-   updateStatusBar();
+    updateStatusBar();
 }
 
 //**************************************************************************************************
@@ -1517,27 +1355,27 @@ void EdytorNc::updateMenus()
 
 void EdytorNc::updateCurrentSerialConfig()
 {
-   int id;
-   QDir dir;
+    int id;
+    QDir dir;
 
-   bool hasMdiChild = (activeMdiChild() != 0);
-   if(hasMdiChild && (serialToolBar > 0))
-   {
-      dir.setPath(activeMdiChild()->filePath());
-      dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-      dir.setSorting(QDir::Name);
-      dir.setNameFilters(QStringList("*.ini"));
+    bool hasMdiChild = (activeMdiChild() != 0);
+    if(hasMdiChild && (serialToolBar > 0))
+    {
+        dir.setPath(activeMdiChild()->filePath());
+        dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+        dir.setSorting(QDir::Name);
+        dir.setNameFilters(QStringList("*.ini"));
 
-      QFileInfoList list = dir.entryInfoList();
+        QFileInfoList list = dir.entryInfoList();
 
-      if(!list.isEmpty())
-      {
-         QFileInfo name = list.at(0);
-         id = configBox->findText(name.baseName());
-         if(id >= 0)
-            configBox->setCurrentIndex(id);
-      };
-   };
+        if(!list.isEmpty())
+        {
+            QFileInfo name = list.at(0);
+            id = configBox->findText(name.baseName());
+            if(id >= 0)
+                configBox->setCurrentIndex(id);
+        };
+    };
 }
 
 //**************************************************************************************************
@@ -1546,32 +1384,32 @@ void EdytorNc::updateCurrentSerialConfig()
 
 void EdytorNc::updateStatusBar()
 {
-   QTextBlock b;
-   int column = 1;
-   int line = 1;
-   int id;
+    QTextBlock b;
+    int column = 1;
+    int line = 1;
+    int id;
 
-   bool hasMdiChild = (activeMdiChild() != 0);
-   bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
+    bool hasMdiChild = (activeMdiChild() != 0);
+    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
 
-   if(hasMdiChild)
-   {
-      id = highlightTypeCombo->findData(activeMdiChild()->getHighligthMode());
-      highlightTypeCombo->blockSignals(true);
-      highlightTypeCombo->setCurrentIndex(id);
-      highlightTypeCombo->blockSignals(false);
+    if(hasMdiChild)
+    {
+        id = highlightTypeCombo->findData(activeMdiChild()->getHighligthMode());
+        highlightTypeCombo->blockSignals(true);
+        highlightTypeCombo->setCurrentIndex(id);
+        highlightTypeCombo->blockSignals(false);
 
-      b = activeMdiChild()->textEdit->textCursor().block();
-      line = b.firstLineNumber() + 1;
-      column = activeMdiChild()->textEdit->textCursor().position() - b.position();
+        b = activeMdiChild()->textEdit->textCursor().block();
+        line = b.firstLineNumber() + 1;
+        column = activeMdiChild()->textEdit->textCursor().position() - b.position();
 
-      labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
-                          tr("  Line: ") + QString::number(line) +
-                          (activeMdiChild()->textEdit->document()->isModified() ? tr("  <b>Modified</b>  "): " ") +
-                          (!hasMdiChildNotReadOnly ? tr(" Read only  "): " ") +
-                          (activeMdiChild()->textEdit->overwriteMode() ? tr(" Overwrite  "): tr(" Insert ")));
+        labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
+                            tr("  Line: ") + QString::number(line) +
+                            (activeMdiChild()->textEdit->document()->isModified() ? tr("  <b>Modified</b>  "): " ") +
+                            (!hasMdiChildNotReadOnly ? tr(" Read only  "): " ") +
+                            (activeMdiChild()->textEdit->overwriteMode() ? tr(" Overwrite  "): tr(" Insert ")));
 
-   };
+    };
 }
 
 //**************************************************************************************************
@@ -1580,44 +1418,44 @@ void EdytorNc::updateStatusBar()
 
 void EdytorNc::updateWindowMenu()
 {
-   QString text;
+    QString text;
 
-   windowMenu->clear();
-   windowMenu->addAction(closeAct);
-   windowMenu->addAction(closeAllAct);
-   windowMenu->addSeparator();
-   windowMenu->addAction(tileAct);
-   windowMenu->addAction(cascadeAct);
-   windowMenu->addSeparator();
-   windowMenu->addAction(nextAct);
-   windowMenu->addAction(previousAct);
-   windowMenu->addAction(separatorAct);
+    windowMenu->clear();
+    windowMenu->addAction(closeAct);
+    windowMenu->addAction(closeAllAct);
+    windowMenu->addSeparator();
+    windowMenu->addAction(tileAct);
+    windowMenu->addAction(cascadeAct);
+    windowMenu->addSeparator();
+    windowMenu->addAction(nextAct);
+    windowMenu->addAction(previousAct);
+    windowMenu->addAction(separatorAct);
 
-   windowMenu->setAttribute(Qt::WA_AlwaysShowToolTips, true);
+    windowMenu->setAttribute(Qt::WA_AlwaysShowToolTips, true);
 
-   QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
-   separatorAct->setVisible(!windows.isEmpty());
+    QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
+    separatorAct->setVisible(!windows.isEmpty());
 
-   for(int i = 0; i < windows.size(); ++i)
-   {
-      MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
+    for(int i = 0; i < windows.size(); ++i)
+    {
+        MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
 
-      if(i < 9)
-      {
-         text = tr("&%1 %2").arg(i + 1)
-                .arg(child->currentFile());
-      } else
-      {
-         text = tr("%1 %2").arg(i + 1)
-                .arg(child->currentFile());
-      }
-      QAction *action = windowMenu->addAction(text);
-      action->setCheckable(true);
-      action->setChecked(child == activeMdiChild());
-      action->setStatusTip(child->getCurrentFileInfo());
-      connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
-      windowMapper->setMapping(action, windows.at(i));
-   };
+        if(i < 9)
+        {
+            text = tr("&%1 %2").arg(i + 1)
+                    .arg(child->currentFile());
+        } else
+        {
+            text = tr("%1 %2").arg(i + 1)
+                    .arg(child->currentFile());
+        }
+        QAction *action = windowMenu->addAction(text);
+        action->setCheckable(true);
+        action->setChecked(child == activeMdiChild());
+        action->setStatusTip(child->getCurrentFileInfo());
+        connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
+        windowMapper->setMapping(action, windows.at(i));
+    };
 }
 
 //**************************************************************************************************
@@ -1661,9 +1499,9 @@ void EdytorNc::createActions()
 
     if(QDir(EXAMPLES_PATH).exists() || QDir(QApplication::applicationDirPath() + "/" + "EXAMPLES").exists())
     {
-       openExampleAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open example..."), this);
-       openExampleAct->setStatusTip(tr("Open an example file"));
-       connect(openExampleAct, SIGNAL(triggered()), this, SLOT(openExample()));
+        openExampleAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open example..."), this);
+        openExampleAct->setStatusTip(tr("Open an example file"));
+        connect(openExampleAct, SIGNAL(triggered()), this, SLOT(openExample()));
     };
 
     saveAct = new QAction(QIcon(":/images/filesave.png"), tr("&Save"), this);
@@ -1804,7 +1642,7 @@ void EdytorNc::createActions()
     speedFeedAct = new QAction(QIcon(":/images/vcf.png"), tr("Feed's speed's"), this);
     speedFeedAct->setShortcut(tr("F9"));
     speedFeedAct->setStatusTip(tr("Calculate speed, feed, cutting speed"));
-    connect(speedFeedAct, SIGNAL(triggered()), this, SLOT(doSpeedFeed()));    
+    connect(speedFeedAct, SIGNAL(triggered()), this, SLOT(doSpeedFeed()));
 
     chamferAct = new QAction(QIcon(":/images/chamfer.png"), tr("Chamfer"), this);
     //chamferAct->setShortcut(tr("F9"));
@@ -1936,14 +1774,14 @@ void EdytorNc::createMenus()
     fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
     if(openExampleAct != NULL)
-       fileMenu->addAction(openExampleAct);
+        fileMenu->addAction(openExampleAct);
     fileMenu->addSeparator();
     recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
     recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
     fileMenu->addSeparator();
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
-    fileMenu->addSeparator();    
+    fileMenu->addSeparator();
     fileMenu->addAction(findFilesAct);
     fileMenu->addSeparator();
     fileMenu->addAction(printAct);
@@ -2104,54 +1942,54 @@ void EdytorNc::createToolBars()
 void EdytorNc::createStatusBar()
 {
 
-   labelStat1 = new QLabel("    ");
-   
-   labelStat1->setFrameShadow(QFrame::Sunken);
-   labelStat1->setFrameShape(QFrame::Box);
+    labelStat1 = new QLabel("    ");
 
-   highlightTypeCombo = new QComboBox();
-   highlightTypeCombo->setToolTip(tr("Highlight style and tooltip mode"));
-   highlightTypeCombo->setEditable(false);
-   highlightTypeCombo->addItem(tr("AUTO"), MODE_AUTO);  
-   highlightTypeCombo->addItem(tr("FANUC"), MODE_FANUC);
-   highlightTypeCombo->addItem(tr("HEIDENHAIN DIALOG"), MODE_HEIDENHAIN);
-   highlightTypeCombo->addItem(tr("HEIDENHAIN ISO"), MODE_HEIDENHAIN_ISO);
-   highlightTypeCombo->addItem(tr("OKUMA OSP"), MODE_OKUMA);
-   highlightTypeCombo->addItem(tr("PHILIPS"), MODE_PHILIPS);
-   highlightTypeCombo->addItem(tr("SINUMERIK OLD"), MODE_SINUMERIK);
-   highlightTypeCombo->addItem(tr("SINUMERIK NEW"), MODE_SINUMERIK_840);
-   highlightTypeCombo->addItem(tr("LinuxCNC"), MODE_LINUXCNC);
-   highlightTypeCombo->addItem(tr("TOOLTIPS"), MODE_TOOLTIPS);
+    labelStat1->setFrameShadow(QFrame::Sunken);
+    labelStat1->setFrameShape(QFrame::Box);
 
-   connect(highlightTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setHighLightMode(int)));
+    highlightTypeCombo = new QComboBox();
+    highlightTypeCombo->setToolTip(tr("Highlight style and tooltip mode"));
+    highlightTypeCombo->setEditable(false);
+    highlightTypeCombo->addItem(tr("AUTO"), MODE_AUTO);
+    highlightTypeCombo->addItem(tr("FANUC"), MODE_FANUC);
+    highlightTypeCombo->addItem(tr("HEIDENHAIN DIALOG"), MODE_HEIDENHAIN);
+    highlightTypeCombo->addItem(tr("HEIDENHAIN ISO"), MODE_HEIDENHAIN_ISO);
+    highlightTypeCombo->addItem(tr("OKUMA OSP"), MODE_OKUMA);
+    highlightTypeCombo->addItem(tr("PHILIPS"), MODE_PHILIPS);
+    highlightTypeCombo->addItem(tr("SINUMERIK OLD"), MODE_SINUMERIK);
+    highlightTypeCombo->addItem(tr("SINUMERIK NEW"), MODE_SINUMERIK_840);
+    highlightTypeCombo->addItem(tr("LinuxCNC"), MODE_LINUXCNC);
+    highlightTypeCombo->addItem(tr("TOOLTIPS"), MODE_TOOLTIPS);
 
-   attachHighlightToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current highlight setting to current directory of programs"), this);
-   attachHighlightToDirAct->setStatusTip(tr("Attach current highlight setting to current directory of programs"));
-   connect(attachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(attachHighlightToDirActClicked()));
+    connect(highlightTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setHighLightMode(int)));
 
-   attachHighlightButton = new QToolButton();
-   attachHighlightButton->setDefaultAction(attachHighlightToDirAct);
+    attachHighlightToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current highlight setting to current directory of programs"), this);
+    attachHighlightToDirAct->setStatusTip(tr("Attach current highlight setting to current directory of programs"));
+    connect(attachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(attachHighlightToDirActClicked()));
 
-   deAttachHighlightToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove highlight settings from the directory"), this);
-   deAttachHighlightToDirAct->setStatusTip(tr("Remove highlight settings from the directory"));
-   connect(deAttachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(deAttachHighlightToDirActClicked()));
+    attachHighlightButton = new QToolButton();
+    attachHighlightButton->setDefaultAction(attachHighlightToDirAct);
 
-   deAttachHighlightButton = new QToolButton();
-   deAttachHighlightButton->setDefaultAction(deAttachHighlightToDirAct);
+    deAttachHighlightToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove highlight settings from the directory"), this);
+    deAttachHighlightToDirAct->setStatusTip(tr("Remove highlight settings from the directory"));
+    connect(deAttachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(deAttachHighlightToDirActClicked()));
 
-   readOnlyButton = new QToolButton();
-   readOnlyButton->setDefaultAction(readOnlyAct);
+    deAttachHighlightButton = new QToolButton();
+    deAttachHighlightButton->setDefaultAction(deAttachHighlightToDirAct);
 
-   //statusBar()->addPermanentWidget(highlightLabel);
-   statusBar()->addPermanentWidget(labelStat1);
-   statusBar()->addPermanentWidget(highlightTypeCombo);
-   statusBar()->addPermanentWidget(attachHighlightButton);
-   statusBar()->addPermanentWidget(deAttachHighlightButton);
-   statusBar()->addPermanentWidget(readOnlyButton);
-   statusBar()->setSizeGripEnabled(true);
+    readOnlyButton = new QToolButton();
+    readOnlyButton->setDefaultAction(readOnlyAct);
+
+    //statusBar()->addPermanentWidget(highlightLabel);
+    statusBar()->addPermanentWidget(labelStat1);
+    statusBar()->addPermanentWidget(highlightTypeCombo);
+    statusBar()->addPermanentWidget(attachHighlightButton);
+    statusBar()->addPermanentWidget(deAttachHighlightButton);
+    statusBar()->addPermanentWidget(readOnlyButton);
+    statusBar()->setSizeGripEnabled(true);
 
 
-   statusBar()->showMessage(tr("Ready"));
+    statusBar()->showMessage(tr("Ready"));
 }
 
 //**************************************************************************************************
@@ -2160,15 +1998,15 @@ void EdytorNc::createStatusBar()
 
 void EdytorNc::setHighLightMode(int mode)
 {  
-   bool ok;
-   bool hasMdiChild = (activeMdiChild() != 0);
+    bool ok;
+    bool hasMdiChild = (activeMdiChild() != 0);
 
-   int id = highlightTypeCombo->itemData(mode).toInt(&ok);
-   if(hasMdiChild)
-   {
-      activeMdiChild()->setHighligthMode(id);
-      activeMdiChild()->setFocus(Qt::MouseFocusReason);
-   };
+    int id = highlightTypeCombo->itemData(mode).toInt(&ok);
+    if(hasMdiChild)
+    {
+        activeMdiChild()->setHighligthMode(id);
+        activeMdiChild()->setFocus(Qt::MouseFocusReason);
+    };
 
 }
 
@@ -2188,8 +2026,8 @@ void EdytorNc::readSettings()
 
     if(settings.value("SerialToolbarShown", FALSE).toBool())
     {
-       createSerialToolBar();
-       showSerialToolBarAct->setChecked(true);
+        createSerialToolBar();
+        showSerialToolBarAct->setChecked(true);
     };
 
     restoreState(settings.value("State", QByteArray()).toByteArray());
@@ -2230,11 +2068,11 @@ void EdytorNc::readSettings()
 
 
 #ifdef Q_OS_LINUX
-   defaultMdiWindowProperites.calcBinary = "kcalc";
+    defaultMdiWindowProperites.calcBinary = "kcalc";
 #endif
 
 #ifdef Q_OS_WIN32
-   defaultMdiWindowProperites.calcBinary = "calc.exe";
+    defaultMdiWindowProperites.calcBinary = "calc.exe";
 #endif
 
     defaultMdiWindowProperites.calcBinary = settings.value("CalcBinary", defaultMdiWindowProperites.calcBinary).toString();
@@ -2266,23 +2104,23 @@ void EdytorNc::readSettings()
 
     if(!defaultMdiWindowProperites.startEmpty)
     {
-       int max = settings.beginReadArray("LastDoc");
-       for(int i = 0; i < max; ++i)
-       {
-          settings.setArrayIndex(i);
-          defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
+        int max = settings.beginReadArray("LastDoc");
+        for(int i = 0; i < max; ++i)
+        {
+            settings.setArrayIndex(i);
+            defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
 
-          defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
-          if(!defaultMdiWindowProperites.fileName.isEmpty())
-          {
-             defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
-             defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", FALSE).toBool();
-             defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
-             defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
-             loadFile(defaultMdiWindowProperites, false);
-          };
-       };
-       settings.endArray();
+            defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
+            if(!defaultMdiWindowProperites.fileName.isEmpty())
+            {
+                defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
+                defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", FALSE).toBool();
+                defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
+                defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
+                loadFile(defaultMdiWindowProperites, false);
+            };
+        };
+        settings.endArray();
     };
 
     fileTreeView->header()->restoreState(settings.value("FileTreeViewState", QByteArray()).toByteArray());
@@ -2297,12 +2135,12 @@ void EdytorNc::readSettings()
     panelHidden = settings.value("PanelHidden", false).toBool();
     if(panelHidden)
     {
-       vSplitter->hide();
-       frame->setMaximumWidth(hideButton->width());
-       hideButton->setText(">>");
+        vSplitter->hide();
+        frame->setMaximumWidth(hideButton->width());
+        hideButton->setText(">>");
     };
 
-    tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt()); 
+    tabWidget->setCurrentIndex(settings.value("TabCurrentIndex", 0).toInt());
     currentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir", false).toBool());
     filePreviewSpinBox->setValue(settings.value("FilePreviewNo", 10).toInt());
 
@@ -2325,7 +2163,7 @@ void EdytorNc::writeSettings()
 {
     MdiChild *mdiChild;
     bool maximized = false;
-   
+
     QSettings settings("EdytorNC", "EdytorNC");
 
 
@@ -2378,9 +2216,9 @@ void EdytorNc::writeSettings()
     settings.setValue("FilePreviewNo", filePreviewSpinBox->value());
 
     if(panelHidden)
-      settings.setValue("ProjectPanelState", panelState);
+        settings.setValue("ProjectPanelState", panelState);
     else
-       settings.setValue("ProjectPanelState", hSplitter->saveState());
+        settings.setValue("ProjectPanelState", hSplitter->saveState());
 
     settings.setValue("PanelHidden", panelHidden);
     settings.setValue("FileBrowserShowCurrentFileDir", currentPathCheckBox->isChecked());
@@ -2424,7 +2262,7 @@ void EdytorNc::writeSettings()
         settings.setValue("Geometry", mdiChild->parentWidget()->saveGeometry());
         settings.setValue("HighlightMode", Opt.hColors.highlightMode);
         if(mdiChild->parentWidget()->isMaximized())
-          maximized =  true;
+            maximized =  true;
 
         i++;
     };
@@ -2448,7 +2286,7 @@ void EdytorNc::writeSettings()
 MdiChild *EdytorNc::activeMdiChild()
 {
     if(QMdiSubWindow *activeSubWindow = mdiArea->activeSubWindow())
-      return qobject_cast<MdiChild *>(activeSubWindow->widget());
+        return qobject_cast<MdiChild *>(activeSubWindow->widget());
     return 0;
 }
 
@@ -2461,13 +2299,13 @@ QMdiSubWindow *EdytorNc::findMdiChild(const QString &fileName)
     QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
 
     if(canonicalFilePath.isEmpty())
-       canonicalFilePath = fileName;
+        canonicalFilePath = fileName;
 
     foreach(QMdiSubWindow *window, mdiArea->subWindowList())
     {
         MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
         if(mdiChild->currentFile() == QDir::toNativeSeparators(canonicalFilePath))
-          return window;
+            return window;
     }
     return 0;
 }
@@ -2479,7 +2317,7 @@ QMdiSubWindow *EdytorNc::findMdiChild(const QString &fileName)
 void EdytorNc::setActiveSubWindow(QWidget *window)
 {
     if(!window)
-      return;
+        return;
     mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
 }
 
@@ -2489,31 +2327,31 @@ void EdytorNc::setActiveSubWindow(QWidget *window)
 
 void EdytorNc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
 {
-   QFileInfo file;
+    QFileInfo file;
 
-   if(checkAlreadyLoaded)
-   {
-      QMdiSubWindow *existing = findMdiChild(options.fileName);
-      if(existing)
-      {
-         mdiArea->setActiveSubWindow(existing);
-         return;
-      };
-   };
+    if(checkAlreadyLoaded)
+    {
+        QMdiSubWindow *existing = findMdiChild(options.fileName);
+        if(existing)
+        {
+            mdiArea->setActiveSubWindow(existing);
+            return;
+        };
+    };
 
-   file.setFile(options.fileName);
-   if((file.exists()) && (file.isReadable()))
-   {
-      MdiChild *child = createMdiChild();
-      child->newFile();
-      child->loadFile(options.fileName);
-      child->setMdiWindowProperites(options);
-      child->parentWidget()->restoreGeometry(options.geometry);
-      if(defaultMdiWindowProperites.maximized)
-         child->showMaximized();
-      else
-         child->showNormal();
-   };
+    file.setFile(options.fileName);
+    if((file.exists()) && (file.isReadable()))
+    {
+        MdiChild *child = createMdiChild();
+        child->newFile();
+        child->loadFile(options.fileName);
+        child->setMdiWindowProperites(options);
+        child->parentWidget()->restoreGeometry(options.geometry);
+        if(defaultMdiWindowProperites.maximized)
+            child->showMaximized();
+        else
+            child->showNormal();
+    };
 }
 
 //**************************************************************************************************
@@ -2552,7 +2390,7 @@ void EdytorNc::fileOpenRecent(QAction *act)
 void EdytorNc::updateRecentFilesMenu()
 {
     QAction *newAc;
-  
+
     recentFileMenu->clear();
     for(int i = 0; i < MAX_RECENTFILES; ++i)
     {
@@ -2577,27 +2415,27 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
     QMdiSubWindow *existing = findMdiChild(fileName);
     if(existing)
     {
-       mdiArea->setActiveSubWindow(existing);
-       return;
+        mdiArea->setActiveSubWindow(existing);
+        return;
     };
     file.setFile(fileName);
     if((file.exists()) && (file.isReadable()))
     {
-       MdiChild *child = createMdiChild();
-       child->newFile();
-       child->loadFile(fileName);
-       updateRecentFiles(fileName);
-       //defaultMdiWindowProperites.maximized = FALSE;
-       defaultMdiWindowProperites.cursorPos = 0;
-       defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-       defaultMdiWindowProperites.geometry = QByteArray();
-       defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
-       defaultMdiWindowProperites.editorToolTips = true;
-       child->setMdiWindowProperites(defaultMdiWindowProperites);
-       if(defaultMdiWindowProperites.maximized)
-         child->showMaximized();
-       else
-         child->showNormal();
+        MdiChild *child = createMdiChild();
+        child->newFile();
+        child->loadFile(fileName);
+        updateRecentFiles(fileName);
+        //defaultMdiWindowProperites.maximized = FALSE;
+        defaultMdiWindowProperites.cursorPos = 0;
+        defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+        defaultMdiWindowProperites.geometry = QByteArray();
+        defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
+        defaultMdiWindowProperites.editorToolTips = true;
+        child->setMdiWindowProperites(defaultMdiWindowProperites);
+        if(defaultMdiWindowProperites.maximized)
+            child->showMaximized();
+        else
+            child->showNormal();
     };
 }
 
@@ -2610,7 +2448,7 @@ void EdytorNc::messReceived(const QString &text)
     QString str = text;
     QStringList list1 = str.split(";", QString::SkipEmptyParts);
     for(int i = 0; i < list1.size(); ++i)
-      openFile(list1.at(i));
+        openFile(list1.at(i));
     emit needToShow();
 }
 
@@ -2620,127 +2458,127 @@ void EdytorNc::messReceived(const QString &text)
 
 void EdytorNc::createFindToolBar()
 {
-   QString selText;
-   QTextCursor cursor;
+    QString selText;
+    QTextCursor cursor;
 
-   if(findToolBar == NULL)
-   {
-      findToolBar = new QToolBar(tr("Find"));
-      addToolBar(Qt::BottomToolBarArea, findToolBar);
-      findToolBar->setObjectName("Find");
+    if(findToolBar == NULL)
+    {
+        findToolBar = new QToolBar(tr("Find"));
+        addToolBar(Qt::BottomToolBarArea, findToolBar);
+        findToolBar->setObjectName("Find");
 
-      findToolBar->setAttribute(Qt::WA_DeleteOnClose);
+        findToolBar->setAttribute(Qt::WA_DeleteOnClose);
 
-      findNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Find next"), this);
-      findNextAct->setShortcut(QKeySequence::FindNext);
-      findNextAct->setStatusTip(tr("Find next"));
-      connect(findNextAct, SIGNAL(triggered()), this, SLOT(findNext()));
+        findNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Find next"), this);
+        findNextAct->setShortcut(QKeySequence::FindNext);
+        findNextAct->setStatusTip(tr("Find next"));
+        connect(findNextAct, SIGNAL(triggered()), this, SLOT(findNext()));
 
-      findPreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Find previous"), this);
-      findPreviousAct->setShortcut(QKeySequence::FindPrevious);
-      findPreviousAct->setStatusTip(tr("Find previous"));
-      connect(findPreviousAct, SIGNAL(triggered()), this, SLOT(findPrevious()));
+        findPreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Find previous"), this);
+        findPreviousAct->setShortcut(QKeySequence::FindPrevious);
+        findPreviousAct->setStatusTip(tr("Find previous"));
+        connect(findPreviousAct, SIGNAL(triggered()), this, SLOT(findPrevious()));
 
-      replaceNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Replace && find next"), this);
-      //replaceNextAct->setShortcut(tr("F3"));
-      replaceNextAct->setStatusTip(tr("Replace && find next"));
-      connect(replaceNextAct, SIGNAL(triggered()), this, SLOT(replaceNext()));
+        replaceNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Replace && find next"), this);
+        //replaceNextAct->setShortcut(tr("F3"));
+        replaceNextAct->setStatusTip(tr("Replace && find next"));
+        connect(replaceNextAct, SIGNAL(triggered()), this, SLOT(replaceNext()));
 
-      replacePreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Replace && find previous"), this);
-      //replacePreviousAct->setShortcut(tr("F3"));
-      replacePreviousAct->setStatusTip(tr("Replace && find previous"));
-      connect(replacePreviousAct, SIGNAL(triggered()), this, SLOT(replacePrevious()));
+        replacePreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Replace && find previous"), this);
+        //replacePreviousAct->setShortcut(tr("F3"));
+        replacePreviousAct->setStatusTip(tr("Replace && find previous"));
+        connect(replacePreviousAct, SIGNAL(triggered()), this, SLOT(replacePrevious()));
 
-      replaceAllAct = new QAction(QIcon(":/images/arrow-right-double.png"), tr("Replace all"), this);
-      //replaceAllAct->setShortcut(tr("F3"));
-      replaceAllAct->setStatusTip(tr("Replace all"));
-      connect(replaceAllAct, SIGNAL(triggered()), this, SLOT(replaceAll()));
+        replaceAllAct = new QAction(QIcon(":/images/arrow-right-double.png"), tr("Replace all"), this);
+        //replaceAllAct->setShortcut(tr("F3"));
+        replaceAllAct->setStatusTip(tr("Replace all"));
+        connect(replaceAllAct, SIGNAL(triggered()), this, SLOT(replaceAll()));
 
-      findCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close find toolbar"), this);
-      findCloseAct->setStatusTip(tr("Close find toolbar"));
-      connect(findCloseAct, SIGNAL(triggered()), this, SLOT(closeFindToolBar()));
+        findCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close find toolbar"), this);
+        findCloseAct->setStatusTip(tr("Close find toolbar"));
+        connect(findCloseAct, SIGNAL(triggered()), this, SLOT(closeFindToolBar()));
 
-      findLabel = new QLabel(tr("Find:"));
-      findToolBar->addWidget(findLabel);
-      findEdit = new QLineEdit();
-      findEdit->setToolTip(tr("<b>Letter$$</b> - matches any number.<p><b>Letter$max$min</b> - matches number &lt;=max &gt;=min.</p>" \
-                              "<p><b>$min</b> can be ommited, then equal 0</p>" \
-                              "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
-      findEdit->installEventFilter(this);
-      findToolBar->addWidget(findEdit);
-      findToolBar->addAction(findPreviousAct);
-      findToolBar->addAction(findNextAct);   
-      findToolBar->addSeparator();
+        findLabel = new QLabel(tr("Find:"));
+        findToolBar->addWidget(findLabel);
+        findEdit = new QLineEdit();
+        findEdit->setToolTip(tr("<b>Letter$$</b> - matches any number.<p><b>Letter$max$min</b> - matches number &lt;=max &gt;=min.</p>" \
+                                "<p><b>$min</b> can be ommited, then equal 0</p>" \
+                                "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
+        findEdit->installEventFilter(this);
+        findToolBar->addWidget(findEdit);
+        findToolBar->addAction(findPreviousAct);
+        findToolBar->addAction(findNextAct);
+        findToolBar->addSeparator();
 
-      replaceLabel = new QLabel(tr("Replace with:"));
-      findToolBar->addWidget(replaceLabel);
-      replaceEdit = new QLineEdit();
-      replaceEdit->setToolTip(tr("<b>$$OperatorNumber</b> - do some math on replaced numbers. Operator +-*/" \
-                                 "<p>$$+1 - will add 1 to replaced numbers</p>"));
-      replaceEdit->installEventFilter(this);
-      findToolBar->addWidget(replaceEdit);
-      findToolBar->addAction(replacePreviousAct);
-      findToolBar->addAction(replaceNextAct);
-      findToolBar->addAction(replaceAllAct);
-      findToolBar->addSeparator();
+        replaceLabel = new QLabel(tr("Replace with:"));
+        findToolBar->addWidget(replaceLabel);
+        replaceEdit = new QLineEdit();
+        replaceEdit->setToolTip(tr("<b>$$OperatorNumber</b> - do some math on replaced numbers. Operator +-*/" \
+                                   "<p>$$+1 - will add 1 to replaced numbers</p>"));
+        replaceEdit->installEventFilter(this);
+        findToolBar->addWidget(replaceEdit);
+        findToolBar->addAction(replacePreviousAct);
+        findToolBar->addAction(replaceNextAct);
+        findToolBar->addAction(replaceAllAct);
+        findToolBar->addSeparator();
 
-      mCheckIgnoreCase = new QCheckBox(tr("Ignore c&ase"));
-      connect(mCheckIgnoreCase, SIGNAL(clicked()), this, SLOT(findTextChanged()));
-      findToolBar->addWidget(mCheckIgnoreCase);
-      mCheckFindWholeWords = new QCheckBox(tr("&Whole words only"));
-      connect(mCheckFindWholeWords, SIGNAL(clicked()), this, SLOT(findTextChanged()));
-      findToolBar->addWidget(mCheckFindWholeWords);
-      //findToolBar->addSeparator();
-      mCheckIgnoreComments = new QCheckBox(tr("Ignore c&omments"));
-      connect(mCheckIgnoreComments, SIGNAL(clicked()), this, SLOT(findTextChanged()));
-      findToolBar->addWidget(mCheckIgnoreComments);
-      findToolBar->addSeparator();
-      findToolBar->addAction(findCloseAct);
+        mCheckIgnoreCase = new QCheckBox(tr("Ignore c&ase"));
+        connect(mCheckIgnoreCase, SIGNAL(clicked()), this, SLOT(findTextChanged()));
+        findToolBar->addWidget(mCheckIgnoreCase);
+        mCheckFindWholeWords = new QCheckBox(tr("&Whole words only"));
+        connect(mCheckFindWholeWords, SIGNAL(clicked()), this, SLOT(findTextChanged()));
+        findToolBar->addWidget(mCheckFindWholeWords);
+        //findToolBar->addSeparator();
+        mCheckIgnoreComments = new QCheckBox(tr("Ignore c&omments"));
+        connect(mCheckIgnoreComments, SIGNAL(clicked()), this, SLOT(findTextChanged()));
+        findToolBar->addWidget(mCheckIgnoreComments);
+        findToolBar->addSeparator();
+        findToolBar->addAction(findCloseAct);
 
-      QSettings settings("EdytorNC", "EdytorNC");
-      mCheckIgnoreComments->setChecked(settings.value("FindIgnoreComments", true).toBool());
-      mCheckFindWholeWords->setChecked(settings.value("FindWholeWords", false).toBool());
-      mCheckIgnoreCase->setChecked(settings.value("FindIgnoreCase", true).toBool());
-   }
-   else
-     findToolBar->show();
+        QSettings settings("EdytorNC", "EdytorNC");
+        mCheckIgnoreComments->setChecked(settings.value("FindIgnoreComments", true).toBool());
+        mCheckFindWholeWords->setChecked(settings.value("FindWholeWords", false).toBool());
+        mCheckIgnoreCase->setChecked(settings.value("FindIgnoreCase", true).toBool());
+    }
+    else
+        findToolBar->show();
 
-   disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
+    disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
 
-   if(!activeMdiChild()->textEdit->textCursor().hasSelection())
-   {
-      cursor = activeMdiChild()->textEdit->textCursor();
-      cursor.select(QTextCursor::WordUnderCursor);
-      selText = cursor.selectedText();
-      if((selText.size() > 32) || (selText.size() < 2))
-        cursor.clearSelection();
-      activeMdiChild()->textEdit->setTextCursor(cursor);
-   };
+    if(!activeMdiChild()->textEdit->textCursor().hasSelection())
+    {
+        cursor = activeMdiChild()->textEdit->textCursor();
+        cursor.select(QTextCursor::WordUnderCursor);
+        selText = cursor.selectedText();
+        if((selText.size() > 32) || (selText.size() < 2))
+            cursor.clearSelection();
+        activeMdiChild()->textEdit->setTextCursor(cursor);
+    };
 
-   cursor = activeMdiChild()->textEdit->textCursor();
+    cursor = activeMdiChild()->textEdit->textCursor();
 
-   if(cursor.hasSelection())
-   {
-      selText = cursor.selectedText();
+    if(cursor.hasSelection())
+    {
+        selText = cursor.selectedText();
 
-      if((selText.size() < 32))
-        findEdit->setText(selText);
-      else
-      {
-         cursor.clearSelection();
-         activeMdiChild()->textEdit->setTextCursor(cursor);
-      };
-   };
+        if((selText.size() < 32))
+            findEdit->setText(selText);
+        else
+        {
+            cursor.clearSelection();
+            activeMdiChild()->textEdit->setTextCursor(cursor);
+        };
+    };
 
-   findEdit->setPalette(QPalette());
-   connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
-   findEdit->setFocus(Qt::MouseFocusReason);
+    findEdit->setPalette(QPalette());
+    connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
+    findEdit->setFocus(Qt::MouseFocusReason);
 
-   activeMdiChild()->highlightFindText(findEdit->text(),
-                                      ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                      (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
+    activeMdiChild()->highlightFindText(findEdit->text(),
+                                        ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                         (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
 
-   findEdit->selectAll();
+    findEdit->selectAll();
 }
 
 //**************************************************************************************************
@@ -2749,20 +2587,20 @@ void EdytorNc::createFindToolBar()
 
 void EdytorNc::closeFindToolBar()
 {
-   if(activeMdiChild())
-   {
-      activeMdiChild()->setFocus(Qt::MouseFocusReason);
-      activeMdiChild()->highlightFindText("");
-      activeMdiChild()->textEdit->centerCursor();
-   };
+    if(activeMdiChild())
+    {
+        activeMdiChild()->setFocus(Qt::MouseFocusReason);
+        activeMdiChild()->highlightFindText("");
+        activeMdiChild()->textEdit->centerCursor();
+    };
 
-   QSettings settings("EdytorNC", "EdytorNC");
-   settings.setValue("FindIgnoreComments", mCheckIgnoreComments->isChecked());
-   settings.setValue("FindWholeWords", mCheckFindWholeWords->isChecked());
-   settings.setValue("FindIgnoreCase", mCheckIgnoreCase->isChecked());
+    QSettings settings("EdytorNC", "EdytorNC");
+    settings.setValue("FindIgnoreComments", mCheckIgnoreComments->isChecked());
+    settings.setValue("FindWholeWords", mCheckFindWholeWords->isChecked());
+    settings.setValue("FindIgnoreCase", mCheckIgnoreCase->isChecked());
 
-   findToolBar->close();
-   findToolBar = NULL;
+    findToolBar->close();
+    findToolBar = NULL;
 }
 
 //**************************************************************************************************
@@ -2771,44 +2609,44 @@ void EdytorNc::closeFindToolBar()
 
 void EdytorNc::findTextChanged()
 {
-   bool hasMdiChild = (activeMdiChild() != 0);
-   QTextCursor cursor;
-   int pos;
+    bool hasMdiChild = (activeMdiChild() != 0);
+    QTextCursor cursor;
+    int pos;
 
 
-   if(findEdit->text().contains(QRegExp("\\$\\$")) || findEdit->text().contains(QRegExp("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}")))
-   {
-      replaceAllAct->setEnabled(false);
-   }
-   else
-      replaceAllAct->setEnabled(true);
+    if(findEdit->text().contains(QRegExp("\\$\\$")) || findEdit->text().contains(QRegExp("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}")))
+    {
+        replaceAllAct->setEnabled(false);
+    }
+    else
+        replaceAllAct->setEnabled(true);
 
 
-   if(hasMdiChild)
-   {
-      cursor = activeMdiChild()->textEdit->textCursor();
-      if(!findEdit->text().isEmpty())
-      {
-         pos = cursor.position() - findEdit->text().size();
-         if(pos < 0)
-           pos = 0;
-         do
-         {
-            cursor.movePosition(QTextCursor::Left);  //cursor.movePosition(QTextCursor::StartOfWord)
-         }while((pos <= cursor.position()) && (cursor.position() > 0));
+    if(hasMdiChild)
+    {
+        cursor = activeMdiChild()->textEdit->textCursor();
+        if(!findEdit->text().isEmpty())
+        {
+            pos = cursor.position() - findEdit->text().size();
+            if(pos < 0)
+                pos = 0;
+            do
+            {
+                cursor.movePosition(QTextCursor::Left);  //cursor.movePosition(QTextCursor::StartOfWord)
+            }while((pos <= cursor.position()) && (cursor.position() > 0));
 
-         activeMdiChild()->textEdit->setTextCursor(cursor);
+            activeMdiChild()->textEdit->setTextCursor(cursor);
 
-         findNext();
-      }
-      else
-      {
-         findEdit->setPalette(QPalette());
-         cursor.clearSelection();
-         activeMdiChild()->textEdit->setTextCursor(cursor);
-      };
+            findNext();
+        }
+        else
+        {
+            findEdit->setPalette(QPalette());
+            cursor.clearSelection();
+            activeMdiChild()->textEdit->setTextCursor(cursor);
+        };
 
-   };
+    };
 }
 
 //**************************************************************************************************
@@ -2817,46 +2655,46 @@ void EdytorNc::findTextChanged()
 
 bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
 {
-   if((obj == findEdit) || (obj == replaceEdit))
-   {
-       if( ev->type() == QEvent::KeyPress )
-       {
-          QKeyEvent *k = (QKeyEvent*) ev;
+    if((obj == findEdit) || (obj == replaceEdit))
+    {
+        if( ev->type() == QEvent::KeyPress )
+        {
+            QKeyEvent *k = (QKeyEvent*) ev;
 
-          if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
-          {
-             if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
-             {
-                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
-                return true;
-             };
+            if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
+            {
+                if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+                    return true;
+                };
 
-          };
+            };
 
-          if(defaultMdiWindowProperites.intCapsLock)
-          {
-             if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
-             {
-                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
-                return true;
+            if(defaultMdiWindowProperites.intCapsLock)
+            {
+                if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+                    return true;
 
-             };
+                };
 
-             if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
-             {
-                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
-                return true;
-             };
-          };
-       };
+                if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+                    return true;
+                };
+            };
+        };
 
-       return false;
-   }
-   else
-   {
-      // pass the event on to the parent class
-      return eventFilter(obj, ev);
-   };
+        return false;
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return eventFilter(obj, ev);
+    };
 }
 
 //**************************************************************************************************
@@ -2865,86 +2703,86 @@ bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
 
 void EdytorNc::createSerialToolBar()
 {
-   if(serialToolBar == NULL)
-   {
-      serialToolBar = new QToolBar(tr("Serial port toolbar"));
-      addToolBar(Qt::TopToolBarArea, serialToolBar);
-      serialToolBar->setObjectName("SerialToolBar");
+    if(serialToolBar == NULL)
+    {
+        serialToolBar = new QToolBar(tr("Serial port toolbar"));
+        addToolBar(Qt::TopToolBarArea, serialToolBar);
+        serialToolBar->setObjectName("SerialToolBar");
 
 
-      configPortAct = new QAction(QIcon(":/images/serialconfig.png"), tr("Serial port configuration"), this);
-      //configPortAct->setShortcut(tr("F3"));
-      configPortAct->setStatusTip(tr("Serial port configuration"));
-      connect(configPortAct, SIGNAL(triggered()), this, SLOT(serialConfig()));
+        configPortAct = new QAction(QIcon(":/images/serialconfig.png"), tr("Serial port configuration"), this);
+        //configPortAct->setShortcut(tr("F3"));
+        configPortAct->setStatusTip(tr("Serial port configuration"));
+        connect(configPortAct, SIGNAL(triggered()), this, SLOT(serialConfig()));
 
-      receiveAct = new QAction(QIcon(":/images/receive.png"), tr("Receive new file"), this);
-      //receiveAct->setShortcut(tr("Shift+F3"));
-      receiveAct->setStatusTip(tr("Receive new file"));
-      connect(receiveAct, SIGNAL(triggered()), this, SLOT(receiveButtonClicked()));
+        receiveAct = new QAction(QIcon(":/images/receive.png"), tr("Receive new file"), this);
+        //receiveAct->setShortcut(tr("Shift+F3"));
+        receiveAct->setStatusTip(tr("Receive new file"));
+        connect(receiveAct, SIGNAL(triggered()), this, SLOT(receiveButtonClicked()));
 
-      sendAct = new QAction(QIcon(":/images/send.png"), tr("Send current file"), this);
-      //sendAct->setShortcut(tr("F3"));
-      sendAct->setStatusTip(tr("Send current file"));
-      connect(sendAct, SIGNAL(triggered()), this, SLOT(sendButtonClicked()));
+        sendAct = new QAction(QIcon(":/images/send.png"), tr("Send current file"), this);
+        //sendAct->setShortcut(tr("F3"));
+        sendAct->setStatusTip(tr("Send current file"));
+        connect(sendAct, SIGNAL(triggered()), this, SLOT(sendButtonClicked()));
 
-      attachToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current port settings to current directory of programs"), this);
-      //attachToDirAct->setShortcut(tr("F3"));
-      attachToDirAct->setStatusTip(tr("Attach current port settings to current directory of programs"));
-      connect(attachToDirAct, SIGNAL(triggered()), this, SLOT(attachToDirButtonClicked()));
+        attachToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current port settings to current directory of programs"), this);
+        //attachToDirAct->setShortcut(tr("F3"));
+        attachToDirAct->setStatusTip(tr("Attach current port settings to current directory of programs"));
+        connect(attachToDirAct, SIGNAL(triggered()), this, SLOT(attachToDirButtonClicked()));
 
-      deAttachToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove settings from the directory"), this);
-      //deAttachToDirAct->setShortcut(tr("F3"));
-      deAttachToDirAct->setStatusTip(tr("Remove settings from the directory"));
-      connect(deAttachToDirAct, SIGNAL(triggered()), this, SLOT(deAttachToDirButtonClicked()));
+        deAttachToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove settings from the directory"), this);
+        //deAttachToDirAct->setShortcut(tr("F3"));
+        deAttachToDirAct->setStatusTip(tr("Remove settings from the directory"));
+        connect(deAttachToDirAct, SIGNAL(triggered()), this, SLOT(deAttachToDirButtonClicked()));
 
-      diagAct = new QAction(QIcon(":/images/serialtest.png"), tr("Check serial port settings"), this);
-      //diagAct->setShortcut(tr("F3"));
-      diagAct->setStatusTip(tr("Check serial port settings"));
-      connect(diagAct, SIGNAL(triggered()), this, SLOT(serialConfigTest()));
+        diagAct = new QAction(QIcon(":/images/serialtest.png"), tr("Check serial port settings"), this);
+        //diagAct->setShortcut(tr("F3"));
+        diagAct->setStatusTip(tr("Check serial port settings"));
+        connect(diagAct, SIGNAL(triggered()), this, SLOT(serialConfigTest()));
 
-      serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/receive toolbar"), this);
-      serialCloseAct->setStatusTip(tr("Close find toolbar"));
-      connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
-
-
-      configBox = new QComboBox();
-      configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-      configBox->setDuplicatesEnabled(false);
+        serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/receive toolbar"), this);
+        serialCloseAct->setStatusTip(tr("Close find toolbar"));
+        connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
 
 
-      //serialToolBar->addSeparator();
-      serialToolBar->addAction(attachToDirAct);
-      serialToolBar->addAction(deAttachToDirAct);
-      serialToolBar->addSeparator();
-      serialToolBar->addAction(diagAct);
-      serialToolBar->addWidget(configBox);
-      serialToolBar->addAction(configPortAct);
-      serialToolBar->addSeparator();
-      serialToolBar->addAction(receiveAct);
-      serialToolBar->addSeparator();
-      serialToolBar->addAction(sendAct);
+        configBox = new QComboBox();
+        configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+        configBox->setDuplicatesEnabled(false);
 
-      serialToolBar->addSeparator();
-      serialToolBar->addAction(serialCloseAct);
-   }
-   else
-     if(!showSerialToolBarAct->isChecked())
-     {
-        closeSerialToolbar();
-        return;
-     }
-     else
-     {
-        serialToolBar->show();
-        showSerialToolBarAct->setChecked(TRUE);
-     };
 
-   //comPort = new QextSerialPort();
-   stop = true;
+        //serialToolBar->addSeparator();
+        serialToolBar->addAction(attachToDirAct);
+        serialToolBar->addAction(deAttachToDirAct);
+        serialToolBar->addSeparator();
+        serialToolBar->addAction(diagAct);
+        serialToolBar->addWidget(configBox);
+        serialToolBar->addAction(configPortAct);
+        serialToolBar->addSeparator();
+        serialToolBar->addAction(receiveAct);
+        serialToolBar->addSeparator();
+        serialToolBar->addAction(sendAct);
 
-   loadSerialConfignames();
-   configBox->adjustSize();
-   updateCurrentSerialConfig();
+        serialToolBar->addSeparator();
+        serialToolBar->addAction(serialCloseAct);
+    }
+    else
+        if(!showSerialToolBarAct->isChecked())
+        {
+            closeSerialToolbar();
+            return;
+        }
+        else
+        {
+            serialToolBar->show();
+            showSerialToolBarAct->setChecked(TRUE);
+        };
+
+    //comPort = new QextSerialPort();
+    stop = true;
+
+    loadSerialConfignames();
+    configBox->adjustSize();
+    updateCurrentSerialConfig();
 }
 
 //**************************************************************************************************
@@ -2953,12 +2791,12 @@ void EdytorNc::createSerialToolBar()
 
 void EdytorNc::closeSerialToolbar()
 {
-   stop = true;
+    stop = true;
 
-   serialToolBar->close();
-   delete(serialToolBar);
-   serialToolBar = NULL;
-   showSerialToolBarAct->setChecked(FALSE);
+    serialToolBar->close();
+    delete(serialToolBar);
+    serialToolBar = NULL;
+    showSerialToolBarAct->setChecked(FALSE);
 }
 
 //**************************************************************************************************
@@ -2967,40 +2805,40 @@ void EdytorNc::closeSerialToolbar()
 
 void EdytorNc::attachToDirButtonClicked(bool attach)
 {
-   QFileInfo fileInfo;
-   QFile file;
-   int i;
+    QFileInfo fileInfo;
+    QFile file;
+    int i;
 
 
-   bool hasMdiChild = (activeMdiChild() != 0);
-   if(hasMdiChild && (serialToolBar > NULL))
-   {
-      QDir dir;
-      dir.setPath(activeMdiChild()->filePath());
-      dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-      dir.setSorting(QDir::Name);
-      dir.setNameFilters(QStringList("*.ini"));
+    bool hasMdiChild = (activeMdiChild() != 0);
+    if(hasMdiChild && (serialToolBar > NULL))
+    {
+        QDir dir;
+        dir.setPath(activeMdiChild()->filePath());
+        dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+        dir.setSorting(QDir::Name);
+        dir.setNameFilters(QStringList("*.ini"));
 
-      QFileInfoList list = dir.entryInfoList();
+        QFileInfoList list = dir.entryInfoList();
 
-      if(!list.isEmpty())
-      {
-         for(i = 0; i < list.count(); i++)
-         {
-            fileInfo = (QFileInfo)list.at(i);
-            file.setFileName(fileInfo.absoluteFilePath());
-            file.remove();
-         };
-      };
+        if(!list.isEmpty())
+        {
+            for(i = 0; i < list.count(); i++)
+            {
+                fileInfo = (QFileInfo)list.at(i);
+                file.setFileName(fileInfo.absoluteFilePath());
+                file.remove();
+            };
+        };
 
-      if(attach)
-      {
-         file.setFileName(activeMdiChild()->filePath() + "/" + configBox->currentText() + ".ini");
-         file.open(QIODevice::ReadWrite);
-         file.close();;
-      };
+        if(attach)
+        {
+            file.setFileName(activeMdiChild()->filePath() + "/" + configBox->currentText() + ".ini");
+            file.open(QIODevice::ReadWrite);
+            file.close();;
+        };
 
-   };
+    };
 }
 
 //**************************************************************************************************
@@ -3009,7 +2847,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 
 void EdytorNc::deAttachToDirButtonClicked()
 {
-   attachToDirButtonClicked(false);
+    attachToDirButtonClicked(false);
 }
 
 //**************************************************************************************************
@@ -3018,10 +2856,10 @@ void EdytorNc::deAttachToDirButtonClicked()
 
 void EdytorNc::serialConfig()
 {
-   SPConfigDialog *serialConfigDialog = new SPConfigDialog(this, configBox->currentText());
+    SPConfigDialog *serialConfigDialog = new SPConfigDialog(this, configBox->currentText());
 
-   if(serialConfigDialog->exec() == QDialog::Accepted)
-      loadSerialConfignames();
+    if(serialConfigDialog->exec() == QDialog::Accepted)
+        loadSerialConfignames();
 }
 
 //**************************************************************************************************
@@ -3058,9 +2896,9 @@ void EdytorNc::loadSerialConfignames()
 
 void EdytorNc::serialConfigTest()
 {
-   TransmissionDialog *trDialog = new TransmissionDialog(this);
+    TransmissionDialog *trDialog = new TransmissionDialog(this);
 
-   trDialog->show();
+    trDialog->show();
 }
 
 //**************************************************************************************************
@@ -3082,9 +2920,9 @@ void EdytorNc::loadConfig()
     settings.beginGroup("SerialPortConfigs");
 
 #ifdef Q_OS_WIN32
-       port = "COM1";
+    port = "COM1";
 #else
-       port = "/dev/ttyS0";
+    port = "/dev/ttyS0";
 #endif
 
     settings.beginGroup(configBox->currentText());
@@ -3119,18 +2957,18 @@ void EdytorNc::loadConfig()
     pos = 0;
     while((pos = sendAtBegining.indexOf(exp, pos)) >= 0)
     {
-       fTx = sendAtBegining.mid(pos, exp.matchedLength());
-       chr = fTx.toInt(&ok, 16);
-       sendAtBegining.replace(pos, exp.matchedLength(), QString(chr));
+        fTx = sendAtBegining.mid(pos, exp.matchedLength());
+        chr = fTx.toInt(&ok, 16);
+        sendAtBegining.replace(pos, exp.matchedLength(), QString(chr));
     };
     sendAtBegining.remove(" ");
 
     pos = 0;
     while((pos = sendAtEnd.indexOf(exp, pos)) >= 0)
     {
-       fTx = sendAtEnd.mid(pos, exp.matchedLength());
-       chr = fTx.toInt(&ok, 16);
-       sendAtEnd.replace(pos, exp.matchedLength(), QString(chr));
+        fTx = sendAtEnd.mid(pos, exp.matchedLength());
+        chr = fTx.toInt(&ok, 16);
+        sendAtEnd.replace(pos, exp.matchedLength(), QString(chr));
     };
     sendAtEnd.remove(" ");
 
@@ -3143,7 +2981,7 @@ void EdytorNc::loadConfig()
 
 void EdytorNc::lineDelaySlot()
 {
-   readyCont = true;
+    readyCont = true;
 }
 
 //**************************************************************************************************
@@ -3152,192 +2990,192 @@ void EdytorNc::lineDelaySlot()
 
 void EdytorNc::sendButtonClicked()
 {
-   int i, bytesToWrite;
-   QString tx;
-   QTextCursor cursor, prevCursor;
-   MdiChild *activeWindow;
-   char controlChar;
-   QTimer *sendStartDelayTimer = NULL;
+    int i, bytesToWrite;
+    QString tx;
+    QTextCursor cursor, prevCursor;
+    MdiChild *activeWindow;
+    char controlChar;
+    QTimer *sendStartDelayTimer = NULL;
 
 
-   bytesToWrite = 0;
+    bytesToWrite = 0;
 
-   activeWindow = activeMdiChild();
-   if(activeWindow <= 0)
-     return;
+    activeWindow = activeMdiChild();
+    if(activeWindow <= 0)
+        return;
 
-   loadConfig();
+    loadConfig();
 
-   comPort = new QextSerialPort(portName, portSettings);
+    comPort = new QextSerialPort(portName, portSettings);
 
-   if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
-     stop = false;
-   else
-   {
-      stop = true;
-      showError(E_INVALID_FD);
-      delete(comPort);
-      return;
-   };
+    if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
+        stop = false;
+    else
+    {
+        stop = true;
+        showError(E_INVALID_FD);
+        delete(comPort);
+        return;
+    };
 
-   comPort->flush();
-   comPort->reset();
+    comPort->flush();
+    comPort->reset();
 
-   showError(E_NO_ERROR);
-   receiveAct->setEnabled(FALSE);
-   sendAct->setEnabled(FALSE);
-   QApplication::setOverrideCursor(Qt::BusyCursor);
+    showError(E_NO_ERROR);
+    receiveAct->setEnabled(FALSE);
+    sendAct->setEnabled(FALSE);
+    QApplication::setOverrideCursor(Qt::BusyCursor);
 
-   cursor = activeWindow->textEdit->textCursor();
-   prevCursor = cursor;
-   cursor.movePosition(QTextCursor::Start);
-   activeWindow->textEdit->setTextCursor(cursor);
+    cursor = activeWindow->textEdit->textCursor();
+    prevCursor = cursor;
+    cursor.movePosition(QTextCursor::Start);
+    activeWindow->textEdit->setTextCursor(cursor);
 
-   tx = sendAtBegining;
-   if(removeBefore)
-       tx.append(activeWindow->textEdit->toPlainText().mid(activeWindow->textEdit->toPlainText().indexOf("%")));
-   else
-       tx.append(activeWindow->textEdit->toPlainText());
-   tx.append(sendAtEnd);
-   if(!tx.contains("\r\n"))
-      tx.replace("\n", "\r\n");
+    tx = sendAtBegining;
+    if(removeBefore)
+        tx.append(activeWindow->textEdit->toPlainText().mid(activeWindow->textEdit->toPlainText().indexOf("%")));
+    else
+        tx.append(activeWindow->textEdit->toPlainText());
+    tx.append(sendAtEnd);
+    if(!tx.contains("\r\n"))
+        tx.replace("\n", "\r\n");
 
-   TransProgressDialog progressDialog(this);
-   progressDialog.setRange(0, tx.size());
-   progressDialog.setModal(true);
-   progressDialog.setWindowTitle(tr("Sending..."));
-   progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
-   progressDialog.setLabelText(tr("Waiting..."));
-   qApp->processEvents();
+    TransProgressDialog progressDialog(this);
+    progressDialog.setRange(0, tx.size());
+    progressDialog.setModal(true);
+    progressDialog.setWindowTitle(tr("Sending..."));
+    progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
+    progressDialog.setLabelText(tr("Waiting..."));
+    qApp->processEvents();
 
-   if(portSettings.FlowControl == FLOW_HARDWARE)
-   {
-      ulong status = comPort->lineStatus();
-      if(!(status & LS_CTS))
-         xoffReceived = true;
-   }
-   else
-      xoffReceived = false;
+    if(portSettings.FlowControl == FLOW_HARDWARE)
+    {
+        ulong status = comPort->lineStatus();
+        if(!(status & LS_CTS))
+            xoffReceived = true;
+    }
+    else
+        xoffReceived = false;
 
 
-   if(sendStartDelay > 0 && portSettings.FlowControl != FLOW_HARDWARE)
-   {
-      sendStartDelayTimer = new QTimer(this);
-      connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
-      sendStartDelayTimer->setInterval(1000);
-      xoffReceived = true;
-      sendStartDelayTimer->start();
-   };
+    if(sendStartDelay > 0 && portSettings.FlowControl != FLOW_HARDWARE)
+    {
+        sendStartDelayTimer = new QTimer(this);
+        connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
+        sendStartDelayTimer->setInterval(1000);
+        xoffReceived = true;
+        sendStartDelayTimer->start();
+    };
 
-   if((sendStartDelay == 0) && (portSettings.FlowControl == FLOW_XONXOFF))
-   {
-      xoffReceived = true;
-   };
+    if((sendStartDelay == 0) && (portSettings.FlowControl == FLOW_XONXOFF))
+    {
+        xoffReceived = true;
+    };
 
-   i = 0;
-   while(i < tx.size())
-   {
-      if(sendStartDelay > 0)
-         progressDialog.setLabelText(tr("Start in %1s").arg(sendStartDelay));
-      else
-         if(xoffReceived)
-            progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
+    i = 0;
+    while(i < tx.size())
+    {
+        if(sendStartDelay > 0)
+            progressDialog.setLabelText(tr("Start in %1s").arg(sendStartDelay));
+        else
+            if(xoffReceived)
+                progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
 
-      qApp->processEvents();
+        qApp->processEvents();
 
-      if(progressDialog.wasCanceled())
-        break;
+        if(progressDialog.wasCanceled())
+            break;
 
-      if(stop)
-        break;
+        if(stop)
+            break;
 
-      if(portSettings.FlowControl == FLOW_HARDWARE)
-      {
-         xoffReceived = !(comPort->lineStatus() & LS_CTS);
-      }
-      else
-      {
-         if(portSettings.FlowControl == FLOW_XONXOFF)
-         {
-            controlChar = 0;
-            if(comPort->bytesAvailable() > 0)
+        if(portSettings.FlowControl == FLOW_HARDWARE)
+        {
+            xoffReceived = !(comPort->lineStatus() & LS_CTS);
+        }
+        else
+        {
+            if(portSettings.FlowControl == FLOW_XONXOFF)
             {
-               comPort->getChar(&controlChar);
-               //qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
+                controlChar = 0;
+                if(comPort->bytesAvailable() > 0)
+                {
+                    comPort->getChar(&controlChar);
+                    //qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
+                };
+
+                if(controlChar == portSettings.Xoff)
+                    xoffReceived = true;
+                if(controlChar == portSettings.Xon)
+                {
+                    sendStartDelay = 0;
+                    xoffReceived = false;
+                };
+            }
+            //         else
+            //            xoffReceived = false;
+        };
+
+        bytesToWrite = comPort->bytesToWrite();
+
+        //#ifdef Q_OS_UNIX
+        //      usleep(2000);
+        //#endif
+
+        if((bytesToWrite == 0) && (!xoffReceived))
+        {
+            if(!comPort->putChar(tx[i].toAscii()))
+            {
+                //            qDebug() << comPort->lastError();
+                //            break;
+            };
+            if(!doNotShowProgressInEditor)
+            {
+                if(tx[i].toAscii() != '\r')
+                    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                activeWindow->textEdit->setTextCursor(cursor);
+            };
+            progressDialog.setValue(i);
+            progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
+            //qApp->processEvents();
+
+            if(lineDelay > 0)
+            {
+                if(tx[i].toAscii() == '\n')
+                {
+                    readyCont = false;
+                    QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
+                    while(!readyCont)
+                    {
+                        qApp->processEvents();
+                    };
+                };
             };
 
-            if(controlChar == portSettings.Xoff)
-               xoffReceived = true;
-            if(controlChar == portSettings.Xon)
-            {
-                sendStartDelay = 0;
-                xoffReceived = false;
-            };
-         }
-//         else
-//            xoffReceived = false;
-      };
+            i++;
+        };
+    };
 
-      bytesToWrite = comPort->bytesToWrite();
+    while(comPort->bytesToWrite() > 0)
+    {
+        qApp->processEvents();
+        //qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
+    };
 
-//#ifdef Q_OS_UNIX
-//      usleep(2000);
-//#endif
+    if(sendStartDelayTimer != NULL)
+    {
+        sendStartDelayTimer->stop();
+        delete(sendStartDelayTimer);
+    };
 
-      if((bytesToWrite == 0) && (!xoffReceived))
-      {
-         if(!comPort->putChar(tx[i].toAscii()))
-         {
-//            qDebug() << comPort->lastError();
-//            break;
-         };
-         if(!doNotShowProgressInEditor)
-         {
-            if(tx[i].toAscii() != '\r')
-               cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-            activeWindow->textEdit->setTextCursor(cursor);
-         };
-         progressDialog.setValue(i);
-         progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
-         //qApp->processEvents();
-
-         if(lineDelay > 0)
-         {
-            if(tx[i].toAscii() == '\n')
-            {
-               readyCont = false;
-               QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
-               while(!readyCont)
-               {
-                  qApp->processEvents();
-               };
-            };
-         };
-
-         i++;
-      };
-   };
-
-   while(comPort->bytesToWrite() > 0)
-   {
-      qApp->processEvents();
-      //qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
-   };
-
-   if(sendStartDelayTimer != NULL)
-   {
-      sendStartDelayTimer->stop();
-      delete(sendStartDelayTimer);
-   };
-
-   comPort->flush();
-   comPort->close();
-   delete(comPort);
-   progressDialog.close();
-   activeWindow->textEdit->setTextCursor(prevCursor);
-   receiveAct->setEnabled(TRUE);
-   sendAct->setEnabled(TRUE);
-   QApplication::restoreOverrideCursor();
+    comPort->flush();
+    comPort->close();
+    delete(comPort);
+    progressDialog.close();
+    activeWindow->textEdit->setTextCursor(prevCursor);
+    receiveAct->setEnabled(TRUE);
+    sendAct->setEnabled(TRUE);
+    QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -3346,10 +3184,10 @@ void EdytorNc::sendButtonClicked()
 
 void EdytorNc::sendStartDelayTimeout()
 {
-   if(sendStartDelay > 0)
-      sendStartDelay--;
-   else
-      xoffReceived = false;
+    if(sendStartDelay > 0)
+        sendStartDelay--;
+    else
+        xoffReceived = false;
 }
 
 //**************************************************************************************************
@@ -3358,180 +3196,180 @@ void EdytorNc::sendStartDelayTimeout()
 
 void EdytorNc::receiveButtonClicked()
 {
-   QString tx;
-   int count, i, j;
-   char buf[1024];
-   MdiChild *activeWindow;
-   QTimer *recieveTimeoutTimer;
+    QString tx;
+    int count, i, j;
+    char buf[1024];
+    MdiChild *activeWindow;
+    QTimer *recieveTimeoutTimer;
 
 
-   showError(E_NO_ERROR);
-   count = 0;
-   recieveTimeoutTimer = NULL;
+    showError(E_NO_ERROR);
+    count = 0;
+    recieveTimeoutTimer = NULL;
 
-   loadConfig();
-   comPort = new QextSerialPort(portName, portSettings);
-   if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
-     stop = false;
-   else
-   {
-      stop = true;
-      showError(E_INVALID_FD);
-      delete(comPort);
-      return;
-   };
-   //comPort->flush();
-   //comPort->reset();
+    loadConfig();
+    comPort = new QextSerialPort(portName, portSettings);
+    if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
+        stop = false;
+    else
+    {
+        stop = true;
+        showError(E_INVALID_FD);
+        delete(comPort);
+        return;
+    };
+    //comPort->flush();
+    //comPort->reset();
 
-   i = configBox->currentIndex();
-   newFile();
-   activeWindow = activeMdiChild();
-   if(activeWindow <= 0)
-     return;
-   configBox->setCurrentIndex(i);
+    i = configBox->currentIndex();
+    newFile();
+    activeWindow = activeMdiChild();
+    if(activeWindow <= 0)
+        return;
+    configBox->setCurrentIndex(i);
 
-   receiveAct->setEnabled(FALSE);
-   sendAct->setEnabled(FALSE);
-   QApplication::setOverrideCursor(Qt::BusyCursor);
+    receiveAct->setEnabled(FALSE);
+    sendAct->setEnabled(FALSE);
+    QApplication::setOverrideCursor(Qt::BusyCursor);
 
-   TransProgressDialog progressDialog(this);
+    TransProgressDialog progressDialog(this);
 
-   if(recieveTimeout > 0)
-   {
-      recieveTimeoutTimer = new QTimer(this);
-      connect(recieveTimeoutTimer, SIGNAL(timeout()), &progressDialog, SLOT(close()));
-      recieveTimeoutTimer->setInterval(recieveTimeout * 1000);
-      recieveTimeoutTimer->setSingleShot(true);
-   };
+    if(recieveTimeout > 0)
+    {
+        recieveTimeoutTimer = new QTimer(this);
+        connect(recieveTimeoutTimer, SIGNAL(timeout()), &progressDialog, SLOT(close()));
+        recieveTimeoutTimer->setInterval(recieveTimeout * 1000);
+        recieveTimeoutTimer->setSingleShot(true);
+    };
 
-   progressDialog.setRange(0, 0);
-   progressDialog.setModal(true);
-   progressDialog.setWindowTitle(tr("Receiving..."));
-   progressDialog.setLabelText(tr("Waiting for data..."));
-   progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
-   qApp->processEvents();
+    progressDialog.setRange(0, 0);
+    progressDialog.setModal(true);
+    progressDialog.setWindowTitle(tr("Receiving..."));
+    progressDialog.setLabelText(tr("Waiting for data..."));
+    progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
+    qApp->processEvents();
 
-   if(portSettings.FlowControl == FLOW_XONXOFF)
-   {
-      comPort->putChar(portSettings.Xon);
-   }
-   else
-      if(portSettings.FlowControl == FLOW_HARDWARE)
-      {
-         comPort->setRts(true);
-         comPort->setDtr(true);
-      };
+    if(portSettings.FlowControl == FLOW_XONXOFF)
+    {
+        comPort->putChar(portSettings.Xon);
+    }
+    else
+        if(portSettings.FlowControl == FLOW_HARDWARE)
+        {
+            comPort->setRts(true);
+            comPort->setDtr(true);
+        };
 
-   tx.clear();
-   while(1)
-   {
-      //progressDialog.setValue(count);
+    tx.clear();
+    while(1)
+    {
+        //progressDialog.setValue(count);
 
-//#ifdef Q_OS_UNIX
-//      usleep(2000);
-//#endif
+        //#ifdef Q_OS_UNIX
+        //      usleep(2000);
+        //#endif
 
-      i = comPort->bytesAvailable();
-      if(i > 0)
-      {
-         //qDebug() << "Bytes available: " << i;
-         i = comPort->readLine(buf, sizeof(buf) - 1);  //readLine
+        i = comPort->bytesAvailable();
+        if(i > 0)
+        {
+            //qDebug() << "Bytes available: " << i;
+            i = comPort->readLine(buf, sizeof(buf) - 1);  //readLine
 
-         if(recieveTimeoutTimer > NULL)
-            recieveTimeoutTimer->start();
+            if(recieveTimeoutTimer > NULL)
+                recieveTimeoutTimer->start();
 
-         qApp->processEvents();
+            qApp->processEvents();
 
-         if(i < 0)
-         {
+            if(i < 0)
+            {
+                stop = true;
+                if(portSettings.FlowControl == FLOW_XONXOFF)
+                {
+                    comPort->putChar(portSettings.Xoff);
+                };
+                showError(comPort->lastError());
+            };
+            buf[i] = '\0';
+            count += i;
+
+            if(deleteControlChars)
+                for(j = 0; j < i; j++)
+                {
+                    if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0D)))
+                        tx.append(buf[j]);
+                }
+            else
+                for(j = 0; j < i; j++)
+                {
+                    if(buf[j] != 0x0A)
+                        tx.append(buf[j]);
+                }
+
+            progressDialog.setLabelText(tr("Reciving byte %1").arg(count));
+
+            activeWindow->textEdit->insertPlainText(tx);
+            tx.clear();
+
+            if(!doNotShowProgressInEditor)
+            {
+                activeWindow->textEdit->ensureCursorVisible();
+            };
+        }
+        else
+            qApp->processEvents();
+
+        if(stop)
+        {
+            if(!tx.isEmpty())
+                activeWindow->textEdit->insertPlainText(tx);
+            break;
+        };
+
+        progressDialog.setValue(count);
+        //qApp->processEvents();
+
+        if(progressDialog.wasCanceled())
+        {
             stop = true;
+
             if(portSettings.FlowControl == FLOW_XONXOFF)
             {
-               comPort->putChar(portSettings.Xoff);
-            };
-            showError(comPort->lastError());
-         };
-         buf[i] = '\0';
-         count += i;
-
-         if(deleteControlChars)
-            for(j = 0; j < i; j++)
-            {
-               if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0D)))
-                  tx.append(buf[j]);
+                comPort->putChar(portSettings.Xoff);
             }
-         else
-            for(j = 0; j < i; j++)
-            {
-               if(buf[j] != 0x0A)
-                  tx.append(buf[j]);
-            }
+            else
+                if(portSettings.FlowControl == FLOW_HARDWARE)
+                {
+                    comPort->setRts(false);
+                    comPort->setDtr(false);
+                };
+        };
+    };
 
-         progressDialog.setLabelText(tr("Reciving byte %1").arg(count));
-
-         activeWindow->textEdit->insertPlainText(tx);
-         tx.clear();
-
-         if(!doNotShowProgressInEditor)
-         {
-            activeWindow->textEdit->ensureCursorVisible();
-         };
-      }
-      else
-         qApp->processEvents();
-
-      if(stop)
-      {
-         if(!tx.isEmpty())
-            activeWindow->textEdit->insertPlainText(tx);
-         break;
-      };
-
-      progressDialog.setValue(count);
-      //qApp->processEvents();
-
-      if(progressDialog.wasCanceled())
-      {
-         stop = true;
-
-         if(portSettings.FlowControl == FLOW_XONXOFF)
-         {
-            comPort->putChar(portSettings.Xoff);
-         }
-         else
-            if(portSettings.FlowControl == FLOW_HARDWARE)
-            {
-               comPort->setRts(false);
-               comPort->setDtr(false);
-            };
-      };
-   };
-
-   comPort->close();
-   delete(comPort);
-   progressDialog.close();
-   receiveAct->setEnabled(TRUE);
-   sendAct->setEnabled(TRUE);
-   if(recieveTimeoutTimer > NULL)
-      delete(recieveTimeoutTimer);
+    comPort->close();
+    delete(comPort);
+    progressDialog.close();
+    receiveAct->setEnabled(TRUE);
+    sendAct->setEnabled(TRUE);
+    if(recieveTimeoutTimer > NULL)
+        delete(recieveTimeoutTimer);
 
 
-   if(activeWindow)
-   {
-     if(activeWindow->textEdit->document()->isEmpty())
-     {
-        activeWindow->parentWidget()->close();
-     }
-     else
-     {
-        if (removeEmptyLines)
-            activeWindow->doRemoveEmptyLines();
-        activeWindow->setHighligthMode(MODE_AUTO);
-        if(defaultMdiWindowProperites.defaultReadOnly)
-           activeWindow->textEdit->isReadOnly();
-     };
-   };
-   QApplication::restoreOverrideCursor();
+    if(activeWindow)
+    {
+        if(activeWindow->textEdit->document()->isEmpty())
+        {
+            activeWindow->parentWidget()->close();
+        }
+        else
+        {
+            if (removeEmptyLines)
+                activeWindow->doRemoveEmptyLines();
+            activeWindow->setHighligthMode(MODE_AUTO);
+            if(defaultMdiWindowProperites.defaultReadOnly)
+                activeWindow->textEdit->isReadOnly();
+        };
+    };
+    QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -3540,8 +3378,8 @@ void EdytorNc::receiveButtonClicked()
 
 void EdytorNc::stopButtonClicked()
 {
-   stop = true;
-   qApp->processEvents();
+    stop = true;
+    qApp->processEvents();
 }
 
 //**************************************************************************************************
@@ -3550,50 +3388,50 @@ void EdytorNc::stopButtonClicked()
 
 void EdytorNc::showError(int error)
 {
-   QString text;
-   QMessageBox msgBox;
-   
-   switch(error)
-   {
-      case E_INVALID_FD                   : text = tr("Invalid file descriptor (port was not opened correctly)");
-                                            break;
-      case E_NO_MEMORY                    : text = tr("Unable to allocate memory tables");
-                                            break;
-      case E_CAUGHT_NON_BLOCKED_SIGNAL    : text = tr("Caught a non-blocked signal");
-                                            break;
-      case E_PORT_TIMEOUT                 : text = tr("Operation timed out");
-                                            break;
-      case E_INVALID_DEVICE               : text = tr("The file opened by the port is not a character device");
-                                            break;
-      case E_BREAK_CONDITION              : text = tr("The port detected a break condition");
-                                            break;
-      case E_FRAMING_ERROR                : text = tr("The port detected a framing error (incorrect baud rate settings ?)");
-                                            break;
-      case E_IO_ERROR                     : text = tr("There was an I/O error while communicating with the port");
-                                            break;
-      case E_BUFFER_OVERRUN               : text = tr("Character buffer overrun");
-                                            break;
-      case E_RECEIVE_OVERFLOW             : text = tr("Receive buffer overflow");
-                                            break;
-      case E_RECEIVE_PARITY_ERROR         : text = tr("The port detected a parity error in the received data");
-                                            break;
-      case E_TRANSMIT_OVERFLOW            : text = tr("Transmit buffer overflow");
-                                            break;
-      case E_READ_FAILED                  : text = tr("General read operation failure");
-                                            break;
-      case E_WRITE_FAILED                 : text = tr("General write operation failure");
-                                            break;
-      case E_NO_ERROR                     : text = tr("No Error has occured");
-                                            statusBar()->showMessage(text);
-                                            return;
-      default                             : text = tr("Unknown error");
-   };
+    QString text;
+    QMessageBox msgBox;
+
+    switch(error)
+    {
+    case E_INVALID_FD                   : text = tr("Invalid file descriptor (port was not opened correctly)");
+        break;
+    case E_NO_MEMORY                    : text = tr("Unable to allocate memory tables");
+        break;
+    case E_CAUGHT_NON_BLOCKED_SIGNAL    : text = tr("Caught a non-blocked signal");
+        break;
+    case E_PORT_TIMEOUT                 : text = tr("Operation timed out");
+        break;
+    case E_INVALID_DEVICE               : text = tr("The file opened by the port is not a character device");
+        break;
+    case E_BREAK_CONDITION              : text = tr("The port detected a break condition");
+        break;
+    case E_FRAMING_ERROR                : text = tr("The port detected a framing error (incorrect baud rate settings ?)");
+        break;
+    case E_IO_ERROR                     : text = tr("There was an I/O error while communicating with the port");
+        break;
+    case E_BUFFER_OVERRUN               : text = tr("Character buffer overrun");
+        break;
+    case E_RECEIVE_OVERFLOW             : text = tr("Receive buffer overflow");
+        break;
+    case E_RECEIVE_PARITY_ERROR         : text = tr("The port detected a parity error in the received data");
+        break;
+    case E_TRANSMIT_OVERFLOW            : text = tr("Transmit buffer overflow");
+        break;
+    case E_READ_FAILED                  : text = tr("General read operation failure");
+        break;
+    case E_WRITE_FAILED                 : text = tr("General write operation failure");
+        break;
+    case E_NO_ERROR                     : text = tr("No Error has occured");
+        statusBar()->showMessage(text);
+        return;
+    default                             : text = tr("Unknown error");
+    };
 
     
-   statusBar()->showMessage(text);
-   msgBox.setText(text);
-   msgBox.setIcon(QMessageBox::Warning);
-   msgBox.exec();
+    statusBar()->showMessage(text);
+    msgBox.setText(text);
+    msgBox.setIcon(QMessageBox::Warning);
+    msgBox.exec();
 
 }
 
@@ -3603,56 +3441,56 @@ void EdytorNc::showError(int error)
 
 void EdytorNc::doCmpMacro()
 {
-   QString fileName, filePath, text;
+    QString fileName, filePath, text;
 
 
-   if(activeMdiChild())
-   {
-//      fileName = activeMdiChild()->filePath() + "/";
-//      fileName = fileName + activeMdiChild()->fileName().remove(".nc");
-//      fileName = fileName + tr("_compiled_");
-//      fileName = fileName + QDate::currentDate().toString(Qt::ISODate) + ".nc";
-//      fileName = fileName + QTime::currentTime().toString(Qt::ISODate);
+    if(activeMdiChild())
+    {
+        //      fileName = activeMdiChild()->filePath() + "/";
+        //      fileName = fileName + activeMdiChild()->fileName().remove(".nc");
+        //      fileName = fileName + tr("_compiled_");
+        //      fileName = fileName + QDate::currentDate().toString(Qt::ISODate) + ".nc";
+        //      fileName = fileName + QTime::currentTime().toString(Qt::ISODate);
 
-      text = activeMdiChild()->textEdit->toPlainText();
-   }
-   else
-     return;
-
-
+        text = activeMdiChild()->textEdit->toPlainText();
+    }
+    else
+        return;
 
 
-   MdiChild *child = createMdiChild();
-
-   child->newFile();
 
 
-   child->textEdit->insertPlainText(text);
+    MdiChild *child = createMdiChild();
 
-   if((child->compileMacro() == -1))
-   {
-       child->textEdit->document()->setModified(false);
-       //child->close();
-       return;
-   };
+    child->newFile();
 
-   defaultMdiWindowProperites.cursorPos = 0;
-   defaultMdiWindowProperites.readOnly = FALSE;
-   //defaultMdiWindowProperites.maximized = FALSE;
-   defaultMdiWindowProperites.geometry = QByteArray();
-   defaultMdiWindowProperites.editorToolTips = true;
-   defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
-   //defaultMdiWindowProperites.fileName = fileName;
-   child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-   //child->setCurrentFile(fileName, child->textEdit->toPlainText());
+    child->textEdit->insertPlainText(text);
 
-   //qDebug() << tmpFileName << fileName;
+    if((child->compileMacro() == -1))
+    {
+        child->textEdit->document()->setModified(false);
+        //child->close();
+        return;
+    };
 
-   if(defaultMdiWindowProperites.maximized)
-     child->showMaximized();
-   else
-     child->showNormal();
+    defaultMdiWindowProperites.cursorPos = 0;
+    defaultMdiWindowProperites.readOnly = FALSE;
+    //defaultMdiWindowProperites.maximized = FALSE;
+    defaultMdiWindowProperites.geometry = QByteArray();
+    defaultMdiWindowProperites.editorToolTips = true;
+    defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+    //defaultMdiWindowProperites.fileName = fileName;
+    child->setMdiWindowProperites(defaultMdiWindowProperites);
+
+    //child->setCurrentFile(fileName, child->textEdit->toPlainText());
+
+    //qDebug() << tmpFileName << fileName;
+
+    if(defaultMdiWindowProperites.maximized)
+        child->showMaximized();
+    else
+        child->showNormal();
 
 }
 
@@ -3662,48 +3500,48 @@ void EdytorNc::doCmpMacro()
 
 void EdytorNc::createUserToolTipsFile()
 {
-   QString fileName;
+    QString fileName;
 
-   if(activeMdiChild())
-     fileName = QFileInfo(activeMdiChild()->currentFile()).canonicalPath();
-   else
-     return;
+    if(activeMdiChild())
+        fileName = QFileInfo(activeMdiChild()->currentFile()).canonicalPath();
+    else
+        return;
 
-   fileName += "/cnc_tips.txt";
+    fileName += "/cnc_tips.txt";
 
-   if(QFileInfo(fileName).exists())
-      openFile(fileName);
-   else
-   {
-         QFile file(fileName);
-         if(!file.open(QIODevice::ReadWrite | QIODevice::Text))
-           return;
+    if(QFileInfo(fileName).exists())
+        openFile(fileName);
+    else
+    {
+        QFile file(fileName);
+        if(!file.open(QIODevice::ReadWrite | QIODevice::Text))
+            return;
 
-         qDebug() << fileName;
+        qDebug() << fileName;
 
-         QTextStream out(&file);
-         out << "# " << fileName << "\n" << "\n";
-         out << "#+++++++++++++++++++++++++++++++++\n";
-         out << tr("# ++++++ EXAMPLE ++++++") << "\n";
-         out << "# [OKUMA]" << "\n";
-         out << tr("# M00=\"<b>M00</b> - program stop, unconditional\"") << "\n";
-         out << "#+++++++++++++++++++++++++++++++++\n\n";
+        QTextStream out(&file);
+        out << "# " << fileName << "\n" << "\n";
+        out << "#+++++++++++++++++++++++++++++++++\n";
+        out << tr("# ++++++ EXAMPLE ++++++") << "\n";
+        out << "# [OKUMA]" << "\n";
+        out << tr("# M00=\"<b>M00</b> - program stop, unconditional\"") << "\n";
+        out << "#+++++++++++++++++++++++++++++++++\n\n";
 
-         out << "[OKUMA]" << "\n" << "\n" << "\n";
-         out << "[FANUC]" << "\n" << "\n" << "\n";
-         out << "[SINUMERIK]" << "\n" << "\n" << "\n";
-         out << "[SINUMERIK_840]" << "\n" << "\n" << "\n";
-         out << "[PHILIPS]" << "\n" << "\n" << "\n";
-         out << "[HEIDENHAIN]" << "\n" << "\n" << "\n";
-         out << "[HEIDENHAIN_ISO]" << "\n" << "\n" << "\n";
-         file.close();
-         openFile(fileName);      
-   };
-   QMdiSubWindow *existing = findMdiChild(fileName);
-   if(existing)
-   {
-      mdiArea->setActiveSubWindow(existing);
-   };
+        out << "[OKUMA]" << "\n" << "\n" << "\n";
+        out << "[FANUC]" << "\n" << "\n" << "\n";
+        out << "[SINUMERIK]" << "\n" << "\n" << "\n";
+        out << "[SINUMERIK_840]" << "\n" << "\n" << "\n";
+        out << "[PHILIPS]" << "\n" << "\n" << "\n";
+        out << "[HEIDENHAIN]" << "\n" << "\n" << "\n";
+        out << "[HEIDENHAIN_ISO]" << "\n" << "\n" << "\n";
+        file.close();
+        openFile(fileName);
+    };
+    QMdiSubWindow *existing = findMdiChild(fileName);
+    if(existing)
+    {
+        mdiArea->setActiveSubWindow(existing);
+    };
 };
 
 //**************************************************************************************************
@@ -3712,639 +3550,639 @@ void EdytorNc::createUserToolTipsFile()
 
 void EdytorNc::createGlobalToolTipsFile()
 {
-   QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-   QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
-
-   QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
-
-   QSettings settings(fileName, QSettings::IniFormat);
-
-
- //******************************************************************//
-   settings.beginGroup("OKUMA");
- //******************************************************************//
-   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
-   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
-   settings.setValue("M02", tr("<b>M02</b> - end of program"));
-   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
-   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
-   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
-   settings.setValue("M06", tr("<b>M06</b> - tool change"));
-   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
-   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
-   settings.setValue("M12", tr("<b>M12</b> - M-tool spindle STOP"));
-   settings.setValue("M13", tr("<b>M13</b> - M-tool spindle CW"));
-   settings.setValue("M14", tr("<b>M14</b> - M-tool spindle CCW"));
-   settings.setValue("M15", tr("<b>M15</b> - B or C-axis positioning, plus direction CW"));
-   settings.setValue("M16", tr("<b>M16</b> - B or C-axis positioning, minus direction CCW"));
-   settings.setValue("M19", tr("<b>M19</b> - oriented spindle stop"));
-   settings.setValue("M20", tr("<b>M20</b> - tailstock barrier OFF"));
-   settings.setValue("M21", tr("<b>M21</b> - tailstock barrier ON"));
-   settings.setValue("M22", tr("<b>M22</b> - chamfering OFF (for thread cutting cycle)"));
-   settings.setValue("M23", tr("<b>M23</b> - chamfering ON (for thread cutting cycle)"));
-   settings.setValue("M24", tr("<b>M24</b> - chuck barrier OFF"));
-   settings.setValue("M25", tr("<b>M25</b> - chuck barrier ON"));
-   settings.setValue("M26", tr("<b>M26</b> - thread lead along Z-axis"));
-   settings.setValue("M27", tr("<b>M27</b> - thread lead along X-axis"));
-   settings.setValue("M28", tr("<b>M28</b> - tool interference check function OFF"));
-   settings.setValue("M29", tr("<b>M28</b> - tool interference check function ON"));
-   settings.setValue("M30", tr("<b>M30</b> - end of program"));
-
-   settings.setValue("M40", tr("<b>M40</b> - spindle gear range neutral"));
-   settings.setValue("M41", tr("<b>M41</b> - spindle gear range 1"));
-   settings.setValue("M42", tr("<b>M42</b> - spindle gear range 2"));
-   settings.setValue("M43", tr("<b>M43</b> - spindle gear range 3"));
-   settings.setValue("M44", tr("<b>M44</b> - spindle gear range 4"));
-   settings.setValue("M48", tr("<b>M48</b> - spindle speed override ignore cancel"));
-   settings.setValue("M49", tr("<b>M49</b> - spindle speed override ignore"));
-
-   settings.setValue("M52", tr("<i>v.M</i> <b>M52</b> - mode of return to upper limit level") +
-                            tr("<br /><i>v.L</i> <b>M52</b> - "));
-   settings.setValue("M53", tr("<i>v.M</i> <b>M53</b> - mode of return to a specified point level set by G71") +
-                            tr("<br /><i>v.L</i> <b>M53</b> - "));
-   settings.setValue("M54", tr("<i>v.M</i> <b>M54</b> - mode of return to the point R level") +
-                            tr("<br /><i>v.L</i> <b>M54</b> - "));
-
-   settings.setValue("M55", tr("<b>M55</b> - tailstock spindle retract"));
-   settings.setValue("M56", tr("<b>M56</b> - tailstock spindle advanced"));
-   settings.setValue("M58", tr("<b>M58</b> - chucking pressure low"));
-   settings.setValue("M59", tr("<b>M59</b> - chucking pressure high"));
-
-   settings.setValue("M60", tr("<b>M60</b> - cancel of M61"));
-   settings.setValue("M61", tr("<b>M61</b> - Ignoring fixed rpm arrival in constant speed cutting"));
-   settings.setValue("M62", tr("<b>M62</b> - cancel of M64"));
-   settings.setValue("M63", tr("<b>M63</b> - ignoring spindle rotation M code answer"));
-   settings.setValue("M64", tr("<b>M64</b> - ignoring general M code answer"));
-   settings.setValue("M65", tr("<b>M65</b> - ignoring T code answer"));
-   settings.setValue("M66", tr("<b>M66</b> - turret indexing position free"));
-
-   settings.setValue("M78", tr("<b>M78</b> - steady rest unclamp"));
-   settings.setValue("M79", tr("<b>M79</b> - steady rest clamp"));
-   settings.setValue("M83", tr("<b>M83</b> - chuck clamp"));
-   settings.setValue("M84", tr("<b>M84</b> - chuck unclamp"));
-   settings.setValue("M85", tr("<b>M85</b> - no return to the cutting starting point after the completion of rough turning cycle (LAP)"));
-   settings.setValue("M88", tr("<b>M88</b> - air blower OFF"));
-   settings.setValue("M89", tr("<b>M89</b> - air blower ON"));
-   settings.setValue("M90", tr("<b>M90</b> - door/cover close"));
-   settings.setValue("M91", tr("<b>M91</b> - door/cover open"));
-
-   settings.setValue("M98", tr("<b>M98</b> - tailstock spindle thrust low"));
-   settings.setValue("M99", tr("<b>M99</b> - tailstock spindle thrust high"));
-   settings.setValue("M109", tr("<b>M109</b> - cancel of M110"));
-   settings.setValue("M110", tr("<b>M110</b> - C-axis joint"));
-
-   settings.setValue("M122", tr("<b>M122</b> - work rest retraction"));
-   settings.setValue("M123", tr("<b>M123</b> - Cwork rest advance"));
-
-   settings.setValue("M130", tr("<b>M130</b> - cutting feed; spindle rotating condition OFF"));
-   settings.setValue("M131", tr("<b>M131</b> - cutting feed; spindle rotating condition ON"));
-   settings.setValue("M132", tr("<b>M132</b> - single block ineffective"));
-   settings.setValue("M133", tr("<b>M133</b> - single block effective"));
-   settings.setValue("M136", tr("<b>M136</b> - feedrate override ineffective"));
-   settings.setValue("M137", tr("<i>v.M</i> <b>M137</b> - feedrate override effective") +
-                             tr("<br /><i>v.L</i> <b>M137</b> - touch setter interlock release ON"));
-   settings.setValue("M138", tr("<i>v.M</i> <b>M138</b> - dry run ineffective") +
-                             tr("<br /><i>v.L</i> <b>M138</b> - touch setter interlock release OFF"));
-   settings.setValue("M139", tr("<b>M139</b> - dry run effective"));
-   settings.setValue("M140", tr("<i>v.M</i> <b>M140</b> - slide hold ineffective") +
-                             tr("<br /><i>v.L</i> <b>M140</b> - main motor overload monitoring OFF"));
-   settings.setValue("M141", tr("<i>v.M</i> <b>M141</b> - slide hold effective") +
-                             tr("<br /><i>v.L</i> <b>M141</b> - main motor overload monitoring ON"));
-   settings.setValue("M142", tr("<b>M142</b> - coolant pressure low"));
-   settings.setValue("M143", tr("<b>M143</b> - coolant pressure high"));
-   settings.setValue("M144", tr("<b>M144</b> - additional coolant 1 OFF"));
-   settings.setValue("M145", tr("<b>M145</b> - additional coolant 1 ON"));
-   settings.setValue("M146", tr("<b>M146</b> - C-axis unclamp"));
-   settings.setValue("M147", tr("<b>M147</b> - C-axis clamp"));
-   settings.setValue("M152", tr("<b>M152</b> - M-tools spindle interlock ON"));
-   settings.setValue("M153", tr("<b>M153</b> - M-tools spindle interlock OFF"));
-   settings.setValue("M156", tr("<b>M156</b> - center work interlock OFF"));
-   settings.setValue("M157", tr("<b>M157</b> - center work interlock ON"));
-   settings.setValue("M161", tr("<b>M161</b> - feedrate override fix (100%)"));
-   settings.setValue("M162", tr("<b>M162</b> - cancel of M163"));
-   settings.setValue("M163", tr("<b>M163</b> - M-tools spindle speed override fix (100%)"));
-
-   settings.setValue("M184", tr("<b>M184</b> - chuck internal interlock release OFF"));
-   settings.setValue("M185", tr("<b>M185</b> - chuck internal interlock release ON"));
-   settings.setValue("M186", tr("<b>M186</b> - work rest base unclamp"));
-   settings.setValue("M187", tr("<b>M187</b> - work rest base clamp"));
-   settings.setValue("M215", tr("<b>M215</b> - load monitor G00 ignore OFF"));
-   settings.setValue("M216", tr("<b>M216</b> - load monitor G00 ignore ON"));
-
-   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
-   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02 X Y Z [I J K</b> | <b>L]</b> - circular interpolation CW"));
-   settings.setValue("G03", tr("<b>G03 X Y Z [I J K</b> | <b>L]</b> - circular interpolation CCW"));
-   settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
-   settings.setValue("G09", tr("<b>G09</b> - exact stop"));
-   settings.setValue("G10", tr("<b>G10</b> - cancel of G11"));
-   settings.setValue("G11", tr("<b>G11</b> - parallel and rotation shift of coordinate system"));
-
-   settings.setValue("G13", tr("<b>G13</b> - turret selection: Turret A"));
-   settings.setValue("G14", tr("<b>G14</b> - turret selection: Turret B"));
-   settings.setValue("G15", tr("<b>G15 H</b>xx - selection of work coordinate system no. xx, modal"));
-   settings.setValue("G16", tr("<b>G15 H</b>xx - selection of work coordinate system no. xx, one-shot"));
-
-   settings.setValue("G17", tr("<b>G17</b> - XY plane"));
-   settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
-   settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
-   settings.setValue("G20", tr("<b>G20</b> - inch input confirmation"));
-   settings.setValue("G21", tr("<b>G21</b> - metric input confirmation"));
-
-   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
-   settings.setValue("G50", tr("<i>v.L</i> <b>G50 S</b>xxxx - maximum spindle speed") +
-                            tr("<br /><i>v.L</i> <b>G50 X Z</b> - zero point shift"));
-
-   settings.setValue("G53", tr("<i>v.M</i> <b>G53</b> - cancel tool length offset") +
-                            tr("<br /><i>v.L</i> <b>G53</b> - "));
-   settings.setValue("G54", tr("<i>v.M</i> <b>G54 H</b>xx - tool length offset X-axis, xx - offset no.") +
-                            tr("<br /><i>v.L</i> <b>G54</b> - "));
-   settings.setValue("G55", tr("<i>v.M</i> <b>G55 H</b>xx - tool length offset Y-axis, xx - offset no.") +
-                            tr("<br /><i>v.L</i> <b>G55</b> - "));
-   settings.setValue("G56", tr("<i>v.M</i> <b>G56 H</b>xx - tool length offset Z-axis, xx - offset no.") +
-                            tr("<br /><i>v.L</i> <b>G56</b> - "));
-   settings.setValue("G57", tr("<i>v.M</i> <b>G57 H</b>xx - tool length offset 4-axis, xx - offset no.") +
-                            tr("<br /><i>v.L</i> <b>G57</b> - "));
-   settings.setValue("G58", tr("<i>v.M</i> <b>G58 H</b>xx - tool length offset 5-axis, xx - offset no.") +
-                            tr("<br /><i>v.L</i> <b>G58</b> - "));
-   settings.setValue("G59", tr("<i>v.M</i> <b>G59 H</b>xx - tool length offset 6-axis, xx - offset no.") +
-                            tr("<br /><i>v.L</i> <b>G59</b> - "));
-
-   settings.setValue("G61", tr("<b>G61</b> - exact stop mode"));
-   settings.setValue("G62", tr("<b>G62</b> - programmable mirror image function"));
-   settings.setValue("G17", tr("<b>G17</b> - cutting mode"));
-
-
-   settings.setValue("G71", tr("<i>v.M</i> <b>G71 Z</b>xx - return level xx command") +
-                            tr("<br /><i>v.L</i> <b>G71</b> - "));
-   settings.setValue("G73", tr("<i>v.M</i> <b>G73</b> - high speed deep hole drilling") +
-                            tr("<br /><i>v.L</i> <b>G73</b> - "));
-   settings.setValue("G74", tr("<i>v.M</i> <b>G74</b> - reverse tapping") +
-                            tr("<br /><i>v.L</i> <b>G74</b> - "));
-   settings.setValue("G76", tr("<i>v.M</i> <b>G76</b> - fine boring") +
-                            tr("<br /><i>v.L</i> <b>G76</b> - "));
-   settings.setValue("G75", tr("<i>v.L</i> <b>G75 G01 [X</b> | <b>Z] L</b>xxxx - chamfering 45deg. xxxx - direction and size"));
-   settings.setValue("G76", tr("<i>v.L</i> <b>G76 G01 [X</b> | <b>Z] L</b>xxxx - rounding. xxxx - direction and size"));
-
-   settings.setValue("G80", tr("<i>v.M</i> <b>G80</b> - fixed cycle mode cancel") +
-                            tr("<br /><i>v.L</i> <b>G80</b> - end of shape designation (LAP)"));
-
-   settings.setValue("G81", tr("<i>v.M</i> <b>G81 R X Y Z</b> - drilling cycle") +
-                            tr("<br /><i>v.L</i> <b>G81</b> - start of longitudinal shape designation (LAP)"));
-
-   settings.setValue("G82", tr("<i>v.M</i> <b>G82 R X Y Z</b> - counter bore cycle") +
-                            tr("<br /><i>v.L</i> <b>G82</b> - start of transverse shape designation (LAP)"));
-
-   settings.setValue("G83", tr("<i>v.M</i> <b>G83 R X Y Z</b> - deep hole drilling cycle") +
-                            tr("<br /><i>v.L</i> <b>G83</b> - start of blank material shape definition (LAP)"));
-
-   settings.setValue("G84", tr("<i>v.M</i> <b>G84 R X Y Z</b> - tapping cycle") +
-                            tr("<br /><i>v.L</i> <b>G84</b> -   change of cutting conditions in bar turning cycle (LAP)"));
-
-   settings.setValue("G85", tr("<i>v.M</i> <b>G85 R X Y Z</b> - boring cycle") +
-                            tr("<br /><i>v.L</i> <b>G85</b> - call of rough bar turning cycle (LAP)"));
-
-   settings.setValue("G86", tr("<i>v.M</i> <b>G86 R X Y Z</b> - boring cycle") +
-                            tr("<br /><i>v.L</i> <b>G86</b> - call of rough copy turning cycle (LAP)"));
-
-   settings.setValue("G87", tr("<i>v.M</i> <b>G87 R X Y Z</b> - back boring cycle") +
-                            tr("<br /><i>v.L</i> <b>G87</b> - call finish turning cycle (LAP)"));
-
-   settings.setValue("G88", tr("<i>v.M</i> <b>G88 R X Y Z</b> - drilling cycle") +
-                            tr("<br /><i>v.L</i> <b>G88</b> - call of continuous thread cutting cycle (LAP)"));
-
-   settings.setValue("G89", tr("<i>v.M</i> <b>G89 R X Y Z</b> - boring cycle") +
-                            tr("<br /><i>v.L</i> <b>G89</b> - "));
-
-
-   settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
-   settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
-   settings.setValue("G92", tr("<b>G92</b> - setting of work coordinate system"));
-   settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
-   settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
-   settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
-   settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
-
-   settings.setValue("NCYL", tr("<b>NCYL</b> - if specified in fixed cycle, positioning to the definied hole position is performed, but the cycle axis does not operate"));
-   settings.setValue("NOEX", tr("<b>NOEX</b> - if specified in fixed cycle, no axis movements may be performed"));
-
-   settings.setValue("SIN", tr("<b>SIN[</b>angle<b>]</b> - sine"));
-   settings.setValue("COS", tr("<b>COS[</b>angle<b>]</b> - cosine"));
-   settings.setValue("TAN", tr("<b>TAN[</b>angle<b>]</b> - tangent"));
-   settings.setValue("ATAN", tr("<b>ATAN[</b>angle<b>]</b> - arctangent 1 or 2"));
-   settings.setValue("SQRT", tr("<b>SQRT[</b>val<b>]</b> - square root"));
-   settings.setValue("ABS", tr("<b>ABS[</b>val<b>]</b> - absolute value"));
-   settings.setValue("BIN", tr("<b>BIN[</b>val<b>]</b> - decimal to binary conversion"));
-   settings.setValue("BCD", tr("<b>BCD[</b>val<b>]</b> - binary to decimal conversion"));
-   settings.setValue("ROUND", tr("<b>ROUND[</b>val<b>]</b> - integer implementation (rounding)"));
-   settings.setValue("FIX", tr("<b>FIX[</b>val<b>]</b> - integer implementation (truncation)"));
-   settings.setValue("FUP", tr("<b>FUP[</b>val<b>]</b> - integer implementation (raising)"));
-   settings.setValue("DROUND", tr("<b>DROUND[</b>val<b>]</b> - unit integer implementation (rounding)"));
-   settings.setValue("DFIX", tr("<b>DFIX[</b>val<b>]</b> - unit integer implementation (truncation)"));
-   settings.setValue("DFUP", tr("<b>DFUP[</b>val<b>]</b> - unit integer implementation (raising)"));
-   settings.setValue("MOD", tr("<b>MOD[</b>val<b>,</b>yy<b>]</b> - remainder of val/yy"));
-
-   settings.setValue("VDIN", tr("<b>VDIN[</b>xx<b>]</b> - imput variable no. xx"));
-   settings.setValue("VDOUT", tr("<b>VDOUT[</b>xx<b>]</b> - output variable no. xx"));
-   settings.setValue("VUACM", tr("<b>VUACM[</b>n<b>]='</b>text<b>'</b> - sub message for user definied alarms, n - subscript expression, text - max. 16 chracters"));
-
-   settings.setValue("MODIN", tr("<b>MODIN O</b>nnnn [<b>Q</b>]xx - subprogram call after axis movement, nnnn - prog. name, xx - number of repetitions"));
-   settings.setValue("MODOUT", tr("<b>MODOUT</b> - cancels last MODIN command"));
-
-   settings.setValue("OMIT", tr("<b>OMIT</b> - coordinate calculation function, omit"));
-   settings.setValue("RSTRT", tr("<b>RSTRT</b> - coordinate calculation function, restart"));
-
-   settings.setValue("LAA", tr("<b>LAA</b> - line at angle"));
-   settings.setValue("ARC", tr("<b>ARC</b> - arc"));
-   settings.setValue("GRDX", tr("<b>GRDX</b> - grid X"));
-   settings.setValue("GRDY", tr("<b>GRDY</b> - grid Y"));
-   settings.setValue("DGRDX", tr("<b>DGRDX</b> - double grid X"));
-   settings.setValue("DGRDY", tr("<b>DGRDY</b> - double grid Y"));
-   settings.setValue("SQRX", tr("<b>SQRX</b> - square X"));
-   settings.setValue("SQRY", tr("<b>SQRY</b> - square Y"));
-   settings.setValue("BHC", tr("<b>BHC X Y I J K </b> - bolt hole circle, X Y - circle center, I - radius, J - angle of first hole, K - no. of holes"));
-
-   settings.setValue("EQ", tr("<b>EQ</b> - equal to"));
-   settings.setValue("NE", tr("<b>NE</b> - not equal to"));
-   settings.setValue("GT", tr("<b>GT</b> - greather than"));
-   settings.setValue("LE", tr("<b>LE</b> - less than or equal to"));
-   settings.setValue("LT", tr("<b>LT</b> - less than"));
-   settings.setValue("GE", tr("<b>GE</b> - greather than or equal to"));
-   settings.setValue("IF", tr("<b>IF[</b>condition<b>] N</b>xxxx - if condition is true goto block xxxx"));
-
-   settings.setValue("TLFON", tr("<b>TLFON</b> - tool life on"));
-   settings.setValue("EMPTY", tr("<b>EMPTY</b> - 'empty' value "));
-
-   settings.setValue("SB", tr("<b>SB=</b>xxxx - M-tool spindle speed xxxx"));
-   settings.setValue("TG", tr("<b>TG=</b>xx - tool group no. xx"));
-   settings.setValue("OG", tr("<b>OG=</b>xx - offset group no. xx"));
-   settings.setValue("GOTO", tr("<b>GOTO N</b>nnnn - jump to nnnn"));
-   settings.setValue("CALL", tr("<b>CALL O</b>nnnn [<b>Q</b>xx] - call subprogram nnnn, repeat it xx times"));
-   settings.setValue("RTS", tr("<b>RTS</b> - subprogram end"));
-   settings.setValue("VLMON", tr("<b>VLMON[</b>xx<b>]=</b>yy - load monitor"));
-
-
-   settings.setValue("VATOL", tr("<b>VATOL</b> - active tool number, tool kind + tool number"));
-   settings.setValue("VNTOL", tr("<b>VNTOL</b> - next tool number, tool kind + tool number"));
-   settings.setValue("VMLOK", tr("<b>VMLOK</b> - equal zero if not in machine lock status"));
-   settings.setValue("VPPCP", tr("<b>VPPCP</b> - PPC parameter"));
-   settings.setValue("VPLNO", tr("<b>VPLNO</b> - PPC pallet number"));
-   settings.setValue("VPLDT", tr("<b>VPLDT</b> - PPC parameter bit data"));
-   settings.setValue("VTLCN", tr("<b>VTLCN</b> - active tool number"));
-   settings.setValue("VTLNN", tr("<b>VTLNN</b> - next tool number"));
-
-
-   settings.setValue("VMCOD", tr("<b>VMCOD[</b>xx<b>]</b> - present M code of group no. xx"));
-   settings.setValue("VSCOD", tr("<b>VSCOD</b> - command value of present spindle speed S"));
-   settings.setValue("VDCOD", tr("<b>VDCOD</b> - present cutter radius compensation offset number"));
-   settings.setValue("VFCOD", tr("<b>VFCOD</b> - command value of present feedrate F"));
-   settings.setValue("VGCOD", tr("<b>VGCOD[</b>xx<b>]</b> - present G code of group no. xx"));
-   settings.setValue("VHCOD", tr("<b>VHCOD</b> - present tool length offset number"));
-   settings.setValue("VACOD", tr("<b>VACOD</b> - coordinate system number"));
-
-   settings.setValue("VZOFX", tr("<i>v.M</i> <b>VZOFX[</b>xx<b>]</b> - zero offset no. xx of X-axis") +
-                              tr("<br /><i>v.L</i> <b>VZOFX</b> - zero offset of X-axis"));
-   settings.setValue("VZOFZ", tr("<i>v.M</i> <b>VZOFZ[</b>xx<b>]</b> - zero offset no. xx of Z-axis") +
-                              tr("<br /><i>v.L</i> <b>VZOFZ</b> - zero offset of Z-axis"));
-   settings.setValue("VZOFY", tr("<i>v.M</i> <b>VZOFY[</b>xx<b>]</b> - zero offset no. xx of Y-axis"));
-   settings.setValue("VZOFW", tr("<i>v.L</i> <b>VZOFW</b> - zero offset of W-axis"));
-   settings.setValue("VZOFC", tr("<i>v.L</i> <b>VZOFC</b> - zero offset of C-axis"));
-   settings.setValue("VZSHZ", tr("<i>v.L</i> <b>VZSHZ</b> - zero shift of Z-axis"));
-   settings.setValue("VZSHX", tr("<i>v.L</i> <b>VZSHX</b> - zero shift of X-axis"));
-   settings.setValue("VZSHC", tr("<i>v.L</i> <b>VZSHC</b> - zero shift of C-axis"));
-   settings.setValue("VTOFZ", tr("<i>v.L</i> <b>VTOFZ[</b>xx<b>]</b> - tool offset no. xx of Z-axis"));
-   settings.setValue("VTOFX", tr("<i>v.L</i> <b>VTOFX[</b>xx<b>]</b> - tool offset no. xx of X-axis"));
-   settings.setValue("VRSTT", tr("<b>VRSTT</b> - equal zero if not in restart state"));
-   settings.setValue("VTOFH", tr("<i>v.M</i> <b>VTOFH[</b>xx<b>]</b> - tool length, offset no. xx"));
-   settings.setValue("VTOFD", tr("<i>v.M</i> <b>VTOFD[</b>xx<b>]</b> - cutter radius, offset no. xx"));
-   settings.setValue("VNCOM", tr("<b>VNCOM[</b>xx<b>]</b> - communication for automation, no. xx"));
-
-
-
-
-   settings.endGroup();
-
-//******************************************************************//
-   settings.beginGroup("FANUC");
-//******************************************************************//
-   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
-   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
-   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
-   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
-   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
-   settings.setValue("M06", tr("<b>M06</b> - tool change"));
-   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
-   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
-   settings.setValue("M30", tr("<b>M30</b> - end of program"));
-   settings.setValue("M98", tr("<b>M98 P</b>xxxx - macro xxxx call"));
-   settings.setValue("M99", tr("<b>M99</b> - subprogram end"));
-
-   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
-   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02 {X Y Z</b> | <b>U V W} {I J K</b> | <b>R} F</b> - circular interpolation CW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc"));
-   settings.setValue("G03", tr("<b>G03 {X Y Z</b> | <b>U V W} {I J K</b> | <b>R} F</b> - circular interpolation CCW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc"));
-   settings.setValue("G04", tr("<b>G04 X U P</b> - dwell XU - in seconds; P - in microseconds"));
-
-   settings.setValue("G10", tr("<b>G10 P X Z Y R Q</b> - change of offset value by program"));
-
-   settings.setValue("G17", tr("<b>G17</b> - XY plane"));
-   settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
-   settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
-
-   settings.setValue("G20", tr("<b>G20</b> - inch input"));
-   settings.setValue("G21", tr("<b>G21</b> - metric input"));
-   settings.setValue("G27", tr("<b>G27</b> - reference point return check"));
-   settings.setValue("G28", tr("<b>G28</b> - reference point return"));
-   settings.setValue("G30", tr("<b>G30 P</b>x - x = 2nd, 3rd, 4th reference point return"));
-   settings.setValue("G31", tr("<b>G31</b> - skip function"));
-
-   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
-
-   settings.setValue("G50", tr("<i>v.T</i> <b>G50 S</b>xxxx - maximum spindle speed") +
-                            tr("<br /><b>G50 X Z</b> - zero point shift"));
-   settings.setValue("G53", tr("<b>G53</b> - machine coordinate system"));
-   settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
-   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
-   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
-   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
-   settings.setValue("G58", tr("<b>G58</b> - settable zero offset 5"));
-   settings.setValue("G59", tr("<b>G59</b> - settable zero offset 6"));
-
-   settings.setValue("G65", tr("<b>G65 P</b>xxxx - macro xxxx call"));
-   settings.setValue("G66", tr("<b>G66 P</b>xxxx - macro xxxx modal call"));
-   settings.setValue("G67", tr("<b>G67</b> - macro modal call cancel"));
-
-   settings.setValue("G70", tr("<i>v.T</i> <b>G70 P Q</b> - finishing cycle; P - sequence number of the first block of finishing shape, Q - sequence number of last block"));
-   settings.setValue("G71", tr("<i>v.T</i> <b>G71 U R</b> - U - depth of cut, Q - escaping amount") +
-                            tr("<br /><i>v.T</i> <b>G71 P Q U W</b> - stock removal in turning; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance"));
-   settings.setValue("G72", tr("<i>v.T</i> <b>G72 W R</b> - U - depth of cut, Q - escaping amount") +
-                            tr("<br /><i>v.T</i> <b>G72 P Q U W</b> - stock removal in facing; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance"));
-   settings.setValue("G73", tr("<i>v.T</i> <b>G73 W R</b>") +
-                            tr("<br /><i>v.T</i> <b>G73 P Q U W</b> - pattern repeating"));
-   settings.setValue("G74", tr("<i>v.T</i> <b>G74 R</b>") +
-                            tr("<br /><i>v.T</i> <b>G74 {X Z U W} P Q R</b> - end face peck drilling cycle"));
-   settings.setValue("G75", tr("<i>v.T</i> <b>G75 R</b>") +
-                            tr("<br /><i>v.T</i> <b>G75 {X Z U W} P Q U W</b> - outer/internal diameter drilling cycle"));
-   settings.setValue("G76", tr("<i>v.T</i> <b>G76 P Q R</b>") +
-                            tr("<br /><i>v.T</i> <b>G76 {X Z U W} P Q U W</b> - multiple thread cutting cycle"));
-
-   settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
-   settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
-   settings.setValue("G92", tr("<b>G92 X Z</b> - coordinate system setting"));
-   settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
-   settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
-   settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
-   settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
-   settings.setValue("G98", tr("<b>G98</b> - return to initial level"));
-   settings.setValue("G99", tr("<b>G99</b> - return to R level"));
-
-   settings.setValue("EQ", tr("<b>EQ</b> - equal to"));
-   settings.setValue("NE", tr("<b>NE</b> - not equal to"));
-   settings.setValue("GT", tr("<b>GT</b> - greather than"));
-   settings.setValue("LE", tr("<b>LE</b> - less than or equal to"));
-   settings.setValue("LT", tr("<b>LT</b> - less than"));
-   settings.setValue("GE", tr("<b>GE</b> - greather than or equal to"));
-   settings.setValue("IF", tr("<b>IF[</b>condition<b>]</b>do something - if condition is true do something"));
-   settings.setValue("GOTO", tr("<b>GOTO</b>nnnn - jump to block nnnn"));
-
-   settings.setValue("WHILE", tr("<b>WHILE[</b>condition<b>] DO</b>n <br />...<br />commands<br />... <br /><b>END</b>n  - loop - while condition true do commands beetwen DOn and ENDn"));
-   settings.setValue("END", tr("<b>END</b>n - end of WHILE DOn loop"));
-
-   settings.setValue("EOR", tr("<b>EOR</b> - exclusive OR"));
-   settings.setValue("OR", tr("<b>OR</b> - logical OR"));
-   settings.setValue("AND", tr("<b>AND</b> - logical AND"));
-   settings.setValue("NOT", tr("<b>NOT</b> - negation"));
-
-   settings.setValue("SIN", tr("<b>SIN[</b>angle<b>]</b> - sine"));
-   settings.setValue("COS", tr("<b>COS[</b>angle<b>]</b> - cosine"));
-   settings.setValue("TAN", tr("<b>TAN[</b>angle<b>]</b> - tangent"));
-   settings.setValue("ATAN", tr("<b>ATAN[</b>angle<b>]</b> - arctangent 1 or 2"));
-   settings.setValue("SQRT", tr("<b>SQRT[</b>val<b>]</b> - square root"));
-   settings.setValue("ABS", tr("<b>ABS[</b>val<b>]</b> - absolute value"));
-   settings.setValue("BIN", tr("<b>BIN[</b>val<b>]</b> - decimal to binary conversion"));
-   settings.setValue("BCD", tr("<b>BCD[</b>val<b>]</b> - binary to decimal conversion"));
-   settings.setValue("ROUND", tr("<b>ROUND[</b>val<b>]</b> - integer implementation (rounding)"));
-   settings.setValue("FIX", tr("<b>FIX[</b>val<b>]</b> - integer implementation (truncation)"));
-   settings.setValue("FUP", tr("<b>FUP[</b>val<b>]</b> - integer implementation (raising)"));
-
-
-
-
-   settings.endGroup();
-
-//******************************************************************//
-   settings.beginGroup("SINUMERIK");
-//******************************************************************//
-   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
-   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
-   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
-   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
-   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
-   settings.setValue("M06", tr("<b>M06</b> - tool change"));
-   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
-   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
-   settings.setValue("M30", tr("<b>M30</b> - end of program"));
-   settings.setValue("M51", tr("<b>M51</b> - thro spindle coolant on"));
-
-   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
-   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
-   settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
-   settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
-
-   settings.setValue("G17", tr("<b>G17</b> - XY plane"));
-   settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
-   settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
-
-   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
-
-   settings.setValue("G53", tr("<b>G53</b> - machine coordinate system"));
-   settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
-   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
-   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
-   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
-   settings.setValue("G58", tr("<b>G58</b> - programmable offset, absolute axial substitution"));
-   settings.setValue("G59", tr("<b>G59</b> - programmable offset, additive axial substitution"));
-
-   settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
-   settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
-   settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
-   settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
-   settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
-   settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
-
-
-   settings.setValue("@100", tr("<b>@100 K</b>nnnn - jump to block number nnnn"));
-   settings.setValue("@121", tr("<b>@121 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy not equal to xx jump to nnnn"));
-   settings.setValue("@122", tr("<b>@122 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy equal to xx jump to nnnn"));
-   settings.setValue("@123", tr("<b>@123 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is less than or equal to xx jump to nnnn"));
-   settings.setValue("@124", tr("<b>@124 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is less than xx jump to nnnn"));
-   settings.setValue("@125", tr("<b>@125 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greather than or equal to xx jump to nnnn"));
-   settings.setValue("@126", tr("<b>@126 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greather than xx jump to nnnn"));
-
-   settings.setValue("@620", tr("<b>@620 R</b>xx - increment value in param. xx"));
-   settings.setValue("@621", tr("<b>@621 R</b>xx - decrement value in param. xx"));
-   settings.setValue("@622", tr("<b>@622 R</b>xx - 'trunc' value in param. xx"));
-   settings.setValue("@630", tr("<b>@630 R</b>xx <b>R</b>|<b>K</b>yy - sine of angle yy is stored in param. xx"));
-   settings.setValue("@631", tr("<b>@630 R</b>xx <b>R</b>|<b>K</b>yy - cosine of angle yy is stored in param. xx"));
-   settings.setValue("@632", tr("<b>@630 R</b>xx <b>R</b>|<b>K</b>yy - tangent of angle yy is stored in param. xx"));
-   settings.setValue("@634", tr("<b>@634 R</b>xx <b>R</b>|<b>K</b>yy - arc sine of angle yy is stored in param. xx"));
-
-   settings.setValue("@714", tr("<b>@714</b> - stop decoding, until buffer is empty"));
-
-
-
-   settings.endGroup();
-
-//******************************************************************//
-   settings.beginGroup("SINUMERIK_840");
-//******************************************************************//
-   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
-   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
-   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
-   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
-   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
-   settings.setValue("M06", tr("<b>M06</b> - tool change"));
-   settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
-   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
-   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
-   settings.setValue("M30", tr("<b>M30</b> - end of program"));
-   settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
-
-   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
-   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
-   settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
-   settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
-
-   settings.setValue("G17", tr("<b>G17</b> - XY plane"));
-   settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
-   settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
-
-   settings.setValue("G53", tr("<b>G53</b> - Suppression of current frames: Programmable frame including system frame for TOROT and TOFRAME and active settable frame G54 ... G599."));
-   settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
-   settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
-   settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
-   settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
-   settings.setValue("G58", tr("<b>G58</b> - programmable offset, absolute axial substitution"));
-   settings.setValue("G59", tr("<b>G59</b> - programmable offset, additive axial substitution"));
-
-
-   settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
-   settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
-   settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
-
-   settings.setValue("G60", tr("<b>G60</b> - Velocity reduction, exact positioning"));
-   settings.setValue("G64", tr("<b>G64</b> - Continuous-path mode"));
-
-   settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
-   settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
-   settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
-   settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
-   settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
-   settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
-
-   settings.setValue("G153", tr("<b>G153</b> - suppression as for G53 and including all channel-specific and/or NCU-global basic frame"));
-   settings.setValue("G500", tr("<b>G500</b> - deactivate all settable G54-G57 frames if G500 does not contain a value"));
-
-   settings.setValue("SUPA", tr("<b>SUPA</b> - suppression as for G153 and including system frames for actual-value setting, scratching, zero offset external, PAROT including handwheel offsets (DRF), [zero offset external], overlaid motion"));
-
-   settings.setValue("IF", tr("<b>IF(</b>condition<b>)</b> nnnn - if condition is true goto block nnnn or label nnnn:"));
-   settings.setValue("GOTO", tr("<b>GOTO</b> nnnn - jump forward and if block not found jump backward to block nnnn or label nnnn:"));
-   settings.setValue("GOTOF", tr("<b>GOTOF</b> nnnn - jump forward to block nnnn or label nnnn:"));
-   settings.setValue("GOTOB", tr("<b>GOTOB</b> nnnn - jump backward to block nnnn or label nnnn:"));
-
-   settings.setValue("STOPRE", tr("<b>STOPRE</b> - stop decoding, until buffer is empty"));
-
-   settings.setValue("DIAMOF", tr("<b>DIAMOF</b> - diameter programming OFF; radius programming for G90/G91"));
-   settings.setValue("DIAMON", tr("<b>DIAMON</b> - diameter programming ON; diameter programming for G90/G91"));
-   settings.setValue("DIAM", tr("<b>DIAM90</b> - diameter programming for G90; radius programming for G91"));
-
-
-   settings.setValue("RET", tr("<b>RET</b> - subprogram end"));
-
-
-
-
-   settings.endGroup();
-
-
-//******************************************************************//
-   settings.beginGroup("HEIDENHAIN");
-//******************************************************************//
-   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
-   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
-   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
-   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
-   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
-   settings.setValue("M06", tr("<b>M06</b> - tool change"));
-   settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
-   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
-   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
-   settings.setValue("M30", tr("<b>M30</b> - end of program"));
-   settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
-
-   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
-   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
-   settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
-   settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
-
-
-
-
-
-
-
-
-   settings.endGroup();
-
-
-
-//******************************************************************//
-   settings.beginGroup("HEIDENHAIN_ISO");
-//******************************************************************//
-   settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
-   settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
-   settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
-   settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
-   settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
-   settings.setValue("M06", tr("<b>M06</b> - tool change"));
-   settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
-   settings.setValue("M08", tr("<b>M08</b> - coolant on"));
-   settings.setValue("M09", tr("<b>M09</b> - coolant off"));
-   settings.setValue("M30", tr("<b>M30</b> - end of program"));
-   settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
-
-   settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
-   settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
-   settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
-   settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
-   settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
-
-   settings.setValue("G17", tr("<b>G17</b> - XY plane"));
-   settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
-   settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
-
-
-
-
-
-   settings.endGroup();
-
-   if(QFileInfo(fileName).exists())
-      openFile(fileName);
-   QMdiSubWindow *existing = findMdiChild(fileName);
-   if(existing)
-   {
-      mdiArea->setActiveSubWindow(existing);
-   };
+    QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
+    QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
+
+    QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+
+    QSettings settings(fileName, QSettings::IniFormat);
+
+
+    //******************************************************************//
+    settings.beginGroup("OKUMA");
+    //******************************************************************//
+    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+    settings.setValue("M02", tr("<b>M02</b> - end of program"));
+    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+    settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+    settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+    settings.setValue("M06", tr("<b>M06</b> - tool change"));
+    settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+    settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+    settings.setValue("M12", tr("<b>M12</b> - M-tool spindle STOP"));
+    settings.setValue("M13", tr("<b>M13</b> - M-tool spindle CW"));
+    settings.setValue("M14", tr("<b>M14</b> - M-tool spindle CCW"));
+    settings.setValue("M15", tr("<b>M15</b> - B or C-axis positioning, plus direction CW"));
+    settings.setValue("M16", tr("<b>M16</b> - B or C-axis positioning, minus direction CCW"));
+    settings.setValue("M19", tr("<b>M19</b> - oriented spindle stop"));
+    settings.setValue("M20", tr("<b>M20</b> - tailstock barrier OFF"));
+    settings.setValue("M21", tr("<b>M21</b> - tailstock barrier ON"));
+    settings.setValue("M22", tr("<b>M22</b> - chamfering OFF (for thread cutting cycle)"));
+    settings.setValue("M23", tr("<b>M23</b> - chamfering ON (for thread cutting cycle)"));
+    settings.setValue("M24", tr("<b>M24</b> - chuck barrier OFF"));
+    settings.setValue("M25", tr("<b>M25</b> - chuck barrier ON"));
+    settings.setValue("M26", tr("<b>M26</b> - thread lead along Z-axis"));
+    settings.setValue("M27", tr("<b>M27</b> - thread lead along X-axis"));
+    settings.setValue("M28", tr("<b>M28</b> - tool interference check function OFF"));
+    settings.setValue("M29", tr("<b>M28</b> - tool interference check function ON"));
+    settings.setValue("M30", tr("<b>M30</b> - end of program"));
+
+    settings.setValue("M40", tr("<b>M40</b> - spindle gear range neutral"));
+    settings.setValue("M41", tr("<b>M41</b> - spindle gear range 1"));
+    settings.setValue("M42", tr("<b>M42</b> - spindle gear range 2"));
+    settings.setValue("M43", tr("<b>M43</b> - spindle gear range 3"));
+    settings.setValue("M44", tr("<b>M44</b> - spindle gear range 4"));
+    settings.setValue("M48", tr("<b>M48</b> - spindle speed override ignore cancel"));
+    settings.setValue("M49", tr("<b>M49</b> - spindle speed override ignore"));
+
+    settings.setValue("M52", tr("<i>v.M</i> <b>M52</b> - mode of return to upper limit level") +
+                      tr("<br /><i>v.L</i> <b>M52</b> - "));
+    settings.setValue("M53", tr("<i>v.M</i> <b>M53</b> - mode of return to a specified point level set by G71") +
+                      tr("<br /><i>v.L</i> <b>M53</b> - "));
+    settings.setValue("M54", tr("<i>v.M</i> <b>M54</b> - mode of return to the point R level") +
+                      tr("<br /><i>v.L</i> <b>M54</b> - "));
+
+    settings.setValue("M55", tr("<b>M55</b> - tailstock spindle retract"));
+    settings.setValue("M56", tr("<b>M56</b> - tailstock spindle advanced"));
+    settings.setValue("M58", tr("<b>M58</b> - chucking pressure low"));
+    settings.setValue("M59", tr("<b>M59</b> - chucking pressure high"));
+
+    settings.setValue("M60", tr("<b>M60</b> - cancel of M61"));
+    settings.setValue("M61", tr("<b>M61</b> - Ignoring fixed rpm arrival in constant speed cutting"));
+    settings.setValue("M62", tr("<b>M62</b> - cancel of M64"));
+    settings.setValue("M63", tr("<b>M63</b> - ignoring spindle rotation M code answer"));
+    settings.setValue("M64", tr("<b>M64</b> - ignoring general M code answer"));
+    settings.setValue("M65", tr("<b>M65</b> - ignoring T code answer"));
+    settings.setValue("M66", tr("<b>M66</b> - turret indexing position free"));
+
+    settings.setValue("M78", tr("<b>M78</b> - steady rest unclamp"));
+    settings.setValue("M79", tr("<b>M79</b> - steady rest clamp"));
+    settings.setValue("M83", tr("<b>M83</b> - chuck clamp"));
+    settings.setValue("M84", tr("<b>M84</b> - chuck unclamp"));
+    settings.setValue("M85", tr("<b>M85</b> - no return to the cutting starting point after the completion of rough turning cycle (LAP)"));
+    settings.setValue("M88", tr("<b>M88</b> - air blower OFF"));
+    settings.setValue("M89", tr("<b>M89</b> - air blower ON"));
+    settings.setValue("M90", tr("<b>M90</b> - door/cover close"));
+    settings.setValue("M91", tr("<b>M91</b> - door/cover open"));
+
+    settings.setValue("M98", tr("<b>M98</b> - tailstock spindle thrust low"));
+    settings.setValue("M99", tr("<b>M99</b> - tailstock spindle thrust high"));
+    settings.setValue("M109", tr("<b>M109</b> - cancel of M110"));
+    settings.setValue("M110", tr("<b>M110</b> - C-axis joint"));
+
+    settings.setValue("M122", tr("<b>M122</b> - work rest retraction"));
+    settings.setValue("M123", tr("<b>M123</b> - Cwork rest advance"));
+
+    settings.setValue("M130", tr("<b>M130</b> - cutting feed; spindle rotating condition OFF"));
+    settings.setValue("M131", tr("<b>M131</b> - cutting feed; spindle rotating condition ON"));
+    settings.setValue("M132", tr("<b>M132</b> - single block ineffective"));
+    settings.setValue("M133", tr("<b>M133</b> - single block effective"));
+    settings.setValue("M136", tr("<b>M136</b> - feedrate override ineffective"));
+    settings.setValue("M137", tr("<i>v.M</i> <b>M137</b> - feedrate override effective") +
+                      tr("<br /><i>v.L</i> <b>M137</b> - touch setter interlock release ON"));
+    settings.setValue("M138", tr("<i>v.M</i> <b>M138</b> - dry run ineffective") +
+                      tr("<br /><i>v.L</i> <b>M138</b> - touch setter interlock release OFF"));
+    settings.setValue("M139", tr("<b>M139</b> - dry run effective"));
+    settings.setValue("M140", tr("<i>v.M</i> <b>M140</b> - slide hold ineffective") +
+                      tr("<br /><i>v.L</i> <b>M140</b> - main motor overload monitoring OFF"));
+    settings.setValue("M141", tr("<i>v.M</i> <b>M141</b> - slide hold effective") +
+                      tr("<br /><i>v.L</i> <b>M141</b> - main motor overload monitoring ON"));
+    settings.setValue("M142", tr("<b>M142</b> - coolant pressure low"));
+    settings.setValue("M143", tr("<b>M143</b> - coolant pressure high"));
+    settings.setValue("M144", tr("<b>M144</b> - additional coolant 1 OFF"));
+    settings.setValue("M145", tr("<b>M145</b> - additional coolant 1 ON"));
+    settings.setValue("M146", tr("<b>M146</b> - C-axis unclamp"));
+    settings.setValue("M147", tr("<b>M147</b> - C-axis clamp"));
+    settings.setValue("M152", tr("<b>M152</b> - M-tools spindle interlock ON"));
+    settings.setValue("M153", tr("<b>M153</b> - M-tools spindle interlock OFF"));
+    settings.setValue("M156", tr("<b>M156</b> - center work interlock OFF"));
+    settings.setValue("M157", tr("<b>M157</b> - center work interlock ON"));
+    settings.setValue("M161", tr("<b>M161</b> - feedrate override fix (100%)"));
+    settings.setValue("M162", tr("<b>M162</b> - cancel of M163"));
+    settings.setValue("M163", tr("<b>M163</b> - M-tools spindle speed override fix (100%)"));
+
+    settings.setValue("M184", tr("<b>M184</b> - chuck internal interlock release OFF"));
+    settings.setValue("M185", tr("<b>M185</b> - chuck internal interlock release ON"));
+    settings.setValue("M186", tr("<b>M186</b> - work rest base unclamp"));
+    settings.setValue("M187", tr("<b>M187</b> - work rest base clamp"));
+    settings.setValue("M215", tr("<b>M215</b> - load monitor G00 ignore OFF"));
+    settings.setValue("M216", tr("<b>M216</b> - load monitor G00 ignore ON"));
+
+    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+    settings.setValue("G02", tr("<b>G02 X Y Z [I J K</b> | <b>L]</b> - circular interpolation CW"));
+    settings.setValue("G03", tr("<b>G03 X Y Z [I J K</b> | <b>L]</b> - circular interpolation CCW"));
+    settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+    settings.setValue("G09", tr("<b>G09</b> - exact stop"));
+    settings.setValue("G10", tr("<b>G10</b> - cancel of G11"));
+    settings.setValue("G11", tr("<b>G11</b> - parallel and rotation shift of coordinate system"));
+
+    settings.setValue("G13", tr("<b>G13</b> - turret selection: Turret A"));
+    settings.setValue("G14", tr("<b>G14</b> - turret selection: Turret B"));
+    settings.setValue("G15", tr("<b>G15 H</b>xx - selection of work coordinate system no. xx, modal"));
+    settings.setValue("G16", tr("<b>G15 H</b>xx - selection of work coordinate system no. xx, one-shot"));
+
+    settings.setValue("G17", tr("<b>G17</b> - XY plane"));
+    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
+    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
+    settings.setValue("G20", tr("<b>G20</b> - inch input confirmation"));
+    settings.setValue("G21", tr("<b>G21</b> - metric input confirmation"));
+
+    settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+    settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+    settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
+    settings.setValue("G50", tr("<i>v.L</i> <b>G50 S</b>xxxx - maximum spindle speed") +
+                      tr("<br /><i>v.L</i> <b>G50 X Z</b> - zero point shift"));
+
+    settings.setValue("G53", tr("<i>v.M</i> <b>G53</b> - cancel tool length offset") +
+                      tr("<br /><i>v.L</i> <b>G53</b> - "));
+    settings.setValue("G54", tr("<i>v.M</i> <b>G54 H</b>xx - tool length offset X-axis, xx - offset no.") +
+                      tr("<br /><i>v.L</i> <b>G54</b> - "));
+    settings.setValue("G55", tr("<i>v.M</i> <b>G55 H</b>xx - tool length offset Y-axis, xx - offset no.") +
+                      tr("<br /><i>v.L</i> <b>G55</b> - "));
+    settings.setValue("G56", tr("<i>v.M</i> <b>G56 H</b>xx - tool length offset Z-axis, xx - offset no.") +
+                      tr("<br /><i>v.L</i> <b>G56</b> - "));
+    settings.setValue("G57", tr("<i>v.M</i> <b>G57 H</b>xx - tool length offset 4-axis, xx - offset no.") +
+                      tr("<br /><i>v.L</i> <b>G57</b> - "));
+    settings.setValue("G58", tr("<i>v.M</i> <b>G58 H</b>xx - tool length offset 5-axis, xx - offset no.") +
+                      tr("<br /><i>v.L</i> <b>G58</b> - "));
+    settings.setValue("G59", tr("<i>v.M</i> <b>G59 H</b>xx - tool length offset 6-axis, xx - offset no.") +
+                      tr("<br /><i>v.L</i> <b>G59</b> - "));
+
+    settings.setValue("G61", tr("<b>G61</b> - exact stop mode"));
+    settings.setValue("G62", tr("<b>G62</b> - programmable mirror image function"));
+    settings.setValue("G17", tr("<b>G17</b> - cutting mode"));
+
+
+    settings.setValue("G71", tr("<i>v.M</i> <b>G71 Z</b>xx - return level xx command") +
+                      tr("<br /><i>v.L</i> <b>G71</b> - "));
+    settings.setValue("G73", tr("<i>v.M</i> <b>G73</b> - high speed deep hole drilling") +
+                      tr("<br /><i>v.L</i> <b>G73</b> - "));
+    settings.setValue("G74", tr("<i>v.M</i> <b>G74</b> - reverse tapping") +
+                      tr("<br /><i>v.L</i> <b>G74</b> - "));
+    settings.setValue("G76", tr("<i>v.M</i> <b>G76</b> - fine boring") +
+                      tr("<br /><i>v.L</i> <b>G76</b> - "));
+    settings.setValue("G75", tr("<i>v.L</i> <b>G75 G01 [X</b> | <b>Z] L</b>xxxx - chamfering 45deg. xxxx - direction and size"));
+    settings.setValue("G76", tr("<i>v.L</i> <b>G76 G01 [X</b> | <b>Z] L</b>xxxx - rounding. xxxx - direction and size"));
+
+    settings.setValue("G80", tr("<i>v.M</i> <b>G80</b> - fixed cycle mode cancel") +
+                      tr("<br /><i>v.L</i> <b>G80</b> - end of shape designation (LAP)"));
+
+    settings.setValue("G81", tr("<i>v.M</i> <b>G81 R X Y Z</b> - drilling cycle") +
+                      tr("<br /><i>v.L</i> <b>G81</b> - start of longitudinal shape designation (LAP)"));
+
+    settings.setValue("G82", tr("<i>v.M</i> <b>G82 R X Y Z</b> - counter bore cycle") +
+                      tr("<br /><i>v.L</i> <b>G82</b> - start of transverse shape designation (LAP)"));
+
+    settings.setValue("G83", tr("<i>v.M</i> <b>G83 R X Y Z</b> - deep hole drilling cycle") +
+                      tr("<br /><i>v.L</i> <b>G83</b> - start of blank material shape definition (LAP)"));
+
+    settings.setValue("G84", tr("<i>v.M</i> <b>G84 R X Y Z</b> - tapping cycle") +
+                      tr("<br /><i>v.L</i> <b>G84</b> -   change of cutting conditions in bar turning cycle (LAP)"));
+
+    settings.setValue("G85", tr("<i>v.M</i> <b>G85 R X Y Z</b> - boring cycle") +
+                      tr("<br /><i>v.L</i> <b>G85</b> - call of rough bar turning cycle (LAP)"));
+
+    settings.setValue("G86", tr("<i>v.M</i> <b>G86 R X Y Z</b> - boring cycle") +
+                      tr("<br /><i>v.L</i> <b>G86</b> - call of rough copy turning cycle (LAP)"));
+
+    settings.setValue("G87", tr("<i>v.M</i> <b>G87 R X Y Z</b> - back boring cycle") +
+                      tr("<br /><i>v.L</i> <b>G87</b> - call finish turning cycle (LAP)"));
+
+    settings.setValue("G88", tr("<i>v.M</i> <b>G88 R X Y Z</b> - drilling cycle") +
+                      tr("<br /><i>v.L</i> <b>G88</b> - call of continuous thread cutting cycle (LAP)"));
+
+    settings.setValue("G89", tr("<i>v.M</i> <b>G89 R X Y Z</b> - boring cycle") +
+                      tr("<br /><i>v.L</i> <b>G89</b> - "));
+
+
+    settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
+    settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
+    settings.setValue("G92", tr("<b>G92</b> - setting of work coordinate system"));
+    settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
+    settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
+    settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
+    settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
+
+    settings.setValue("NCYL", tr("<b>NCYL</b> - if specified in fixed cycle, positioning to the definied hole position is performed, but the cycle axis does not operate"));
+    settings.setValue("NOEX", tr("<b>NOEX</b> - if specified in fixed cycle, no axis movements may be performed"));
+
+    settings.setValue("SIN", tr("<b>SIN[</b>angle<b>]</b> - sine"));
+    settings.setValue("COS", tr("<b>COS[</b>angle<b>]</b> - cosine"));
+    settings.setValue("TAN", tr("<b>TAN[</b>angle<b>]</b> - tangent"));
+    settings.setValue("ATAN", tr("<b>ATAN[</b>angle<b>]</b> - arctangent 1 or 2"));
+    settings.setValue("SQRT", tr("<b>SQRT[</b>val<b>]</b> - square root"));
+    settings.setValue("ABS", tr("<b>ABS[</b>val<b>]</b> - absolute value"));
+    settings.setValue("BIN", tr("<b>BIN[</b>val<b>]</b> - decimal to binary conversion"));
+    settings.setValue("BCD", tr("<b>BCD[</b>val<b>]</b> - binary to decimal conversion"));
+    settings.setValue("ROUND", tr("<b>ROUND[</b>val<b>]</b> - integer implementation (rounding)"));
+    settings.setValue("FIX", tr("<b>FIX[</b>val<b>]</b> - integer implementation (truncation)"));
+    settings.setValue("FUP", tr("<b>FUP[</b>val<b>]</b> - integer implementation (raising)"));
+    settings.setValue("DROUND", tr("<b>DROUND[</b>val<b>]</b> - unit integer implementation (rounding)"));
+    settings.setValue("DFIX", tr("<b>DFIX[</b>val<b>]</b> - unit integer implementation (truncation)"));
+    settings.setValue("DFUP", tr("<b>DFUP[</b>val<b>]</b> - unit integer implementation (raising)"));
+    settings.setValue("MOD", tr("<b>MOD[</b>val<b>,</b>yy<b>]</b> - remainder of val/yy"));
+
+    settings.setValue("VDIN", tr("<b>VDIN[</b>xx<b>]</b> - imput variable no. xx"));
+    settings.setValue("VDOUT", tr("<b>VDOUT[</b>xx<b>]</b> - output variable no. xx"));
+    settings.setValue("VUACM", tr("<b>VUACM[</b>n<b>]='</b>text<b>'</b> - sub message for user definied alarms, n - subscript expression, text - max. 16 chracters"));
+
+    settings.setValue("MODIN", tr("<b>MODIN O</b>nnnn [<b>Q</b>]xx - subprogram call after axis movement, nnnn - prog. name, xx - number of repetitions"));
+    settings.setValue("MODOUT", tr("<b>MODOUT</b> - cancels last MODIN command"));
+
+    settings.setValue("OMIT", tr("<b>OMIT</b> - coordinate calculation function, omit"));
+    settings.setValue("RSTRT", tr("<b>RSTRT</b> - coordinate calculation function, restart"));
+
+    settings.setValue("LAA", tr("<b>LAA</b> - line at angle"));
+    settings.setValue("ARC", tr("<b>ARC</b> - arc"));
+    settings.setValue("GRDX", tr("<b>GRDX</b> - grid X"));
+    settings.setValue("GRDY", tr("<b>GRDY</b> - grid Y"));
+    settings.setValue("DGRDX", tr("<b>DGRDX</b> - double grid X"));
+    settings.setValue("DGRDY", tr("<b>DGRDY</b> - double grid Y"));
+    settings.setValue("SQRX", tr("<b>SQRX</b> - square X"));
+    settings.setValue("SQRY", tr("<b>SQRY</b> - square Y"));
+    settings.setValue("BHC", tr("<b>BHC X Y I J K </b> - bolt hole circle, X Y - circle center, I - radius, J - angle of first hole, K - no. of holes"));
+
+    settings.setValue("EQ", tr("<b>EQ</b> - equal to"));
+    settings.setValue("NE", tr("<b>NE</b> - not equal to"));
+    settings.setValue("GT", tr("<b>GT</b> - greather than"));
+    settings.setValue("LE", tr("<b>LE</b> - less than or equal to"));
+    settings.setValue("LT", tr("<b>LT</b> - less than"));
+    settings.setValue("GE", tr("<b>GE</b> - greather than or equal to"));
+    settings.setValue("IF", tr("<b>IF[</b>condition<b>] N</b>xxxx - if condition is true goto block xxxx"));
+
+    settings.setValue("TLFON", tr("<b>TLFON</b> - tool life on"));
+    settings.setValue("EMPTY", tr("<b>EMPTY</b> - 'empty' value "));
+
+    settings.setValue("SB", tr("<b>SB=</b>xxxx - M-tool spindle speed xxxx"));
+    settings.setValue("TG", tr("<b>TG=</b>xx - tool group no. xx"));
+    settings.setValue("OG", tr("<b>OG=</b>xx - offset group no. xx"));
+    settings.setValue("GOTO", tr("<b>GOTO N</b>nnnn - jump to nnnn"));
+    settings.setValue("CALL", tr("<b>CALL O</b>nnnn [<b>Q</b>xx] - call subprogram nnnn, repeat it xx times"));
+    settings.setValue("RTS", tr("<b>RTS</b> - subprogram end"));
+    settings.setValue("VLMON", tr("<b>VLMON[</b>xx<b>]=</b>yy - load monitor"));
+
+
+    settings.setValue("VATOL", tr("<b>VATOL</b> - active tool number, tool kind + tool number"));
+    settings.setValue("VNTOL", tr("<b>VNTOL</b> - next tool number, tool kind + tool number"));
+    settings.setValue("VMLOK", tr("<b>VMLOK</b> - equal zero if not in machine lock status"));
+    settings.setValue("VPPCP", tr("<b>VPPCP</b> - PPC parameter"));
+    settings.setValue("VPLNO", tr("<b>VPLNO</b> - PPC pallet number"));
+    settings.setValue("VPLDT", tr("<b>VPLDT</b> - PPC parameter bit data"));
+    settings.setValue("VTLCN", tr("<b>VTLCN</b> - active tool number"));
+    settings.setValue("VTLNN", tr("<b>VTLNN</b> - next tool number"));
+
+
+    settings.setValue("VMCOD", tr("<b>VMCOD[</b>xx<b>]</b> - present M code of group no. xx"));
+    settings.setValue("VSCOD", tr("<b>VSCOD</b> - command value of present spindle speed S"));
+    settings.setValue("VDCOD", tr("<b>VDCOD</b> - present cutter radius compensation offset number"));
+    settings.setValue("VFCOD", tr("<b>VFCOD</b> - command value of present feedrate F"));
+    settings.setValue("VGCOD", tr("<b>VGCOD[</b>xx<b>]</b> - present G code of group no. xx"));
+    settings.setValue("VHCOD", tr("<b>VHCOD</b> - present tool length offset number"));
+    settings.setValue("VACOD", tr("<b>VACOD</b> - coordinate system number"));
+
+    settings.setValue("VZOFX", tr("<i>v.M</i> <b>VZOFX[</b>xx<b>]</b> - zero offset no. xx of X-axis") +
+                      tr("<br /><i>v.L</i> <b>VZOFX</b> - zero offset of X-axis"));
+    settings.setValue("VZOFZ", tr("<i>v.M</i> <b>VZOFZ[</b>xx<b>]</b> - zero offset no. xx of Z-axis") +
+                      tr("<br /><i>v.L</i> <b>VZOFZ</b> - zero offset of Z-axis"));
+    settings.setValue("VZOFY", tr("<i>v.M</i> <b>VZOFY[</b>xx<b>]</b> - zero offset no. xx of Y-axis"));
+    settings.setValue("VZOFW", tr("<i>v.L</i> <b>VZOFW</b> - zero offset of W-axis"));
+    settings.setValue("VZOFC", tr("<i>v.L</i> <b>VZOFC</b> - zero offset of C-axis"));
+    settings.setValue("VZSHZ", tr("<i>v.L</i> <b>VZSHZ</b> - zero shift of Z-axis"));
+    settings.setValue("VZSHX", tr("<i>v.L</i> <b>VZSHX</b> - zero shift of X-axis"));
+    settings.setValue("VZSHC", tr("<i>v.L</i> <b>VZSHC</b> - zero shift of C-axis"));
+    settings.setValue("VTOFZ", tr("<i>v.L</i> <b>VTOFZ[</b>xx<b>]</b> - tool offset no. xx of Z-axis"));
+    settings.setValue("VTOFX", tr("<i>v.L</i> <b>VTOFX[</b>xx<b>]</b> - tool offset no. xx of X-axis"));
+    settings.setValue("VRSTT", tr("<b>VRSTT</b> - equal zero if not in restart state"));
+    settings.setValue("VTOFH", tr("<i>v.M</i> <b>VTOFH[</b>xx<b>]</b> - tool length, offset no. xx"));
+    settings.setValue("VTOFD", tr("<i>v.M</i> <b>VTOFD[</b>xx<b>]</b> - cutter radius, offset no. xx"));
+    settings.setValue("VNCOM", tr("<b>VNCOM[</b>xx<b>]</b> - communication for automation, no. xx"));
+
+
+
+
+    settings.endGroup();
+
+    //******************************************************************//
+    settings.beginGroup("FANUC");
+    //******************************************************************//
+    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+    settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+    settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+    settings.setValue("M06", tr("<b>M06</b> - tool change"));
+    settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+    settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+    settings.setValue("M30", tr("<b>M30</b> - end of program"));
+    settings.setValue("M98", tr("<b>M98 P</b>xxxx - macro xxxx call"));
+    settings.setValue("M99", tr("<b>M99</b> - subprogram end"));
+
+    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+    settings.setValue("G02", tr("<b>G02 {X Y Z</b> | <b>U V W} {I J K</b> | <b>R} F</b> - circular interpolation CW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc"));
+    settings.setValue("G03", tr("<b>G03 {X Y Z</b> | <b>U V W} {I J K</b> | <b>R} F</b> - circular interpolation CCW; XYZ - end point (absolute); UW - end point (incremental); IJK - distance from start point to center; R - radius of arc"));
+    settings.setValue("G04", tr("<b>G04 X U P</b> - dwell XU - in seconds; P - in microseconds"));
+
+    settings.setValue("G10", tr("<b>G10 P X Z Y R Q</b> - change of offset value by program"));
+
+    settings.setValue("G17", tr("<b>G17</b> - XY plane"));
+    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
+    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
+
+    settings.setValue("G20", tr("<b>G20</b> - inch input"));
+    settings.setValue("G21", tr("<b>G21</b> - metric input"));
+    settings.setValue("G27", tr("<b>G27</b> - reference point return check"));
+    settings.setValue("G28", tr("<b>G28</b> - reference point return"));
+    settings.setValue("G30", tr("<b>G30 P</b>x - x = 2nd, 3rd, 4th reference point return"));
+    settings.setValue("G31", tr("<b>G31</b> - skip function"));
+
+    settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+    settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+    settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
+
+    settings.setValue("G50", tr("<i>v.T</i> <b>G50 S</b>xxxx - maximum spindle speed") +
+                      tr("<br /><b>G50 X Z</b> - zero point shift"));
+    settings.setValue("G53", tr("<b>G53</b> - machine coordinate system"));
+    settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
+    settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
+    settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
+    settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
+    settings.setValue("G58", tr("<b>G58</b> - settable zero offset 5"));
+    settings.setValue("G59", tr("<b>G59</b> - settable zero offset 6"));
+
+    settings.setValue("G65", tr("<b>G65 P</b>xxxx - macro xxxx call"));
+    settings.setValue("G66", tr("<b>G66 P</b>xxxx - macro xxxx modal call"));
+    settings.setValue("G67", tr("<b>G67</b> - macro modal call cancel"));
+
+    settings.setValue("G70", tr("<i>v.T</i> <b>G70 P Q</b> - finishing cycle; P - sequence number of the first block of finishing shape, Q - sequence number of last block"));
+    settings.setValue("G71", tr("<i>v.T</i> <b>G71 U R</b> - U - depth of cut, Q - escaping amount") +
+                      tr("<br /><i>v.T</i> <b>G71 P Q U W</b> - stock removal in turning; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance"));
+    settings.setValue("G72", tr("<i>v.T</i> <b>G72 W R</b> - U - depth of cut, Q - escaping amount") +
+                      tr("<br /><i>v.T</i> <b>G72 P Q U W</b> - stock removal in facing; P - first sequence number of finishing shape, Q - last sequence number of finishing shape, U - X finishing allowance, W - Z finishing allowance"));
+    settings.setValue("G73", tr("<i>v.T</i> <b>G73 W R</b>") +
+                      tr("<br /><i>v.T</i> <b>G73 P Q U W</b> - pattern repeating"));
+    settings.setValue("G74", tr("<i>v.T</i> <b>G74 R</b>") +
+                      tr("<br /><i>v.T</i> <b>G74 {X Z U W} P Q R</b> - end face peck drilling cycle"));
+    settings.setValue("G75", tr("<i>v.T</i> <b>G75 R</b>") +
+                      tr("<br /><i>v.T</i> <b>G75 {X Z U W} P Q U W</b> - outer/internal diameter drilling cycle"));
+    settings.setValue("G76", tr("<i>v.T</i> <b>G76 P Q R</b>") +
+                      tr("<br /><i>v.T</i> <b>G76 {X Z U W} P Q U W</b> - multiple thread cutting cycle"));
+
+    settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
+    settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
+    settings.setValue("G92", tr("<b>G92 X Z</b> - coordinate system setting"));
+    settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
+    settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
+    settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
+    settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
+    settings.setValue("G98", tr("<b>G98</b> - return to initial level"));
+    settings.setValue("G99", tr("<b>G99</b> - return to R level"));
+
+    settings.setValue("EQ", tr("<b>EQ</b> - equal to"));
+    settings.setValue("NE", tr("<b>NE</b> - not equal to"));
+    settings.setValue("GT", tr("<b>GT</b> - greather than"));
+    settings.setValue("LE", tr("<b>LE</b> - less than or equal to"));
+    settings.setValue("LT", tr("<b>LT</b> - less than"));
+    settings.setValue("GE", tr("<b>GE</b> - greather than or equal to"));
+    settings.setValue("IF", tr("<b>IF[</b>condition<b>]</b>do something - if condition is true do something"));
+    settings.setValue("GOTO", tr("<b>GOTO</b>nnnn - jump to block nnnn"));
+
+    settings.setValue("WHILE", tr("<b>WHILE[</b>condition<b>] DO</b>n <br />...<br />commands<br />... <br /><b>END</b>n  - loop - while condition true do commands beetwen DOn and ENDn"));
+    settings.setValue("END", tr("<b>END</b>n - end of WHILE DOn loop"));
+
+    settings.setValue("EOR", tr("<b>EOR</b> - exclusive OR"));
+    settings.setValue("OR", tr("<b>OR</b> - logical OR"));
+    settings.setValue("AND", tr("<b>AND</b> - logical AND"));
+    settings.setValue("NOT", tr("<b>NOT</b> - negation"));
+
+    settings.setValue("SIN", tr("<b>SIN[</b>angle<b>]</b> - sine"));
+    settings.setValue("COS", tr("<b>COS[</b>angle<b>]</b> - cosine"));
+    settings.setValue("TAN", tr("<b>TAN[</b>angle<b>]</b> - tangent"));
+    settings.setValue("ATAN", tr("<b>ATAN[</b>angle<b>]</b> - arctangent 1 or 2"));
+    settings.setValue("SQRT", tr("<b>SQRT[</b>val<b>]</b> - square root"));
+    settings.setValue("ABS", tr("<b>ABS[</b>val<b>]</b> - absolute value"));
+    settings.setValue("BIN", tr("<b>BIN[</b>val<b>]</b> - decimal to binary conversion"));
+    settings.setValue("BCD", tr("<b>BCD[</b>val<b>]</b> - binary to decimal conversion"));
+    settings.setValue("ROUND", tr("<b>ROUND[</b>val<b>]</b> - integer implementation (rounding)"));
+    settings.setValue("FIX", tr("<b>FIX[</b>val<b>]</b> - integer implementation (truncation)"));
+    settings.setValue("FUP", tr("<b>FUP[</b>val<b>]</b> - integer implementation (raising)"));
+
+
+
+
+    settings.endGroup();
+
+    //******************************************************************//
+    settings.beginGroup("SINUMERIK");
+    //******************************************************************//
+    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+    settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+    settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+    settings.setValue("M06", tr("<b>M06</b> - tool change"));
+    settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+    settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+    settings.setValue("M30", tr("<b>M30</b> - end of program"));
+    settings.setValue("M51", tr("<b>M51</b> - thro spindle coolant on"));
+
+    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+    settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
+    settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
+    settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+
+    settings.setValue("G17", tr("<b>G17</b> - XY plane"));
+    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
+    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
+
+    settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+    settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+    settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
+
+    settings.setValue("G53", tr("<b>G53</b> - machine coordinate system"));
+    settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
+    settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
+    settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
+    settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
+    settings.setValue("G58", tr("<b>G58</b> - programmable offset, absolute axial substitution"));
+    settings.setValue("G59", tr("<b>G59</b> - programmable offset, additive axial substitution"));
+
+    settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
+    settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
+    settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
+    settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
+    settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
+    settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
+
+
+    settings.setValue("@100", tr("<b>@100 K</b>nnnn - jump to block number nnnn"));
+    settings.setValue("@121", tr("<b>@121 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy not equal to xx jump to nnnn"));
+    settings.setValue("@122", tr("<b>@122 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy equal to xx jump to nnnn"));
+    settings.setValue("@123", tr("<b>@123 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is less than or equal to xx jump to nnnn"));
+    settings.setValue("@124", tr("<b>@124 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is less than xx jump to nnnn"));
+    settings.setValue("@125", tr("<b>@125 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greather than or equal to xx jump to nnnn"));
+    settings.setValue("@126", tr("<b>@126 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greather than xx jump to nnnn"));
+
+    settings.setValue("@620", tr("<b>@620 R</b>xx - increment value in param. xx"));
+    settings.setValue("@621", tr("<b>@621 R</b>xx - decrement value in param. xx"));
+    settings.setValue("@622", tr("<b>@622 R</b>xx - 'trunc' value in param. xx"));
+    settings.setValue("@630", tr("<b>@630 R</b>xx <b>R</b>|<b>K</b>yy - sine of angle yy is stored in param. xx"));
+    settings.setValue("@631", tr("<b>@630 R</b>xx <b>R</b>|<b>K</b>yy - cosine of angle yy is stored in param. xx"));
+    settings.setValue("@632", tr("<b>@630 R</b>xx <b>R</b>|<b>K</b>yy - tangent of angle yy is stored in param. xx"));
+    settings.setValue("@634", tr("<b>@634 R</b>xx <b>R</b>|<b>K</b>yy - arc sine of angle yy is stored in param. xx"));
+
+    settings.setValue("@714", tr("<b>@714</b> - stop decoding, until buffer is empty"));
+
+
+
+    settings.endGroup();
+
+    //******************************************************************//
+    settings.beginGroup("SINUMERIK_840");
+    //******************************************************************//
+    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+    settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+    settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+    settings.setValue("M06", tr("<b>M06</b> - tool change"));
+    settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
+    settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+    settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+    settings.setValue("M30", tr("<b>M30</b> - end of program"));
+    settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
+
+    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+    settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
+    settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
+    settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+
+    settings.setValue("G17", tr("<b>G17</b> - XY plane"));
+    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
+    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
+
+    settings.setValue("G53", tr("<b>G53</b> - Suppression of current frames: Programmable frame including system frame for TOROT and TOFRAME and active settable frame G54 ... G599."));
+    settings.setValue("G54", tr("<b>G54</b> - settable zero offset 1"));
+    settings.setValue("G55", tr("<b>G55</b> - settable zero offset 2"));
+    settings.setValue("G56", tr("<b>G56</b> - settable zero offset 3"));
+    settings.setValue("G57", tr("<b>G57</b> - settable zero offset 4"));
+    settings.setValue("G58", tr("<b>G58</b> - programmable offset, absolute axial substitution"));
+    settings.setValue("G59", tr("<b>G59</b> - programmable offset, additive axial substitution"));
+
+
+    settings.setValue("G40", tr("<b>G40</b> - tool nose/cutter radius compensation cancel"));
+    settings.setValue("G41", tr("<b>G41</b> - tool nose/cutter radius compensation left"));
+    settings.setValue("G42", tr("<b>G42</b> - tool nose/cutter radius compensation right"));
+
+    settings.setValue("G60", tr("<b>G60</b> - Velocity reduction, exact positioning"));
+    settings.setValue("G64", tr("<b>G64</b> - Continuous-path mode"));
+
+    settings.setValue("G90", tr("<b>G90</b> - absolute programming"));
+    settings.setValue("G91", tr("<b>G91</b> - incremental programming"));
+    settings.setValue("G94", tr("<b>G94</b> - feed per minute"));
+    settings.setValue("G95", tr("<b>G95</b> - feed per revolution"));
+    settings.setValue("G96", tr("<b>G96 S</b>xx - constant cutting speed xx"));
+    settings.setValue("G97", tr("<b>G97 S</b>xx - constant spindle speed xx"));
+
+    settings.setValue("G153", tr("<b>G153</b> - suppression as for G53 and including all channel-specific and/or NCU-global basic frame"));
+    settings.setValue("G500", tr("<b>G500</b> - deactivate all settable G54-G57 frames if G500 does not contain a value"));
+
+    settings.setValue("SUPA", tr("<b>SUPA</b> - suppression as for G153 and including system frames for actual-value setting, scratching, zero offset external, PAROT including handwheel offsets (DRF), [zero offset external], overlaid motion"));
+
+    settings.setValue("IF", tr("<b>IF(</b>condition<b>)</b> nnnn - if condition is true goto block nnnn or label nnnn:"));
+    settings.setValue("GOTO", tr("<b>GOTO</b> nnnn - jump forward and if block not found jump backward to block nnnn or label nnnn:"));
+    settings.setValue("GOTOF", tr("<b>GOTOF</b> nnnn - jump forward to block nnnn or label nnnn:"));
+    settings.setValue("GOTOB", tr("<b>GOTOB</b> nnnn - jump backward to block nnnn or label nnnn:"));
+
+    settings.setValue("STOPRE", tr("<b>STOPRE</b> - stop decoding, until buffer is empty"));
+
+    settings.setValue("DIAMOF", tr("<b>DIAMOF</b> - diameter programming OFF; radius programming for G90/G91"));
+    settings.setValue("DIAMON", tr("<b>DIAMON</b> - diameter programming ON; diameter programming for G90/G91"));
+    settings.setValue("DIAM", tr("<b>DIAM90</b> - diameter programming for G90; radius programming for G91"));
+
+
+    settings.setValue("RET", tr("<b>RET</b> - subprogram end"));
+
+
+
+
+    settings.endGroup();
+
+
+    //******************************************************************//
+    settings.beginGroup("HEIDENHAIN");
+    //******************************************************************//
+    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+    settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+    settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+    settings.setValue("M06", tr("<b>M06</b> - tool change"));
+    settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
+    settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+    settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+    settings.setValue("M30", tr("<b>M30</b> - end of program"));
+    settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
+
+    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+    settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
+    settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
+    settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+
+
+
+
+
+
+
+
+    settings.endGroup();
+
+
+
+    //******************************************************************//
+    settings.beginGroup("HEIDENHAIN_ISO");
+    //******************************************************************//
+    settings.setValue("M00", tr("<b>M00</b> - program stop, unconditional"));
+    settings.setValue("M01", tr("<b>M01</b> - optional program stop"));
+    settings.setValue("M03", tr("<b>M03</b> - start spindle CW"));
+    settings.setValue("M04", tr("<b>M04</b> - start spindle CCW"));
+    settings.setValue("M05", tr("<b>M05</b> - spindle stop"));
+    settings.setValue("M06", tr("<b>M06</b> - tool change"));
+    settings.setValue("M07", tr("<b>M07</b> - thro spindle coolant on"));
+    settings.setValue("M08", tr("<b>M08</b> - coolant on"));
+    settings.setValue("M09", tr("<b>M09</b> - coolant off"));
+    settings.setValue("M30", tr("<b>M30</b> - end of program"));
+    settings.setValue("M50", tr("<b>M50</b> - shower coolant on"));
+
+    settings.setValue("G00", tr("<b>G00</b> - rapid move - positioning"));
+    settings.setValue("G01", tr("<b>G01</b> - linear interpolation"));
+    settings.setValue("G02", tr("<b>G02</b> - circular interpolation CW"));
+    settings.setValue("G03", tr("<b>G03</b> - circular interpolation CCW"));
+    settings.setValue("G04", tr("<b>G04 F</b>xxxx - dwell xxxx seconds"));
+
+    settings.setValue("G17", tr("<b>G17</b> - XY plane"));
+    settings.setValue("G18", tr("<b>G18</b> - ZX plane"));
+    settings.setValue("G19", tr("<b>G19</b> - YZ plane"));
+
+
+
+
+
+    settings.endGroup();
+
+    if(QFileInfo(fileName).exists())
+        openFile(fileName);
+    QMdiSubWindow *existing = findMdiChild(fileName);
+    if(existing)
+    {
+        mdiArea->setActiveSubWindow(existing);
+    };
 }
 
 //**************************************************************************************************
@@ -4353,39 +4191,39 @@ void EdytorNc::createGlobalToolTipsFile()
 
 void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 {
-   QFileInfo fileInfo;
-   QFile file;
-   int i;
+    QFileInfo fileInfo;
+    QFile file;
+    int i;
 
-   bool hasMdiChild = (activeMdiChild() != 0);
-   if(hasMdiChild)
-   {
-      QDir dir;
-      dir.setPath(activeMdiChild()->filePath());
-      dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-      dir.setSorting(QDir::Name);
-      dir.setNameFilters(QStringList("*.cfg"));
+    bool hasMdiChild = (activeMdiChild() != 0);
+    if(hasMdiChild)
+    {
+        QDir dir;
+        dir.setPath(activeMdiChild()->filePath());
+        dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+        dir.setSorting(QDir::Name);
+        dir.setNameFilters(QStringList("*.cfg"));
 
-      QFileInfoList list = dir.entryInfoList();
+        QFileInfoList list = dir.entryInfoList();
 
-      if(!list.isEmpty())
-      {
-         for(i = 0; i < list.count(); i++)
-         {
-            fileInfo = (QFileInfo)list.at(i);
-            file.setFileName(fileInfo.absoluteFilePath());
-            file.remove();
-         };
-      };
+        if(!list.isEmpty())
+        {
+            for(i = 0; i < list.count(); i++)
+            {
+                fileInfo = (QFileInfo)list.at(i);
+                file.setFileName(fileInfo.absoluteFilePath());
+                file.remove();
+            };
+        };
 
-      if(attach)
-      {
-         file.setFileName(activeMdiChild()->filePath() + "/" + highlightTypeCombo->currentText() + ".cfg");
-         file.open(QIODevice::ReadWrite);
-         file.close();;
-      };
+        if(attach)
+        {
+            file.setFileName(activeMdiChild()->filePath() + "/" + highlightTypeCombo->currentText() + ".cfg");
+            file.open(QIODevice::ReadWrite);
+            file.close();;
+        };
 
-   };
+    };
 }
 
 //**************************************************************************************************
@@ -4394,7 +4232,7 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 
 void EdytorNc::attachHighlightToDirActClicked()
 {
-   attachHighlighterToDirButtonClicked(true);
+    attachHighlighterToDirButtonClicked(true);
 }
 
 //**************************************************************************************************
@@ -4403,7 +4241,7 @@ void EdytorNc::attachHighlightToDirActClicked()
 
 void EdytorNc::deAttachHighlightToDirActClicked()
 {
-   attachHighlighterToDirButtonClicked(false);
+    attachHighlighterToDirButtonClicked(false);
 }
 
 //**************************************************************************************************
@@ -4412,29 +4250,29 @@ void EdytorNc::deAttachHighlightToDirActClicked()
 
 int EdytorNc::defaultHighlightMode(QString filePath)
 {
-   int id;
-   QDir dir;
-   bool ok;
+    int id;
+    QDir dir;
+    bool ok;
 
-   dir.setPath(filePath);
-   dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-   dir.setSorting(QDir::Name);
-   dir.setNameFilters(QStringList("*.cfg"));
+    dir.setPath(filePath);
+    dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    dir.setSorting(QDir::Name);
+    dir.setNameFilters(QStringList("*.cfg"));
 
-   QFileInfoList list = dir.entryInfoList();
+    QFileInfoList list = dir.entryInfoList();
 
-   if(!list.isEmpty())
-   {
-      QFileInfo name = list.at(0);
-      id = highlightTypeCombo->findText(name.baseName());
-      if(id >= 0)
-      {
-         //highlightTypeCombo->setCurrentIndex(id);
-         return(highlightTypeCombo->itemData(id).toInt(&ok));
-      };
-   };
+    if(!list.isEmpty())
+    {
+        QFileInfo name = list.at(0);
+        id = highlightTypeCombo->findText(name.baseName());
+        if(id >= 0)
+        {
+            //highlightTypeCombo->setCurrentIndex(id);
+            return(highlightTypeCombo->itemData(id).toInt(&ok));
+        };
+    };
 
-   return MODE_AUTO;
+    return MODE_AUTO;
 };
 
 //**************************************************************************************************
@@ -4443,103 +4281,103 @@ int EdytorNc::defaultHighlightMode(QString filePath)
 
 void EdytorNc::projectAdd()
 {
-   QFileInfo file;
-   QStandardItem *item;
-   QIcon icon;
+    QFileInfo file;
+    QStandardItem *item;
+    QIcon icon;
 
-   if(currentProject == NULL)
-      return;
+    if(currentProject == NULL)
+        return;
 
 #ifdef Q_OS_LINUX
-   QString filters = tr("All files (*.* *);;"
-                        "CNC programs files *.nc (*.nc);;"
-                        "CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;"
-                        "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
-                        "Drawings *.dwg *.dxf (*.dwg *.dxf);;"
-                        "Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;"
-                        "Text files *.txt (*.txt)");
+    QString filters = tr("All files (*.* *);;"
+                         "CNC programs files *.nc (*.nc);;"
+                         "CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;"
+                         "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
+                         "Drawings *.dwg *.dxf (*.dwg *.dxf);;"
+                         "Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;"
+                         "Text files *.txt (*.txt)");
 #endif
 
 #ifdef Q_OS_WIN32
-   QString filters = tr("All files (*.* *);;"
-                        "CNC programs files (*.nc);;"
-                        "CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;"
-                        "Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
-                        "Drawings (*.dwg *.dxf);;"
-                        "Pictures (*.jpg *.bmp *.svg);;"
-                        "Text files (*.txt)");
+    QString filters = tr("All files (*.* *);;"
+                         "CNC programs files (*.nc);;"
+                         "CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;"
+                         "Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
+                         "Drawings (*.dwg *.dxf);;"
+                         "Pictures (*.jpg *.bmp *.svg);;"
+                         "Text files (*.txt)");
 #endif
 
 
 
-   QStringList files = QFileDialog::getOpenFileNames(
-                        this,
-                        tr("Add files to project"),
-                        lastDir.absolutePath(),
-                        filters, 0);
+    QStringList files = QFileDialog::getOpenFileNames(
+                this,
+                tr("Add files to project"),
+                lastDir.absolutePath(),
+                filters, 0);
 
 
-   QStringList list = files;
+    QStringList list = files;
 
-   if(list.isEmpty())
-      return;
+    if(list.isEmpty())
+        return;
 
-   QStringList::Iterator it = list.begin();
+    QStringList::Iterator it = list.begin();
 
-   QStandardItem *parentItem = currentProject;
+    QStandardItem *parentItem = currentProject;
 
-   if(it != list.end())
-   {
-      file.setFile(*it);
-      if((file.absoluteDir().exists()) && (file.absoluteDir().isReadable()))
-      {
+    if(it != list.end())
+    {
+        file.setFile(*it);
+        if((file.absoluteDir().exists()) && (file.absoluteDir().isReadable()))
+        {
 
-         QList<QStandardItem *> items = model->findItems(QDir::toNativeSeparators(file.absoluteDir().canonicalPath()), Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
+            QList<QStandardItem *> items = model->findItems(QDir::toNativeSeparators(file.absoluteDir().canonicalPath()), Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
 
-         if(!items.isEmpty())
-         {
-            item = items.at(0);
-            if(item->text() != file.absoluteDir().canonicalPath())
+            if(!items.isEmpty())
             {
-               item = new QStandardItem(QIcon(":/images/folder.png"), QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
-               parentItem->appendRow(item);
+                item = items.at(0);
+                if(item->text() != file.absoluteDir().canonicalPath())
+                {
+                    item = new QStandardItem(QIcon(":/images/folder.png"), QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
+                    parentItem->appendRow(item);
+                };
+            }
+            else
+            {
+                item = new QStandardItem(QIcon(":/images/folder.png"), QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
+                parentItem->appendRow(item);
             };
-         }
-         else
-         {
-            item = new QStandardItem(QIcon(":/images/folder.png"), QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
+
+            parentItem = item;
+
+        }
+        else
+            return;
+    };
+
+    QFileSystemModel *fModel = new QFileSystemModel;
+
+    while(it != list.end())
+    {
+        file.setFile(*it);
+
+        if((file.exists()) && (file.isReadable()))
+        {
+            icon = fModel->iconProvider()->icon(file);
+
+            if(icon.isNull())
+                icon = QIcon(":/images/ncfile.png");
+
+            item = new QStandardItem(icon, file.fileName());
             parentItem->appendRow(item);
-         };
+        };
+        ++it;
+    };
+    projectTreeView->expandAll(); //model->indexFromItem(currentProject));
 
-         parentItem = item;
-
-      }
-      else
-         return;
-   };
-
-   QFileSystemModel *fModel = new QFileSystemModel;
-
-   while(it != list.end())
-   {
-      file.setFile(*it);
-
-      if((file.exists()) && (file.isReadable()))
-      {
-         icon = fModel->iconProvider()->icon(file);
-
-         if(icon.isNull())
-            icon = QIcon(":/images/ncfile.png");
-
-         item = new QStandardItem(icon, file.fileName());
-         parentItem->appendRow(item);
-      };
-      ++it;
-   };
-   projectTreeView->expandAll(); //model->indexFromItem(currentProject));
-
-   currentProjectModified = true;
-   statusBar()->showMessage(tr("Project opened"), 2000);
+    currentProjectModified = true;
+    statusBar()->showMessage(tr("Project opened"), 2000);
 }
 
 //**************************************************************************************************
@@ -4548,43 +4386,43 @@ void EdytorNc::projectAdd()
 
 void EdytorNc::projectSave()
 {
-   QString path, fileName;
-   int fileCount;
-   QStandardItem *item;
+    QString path, fileName;
+    int fileCount;
+    QStandardItem *item;
 
 
-   if(currentProjectName.isEmpty() || currentProject == NULL)
-      return;
+    if(currentProjectName.isEmpty() || currentProject == NULL)
+        return;
 
-   QSettings settings(currentProjectName, QSettings::IniFormat);
+    QSettings settings(currentProjectName, QSettings::IniFormat);
 
-   settings.remove("ProjectFiles");
-   settings.beginWriteArray("ProjectFiles");
+    settings.remove("ProjectFiles");
+    settings.beginWriteArray("ProjectFiles");
 
-   fileCount = 0;
-   for(int i = 0; i < currentProject->rowCount(); i++)
-   {
-      item = currentProject->child(i, 0);
-      path = item->text();
-      for(int j = 0; j < item->rowCount(); j++)
-      {
-         fileName = item->child(j, 0)->text();
+    fileCount = 0;
+    for(int i = 0; i < currentProject->rowCount(); i++)
+    {
+        item = currentProject->child(i, 0);
+        path = item->text();
+        for(int j = 0; j < item->rowCount(); j++)
+        {
+            fileName = item->child(j, 0)->text();
 
-         //qDebug() << path;
-         //qDebug() << fileName;
-         settings.setArrayIndex(fileCount);
-         settings.setValue("File", QFileInfo(path, fileName).absoluteFilePath());
-         fileCount++;
-      };
-   };
+            //qDebug() << path;
+            //qDebug() << fileName;
+            settings.setArrayIndex(fileCount);
+            settings.setValue("File", QFileInfo(path, fileName).absoluteFilePath());
+            fileCount++;
+        };
+    };
 
-   settings.endArray();
+    settings.endArray();
 
-   if(settings.status() == QSettings::NoError)
-   {
-      currentProjectModified = false;
-      statusBar()->showMessage(tr("Project saved"), 5000);
-   };
+    if(settings.status() == QSettings::NoError)
+    {
+        currentProjectModified = false;
+        statusBar()->showMessage(tr("Project saved"), 5000);
+    };
 
 }
 
@@ -4594,16 +4432,16 @@ void EdytorNc::projectSave()
 
 void EdytorNc::projectSaveAs()
 {
-   QString fileName = projectSelectName();
+    QString fileName = projectSelectName();
 
-   if(fileName.isEmpty())
-      return;
+    if(fileName.isEmpty())
+        return;
 
-   currentProjectName = fileName;
-   QStandardItem *parentItem = model->invisibleRootItem();
-   parentItem->child(0, 0)->setText(QFileInfo(currentProjectName).fileName());
-   parentItem->child(0, 0)->setToolTip(QDir::toNativeSeparators(QFileInfo(currentProjectName).absoluteFilePath()));
-   projectSave();
+    currentProjectName = fileName;
+    QStandardItem *parentItem = model->invisibleRootItem();
+    parentItem->child(0, 0)->setText(QFileInfo(currentProjectName).fileName());
+    parentItem->child(0, 0)->setToolTip(QDir::toNativeSeparators(QFileInfo(currentProjectName).absoluteFilePath()));
+    projectSave();
 }
 
 //**************************************************************************************************
@@ -4613,24 +4451,24 @@ void EdytorNc::projectSaveAs()
 void EdytorNc::projectNew()
 {
 
-   if(!maybeSaveProject())
-      return;
+    if(!maybeSaveProject())
+        return;
 
-   QString fileName = projectSelectName();
+    QString fileName = projectSelectName();
 
-   if(fileName.isEmpty())
-      return;
+    if(fileName.isEmpty())
+        return;
 
-   currentProjectName = fileName;
+    currentProjectName = fileName;
 
 
-   QStandardItem *parentItem = model->invisibleRootItem();
-   QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"), QFileInfo(currentProjectName).fileName());
+    QStandardItem *parentItem = model->invisibleRootItem();
+    QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"), QFileInfo(currentProjectName).fileName());
 
-   parentItem->appendRow(item);
+    parentItem->appendRow(item);
 
-   currentProject = item;
-   currentProjectModified = true;
+    currentProject = item;
+    currentProjectModified = true;
 }
 
 //**************************************************************************************************
@@ -4639,38 +4477,38 @@ void EdytorNc::projectNew()
 
 void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex & index)
 {
-   QFileInfo file;
+    QFileInfo file;
 
-   if((!index.isValid()))
-      return;
+    if((!index.isValid()))
+        return;
 
-   QStandardItem *item = model->itemFromIndex(index);
+    QStandardItem *item = model->itemFromIndex(index);
 
-   if(item == NULL)
-      return;
+    if(item == NULL)
+        return;
 
-   if(item->hasChildren())
-      return;
+    if(item->hasChildren())
+        return;
 
-   file.setFile(item->parent()->text(), item->text());
+    file.setFile(item->parent()->text(), item->text());
 
-   if((file.exists()) && (file.isReadable()))
-   {
-      if(file.suffix() == "nc")
-      {
-         defaultMdiWindowProperites.fileName = file.absoluteFilePath();
-         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-         defaultMdiWindowProperites.geometry = QByteArray();
-         defaultMdiWindowProperites.cursorPos = 0;
-         defaultMdiWindowProperites.editorToolTips = true;
-         defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
-         loadFile(defaultMdiWindowProperites);
-      }
-      else
-      {
-         QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
-      };
-   };
+    if((file.exists()) && (file.isReadable()))
+    {
+        if(file.suffix() == "nc")
+        {
+            defaultMdiWindowProperites.fileName = file.absoluteFilePath();
+            defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+            defaultMdiWindowProperites.geometry = QByteArray();
+            defaultMdiWindowProperites.cursorPos = 0;
+            defaultMdiWindowProperites.editorToolTips = true;
+            defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
+            loadFile(defaultMdiWindowProperites);
+        }
+        else
+        {
+            QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
+        };
+    };
 }
 
 //**************************************************************************************************
@@ -4679,30 +4517,30 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex & index)
 
 void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex & index)
 {
-   QFileInfo file;
+    QFileInfo file;
 
-   if(!index.isValid())
-      return;
+    if(!index.isValid())
+        return;
 
-   file.setFile(dirModel->filePath(index));
+    file.setFile(dirModel->filePath(index));
 
-   if((file.exists()) && (file.isReadable()))
-   {
-      if(file.suffix() == "nc")
-      {
-         defaultMdiWindowProperites.fileName = file.absoluteFilePath();
-         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-         defaultMdiWindowProperites.geometry = QByteArray();
-         defaultMdiWindowProperites.cursorPos = 0;
-         defaultMdiWindowProperites.editorToolTips = true;
-         defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
-         loadFile(defaultMdiWindowProperites);
-      }
-      else
-      {
-         QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
-      };
-   };
+    if((file.exists()) && (file.isReadable()))
+    {
+        if(file.suffix() == "nc")
+        {
+            defaultMdiWindowProperites.fileName = file.absoluteFilePath();
+            defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+            defaultMdiWindowProperites.geometry = QByteArray();
+            defaultMdiWindowProperites.cursorPos = 0;
+            defaultMdiWindowProperites.editorToolTips = true;
+            defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
+            loadFile(defaultMdiWindowProperites);
+        }
+        else
+        {
+            QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
+        };
+    };
 }
 
 //**************************************************************************************************
@@ -4713,20 +4551,20 @@ QString EdytorNc::projectSelectName()
 {
 
 #ifdef Q_OS_LINUX
-   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
+    QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
 #endif
 
 #ifdef Q_OS_WIN32
-   QString filters = tr("EdytorNC project file (*.ncp)");
+    QString filters = tr("EdytorNC project file (*.ncp)");
 #endif
 
-   QString file = QFileDialog::getSaveFileName(
-                         this,
-                         tr("Select the project name and location..."),
-                         currentProjectName,
-                         filters);
+    QString file = QFileDialog::getSaveFileName(
+                this,
+                tr("Select the project name and location..."),
+                currentProjectName,
+                filters);
 
-   return file;
+    return file;
 }
 
 //**************************************************************************************************
@@ -4736,28 +4574,28 @@ QString EdytorNc::projectSelectName()
 void EdytorNc::projectOpen()
 {
 
-   if(!maybeSaveProject())
-      return;
+    if(!maybeSaveProject())
+        return;
 
 
 #ifdef Q_OS_LINUX
-   QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
+    QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
 #endif
 
 #ifdef Q_OS_WIN32
-   QString filters = tr("EdytorNC project file (*.ncp)");
+    QString filters = tr("EdytorNC project file (*.ncp)");
 #endif
 
-   QString fileName = QFileDialog::getOpenFileName(
-                         this,
-                         tr("Open the project file..."),
-                         currentProjectName,
-                         filters);
+    QString fileName = QFileDialog::getOpenFileName(
+                this,
+                tr("Open the project file..."),
+                currentProjectName,
+                filters);
 
-   if(fileName.isEmpty())
-      return;
+    if(fileName.isEmpty())
+        return;
 
-   projectLoad(fileName);
+    projectLoad(fileName);
 }
 
 //**************************************************************************************************
@@ -4766,30 +4604,30 @@ void EdytorNc::projectOpen()
 
 void EdytorNc::hidePanel()
 {
-   hSplitter->setUpdatesEnabled(false);
+    hSplitter->setUpdatesEnabled(false);
 
-   if(!panelHidden)
-   {
-      panelState = hSplitter->saveState();
-      frame->setMaximumWidth(hideButton->width());
-      vSplitter->hide();
-      //openFileTableWidget->hide();
-      hideButton->setText(">>");
-      panelHidden = true;
-   }
-   else
-   {
-      panelHidden = false;
-      fileTreeViewChangeRootDir();
-      frame->setMaximumWidth(16777215);
-      vSplitter->show();
-      //openFileTableWidget->show();
-      hideButton->setText("<<");
-      hSplitter->restoreState(panelState);
-   };
+    if(!panelHidden)
+    {
+        panelState = hSplitter->saveState();
+        frame->setMaximumWidth(hideButton->width());
+        vSplitter->hide();
+        //openFileTableWidget->hide();
+        hideButton->setText(">>");
+        panelHidden = true;
+    }
+    else
+    {
+        panelHidden = false;
+        fileTreeViewChangeRootDir();
+        frame->setMaximumWidth(16777215);
+        vSplitter->show();
+        //openFileTableWidget->show();
+        hideButton->setText("<<");
+        hSplitter->restoreState(panelState);
+    };
 
-   hSplitter->updateGeometry();
-   hSplitter->setUpdatesEnabled(true);
+    hSplitter->updateGeometry();
+    hSplitter->setUpdatesEnabled(true);
 }
 
 //**************************************************************************************************
@@ -4798,26 +4636,26 @@ void EdytorNc::hidePanel()
 
 void EdytorNc::projectTreeRemoveItem()
 {
-   QStandardItem *item;
+    QStandardItem *item;
 
-   QModelIndexList list = projectTreeView->selectionModel()->selectedIndexes();
-   QModelIndexList::Iterator it = list.begin();
+    QModelIndexList list = projectTreeView->selectionModel()->selectedIndexes();
+    QModelIndexList::Iterator it = list.begin();
 
 
-   while(it != list.end())
-   {
-      item = model->itemFromIndex(*it);
+    while(it != list.end())
+    {
+        item = model->itemFromIndex(*it);
 
-      if(item == NULL)
-         return;
+        if(item == NULL)
+            return;
 
-      if(!item->hasChildren())
-      {
-         currentProjectModified = model->removeRow(item->row(), model->indexFromItem(item->parent()));
-      };
+        if(!item->hasChildren())
+        {
+            currentProjectModified = model->removeRow(item->row(), model->indexFromItem(item->parent()));
+        };
 
-      ++it;
-   };
+        ++it;
+    };
 }
 
 //**************************************************************************************************
@@ -4826,77 +4664,77 @@ void EdytorNc::projectTreeRemoveItem()
 
 void EdytorNc::projectLoad(QString projectName)
 {
-   QFileInfo file;
-   QIcon icon;
+    QFileInfo file;
+    QIcon icon;
 
 
-   if(projectName.isEmpty())
-      return;
+    if(projectName.isEmpty())
+        return;
 
-   currentProjectName = projectName;
+    currentProjectName = projectName;
 
-   model->clear();
+    model->clear();
 
-   QSettings settings(currentProjectName, QSettings::IniFormat);
+    QSettings settings(currentProjectName, QSettings::IniFormat);
 
-   QStandardItem *parentItem = model->invisibleRootItem();
-   QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"), QFileInfo(currentProjectName).fileName());
-   item->setToolTip(QDir::toNativeSeparators(currentProjectName));
+    QStandardItem *parentItem = model->invisibleRootItem();
+    QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"), QFileInfo(currentProjectName).fileName());
+    item->setToolTip(QDir::toNativeSeparators(currentProjectName));
 
-   parentItem->appendRow(item);
+    parentItem->appendRow(item);
 
-   currentProject = item;
-   parentItem = item;
+    currentProject = item;
+    parentItem = item;
 
-   QFileSystemModel *fModel = new QFileSystemModel;
+    QFileSystemModel *fModel = new QFileSystemModel;
 
-   int max = settings.beginReadArray("ProjectFiles");
-   for(int i = 0; i < max; ++i)
-   {
-      settings.setArrayIndex(i);
-      file.setFile(settings.value("File", "").toString());
+    int max = settings.beginReadArray("ProjectFiles");
+    for(int i = 0; i < max; ++i)
+    {
+        settings.setArrayIndex(i);
+        file.setFile(settings.value("File", "").toString());
 
-      if((file.absoluteDir().exists()) && (file.absoluteDir().isReadable()))
-      {
-         QList<QStandardItem *> items = model->findItems(file.absoluteDir().canonicalPath(), Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
+        if((file.absoluteDir().exists()) && (file.absoluteDir().isReadable()))
+        {
+            QList<QStandardItem *> items = model->findItems(file.absoluteDir().canonicalPath(), Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
 
-         if(!items.isEmpty())
-         {
-            item = items.at(0);
-            if(item->text() != file.absoluteDir().canonicalPath())
+            if(!items.isEmpty())
             {
-               item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
-               item->setToolTip(QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
-               currentProject->appendRow(item);
+                item = items.at(0);
+                if(item->text() != file.absoluteDir().canonicalPath())
+                {
+                    item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
+                    item->setToolTip(QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
+                    currentProject->appendRow(item);
+                };
+            }
+            else
+            {
+                item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
+                item->setToolTip(QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
+                currentProject->appendRow(item);
             };
-         }
-         else
-         {
-            item = new QStandardItem(QIcon(":/images/folder.png"), file.absoluteDir().canonicalPath());
-            item->setToolTip(QDir::toNativeSeparators(file.absoluteDir().canonicalPath()));
-            currentProject->appendRow(item);
-         };
 
-         parentItem = item;
+            parentItem = item;
 
-         if((file.exists()) && (file.isReadable()))
-         {
-            icon = fModel->iconProvider()->icon(file);
+            if((file.exists()) && (file.isReadable()))
+            {
+                icon = fModel->iconProvider()->icon(file);
 
-            if(icon.isNull())
-               icon = QIcon(":/images/ncfile.png");
+                if(icon.isNull())
+                    icon = QIcon(":/images/ncfile.png");
 
-            item = new QStandardItem(icon, file.fileName());
-            item->setToolTip(file.fileName());
-            parentItem->appendRow(item);
-         };
-      };
-   };
-   settings.endArray();
+                item = new QStandardItem(icon, file.fileName());
+                item->setToolTip(file.fileName());
+                parentItem->appendRow(item);
+            };
+        };
+    };
+    settings.endArray();
 
-   projectTreeView->expandAll();
+    projectTreeView->expandAll();
 
-   currentProjectModified = false;
+    currentProjectModified = false;
 }
 
 //**************************************************************************************************
@@ -4905,30 +4743,30 @@ void EdytorNc::projectLoad(QString projectName)
 
 bool EdytorNc::maybeSaveProject()
 {
-   if(currentProjectModified)
-   {
-      QMessageBox msgBox;
-      msgBox.setText(tr("<b>Project: \"%1\"\n has been modified.</b>").arg(currentProjectName));
-      msgBox.setInformativeText(tr("Do you want to save your changes ?"));
-      msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-      msgBox.setDefaultButton(QMessageBox::Save);
-      msgBox.setIcon(QMessageBox::Warning);
-      int ret = msgBox.exec();
-      switch (ret)
-      {
-         case QMessageBox::Save    : projectSave();
-                                     return true;
-                                     break;
-         case QMessageBox::Discard : currentProjectModified = false;
-                                     return true;
-                                     break;
-         case QMessageBox::Cancel  : return false;
-                                     break;
-         default                   : return true;
-                                     break;
-      } ;
-   };
-   return true;
+    if(currentProjectModified)
+    {
+        QMessageBox msgBox;
+        msgBox.setText(tr("<b>Project: \"%1\"\n has been modified.</b>").arg(currentProjectName));
+        msgBox.setInformativeText(tr("Do you want to save your changes ?"));
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        msgBox.setIcon(QMessageBox::Warning);
+        int ret = msgBox.exec();
+        switch (ret)
+        {
+        case QMessageBox::Save    : projectSave();
+            return true;
+            break;
+        case QMessageBox::Discard : currentProjectModified = false;
+            return true;
+            break;
+        case QMessageBox::Cancel  : return false;
+            break;
+        default                   : return true;
+            break;
+        } ;
+    };
+    return true;
 }
 
 //**************************************************************************************************
@@ -4937,21 +4775,21 @@ bool EdytorNc::maybeSaveProject()
 
 void EdytorNc::createFileBrowseTabs()
 {
-   dirModel = new QFileSystemModel();
-   dirModel->setResolveSymlinks(true);
-   
-   //dirModel->setRootPath(lastDir.absolutePath());
-   //fileTreeViewChangeRootDir();
+    dirModel = new QFileSystemModel();
+    dirModel->setResolveSymlinks(true);
 
-   dirModel->setNameFilters(defaultMdiWindowProperites.extensions); //QStringList("*.nc")
-   dirModel->setNameFilterDisables(false);
+    //dirModel->setRootPath(lastDir.absolutePath());
+    //fileTreeViewChangeRootDir();
 
-   fileTreeView->setModel(dirModel);
-   fileTreeViewChangeRootDir();
+    dirModel->setNameFilters(defaultMdiWindowProperites.extensions); //QStringList("*.nc")
+    dirModel->setNameFilterDisables(false);
 
-   connect(fileTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(fileTreeViewDoubleClicked(QModelIndex)));
-   connect(openFileTableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(openFileTableWidgetClicked(int, int)));
-   openFileTableWidget->setToolTip(tr("Open files"));
+    fileTreeView->setModel(dirModel);
+    fileTreeViewChangeRootDir();
+
+    connect(fileTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(fileTreeViewDoubleClicked(QModelIndex)));
+    connect(openFileTableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(openFileTableWidgetClicked(int, int)));
+    openFileTableWidget->setToolTip(tr("Open files"));
 }
 
 //**************************************************************************************************
@@ -4960,59 +4798,59 @@ void EdytorNc::createFileBrowseTabs()
 
 void EdytorNc::updateOpenFileList()
 {
-   QTableWidgetItem *newItem;
-   QFileInfo file;
-   QStringList labels;
+    QTableWidgetItem *newItem;
+    QFileInfo file;
+    QStringList labels;
 
-   openFileTableWidget->setUpdatesEnabled(false);
+    openFileTableWidget->setUpdatesEnabled(false);
 
-   openFileTableWidget->clear();
-   labels << tr("Info") << tr("File Name") << "";
-   openFileTableWidget->setHorizontalHeaderLabels(labels);
-   openFileTableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+    openFileTableWidget->clear();
+    labels << tr("Info") << tr("File Name") << "";
+    openFileTableWidget->setHorizontalHeaderLabels(labels);
+    openFileTableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
 
-   QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
+    QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
 
-   openFileTableWidget->setRowCount(windows.size());
-   for (int i = 0; i < windows.size(); ++i)
-   {
-       MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
+    openFileTableWidget->setRowCount(windows.size());
+    for (int i = 0; i < windows.size(); ++i)
+    {
+        MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
 
-       file.setFile(child->currentFile());
+        file.setFile(child->currentFile());
 
-       newItem = new QTableWidgetItem(file.fileName() + (child->textEdit->document()->isModified() ? "*": ""));
+        newItem = new QTableWidgetItem(file.fileName() + (child->textEdit->document()->isModified() ? "*": ""));
 
-       if(file.canonicalFilePath().isEmpty())
-         newItem->setToolTip(child->currentFile());
-       else
-           newItem->setToolTip(QDir::toNativeSeparators(file.canonicalFilePath()));
-       openFileTableWidget->setItem(i, 1, newItem);
+        if(file.canonicalFilePath().isEmpty())
+            newItem->setToolTip(child->currentFile());
+        else
+            newItem->setToolTip(QDir::toNativeSeparators(file.canonicalFilePath()));
+        openFileTableWidget->setItem(i, 1, newItem);
 
-       newItem = new QTableWidgetItem(child->getCurrentFileInfo());
-       newItem->setToolTip(child->getCurrentFileInfo() + " --> " + QDir::toNativeSeparators(file.canonicalFilePath()));
-       openFileTableWidget->setItem(i, 0, newItem);
+        newItem = new QTableWidgetItem(child->getCurrentFileInfo());
+        newItem->setToolTip(child->getCurrentFileInfo() + " --> " + QDir::toNativeSeparators(file.canonicalFilePath()));
+        openFileTableWidget->setItem(i, 0, newItem);
 
-       newItem = new QTableWidgetItem(QIcon(":/images/fileclose_small.png"), "", QTableWidgetItem::UserType);
-       newItem->setToolTip(tr("Close"));
-       openFileTableWidget->setItem(i, 2, newItem);
+        newItem = new QTableWidgetItem(QIcon(":/images/fileclose_small.png"), "", QTableWidgetItem::UserType);
+        newItem->setToolTip(tr("Close"));
+        openFileTableWidget->setItem(i, 2, newItem);
 
-       if(child == activeMdiChild())
-       {
-          openFileTableWidget->selectRow(i);
-       };
-   };
-   
-   openFileTableWidget->setVisible(false);
-   openFileTableWidget->resizeRowsToContents();
+        if(child == activeMdiChild())
+        {
+            openFileTableWidget->selectRow(i);
+        };
+    };
 
-   openFileTableWidget->horizontalHeader()->setResizeMode(2, QHeaderView::Fixed);
-   openFileTableWidget->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
-   openFileTableWidget->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);
+    openFileTableWidget->setVisible(false);
+    openFileTableWidget->resizeRowsToContents();
 
-   //openFileTableWidget->resizeColumnsToContents();
-   openFileTableWidget->setVisible(true);
+    openFileTableWidget->horizontalHeader()->setResizeMode(2, QHeaderView::Fixed);
+    openFileTableWidget->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
+    openFileTableWidget->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);
 
-   openFileTableWidget->setUpdatesEnabled(true);
+    //openFileTableWidget->resizeColumnsToContents();
+    openFileTableWidget->setVisible(true);
+
+    openFileTableWidget->setUpdatesEnabled(true);
 }
 
 //**************************************************************************************************
@@ -5021,19 +4859,19 @@ void EdytorNc::updateOpenFileList()
 
 void EdytorNc::openFileTableWidgetClicked(int x, int y)
 {
-   QTableWidgetItem *item = openFileTableWidget->item(x, 1);
+    QTableWidgetItem *item = openFileTableWidget->item(x, 1);
 
-   QMdiSubWindow *existing = findMdiChild(item->toolTip());
-   if(existing)
-   {
-      if(y == 2)
-      {
-         existing->close();
-         updateOpenFileList();
-      }
-      else
-         mdiArea->setActiveSubWindow(existing);
-   };
+    QMdiSubWindow *existing = findMdiChild(item->toolTip());
+    if(existing)
+    {
+        if(y == 2)
+        {
+            existing->close();
+            updateOpenFileList();
+        }
+        else
+            mdiArea->setActiveSubWindow(existing);
+    };
 }
 
 //**************************************************************************************************
@@ -5042,40 +4880,40 @@ void EdytorNc::openFileTableWidgetClicked(int x, int y)
 
 void EdytorNc::fileTreeViewChangeRootDir()
 {
-   QString path;
+    QString path;
 
-   if(panelHidden)  //if((!isVisible()) || panelHidden)
-      return;
+    if(panelHidden)  //if((!isVisible()) || panelHidden)
+        return;
 
-   if(tabWidget->currentIndex() != 1)
-      return;
+    if(tabWidget->currentIndex() != 1)
+        return;
 
-   if(fileTreeView == NULL || dirModel == NULL)
-      return;
+    if(fileTreeView == NULL || dirModel == NULL)
+        return;
 
-   if(currentPathCheckBox->isChecked() && (activeMdiChild() != 0))
-   {
-      path = activeMdiChild()->currentFile();
-      path = QFileInfo(path).canonicalPath();
-   }
-   else
-      path = lastDir.canonicalPath();
+    if(currentPathCheckBox->isChecked() && (activeMdiChild() != 0))
+    {
+        path = activeMdiChild()->currentFile();
+        path = QFileInfo(path).canonicalPath();
+    }
+    else
+        path = lastDir.canonicalPath();
 
-   if(path.isEmpty())
-      return;
+    if(path.isEmpty())
+        return;
 
-   if(dirModel->rootPath() == path)
-      return;
+    if(dirModel->rootPath() == path)
+        return;
 
-   fileTreeView->setRootIndex(dirModel->index(path));
-   dirModel->setRootPath(path);
-   //fileTreeView->setToolTip(path);
-   fileTreeView->setSortingEnabled(true);
-   fileTreeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
-   fileTreeView->resizeColumnToContents(0);
-   fileTreeView->resizeColumnToContents(1);
-   fileTreeView->setColumnHidden(2, true);
-   fileTreeView->resizeColumnToContents(3);
+    fileTreeView->setRootIndex(dirModel->index(path));
+    dirModel->setRootPath(path);
+    //fileTreeView->setToolTip(path);
+    fileTreeView->setSortingEnabled(true);
+    fileTreeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+    fileTreeView->resizeColumnToContents(0);
+    fileTreeView->resizeColumnToContents(1);
+    fileTreeView->setColumnHidden(2, true);
+    fileTreeView->resizeColumnToContents(3);
 }
 
 //**************************************************************************************************
@@ -5084,74 +4922,74 @@ void EdytorNc::fileTreeViewChangeRootDir()
 
 bool EdytorNc::event(QEvent *event)
 {
-   QString key, text;
-   QModelIndex index;
-   QFile file;
-   QString fileName;
-   char buf[1024];
-   qint64 lineLength;
+    QString key, text;
+    QModelIndex index;
+    QFile file;
+    QString fileName;
+    char buf[1024];
+    qint64 lineLength;
 
 
-   if((event->type() == QEvent::ToolTip))
-   {
-      if(panelHidden)
-         return true;
+    if((event->type() == QEvent::ToolTip))
+    {
+        if(panelHidden)
+            return true;
 
-      QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
 
 
-      QPoint pos = fileTreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
+        QPoint pos = fileTreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
 
-      if((pos.y() >= fileTreeView->viewport()->height()) ||
-         (pos.x() >= fileTreeView->viewport()->width()) || (tabWidget->currentIndex() != 1))
-      {
-         return true;
-      };
+        if((pos.y() >= fileTreeView->viewport()->height()) ||
+                (pos.x() >= fileTreeView->viewport()->width()) || (tabWidget->currentIndex() != 1))
+        {
+            return true;
+        };
 
-      index = fileTreeView->indexAt(pos);
+        index = fileTreeView->indexAt(pos);
 
-      if(!index.isValid())
-         return true;
+        if(!index.isValid())
+            return true;
 
-      fileName = dirModel->filePath(index);
-      file.setFileName(fileName);
-      text = "<b>" + QDir::toNativeSeparators(fileName) + "</b>";
+        fileName = dirModel->filePath(index);
+        file.setFileName(fileName);
+        text = "<b>" + QDir::toNativeSeparators(fileName) + "</b>";
 
-      if(filePreviewSpinBox->value() > 0)
-      {
-         text.append("<br />");
-         if(file.open(QIODevice::ReadOnly))
-         {
-            for(int i = 0; i < filePreviewSpinBox->value(); i++)
+        if(filePreviewSpinBox->value() > 0)
+        {
+            text.append("<br />");
+            if(file.open(QIODevice::ReadOnly))
             {
-               lineLength = file.readLine(buf, sizeof(buf));
-               if (lineLength != -1)
-               {
-                  text.append(buf);
-               };
+                for(int i = 0; i < filePreviewSpinBox->value(); i++)
+                {
+                    lineLength = file.readLine(buf, sizeof(buf));
+                    if (lineLength != -1)
+                    {
+                        text.append(buf);
+                    };
+                };
+                file.close();
+                if(text.endsWith('\n'))
+                    text.remove(text.size() - 1, 1);
             };
-            file.close();
-            if(text.endsWith('\n'))
-               text.remove(text.size() - 1, 1);
-         };
-      };
+        };
 
-      if(!text.isEmpty())
-      {
-         if(text.length() < fileName.size())
-            key = "<p style='white-space:normal'>";
-         else
-            key = "<p style='white-space:pre'>";
-         QToolTip::showText(helpEvent->globalPos(), key + text, this, QRect());
-      }
-      else
-      {
-         QToolTip::hideText();
-         event->ignore();
-      };
-      return true;
-   };
-   return QWidget::event(event);
+        if(!text.isEmpty())
+        {
+            if(text.length() < fileName.size())
+                key = "<p style='white-space:normal'>";
+            else
+                key = "<p style='white-space:pre'>";
+            QToolTip::showText(helpEvent->globalPos(), key + text, this, QRect());
+        }
+        else
+        {
+            QToolTip::hideText();
+            event->ignore();
+        };
+        return true;
+    };
+    return QWidget::event(event);
 }
 
 //**************************************************************************************************
@@ -5160,36 +4998,36 @@ bool EdytorNc::event(QEvent *event)
 
 void EdytorNc::splitPrograms()
 {
-   MdiChild *activeWindow = activeMdiChild();
-   if(activeWindow <= 0)
-     return;
+    MdiChild *activeWindow = activeMdiChild();
+    if(activeWindow <= 0)
+        return;
 
-   QApplication::setOverrideCursor(Qt::BusyCursor);
+    QApplication::setOverrideCursor(Qt::BusyCursor);
 
-   QStringList list = activeWindow->splitFile();
+    QStringList list = activeWindow->splitFile();
 
-   if(list.size() <= 1)
-   {
-      QApplication::restoreOverrideCursor();
-      return;
-   };
+    if(list.size() <= 1)
+    {
+        QApplication::restoreOverrideCursor();
+        return;
+    };
 
-   QStringList::const_iterator it = list.constBegin();
-   while(it != list.constEnd())
-   {
-      newFile();
-      activeWindow = activeMdiChild();
-      if(activeWindow <= 0)
-      {
-         QApplication::restoreOverrideCursor();
-         return;
-      };
-      activeWindow->textEdit->setUndoRedoEnabled(false);  //clear undo/redo history
-      activeWindow->textEdit->setPlainText(*it);
-      activeWindow->textEdit->setUndoRedoEnabled(true);
-      it++;
-   };
-   QApplication::restoreOverrideCursor();
+    QStringList::const_iterator it = list.constBegin();
+    while(it != list.constEnd())
+    {
+        newFile();
+        activeWindow = activeMdiChild();
+        if(activeWindow <= 0)
+        {
+            QApplication::restoreOverrideCursor();
+            return;
+        };
+        activeWindow->textEdit->setUndoRedoEnabled(false);  //clear undo/redo history
+        activeWindow->textEdit->setPlainText(*it);
+        activeWindow->textEdit->setUndoRedoEnabled(true);
+        it++;
+    };
+    QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -5198,8 +5036,8 @@ void EdytorNc::splitPrograms()
 
 void EdytorNc::doSemiComment()
 {
-   if(activeMdiChild())
-      activeMdiChild()->semicomment();
+    if(activeMdiChild())
+        activeMdiChild()->semicomment();
 }
 
 //**************************************************************************************************
@@ -5208,8 +5046,8 @@ void EdytorNc::doSemiComment()
 
 void EdytorNc::doParaComment()
 {
-   if(activeMdiChild())
-      activeMdiChild()->paracomment();
+    if(activeMdiChild())
+        activeMdiChild()->paracomment();
 }
 
 //**************************************************************************************************
@@ -5223,18 +5061,18 @@ void EdytorNc::displayCleanUpDialog()
 
     if(editorWindow)
     {
-       cleanUpDialog *dialog = new cleanUpDialog(this);
-       //dialog->setText(activeMdiChild()->textEdit->toPlainText());
+        cleanUpDialog *dialog = new cleanUpDialog(this);
+        //dialog->setText(activeMdiChild()->textEdit->toPlainText());
 
-       int result = dialog->exec(selectedExpressions, editorWindow->textEdit->toPlainText());
+        int result = dialog->exec(selectedExpressions, editorWindow->textEdit->toPlainText());
 
-       if(result == QDialog::Accepted)
-       {
-          selectedExpressions = dialog->getSelectedExpressions();
-          editorWindow->doRemoveTextByRegExp(selectedExpressions);
-       };
+        if(result == QDialog::Accepted)
+        {
+            selectedExpressions = dialog->getSelectedExpressions();
+            editorWindow->doRemoveTextByRegExp(selectedExpressions);
+        };
 
-       delete(dialog);
+        delete(dialog);
     };
 
 

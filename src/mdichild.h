@@ -83,13 +83,16 @@ public:
     int getHighligthMode();
     void doDiff();
     QString getCurrentFileInfo();
-    bool findText(const QString &text, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
     QString guessFileName();
     QStringList splitFile();
     bool foundTextMatched(QString pattern, QString text);
     void setCurrentFile(const QString &fileName, const QString &text);
     void semicomment();
     void paracomment();
+    bool findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments);
+    bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
+    bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
+
 
 
 
@@ -111,7 +114,7 @@ private:
     void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
     void detectHighligthMode();
-
+    bool findText(const QString &text, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
 
 
 
