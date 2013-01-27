@@ -938,7 +938,6 @@ void MdiChild::doRemoveTextByRegExp(QStringList exp)
                 expTx.replace('$', "\\n");
 
         tx.remove(QRegExp(expTx));
-        qDebug() << expTx;
 
     };
 
@@ -2892,8 +2891,6 @@ QString MdiChild::guessFileName()
 
    textEdit->setTextCursor(cursor);
 
-   qDebug() << fileName << mdiWindowProperites.saveDirectory ;
-
    return fileName;
 }
 
@@ -3005,7 +3002,6 @@ void MdiChild::semicomment()
 
 void MdiChild::paracomment()
 {
-
     if(textEdit->textCursor().hasSelection())
     {
         QTextCursor cursor = textEdit->textCursor();
@@ -3047,6 +3043,165 @@ void MdiChild::paracomment()
     };
 }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments)
+{
+    bool found = false;
+    QTextCursor cursor, cursorOld;
+
+    if(textToFind.isEmpty())
+        return false;
+
+
+    found = findText(textToFind, options, ignoreComments);
+
+    if(!found)
+    {
+        cursor = textEdit->textCursor();
+        cursorOld = cursor;
+
+        if(options & QTextDocument::FindBackward)
+        {
+            cursor.movePosition(QTextCursor::End);
+        }
+        else
+        {
+            cursor.movePosition(QTextCursor::Start);
+        };
+
+        textEdit->setTextCursor(cursor);
+
+        found = findText(textToFind, options, ignoreComments);
+
+        if(!found)
+        {
+            cursorOld.clearSelection();
+            textEdit->setTextCursor(cursorOld);
+        };
+
+    };
+
+    return found;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments)
+{
+    QString foundText;
+    double val, val1;
+    bool ok;
+    QRegExp regExp;
+    QChar op;
+
+
+    if(textEdit->isReadOnly())
+        return false;
+
+    if(textToFind.isEmpty())
+        return false;
+
+    bool found = false;
+
+
+    if(foundTextMatched(textToFind, textEdit->textCursor().selectedText()))
+        found = true;
+    else
+        found = findNext(textToFind, options, ignoreComments);
+
+    if(found)
+    {
+        QTextCursor cr = textEdit->textCursor();
+        cr.beginEditBlock();
+        if(mdiWindowProperites.underlineChanges)
+        {
+            QTextCharFormat format = cr.charFormat();
+            format.setUnderlineStyle(QTextCharFormat::DotLine);
+            format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+            cr.setCharFormat(format);
+        };
+
+
+        regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[0-9.]{1,}"));
+        if(replacedText.contains(regExp))
+        {
+            replacedText.remove("$$");
+            op = replacedText.at(0);
+            replacedText.remove(0, 1);
+            val = replacedText.toDouble(&ok);
+
+            foundText = cr.selectedText();
+            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
+            val1 = foundText.toDouble(&ok);
+            replacedText = cr.selectedText();
+            replacedText.remove(foundText);
+
+            if(op == '+')
+                val = val1 + val;
+            if(op == '-')
+                val = val1 - val;
+            if(op == '*')
+                val = val1 * val;
+            if(op == '/')
+                val = val1 / val;
+
+            if(replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N" || replacedText == "n")
+            {
+                replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+                if(replacedText[replacedText.length() - 1] == '.')
+                    replacedText = replacedText.remove((replacedText.length() - 1), 1);
+            }
+            else
+                replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+
+        };
+
+        cr.insertText(replacedText);
+        cr.endEditBlock();
+        textEdit->setTextCursor(cr);
+        found = findNext(textToFind, options, ignoreComments);
+    };
+
+    return found;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments)
+{
+    bool found = false;
+
+    if(textEdit->isReadOnly())
+        return false;
+
+    if(textToFind.isEmpty())
+        return false;
+
+    if(textEdit->textCursor().selectedText() == textToFind)
+        found = true;
+    else
+        found = findNext(textToFind, options, ignoreComments);
+
+    QTextCursor startCursor = textEdit->textCursor();
+
+    while(found)
+    {
+        found = replaceNext(textToFind, replacedText, options, ignoreComments);
+
+        if(startCursor.blockNumber() == textEdit->textCursor().blockNumber())
+            break;
+        qApp->processEvents();
+    };
+
+    return found;
+}
 
 //**************************************************************************************************
 //
