@@ -1241,7 +1241,7 @@ bool MdiChild::event(QEvent *event)
          break;
       case MODE_HEIDENHAIN_ISO   : group = QLatin1String("HEIDENHAIN_ISO");
          break;
-      case MODE_LINUXCNC         : group = QLatin1String("MODE_LINUXCNC");
+      case MODE_LINUXCNC         : group = QLatin1String("LinuxCNC");
          break;
       case MODE_TOOLTIPS         : group = QLatin1String("TOOLTIP");
          break;
@@ -3055,6 +3055,7 @@ bool MdiChild::findNext(QString textToFind, QTextDocument::FindFlags options, bo
     if(textToFind.isEmpty())
         return false;
 
+    textEdit->blockSignals(true);
 
     found = findText(textToFind, options, ignoreComments);
 
@@ -3084,6 +3085,9 @@ bool MdiChild::findNext(QString textToFind, QTextDocument::FindFlags options, bo
 
     };
 
+    textEdit->blockSignals(false);
+    highlightCurrentLine();
+
     return found;
 }
 
@@ -3108,6 +3112,7 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText, QTextDocume
 
     bool found = false;
 
+    textEdit->blockSignals(true);
 
     if(foundTextMatched(textToFind, textEdit->textCursor().selectedText()))
         found = true;
@@ -3164,8 +3169,13 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText, QTextDocume
         cr.insertText(replacedText);
         cr.endEditBlock();
         textEdit->setTextCursor(cr);
+
         found = findNext(textToFind, options, ignoreComments);
     };
+
+    textEdit->blockSignals(false);
+    highlightCurrentLine();
+    highlightFindText(textToFind, options, ignoreComments);
 
     return found;
 }
