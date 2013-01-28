@@ -11,7 +11,8 @@ PUBLIC_HEADERS         += $$PWD/qextserialport.h \
 HEADERS                += $$PUBLIC_HEADERS \
                           $$PWD/qextserialport_p.h \
                           $$PWD/qextserialenumerator_p.h \
-    cleanupdialog.h
+    cleanupdialog.h \
+    tooltips.h
 
 SOURCES                += $$PWD/qextserialport.cpp \
                           $$PWD/qextserialenumerator.cpp \
