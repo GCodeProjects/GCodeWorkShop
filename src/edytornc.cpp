@@ -1315,6 +1315,9 @@ void EdytorNc::updateMenus()
     splittAct->setEnabled(hasMdiChildNotReadOnly);
     convertProgAct->setEnabled(hasMdiChildNotReadOnly);
     cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
+    convertProgAct->setEnabled(cleanUpDialogAct);
+    cmpMacroAct->setEnabled(swapAxesAct);
+
 
     redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
     undoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isUndoAvailable());
@@ -1711,6 +1714,11 @@ void EdytorNc::createActions()
     paraCommAct->setStatusTip(tr("Comment/uncomment selected text using parentheses"));
     connect(paraCommAct, SIGNAL(triggered()), this, SLOT(doParaComment()));
 
+    swapAxesAct = new QAction(QIcon(":/images/swapaxes.png"), tr("Swap axes"), this);
+    //swapAxesAct->setShortcut(QKeySequence::Save);
+    swapAxesAct->setStatusTip(tr("Swap/modify axes"));
+    connect(swapAxesAct, SIGNAL(triggered()), this, SLOT(doSwapAxes()));
+
 
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
@@ -1822,19 +1830,16 @@ void EdytorNc::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction(insertSpcAct);
     toolsMenu->addAction(removeSpcAct);
-    toolsMenu->addSeparator();
-    toolsMenu->addAction(cleanUpDialogAct);
-    toolsMenu->addSeparator();
+    toolsMenu->addAction(insertDotAct);
     toolsMenu->addAction(insertEmptyLinesAct);
     toolsMenu->addAction(removeEmptyLinesAct);
+    toolsMenu->addAction(cleanUpDialogAct);
+    toolsMenu->addAction(swapAxesAct);
     toolsMenu->addAction(splittAct);
+    toolsMenu->addAction(renumberAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(semiCommAct);
     toolsMenu->addAction(paraCommAct);
-    toolsMenu->addSeparator();
-    toolsMenu->addAction(insertDotAct);
-    toolsMenu->addSeparator();
-    toolsMenu->addAction(renumberAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(bhcAct);
     toolsMenu->addAction(speedFeedAct);
@@ -1908,13 +1913,11 @@ void EdytorNc::createToolBars()
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(insertSpcAct);
     toolsToolBar->addAction(removeSpcAct);
-    toolsToolBar->addSeparator();
-    toolsToolBar->addAction(removeEmptyLinesAct);
-    toolsToolBar->addAction(splittAct);
-    toolsToolBar->addSeparator();
+    toolsToolBar->addAction(cleanUpDialogAct);
     toolsToolBar->addAction(insertDotAct);
-    toolsToolBar->addSeparator();
+    toolsToolBar->addAction(swapAxesAct);
     toolsToolBar->addAction(renumberAct);
+    toolsToolBar->addAction(splittAct);
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(bhcAct);
     toolsToolBar->addAction(speedFeedAct);
@@ -4457,6 +4460,38 @@ void EdytorNc::displayCleanUpDialog()
         delete(dialog);
     };
 
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doSwapAxes()
+{
+    MdiChild *editorWindow = activeMdiChild();
+
+    if(editorWindow)
+    {
+        swapAxesDialog *swapDialog = new swapAxesDialog();
+
+
+        int result = swapDialog->exec();
+
+        if(result == QDialog::Accepted)
+        {
+            editorWindow->swapAxes(swapDialog->getFirstAxis(),
+                                   swapDialog->getSecondAxis(),
+                                   swapDialog->getMinValue(),
+                                   swapDialog->getMaxValue(),
+                                   swapDialog->getOperator(),
+                                   swapDialog->getModiferValue(),
+                                   0,
+                                   true);
+        };
+
+        delete(swapDialog);
+    };
 
 }
 

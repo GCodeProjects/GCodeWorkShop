@@ -3132,7 +3132,7 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText, QTextDocume
         };
 
 
-        regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[0-9.]{1,}"));
+        regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[-]{0,1}[0-9.]{1,}"));
         if(replacedText.contains(regExp))
         {
             replacedText.remove("$$");
@@ -3209,6 +3209,110 @@ bool MdiChild::replaceAll(QString textToFind, QString replacedText, QTextDocumen
             break;
         qApp->processEvents();
     };
+
+    return found;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, double max,
+                        int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments)
+{
+    double val, val1;
+    QRegExp regExp;
+    bool found = false;
+    bool ok;
+    QString newText, foundText;
+
+
+    if(textEdit->isReadOnly())
+        return false;
+
+    if(textToFind.isEmpty())
+        return false;
+
+    if(options & QTextDocument::FindCaseSensitively)
+        regExp.setCaseSensitivity(Qt::CaseSensitive);
+    else
+        regExp.setCaseSensitivity(Qt::CaseInsensitive);
+
+
+    textEdit->blockSignals(true);
+
+    QTextCursor startCursor = textEdit->textCursor();
+
+    QTextCursor cursor = startCursor;
+    cursor.setPosition(0);
+
+    regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
+
+    do
+    {
+        cursor = textEdit->document()->find(regExp, cursor, options);
+
+        found = !cursor.isNull();
+
+        if(found)
+        {
+            foundText = cursor.selectedText();
+
+            if(min > -999999)
+            {
+                double val = QString(foundText.remove(textToFind, Qt::CaseInsensitive)).toDouble(&ok);
+
+                if(!((val >= min) && (val <= max)))
+                {
+                    continue;
+                };
+            };
+
+            cursor.beginEditBlock();
+            if(mdiWindowProperites.underlineChanges)
+            {
+                QTextCharFormat format = cursor.charFormat();
+                format.setUnderlineStyle(QTextCharFormat::DotLine);
+                format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+                cursor.setCharFormat(format);
+            };
+
+            if(oper >= 0)
+            {
+                foundText.remove(QRegExp("[A-Za-z#]{1,}"));
+                val1 = foundText.toDouble(&ok);
+
+                if((modifier == 0) && oper == 3)  //divide by 0
+                    modifier = 1;
+
+                switch(oper)
+                {
+                case 0 : val = val1 + modifier;
+                    break;
+                case 1 : val = val1 - modifier;
+                    break;
+                case 2 : val = val1 * modifier;
+                    break;
+                case 3 : val = val1 / modifier;
+                    break;
+                default: val = val1;
+                    break;
+                };
+                newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+            }
+            else
+                newText = replacedText;
+
+            cursor.insertText(newText);
+            cursor.endEditBlock();
+            textEdit->setTextCursor(cursor);
+        };
+
+    }while(found);
+
+    textEdit->blockSignals(false);
+
+    textEdit->setTextCursor(startCursor);
 
     return found;
 }

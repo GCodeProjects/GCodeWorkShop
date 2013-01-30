@@ -93,5 +93,6 @@
         <file>images/semicomment.png</file>
         <file>images/paracomment.png</file>
         <file>images/cleanup.png</file>
+        <file>images/swapaxes.png</file>
     </qresource>
 </RCC>

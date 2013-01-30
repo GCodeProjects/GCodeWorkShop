@@ -12,11 +12,13 @@ HEADERS                += $$PUBLIC_HEADERS \
                           $$PWD/qextserialport_p.h \
                           $$PWD/qextserialenumerator_p.h \
     cleanupdialog.h \
-    tooltips.h
+    tooltips.h \
+    swapaxesdialog.h
 
 SOURCES                += $$PWD/qextserialport.cpp \
                           $$PWD/qextserialenumerator.cpp \
-    cleanupdialog.cpp
+    cleanupdialog.cpp \
+    swapaxesdialog.cpp
 unix {
     SOURCES            += $$PWD/qextserialport_unix.cpp
     linux* {
@@ -115,7 +117,8 @@ FORMS += i2mdialog.ui \
     transmissiondialog.ui \
     transprogressdialog.ui \
     edytornc.ui \
-    cleanupdialog.ui
+    cleanupdialog.ui \
+    swapaxesdialog.ui
 TRANSLATIONS = edytornc_pl.ts \
     edytornc_ca.ts \
     edytornc_de.ts \
