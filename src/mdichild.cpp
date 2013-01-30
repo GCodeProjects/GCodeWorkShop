@@ -3277,31 +3277,28 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                 cursor.setCharFormat(format);
             };
 
-            if(oper >= 0)
+            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
+            val1 = foundText.toDouble(&ok);
+
+            if((modifier == 0) && oper == 3)  //divide by 0
+                modifier = 1;
+
+            switch(oper)
             {
-                foundText.remove(QRegExp("[A-Za-z#]{1,}"));
-                val1 = foundText.toDouble(&ok);
+            case 0 : val = val1 + modifier;
+                break;
+            case 1 : val = val1 - modifier;
+                break;
+            case 2 : val = val1 * modifier;
+                break;
+            case 3 : val = val1 / modifier;
+                break;
+            default: val = val1;
+                break;
+            };
 
-                if((modifier == 0) && oper == 3)  //divide by 0
-                    modifier = 1;
 
-                switch(oper)
-                {
-                case 0 : val = val1 + modifier;
-                    break;
-                case 1 : val = val1 - modifier;
-                    break;
-                case 2 : val = val1 * modifier;
-                    break;
-                case 3 : val = val1 / modifier;
-                    break;
-                default: val = val1;
-                    break;
-                };
-                newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
-            }
-            else
-                newText = replacedText;
+            newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
 
             cursor.insertText(newText);
             cursor.endEditBlock();

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>962</width>
-    <height>412</height>
+    <width>960</width>
+    <height>410</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,8 +59,16 @@
      </item>
      <item>
       <widget class="QPlainTextEdit" name="textEdit">
+       <property name="font">
+        <font>
+         <family>Courier</family>
+        </font>
+       </property>
        <property name="toolTip">
         <string>Preview, changes will not be saved</string>
+       </property>
+       <property name="lineWrapMode">
+        <enum>QPlainTextEdit::NoWrap</enum>
        </property>
       </widget>
      </item>
@@ -120,6 +128,9 @@
        <property name="icon">
         <iconset resource="application.qrc">
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
