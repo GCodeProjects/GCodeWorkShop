@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>368</width>
-    <height>201</height>
+    <width>366</width>
+    <height>199</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,6 +27,19 @@
    <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="5">
@@ -262,22 +275,22 @@
        </property>
        <item>
         <property name="text">
-         <string>+</string>
+         <string>Add</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>-</string>
+         <string>Subtract</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>*</string>
+         <string>Multiply</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>/</string>
+         <string>Divide</string>
         </property>
        </item>
       </widget>
@@ -318,6 +331,13 @@
       <widget class="QCheckBox" name="modifyCheckBox">
        <property name="text">
         <string>Modify</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>By:</string>
        </property>
       </widget>
      </item>
@@ -405,6 +425,18 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>fromComboBox</tabstop>
+  <tabstop>toComboBox</tabstop>
+  <tabstop>betweenCheckBox</tabstop>
+  <tabstop>minDoubleSpinBox</tabstop>
+  <tabstop>maxDoubleSpinBox</tabstop>
+  <tabstop>modifyCheckBox</tabstop>
+  <tabstop>operatorComboBox</tabstop>
+  <tabstop>modiferDoubleSpinBox</tabstop>
+  <tabstop>saveAtCloseCheckBox</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="application.qrc"/>
  </resources>

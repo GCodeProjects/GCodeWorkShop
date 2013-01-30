@@ -200,7 +200,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 //
 //**************************************************************************************************
 
-void EdytorNc::newFile()
+MdiChild * EdytorNc::newFile()
 {
     MdiChild *child = createMdiChild();
 
@@ -217,6 +217,8 @@ void EdytorNc::newFile()
         child->showMaximized();
     else
         child->showNormal();
+
+    return child;
 }
 
 //**************************************************************************************************
@@ -1702,7 +1704,7 @@ void EdytorNc::createActions()
 
     splittAct = new QAction(QIcon(":/images/split_prog.png"), tr("Split file"), this);
     splittAct->setStatusTip(tr("Split file"));
-    connect(splittAct, SIGNAL(triggered()), this, SLOT(splitPrograms()));
+    connect(splittAct, SIGNAL(triggered()), this, SLOT(doSplitPrograms()));
 
     semiCommAct = new QAction(QIcon(":/images/semicomment.png"), tr("Comment ;"), this);
     semiCommAct->setShortcut(tr("Ctrl+;"));
@@ -4381,7 +4383,7 @@ bool EdytorNc::event(QEvent *event)
 //
 //**************************************************************************************************
 
-void EdytorNc::splitPrograms()
+void EdytorNc::doSplitPrograms()
 {
     MdiChild *activeWindow = activeMdiChild();
     if(activeWindow <= 0)
@@ -4400,8 +4402,7 @@ void EdytorNc::splitPrograms()
     QStringList::const_iterator it = list.constBegin();
     while(it != list.constEnd())
     {
-        newFile();
-        activeWindow = activeMdiChild();
+        activeWindow = newFile();
         if(activeWindow <= 0)
         {
             QApplication::restoreOverrideCursor();
@@ -4447,7 +4448,6 @@ void EdytorNc::displayCleanUpDialog()
     if(editorWindow)
     {
         cleanUpDialog *dialog = new cleanUpDialog(this);
-        //dialog->setText(activeMdiChild()->textEdit->toPlainText());
 
         int result = dialog->exec(selectedExpressions, editorWindow->textEdit->toPlainText());
 
@@ -4473,7 +4473,7 @@ void EdytorNc::doSwapAxes()
 
     if(editorWindow)
     {
-        swapAxesDialog *swapDialog = new swapAxesDialog();
+        swapAxesDialog *swapDialog = new swapAxesDialog(this);
 
 
         int result = swapDialog->exec();

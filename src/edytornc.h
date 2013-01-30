@@ -61,7 +61,7 @@ protected:
     bool event(QEvent *event);
 
 private slots:
-    void newFile();
+    MdiChild *newFile();
     void open();
     void openExample();
     void save();
@@ -144,7 +144,7 @@ private slots:
     void projectOpen();
     void updateOpenFileList();
     void openFileTableWidgetClicked(int x, int y);
-    void splitPrograms();
+    void doSplitPrograms();
     void diffEditorFile();
     void closeTab(int i);
     void closeCurrentWindow();
