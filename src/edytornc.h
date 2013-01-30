@@ -34,6 +34,7 @@
 #include "serialtransmission.h"
 #include "kdiff3.h"
 #include "cleanupdialog.h"
+#include "swapaxesdialog.h"
 
 #include "ui_edytornc.h"
 
@@ -151,6 +152,7 @@ private slots:
     void doSemiComment();
     void doParaComment();
     void displayCleanUpDialog();
+    void doSwapAxes();
 
 
 
@@ -238,6 +240,7 @@ private:
     QAction *undoAct;
     QAction *redoAct;
     QAction *cleanUpDialogAct;
+    QAction *swapAxesAct;
 
     QAction *semiCommAct;
     QAction *paraCommAct;
