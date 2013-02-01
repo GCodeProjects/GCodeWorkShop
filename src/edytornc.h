@@ -35,6 +35,7 @@
 #include "kdiff3.h"
 #include "cleanupdialog.h"
 #include "swapaxesdialog.h"
+#include "newfiledialog.h"
 
 #include "ui_edytornc.h"
 

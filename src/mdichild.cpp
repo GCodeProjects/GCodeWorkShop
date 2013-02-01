@@ -68,14 +68,42 @@ MdiChild::~MdiChild()
 
 void MdiChild::newFile()
 {
-   static int sequenceNumber = 1;
+    static int sequenceNumber = 1;
 
-   isUntitled = true;
-   curFile = tr("program%1.nc").arg(sequenceNumber++);
-   setWindowTitle(curFile + "[*]");
-   curFileInfo = curFile;
+    isUntitled = true;
+    curFile = tr("program%1.nc").arg(sequenceNumber++);
+    setWindowTitle(curFile + "[*]");
+    curFileInfo = curFile;
 
-   connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+    connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+}
+
+//**************************************************************************************************
+//  Load template file
+//**************************************************************************************************
+
+void MdiChild::newFile(const QString &fileName)
+{
+    QFile file(fileName);
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::warning(this, tr("EdytorNC"),
+                             tr("Cannot read file \"%1\".\n %2")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+    }
+    else
+    {
+        QTextStream in(&file);
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+
+        QString tex = in.readAll();
+        textEdit->setPlainText(tex);
+        file.close();
+        QApplication::restoreOverrideCursor();
+    };
+
+    newFile();
 }
 
 //**************************************************************************************************
@@ -3241,16 +3269,15 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 
     textEdit->blockSignals(true);
 
-    QTextCursor startCursor = textEdit->textCursor();
-
-    QTextCursor cursor = startCursor;
+    QTextDocument *document = textEdit->document();
+    QTextCursor cursor(document);
     cursor.setPosition(0);
 
     regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
 
     do
     {
-        cursor = textEdit->document()->find(regExp, cursor, options);
+        cursor = document->find(regExp, cursor, options);
 
         found = !cursor.isNull();
 
@@ -3268,16 +3295,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                 };
             };
 
-            cursor.beginEditBlock();
-            if(mdiWindowProperites.underlineChanges)
-            {
-                QTextCharFormat format = cursor.charFormat();
-                format.setUnderlineStyle(QTextCharFormat::DotLine);
-                format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
-                cursor.setCharFormat(format);
-            };
-
-            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
+            foundText.remove(textToFind);  //QRegExp("[A-Za-z#]{1,}")
             val1 = foundText.toDouble(&ok);
 
             if((modifier == 0) && oper == 3)  //divide by 0
@@ -3297,21 +3315,58 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                 break;
             };
 
-
             newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
 
+            if(mdiWindowProperites.underlineChanges)
+            {
+                QTextCharFormat format = cursor.charFormat();
+                format.setUnderlineStyle(QTextCharFormat::DotLine);
+                format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+                cursor.setCharFormat(format);
+            };
             cursor.insertText(newText);
-            cursor.endEditBlock();
-            textEdit->setTextCursor(cursor);
         };
 
     }while(found);
 
     textEdit->blockSignals(false);
 
-    textEdit->setTextCursor(startCursor);
+    //textEdit->setDocument(document);
 
     return found;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, double max,
+                          int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments)
+{
+
+    if(textEdit->isReadOnly())
+        return false;
+
+    if(textToFind.isEmpty())
+        return false;
+
+    QTextCursor startCursor = textEdit->textCursor();
+    startCursor.beginEditBlock();
+
+    if(textToFind != replacedText)
+    {
+        swapAxes(replacedText, QString(":%1:").arg(replacedText), min, max, oper, modifier, options, ignoreComments);
+        swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
+        swapAxes(QString(":%1:").arg(replacedText), textToFind, -999999, -999999, -1, 0, options, ignoreComments);
+    }
+    else
+        swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
+
+    startCursor.movePosition(QTextCursor::StartOfLine);
+    startCursor.endEditBlock();
+    textEdit->setTextCursor(startCursor);
+
+
 }
 
 //**************************************************************************************************
