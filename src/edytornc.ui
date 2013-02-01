@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>613</width>
-    <height>507</height>
+    <width>611</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,14 +59,14 @@
             <enum>QTabWidget::Rounded</enum>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="documentMode">
             <bool>false</bool>
            </property>
            <widget class="QWidget" name="projectTab">
             <attribute name="icon">
-             <iconset>
+             <iconset resource="application.qrc">
               <normaloff>:/images/project_new.png</normaloff>:/images/project_new.png</iconset>
             </attribute>
             <attribute name="title">
@@ -97,7 +97,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_new.png</normaloff>:/images/project_new.png</iconset>
                   </property>
                  </widget>
@@ -114,7 +114,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_open.png</normaloff>:/images/project_open.png</iconset>
                   </property>
                  </widget>
@@ -131,7 +131,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_save.png</normaloff>:/images/project_save.png</iconset>
                   </property>
                  </widget>
@@ -148,7 +148,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_save_as.png</normaloff>:/images/project_save_as.png</iconset>
                   </property>
                  </widget>
@@ -181,7 +181,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_add.png</normaloff>:/images/project_add.png</iconset>
                   </property>
                  </widget>
@@ -198,7 +198,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="application.qrc">
                     <normaloff>:/images/project_remove.png</normaloff>:/images/project_remove.png</iconset>
                   </property>
                  </widget>
@@ -245,19 +245,13 @@
                <attribute name="headerDefaultSectionSize">
                 <number>150</number>
                </attribute>
-               <attribute name="headerDefaultSectionSize">
-                <number>150</number>
-               </attribute>
-               <attribute name="headerVisible">
-                <bool>false</bool>
-               </attribute>
               </widget>
              </item>
             </layout>
            </widget>
            <widget class="QWidget" name="fileTab">
             <attribute name="icon">
-             <iconset>
+             <iconset resource="application.qrc">
               <normaloff>:/images/folder.png</normaloff>:/images/folder.png</iconset>
             </attribute>
             <attribute name="title">
@@ -289,12 +283,6 @@
                </attribute>
                <attribute name="headerMinimumSectionSize">
                 <number>50</number>
-               </attribute>
-               <attribute name="headerMinimumSectionSize">
-                <number>50</number>
-               </attribute>
-               <attribute name="headerHighlightSections">
-                <bool>true</bool>
                </attribute>
               </widget>
              </item>
@@ -378,6 +366,9 @@
            <property name="gridStyle">
             <enum>Qt::NoPen</enum>
            </property>
+           <property name="sortingEnabled">
+            <bool>false</bool>
+           </property>
            <property name="wordWrap">
             <bool>false</bool>
            </property>
@@ -387,9 +378,6 @@
            <property name="columnCount">
             <number>3</number>
            </property>
-           <attribute name="verticalHeaderVisible">
-            <bool>false</bool>
-           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
@@ -449,6 +437,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>

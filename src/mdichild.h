@@ -58,6 +58,7 @@ public:
     ~MdiChild();
 
     void newFile();
+    void newFile(const QString &fileName);
     bool loadFile(const QString &fileName);
     bool save();
     bool saveAs();
@@ -93,6 +94,7 @@ public:
     bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
     bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
     bool swapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments);
+    bool doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments);
 
 
 

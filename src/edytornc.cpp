@@ -200,23 +200,42 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 //
 //**************************************************************************************************
 
-MdiChild * EdytorNc::newFile()
+MdiChild *EdytorNc::newFile()
 {
-    MdiChild *child = createMdiChild();
+    QString fileName = "";
 
-    child->newFile();
-    defaultMdiWindowProperites.cursorPos = 0;
-    defaultMdiWindowProperites.readOnly = FALSE;
-    //defaultMdiWindowProperites.maximized = FALSE;
-    defaultMdiWindowProperites.geometry = QByteArray();
-    defaultMdiWindowProperites.editorToolTips = true;
-    defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
-    child->setMdiWindowProperites(defaultMdiWindowProperites);
+    MdiChild *child = 0;
 
-    if(defaultMdiWindowProperites.maximized)
-        child->showMaximized();
-    else
-        child->showNormal();
+    newFileDialog *newFileDlg = new newFileDialog(this);
+    int result = newFileDlg->exec();
+
+    if(result == QDialog::Accepted)
+    {
+        fileName = newFileDlg->getChosenFile();
+
+        child = createMdiChild();
+
+        if(!fileName.isEmpty() && !(fileName == "EMPTY FILE"))
+            child->newFile(fileName);
+        else
+            child->newFile();
+
+        defaultMdiWindowProperites.cursorPos = 0;
+        defaultMdiWindowProperites.readOnly = FALSE;
+        //defaultMdiWindowProperites.maximized = FALSE;
+        defaultMdiWindowProperites.geometry = QByteArray();
+        defaultMdiWindowProperites.editorToolTips = true;
+        defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+        child->setMdiWindowProperites(defaultMdiWindowProperites);
+
+        if(defaultMdiWindowProperites.maximized)
+            child->showMaximized();
+        else
+            child->showNormal();
+
+    };
+
+    delete(newFileDlg);
 
     return child;
 }
@@ -1317,8 +1336,8 @@ void EdytorNc::updateMenus()
     splittAct->setEnabled(hasMdiChildNotReadOnly);
     convertProgAct->setEnabled(hasMdiChildNotReadOnly);
     cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
-    convertProgAct->setEnabled(cleanUpDialogAct);
-    cmpMacroAct->setEnabled(swapAxesAct);
+    cleanUpDialogAct->setEnabled(hasMdiChildNotReadOnly);
+    swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
 
 
     redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
@@ -3229,8 +3248,7 @@ void EdytorNc::receiveButtonClicked()
     //comPort->reset();
 
     i = configBox->currentIndex();
-    newFile();
-    activeWindow = activeMdiChild();
+    activeWindow = newFile();
     if(activeWindow <= 0)
         return;
     configBox->setCurrentIndex(i);
@@ -4469,25 +4487,31 @@ void EdytorNc::displayCleanUpDialog()
 
 void EdytorNc::doSwapAxes()
 {
+    QString first, second;
+    double min, max, modi;
+    int oper;
+    bool ignoreComments = true;
+    QTextDocument::FindFlags findOptions = 0;
+
+
     MdiChild *editorWindow = activeMdiChild();
 
     if(editorWindow)
     {
         swapAxesDialog *swapDialog = new swapAxesDialog(this);
 
-
         int result = swapDialog->exec();
 
         if(result == QDialog::Accepted)
         {
-            editorWindow->swapAxes(swapDialog->getFirstAxis(),
-                                   swapDialog->getSecondAxis(),
-                                   swapDialog->getMinValue(),
-                                   swapDialog->getMaxValue(),
-                                   swapDialog->getOperator(),
-                                   swapDialog->getModiferValue(),
-                                   0,
-                                   true);
+            first = swapDialog->getFirstAxis();
+            second = swapDialog->getSecondAxis();
+            min = swapDialog->getMinValue();
+            max = swapDialog->getMaxValue();
+            oper = swapDialog->getOperator();
+            modi = swapDialog->getModiferValue();
+
+            editorWindow->doSwapAxes(first, second, min, max, oper, modi, findOptions, ignoreComments);
         };
 
         delete(swapDialog);
