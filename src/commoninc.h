@@ -105,6 +105,7 @@ struct _editor_properites
    bool startEmpty;
    QString curFile;  // replace by filename
    QString curFileInfo;
+   bool guessFileNameByProgNum;
 };
 
 

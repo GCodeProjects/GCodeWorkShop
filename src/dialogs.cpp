@@ -2815,6 +2815,11 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    edtSaveExtension->setText(editProp.saveExtension);
    edtSaveDirectory->setText(editProp.saveDirectory);
 
+   if(editProp.guessFileNameByProgNum)
+       progNumCheckBox->setChecked(true);
+   else
+       firstCommCheckBox->setChecked(true);
+
    highlightModeComboBox->addItem(tr("AUTO"), MODE_AUTO);
    highlightModeComboBox->addItem(tr("FANUC"), MODE_FANUC);
    highlightModeComboBox->addItem(tr("HEIDENHAIN DIALOG"), MODE_HEIDENHAIN);
@@ -3002,6 +3007,8 @@ _editor_properites SetupDialog::getSettings()
    editProp.saveExtension = edtSaveExtension->text();
    editProp.saveDirectory = edtSaveDirectory->text();
 
+   editProp.guessFileNameByProgNum = progNumCheckBox->isChecked();
+
    return(editProp);
 }
 
@@ -3121,6 +3128,8 @@ void SetupDialog::setDefaultProp()
    lstExtensions->addItem("*.nc");
    lstExtensions->addItem("*.ngc");
    lstExtensions->addItem("*.anc");
+
+   progNumCheckBox->setChecked(true);
 
    edtSaveExtension->setText("*.nc");
 }

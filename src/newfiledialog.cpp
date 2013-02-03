@@ -21,7 +21,6 @@
  ***************************************************************************/
 
 
-#include <QDebug>
 
 #include "newfiledialog.h"
 #include "ui_newfiledialog.h"
@@ -40,8 +39,6 @@ newFileDialog::newFileDialog(QWidget *parent) :
 
     if(!path.exists())
         path.setPath(QApplication::applicationDirPath() + "/" + "TEMPLATE");
-
-        qDebug() << path.canonicalPath() << QApplication::applicationDirPath() + "/" + "TEMPLATE";
 
     if(!path.exists())
         path.setPath(QDir::homePath());

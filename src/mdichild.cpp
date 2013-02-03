@@ -2825,101 +2825,136 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
 
 QString MdiChild::guessFileName()
 {
-   QTextCursor cursor;
-   QString fileName;
-   QString text;
-   int pos;
-   QRegExp expression;
+    QTextCursor cursor;
+    QString fileName;
+    QString text;
+    int pos;
+    QRegExp expression;
 
-   cursor = textEdit->textCursor();
-   text = textEdit->toPlainText();
+    cursor = textEdit->textCursor();
+    text = textEdit->toPlainText();
 
-   while(1)
-   {
-      expression.setPattern(FILENAME_SINU840);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QLatin1String("%_N_"));
-         fileName.remove(QRegExp("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
-         break;
-      };
+    if(mdiWindowProperites.guessFileNameByProgNum)
+    {
 
-      expression.setPattern(FILENAME_OSP);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QLatin1String("$"));
-         fileName.remove(QRegExp(".(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
-         break;
-      };
+        while(1)
+        {
+            expression.setPattern(FILENAME_SINU840);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove(QLatin1String("%_N_"));
+                fileName.remove(QRegExp("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
+                break;
+            };
 
-      expression.setPattern(FILENAME_SINU);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QRegExp("%(MPF|SPF|TEA)[\\s]{0,3}"));
-         break;
-      };
+            expression.setPattern(FILENAME_OSP);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove(QLatin1String("$"));
+                fileName.remove(QRegExp(".(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
+                break;
+            };
 
-      expression.setPattern(FILENAME_PHIL);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QRegExp("%PM[\\s]{1,}[N]{1,1}"));
-         break;
-      };
+            expression.setPattern(FILENAME_SINU);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove(QRegExp("%(MPF|SPF|TEA)[\\s]{0,3}"));
+                break;
+            };
 
-      expression.setPattern(FILENAME_FANUC);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
+            expression.setPattern(FILENAME_PHIL);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove(QRegExp("%PM[\\s]{1,}[N]{1,1}"));
+                break;
+            };
 
-         if(fileName.at(0)!='O')
-             fileName[0]='O';
-         if(fileName.at(0)=='O' && fileName.at(1)=='O')
-             fileName.remove(0,1);
-         break;
-      }
+            expression.setPattern(FILENAME_FANUC);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
 
-      expression.setPattern(FILENAME_HEID1);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QLatin1String("%"));
-         fileName.remove(QRegExp("\\s"));
-         break;
-      };
+                if(fileName.at(0)!='O')
+                    fileName[0]='O';
+                if(fileName.at(0)=='O' && fileName.at(1)=='O')
+                    fileName.remove(0,1);
+                break;
+            }
 
-      expression.setPattern(FILENAME_HEID2);
-      pos = text.indexOf(expression);
-      if(pos >= 0)
-      {
-         fileName = text.mid(pos, expression.matchedLength());
-         fileName.remove(QRegExp("(BEGIN)(\\sPGM\\s)"));
-         fileName.remove(QRegExp("(\\sMM|\\sINCH)"));
-         break;
-      };
+            expression.setPattern(FILENAME_HEID1);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove(QLatin1String("%"));
+                fileName.remove(QRegExp("\\s"));
+                break;
+            };
 
-      fileName = "";
-      break;
-   };
-   
-   fileName = fileName.simplified();
-   //fileName.append(mdiWindowProperites.saveExtension);
-   fileName.prepend(mdiWindowProperites.saveDirectory + "/");
+            expression.setPattern(FILENAME_HEID2);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove(QRegExp("(BEGIN)(\\sPGM\\s)"));
+                fileName.remove(QRegExp("(\\sMM|\\sINCH)"));
+                break;
+            };
 
-   fileName = QDir::cleanPath(fileName);
+            fileName = "";
+            break;
+        };
 
-   textEdit->setTextCursor(cursor);
+    }
+    else
+    {
+        while(true)
+        {
+            expression.setPattern("(;)[\\w:*=+ -]{4,64}");
+            pos = text.indexOf(expression);
+            if(pos >= 2)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove(";");
+                break;
+            };
 
-   return fileName;
+            expression.setPattern("(\\()[\\w:*=+ -]{4,64}(\\))");
+            pos = text.indexOf(expression);
+            if(pos >= 2)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+                fileName.remove("(");
+                fileName.remove(")");
+                break;
+            };
+
+            fileName = "";
+            break;
+
+        };
+
+    };
+
+
+    fileName = fileName.simplified();
+    //fileName.append(mdiWindowProperites.saveExtension);
+    fileName.prepend(mdiWindowProperites.saveDirectory + "/");
+
+    fileName = QDir::cleanPath(fileName);
+
+    textEdit->setTextCursor(cursor);
+
+    return fileName;
 }
 
 //**************************************************************************************************
@@ -3253,70 +3288,125 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
     bool found = false;
     bool ok;
     QString newText, foundText;
+    bool inComment;
+    int commentPos, id;
 
-
+    
     if(textEdit->isReadOnly())
         return false;
-
+    
     if(textToFind.isEmpty())
         return false;
-
+    
     if(options & QTextDocument::FindCaseSensitively)
         regExp.setCaseSensitivity(Qt::CaseSensitive);
     else
         regExp.setCaseSensitivity(Qt::CaseInsensitive);
 
-
+    
     textEdit->blockSignals(true);
-
+    
     QTextDocument *document = textEdit->document();
     QTextCursor cursor(document);
     cursor.setPosition(0);
 
-    regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
-
+    
     do
     {
-        cursor = document->find(regExp, cursor, options);
+        if(oper == -1)
+        {
+            regExp.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(textToFind));
+            cursor = document->find(regExp, cursor, options);
+        }
+        else
+        {
+            regExp.setPattern(QString("(%1)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
+            cursor = document->find(regExp, cursor, options);
+        };
 
         found = !cursor.isNull();
 
-        if(found)
+
+
+        if(found && ignoreComments)
+        {
+            QString cur_line = cursor.block().text();
+            int cur_line_column = cursor.columnNumber();
+
+            id = getHighligthMode();
+            if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
+                commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+            else
+            {
+                if((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS))
+                    commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+                else
+                {
+                    commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+                    if(commentPos > cur_line_column)
+                        commentPos = -1;
+
+                    if(commentPos < 0)
+                        commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+                };
+            };
+
+            if(commentPos < 0)
+                commentPos = cur_line_column + 1;
+
+            inComment = (commentPos < cur_line_column);
+        }
+        else
+            inComment = false;
+
+        
+        if(found && !inComment)
         {
             foundText = cursor.selectedText();
-
+            
             if(min > -999999)
             {
-                double val = QString(foundText.remove(textToFind, Qt::CaseInsensitive)).toDouble(&ok);
+                val = QString(foundText.remove(textToFind, Qt::CaseInsensitive)).toDouble(&ok);
+                
+                if(!ok)
+                    continue;
 
                 if(!((val >= min) && (val <= max)))
                 {
                     continue;
                 };
             };
-
-            foundText.remove(textToFind);  //QRegExp("[A-Za-z#]{1,}")
-            val1 = foundText.toDouble(&ok);
-
-            if((modifier == 0) && oper == 3)  //divide by 0
-                modifier = 1;
-
-            switch(oper)
+            
+            if(oper > -1)
             {
-            case 0 : val = val1 + modifier;
-                break;
-            case 1 : val = val1 - modifier;
-                break;
-            case 2 : val = val1 * modifier;
-                break;
-            case 3 : val = val1 / modifier;
-                break;
-            default: val = val1;
-                break;
+                foundText.remove(textToFind);  //QRegExp("[A-Za-z#]{1,}")
+                val1 = foundText.toDouble(&ok);
+
+                if((modifier == 0) && oper == 3)  //divide by 0
+                    modifier = 1;
+
+                switch(oper)
+                {
+                case 0 : val = val1 + modifier;
+                    break;
+                case 1 : val = val1 - modifier;
+                    break;
+                case 2 : val = val1 * modifier;
+                    break;
+                case 3 : val = val1 / modifier;
+                    break;
+                default: val = val1;
+                    break;
+                };
+
+                newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+            }
+            else
+            {
+                newText = replacedText;
             };
 
-            newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
-
+            
             if(mdiWindowProperites.underlineChanges)
             {
                 QTextCharFormat format = cursor.charFormat();
@@ -3326,13 +3416,13 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
             };
             cursor.insertText(newText);
         };
-
+        
     }while(found);
-
+    
     textEdit->blockSignals(false);
-
+    
     //textEdit->setDocument(document);
-
+    
     return found;
 }
 
@@ -3343,30 +3433,30 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 bool MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, double max,
                           int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments)
 {
-
+    
     if(textEdit->isReadOnly())
         return false;
-
+    
     if(textToFind.isEmpty())
         return false;
-
+    
     QTextCursor startCursor = textEdit->textCursor();
     startCursor.beginEditBlock();
-
+    
     if(textToFind != replacedText)
     {
-        swapAxes(replacedText, QString(":%1:").arg(replacedText), min, max, oper, modifier, options, ignoreComments);
+        swapAxes(replacedText, QString(":%1:").arg(replacedText), min, max, -1, modifier, options, ignoreComments);
         swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
         swapAxes(QString(":%1:").arg(replacedText), textToFind, -999999, -999999, -1, 0, options, ignoreComments);
     }
     else
         swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
-
+    
     startCursor.movePosition(QTextCursor::StartOfLine);
     startCursor.endEditBlock();
     textEdit->setTextCursor(startCursor);
-
-
+    
+    
 }
 
 //**************************************************************************************************

@@ -2087,6 +2087,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.defaultReadOnly = settings.value("ViewerMode", FALSE).toBool();
     defaultMdiWindowProperites.defaultHighlightMode = settings.value("DefaultHighlightMode", MODE_AUTO).toInt();
 
+    defaultMdiWindowProperites.guessFileNameByProgNum = settings.value("GessFileNameByProgNum", true).toBool();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
 
@@ -2226,6 +2227,8 @@ void EdytorNc::writeSettings()
     settings.setValue("ViewerMode", defaultMdiWindowProperites.defaultReadOnly);
     settings.setValue("DefaultHighlightMode", defaultMdiWindowProperites.defaultHighlightMode);
     settings.setValue("StartEmpty", defaultMdiWindowProperites.startEmpty);
+
+    settings.setValue("GessFileNameByProgNum", defaultMdiWindowProperites.guessFileNameByProgNum);
     
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
@@ -4491,7 +4494,7 @@ void EdytorNc::doSwapAxes()
     double min, max, modi;
     int oper;
     bool ignoreComments = true;
-    QTextDocument::FindFlags findOptions = 0;
+    QTextDocument::FindFlags findOptions = 0; //QTextDocument::FindWholeWords;
 
 
     MdiChild *editorWindow = activeMdiChild();
