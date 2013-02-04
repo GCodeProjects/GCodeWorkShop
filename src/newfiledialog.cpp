@@ -98,7 +98,7 @@ void newFileDialog::fillFileCombo()
                                        QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
                                        QDir::Name | QDir::IgnoreCase);
     ui->fileComboBox->clear();
-    ui->fileComboBox->addItem("EMPTY FILE");
+    ui->fileComboBox->addItem(tr("EMPTY FILE"));
     ui->fileComboBox->addItems(files);
 }
 
@@ -124,7 +124,7 @@ QString newFileDialog::getChosenFile()
     if(file.exists())
         return file.fileName();
     else
-        return "EMPTY FILE";
+        return tr("EMPTY FILE");
 }
 
 //**************************************************************************************************

@@ -154,6 +154,7 @@ private slots:
     void doParaComment();
     void displayCleanUpDialog();
     void doSwapAxes();
+    void doBlockSkip();
 
 
 
@@ -242,6 +243,7 @@ private:
     QAction *redoAct;
     QAction *cleanUpDialogAct;
     QAction *swapAxesAct;
+    QAction *insertBlockSkipAct;
 
     QAction *semiCommAct;
     QAction *paraCommAct;

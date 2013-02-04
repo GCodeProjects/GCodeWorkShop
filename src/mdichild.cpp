@@ -3019,11 +3019,78 @@ QStringList MdiChild::splitFile()
 }
 
 //**************************************************************************************************
-//  commrnts/uncomments selected text using ;
+//  insert/remove block skip /
+//**************************************************************************************************
+
+void MdiChild::blockSkip()
+{
+    int idx;
+
+    if(textEdit->textCursor().hasSelection())
+    {
+        QTextCursor cursor = textEdit->textCursor();
+
+        int start = textEdit->textCursor().selectionStart();
+        int end = textEdit->textCursor().selectionEnd();
+        if(start < end)  // selection always in same direction
+        {
+            cursor.setPosition(end, QTextCursor::MoveAnchor);
+            cursor.setPosition(start, QTextCursor::KeepAnchor);
+        };
+
+        cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+        textEdit->setTextCursor(cursor);
+        QString selText = cursor.selectedText();
+
+        QStringList list = selText.split(QChar::ParagraphSeparator);
+        if(list.isEmpty())
+            list.append(selText);
+
+        bool remove = false;
+
+        if(selText[0] == '/')
+            remove = true;
+
+        selText.clear();
+
+        foreach(QString txLine, list)
+        {
+            if(remove)
+            {
+                if(txLine.length() > 0)
+                {
+                    idx = txLine.indexOf("/ ");
+                    if(idx == 0)
+                        txLine.remove(idx, 2);
+                    else
+                    {
+                        idx = txLine.indexOf("/");
+                        if(idx == 0)
+                            txLine.remove(idx, 1);
+                    };
+                };
+            }
+            else
+                txLine.prepend("/");
+
+            txLine.append("\n");
+            selText.append(txLine);
+        };
+
+        selText.remove(selText.length() - 1, 1);
+
+        textEdit->insertPlainText(selText);
+        textEdit->setTextCursor(cursor);
+    };
+}
+
+//**************************************************************************************************
+//  comments/uncomments selected text using ;
 //**************************************************************************************************
 
 void MdiChild::semicomment()
 {
+    int idx;
 
     if(textEdit->textCursor().hasSelection())
     {
@@ -3043,7 +3110,11 @@ void MdiChild::semicomment()
             if(remove)
             {
                 if(txLine.length() > 0)
-                    txLine.remove(0, 1);
+                {
+                    idx = txLine.indexOf(";");
+                    if(idx >= 0)
+                        txLine.remove(idx, 1);
+                };
             }
             else
                 txLine.prepend(";");
@@ -3060,13 +3131,14 @@ void MdiChild::semicomment()
 }
 
 //**************************************************************************************************
-//  commrnts/uncomments selected text using ()
+//  comments/uncomments selected text using ()
 //**************************************************************************************************
 
 void MdiChild::paracomment()
 {
     if(textEdit->textCursor().hasSelection())
     {
+        int idx;
         QTextCursor cursor = textEdit->textCursor();
         QString selText = cursor.selectedText();
 
@@ -3084,8 +3156,13 @@ void MdiChild::paracomment()
             {
                 if(txLine.length() > 0)
                 {
-                    txLine.remove(0, 1);
-                    txLine.remove(txLine.length() - 1, 1);
+                    idx = txLine.indexOf("(");
+                    if(idx >= 0)
+                      txLine.remove(idx, 1);
+
+                    idx = txLine.indexOf(")");
+                    if(idx >= 0)
+                      txLine.remove(idx, 1);
                 };
             }
             else
@@ -3286,11 +3363,15 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
     double val, val1;
     QRegExp regExp;
     bool found = false;
-    bool ok;
+    bool ok, inSelection;
     QString newText, foundText;
     bool inComment;
     int commentPos, id;
+    QTextDocument *document;
+    int cursorStart, cursorEnd;
 
+    cursorStart = 0;
+    cursorEnd = 0;
     
     if(textEdit->isReadOnly())
         return false;
@@ -3306,7 +3387,19 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
     
     textEdit->blockSignals(true);
     
-    QTextDocument *document = textEdit->document();
+    inSelection = textEdit->textCursor().hasSelection();
+
+    if(inSelection)
+    {
+        cursorStart = textEdit->textCursor().selectionStart();
+        cursorEnd = textEdit->textCursor().selectionEnd();
+        document = new QTextDocument(textEdit->textCursor().selectedText(), this);
+    }
+    else
+        document = textEdit->document();
+
+
+
     QTextCursor cursor(document);
     cursor.setPosition(0);
 
@@ -3412,17 +3505,36 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                 QTextCharFormat format = cursor.charFormat();
                 format.setUnderlineStyle(QTextCharFormat::DotLine);
                 format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
-                cursor.setCharFormat(format);
+                cursor.mergeCharFormat(format);
             };
             cursor.insertText(newText);
         };
         
     }while(found);
     
+
+    if(inSelection)
+    {
+        //textEdit->insertPlainText(document->toPlainText());
+        cursor = QTextCursor(document);
+        cursor.select(QTextCursor::Document);
+        textEdit->textCursor().insertFragment(cursor.selection());
+        delete(document);
+
+        if(cursorStart < cursorEnd)
+            cursorStart = cursorEnd;
+
+        cursorEnd = cursorStart + cursor.selectedText().length();
+
+        cursor = textEdit->textCursor();  //restore selection
+        cursor.setPosition(cursorStart, QTextCursor::MoveAnchor);
+        cursor.setPosition(cursorEnd, QTextCursor::KeepAnchor);
+        textEdit->setTextCursor(cursor);
+    };
+
+
     textEdit->blockSignals(false);
-    
-    //textEdit->setDocument(document);
-    
+
     return found;
 }
 
@@ -3430,15 +3542,15 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 //
 //**************************************************************************************************
 
-bool MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, double max,
+void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, double max,
                           int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments)
 {
     
     if(textEdit->isReadOnly())
-        return false;
+        return;
     
     if(textToFind.isEmpty())
-        return false;
+        return;
     
     QTextCursor startCursor = textEdit->textCursor();
     startCursor.beginEditBlock();

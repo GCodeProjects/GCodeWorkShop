@@ -215,7 +215,7 @@ MdiChild *EdytorNc::newFile()
 
         child = createMdiChild();
 
-        if(!fileName.isEmpty() && !(fileName == "EMPTY FILE"))
+        if(!fileName.isEmpty() && !(fileName == tr("EMPTY FILE")))
             child->newFile(fileName);
         else
             child->newFile();
@@ -1338,6 +1338,7 @@ void EdytorNc::updateMenus()
     cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
     cleanUpDialogAct->setEnabled(hasMdiChildNotReadOnly);
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
+    insertBlockSkipAct->setEnabled(hasMdiChildNotReadOnly);
 
 
     redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
@@ -1476,7 +1477,7 @@ void EdytorNc::updateWindowMenu()
         QAction *action = windowMenu->addAction(text);
         action->setCheckable(true);
         action->setChecked(child == activeMdiChild());
-        action->setStatusTip(child->getCurrentFileInfo());
+        action->setToolTip(child->getCurrentFileInfo());
         connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
         windowMapper->setMapping(action, windows.at(i));
     };
@@ -1513,110 +1514,110 @@ void EdytorNc::createActions()
 {
     newAct = new QAction(QIcon(":/images/filenew.png"), tr("&New"), this);
     newAct->setShortcut(QKeySequence::New);
-    newAct->setStatusTip(tr("Create a new file"));
+    newAct->setToolTip(tr("Create a new file"));
     connect(newAct, SIGNAL(triggered()), this, SLOT(newFile()));
 
     openAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open..."), this);
     openAct->setShortcut(QKeySequence::Open);
-    openAct->setStatusTip(tr("Open an existing file"));
+    openAct->setToolTip(tr("Open an existing file"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
     if(QDir(EXAMPLES_PATH).exists() || QDir(QApplication::applicationDirPath() + "/" + "EXAMPLES").exists())
     {
         openExampleAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open example..."), this);
-        openExampleAct->setStatusTip(tr("Open an example file"));
+        openExampleAct->setToolTip(tr("Open an example file"));
         connect(openExampleAct, SIGNAL(triggered()), this, SLOT(openExample()));
     };
 
     saveAct = new QAction(QIcon(":/images/filesave.png"), tr("&Save"), this);
     saveAct->setShortcut(QKeySequence::Save);
-    saveAct->setStatusTip(tr("Save the document to disk"));
+    saveAct->setToolTip(tr("Save the document to disk"));
     connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
 
     saveAsAct = new QAction(QIcon(":/images/filesaveas.png"), tr("Save &As..."), this);
     saveAsAct->setShortcut(QKeySequence::SaveAs);
-    saveAsAct->setStatusTip(tr("Save the document under a new name"));
+    saveAsAct->setToolTip(tr("Save the document under a new name"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
     exitAct = new QAction(QIcon(":/images/exit.png"), tr("E&xit"), this);
     //exitAct->setShortcut(QKeySequence::Quit);
     exitAct->setShortcut(tr("Ctrl+Q"));
-    exitAct->setStatusTip(tr("Exit the application"));
+    exitAct->setToolTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
     
     findFilesAct = new QAction(QIcon(":/images/filefind.png"), tr("&Find files..."), this);
     //openAct->setShortcut(tr("Ctrl+"));
     findFilesAct->setCheckable(true);
-    findFilesAct->setStatusTip(tr("Find files"));
+    findFilesAct->setToolTip(tr("Find files"));
     connect(findFilesAct, SIGNAL(triggered()), this, SLOT(findInFl()));
 
     printAct = new QAction(QIcon(":/images/document-print.png"), tr("&Print"), this);
     printAct->setShortcut(QKeySequence::Print);
-    printAct->setStatusTip(tr("Print file"));
+    printAct->setToolTip(tr("Print file"));
     connect(printAct, SIGNAL(triggered()), this, SLOT(printFile()));
 
     
     undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
     undoAct->setShortcut(QKeySequence::Undo);
-    undoAct->setStatusTip(tr("Undo last operation"));
+    undoAct->setToolTip(tr("Undo last operation"));
     connect(undoAct, SIGNAL(triggered()), this, SLOT(undo()));
     undoAct->setEnabled(FALSE);
 
     redoAct = new QAction(QIcon(":/images/redo.png"), tr("&Redo"), this);
     redoAct->setShortcut(QKeySequence::Redo);
-    redoAct->setStatusTip(tr("Redo last operation"));
+    redoAct->setToolTip(tr("Redo last operation"));
     connect(redoAct, SIGNAL(triggered()), this, SLOT(redo()));
     redoAct->setEnabled(FALSE);
 
     cutAct = new QAction(QIcon(":/images/editcut.png"), tr("Cu&t"), this);
     cutAct->setShortcut(QKeySequence::Cut);
-    cutAct->setStatusTip(tr("Cut the current selection's contents to the "
+    cutAct->setToolTip(tr("Cut the current selection's contents to the "
                             "clipboard"));
     connect(cutAct, SIGNAL(triggered()), this, SLOT(cut()));
 
     copyAct = new QAction(QIcon(":/images/editcopy.png"), tr("&Copy"), this);
     copyAct->setShortcut(QKeySequence::Copy);
-    copyAct->setStatusTip(tr("Copy the current selection's contents to the "
+    copyAct->setToolTip(tr("Copy the current selection's contents to the "
                              "clipboard"));
     connect(copyAct, SIGNAL(triggered()), this, SLOT(copy()));
 
     pasteAct = new QAction(QIcon(":/images/editpaste.png"), tr("&Paste"), this);
     pasteAct->setShortcut(QKeySequence::Paste);
-    pasteAct->setStatusTip(tr("Paste the clipboard's contents into the current "
+    pasteAct->setToolTip(tr("Paste the clipboard's contents into the current "
                               "selection"));
     connect(pasteAct, SIGNAL(triggered()), this, SLOT(paste()));
 
 
     findAct = new QAction(QIcon(":/images/find.png"), tr("&Find"), this);
     findAct->setShortcut(QKeySequence::Find);
-    findAct->setStatusTip(tr("Find text"));
+    findAct->setToolTip(tr("Find text"));
     connect(findAct, SIGNAL(triggered()), this, SLOT(createFindToolBar()));
 
     replaceAct = new QAction(QIcon(":/images/replace.png"), tr("&Replace"), this);
     replaceAct->setShortcut(tr("Ctrl+R"));
-    replaceAct->setStatusTip(tr("Find and replace text"));
+    replaceAct->setToolTip(tr("Find and replace text"));
     connect(replaceAct, SIGNAL(triggered()), this, SLOT(createFindToolBar()));
 
 
     deleteAct = new QAction(QIcon(":/images/editdelete.png"), tr("&Delete"), this);
     deleteAct->setShortcut(QKeySequence::Delete);
-    deleteAct->setStatusTip(tr("Removes selected text"));
+    deleteAct->setToolTip(tr("Removes selected text"));
     connect(deleteAct, SIGNAL(triggered()), this, SLOT(deleteText()));
     
     selAllAct = new QAction(QIcon(":/images/edit-select-all.png"), tr("&Select all"), this);
     selAllAct->setShortcut(QKeySequence::SelectAll);
-    selAllAct->setStatusTip(tr("Select all text"));
+    selAllAct->setToolTip(tr("Select all text"));
     connect(selAllAct, SIGNAL(triggered()), this, SLOT(selAll()));
 
     readOnlyAct = new QAction(QIcon(":/images/unlock.png"), tr("Read &only"), this);
     readOnlyAct->setShortcut(tr("F12"));
     readOnlyAct->setCheckable(TRUE);
-    readOnlyAct->setStatusTip(tr("Makes text read only"));
+    readOnlyAct->setToolTip(tr("Makes text read only"));
     connect(readOnlyAct, SIGNAL(triggered()), this, SLOT(readOnly()));
 
     configAct = new QAction(QIcon(":/images/configure.png"), tr("Configuration"), this);
     configAct->setShortcut(QKeySequence::Preferences);
-    configAct->setStatusTip(tr("Open configuration dialog"));
+    configAct->setToolTip(tr("Open configuration dialog"));
     connect(configAct, SIGNAL(triggered()), this, SLOT(config()));
 
 
@@ -1625,148 +1626,153 @@ void EdytorNc::createActions()
 
     bhcAct = new QAction(QIcon(":/images/bhc.png"), tr("&Bolt hole circle"), this);
     bhcAct->setShortcut(tr("F8"));
-    bhcAct->setStatusTip(tr("Calculate bolt hole's positions"));
+    bhcAct->setToolTip(tr("Calculate bolt hole's positions"));
     connect(bhcAct, SIGNAL(triggered()), this, SLOT(doBhc()));
     
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
-    insertSpcAct->setStatusTip(tr("Inserts spaces"));
+    insertSpcAct->setToolTip(tr("Inserts spaces"));
     connect(insertSpcAct, SIGNAL(triggered()), this, SLOT(doInsertSpaces()));
 
     removeSpcAct = new QAction(QIcon(":/images/removespc.png"), tr("Remove spaces"), this);
     removeSpcAct->setShortcut(tr("F5"));
-    removeSpcAct->setStatusTip(tr("Removes spaces"));
+    removeSpcAct->setToolTip(tr("Removes spaces"));
     connect(removeSpcAct, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
 
     removeEmptyLinesAct = new QAction(QIcon(":/images/removeemptylines.png"), tr("Remove empty lines"), this);
     //removeEmptyLinesAct->setShortcut(tr("F5"));
-    removeEmptyLinesAct->setStatusTip(tr("Removes empty lines"));
+    removeEmptyLinesAct->setToolTip(tr("Removes empty lines"));
     connect(removeEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
 
     insertEmptyLinesAct = new QAction(QIcon(":/images/insertemptylines.png"), tr("Insert empty lines"), this);
     //insertEmptyLinesAct->setShortcut(tr("F5"));
-    insertEmptyLinesAct->setStatusTip(tr("Insert empty lines"));
+    insertEmptyLinesAct->setToolTip(tr("Insert empty lines"));
     connect(insertEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
 
     cleanUpDialogAct = new QAction(QIcon(":/images/cleanup.png"), tr("Clean&up"), this);
     //cleanUpDialogAct->setShortcut(QKeySequence::Print);
-    cleanUpDialogAct->setStatusTip(tr("Remove text using regular expressions"));
+    cleanUpDialogAct->setToolTip(tr("Remove text using regular expressions"));
     connect(cleanUpDialogAct, SIGNAL(triggered()), this, SLOT(displayCleanUpDialog()));
 
     insertDotAct = new QAction(QIcon(":/images/dots.png"), tr("Insert dots"), this);
     insertDotAct->setShortcut(tr("F6"));
-    insertDotAct->setStatusTip(tr("Inserts decimal dot"));
+    insertDotAct->setToolTip(tr("Inserts decimal dot"));
     connect(insertDotAct, SIGNAL(triggered()), this, SLOT(doInsertDot()));
 
     renumberAct = new QAction(QIcon(":/images/renumber.png"), tr("Renumber"), this);
     renumberAct->setShortcut(tr("F7"));
-    renumberAct->setStatusTip(tr("Renumber program blocks"));
+    renumberAct->setToolTip(tr("Renumber program blocks"));
     connect(renumberAct, SIGNAL(triggered()), this, SLOT(doRenumber()));
 
     speedFeedAct = new QAction(QIcon(":/images/vcf.png"), tr("Feed's speed's"), this);
     speedFeedAct->setShortcut(tr("F9"));
-    speedFeedAct->setStatusTip(tr("Calculate speed, feed, cutting speed"));
+    speedFeedAct->setToolTip(tr("Calculate speed, feed, cutting speed"));
     connect(speedFeedAct, SIGNAL(triggered()), this, SLOT(doSpeedFeed()));
 
     chamferAct = new QAction(QIcon(":/images/chamfer.png"), tr("Chamfer"), this);
     //chamferAct->setShortcut(tr("F9"));
-    chamferAct->setStatusTip(tr("Calculate chamfer"));
+    chamferAct->setToolTip(tr("Calculate chamfer"));
     connect(chamferAct, SIGNAL(triggered()), this, SLOT(doChamfer()));
 
     trianglesAct = new QAction(QIcon(":/images/triangles.png"), tr("Solution of triangles"), this);
     //trianglesAct->setShortcut(tr("F9"));
-    trianglesAct->setStatusTip(tr("Solution of triangles"));
+    trianglesAct->setToolTip(tr("Solution of triangles"));
     connect(trianglesAct, SIGNAL(triggered()), this, SLOT(doTriangles()));
 
     convertAct = new QAction(QIcon(":/images/i2m.png"), tr("Convert inch <-> mm"), this);
     //convertAct->setShortcut(tr("F9"));
-    convertAct->setStatusTip(tr("Convert inch <-> mm"));
+    convertAct->setToolTip(tr("Convert inch <-> mm"));
     connect(convertAct, SIGNAL(triggered()), this, SLOT(doConvert()));
 
     convertProgAct = new QAction(QIcon(":/images/i2mprog.png"), tr("Convert program inch <-> mm"), this);
     //convertProgAct->setShortcut(tr("F9"));
-    convertProgAct->setStatusTip(tr("Convert program inch <-> mm"));
+    convertProgAct->setToolTip(tr("Convert program inch <-> mm"));
     connect(convertProgAct, SIGNAL(triggered()), this, SLOT(doConvertProg()));
 
     calcAct = new QAction(QIcon(":/images/calc.png"), tr("Calculator"), this);
     //calcAct->setShortcut(tr("F9"));
-    calcAct->setStatusTip(tr("Run calculator"));
+    calcAct->setToolTip(tr("Run calculator"));
     connect(calcAct, SIGNAL(triggered()), this, SLOT(doCalc()));
 
     showSerialToolBarAct = new QAction(QIcon(":/images/serial.png"), tr("Serial port send/receive"), this);
     //showSerialToolBarAct->setShortcut(tr("F9"));
     showSerialToolBarAct->setCheckable(true);
-    showSerialToolBarAct->setStatusTip(tr("Serial port send/receive"));
+    showSerialToolBarAct->setToolTip(tr("Serial port send/receive"));
     connect(showSerialToolBarAct, SIGNAL(triggered()), this, SLOT(createSerialToolBar()));
 
     cmpMacroAct = new QAction(QIcon(":/images/compfile.png"), tr("Compile macro - experimental"), this);
     //cmpMacroAct->setShortcut(tr("F9"));
-    cmpMacroAct->setStatusTip(tr("Translate EdytorNC macro into CNC program"));
+    cmpMacroAct->setToolTip(tr("Translate EdytorNC macro into CNC program"));
     connect(cmpMacroAct, SIGNAL(triggered()), this, SLOT(doCmpMacro()));
 
     diffRAct = new QAction(QIcon(":/images/diffr.png"), tr("Show diff - open current file in right diff window"), this);
-    diffRAct->setStatusTip(tr("Show diff - open current file in right diff window"));
+    diffRAct->setToolTip(tr("Show diff - open current file in right diff window"));
     connect(diffRAct, SIGNAL(triggered()), this, SLOT(doDiffR()));
 
     diffLAct = new QAction(QIcon(":/images/diffl.png"), tr("Show diff - open current file in left diff window"), this);
-    diffLAct->setStatusTip(tr("Show diff - open current file in left diff window"));
+    diffLAct->setToolTip(tr("Show diff - open current file in left diff window"));
     connect(diffLAct, SIGNAL(triggered()), this, SLOT(doDiffL()));
 
     diffAct = new QAction(QIcon(":/images/diff.png"), tr("On/off diff window"), this);
     diffAct->setCheckable(true);
-    diffAct->setStatusTip(tr("Show diff window"));
+    diffAct->setToolTip(tr("Show diff window"));
     connect(diffAct, SIGNAL(triggered()), this, SLOT(doDiff()));
 
     diffEditorAct = new QAction(QIcon(":/images/diff_editor.png"), tr("Show unsaved changes"), this);
-    diffEditorAct->setStatusTip(tr("Show diff of currently edited file and file on disk"));
+    diffEditorAct->setToolTip(tr("Show diff of currently edited file and file on disk"));
     connect(diffEditorAct, SIGNAL(triggered()), this, SLOT(diffEditorFile()));
 
     splittAct = new QAction(QIcon(":/images/split_prog.png"), tr("Split file"), this);
-    splittAct->setStatusTip(tr("Split file"));
+    splittAct->setToolTip(tr("Split file"));
     connect(splittAct, SIGNAL(triggered()), this, SLOT(doSplitPrograms()));
 
     semiCommAct = new QAction(QIcon(":/images/semicomment.png"), tr("Comment ;"), this);
     semiCommAct->setShortcut(tr("Ctrl+;"));
-    semiCommAct->setStatusTip(tr("Comment/uncomment selected text using semicolon"));
+    semiCommAct->setToolTip(tr("Comment/uncomment selected text using semicolon"));
     connect(semiCommAct, SIGNAL(triggered()), this, SLOT(doSemiComment()));
 
     paraCommAct = new QAction(QIcon(":/images/paracomment.png"), tr("Comment ()"), this);
     paraCommAct->setShortcut(tr("Ctrl+9"));
-    paraCommAct->setStatusTip(tr("Comment/uncomment selected text using parentheses"));
+    paraCommAct->setToolTip(tr("Comment/uncomment selected text using parentheses"));
     connect(paraCommAct, SIGNAL(triggered()), this, SLOT(doParaComment()));
 
     swapAxesAct = new QAction(QIcon(":/images/swapaxes.png"), tr("Swap axes"), this);
     //swapAxesAct->setShortcut(QKeySequence::Save);
-    swapAxesAct->setStatusTip(tr("Swap/modify axes"));
+    swapAxesAct->setToolTip(tr("Swap/modify axes, selected text or entire program"));
     connect(swapAxesAct, SIGNAL(triggered()), this, SLOT(doSwapAxes()));
+
+    insertBlockSkipAct = new QAction(QIcon(":/images/blockskip.png"), tr("Block Skip"), this);
+    insertBlockSkipAct->setShortcut(tr("Ctrl+/"));
+    insertBlockSkipAct->setToolTip(tr("Insert/remove Block Skip /"));
+    connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(doBlockSkip()));
 
 
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
     //closeAct->setShortcut(QKeySequence::Close);
-    closeAct->setStatusTip(tr("Close the active window"));
+    closeAct->setToolTip(tr("Close the active window"));
     connect(closeAct, SIGNAL(triggered()), this, SLOT(closeCurrentWindow()));
 
     closeAllAct = new QAction(QIcon(":/images/window-close.png"), tr("Close &All"), this);
-    closeAllAct->setStatusTip(tr("Close all the windows"));
+    closeAllAct->setToolTip(tr("Close all the windows"));
     connect(closeAllAct, SIGNAL(triggered()), mdiArea, SLOT(closeAllSubWindows()));
 
     tileAct = new QAction(QIcon(":/images/tile_h.png"), tr("&Tile"), this);
-    tileAct->setStatusTip(tr("Tile the windows"));
+    tileAct->setToolTip(tr("Tile the windows"));
     connect(tileAct, SIGNAL(triggered()), mdiArea, SLOT(tileSubWindows()));
 
     cascadeAct = new QAction(QIcon(":/images/cascade.png"), tr("&Cascade"), this);
-    cascadeAct->setStatusTip(tr("Cascade the windows"));
+    cascadeAct->setToolTip(tr("Cascade the windows"));
     connect(cascadeAct, SIGNAL(triggered()), mdiArea, SLOT(cascadeSubWindows()));
 
     nextAct = new QAction(QIcon(":/images/go-next.png"), tr("Ne&xt"), this);
     nextAct->setShortcut(QKeySequence::Forward);
-    nextAct->setStatusTip(tr("Move the focus to the next window"));
+    nextAct->setToolTip(tr("Move the focus to the next window"));
     connect(nextAct, SIGNAL(triggered()), mdiArea, SLOT(activateNextSubWindow()));
 
     previousAct = new QAction(QIcon(":/images/go-previous.png"), tr("Pre&vious"), this);
     previousAct->setShortcut(QKeySequence::Back);
-    previousAct->setStatusTip(tr("Move the focus to the previous window"));
+    previousAct->setToolTip(tr("Move the focus to the previous window"));
     connect(previousAct, SIGNAL(triggered()), mdiArea, SLOT(activatePreviousSubWindow()));
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(activeWindowChanged(QMdiSubWindow *)));
@@ -1777,19 +1783,19 @@ void EdytorNc::createActions()
 
 
     createGlobalToolTipsAct = new QAction(tr("&Create global cnc tooltips"), this);
-    createGlobalToolTipsAct->setStatusTip(tr("Create default global cnc tooltips file"));
+    createGlobalToolTipsAct->setToolTip(tr("Create default global cnc tooltips file"));
     connect(createGlobalToolTipsAct, SIGNAL(triggered()), this, SLOT(createGlobalToolTipsFile()));
 
     createUserToolTipsAct = new QAction(tr("&Create user cnc tooltips"), this);
-    createUserToolTipsAct->setStatusTip(tr("Create/edit user cnc tooltips file"));
+    createUserToolTipsAct->setToolTip(tr("Create/edit user cnc tooltips file"));
     connect(createUserToolTipsAct, SIGNAL(triggered()), this, SLOT(createUserToolTipsFile()));
 
     aboutAct = new QAction(tr("&About"), this);
-    aboutAct->setStatusTip(tr("Show the application's About box"));
+    aboutAct->setToolTip(tr("Show the application's About box"));
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
 
     aboutQtAct = new QAction(tr("About &Qt"), this);
-    aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
+    aboutQtAct->setToolTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
 
@@ -1861,6 +1867,7 @@ void EdytorNc::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction(semiCommAct);
     toolsMenu->addAction(paraCommAct);
+    toolsMenu->addAction(insertBlockSkipAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(bhcAct);
     toolsMenu->addAction(speedFeedAct);
@@ -1988,14 +1995,14 @@ void EdytorNc::createStatusBar()
     connect(highlightTypeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setHighLightMode(int)));
 
     attachHighlightToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current highlight setting to current directory of programs"), this);
-    attachHighlightToDirAct->setStatusTip(tr("Attach current highlight setting to current directory of programs"));
+    attachHighlightToDirAct->setToolTip(tr("Attach current highlight setting to current directory of programs"));
     connect(attachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(attachHighlightToDirActClicked()));
 
     attachHighlightButton = new QToolButton();
     attachHighlightButton->setDefaultAction(attachHighlightToDirAct);
 
     deAttachHighlightToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove highlight settings from the directory"), this);
-    deAttachHighlightToDirAct->setStatusTip(tr("Remove highlight settings from the directory"));
+    deAttachHighlightToDirAct->setToolTip(tr("Remove highlight settings from the directory"));
     connect(deAttachHighlightToDirAct, SIGNAL(triggered()), this, SLOT(deAttachHighlightToDirActClicked()));
 
     deAttachHighlightButton = new QToolButton();
@@ -2498,31 +2505,31 @@ void EdytorNc::createFindToolBar()
 
         findNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Find next"), this);
         findNextAct->setShortcut(QKeySequence::FindNext);
-        findNextAct->setStatusTip(tr("Find next"));
+        findNextAct->setToolTip(tr("Find next"));
         connect(findNextAct, SIGNAL(triggered()), this, SLOT(findNext()));
 
         findPreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Find previous"), this);
         findPreviousAct->setShortcut(QKeySequence::FindPrevious);
-        findPreviousAct->setStatusTip(tr("Find previous"));
+        findPreviousAct->setToolTip(tr("Find previous"));
         connect(findPreviousAct, SIGNAL(triggered()), this, SLOT(findPrevious()));
 
         replaceNextAct = new QAction(QIcon(":/images/arrow-right.png"), tr("Replace && find next"), this);
         //replaceNextAct->setShortcut(tr("F3"));
-        replaceNextAct->setStatusTip(tr("Replace && find next"));
+        replaceNextAct->setToolTip(tr("Replace && find next"));
         connect(replaceNextAct, SIGNAL(triggered()), this, SLOT(replaceNext()));
 
         replacePreviousAct = new QAction(QIcon(":/images/arrow-left.png"), tr("Replace && find previous"), this);
         //replacePreviousAct->setShortcut(tr("F3"));
-        replacePreviousAct->setStatusTip(tr("Replace && find previous"));
+        replacePreviousAct->setToolTip(tr("Replace && find previous"));
         connect(replacePreviousAct, SIGNAL(triggered()), this, SLOT(replacePrevious()));
 
         replaceAllAct = new QAction(QIcon(":/images/arrow-right-double.png"), tr("Replace all"), this);
         //replaceAllAct->setShortcut(tr("F3"));
-        replaceAllAct->setStatusTip(tr("Replace all"));
+        replaceAllAct->setToolTip(tr("Replace all"));
         connect(replaceAllAct, SIGNAL(triggered()), this, SLOT(replaceAll()));
 
         findCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close find toolbar"), this);
-        findCloseAct->setStatusTip(tr("Close find toolbar"));
+        findCloseAct->setToolTip(tr("Close find toolbar"));
         connect(findCloseAct, SIGNAL(triggered()), this, SLOT(closeFindToolBar()));
 
         findLabel = new QLabel(tr("Find:"));
@@ -2739,36 +2746,36 @@ void EdytorNc::createSerialToolBar()
 
         configPortAct = new QAction(QIcon(":/images/serialconfig.png"), tr("Serial port configuration"), this);
         //configPortAct->setShortcut(tr("F3"));
-        configPortAct->setStatusTip(tr("Serial port configuration"));
+        configPortAct->setToolTip(tr("Serial port configuration"));
         connect(configPortAct, SIGNAL(triggered()), this, SLOT(serialConfig()));
 
         receiveAct = new QAction(QIcon(":/images/receive.png"), tr("Receive new file"), this);
         //receiveAct->setShortcut(tr("Shift+F3"));
-        receiveAct->setStatusTip(tr("Receive new file"));
+        receiveAct->setToolTip(tr("Receive new file"));
         connect(receiveAct, SIGNAL(triggered()), this, SLOT(receiveButtonClicked()));
 
         sendAct = new QAction(QIcon(":/images/send.png"), tr("Send current file"), this);
         //sendAct->setShortcut(tr("F3"));
-        sendAct->setStatusTip(tr("Send current file"));
+        sendAct->setToolTip(tr("Send current file"));
         connect(sendAct, SIGNAL(triggered()), this, SLOT(sendButtonClicked()));
 
         attachToDirAct = new QAction(QIcon(":/images/attach.png"), tr("Attach current port settings to current directory of programs"), this);
         //attachToDirAct->setShortcut(tr("F3"));
-        attachToDirAct->setStatusTip(tr("Attach current port settings to current directory of programs"));
+        attachToDirAct->setToolTip(tr("Attach current port settings to current directory of programs"));
         connect(attachToDirAct, SIGNAL(triggered()), this, SLOT(attachToDirButtonClicked()));
 
         deAttachToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove settings from the directory"), this);
         //deAttachToDirAct->setShortcut(tr("F3"));
-        deAttachToDirAct->setStatusTip(tr("Remove settings from the directory"));
+        deAttachToDirAct->setToolTip(tr("Remove settings from the directory"));
         connect(deAttachToDirAct, SIGNAL(triggered()), this, SLOT(deAttachToDirButtonClicked()));
 
         diagAct = new QAction(QIcon(":/images/serialtest.png"), tr("Check serial port settings"), this);
         //diagAct->setShortcut(tr("F3"));
-        diagAct->setStatusTip(tr("Check serial port settings"));
+        diagAct->setToolTip(tr("Check serial port settings"));
         connect(diagAct, SIGNAL(triggered()), this, SLOT(serialConfigTest()));
 
         serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/receive toolbar"), this);
-        serialCloseAct->setStatusTip(tr("Close find toolbar"));
+        serialCloseAct->setToolTip(tr("Close find toolbar"));
         connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
 
 
@@ -4435,6 +4442,16 @@ void EdytorNc::doSplitPrograms()
         it++;
     };
     QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doBlockSkip()
+{
+    if(activeMdiChild())
+        activeMdiChild()->blockSkip();
 }
 
 //**************************************************************************************************
