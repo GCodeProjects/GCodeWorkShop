@@ -1418,6 +1418,7 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
    connect(mirrorY, SIGNAL(toggled(bool)), SLOT(inputChk()));
 
    contextMenu = new QMenu(this);
+   commentActGroup = new QActionGroup(this);
 
 
    QAction *copyAct = new QAction(QIcon(":/images/editcopy.png"), tr("&Copy"), this);
@@ -1437,8 +1438,12 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
    contextMenu->addSeparator();
    contextMenu->addAction(selAllAct);
    contextMenu->addSeparator();
-   addCommentsId = contextMenu->addAction(tr("Add comments"));
-   addCommentsId->setCheckable(TRUE);
+   addCommentsId = contextMenu->addAction(tr("Add ; comments"));
+   addCommentsId->setCheckable(true);
+   addCommentsId->setActionGroup(commentActGroup);
+   addCommentsParaId = contextMenu->addAction(tr("Add () comments"));
+   addCommentsParaId->setCheckable(true);
+   addCommentsParaId->setActionGroup(commentActGroup);
 
    resultTable->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -1534,52 +1539,64 @@ void BHCTab::sellAll()
 
 void BHCTab::copySelection()
 {
-   int i;
-   QString selText, tmp;
-   QRegExp exp;
-   QStringList list;
-   QTableWidgetItem *it;
+    int i;
+    QString selText, tmp;
+    QTableWidgetItem *it;
 
+    selText = "";
 
-   if(addCommentsId->isChecked())
-     selText = QString(tr("(Diameter: %1, no. of holes: %2, start angle: %3)\n")).arg(diaInput->text()).arg(holesInput->text()).arg(angleStartInput->text());
-   else
-     selText = "";
+    for(i = 0; i < resultTable->rowCount(); i++)
+    {
 
-   for(i = 0; i < resultTable->rowCount(); i++)
-   {
+        if(resultTable->item(i, 0)->isSelected() || resultTable->item(i, 1)->isSelected())
+        {
+            it = resultTable->item(i, 0);
+            selText += "X" + it->text();
+            it = resultTable->item(i, 1);
+            selText += " Y" + it->text();
 
-      if(resultTable->item(i, 0)->isSelected() || resultTable->item(i, 1)->isSelected())
-      {
-         it = resultTable->item(i, 0);
-         selText += "X" + it->text();
-         it = resultTable->item(i, 1);
-         selText += " Y" + it->text();
+            if(addCommentsParaId->isChecked())
+            {
+                it = resultTable->verticalHeaderItem(i);
+                tmp = it->text();
+                tmp.remove(")");
+                tmp.replace("(", "- ");
+                tmp = tmp.simplified();
+                selText += " (" + tmp + ")\n";
+            }
+            else
+                if(addCommentsId->isChecked())
+                {
+                    it = resultTable->verticalHeaderItem(i);
+                    tmp = it->text();
+                    tmp.remove(")");
+                    tmp.replace("(", "- ");
+                    tmp = tmp.simplified();
+                    selText += " ;" + tmp + "\n";
+                }
+                else
+                {
+                    selText += "\n";
+                };
+        };
 
-         if(addCommentsId->isChecked())
-         {  
-            it = resultTable->verticalHeaderItem(i);
-            tmp = it->text();
-            tmp.remove(")");
-            tmp.replace("(", "- ");
-            tmp = tmp.simplified();
-            selText += " (" + tmp + ")\n";
-         }
-         else
-         {
-            selText += "\n";
-         };
-      };
+    };
 
-   };
+    selText.remove(selText.length()-1, 1);
+    selText = removeZeros(selText);
 
-   selText.remove(selText.length()-1, 1);
-   selText = removeZeros(selText);
+    if(addCommentsParaId->isChecked())
+        selText.prepend(QString(tr("(DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3)\n"))
+                        .arg(diaInput->text()).arg(holesInput->text()).arg(angleStartInput->text()));
 
-   QClipboard *clipBoard = QApplication::clipboard();
-   clipBoard->setText(selText, QClipboard::Clipboard);
-   if(clipBoard->supportsSelection())
-     clipBoard->setText(selText, QClipboard::Selection);
+    if(addCommentsId->isChecked())
+        selText.prepend(QString(tr(";DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3\n"))
+                        .arg(diaInput->text()).arg(holesInput->text()).arg(angleStartInput->text()));
+
+    QClipboard *clipBoard = QApplication::clipboard();
+    clipBoard->setText(selText, QClipboard::Clipboard);
+    if(clipBoard->supportsSelection())
+        clipBoard->setText(selText, QClipboard::Selection);
 
 
 }

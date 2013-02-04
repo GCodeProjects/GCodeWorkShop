@@ -263,6 +263,8 @@ class BHCTab : public QWidget, public Ui::BHCTab
     QMenu *contextMenu;
     QAbstractItemModel *model;
     QAction *addCommentsId;
+    QAction *addCommentsParaId;
+    QActionGroup *commentActGroup;
 
 
 };
