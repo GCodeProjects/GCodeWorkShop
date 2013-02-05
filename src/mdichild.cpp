@@ -3406,7 +3406,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
     
     do
     {
-        if(oper == -1)
+        if((oper == -1) && (max == -999999))
         {
             regExp.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(textToFind));
             cursor = document->find(regExp, cursor, options);
@@ -3456,7 +3456,8 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
         if(found && !inComment)
         {
             foundText = cursor.selectedText();
-            
+
+            val = 0;
             if(min > -999999)
             {
                 val = QString(foundText.remove(textToFind, Qt::CaseInsensitive)).toDouble(&ok);
@@ -3491,9 +3492,10 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                 default: val = val1;
                     break;
                 };
+            };
 
+            if((oper > -1) || (min > -999999))
                 newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
-            }
             else
             {
                 newText = replacedText;
@@ -3515,23 +3517,21 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 
     if(inSelection)
     {
-        //textEdit->insertPlainText(document->toPlainText());
         cursor = QTextCursor(document);
         cursor.select(QTextCursor::Document);
-        textEdit->textCursor().insertFragment(cursor.selection());
-        delete(document);
 
-        if(cursorStart < cursorEnd)
+        if(cursorStart > cursorEnd)
             cursorStart = cursorEnd;
 
         cursorEnd = cursorStart + cursor.selectedText().length();
+        textEdit->textCursor().insertFragment(cursor.selection());
+        delete(document);
 
         cursor = textEdit->textCursor();  //restore selection
         cursor.setPosition(cursorStart, QTextCursor::MoveAnchor);
         cursor.setPosition(cursorEnd, QTextCursor::KeepAnchor);
         textEdit->setTextCursor(cursor);
     };
-
 
     textEdit->blockSignals(false);
 
@@ -3559,7 +3559,7 @@ void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, 
     {
         swapAxes(replacedText, QString(":%1:").arg(replacedText), min, max, -1, modifier, options, ignoreComments);
         swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
-        swapAxes(QString(":%1:").arg(replacedText), textToFind, -999999, -999999, -1, 0, options, ignoreComments);
+        swapAxes(QString(":%1:").arg(replacedText), textToFind, -999999, 0, -1, 0, options, ignoreComments);
     }
     else
         swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
