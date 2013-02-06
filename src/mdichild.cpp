@@ -2058,7 +2058,7 @@ void MdiChild::highlightCurrentLine()
 
    tmpSelections.clear();
    extraSelections.clear();
-   //tmpSelections.append(extraSelections);
+   tmpSelections.append(blockExtraSelections);
    tmpSelections.append(findTextExtraSelections);
    textEdit->setExtraSelections(tmpSelections);
 
@@ -3286,6 +3286,9 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText, QTextDocume
             replacedText = cr.selectedText();
             replacedText.remove(foundText);
 
+            if((val == 0) && (op == '/'))  //divide by 0
+                val = 1;
+
             if(op == '+')
                 val = val1 + val;
             if(op == '-')
@@ -3403,22 +3406,19 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
     QTextCursor cursor(document);
     cursor.setPosition(0);
 
-    
     do
     {
-        if((oper == -1) && (max == -999999))
+        if((oper == -1) && (min == -999999))
         {
             regExp.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(textToFind));
-            cursor = document->find(regExp, cursor, options);
         }
         else
         {
             regExp.setPattern(QString("(%1)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
-            cursor = document->find(regExp, cursor, options);
         };
 
+        cursor = document->find(regExp, cursor, options);
         found = !cursor.isNull();
-
 
 
         if(found && ignoreComments)
@@ -3456,46 +3456,52 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
         if(found && !inComment)
         {
             foundText = cursor.selectedText();
+            foundText.remove(textToFind);
 
             val = 0;
+            ok = false;
+
+            val1 = foundText.toDouble(&ok);
+
             if(min > -999999)
             {
-                val = QString(foundText.remove(textToFind, Qt::CaseInsensitive)).toDouble(&ok);
-                
                 if(!ok)
                     continue;
 
-                if(!((val >= min) && (val <= max)))
+                if(!((val1 >= min) && (val1 <= max)))
                 {
                     continue;
                 };
             };
             
-            if(oper > -1)
+            if((modifier == 0) && (oper == 3))  //divide by 0
+                modifier = 1;
+
+            switch(oper)
             {
-                foundText.remove(textToFind);  //QRegExp("[A-Za-z#]{1,}")
-                val1 = foundText.toDouble(&ok);
-
-                if((modifier == 0) && oper == 3)  //divide by 0
-                    modifier = 1;
-
-                switch(oper)
-                {
-                case 0 : val = val1 + modifier;
-                    break;
-                case 1 : val = val1 - modifier;
-                    break;
-                case 2 : val = val1 * modifier;
-                    break;
-                case 3 : val = val1 / modifier;
-                    break;
-                default: val = val1;
-                    break;
-                };
+            case 0 : val = val1 + modifier;
+                break;
+            case 1 : val = val1 - modifier;
+                break;
+            case 2 : val = val1 * modifier;
+                break;
+            case 3 : val = val1 / modifier;
+                break;
+            default: val = val1;
+                break;
             };
 
-            if((oper > -1) || (min > -999999))
-                newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+            if(ok)
+            {
+                if(replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N" || replacedText == "n")
+                {
+                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+                    if(newText[newText.length() - 1] == '.')
+                        newText = newText.remove((newText.length() - 1), 1);
+                }
+                else
+                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+            }
             else
             {
                 newText = replacedText;
@@ -3557,9 +3563,9 @@ void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, 
     
     if(textToFind != replacedText)
     {
-        swapAxes(replacedText, QString(":%1:").arg(replacedText), min, max, -1, modifier, options, ignoreComments);
+        swapAxes(replacedText, QString("~%1").arg(replacedText), min, max, -1, modifier, options, ignoreComments);
         swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
-        swapAxes(QString(":%1:").arg(replacedText), textToFind, -999999, 0, -1, 0, options, ignoreComments);
+        swapAxes(QString("~%1").arg(replacedText), textToFind, -999999, 0, -1, 0, options, ignoreComments);
     }
     else
         swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
@@ -3569,6 +3575,109 @@ void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, 
     textEdit->setTextCursor(startCursor);
     
     
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::highlightCodeBlock(QString searchString, int rMin, int rMax)
+{
+   QList<QTextEdit::ExtraSelection> tmpSelections;
+   bool colorSwitch;
+   QString exp;
+   int id, foundId;
+
+   QString findExp;
+   QColor lineColor;
+
+   QTextCursor startCursor, endCursor;
+
+
+
+
+   tmpSelections.clear();
+   blockExtraSelections.clear();
+   tmpSelections.append(extraSelections);
+
+   QTextDocument *doc = textEdit->document();
+   QTextCursor cursor = textEdit->textCursor();
+   cursor.setPosition(0);
+
+   exp = searchString;
+
+
+   cursor.setPosition(0);
+   id = foundId = rMin;
+   colorSwitch = false;
+   do
+   {
+
+
+//       if(!searchString.contains("%1"))
+//           searchString.append("%1");
+
+       findExp = searchString; //.arg(foundId);
+       startCursor = doc->find(findExp, cursor);
+       qDebug() << "1 " << findExp;
+
+       if(!startCursor.isNull())
+       {
+           findExp = searchString; //.arg(id + 1);
+           endCursor = doc->find(findExp, startCursor);
+           qDebug() << "2 " << findExp;
+       };
+
+       if((!startCursor.isNull()) && (!endCursor.isNull()))
+       {
+
+           if(colorSwitch)
+           {
+               lineColor = QColor(Qt::blue).lighter(160);
+           }
+           else
+           {
+               lineColor = QColor(Qt::red).lighter(100);
+           };
+
+           selection.format.setBackground(lineColor);
+           colorSwitch = !colorSwitch;
+
+
+
+           cursor.setPosition(startCursor.selectionStart(), QTextCursor::MoveAnchor);
+           cursor.setPosition(endCursor.selectionStart(), QTextCursor::KeepAnchor);
+
+           qDebug() << cursor.selectionStart() << cursor.selectionEnd();
+
+           qDebug() << "--------------------------------";
+           qDebug() << cursor.selectedText();
+           qDebug() << "--------------------------------";
+
+           selection.cursor = cursor;
+           blockExtraSelections.append(selection);
+
+
+           foundId = id;
+
+       };
+
+       cursor = endCursor;
+
+       if(cursor.atEnd())
+           break;
+
+       if(startCursor.atEnd())
+           break;
+
+       //id++;
+//       if(id >= rMax)
+//           break;
+
+   }while(!cursor.isNull());
+
+   tmpSelections.append(blockExtraSelections);
+   textEdit->setExtraSelections(tmpSelections);
 }
 
 //**************************************************************************************************
