@@ -54,12 +54,12 @@ swapAxesDialog::swapAxesDialog(QWidget *parent) :
         list = settings.value("FromComboValues", (QStringList() << "X" << "Y" << "Z")).toStringList();
         ui->fromComboBox->clear();
         ui->fromComboBox->addItems(list);
-        ui->fromComboBox->setCurrentIndex(settings.value("FromComboIndex", 0).toInt(&ok));
+        ui->fromComboBox->setCurrentIndex(ui->fromComboBox->findText(settings.value("FromComboIndex", "X").toString()));
 
         list = settings.value("ToComboValues", (QStringList() << "X" << "Y" << "Z")).toStringList();
         ui->toComboBox->clear();
         ui->toComboBox->addItems(list);
-        ui->toComboBox->setCurrentIndex(settings.value("ToComboIndex", 1).toInt(&ok));
+        ui->toComboBox->setCurrentIndex(ui->toComboBox->findText(settings.value("ToComboIndex", "Y").toString()));
 
         ui->minDoubleSpinBox->setValue(settings.value("Min", 0).toDouble(&ok));
         ui->maxDoubleSpinBox->setValue(settings.value("Max", 0).toDouble(&ok));
@@ -118,23 +118,27 @@ void swapAxesDialog::saveSettings()
         QStringList list;
 
         list.clear();
+        list.append(ui->fromComboBox->currentText());
         for(int i = 0; i < ui->fromComboBox->count(); i++)
         {
             list.append(ui->fromComboBox->itemText(i));
         };
         list.removeDuplicates();
+        list.sort();
         settings.setValue("FromComboValues", list);
-        settings.setValue("FromComboIndex", ui->fromComboBox->currentIndex());
+        settings.setValue("FromComboIndex", ui->fromComboBox->currentText());
 
 
         list.clear();
+        list.append(ui->toComboBox->currentText());
         for(int i = 0; i < ui->toComboBox->count(); i++)
         {
             list.append(ui->toComboBox->itemText(i));
         };
         list.removeDuplicates();
+        list.sort();
         settings.setValue("ToComboValues", list);
-        settings.setValue("ToComboIndex", ui->toComboBox->currentIndex());
+        settings.setValue("ToComboIndex", ui->toComboBox->currentText());
 
 
         settings.setValue("Min", ui->minDoubleSpinBox->value());

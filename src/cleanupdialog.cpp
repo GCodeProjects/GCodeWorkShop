@@ -366,6 +366,8 @@ void cleanUpDialog::highlightFindText(QRegExp exp)
             findTextExtraSelections.append(selection);
         };
 
+        QApplication::processEvents();
+
     }while(!cursor.isNull());
 
     firstFoundCursor.movePosition(QTextCursor::StartOfBlock);
