@@ -61,6 +61,8 @@ struct _h_colors
    int zColor;
    int aColor;
    int bColor;
+   int defaultColor;
+   int backgroundColor;
    int highlightMode;
 
 };

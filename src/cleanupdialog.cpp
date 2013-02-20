@@ -359,6 +359,9 @@ void cleanUpDialog::highlightFindText(QRegExp exp)
 
         if(!cursor.isNull())
         {
+            if(cursor.selectedText().length() == 0)  //cursor not null but nothing found
+                break;
+
             if(firstFoundCursor.position() == 0)
                 firstFoundCursor = cursor;
 
@@ -368,7 +371,7 @@ void cleanUpDialog::highlightFindText(QRegExp exp)
 
         QApplication::processEvents();
 
-    }while(!cursor.isNull());
+    }while(!cursor.isNull() && !cursor.atEnd());
 
     firstFoundCursor.movePosition(QTextCursor::StartOfBlock);
     ui->textEdit->setExtraSelections(findTextExtraSelections);
