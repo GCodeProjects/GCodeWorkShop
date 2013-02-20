@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>541</width>
+    <width>539</width>
     <height>355</height>
    </rect>
   </property>
@@ -92,7 +92,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Syntax highlight colors</string>
+          <string>Highlight colors</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -101,30 +101,23 @@
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="2" column="3">
-          <widget class="QPushButton" name="bColorButton">
+         <item row="3" column="4">
+          <widget class="QPushButton" name="commentColorButton">
            <property name="text">
-            <string>B90. C30.</string>
+            <string>(Comment)</string>
            </property>
            <property name="flat">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="3" column="3">
-          <widget class="QPushButton" name="zColorButton">
-           <property name="text">
-            <string>Z26.45</string>
+         <item row="1" column="4">
+          <widget class="QPushButton" name="progNameColorButton">
+           <property name="autoFillBackground">
+            <bool>false</bool>
            </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QPushButton" name="dhtColorButton">
            <property name="text">
-            <string>D3 H7 T1</string>
+            <string>%1000 O1234</string>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -141,16 +134,6 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="keyWordColorButton">
-           <property name="text">
-            <string>SPFA</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
          <item row="3" column="1">
           <widget class="QPushButton" name="nColorButton">
            <property name="text">
@@ -161,53 +144,10 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="gColorButton">
+         <item row="3" column="3">
+          <widget class="QPushButton" name="zColorButton">
            <property name="text">
-            <string>G00 G90</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="4">
-          <widget class="QPushButton" name="commentColorButton">
-           <property name="text">
-            <string>(Comment)</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="aColorButton">
-           <property name="text">
-            <string>A120.</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QPushButton" name="macroColorButton">
-           <property name="text">
-            <string>SIN() ABS()</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="4">
-          <widget class="QPushButton" name="progNameColorButton">
-           <property name="autoFillBackground">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>%1000 O1234</string>
+            <string>Z26.45</string>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -247,10 +187,90 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="keyWordColorButton">
+           <property name="text">
+            <string>SPFA</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QPushButton" name="dhtColorButton">
+           <property name="text">
+            <string>D3 H7 T1</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="0">
           <widget class="QPushButton" name="rColorButton">
            <property name="text">
             <string>R10</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="aColorButton">
+           <property name="text">
+            <string>A120.</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QPushButton" name="macroColorButton">
+           <property name="text">
+            <string>SIN() ABS()</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QPushButton" name="bColorButton">
+           <property name="text">
+            <string>B90. C30.</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QPushButton" name="gColorButton">
+           <property name="text">
+            <string>G00 G90</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QPushButton" name="fontColorButton">
+           <property name="text">
+            <string>Default color</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QPushButton" name="backgroundColorButton">
+           <property name="text">
+            <string>Backgroud</string>
            </property>
            <property name="flat">
             <bool>true</bool>

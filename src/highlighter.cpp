@@ -505,7 +505,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
                   case 'X'         :
                   case 'Y'         :
                   case 'U'         :
-                  case 'W'         : format.setForeground(Qt::black);
+                  case 'W'         : format.setForeground(QColor(highlightColors.defaultColor));
                                      setFormat(pos, sellen, format);
                                      break;
                   default          : ;
@@ -558,7 +558,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
 
       };
 
-      format.setForeground(Qt::black);
+      format.setForeground(QColor(highlightColors.defaultColor));
       format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
       format.setFontWeight(QFont::Normal);
@@ -762,7 +762,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
                   case 'X'         :
                   case 'Y'         :
                   case 'U'         :
-                  case 'W'         : format.setForeground(Qt::black);
+                  case 'W'         : format.setForeground(QColor(highlightColors.defaultColor));
                                      setFormat(pos, sellen, format);
                                      break;
                   default          : ;
@@ -813,7 +813,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
          break;
       };
 
-      format.setForeground(Qt::black);
+      format.setForeground(QColor(highlightColors.defaultColor));
       format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
    };
@@ -979,7 +979,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
                   case 'X'         :
                   case 'Y'         :
                   case 'U'         :
-                  case 'W'         : format.setForeground(Qt::black);
+                  case 'W'         : format.setForeground(QColor(highlightColors.defaultColor));
                                      setFormat(pos, sellen, format);
                                      break;
                   default          : ;
@@ -1031,7 +1031,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
 
       };
 
-      format.setForeground(Qt::black);
+      format.setForeground(QColor(highlightColors.defaultColor));
       format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
    };
@@ -1254,7 +1254,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
                   case 'X'         :
                   case 'Y'         :
                   case 'U'         :
-                  case 'W'         : format.setForeground(Qt::black);
+                  case 'W'         : format.setForeground(QColor(highlightColors.defaultColor));
                                      setFormat(pos, sellen, format);
                                      break;
                   default          : ;
@@ -1307,7 +1307,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
 
       };
 
-      format.setForeground(Qt::black);
+      format.setForeground(QColor(highlightColors.defaultColor));
       format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
       format.setFontWeight(QFont::Normal);
@@ -1511,7 +1511,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
                   case 'X'         :
                   case 'Y'         :
                   case 'U'         :
-                  case 'W'         : format.setForeground(Qt::black);
+                  case 'W'         : format.setForeground(QColor(highlightColors.defaultColor));
                                      setFormat(pos, sellen, format);
                                      break;
                   default          : ;
@@ -1562,7 +1562,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
          break;
       };
 
-      format.setForeground(Qt::black);
+      format.setForeground(QColor(highlightColors.defaultColor));
       format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
    };
@@ -1752,7 +1752,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
                   case 'X'         :
                   case 'Y'         :
                   case 'U'         :
-                  case 'W'         : format.setForeground(Qt::black);
+                  case 'W'         : format.setForeground(QColor(highlightColors.defaultColor));
                                      setFormat(pos, sellen, format);
                                      break;
                   default          : ;
@@ -1803,7 +1803,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
          break;
       };
 
-      format.setForeground(Qt::black);
+      format.setForeground(QColor(highlightColors.defaultColor));
       format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
    };
@@ -2162,7 +2162,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
                   case 'X'         :
                   case 'Y'         :
                   case 'U'         :
-                  case 'W'         : format.setForeground(Qt::black);
+                  case 'W'         : format.setForeground(QColor(highlightColors.defaultColor));
                                      setFormat(pos, sellen, format);
                                      break;
                   default          : ;
@@ -2214,7 +2214,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
 
       };
 
-      format.setForeground(Qt::black);
+      format.setForeground(QColor(highlightColors.defaultColor));
       format.setFontWeight(QFont::Normal);
       pos = pos + sellen;
    };

@@ -2700,17 +2700,33 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    colorButtons = new QButtonGroup(this);
    connect(colorButtons, SIGNAL(buttonClicked(QAbstractButton *)), SLOT(changeColor(QAbstractButton *)));
 
-   commentColorButton->setBackgroundRole(QPalette::Base);
-   QColor color = palette.color(QPalette::Background);
+
+   palette.setColor(backgroundColorButton->foregroundRole(), prop->hColors.backgroundColor);
+   backgroundColorButton->setPalette(palette);
+   backgroundColorButton->setAutoFillBackground(TRUE);
+   colorButtons->addButton(backgroundColorButton);
+
+
+   QColor color = prop->hColors.backgroundColor;
+
    palette.setColor(QPalette::Button, color);
    palette.setColor(QPalette::Light, color);
    palette.setColor(QPalette::Dark, color);
    palette.setColor(QPalette::Shadow, color);
    palette.setColor(QPalette::Midlight, color);
+   palette.setColor(QPalette::Base, color);
+
+
+   palette.setColor(fontColorButton->foregroundRole(), prop->hColors.defaultColor);
+   fontColorButton->setPalette(palette);
+   fontColorButton->setAutoFillBackground(TRUE);
+   fontColorButton->setBackgroundRole(QPalette::Base);
+   colorButtons->addButton(fontColorButton);
 
    palette.setColor(commentColorButton->foregroundRole(), prop->hColors.commentColor);
    commentColorButton->setPalette(palette);
    commentColorButton->setAutoFillBackground(TRUE);
+   commentColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(commentColorButton);
 
    palette.setColor(gColorButton->foregroundRole(), prop->hColors.gColor);
@@ -2947,6 +2963,14 @@ _editor_properites SetupDialog::getSettings()
       editProp.defaultHighlightMode = highlightModeComboBox->itemData(id).toInt(&ok);
    };
 
+   palette = backgroundColorButton->palette();
+   palette.color(backgroundColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.backgroundColor = (r << 16) + (g << 8) + b;
+
+   palette = fontColorButton->palette();
+   palette.color(fontColorButton->foregroundRole()).getRgb(&r, &g, &b);
+   editProp.hColors.defaultColor = (r << 16) + (g << 8) + b;
+
    palette = commentColorButton->palette();
    palette.color(commentColorButton->foregroundRole()).getRgb(&r, &g, &b);
    editProp.hColors.commentColor = (r << 16) + (g << 8) + b;
@@ -3043,8 +3067,89 @@ void SetupDialog::changeColor(QAbstractButton *button)
    if(color.isValid())
    {
       palette.setColor(button->foregroundRole(), color);
-      button->setPalette(palette);
+      button->setPalette(palette);      
    };
+
+
+   palette = backgroundColorButton->palette();
+   color = palette.color(backgroundColorButton->foregroundRole());
+
+   palette = fontColorButton->palette();
+   palette.setColor(fontColorButton->backgroundRole(), color);
+   fontColorButton->setPalette(palette);
+
+   palette = commentColorButton->palette();
+   palette.setColor(commentColorButton->backgroundRole(), color);
+   commentColorButton->setPalette(palette);
+
+   palette = commentColorButton->palette();
+   palette.setColor(commentColorButton->backgroundRole(), color);
+   commentColorButton->setPalette(palette);
+
+   palette = gColorButton->palette();
+   palette.setColor(gColorButton->backgroundRole(), color);
+   gColorButton->setPalette(palette);
+
+   palette = mColorButton->palette();
+   palette.setColor(mColorButton->backgroundRole(), color);
+   mColorButton->setPalette(palette);
+
+   palette = nColorButton->palette();
+   palette.setColor(nColorButton->backgroundRole(), color);
+   nColorButton->setPalette(palette);
+
+   palette = lColorButton->palette();
+   palette.setColor(lColorButton->backgroundRole(), color);
+   lColorButton->setPalette(palette);
+
+   palette = fsColorButton->palette();
+   palette.setColor(fsColorButton->backgroundRole(), color);
+   fsColorButton->setPalette(palette);
+
+   palette = dhtColorButton->palette();
+   palette.setColor(dhtColorButton->backgroundRole(), color);
+   dhtColorButton->setPalette(palette);
+
+   palette = rColorButton->palette();
+   palette.setColor(rColorButton->backgroundRole(), color);
+   rColorButton->setPalette(palette);
+
+   palette = macroColorButton->palette();
+   palette.setColor(macroColorButton->backgroundRole(), color);
+   macroColorButton->setPalette(palette);
+
+   palette = keyWordColorButton->palette();
+   palette.setColor(keyWordColorButton->backgroundRole(), color);
+   keyWordColorButton->setPalette(palette);
+
+   palette = progNameColorButton->palette();
+   palette.setColor(progNameColorButton->backgroundRole(), color);
+   progNameColorButton->setPalette(palette);
+
+   palette = operatorColorButton->palette();
+   palette.setColor(operatorColorButton->backgroundRole(), color);
+   operatorColorButton->setPalette(palette);
+
+   palette = zColorButton->palette();
+   palette.setColor(zColorButton->backgroundRole(), color);
+   zColorButton->setPalette(palette);
+
+   palette = aColorButton->palette();
+   palette.setColor(aColorButton->backgroundRole(), color);
+   aColorButton->setPalette(palette);
+
+   palette = bColorButton->palette();
+   palette.setColor(bColorButton->backgroundRole(), color);
+   bColorButton->setPalette(palette);
+
+   palette = underlineColorButton->palette();
+   palette.setColor(underlineColorButton->backgroundRole(), color);
+   underlineColorButton->setPalette(palette);
+
+   palette = curLineColorButton->palette();
+   palette.setColor(curLineColorButton->backgroundRole(), color);
+   curLineColorButton->setPalette(palette);
+
 }
 
 //**************************************************************************************************
@@ -3105,6 +3210,12 @@ void SetupDialog::setDefaultProp()
 
    palette.setColor(curLineColorButton->foregroundRole(), 0xFEFFB6);
    curLineColorButton->setPalette(palette);
+
+   palette.setColor(fontColorButton->foregroundRole(), Qt::black);
+   fontColorButton->setPalette(palette);
+
+   palette.setColor(backgroundColorButton->foregroundRole(), 0xFFFFFF);
+   backgroundColorButton->setPalette(palette);
 
 
    syntaxHCheckBox->setChecked(true);

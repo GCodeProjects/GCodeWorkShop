@@ -97,6 +97,7 @@ public:
     bool swapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments);
     void doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments);
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
+    void filePrintPreview();
 
 
 
@@ -141,6 +142,7 @@ private:
 
 private slots :
     void highlightCurrentLine();
+    void printPreview(QPrinter *printer);
 
 signals:
     void message(const QString&, int );

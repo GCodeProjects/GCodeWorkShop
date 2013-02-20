@@ -162,6 +162,9 @@ void EdytorNc::closeEvent(QCloseEvent *event)
     foreach(const QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
     {
         MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+
+        mdiChild->blockSignals(true);
+
         if(mdiChild->textEdit->document()->isModified())
         {
             setUpdatesEnabled(TRUE);
@@ -169,6 +172,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
             mdiChild->raise();
             if(!mdiChild->parentWidget()->close())
             {
+                mdiChild->blockSignals(false);
                 event->ignore();
                 return;
             };
@@ -436,14 +440,17 @@ void EdytorNc::printFile()
 {
     if(activeMdiChild())
     {
-        QTextDocument *document = activeMdiChild()->textEdit->document();
+        MdiChild *child = activeMdiChild();
+
         QPrinter printer;
+        printer.setPageMargins(15, 10, 10, 10, QPrinter::Millimeter);
 
         QPrintDialog *dlg = new QPrintDialog(&printer, this);
-        if(dlg->exec() != QDialog::Accepted)
-            return;
-
-        document->print(&printer);
+        if(dlg->exec() == QDialog::Accepted)
+        {
+            printer.setDocName(child->fileName());
+            child->textEdit->print(&printer);
+        };
     };
 }
 
@@ -1338,6 +1345,8 @@ void EdytorNc::updateMenus()
     cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
     cleanUpDialogAct->setEnabled(hasMdiChildNotReadOnly);
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
+    semiCommAct->setEnabled(hasMdiChildNotReadOnly);
+    paraCommAct->setEnabled(hasMdiChildNotReadOnly);
     insertBlockSkipAct->setEnabled(hasMdiChildNotReadOnly);
 
 
@@ -2132,6 +2141,8 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.hColors.zColor = settings.value("ZColor", 0x000080).toInt();
     defaultMdiWindowProperites.hColors.aColor = settings.value("AColor", 0x000000).toInt();
     defaultMdiWindowProperites.hColors.bColor = settings.value("BColor", 0x000000).toInt();
+    defaultMdiWindowProperites.hColors.defaultColor = settings.value("DefaultColor", 0x000000).toInt();
+    defaultMdiWindowProperites.hColors.backgroundColor = settings.value("BackgroundColor", 0xFFFFFF).toInt();
     settings.endGroup();
 
     if(!defaultMdiWindowProperites.startEmpty)
@@ -2276,6 +2287,8 @@ void EdytorNc::writeSettings()
     settings.setValue("BColor", defaultMdiWindowProperites.hColors.bColor);
     settings.setValue("AColor", defaultMdiWindowProperites.hColors.aColor);
     settings.setValue("ZColor", defaultMdiWindowProperites.hColors.zColor);
+    settings.setValue("DefaultColor", defaultMdiWindowProperites.hColors.defaultColor);
+    settings.setValue("BackgroundColor", defaultMdiWindowProperites.hColors.backgroundColor);
 
     settings.endGroup();
 

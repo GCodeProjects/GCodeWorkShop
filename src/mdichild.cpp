@@ -41,15 +41,14 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    setFocusProxy(textEdit);
 
    marginWidget->setAutoFillBackground(TRUE);
-   marginWidget->setBackgroundRole(QPalette::Base);
+
    textEdit->installEventFilter(this);
    setWindowIcon(QIcon(":/images/ncfile.png"));
+
+
    splitterH->setBackgroundRole(QPalette::Base);
-   //splitterV->setBackgroundRole(QPalette::Base);
+   marginWidget->setBackgroundRole(QPalette::Base);
 
-
-   //textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
-   //setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 //**************************************************************************************************
@@ -530,6 +529,15 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
    mdiWindowProperites = opt;
    textEdit->setReadOnly(mdiWindowProperites.readOnly);
    setFont(QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
+
+
+   QPalette pal;
+   if(mdiWindowProperites.hColors.backgroundColor != 0xFFFFFF)
+       pal.setColor(QPalette::Base, QColor(mdiWindowProperites.hColors.backgroundColor));
+   pal.setColor(QPalette::Text, QColor(mdiWindowProperites.hColors.defaultColor));
+
+   setPalette(pal);
+
 
    if(mdiWindowProperites.syntaxH)
    {
@@ -3684,7 +3692,28 @@ void MdiChild::highlightCodeBlock(QString searchString, int rMin, int rMax)
 //
 //**************************************************************************************************
 
+void MdiChild::filePrintPreview()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setPageMargins(15, 10, 10, 10, QPrinter::Millimeter);
+    QPrintPreviewDialog preview(&printer, this);
+    preview.setWindowFlags(Qt::Window);
+    connect(&preview, SIGNAL(paintRequested(QPrinter *)), SLOT(printPreview(QPrinter *)));
+    preview.exec();
+#endif
+}
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::printPreview(QPrinter *printer)
+{
+#ifndef QT_NO_PRINTER
+    textEdit->print(printer);
+#endif
+}
 
 
 //**************************************************************************************************
