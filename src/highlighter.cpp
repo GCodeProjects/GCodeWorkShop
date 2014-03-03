@@ -132,6 +132,10 @@ void Highlighter::loadRules()
       pattern = "^(:)[0-9]{1,}";  // FANUC
       pogRule.pattern = QRegExp(pattern);
       progNameHighlightRules.append(pogRule);
+
+      pattern = "^(<)[\\w\\S]{1,}(>)";  // FANUC
+      pogRule.pattern = QRegExp(pattern);
+      progNameHighlightRules.append(pogRule);
    };
 
 
@@ -231,10 +235,10 @@ void Highlighter::loadRules()
    };
 
 
-   if(highlightColors.highlightMode == MODE_PHILIPS)  // PHILIPS SYSTEM 2000
+   if(highlightColors.highlightMode == MODE_PHILIPS)  // PHILIPS
    {
       keywords << "\\b(@714)\\b";
-      keywordPatterns.append(keywords);;
+      keywordPatterns.append(keywords);
 
       pattern = "^%PM$";
       pogRule.pattern = QRegExp(pattern);
@@ -395,7 +399,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
    while(pos < tx.length())
    {
 
-      ch = tx.at(pos);
+      ch = tx.at(pos).toUpper();
       sellen = 1;
       while(true)
       {
@@ -409,7 +413,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
                   sellen = (tx.length() - pos);
                   break;
                };
-               ch = tx.at(pos + sellen);
+               ch = tx.at(pos + sellen).toUpper();
                sellen++;
 
                if(ch == '(')
@@ -433,7 +437,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
                adrress.append(ch);
                if((adrress.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(adrress.length() + pos);
+               ch = tx.at(adrress.length() + pos).toUpper();
             }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
 
@@ -443,7 +447,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
                val.append(ch);
                if((sellen + val.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(sellen + val.length() + pos);
+               ch = tx.at(sellen + val.length() + pos).toUpper();
             };
 
             sellen = adrress.length() + val.length();
@@ -518,8 +522,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
 
          //***********************************************************************
 
-         if((ch == '/') || (ch == '*') || (ch == '-') || (ch == '+') || (ch == '<') || (ch == '>')
-            || (ch == '='))
+         if((ch == '/') || (ch == '*') || (ch == '-') || (ch == '+') || (ch == '='))
          {
 
             format.setForeground(QColor(highlightColors.operatorColor));
@@ -546,7 +549,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
                sellen++;
                if((pos + sellen) >= tx.length())
                   break;
-               ch = tx.at(sellen + pos);
+               ch = tx.at(sellen + pos).toUpper();
 
             }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
             sellen++;
@@ -637,7 +640,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
    while(pos < tx.length())
    {
 
-      ch = tx.at(pos);
+      ch = tx.at(pos).toUpper();
       sellen = 1;
       while(true)
       {
@@ -663,7 +666,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
                adrress.append(ch);
                if((adrress.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(adrress.length() + pos);
+               ch = tx.at(adrress.length() + pos).toUpper().toUpper();
 
             }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
@@ -674,7 +677,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
                val.append(ch);
                if((sellen + val.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(sellen + val.length() + pos);
+               ch = tx.at(sellen + val.length() + pos).toUpper();
                if(ch == ':')
                {
                   format.setForeground(QColor(highlightColors.keyWordColor));
@@ -802,7 +805,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
                sellen++;
                if((pos + sellen) >= tx.length())
                   break;
-               ch = tx.at(sellen + pos);
+               ch = tx.at(sellen + pos).toUpper();
 
             }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
             sellen++;
@@ -855,7 +858,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
    while(pos < tx.length())
    {
 
-      ch = tx.at(pos);
+      ch = tx.at(pos).toUpper();
       sellen = 1;
       while(true)
       {
@@ -869,7 +872,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
                   sellen = (tx.length() - pos);
                   break;
                };
-               ch = tx.at(pos + sellen);
+               ch = tx.at(pos + sellen).toUpper();
                sellen++;
 
                if(ch == '(')
@@ -894,7 +897,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
                adrress.append(ch);
                if((adrress.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(adrress.length() + pos);
+               ch = tx.at(adrress.length() + pos).toUpper();
 
             }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
@@ -905,7 +908,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
                val.append(ch);
                if((sellen + val.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(sellen + val.length() + pos);
+               ch = tx.at(sellen + val.length() + pos).toUpper();
                if(ch == ':')
                {
                   format.setForeground(QColor(highlightColors.keyWordColor));
@@ -1019,7 +1022,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
                sellen++;
                if((pos + sellen) >= tx.length())
                   break;
-               ch = tx.at(sellen + pos);
+               ch = tx.at(sellen + pos).toUpper();
 
             }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
             sellen++;
@@ -1145,7 +1148,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
    while(pos < tx.length())
    {
 
-      ch = tx.at(pos);
+      ch = tx.at(pos).toUpper();
       sellen = 1;
       while(true)
       {
@@ -1159,7 +1162,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
                   sellen = (tx.length() - pos);
                   break;
                };
-               ch = tx.at(pos + sellen);
+               ch = tx.at(pos + sellen).toUpper();
                sellen++;
 
                if(ch == '(')
@@ -1183,7 +1186,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
                adrress.append(ch);
                if((adrress.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(adrress.length() + pos);
+               ch = tx.at(adrress.length() + pos).toUpper();
             }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
 
@@ -1193,7 +1196,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
                val.append(ch);
                if((sellen + val.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(sellen + val.length() + pos);
+               ch = tx.at(sellen + val.length() + pos).toUpper();
             };
 
             sellen = adrress.length() + val.length();
@@ -1295,7 +1298,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
                sellen++;
                if((pos + sellen) >= tx.length())
                   break;
-               ch = tx.at(sellen + pos);
+               ch = tx.at(sellen + pos).toUpper();
 
             }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
             sellen++;
@@ -1386,7 +1389,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
    while(pos < tx.length())
    {
 
-      ch = tx.at(pos);
+      ch = tx.at(pos).toUpper();
       sellen = 1;
       while(true)
       {
@@ -1412,7 +1415,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
                adrress.append(ch);
                if((adrress.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(adrress.length() + pos);
+               ch = tx.at(adrress.length() + pos).toUpper();
 
             }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
@@ -1423,7 +1426,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
                val.append(ch);
                if((sellen + val.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(sellen + val.length() + pos);
+               ch = tx.at(sellen + val.length() + pos).toUpper();
                if(ch == ':')
                {
                   format.setForeground(QColor(highlightColors.keyWordColor));
@@ -1551,7 +1554,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
                sellen++;
                if((pos + sellen) >= tx.length())
                   break;
-               ch = tx.at(sellen + pos);
+               ch = tx.at(sellen + pos).toUpper();
 
             }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
             sellen++;
@@ -1627,7 +1630,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
    while(pos < tx.length())
    {
 
-      ch = tx.at(pos);
+      ch = tx.at(pos).toUpper();
       sellen = 1;
       while(true)
       {
@@ -1653,7 +1656,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
                adrress.append(ch);
                if((adrress.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(adrress.length() + pos);
+               ch = tx.at(adrress.length() + pos).toUpper();
 
             }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
@@ -1664,7 +1667,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
                val.append(ch);
                if((sellen + val.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(sellen + val.length() + pos);
+               ch = tx.at(sellen + val.length() + pos).toUpper();
                if(ch == ':')
                {
                   format.setForeground(QColor(highlightColors.keyWordColor));
@@ -1792,7 +1795,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
                sellen++;
                if((pos + sellen) >= tx.length())
                   break;
-               ch = tx.at(sellen + pos);
+               ch = tx.at(sellen + pos).toUpper();
 
             }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
             sellen++;
@@ -1955,9 +1958,15 @@ int autoDetectHighligthMode(const QString text)
       };
 
       if(text.contains(QRegExp(":[0-9]{1,}"))
-         || text.contains(QRegExp("\\bO[0-9]{1,}\\b")))
+         || text.contains(QRegExp("\\bO[0-9]{1,}\\b"))
+         || text.contains(QRegExp("(<)[\\w\\S]{1,}(>)")))
       {
          return MODE_FANUC;
+      };
+
+      if(text.contains(QRegExp("^%PM")))   // PHILIPS
+      {
+         return MODE_PHILIPS;
       };
 
       if(text.contains(QRegExp("%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b")))
@@ -1973,11 +1982,6 @@ int autoDetectHighligthMode(const QString text)
       if(text.contains(QRegExp("(BEGIN|END)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)")))
       {
          return MODE_HEIDENHAIN;
-      };
-
-      if(text.contains(QRegExp("^%PM")))   // PHILIPS
-      {
-         return MODE_PHILIPS;
       };
 
       if(text.contains(QRegExp("(\\[)(OKUMA|SINUMERIK|SINUMERIK_840|FANUC|PHILIPS|HEIDENHAIN|HEIDENHAIN_ISO)(\\])")))   // TOOLTIPS
@@ -2024,7 +2028,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
    while(pos < tx.length())
    {
 
-      ch = tx.at(pos);
+      ch = tx.at(pos).toUpper();
       sellen = 1;
       while(true)
       {
@@ -2052,7 +2056,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
                   sellen = (tx.length() - pos);
                   break;
                };
-               ch = tx.at(pos + sellen);
+               ch = tx.at(pos + sellen).toUpper();
                sellen++;
 
                if(ch == '(')
@@ -2077,7 +2081,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
                adrress.append(ch);
                if((adrress.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(adrress.length() + pos);
+               ch = tx.at(adrress.length() + pos).toUpper();
 
             }while((ch >= 'A' && ch <= 'Z') || (ch == '_'));
             sellen = adrress.length();
@@ -2088,7 +2092,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
                val.append(ch);
                if((sellen + val.length() + pos) >= tx.length())
                   break;
-               ch = tx.at(sellen + val.length() + pos);
+               ch = tx.at(sellen + val.length() + pos).toUpper();
                if(ch == ':')
                {
                   format.setForeground(QColor(highlightColors.keyWordColor));
@@ -2202,7 +2206,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
                sellen++;
                if((pos + sellen) >= tx.length())
                   break;
-               ch = tx.at(sellen + pos);
+               ch = tx.at(sellen + pos).toUpper();
 
             }while(!((ch == '"') || (ch == '\'') || ((pos + sellen) >= tx.length())));
             sellen++;

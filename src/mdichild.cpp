@@ -908,7 +908,7 @@ void MdiChild::doRemoveSpace()
             break;
       }while(!((tx.at(i) == QLatin1Char('\n'))));
 
-      if(tx.at(i) == ' ')
+      if(tx.at(i) == ' ' || tx.at(i) == '\t')
       {
          tx.remove(i, 1);
          i--;

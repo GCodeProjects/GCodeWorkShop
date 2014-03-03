@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
+    <width>537</width>
     <height>355</height>
    </rect>
   </property>
@@ -922,7 +922,13 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>tabWidget</tabstop>
   <tabstop>changeFontButton</tabstop>
+  <tabstop>rColorButton</tabstop>
+  <tabstop>lColorButton</tabstop>
+  <tabstop>operatorColorButton</tabstop>
+  <tabstop>mColorButton</tabstop>
+  <tabstop>progNameColorButton</tabstop>
   <tabstop>keyWordColorButton</tabstop>
   <tabstop>aColorButton</tabstop>
   <tabstop>dhtColorButton</tabstop>
@@ -933,6 +939,34 @@
   <tabstop>fsColorButton</tabstop>
   <tabstop>zColorButton</tabstop>
   <tabstop>commentColorButton</tabstop>
+  <tabstop>fontColorButton</tabstop>
+  <tabstop>backgroundColorButton</tabstop>
+  <tabstop>syntaxHCheckBox</tabstop>
+  <tabstop>capsLockCheckBox</tabstop>
+  <tabstop>editorToolTipsCheckBox</tabstop>
+  <tabstop>clearUndocheckBox</tabstop>
+  <tabstop>curLineColorButton</tabstop>
+  <tabstop>underlineColorButton</tabstop>
+  <tabstop>underlineCheckBox</tabstop>
+  <tabstop>clearUnderlinecheckBox</tabstop>
+  <tabstop>lstExtensions</tabstop>
+  <tabstop>btnDeleteExtension</tabstop>
+  <tabstop>edtExtension</tabstop>
+  <tabstop>btnAddExtension</tabstop>
+  <tabstop>edtSaveExtension</tabstop>
+  <tabstop>progNumCheckBox</tabstop>
+  <tabstop>firstCommCheckBox</tabstop>
+  <tabstop>edtSaveDirectory</tabstop>
+  <tabstop>btnBrowseDirectory</tabstop>
+  <tabstop>calcLineEdit</tabstop>
+  <tabstop>browseButton</tabstop>
+  <tabstop>fileNameCheckBox</tabstop>
+  <tabstop>filePathCheckBox</tabstop>
+  <tabstop>titleCheckBox</tabstop>
+  <tabstop>tabbedModecheckBox</tabstop>
+  <tabstop>readOnlyModeCheckBox</tabstop>
+  <tabstop>startEmptyCheckBox</tabstop>
+  <tabstop>highlightModeComboBox</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>defaultButton</tabstop>
   <tabstop>cancelButton</tabstop>
