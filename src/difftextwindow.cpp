@@ -152,7 +152,7 @@ DiffTextWindow::DiffTextWindow(
 
    d = new DiffTextWindowData(this);
    d->m_pDiffTextWindowFrame = pParent;
-   setFocusPolicy( Qt::ClickFocus );
+   setFocusPolicy( Qt::WheelFocus );
    setAcceptDrops( true );
 
    d->m_pOptionDialog = pOptionDialog;
