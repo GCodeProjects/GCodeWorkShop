@@ -63,6 +63,7 @@ protected:
 
 private slots:
     MdiChild *newFile();
+    MdiChild *newFileFromTemplate();
     void open();
     void openExample();
     void save();
@@ -331,6 +332,7 @@ private:
     bool deleteControlChars;
     bool removeEmptyLines;
     bool removeBefore;
+    bool endOfBlockLF;
     int sendStartDelay;
     bool doNotShowProgressInEditor;
     int recieveTimeout;
