@@ -204,7 +204,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 //
 //**************************************************************************************************
 
-MdiChild *EdytorNc::newFile()
+MdiChild *EdytorNc::newFileFromTemplate()
 {
     QString fileName = "";
 
@@ -240,6 +240,31 @@ MdiChild *EdytorNc::newFile()
     };
 
     delete(newFileDlg);
+
+    return child;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+MdiChild *EdytorNc::newFile()
+{
+    MdiChild *child = createMdiChild();
+    child->newFile();
+
+    defaultMdiWindowProperites.cursorPos = 0;
+    defaultMdiWindowProperites.readOnly = FALSE;
+    //defaultMdiWindowProperites.maximized = FALSE;
+    defaultMdiWindowProperites.geometry = QByteArray();
+    defaultMdiWindowProperites.editorToolTips = true;
+    defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+    child->setMdiWindowProperites(defaultMdiWindowProperites);
+
+    if(defaultMdiWindowProperites.maximized)
+        child->showMaximized();
+    else
+        child->showNormal();
 
     return child;
 }
@@ -1282,7 +1307,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2014.03.00 BETA" +
+                       trUtf8("<P>Version: ") + "2014.05.00 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2014 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1524,7 +1549,7 @@ void EdytorNc::createActions()
     newAct = new QAction(QIcon(":/images/filenew.png"), tr("&New"), this);
     newAct->setShortcut(QKeySequence::New);
     newAct->setToolTip(tr("Create a new file"));
-    connect(newAct, SIGNAL(triggered()), this, SLOT(newFile()));
+    connect(newAct, SIGNAL(triggered()), this, SLOT(newFileFromTemplate()));
 
     openAct = new QAction(QIcon(":/images/fileopen.png"), tr("&Open..."), this);
     openAct->setShortcut(QKeySequence::Open);
@@ -2989,6 +3014,7 @@ void EdytorNc::loadConfig()
     deleteControlChars = settings.value("DeleteControlChars", true).toBool();
     removeEmptyLines = settings.value("RemoveEmptyLines", true).toBool();
     removeBefore = settings.value("RemoveBefore", false).toBool();
+    endOfBlockLF = settings.value("EndOfBlockLF", false).toBool();
 
     sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
     doNotShowProgressInEditor = settings.value("DoNotShowProgressInEditor", false).toBool();
@@ -3084,8 +3110,17 @@ void EdytorNc::sendButtonClicked()
     else
         tx.append(activeWindow->textEdit->toPlainText());
     tx.append(sendAtEnd);
-    if(!tx.contains("\r\n"))
-        tx.replace("\n", "\r\n");
+
+    if(endOfBlockLF)
+    {
+        if(tx.contains("\r\n"))
+            tx.replace("\r\n", "\n");
+    }
+    else
+    {
+        if(!tx.contains("\r\n"))
+            tx.replace("\n", "\r\n");
+    }
 
     TransProgressDialog progressDialog(this);
     progressDialog.setRange(0, tx.size());

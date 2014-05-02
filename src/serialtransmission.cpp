@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2014 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -227,6 +227,7 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
     settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());    
     settings.setValue("RecieveTimeout", recieveTimeoutSpinBox->value());
+    settings.setValue("EndOfBlockLF", endOfBlockLF->isChecked());
 
 
     settings.endGroup();
@@ -348,6 +349,7 @@ void SPConfigDialog::changeSettings()
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
     doNotShowProgressInEditor->setChecked(settings.value("DoNotShowProgressInEditor", false).toBool());
     recieveTimeoutSpinBox->setValue(settings.value("RecieveTimeout", 0).toInt());
+    endOfBlockLF->setChecked(settings.value("EndOfBlockLF", false).toBool());
 
     settings.endGroup();
     settings.endGroup();
