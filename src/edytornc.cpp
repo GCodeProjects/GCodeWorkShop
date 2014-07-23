@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2014 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -1307,7 +1307,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2014.05.00 BETA" +
+                       trUtf8("<P>Version: ") + "2014.07.00 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2014 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1417,8 +1417,8 @@ void EdytorNc::updateCurrentSerialConfig()
     int id;
     QDir dir;
 
-    bool hasMdiChild = (activeMdiChild() != 0);
-    if(hasMdiChild && (serialToolBar > 0))
+    bool hasMdiChild = (activeMdiChild() != NULL);
+    if(hasMdiChild && (serialToolBar > NULL))
     {
         dir.setPath(activeMdiChild()->filePath());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -2802,7 +2802,7 @@ void EdytorNc::createSerialToolBar()
         attachToDirAct->setToolTip(tr("Attach current port settings to current directory of programs"));
         connect(attachToDirAct, SIGNAL(triggered()), this, SLOT(attachToDirButtonClicked()));
 
-        deAttachToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove settings from the directory"), this);
+        deAttachToDirAct = new QAction(QIcon(":/images/deattach.png"), tr("Remove settings from the current directory"), this);
         //deAttachToDirAct->setShortcut(tr("F3"));
         deAttachToDirAct->setToolTip(tr("Remove settings from the directory"));
         connect(deAttachToDirAct, SIGNAL(triggered()), this, SLOT(deAttachToDirButtonClicked()));
@@ -2813,7 +2813,7 @@ void EdytorNc::createSerialToolBar()
         connect(diagAct, SIGNAL(triggered()), this, SLOT(serialConfigTest()));
 
         serialCloseAct = new QAction(QIcon(":/images/close_small.png"), tr("Close send/receive toolbar"), this);
-        serialCloseAct->setToolTip(tr("Close find toolbar"));
+        serialCloseAct->setToolTip(tr("Close send/receive toolbar"));
         connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
 
 
@@ -3074,7 +3074,7 @@ void EdytorNc::sendButtonClicked()
     bytesToWrite = 0;
 
     activeWindow = activeMdiChild();
-    if(activeWindow <= 0)
+    if(activeWindow <= NULL)
         return;
 
     loadConfig();
@@ -3105,8 +3105,11 @@ void EdytorNc::sendButtonClicked()
     activeWindow->textEdit->setTextCursor(cursor);
 
     tx = sendAtBegining;
-    if(removeBefore)
+    if(removeBefore && (activeWindow->textEdit->toPlainText().count('%') > 1))
+    {
         tx.append(activeWindow->textEdit->toPlainText().mid(activeWindow->textEdit->toPlainText().indexOf("%")));
+
+    }
     else
         tx.append(activeWindow->textEdit->toPlainText());
     tx.append(sendAtEnd);
@@ -3307,7 +3310,7 @@ void EdytorNc::receiveButtonClicked()
 
     i = configBox->currentIndex();
     activeWindow = newFile();
-    if(activeWindow <= 0)
+    if(activeWindow <= NULL)
         return;
     configBox->setCurrentIndex(i);
 
@@ -3448,13 +3451,28 @@ void EdytorNc::receiveButtonClicked()
         }
         else
         {
-            if (removeEmptyLines)
+            tx = activeWindow->textEdit->toPlainText();
+            if(tx.contains("\n\r\r"))
+                tx.replace("\n\r\r", "\r\n");
+            else
+                if(!tx.contains("\r\n"))
+                    tx.replace("\n", "\r\n");
+
+            activeWindow->textEdit->clear();
+            activeWindow->textEdit->insertPlainText(tx);
+
+            if(removeEmptyLines)
                 activeWindow->doRemoveEmptyLines();
             activeWindow->setHighligthMode(MODE_AUTO);
             if(defaultMdiWindowProperites.defaultReadOnly)
                 activeWindow->textEdit->isReadOnly();
+
+            activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
         };
     };
+
+
+
     QApplication::restoreOverrideCursor();
 }
 
@@ -4462,7 +4480,7 @@ bool EdytorNc::event(QEvent *event)
 void EdytorNc::doSplitPrograms()
 {
     MdiChild *activeWindow = activeMdiChild();
-    if(activeWindow <= 0)
+    if(activeWindow <= NULL)
         return;
 
     QApplication::setOverrideCursor(Qt::BusyCursor);
@@ -4479,7 +4497,7 @@ void EdytorNc::doSplitPrograms()
     while(it != list.constEnd())
     {
         activeWindow = newFile();
-        if(activeWindow <= 0)
+        if(activeWindow <= NULL)
         {
             QApplication::restoreOverrideCursor();
             return;

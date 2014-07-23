@@ -760,7 +760,7 @@ p, li { white-space: pre-wrap; }
        <item row="4" column="0">
         <widget class="QCheckBox" name="endOfBlockLF">
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is send at the end of block. By default CRLF is send.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>Send only LF at the end of block</string>

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2014 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -37,6 +37,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    setAttribute(Qt::WA_DeleteOnClose);
    isUntitled = true;
    textEdit->setWordWrapMode(QTextOption::NoWrap);
+   textEdit->document()->setDocumentMargin(8);
    highlighter = NULL;
    setFocusProxy(textEdit);
 
@@ -929,26 +930,31 @@ void MdiChild::doRemoveSpace()
 
 void MdiChild::doRemoveEmptyLines()
 {
-   int i;
-   QString tx, line, newTx;
+    int i;
+    QString tx;
+    QRegExp exp;
 
-   QApplication::setOverrideCursor(Qt::BusyCursor);
-   tx = textEdit->toPlainText();
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+    tx = textEdit->toPlainText();
 
-   for(i = 0; i < (textEdit->document()->lineCount() - 1); i++)
-   {
-      line = tx.section(QLatin1Char('\n'), i, i);
-      line.simplified();
-      if(!line.isEmpty())
-         newTx.append(line + '\n');
-   };
+    exp.setPattern("[\\n]{2,}");
+    i = 0;
+    while(i >= 0)
+    {
+        i = tx.indexOf(exp, 0);
+        if(i >= 0)
+        {
+            tx.replace(exp, "\r\n");
+        };
+    };
 
-   textEdit->selectAll();
-   textEdit->insertPlainText(newTx);
-   QTextCursor cursor = textEdit->textCursor();
-   cursor.setPosition(0);
-   textEdit->setTextCursor(cursor);
-   QApplication::restoreOverrideCursor();
+    textEdit->selectAll();
+    textEdit->insertPlainText(tx);
+
+    QTextCursor cursor = textEdit->textCursor();
+    cursor.setPosition(0);
+    textEdit->setTextCursor(cursor);
+    QApplication::restoreOverrideCursor();
 }
 
 //**************************************************************************************************
@@ -3714,7 +3720,6 @@ void MdiChild::printPreview(QPrinter *printer)
     textEdit->print(printer);
 #endif
 }
-
 
 //**************************************************************************************************
 //

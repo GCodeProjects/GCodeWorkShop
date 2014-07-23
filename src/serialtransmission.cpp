@@ -1090,6 +1090,7 @@ TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : Q
    xoff = 0;
 
    connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
+   connect(this, SIGNAL(rejected()), SLOT(cancelButtonClicked()));
 
    timer = new QTimer(this);
    connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
