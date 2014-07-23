@@ -738,7 +738,7 @@ static void checkLineForComments(
       }
 
       // C++-comment
-      else if ( p[i]=='/' && i+1<size && p[i+1] =='/' )
+      else if ( p[i]==';' ) //p[i]=='/' && i+1<size && p[i+1] =='/'
       {
          int commentStart = i;
          bCommentInLine = true;
@@ -753,14 +753,14 @@ static void checkLineForComments(
       }
 
       // C-comment
-      else if ( p[i]=='/' && i+1<size && p[i+1] =='*' )
+      else if ( p[i]=='(' ) //p[i]=='/' && i+1<size && p[i+1] =='*'
       {
          int commentStart = i;
          bCommentInLine = true;
          i+=2;
          for( ; !isLineOrBufEnd(p,i,size); ++i)
          {
-            if ( i+1<size && p[i]=='*' && p[i+1]=='/')  // end of the comment
+            if ( p[i]==')' )  // end of the comment i+1<size && p[i]=='*' && p[i+1]=='/'
             {
                i+=2;
 

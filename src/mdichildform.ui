@@ -101,9 +101,6 @@
       <property name="lineWidth">
        <number>0</number>
       </property>
-      <property name="lineWrapMode">
-       <enum>QPlainTextEdit::NoWrap</enum>
-      </property>
      </widget>
     </widget>
    </item>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>263</width>
-    <height>170</height>
+    <width>261</width>
+    <height>168</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -54,6 +54,16 @@
             <width>16777215</width>
             <height>16777215</height>
            </size>
+          </property>
+          <property name="toolTip">
+           <string>Accepted values (examples): 
+1.5 
+0.5 
+.5
+1/2
+.1/4
+1.3/4
+2.5/8</string>
           </property>
           <property name="text">
            <string>0</string>
