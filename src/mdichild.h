@@ -88,7 +88,8 @@ public:
     QStringList splitFile();
     bool foundTextMatched(QString pattern, QString text);
     void setCurrentFile(const QString &fileName, const QString &text);
-    void blockSkip();
+    //void blockSkip();
+    void blockSkip(bool remove = false, bool inc = true);
     void semicomment();
     void paracomment();
     bool findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments);

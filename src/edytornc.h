@@ -156,6 +156,11 @@ private slots:
     void displayCleanUpDialog();
     void doSwapAxes();
     void doBlockSkip();
+    void doBlockSkip1();
+    void doBlockSkip2();
+    void doBlockSkip3();
+    void doBlockSkip4();
+    void doBlockSkip5();
 
 
 
@@ -210,6 +215,7 @@ private:
     QMenu *recentFileMenu;
     QMenu *editMenu;
     QMenu *toolsMenu;
+    QMenu *blockSkipMenu;
     QMenu *windowMenu;
     QMenu *helpMenu;
 
@@ -245,6 +251,8 @@ private:
     QAction *cleanUpDialogAct;
     QAction *swapAxesAct;
     QAction *insertBlockSkipAct;
+    QAction *insertBlockSkip1Act;
+    QAction *insertBlockSkip2Act;
 
     QAction *semiCommAct;
     QAction *paraCommAct;

@@ -22,6 +22,9 @@ Some features :
 		   Code colorizing detects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC
   ctrl+;  Comments/uncoments selected text with semicolon ;
   ctrl+9  Comments/uncoments selected text with parentheses ()
+  Ctrl++  Add Block Skip (/) and/or increments it
+  Ctrl+-  Add Block Skip (/) and/or decrements it
+  Ctrl+/  Removes Block Skip (/) 
   
   Find/Replace can be used to addition, subtraction, multiplication, division on numbers.
 	  in Find: Y$$ in Replace $$*2 will multiply by 2 all numbers found with Y
@@ -46,12 +49,14 @@ If you have any suggestion (bug/translations mistakes) about EdytorNC please ema
 
 To compile EdytorNC :
 - install Qt SDK
-- go to the edytornc src directory.
+- download latest version of EdytorNC source files (on sourceforge, choose "Source" tab and then "Download Snapshot") 
+- unzip downloaded file
+- run Terminal (Console application)
+- go to the EdytorNC src directory (cd /user_dir/unzipped_folder)
 - run qmake (this creates proper Makefile)
-- go to edytornc directory
-- run qmake
 - run make clean
 - run make (there is no make install)
+- go to (cd /user_dir/unzipped_folder/bin) and execute edytornc file
 
 
 To translate EdytorNC to your language you may use "Qt Linguist Download"
