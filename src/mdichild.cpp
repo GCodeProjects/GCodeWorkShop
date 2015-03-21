@@ -3036,16 +3036,88 @@ QStringList MdiChild::splitFile()
 //  insert/remove block skip /
 //**************************************************************************************************
 
-void MdiChild::blockSkip()
+//void MdiChild::blockSkip()
+//{
+//    int idx;
+
+//    if(textEdit->textCursor().hasSelection())
+//    {
+//        QTextCursor cursor = textEdit->textCursor();
+
+//        int start = textEdit->textCursor().selectionStart();
+//        int end = textEdit->textCursor().selectionEnd();
+//        if(start < end)  // selection always in same direction
+//        {
+//            cursor.setPosition(end, QTextCursor::MoveAnchor);
+//            cursor.setPosition(start, QTextCursor::KeepAnchor);
+//        };
+
+//        cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+//        textEdit->setTextCursor(cursor);
+//        QString selText = cursor.selectedText();
+
+//        QStringList list = selText.split(QChar::ParagraphSeparator);
+//        if(list.isEmpty())
+//            list.append(selText);
+
+//        bool remove = false;
+
+//        if(selText[0] == '/')
+//            remove = true;
+
+//        selText.clear();
+
+//        foreach(QString txLine, list)
+//        {
+//            if(remove)
+//            {
+//                if(txLine.length() > 0)
+//                {
+//                    idx = txLine.indexOf("/ ");
+//                    if(idx == 0)
+//                        txLine.remove(idx, 2);
+//                    else
+//                    {
+//                        idx = txLine.indexOf("/");
+//                        if(idx == 0)
+//                            txLine.remove(idx, 1);
+//                    };
+//                };
+//            }
+//            else
+//                txLine.prepend("/");
+
+//            txLine.append("\n");
+//            selText.append(txLine);
+//        };
+
+//        selText.remove(selText.length() - 1, 1);
+
+//        textEdit->insertPlainText(selText);
+//        textEdit->setTextCursor(cursor);
+//    };
+//}
+
+//**************************************************************************************************
+//  insert/remove block skip /
+//**************************************************************************************************
+
+void MdiChild::blockSkip(bool remove, bool inc)
 {
-    int idx;
+    int idx, num;
+    QRegExp regExp;
+    bool replace = false;
+    bool ok;
+    int start, end;
+    QTextCursor cursor;
+
 
     if(textEdit->textCursor().hasSelection())
     {
-        QTextCursor cursor = textEdit->textCursor();
+        cursor = textEdit->textCursor();
 
-        int start = textEdit->textCursor().selectionStart();
-        int end = textEdit->textCursor().selectionEnd();
+        start = textEdit->textCursor().selectionStart();
+        end = textEdit->textCursor().selectionEnd();
         if(start < end)  // selection always in same direction
         {
             cursor.setPosition(end, QTextCursor::MoveAnchor);
@@ -3060,10 +3132,43 @@ void MdiChild::blockSkip()
         if(list.isEmpty())
             list.append(selText);
 
-        bool remove = false;
 
-        if(selText[0] == '/')
-            remove = true;
+        regExp.setPattern(QString("/[0-9]{0,1}"));
+        regExp.setMinimal(false);
+        num = 0;
+
+        if(!remove)
+        {
+            idx = regExp.indexIn(selText, 0);
+
+            if(idx >= 0)
+            {
+                QString tx = regExp.cap(0);
+                tx.remove('/');
+                tx.remove(' ');
+
+                num = tx.toInt(&ok);
+                if(!ok)
+                {
+                    num = 0;
+                };
+
+                if(inc)
+                {
+                    num++;
+                    if(num > 9)
+                        num = 9;
+                }
+                else
+                {
+                    num--;
+                    if(num < 0)
+                        num = 0;
+                };
+                replace = true;
+            };
+        };
+
 
         selText.clear();
 
@@ -3073,19 +3178,25 @@ void MdiChild::blockSkip()
             {
                 if(txLine.length() > 0)
                 {
-                    idx = txLine.indexOf("/ ");
-                    if(idx == 0)
-                        txLine.remove(idx, 2);
-                    else
-                    {
-                        idx = txLine.indexOf("/");
-                        if(idx == 0)
-                            txLine.remove(idx, 1);
-                    };
+                    txLine.remove(regExp);
                 };
             }
             else
-                txLine.prepend("/");
+                if(replace)
+                {
+                    if(txLine.length() > 0)
+                    {
+                        if(num == 0)
+                            txLine.replace(regExp, "/");
+                        else
+                            txLine.replace(regExp, QString("/%1").arg(num));
+                    };
+                }
+                else
+                    if(num == 0)
+                      txLine.prepend("/");
+                    else
+                        txLine.prepend(QString("/%1").arg(num));
 
             txLine.append("\n");
             selText.append(txLine);
@@ -3093,7 +3204,18 @@ void MdiChild::blockSkip()
 
         selText.remove(selText.length() - 1, 1);
 
+
+        start = textEdit->textCursor().selectionStart();
+        end = textEdit->textCursor().selectionEnd();
+
         textEdit->insertPlainText(selText);
+        end = start + selText.length(); //keep selection
+        if(start < end)  // selection always in same direction
+        {
+            cursor.setPosition(end, QTextCursor::MoveAnchor);
+            cursor.setPosition(start, QTextCursor::KeepAnchor);
+        };
+        cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
         textEdit->setTextCursor(cursor);
     };
 }

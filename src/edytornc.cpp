@@ -127,11 +127,9 @@ EdytorNc::~EdytorNc()
 
 void EdytorNc::closeTab(int i)
 {
-    QMdiSubWindow *sub = mdiArea->subWindowList()[i];
-    QWidget *win = sub->widget();
-    win->close();
-    mdiArea->setActiveSubWindow(sub);
-    mdiArea->closeActiveSubWindow();
+    QTabBar* tab = mdiArea->findChild<QTabBar*>();
+    if(tab != NULL)
+        tab->removeTab(i);
 }
 
 //**************************************************************************************************
@@ -1307,8 +1305,8 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2014.07.00 BETA" +
-                       trUtf8("<P>Copyright (C) 1998 - 2014 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
+                       trUtf8("<P>Version: ") + "2015.04.00 BETA" +
+                       trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation thanks to Michael Numberger") +
                        trUtf8("<br />Czech translation thanks to Pavel Fric") +
@@ -1777,9 +1775,18 @@ void EdytorNc::createActions()
 
     insertBlockSkipAct = new QAction(QIcon(":/images/blockskip.png"), tr("Block Skip"), this);
     insertBlockSkipAct->setShortcut(tr("Ctrl+/"));
-    insertBlockSkipAct->setToolTip(tr("Insert/remove Block Skip /"));
+    insertBlockSkipAct->setToolTip(tr("Remove Block Skip /"));
     connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(doBlockSkip()));
 
+    insertBlockSkip1Act = new QAction(QIcon(":/images/blockskip.png"), tr("Block Skip +"), this);
+    insertBlockSkip1Act->setShortcut(tr("Ctrl++"));
+    insertBlockSkip1Act->setToolTip(tr("Insert/increase Block Skip /"));
+    connect(insertBlockSkip1Act, SIGNAL(triggered()), this, SLOT(doBlockSkip1()));
+
+    insertBlockSkip2Act = new QAction(QIcon(":/images/blockskip.png"), tr("Block Skip -"), this);
+    insertBlockSkip2Act->setShortcut(tr("Ctrl+-"));
+    insertBlockSkip2Act->setToolTip(tr("Insert/decrease Block Skip /"));
+    connect(insertBlockSkip2Act, SIGNAL(triggered()), this, SLOT(doBlockSkip2()));
 
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
@@ -1901,7 +1908,11 @@ void EdytorNc::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction(semiCommAct);
     toolsMenu->addAction(paraCommAct);
-    toolsMenu->addAction(insertBlockSkipAct);
+    blockSkipMenu = toolsMenu->addMenu(tr("&Block Skip"));
+    blockSkipMenu->setIcon(QIcon(":/images/blockskip.png"));
+    blockSkipMenu->addAction(insertBlockSkipAct);
+    blockSkipMenu->addAction(insertBlockSkip1Act);
+    blockSkipMenu->addAction(insertBlockSkip2Act);
     toolsMenu->addSeparator();
     toolsMenu->addAction(bhcAct);
     toolsMenu->addAction(speedFeedAct);
@@ -4517,7 +4528,57 @@ void EdytorNc::doSplitPrograms()
 void EdytorNc::doBlockSkip()
 {
     if(activeMdiChild())
-        activeMdiChild()->blockSkip();
+        activeMdiChild()->blockSkip(true);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doBlockSkip1()
+{
+    if(activeMdiChild())
+        activeMdiChild()->blockSkip(false, true);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doBlockSkip2()
+{
+    if(activeMdiChild())
+        activeMdiChild()->blockSkip(false, false);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doBlockSkip3()
+{
+    if(activeMdiChild())
+        activeMdiChild()->blockSkip(3);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doBlockSkip4()
+{
+    if(activeMdiChild())
+        activeMdiChild()->blockSkip(4);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::doBlockSkip5()
+{
+    if(activeMdiChild())
+        activeMdiChild()->blockSkip(5);
 }
 
 //**************************************************************************************************
