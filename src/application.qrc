@@ -95,5 +95,8 @@
         <file>images/cleanup.png</file>
         <file>images/swapaxes.png</file>
         <file>images/blockskip.png</file>
+        <file>images/blockskipr.png</file>
+        <file>images/blockskip+.png</file>
+        <file>images/blockskip-.png</file>
     </qresource>
 </RCC>

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -281,14 +281,14 @@ void FeedsDialog::setDefButton()
 {
    if(fInput->hasFocus() || sInput->hasFocus())
    {
-     computeButton->setDefault(FALSE);
-     computeVcButton->setDefault(TRUE);
+     computeButton->setDefault(false);
+     computeVcButton->setDefault(true);
    }
    else
      if(vcInput->hasFocus() || fzInput->hasFocus())
      {
-        computeVcButton->setDefault(FALSE);
-        computeButton->setDefault(TRUE);
+        computeVcButton->setDefault(false);
+        computeButton->setDefault(true);
      };
 
 }
@@ -422,10 +422,10 @@ RenumberDialog::RenumberDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(pa
    toInput->setValue(settings.value("To", 8000).toInt());
    mSpinBox->setValue(settings.value("Prec", 4).toInt());
 
-   mRenumEmpty->setChecked(settings.value("RenumEmpty", FALSE).toBool());
-   mRenumWithComm->setChecked(settings.value("RenumWithComm", FALSE).toBool());
-   mRenumMarked->setChecked(settings.value("RenumMarked", TRUE).toBool());
-   mCheckDivide->setChecked(settings.value("CheckDivide", FALSE).toBool());
+   mRenumEmpty->setChecked(settings.value("RenumEmpty", false).toBool());
+   mRenumWithComm->setChecked(settings.value("RenumWithComm", false).toBool());
+   mRenumMarked->setChecked(settings.value("RenumMarked", true).toBool());
+   mCheckDivide->setChecked(settings.value("CheckDivide", false).toBool());
 
    if(mCheckDivide->isChecked())
      divideClicked();
@@ -559,23 +559,23 @@ void RenumberDialog::divideClicked()
 
 void RenumberDialog::renumClicked()
 {
-   formInput->setEnabled(TRUE);
-   startAtInput->setEnabled(TRUE);
-   incInput->setEnabled(TRUE);
-   toInput->setEnabled(TRUE);
+   formInput->setEnabled(true);
+   startAtInput->setEnabled(true);
+   incInput->setEnabled(true);
+   toInput->setEnabled(true);
 
    //startAtInput->setValue(10);
    //incInput->setValue(10);
    //toInput->setValue(8000);
 
-   mRenumLines->setChecked(TRUE);
-   mAllLines->setChecked(FALSE);
-   mRemoveAll->setChecked(FALSE);
+   mRenumLines->setChecked(true);
+   mAllLines->setChecked(false);
+   mRemoveAll->setChecked(false);
 
-   mRenumWithComm->setEnabled(FALSE);
-   mRenumEmpty->setEnabled(FALSE);
+   mRenumWithComm->setEnabled(false);
+   mRenumEmpty->setEnabled(false);
 
-   mCheckDivide->setEnabled(TRUE);
+   mCheckDivide->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -584,22 +584,22 @@ void RenumberDialog::renumClicked()
 
 void RenumberDialog::mRenumHeClicked()
 {
-   formInput->setEnabled(FALSE);
-   startAtInput->setEnabled(TRUE);
-   incInput->setEnabled(TRUE);
-   toInput->setEnabled(FALSE);
+   formInput->setEnabled(false);
+   startAtInput->setEnabled(true);
+   incInput->setEnabled(true);
+   toInput->setEnabled(false);
 
    //startAtInput->setValue(0);
    //incInput->setValue(1);
 
-   //mRenumLines->setChecked(TRUE);
-   //mAllLines->setChecked(FALSE);
-   //mRemoveAll->setChecked(FALSE);
+   //mRenumLines->setChecked(true);
+   //mAllLines->setChecked(false);
+   //mRemoveAll->setChecked(false);
 
-   mRenumWithComm->setEnabled(FALSE);
-   mRenumEmpty->setEnabled(TRUE);
+   mRenumWithComm->setEnabled(false);
+   mRenumEmpty->setEnabled(true);
 
-   mCheckDivide->setEnabled(FALSE);
+   mCheckDivide->setEnabled(false);
 }
 
 //**************************************************************************************************
@@ -608,22 +608,22 @@ void RenumberDialog::mRenumHeClicked()
 
 void RenumberDialog::allLinesClicked()
 {
-   formInput->setEnabled(FALSE);
-   startAtInput->setEnabled(TRUE);
-   incInput->setEnabled(TRUE);
-   toInput->setEnabled(FALSE);
+   formInput->setEnabled(false);
+   startAtInput->setEnabled(true);
+   incInput->setEnabled(true);
+   toInput->setEnabled(false);
 
    //startAtInput->setValue(10);
    //incInput->setValue(10);
 
-   //mRenumLines->setChecked(FALSE);
-   //mAllLines->setChecked(TRUE);
-   //mRemoveAll->setChecked(FALSE);
+   //mRenumLines->setChecked(false);
+   //mAllLines->setChecked(true);
+   //mRemoveAll->setChecked(false);
 
-   mRenumWithComm->setEnabled(TRUE);
-   mRenumEmpty->setEnabled(TRUE);
+   mRenumWithComm->setEnabled(true);
+   mRenumEmpty->setEnabled(true);
 
-   mCheckDivide->setEnabled(TRUE);
+   mCheckDivide->setEnabled(true);
 }
 
 //**************************************************************************************************
@@ -632,19 +632,19 @@ void RenumberDialog::allLinesClicked()
 
 void RenumberDialog::removeAllClicked()
 {
-   formInput->setEnabled(FALSE);
-   startAtInput->setEnabled(FALSE);
-   incInput->setEnabled(FALSE);
-   toInput->setEnabled(FALSE);
+   formInput->setEnabled(false);
+   startAtInput->setEnabled(false);
+   incInput->setEnabled(false);
+   toInput->setEnabled(false);
 
-   //mRenumLines->setChecked(FALSE);
-  // mAllLines->setChecked(FALSE);
-   //mRemoveAll->setChecked(TRUE);
+   //mRenumLines->setChecked(false);
+  // mAllLines->setChecked(false);
+   //mRemoveAll->setChecked(true);
 
-   mRenumWithComm->setEnabled(FALSE);
-   mRenumEmpty->setEnabled(FALSE);
+   mRenumWithComm->setEnabled(false);
+   mRenumEmpty->setEnabled(false);
 
-   mCheckDivide->setEnabled(FALSE);
+   mCheckDivide->setEnabled(false);
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1254,15 +1254,15 @@ void TriangleDialog::rightTriangleCheckBoxToggled()
 
   if(rightTriangleCheckBox->isChecked())
   {
-     aACheckBox->setChecked(TRUE);
+     aACheckBox->setChecked(true);
      aAInput->setText("90");
-     aACheckBox->setEnabled(FALSE);
+     aACheckBox->setEnabled(false);
      picLabel->setPixmap(*pic2);
   }
   else
   {
-     aACheckBox->setChecked(FALSE);
-     aACheckBox->setEnabled(TRUE);
+     aACheckBox->setChecked(false);
+     aACheckBox->setEnabled(true);
      picLabel->setPixmap(*pic1);
   };
 
@@ -1304,77 +1304,77 @@ void TriangleDialog::checkBoxToggled()
       (mode == 0x43) || (mode == 0x25) || (mode == 0x16) || (mode == 0x13) || (mode == 0x15) ||
       (mode == 0x23) || (mode == 0x26) || (mode == 0x45) || (mode == 0x46))
    {
-      computeButton->setEnabled(TRUE);
+      computeButton->setEnabled(true);
       if(!(mode & 0x01))
-        aCheckBox->setEnabled(FALSE);
+        aCheckBox->setEnabled(false);
       else
       {
-         aInput->setReadOnly(FALSE);
+         aInput->setReadOnly(false);
          aInput->setPalette(palette);
       };
 
       if(!(mode & 0x02))
-        bCheckBox->setEnabled(FALSE);
+        bCheckBox->setEnabled(false);
       else
       {
-         bInput->setReadOnly(FALSE);
+         bInput->setReadOnly(false);
          bInput->setPalette(palette);
       };
 
       if(!(mode & 0x04))
-        cCheckBox->setEnabled(FALSE);
+        cCheckBox->setEnabled(false);
       else
       {
-         cInput->setReadOnly(FALSE);
+         cInput->setReadOnly(false);
          cInput->setPalette(palette);
       };
 
 
       if(!(mode & 0x10))
-        aACheckBox->setEnabled(FALSE);
+        aACheckBox->setEnabled(false);
       else
       {
          if(!rightTriangleCheckBox->isChecked())
          {
-            aAInput->setReadOnly(FALSE);
+            aAInput->setReadOnly(false);
             aAInput->setPalette(palette);
          };
       };
 
       if(!(mode & 0x20))
-        aBCheckBox->setEnabled(FALSE);
+        aBCheckBox->setEnabled(false);
       else
       {
-         aBInput->setReadOnly(FALSE);
+         aBInput->setReadOnly(false);
          aBInput->setPalette(palette);
       };
 
       if(!(mode & 0x40))
-        aCCheckBox->setEnabled(FALSE);
+        aCCheckBox->setEnabled(false);
       else
       {
-         aCInput->setReadOnly(FALSE);
+         aCInput->setReadOnly(false);
          aCInput->setPalette(palette);
       };
    }
    else
    {
-      aCheckBox->setEnabled(TRUE);
-      aInput->setReadOnly(TRUE);
-      bCheckBox->setEnabled(TRUE);
-      bInput->setReadOnly(TRUE);
-      cCheckBox->setEnabled(TRUE);
-      cInput->setReadOnly(TRUE);
+      aCheckBox->setEnabled(true);
+      aInput->setReadOnly(true);
+      bCheckBox->setEnabled(true);
+      bInput->setReadOnly(true);
+      cCheckBox->setEnabled(true);
+      cInput->setReadOnly(true);
 
       if(!rightTriangleCheckBox->isChecked())
       {
-         aACheckBox->setEnabled(TRUE);
-         aAInput->setReadOnly(TRUE);
+         aACheckBox->setEnabled(true);
+         aAInput->setReadOnly(true);
       };
-      aBCheckBox->setEnabled(TRUE);
-      aBInput->setReadOnly(TRUE);
-      aCCheckBox->setEnabled(TRUE);
-      aCInput->setReadOnly(TRUE);
+      aBCheckBox->setEnabled(true);
+      aBInput->setReadOnly(true);
+      aCCheckBox->setEnabled(true);
+      aCInput->setReadOnly(true);
 
       palette.setColor(aInput->foregroundRole(), Qt::blue);
       aInput->setPalette(palette);
@@ -1384,7 +1384,7 @@ void TriangleDialog::checkBoxToggled()
       aBInput->setPalette(palette);
       aCInput->setPalette(palette);
 
-      computeButton->setEnabled(FALSE);
+      computeButton->setEnabled(false);
 
    };
 }
@@ -2164,7 +2164,7 @@ void BHCDialog::computeButtonClicked()
    drawing->setScale(maxDia);
 
    drawing->show();
-   drawing->setUpdatesEnabled(FALSE);
+   drawing->setUpdatesEnabled(false);
    drawing->clear();
 
 
@@ -2304,7 +2304,7 @@ void BHCDialog::computeButtonClicked()
       };
 
    };
-   drawing->setUpdatesEnabled(TRUE);
+   drawing->setUpdatesEnabled(true);
    drawing->update();
 
    //adjustSize();
@@ -2480,8 +2480,8 @@ void ChamferDialog::checkBoxToggled()
 
    if(dlCheckBox->isChecked())
    {
-      xoCheckBox->setEnabled(FALSE);
-      xdCheckBox->setEnabled(FALSE);
+      xoCheckBox->setEnabled(false);
+      xdCheckBox->setEnabled(false);
    };
 
    angCheckBox->setEnabled(!zlCheckBox->isChecked() || !dlCheckBox->isChecked());
@@ -2489,27 +2489,27 @@ void ChamferDialog::checkBoxToggled()
 
    if(!angCheckBox->isEnabled())
    {
-     angCheckBox->setChecked(FALSE);
+     angCheckBox->setChecked(false);
      angInput->setText("0");
    };
    if(!zlCheckBox->isEnabled())
    {
-     zlCheckBox->setChecked(FALSE);
+     zlCheckBox->setChecked(false);
      zlInput->setText("0");
    };
    if(!dlCheckBox->isEnabled())
    {
-     dlCheckBox->setChecked(FALSE);
+     dlCheckBox->setChecked(false);
      dlInput->setText("0");
    };
    if(!xdCheckBox->isEnabled())
    {
-     xdCheckBox->setChecked(FALSE);
+     xdCheckBox->setChecked(false);
      xdInput->setText("0");
    };
    if(!xoCheckBox->isEnabled())
    {
-     xoCheckBox->setChecked(FALSE);
+     xoCheckBox->setChecked(false);
      xoInput->setText("0");
    };
 
@@ -2519,7 +2519,7 @@ void ChamferDialog::checkBoxToggled()
    xdInput->setReadOnly(!xdCheckBox->isChecked());
    xoInput->setReadOnly(!xoCheckBox->isChecked());
 
-   computeButton->setEnabled(FALSE);
+   computeButton->setEnabled(false);
 
    inputChanged();
 
@@ -2563,7 +2563,7 @@ void ChamferDialog::inputChanged()
    if(angCheckBox->isChecked() && zlCheckBox->isChecked())
      if(zlInput->hasAcceptableInput() && angInput->hasAcceptableInput())
      {
-        computeButton->setEnabled(TRUE);
+        computeButton->setEnabled(true);
         return;
      };
 
@@ -2571,25 +2571,25 @@ void ChamferDialog::inputChanged()
    if(angCheckBox->isChecked() && dlCheckBox->isChecked())
      if(dlInput->hasAcceptableInput() && angInput->hasAcceptableInput())
      {
-        computeButton->setEnabled(TRUE);
+        computeButton->setEnabled(true);
         return;
      };
 
    if(angCheckBox->isChecked() && xoCheckBox->isChecked() && xdCheckBox->isChecked())
      if(xdInput->hasAcceptableInput() && xoInput->hasAcceptableInput() && angInput->hasAcceptableInput())
      {
-        computeButton->setEnabled(TRUE);
+        computeButton->setEnabled(true);
         return;
      };
 
    if(zlCheckBox->isChecked() && dlCheckBox->isChecked())
      if(zlInput->hasAcceptableInput() && dlInput->hasAcceptableInput())
      {
-        computeButton->setEnabled(TRUE);
+        computeButton->setEnabled(true);
         return;
      };
 
-   computeButton->setEnabled(FALSE);
+   computeButton->setEnabled(false);
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2703,7 +2703,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
 
    palette.setColor(backgroundColorButton->foregroundRole(), prop->hColors.backgroundColor);
    backgroundColorButton->setPalette(palette);
-   backgroundColorButton->setAutoFillBackground(TRUE);
+   backgroundColorButton->setAutoFillBackground(true);
    colorButtons->addButton(backgroundColorButton);
 
 
@@ -2719,109 +2719,109 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
 
    palette.setColor(fontColorButton->foregroundRole(), prop->hColors.defaultColor);
    fontColorButton->setPalette(palette);
-   fontColorButton->setAutoFillBackground(TRUE);
+   fontColorButton->setAutoFillBackground(true);
    fontColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(fontColorButton);
 
    palette.setColor(commentColorButton->foregroundRole(), prop->hColors.commentColor);
    commentColorButton->setPalette(palette);
-   commentColorButton->setAutoFillBackground(TRUE);
+   commentColorButton->setAutoFillBackground(true);
    commentColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(commentColorButton);
 
    palette.setColor(gColorButton->foregroundRole(), prop->hColors.gColor);
    gColorButton->setPalette(palette);
-   gColorButton->setAutoFillBackground(TRUE);
+   gColorButton->setAutoFillBackground(true);
    gColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(gColorButton);
 
    palette.setColor(mColorButton->foregroundRole(), prop->hColors.mColor);
    mColorButton->setPalette(palette);
-   mColorButton->setAutoFillBackground(TRUE);
+   mColorButton->setAutoFillBackground(true);
    mColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(mColorButton);
 
    palette.setColor(nColorButton->foregroundRole(), prop->hColors.nColor);
    nColorButton->setPalette(palette);
-   nColorButton->setAutoFillBackground(TRUE);
+   nColorButton->setAutoFillBackground(true);
    nColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(nColorButton);
 
    palette.setColor(lColorButton->foregroundRole(), prop->hColors.lColor);
    lColorButton->setPalette(palette);
-   lColorButton->setAutoFillBackground(TRUE);
+   lColorButton->setAutoFillBackground(true);
    lColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(lColorButton);
 
    palette.setColor(fsColorButton->foregroundRole(), prop->hColors.fsColor);
    fsColorButton->setPalette(palette);
-   fsColorButton->setAutoFillBackground(TRUE);
+   fsColorButton->setAutoFillBackground(true);
    fsColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(fsColorButton);
 
    palette.setColor(dhtColorButton->foregroundRole(), prop->hColors.dhtColor);
    dhtColorButton->setPalette(palette);
-   dhtColorButton->setAutoFillBackground(TRUE);
+   dhtColorButton->setAutoFillBackground(true);
    dhtColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(dhtColorButton);
 
    palette.setColor(rColorButton->foregroundRole(), prop->hColors.rColor);
    rColorButton->setPalette(palette);
-   rColorButton->setAutoFillBackground(TRUE);
+   rColorButton->setAutoFillBackground(true);
    rColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(rColorButton);
 
    palette.setColor(macroColorButton->foregroundRole(), prop->hColors.macroColor);
    macroColorButton->setPalette(palette);
-   macroColorButton->setAutoFillBackground(TRUE);
+   macroColorButton->setAutoFillBackground(true);
    macroColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(macroColorButton);
 
    palette.setColor(keyWordColorButton->foregroundRole(), prop->hColors.keyWordColor);
    keyWordColorButton->setPalette(palette);
-   keyWordColorButton->setAutoFillBackground(TRUE);
+   keyWordColorButton->setAutoFillBackground(true);
    keyWordColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(keyWordColorButton);
 
    palette.setColor(progNameColorButton->foregroundRole(), prop->hColors.progNameColor);
    progNameColorButton->setPalette(palette);
-   progNameColorButton->setAutoFillBackground(TRUE);
+   progNameColorButton->setAutoFillBackground(true);
    progNameColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(progNameColorButton);
 
    palette.setColor(operatorColorButton->foregroundRole(), prop->hColors.operatorColor);
    operatorColorButton->setPalette(palette);
-   operatorColorButton->setAutoFillBackground(TRUE);
+   operatorColorButton->setAutoFillBackground(true);
    operatorColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(operatorColorButton);
 
    palette.setColor(zColorButton->foregroundRole(), prop->hColors.zColor);
    zColorButton->setPalette(palette);
-   zColorButton->setAutoFillBackground(TRUE);
+   zColorButton->setAutoFillBackground(true);
    zColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(zColorButton);
 
    palette.setColor(aColorButton->foregroundRole(), prop->hColors.aColor);
    aColorButton->setPalette(palette);
-   aColorButton->setAutoFillBackground(TRUE);
+   aColorButton->setAutoFillBackground(true);
    aColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(aColorButton);
 
    palette.setColor(bColorButton->foregroundRole(), prop->hColors.bColor);
    bColorButton->setPalette(palette);
-   bColorButton->setAutoFillBackground(TRUE);
+   bColorButton->setAutoFillBackground(true);
    bColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(bColorButton);
 
    palette.setColor(underlineColorButton->foregroundRole(), prop->underlineColor);
    underlineColorButton->setPalette(palette);
-   underlineColorButton->setAutoFillBackground(TRUE);
+   underlineColorButton->setAutoFillBackground(true);
    underlineColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(underlineColorButton);
 
    palette.setColor(curLineColorButton->foregroundRole(), prop->lineColor);
    curLineColorButton->setPalette(palette);
-   curLineColorButton->setAutoFillBackground(TRUE);
+   curLineColorButton->setAutoFillBackground(true);
    curLineColorButton->setBackgroundRole(QPalette::Base);
    colorButtons->addButton(curLineColorButton);
 

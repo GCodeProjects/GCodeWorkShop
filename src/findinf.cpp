@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -130,7 +130,7 @@ void FindInFiles::find()
     QString fileName = fileComboBox->currentText();
     QString path = QDir(directoryComboBox->currentText()).absolutePath();
 
-    findButton->setEnabled(FALSE);
+    findButton->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
     qApp->processEvents();
 
@@ -167,7 +167,7 @@ void FindInFiles::find()
     filesTable->resizeColumnsToContents();
 
 
-    findButton->setEnabled(TRUE);
+    findButton->setEnabled(true);
     QApplication::restoreOverrideCursor();
 }
 
@@ -452,14 +452,14 @@ void FindInFiles::readSettings()
 
    QSettings settings("EdytorNC", "EdytorNC");
 
-   intCapsLock = settings.value("IntCapsLock", TRUE).toBool();
+   intCapsLock = settings.value("IntCapsLock", true).toBool();
 
    settings.beginGroup("FindFileDialog");
 
-   wholeWordsCheckBox->setChecked(settings.value("WholeWords", FALSE).toBool());
-   subFoldersCheckBox->setChecked(settings.value("SubFolders", FALSE).toBool());
-   commentStyle1CheckBox->setChecked(settings.value("CommentStyle1", FALSE).toBool());
-   commentStyle2CheckBox->setChecked(settings.value("CommentStyle2", FALSE).toBool());
+   wholeWordsCheckBox->setChecked(settings.value("WholeWords", false).toBool());
+   subFoldersCheckBox->setChecked(settings.value("SubFolders", false).toBool());
+   commentStyle1CheckBox->setChecked(settings.value("CommentStyle1", false).toBool());
+   commentStyle2CheckBox->setChecked(settings.value("CommentStyle2", false).toBool());
 
    list = settings.value("Dirs", QStringList(QDir::homePath())).toStringList();
    list.removeDuplicates();
@@ -701,7 +701,7 @@ bool FindInFiles::eventFilter(QObject *obj, QEvent *ev)
           {
              if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
              {
-                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
                 return true;
              };
 
@@ -711,20 +711,20 @@ bool FindInFiles::eventFilter(QObject *obj, QEvent *ev)
           {
              if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
              {
-                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), false, 1));
                 return true;
 
              };
 
              if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
              {
-                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+                QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), false, 1));
                 return true;
              };
           };
        };
 
-       return FALSE;
+       return false;
    }
    else
    {

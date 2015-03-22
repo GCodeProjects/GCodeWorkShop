@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -23,7 +23,8 @@
 #ifndef MDICHILD_H
 #define MDICHILD_H
 
-#include <QtGui>
+#include <QtWidgets>
+#include <QtPrintSupport/QPrinter>
 
 #include "highlighter.h"
 #include "commoninc.h"

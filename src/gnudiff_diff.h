@@ -225,7 +225,7 @@ struct file_data {
     lin nondiscarded_lines;
 
     /* Vector, indexed by real origin-0 line number,
-       containing TRUE for a line that is an insertion or a deletion.
+       containing true for a line that is an insertion or a deletion.
        The results of comparison are stored here.  */
     bool *changed;
 
