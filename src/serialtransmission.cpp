@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2014 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -33,12 +33,12 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
    setupUi(this);
    setAttribute(Qt::WA_DeleteOnClose);
    setWindowTitle(tr("Serial port configuration"));
-   setModal(TRUE);
+   setModal(true);
 
    configName = confName;
 
    baudGroup = new QButtonGroup(this);
-   baudGroup->setExclusive(TRUE);
+   baudGroup->setExclusive(true);
    baudGroup->addButton(b1CheckBox, BAUD300);
    baudGroup->addButton(b2CheckBox, BAUD600);
    baudGroup->addButton(b3CheckBox, BAUD1200);
@@ -53,7 +53,7 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
 
 
    dataBitsGroup = new QButtonGroup(this);
-   dataBitsGroup->setExclusive(TRUE);
+   dataBitsGroup->setExclusive(true);
    dataBitsGroup->addButton(d1CheckBox, DATA_5);
    dataBitsGroup->addButton(d2CheckBox, DATA_6);
    dataBitsGroup->addButton(d3CheckBox, DATA_7);
@@ -61,13 +61,13 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
 
 
    stopBitsGroup = new QButtonGroup(this);
-   stopBitsGroup->setExclusive(TRUE);
+   stopBitsGroup->setExclusive(true);
    stopBitsGroup->addButton(s1CheckBox, STOP_1);
    stopBitsGroup->addButton(s2CheckBox, STOP_2);
 
 
    parityGroup = new QButtonGroup(this);
-   parityGroup->setExclusive(TRUE);
+   parityGroup->setExclusive(true);
    parityGroup->addButton(p1CheckBox, PAR_NONE);
    parityGroup->addButton(p2CheckBox, PAR_ODD);
    parityGroup->addButton(p3CheckBox, PAR_EVEN);
@@ -75,7 +75,7 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
 
 
    flowCtlGroup = new QButtonGroup(this);
-   flowCtlGroup->setExclusive(TRUE);
+   flowCtlGroup->setExclusive(true);
    flowCtlGroup->addButton(f1CheckBox, FLOW_OFF);
    flowCtlGroup->addButton(f2CheckBox, FLOW_HARDWARE);
    flowCtlGroup->addButton(f3CheckBox, FLOW_XONXOFF);
@@ -271,69 +271,69 @@ void SPConfigDialog::changeSettings()
     id = settings.value("BaudRate", BAUD9600).toInt();
     switch(id)
     {
-           case BAUD300    : b1CheckBox->setChecked(TRUE);
+           case BAUD300    : b1CheckBox->setChecked(true);
                              break;
-           case BAUD600    : b2CheckBox->setChecked(TRUE);
+           case BAUD600    : b2CheckBox->setChecked(true);
                              break;
-           case BAUD1200   : b3CheckBox->setChecked(TRUE);
+           case BAUD1200   : b3CheckBox->setChecked(true);
                              break;
-           case BAUD2400   : b4CheckBox->setChecked(TRUE);
+           case BAUD2400   : b4CheckBox->setChecked(true);
                              break;
-           case BAUD4800   : b5CheckBox->setChecked(TRUE);
+           case BAUD4800   : b5CheckBox->setChecked(true);
                              break;
-           case BAUD9600   : b6CheckBox->setChecked(TRUE);
+           case BAUD9600   : b6CheckBox->setChecked(true);
                              break;
-           case BAUD19200  : b7CheckBox->setChecked(TRUE);
+           case BAUD19200  : b7CheckBox->setChecked(true);
                              break;
-           case BAUD38400  : b8CheckBox->setChecked(TRUE);
+           case BAUD38400  : b8CheckBox->setChecked(true);
                              break;
-           case BAUD57600  : b9CheckBox->setChecked(TRUE);
+           case BAUD57600  : b9CheckBox->setChecked(true);
                              break;
-           case BAUD115200 : b11CheckBox->setChecked(TRUE);
+           case BAUD115200 : b11CheckBox->setChecked(true);
                              break;
     };
 
     id = settings.value("DataBits", DATA_8).toInt();
     switch(id)
     {
-           case DATA_5    : d1CheckBox->setChecked(TRUE);
+           case DATA_5    : d1CheckBox->setChecked(true);
                             break;
-           case DATA_6    : d2CheckBox->setChecked(TRUE);
+           case DATA_6    : d2CheckBox->setChecked(true);
                             break;
-           case DATA_7    : d3CheckBox->setChecked(TRUE);
+           case DATA_7    : d3CheckBox->setChecked(true);
                             break;
-           case DATA_8    : d4CheckBox->setChecked(TRUE);
+           case DATA_8    : d4CheckBox->setChecked(true);
                             break;
     };
 
     id = settings.value("StopBits", STOP_2).toInt();
     switch(id)
     {
-           case STOP_1    : s1CheckBox->setChecked(TRUE);
+           case STOP_1    : s1CheckBox->setChecked(true);
                             break;
-           case STOP_2    : s2CheckBox->setChecked(TRUE);
+           case STOP_2    : s2CheckBox->setChecked(true);
                             break;
     };
 
     id = settings.value("Parity", PAR_NONE).toInt();
     switch(id)
     {
-           case PAR_NONE  : p1CheckBox->setChecked(TRUE);
+           case PAR_NONE  : p1CheckBox->setChecked(true);
                             break;
-           case PAR_ODD   : p2CheckBox->setChecked(TRUE);
+           case PAR_ODD   : p2CheckBox->setChecked(true);
                             break;
-           case PAR_EVEN  : p3CheckBox->setChecked(TRUE);
+           case PAR_EVEN  : p3CheckBox->setChecked(true);
                             break;
     };
 
     id = settings.value("FlowControl", FLOW_HARDWARE).toInt();
     switch(id)
     {
-           case FLOW_OFF       : f1CheckBox->setChecked(TRUE);
+           case FLOW_OFF       : f1CheckBox->setChecked(true);
                                  break;
-           case FLOW_HARDWARE  : f2CheckBox->setChecked(TRUE);
+           case FLOW_HARDWARE  : f2CheckBox->setChecked(true);
                                  break;
-           case FLOW_XONXOFF   : f3CheckBox->setChecked(TRUE);
+           case FLOW_XONXOFF   : f3CheckBox->setChecked(true);
                                  break;
     };
 
@@ -595,7 +595,7 @@ void TransmissionDialog::sendTextEditChanged()
    cr.setCharFormat(format);
    for(i = 0; i < tx.size(); i++)
    {
-      ty = QString("%1 ").arg((int)tx.at(i).toAscii(), 2, 16, (QChar)'0');
+      ty = QString("%1 ").arg((int)tx.at(i).toLatin1(), 2, 16, (QChar)'0');
 
       cr.insertText(ty);
    };
@@ -1037,7 +1037,7 @@ void TransmissionDialog::sendText(QString tx)
 
          if((bytesToWrite == 0) && (!xoffReceived))
          {
-            if(!comPort->putChar(tx[i].toAscii()))
+            if(!comPort->putChar(tx[i].toLatin1()))
                showError(comPort->lastError());
 
             errorLabel->setText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
@@ -1045,7 +1045,7 @@ void TransmissionDialog::sendText(QString tx)
 
             if(lineDelay > 0)
             {
-               if(tx[i].toAscii() == '\n')
+               if(tx[i].toLatin1() == '\n')
                {
                   readyCont = false;
                   QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
@@ -1253,13 +1253,13 @@ void TransProgressDialog::updateLeds()
 //     return;
 //   configBox->setCurrentIndex(i);
 //
-//   receiveAct->setEnabled(FALSE);
-//   sendAct->setEnabled(FALSE);
+//   receiveAct->setEnabled(false);
+//   sendAct->setEnabled(false);
 //   QApplication::setOverrideCursor(Qt::BusyCursor);
 //
 //   QProgressDialog progressDialog(this);
 //   progressDialog.setRange(0, 32768);
-//   progressDialog.setModal(TRUE);
+//   progressDialog.setModal(true);
 //   progressDialog.setLabelText(tr("Waiting for data..."));
 //   progressDialog.open();
 //   qApp->processEvents();
@@ -1307,9 +1307,9 @@ void TransProgressDialog::updateLeds()
 //
 //   comPort->close();
 //   delete(comPort);
-//   stopButton->setEnabled(FALSE);
-//   reciveButton->setEnabled(TRUE);
-//   sendButton->setEnabled(TRUE);
+//   stopButton->setEnabled(false);
+//   reciveButton->setEnabled(true);
+//   sendButton->setEnabled(true);
 //   QApplication::restoreOverrideCursor();
 //
 //
@@ -1326,9 +1326,9 @@ void TransProgressDialog::updateLeds()
 ////      showError(E_INVALID_FD);
 ////      return;
 ////   };
-////   reciveButton->setEnabled(FALSE);
-////   sendButton->setEnabled(FALSE);
-////   stopButton->setEnabled(TRUE);
+////   reciveButton->setEnabled(false);
+////   sendButton->setEnabled(false);
+////   stopButton->setEnabled(true);
 ////   QApplication::setOverrideCursor(Qt::BusyCursor);
 ////
 ////   while(!stop)

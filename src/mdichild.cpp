@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2014 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -24,6 +24,7 @@
 #include "mdichild.h"
 #include "edytornc.h"
 
+#include <QPrintPreviewDialog>
 
 
 
@@ -41,7 +42,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    highlighter = NULL;
    setFocusProxy(textEdit);
 
-   marginWidget->setAutoFillBackground(TRUE);
+   marginWidget->setAutoFillBackground(true);
 
    textEdit->installEventFilter(this);
    setWindowIcon(QIcon(":/images/ncfile.png"));
@@ -304,13 +305,13 @@ bool MdiChild::saveFile(const QString &fileName)
    cursor = textEdit->document()->find(exp, cursor);
    if(!cursor.isNull())
    {
-      textEdit->setUpdatesEnabled(FALSE);
+      textEdit->setUpdatesEnabled(false);
       cursor.beginEditBlock();
       cursor.removeSelectedText();
       cursor.insertText(dat.toString("dd.MM.yyyy"));
       cursor.endEditBlock();
 
-      textEdit->setUpdatesEnabled(TRUE);
+      textEdit->setUpdatesEnabled(true);
       textEdit->repaint();
    }
    else
@@ -321,13 +322,13 @@ bool MdiChild::saveFile(const QString &fileName)
       cursor = textEdit->document()->find(exp, cursor);
       if(!cursor.isNull())
       {
-         textEdit->setUpdatesEnabled(FALSE);
+         textEdit->setUpdatesEnabled(false);
          cursor.beginEditBlock();
          cursor.removeSelectedText();
          cursor.insertText(dat.toString("dd.MM.yyyy"));
          cursor.endEditBlock();
 
-         textEdit->setUpdatesEnabled(TRUE);
+         textEdit->setUpdatesEnabled(true);
          textEdit->repaint();
       }
    };
@@ -393,16 +394,16 @@ bool MdiChild::maybeSave()
       {
       case QMessageBox::Save    : return save();
          break;
-      case QMessageBox::Discard : textEdit->document()->setModified(FALSE);
-         return TRUE;
+      case QMessageBox::Discard : textEdit->document()->setModified(false);
+         return true;
          break;
-      case QMessageBox::Cancel  : return FALSE;
+      case QMessageBox::Cancel  : return false;
          break;
-      default                   : return TRUE;
+      default                   : return true;
          break;
       } ;
    };
-   return TRUE;
+   return true;
 }
 
 //**************************************************************************************************
@@ -596,7 +597,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
          {
             if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
             {
-               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
                return true;
             };
 
@@ -606,24 +607,25 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
          {
             if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
             {
-               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), false, 1));
                return true;
 
             };
 
             if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
             {
-               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), false, 1));
                return true;
             };
          };
       };
 
-      return FALSE;
+      return false;
    }
    else
    {
-      return textEdit->eventFilter(obj, ev);
+      //return textEdit->eventFilter(obj, ev);
+      return false;
    };
 }
 
@@ -1809,7 +1811,7 @@ int MdiChild::compileMacro()
    text = textEdit->toPlainText();
    pos = 0;
    exp.setCaseSensitivity(Qt::CaseInsensitive);
-   //exp.setWildcard(FALSE);
+   //exp.setWildcard(false);
 
    exp.setPattern("\\{BEGIN\\}");
    defBegin = exp.indexIn(text, pos);

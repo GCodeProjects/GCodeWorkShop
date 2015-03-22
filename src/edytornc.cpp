@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2014 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -23,6 +23,8 @@
 #include "edytornc.h"
 #include "mdichild.h"
 #include "tooltips.h"
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
@@ -148,7 +150,7 @@ void EdytorNc::closeCurrentWindow()
 
 void EdytorNc::closeEvent(QCloseEvent *event)
 {
-    setUpdatesEnabled(FALSE);
+    setUpdatesEnabled(false);
     writeSettings();
 
     if(!maybeSaveProject())
@@ -165,7 +167,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 
         if(mdiChild->textEdit->document()->isModified())
         {
-            setUpdatesEnabled(TRUE);
+            setUpdatesEnabled(true);
             mdiChild->activateWindow();
             mdiChild->raise();
             if(!mdiChild->parentWidget()->close())
@@ -174,7 +176,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
                 event->ignore();
                 return;
             };
-            setUpdatesEnabled(FALSE);
+            setUpdatesEnabled(false);
         };
     };
 
@@ -188,7 +190,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
     {
         event->accept();
     }
-    setUpdatesEnabled(TRUE);
+    setUpdatesEnabled(true);
 
     if(findFiles != NULL)
     {
@@ -223,8 +225,8 @@ MdiChild *EdytorNc::newFileFromTemplate()
             child->newFile();
 
         defaultMdiWindowProperites.cursorPos = 0;
-        defaultMdiWindowProperites.readOnly = FALSE;
-        //defaultMdiWindowProperites.maximized = FALSE;
+        defaultMdiWindowProperites.readOnly = false;
+        //defaultMdiWindowProperites.maximized = false;
         defaultMdiWindowProperites.geometry = QByteArray();
         defaultMdiWindowProperites.editorToolTips = true;
         defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
@@ -252,8 +254,8 @@ MdiChild *EdytorNc::newFile()
     child->newFile();
 
     defaultMdiWindowProperites.cursorPos = 0;
-    defaultMdiWindowProperites.readOnly = FALSE;
-    //defaultMdiWindowProperites.maximized = FALSE;
+    defaultMdiWindowProperites.readOnly = false;
+    //defaultMdiWindowProperites.maximized = false;
     defaultMdiWindowProperites.geometry = QByteArray();
     defaultMdiWindowProperites.editorToolTips = true;
     defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
@@ -418,7 +420,7 @@ void EdytorNc::openFile(const QString fileName)
         {
             defaultMdiWindowProperites.cursorPos = 0;
             defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-            //defaultMdiWindowProperites.maximized = FALSE;
+            //defaultMdiWindowProperites.maximized = false;
             defaultMdiWindowProperites.geometry = QByteArray();
             defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
             defaultMdiWindowProperites.editorToolTips = true;
@@ -1284,7 +1286,7 @@ void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
     MdiChild *mdiChild;
 
     if(mdiArea->subWindowList().count() <= 1)
-        defaultMdiWindowProperites.maximized = TRUE;
+        defaultMdiWindowProperites.maximized = true;
 
     mdiChild = activeMdiChild();
     if(mdiChild)
@@ -1378,12 +1380,12 @@ void EdytorNc::updateMenus()
 
     if(!hasMdiChildNotReadOnly)
     {
-        readOnlyAct->setChecked(TRUE);
+        readOnlyAct->setChecked(true);
         readOnlyAct->setIcon(QIcon(":/images/lock.png"));
     }
     else
     {
-        readOnlyAct->setChecked(FALSE);
+        readOnlyAct->setChecked(false);
         readOnlyAct->setIcon(QIcon(":/images/unlock.png"));
     };
 
@@ -1530,7 +1532,7 @@ MdiChild *EdytorNc::createMdiChild()
     //connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateStatusBar()));
-    connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(message(const QString&, int)));
+    connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(showMessage(const QString&, int)));
 
     //connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
     //connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
@@ -1593,13 +1595,13 @@ void EdytorNc::createActions()
     undoAct->setShortcut(QKeySequence::Undo);
     undoAct->setToolTip(tr("Undo last operation"));
     connect(undoAct, SIGNAL(triggered()), this, SLOT(undo()));
-    undoAct->setEnabled(FALSE);
+    undoAct->setEnabled(false);
 
     redoAct = new QAction(QIcon(":/images/redo.png"), tr("&Redo"), this);
     redoAct->setShortcut(QKeySequence::Redo);
     redoAct->setToolTip(tr("Redo last operation"));
     connect(redoAct, SIGNAL(triggered()), this, SLOT(redo()));
-    redoAct->setEnabled(FALSE);
+    redoAct->setEnabled(false);
 
     cutAct = new QAction(QIcon(":/images/editcut.png"), tr("Cu&t"), this);
     cutAct->setShortcut(QKeySequence::Cut);
@@ -1643,7 +1645,7 @@ void EdytorNc::createActions()
 
     readOnlyAct = new QAction(QIcon(":/images/unlock.png"), tr("Read &only"), this);
     readOnlyAct->setShortcut(tr("F12"));
-    readOnlyAct->setCheckable(TRUE);
+    readOnlyAct->setCheckable(true);
     readOnlyAct->setToolTip(tr("Makes text read only"));
     connect(readOnlyAct, SIGNAL(triggered()), this, SLOT(readOnly()));
 
@@ -1773,18 +1775,18 @@ void EdytorNc::createActions()
     swapAxesAct->setToolTip(tr("Swap/modify axes, selected text or entire program"));
     connect(swapAxesAct, SIGNAL(triggered()), this, SLOT(doSwapAxes()));
 
-    insertBlockSkipAct = new QAction(QIcon(":/images/blockskip.png"), tr("Block Skip"), this);
-    insertBlockSkipAct->setShortcut(tr("Ctrl+/"));
+    insertBlockSkipAct = new QAction(QIcon(":/images/blockskipr.png"), tr("Block Skip remove"), this);
+    insertBlockSkipAct->setShortcut(tr("Ctrl+1"));
     insertBlockSkipAct->setToolTip(tr("Remove Block Skip /"));
     connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(doBlockSkip()));
 
-    insertBlockSkip1Act = new QAction(QIcon(":/images/blockskip.png"), tr("Block Skip +"), this);
-    insertBlockSkip1Act->setShortcut(tr("Ctrl++"));
+    insertBlockSkip1Act = new QAction(QIcon(":/images/blockskip+.png"), tr("Block Skip +"), this);
+    insertBlockSkip1Act->setShortcut(tr("Ctrl+2"));
     insertBlockSkip1Act->setToolTip(tr("Insert/increase Block Skip /"));
     connect(insertBlockSkip1Act, SIGNAL(triggered()), this, SLOT(doBlockSkip1()));
 
-    insertBlockSkip2Act = new QAction(QIcon(":/images/blockskip.png"), tr("Block Skip -"), this);
-    insertBlockSkip2Act->setShortcut(tr("Ctrl+-"));
+    insertBlockSkip2Act = new QAction(QIcon(":/images/blockskip-.png"), tr("Block Skip -"), this);
+    insertBlockSkip2Act->setShortcut(tr("Ctrl+3"));
     insertBlockSkip2Act->setToolTip(tr("Insert/decrease Block Skip /"));
     connect(insertBlockSkip2Act, SIGNAL(triggered()), this, SLOT(doBlockSkip2()));
 
@@ -2100,7 +2102,7 @@ void EdytorNc::readSettings()
     resize(size);
 
 
-    if(settings.value("SerialToolbarShown", FALSE).toBool())
+    if(settings.value("SerialToolbarShown", false).toBool())
     {
         createSerialToolBar();
         showSerialToolBarAct->setChecked(true);
@@ -2116,27 +2118,27 @@ void EdytorNc::readSettings()
 
     defaultMdiWindowProperites.dotAdr = settings.value("DotAddress", "XYZB").toString();
     defaultMdiWindowProperites.dotAftrerCount = settings.value("DotAfterCount", 1000).toInt();
-    defaultMdiWindowProperites.atEnd = settings.value("DotAtEnd", TRUE ).toBool();
-    defaultMdiWindowProperites.dotAfter = settings.value("DotAfter", FALSE).toBool();
+    defaultMdiWindowProperites.atEnd = settings.value("DotAtEnd", true ).toBool();
+    defaultMdiWindowProperites.dotAfter = settings.value("DotAfter", false).toBool();
 
     defaultMdiWindowProperites.i2mAdr = settings.value("I2MAddress", "XYZ").toString();
     defaultMdiWindowProperites.i2mprec = settings.value("I2MPrec", 3).toInt();
-    defaultMdiWindowProperites.inch = settings.value("I2M", TRUE).toBool();
+    defaultMdiWindowProperites.inch = settings.value("I2M", true).toBool();
 
     defaultMdiWindowProperites.fontName = settings.value("FontName", "Courier").toString();
     defaultMdiWindowProperites.fontSize = settings.value("FontSize", 12).toInt();
-    defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", TRUE).toBool();
-    defaultMdiWindowProperites.underlineChanges = settings.value("UnderlineChanges", TRUE).toBool();
+    defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", true).toBool();
+    defaultMdiWindowProperites.underlineChanges = settings.value("UnderlineChanges", true).toBool();
     defaultMdiWindowProperites.windowMode = settings.value("WindowMode", 0x0E).toInt();
-    defaultMdiWindowProperites.clearUndoHistory = settings.value("ClearUndoRedo", FALSE).toBool();
-    defaultMdiWindowProperites.clearUnderlineHistory = settings.value("ClearUnderline", FALSE).toBool();
-    defaultMdiWindowProperites.editorToolTips = settings.value("EditorToolTips", TRUE).toBool();
-    defaultMdiWindowProperites.startEmpty = settings.value("StartEmpty", FALSE).toBool();
+    defaultMdiWindowProperites.clearUndoHistory = settings.value("ClearUndoRedo", false).toBool();
+    defaultMdiWindowProperites.clearUnderlineHistory = settings.value("ClearUnderline", false).toBool();
+    defaultMdiWindowProperites.editorToolTips = settings.value("EditorToolTips", true).toBool();
+    defaultMdiWindowProperites.startEmpty = settings.value("StartEmpty", false).toBool();
 
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
 
-    defaultMdiWindowProperites.defaultReadOnly = settings.value("ViewerMode", FALSE).toBool();
+    defaultMdiWindowProperites.defaultReadOnly = settings.value("ViewerMode", false).toBool();
     defaultMdiWindowProperites.defaultHighlightMode = settings.value("DefaultHighlightMode", MODE_AUTO).toInt();
 
     defaultMdiWindowProperites.guessFileNameByProgNum = settings.value("GessFileNameByProgNum", true).toBool();
@@ -2157,10 +2159,10 @@ void EdytorNc::readSettings()
     m_recentFiles = settings.value("RecentFiles").toStringList();
     updateRecentFilesMenu();
 
-    defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", TRUE).toBool();
+    defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
 
     settings.beginGroup("Highlight");
-    defaultMdiWindowProperites.syntaxH = settings.value("HighlightOn", TRUE).toBool();
+    defaultMdiWindowProperites.syntaxH = settings.value("HighlightOn", true).toBool();
 
     defaultMdiWindowProperites.hColors.commentColor = settings.value("CommentColor", 0xde0020).toInt();
     defaultMdiWindowProperites.hColors.gColor = settings.value("GColor", 0x1600ee).toInt();
@@ -2193,7 +2195,7 @@ void EdytorNc::readSettings()
             if(!defaultMdiWindowProperites.fileName.isEmpty())
             {
                 defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
-                defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", FALSE).toBool();
+                defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", false).toBool();
                 defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
                 defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
                 loadFile(defaultMdiWindowProperites, false);
@@ -2508,7 +2510,7 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
         child->newFile();
         child->loadFile(fileName);
         updateRecentFiles(fileName);
-        //defaultMdiWindowProperites.maximized = FALSE;
+        //defaultMdiWindowProperites.maximized = false;
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
         defaultMdiWindowProperites.geometry = QByteArray();
@@ -2748,7 +2750,7 @@ bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
             {
                 if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
                 {
-                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", FALSE, 1));
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
                     return true;
                 };
 
@@ -2758,14 +2760,14 @@ bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
             {
                 if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
                 {
-                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), FALSE, 1));
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), false, 1));
                     return true;
 
                 };
 
                 if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
                 {
-                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), FALSE, 1));
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), false, 1));
                     return true;
                 };
             };
@@ -2857,7 +2859,7 @@ void EdytorNc::createSerialToolBar()
         else
         {
             serialToolBar->show();
-            showSerialToolBarAct->setChecked(TRUE);
+            showSerialToolBarAct->setChecked(true);
         };
 
     //comPort = new QextSerialPort();
@@ -2879,7 +2881,7 @@ void EdytorNc::closeSerialToolbar()
     serialToolBar->close();
     delete(serialToolBar);
     serialToolBar = NULL;
-    showSerialToolBarAct->setChecked(FALSE);
+    showSerialToolBarAct->setChecked(false);
 }
 
 //**************************************************************************************************
@@ -3106,8 +3108,8 @@ void EdytorNc::sendButtonClicked()
     comPort->reset();
 
     showError(E_NO_ERROR);
-    receiveAct->setEnabled(FALSE);
-    sendAct->setEnabled(FALSE);
+    receiveAct->setEnabled(false);
+    sendAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     cursor = activeWindow->textEdit->textCursor();
@@ -3220,7 +3222,7 @@ void EdytorNc::sendButtonClicked()
 
         if((bytesToWrite == 0) && (!xoffReceived))
         {
-            if(!comPort->putChar(tx[i].toAscii()))
+            if(!comPort->putChar(tx[i].toLatin1()))
             {
                 //            qDebug() << comPort->lastError();
                 //            break;
@@ -3228,7 +3230,7 @@ void EdytorNc::sendButtonClicked()
             if(!doNotShowProgressInEditor)
             {
                 activeWindow->textEdit->blockSignals(true);
-                if(tx[i].toAscii() != '\r')
+                if(tx[i].toLatin1() != '\r')
                     cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                 activeWindow->textEdit->setTextCursor(cursor);
                 activeWindow->textEdit->blockSignals(false);
@@ -3239,7 +3241,7 @@ void EdytorNc::sendButtonClicked()
 
             if(lineDelay > 0)
             {
-                if(tx[i].toAscii() == '\n')
+                if(tx[i].toLatin1() == '\n')
                 {
                     readyCont = false;
                     QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
@@ -3271,8 +3273,8 @@ void EdytorNc::sendButtonClicked()
     delete(comPort);
     progressDialog.close();
     activeWindow->textEdit->setTextCursor(prevCursor);
-    receiveAct->setEnabled(TRUE);
-    sendAct->setEnabled(TRUE);
+    receiveAct->setEnabled(true);
+    sendAct->setEnabled(true);
     QApplication::restoreOverrideCursor();
 }
 
@@ -3325,8 +3327,8 @@ void EdytorNc::receiveButtonClicked()
         return;
     configBox->setCurrentIndex(i);
 
-    receiveAct->setEnabled(FALSE);
-    sendAct->setEnabled(FALSE);
+    receiveAct->setEnabled(false);
+    sendAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     TransProgressDialog progressDialog(this);
@@ -3448,8 +3450,8 @@ void EdytorNc::receiveButtonClicked()
     comPort->close();
     delete(comPort);
     progressDialog.close();
-    receiveAct->setEnabled(TRUE);
-    sendAct->setEnabled(TRUE);
+    receiveAct->setEnabled(true);
+    sendAct->setEnabled(true);
     if(recieveTimeoutTimer > NULL)
         delete(recieveTimeoutTimer);
 
@@ -3590,8 +3592,8 @@ void EdytorNc::doCmpMacro()
     };
 
     defaultMdiWindowProperites.cursorPos = 0;
-    defaultMdiWindowProperites.readOnly = FALSE;
-    //defaultMdiWindowProperites.maximized = FALSE;
+    defaultMdiWindowProperites.readOnly = false;
+    //defaultMdiWindowProperites.maximized = false;
     defaultMdiWindowProperites.geometry = QByteArray();
     defaultMdiWindowProperites.editorToolTips = true;
     defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
@@ -4299,7 +4301,7 @@ void EdytorNc::updateOpenFileList()
     openFileTableWidget->clear();
     labels << tr("Info") << tr("File Name") << "";
     openFileTableWidget->setHorizontalHeaderLabels(labels);
-    openFileTableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+    openFileTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
 
@@ -4335,9 +4337,9 @@ void EdytorNc::updateOpenFileList()
     openFileTableWidget->setVisible(false);
     openFileTableWidget->resizeRowsToContents();
 
-    openFileTableWidget->horizontalHeader()->setResizeMode(2, QHeaderView::Fixed);
-    openFileTableWidget->horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
-    openFileTableWidget->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);
+    openFileTableWidget->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Fixed);
+    openFileTableWidget->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    openFileTableWidget->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 
     //openFileTableWidget->resizeColumnsToContents();
     openFileTableWidget->setVisible(true);
@@ -4401,7 +4403,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
     dirModel->setRootPath(path);
     //fileTreeView->setToolTip(path);
     fileTreeView->setSortingEnabled(true);
-    fileTreeView->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+    fileTreeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
     fileTreeView->resizeColumnToContents(0);
     fileTreeView->resizeColumnToContents(1);
     fileTreeView->setColumnHidden(2, true);

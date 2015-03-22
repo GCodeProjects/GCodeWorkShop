@@ -101,6 +101,8 @@ CONFIG += warn_on \
     qt
 #CONFIG += release
 QT *= network
+QT += widgets
+QT += printsupport
 RESOURCES = application.qrc
 RC_FILE = edytornc.rc
 FORMS += i2mdialog.ui \
@@ -158,4 +160,4 @@ macx:LIBS += -framework IOKit -framework CoreFoundation
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
-VERSION = 2013.01
+VERSION = 2015.04

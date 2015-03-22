@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -924,9 +924,9 @@ int BasicInterpreter::interpretBasic(QString &code)
    result.clear();
    error = 0;
 
-   char *buf = new char[code.toAscii().size() + 1];
+   char *buf = new char[code.toLatin1().size() + 1];
 
-   memcpy(buf, code.toAscii().data(), code.toAscii().size());
+   memcpy(buf, code.toLatin1().data(), code.toLatin1().size());
 
    prog = buf;
    scan_labels(); /* find the labels in the program */

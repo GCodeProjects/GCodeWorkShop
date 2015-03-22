@@ -22,9 +22,9 @@ Some features :
 		   Code colorizing detects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC
   ctrl+;  Comments/uncoments selected text with semicolon ;
   ctrl+9  Comments/uncoments selected text with parentheses ()
-  Ctrl++  Add Block Skip (/) and/or increments it
-  Ctrl+-  Add Block Skip (/) and/or decrements it
-  Ctrl+/  Removes Block Skip (/) 
+  Ctrl+2  Add Block Skip (/) and/or increments it
+  Ctrl+3  Add Block Skip (/) and/or decrements it
+  Ctrl+1  Removes Block Skip (/) 
   
   Find/Replace can be used to addition, subtraction, multiplication, division on numbers.
 	  in Find: Y$$ in Replace $$*2 will multiply by 2 all numbers found with Y

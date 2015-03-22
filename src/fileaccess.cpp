@@ -500,7 +500,7 @@ QString FileAccess::tempFileName()
             break;
          }
       }
-      return QDir::convertSeparators(fileName+".2");
+      return QDir::toNativeSeparators(fileName+".2");
 }
 
 bool FileAccess::removeTempFile( const QString& name ) // static

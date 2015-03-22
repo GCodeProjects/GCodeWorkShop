@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -24,7 +24,7 @@
 #define DIALOGS_H
 
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QTextDocument>
 
 #include "commoninc.h"
@@ -288,7 +288,7 @@ class BHCDraw : public QWidget
   public slots:
     void clear();
     void printText(int x, int y, int line, const QString &text, QColor color);
-    void drawHole(qreal ang, qreal dia, bool first = FALSE, bool last = FALSE, QColor color = Qt::green);
+    void drawHole(qreal ang, qreal dia, bool first = false, bool last = false, QColor color = Qt::green);
     void init(int w, int h);
     void drawLines(qreal dia, qreal ang, QColor cl);
     void setScale(double sc);

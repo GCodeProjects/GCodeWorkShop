@@ -91,13 +91,13 @@ bool QextSerialPortPrivate::open_sys(QIODevice::OpenMode mode)
         GetCommState(handle, &(commConfig.dcb));
 
         /*set up parameters*/
-        commConfig.dcb.fBinary = TRUE;
-        commConfig.dcb.fInX = FALSE;
-        commConfig.dcb.fOutX = FALSE;
-        commConfig.dcb.fAbortOnError = FALSE;
-        commConfig.dcb.fNull = FALSE;
+        commConfig.dcb.fBinary = true;
+        commConfig.dcb.fInX = false;
+        commConfig.dcb.fOutX = false;
+        commConfig.dcb.fAbortOnError = false;
+        commConfig.dcb.fNull = false;
         /* Dtr default to true. See Issue 122*/
-        commConfig.dcb.fDtrControl = TRUE;
+        commConfig.dcb.fDtrControl = true;
         /*flush all settings*/
         settingsDirtyFlags = DFE_ALL;
         updatePortSettings();
@@ -341,7 +341,7 @@ void QextSerialPortPrivate::updatePortSettings()
     }
     if (settingsDirtyFlags & DFE_Parity) {
         commConfig.dcb.Parity = (BYTE)settings.Parity;
-        commConfig.dcb.fParity = (settings.Parity == PAR_NONE) ? FALSE : TRUE;
+        commConfig.dcb.fParity = (settings.Parity == PAR_NONE) ? false : true;
     }
     if (settingsDirtyFlags & DFE_DataBits) {
         commConfig.dcb.ByteSize = (BYTE)settings.DataBits;
@@ -363,24 +363,24 @@ void QextSerialPortPrivate::updatePortSettings()
         switch(settings.FlowControl) {
         /*no flow control*/
         case FLOW_OFF:
-            commConfig.dcb.fOutxCtsFlow = FALSE;
+            commConfig.dcb.fOutxCtsFlow = false;
             commConfig.dcb.fRtsControl = RTS_CONTROL_DISABLE;
-            commConfig.dcb.fInX = FALSE;
-            commConfig.dcb.fOutX = FALSE;
+            commConfig.dcb.fInX = false;
+            commConfig.dcb.fOutX = false;
             break;
         /*software (XON/XOFF) flow control*/
         case FLOW_XONXOFF:
-            commConfig.dcb.fOutxCtsFlow = FALSE;
+            commConfig.dcb.fOutxCtsFlow = false;
             commConfig.dcb.fRtsControl = RTS_CONTROL_DISABLE;
-            commConfig.dcb.fInX = TRUE;
-            commConfig.dcb.fOutX = TRUE;
+            commConfig.dcb.fInX = true;
+            commConfig.dcb.fOutX = true;
             break;
         /*hardware flow control*/
         case FLOW_HARDWARE:
-            commConfig.dcb.fOutxCtsFlow = TRUE;
+            commConfig.dcb.fOutxCtsFlow = true;
             commConfig.dcb.fRtsControl = RTS_CONTROL_HANDSHAKE;
-            commConfig.dcb.fInX = FALSE;
-            commConfig.dcb.fOutX = FALSE;
+            commConfig.dcb.fInX = false;
+            commConfig.dcb.fOutX = false;
             break;
         }
     }

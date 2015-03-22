@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -189,11 +189,11 @@ void cleanUpDialog::newRow()
     {
         row--;
 
-        if(ui->tableWidget->item(row, 0) > 0)
+        if(ui->tableWidget->item(row, 0) > NULL)
             if(ui->tableWidget->item(row, 0)->text().isNull() || ui->tableWidget->item(row, 0)->text().isEmpty())
                 return;
 
-        if(ui->tableWidget->item(row, 1) > 0)
+        if(ui->tableWidget->item(row, 1) > NULL)
             if(ui->tableWidget->item(row, 1)->text().isNull() || ui->tableWidget->item(row, 1)->text().isEmpty())
                 return;
     };
@@ -228,7 +228,7 @@ void cleanUpDialog::highlightText(int row, int col)
     Q_UNUSED(col);
     QTableWidgetItem *item = ui->tableWidget->item(row, 1);
 
-    if(item > 0)
+    if(item > NULL)
     {
         if(!item->text().isEmpty())
         {

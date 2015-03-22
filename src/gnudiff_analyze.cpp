@@ -108,7 +108,7 @@ GnuDiff::diag (lin xoff, lin xlim, lin yoff, lin ylim, bool find_minimal,
   lin fmin = fmid, fmax = fmid;	/* Limits of top-down search. */
   lin bmin = bmid, bmax = bmid;	/* Limits of bottom-up search. */
   lin c;			/* Cost. */
-  bool odd = (fmid - bmid) & 1;	/* True if southeast corner is on an odd
+  bool odd = (fmid - bmid) & 1;	/* true if southeast corner is on an odd
 				   diagonal with respect to the northwest. */
 
   fd[fmid] = xoff;

@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2013 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2015 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -20,7 +20,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QString>
 
 #include "highlighter.h"
@@ -202,7 +202,7 @@ void Highlighter::loadRules()
       keywords << "\\b(OR|XOR|AND|NOT|EOR|IF|THEN|ELSE|ENDIF|END|BEGIN|DEFINE|AS)\\b"
                << "\\b(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
                << "\\b(DO|WHILE|ENDWHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN|ENDFOR|LOOP|ENDLOOP)\\b"
-               << "\\b(GOSUB|RETURN|RETURN|RET|GET|PUT|READ|WRITE|TRUE|FALSE)\\b"
+               << "\\b(GOSUB|RETURN|RETURN|RET|GET|PUT|READ|WRITE|true|false)\\b"
                << "\\b(PROC|SUPA|STOPRE|MSG|SAVE|DISPLOF|SBLOF|PGM|ANG|AR|CHR|RND|AC)\\b"
                << "\\b(VAR|MCALL|CALL|AP|RP|PRINT)\\b"
                << "\\b(DEF ){0,1}(REAL |INT |AXIS |BOOL |CHAR |STRING |FRAME|STRING\\[[0-9]{1,3}\\] )\\b"
@@ -461,7 +461,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
                if(tx.isEmpty())
                   break;
                ch = adrress.at(0);
-               switch(ch.toAscii())
+               switch(ch.toLatin1())
                {
                   case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                      setFormat(pos, sellen, format);
@@ -716,7 +716,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
                if(tx.isEmpty())
                   break;
                ch = adrress.at(0);
-               switch(ch.toAscii())
+               switch(ch.toLatin1())
                {
                   case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                      setFormat(pos, sellen, format);
@@ -933,7 +933,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
                if(tx.isEmpty())
                   break;
                ch = adrress.at(0);
-               switch(ch.toAscii())
+               switch(ch.toLatin1())
                {
                   case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                      setFormat(pos, sellen, format);
@@ -1210,7 +1210,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
                if(tx.isEmpty())
                   break;
                ch = adrress.at(0);
-               switch(ch.toAscii())
+               switch(ch.toLatin1())
                {
                   case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                      setFormat(pos, sellen, format);
@@ -1465,7 +1465,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
                if(tx.isEmpty())
                   break;
                ch = adrress.at(0);
-               switch(ch.toAscii())
+               switch(ch.toLatin1())
                {
                   case 'L'         : format.setForeground(QColor(highlightColors.gColor));
                                      setFormat(pos, sellen, format);
@@ -1706,7 +1706,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
                if(tx.isEmpty())
                   break;
                ch = adrress.at(0);
-               switch(ch.toAscii())
+               switch(ch.toLatin1())
                {
                   case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                      setFormat(pos, sellen, format);
@@ -2117,7 +2117,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
                if(tx.isEmpty())
                   break;
                ch = adrress.at(0);
-               switch(ch.toAscii())
+               switch(ch.toLatin1())
                {
                   case 'G'         : format.setForeground(QColor(highlightColors.gColor));
                                      setFormat(pos, sellen, format);

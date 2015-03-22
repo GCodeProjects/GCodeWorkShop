@@ -21,7 +21,7 @@
 #ifndef OPTION_DIALOG_H
 #define OPTION_DIALOG_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 //#include <kpagedialog.h>
 #include <qstringlist.h>
