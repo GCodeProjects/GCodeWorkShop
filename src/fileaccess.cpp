@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2003-2007 by Joachim Eibl                               *
+ *   Copyright (C) 2003-2011 by Joachim Eibl                               *
  *   joachim.eibl at gmx.de                                                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -1074,6 +1074,219 @@ static bool cvsIgnoreExists( t_DirectoryList* pDirList )
    return false;
 }
 
+//bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden, const QString& filePattern,
+//   const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore )
+//{
+//   ProgressProxy pp;
+//   m_pDirList = pDirList;
+//   m_pDirList->clear();
+//   m_bFindHidden = bFindHidden;
+//   m_bRecursive = bRecursive;
+//   m_bFollowDirLinks = bFollowDirLinks;  // Only relevant if bRecursive==true.
+//   m_fileAntiPattern = fileAntiPattern;
+//   m_filePattern = filePattern;
+//   m_dirAntiPattern = dirAntiPattern;
+
+//   if ( pp.wasCancelled() )
+//      return true; // Cancelled is not an error.
+
+//   pp.setInformation( tr("Reading directory: ") + m_pFileAccess->absoluteFilePath(), 0, false );
+
+//   if( m_pFileAccess->isLocal() )
+//   {
+//      QString currentPath = QDir::currentPath();
+//      m_bSuccess = QDir::setCurrent( m_pFileAccess->absoluteFilePath() );
+//      if ( m_bSuccess )
+//      {
+//#ifndef _WIN32
+//         m_bSuccess = true;
+//         QDir dir( "." );
+
+//         dir.setSorting( QDir::Name | QDir::DirsFirst );
+//         dir.setFilter( QDir::Files | QDir::Dirs | /* from KDE3 QDir::TypeMaskDirs | */ QDir::Hidden );
+
+//         QFileInfoList fiList = dir.entryInfoList();
+//         if ( fiList.isEmpty() )
+//         {
+//            // No Permission to read directory or other error.
+//            m_bSuccess = false;
+//         }
+//         else
+//         {
+//            foreach ( QFileInfo fi, fiList )       // for each file...
+//            {
+//               if ( fi.fileName() == "." ||  fi.fileName()==".." )
+//                  continue;
+
+//               pDirList->push_back( FileAccess( nicePath(fi) ) );
+//            }
+//         }
+//#else
+//         QString pattern ="*.*";
+//         WIN32_FIND_DATA findData;
+//         WIN32_FIND_DATAA& findDataA=*(WIN32_FIND_DATAA*)&findData;  // Needed for Win95
+
+//         Qt::HANDLE searchHandle = QT_WA_INLINE(
+//                 FindFirstFile( (TCHAR*)pattern.utf16(), &findData ),
+//                 FindFirstFileA( pattern.toLocal8Bit(), &findDataA )
+//              );
+
+//         if ( searchHandle != INVALID_HANDLE_VALUE )
+//         {
+//            QString absPath = m_pFileAccess->absoluteFilePath();
+//            QString relPath = m_pFileAccess->filePath();
+//            bool bFirst=true;
+//            while( ! pp.wasCancelled() )
+//            {
+//               if (!bFirst)
+//               {
+//                  if ( ! QT_WA_INLINE(
+//                            FindNextFile(searchHandle,&findData),
+//                            FindNextFileA(searchHandle,&findDataA)) )
+//                     break;
+//               }
+//               bFirst = false;
+//               FileAccess fa;
+//               fa.m_size = findData.nFileSizeLow ;//+ findData.nFileSizeHigh;
+
+//               FILETIME ft;
+//               SYSTEMTIME t;
+//               FileTimeToLocalFileTime( &findData.ftLastWriteTime, &ft ); FileTimeToSystemTime(&ft,&t);
+//               fa.m_modificationTime = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+//               FileTimeToLocalFileTime( &findData.ftLastAccessTime, &ft ); FileTimeToSystemTime(&ft,&t);
+//               fa.m_accessTime       = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+//               FileTimeToLocalFileTime( &findData.ftCreationTime, &ft ); FileTimeToSystemTime(&ft,&t);
+//               fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+
+//               int  a = findData.dwFileAttributes;
+//               fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0;
+//               fa.m_bDir        = ( a & FILE_ATTRIBUTE_DIRECTORY ) != 0;
+//               fa.m_bFile       = !fa.m_bDir;
+//               fa.m_bHidden     = ( a & FILE_ATTRIBUTE_HIDDEN) != 0;
+
+//               fa.m_bExecutable = false; // Useless on windows
+//               fa.m_bExists     = true;
+//               fa.m_bReadable   = true;
+//               fa.m_bLocal      = true;
+//               fa.m_bValidData  = true;
+//               fa.m_bSymLink    = false;
+//               fa.m_fileType    = 0;
+
+//               fa.m_name = QT_WA_INLINE(
+//                  QString::fromUtf16((const ushort*)findData.cFileName),
+//                  QString::fromLocal8Bit(findDataA.cFileName)
+//                  );
+
+//               fa.m_path = fa.m_name;
+//               fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
+//               fa.m_url.setPath( fa.m_absoluteFilePath );
+//               if ( fa.m_name!="." && fa.m_name!=".." )
+//                  pDirList->push_back( fa );
+//            }
+//            FindClose( searchHandle );
+//         }
+//         else
+//         {
+//            QDir::setCurrent( currentPath ); // restore current path
+//            return false;
+//         }
+//#endif
+//      }
+//      QDir::setCurrent( currentPath ); // restore current path
+//   }
+//   else
+//   {
+////      KIO::ListJob* pListJob=0;
+////      pListJob = KIO::listDir( m_pFileAccess->m_url, KIO::HideProgressInfo, true /*bFindHidden*/ );
+////
+////      m_bSuccess = false;
+////      if ( pListJob!=0 )
+////      {
+////         connect( pListJob, SIGNAL( entries( KIO::Job*, const KIO::UDSEntryList& ) ),
+////                  this,     SLOT( slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& )) );
+////         connect( pListJob, SIGNAL( result( KJob* )),
+////                  this,     SLOT( slotSimpleJobResult(KJob*) ) );
+////
+////         connect( pListJob, SIGNAL( infoMessage(KJob*, const QString&)),
+////                  this,     SLOT( slotListDirInfoMessage(KJob*, const QString&) ));
+////
+////         // This line makes the transfer via fish unreliable.:-(
+////         //connect( pListJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
+////
+////         g_pProgressDialog->enterEventLoop( pListJob,
+////            i18n("Listing directory: %1",m_pFileAccess->prettyAbsPath()) );
+////      }
+//   }
+
+//   CvsIgnoreList cvsIgnoreList;
+//   if ( bUseCvsIgnore )
+//   {
+//      cvsIgnoreList.init( *m_pFileAccess, cvsIgnoreExists(pDirList) );
+//   }
+//#ifdef _WIN32
+//   bool bCaseSensitive = false;
+//#else
+//   bool bCaseSensitive = true;
+//#endif
+
+//   // Now remove all entries that don't match:
+//   t_DirectoryList::iterator i;
+//   for( i = pDirList->begin(); i!=pDirList->end();  )
+//   {
+//      t_DirectoryList::iterator i2=i;
+//      ++i2;
+//      QString fn = i->fileName();
+//      if (  (!bFindHidden && i->isHidden() )
+//            ||
+//            (i->isFile() &&
+//               ( !wildcardMultiMatch( filePattern, i->fileName(), bCaseSensitive ) ||
+//                 wildcardMultiMatch( fileAntiPattern, i->fileName(), bCaseSensitive ) ) )
+//            ||
+//            (i->isDir() && wildcardMultiMatch( dirAntiPattern, i->fileName(), bCaseSensitive ) )
+//            ||
+//            cvsIgnoreList.matches( i->fileName(), bCaseSensitive )
+//         )
+//      {
+//         // Remove it
+//         pDirList->erase( i );
+//         i = i2;
+//      }
+//      else
+//      {
+//         ++i;
+//      }
+//   }
+
+//   if ( bRecursive )
+//   {
+//      t_DirectoryList subDirsList;
+
+//      t_DirectoryList::iterator i;
+//      for( i = m_pDirList->begin(); i!=m_pDirList->end(); ++i )
+//      {
+//         if  ( i->isDir() && (!i->isSymLink() || m_bFollowDirLinks))
+//         {
+//            t_DirectoryList dirList;
+//            i->listDir( &dirList, bRecursive, bFindHidden,
+//               filePattern, fileAntiPattern, dirAntiPattern, bFollowDirLinks, bUseCvsIgnore );
+
+//            t_DirectoryList::iterator j;
+//            for( j = dirList.begin(); j!=dirList.end(); ++j )
+//            {
+//               j->m_path = i->fileName() + "/" + j->m_path;
+//            }
+
+//            // append data onto the main list
+//            subDirsList.splice( subDirsList.end(), dirList );
+//         }
+//      }
+
+//      m_pDirList->splice( m_pDirList->end(), subDirsList );
+//   }
+
+//   return m_bSuccess;
+//}
+
 bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, bool bFindHidden, const QString& filePattern,
    const QString& fileAntiPattern, const QString& dirAntiPattern, bool bFollowDirLinks, bool bUseCvsIgnore )
 {
@@ -1103,7 +1316,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
          QDir dir( "." );
 
          dir.setSorting( QDir::Name | QDir::DirsFirst );
-         dir.setFilter( QDir::Files | QDir::Dirs | /* from KDE3 QDir::TypeMaskDirs | */ QDir::Hidden );
+         dir.setFilter( QDir::Files | QDir::Dirs | /* from KDE3 QDir::TypeMaskDirs | */ QDir::Hidden | QDir::System );
 
          QFileInfoList fiList = dir.entryInfoList();
          if ( fiList.isEmpty() )
@@ -1118,18 +1331,17 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
                if ( fi.fileName() == "." ||  fi.fileName()==".." )
                   continue;
 
+//               FileAccess fa;
+//               fa.setFile( fi, m_pFileAccess );
+//               pDirList->push_back( fa );
                pDirList->push_back( FileAccess( nicePath(fi) ) );
             }
          }
 #else
          QString pattern ="*.*";
          WIN32_FIND_DATA findData;
-         WIN32_FIND_DATAA& findDataA=*(WIN32_FIND_DATAA*)&findData;  // Needed for Win95
 
-         Qt::HANDLE searchHandle = QT_WA_INLINE(
-                 FindFirstFile( (TCHAR*)pattern.utf16(), &findData ),
-                 FindFirstFileA( pattern.toLocal8Bit(), &findDataA )
-              );
+         Qt::HANDLE searchHandle = FindFirstFileW( (const wchar_t*)pattern.utf16(), &findData );
 
          if ( searchHandle != INVALID_HANDLE_VALUE )
          {
@@ -1140,48 +1352,57 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
             {
                if (!bFirst)
                {
-                  if ( ! QT_WA_INLINE(
-                            FindNextFile(searchHandle,&findData),
-                            FindNextFileA(searchHandle,&findDataA)) )
+                  if ( ! FindNextFileW(searchHandle,&findData) )
                      break;
                }
                bFirst = false;
                FileAccess fa;
-               fa.m_size = findData.nFileSizeLow ;//+ findData.nFileSizeHigh;
 
-               FILETIME ft;
-               SYSTEMTIME t;
-               FileTimeToLocalFileTime( &findData.ftLastWriteTime, &ft ); FileTimeToSystemTime(&ft,&t);
-               fa.m_modificationTime = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
-               FileTimeToLocalFileTime( &findData.ftLastAccessTime, &ft ); FileTimeToSystemTime(&ft,&t);
-               fa.m_accessTime       = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
-               FileTimeToLocalFileTime( &findData.ftCreationTime, &ft ); FileTimeToSystemTime(&ft,&t);
-               fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+               fa.m_path = QString::fromUtf16((const ushort*)findData.cFileName);
+               if ( fa.m_path!="." && fa.m_path!=".." )
+               {
+                  fa.m_size = ( qint64( findData.nFileSizeHigh ) << 32 ) + findData.nFileSizeLow;
 
-               int  a = findData.dwFileAttributes;
-               fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0;
-               fa.m_bDir        = ( a & FILE_ATTRIBUTE_DIRECTORY ) != 0;
-               fa.m_bFile       = !fa.m_bDir;
-               fa.m_bHidden     = ( a & FILE_ATTRIBUTE_HIDDEN) != 0;
+                  FILETIME ft;
+                  SYSTEMTIME t;
+                  FileTimeToLocalFileTime( &findData.ftLastWriteTime, &ft ); FileTimeToSystemTime(&ft,&t);
+                  fa.m_modificationTime = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+                  //FileTimeToLocalFileTime( &findData.ftLastAccessTime, &ft ); FileTimeToSystemTime(&ft,&t);
+                  //fa.m_accessTime       = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
+                  //FileTimeToLocalFileTime( &findData.ftCreationTime, &ft ); FileTimeToSystemTime(&ft,&t);
+                  //fa.m_creationTime     = QDateTime( QDate(t.wYear, t.wMonth, t.wDay), QTime(t.wHour, t.wMinute, t.wSecond) );
 
-               fa.m_bExecutable = false; // Useless on windows
-               fa.m_bExists     = true;
-               fa.m_bReadable   = true;
-               fa.m_bLocal      = true;
-               fa.m_bValidData  = true;
-               fa.m_bSymLink    = false;
-               fa.m_fileType    = 0;
+                  int  a = findData.dwFileAttributes;
+                  fa.m_bWritable   = ( a & FILE_ATTRIBUTE_READONLY) == 0;
+                  fa.m_bDir        = ( a & FILE_ATTRIBUTE_DIRECTORY ) != 0;
+                  fa.m_bFile       = !fa.m_bDir;
+                  fa.m_bHidden     = ( a & FILE_ATTRIBUTE_HIDDEN) != 0;
 
-               fa.m_name = QT_WA_INLINE(
-                  QString::fromUtf16((const ushort*)findData.cFileName),
-                  QString::fromLocal8Bit(findDataA.cFileName)
-                  );
+                  //fa.m_bExecutable = false; // Useless on windows
+                  fa.m_bExists     = true;
+                  //fa.m_bReadable   = true;
+                  //fa.m_bLocal      = true;
+                  //fa.m_bValidData  = true;
+                  fa.m_bSymLink    = false;
+                  //fa.m_fileType    = 0;
 
-               fa.m_path = fa.m_name;
-               fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
-               fa.m_url.setPath( fa.m_absoluteFilePath );
-               if ( fa.m_name!="." && fa.m_name!=".." )
-                  pDirList->push_back( fa );
+
+                  //fa.m_filePath = fa.m_name;
+                  //fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
+                  //fa.m_url.setPath( fa.m_absoluteFilePath );
+
+                  fa.m_path = fa.m_name;
+                  fa.m_absoluteFilePath = absPath + "/" + fa.m_name;
+                  fa.m_url.setPath( fa.m_absoluteFilePath );
+                  if ( fa.m_name!="." && fa.m_name!=".." )
+                      pDirList->push_back( fa );
+
+//                  if ( fa.d() )
+//                     fa.m_pData->m_pParent = m_pFileAccess;
+//                  else
+//                     fa.m_pParent = m_pFileAccess;
+//                  pDirList->push_back( fa );
+               }
             }
             FindClose( searchHandle );
          }
@@ -1197,8 +1418,8 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    else
    {
 //      KIO::ListJob* pListJob=0;
-//      pListJob = KIO::listDir( m_pFileAccess->m_url, KIO::HideProgressInfo, true /*bFindHidden*/ );
-//
+//      pListJob = KIO::listDir( m_pFileAccess->url(), KIO::HideProgressInfo, true /*bFindHidden*/ );
+
 //      m_bSuccess = false;
 //      if ( pListJob!=0 )
 //      {
@@ -1206,14 +1427,14 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
 //                  this,     SLOT( slotListDirProcessNewEntries( KIO::Job*, const KIO::UDSEntryList& )) );
 //         connect( pListJob, SIGNAL( result( KJob* )),
 //                  this,     SLOT( slotSimpleJobResult(KJob*) ) );
-//
+
 //         connect( pListJob, SIGNAL( infoMessage(KJob*, const QString&)),
-//                  this,     SLOT( slotListDirInfoMessage(KJob*, const QString&) ));
-//
+//                  &pp,      SLOT( slotListDirInfoMessage(KJob*, const QString&) ));
+
 //         // This line makes the transfer via fish unreliable.:-(
-//         //connect( pListJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(slotPercent(KJob*, unsigned long)));
-//
-//         g_pProgressDialog->enterEventLoop( pListJob,
+//         //connect( pListJob, SIGNAL(percent(KJob*,unsigned long)), &pp, SLOT(slotPercent(KJob*, unsigned long)));
+
+//         ProgressProxy::enterEventLoop( pListJob,
 //            i18n("Listing directory: %1",m_pFileAccess->prettyAbsPath()) );
 //      }
    }
@@ -1223,7 +1444,7 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
    {
       cvsIgnoreList.init( *m_pFileAccess, cvsIgnoreExists(pDirList) );
    }
-#ifdef _WIN32
+#if defined(_WIN32) || defined(Q_OS_OS2)
    bool bCaseSensitive = false;
 #else
    bool bCaseSensitive = true;
@@ -1239,12 +1460,12 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
       if (  (!bFindHidden && i->isHidden() )
             ||
             (i->isFile() &&
-               ( !wildcardMultiMatch( filePattern, i->fileName(), bCaseSensitive ) ||
-                 wildcardMultiMatch( fileAntiPattern, i->fileName(), bCaseSensitive ) ) )
+               ( !wildcardMultiMatch( filePattern, fn, bCaseSensitive ) ||
+                 wildcardMultiMatch( fileAntiPattern, fn, bCaseSensitive ) ) )
             ||
-            (i->isDir() && wildcardMultiMatch( dirAntiPattern, i->fileName(), bCaseSensitive ) )
+            (i->isDir() && wildcardMultiMatch( dirAntiPattern, fn, bCaseSensitive ) )
             ||
-            cvsIgnoreList.matches( i->fileName(), bCaseSensitive )
+            cvsIgnoreList.matches( fn, bCaseSensitive )
          )
       {
          // Remove it
@@ -1273,7 +1494,9 @@ bool FileAccessJobHandler::listDir( t_DirectoryList* pDirList, bool bRecursive, 
             t_DirectoryList::iterator j;
             for( j = dirList.begin(); j!=dirList.end(); ++j )
             {
-               j->m_path = i->fileName() + "/" + j->m_path;
+                j->m_path = i->fileName() + "/" + j->m_path;
+//               if ( j->parent()==0 )
+//                  j->m_filePath = i->fileName() + "/" + j->m_filePath;
             }
 
             // append data onto the main list
