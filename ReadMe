@@ -1,7 +1,7 @@
 EdytorNC is text editor for CNC programmers.
 http://sourceforge.net/projects/edytornc/
 
-Source code of EdytorNC can be downloaded from SVN server on sourceforge.net
+Source code of EdytorNC can be downloaded from SVN server on sourceforge.net (http://sourceforge.net/p/edytornc/code/HEAD/tree/)
 
 
 Some features :
@@ -48,20 +48,27 @@ If you have any suggestion (bug/translations mistakes) about EdytorNC please ema
 
 
 To compile EdytorNC :
-- install Qt SDK
-- download latest version of EdytorNC source files (on sourceforge, choose "Source" tab and then "Download Snapshot") 
+- install Qt5 SDK. Download: http://www.qt.io/download-open-source/#section-2  or use your software manager
+- download latest version of EdytorNC source files (http://sourceforge.net/p/edytornc/code/HEAD/tree/  Click on "Download Snapshot") 
 - unzip downloaded file
 - run Terminal (Console application)
 - go to the EdytorNC src directory (cd /user_dir/unzipped_folder)
-- run qmake (this creates proper Makefile)
-- run make clean
-- run make (there is no make install)
-- go to (cd /user_dir/unzipped_folder/bin) and execute edytornc file
+
+  - run qmake (this creates proper Makefile)
+  - run make clean
+  - run make (there is no make install)
+  - go to (cd /user_dir/unzipped_folder/bin) and execute edytornc file
+
+or
+
+  - open edytornc.pro in Qt Creator
+  - press Ctrl+R
 
 
-To translate EdytorNC to your language you may use "Qt Linguist Download"
+To translate EdytorNC to your language you may use "Qt Linguist Download" 
 http://qt-apps.org/content/show.php/Qt+Linguist+Download?content=89360
-More about translations : https://qt-project.org/doc/qt-4.8/linguist-translators.html
+Qt Linguist maybe also included in Qt SDK
+More about translations : http://doc.qt.io/qt-5/qtlinguist-index.html
 
 
 

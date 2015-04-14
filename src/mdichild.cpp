@@ -939,7 +939,7 @@ void MdiChild::doRemoveEmptyLines()
     QApplication::setOverrideCursor(Qt::BusyCursor);
     tx = textEdit->toPlainText();
 
-    exp.setPattern("[\\n]{2,}");
+    exp.setPattern("[\\n]{2,2}");
     i = 0;
     while(i >= 0)
     {

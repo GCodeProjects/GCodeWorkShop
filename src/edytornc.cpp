@@ -1313,6 +1313,7 @@ void EdytorNc::about()
                        trUtf8("<br />German translation thanks to Michael Numberger") +
                        trUtf8("<br />Czech translation thanks to Pavel Fric") +
                        trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
+                       trUtf8("<br />Spanish translation thanks to Otto Huamani") +
                        trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
                        trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                        trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
@@ -3394,13 +3395,13 @@ void EdytorNc::receiveButtonClicked()
             if(deleteControlChars)
                 for(j = 0; j < i; j++)
                 {
-                    if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0D)))
+                    if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0D) || (buf[j] == 0x0A)))
                         tx.append(buf[j]);
                 }
             else
                 for(j = 0; j < i; j++)
                 {
-                    if(buf[j] != 0x0A)
+                    //if(buf[j] != 0x0A)
                         tx.append(buf[j]);
                 };
 

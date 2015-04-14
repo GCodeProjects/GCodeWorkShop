@@ -128,7 +128,8 @@ TRANSLATIONS = edytornc_pl.ts \
     edytornc_ca.ts \
     edytornc_de.ts \
     edytornc_fi.ts \
-    edytornc_cs_CZ.ts
+    edytornc_cs_CZ.ts \
+    edytornc_es.ts
 OBJECTS_DIR = build/obj
 MOC_DIR = build/moc
 unix:update.commands = lupdate src.pro
