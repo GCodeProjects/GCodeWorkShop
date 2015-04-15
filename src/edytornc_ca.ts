@@ -4195,13 +4195,13 @@ Verifica +-*/.
         <translation>Fitxer de configuració:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="117"/>
+        <location filename="spconfigdialog.ui" line="120"/>
         <source>Serial port :</source>
         <translation>Port sèrie:</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="58"/>
-        <location filename="spconfigdialog.ui" line="977"/>
+        <location filename="spconfigdialog.ui" line="980"/>
         <source>Save configuration</source>
         <translation>Desa la configuració</translation>
     </message>
@@ -4221,185 +4221,191 @@ Verifica +-*/.
         <translation>Suprimeix</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="134"/>
+        <location filename="spconfigdialog.ui" line="137"/>
         <source>/dev/ttyS0</source>
         <translation>/dev/ttyS0</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="139"/>
+        <location filename="spconfigdialog.ui" line="142"/>
         <source>/dev/ttyS1</source>
         <translation>/dev/ttyS1</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="144"/>
+        <location filename="spconfigdialog.ui" line="147"/>
         <source>/dev/ttyUSB0</source>
         <translation>/dev/ttyUSB0</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="149"/>
+        <location filename="spconfigdialog.ui" line="152"/>
         <source>/dev/ttyUSB1</source>
         <translation>/dev/ttyUSB1</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="157"/>
+        <location filename="spconfigdialog.ui" line="160"/>
         <source>&amp;Browse</source>
         <translation>&amp;Navega</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="188"/>
+        <location filename="spconfigdialog.ui" line="191"/>
         <source>Baud rate</source>
         <translation>Velocitat de transmissió</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="200"/>
+        <location filename="spconfigdialog.ui" line="203"/>
         <source>300</source>
         <translation>300</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="210"/>
+        <location filename="spconfigdialog.ui" line="213"/>
         <source>600</source>
         <translation>600</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="230"/>
+        <location filename="spconfigdialog.ui" line="233"/>
         <source>1200</source>
         <translation>1200</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="240"/>
+        <location filename="spconfigdialog.ui" line="243"/>
         <source>2400</source>
         <translation>2400</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="273"/>
+        <location filename="spconfigdialog.ui" line="276"/>
         <source>19200</source>
         <translation>19200</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="250"/>
+        <location filename="spconfigdialog.ui" line="253"/>
         <source>4800</source>
         <translation>4800</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="109"/>
+        <location filename="spconfigdialog.ui" line="112"/>
         <source>Port settings</source>
         <translation>Paràmetres del port</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="260"/>
+        <location filename="spconfigdialog.ui" line="263"/>
         <source>9600</source>
         <translation>9600</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="283"/>
+        <location filename="spconfigdialog.ui" line="286"/>
         <source>38400</source>
         <translation>38400</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="293"/>
+        <location filename="spconfigdialog.ui" line="296"/>
         <source>57600</source>
         <translation>57600</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="316"/>
+        <location filename="spconfigdialog.ui" line="319"/>
         <source>Data bit&apos;s</source>
         <translation>Bits</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="328"/>
+        <location filename="spconfigdialog.ui" line="331"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="338"/>
+        <location filename="spconfigdialog.ui" line="341"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="348"/>
+        <location filename="spconfigdialog.ui" line="351"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="361"/>
+        <location filename="spconfigdialog.ui" line="364"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="374"/>
+        <location filename="spconfigdialog.ui" line="377"/>
         <source>Stop bit&apos;s</source>
         <translation>Bit d&apos;aturada</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="386"/>
+        <location filename="spconfigdialog.ui" line="389"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="396"/>
+        <location filename="spconfigdialog.ui" line="399"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="412"/>
+        <location filename="spconfigdialog.ui" line="415"/>
         <source>Parity</source>
         <translation>Paritat</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="424"/>
+        <location filename="spconfigdialog.ui" line="427"/>
         <source>None</source>
         <translation>Cap</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="437"/>
+        <location filename="spconfigdialog.ui" line="440"/>
         <source>Even</source>
         <translation>Parell</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="447"/>
+        <location filename="spconfigdialog.ui" line="450"/>
         <source>Odd</source>
         <translation>Senar</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="460"/>
+        <location filename="spconfigdialog.ui" line="463"/>
         <source>Flow control</source>
         <translation>Control de fluxe</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="472"/>
+        <location filename="spconfigdialog.ui" line="475"/>
         <source>Off</source>
         <translation>Apagat</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="482"/>
+        <location filename="spconfigdialog.ui" line="485"/>
         <source>Hardware</source>
         <translation>Maquinari</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="498"/>
+        <location filename="spconfigdialog.ui" line="501"/>
         <source>XON, XOFF</source>
         <translation>XON, XOFF</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="527"/>
+        <location filename="spconfigdialog.ui" line="530"/>
         <source>Options</source>
         <translation>Opcions</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="636"/>
+        <location filename="spconfigdialog.ui" line="639"/>
         <source>Delay before sending the next block:</source>
         <oldsource>Delay before sending the next block (s)</oldsource>
         <translation>Retard abans d&apos;enviar el següent bloc:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="694"/>
-        <location filename="spconfigdialog.ui" line="740"/>
-        <location filename="spconfigdialog.ui" line="792"/>
+        <location filename="spconfigdialog.ui" line="649"/>
+        <location filename="spconfigdialog.ui" line="665"/>
+        <source>90</source>
+        <translation type="unfinished">90</translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="697"/>
+        <location filename="spconfigdialog.ui" line="743"/>
+        <location filename="spconfigdialog.ui" line="795"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="737"/>
+        <location filename="spconfigdialog.ui" line="740"/>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
         <oldsource>If 0 then waits for XON, if &gt;0 waits for timeout or XON  wich one  first </oldsource>
         <translation>Si 0 llavors espera un XON, si &gt;0 espera el temps d&apos;espera o XON, el que sigui primer.</translation>
@@ -4423,12 +4429,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt; El caràcter d&apos;espai només es pot escriure com un número hexadecimal - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="720"/>
+        <location filename="spconfigdialog.ui" line="723"/>
         <source>Send at start:</source>
         <translation>Envia al començament:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="533"/>
+        <location filename="spconfigdialog.ui" line="536"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -4440,150 +4446,148 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="609"/>
+        <location filename="spconfigdialog.ui" line="612"/>
         <source>Send at end:</source>
         <translation>Envia al final:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="675"/>
+        <location filename="spconfigdialog.ui" line="678"/>
         <source>Remove empty lines after receive is complete</source>
         <translation>Suprimeix les línies buides deprés que es completi la recepció</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="678"/>
+        <location filename="spconfigdialog.ui" line="681"/>
         <source>Remove empty lines</source>
         <translation>Suprimeix les línies buides</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="753"/>
+        <location filename="spconfigdialog.ui" line="756"/>
         <source>When sending, discard all characters before %</source>
         <translation>Quan s&apos;envii, descarta tots els caràcter abans de %</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="756"/>
+        <location filename="spconfigdialog.ui" line="759"/>
         <source>Remove characters before %</source>
         <translation>Suprimeix els caràcters abans de %</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="763"/>
+        <location filename="spconfigdialog.ui" line="766"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="766"/>
+        <location filename="spconfigdialog.ui" line="769"/>
         <source>Send only LF at the end of block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="789"/>
+        <location filename="spconfigdialog.ui" line="792"/>
         <source>After recieve last character, close the recieve dialog after this time</source>
         <translation>Després de rebre l&apos;últim caràcter, tanca el diàleg de recepció després d&apos;aquest temps</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="822"/>
+        <location filename="spconfigdialog.ui" line="825"/>
         <source>Main program path</source>
         <translation>Camí del programa principal</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="829"/>
+        <location filename="spconfigdialog.ui" line="832"/>
         <source>Under construction</source>
         <translation>En construcció</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="836"/>
-        <location filename="spconfigdialog.ui" line="849"/>
-        <location filename="spconfigdialog.ui" line="869"/>
+        <location filename="spconfigdialog.ui" line="839"/>
+        <location filename="spconfigdialog.ui" line="852"/>
+        <location filename="spconfigdialog.ui" line="872"/>
         <source>Browse</source>
         <translation>Navega</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="856"/>
+        <location filename="spconfigdialog.ui" line="859"/>
         <source>All other path</source>
         <translation>Tots els altres camins</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="879"/>
+        <location filename="spconfigdialog.ui" line="882"/>
         <source>Sub program path</source>
         <translation>Camí de sub-programa</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="890"/>
+        <location filename="spconfigdialog.ui" line="893"/>
         <source>If file exists</source>
         <translation>Si el fitxer existeix</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="896"/>
+        <location filename="spconfigdialog.ui" line="899"/>
         <source>Overwrite</source>
         <translation>Sobreescriu</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="903"/>
+        <location filename="spconfigdialog.ui" line="906"/>
         <source>Rename</source>
         <translation>Canvia el nom</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="913"/>
+        <location filename="spconfigdialog.ui" line="916"/>
         <source>File name</source>
         <translation>Nom del fitxer</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="932"/>
+        <location filename="spconfigdialog.ui" line="935"/>
         <source>No. of digits</source>
         <translation>Nombre de dígits</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="939"/>
+        <location filename="spconfigdialog.ui" line="942"/>
         <source>Remowe letters</source>
         <translation>Esborra lletres</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="949"/>
+        <location filename="spconfigdialog.ui" line="952"/>
         <source>CheckBox</source>
         <translation>Casella de selecció</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="659"/>
+        <location filename="spconfigdialog.ui" line="662"/>
         <source>XON 17 Dec. 0x11 Hex.</source>
         <translation>XON 17 Dec. 0x11 Hex.</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="646"/>
-        <location filename="spconfigdialog.ui" line="662"/>
         <source>90; </source>
-        <translation>90; </translation>
+        <translation type="vanished">90; </translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="665"/>
+        <location filename="spconfigdialog.ui" line="668"/>
         <source>17</source>
         <translation>17</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="643"/>
+        <location filename="spconfigdialog.ui" line="646"/>
         <source>XOFF 19 Dec. 0x13 Hex.</source>
         <translation>XOFF 19 Dec. 0x13 Hex.</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="649"/>
+        <location filename="spconfigdialog.ui" line="652"/>
         <source>19</source>
         <translation>19</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="730"/>
+        <location filename="spconfigdialog.ui" line="733"/>
         <source>XON character:</source>
         <translation>caràcter XON:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="713"/>
+        <location filename="spconfigdialog.ui" line="716"/>
         <source>XOFF character:</source>
         <translation>caràcter XOFF:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="576"/>
+        <location filename="spconfigdialog.ui" line="579"/>
         <source>Start sending after:</source>
         <translation>Comença a enviar després de:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="616"/>
+        <location filename="spconfigdialog.ui" line="619"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -4595,22 +4599,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="774"/>
+        <location filename="spconfigdialog.ui" line="777"/>
         <source>Autosave</source>
         <translation>Desament automàtic</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="782"/>
+        <location filename="spconfigdialog.ui" line="785"/>
         <source>Recieve timeout:</source>
         <translation>Temps d&apos;espera de recepció:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="983"/>
+        <location filename="spconfigdialog.ui" line="986"/>
         <source>&amp;Save &amp;&amp; close</source>
         <translation>&amp;Desa i tanca</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="1010"/>
+        <location filename="spconfigdialog.ui" line="1013"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Canceŀla</translation>
     </message>
@@ -4631,32 +4635,32 @@ p, li { white-space: pre-wrap; }
         <translation>TotTots els fitxers (*.* *)</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="599"/>
+        <location filename="spconfigdialog.ui" line="602"/>
         <source>Delete control chars</source>
         <translation>Elimina els caràcters de control</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="596"/>
+        <location filename="spconfigdialog.ui" line="599"/>
         <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
         <translation>Elimina tots els caràcters de control (&lt;0x3F; &gt;0x7F) del fitxer rebut</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="220"/>
+        <location filename="spconfigdialog.ui" line="223"/>
         <source>115200</source>
         <translation>115200</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="303"/>
+        <location filename="spconfigdialog.ui" line="306"/>
         <source>56000</source>
         <translation>56000</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="563"/>
+        <location filename="spconfigdialog.ui" line="566"/>
         <source>Enable this option for lower transmission latency on high baud rate</source>
         <translation>Habilitar aquesta opció per una latència de transmissió més baixa en transmissions d&apos;alta velocitat</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="566"/>
+        <location filename="spconfigdialog.ui" line="569"/>
         <source>Disable text selection</source>
         <translation>Deshabilita la selecció de text</translation>
     </message>
