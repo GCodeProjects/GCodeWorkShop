@@ -1312,6 +1312,10 @@
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
+    <message>
+        <source>&lt;br /&gt;Spanish translation thanks to Otto Huamani</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FeedsDialog</name>
@@ -2363,10 +2367,6 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>90; </source>
-        <translation></translation>
-    </message>
-    <message>
         <source>19</source>
         <translation></translation>
     </message>
@@ -2501,6 +2501,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>All files (*)</source>
         <translation>Todos los archivos (*)</translation>
+    </message>
+    <message>
+        <source>90</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
