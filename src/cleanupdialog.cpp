@@ -30,7 +30,7 @@
 
 #define EXAMPLE_EXP        "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))$" << "(\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))" << "[\n]{2,}"
 
-#define EXAMPLE_EXP_COMM   "Lines with: '(comment)" << "Any: (comment)" << << "Empty lines:"
+#define EXAMPLE_EXP_COMM   "Lines with: '(comment)" << "Any: (comment)" << "Empty lines:"
 
 
 cleanUpDialog::cleanUpDialog(QWidget *parent) :
