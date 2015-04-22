@@ -3395,13 +3395,13 @@ void EdytorNc::receiveButtonClicked()
             if(deleteControlChars)
                 for(j = 0; j < i; j++)
                 {
-                    if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0D) || (buf[j] == 0x0A)))
+                    if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0A)))
                         tx.append(buf[j]);
                 }
             else
                 for(j = 0; j < i; j++)
                 {
-                    //if(buf[j] != 0x0A)
+                    if(buf[j] != 0x0D)
                         tx.append(buf[j]);
                 };
 
