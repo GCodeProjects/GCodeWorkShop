@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>537</width>
-    <height>355</height>
+    <width>535</width>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -492,7 +492,7 @@
            <item>
             <widget class="QLineEdit" name="edtExtension">
              <property name="inputMask">
-              <string>*.Aaa; </string>
+              <string>*.Axx</string>
              </property>
              <property name="text">
               <string>*.</string>
@@ -554,7 +554,7 @@
               <string>Extension to be added to filename when saving</string>
              </property>
              <property name="inputMask">
-              <string>*.Aaa; </string>
+              <string>*.Aaa</string>
              </property>
              <property name="text">
               <string>*.nc</string>
