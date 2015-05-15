@@ -3297,7 +3297,7 @@ void EdytorNc::sendStartDelayTimeout()
 
 void EdytorNc::receiveButtonClicked()
 {
-    QString tx;
+    QString tx, eobString;
     int count, i, j;
     char buf[1024];
     MdiChild *activeWindow;
@@ -3361,6 +3361,7 @@ void EdytorNc::receiveButtonClicked()
         };
 
     tx.clear();
+    eobString.clear();
     while(1)
     {
         //progressDialog.setValue(count);
@@ -3392,18 +3393,43 @@ void EdytorNc::receiveButtonClicked()
             buf[i] = '\0';
             count += i;
 
-            if(deleteControlChars)
-                for(j = 0; j < i; j++)
+            for(j = 0; j < i; j++)
+            {
+                if(deleteControlChars)
+                    if(((buf[j] <= 0x1F) || (buf[j] >= 0x7F))) // is control character (below 0x1F and above 0x7F)
+                        if((buf[j] != 0x0A) && (buf[j] != 0x0D)) // but not LF or CR
+                            continue; //skip this character
+
+                if((buf[j] == 0x0A) || (buf[j] == 0x0D))
                 {
-                    if(((buf[j] > 0x1F) && (buf[j] < 0x7F)) || ((buf[j] == 0x0A)))
-                        tx.append(buf[j]);
+                    eobString.append(buf[j]);
+                    if(eobString.contains("\n\r\r")) //known EOB codes
+                    {
+                        tx.append("\r\n");
+                        eobString.clear();
+                    }
+                    else
+                        if(eobString.contains("\r\n"))
+                        {
+                            tx.append("\r\n");
+                            eobString.clear();
+                        };
                 }
-            else
-                for(j = 0; j < i; j++)
+                else
                 {
-                    if(buf[j] != 0x0D)
-                        tx.append(buf[j]);
+                    if(!eobString.isEmpty()) //unknown EOB codes or only LF
+                    {
+                        if(eobString.contains("\n"))
+                          eobString.replace("\n", "\r\n");
+
+                        tx.append(eobString);
+                        eobString.clear();
+                    };
+
+                    tx.append(buf[j]);
                 };
+
+            };
 
             progressDialog.setLabelText(tr("Reciving byte %1").arg(count));
 
@@ -3423,6 +3449,15 @@ void EdytorNc::receiveButtonClicked()
 
         if(stop)
         {
+            if(!eobString.isEmpty())
+            {
+                if(eobString.contains("\n"))
+                  eobString.replace("\n", "\r\n");
+
+                tx.append(eobString);
+                eobString.clear();
+            };
+
             if(!tx.isEmpty())
                 activeWindow->textEdit->insertPlainText(tx);
             break;
@@ -3466,11 +3501,11 @@ void EdytorNc::receiveButtonClicked()
         else
         {
             tx = activeWindow->textEdit->toPlainText();
-            if(tx.contains("\n\r\r"))
-                tx.replace("\n\r\r", "\r\n");
-            else
-                if(!tx.contains("\r\n"))
-                    tx.replace("\n", "\r\n");
+//            if(tx.contains("\n\r\r"))
+//                tx.replace("\n\r\r", "\r\n");
+//            else
+//                if(!tx.contains("\r\n"))
+//                    tx.replace("\n", "\r\n");
 
             activeWindow->textEdit->clear();
             activeWindow->textEdit->insertPlainText(tx);
