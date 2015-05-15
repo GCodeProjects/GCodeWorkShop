@@ -228,6 +228,8 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());    
     settings.setValue("RecieveTimeout", recieveTimeoutSpinBox->value());
     settings.setValue("EndOfBlockLF", endOfBlockLF->isChecked());
+    settings.setValue("RemoveSpaceEOB", removeSpaceEOB->isChecked());
+
 
 
     settings.endGroup();
@@ -350,6 +352,7 @@ void SPConfigDialog::changeSettings()
     doNotShowProgressInEditor->setChecked(settings.value("DoNotShowProgressInEditor", false).toBool());
     recieveTimeoutSpinBox->setValue(settings.value("RecieveTimeout", 0).toInt());
     endOfBlockLF->setChecked(settings.value("EndOfBlockLF", false).toBool());
+    removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
 
     settings.endGroup();
     settings.endGroup();

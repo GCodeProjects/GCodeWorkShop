@@ -341,6 +341,7 @@ private:
     bool removeEmptyLines;
     bool removeBefore;
     bool endOfBlockLF;
+    bool removeSpaceEOB;
     int sendStartDelay;
     bool doNotShowProgressInEditor;
     int recieveTimeout;
