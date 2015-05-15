@@ -3029,6 +3029,7 @@ void EdytorNc::loadConfig()
     removeEmptyLines = settings.value("RemoveEmptyLines", true).toBool();
     removeBefore = settings.value("RemoveBefore", false).toBool();
     endOfBlockLF = settings.value("EndOfBlockLF", false).toBool();
+    removeSpaceEOB = settings.value("RemoveSpaceEOB", false).toBool();
 
     sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
     doNotShowProgressInEditor = settings.value("DoNotShowProgressInEditor", false).toBool();
@@ -3506,6 +3507,13 @@ void EdytorNc::receiveButtonClicked()
 //            else
 //                if(!tx.contains("\r\n"))
 //                    tx.replace("\n", "\r\n");
+
+            if(removeSpaceEOB) //removes white space at end of line added by Fanuc
+            {
+                if(tx.contains("\r\n"))
+                    tx.replace(" \r\n", "\r\n");
+                else tx.replace(" \n", "\r\n");
+            };
 
             activeWindow->textEdit->clear();
             activeWindow->textEdit->insertPlainText(tx);
