@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>BHCDialog</name>
     <message>
@@ -409,7 +409,7 @@
     <message>
         <location filename="edytornc.ui" line="175"/>
         <location filename="edytornc.ui" line="178"/>
-        <location filename="edytornc.cpp" line="3810"/>
+        <location filename="edytornc.cpp" line="3853"/>
         <source>Add files to project</source>
         <translation>Datein zu Projekt hinzufügen</translation>
     </message>
@@ -446,7 +446,7 @@
     </message>
     <message>
         <location filename="edytornc.ui" line="391"/>
-        <location filename="edytornc.cpp" line="4303"/>
+        <location filename="edytornc.cpp" line="4346"/>
         <source>File Name</source>
         <translation>Dateiname</translation>
     </message>
@@ -546,7 +546,7 @@
     <message>
         <location filename="edytornc.cpp" line="1311"/>
         <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;P&gt;Copyright (C) 1998 - 2013 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt; {1998 ?} {2015 ?} {78@?}</translation>
+        <translation>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1312"/>
@@ -571,7 +571,7 @@
     <message>
         <location filename="edytornc.cpp" line="1316"/>
         <source>&lt;br /&gt;Spanish translation thanks to Otto Huamani</source>
-        <translation type="unfinished"></translation>
+        <translation>Spanische Übersetzung Danke an Otto Huamani</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1317"/>
@@ -1113,7 +1113,7 @@
     </message>
     <message>
         <source>Swap/modify axes</source>
-        <translation type="vanished">Achsen wechseln/verscheiben</translation>
+        <translation>Achsen wechseln/verscheiben</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1795"/>
@@ -1226,7 +1226,7 @@
     <message>
         <location filename="edytornc.cpp" line="1914"/>
         <source>&amp;Block Skip</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1931"/>
@@ -1438,7 +1438,7 @@
     <message>
         <location filename="edytornc.cpp" line="2819"/>
         <source>Remove settings from the current directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Löscht die aktuellen Schnittstellen-Einstellungen aus dem aktuellen Verzeichnis</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2821"/>
@@ -1464,152 +1464,152 @@
         <translation>Vorgaben</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3145"/>
+        <location filename="edytornc.cpp" line="3146"/>
         <source>Sending...</source>
         <translation>Senden...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3147"/>
+        <location filename="edytornc.cpp" line="3148"/>
         <source>Waiting...</source>
         <translation>Warten...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3178"/>
+        <location filename="edytornc.cpp" line="3179"/>
         <source>Start in %1s</source>
         <translation>Start in %1s</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3181"/>
+        <location filename="edytornc.cpp" line="3182"/>
         <source>Waiting for a signal readiness...</source>
         <translation>Warten auf das Signal Bereitschaft...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3240"/>
+        <location filename="edytornc.cpp" line="3241"/>
         <source>Sending byte %1 of %2</source>
         <translation>Sende Byte %1 von %2</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3347"/>
+        <location filename="edytornc.cpp" line="3348"/>
         <source>Receiving...</source>
         <translation>Empfangen...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3348"/>
+        <location filename="edytornc.cpp" line="3349"/>
         <source>Waiting for data...</source>
         <translation>Warten auf Daten...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3408"/>
+        <location filename="edytornc.cpp" line="3435"/>
         <source>Reciving byte %1</source>
         <translation>Empfange Byte %1</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3514"/>
+        <location filename="edytornc.cpp" line="3557"/>
         <source>Invalid file descriptor (port was not opened correctly)</source>
         <translation>Falsche Datei Beschreibung (Port wurde nicht korrekt geöffnet)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3516"/>
+        <location filename="edytornc.cpp" line="3559"/>
         <source>Unable to allocate memory tables</source>
         <translation>Kann Speicherbereiche nicht belegen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3518"/>
+        <location filename="edytornc.cpp" line="3561"/>
         <source>Caught a non-blocked signal</source>
         <translation>Fängt ein nicht-blockiertes Signal</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3520"/>
+        <location filename="edytornc.cpp" line="3563"/>
         <source>Operation timed out</source>
         <translation>Zeit Überschreitung</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3522"/>
+        <location filename="edytornc.cpp" line="3565"/>
         <source>The file opened by the port is not a character device</source>
         <translation>Die vom Port geöffnete Datei ist keine Zeichnen-Datei</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3524"/>
+        <location filename="edytornc.cpp" line="3567"/>
         <source>The port detected a break condition</source>
         <translation>Der Port hat eine Unterbrechung</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3526"/>
+        <location filename="edytornc.cpp" line="3569"/>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
         <translation>Der Port hat einen Rahmen Fehler (falsche Baud-Raten Eintellung?)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3528"/>
+        <location filename="edytornc.cpp" line="3571"/>
         <source>There was an I/O error while communicating with the port</source>
         <translation>ES trat ein I/O-Fehler während der Kommunikation auf</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3530"/>
+        <location filename="edytornc.cpp" line="3573"/>
         <source>Character buffer overrun</source>
         <translation>Zeichen Puffer Überlauf</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3532"/>
+        <location filename="edytornc.cpp" line="3575"/>
         <source>Receive buffer overflow</source>
         <translation>Empfang Puffer Überlauf</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3534"/>
+        <location filename="edytornc.cpp" line="3577"/>
         <source>The port detected a parity error in the received data</source>
         <translation>Der Port findet ein Paritätsfehler in den empfangenen Daten</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3536"/>
+        <location filename="edytornc.cpp" line="3579"/>
         <source>Transmit buffer overflow</source>
         <translation>Sende Puffer Überlauf</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3538"/>
+        <location filename="edytornc.cpp" line="3581"/>
         <source>General read operation failure</source>
         <translation>Allgemeiner Lesefehler</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3540"/>
+        <location filename="edytornc.cpp" line="3583"/>
         <source>General write operation failure</source>
         <translation>Allgemeiner Schreibfehler</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3542"/>
+        <location filename="edytornc.cpp" line="3585"/>
         <source>No Error has occured</source>
         <translation>Kein Fehler aufgetreten</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3545"/>
+        <location filename="edytornc.cpp" line="3588"/>
         <source>Unknown error</source>
         <translation>Unbekannter Fehler</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3643"/>
+        <location filename="edytornc.cpp" line="3686"/>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation># ++++++ Beispiel ++++++</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3645"/>
+        <location filename="edytornc.cpp" line="3688"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
         <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - Programm Stop, bedingungslos&quot;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3787"/>
+        <location filename="edytornc.cpp" line="3830"/>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
         <translation>Alle Dateien (*.* *);;CNC Programm Dateien *.nc (*.nc);;CNC Programm Dateien *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Dokumente *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Zeichnungen *.dwg *.dxf (*.dwg *.dxf);;Bilder *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text Dateien *.txt (*.txt)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3797"/>
+        <location filename="edytornc.cpp" line="3840"/>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
         <translation>Alle Dateien (*.* *);;CNC Programm Dateien (*.nc);;CNC Programm Dateien (*.nc *.ngc *.min *.anc *.cnc);;Dokumente (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Zeichnungen (*.dwg *.dxf);;Bilder (*.jpg *.bmp *.svg);;Text Dateien (*.txt)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4329"/>
+        <location filename="edytornc.cpp" line="4372"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4244"/>
+        <location filename="edytornc.cpp" line="4287"/>
         <source>&lt;b&gt;Project: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Projekt: &quot;%1&quot;
@@ -1628,7 +1628,7 @@
     <message>
         <location filename="edytornc.cpp" line="1780"/>
         <source>Ctrl+1</source>
-        <translation type="unfinished">Ctrl+1</translation>
+        <translation>Ctrl+1</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1781"/>
@@ -1643,7 +1643,7 @@
     <message>
         <location filename="edytornc.cpp" line="1785"/>
         <source>Ctrl+2</source>
-        <translation type="unfinished">Ctrl+2</translation>
+        <translation>Ctrl+2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1786"/>
@@ -1658,7 +1658,7 @@
     <message>
         <location filename="edytornc.cpp" line="1790"/>
         <source>Ctrl+3</source>
-        <translation type="unfinished">Ctrl+3</translation>
+        <translation>Ctrl+3</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1791"/>
@@ -1666,22 +1666,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4245"/>
+        <location filename="edytornc.cpp" line="4288"/>
         <source>Do you want to save your changes ?</source>
         <translation>Wollen Sie Ihre Änderungen speichern ?</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4287"/>
+        <location filename="edytornc.cpp" line="4330"/>
         <source>Open files</source>
         <translation>Öffne Dateien</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4303"/>
+        <location filename="edytornc.cpp" line="4346"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3875"/>
+        <location filename="edytornc.cpp" line="3918"/>
         <source>Project opened</source>
         <translation>Projekt geöffnet</translation>
     </message>
@@ -1699,7 +1699,7 @@
     </message>
     <message>
         <source>&lt;P&gt;Copyright (C) 1998 - 2013 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation type="vanished">&lt;P&gt;Copyright (C) 1998 - 2013 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
+        <translation>&lt;P&gt;Copyright (C) 1998 - 2013 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1829"/>
@@ -1722,29 +1722,29 @@
         <translation>Erstelle/editiere Benutzer CNC-Tooltips Datei</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3919"/>
+        <location filename="edytornc.cpp" line="3962"/>
         <source>Project saved</source>
         <translation>Projekt gespeichert</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4049"/>
-        <location filename="edytornc.cpp" line="4077"/>
+        <location filename="edytornc.cpp" line="4092"/>
+        <location filename="edytornc.cpp" line="4120"/>
         <source>EdytorNC project file *.ncp (*.ncp)</source>
         <translation>EdytorNC Projekt Datei *.ncp (*.ncp)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4053"/>
-        <location filename="edytornc.cpp" line="4081"/>
+        <location filename="edytornc.cpp" line="4096"/>
+        <location filename="edytornc.cpp" line="4124"/>
         <source>EdytorNC project file (*.ncp)</source>
         <translation>EdytorNC Projekt Datei (*.ncp)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4058"/>
+        <location filename="edytornc.cpp" line="4101"/>
         <source>Select the project name and location...</source>
         <translation>Wähle den Projektnamen und den Ort...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4086"/>
+        <location filename="edytornc.cpp" line="4129"/>
         <source>Open the project file...</source>
         <translation>Öffne die Projekt Datei...</translation>
     </message>
@@ -2073,7 +2073,14 @@
 .1/4
 1.3/4
 2.5/8</source>
-        <translation type="unfinished"></translation>
+        <translation>Akzeptierte Wertes (Beispiele): 
+1.5 
+0.5 
+.5
+1/2
+.1/4
+1.3/4
+2.5/8</translation>
     </message>
     <message>
         <location filename="i2mdialog.ui" line="69"/>
@@ -2809,7 +2816,7 @@ Weiter mit eigenem Risiko.</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="88"/>
-        <location filename="serialtransmission.cpp" line="390"/>
+        <location filename="serialtransmission.cpp" line="393"/>
         <source>Default</source>
         <translation></translation>
     </message>
@@ -2825,7 +2832,7 @@ Weiter mit eigenem Risiko.</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="58"/>
-        <location filename="spconfigdialog.ui" line="980"/>
+        <location filename="spconfigdialog.ui" line="990"/>
         <source>Save configuration</source>
         <translation>Speichere Einstellungen</translation>
     </message>
@@ -3029,12 +3036,12 @@ Weiter mit eigenem Risiko.</translation>
         <location filename="spconfigdialog.ui" line="649"/>
         <location filename="spconfigdialog.ui" line="665"/>
         <source>90</source>
-        <translation type="unfinished">90</translation>
+        <translation>90</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="697"/>
         <location filename="spconfigdialog.ui" line="743"/>
-        <location filename="spconfigdialog.ui" line="795"/>
+        <location filename="spconfigdialog.ui" line="805"/>
         <source>s</source>
         <translation>s</translation>
     </message>
@@ -3042,7 +3049,7 @@ Weiter mit eigenem Risiko.</translation>
         <location filename="spconfigdialog.ui" line="740"/>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
         <oldsource>If 0 then waits for XON, if &gt;0 waits for timeout or XON  wich one  first </oldsource>
-        <translation>Wenn 0 dann warten auf XON, wenn &gt;0 warten auf Timeout oder XON, was zuerst kommt</translation>
+        <translation>Wenn 0 dann warten auf XON, wenn &gt;0 warten auf Timeout oder XON, was zuerst kommt.</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="723"/>
@@ -3096,77 +3103,87 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="spconfigdialog.ui" line="766"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn gewählt, wird nur LF am Zeilenende gesendet, sonst wird CRLF gesendet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="769"/>
         <source>Send only LF at the end of block</source>
-        <translation type="unfinished"></translation>
+        <translation>Sende nur LF am Zeilenende</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="792"/>
+        <location filename="spconfigdialog.ui" line="776"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove white space just before the end of line, sometimes added by Fanuc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Entfernt Leerzeichen am Ende der Zeile, manchmal von Fanuc erzeugt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="779"/>
+        <source>Remove white space at end of line</source>
+        <translation>Entfernt Leezeichen am Zeilenende</translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="802"/>
         <source>After recieve last character, close the recieve dialog after this time</source>
         <translation>Nach Empfang des letzten Zeichens, schließt das Empfangen-Fenster nach dieser Zeit</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="825"/>
+        <location filename="spconfigdialog.ui" line="835"/>
         <source>Main program path</source>
         <translation>Pfad Hauptprogramm</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="832"/>
+        <location filename="spconfigdialog.ui" line="842"/>
         <source>Under construction</source>
         <translation>In Arbeit</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="839"/>
-        <location filename="spconfigdialog.ui" line="852"/>
-        <location filename="spconfigdialog.ui" line="872"/>
+        <location filename="spconfigdialog.ui" line="849"/>
+        <location filename="spconfigdialog.ui" line="862"/>
+        <location filename="spconfigdialog.ui" line="882"/>
         <source>Browse</source>
         <translation>Durchsuchen</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="859"/>
+        <location filename="spconfigdialog.ui" line="869"/>
         <source>All other path</source>
         <translation>Alle anderen Pfade</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="882"/>
+        <location filename="spconfigdialog.ui" line="892"/>
         <source>Sub program path</source>
         <translation>Unterprogramm Pfad</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="893"/>
+        <location filename="spconfigdialog.ui" line="903"/>
         <source>If file exists</source>
         <translation>Wenn die Datei existiert</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="899"/>
+        <location filename="spconfigdialog.ui" line="909"/>
         <source>Overwrite</source>
         <translation>Überschreiben</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="906"/>
+        <location filename="spconfigdialog.ui" line="916"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="916"/>
+        <location filename="spconfigdialog.ui" line="926"/>
         <source>File name</source>
         <translation>Datei Name</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="935"/>
+        <location filename="spconfigdialog.ui" line="945"/>
         <source>No. of digits</source>
         <translation>Anzahl Zeichen</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="942"/>
+        <location filename="spconfigdialog.ui" line="952"/>
         <source>Remowe letters</source>
         <translation>Lösche Buchstaben</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="952"/>
+        <location filename="spconfigdialog.ui" line="962"/>
         <source>CheckBox</source>
         <translation>Wählkasten</translation>
     </message>
@@ -3245,22 +3262,22 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Leer-Zeichen und Steuerzeichen können nur als HEX-Zahlen geschrieben werden- 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="777"/>
+        <location filename="spconfigdialog.ui" line="787"/>
         <source>Autosave</source>
         <translation>Automatisches Speichern</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="785"/>
+        <location filename="spconfigdialog.ui" line="795"/>
         <source>Recieve timeout:</source>
-        <translation>Empfangen Timeout</translation>
+        <translation>Empfangen Timeout:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="986"/>
+        <location filename="spconfigdialog.ui" line="996"/>
         <source>&amp;Save &amp;&amp; close</source>
         <translation>&amp;Speichern &amp;&amp; Schließen</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="1013"/>
+        <location filename="spconfigdialog.ui" line="1023"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -3271,7 +3288,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="serialtransmission.cpp" line="145"/>
-        <location filename="serialtransmission.cpp" line="452"/>
+        <location filename="serialtransmission.cpp" line="455"/>
         <source>Select serial port device</source>
         <translation>Wählen Sie die serielle Schnittstelle</translation>
     </message>
@@ -3307,7 +3324,7 @@ p, li { white-space: pre-wrap; }
         <location filename="setupdialog.ui" line="95"/>
         <source>Highlight colors</source>
         <oldsource>Syntax highlight colors</oldsource>
-        <translation type="unfinished">Bedeutungen farblich hervorheben</translation>
+        <translation>Markierungsfarben</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="243"/>
@@ -3452,12 +3469,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setupdialog.ui" line="263"/>
         <source>Default color</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardfarbe</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="273"/>
         <source>Backgroud</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrund</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="488"/>
@@ -3466,9 +3483,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="setupdialog.ui" line="495"/>
-        <location filename="setupdialog.ui" line="557"/>
-        <source>*.Aaa; </source>
-        <translation>*.Aaa; </translation>
+        <source>*.Axx</source>
+        <oldsource>*.Aaa; </oldsource>
+        <translation>*.Aaa </translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="498"/>
@@ -3484,6 +3501,11 @@ p, li { white-space: pre-wrap; }
         <location filename="setupdialog.ui" line="554"/>
         <source>Extension to be added to filename when saving</source>
         <translation>Erweiterung die beim Speichern angehängt wird</translation>
+    </message>
+    <message>
+        <location filename="setupdialog.ui" line="557"/>
+        <source>*.Aaa</source>
+        <translation>*.Aaa</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="560"/>
@@ -3785,7 +3807,7 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="1166"/>
+        <location filename="serialtransmission.cpp" line="1169"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
@@ -3799,8 +3821,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="33"/>
-        <location filename="serialtransmission.cpp" line="923"/>
         <location filename="serialtransmission.cpp" line="926"/>
+        <location filename="serialtransmission.cpp" line="929"/>
         <source>Default</source>
         <translation></translation>
     </message>
@@ -3811,7 +3833,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="68"/>
-        <location filename="serialtransmission.cpp" line="709"/>
+        <location filename="serialtransmission.cpp" line="712"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
@@ -3903,112 +3925,112 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="507"/>
+        <location filename="serialtransmission.cpp" line="510"/>
         <source>Serial transmission test</source>
         <translation>Test serielle Schnittstelle</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="647"/>
+        <location filename="serialtransmission.cpp" line="650"/>
         <source>&amp;Disconnect</source>
         <translation>Verbindung &amp;trennen</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="819"/>
+        <location filename="serialtransmission.cpp" line="822"/>
         <source>Recived: %1 bytes.</source>
         <translation>Empfangen: %1 bytes.</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="941"/>
+        <location filename="serialtransmission.cpp" line="944"/>
         <source>Invalid file descriptor (port was not opened correctly)</source>
         <translation>Falsche Datei Beschreibung (Port wurde nicht korrekt geöffnet)</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="943"/>
+        <location filename="serialtransmission.cpp" line="946"/>
         <source>Unable to allocate memory tables</source>
         <translation>Kann Speicherbereiche nicht belegen</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="945"/>
+        <location filename="serialtransmission.cpp" line="948"/>
         <source>Caught a non-blocked signal</source>
         <translation>Fängt ein nicht-blockiertes Signal</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="947"/>
+        <location filename="serialtransmission.cpp" line="950"/>
         <source>Operation timed out</source>
         <translation>Zeit Überschreitung</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="949"/>
+        <location filename="serialtransmission.cpp" line="952"/>
         <source>The file opened by the port is not a character device</source>
         <translation>Die vom Port geöffnete Datei ist keine Zeichnen-Datei</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="951"/>
+        <location filename="serialtransmission.cpp" line="954"/>
         <source>The port detected a break condition</source>
         <translation>Der Port hat eine Unterbrechung</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="953"/>
+        <location filename="serialtransmission.cpp" line="956"/>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
         <translation>Der Port hat einen Rahmen Fehler (falsche Baud-Raten Eintellung?)</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="955"/>
+        <location filename="serialtransmission.cpp" line="958"/>
         <source>There was an I/O error while communicating with the port</source>
         <translation>ES trat ein I/O-Fehler während der Kommunikation auf</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="957"/>
+        <location filename="serialtransmission.cpp" line="960"/>
         <source>Character buffer overrun</source>
         <translation>Zeichen Puffer Überlauf</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="959"/>
+        <location filename="serialtransmission.cpp" line="962"/>
         <source>Receive buffer overflow</source>
         <translation>Empfang Puffer Überlauf</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="961"/>
+        <location filename="serialtransmission.cpp" line="964"/>
         <source>The port detected a parity error in the received data</source>
         <translation>Der Port findet ein Paritätsfehler in den empfangenen Daten</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="963"/>
+        <location filename="serialtransmission.cpp" line="966"/>
         <source>Transmit buffer overflow</source>
         <translation>Sende Puffer Überlauf</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="965"/>
+        <location filename="serialtransmission.cpp" line="968"/>
         <source>General read operation failure</source>
         <translation>Allgemeiner Lesefehler</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="967"/>
+        <location filename="serialtransmission.cpp" line="970"/>
         <source>General write operation failure</source>
         <translation>Allgemeiner Schreibfehler</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="969"/>
+        <location filename="serialtransmission.cpp" line="972"/>
         <source>No Error has occured</source>
         <translation>Kein Fehler</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="971"/>
+        <location filename="serialtransmission.cpp" line="974"/>
         <source>Unknown error</source>
         <translation>Unbekannter Fehler</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="998"/>
+        <location filename="serialtransmission.cpp" line="1001"/>
         <source>Waiting...</source>
         <translation>Warten...</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="1006"/>
+        <location filename="serialtransmission.cpp" line="1009"/>
         <source>Waiting for a signal readiness...</source>
         <translation>Warten auf das Signal Bereitschaft...</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="1043"/>
+        <location filename="serialtransmission.cpp" line="1046"/>
         <source>Sending byte %1 of %2</source>
         <translation>Sende Byte %1 von %2</translation>
     </message>
