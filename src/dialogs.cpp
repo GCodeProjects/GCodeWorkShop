@@ -302,10 +302,10 @@ void FeedsDialog::computeButtonClicked()
    double Vc, Fz, D, z, S, F;
    bool ok;
 
-   Vc = vcInput->text().toDouble(&ok);
-   Fz = fzInput->text().toDouble(&ok);
-   D = dInput->text().toDouble(&ok);
-   z = zInput->text().toDouble(&ok);
+   Vc = QLocale().toDouble(vcInput->text(), &ok);
+   Fz = QLocale().toDouble(fzInput->text(), &ok);
+   D = QLocale().toDouble(dInput->text(), &ok);
+   z = QLocale().toDouble(zInput->text(), &ok);
 
    S = (Vc * 1000) / (M_PI * D);
    F = S * (Fz * z);
@@ -325,9 +325,9 @@ void FeedsDialog::computeVcButtonClicked()
    bool ok;
 
    S = sInput->text().toInt(&ok);
-   F = fInput->text().toDouble(&ok);
-   D = dInput->text().toDouble(&ok);
-   z = zInput->text().toDouble(&ok);
+   F = QLocale().toDouble(fInput->text(), &ok);
+   D = QLocale().toDouble(dInput->text(), &ok);
+   z = QLocale().toDouble(zInput->text(), &ok);
 
    Vc = (M_PI * D * S) / 1000;
    Fz = (F / S) / z;
@@ -928,9 +928,9 @@ void TriangleDialog::computeButtonClicked()
    double angle1, angle2, angle3;
    bool ok;
 
-   angle1 = aAInput->text().toDouble(&ok);
-   angle2 = aBInput->text().toDouble(&ok);
-   angle3 = aCInput->text().toDouble(&ok);
+   angle1 = QLocale().toDouble(aAInput->text(), &ok);
+   angle2 = QLocale().toDouble(aBInput->text(), &ok);
+   angle3 = QLocale().toDouble(aCInput->text(), &ok);
 
    if(!aCheckBox->isChecked())
       aInput->setText("--");
@@ -971,53 +971,53 @@ int TriangleDialog::option1()  //any one side and two angles known
 
    switch(mode)
    {
-      case 0x31 : side1 = aInput->text().toDouble(&ok);
-                  angle1 = aAInput->text().toDouble(&ok);
-                  angle2 = aBInput->text().toDouble(&ok);
+      case 0x31 : side1 = QLocale().toDouble(aInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aAInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aBInput->text(), &ok);
                   angle3 = 180 - (angle1 + angle2);
                   break;
-      case 0x51 : side1 = aInput->text().toDouble(&ok);
-                  angle1 = aAInput->text().toDouble(&ok);
-                  angle2 = aCInput->text().toDouble(&ok);
+      case 0x51 : side1 = QLocale().toDouble(aInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aAInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aCInput->text(), &ok);
                   angle3 = 180 - (angle1 + angle2);
                   break;
-      case 0x61 : side1 = aInput->text().toDouble(&ok);
-                  angle3 = aBInput->text().toDouble(&ok);
-                  angle2 = aCInput->text().toDouble(&ok);
+      case 0x61 : side1 = QLocale().toDouble(aInput->text(), &ok);
+                  angle3 = QLocale().toDouble(aBInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aCInput->text(), &ok);
                   angle1 = 180 - (angle2 + angle3);
                   break;
 
 
-      case 0x32 : side1 = bInput->text().toDouble(&ok);
-                  angle1 = aBInput->text().toDouble(&ok);
-                  angle2 = aAInput->text().toDouble(&ok);
+      case 0x32 : side1 = QLocale().toDouble(bInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aBInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aAInput->text(), &ok);
                   angle3 = 180 - (angle1 + angle2);
                   break;
-      case 0x52 : side1 = bInput->text().toDouble(&ok);
-                  angle3 = aAInput->text().toDouble(&ok);
-                  angle2 = aCInput->text().toDouble(&ok);
+      case 0x52 : side1 = QLocale().toDouble(bInput->text(), &ok);
+                  angle3 = QLocale().toDouble(aAInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aCInput->text(), &ok);
                   angle1 = 180 - (angle2 + angle3);
                   break;
-      case 0x62 : side1 = bInput->text().toDouble(&ok);
-                  angle1 = aBInput->text().toDouble(&ok);
-                  angle2 = aCInput->text().toDouble(&ok);
+      case 0x62 : side1 = QLocale().toDouble(bInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aBInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aCInput->text(), &ok);
                   angle3 = 180 - (angle1 + angle2);
                   break;
 
 
-      case 0x34 : side1 = cInput->text().toDouble(&ok);
-                  angle3 = aAInput->text().toDouble(&ok);
-                  angle2 = aBInput->text().toDouble(&ok);
+      case 0x34 : side1 = QLocale().toDouble(cInput->text(), &ok);
+                  angle3 = QLocale().toDouble(aAInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aBInput->text(), &ok);
                   angle1 = 180 - (angle2 + angle3);
                   break;
-      case 0x54 : side1 = cInput->text().toDouble(&ok);
-                  angle1 = aCInput->text().toDouble(&ok);
-                  angle2 = aAInput->text().toDouble(&ok);
+      case 0x54 : side1 = QLocale().toDouble(cInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aCInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aAInput->text(), &ok);
                   angle3 = 180 - (angle1 + angle2);
                   break;
-      case 0x64 : side1 = cInput->text().toDouble(&ok);
-                  angle1 = aCInput->text().toDouble(&ok);
-                  angle2 = aBInput->text().toDouble(&ok);
+      case 0x64 : side1 = QLocale().toDouble(cInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aCInput->text(), &ok);
+                  angle2 = QLocale().toDouble(aBInput->text(), &ok);
                   angle3 = 180 - (angle1 + angle2);
                   break;
 
@@ -1088,17 +1088,17 @@ int TriangleDialog::option2()  // two sides and the included angle
 
    switch(mode)
    {
-      case 0x43 : side1 = aInput->text().toDouble(&ok);
-                  side2 = bInput->text().toDouble(&ok);
-                  angle1 = aCInput->text().toDouble(&ok);
+      case 0x43 : side1 = QLocale().toDouble(aInput->text(), &ok);
+                  side2 = QLocale().toDouble(bInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aCInput->text(), &ok);
                   break;
-      case 0x25 : side2 = aInput->text().toDouble(&ok);
-                  side1 = cInput->text().toDouble(&ok);
-                  angle1 = aBInput->text().toDouble(&ok);
+      case 0x25 : side2 = QLocale().toDouble(aInput->text(), &ok);
+                  side1 = QLocale().toDouble(cInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aBInput->text(), &ok);
                   break;
-      case 0x16 : side1 = bInput->text().toDouble(&ok);
-                  side2 = cInput->text().toDouble(&ok);
-                  angle1 = aAInput->text().toDouble(&ok);
+      case 0x16 : side1 = QLocale().toDouble(bInput->text(), &ok);
+                  side2 = QLocale().toDouble(cInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aAInput->text(), &ok);
                   break;
       default : return(-1);
    };
@@ -1142,29 +1142,29 @@ int TriangleDialog::option3()  // two sides and the opposite angle
 
    switch(mode)
    {
-      case 0x13 : side1 = aInput->text().toDouble(&ok);
-                  side2 = bInput->text().toDouble(&ok);
-                  angle1 = aAInput->text().toDouble(&ok);
+      case 0x13 : side1 = QLocale().toDouble(aInput->text(), &ok);
+                  side2 = QLocale().toDouble(bInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aAInput->text(), &ok);
                   break;
-      case 0x15 : side1 = aInput->text().toDouble(&ok);
-                  side2 = cInput->text().toDouble(&ok);
-                  angle1 = aAInput->text().toDouble(&ok);
+      case 0x15 : side1 = QLocale().toDouble(aInput->text(), &ok);
+                  side2 = QLocale().toDouble(cInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aAInput->text(), &ok);
                   break;
-      case 0x46 : side1 = cInput->text().toDouble(&ok);
-                  side2 = bInput->text().toDouble(&ok);
-                  angle1 = aCInput->text().toDouble(&ok);
+      case 0x46 : side1 = QLocale().toDouble(cInput->text(), &ok);
+                  side2 = QLocale().toDouble(bInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aCInput->text(), &ok);
                   break;
-      case 0x45 : side1 = cInput->text().toDouble(&ok);
-                  side2 = aInput->text().toDouble(&ok);
-                  angle1 = aCInput->text().toDouble(&ok);
+      case 0x45 : side1 = QLocale().toDouble(cInput->text(), &ok);
+                  side2 = QLocale().toDouble(aInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aCInput->text(), &ok);
                   break;
-      case 0x23 : side1 = bInput->text().toDouble(&ok);
-                  side2 = aInput->text().toDouble(&ok);
-                  angle1 = aBInput->text().toDouble(&ok);
+      case 0x23 : side1 = QLocale().toDouble(bInput->text(), &ok);
+                  side2 = QLocale().toDouble(aInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aBInput->text(), &ok);
                   break;
-      case 0x26 : side1 = bInput->text().toDouble(&ok);
-                  side2 = cInput->text().toDouble(&ok);
-                  angle1 = aBInput->text().toDouble(&ok);
+      case 0x26 : side1 = QLocale().toDouble(bInput->text(), &ok);
+                  side2 = QLocale().toDouble(cInput->text(), &ok);
+                  angle1 = QLocale().toDouble(aBInput->text(), &ok);
                   break;
       default : return(-1);
    };
@@ -1223,9 +1223,9 @@ void TriangleDialog::option4()  // all sides given
    if(mode != 0x07)
      return;
 
-   side1 = aInput->text().toDouble(&ok);
-   side2 = bInput->text().toDouble(&ok);
-   side3 = cInput->text().toDouble(&ok);
+   side1 = QLocale().toDouble(aInput->text(), &ok);
+   side2 = QLocale().toDouble(bInput->text(), &ok);
+   side3 = QLocale().toDouble(cInput->text(), &ok);
 
 
 
@@ -1512,6 +1512,7 @@ void BHCTab::inputChanged()
      angleBeetwenInput->setPalette(QPalette());
    else
      angleBeetwenInput->setPalette(palette);
+
 }
 
 //**************************************************************************************************
@@ -2019,7 +2020,7 @@ void BHCDialog::computeButtonClicked()
       if(tab == 0)
         continue;
 
-      maxDia = qMax(maxDia, tab->diaInput->text().toDouble(&ok));
+      maxDia = qMax(maxDia, QLocale().toDouble(tab->diaInput->text(), &ok));
 
    };
 
@@ -2037,7 +2038,7 @@ void BHCDialog::computeButtonClicked()
          xCenter = 0;
       }
       else
-        xCenter = tab->xCenterInput->text().toDouble(&ok);
+        xCenter = QLocale().toDouble(tab->xCenterInput->text(), &ok);
 
       if(!tab->yCenterInput->hasAcceptableInput())
       {
@@ -2045,7 +2046,7 @@ void BHCDialog::computeButtonClicked()
          yCenter = 0;
       }
       else
-        yCenter = tab->yCenterInput->text().toDouble(&ok);
+        yCenter = QLocale().toDouble(tab->yCenterInput->text(), &ok);
 
       if(!tab->diaInput->hasAcceptableInput())
       {
@@ -2054,10 +2055,10 @@ void BHCDialog::computeButtonClicked()
          continue;
       }
       else
-        dia = tab->diaInput->text().toDouble(&ok);
+        dia = QLocale().toDouble(tab->diaInput->text(), &ok);
 
       if(tab->angleStartInput->hasAcceptableInput())
-        firstAngle = tab->angleStartInput->text().toDouble(&ok);
+        firstAngle = QLocale().toDouble(tab->angleStartInput->text(), &ok);
       else
       {
          tab->angleStartInput->setText("0");
@@ -2065,7 +2066,7 @@ void BHCDialog::computeButtonClicked()
       };
 
       if(tab->angleBeetwenInput->hasAcceptableInput())
-        angleBeetwen = tab->angleBeetwenInput->text().toDouble(&ok);
+        angleBeetwen = QLocale().toDouble(tab->angleBeetwenInput->text(), &ok);
       else
       {
          tab->angleBeetwenInput->setText("0");
@@ -2181,7 +2182,7 @@ void BHCDialog::computeButtonClicked()
          xCenter = 0;
       }
       else
-        xCenter = tab->xCenterInput->text().toDouble(&ok);
+        xCenter = QLocale().toDouble(tab->xCenterInput->text(), &ok);
 
       if(!tab->yCenterInput->hasAcceptableInput())
       {
@@ -2189,7 +2190,7 @@ void BHCDialog::computeButtonClicked()
          yCenter = 0;
       }
       else
-        yCenter = tab->yCenterInput->text().toDouble(&ok);
+        yCenter = QLocale().toDouble(tab->yCenterInput->text(), &ok);
 
       if(!tab->diaInput->hasAcceptableInput())
       {
@@ -2198,10 +2199,10 @@ void BHCDialog::computeButtonClicked()
          continue;
       }
       else
-        dia = tab->diaInput->text().toDouble(&ok);
+        dia = QLocale().toDouble(tab->diaInput->text(), &ok);
 
       if(tab->angleStartInput->hasAcceptableInput())
-        firstAngle = tab->angleStartInput->text().toDouble(&ok);
+        firstAngle = QLocale().toDouble(tab->angleStartInput->text(), &ok);
       else
       {
          tab->angleStartInput->setText("0");
@@ -2209,7 +2210,7 @@ void BHCDialog::computeButtonClicked()
       };
 
       if(tab->angleBeetwenInput->hasAcceptableInput())
-        angleBeetwen = tab->angleBeetwenInput->text().toDouble(&ok);
+        angleBeetwen = QLocale().toDouble(tab->angleBeetwenInput->text(), &ok);
       else
       {
          tab->angleBeetwenInput->setText("0");
@@ -2383,15 +2384,15 @@ void ChamferDialog::computeButtonClicked()
       if(!zlInput->hasAcceptableInput() || !angInput->hasAcceptableInput())
         return;
 
-      ang = angInput->text().toDouble(&ok);
-      ZL = zlInput->text().toDouble(&ok);
+      ang = QLocale().toDouble(angInput->text(), &ok);
+      ZL = QLocale().toDouble(zlInput->text(), &ok);
 
       XL = tan((M_PI/180) * ang) * (ZL * 2);
       dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
 
       if(xoCheckBox->isChecked() && xoInput->hasAcceptableInput())
       {
-         X1 = xoInput->text().toDouble(&ok);
+         X1 = QLocale().toDouble(xoInput->text(), &ok);
          X2 = X1 + XL;
          xdInput->setText(QString("%1").arg(X2, 0, 'f', 3));
 
@@ -2399,7 +2400,7 @@ void ChamferDialog::computeButtonClicked()
 
       if(xdCheckBox->isChecked() && xdInput->hasAcceptableInput())
       {
-         X2 = xdInput->text().toDouble(&ok);
+         X2 = QLocale().toDouble(xdInput->text(), &ok);
          X1 = X2 - XL;
          xoInput->setText(QString("%1").arg(X1, 0, 'f', 3));
 
@@ -2413,8 +2414,8 @@ void ChamferDialog::computeButtonClicked()
       if(!dlInput->hasAcceptableInput() || !angInput->hasAcceptableInput())
         return;
 
-      ang = angInput->text().toDouble(&ok);
-      XL = dlInput->text().toDouble(&ok);
+      ang = QLocale().toDouble(angInput->text(), &ok);
+      XL = QLocale().toDouble(dlInput->text(), &ok);
 
       ZL = (XL / 2) / tan((M_PI/180) * ang) ;
       zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
@@ -2428,9 +2429,9 @@ void ChamferDialog::computeButtonClicked()
       if(!xdInput->hasAcceptableInput() || !xoInput->hasAcceptableInput() || !angInput->hasAcceptableInput())
         return;
 
-      ang = angInput->text().toDouble(&ok);
-      X1 = xoInput->text().toDouble(&ok);
-      X2 = xdInput->text().toDouble(&ok);
+      ang = QLocale().toDouble(angInput->text(), &ok);
+      X1 = QLocale().toDouble(xoInput->text(), &ok);
+      X2 = QLocale().toDouble(xdInput->text(), &ok);
       XL = X2 - X1;
       dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
       ZL = (XL / 2) / tan((M_PI/180) * ang) ;
@@ -2445,8 +2446,8 @@ void ChamferDialog::computeButtonClicked()
       if(!zlInput->hasAcceptableInput() || !dlInput->hasAcceptableInput())
         return;
 
-      XL = dlInput->text().toDouble(&ok);
-      ZL = zlInput->text().toDouble(&ok);
+      XL = QLocale().toDouble(dlInput->text(), &ok);
+      ZL = QLocale().toDouble(zlInput->text(), &ok);
       ang = (atan((XL / 2) / ZL)) / (M_PI/180);
 
       angInput->setText(QString("%1").arg(ang, 0, 'f', 3));

@@ -25,6 +25,7 @@
 #include "tooltips.h"
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
+#include <QtSerialPort/QSerialPort>
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
@@ -3073,7 +3074,7 @@ void EdytorNc::lineDelaySlot()
 }
 
 //**************************************************************************************************
-//
+//  Old serial port rutine
 //**************************************************************************************************
 
 void EdytorNc::sendButtonClicked()
