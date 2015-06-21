@@ -784,10 +784,22 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       {
          num = startAt;
          exp.setPattern("[N]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
-         lineCount = textEdit->document()->lineCount();
+         if(selection)
+         {
+             lineCount = tx.count('\n');
+             lineCount++;
+         }
+         else
+         {
+             lineCount = textEdit->document()->lineCount();
+             lineCount--;
+         };
+
+         qDebug() << lineCount;
+
          for(i = 0; i < lineCount; i++)
          {
-            line = tx.section(QLatin1Char('\n'), i, i);
+            line = tx.section(QLatin1Char('\n'), i, i, QString::SectionIncludeTrailingSep);
 
             //qDebug() << line;
 
@@ -848,7 +860,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                };
                break;
             };
-            new_tx += line + '\n';
+            new_tx += line;// + '\n';
          };
          tx = new_tx;
          break;
