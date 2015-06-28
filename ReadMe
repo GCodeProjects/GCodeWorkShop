@@ -13,7 +13,7 @@ Some features :
   find in files
   simple project managment - you can keep links to (almost) all files related to your part programm in one place. 
   first comment in program is displayed in title bar. In first comment you can write part name.
-  comment with date will be replaced with current date on file save. Comment format (dd-mm-yyyy) or ;dd-mm-yyyy
+  comment with date will be replaced with current date on file save. Comment format: (dd-/.mm-/.yyyy) or ;dd-/.mm-/.yyyy - now system localization settings are used.
   block renumbering - whole program or selection
   code colorizing. Now with help function - click on "Help"->"Create cnc tooltips" and put mouse pointer above G, M or other codes - should appear tooltip with short information about pointed code. 
                    Default tooltips are in file "cnc_tooltips_lang_code.txt" (lang_code = pl_PL - for Polish) in folder with application settings (~.config on Linux. C:\Documents and Settings\USERNAME\Application Data\EdytorNC on Windows).

@@ -4033,7 +4033,7 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex & index)
 
     if((file.exists()) && (file.isReadable()))
     {
-        if(file.suffix() == "nc")
+        if(defaultMdiWindowProperites.extensions.contains("*." + file.suffix()))
         {
             defaultMdiWindowProperites.fileName = file.absoluteFilePath();
             defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
@@ -4065,7 +4065,7 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex & index)
 
     if((file.exists()) && (file.isReadable()))
     {
-        if(file.suffix() == "nc")
+        if(defaultMdiWindowProperites.extensions.contains("*." + file.suffix()))
         {
             defaultMdiWindowProperites.fileName = file.absoluteFilePath();
             defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;

@@ -332,8 +332,12 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
             QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
             sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-            QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
+            //QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
+            //dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+            QTableWidgetItem *dateItem = new QTableWidgetItem();
             dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+            dateItem->setData(Qt::DisplayRole, QFileInfo(file).lastModified());
+
 
             int row = filesTable->rowCount();
             filesTable->insertRow(row);
@@ -454,7 +458,17 @@ void FindInFiles::readSettings()
 
    intCapsLock = settings.value("IntCapsLock", true).toBool();
 
+   list = settings.value("Extensions", "").toStringList();
+
    settings.beginGroup("FindFileDialog");
+
+   list.append(settings.value("Filters", "*.nc").toStringList());
+   list.removeDuplicates();
+   list.sort();
+   fileComboBox->addItems(list);
+   item = settings.value("SelectedFilter", QString("*.nc")).toString();
+   i = fileComboBox->findText(item);
+   fileComboBox->setCurrentIndex(i);
 
    wholeWordsCheckBox->setChecked(settings.value("WholeWords", false).toBool());
    subFoldersCheckBox->setChecked(settings.value("SubFolders", false).toBool());
@@ -468,14 +482,6 @@ void FindInFiles::readSettings()
    item = settings.value("SelectedDir", QDir::toNativeSeparators(QDir::homePath())).toString();
    i = directoryComboBox->findText(item);
    directoryComboBox->setCurrentIndex(i);
-
-   list = settings.value("Filters", "*.nc").toStringList();
-   list.removeDuplicates();
-   list.sort();
-   fileComboBox->addItems(list);
-   item = settings.value("SelectedFilter", QString("*.nc")).toString();
-   i = fileComboBox->findText(item);
-   fileComboBox->setCurrentIndex(i);
 
    list = settings.value("Texts", QStringList()).toStringList();
    list.removeDuplicates();
