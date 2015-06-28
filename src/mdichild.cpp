@@ -297,7 +297,7 @@ bool MdiChild::saveFile(const QString &fileName)
    QDate dat = QDate::currentDate();
 
 
-   exp.setPattern("(DATA|DATE)[:\\s]*[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
+   exp.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
    cursor = textEdit->textCursor();
    cursor.setPosition(0);
    //setTextCursor(cursor);
@@ -308,7 +308,7 @@ bool MdiChild::saveFile(const QString &fileName)
       textEdit->setUpdatesEnabled(false);
       cursor.beginEditBlock();
       cursor.removeSelectedText();
-      cursor.insertText(dat.toString("dd.MM.yyyy"));
+      cursor.insertText(tr("DATE") + ": " + dat.toString(Qt::DefaultLocaleShortDate));
       cursor.endEditBlock();
 
       textEdit->setUpdatesEnabled(true);
@@ -316,7 +316,7 @@ bool MdiChild::saveFile(const QString &fileName)
    }
    else
    {
-      exp.setPattern("[\\d][\\d](\\.|-)[\\d][\\d](\\.|-)[\\d][\\d][\\d][\\d]");
+      exp.setPattern("[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
       cursor = textEdit->textCursor();
       cursor.setPosition(0);
       cursor = textEdit->document()->find(exp, cursor);
@@ -325,7 +325,7 @@ bool MdiChild::saveFile(const QString &fileName)
          textEdit->setUpdatesEnabled(false);
          cursor.beginEditBlock();
          cursor.removeSelectedText();
-         cursor.insertText(dat.toString("dd.MM.yyyy"));
+         cursor.insertText(dat.toString(Qt::DefaultLocaleShortDate));
          cursor.endEditBlock();
 
          textEdit->setUpdatesEnabled(true);
@@ -795,8 +795,6 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
              lineCount--;
          };
 
-         qDebug() << lineCount;
-
          for(i = 0; i < lineCount; i++)
          {
             line = tx.section(QLatin1Char('\n'), i, i, QString::SectionIncludeTrailingSep);
@@ -860,7 +858,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                };
                break;
             };
-            new_tx += line;// + '\n';
+            new_tx += line; // + '\n';
          };
          tx = new_tx;
          break;

@@ -1,6 +1,7 @@
 %_N_SINUMERIK840D_MPF
 ;$PATH=/_N_MPF_DIR
 ;SINUMERIK840D
+; 202015-06-26
 ;(*******************************************)
 DEF REAL WYSSKRZ=143.35
 DEF REAL WYSPAD=124.9
