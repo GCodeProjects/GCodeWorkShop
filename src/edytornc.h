@@ -67,6 +67,7 @@ private slots:
     void open();
     void openExample();
     void save();
+    void saveAll();
     void saveAs();
     void printFile();
     void cut();
@@ -158,9 +159,6 @@ private slots:
     void doBlockSkip();
     void doBlockSkip1();
     void doBlockSkip2();
-    void doBlockSkip3();
-    void doBlockSkip4();
-    void doBlockSkip5();
 
 
 
@@ -228,6 +226,7 @@ private:
     QAction *openAct;
     QAction *openExampleAct;
     QAction *saveAct;
+    QAction *saveAllAct;
     QAction *saveAsAct;
     QAction *exitAct;
     QAction *findFilesAct;

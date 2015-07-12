@@ -2439,7 +2439,7 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
 
          if(ignoreComments)
          {
-            id = getHighligthMode();
+            id = highligthMode();
             if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
                commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
             else
@@ -2554,7 +2554,7 @@ void MdiChild::setHighligthMode(int mod)
 //
 //**************************************************************************************************
 
-int MdiChild::getHighligthMode()
+int MdiChild::highligthMode()
 {
    return mdiWindowProperites.hColors.highlightMode;
 }
@@ -2603,7 +2603,7 @@ void MdiChild::doDiff()
 //
 //**************************************************************************************************
 
-QString MdiChild::getCurrentFileInfo()
+QString MdiChild::currentFileInfo()
 {
    return curFileInfo;
 }
@@ -2799,7 +2799,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
 
       if(found && ignoreComments)
       {
-         id = getHighligthMode();
+         id = highligthMode();
          if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
             commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
          else
@@ -3574,7 +3574,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
             QString cur_line = cursor.block().text();
             int cur_line_column = cursor.columnNumber();
 
-            id = getHighligthMode();
+            id = highligthMode();
             if((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN))
                 commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
             else
@@ -3729,109 +3729,6 @@ void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, 
 //
 //**************************************************************************************************
 
-void MdiChild::highlightCodeBlock(QString searchString, int rMin, int rMax)
-{
-   QList<QTextEdit::ExtraSelection> tmpSelections;
-   bool colorSwitch;
-   QString exp;
-   int id, foundId;
-
-   QString findExp;
-   QColor lineColor;
-
-   QTextCursor startCursor, endCursor;
-
-
-
-
-   tmpSelections.clear();
-   blockExtraSelections.clear();
-   tmpSelections.append(extraSelections);
-
-   QTextDocument *doc = textEdit->document();
-   QTextCursor cursor = textEdit->textCursor();
-   cursor.setPosition(0);
-
-   exp = searchString;
-
-
-   cursor.setPosition(0);
-   id = foundId = rMin;
-   colorSwitch = false;
-   do
-   {
-
-
-//       if(!searchString.contains("%1"))
-//           searchString.append("%1");
-
-       findExp = searchString; //.arg(foundId);
-       startCursor = doc->find(findExp, cursor);
-       qDebug() << "1 " << findExp;
-
-       if(!startCursor.isNull())
-       {
-           findExp = searchString; //.arg(id + 1);
-           endCursor = doc->find(findExp, startCursor);
-           qDebug() << "2 " << findExp;
-       };
-
-       if((!startCursor.isNull()) && (!endCursor.isNull()))
-       {
-
-           if(colorSwitch)
-           {
-               lineColor = QColor(Qt::blue).lighter(160);
-           }
-           else
-           {
-               lineColor = QColor(Qt::red).lighter(100);
-           };
-
-           selection.format.setBackground(lineColor);
-           colorSwitch = !colorSwitch;
-
-
-
-           cursor.setPosition(startCursor.selectionStart(), QTextCursor::MoveAnchor);
-           cursor.setPosition(endCursor.selectionStart(), QTextCursor::KeepAnchor);
-
-           qDebug() << cursor.selectionStart() << cursor.selectionEnd();
-
-           qDebug() << "--------------------------------";
-           qDebug() << cursor.selectedText();
-           qDebug() << "--------------------------------";
-
-           selection.cursor = cursor;
-           blockExtraSelections.append(selection);
-
-
-           foundId = id;
-
-       };
-
-       cursor = endCursor;
-
-       if(cursor.atEnd())
-           break;
-
-       if(startCursor.atEnd())
-           break;
-
-       //id++;
-//       if(id >= rMax)
-//           break;
-
-   }while(!cursor.isNull());
-
-   tmpSelections.append(blockExtraSelections);
-   textEdit->setExtraSelections(tmpSelections);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void MdiChild::filePrintPreview()
 {
 #ifndef QT_NO_PRINTER
@@ -3858,4 +3755,68 @@ void MdiChild::printPreview(QPrinter *printer)
 //**************************************************************************************************
 //
 //**************************************************************************************************
+
+bool MdiChild::isModified()
+{
+    return textEdit->document()->isModified();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::isReadOnly()
+{
+    return textEdit->isReadOnly();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::hasSelection()
+{
+    return textEdit->textCursor().hasSelection();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::isUndoAvailable()
+{
+    return textEdit->document()->isUndoAvailable();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::isRedoAvailable()
+{
+    return textEdit->document()->isRedoAvailable();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool MdiChild::overwriteMode()
+{
+    return textEdit->overwriteMode();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+QTextCursor MdiChild::textCursor()
+{
+    return textEdit->textCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 

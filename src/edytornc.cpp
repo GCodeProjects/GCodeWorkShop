@@ -166,7 +166,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 
         mdiChild->blockSignals(true);
 
-        if(mdiChild->textEdit->document()->isModified())
+        if(mdiChild->isModified())
         {
             setUpdatesEnabled(true);
             mdiChild->activateWindow();
@@ -327,7 +327,7 @@ void EdytorNc::open()
     if(existing)
         mdiArea->setActiveSubWindow(existing);
 
-    statusBar()->showMessage(tr("File loaded"), 2000);
+    statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
 //**************************************************************************************************
@@ -397,7 +397,7 @@ void EdytorNc::openExample()
     if(existing)
         mdiArea->setActiveSubWindow(existing);
 
-    statusBar()->showMessage(tr("File loaded"), 2000);
+    statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
 //**************************************************************************************************
@@ -445,7 +445,40 @@ void EdytorNc::openFile(const QString fileName)
 void EdytorNc::save()
 {
     if(activeMdiChild() && activeMdiChild()->save())
-        statusBar()->showMessage(tr("File saved"), 2000);
+        statusBar()->showMessage(tr("File saved"), 5000);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::saveAll()
+{
+    int i = 0;
+
+    MdiChild *currentMdiChild = activeMdiChild();
+
+    setUpdatesEnabled(false);
+
+    foreach(const QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
+    {
+        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+        mdiChild->blockSignals(true);
+
+        if(mdiChild->isModified())
+        {
+            mdiChild->save();
+            i++;
+        };
+        mdiChild->blockSignals(false);
+    };
+
+    if(currentMdiChild > NULL)
+        currentMdiChild->setFocus();
+
+    setUpdatesEnabled(true);
+
+    statusBar()->showMessage(tr("Saved %1 files").arg(i), 5000);
 }
 
 //**************************************************************************************************
@@ -455,7 +488,7 @@ void EdytorNc::save()
 void EdytorNc::saveAs()
 {
     if(activeMdiChild() && activeMdiChild()->saveAs())
-        statusBar()->showMessage(tr("File saved"), 2000);
+        statusBar()->showMessage(tr("File saved"), 5000);
 }
 
 //**************************************************************************************************
@@ -605,7 +638,7 @@ bool EdytorNc::findPrevious()
 void EdytorNc::replaceNext()
 {
     QPalette palette;
-    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
+    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
     bool found = false;
 
     replaceNextAct->setEnabled(false);
@@ -640,7 +673,7 @@ void EdytorNc::replaceNext()
 void EdytorNc::replacePrevious()
 {
     QPalette palette;
-    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
+    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
     bool found = false;
 
     replaceNextAct->setEnabled(false);
@@ -676,7 +709,7 @@ void EdytorNc::replaceAll()
 {
     QPalette palette;
     bool found = false;
-    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->textEdit->isReadOnly());
+    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
 
     replaceNextAct->setEnabled(false);
     replacePreviousAct->setEnabled(false);
@@ -770,6 +803,9 @@ void EdytorNc::config()
             opt.saveExtension = defaultMdiWindowProperites.saveExtension;
             opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
             opt.extensions = defaultMdiWindowProperites.extensions;
+
+            if(dirModel > NULL)
+                dirModel->setNameFilters(defaultMdiWindowProperites.extensions);
 
             mdiChild->setMdiWindowProperites(opt);
         };
@@ -1308,7 +1344,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2015.04.00 BETA" +
+                       trUtf8("<P>Version: ") + "2015.07.00 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation thanks to Michael Numberger") +
@@ -1338,11 +1374,33 @@ void EdytorNc::about()
 
 void EdytorNc::updateMenus()
 {
-    bool hasMdiChild = (activeMdiChild() != 0);
-    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
-    bool hasSelection = (hasMdiChild && activeMdiChild()->textEdit->textCursor().hasSelection());
+    bool hasMdiChildNotReadOnly;
+    bool hasSelection;
+    bool hasModifiedMdiChild;
+    bool hasMdiChild = (activeMdiChild() > NULL);
 
-    saveAct->setEnabled(hasMdiChild);
+    if(hasMdiChild)
+    {
+        hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
+        hasSelection = (hasMdiChild && activeMdiChild()->hasSelection());
+        hasModifiedMdiChild = hasMdiChild && activeMdiChild()->isModified();
+
+        redoAct->setEnabled(hasMdiChild && activeMdiChild()->isRedoAvailable());
+        undoAct->setEnabled(hasMdiChild && activeMdiChild()->isUndoAvailable());
+    }
+    else
+    {
+        hasMdiChildNotReadOnly = false;
+        hasSelection = false;
+        hasModifiedMdiChild = false;
+
+        redoAct->setEnabled(false);
+        undoAct->setEnabled(false);
+    };
+
+
+    saveAct->setEnabled(hasModifiedMdiChild);
+    saveAllAct->setEnabled(hasMdiChild);
     saveAsAct->setEnabled(hasMdiChild);
     pasteAct->setEnabled(hasMdiChild);
     closeAct->setEnabled(hasMdiChild);
@@ -1377,8 +1435,7 @@ void EdytorNc::updateMenus()
     insertBlockSkipAct->setEnabled(hasMdiChildNotReadOnly);
 
 
-    redoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isRedoAvailable());
-    undoAct->setEnabled(hasMdiChild && activeMdiChild()->textEdit->document()->isUndoAvailable());
+
 
     if(!hasMdiChildNotReadOnly)
     {
@@ -1405,6 +1462,10 @@ void EdytorNc::updateMenus()
                                                  (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
         else
             activeMdiChild()->highlightFindText("");
+
+        saveAct->setText(tr("&Save \"%1\"").arg(activeMdiChild()->fileName()));
+        saveAsAct->setText(tr("Save \"%1\" &As...").arg(activeMdiChild()->fileName()));
+        closeAct->setText(tr("Cl&ose \"%1\"").arg(activeMdiChild()->fileName()));
     };
 
     updateStatusBar();
@@ -1450,25 +1511,25 @@ void EdytorNc::updateStatusBar()
     int line = 1;
     int id;
 
-    bool hasMdiChild = (activeMdiChild() != 0);
-    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->textEdit->isReadOnly());
+    bool hasMdiChild = (activeMdiChild() > NULL);
+    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
 
     if(hasMdiChild)
     {
-        id = highlightTypeCombo->findData(activeMdiChild()->getHighligthMode());
+        id = highlightTypeCombo->findData(activeMdiChild()->highligthMode());
         highlightTypeCombo->blockSignals(true);
         highlightTypeCombo->setCurrentIndex(id);
         highlightTypeCombo->blockSignals(false);
 
-        b = activeMdiChild()->textEdit->textCursor().block();
+        b = activeMdiChild()->textCursor().block();
         line = b.firstLineNumber() + 1;
-        column = activeMdiChild()->textEdit->textCursor().position() - b.position();
+        column = activeMdiChild()->textCursor().position() - b.position();
 
         labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
                             tr("  Line: ") + QString::number(line) +
-                            (activeMdiChild()->textEdit->document()->isModified() ? tr("  <b>Modified</b>  "): " ") +
+                            (activeMdiChild()->isModified() ? tr("  <b>Modified</b>  "): " ") +
                             (!hasMdiChildNotReadOnly ? tr(" Read only  "): " ") +
-                            (activeMdiChild()->textEdit->overwriteMode() ? tr(" Overwrite  "): tr(" Insert ")));
+                            (activeMdiChild()->overwriteMode() ? tr(" Overwrite  "): tr(" Insert ")));
 
     };
 }
@@ -1513,7 +1574,7 @@ void EdytorNc::updateWindowMenu()
         QAction *action = windowMenu->addAction(text);
         action->setCheckable(true);
         action->setChecked(child == activeMdiChild());
-        action->setToolTip(child->getCurrentFileInfo());
+        action->setToolTip(child->currentFileInfo());
         connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
         windowMapper->setMapping(action, windows.at(i));
     };
@@ -1528,13 +1589,22 @@ MdiChild *EdytorNc::createMdiChild()
     MdiChild *child = new MdiChild();
     mdiArea->addSubWindow(child);
 
-    connect(child->textEdit, SIGNAL(copyAvailable(bool)), this, SLOT(updateMenus()));
+
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-    //connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
-    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateStatusBar()));
+    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
+    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(showMessage(const QString&, int)));
+
+
+//    connect(child->textEdit, SIGNAL(copyAvailable(bool)), this, SLOT(updateMenus()));
+//    connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
+//    connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
+//    //connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
+//    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
+//    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateStatusBar()));
+//    connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(showMessage(const QString&, int)));
 
     //connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
     //connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
@@ -1565,12 +1635,17 @@ void EdytorNc::createActions()
         connect(openExampleAct, SIGNAL(triggered()), this, SLOT(openExample()));
     };
 
-    saveAct = new QAction(QIcon(":/images/filesave.png"), tr("&Save"), this);
+    saveAct = new QAction(QIcon(":/images/filesave.png"), tr("&Save \"%1\"").arg(""), this);
     saveAct->setShortcut(QKeySequence::Save);
     saveAct->setToolTip(tr("Save the document to disk"));
     connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
 
-    saveAsAct = new QAction(QIcon(":/images/filesaveas.png"), tr("Save &As..."), this);
+    saveAllAct = new QAction(QIcon(":/images/filesave.png"), tr("Save A&ll"), this);
+    saveAllAct->setShortcut(tr("Ctrl+Shift+S"));
+    saveAllAct->setToolTip(tr("Save all modified documents to disk"));
+    connect(saveAllAct, SIGNAL(triggered()), this, SLOT(saveAll()));
+
+    saveAsAct = new QAction(QIcon(":/images/filesaveas.png"), tr("Save \"%1\" &As...").arg(""), this);
     saveAsAct->setShortcut(QKeySequence::SaveAs);
     saveAsAct->setToolTip(tr("Save the document under a new name"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
@@ -1793,7 +1868,7 @@ void EdytorNc::createActions()
     connect(insertBlockSkip2Act, SIGNAL(triggered()), this, SLOT(doBlockSkip2()));
 
 
-    closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose"), this);
+    closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose \"%1\"").arg(""), this);
     //closeAct->setShortcut(QKeySequence::Close);
     closeAct->setToolTip(tr("Close the active window"));
     connect(closeAct, SIGNAL(triggered()), this, SLOT(closeCurrentWindow()));
@@ -1861,6 +1936,7 @@ void EdytorNc::createMenus()
     fileMenu->addSeparator();
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
+    fileMenu->addAction(saveAllAct);
     fileMenu->addSeparator();
     fileMenu->addAction(findFilesAct);
     fileMenu->addSeparator();
@@ -1885,13 +1961,15 @@ void EdytorNc::createMenus()
     editMenu->addSeparator();
     editMenu->addAction(findAct);
     editMenu->addAction(replaceAct);
+
     editMenu->addSeparator();
-    editMenu->addSeparator();
-    editMenu->addAction(diffAct);
-    editMenu->addSeparator();
-    editMenu->addAction(diffLAct);
-    editMenu->addAction(diffRAct);
-    editMenu->addAction(diffEditorAct);
+    editMenu->addAction(semiCommAct);
+    editMenu->addAction(paraCommAct);
+    blockSkipMenu = editMenu->addMenu(tr("&Block Skip"));
+    blockSkipMenu->setIcon(QIcon(":/images/blockskip.png"));
+    blockSkipMenu->addAction(insertBlockSkipAct);
+    blockSkipMenu->addAction(insertBlockSkip1Act);
+    blockSkipMenu->addAction(insertBlockSkip2Act);
     editMenu->addSeparator();
     editMenu->addAction(readOnlyAct);
     editMenu->addSeparator();
@@ -1910,13 +1988,11 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(splittAct);
     toolsMenu->addAction(renumberAct);
     toolsMenu->addSeparator();
-    toolsMenu->addAction(semiCommAct);
-    toolsMenu->addAction(paraCommAct);
-    blockSkipMenu = toolsMenu->addMenu(tr("&Block Skip"));
-    blockSkipMenu->setIcon(QIcon(":/images/blockskip.png"));
-    blockSkipMenu->addAction(insertBlockSkipAct);
-    blockSkipMenu->addAction(insertBlockSkip1Act);
-    blockSkipMenu->addAction(insertBlockSkip2Act);
+    toolsMenu->addAction(diffAct);
+    toolsMenu->addSeparator();
+    toolsMenu->addAction(diffLAct);
+    toolsMenu->addAction(diffRAct);
+    toolsMenu->addAction(diffEditorAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(bhcAct);
     toolsMenu->addAction(speedFeedAct);
@@ -1954,6 +2030,7 @@ void EdytorNc::createToolBars()
     fileToolBar->addAction(newAct);
     fileToolBar->addAction(openAct);
     fileToolBar->addAction(saveAct);
+    fileToolBar->addAction(saveAllAct);
     fileToolBar->addAction(saveAsAct);
     fileToolBar->addSeparator();
     fileToolBar->addAction(findFilesAct);
@@ -2309,7 +2386,7 @@ void EdytorNc::writeSettings()
     settings.setValue("FileBrowserShowCurrentFileDir", currentPathCheckBox->isChecked());
 
 
-    settings.beginGroup("Highlight" );
+    settings.beginGroup("Highlight");
     settings.setValue("HighlightOn", defaultMdiWindowProperites.syntaxH);
 
     settings.setValue("CommentColor", defaultMdiWindowProperites.hColors.commentColor);
@@ -2632,9 +2709,9 @@ void EdytorNc::createFindToolBar()
 
     disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
 
-    if(!activeMdiChild()->textEdit->textCursor().hasSelection())
+    if(!activeMdiChild()->hasSelection())
     {
-        cursor = activeMdiChild()->textEdit->textCursor();
+        cursor = activeMdiChild()->textCursor();
         cursor.select(QTextCursor::WordUnderCursor);
         selText = cursor.selectedText();
         if((selText.size() > 32) || (selText.size() < 2))
@@ -2642,7 +2719,7 @@ void EdytorNc::createFindToolBar()
         activeMdiChild()->textEdit->setTextCursor(cursor);
     };
 
-    cursor = activeMdiChild()->textEdit->textCursor();
+    cursor = activeMdiChild()->textCursor();
 
     if(cursor.hasSelection())
     {
@@ -2711,7 +2788,7 @@ void EdytorNc::findTextChanged()
 
     if(hasMdiChild)
     {
-        cursor = activeMdiChild()->textEdit->textCursor();
+        cursor = activeMdiChild()->textCursor();
         if(!findEdit->text().isEmpty())
         {
             pos = cursor.position() - findEdit->text().size();
@@ -3115,7 +3192,7 @@ void EdytorNc::sendButtonClicked()
     sendAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    cursor = activeWindow->textEdit->textCursor();
+    cursor = activeWindow->textCursor();
     prevCursor = cursor;
     cursor.movePosition(QTextCursor::Start);
     activeWindow->textEdit->setTextCursor(cursor);
@@ -3679,7 +3756,7 @@ void EdytorNc::createUserToolTipsFile()
         if(!file.open(QIODevice::ReadWrite | QIODevice::Text))
             return;
 
-        qDebug() << fileName;
+       // qDebug() << fileName;
 
         QTextStream out(&file);
         out << "# " << fileName << "\n" << "\n";
@@ -3704,7 +3781,7 @@ void EdytorNc::createUserToolTipsFile()
     {
         mdiArea->setActiveSubWindow(existing);
     };
-};
+}
 
 //**************************************************************************************************
 //
@@ -4357,7 +4434,7 @@ void EdytorNc::updateOpenFileList()
 
         file.setFile(child->currentFile());
 
-        newItem = new QTableWidgetItem(file.fileName() + (child->textEdit->document()->isModified() ? "*": ""));
+        newItem = new QTableWidgetItem(file.fileName() + (child->isModified() ? "*": ""));
 
         if(file.canonicalFilePath().isEmpty())
             newItem->setToolTip(child->currentFile());
@@ -4365,8 +4442,8 @@ void EdytorNc::updateOpenFileList()
             newItem->setToolTip(QDir::toNativeSeparators(file.canonicalFilePath()));
         openFileTableWidget->setItem(i, 1, newItem);
 
-        newItem = new QTableWidgetItem(child->getCurrentFileInfo());
-        newItem->setToolTip(child->getCurrentFileInfo() + " --> " + QDir::toNativeSeparators(file.canonicalFilePath()));
+        newItem = new QTableWidgetItem(child->currentFileInfo());
+        newItem->setToolTip(child->currentFileInfo() + " --> " + QDir::toNativeSeparators(file.canonicalFilePath()));
         openFileTableWidget->setItem(i, 0, newItem);
 
         newItem = new QTableWidgetItem(QIcon(":/images/fileclose_small.png"), "", QTableWidgetItem::UserType);
@@ -4601,37 +4678,6 @@ void EdytorNc::doBlockSkip2()
 //**************************************************************************************************
 //
 //**************************************************************************************************
-
-void EdytorNc::doBlockSkip3()
-{
-    if(activeMdiChild())
-        activeMdiChild()->blockSkip(3);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::doBlockSkip4()
-{
-    if(activeMdiChild())
-        activeMdiChild()->blockSkip(4);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::doBlockSkip5()
-{
-    if(activeMdiChild())
-        activeMdiChild()->blockSkip(5);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void EdytorNc::doSemiComment()
 {
     if(activeMdiChild())

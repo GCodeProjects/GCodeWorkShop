@@ -64,8 +64,14 @@ I2MDialog::I2MDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
    setAttribute(Qt::WA_DeleteOnClose);
    setWindowTitle(tr("Inch to metric"));
 
+   QSettings settings("EdytorNC", "EdytorNC");
+   settings.beginGroup("Inch2mm");
+   inchCheckBox->setChecked(settings.value("Inch", true).toBool());
+   mmCheckBox->setChecked(!settings.value("Inch", true).toBool());
+   settings.endGroup();
 
    inputChanged();
+   checkBoxToggled();
 
    //setMaximumSize(width(), height());
 
@@ -84,7 +90,10 @@ I2MDialog::I2MDialog(QWidget * parent, Qt::WindowFlags f) : QDialog(parent, f)
 
 I2MDialog::~I2MDialog()
 {
-
+    QSettings settings("EdytorNC", "EdytorNC");
+    settings.beginGroup("Inch2mm");
+    settings.setValue("Inch", inchCheckBox->isChecked());
+    settings.endGroup();
 }
 
 //**************************************************************************************************
@@ -219,49 +228,58 @@ FeedsDialog::FeedsDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent,
    setAttribute(Qt::WA_DeleteOnClose);
    setWindowTitle(tr("Cutting parameters"));
 
+   QSettings settings("EdytorNC", "EdytorNC");
+   settings.beginGroup("FeedSpeedDialog");
+   mmCheckBox->setChecked(settings.value("MM", true).toBool());
+   inchCheckBox->setChecked(!settings.value("MM", true).toBool());
+   settings.endGroup();
 
-
-   QValidator *vcInputValid = new QIntValidator( 1, 9999, this );
+   QValidator *vcInputValid = new QIntValidator(1, 9999, this );
    vcInput->setValidator(vcInputValid);
 
-   QValidator *fzInputValid = new QDoubleValidator( 0.0001, 999, 4, this );
+   QValidator *fzInputValid = new QDoubleValidator(0.0001, 999, 4, this );
    fzInput->setValidator(fzInputValid);
 
-   QValidator *dInputValid = new QDoubleValidator( 0.1, 5000, 1, this );
+   QValidator *dInputValid = new QDoubleValidator(0.01, 9000, 4, this );
    dInput->setValidator(dInputValid);
 
-   QValidator *zInputValid = new QIntValidator( 1, 500, this );
+   QValidator *zInputValid = new QIntValidator(1, 500, this );
    zInput->setValidator(zInputValid);
 
-   QValidator *sInputValid = new QIntValidator( 1, 99999, this );
+   QValidator *sInputValid = new QIntValidator(1, 99999, this );
    sInput->setValidator(sInputValid);
 
-   QValidator *fInputValid = new QDoubleValidator( 0.1, 99999, 3, this );
+   QValidator *fInputValid = new QDoubleValidator(0.01, 99999, 4, this );
    fInput->setValidator(fInputValid);
 
 
-   connect( vcInput, SIGNAL(lostFocus()), SLOT(setDefButton()));
-   connect( fzInput, SIGNAL(lostFocus()), SLOT(setDefButton()));
-   connect( sInput, SIGNAL(lostFocus()), SLOT(setDefButton()));
-   connect( fInput, SIGNAL(lostFocus()), SLOT(setDefButton()));
-   connect( dInput, SIGNAL(lostFocus()), SLOT(setDefButton()));
-   connect( zInput, SIGNAL(lostFocus()), SLOT(setDefButton()));
+   connect(vcInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
+   connect(fzInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
+   connect(sInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
+   connect(fInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
+   connect(dInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
+   connect(zInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
 
-   connect( computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-   connect( closeButton, SIGNAL(clicked()), SLOT(close()));
-   connect( computeVcButton, SIGNAL(clicked()), SLOT(computeVcButtonClicked()));
+   connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
+   connect(closeButton, SIGNAL(clicked()), SLOT(close()));
+   connect(computeVcButton, SIGNAL(clicked()), SLOT(computeVcButtonClicked()));
 
 
    inputChanged();
+   checkBoxChanged();
 
    setMaximumSize(width(), height());
 
-   connect( vcInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   connect( fzInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   connect( dInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   connect( zInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   connect( sInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
-   connect( fInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(vcInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(fzInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(dInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(zInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(sInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+   connect(fInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+
+   connect(mmCheckBox, SIGNAL(stateChanged(int)), SLOT(checkBoxChanged()));
+   connect(inchCheckBox, SIGNAL(stateChanged(int)), SLOT(checkBoxChanged()));
+
 }
 
 //**************************************************************************************************
@@ -270,7 +288,10 @@ FeedsDialog::FeedsDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent,
 
 FeedsDialog::~FeedsDialog()
 {
-
+    QSettings settings("EdytorNC", "EdytorNC");
+    settings.beginGroup("FeedSpeedDialog");
+    settings.setValue("MM", mmCheckBox->isChecked());
+    settings.endGroup();
 }
 
 //**************************************************************************************************
@@ -297,6 +318,38 @@ void FeedsDialog::setDefButton()
 //
 //**************************************************************************************************
 
+void FeedsDialog::checkBoxChanged()
+{
+   if(mmCheckBox->isChecked())
+   {
+       vcInput->setToolTip("Cutting speed (m/min)");
+       fzInput->setToolTip("Feed (chip load) per tooth (mm)");
+       dInput->setToolTip("Tool diameter (mm)");
+       zInput->setToolTip("Number of teeth on the cutter");
+       fInput->setToolTip("Table feed (mm/min)");
+       sInput->setToolTip("Spindle speed (revs/min)");
+       fInput->setMaxLength(9);
+       fzInput->setMaxLength(8);
+   }
+   else
+     if(inchCheckBox->isChecked())
+     {
+         vcInput->setToolTip("Cutting speed (ft/min)");
+         fzInput->setToolTip("Feed (chip load) per tooth (inches)");
+         dInput->setToolTip("Tool diameter (inches)");
+         zInput->setToolTip("Number of teeth on the cutter");
+         fInput->setToolTip("Table feed (inches/min)");
+         sInput->setToolTip("Spindle speed (revs/min)");
+         fInput->setMaxLength(10);
+         fzInput->setMaxLength(9);
+     };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 void FeedsDialog::computeButtonClicked()
 {
    double Vc, Fz, D, z, S, F;
@@ -307,11 +360,23 @@ void FeedsDialog::computeButtonClicked()
    D = QLocale().toDouble(dInput->text(), &ok);
    z = QLocale().toDouble(zInput->text(), &ok);
 
-   S = (Vc * 1000) / (M_PI * D);
-   F = S * (Fz * z);
+   if(mmCheckBox->isChecked())
+   {
+       S = (Vc * 1000) / (M_PI * D);
+       F = S * (Fz * z);
 
-   sInput->setText(QString("%1").arg(round(S)));
-   fInput->setText(QString("%1").arg(F, 0, 'f', 3));
+       sInput->setText(QString("%1").arg(round(S)));
+       fInput->setText(QString("%1").arg(F, 0, 'f', 3));
+   };
+
+   if(inchCheckBox->isChecked())
+   {
+       S = (Vc * 12) / (M_PI * D);
+       F = S * (Fz * z);
+
+       sInput->setText(QString("%1").arg(round(S)));
+       fInput->setText(QString("%1").arg(F, 0, 'f', 4));
+   };
 
 }
 
@@ -329,11 +394,24 @@ void FeedsDialog::computeVcButtonClicked()
    D = QLocale().toDouble(dInput->text(), &ok);
    z = QLocale().toDouble(zInput->text(), &ok);
 
-   Vc = (M_PI * D * S) / 1000;
-   Fz = (F / S) / z;
+   if(mmCheckBox->isChecked())
+   {
+       Vc = (M_PI * D * S) / 1000;
+       Fz = (F / S) / z;
 
-   vcInput->setText(QString("%1").arg(round(round(Vc))));
-   fzInput->setText(QString("%1").arg(Fz, 0, 'f', 3));
+       vcInput->setText(QString("%1").arg(round(round(Vc))));
+       fzInput->setText(QString("%1").arg(Fz, 0, 'f', 3));
+   };
+
+   if(inchCheckBox->isChecked())
+   {
+       Vc = (M_PI * D * S) / 12;
+       Fz = (F / S) / z;
+
+       vcInput->setText(QString("%1").arg(round(round(Vc))));
+       fzInput->setText(QString("%1").arg(Fz, 0, 'f', 4));
+   };
+
 }
 
 //**************************************************************************************************
@@ -1701,7 +1779,7 @@ void BHCDraw::focusOutEvent(QFocusEvent *)
 //
 //**************************************************************************************************
 
-void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color)
+void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool first, bool last, QColor color)
 {
     qreal x, y, x1, y1, sca, d;
 
@@ -1726,17 +1804,12 @@ void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color
 
     paint->scale(sca, sca);
 
-
-    paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
-    paint->setBrush(Qt::NoBrush);
-    paint->drawEllipse(QPointF(v.x() / 2, -v.y() / 2), dia, dia);
-
     d = 12 / sca;
-    x = (dia + (d)) * cos((M_PI/180) * ang);
-    y = (dia + (d)) * sin((M_PI/180) * ang);
+    x = xcenter + (dia + (d)) * cos((M_PI/180) * ang);
+    y = ycenter + (dia + (d)) * sin((M_PI/180) * ang);
 
-    x1 = (dia - (d)) * cos((M_PI/180) * ang);
-    y1 = (dia - (d)) * sin((M_PI/180) * ang);
+    x1 = xcenter + (dia - (d)) * cos((M_PI/180) * ang);
+    y1 = ycenter + (dia - (d)) * sin((M_PI/180) * ang);
 
 
     paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
@@ -1753,21 +1826,40 @@ void BHCDraw::drawHole(qreal ang, qreal dia, bool first, bool last, QColor color
       paint->setBrush(Qt::NoBrush);
 
     if(first)
-      paint->setPen(QPen(color.darker(65), 0, Qt::SolidLine));
+    {
+        // circle center point
+        paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
+        paint->drawLine(QPointF(xcenter + v.x() / 2, -(ycenter - d)), QPointF(xcenter + v.x() / 2, -(ycenter + d)));
+        paint->drawLine(QPointF(xcenter - d, -(ycenter + v.y() / 2)), QPointF(xcenter + d, -(ycenter + v.y() / 2)));
+
+        //circle radius line
+        x = xcenter + 0 * cos((M_PI/180) * ang);
+        y = ycenter + (0) * sin((M_PI/180) * ang);
+        x1 = xcenter + (dia - (d)) * cos((M_PI/180) * ang);
+        y1 = ycenter + (dia - (d)) * sin((M_PI/180) * ang);
+        paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
+
+        //diameter circle
+        paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
+        paint->setBrush(Qt::NoBrush);
+        paint->drawEllipse(QPointF(xcenter + v.x() / 2, - ycenter -v.y() / 2), dia, dia);
+
+        paint->setPen(QPen(color.darker(65), 0, Qt::SolidLine));
+    }
     else
       paint->setPen(QPen(color, 0, Qt::SolidLine));
 
 
-    x = dia * cos((M_PI/180) * ang);
-    y = dia * sin((M_PI/180) * ang);
+    x = xcenter + dia * cos((M_PI/180) * ang);
+    y = ycenter + dia * sin((M_PI/180) * ang);
 
     d = 8 / sca;
 
     paint->drawEllipse(QPointF(x, -y), d, d);
 
 
-    v = paint->viewport();
-        c = qMin(v.width(), v.height());
+//    v = paint->viewport();
+//    c = qMin(v.width(), v.height());
 
     paint->restore();
     paint->end();
@@ -1970,7 +2062,7 @@ void BHCDialog::comChk()
       for(tabId = 0; tabId <= tabBar->count(); tabId++)
       {
          tab = (BHCTab*)tabBar->widget(tabId);
-         if(tab == 0)
+         if(tab == NULL)
            continue;
 
          if(tabId == activTab)
@@ -2017,19 +2109,20 @@ void BHCDialog::computeButtonClicked()
    for(tabId = 0; tabId <= tabBar->count(); tabId++)
    {
       tab = (BHCTab*)tabBar->widget(tabId);
-      if(tab == 0)
+      if(tab == NULL)
         continue;
 
-      maxDia = qMax(maxDia, QLocale().toDouble(tab->diaInput->text(), &ok));
-
+      maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(), &ok)+ 2*abs(QLocale().toDouble(tab->xCenterInput->text(), &ok))));
+//      maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(), &ok)- 2*(QLocale().toDouble(tab->xCenterInput->text(), &ok))));
+      maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(), &ok)+ 2*abs(QLocale().toDouble(tab->yCenterInput->text(), &ok))));
+//      maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(), &ok)- 2*(QLocale().toDouble(tab->yCenterInput->text(), &ok))));
    };
 
 
-
-   for(tabId = 0; tabId <= tabBar->count(); tabId++)
+   for(tabId = 0; tabId < tabBar->count(); tabId++)
    {
       tab = (BHCTab*)tabBar->widget(tabId);
-      if(tab == 0)
+      if(tab == NULL)
         continue;
 
       if(!tab->xCenterInput->hasAcceptableInput())
@@ -2088,7 +2181,10 @@ void BHCDialog::computeButtonClicked()
       {
          tab->resultTable->setRowCount(0);
          continue;
-      }
+      };
+
+      if(dia == 0)
+          continue;
 
       roate = roate / 10;
 
@@ -2104,6 +2200,13 @@ void BHCDialog::computeButtonClicked()
       tab->resultTable->setRowCount(holeCount);
 
       dia = dia / 2;
+
+      if(tab->mirrorY->isChecked())
+         xCenter = -xCenter;
+
+      if(tab->mirrorX->isChecked())
+         yCenter = -yCenter;
+
       for(i = 0; i < holeCount; i++)
       {
          ang = firstAngle + (angleBeetwen * i);
@@ -2128,7 +2231,6 @@ void BHCDialog::computeButtonClicked()
 
          x = xCenter + (dia * cos((M_PI/180) * ang));
          y = yCenter + (dia * sin((M_PI/180) * ang));
-
 
          QTableWidgetItem *xItem = new QTableWidgetItem(removeZeros(QString("%1").arg(x, 0, 'f', 3)));
          //xItem->setFlags(Qt::ItemIsEnabled);
@@ -2248,17 +2350,17 @@ void BHCDialog::computeButtonClicked()
          case 1:  col = Qt::blue;
                   textPosX = 8;
                   textPosY = drawing->height();
-                  dir = 4;
+                  dir = 5;
                   break;
          case 2:  col = Qt::red;
-                  textPosX = (drawing->width()/2) + drawing->width()/6;
+                  textPosX = (drawing->width()/2) + drawing->width()/4;
                   textPosY = 0;
                   dir = -1;
                   break;
          case 3:  col = Qt::yellow;
-                  textPosX = (drawing->width()/2) + drawing->width()/6;
+                  textPosX = (drawing->width()/2) + drawing->width()/4;
                   textPosY = drawing->height();
-                  dir = 4;
+                  dir = 5;
                   break;
          default: col = Qt::green;
                   textPosX = 8;
@@ -2271,12 +2373,18 @@ void BHCDialog::computeButtonClicked()
       drawing->printText(textPosX, textPosY, 1-dir, QString(tr("Number of holes : %1")).arg(holeCount), col);
       drawing->printText(textPosX, textPosY, 2-dir, QString(tr("Angle of first hole : %1")).arg(firstAngle), col);
       drawing->printText(textPosX, textPosY, 3-dir, QString(tr("Angle beetwen holes : %1")).arg(angleBeetwen), col);
-
+      drawing->printText(textPosX, textPosY, 4-dir, QString(tr("Center Position : X%1 Y%2")).arg(xCenter).arg(yCenter), col);
       firstAngle += roate;
 
       tab->resultTable->setRowCount(holeCount);
 
       dia = dia / 2;
+
+      if(tab->mirrorY->isChecked())
+         xCenter = -xCenter;
+
+      if(tab->mirrorX->isChecked())
+         yCenter = -yCenter;
 
       for(i = 0; i < holeCount; i++)
       {
@@ -2300,7 +2408,7 @@ void BHCDialog::computeButtonClicked()
             ang = ang + 360;
          };
 
-         drawing->drawHole(ang, dia, (i == 0), (i == (holeCount-1)), col);
+         drawing->drawHole(ang, dia, xCenter, yCenter, (i == 0), (i == (holeCount-1)), col);
 
       };
 

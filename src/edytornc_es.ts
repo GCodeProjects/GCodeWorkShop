@@ -51,6 +51,10 @@
         <source>Angle beetwen holes : %1</source>
         <translation>Ángulo entre Agujeros : %1</translation>
     </message>
+    <message>
+        <source>Center Position : X%1 Y%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BHCDraw</name>
@@ -160,6 +164,10 @@
 </source>
         <translation>;DIÁMETRO: %1, Nº DE AGUJEROS: %2, ÁNGULO INICIAL: %3
 </translation>
+    </message>
+    <message>
+        <source>Select rows &amp; right click for menu</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -512,7 +520,7 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Guardar</translation>
+        <translation type="vanished">&amp;Guardar</translation>
     </message>
     <message>
         <source>Save the document to disk</source>
@@ -520,7 +528,7 @@
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Guardar &amp;Como...</translation>
+        <translation type="vanished">Guardar &amp;Como...</translation>
     </message>
     <message>
         <source>Save the document under a new name</source>
@@ -880,7 +888,7 @@
     </message>
     <message>
         <source>Cl&amp;ose</source>
-        <translation>C&amp;errar</translation>
+        <translation type="vanished">C&amp;errar</translation>
     </message>
     <message>
         <source>Close the active window</source>
@@ -1316,6 +1324,34 @@
         <source>&lt;br /&gt;Spanish translation thanks to Otto Huamani</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Saved %1 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &quot;%1&quot; &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cl&amp;ose &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save A&amp;ll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save all modified documents to disk</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FeedsDialog</name>
@@ -1333,7 +1369,7 @@
     </message>
     <message>
         <source>Cutting speed (m/min)</source>
-        <translation>Velocidad de corte (m/min)</translation>
+        <translation type="vanished">Velocidad de corte (m/min)</translation>
     </message>
     <message>
         <source>90</source>
@@ -1349,11 +1385,7 @@
     </message>
     <message>
         <source>Feed per tooth (mm)</source>
-        <translation>Avance por diente (mm)</translation>
-    </message>
-    <message>
-        <source>0.2</source>
-        <translation></translation>
+        <translation type="vanished">Avance por diente (mm)</translation>
     </message>
     <message>
         <source>Tool diameter</source>
@@ -1365,7 +1397,7 @@
     </message>
     <message>
         <source>Tool diameter (mm)</source>
-        <translation>Diámetro de herramienta (mm)</translation>
+        <translation type="vanished">Diámetro de herramienta (mm)</translation>
     </message>
     <message>
         <source>10</source>
@@ -1393,7 +1425,7 @@
     </message>
     <message>
         <source>Spindle speed (r/min)</source>
-        <translation>Velocidad de giro (r/min)</translation>
+        <translation type="vanished">Velocidad de giro (r/min)</translation>
     </message>
     <message>
         <source>0</source>
@@ -1409,7 +1441,7 @@
     </message>
     <message>
         <source>Table feed (mm/min)</source>
-        <translation>Avance de los ejes (mm/min)</translation>
+        <translation type="vanished">Avance de los ejes (mm/min)</translation>
     </message>
     <message>
         <source>Compute spindle speed and table feed</source>
@@ -1434,6 +1466,14 @@
     <message>
         <source>Cutting parameters</source>
         <translation>Parámetros de corte</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>inches</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1912,6 +1952,14 @@ Comprobar +-*/.
     <message>
         <source>EdytorNc - compile basic</source>
         <translation>EdytorNC: compilar base</translation>
+    </message>
+    <message>
+        <source>(DATE)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DATE</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2506,6 +2554,14 @@ p, li { white-space: pre-wrap; }
         <source>90</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove white space just before the end of line, sometimes added by Fanuc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove white space at end of line</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SetupDialog</name>
@@ -2656,10 +2712,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Extension to add: </source>
         <translation>Extensión para agregar: </translation>
-    </message>
-    <message>
-        <source>*.Aaa; </source>
-        <translation></translation>
     </message>
     <message>
         <source>*.</source>
@@ -2840,6 +2892,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Select default save directory</source>
         <translation>Seleccionar el directorio predeterminado para guardar</translation>
+    </message>
+    <message>
+        <source>*.Axx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>*.Aaa</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

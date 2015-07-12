@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>354</width>
-    <height>170</height>
+    <width>407</width>
+    <height>177</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,28 +15,66 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="mmCheckBox">
+        <property name="text">
+         <string>mm</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="inchCheckBox">
+        <property name="text">
+         <string>inches</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QGroupBox" name="groupBox_3">
-       <property name="title">
-        <string/>
+      <widget class="QFrame" name="frame_2">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="toolTip">
-           <string>Cutting speed</string>
-          </property>
-          <property name="text">
-           <string> Vc :</string>
-          </property>
-         </widget>
-        </item>
-        <item>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="1">
          <widget class="QLineEdit" name="vcInput">
-          <property name="toolTip">
-           <string>Cutting speed (m/min)</string>
-          </property>
           <property name="text">
            <string>90</string>
           </property>
@@ -46,9 +84,22 @@
           <property name="dragEnabled">
            <bool>true</bool>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="toolTip">
+           <string>Cutting speed</string>
+          </property>
+          <property name="text">
+           <string> Vc :</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <widget class="QLabel" name="label_2">
           <property name="toolTip">
            <string>Feed per tooth</string>
@@ -58,18 +109,18 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="1">
          <widget class="QLineEdit" name="fzInput">
-          <property name="toolTip">
-           <string>Feed per tooth (mm)</string>
-          </property>
           <property name="text">
-           <string>0.2</string>
+           <string>0</string>
           </property>
           <property name="maxLength">
            <number>8</number>
           </property>
           <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="clearButtonEnabled">
            <bool>true</bool>
           </property>
          </widget>
@@ -78,12 +129,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_2">
-       <property name="title">
-        <string/>
+      <widget class="QFrame" name="frame_3">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
          <widget class="QLabel" name="label_5">
           <property name="toolTip">
            <string>Tool diameter</string>
@@ -93,11 +147,8 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QLineEdit" name="dInput">
-          <property name="toolTip">
-           <string>Tool diameter (mm)</string>
-          </property>
           <property name="text">
            <string>10</string>
           </property>
@@ -107,9 +158,12 @@
           <property name="dragEnabled">
            <bool>true</bool>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="0">
          <widget class="QLabel" name="label_6">
           <property name="toolTip">
            <string>Number of toot's</string>
@@ -119,11 +173,8 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="1">
          <widget class="QLineEdit" name="zInput">
-          <property name="toolTip">
-           <string>Number of toot's</string>
-          </property>
           <property name="text">
            <string>1</string>
           </property>
@@ -133,18 +184,24 @@
           <property name="dragEnabled">
            <bool>true</bool>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox">
-       <property name="title">
-        <string/>
+      <widget class="QFrame" name="frame_4">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="toolTip">
            <string>Spindle speed</string>
@@ -154,11 +211,8 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item row="0" column="1">
          <widget class="QLineEdit" name="sInput">
-          <property name="toolTip">
-           <string>Spindle speed (r/min)</string>
-          </property>
           <property name="text">
            <string>0</string>
           </property>
@@ -168,9 +222,28 @@
           <property name="dragEnabled">
            <bool>true</bool>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
-        <item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="fInput">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="maxLength">
+           <number>9</number>
+          </property>
+          <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <widget class="QLabel" name="label_4">
           <property name="toolTip">
            <string>Table feed</string>
@@ -180,26 +253,17 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLineEdit" name="fInput">
-          <property name="toolTip">
-           <string>Table feed (mm/min)</string>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="maxLength">
-           <number>9</number>
-          </property>
-          <property name="dragEnabled">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">

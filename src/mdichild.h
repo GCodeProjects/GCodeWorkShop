@@ -64,7 +64,7 @@ public:
     bool save();
     bool saveAs();
     bool saveFile(const QString &fileName);
-    QString currentFile() { return QDir::toNativeSeparators(curFile); }
+    QString currentFile() { return QDir::toNativeSeparators(curFile); }  //filename with full path
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
     int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked);
@@ -82,9 +82,9 @@ public:
     QString filePath();
     QString fileName();
     void setHighligthMode(int mod);
-    int getHighligthMode();
+    int highligthMode();
     void doDiff();
-    QString getCurrentFileInfo();
+    QString currentFileInfo(); // Text from first comment in CNC program
     QString guessFileName();
     QStringList splitFile();
     bool foundTextMatched(QString pattern, QString text);
@@ -100,6 +100,13 @@ public:
     void doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments);
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
     void filePrintPreview();
+    bool isModified();
+    bool isReadOnly();
+    bool hasSelection();
+    bool isUndoAvailable();
+    bool isRedoAvailable();
+    bool overwriteMode();
+    QTextCursor textCursor();
 
 
 
