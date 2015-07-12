@@ -19,60 +19,65 @@
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1896"/>
+        <location filename="dialogs.cpp" line="1989"/>
         <source>Bolt circle</source>
         <translation>Reikäpiiri</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1918"/>
+        <location filename="dialogs.cpp" line="2011"/>
         <source>Circle 1 - green</source>
         <translation>Piiri 1 - vihreä</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1919"/>
+        <location filename="dialogs.cpp" line="2012"/>
         <source>Circle 2 - blue</source>
         <translation>Piiri 2 - sininen</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1920"/>
+        <location filename="dialogs.cpp" line="2013"/>
         <source>Circle 3 - red</source>
         <translation>Piiri 3 - punainen</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1921"/>
+        <location filename="dialogs.cpp" line="2014"/>
         <source>Circle 4 - yellow</source>
         <translation>Piiri 4 - keltainen</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2269"/>
+        <location filename="dialogs.cpp" line="2372"/>
         <source>Diameter : %1</source>
         <translation>Halkaisija : %1</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2270"/>
+        <location filename="dialogs.cpp" line="2373"/>
         <source>Number of holes : %1</source>
         <translation>Reikien lukumäärä : %1</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2271"/>
+        <location filename="dialogs.cpp" line="2374"/>
         <source>Angle of first hole : %1</source>
         <translation>Ensimmäisen reiän kulma : %1</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2272"/>
+        <location filename="dialogs.cpp" line="2375"/>
         <source>Angle beetwen holes : %1</source>
         <translation>Reikien välinen kulma : %1</translation>
+    </message>
+    <message>
+        <location filename="dialogs.cpp" line="2376"/>
+        <source>Center Position : X%1 Y%2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>BHCDraw</name>
     <message>
-        <location filename="dialogs.cpp" line="1621"/>
+        <location filename="dialogs.cpp" line="1700"/>
         <source>Bolt circle - preview</source>
         <translation>Reikäpiiri - esikatselu</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1624"/>
+        <location filename="dialogs.cpp" line="1703"/>
         <source>Click to close</source>
         <translation>Paina sulkeaksesi</translation>
     </message>
@@ -131,72 +136,77 @@
     </message>
     <message>
         <location filename="bhctabform.ui" line="209"/>
-        <location filename="bhctabform.ui" line="231"/>
-        <location filename="bhctabform.ui" line="253"/>
-        <location filename="bhctabform.ui" line="275"/>
-        <location filename="bhctabform.ui" line="297"/>
-        <location filename="bhctabform.ui" line="319"/>
+        <location filename="bhctabform.ui" line="234"/>
+        <location filename="bhctabform.ui" line="259"/>
+        <location filename="bhctabform.ui" line="284"/>
+        <location filename="bhctabform.ui" line="309"/>
+        <location filename="bhctabform.ui" line="334"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="bhctabform.ui" line="331"/>
+        <location filename="bhctabform.ui" line="349"/>
         <source>Common mirror and roate</source>
         <translation>Yhdistetty peilaus ja kääntö</translation>
     </message>
     <message>
-        <location filename="bhctabform.ui" line="384"/>
+        <location filename="bhctabform.ui" line="374"/>
+        <source>Select rows &amp; right click for menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="bhctabform.ui" line="402"/>
         <source>1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="bhctabform.ui" line="389"/>
+        <location filename="bhctabform.ui" line="407"/>
         <source>X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="bhctabform.ui" line="394"/>
+        <location filename="bhctabform.ui" line="412"/>
         <source>Y</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1424"/>
+        <location filename="dialogs.cpp" line="1502"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopioi</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1426"/>
+        <location filename="dialogs.cpp" line="1504"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopioi valinta leikepöydälle</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1431"/>
+        <location filename="dialogs.cpp" line="1509"/>
         <source>&amp;Select all</source>
         <translation>&amp;Valitse kaikki</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1433"/>
+        <location filename="dialogs.cpp" line="1511"/>
         <source>Select all</source>
         <translation>Valitse kaikki</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1441"/>
+        <location filename="dialogs.cpp" line="1519"/>
         <source>Add ; comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1444"/>
+        <location filename="dialogs.cpp" line="1522"/>
         <source>Add () comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1589"/>
+        <location filename="dialogs.cpp" line="1668"/>
         <source>(DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3)
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="1593"/>
+        <location filename="dialogs.cpp" line="1672"/>
         <source>;DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3
 </source>
         <translation type="unfinished"></translation>
@@ -272,7 +282,7 @@
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2325"/>
+        <location filename="dialogs.cpp" line="2434"/>
         <source>Chamfer</source>
         <translation>Viiste</translation>
     </message>
@@ -357,7 +367,7 @@
         <translation>&amp;Peruuta</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="660"/>
+        <location filename="dialogs.cpp" line="738"/>
         <source>Insert dots</source>
         <translation>Lisää pisteet</translation>
     </message>
@@ -370,210 +380,210 @@
         <translation>Pääikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="76"/>
+        <location filename="edytornc.ui" line="94"/>
         <source>Manage project</source>
         <translation>Hallitse projektia</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="91"/>
-        <location filename="edytornc.ui" line="94"/>
+        <location filename="edytornc.ui" line="127"/>
+        <location filename="edytornc.ui" line="130"/>
         <source>New project</source>
         <translation>Uusi projekti</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="108"/>
-        <location filename="edytornc.ui" line="111"/>
+        <location filename="edytornc.ui" line="144"/>
+        <location filename="edytornc.ui" line="147"/>
         <source>Open project</source>
         <translation>Avaa projekti</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="125"/>
-        <location filename="edytornc.ui" line="128"/>
-        <location filename="edytornc.ui" line="145"/>
+        <location filename="edytornc.ui" line="161"/>
+        <location filename="edytornc.ui" line="164"/>
+        <location filename="edytornc.ui" line="181"/>
         <source>Save project</source>
         <translation>Tallenna projekti</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="142"/>
+        <location filename="edytornc.ui" line="178"/>
         <source>Save project as...</source>
         <translation>Tallenna projekti nimellä...</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="175"/>
-        <location filename="edytornc.ui" line="178"/>
-        <location filename="edytornc.cpp" line="3810"/>
+        <location filename="edytornc.ui" line="211"/>
+        <location filename="edytornc.ui" line="214"/>
+        <location filename="edytornc.cpp" line="3931"/>
         <source>Add files to project</source>
         <translation>Lisää tiedostoja projektiin</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="192"/>
-        <location filename="edytornc.ui" line="195"/>
+        <location filename="edytornc.ui" line="228"/>
+        <location filename="edytornc.ui" line="231"/>
         <source>Remove file from project</source>
         <translation>Poista tiedostoja projektista</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="261"/>
+        <location filename="edytornc.ui" line="297"/>
         <source>Browse files</source>
         <translation>Selaa tiedostoja</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="294"/>
+        <location filename="edytornc.ui" line="342"/>
         <source>If checked, show the list of files in the current directory, otherwise the last opened directory</source>
         <translation>Jos valittu, näytä lista tiedostoista työhakemistossa, muuten näytä viimeksi avattu hakemisto</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="297"/>
+        <location filename="edytornc.ui" line="345"/>
         <source>Current directory</source>
         <translation>Nykyinen hakemisto</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="317"/>
+        <location filename="edytornc.ui" line="365"/>
         <source>Preview no. of file lines</source>
         <translation>Esikatselu rivien lukumäärä</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="386"/>
+        <location filename="edytornc.ui" line="434"/>
         <source>Part</source>
         <translation>Osa</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="391"/>
-        <location filename="edytornc.cpp" line="4303"/>
+        <location filename="edytornc.ui" line="439"/>
+        <location filename="edytornc.cpp" line="4424"/>
         <source>File Name</source>
         <translation>Tiedoston nimi</translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="396"/>
+        <location filename="edytornc.ui" line="444"/>
         <source>x</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.ui" line="417"/>
+        <location filename="edytornc.ui" line="465"/>
         <source>&lt;&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="91"/>
-        <location filename="edytornc.cpp" line="969"/>
+        <location filename="edytornc.cpp" line="92"/>
+        <location filename="edytornc.cpp" line="1006"/>
         <source>EdytorNC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="222"/>
+        <location filename="edytornc.cpp" line="223"/>
         <source>EMPTY FILE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="286"/>
-        <location filename="edytornc.cpp" line="356"/>
+        <location filename="edytornc.cpp" line="287"/>
+        <location filename="edytornc.cpp" line="357"/>
         <source>Select one or more files to open</source>
         <translation>Valitse yksi tai useampia tiedostoja avattavaksi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="329"/>
-        <location filename="edytornc.cpp" line="399"/>
+        <location filename="edytornc.cpp" line="330"/>
+        <location filename="edytornc.cpp" line="400"/>
         <source>File loaded</source>
         <translation>Tiedosto ladattu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="447"/>
-        <location filename="edytornc.cpp" line="457"/>
+        <location filename="edytornc.cpp" line="448"/>
+        <location filename="edytornc.cpp" line="491"/>
         <source>File saved</source>
         <translation>Tiedosto tallennettu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="970"/>
+        <location filename="edytornc.cpp" line="1007"/>
         <source>Cannot write tmp file &quot;%1&quot;.
  %2</source>
         <translation>Aputiedostoon ei voitu kirjoittaa &quot;%1&quot; 
  %2</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1104"/>
+        <location filename="edytornc.cpp" line="1141"/>
         <source>Removed : %1 line numbers.</source>
         <translation>Poisetttu : %1 rivinumeroa.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1106"/>
+        <location filename="edytornc.cpp" line="1143"/>
         <source>Renumbered : %1 lines.</source>
         <translation>Numeroitu uudelleen : %1 riviä.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1208"/>
+        <location filename="edytornc.cpp" line="1245"/>
         <source>Information</source>
         <translation>Huomautus</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1209"/>
+        <location filename="edytornc.cpp" line="1246"/>
         <source>Set correct calculator program name in configuration dialog.</source>
         <translation>Valitse laskimena käytettävä ohjelma asetukset valikosta.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1308"/>
+        <location filename="edytornc.cpp" line="1345"/>
         <source>About EdytorNC</source>
         <translation>Tietoja EdytorNC:stä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1309"/>
+        <location filename="edytornc.cpp" line="1346"/>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
         <translation>&lt;b&gt;EdytorNC&lt;/b&gt; on tekstieditori CNC ohjelmoijille.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1310"/>
+        <location filename="edytornc.cpp" line="1347"/>
         <source>&lt;P&gt;Version: </source>
         <translation>&lt;P&gt;Versio: </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1311"/>
+        <location filename="edytornc.cpp" line="1348"/>
         <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1312"/>
+        <location filename="edytornc.cpp" line="1349"/>
         <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
         <oldsource>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i SalomÃ³</oldsource>
         <translation>&lt;P&gt;Katalaaninkielinen käännös ja deb paketti: Jordi Sayol i Salomó</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1313"/>
+        <location filename="edytornc.cpp" line="1350"/>
         <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
         <translation>&lt;br /&gt;Saksankielinen käännös: Michael Numberger</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1314"/>
+        <location filename="edytornc.cpp" line="1351"/>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
         <translation>&lt;br /&gt;Tsekin kielinen käännös: Pavel Fric</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1315"/>
+        <location filename="edytornc.cpp" line="1352"/>
         <source>&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju</source>
         <oldsource>&lt;br /&gt;Finnish translation thanks to Janne M�ntyharju</oldsource>
         <translation>&lt;br /&gt;Suomenkielinen käännös: Janne Mäntyharju</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1316"/>
+        <location filename="edytornc.cpp" line="1353"/>
         <source>&lt;br /&gt;Spanish translation thanks to Otto Huamani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1318"/>
+        <location filename="edytornc.cpp" line="1355"/>
         <source>&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski</source>
         <translation>&lt;P&gt;Uusi EdytorNC ikoni: Jakub Gajewski</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1319"/>
+        <location filename="edytornc.cpp" line="1356"/>
         <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1320"/>
-        <location filename="edytornc.cpp" line="1322"/>
-        <location filename="edytornc.cpp" line="1324"/>
+        <location filename="edytornc.cpp" line="1357"/>
+        <location filename="edytornc.cpp" line="1359"/>
+        <location filename="edytornc.cpp" line="1361"/>
         <source>&lt;P&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1321"/>
+        <location filename="edytornc.cpp" line="1358"/>
         <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
         <translation>&lt;P&gt;Asennusohjelma tehty &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
     </message>
@@ -582,934 +592,969 @@
         <translation type="obsolete">&lt;P&gt;EdytorNC on saanut palkinnon: &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1323"/>
+        <location filename="edytornc.cpp" line="1360"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
         <translation>&lt;P&gt;EdytorNC sisältää koodia muista avoimen lähdekoodin projekteista.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1325"/>
+        <location filename="edytornc.cpp" line="1362"/>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
         <translation>&lt;P&gt;&lt;i&gt;EdytorNC on vapaa ohjelmisto. Voit levittää ja/tai muokata sitä GNU Free Software Foundationin julkaiseman GPL-lisenssin version 2 tai (halutessasi) uudemman ehtojen rajoissa.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1329"/>
+        <location filename="edytornc.cpp" line="1366"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1466"/>
+        <location filename="edytornc.cpp" line="1528"/>
         <source> Col: </source>
         <translation> Sarake: </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1467"/>
+        <location filename="edytornc.cpp" line="1529"/>
         <source>  Line: </source>
         <translation>  Rivi: </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1468"/>
+        <location filename="edytornc.cpp" line="1530"/>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
         <translation>  &lt;b&gt;Muutettu&lt;/b&gt;  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1469"/>
+        <location filename="edytornc.cpp" line="1531"/>
         <source> Read only  </source>
         <translation>Vain luku</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1470"/>
+        <location filename="edytornc.cpp" line="1532"/>
         <source> Overwrite  </source>
         <translation>Ylikirjoita</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1470"/>
+        <location filename="edytornc.cpp" line="1532"/>
         <source> Insert </source>
         <translation>Lisää</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1505"/>
+        <location filename="edytornc.cpp" line="1567"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1509"/>
+        <location filename="edytornc.cpp" line="1571"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1550"/>
+        <location filename="edytornc.cpp" line="1621"/>
         <source>&amp;New</source>
         <translation>&amp;Uusi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1552"/>
+        <location filename="edytornc.cpp" line="1623"/>
         <source>Create a new file</source>
         <translation>Luo uusi tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1555"/>
+        <location filename="edytornc.cpp" line="1626"/>
         <source>&amp;Open...</source>
         <translation>&amp;Avaa...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1557"/>
+        <location filename="edytornc.cpp" line="1628"/>
         <source>Open an existing file</source>
         <translation>Avaa olemassa oleva tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1562"/>
+        <location filename="edytornc.cpp" line="1633"/>
         <source>&amp;Open example...</source>
         <translation>Avaa &amp;esimerkki...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1563"/>
+        <location filename="edytornc.cpp" line="1634"/>
         <source>Open an example file</source>
         <translation>Avaa esimerkkitiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1567"/>
         <source>&amp;Save</source>
-        <translation>&amp;Tallenna</translation>
+        <translation type="vanished">&amp;Tallenna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1569"/>
+        <location filename="edytornc.cpp" line="1640"/>
         <source>Save the document to disk</source>
         <translation>Tallenna tiedosto levylle</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1572"/>
         <source>Save &amp;As...</source>
-        <translation>Tallenna &amp;nimellä...</translation>
+        <translation type="vanished">Tallenna &amp;nimellä...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1574"/>
+        <location filename="edytornc.cpp" line="1650"/>
         <source>Save the document under a new name</source>
         <translation>Tallenna tiedosto uudella nimellä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1577"/>
+        <location filename="edytornc.cpp" line="1653"/>
         <source>E&amp;xit</source>
         <translation>&amp;Lopeta</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1579"/>
+        <location filename="edytornc.cpp" line="1655"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1580"/>
+        <location filename="edytornc.cpp" line="1656"/>
         <source>Exit the application</source>
         <translation>Lopeta ohjelma</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1583"/>
+        <location filename="edytornc.cpp" line="1659"/>
         <source>&amp;Find files...</source>
         <translation>&amp;Etsi tiedostoja...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1586"/>
+        <location filename="edytornc.cpp" line="1662"/>
         <source>Find files</source>
         <translation>Etsi tiedostoja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1589"/>
+        <location filename="edytornc.cpp" line="1665"/>
         <source>&amp;Print</source>
         <translation>&amp;Tulosta</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1591"/>
+        <location filename="edytornc.cpp" line="1667"/>
         <source>Print file</source>
         <translation>Tulosta tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1595"/>
+        <location filename="edytornc.cpp" line="1671"/>
         <source>&amp;Undo</source>
         <translation>&amp;Peruuta</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1597"/>
+        <location filename="edytornc.cpp" line="1673"/>
         <source>Undo last operation</source>
         <translation>Peruuta edellinen toiminto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1601"/>
+        <location filename="edytornc.cpp" line="1677"/>
         <source>&amp;Redo</source>
         <translation>Tee &amp;uudelleen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1603"/>
+        <location filename="edytornc.cpp" line="1679"/>
         <source>Redo last operation</source>
         <translation>Toista edellinen operaatio</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1607"/>
+        <location filename="edytornc.cpp" line="1683"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Leikkaa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1609"/>
+        <location filename="edytornc.cpp" line="1685"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Leikkaa valinta leikepöydälle</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1613"/>
+        <location filename="edytornc.cpp" line="1689"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopio</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1615"/>
+        <location filename="edytornc.cpp" line="1691"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopio valinta leikepöydälle</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1619"/>
+        <location filename="edytornc.cpp" line="1695"/>
         <source>&amp;Paste</source>
         <translation>&amp;Liitä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1621"/>
+        <location filename="edytornc.cpp" line="1697"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Liitä leikepöydän sisältö</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1626"/>
+        <location filename="edytornc.cpp" line="1702"/>
         <source>&amp;Find</source>
         <translation>&amp;Etsi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1628"/>
+        <location filename="edytornc.cpp" line="1704"/>
         <source>Find text</source>
         <translation>Etsi tekstiä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1631"/>
+        <location filename="edytornc.cpp" line="1707"/>
         <source>&amp;Replace</source>
         <translation>&amp;Korvaa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1632"/>
+        <location filename="edytornc.cpp" line="1708"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1633"/>
+        <location filename="edytornc.cpp" line="1709"/>
         <source>Find and replace text</source>
         <translation>Etsi ja korvaa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1637"/>
+        <location filename="edytornc.cpp" line="1713"/>
         <source>&amp;Delete</source>
         <translation>&amp;Poista</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1639"/>
+        <location filename="edytornc.cpp" line="1715"/>
         <source>Removes selected text</source>
         <translation>Poistaa valitun tekstin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1642"/>
+        <location filename="edytornc.cpp" line="1718"/>
         <source>&amp;Select all</source>
         <translation>&amp;Valitse kaikki</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1644"/>
+        <location filename="edytornc.cpp" line="1720"/>
         <source>Select all text</source>
         <translation>Valitse kaikki</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1647"/>
+        <location filename="edytornc.cpp" line="1723"/>
         <source>Read &amp;only</source>
         <translation>Vain &amp;luku</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1648"/>
+        <location filename="edytornc.cpp" line="1724"/>
         <source>F12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1650"/>
+        <location filename="edytornc.cpp" line="1726"/>
         <source>Makes text read only</source>
         <translation>Estää tiedoston muuttamisen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1653"/>
+        <location filename="edytornc.cpp" line="1729"/>
         <source>Configuration</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1655"/>
+        <location filename="edytornc.cpp" line="1731"/>
         <source>Open configuration dialog</source>
         <translation>Avaa asetusvalikko</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1662"/>
+        <location filename="edytornc.cpp" line="1738"/>
         <source>&amp;Bolt hole circle</source>
         <translation>&amp;Reikäpiiri</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1663"/>
+        <location filename="edytornc.cpp" line="1739"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1664"/>
+        <location filename="edytornc.cpp" line="1740"/>
         <source>Calculate bolt hole&apos;s positions</source>
         <translation>Laske reikäpiirin reikien paikat</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1667"/>
+        <location filename="edytornc.cpp" line="1743"/>
         <source>&amp;Insert spaces</source>
         <translation>&amp;Lisää välilyöntejä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1668"/>
+        <location filename="edytornc.cpp" line="1744"/>
         <source>F4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1669"/>
+        <location filename="edytornc.cpp" line="1745"/>
         <source>Inserts spaces</source>
         <translation>Lisää välilyöntejä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1672"/>
+        <location filename="edytornc.cpp" line="1748"/>
         <source>Remove spaces</source>
         <translation>Poista välilyöntejä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1673"/>
+        <location filename="edytornc.cpp" line="1749"/>
         <source>F5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1674"/>
+        <location filename="edytornc.cpp" line="1750"/>
         <source>Removes spaces</source>
         <translation>Poista välilyöntejä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1677"/>
+        <location filename="edytornc.cpp" line="1753"/>
         <source>Remove empty lines</source>
         <translation>Poista tyhjät rivit</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1679"/>
+        <location filename="edytornc.cpp" line="1755"/>
         <source>Removes empty lines</source>
         <translation>Poista tyhjät rivit</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1692"/>
+        <location filename="edytornc.cpp" line="1768"/>
         <source>Insert dots</source>
         <translation>Lisää pisteet</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1693"/>
+        <location filename="edytornc.cpp" line="1769"/>
         <source>F6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1694"/>
+        <location filename="edytornc.cpp" line="1770"/>
         <source>Inserts decimal dot</source>
         <translation>Lisää desimaalipisteet koordinaatteihin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1697"/>
+        <location filename="edytornc.cpp" line="1773"/>
         <source>Renumber</source>
         <translation>Numeroi uudelleen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1698"/>
+        <location filename="edytornc.cpp" line="1774"/>
         <source>F7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1699"/>
+        <location filename="edytornc.cpp" line="1775"/>
         <source>Renumber program blocks</source>
         <translation>Numeroi uudelleen ohjelmalohkoja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1702"/>
+        <location filename="edytornc.cpp" line="1778"/>
         <source>Feed&apos;s speed&apos;s</source>
         <translation>Syöttönopeus</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1703"/>
+        <location filename="edytornc.cpp" line="1779"/>
         <source>F9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1704"/>
+        <location filename="edytornc.cpp" line="1780"/>
         <source>Calculate speed, feed, cutting speed</source>
         <translation>Laske nopeus, syöttö ja leikkuunopeus</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1707"/>
+        <location filename="edytornc.cpp" line="1783"/>
         <source>Chamfer</source>
         <translation>Viiste</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1709"/>
+        <location filename="edytornc.cpp" line="1785"/>
         <source>Calculate chamfer</source>
         <translation>Laske viiste</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1712"/>
-        <location filename="edytornc.cpp" line="1714"/>
+        <location filename="edytornc.cpp" line="1788"/>
+        <location filename="edytornc.cpp" line="1790"/>
         <source>Solution of triangles</source>
         <translation>Kolmion ratkaisu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1717"/>
-        <location filename="edytornc.cpp" line="1719"/>
+        <location filename="edytornc.cpp" line="1793"/>
+        <location filename="edytornc.cpp" line="1795"/>
         <source>Convert inch &lt;-&gt; mm</source>
         <translation>Muunna tuumat &lt;-&gt; millit</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1722"/>
-        <location filename="edytornc.cpp" line="1724"/>
+        <location filename="edytornc.cpp" line="1798"/>
+        <location filename="edytornc.cpp" line="1800"/>
         <source>Convert program inch &lt;-&gt; mm</source>
         <translation>Muunna tuumat &lt;-&gt; millit</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1727"/>
+        <location filename="edytornc.cpp" line="1803"/>
         <source>Calculator</source>
         <translation>Laskin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1729"/>
+        <location filename="edytornc.cpp" line="1805"/>
         <source>Run calculator</source>
         <translation>Käynnistä laskin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1732"/>
-        <location filename="edytornc.cpp" line="1735"/>
+        <location filename="edytornc.cpp" line="1808"/>
+        <location filename="edytornc.cpp" line="1811"/>
         <source>Serial port send/receive</source>
         <translation>Sarjaportti lähetä/vastaanota</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1738"/>
+        <location filename="edytornc.cpp" line="1814"/>
         <source>Compile macro - experimental</source>
         <translation>Käännä makro (kokeellinen)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1740"/>
+        <location filename="edytornc.cpp" line="1816"/>
         <source>Translate EdytorNC macro into CNC program</source>
         <translation>Muuta EdytoNC makro CNC ohjelmaksi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1743"/>
-        <location filename="edytornc.cpp" line="1744"/>
+        <location filename="edytornc.cpp" line="1819"/>
+        <location filename="edytornc.cpp" line="1820"/>
         <source>Show diff - open current file in right diff window</source>
         <translation>Näytä erot - avaa nykyinen tiedosto oikeanpuoleisessa ikkunassa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1747"/>
-        <location filename="edytornc.cpp" line="1748"/>
+        <location filename="edytornc.cpp" line="1823"/>
+        <location filename="edytornc.cpp" line="1824"/>
         <source>Show diff - open current file in left diff window</source>
         <translation>Näytä erot - avaa nykyinen tiedosto vasemmanpuoleisessa ikkunassa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1751"/>
+        <location filename="edytornc.cpp" line="1827"/>
         <source>On/off diff window</source>
         <translation>Näytä/piilota vertailuikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1753"/>
+        <location filename="edytornc.cpp" line="1829"/>
         <source>Show diff window</source>
         <translation>Näytä vertailuikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1756"/>
+        <location filename="edytornc.cpp" line="1832"/>
         <source>Show unsaved changes</source>
         <translation>Näytä tallentamattomat muutokset</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1757"/>
+        <location filename="edytornc.cpp" line="1833"/>
         <source>Show diff of currently edited file and file on disk</source>
         <translation>Näytä erot avoinna olevan ja tiedostolle tallennetun ohjelman välillä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1760"/>
-        <location filename="edytornc.cpp" line="1761"/>
+        <location filename="edytornc.cpp" line="1836"/>
+        <location filename="edytornc.cpp" line="1837"/>
         <source>Split file</source>
         <translation>Jaa tiedosto osiin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1774"/>
+        <location filename="edytornc.cpp" line="1850"/>
         <source>Swap axes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1795"/>
         <source>Cl&amp;ose</source>
-        <translation>&amp;Sulje</translation>
+        <translation type="vanished">&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1797"/>
+        <location filename="edytornc.cpp" line="1873"/>
         <source>Close the active window</source>
         <translation>Sulje avoinna oleva ikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1800"/>
+        <location filename="edytornc.cpp" line="1876"/>
         <source>Close &amp;All</source>
         <translation>Sulje &amp;kaikki</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1801"/>
+        <location filename="edytornc.cpp" line="1877"/>
         <source>Close all the windows</source>
         <translation>Sulje kaikki ikkunat</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1804"/>
+        <location filename="edytornc.cpp" line="1880"/>
         <source>&amp;Tile</source>
         <translation>&amp;Vierekkäin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1805"/>
+        <location filename="edytornc.cpp" line="1881"/>
         <source>Tile the windows</source>
         <translation>Aseta ikkunat vierekkäin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1808"/>
+        <location filename="edytornc.cpp" line="1884"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Limittäin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1809"/>
+        <location filename="edytornc.cpp" line="1885"/>
         <source>Cascade the windows</source>
         <translation>Aseta ikkunat limittäin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1812"/>
+        <location filename="edytornc.cpp" line="1888"/>
         <source>Ne&amp;xt</source>
         <translation>&amp;Seuraava</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1814"/>
+        <location filename="edytornc.cpp" line="1890"/>
         <source>Move the focus to the next window</source>
         <translation>Valitse seuraava ikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1817"/>
+        <location filename="edytornc.cpp" line="1893"/>
         <source>Pre&amp;vious</source>
         <translation>&amp;Edellinen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1819"/>
+        <location filename="edytornc.cpp" line="1895"/>
         <source>Move the focus to the previous window</source>
         <translation>Valitse edellinen ikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1829"/>
+        <location filename="edytornc.cpp" line="1905"/>
         <source>&amp;Create global cnc tooltips</source>
         <translation>&amp;Luo oletus cnc-koodivihjeet</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1830"/>
+        <location filename="edytornc.cpp" line="1906"/>
         <source>Create default global cnc tooltips file</source>
         <translation>Luo oletus cnc-koodivihjeet tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1833"/>
+        <location filename="edytornc.cpp" line="1909"/>
         <source>&amp;Create user cnc tooltips</source>
         <translation>&amp;Luo käyttäjän cnc-koodivihjeet</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1834"/>
+        <location filename="edytornc.cpp" line="1910"/>
         <source>Create/edit user cnc tooltips file</source>
         <translation>Luo/muokkaa käyttäjän cnc-koodivihjetiedostoa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1837"/>
+        <location filename="edytornc.cpp" line="1913"/>
         <source>&amp;About</source>
         <translation>&amp;Tietoja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1838"/>
+        <location filename="edytornc.cpp" line="1914"/>
         <source>Show the application&apos;s About box</source>
         <translation>Näyttää ohjelman tietoja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1841"/>
+        <location filename="edytornc.cpp" line="1917"/>
         <source>About &amp;Qt</source>
         <translation>Tietoa &amp;Qt:sta</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1842"/>
+        <location filename="edytornc.cpp" line="1918"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>Näytä Qt-kirjaston tietoja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1852"/>
+        <location filename="edytornc.cpp" line="1928"/>
         <source>&amp;File</source>
         <translation>&amp;Tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1858"/>
+        <location filename="edytornc.cpp" line="1934"/>
         <source>&amp;Recent files</source>
         <translation>&amp;Viimeksi avatut</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1874"/>
+        <location filename="edytornc.cpp" line="1951"/>
         <source>&amp;Edit</source>
         <translation>&amp;Muokkaa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1899"/>
+        <location filename="edytornc.cpp" line="1978"/>
         <source>&amp;Tools</source>
         <translation>&amp;Työkalut</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1914"/>
+        <location filename="edytornc.cpp" line="1968"/>
         <source>&amp;Block Skip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1931"/>
+        <location filename="edytornc.cpp" line="481"/>
+        <source>Saved %1 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="1466"/>
+        <location filename="edytornc.cpp" line="1638"/>
+        <source>&amp;Save &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="1467"/>
+        <location filename="edytornc.cpp" line="1648"/>
+        <source>Save &quot;%1&quot; &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="1468"/>
+        <location filename="edytornc.cpp" line="1871"/>
+        <source>Cl&amp;ose &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="1643"/>
+        <source>Save A&amp;ll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="1644"/>
+        <source>Ctrl+Shift+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="1645"/>
+        <source>Save all modified documents to disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="2008"/>
         <source>&amp;Window</source>
         <translation>&amp;Ikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1937"/>
+        <location filename="edytornc.cpp" line="2014"/>
         <source>&amp;Help</source>
         <translation>&amp;Ohjeita</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1951"/>
+        <location filename="edytornc.cpp" line="2028"/>
         <source>File</source>
         <translation>Tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1962"/>
+        <location filename="edytornc.cpp" line="2040"/>
         <source>Edit</source>
         <translation>Muokkaa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1985"/>
+        <location filename="edytornc.cpp" line="2063"/>
         <source>Tools</source>
         <translation>Työkalut</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2010"/>
+        <location filename="edytornc.cpp" line="2088"/>
         <source>Window</source>
         <translation>Ikkuna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2030"/>
+        <location filename="edytornc.cpp" line="2108"/>
         <source>Highlight style and tooltip mode</source>
         <translation>Ohjelman tyyppi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2032"/>
+        <location filename="edytornc.cpp" line="2110"/>
         <source>AUTO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2033"/>
+        <location filename="edytornc.cpp" line="2111"/>
         <source>FANUC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2034"/>
+        <location filename="edytornc.cpp" line="2112"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2035"/>
+        <location filename="edytornc.cpp" line="2113"/>
         <source>HEIDENHAIN ISO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2036"/>
+        <location filename="edytornc.cpp" line="2114"/>
         <source>OKUMA OSP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2037"/>
+        <location filename="edytornc.cpp" line="2115"/>
         <source>PHILIPS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2038"/>
+        <location filename="edytornc.cpp" line="2116"/>
         <source>SINUMERIK OLD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2039"/>
+        <location filename="edytornc.cpp" line="2117"/>
         <source>SINUMERIK NEW</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2041"/>
+        <location filename="edytornc.cpp" line="2119"/>
         <source>TOOLTIPS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2045"/>
-        <location filename="edytornc.cpp" line="2046"/>
+        <location filename="edytornc.cpp" line="2123"/>
+        <location filename="edytornc.cpp" line="2124"/>
         <source>Attach current highlight setting to current directory of programs</source>
         <translation>Kiinnitä nykyiset syntaksinkorostusasetukset tämän hakemiston ohjelmiin</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2052"/>
-        <location filename="edytornc.cpp" line="2053"/>
+        <location filename="edytornc.cpp" line="2130"/>
+        <location filename="edytornc.cpp" line="2131"/>
         <source>Remove highlight settings from the directory</source>
         <translation>Poista syntaksinkorostusasetukset tämän hakemiston yhteydestä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2071"/>
+        <location filename="edytornc.cpp" line="2149"/>
         <source>Ready</source>
         <translation>Valmis</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2552"/>
+        <location filename="edytornc.cpp" line="2630"/>
         <source>Find</source>
         <translation>Etsi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2558"/>
-        <location filename="edytornc.cpp" line="2560"/>
+        <location filename="edytornc.cpp" line="2636"/>
+        <location filename="edytornc.cpp" line="2638"/>
         <source>Find next</source>
         <translation>Etsi seuraava</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2563"/>
-        <location filename="edytornc.cpp" line="2565"/>
+        <location filename="edytornc.cpp" line="2641"/>
+        <location filename="edytornc.cpp" line="2643"/>
         <source>Find previous</source>
         <translation>Etsi edellinen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2568"/>
-        <location filename="edytornc.cpp" line="2570"/>
+        <location filename="edytornc.cpp" line="2646"/>
+        <location filename="edytornc.cpp" line="2648"/>
         <source>Replace &amp;&amp; find next</source>
         <translation>Korvaa ja etsi seuraava</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2573"/>
-        <location filename="edytornc.cpp" line="2575"/>
+        <location filename="edytornc.cpp" line="2651"/>
+        <location filename="edytornc.cpp" line="2653"/>
         <source>Replace &amp;&amp; find previous</source>
         <translation>Korvaa ja etsi edellinen</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2578"/>
-        <location filename="edytornc.cpp" line="2580"/>
+        <location filename="edytornc.cpp" line="2656"/>
+        <location filename="edytornc.cpp" line="2658"/>
         <source>Replace all</source>
         <translation>Korvaa kaikki</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2583"/>
-        <location filename="edytornc.cpp" line="2584"/>
+        <location filename="edytornc.cpp" line="2661"/>
+        <location filename="edytornc.cpp" line="2662"/>
         <source>Close find toolbar</source>
         <translation>Sulje &quot;etsi&quot; työkalurivi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2587"/>
+        <location filename="edytornc.cpp" line="2665"/>
         <source>Find:</source>
         <translation>Etsi:</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2599"/>
+        <location filename="edytornc.cpp" line="2677"/>
         <source>Replace with:</source>
         <translation>Korvaa tekstillä:</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2611"/>
+        <location filename="edytornc.cpp" line="2689"/>
         <source>Ignore c&amp;ase</source>
         <translation>&amp;Älä huomioi kirjainkokoa</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2614"/>
+        <location filename="edytornc.cpp" line="2692"/>
         <source>&amp;Whole words only</source>
         <translation>&amp;Vain kokonaiset sanat</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2618"/>
+        <location filename="edytornc.cpp" line="2696"/>
         <source>Ignore c&amp;omments</source>
         <translation>&amp;Ohita kommentit</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2794"/>
+        <location filename="edytornc.cpp" line="2872"/>
         <source>Serial port toolbar</source>
         <translation>Sarjaportti työkalurivi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2799"/>
-        <location filename="edytornc.cpp" line="2801"/>
+        <location filename="edytornc.cpp" line="2877"/>
+        <location filename="edytornc.cpp" line="2879"/>
         <source>Serial port configuration</source>
         <translation>Sarjaportin asetukset</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2804"/>
-        <location filename="edytornc.cpp" line="2806"/>
+        <location filename="edytornc.cpp" line="2882"/>
+        <location filename="edytornc.cpp" line="2884"/>
         <source>Receive new file</source>
         <translation>Vastaanota uusi tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2809"/>
-        <location filename="edytornc.cpp" line="2811"/>
+        <location filename="edytornc.cpp" line="2887"/>
+        <location filename="edytornc.cpp" line="2889"/>
         <source>Send current file</source>
         <translation>Lähetä nykyinen tiedosto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2814"/>
-        <location filename="edytornc.cpp" line="2816"/>
+        <location filename="edytornc.cpp" line="2892"/>
+        <location filename="edytornc.cpp" line="2894"/>
         <source>Attach current port settings to current directory of programs</source>
         <translation>Liitä nykyiset sarjaportin asetukset nykyiseen hakemistoon</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2819"/>
+        <location filename="edytornc.cpp" line="2897"/>
         <source>Remove settings from the current directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2821"/>
+        <location filename="edytornc.cpp" line="2899"/>
         <source>Remove settings from the directory</source>
         <translation>Poista asetuksen tämän hakemiston yhteydestä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2824"/>
-        <location filename="edytornc.cpp" line="2826"/>
+        <location filename="edytornc.cpp" line="2902"/>
+        <location filename="edytornc.cpp" line="2904"/>
         <source>Check serial port settings</source>
         <translation>Testaa sarjaportin asetukset</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2829"/>
-        <location filename="edytornc.cpp" line="2830"/>
+        <location filename="edytornc.cpp" line="2907"/>
+        <location filename="edytornc.cpp" line="2908"/>
         <source>Close send/receive toolbar</source>
         <translation>Sulje sarjaportti työkalurivi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2967"/>
-        <location filename="edytornc.cpp" line="2970"/>
+        <location filename="edytornc.cpp" line="3045"/>
+        <location filename="edytornc.cpp" line="3048"/>
         <source>Default</source>
         <translation>Oletus</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3145"/>
+        <location filename="edytornc.cpp" line="3224"/>
         <source>Sending...</source>
         <translation>Lähetetään...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3147"/>
+        <location filename="edytornc.cpp" line="3226"/>
         <source>Waiting...</source>
         <translation>Odotetaan...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3178"/>
+        <location filename="edytornc.cpp" line="3257"/>
         <source>Start in %1s</source>
         <translation>Aloitetaan %1s päästä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3181"/>
+        <location filename="edytornc.cpp" line="3260"/>
         <source>Waiting for a signal readiness...</source>
         <translation>Odotetaan työstökonetta...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3240"/>
+        <location filename="edytornc.cpp" line="3319"/>
         <source>Sending byte %1 of %2</source>
         <translation>Lähetetään tavu %1 / %2</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3347"/>
+        <location filename="edytornc.cpp" line="3426"/>
         <source>Receiving...</source>
         <translation>Vastaanotetaan...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3348"/>
+        <location filename="edytornc.cpp" line="3427"/>
         <source>Waiting for data...</source>
         <translation>Odotetaan dataa...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3408"/>
+        <location filename="edytornc.cpp" line="3513"/>
         <source>Reciving byte %1</source>
         <translation>Vastaanotetaan tavua %1</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3514"/>
+        <location filename="edytornc.cpp" line="3635"/>
         <source>Invalid file descriptor (port was not opened correctly)</source>
         <translation>Tuntematon laitetiedosto (porttia ei voitu avata)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3516"/>
+        <location filename="edytornc.cpp" line="3637"/>
         <source>Unable to allocate memory tables</source>
         <translation>Virhe varattaessa muistia</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3518"/>
+        <location filename="edytornc.cpp" line="3639"/>
         <source>Caught a non-blocked signal</source>
         <translation>Tuntematon signaali</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3520"/>
+        <location filename="edytornc.cpp" line="3641"/>
         <source>Operation timed out</source>
         <translation>Operaation aika ylittyi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3522"/>
+        <location filename="edytornc.cpp" line="3643"/>
         <source>The file opened by the port is not a character device</source>
         <translation>Avattu tiedosto ei ole sarjaporttilaite</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3524"/>
+        <location filename="edytornc.cpp" line="3645"/>
         <source>The port detected a break condition</source>
         <translation>Break-tila havaittu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3526"/>
+        <location filename="edytornc.cpp" line="3647"/>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
         <translation>Kehysvirhe (väärä nopeus valittu?)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3528"/>
+        <location filename="edytornc.cpp" line="3649"/>
         <source>There was an I/O error while communicating with the port</source>
         <translation>I/O virhe</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3530"/>
+        <location filename="edytornc.cpp" line="3651"/>
         <source>Character buffer overrun</source>
         <translation>Merkkipuskuri ylitetty</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3532"/>
+        <location filename="edytornc.cpp" line="3653"/>
         <source>Receive buffer overflow</source>
         <translation>Vastaanottopuskurin ylivuoto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3534"/>
+        <location filename="edytornc.cpp" line="3655"/>
         <source>The port detected a parity error in the received data</source>
         <translation>Pariteettivirhe</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3536"/>
+        <location filename="edytornc.cpp" line="3657"/>
         <source>Transmit buffer overflow</source>
         <translation>Lähetyspuskurin ylivuoto</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3538"/>
+        <location filename="edytornc.cpp" line="3659"/>
         <source>General read operation failure</source>
         <translation>Määrittelemätön lukuvirhe</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3540"/>
+        <location filename="edytornc.cpp" line="3661"/>
         <source>General write operation failure</source>
         <translation>Määrittelemätön kirjoitusvirhe</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3542"/>
+        <location filename="edytornc.cpp" line="3663"/>
         <source>No Error has occured</source>
         <translation>Ei virhettä</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3545"/>
+        <location filename="edytornc.cpp" line="3666"/>
         <source>Unknown error</source>
         <translation>Tuntematon virhe</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3643"/>
+        <location filename="edytornc.cpp" line="3764"/>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation># ++++++ ESIMERKKI ++++++</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3645"/>
+        <location filename="edytornc.cpp" line="3766"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
         <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - ohjelman pysäytys, ehdoton&quot;</translation>
     </message>
@@ -1586,118 +1631,118 @@
         <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - karan vaihde 4</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1317"/>
+        <location filename="edytornc.cpp" line="1354"/>
         <source>&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1682"/>
-        <location filename="edytornc.cpp" line="1684"/>
+        <location filename="edytornc.cpp" line="1758"/>
+        <location filename="edytornc.cpp" line="1760"/>
         <source>Insert empty lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1687"/>
+        <location filename="edytornc.cpp" line="1763"/>
         <source>Clean&amp;up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1689"/>
+        <location filename="edytornc.cpp" line="1765"/>
         <source>Remove text using regular expressions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1764"/>
+        <location filename="edytornc.cpp" line="1840"/>
         <source>Comment ;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1765"/>
+        <location filename="edytornc.cpp" line="1841"/>
         <source>Ctrl+;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1766"/>
+        <location filename="edytornc.cpp" line="1842"/>
         <source>Comment/uncomment selected text using semicolon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1769"/>
+        <location filename="edytornc.cpp" line="1845"/>
         <source>Comment ()</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1770"/>
+        <location filename="edytornc.cpp" line="1846"/>
         <source>Ctrl+9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1771"/>
+        <location filename="edytornc.cpp" line="1847"/>
         <source>Comment/uncomment selected text using parentheses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1776"/>
+        <location filename="edytornc.cpp" line="1852"/>
         <source>Swap/modify axes, selected text or entire program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1779"/>
+        <location filename="edytornc.cpp" line="1855"/>
         <source>Block Skip remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1780"/>
+        <location filename="edytornc.cpp" line="1856"/>
         <source>Ctrl+1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1781"/>
+        <location filename="edytornc.cpp" line="1857"/>
         <source>Remove Block Skip /</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1784"/>
+        <location filename="edytornc.cpp" line="1860"/>
         <source>Block Skip +</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1785"/>
+        <location filename="edytornc.cpp" line="1861"/>
         <source>Ctrl+2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1786"/>
+        <location filename="edytornc.cpp" line="1862"/>
         <source>Insert/increase Block Skip /</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1789"/>
+        <location filename="edytornc.cpp" line="1865"/>
         <source>Block Skip -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1790"/>
+        <location filename="edytornc.cpp" line="1866"/>
         <source>Ctrl+3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1791"/>
+        <location filename="edytornc.cpp" line="1867"/>
         <source>Insert/decrease Block Skip /</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2040"/>
+        <location filename="edytornc.cpp" line="2118"/>
         <source>LinuxCNC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2590"/>
+        <location filename="edytornc.cpp" line="2668"/>
         <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2602"/>
+        <location filename="edytornc.cpp" line="2680"/>
         <source>&lt;b&gt;$$OperatorNumber&lt;/b&gt; - do some math on replaced numbers. Operator +-*/&lt;p&gt;$$+1 - will add 1 to replaced numbers&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1714,12 +1759,12 @@
         <translation type="obsolete">&lt;b&gt;M59&lt;/b&gt; - pakan paine korkea</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3787"/>
+        <location filename="edytornc.cpp" line="3908"/>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3797"/>
+        <location filename="edytornc.cpp" line="3918"/>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1732,61 +1777,61 @@
         <translation type="obsolete">Kaikki tiedostot (*.* *);;CNC-Tiedostot *.nc (*.nc);;CNC-Tiedostot *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Dokumentit *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Piirrokset *.dwg *.dxf (*.dwg *.dxf);;Kuvat *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Tekstitiedostot *.txt (*.txt)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3875"/>
+        <location filename="edytornc.cpp" line="3996"/>
         <source>Project opened</source>
         <translation>Projekti avattu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3919"/>
+        <location filename="edytornc.cpp" line="4040"/>
         <source>Project saved</source>
         <translation>Projekti tallennettu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4049"/>
-        <location filename="edytornc.cpp" line="4077"/>
+        <location filename="edytornc.cpp" line="4170"/>
+        <location filename="edytornc.cpp" line="4198"/>
         <source>EdytorNC project file *.ncp (*.ncp)</source>
         <translation>EdytorNC projektitiedosto *.ncp (*.ncp)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4053"/>
-        <location filename="edytornc.cpp" line="4081"/>
+        <location filename="edytornc.cpp" line="4174"/>
+        <location filename="edytornc.cpp" line="4202"/>
         <source>EdytorNC project file (*.ncp)</source>
         <translation>EdytorNC projektitiedosto (*.ncp)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4058"/>
+        <location filename="edytornc.cpp" line="4179"/>
         <source>Select the project name and location...</source>
         <translation>Valitse projektin nimi ja hakemisto...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4086"/>
+        <location filename="edytornc.cpp" line="4207"/>
         <source>Open the project file...</source>
         <translation>Avaa projektitiedosto...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4244"/>
+        <location filename="edytornc.cpp" line="4365"/>
         <source>&lt;b&gt;Project: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Projektia: &quot;%1&quot;
  on muutettu.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4245"/>
+        <location filename="edytornc.cpp" line="4366"/>
         <source>Do you want to save your changes ?</source>
         <translation>Haluatko tallentaa muutokset ?</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4287"/>
+        <location filename="edytornc.cpp" line="4408"/>
         <source>Open files</source>
         <translation>Avaa tiedostoja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4303"/>
+        <location filename="edytornc.cpp" line="4424"/>
         <source>Info</source>
         <translation>Tiedot</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4329"/>
+        <location filename="edytornc.cpp" line="4450"/>
         <source>Close</source>
         <translation>Sulje</translation>
     </message>
@@ -1799,144 +1844,148 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="28"/>
+        <location filename="feedsdialog.ui" line="29"/>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <location filename="feedsdialog.ui" line="42"/>
+        <source>inches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="feedsdialog.ui" line="95"/>
         <source>Cutting speed</source>
         <translation>Leikkuunopeus</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="31"/>
+        <location filename="feedsdialog.ui" line="98"/>
         <source> Vc :</source>
         <translation> Vc :</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="38"/>
         <source>Cutting speed (m/min)</source>
-        <translation>Leikkuunopeus (m/min)</translation>
+        <translation type="vanished">Leikkuunopeus (m/min)</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="41"/>
+        <location filename="feedsdialog.ui" line="79"/>
         <source>90</source>
         <translation>90</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="54"/>
+        <location filename="feedsdialog.ui" line="105"/>
         <source>Feed per tooth</source>
         <translation>Syöttö per hammas</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="57"/>
+        <location filename="feedsdialog.ui" line="108"/>
         <source>Fz :</source>
         <translation>Fz :</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="64"/>
         <source>Feed per tooth (mm)</source>
-        <translation>Syöttö per hammas (mm)</translation>
+        <translation type="vanished">Syöttö per hammas (mm)</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="67"/>
         <source>0.2</source>
-        <translation>0.2</translation>
+        <translation type="vanished">0.2</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="89"/>
+        <location filename="feedsdialog.ui" line="143"/>
         <source>Tool diameter</source>
         <translation>Terän halkaisija</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="92"/>
+        <location filename="feedsdialog.ui" line="146"/>
         <source>D :</source>
         <translation>D :</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="99"/>
         <source>Tool diameter (mm)</source>
-        <translation>Terän halkaisija (mm)</translation>
+        <translation type="vanished">Terän halkaisija (mm)</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="102"/>
+        <location filename="feedsdialog.ui" line="153"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="115"/>
-        <location filename="feedsdialog.ui" line="125"/>
+        <location filename="feedsdialog.ui" line="169"/>
         <source>Number of toot&apos;s</source>
         <translation>Hampaiden lukumäärä</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="118"/>
+        <location filename="feedsdialog.ui" line="172"/>
         <source>z :</source>
         <translation>z :</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="128"/>
+        <location filename="feedsdialog.ui" line="179"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="150"/>
+        <location filename="feedsdialog.ui" line="207"/>
         <source>Spindle speed</source>
         <translation>Karan nopeus</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="153"/>
+        <location filename="feedsdialog.ui" line="210"/>
         <source>S :</source>
         <translation>S :</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="160"/>
         <source>Spindle speed (r/min)</source>
-        <translation>Karan nopeus (1/min)</translation>
+        <translation type="vanished">Karan nopeus (1/min)</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="163"/>
-        <location filename="feedsdialog.ui" line="189"/>
+        <location filename="feedsdialog.ui" line="115"/>
+        <location filename="feedsdialog.ui" line="217"/>
+        <location filename="feedsdialog.ui" line="233"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="176"/>
+        <location filename="feedsdialog.ui" line="249"/>
         <source>Table feed</source>
         <translation>Pöydän syöttö</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="179"/>
+        <location filename="feedsdialog.ui" line="252"/>
         <source>F :</source>
         <translation>F :</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="186"/>
         <source>Table feed (mm/min)</source>
-        <translation>Pöydän syöttö (mm/min)</translation>
+        <translation type="vanished">Pöydän syöttö (mm/min)</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="225"/>
+        <location filename="feedsdialog.ui" line="289"/>
         <source>Compute spindle speed and table feed</source>
         <translation>Laske keran nopeus ja pöydän syöttö</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="228"/>
+        <location filename="feedsdialog.ui" line="292"/>
         <source>&amp;S, F</source>
         <translation>&amp;S, F</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="255"/>
+        <location filename="feedsdialog.ui" line="319"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="285"/>
+        <location filename="feedsdialog.ui" line="349"/>
         <source>Compute cutting speed and feed per tooth</source>
         <translation>Laske leikkuunopeus ja syöttö per hammas</translation>
     </message>
     <message>
-        <location filename="feedsdialog.ui" line="288"/>
+        <location filename="feedsdialog.ui" line="352"/>
         <source>&amp;Vc, Fz</source>
         <translation>&amp;Vc, Fz</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="220"/>
+        <location filename="dialogs.cpp" line="229"/>
         <source>Cutting parameters</source>
         <translation>Leikkuuparametrit</translation>
     </message>
@@ -2073,22 +2122,22 @@
         <translation>%1 KB</translation>
     </message>
     <message>
-        <location filename="findinf.cpp" line="359"/>
+        <location filename="findinf.cpp" line="363"/>
         <source>File Name</source>
         <translation>Tiedoston nimi</translation>
     </message>
     <message>
-        <location filename="findinf.cpp" line="359"/>
+        <location filename="findinf.cpp" line="363"/>
         <source>Info</source>
         <translation>Tiedot</translation>
     </message>
     <message>
-        <location filename="findinf.cpp" line="359"/>
+        <location filename="findinf.cpp" line="363"/>
         <source>Size</source>
         <translation>Koko</translation>
     </message>
     <message>
-        <location filename="findinf.cpp" line="359"/>
+        <location filename="findinf.cpp" line="363"/>
         <source>Modified</source>
         <translation>Muutettu</translation>
     </message>
@@ -2119,27 +2168,27 @@
     </message>
     <message>
         <location filename="i2mdialog.ui" line="69"/>
-        <location filename="i2mdialog.ui" line="95"/>
+        <location filename="i2mdialog.ui" line="98"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
-        <location filename="i2mdialog.ui" line="82"/>
+        <location filename="i2mdialog.ui" line="85"/>
         <source>mm :</source>
         <translation>mm :</translation>
     </message>
     <message>
-        <location filename="i2mdialog.ui" line="111"/>
+        <location filename="i2mdialog.ui" line="114"/>
         <source>&amp;Inch to mm</source>
         <translation>&amp;Tuumat millimetreiksi</translation>
     </message>
     <message>
-        <location filename="i2mdialog.ui" line="124"/>
+        <location filename="i2mdialog.ui" line="127"/>
         <source>&amp;mm to inch</source>
         <translation>&amp;millimetrit tuumiksi</translation>
     </message>
     <message>
-        <location filename="i2mdialog.ui" line="154"/>
+        <location filename="i2mdialog.ui" line="157"/>
         <source>&amp;Close</source>
         <translation>&amp;Sulje</translation>
     </message>
@@ -2149,14 +2198,14 @@
         <translation>Tuumat metreiksi</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="195"/>
-        <location filename="dialogs.cpp" line="201"/>
+        <location filename="dialogs.cpp" line="204"/>
+        <location filename="dialogs.cpp" line="210"/>
         <source>Inch</source>
         <translation>Tuumat</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="196"/>
-        <location filename="dialogs.cpp" line="200"/>
+        <location filename="dialogs.cpp" line="205"/>
+        <location filename="dialogs.cpp" line="209"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
@@ -2209,7 +2258,7 @@
         <translation>&amp;Peruuta</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2605"/>
+        <location filename="dialogs.cpp" line="2714"/>
         <source>Convert program inch to metric</source>
         <translation>Muunna tuumat metreiksi ohjelmassa</translation>
     </message>
@@ -2361,6 +2410,16 @@ Jatka omalla vastuullasi.</translation>
  %2</translation>
     </message>
     <message>
+        <location filename="mdichild.cpp" line="300"/>
+        <source>(DATE)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="311"/>
+        <source>DATE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mdichild.cpp" line="387"/>
         <source>&lt;b&gt;File: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
@@ -2373,23 +2432,23 @@ Jatka omalla vastuullasi.</translation>
         <translation>Haluatko tallentaa muutokset ?</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1170"/>
+        <location filename="mdichild.cpp" line="1180"/>
         <source>Inserted : %1 dots.</source>
         <translation>Lisätty : %1 pistettä.</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1250"/>
+        <location filename="mdichild.cpp" line="1260"/>
         <source>Converted : %1 numbers.</source>
         <translation>Muutettu : %1 lukua.</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1824"/>
-        <location filename="mdichild.cpp" line="2015"/>
+        <location filename="mdichild.cpp" line="1834"/>
+        <location filename="mdichild.cpp" line="2025"/>
         <source>EdytorNc - compile macro</source>
         <translation>EdytorNc - käännä makro</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1824"/>
+        <location filename="mdichild.cpp" line="1834"/>
         <source>No constant definition .
 {BEGIN}
 ...
@@ -2402,22 +2461,22 @@ Jatka omalla vastuullasi.</translation>
  Ei makroa ?</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1859"/>
+        <location filename="mdichild.cpp" line="1869"/>
         <source>EdytorNC - compile macro</source>
         <translation>EdytorNc - käännä makro</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1859"/>
+        <location filename="mdichild.cpp" line="1869"/>
         <source>Param list: no bracket &apos;}&apos; !</source>
         <translation>Parametrilista: ei sulkua &apos;}&apos; !</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2002"/>
+        <location filename="mdichild.cpp" line="2012"/>
         <source>No ( or ) !</source>
         <translation>Ei ( tai ) !</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2004"/>
+        <location filename="mdichild.cpp" line="2014"/>
         <source>Function parameter not found ! 
  Check +-*/.
 &quot;%1&quot;</source>
@@ -2426,106 +2485,106 @@ Jatka omalla vastuullasi.</translation>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2006"/>
+        <location filename="mdichild.cpp" line="2016"/>
         <source>Wrong number !</source>
         <translation>Väärä numero !</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2008"/>
+        <location filename="mdichild.cpp" line="2018"/>
         <source>Unknown math function !
 &quot;%1&quot;</source>
         <translation>Tuntematon matemaattinen funktio !
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2010"/>
+        <location filename="mdichild.cpp" line="2020"/>
         <source>Decimal point or minus writed two times !
 &quot;%1&quot;</source>
         <translation>Kaksi desimaali- tai miinusmerkkiä !
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2012"/>
+        <location filename="mdichild.cpp" line="2022"/>
         <source>Unknown error !</source>
         <translation>Tuntematon virhe !</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2029"/>
+        <location filename="mdichild.cpp" line="2039"/>
         <source>Syntax error</source>
         <translation>Syntaksivirhe</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2031"/>
+        <location filename="mdichild.cpp" line="2041"/>
         <source>Unbalanced parentheses</source>
         <translation>Sulku puuttuu</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2033"/>
+        <location filename="mdichild.cpp" line="2043"/>
         <source>No expression present</source>
         <translation>Parametri puuttuu</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2035"/>
+        <location filename="mdichild.cpp" line="2045"/>
         <source>Equals sign expected</source>
         <translation>= merkki puuttuu</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2037"/>
+        <location filename="mdichild.cpp" line="2047"/>
         <source>Not a variable</source>
         <translation>Ei muuttuja</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2039"/>
+        <location filename="mdichild.cpp" line="2049"/>
         <source>Label table full</source>
         <translation>Nimiötaulu täynnä</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2041"/>
+        <location filename="mdichild.cpp" line="2051"/>
         <source>Duplicate label</source>
         <translation>Sama nimiö on jo olemassa</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2043"/>
+        <location filename="mdichild.cpp" line="2053"/>
         <source>Undefined label</source>
         <translation>Määrittelemätön nimiö</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2045"/>
+        <location filename="mdichild.cpp" line="2055"/>
         <source>THEN expected</source>
         <translation>THEN puuttuu</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2047"/>
+        <location filename="mdichild.cpp" line="2057"/>
         <source>TO expected</source>
         <translation>TO puuttuu</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2049"/>
+        <location filename="mdichild.cpp" line="2059"/>
         <source>Too many nested FOR loops</source>
         <translation>Liian monta sisäkkäistä FOR silmukkaa</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2051"/>
+        <location filename="mdichild.cpp" line="2061"/>
         <source>NEXT without FOR</source>
         <translation>NEXT ilman FOR lausetta</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2053"/>
+        <location filename="mdichild.cpp" line="2063"/>
         <source>Too many nested GOSUBs</source>
         <translation>Liian monta sisäkkäistä GOSUB:ia</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2055"/>
+        <location filename="mdichild.cpp" line="2065"/>
         <source>RETURN without GOSUBs</source>
         <translation>RETURN ilman GOSUB:ia</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2057"/>
+        <location filename="mdichild.cpp" line="2067"/>
         <source>Unknown error</source>
         <translation>Tuntematon virhe</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2059"/>
+        <location filename="mdichild.cpp" line="2069"/>
         <source>EdytorNc - compile basic</source>
         <translation>EdytorNc - basic</translation>
     </message>
@@ -2784,7 +2843,7 @@ Jatka omalla vastuullasi.</translation>
         <translation>&amp;Peruuta</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="401"/>
+        <location filename="dialogs.cpp" line="479"/>
         <source>Renumber lines</source>
         <translation>Uudelleennumeroi rivit</translation>
     </message>
@@ -2798,7 +2857,7 @@ Jatka omalla vastuullasi.</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="88"/>
-        <location filename="serialtransmission.cpp" line="390"/>
+        <location filename="serialtransmission.cpp" line="393"/>
         <source>Default</source>
         <translation>Oletus</translation>
     </message>
@@ -2809,7 +2868,7 @@ Jatka omalla vastuullasi.</translation>
     </message>
     <message>
         <location filename="spconfigdialog.ui" line="58"/>
-        <location filename="spconfigdialog.ui" line="980"/>
+        <location filename="spconfigdialog.ui" line="990"/>
         <source>Save configuration</source>
         <translation>Tallenna</translation>
     </message>
@@ -3052,7 +3111,7 @@ Jatka omalla vastuullasi.</translation>
     <message>
         <location filename="spconfigdialog.ui" line="697"/>
         <location filename="spconfigdialog.ui" line="743"/>
-        <location filename="spconfigdialog.ui" line="795"/>
+        <location filename="spconfigdialog.ui" line="805"/>
         <source>s</source>
         <translation></translation>
     </message>
@@ -3170,89 +3229,99 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="777"/>
+        <location filename="spconfigdialog.ui" line="776"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove white space just before the end of line, sometimes added by Fanuc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="779"/>
+        <source>Remove white space at end of line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="spconfigdialog.ui" line="787"/>
         <source>Autosave</source>
         <translation>Automaattitallennus</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="785"/>
+        <location filename="spconfigdialog.ui" line="795"/>
         <source>Recieve timeout:</source>
         <translation>Vastaanoton aikakatkaisu:</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="792"/>
+        <location filename="spconfigdialog.ui" line="802"/>
         <source>After recieve last character, close the recieve dialog after this time</source>
         <translation>Lopeta vastaanotto automaattisesti kun N sekunttia on kulunut viimeisen merkin vastaanotosta</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="825"/>
+        <location filename="spconfigdialog.ui" line="835"/>
         <source>Main program path</source>
         <translation>Pääohjelmahakemisto</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="832"/>
+        <location filename="spconfigdialog.ui" line="842"/>
         <source>Under construction</source>
         <translation>Työn alla</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="839"/>
-        <location filename="spconfigdialog.ui" line="852"/>
-        <location filename="spconfigdialog.ui" line="872"/>
+        <location filename="spconfigdialog.ui" line="849"/>
+        <location filename="spconfigdialog.ui" line="862"/>
+        <location filename="spconfigdialog.ui" line="882"/>
         <source>Browse</source>
         <translation>Selaa</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="859"/>
+        <location filename="spconfigdialog.ui" line="869"/>
         <source>All other path</source>
         <translation>Muiden hakemisto</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="882"/>
+        <location filename="spconfigdialog.ui" line="892"/>
         <source>Sub program path</source>
         <translation>Aliohjelmahakemisto</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="893"/>
+        <location filename="spconfigdialog.ui" line="903"/>
         <source>If file exists</source>
         <translation>Jos tiedosto on olemassa</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="899"/>
+        <location filename="spconfigdialog.ui" line="909"/>
         <source>Overwrite</source>
         <translation>Ylikirjoita</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="906"/>
+        <location filename="spconfigdialog.ui" line="916"/>
         <source>Rename</source>
         <translation>Uudelleennimeä</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="916"/>
+        <location filename="spconfigdialog.ui" line="926"/>
         <source>File name</source>
         <translation>Tiedoston nimi</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="935"/>
+        <location filename="spconfigdialog.ui" line="945"/>
         <source>No. of digits</source>
         <translation>Numeroiden määrä</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="942"/>
+        <location filename="spconfigdialog.ui" line="952"/>
         <source>Remowe letters</source>
         <translation>Poista teksti</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="952"/>
+        <location filename="spconfigdialog.ui" line="962"/>
         <source>CheckBox</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="986"/>
+        <location filename="spconfigdialog.ui" line="996"/>
         <source>&amp;Save &amp;&amp; close</source>
         <translation>&amp;Tallenna ja sulje</translation>
     </message>
     <message>
-        <location filename="spconfigdialog.ui" line="1013"/>
+        <location filename="spconfigdialog.ui" line="1023"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Peruuta</translation>
     </message>
@@ -3263,7 +3332,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="serialtransmission.cpp" line="145"/>
-        <location filename="serialtransmission.cpp" line="452"/>
+        <location filename="serialtransmission.cpp" line="455"/>
         <source>Select serial port device</source>
         <translation>Valitse sarjaporttilaite</translation>
     </message>
@@ -3483,8 +3552,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="setupdialog.ui" line="495"/>
-        <location filename="setupdialog.ui" line="557"/>
-        <source>*.Aaa; </source>
+        <source>*.Axx</source>
+        <oldsource>*.Aaa; </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3510,6 +3579,11 @@ p, li { white-space: pre-wrap; }
         <location filename="setupdialog.ui" line="554"/>
         <source>Extension to be added to filename when saving</source>
         <translation>Pääte joka lisätään tiedoston nimeen tallennettaessa</translation>
+    </message>
+    <message>
+        <location filename="setupdialog.ui" line="557"/>
+        <source>*.Aaa</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="560"/>
@@ -3622,84 +3696,84 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Peruuta</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2687"/>
+        <location filename="dialogs.cpp" line="2796"/>
         <source>EdytorNC configuration</source>
         <translation>EdytorNC asetukset</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2693"/>
-        <location filename="dialogs.cpp" line="2896"/>
-        <location filename="dialogs.cpp" line="3251"/>
+        <location filename="dialogs.cpp" line="2802"/>
+        <location filename="dialogs.cpp" line="3005"/>
+        <location filename="dialogs.cpp" line="3360"/>
         <source>Current font : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</source>
         <translation>Nykyinen fontti : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2856"/>
+        <location filename="dialogs.cpp" line="2965"/>
         <source>AUTO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2857"/>
+        <location filename="dialogs.cpp" line="2966"/>
         <source>FANUC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2858"/>
+        <location filename="dialogs.cpp" line="2967"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2859"/>
+        <location filename="dialogs.cpp" line="2968"/>
         <source>HEIDENHAIN ISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2860"/>
+        <location filename="dialogs.cpp" line="2969"/>
         <source>OKUMA OSP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2861"/>
+        <location filename="dialogs.cpp" line="2970"/>
         <source>PHILIPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2862"/>
+        <location filename="dialogs.cpp" line="2971"/>
         <source>SINUMERIK OLD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2863"/>
+        <location filename="dialogs.cpp" line="2972"/>
         <source>SINUMERIK NEW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2864"/>
+        <location filename="dialogs.cpp" line="2973"/>
         <source>LinuxCNC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2865"/>
+        <location filename="dialogs.cpp" line="2974"/>
         <source>TOOLTIPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2910"/>
+        <location filename="dialogs.cpp" line="3019"/>
         <source>Executables (*.exe)</source>
         <translation>Ohjelmat (*.exe)</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2912"/>
+        <location filename="dialogs.cpp" line="3021"/>
         <source>All files (*)</source>
         <translation>Kaikki tiedostot (*)</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="2917"/>
+        <location filename="dialogs.cpp" line="3026"/>
         <source>Select calculator executable</source>
         <translation>Valitse laskin ohjelma</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="3294"/>
+        <location filename="dialogs.cpp" line="3403"/>
         <source>Select default save directory</source>
         <translation>Valitse oletustallennushakemisto</translation>
     </message>
@@ -3785,7 +3859,7 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Peruuta</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="1166"/>
+        <location filename="serialtransmission.cpp" line="1169"/>
         <source>&amp;Close</source>
         <translation>&amp;Sulje</translation>
     </message>
@@ -3799,8 +3873,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="33"/>
-        <location filename="serialtransmission.cpp" line="923"/>
         <location filename="serialtransmission.cpp" line="926"/>
+        <location filename="serialtransmission.cpp" line="929"/>
         <source>Default</source>
         <translation>Oletus</translation>
     </message>
@@ -3811,7 +3885,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transmissiondialog.ui" line="68"/>
-        <location filename="serialtransmission.cpp" line="709"/>
+        <location filename="serialtransmission.cpp" line="712"/>
         <source>&amp;Connect</source>
         <translation>&amp;Yhdistä</translation>
     </message>
@@ -3903,112 +3977,112 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="507"/>
+        <location filename="serialtransmission.cpp" line="510"/>
         <source>Serial transmission test</source>
         <translation>Tiedonsiirtotesti</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="647"/>
+        <location filename="serialtransmission.cpp" line="650"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Katkaise</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="819"/>
+        <location filename="serialtransmission.cpp" line="822"/>
         <source>Recived: %1 bytes.</source>
         <translation>Vastaanotettu: %1 tavua.</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="941"/>
+        <location filename="serialtransmission.cpp" line="944"/>
         <source>Invalid file descriptor (port was not opened correctly)</source>
         <translation>Tuntematon laitetiedosto (porttia ei voitu avata)</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="943"/>
+        <location filename="serialtransmission.cpp" line="946"/>
         <source>Unable to allocate memory tables</source>
         <translation>Virhe varattaessa muistia</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="945"/>
+        <location filename="serialtransmission.cpp" line="948"/>
         <source>Caught a non-blocked signal</source>
         <translation>Tuntematon signaali</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="947"/>
+        <location filename="serialtransmission.cpp" line="950"/>
         <source>Operation timed out</source>
         <translation>Operaation aika ylittyi</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="949"/>
+        <location filename="serialtransmission.cpp" line="952"/>
         <source>The file opened by the port is not a character device</source>
         <translation>Avattu tiedosto ei ole sarjaporttilaite</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="951"/>
+        <location filename="serialtransmission.cpp" line="954"/>
         <source>The port detected a break condition</source>
         <translation>Break-tila havaittu</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="953"/>
+        <location filename="serialtransmission.cpp" line="956"/>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
         <translation>Kehysvirhe (väärä nopeus valittu?)</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="955"/>
+        <location filename="serialtransmission.cpp" line="958"/>
         <source>There was an I/O error while communicating with the port</source>
         <translation>I/O virhe</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="957"/>
+        <location filename="serialtransmission.cpp" line="960"/>
         <source>Character buffer overrun</source>
         <translation>Merkkipuskuri ylitetty</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="959"/>
+        <location filename="serialtransmission.cpp" line="962"/>
         <source>Receive buffer overflow</source>
         <translation>Vastaanottopuskurin ylivuoto</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="961"/>
+        <location filename="serialtransmission.cpp" line="964"/>
         <source>The port detected a parity error in the received data</source>
         <translation>Pariteettivirhe</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="963"/>
+        <location filename="serialtransmission.cpp" line="966"/>
         <source>Transmit buffer overflow</source>
         <translation>Lähetyspuskurin ylivuoto</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="965"/>
+        <location filename="serialtransmission.cpp" line="968"/>
         <source>General read operation failure</source>
         <translation>Määrittelemätön lukuvirhe</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="967"/>
+        <location filename="serialtransmission.cpp" line="970"/>
         <source>General write operation failure</source>
         <translation>Määrittelemätön kirjoitusvirhe</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="969"/>
+        <location filename="serialtransmission.cpp" line="972"/>
         <source>No Error has occured</source>
         <translation>Ei virhettä</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="971"/>
+        <location filename="serialtransmission.cpp" line="974"/>
         <source>Unknown error</source>
         <translation>Tuntematon virhe</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="998"/>
+        <location filename="serialtransmission.cpp" line="1001"/>
         <source>Waiting...</source>
         <translation>Odottaa...</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="1006"/>
+        <location filename="serialtransmission.cpp" line="1009"/>
         <source>Waiting for a signal readiness...</source>
         <translation>Odotetaan valmis-signaalia...</translation>
     </message>
     <message>
-        <location filename="serialtransmission.cpp" line="1043"/>
+        <location filename="serialtransmission.cpp" line="1046"/>
         <source>Sending byte %1 of %2</source>
         <translation>Lähetetään %1:s tavu %2:ta</translation>
     </message>
@@ -4062,26 +4136,26 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="triangledialog.ui" line="104"/>
-        <location filename="triangledialog.ui" line="117"/>
-        <location filename="triangledialog.ui" line="130"/>
-        <location filename="triangledialog.ui" line="143"/>
-        <location filename="triangledialog.ui" line="156"/>
-        <location filename="triangledialog.ui" line="169"/>
+        <location filename="triangledialog.ui" line="120"/>
+        <location filename="triangledialog.ui" line="136"/>
+        <location filename="triangledialog.ui" line="152"/>
+        <location filename="triangledialog.ui" line="168"/>
+        <location filename="triangledialog.ui" line="184"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="triangledialog.ui" line="207"/>
+        <location filename="triangledialog.ui" line="225"/>
         <source>&amp;Compute</source>
         <translation>&amp;Laske</translation>
     </message>
     <message>
-        <location filename="triangledialog.ui" line="234"/>
+        <location filename="triangledialog.ui" line="252"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="dialogs.cpp" line="786"/>
+        <location filename="dialogs.cpp" line="864"/>
         <source>Solution of triangles</source>
         <translation>Kolmion ratkaisu</translation>
     </message>

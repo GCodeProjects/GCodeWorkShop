@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>261</width>
-    <height>168</height>
+    <height>183</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -67,6 +67,9 @@
           </property>
           <property name="text">
            <string>0</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

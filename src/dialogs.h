@@ -108,6 +108,7 @@ class FeedsDialog : public QDialog, private Ui::FeedsDialog
     void computeButtonClicked();
     void computeVcButtonClicked();
     void setDefButton();
+    void checkBoxChanged();
 
   private:
 
@@ -288,7 +289,7 @@ class BHCDraw : public QWidget
   public slots:
     void clear();
     void printText(int x, int y, int line, const QString &text, QColor color);
-    void drawHole(qreal ang, qreal dia, bool first = false, bool last = false, QColor color = Qt::green);
+    void drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool first = false, bool last = false, QColor color = Qt::green);
     void init(int w, int h);
     void drawLines(qreal dia, qreal ang, QColor cl);
     void setScale(double sc);

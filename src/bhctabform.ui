@@ -211,6 +211,9 @@
           <property name="maxLength">
            <number>7</number>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="4" column="1">
@@ -232,6 +235,9 @@
           </property>
           <property name="maxLength">
            <number>7</number>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -255,6 +261,9 @@
           <property name="maxLength">
            <number>8</number>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="1" column="1">
@@ -276,6 +285,9 @@
           </property>
           <property name="maxLength">
            <number>9</number>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -299,6 +311,9 @@
           <property name="maxLength">
            <number>9</number>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="3" column="1">
@@ -320,6 +335,9 @@
           </property>
           <property name="maxLength">
            <number>3</number>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -352,6 +370,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="toolTip">
+      <string>Select rows &amp; right click for menu</string>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -373,9 +394,6 @@
      <property name="columnCount">
       <number>2</number>
      </property>
-     <attribute name="verticalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
      <attribute name="verticalHeaderCascadingSectionResizes">
       <bool>false</bool>
      </attribute>
