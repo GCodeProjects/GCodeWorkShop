@@ -98,5 +98,6 @@
         <file>images/blockskipr.png</file>
         <file>images/blockskip+.png</file>
         <file>images/blockskip-.png</file>
+        <file>images/filesaveall.png</file>
     </qresource>
 </RCC>

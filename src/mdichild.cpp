@@ -45,6 +45,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    marginWidget->setAutoFillBackground(true);
 
    textEdit->installEventFilter(this);
+   textEdit->viewport()->installEventFilter(this);
    setWindowIcon(QIcon(":/images/ncfile.png"));
 
 
@@ -570,63 +571,166 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
 
 bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 {
-   if((obj == textEdit) && !(textEdit->isReadOnly()))
-   {
-      if( ev->type() == QEvent::KeyPress )
-      {
-         QKeyEvent *k = (QKeyEvent*) ev;
+    //qDebug() << "E" << ev->type() << obj->objectName();
 
-         if(k->key() == Qt::Key_Insert)
-            textEdit->setOverwriteMode(!textEdit->overwriteMode());
+    //proper word selection
+    if((obj == textEdit->viewport()) && (ev->type() == QEvent::MouseButtonDblClick))
+    {
+        QString key = "";
+        QString wordDelimiters = "()[]=,;:/ ";
+        bool wasLetter = false;
+        int posStart, posEnd;
+        QTextCursor cursor = textEdit->textCursor();
 
+        while(true)
+        {
+            if(cursor.atBlockStart() || cursor.atStart())
+                break;
 
-         if(mdiWindowProperites.underlineChanges)
-         {
-            if((k->text()[0].isPrint()) && !(k->text()[0].isSpace()))
+            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+            key = cursor.selectedText();
+
+            if(cursor.atBlockStart() || cursor.atStart())
+                break;
+
+            if(key.isEmpty())
+                break;
+
+            if(key.at(0).isSpace())
             {
-               QTextCursor cr = textEdit->textCursor(); //Underline changes
-               QTextCharFormat format = cr.charFormat();
-               format.setUnderlineStyle(QTextCharFormat::DotLine);
-               format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
-               cr.setCharFormat(format);
-               textEdit->setTextCursor(cr);
-            };
-         };
-
-         if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
-         {
-            if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
-            {
-               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
-               return true;
-            };
-
-         };
-
-         if(mdiWindowProperites.intCapsLock)
-         {
-            if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
-            {
-               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), false, 1));
-               return true;
-
+                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                break;
             };
 
-            if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
-            {
-               QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), false, 1));
-               return true;
-            };
-         };
-      };
+            if(key.at(0).isLetter())
+                wasLetter = true;
 
-      return false;
-   }
-   else
-   {
-      //return textEdit->eventFilter(obj, ev);
-      return false;
-   };
+            if((key.at(0).isDigit() || (key.at(0) == '.')) && wasLetter)
+            {
+                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                break;
+            };
+
+            if(wordDelimiters.contains(key.at(0)))
+            {
+                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                break;
+            };
+        };
+        posStart = cursor.position();
+
+        if(!cursor.atEnd() && !cursor.atBlockEnd())
+        {
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
+        };
+
+        wasLetter = true;
+
+        while(true)
+        {
+            if(cursor.atEnd() || cursor.atBlockEnd())
+            {
+                break;
+            };
+
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            key = cursor.selectedText();
+
+            if(cursor.atEnd())
+            {
+                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+                break;
+            };
+
+            if(key.at(key.length() - 1).isSpace())
+            {
+                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+                break;
+            };
+
+            if(key.at(key.length() - 1).isDigit())
+            {
+                wasLetter = false;
+            };
+
+            if(key.at(key.length() - 1).isLetter() && !wasLetter)
+            {
+                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+                break;
+            };
+
+            if(wordDelimiters.contains(key.at(key.length() - 1)))
+            {
+                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+                break;
+            };
+        };
+        posEnd = cursor.position();
+
+        cursor.setPosition(posStart, QTextCursor::MoveAnchor);
+        cursor.setPosition(posEnd, QTextCursor::KeepAnchor);
+        textEdit->setTextCursor(cursor);
+        return true;
+    };
+
+
+    if((obj == textEdit) && !(textEdit->isReadOnly()))
+    {
+        if( ev->type() == QEvent::KeyPress )
+        {
+            QKeyEvent *k = (QKeyEvent*) ev;
+
+            if(k->key() == Qt::Key_Insert)
+                textEdit->setOverwriteMode(!textEdit->overwriteMode());
+
+
+            if(mdiWindowProperites.underlineChanges)
+            {
+                if((k->text()[0].isPrint()) && !(k->text()[0].isSpace()))
+                {
+                    QTextCursor cr = textEdit->textCursor(); //Underline changes
+                    QTextCharFormat format = cr.charFormat();
+                    format.setUnderlineStyle(QTextCharFormat::DotLine);
+                    format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+                    cr.setCharFormat(format);
+                    textEdit->setTextCursor(cr);
+                };
+            };
+
+            if(k->key() == Qt::Key_Comma) //Keypad comma should always prints period
+            {
+                if((k->modifiers() == Qt::KeypadModifier) || (k->nativeScanCode() == 0x53)) // !!! Qt::KeypadModifier - Not working for keypad comma !!!
+                {
+                    QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
+                    return true;
+                };
+
+            };
+
+            if(mdiWindowProperites.intCapsLock)
+            {
+                if(k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier))
+                {
+                    QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier, k->text().toUpper(), false, 1));
+                    return true;
+
+                };
+
+                if(k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier))
+                {
+                    QApplication::sendEvent(textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier, k->text().toLower(), false, 1));
+                    return true;
+                };
+            };
+        };
+
+        return false;
+    }
+    else
+    {
+        //return textEdit->eventFilter(obj, ev);
+        return false;
+    };
 }
 
 //**************************************************************************************************

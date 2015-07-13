@@ -182,6 +182,7 @@ private:
     bool maybeSaveProject();
     void createFileBrowseTabs();
     void fileTreeViewChangeRootDir();
+    void fileTreeViewChangeRootDir(QString path);
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     void createDiffApp();
