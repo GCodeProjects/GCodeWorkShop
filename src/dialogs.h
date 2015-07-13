@@ -334,6 +334,7 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
     void comChk();
     void computeButtonClicked();
     void closeButtonClicked();
+    void clearAll();
 
   private:
     QTabWidget *tabBar;

@@ -1989,14 +1989,17 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
    setWindowTitle(tr("Bolt circle"));
    //setFocusPolicy(QWidget::StrongFocus);
 
+   drawing = NULL;
+
    parentHeight = parent->height() - 10;
    parentWidth = parent->width() - 15;
 
    tabBar = new QTabWidget(this);
    pageLayout->addWidget(tabBar);
 
-   connect( computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()) );
-   connect( closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()) );
+   connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
+   connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
+   connect(clearAllButton, SIGNAL(clicked()), SLOT(clearAll()));
 
 
    BHCTab *page1 = new BHCTab(this);
@@ -2013,8 +2016,36 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
    tabBar->addTab(page3, tr("Circle 3 - red"));
    tabBar->addTab(page4, tr("Circle 4 - yellow"));
 
-   //setFocusProxy(page1);
-   //setMaximumSize(width(), height());
+
+   QSettings settings("EdytorNC", "EdytorNC");
+   settings.beginGroup("BHC");
+
+   for(int tabId = 0; tabId < tabBar->count(); tabId++)
+   {
+      BHCTab *tab = (BHCTab*)tabBar->widget(tabId);
+      if(tab == NULL)
+        continue;
+
+      settings.beginGroup(QString("TAB%1").arg(tabId));
+
+      tab->xCenterInput->setText(settings.value("XCenter", "0").toString());
+      tab->yCenterInput->setText(settings.value("YCenter", "0").toString());
+      tab->diaInput->setText(settings.value("Dia", "0").toString());
+      tab->angleStartInput->setText(settings.value("StartAngle", "0").toString());
+      tab->angleBeetwenInput->setText(settings.value("AngleBeetwen", "0").toString());
+      tab->holesInput->setText(settings.value("NoOfHoles", "0").toString());
+      tab->roateInput->setValue(settings.value("Rotate", 0).toInt());
+
+      tab->mirrorX->setChecked(settings.value("MirrorX", false).toBool());
+      tab->mirrorY->setChecked(settings.value("MirrorY", false).toBool());
+      tab->all->setChecked(settings.value("Common", true).toBool());
+
+      settings.endGroup();
+   };
+
+   settings.endGroup();
+
+
    adjustSize();
 }
 
@@ -2024,6 +2055,34 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 
 BHCDialog::~BHCDialog()
 {
+
+    QSettings settings("EdytorNC", "EdytorNC");
+    settings.beginGroup("BHC");
+
+    for(int tabId = 0; tabId < tabBar->count(); tabId++)
+    {
+       BHCTab *tab = (BHCTab*)tabBar->widget(tabId);
+       if(tab == NULL)
+         continue;
+
+       settings.beginGroup(QString("TAB%1").arg(tabId));
+
+       settings.setValue("XCenter", tab->xCenterInput->text());
+       settings.setValue("YCenter", tab->yCenterInput->text());
+       settings.setValue("Dia", tab->diaInput->text());
+       settings.setValue("StartAngle", tab->angleStartInput->text());
+       settings.setValue("AngleBeetwen", tab->angleBeetwenInput->text());
+       settings.setValue("NoOfHoles", tab->holesInput->text());
+       settings.setValue("Rotate", tab->roateInput->value());
+
+       settings.setValue("MirrorX", tab->mirrorX->isChecked());
+       settings.setValue("MirrorY", tab->mirrorY->isChecked());
+       settings.setValue("Common", tab->all->isChecked());
+
+       settings.endGroup();
+    };
+
+    settings.endGroup();
 
 }
 
@@ -2059,7 +2118,7 @@ void BHCDialog::comChk()
       mirX = tab->mirrorX->isChecked();
       mirY = tab->mirrorY->isChecked();
 
-      for(tabId = 0; tabId <= tabBar->count(); tabId++)
+      for(tabId = 0; tabId < tabBar->count(); tabId++)
       {
          tab = (BHCTab*)tabBar->widget(tabId);
          if(tab == NULL)
@@ -2078,6 +2137,35 @@ void BHCDialog::comChk()
    };
 
    computeButtonClicked();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void BHCDialog::clearAll()
+{
+    for(int tabId = 0; tabId < tabBar->count(); tabId++)
+    {
+       BHCTab *tab = (BHCTab*)tabBar->widget(tabId);
+       if(tab == NULL)
+         continue;
+
+       tab->xCenterInput->setText("0");
+       tab->yCenterInput->setText("0");
+       tab->diaInput->setText("0");
+       tab->angleStartInput->setText("0");
+       tab->angleBeetwenInput->setText("0");
+       tab->holesInput->setText("0");
+       tab->roateInput->setValue(0);
+
+       tab->resultTable->setRowCount(0);
+       tab->resultTable->clearContents();
+
+    };
+
+    if(drawing > NULL)
+        drawing->close();
 }
 
 //**************************************************************************************************

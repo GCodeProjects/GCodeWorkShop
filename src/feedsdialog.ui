@@ -95,7 +95,7 @@
            <string>Cutting speed</string>
           </property>
           <property name="text">
-           <string> Vc :</string>
+           <string>Vc :</string>
           </property>
          </widget>
         </item>

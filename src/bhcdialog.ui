@@ -64,7 +64,7 @@
         <string>&amp;Compute</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/funct.png</normaloff>:/images/funct.png</iconset>
        </property>
       </widget>
@@ -88,8 +88,32 @@
         <string>Cl&amp;ose</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="application.qrc">
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clearAllButton">
+       <property name="text">
+        <string>Clear &amp;All</string>
+       </property>
+       <property name="icon">
+        <iconset resource="application.qrc">
+         <normaloff>:/images/cleanup.png</normaloff>:/images/cleanup.png</iconset>
        </property>
       </widget>
      </item>
@@ -110,6 +134,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="application.qrc"/>
+ </resources>
  <connections/>
 </ui>

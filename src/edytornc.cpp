@@ -1640,7 +1640,7 @@ void EdytorNc::createActions()
     saveAct->setToolTip(tr("Save the document to disk"));
     connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
 
-    saveAllAct = new QAction(QIcon(":/images/filesave.png"), tr("Save A&ll"), this);
+    saveAllAct = new QAction(QIcon(":/images/filesaveall.png"), tr("Save A&ll"), this);
     saveAllAct->setShortcut(tr("Ctrl+Shift+S"));
     saveAllAct->setToolTip(tr("Save all modified documents to disk"));
     connect(saveAllAct, SIGNAL(triggered()), this, SLOT(saveAll()));
@@ -4142,20 +4142,38 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex & index)
 
     if((file.exists()) && (file.isReadable()))
     {
-        if(defaultMdiWindowProperites.extensions.contains("*." + file.suffix()))
+        if(file.isDir())
         {
-            defaultMdiWindowProperites.fileName = file.absoluteFilePath();
-            defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-            defaultMdiWindowProperites.geometry = QByteArray();
-            defaultMdiWindowProperites.cursorPos = 0;
-            defaultMdiWindowProperites.editorToolTips = true;
-            defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
-            loadFile(defaultMdiWindowProperites);
+            QString path = dirModel->filePath(index);
+            if(path.endsWith(".."))
+            {
+                int idx = path.lastIndexOf('/');
+                if(idx > 0)
+                {
+                    idx = path.lastIndexOf('/', idx - 1);
+                    if(idx > 0)
+                    {
+                        path.remove(idx, (path.length() - idx));
+                    };
+                };
+            };
+            fileTreeViewChangeRootDir(path);
         }
         else
-        {
-            QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
-        };
+            if(defaultMdiWindowProperites.extensions.contains("*." + file.suffix()))
+            {
+                defaultMdiWindowProperites.fileName = file.absoluteFilePath();
+                defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+                defaultMdiWindowProperites.geometry = QByteArray();
+                defaultMdiWindowProperites.cursorPos = 0;
+                defaultMdiWindowProperites.editorToolTips = true;
+                defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
+                loadFile(defaultMdiWindowProperites);
+            }
+            else
+            {
+                QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
+            };
     };
 }
 
@@ -4399,6 +4417,7 @@ void EdytorNc::createFileBrowseTabs()
 
     dirModel->setNameFilters(defaultMdiWindowProperites.extensions); //QStringList("*.nc")
     dirModel->setNameFilterDisables(false);
+    dirModel->setFilter(QDir::Files | QDir::AllDirs | QDir::Drives | QDir::NoDot);
 
     fileTreeView->setModel(dirModel);
     fileTreeViewChangeRootDir();
@@ -4521,6 +4540,15 @@ void EdytorNc::fileTreeViewChangeRootDir()
     if(dirModel->rootPath() == path)
         return;
 
+    fileTreeViewChangeRootDir(path);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::fileTreeViewChangeRootDir(QString path)
+{
     fileTreeView->setRootIndex(dirModel->index(path));
     dirModel->setRootPath(path);
     //fileTreeView->setToolTip(path);
@@ -4531,7 +4559,6 @@ void EdytorNc::fileTreeViewChangeRootDir()
     fileTreeView->setColumnHidden(2, true);
     fileTreeView->resizeColumnToContents(3);
 }
-
 //**************************************************************************************************
 //
 //**************************************************************************************************
