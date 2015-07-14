@@ -23,9 +23,10 @@
 
 
 #include "serialtransmission.h"
+#include <QtSerialPort/QSerialPortInfo>
 
 
-
+static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
 
 
 SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlags f) : QDialog(parent, f)
@@ -39,46 +40,44 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
 
    baudGroup = new QButtonGroup(this);
    baudGroup->setExclusive(true);
-   baudGroup->addButton(b1CheckBox, BAUD300);
-   baudGroup->addButton(b2CheckBox, BAUD600);
-   baudGroup->addButton(b3CheckBox, BAUD1200);
-   baudGroup->addButton(b4CheckBox, BAUD2400);
-   baudGroup->addButton(b5CheckBox, BAUD4800);
-   baudGroup->addButton(b6CheckBox, BAUD9600);
-   baudGroup->addButton(b7CheckBox, BAUD19200);
-   baudGroup->addButton(b8CheckBox, BAUD38400);
-   baudGroup->addButton(b9CheckBox, BAUD57600);
-   baudGroup->addButton(b11CheckBox, BAUD115200);
+   baudGroup->addButton(b3CheckBox, QSerialPort::Baud1200);
+   baudGroup->addButton(b4CheckBox, QSerialPort::Baud2400);
+   baudGroup->addButton(b5CheckBox, QSerialPort::Baud4800);
+   baudGroup->addButton(b6CheckBox, QSerialPort::Baud9600);
+   baudGroup->addButton(b7CheckBox, QSerialPort::Baud19200);
+   baudGroup->addButton(b8CheckBox, QSerialPort::Baud38400);
+   baudGroup->addButton(b9CheckBox, QSerialPort::Baud57600);
+   baudGroup->addButton(b11CheckBox, QSerialPort::Baud115200);
 
 
 
    dataBitsGroup = new QButtonGroup(this);
    dataBitsGroup->setExclusive(true);
-   dataBitsGroup->addButton(d1CheckBox, DATA_5);
-   dataBitsGroup->addButton(d2CheckBox, DATA_6);
-   dataBitsGroup->addButton(d3CheckBox, DATA_7);
-   dataBitsGroup->addButton(d4CheckBox, DATA_8);
+   dataBitsGroup->addButton(d1CheckBox, QSerialPort::Data5);
+   dataBitsGroup->addButton(d2CheckBox, QSerialPort::Data6);
+   dataBitsGroup->addButton(d3CheckBox, QSerialPort::Data7);
+   dataBitsGroup->addButton(d4CheckBox, QSerialPort::Data8);
 
 
    stopBitsGroup = new QButtonGroup(this);
    stopBitsGroup->setExclusive(true);
-   stopBitsGroup->addButton(s1CheckBox, STOP_1);
-   stopBitsGroup->addButton(s2CheckBox, STOP_2);
+   stopBitsGroup->addButton(s1CheckBox, QSerialPort::OneStop);
+   stopBitsGroup->addButton(s2CheckBox, QSerialPort::TwoStop);
 
 
    parityGroup = new QButtonGroup(this);
    parityGroup->setExclusive(true);
-   parityGroup->addButton(p1CheckBox, PAR_NONE);
-   parityGroup->addButton(p2CheckBox, PAR_ODD);
-   parityGroup->addButton(p3CheckBox, PAR_EVEN);
+   parityGroup->addButton(p1CheckBox, QSerialPort::NoParity);
+   parityGroup->addButton(p2CheckBox, QSerialPort::OddParity);
+   parityGroup->addButton(p3CheckBox, QSerialPort::EvenParity);
 
 
 
    flowCtlGroup = new QButtonGroup(this);
    flowCtlGroup->setExclusive(true);
-   flowCtlGroup->addButton(f1CheckBox, FLOW_OFF);
-   flowCtlGroup->addButton(f2CheckBox, FLOW_HARDWARE);
-   flowCtlGroup->addButton(f3CheckBox, FLOW_XONXOFF);
+   flowCtlGroup->addButton(f1CheckBox, QSerialPort::NoFlowControl);
+   flowCtlGroup->addButton(f2CheckBox, QSerialPort::HardwareControl);
+   flowCtlGroup->addButton(f3CheckBox, QSerialPort::SoftwareControl);
 
 
 #ifdef Q_OS_WIN32
@@ -104,6 +103,7 @@ SPConfigDialog::SPConfigDialog(QWidget *parent, QString confName, Qt::WindowFlag
    flowCtlGroupReleased();
 
    connect(configNameBox, SIGNAL(currentIndexChanged(int)), SLOT(changeSettings()));
+   connect(portNameComboBox, SIGNAL(currentIndexChanged(QString)), SLOT(portNameComboBoxIndexChanged(QString)));
 
    setResult(QDialog::Rejected);
 }
@@ -188,6 +188,7 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("PortNameList", list);
 #endif
 
+
     list.clear();
     list.prepend(configNameBox->currentText());
     for(int i = 0; i <= configNameBox->count(); i++)
@@ -225,7 +226,7 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("RemoveBefore",removeBefore->isChecked());
     //settings.setValue("StartAfterXONCTS", startAfterXONCTS->isChecked());
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
-    settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());    
+    settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());
     settings.setValue("RecieveTimeout", recieveTimeoutSpinBox->value());
     settings.setValue("EndOfBlockLF", endOfBlockLF->isChecked());
     settings.setValue("RemoveSpaceEOB", removeSpaceEOB->isChecked());
@@ -263,80 +264,77 @@ void SPConfigDialog::changeSettings()
 #ifdef Q_OS_WIN32
     port = "COM1";
 #else
-    port = "/dev/ttyS0";
+    port = "/dev/ttyUSB0";
 #endif
 
     item = settings.value("PortName", port).toString();
     id = portNameComboBox->findText(item);
     portNameComboBox->setCurrentIndex(id);
+    portNameComboBoxIndexChanged(item);
 
-    id = settings.value("BaudRate", BAUD9600).toInt();
+    id = settings.value("BaudRate", QSerialPort::Baud9600).toInt();
     switch(id)
     {
-           case BAUD300    : b1CheckBox->setChecked(true);
-                             break;
-           case BAUD600    : b2CheckBox->setChecked(true);
-                             break;
-           case BAUD1200   : b3CheckBox->setChecked(true);
-                             break;
-           case BAUD2400   : b4CheckBox->setChecked(true);
-                             break;
-           case BAUD4800   : b5CheckBox->setChecked(true);
-                             break;
-           case BAUD9600   : b6CheckBox->setChecked(true);
-                             break;
-           case BAUD19200  : b7CheckBox->setChecked(true);
-                             break;
-           case BAUD38400  : b8CheckBox->setChecked(true);
-                             break;
-           case BAUD57600  : b9CheckBox->setChecked(true);
-                             break;
-           case BAUD115200 : b11CheckBox->setChecked(true);
-                             break;
+           case QSerialPort::Baud1200   : b3CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Baud2400   : b4CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Baud4800   : b5CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Baud9600   : b6CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Baud19200  : b7CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Baud38400  : b8CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Baud57600  : b9CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Baud115200 : b11CheckBox->setChecked(true);
+                break;
     };
 
-    id = settings.value("DataBits", DATA_8).toInt();
+    id = settings.value("DataBits", QSerialPort::Data8).toInt();
     switch(id)
     {
-           case DATA_5    : d1CheckBox->setChecked(true);
-                            break;
-           case DATA_6    : d2CheckBox->setChecked(true);
-                            break;
-           case DATA_7    : d3CheckBox->setChecked(true);
-                            break;
-           case DATA_8    : d4CheckBox->setChecked(true);
-                            break;
+           case QSerialPort::Data5    : d1CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Data6    : d2CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Data7    : d3CheckBox->setChecked(true);
+                break;
+           case QSerialPort::Data8    : d4CheckBox->setChecked(true);
+                break;
     };
 
-    id = settings.value("StopBits", STOP_2).toInt();
+    id = settings.value("StopBits", QSerialPort::TwoStop).toInt();
     switch(id)
     {
-           case STOP_1    : s1CheckBox->setChecked(true);
-                            break;
-           case STOP_2    : s2CheckBox->setChecked(true);
-                            break;
+           case QSerialPort::OneStop    : s1CheckBox->setChecked(true);
+                break;
+           case QSerialPort::TwoStop    : s2CheckBox->setChecked(true);
+                break;
     };
 
-    id = settings.value("Parity", PAR_NONE).toInt();
+    id = settings.value("Parity", QSerialPort::NoParity).toInt();
     switch(id)
     {
-           case PAR_NONE  : p1CheckBox->setChecked(true);
-                            break;
-           case PAR_ODD   : p2CheckBox->setChecked(true);
-                            break;
-           case PAR_EVEN  : p3CheckBox->setChecked(true);
-                            break;
+           case QSerialPort::NoParity   : p1CheckBox->setChecked(true);
+                break;
+           case QSerialPort::OddParity  : p2CheckBox->setChecked(true);
+                break;
+           case QSerialPort::EvenParity : p3CheckBox->setChecked(true);
+                break;
     };
 
-    id = settings.value("FlowControl", FLOW_HARDWARE).toInt();
+    id = settings.value("FlowControl", QSerialPort::HardwareControl).toInt();
     switch(id)
     {
-           case FLOW_OFF       : f1CheckBox->setChecked(true);
-                                 break;
-           case FLOW_HARDWARE  : f2CheckBox->setChecked(true);
-                                 break;
-           case FLOW_XONXOFF   : f3CheckBox->setChecked(true);
-                                 break;
+           case QSerialPort::NoFlowControl      : f1CheckBox->setChecked(true);
+                break;
+           case QSerialPort::HardwareControl    : f2CheckBox->setChecked(true);
+                break;
+           case QSerialPort::SoftwareControl    : f3CheckBox->setChecked(true);
+                break;
     };
 
     eotInput->setText(settings.value("SendAtEnd", "").toString());
@@ -373,19 +371,27 @@ void SPConfigDialog::loadSettings()
 
     portNameComboBox->clear();
 
-#ifdef Q_OS_WIN32
-    for(int i = 1; i <= 64; i++)
-      list.append(QString("COM%1").arg(i));
-    portNameComboBox->setEditable(false);
+//#ifdef Q_OS_WIN32
+//    for(int i = 1; i <= 64; i++)
+//      list.append(QString("COM%1").arg(i));
+//    portNameComboBox->setEditable(false);
 
-#else
-    list << "/dev/ttyS0" << "/dev/ttyS1" << "/dev/ttyS2" << "/dev/ttyS3" <<
-            "/dev/ttyUSB0" << "/dev/ttyUSB1" << "/dev/ttyUSB2" << "/dev/ttyUSB3";
-    list = settings.value("PortNameList", list).toStringList();
+//#else
+//    list << "/dev/ttyS0" << "/dev/ttyS1" << "/dev/ttyS2" << "/dev/ttyS3" <<
+//            "/dev/ttyUSB0" << "/dev/ttyUSB1" << "/dev/ttyUSB2" << "/dev/ttyUSB3";
+//    list = settings.value("PortNameList", list).toStringList();
+//    list.sort();
+
+//#endif
+
+
+
+    foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
+    {
+        list.append(info.portName());
+    };
+
     list.sort();
-
-#endif
-
     portNameComboBox->addItems(list);
 
 
@@ -400,6 +406,34 @@ void SPConfigDialog::loadSettings()
 
     changeSettings();
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SPConfigDialog::portNameComboBoxIndexChanged(QString name)
+{
+    QString description;
+    QString manufacturer;
+    QString serialNumber;
+
+    QSerialPortInfo *info = new QSerialPortInfo(name);
+
+    description = info->description();
+    manufacturer = info->manufacturer();
+    serialNumber = info->serialNumber();
+
+    portInfoListWidget->clear();
+    //portInfoListWidget->addItem(tr("Port name:          %1").arg(info->portName()));
+    portInfoListWidget->addItem(tr("Description       : %1").arg((!description.isEmpty() ? description : blankString)));
+    portInfoListWidget->addItem(tr("Manufacturer      : %1").arg((!manufacturer.isEmpty() ? manufacturer : blankString)));
+    portInfoListWidget->addItem(tr("SerialNumber      : %1").arg((!serialNumber.isEmpty() ? serialNumber : blankString)));
+    portInfoListWidget->addItem(tr("System location   : %1").arg(info->systemLocation()));
+    portInfoListWidget->addItem(tr("Vendor identifier : %1").arg((info->vendorIdentifier() ? QString::number(info->vendorIdentifier(), 16) : blankString)));
+    portInfoListWidget->addItem(tr("Product identifier: %1").arg((info->productIdentifier() ? QString::number(info->productIdentifier(), 16) : blankString)));
+
+}
+
 
 //**************************************************************************************************
 //
@@ -642,7 +676,7 @@ void TransmissionDialog::clearButtonClicked()
 //**************************************************************************************************
 
 void TransmissionDialog::connectButtonToggled(bool tg)
-{ 
+{
    if(tg)
    {
 
@@ -659,19 +693,35 @@ void TransmissionDialog::connectButtonToggled(bool tg)
       {
          comPort->reset();
          comPort->close();
-         delete(comPort);
+         delete comPort;
       };
 
-      comPort = new QextSerialPort(portName, portSettings);
-      if(!comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
-      {
-         showError(E_INVALID_FD);
-         //showError(comPort->lastError());
-         delete(comPort);
-         comPort = NULL;
-         connectButton->setChecked(false);
-         return;
-      };
+      comPort = new QSerialPort(portName);
+      comPort->clearError();
+      comPort->setBaudRate(portSettings.BaudRate);
+      comPort->setDataBits(portSettings.DataBits);
+      comPort->setParity(portSettings.Parity);
+      comPort->setStopBits(portSettings.StopBits);
+      comPort->setFlowControl(portSettings.FlowControl);
+      if (!comPort->open(QIODevice::ReadWrite)) {
+          showError(comPort->error());
+          delete comPort;
+          comPort = NULL;
+          connectButton->setChecked(false);
+          return;
+      }
+
+
+//      comPort = new QextSerialPort(portName, portSettings);
+//      if(!comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
+//      {
+//         showError(E_INVALID_FD);
+//         //showError(comPort->lastError());
+//         delete(comPort);
+//         comPort = NULL;
+//         connectButton->setChecked(false);
+//         return;
+//      };
 
       comPort->reset();
       comPort->flush();
@@ -691,14 +741,14 @@ void TransmissionDialog::connectButtonToggled(bool tg)
       configButton->setEnabled(false);
 
 
-      bool en = portSettings.FlowControl == FLOW_XONXOFF;
+      bool en = portSettings.FlowControl == QSerialPort::SoftwareControl;
       setXonButton->setEnabled(en);
       setXoffButton->setEnabled(en);
 
       sendLineEdit->setReadOnly(false);
       sendLineEdit->setFocus(Qt::MouseFocusReason);
 
-      showError(comPort->lastError());
+      showError(comPort->error());
 
       stop = false;
       timer->start(20);
@@ -760,7 +810,7 @@ void TransmissionDialog::setXoffButtonClicked()
 void TransmissionDialog::setDtrButtonClicked()
 {
    if(comPort->isOpen())
-     comPort->setDtr(setDtrButton->isChecked());
+     comPort->setDataTerminalReady(setDtrButton->isChecked());
 }
 
 //**************************************************************************************************
@@ -770,7 +820,7 @@ void TransmissionDialog::setDtrButtonClicked()
 void TransmissionDialog::setRtsButtonClicked()
 {
    if(comPort->isOpen())
-     comPort->setRts(setRtsButton->isChecked());
+     comPort->setRequestToSend(setRtsButton->isChecked());
 }
 
 //**************************************************************************************************
@@ -798,15 +848,24 @@ void TransmissionDialog::updateLeds()
    while(!stop)
    {
 
-      status = comPort->lineStatus();
+      status = comPort->pinoutSignals();
 
-      ctsLabel->setEnabled(status & LS_CTS);
-      dsrLabel->setEnabled(status & LS_DSR);
-      dcdLabel->setEnabled(status & LS_DCD);
-      rtsLabel->setEnabled(status & LS_RTS);
-      setRtsButton->setChecked(status & LS_RTS);
-      dtrLabel->setEnabled(status & LS_DTR);
-      setDtrButton->setChecked(status & LS_DTR);
+//      ctsLabel->setEnabled(status & LS_CTS);
+//      dsrLabel->setEnabled(status & LS_DSR);
+//      dcdLabel->setEnabled(status & LS_DCD);
+//      rtsLabel->setEnabled(status & LS_RTS);
+//      setRtsButton->setChecked(status & LS_RTS);
+//      dtrLabel->setEnabled(status & LS_DTR);
+//      setDtrButton->setChecked(status & LS_DTR);
+
+      ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
+      dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
+      dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
+      rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
+      setRtsButton->setChecked(status & QSerialPort::RequestToSendSignal);
+      dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
+      setDtrButton->setChecked(status & QSerialPort::DataTerminalReadySignal);
+
 
       i = comPort->bytesAvailable();
       qApp->processEvents();
@@ -815,7 +874,7 @@ void TransmissionDialog::updateLeds()
          ok = comPort->getChar(&ch);
          if(!ok)
          {
-            showError(comPort->lastError());
+            showError(comPort->error());
             return;
          };
          count++;
@@ -850,7 +909,7 @@ void TransmissionDialog::updateLeds()
       }
       else
          if(i < 0)
-            showError(comPort->lastError());
+            showError(comPort->error());
 
    };
    comPort->close();
@@ -892,16 +951,16 @@ void TransmissionDialog::changeSettings()
 
     portName = settings.value("PortName", port).toString();
 
-    portSettings.BaudRate = (BaudRateType) settings.value("BaudRate", BAUD9600).toInt();
-    portSettings.DataBits = (DataBitsType) settings.value("DataBits", DATA_8).toInt();
-    portSettings.StopBits = (StopBitsType) settings.value("StopBits", STOP_2).toInt();
-    portSettings.Parity = (ParityType) settings.value("Parity", PAR_NONE).toInt();
-    portSettings.FlowControl = (FlowType) settings.value("FlowControl", FLOW_HARDWARE).toInt();
+    portSettings.BaudRate = (QSerialPort::BaudRate) settings.value("BaudRate", QSerialPort::Baud9600).toInt();
+    portSettings.DataBits = (QSerialPort::DataBits) settings.value("DataBits", QSerialPort::Data8).toInt();
+    portSettings.StopBits = (QSerialPort::StopBits) settings.value("StopBits", QSerialPort::TwoStop).toInt();
+    portSettings.Parity = (QSerialPort::Parity) settings.value("Parity", QSerialPort::NoParity).toInt();
+    portSettings.FlowControl = (QSerialPort::FlowControl) settings.value("FlowControl", QSerialPort::HardwareControl).toInt();
     portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
     portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
-    lineDelay = settings.value("LineDelay", 0).toDouble(); 
+    lineDelay = settings.value("LineDelay", 0).toDouble();
 
 
     settings.endGroup();
@@ -939,40 +998,69 @@ void TransmissionDialog::loadSerialConfignames()
 
 void TransmissionDialog::showError(int error)
 {
-   switch(error)
-   {
-      case E_INVALID_FD                   : errorLabel->setText(tr("Invalid file descriptor (port was not opened correctly)"));
-                                            break;
-      case E_NO_MEMORY                    : errorLabel->setText(tr("Unable to allocate memory tables"));
-                                            break;
-      case E_CAUGHT_NON_BLOCKED_SIGNAL    : errorLabel->setText(tr("Caught a non-blocked signal"));
-                                            break;
-      case E_PORT_TIMEOUT                 : errorLabel->setText(tr("Operation timed out"));
-                                            break;
-      case E_INVALID_DEVICE               : errorLabel->setText(tr("The file opened by the port is not a character device"));
-                                            break;
-      case E_BREAK_CONDITION              : errorLabel->setText(tr("The port detected a break condition"));
-                                            break;
-      case E_FRAMING_ERROR                : errorLabel->setText(tr("The port detected a framing error (incorrect baud rate settings ?)"));
-                                            break;
-      case E_IO_ERROR                     : errorLabel->setText(tr("There was an I/O error while communicating with the port"));
-                                            break;
-      case E_BUFFER_OVERRUN               : errorLabel->setText(tr("Character buffer overrun"));
-                                            break;
-      case E_RECEIVE_OVERFLOW             : errorLabel->setText(tr("Receive buffer overflow"));
-                                            break;
-      case E_RECEIVE_PARITY_ERROR         : errorLabel->setText(tr("The port detected a parity error in the received data"));
-                                            break;
-      case E_TRANSMIT_OVERFLOW            : errorLabel->setText(tr("Transmit buffer overflow"));
-                                            break;
-      case E_READ_FAILED                  : errorLabel->setText(tr("General read operation failure"));
-                                            break;
-      case E_WRITE_FAILED                 : errorLabel->setText(tr("General write operation failure"));
-                                            break;
-      case E_NO_ERROR                     : errorLabel->setText(tr("No Error has occured"));
-                                            break;
-      default                             : errorLabel->setText(tr("Unknown error"));
-   };
+   switch(error){
+//      case E_INVALID_FD                   : errorLabel->setText(tr("Invalid file descriptor (port was not opened correctly)"));
+//                                            break;
+//      case E_NO_MEMORY                    : errorLabel->setText(tr("Unable to allocate memory tables"));
+//                                            break;
+//      case E_CAUGHT_NON_BLOCKED_SIGNAL    : errorLabel->setText(tr("Caught a non-blocked signal"));
+//                                            break;
+//      case E_PORT_TIMEOUT                 : errorLabel->setText(tr("Operation timed out"));
+//                                            break;
+//      case E_INVALID_DEVICE               : errorLabel->setText(tr("The file opened by the port is not a character device"));
+//                                            break;
+//      case E_BREAK_CONDITION              : errorLabel->setText(tr("The port detected a break condition"));
+//                                            break;
+//      case E_FRAMING_ERROR                : errorLabel->setText(tr("The port detected a framing error (incorrect baud rate settings ?)"));
+//                                            break;
+//      case E_IO_ERROR                     : errorLabel->setText(tr("There was an I/O error while communicating with the port"));
+//                                            break;
+//      case E_BUFFER_OVERRUN               : errorLabel->setText(tr("Character buffer overrun"));
+//                                            break;
+//      case E_RECEIVE_OVERFLOW             : errorLabel->setText(tr("Receive buffer overflow"));
+//                                            break;
+//      case E_RECEIVE_PARITY_ERROR         : errorLabel->setText(tr("The port detected a parity error in the received data"));
+//                                            break;
+//      case E_TRANSMIT_OVERFLOW            : errorLabel->setText(tr("Transmit buffer overflow"));
+//                                            break;
+//      case E_READ_FAILED                  : errorLabel->setText(tr("General read operation failure"));
+//                                            break;
+//      case E_WRITE_FAILED                 : errorLabel->setText(tr("General write operation failure"));
+//                                            break;
+//      case E_NO_ERROR                     : errorLabel->setText(tr("No Error has occured"));
+//                                            break;
+//      default                             : errorLabel->setText(tr("Unknown error"));
+
+   case QSerialPort::NoError                   : errorLabel->setText("No Error has occured");
+       break;
+   case QSerialPort::DeviceNotFoundError       : errorLabel->setText("Attempting to open an non-existing device");
+       break;
+   case QSerialPort::PermissionError           : errorLabel->setText("Attempting to open an already opened device by another process or user not having enough permission and credentials to open");
+       break;
+   case QSerialPort::OpenError                 : errorLabel->setText("Attempting to open an already opened device in this object");
+       break;
+   case QSerialPort::ParityError               : errorLabel->setText("Parity error detected by the hardware while reading data");
+       break;
+   case QSerialPort::FramingError              : errorLabel->setText("Framing error detected by the hardware while reading data");
+       break;
+   case QSerialPort::BreakConditionError       : errorLabel->setText("Break condition detected by the hardware on the input line");
+       break;
+   case QSerialPort::WriteError                : errorLabel->setText("An I/O error occurred while writing the data");
+       break;
+   case QSerialPort::ReadError                 : errorLabel->setText("An I/O error occurred while reading the data");
+       break;
+   case QSerialPort::ResourceError             : errorLabel->setText("An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system");
+       break;
+   case QSerialPort::UnsupportedOperationError : errorLabel->setText("Receive buffer overflow");
+       break;
+   case QSerialPort::UnknownError              : errorLabel->setText("An unidentified error occurred");
+       break;
+   case QSerialPort::TimeoutError              : errorLabel->setText("Transmit buffer overflow");
+       break;
+   case QSerialPort::NotOpenError              : errorLabel->setText("An operation is executed that can only be successfully performed if the device is open");
+       break;
+   default                                     : errorLabel->setText("Unknown error");
+   }
 
 
 }
@@ -1012,7 +1100,7 @@ void TransmissionDialog::sendText(QString tx)
          if(stop)
             break;
 
-         if(portSettings.FlowControl == FLOW_XONXOFF)
+         if(portSettings.FlowControl == QSerialPort::SoftwareControl)
          {
             controlChar = 0;
             if(comPort->bytesAvailable() > 0)
@@ -1041,7 +1129,7 @@ void TransmissionDialog::sendText(QString tx)
          if((bytesToWrite == 0) && (!xoffReceived))
          {
             if(!comPort->putChar(tx[i].toLatin1()))
-               showError(comPort->lastError());
+               showError(comPort->error());
 
             errorLabel->setText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
             qApp->processEvents();
@@ -1179,7 +1267,7 @@ void TransProgressDialog::setRange(int min, int max)
 //
 //**************************************************************************************************
 
-void TransProgressDialog::open(QextSerialPort *port, char cxon, char cxoff)
+void TransProgressDialog::open(QSerialPort *port, char cxon, char cxoff)
 {
    if(port != NULL)
    {
@@ -1211,13 +1299,20 @@ void TransProgressDialog::updateLeds()
    if(!comPort->isOpen())
       return;
 
-   status = comPort->lineStatus();
+   status = comPort->pinoutSignals();
 
-   ctsLabel->setEnabled(status & LS_CTS);
-   dsrLabel->setEnabled(status & LS_DSR);
-   dcdLabel->setEnabled(status & LS_DCD);
-   rtsLabel->setEnabled(status & LS_RTS);
-   dtrLabel->setEnabled(status & LS_DTR);
+//   ctsLabel->setEnabled(status & LS_CTS);
+//   dsrLabel->setEnabled(status & LS_DSR);
+//   dcdLabel->setEnabled(status & LS_DCD);
+//   rtsLabel->setEnabled(status & LS_RTS);
+//   dtrLabel->setEnabled(status & LS_DTR);
+
+   ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
+   dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
+   dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
+   rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
+   dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
+
 
 
    timer->start();

@@ -2334,12 +2334,6 @@ void BHCDialog::computeButtonClicked()
          tab->resultTable->setItem(i, 0, xItem);
          tab->resultTable->setItem(i, 1, yItem);
       };
-
-      //tab->resultTable->resizeColumnsToContents();
-      //tab->resultTable->resizeRowsToContents();
-      //tab->resultTable->adjustSize();
-      //tab->adjustSize();
-
    };
 
 
@@ -3451,8 +3445,8 @@ void SetupDialog::setDefaultProp()
 
    lstExtensions->clear();
    lstExtensions->addItem("*.nc");
-   lstExtensions->addItem("*.ngc");
-   lstExtensions->addItem("*.anc");
+   lstExtensions->addItem("*.cnc");
+   //lstExtensions->addItem("*.anc");
 
    progNumCheckBox->setChecked(true);
 
@@ -3465,9 +3459,12 @@ void SetupDialog::setDefaultProp()
 
 void SetupDialog::on_btnAddExtension_clicked()
 {
-    if((edtExtension->text() == "") || (edtExtension->text() == "*."))
+    QString ext = edtExtension->text();
+    ext.remove(" ");
+    ext.simplified();
+    if((ext == "") || (ext == "*."))
         return;
-    lstExtensions->addItem(edtExtension->text());
+    lstExtensions->addItem(ext);
     edtExtension->setText("*.");
 }
 

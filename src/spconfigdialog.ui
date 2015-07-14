@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>633</width>
-    <height>365</height>
+    <width>641</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -105,7 +105,7 @@
       <bool>true</bool>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -113,70 +113,81 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QGridLayout" name="gridLayout_7">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Serial port :</string>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QGridLayout" name="gridLayout_7">
+           <item row="0" column="1">
+            <widget class="QComboBox" name="portNameComboBox">
+             <property name="minimumSize">
+              <size>
+               <width>300</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>/dev/ttyS0</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>/dev/ttyS1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>/dev/ttyUSB0</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>/dev/ttyUSB1</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Serial port :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QPushButton" name="browseButton">
+             <property name="text">
+              <string>&amp;Browse</string>
+             </property>
+             <property name="icon">
+              <iconset resource="application.qrc">
+               <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QListWidget" name="portInfoListWidget">
+           <property name="statusTip">
+            <string>Information about serial port</string>
            </property>
           </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="portNameComboBox">
-           <property name="minimumSize">
-            <size>
-             <width>300</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <item>
-            <property name="text">
-             <string>/dev/ttyS0</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>/dev/ttyS1</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>/dev/ttyUSB0</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>/dev/ttyUSB1</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QPushButton" name="browseButton">
-           <property name="text">
-            <string>&amp;Browse</string>
-           </property>
-           <property name="icon">
-            <iconset resource="application.qrc">
-             <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </item>
@@ -197,93 +208,10 @@
             <property name="rightMargin">
              <number>3</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="b1CheckBox">
-              <property name="text">
-               <string>300</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="b2CheckBox">
-              <property name="text">
-               <string>600</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="2">
              <widget class="QCheckBox" name="b11CheckBox">
               <property name="text">
                <string>115200</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="b3CheckBox">
-              <property name="text">
-               <string>1200</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="b4CheckBox">
-              <property name="text">
-               <string>2400</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="b5CheckBox">
-              <property name="text">
-               <string>4800</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="b6CheckBox">
-              <property name="text">
-               <string>9600</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="b7CheckBox">
-              <property name="text">
-               <string>19200</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QCheckBox" name="b8CheckBox">
-              <property name="text">
-               <string>38400</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
@@ -304,6 +232,69 @@
              <widget class="QCheckBox" name="b10CheckBox">
               <property name="text">
                <string>56000</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="b3CheckBox">
+              <property name="text">
+               <string>1200</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="b4CheckBox">
+              <property name="text">
+               <string>2400</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="b5CheckBox">
+              <property name="text">
+               <string>4800</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="b6CheckBox">
+              <property name="text">
+               <string>9600</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="b7CheckBox">
+              <property name="text">
+               <string>19200</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="b8CheckBox">
+              <property name="text">
+               <string>38400</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>

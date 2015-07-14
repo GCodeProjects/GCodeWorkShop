@@ -58,7 +58,7 @@ EdytorNc::EdytorNc()
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
-    
+
     model = new QStandardItemModel();
     projectTreeView->setModel(model);
     currentProject = NULL;
@@ -92,7 +92,7 @@ EdytorNc::EdytorNc()
     setWindowTitle(tr("EdytorNC"));
     setWindowIcon(QIcon(":/images/edytornc.png"));
     createStatusBar();
-    
+
     if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
     {
         mdiArea->setViewMode(QMdiArea::TabbedView);
@@ -122,7 +122,7 @@ EdytorNc::~EdytorNc()
         proc->close();
         delete(proc);
     };
-}    
+}
 
 //**************************************************************************************************
 //
@@ -1347,10 +1347,10 @@ void EdytorNc::about()
                        trUtf8("<P>Version: ") + "2015.07.00 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
-                       trUtf8("<br />German translation thanks to Michael Numberger") +
+                       trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
                        trUtf8("<br />Czech translation thanks to Pavel Fric") +
                        trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
-                       trUtf8("<br />Spanish translation thanks to Otto Huamani") +
+                       trUtf8("<br />Spanish translation and other fixes thanks to Otto Huamani") +
                        trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
                        trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                        trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
@@ -1655,7 +1655,7 @@ void EdytorNc::createActions()
     exitAct->setShortcut(tr("Ctrl+Q"));
     exitAct->setToolTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
-    
+
     findFilesAct = new QAction(QIcon(":/images/filefind.png"), tr("&Find files..."), this);
     //openAct->setShortcut(tr("Ctrl+"));
     findFilesAct->setCheckable(true);
@@ -1667,7 +1667,7 @@ void EdytorNc::createActions()
     printAct->setToolTip(tr("Print file"));
     connect(printAct, SIGNAL(triggered()), this, SLOT(printFile()));
 
-    
+
     undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
     undoAct->setShortcut(QKeySequence::Undo);
     undoAct->setToolTip(tr("Undo last operation"));
@@ -1714,7 +1714,7 @@ void EdytorNc::createActions()
     deleteAct->setShortcut(QKeySequence::Delete);
     deleteAct->setToolTip(tr("Removes selected text"));
     connect(deleteAct, SIGNAL(triggered()), this, SLOT(deleteText()));
-    
+
     selAllAct = new QAction(QIcon(":/images/edit-select-all.png"), tr("&Select all"), this);
     selAllAct->setShortcut(QKeySequence::SelectAll);
     selAllAct->setToolTip(tr("Select all text"));
@@ -1739,7 +1739,7 @@ void EdytorNc::createActions()
     bhcAct->setShortcut(tr("F8"));
     bhcAct->setToolTip(tr("Calculate bolt hole's positions"));
     connect(bhcAct, SIGNAL(triggered()), this, SLOT(doBhc()));
-    
+
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
     insertSpcAct->setToolTip(tr("Inserts spaces"));
@@ -2154,7 +2154,7 @@ void EdytorNc::createStatusBar()
 //**************************************************************************************************
 
 void EdytorNc::setHighLightMode(int mode)
-{  
+{
     bool ok;
     bool hasMdiChild = (activeMdiChild() != 0);
 
@@ -2191,7 +2191,7 @@ void EdytorNc::readSettings()
 
     lastDir = settings.value("LastDir",  QDir::homePath()).toString();
 
-    defaultMdiWindowProperites.extensions = settings.value("Extensions", (QStringList() << "*.nc" << "*.anc" << "*.ngc" << "*.cnc")).toStringList();
+    defaultMdiWindowProperites.extensions = settings.value("Extensions", (QStringList() << "*.nc" <<  "*.cnc")).toStringList();
     defaultMdiWindowProperites.saveExtension = settings.value("DefaultSaveExtension", "*.nc").toString();
     defaultMdiWindowProperites.saveDirectory = settings.value("DefaultSaveDirectory", lastDir.absolutePath()).toString();
 
@@ -2334,7 +2334,7 @@ void EdytorNc::writeSettings()
     settings.setValue("State", saveState());
 
     settings.setValue("LastDir", lastDir.path());
-    
+
     settings.setValue("Extensions", defaultMdiWindowProperites.extensions);
     settings.setValue("DefaultSaveExtension", defaultMdiWindowProperites.saveExtension);
     settings.setValue("DefaultSaveDirectory", defaultMdiWindowProperites.saveDirectory);
@@ -2364,7 +2364,7 @@ void EdytorNc::writeSettings()
     settings.setValue("StartEmpty", defaultMdiWindowProperites.startEmpty);
 
     settings.setValue("GessFileNameByProgNum", defaultMdiWindowProperites.guessFileNameByProgNum);
-    
+
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
 
@@ -3093,11 +3093,11 @@ void EdytorNc::loadConfig()
 
 
     portName = settings.value("PortName", port).toString();
-    portSettings.BaudRate = (BaudRateType) settings.value("BaudRate", BAUD9600).toInt();
-    portSettings.DataBits = (DataBitsType) settings.value("DataBits", DATA_8).toInt();
-    portSettings.StopBits = (StopBitsType) settings.value("StopBits", STOP_2).toInt();
-    portSettings.Parity = (ParityType) settings.value("Parity", PAR_NONE).toInt();
-    portSettings.FlowControl = (FlowType) settings.value("FlowControl", FLOW_HARDWARE).toInt();
+    portSettings.BaudRate = (QSerialPort::BaudRate) settings.value("BaudRate", QSerialPort::Baud9600).toInt();
+    portSettings.DataBits = (QSerialPort::DataBits) settings.value("DataBits", QSerialPort::Data8).toInt();
+    portSettings.StopBits = (QSerialPort::StopBits) settings.value("StopBits", QSerialPort::TwoStop).toInt();
+    portSettings.Parity = (QSerialPort::Parity) settings.value("Parity", QSerialPort::NoParity).toInt();
+    portSettings.FlowControl = (QSerialPort::FlowControl) settings.value("FlowControl", QSerialPort::HardwareControl).toInt();
     lineDelay = settings.value("LineDelay", 0).toDouble();
     portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
     portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
@@ -3151,12 +3151,12 @@ void EdytorNc::lineDelaySlot()
 }
 
 //**************************************************************************************************
-//  Old serial port rutine
+//
 //**************************************************************************************************
 
 void EdytorNc::sendButtonClicked()
 {
-    int i, bytesToWrite;
+    int i;
     QString tx;
     QTextCursor cursor, prevCursor;
     MdiChild *activeWindow;
@@ -3164,35 +3164,42 @@ void EdytorNc::sendButtonClicked()
     QTimer *sendStartDelayTimer = NULL;
 
 
-    bytesToWrite = 0;
-
     activeWindow = activeMdiChild();
     if(activeWindow <= NULL)
         return;
 
+
     loadConfig();
 
-    comPort = new QextSerialPort(portName, portSettings);
 
-    if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
+    comPort = new QSerialPort(portName);
+    comPort->clearError();
+    comPort->setBaudRate(portSettings.BaudRate);
+    comPort->setDataBits(portSettings.DataBits);
+    comPort->setParity(portSettings.Parity);
+    comPort->setStopBits(portSettings.StopBits);
+    comPort->setFlowControl(portSettings.FlowControl);
+
+    if (comPort->open(QIODevice::ReadWrite))
+    {
+        showError(comPort->error());
         stop = false;
+        comPort->flush();
+        comPort->reset();
+    }
     else
     {
         stop = true;
-        showError(E_INVALID_FD);
-        delete(comPort);
+        showError(comPort->error());
+        delete comPort;
         return;
     };
 
-    comPort->flush();
-    comPort->reset();
-
-    showError(E_NO_ERROR);
     receiveAct->setEnabled(false);
     sendAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    cursor = activeWindow->textCursor();
+    cursor = activeWindow->textEdit->textCursor();
     prevCursor = cursor;
     cursor.movePosition(QTextCursor::Start);
     activeWindow->textEdit->setTextCursor(cursor);
@@ -3222,106 +3229,91 @@ void EdytorNc::sendButtonClicked()
     progressDialog.setRange(0, tx.size());
     progressDialog.setModal(true);
     progressDialog.setWindowTitle(tr("Sending..."));
-    progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
+    progressDialog.open(comPort,
+                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xon : 0),
+                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xoff : 0));
     progressDialog.setLabelText(tr("Waiting..."));
     qApp->processEvents();
+    //*start/
 
-    if(portSettings.FlowControl == FLOW_HARDWARE)
-    {
-        ulong status = comPort->lineStatus();
-        if(!(status & LS_CTS))
+        if(comPort->flowControl() == QSerialPort::HardwareControl)
+            sendStartDelay = 0;
+        else if(comPort->flowControl() == QSerialPort::SoftwareControl)
             xoffReceived = true;
-    }
-    else
-        xoffReceived = false;
+        else xoffReceived = false;
 
-
-    if(sendStartDelay > 0 && portSettings.FlowControl != FLOW_HARDWARE)
-    {
-        sendStartDelayTimer = new QTimer(this);
-        connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
-        sendStartDelayTimer->setInterval(1000);
-        xoffReceived = true;
-        sendStartDelayTimer->start();
-    };
-
-    if((sendStartDelay == 0) && (portSettings.FlowControl == FLOW_XONXOFF))
-    {
-        xoffReceived = true;
-    };
-
-    i = 0;
-    while(i < tx.size())
-    {
         if(sendStartDelay > 0)
-            progressDialog.setLabelText(tr("Start in %1s").arg(sendStartDelay));
-        else
-            if(xoffReceived)
-                progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
-
-        qApp->processEvents();
-
-        if(progressDialog.wasCanceled())
-            break;
-
-        if(stop)
-            break;
-
-        if(portSettings.FlowControl == FLOW_HARDWARE)
         {
-            xoffReceived = !(comPort->lineStatus() & LS_CTS);
-        }
-        else
-        {
-            if(portSettings.FlowControl == FLOW_XONXOFF)
+            xoffReceived = false;
+            sendStartDelayTimer = new QTimer(this);
+            connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
+            sendStartDelayTimer->start(1000);
+            while(sendStartDelay > 0)
             {
-                controlChar = 0;
-                if(comPort->bytesAvailable() > 0)
-                {
-                    comPort->getChar(&controlChar);
-                    //qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
-                };
-
-                if(controlChar == portSettings.Xoff)
-                    xoffReceived = true;
-                if(controlChar == portSettings.Xon)
-                {
-                    sendStartDelay = 0;
-                    xoffReceived = false;
-                };
-            }
-            //         else
-            //            xoffReceived = false;
+                progressDialog.setLabelText(tr("Start in %1s").arg(sendStartDelay));
+                if(progressDialog.wasCanceled())
+                    break;
+                if(stop)
+                    break;
+                qApp->processEvents();
+            };
+            delete sendStartDelayTimer;
+            sendStartDelayTimer = NULL;
         };
 
-        bytesToWrite = comPort->bytesToWrite();
-
-        //#ifdef Q_OS_UNIX
-        //      usleep(2000);
-        //#endif
-
-        if((bytesToWrite == 0) && (!xoffReceived))
+        i = 0;
+        while(i < tx.size())
         {
-            if(!comPort->putChar(tx[i].toLatin1()))
+            if(progressDialog.wasCanceled())
+                break;
+            if(stop)
+                break;
+
+            if(comPort->flowControl() == QSerialPort::HardwareControl)
+                xoffReceived = !(comPort->pinoutSignals() & QSerialPort::ClearToSendSignal);
+            else
+                if(comPort->flowControl() == QSerialPort::SoftwareControl)
+                {
+                    controlChar = 0;
+                    if(comPort->bytesAvailable() > 0)
+                        comPort->getChar(&controlChar);
+                    //qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
+
+                    if(controlChar == portSettings.Xoff)
+                        xoffReceived = true;
+                    if(controlChar == portSettings.Xon)
+                        xoffReceived = false;
+                };
+
+            if(xoffReceived)
             {
-                //            qDebug() << comPort->lastError();
-                //            break;
+                progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
+                qApp->processEvents();
+                continue;
             };
+
+            if(!comPort->putChar(tx.at(i).toLatin1()))
+            {
+                //qDebug() << comPort->lastError();
+                //break;
+            };
+
+            progressDialog.setValue(i + 1);
+            progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
+            qApp->processEvents();
+
             if(!doNotShowProgressInEditor)
             {
                 activeWindow->textEdit->blockSignals(true);
-                if(tx[i].toLatin1() != '\r')
+                if(tx.at(i).toLatin1() != '\r')
                     cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                 activeWindow->textEdit->setTextCursor(cursor);
                 activeWindow->textEdit->blockSignals(false);
             };
-            progressDialog.setValue(i);
-            progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
-            //qApp->processEvents();
 
             if(lineDelay > 0)
             {
-                if(tx[i].toLatin1() == '\n')
+                if(tx.at(i).toLatin1() == '\n')
                 {
                     readyCont = false;
                     QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
@@ -3332,25 +3324,19 @@ void EdytorNc::sendButtonClicked()
                 };
             };
 
+            while(comPort->bytesToWrite() > 0)
+            {
+                qApp->processEvents();
+                comPort->waitForBytesWritten(100);
+            };
             i++;
         };
-    };
+    //end*/
 
-    while(comPort->bytesToWrite() > 0)
-    {
-        qApp->processEvents();
-        //qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
-    };
-
-    if(sendStartDelayTimer != NULL)
-    {
-        sendStartDelayTimer->stop();
-        delete(sendStartDelayTimer);
-    };
 
     comPort->flush();
     comPort->close();
-    delete(comPort);
+    delete comPort;
     progressDialog.close();
     activeWindow->textEdit->setTextCursor(prevCursor);
     receiveAct->setEnabled(true);
@@ -3364,10 +3350,10 @@ void EdytorNc::sendButtonClicked()
 
 void EdytorNc::sendStartDelayTimeout()
 {
-    if(sendStartDelay > 0)
+//    if(sendStartDelay > 0)
         sendStartDelay--;
-    else
-        xoffReceived = false;
+//    else
+//        xoffReceived = false;
 }
 
 //**************************************************************************************************
@@ -3382,29 +3368,40 @@ void EdytorNc::receiveButtonClicked()
     MdiChild *activeWindow;
     QTimer *recieveTimeoutTimer;
 
-
-    showError(E_NO_ERROR);
     count = 0;
     recieveTimeoutTimer = NULL;
 
     loadConfig();
-    comPort = new QextSerialPort(portName, portSettings);
-    if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
+
+    comPort = new QSerialPort(portName);
+    comPort->clearError();
+    comPort->setBaudRate(portSettings.BaudRate);
+    comPort->setDataBits(portSettings.DataBits);
+    comPort->setParity(portSettings.Parity);
+    comPort->setStopBits(portSettings.StopBits);
+    comPort->setFlowControl(portSettings.FlowControl);
+
+    if (comPort->open(QIODevice::ReadWrite))
+    {
         stop = false;
+        //comPort->flush();
+        //comPort->reset();
+        showError(comPort->error());
+    }
     else
     {
         stop = true;
-        showError(E_INVALID_FD);
-        delete(comPort);
+        showError(comPort->error());
+        delete comPort;
         return;
     };
-    //comPort->flush();
-    //comPort->reset();
 
     i = configBox->currentIndex();
     activeWindow = newFile();
+
     if(activeWindow <= NULL)
         return;
+
     configBox->setCurrentIndex(i);
 
     receiveAct->setEnabled(false);
@@ -3425,30 +3422,33 @@ void EdytorNc::receiveButtonClicked()
     progressDialog.setModal(true);
     progressDialog.setWindowTitle(tr("Receiving..."));
     progressDialog.setLabelText(tr("Waiting for data..."));
-    progressDialog.open(comPort, (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xon : 0), (portSettings.FlowControl == FLOW_XONXOFF ? portSettings.Xoff : 0));
+    progressDialog.open(comPort,
+                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xon : 0),
+                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xoff : 0));
     qApp->processEvents();
 
-    if(portSettings.FlowControl == FLOW_XONXOFF)
+    if(portSettings.FlowControl == QSerialPort::SoftwareControl)
     {
         comPort->putChar(portSettings.Xon);
     }
     else
-        if(portSettings.FlowControl == FLOW_HARDWARE)
+        if(portSettings.FlowControl == QSerialPort::HardwareControl)
         {
-            comPort->setRts(true);
-            comPort->setDtr(true);
+            comPort->setRequestToSend(true);
+            comPort->setDataTerminalReady(true);
         };
 
     tx.clear();
     eobString.clear();
-    while(1)
+    forever
     {
-        //progressDialog.setValue(count);
+        progressDialog.setValue(count);
 
         //#ifdef Q_OS_UNIX
         //      usleep(2000);
         //#endif
 
+        comPort->waitForReadyRead(100);
         i = comPort->bytesAvailable();
         if(i > 0)
         {
@@ -3463,11 +3463,11 @@ void EdytorNc::receiveButtonClicked()
             if(i < 0)
             {
                 stop = true;
-                if(portSettings.FlowControl == FLOW_XONXOFF)
+                if(portSettings.FlowControl == QSerialPort::SoftwareControl)
                 {
                     comPort->putChar(portSettings.Xoff);
                 };
-                showError(comPort->lastError());
+                showError(comPort->error());
             };
             buf[i] = '\0';
             count += i;
@@ -3549,21 +3549,21 @@ void EdytorNc::receiveButtonClicked()
         {
             stop = true;
 
-            if(portSettings.FlowControl == FLOW_XONXOFF)
+            if(portSettings.FlowControl == QSerialPort::SoftwareControl)
             {
                 comPort->putChar(portSettings.Xoff);
             }
             else
-                if(portSettings.FlowControl == FLOW_HARDWARE)
+                if(portSettings.FlowControl == QSerialPort::HardwareControl)
                 {
-                    comPort->setRts(false);
-                    comPort->setDtr(false);
+                    comPort->setRequestToSend(false);
+                    comPort->setDataTerminalReady(false);
                 };
         };
     };
 
     comPort->close();
-    delete(comPort);
+    delete comPort;
     progressDialog.close();
     receiveAct->setEnabled(true);
     sendAct->setEnabled(true);
@@ -3575,16 +3575,12 @@ void EdytorNc::receiveButtonClicked()
     {
         if(activeWindow->textEdit->document()->isEmpty())
         {
+            activeWindow->textEdit->document()->setModified(false);
             activeWindow->parentWidget()->close();
         }
         else
         {
             tx = activeWindow->textEdit->toPlainText();
-//            if(tx.contains("\n\r\r"))
-//                tx.replace("\n\r\r", "\r\n");
-//            else
-//                if(!tx.contains("\r\n"))
-//                    tx.replace("\n", "\r\n");
 
             if(removeSpaceEOB) //removes white space at end of line added by Fanuc
             {
@@ -3632,41 +3628,39 @@ void EdytorNc::showError(int error)
 
     switch(error)
     {
-    case E_INVALID_FD                   : text = tr("Invalid file descriptor (port was not opened correctly)");
-        break;
-    case E_NO_MEMORY                    : text = tr("Unable to allocate memory tables");
-        break;
-    case E_CAUGHT_NON_BLOCKED_SIGNAL    : text = tr("Caught a non-blocked signal");
-        break;
-    case E_PORT_TIMEOUT                 : text = tr("Operation timed out");
-        break;
-    case E_INVALID_DEVICE               : text = tr("The file opened by the port is not a character device");
-        break;
-    case E_BREAK_CONDITION              : text = tr("The port detected a break condition");
-        break;
-    case E_FRAMING_ERROR                : text = tr("The port detected a framing error (incorrect baud rate settings ?)");
-        break;
-    case E_IO_ERROR                     : text = tr("There was an I/O error while communicating with the port");
-        break;
-    case E_BUFFER_OVERRUN               : text = tr("Character buffer overrun");
-        break;
-    case E_RECEIVE_OVERFLOW             : text = tr("Receive buffer overflow");
-        break;
-    case E_RECEIVE_PARITY_ERROR         : text = tr("The port detected a parity error in the received data");
-        break;
-    case E_TRANSMIT_OVERFLOW            : text = tr("Transmit buffer overflow");
-        break;
-    case E_READ_FAILED                  : text = tr("General read operation failure");
-        break;
-    case E_WRITE_FAILED                 : text = tr("General write operation failure");
-        break;
-    case E_NO_ERROR                     : text = tr("No Error has occured");
-        statusBar()->showMessage(text);
-        return;
-    default                             : text = tr("Unknown error");
+        case QSerialPort::NoError                   : text = tr("No Error has occured");
+            statusBar()->showMessage(text);
+            return;
+        case QSerialPort::DeviceNotFoundError       : text = tr("Attempting to open an non-existing device");
+            break;
+        case QSerialPort::PermissionError           : text = tr("Attempting to open an already opened device by another process or user not having enough permission and credentials to open");
+            break;
+        case QSerialPort::OpenError                 : text = tr("Attempting to open an already opened device in this object");
+            break;
+        case QSerialPort::ParityError               : text = tr("Parity error detected by the hardware while reading data");
+            break;
+        case QSerialPort::FramingError              : text = tr("Framing error detected by the hardware while reading data");
+            break;
+        case QSerialPort::BreakConditionError       : text = tr("Break condition detected by the hardware on the input line");
+            break;
+        case QSerialPort::WriteError                : text = tr("An I/O error occurred while writing the data");
+            break;
+        case QSerialPort::ReadError                 : text = tr("An I/O error occurred while reading the data");
+            break;
+        case QSerialPort::ResourceError             : text = tr("An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system");
+            break;
+        case QSerialPort::UnsupportedOperationError : text = tr("Receive buffer overflow");
+            break;
+        case QSerialPort::UnknownError              : text = tr("An unidentified error occurred");
+           break;
+        case QSerialPort::TimeoutError              : text = tr("Transmit buffer overflow");
+           break;
+        case QSerialPort::NotOpenError              : text = tr("An operation is executed that can only be successfully performed if the device is open");
+           break;
+        default                                     : text = tr("Unknown error");
     };
 
-    
+
     statusBar()->showMessage(text);
     msgBox.setText(text);
     msgBox.setIcon(QMessageBox::Warning);
