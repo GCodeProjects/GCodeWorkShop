@@ -221,7 +221,7 @@ private:
     QToolBar *fileToolBar;
     QToolBar *editToolBar;
     QToolBar *windowToolBar;
-    QToolBar *toolsToolBar;   
+    QToolBar *toolsToolBar;
 
     QAction *newAct;
     QAction *openAct;
@@ -334,7 +334,7 @@ private:
     int parity;
     int flowControl;
     double lineDelay;
-    QextSerialPort *comPort;
+    QSerialPort *comPort;
     bool readyCont;
     bool xoffReceived;
     bool deleteControlChars;

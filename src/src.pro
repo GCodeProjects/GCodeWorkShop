@@ -1,43 +1,38 @@
 
-#qextserialport
+##qextserialport
 
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
-PUBLIC_HEADERS         += $$PWD/qextserialport.h \
-                          $$PWD/qextserialenumerator.h \
-                          $$PWD/qextserialport_global.h
+#PUBLIC_HEADERS         += $$PWD/qextserialport.h \
+#                          $$PWD/qextserialenumerator.h \
+#                          $$PWD/qextserialport_global.h
 
-HEADERS                += $$PUBLIC_HEADERS \
-                          $$PWD/qextserialport_p.h \
-                          $$PWD/qextserialenumerator_p.h \
-    cleanupdialog.h \
-    tooltips.h \
-    swapaxesdialog.h \
-    newfiledialog.h
+#HEADERS                += $$PUBLIC_HEADERS \
+#                          $$PWD/qextserialport_p.h \
+#                          $$PWD/qextserialenumerator_p.h \
 
-SOURCES                += $$PWD/qextserialport.cpp \
-                          $$PWD/qextserialenumerator.cpp \
-    cleanupdialog.cpp \
-    swapaxesdialog.cpp \
-    newfiledialog.cpp
-unix {
-    SOURCES            += $$PWD/qextserialport_unix.cpp
-    linux* {
-        SOURCES        += $$PWD/qextserialenumerator_linux.cpp
-    } else:macx {
-        SOURCES        += $$PWD/qextserialenumerator_osx.cpp
-    } else {
-        SOURCES        += $$PWD/qextserialenumerator_unix.cpp
-    }
-}
-win32:SOURCES          += $$PWD/qextserialport_win.cpp \
-                          $$PWD/qextserialenumerator_win.cpp
 
-linux*{
-    !qesp_linux_udev:DEFINES += QESP_NO_UDEV
-    qesp_linux_udev: LIBS += -ludev
-}
+#SOURCES                += $$PWD/qextserialport.cpp \
+#                          $$PWD/qextserialenumerator.cpp \
+
+#unix {
+#    SOURCES            += $$PWD/qextserialport_unix.cpp
+#    linux* {
+#        SOURCES        += $$PWD/qextserialenumerator_linux.cpp
+#    } else:macx {
+#        SOURCES        += $$PWD/qextserialenumerator_osx.cpp
+#    } else {
+#        SOURCES        += $$PWD/qextserialenumerator_unix.cpp
+#    }
+#}
+#win32:SOURCES          += $$PWD/qextserialport_win.cpp \
+#                          $$PWD/qextserialenumerator_win.cpp
+
+#linux*{
+#    !qesp_linux_udev:DEFINES += QESP_NO_UDEV
+#    qesp_linux_udev: LIBS += -ludev
+#}
 
 macx:LIBS              += -framework IOKit -framework CoreFoundation
 win32:LIBS             += -lsetupapi -ladvapi32 -luser32
@@ -73,7 +68,10 @@ SOURCES += edytornc.cpp \
     gnudiff_io.cpp \
     gnudiff_analyze.cpp \
     pdiff.cpp \
-    mergeresultwindow.cpp
+    mergeresultwindow.cpp \
+    cleanupdialog.cpp \
+    swapaxesdialog.cpp \
+    newfiledialog.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -94,7 +92,11 @@ HEADERS += edytornc.h \
     kdiff3.h \
     gnudiff_system.h \
     gnudiff_diff.h \
-    mergeresultwindow.h
+    mergeresultwindow.h \
+    cleanupdialog.h \
+    tooltips.h \
+    swapaxesdialog.h \
+    newfiledialog.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \
@@ -103,6 +105,7 @@ CONFIG += warn_on \
 QT *= network
 QT += widgets
 QT += printsupport
+QT += serialport
 RESOURCES = application.qrc
 RC_FILE = edytornc.rc
 FORMS += i2mdialog.ui \
@@ -161,4 +164,4 @@ macx:LIBS += -framework IOKit -framework CoreFoundation
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
-VERSION = 2015.04
+VERSION = 2015.07

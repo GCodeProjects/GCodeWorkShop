@@ -26,12 +26,22 @@
 #include <QtWidgets>
 
 
-#include "qextserialport.h"
-
 #include "ui_spconfigdialog.h"
 #include "ui_transmissiondialog.h"
 #include "ui_transprogressdialog.h"
+#include <qserialport.h>
 
+struct PortSettings
+{
+    QSerialPort::BaudRate BaudRate;
+    QSerialPort::DataBits DataBits;
+    QSerialPort::Parity Parity;
+    QSerialPort::StopBits StopBits;
+    QSerialPort::FlowControl FlowControl;
+    long Timeout_Millisec;
+    char Xon;
+    char Xoff;
+};
 
 class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
 {
@@ -62,6 +72,7 @@ class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
      void browse1ButtonClicked();
      void browse2ButtonClicked();
      void browse3ButtonClicked();
+     void portNameComboBoxIndexChanged(QString name);
 
 
    private:
@@ -128,12 +139,13 @@ class TransmissionDialog : public QDialog, private Ui::TransmissionDialog
      QString sendAtEnd;
      QString sendAtBegining;
 
-     QextSerialPort *comPort;
+     QSerialPort *comPort;
      QTimer *timer;
      long int count;
      double lineDelay;
      bool readyCont;
      PortSettings portSettings;
+
 
 
 
@@ -155,7 +167,7 @@ class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
 
    public slots:
      void setLabelText(const QString text);
-     void open(QextSerialPort *port, char cxon = 0, char cxoff = 0);
+     void open(QSerialPort *port, char cxon = 0, char cxoff = 0);
      bool wasCanceled();
      void setRange(int min, int max);
      void setValue(int val);
@@ -174,7 +186,7 @@ class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
 
 
    private:
-     QextSerialPort *comPort;
+     QSerialPort *comPort;
      bool canceled;
      char xon, xoff;
 
