@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>641</width>
-    <height>340</height>
+    <height>370</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -184,12 +184,73 @@
          </item>
          <item>
           <widget class="QListWidget" name="portInfoListWidget">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="toolTip">
+            <string>Serial port information</string>
+           </property>
            <property name="statusTip">
             <string>Information about serial port</string>
            </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContents</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <item>
+            <property name="text">
+             <string>Description       :</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Manufacturer      :</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>SerialNumber      :</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>System location   :</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Vendor identifier :</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Product identifier:</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>1</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -208,36 +269,6 @@
             <property name="rightMargin">
              <number>3</number>
             </property>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="b11CheckBox">
-              <property name="text">
-               <string>115200</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="b9CheckBox">
-              <property name="text">
-               <string>57600</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="b10CheckBox">
-              <property name="text">
-               <string>56000</string>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <widget class="QCheckBox" name="b3CheckBox">
               <property name="text">
@@ -295,6 +326,26 @@
              <widget class="QCheckBox" name="b8CheckBox">
               <property name="text">
                <string>38400</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="b9CheckBox">
+              <property name="text">
+               <string>57600</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="b11CheckBox">
+              <property name="text">
+               <string>115200</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
@@ -509,7 +560,7 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>2</height>
           </size>
          </property>
         </spacer>
@@ -1026,6 +1077,63 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>configNameBox</tabstop>
+  <tabstop>saveButton</tabstop>
+  <tabstop>deleteButton</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>portNameComboBox</tabstop>
+  <tabstop>browseButton</tabstop>
+  <tabstop>b3CheckBox</tabstop>
+  <tabstop>b4CheckBox</tabstop>
+  <tabstop>b5CheckBox</tabstop>
+  <tabstop>b6CheckBox</tabstop>
+  <tabstop>b7CheckBox</tabstop>
+  <tabstop>b8CheckBox</tabstop>
+  <tabstop>b9CheckBox</tabstop>
+  <tabstop>b11CheckBox</tabstop>
+  <tabstop>d1CheckBox</tabstop>
+  <tabstop>d2CheckBox</tabstop>
+  <tabstop>d3CheckBox</tabstop>
+  <tabstop>d4CheckBox</tabstop>
+  <tabstop>s1CheckBox</tabstop>
+  <tabstop>s2CheckBox</tabstop>
+  <tabstop>p1CheckBox</tabstop>
+  <tabstop>p2CheckBox</tabstop>
+  <tabstop>p3CheckBox</tabstop>
+  <tabstop>f1CheckBox</tabstop>
+  <tabstop>f2CheckBox</tabstop>
+  <tabstop>f3CheckBox</tabstop>
+  <tabstop>saveCloseButton</tabstop>
+  <tabstop>closeButton</tabstop>
+  <tabstop>deleteControlChars</tabstop>
+  <tabstop>doNotShowProgressInEditor</tabstop>
+  <tabstop>removeEmptyLines</tabstop>
+  <tabstop>removeBefore</tabstop>
+  <tabstop>endOfBlockLF</tabstop>
+  <tabstop>removeSpaceEOB</tabstop>
+  <tabstop>stInput</tabstop>
+  <tabstop>eotInput</tabstop>
+  <tabstop>xonInput</tabstop>
+  <tabstop>xoffInput</tabstop>
+  <tabstop>delayDoubleSpinBox</tabstop>
+  <tabstop>startDelaySpinBox</tabstop>
+  <tabstop>browse1PushButton</tabstop>
+  <tabstop>ext1ComboBox</tabstop>
+  <tabstop>path3LineEdit</tabstop>
+  <tabstop>browse3PushButton</tabstop>
+  <tabstop>ext3ComboBox</tabstop>
+  <tabstop>ext2ComboBox</tabstop>
+  <tabstop>browse2PushButton</tabstop>
+  <tabstop>path2LineEdit</tabstop>
+  <tabstop>overwriteCheckBox</tabstop>
+  <tabstop>renameCheckBox</tabstop>
+  <tabstop>spinBox</tabstop>
+  <tabstop>checkBox_2</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>recieveTimeoutSpinBox</tabstop>
+  <tabstop>path1LineEdit</tabstop>
+ </tabstops>
  <resources>
   <include location="application.qrc"/>
  </resources>

@@ -167,7 +167,7 @@ class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
 
    public slots:
      void setLabelText(const QString text);
-     void open(QSerialPort *port, char cxon = 0, char cxoff = 0);
+     void open(QSerialPort *port);
      bool wasCanceled();
      void setRange(int min, int max);
      void setValue(int val);
@@ -188,7 +188,6 @@ class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
    private:
      QSerialPort *comPort;
      bool canceled;
-     char xon, xoff;
 
      QTimer *timer;
 
