@@ -64,7 +64,7 @@ public:
     bool save();
     bool saveAs();
     bool saveFile(const QString &fileName);
-    QString currentFile() { return QDir::toNativeSeparators(curFile); }  //filename with full path
+    QString currentFile();  //filename with full path
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
     int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked);
@@ -91,8 +91,8 @@ public:
     void setCurrentFile(const QString &fileName, const QString &text);
     //void blockSkip();
     void blockSkip(bool remove = false, bool inc = true);
-    void semicomment();
-    void paracomment();
+    void semiComment();
+    void paraComment();
     bool findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments);
     bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
     bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
@@ -115,11 +115,6 @@ protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
     bool event(QEvent *event);
-
-private slots:
-    void documentWasModified();
-    void cleanUp(QString *str);
-
 
 private:
     bool maybeSave();
@@ -147,11 +142,18 @@ private:
     QList<QTextEdit::ExtraSelection> blockExtraSelections;
 
 
-
-
 private slots :
     void highlightCurrentLine();
     void printPreview(QPrinter *printer);
+    void createContextMenuActions();
+    void showContextMenu(const QPoint &pt);
+    void documentWasModified();
+    void cleanUp(QString *str);
+    void semiCommentSlot();
+    void paraCommentSlot();
+    void blockSkipRemSlot();
+    void blockSkipIncSlot();
+    void blockSkipDecSlot();
 
 signals:
     void message(const QString&, int );

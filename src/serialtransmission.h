@@ -28,7 +28,6 @@
 
 #include "ui_spconfigdialog.h"
 #include "ui_transmissiondialog.h"
-#include "ui_transprogressdialog.h"
 #include <qserialport.h>
 
 struct PortSettings
@@ -157,44 +156,44 @@ class TransmissionDialog : public QDialog, private Ui::TransmissionDialog
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
-{
-   Q_OBJECT
+//class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
+//{
+//   Q_OBJECT
 
-   public:
-     TransProgressDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-     ~TransProgressDialog();
+//   public:
+//     TransProgressDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+//     ~TransProgressDialog();
 
-   public slots:
-     void setLabelText(const QString text);
-     void open(QSerialPort *port);
-     bool wasCanceled();
-     void setRange(int min, int max);
-     void setValue(int val);
-
-
-   protected:
-     void closeEvent(QCloseEvent *event);
-
-   signals :
+//   public slots:
+//     void setLabelText(const QString text);
+//     void open(QSerialPort *port);
+//     bool wasCanceled();
+//     void setRange(int min, int max);
+//     void setValue(int val);
 
 
+//   protected:
+//     void closeEvent(QCloseEvent *event);
 
-   private slots:
-     void cancelButtonClicked();
-     void updateLeds();
-
-
-   private:
-     QSerialPort *comPort;
-     bool canceled;
-
-     QTimer *timer;
+//   signals :
 
 
 
+//   private slots:
+//     void cancelButtonClicked();
+//     void updateLeds();
 
-};
+
+//   private:
+//     QSerialPort *comPort;
+//     bool canceled;
+
+//     QTimer *timer;
+
+
+
+
+//};
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================

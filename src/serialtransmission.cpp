@@ -225,12 +225,10 @@ void SPConfigDialog::saveButtonClicked()
     settings.setValue("RemoveBefore",removeBefore->isChecked());
     //settings.setValue("StartAfterXONCTS", startAfterXONCTS->isChecked());
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
-    settings.setValue("DoNotShowProgressInEditor", doNotShowProgressInEditor->isChecked());
+    settings.setValue("AutoCloseTime", autoCloseSpinBox->value());
     settings.setValue("RecieveTimeout", recieveTimeoutSpinBox->value());
     settings.setValue("EndOfBlockLF", endOfBlockLF->isChecked());
     settings.setValue("RemoveSpaceEOB", removeSpaceEOB->isChecked());
-
-
 
     settings.endGroup();
     settings.endGroup();
@@ -255,9 +253,7 @@ void SPConfigDialog::changeSettings()
     QString item, port;
 
     QSettings settings("EdytorNC", "EdytorNC");
-
     settings.beginGroup("SerialPortConfigs");
-
     settings.beginGroup(configNameBox->currentText());
 
 #ifdef Q_OS_WIN32
@@ -351,7 +347,7 @@ void SPConfigDialog::changeSettings()
     removeBefore->setChecked(settings.value("RemoveBefore", false).toBool());
     //startAfterXONCTS->setChecked(settings.value("StartAfterXONCTS", true).toBool());
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
-    doNotShowProgressInEditor->setChecked(settings.value("DoNotShowProgressInEditor", false).toBool());
+    autoCloseSpinBox->setValue(settings.value("AutoCloseTime", 15).toInt());
     recieveTimeoutSpinBox->setValue(settings.value("RecieveTimeout", 0).toInt());
     endOfBlockLF->setChecked(settings.value("EndOfBlockLF", false).toBool());
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
@@ -1100,273 +1096,134 @@ void TransmissionDialog::lineDelaySlot()
 =========================================================================================
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
-{
-   setupUi(this);
-   //setWindowTitle(tr("Serial transmission"));
-
-   comPort = NULL;
-
-   canceled = true;
-
-   connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
-   connect(this, SIGNAL(rejected()), SLOT(cancelButtonClicked()));
-
-   timer = new QTimer(this);
-   connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-TransProgressDialog::~TransProgressDialog()
-{
-   timer->stop();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::closeEvent(QCloseEvent *event)
-{
-   timer->stop();
-   canceled = true;
-   event->accept();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::cancelButtonClicked()
-{
-   timer->stop();
-   canceled = true;
-   close();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-bool TransProgressDialog::wasCanceled()
-{
-   return canceled;
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::setLabelText(const QString text)
-{
-   label->setText(text);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::setValue(int val)
-{
-   progressBar->setValue(val);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::setRange(int min, int max)
-{
-   if(max == 0)
-   {
-      progressBar->hide();
-      cancelButton->setText(tr("&Close"));
-      cancelButton->setIcon(QIcon(":/images/window-close.png"));
-   }
-   else
-      progressBar->setRange(min, max);
-
-   progressBar->setValue(0);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::open(QSerialPort *port)
-{
-   if(port != NULL)
-   {
-      canceled = false;
-      show();
-      comPort = port;
-      timer->start(20);
-   };
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void TransProgressDialog::updateLeds()
-{
-   timer->stop();
-   if(comPort == NULL)
-      return;
-
-   if(!comPort->isOpen())
-      return;
-
-   QSerialPort::PinoutSignals status = comPort->pinoutSignals();
-   ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
-   dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
-   dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
-   rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
-   dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
-
-   timer->start();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-//void TransmissionDialog::reciveButtonClicked()
+//TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 //{
-//   QString tx;
-//   int count, i;
-//   bool ok;
-//   char ch;
-//
-//
-//   loadConfig();
-//   comPort = new QextSerialPort(portName, portSettings);
-//   if(comPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered | QIODevice::Truncate))
-//     stop = false;
+//   setupUi(this);
+//   //setWindowTitle(tr("Serial transmission"));
+
+//   comPort = NULL;
+
+//   canceled = true;
+
+//   connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
+//   connect(this, SIGNAL(rejected()), SLOT(cancelButtonClicked()));
+
+//   timer = new QTimer(this);
+//   connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//TransProgressDialog::~TransProgressDialog()
+//{
+//   timer->stop();
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//void TransProgressDialog::closeEvent(QCloseEvent *event)
+//{
+//   timer->stop();
+//   canceled = true;
+//   event->accept();
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//void TransProgressDialog::cancelButtonClicked()
+//{
+//   timer->stop();
+//   canceled = true;
+//   close();
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//bool TransProgressDialog::wasCanceled()
+//{
+//   return canceled;
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//void TransProgressDialog::setLabelText(const QString text)
+//{
+//   label->setText(text);
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//void TransProgressDialog::setValue(int val)
+//{
+//   progressBar->setValue(val);
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//void TransProgressDialog::setRange(int min, int max)
+//{
+//   if(max == 0)
+//   {
+//      progressBar->hide();
+//      cancelButton->setText(tr("&Close"));
+//      cancelButton->setIcon(QIcon(":/images/window-close.png"));
+//   }
 //   else
+//      progressBar->setRange(min, max);
+
+//   progressBar->setValue(0);
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//void TransProgressDialog::open(QSerialPort *port)
+//{
+//   if(port != NULL)
 //   {
-//      stop = true;
-//      showError(E_INVALID_FD);
-//      delete(comPort);
+//      canceled = false;
+//      show();
+//      comPort = port;
+//      timer->start(20);
+//   };
+//}
+
+////**************************************************************************************************
+////
+////**************************************************************************************************
+
+//void TransProgressDialog::updateLeds()
+//{
+//   timer->stop();
+//   if(comPort == NULL)
 //      return;
-//   };
-//   comPort->flush();
-//   comPort->reset();
-//
-//   i = configBox->currentIndex();
-//   newFile();
-//   activeWindow = activeMdiChild();
-//   if(!(activeWindow != 0))
-//     return;
-//   configBox->setCurrentIndex(i);
-//
-//   receiveAct->setEnabled(false);
-//   sendAct->setEnabled(false);
-//   QApplication::setOverrideCursor(Qt::BusyCursor);
-//
-//   QProgressDialog progressDialog(this);
-//   progressDialog.setRange(0, 32768);
-//   progressDialog.setModal(true);
-//   progressDialog.setLabelText(tr("Waiting for data..."));
-//   progressDialog.open();
-//   qApp->processEvents();
-//
-//   if(portSettings.FlowControl == FLOW_XONXOFF)
-//   {
-//      comPort->putChar(portSettings.Xon);
-//   };
-//
-//   tx.clear();
-//   while(1)
-//   {
-//      //progressDialog.setValue(count);
-//
-//#ifdef Q_OS_UNIX
-//      usleep(2000);
-//#endif
-//
-//      i = comPort->bytesAvailable();
-//      if(i > 0)
-//      {
-//         ok = comPort->getChar(&ch);
-//         if(!ok)
-//         {
-//            stop = true;
-//            if(portSettings.FlowControl == FLOW_XONXOFF)
-//            {
-//               comPort->putChar(portSettings.Xoff);
-//            };
-//            showError(comPort->lastError());
-//            break;
-//         };
-//         count++;
-//         errorLabel->setText(tr("Recived: %1 bytes.").arg(count));
-//         textEdit->insertPlainText(ch);
-//         tx = QString("%1 ").arg(ch, 0, 16);
-//         hexTextEdit->insertPlainText(tx.toUpper());
-//
-//         textEdit->ensureCursorVisible();
-//         hexTextEdit->ensureCursorVisible();
-//         qApp->processEvents();
-//
-//      };
-//   };
-//
-//   comPort->close();
-//   delete(comPort);
-//   stopButton->setEnabled(false);
-//   reciveButton->setEnabled(true);
-//   sendButton->setEnabled(true);
-//   QApplication::restoreOverrideCursor();
-//
-//
-//   //////////////////////////////////////////////////////////////////////
-//
-//
-////   showError(E_NO_ERROR);
-////   count = 0;
-////   if(comPort->open(QIODevice::ReadOnly))
-////     stop = false;
-////   else
-////   {
-////      stop = true;
-////      showError(E_INVALID_FD);
-////      return;
-////   };
-////   reciveButton->setEnabled(false);
-////   sendButton->setEnabled(false);
-////   stopButton->setEnabled(true);
-////   QApplication::setOverrideCursor(Qt::BusyCursor);
-////
-////   while(!stop)
-////   {
-////      qApp->processEvents();
-////
-////      if(comPort->bytesAvailable() > 0)
-////      {
-////         ok = comPort->getChar(&ch);
-////         if(!ok)
-////         {
-////            stop = true;
-////            showError(comPort->lastError());
-////            break;
-////         };
-////         count++;
-////         errorLabel->setText(tr("Recived: %1 bytes.").arg(count));
-////         textEdit->insertPlainText(ch);
-////         tx = QString("%1 ").arg(ch, 0, 16);
-////         textEdit->insertPlainText(tx.toUpper());
-////      };
-////
-////   };
-////
-////   comPort->close();
-//
-////   QApplication::restoreOverrideCursor();
-//
+
+//   if(!comPort->isOpen())
+//      return;
+
+//   QSerialPort::PinoutSignals status = comPort->pinoutSignals();
+//   ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
+//   dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
+//   dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
+//   rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
+//   dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
+
+//   timer->start();
 //}
 
 //**************************************************************************************************

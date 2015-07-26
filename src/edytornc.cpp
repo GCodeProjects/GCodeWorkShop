@@ -25,7 +25,8 @@
 #include "tooltips.h"
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
-#include <QtSerialPort/QSerialPort>
+#include <QtPrintSupport/QPrintPreviewDialog>
+//#include <QtSerialPort/QSerialPort>
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
@@ -225,6 +226,7 @@ MdiChild *EdytorNc::newFileFromTemplate()
         else
             child->newFile();
 
+        defaultMdiWindowProperites.lastDir = lastDir.canonicalPath();
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = false;
         //defaultMdiWindowProperites.maximized = false;
@@ -254,6 +256,7 @@ MdiChild *EdytorNc::newFile()
     MdiChild *child = createMdiChild();
     child->newFile();
 
+    defaultMdiWindowProperites.lastDir = lastDir.canonicalPath();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.readOnly = false;
     //defaultMdiWindowProperites.maximized = false;
@@ -497,20 +500,86 @@ void EdytorNc::saveAs()
 
 void EdytorNc::printFile()
 {
-    if(activeMdiChild())
+#ifndef QT_NO_PRINTER
+
+    MdiChild *child = activeMdiChild();
+
+    if(child)
     {
-        MdiChild *child = activeMdiChild();
+        QPrinter printer(QPrinter::HighResolution);
+        loadPrinterSettings(&printer);
 
-        QPrinter printer;
-        printer.setPageMargins(15, 10, 10, 10, QPrinter::Millimeter);
+        printer.setOutputFormat(QPrinter::NativeFormat);
 
-        QPrintDialog *dlg = new QPrintDialog(&printer, this);
-        if(dlg->exec() == QDialog::Accepted)
+        QPrintDialog dialog(&printer, this);
+        dialog.setWindowTitle(tr("Print Document"));
+        if(child->hasSelection())
+        {
+            dialog.addEnabledOption(QAbstractPrintDialog::PrintSelection);
+            printer.setPrintRange(QPrinter::Selection);
+        };
+        if(dialog.exec() == QDialog::Accepted)
         {
             printer.setDocName(child->fileName());
             child->textEdit->print(&printer);
+            statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(printer.printerName()), 5000);
+            savePrinterSettings(&printer);
         };
     };
+
+#endif
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::filePrintPreview()
+{
+#ifndef QT_NO_PRINTER
+
+    MdiChild *child = activeMdiChild();
+
+    if(child)
+    {
+        QPrinter printer(QPrinter::HighResolution);
+        loadPrinterSettings(&printer);
+
+        printer.setOutputFormat(QPrinter::NativeFormat);
+
+        if(child->hasSelection())
+        {
+            printer.setPrintRange(QPrinter::Selection);
+        };
+
+        QPrintPreviewDialog preview(&printer, this);
+        preview.setWindowFlags(Qt::Window);
+        connect(&preview, SIGNAL(paintRequested(QPrinter *)), SLOT(printPreview(QPrinter *)));
+        preview.exec();
+        savePrinterSettings(&printer);
+    };
+
+#endif
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::printPreview(QPrinter *printer)
+{
+#ifndef QT_NO_PRINTER
+
+    MdiChild *child = activeMdiChild();
+
+    if(child)
+    {
+        printer->setDocName(child->fileName());
+        child->textEdit->print(printer);
+        statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(printer->printerName()), 5000);
+    };
+
+#endif
 }
 
 //**************************************************************************************************
@@ -1402,6 +1471,8 @@ void EdytorNc::updateMenus()
     saveAct->setEnabled(hasModifiedMdiChild);
     saveAllAct->setEnabled(hasMdiChild);
     saveAsAct->setEnabled(hasMdiChild);
+    printAct->setEnabled(hasMdiChild);
+    printPreviewAct->setEnabled(hasMdiChild);
     pasteAct->setEnabled(hasMdiChild);
     closeAct->setEnabled(hasMdiChild);
     closeAllAct->setEnabled(hasMdiChild);
@@ -1430,10 +1501,11 @@ void EdytorNc::updateMenus()
     cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
     cleanUpDialogAct->setEnabled(hasMdiChildNotReadOnly);
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
-    semiCommAct->setEnabled(hasMdiChildNotReadOnly);
-    paraCommAct->setEnabled(hasMdiChildNotReadOnly);
-    insertBlockSkipAct->setEnabled(hasMdiChildNotReadOnly);
-
+    semiCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    paraCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    insertBlockSkipAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    insertBlockSkip1Act->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    insertBlockSkip2Act->setEnabled(hasMdiChildNotReadOnly && hasSelection);
 
 
 
@@ -1666,6 +1738,15 @@ void EdytorNc::createActions()
     printAct->setShortcut(QKeySequence::Print);
     printAct->setToolTip(tr("Print file"));
     connect(printAct, SIGNAL(triggered()), this, SLOT(printFile()));
+
+    printPreviewAct = new QAction(QIcon(":/images/document-print-preview.png"), tr("Pr&int preview"), this);
+    //printPreviewAct->setShortcut(QKeySequence::Print);
+    printPreviewAct->setToolTip(tr("Preview printing"));
+    connect(printPreviewAct, SIGNAL(triggered()), this, SLOT(filePrintPreview()));
+
+    sessionMgrAct = new QAction(tr("Session manager..."), this);
+    sessionMgrAct->setToolTip(tr("Sessions manager"));
+    connect(sessionMgrAct, SIGNAL(triggered()), this, SLOT(sessionMgr()));
 
 
     undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
@@ -1940,7 +2021,14 @@ void EdytorNc::createMenus()
     fileMenu->addSeparator();
     fileMenu->addAction(findFilesAct);
     fileMenu->addSeparator();
+
+    sessionsMenu = fileMenu->addMenu(tr("Sessions"));
+    connect(sessionsMenu, SIGNAL(triggered(QAction *)), this, SLOT(changeSession(QAction *)));
+    fileMenu->addAction(sessionMgrAct);
+
+    fileMenu->addSeparator();
     fileMenu->addAction(printAct);
+    fileMenu->addAction(printPreviewAct);
     fileMenu->addSeparator();
     fileMenu->addAction(closeAct);
     fileMenu->addAction(closeAllAct);
@@ -2193,7 +2281,7 @@ void EdytorNc::readSettings()
 
     defaultMdiWindowProperites.extensions = settings.value("Extensions", (QStringList() << "*.nc" <<  "*.cnc")).toStringList();
     defaultMdiWindowProperites.saveExtension = settings.value("DefaultSaveExtension", "*.nc").toString();
-    defaultMdiWindowProperites.saveDirectory = settings.value("DefaultSaveDirectory", lastDir.absolutePath()).toString();
+    defaultMdiWindowProperites.saveDirectory = settings.value("DefaultSaveDirectory", "").toString();
 
     defaultMdiWindowProperites.dotAdr = settings.value("DotAddress", "XYZB").toString();
     defaultMdiWindowProperites.dotAftrerCount = settings.value("DotAfterCount", 1000).toInt();
@@ -2238,7 +2326,7 @@ void EdytorNc::readSettings()
     m_recentFiles = settings.value("RecentFiles").toStringList();
     updateRecentFilesMenu();
 
-    defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
+    //defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
 
     settings.beginGroup("Highlight");
     defaultMdiWindowProperites.syntaxH = settings.value("HighlightOn", true).toBool();
@@ -2262,26 +2350,43 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.hColors.backgroundColor = settings.value("BackgroundColor", 0xFFFFFF).toInt();
     settings.endGroup();
 
-    if(!defaultMdiWindowProperites.startEmpty)
-    {
-        int max = settings.beginReadArray("LastDoc");
-        for(int i = 0; i < max; ++i)
-        {
-            settings.setArrayIndex(i);
-            defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
+    settings.beginGroup("Sessions");
+    sessionList = settings.value("SessionList", (QStringList(tr("default")))).toStringList();
 
-            defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
-            if(!defaultMdiWindowProperites.fileName.isEmpty())
-            {
-                defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
-                defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", false).toBool();
-                defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
-                defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
-                loadFile(defaultMdiWindowProperites, false);
-            };
-        };
-        settings.endArray();
-    };
+    if(settings.value("RestoreLastSession", false).toBool())
+        currentSession = settings.value("CurrentSession", tr("default")).toString();
+    else
+        currentSession = tr("default");
+
+
+//    if(!defaultMdiWindowProperites.startEmpty)
+//    {
+//        int max = settings.beginReadArray(currentSession);
+//        for(int i = 0; i < max; ++i)
+//        {
+//            settings.setArrayIndex(i);
+//            defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
+
+//            defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
+//            if(!defaultMdiWindowProperites.fileName.isEmpty())
+//            {
+//                defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
+//                defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", false).toBool();
+//                defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
+//                defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
+//                loadFile(defaultMdiWindowProperites, false);
+//            };
+//        };
+//        settings.endArray();
+//    };
+
+    settings.endGroup();
+
+    if(!defaultMdiWindowProperites.startEmpty)
+        loadSession(currentSession);
+
+    updateSessionMenus();
+
 
     fileTreeView->header()->restoreState(settings.value("FileTreeViewState", QByteArray()).toByteArray());
 
@@ -2311,8 +2416,6 @@ void EdytorNc::readSettings()
 
     settings.endGroup();
 
-
-
 }
 
 //**************************************************************************************************
@@ -2321,8 +2424,8 @@ void EdytorNc::readSettings()
 
 void EdytorNc::writeSettings()
 {
-    MdiChild *mdiChild;
-    bool maximized = false;
+//    MdiChild *mdiChild;
+//    bool maximized = false;
 
     QSettings settings("EdytorNC", "EdytorNC");
 
@@ -2412,35 +2515,18 @@ void EdytorNc::writeSettings()
     //cleanup old settings
     settings.remove("LastDoc");
 
-    settings.beginWriteArray("LastDoc");
-    int i = 0;
-    foreach(const QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
-    {
-        mdiChild = qobject_cast<MdiChild *>(window->widget());
-        _editor_properites Opt = mdiChild->getMdiWindowProperites();
 
-        settings.setArrayIndex(i);
-        settings.setValue("OpenedFile", Opt.fileName);
-        settings.setValue("Cursor", Opt.cursorPos);
-        settings.setValue("ReadOnly", Opt.readOnly);
-        settings.setValue("Geometry", mdiChild->parentWidget()->saveGeometry());
-        settings.setValue("HighlightMode", Opt.hColors.highlightMode);
-        if(mdiChild->parentWidget()->isMaximized())
-            maximized =  true;
-
-        i++;
-    };
-    settings.endArray();
-
-    settings.setValue("MaximizedMdi", maximized);
-
-
-    settings.beginGroup("CleanUpDialog");
-
-    settings.setValue("SelectedExpressions", selectedExpressions);
-
+    settings.beginGroup("Sessions");
+    settings.setValue("SessionList", sessionList);
+    settings.setValue("CurrentSession", currentSession);
     settings.endGroup();
 
+    settings.beginGroup("CleanUpDialog");
+    settings.setValue("SelectedExpressions", selectedExpressions);
+    settings.endGroup();
+
+    if(!defaultMdiWindowProperites.startEmpty)
+        saveSession(currentSession);
 }
 
 //**************************************************************************************************
@@ -2511,7 +2597,7 @@ void EdytorNc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
         child->loadFile(options.fileName);
         child->setMdiWindowProperites(options);
         child->parentWidget()->restoreGeometry(options.geometry);
-        if(defaultMdiWindowProperites.maximized)
+        if(options.maximized)
             child->showMaximized();
         else
             child->showNormal();
@@ -2941,8 +3027,6 @@ void EdytorNc::createSerialToolBar()
             showSerialToolBarAct->setChecked(true);
         };
 
-    //comPort = new QextSerialPort();
-    stop = true;
 
     loadSerialConfignames();
     configBox->adjustSize();
@@ -2955,8 +3039,6 @@ void EdytorNc::createSerialToolBar()
 
 void EdytorNc::closeSerialToolbar()
 {
-    stop = true;
-
     serialToolBar->close();
     delete(serialToolBar);
     serialToolBar = NULL;
@@ -3012,1117 +3094,6 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 void EdytorNc::deAttachToDirButtonClicked()
 {
     attachToDirButtonClicked(false);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::serialConfig()
-{
-    SPConfigDialog *serialConfigDialog = new SPConfigDialog(this, configBox->currentText());
-
-    if(serialConfigDialog->exec() == QDialog::Accepted)
-        loadSerialConfignames();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::loadSerialConfignames()
-{
-    int id;
-    QStringList list;
-    QString item;
-
-    QSettings settings("EdytorNC", "EdytorNC");
-
-    settings.beginGroup("SerialPortConfigs");
-
-
-    configBox->clear();
-    list = settings.value("SettingsList", QStringList(tr("Default"))).toStringList();
-    list.sort();
-    configBox->addItems(list);
-    item = settings.value("CurrentSerialPortSettings", tr("Default")).toString();
-    id = configBox->findText(item);
-    configBox->setCurrentIndex(id);
-
-
-
-    settings.endGroup();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::serialConfigTest()
-{
-    TransmissionDialog *trDialog = new TransmissionDialog(this);
-
-    trDialog->show();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::loadConfig()
-{
-    QString port, fTx;
-    int pos;
-    QRegExp exp;
-    char chr;
-    bool ok;
-
-
-    stop = true;
-    QSettings settings("EdytorNC", "EdytorNC");
-
-    settings.beginGroup("SerialPortConfigs");
-
-#ifdef Q_OS_WIN32
-    port = "COM1";
-#else
-    port = "/dev/ttyUSB0";
-#endif
-
-    settings.beginGroup(configBox->currentText());
-
-
-    portName = settings.value("PortName", port).toString();
-    portSettings.BaudRate = (QSerialPort::BaudRate) settings.value("BaudRate", QSerialPort::Baud9600).toInt();
-    portSettings.DataBits = (QSerialPort::DataBits) settings.value("DataBits", QSerialPort::Data8).toInt();
-    portSettings.StopBits = (QSerialPort::StopBits) settings.value("StopBits", QSerialPort::TwoStop).toInt();
-    portSettings.Parity = (QSerialPort::Parity) settings.value("Parity", QSerialPort::NoParity).toInt();
-    portSettings.FlowControl = (QSerialPort::FlowControl) settings.value("FlowControl", QSerialPort::HardwareControl).toInt();
-    lineDelay = settings.value("LineDelay", 0).toDouble();
-    portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
-    portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
-    sendAtEnd = settings.value("SendAtEnd", "").toString();
-    sendAtBegining = settings.value("SendAtBegining", "").toString();
-    deleteControlChars = settings.value("DeleteControlChars", true).toBool();
-    removeEmptyLines = settings.value("RemoveEmptyLines", true).toBool();
-    removeBefore = settings.value("RemoveBefore", false).toBool();
-    endOfBlockLF = settings.value("EndOfBlockLF", false).toBool();
-    removeSpaceEOB = settings.value("RemoveSpaceEOB", false).toBool();
-
-    sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
-    doNotShowProgressInEditor = settings.value("DoNotShowProgressInEditor", false).toBool();
-    recieveTimeout = settings.value("RecieveTimeout", 0).toInt();
-
-
-    settings.endGroup();
-    settings.endGroup();
-
-    portSettings.Timeout_Millisec = 50;
-
-    exp.setPattern("0x[0-9a-fA-F]{1,2}");
-    pos = 0;
-    while((pos = sendAtBegining.indexOf(exp, pos)) >= 0)
-    {
-        fTx = sendAtBegining.mid(pos, exp.matchedLength());
-        chr = fTx.toInt(&ok, 16);
-        sendAtBegining.replace(pos, exp.matchedLength(), QString(chr));
-    };
-    sendAtBegining.remove(" ");
-
-    pos = 0;
-    while((pos = sendAtEnd.indexOf(exp, pos)) >= 0)
-    {
-        fTx = sendAtEnd.mid(pos, exp.matchedLength());
-        chr = fTx.toInt(&ok, 16);
-        sendAtEnd.replace(pos, exp.matchedLength(), QString(chr));
-    };
-    sendAtEnd.remove(" ");
-
-    //comPort->setTimeout(0,100);
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::lineDelaySlot()
-{
-    readyCont = true;
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::sendButtonClicked()
-{
-    int i, bytesToWrite;
-    QString tx;
-    QTextCursor cursor, prevCursor;
-    MdiChild *activeWindow;
-    char controlChar;
-    QTimer *sendStartDelayTimer = NULL;
-
-
-    bytesToWrite = 0;
-
-    activeWindow = activeMdiChild();
-    if(activeWindow <= NULL)
-        return;
-
-    loadConfig();
-
-    comPort = new QSerialPort(portName);
-    comPort->clearError();
-    comPort->setBaudRate(portSettings.BaudRate);
-    comPort->setDataBits(portSettings.DataBits);
-    comPort->setParity(portSettings.Parity);
-    comPort->setStopBits(portSettings.StopBits);
-    comPort->setFlowControl(portSettings.FlowControl);
-
-    if (comPort->open(QIODevice::ReadWrite))
-    {
-        showError(comPort->error());
-        stop = false;
-    }
-    else
-    {
-        stop = true;
-        showError(comPort->error());
-        delete comPort;
-        return;
-    };
-
-
-    //comPort->flush();
-    //comPort->reset();
-    comPort->clear(QSerialPort::Output);
-
-    showError(QSerialPort::NoError);
-    receiveAct->setEnabled(false);
-    sendAct->setEnabled(false);
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-
-    cursor = activeWindow->textCursor();
-    prevCursor = cursor;
-    cursor.movePosition(QTextCursor::Start);
-    activeWindow->textEdit->setTextCursor(cursor);
-
-    tx = sendAtBegining;
-    if(removeBefore && (activeWindow->textEdit->toPlainText().count('%') > 1))
-    {
-        tx.append(activeWindow->textEdit->toPlainText().mid(activeWindow->textEdit->toPlainText().indexOf("%")));
-
-    }
-    else
-        tx.append(activeWindow->textEdit->toPlainText());
-    tx.append(sendAtEnd);
-
-    if(endOfBlockLF)
-    {
-        if(tx.contains("\r\n"))
-            tx.replace("\r\n", "\n");
-    }
-    else
-    {
-        if(!tx.contains("\r\n"))
-            tx.replace("\n", "\r\n");
-    }
-
-    TransProgressDialog progressDialog(this);
-    progressDialog.setRange(0, tx.size());
-    progressDialog.setModal(true);
-    progressDialog.setWindowTitle(tr("Sending..."));
-//    progressDialog.open(comPort, (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xon : 0),
-//                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xoff : 0));
-    progressDialog.open(comPort);
-    progressDialog.setLabelText(tr("Waiting..."));
-    qApp->processEvents();
-
-    if(portSettings.FlowControl == QSerialPort::HardwareControl)
-    {
-        if(!(comPort->pinoutSignals() & QSerialPort::ClearToSendSignal))
-            xoffReceived = true;
-    }
-    else
-        xoffReceived = false;
-
-
-    if(sendStartDelay > 0 && portSettings.FlowControl != QSerialPort::HardwareControl)
-    {
-        sendStartDelayTimer = new QTimer(this);
-        connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
-        sendStartDelayTimer->setInterval(1000);
-        xoffReceived = true;
-        sendStartDelayTimer->start();
-    };
-
-    if((sendStartDelay == 0) && (portSettings.FlowControl == QSerialPort::SoftwareControl))
-    {
-        xoffReceived = true;
-    };
-
-    i = 0;
-    while(i < tx.size())
-    {
-        if(sendStartDelay > 0)
-            progressDialog.setLabelText(tr("Start in %1s").arg(sendStartDelay));
-        else
-            if(xoffReceived)
-                progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
-
-        qApp->processEvents();
-
-        if(progressDialog.wasCanceled())
-            break;
-
-        if(stop)
-            break;
-
-        if(portSettings.FlowControl == QSerialPort::HardwareControl)
-        {
-            xoffReceived = !(comPort->pinoutSignals() & QSerialPort::ClearToSendSignal);
-        }
-        else
-        {
-            if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-            {
-                controlChar = 0;
-                if(comPort->bytesAvailable() > 0)
-                {
-                    comPort->getChar(&controlChar);
-                    //qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
-                };
-
-                if(controlChar == portSettings.Xoff)
-                    xoffReceived = true;
-                if(controlChar == portSettings.Xon)
-                {
-                    sendStartDelay = 0;
-                    xoffReceived = false;
-                };
-            }
-            //         else
-            //            xoffReceived = false;
-        };
-
-        bytesToWrite = comPort->bytesToWrite();
-
-        //#ifdef Q_OS_UNIX
-        //      usleep(2000);
-        //#endif
-
-        if((bytesToWrite == 0) && (!xoffReceived))
-        {
-            if(!comPort->putChar(tx[i].toLatin1()))
-            {
-                //            qDebug() << comPort->lastError();
-                //            break;
-            };
-            if(!doNotShowProgressInEditor)
-            {
-                activeWindow->textEdit->blockSignals(true);
-                if(tx[i].toLatin1() != '\r')
-                    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-                activeWindow->textEdit->setTextCursor(cursor);
-                activeWindow->textEdit->blockSignals(false);
-            };
-            progressDialog.setValue(i);
-            progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
-            //qApp->processEvents();
-
-            if(lineDelay > 0)
-            {
-                if(tx[i].toLatin1() == '\n')
-                {
-                    readyCont = false;
-                    QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
-                    while(!readyCont)
-                    {
-                        qApp->processEvents();
-                    };
-                };
-            };
-
-            i++;
-        };
-    };
-
-    while(comPort->bytesToWrite() > 0)
-    {
-        qApp->processEvents();
-        //qDebug() << "xoffReceived: " << xoffReceived << " bytes:" << bytesToWrite;
-    };
-
-    if(sendStartDelayTimer != NULL)
-    {
-        sendStartDelayTimer->stop();
-        delete(sendStartDelayTimer);
-    };
-
-    comPort->flush();
-    comPort->close();
-    delete(comPort);
-    progressDialog.close();
-    activeWindow->textEdit->setTextCursor(prevCursor);
-    receiveAct->setEnabled(true);
-    sendAct->setEnabled(true);
-    QApplication::restoreOverrideCursor();
-}
-
-//void EdytorNc::sendButtonClicked()
-//{
-//    int i;
-//    QString tx;
-//    QTextCursor cursor, prevCursor;
-//    MdiChild *activeWindow;
-//    char controlChar;
-//    QTimer *sendStartDelayTimer = NULL;
-
-
-//    activeWindow = activeMdiChild();
-//    if(activeWindow <= NULL)
-//        return;
-
-
-//    loadConfig();
-
-
-//    comPort = new QSerialPort(portName);
-//    comPort->clearError();
-//    comPort->setBaudRate(portSettings.BaudRate);
-//    comPort->setDataBits(portSettings.DataBits);
-//    comPort->setParity(portSettings.Parity);
-//    comPort->setStopBits(portSettings.StopBits);
-//    comPort->setFlowControl(portSettings.FlowControl);
-
-//    if (comPort->open(QIODevice::ReadWrite))
-//    {
-//        showError(comPort->error());
-//        stop = false;
-//        comPort->flush();
-//        comPort->reset();
-//    }
-//    else
-//    {
-//        stop = true;
-//        showError(comPort->error());
-//        delete comPort;
-//        return;
-//    };
-
-//    receiveAct->setEnabled(false);
-//    sendAct->setEnabled(false);
-//    QApplication::setOverrideCursor(Qt::BusyCursor);
-
-//    cursor = activeWindow->textEdit->textCursor();
-//    prevCursor = cursor;
-//    cursor.movePosition(QTextCursor::Start);
-//    activeWindow->textEdit->setTextCursor(cursor);
-
-//    tx = sendAtBegining;
-//    if(removeBefore && (activeWindow->textEdit->toPlainText().count('%') > 1))
-//    {
-//        tx.append(activeWindow->textEdit->toPlainText().mid(activeWindow->textEdit->toPlainText().indexOf("%")));
-
-//    }
-//    else
-//        tx.append(activeWindow->textEdit->toPlainText());
-//    tx.append(sendAtEnd);
-
-//    if(endOfBlockLF)
-//    {
-//        if(tx.contains("\r\n"))
-//            tx.replace("\r\n", "\n");
-//    }
-//    else
-//    {
-//        if(!tx.contains("\r\n"))
-//            tx.replace("\n", "\r\n");
-//    }
-
-//    TransProgressDialog progressDialog(this);
-//    progressDialog.setRange(0, tx.size());
-//    progressDialog.setModal(true);
-//    progressDialog.setWindowTitle(tr("Sending..."));
-//    progressDialog.open(comPort,
-//                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xon : 0),
-//                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xoff : 0));
-//    progressDialog.setLabelText(tr("Waiting..."));
-//    qApp->processEvents();
-//    //*start/
-
-//        if(comPort->flowControl() == QSerialPort::HardwareControl)
-//            sendStartDelay = 0;
-//        else if(comPort->flowControl() == QSerialPort::SoftwareControl)
-//            xoffReceived = true;
-//        else xoffReceived = false;
-
-//        if(sendStartDelay > 0)
-//        {
-//            xoffReceived = false;
-//            sendStartDelayTimer = new QTimer(this);
-//            connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
-//            sendStartDelayTimer->start(1000);
-//            while(sendStartDelay > 0)
-//            {
-//                progressDialog.setLabelText(tr("Start in %1s").arg(sendStartDelay));
-//                if(progressDialog.wasCanceled())
-//                    break;
-//                if(stop)
-//                    break;
-//                qApp->processEvents();
-//            };
-//            delete sendStartDelayTimer;
-//            sendStartDelayTimer = NULL;
-//        };
-
-//        i = 0;
-//        while(i < tx.size())
-//        {
-//            if(progressDialog.wasCanceled())
-//                break;
-//            if(stop)
-//                break;
-
-//            if(comPort->flowControl() == QSerialPort::HardwareControl)
-//                xoffReceived = !(comPort->pinoutSignals() & QSerialPort::ClearToSendSignal);
-//            else
-//                if(comPort->flowControl() == QSerialPort::SoftwareControl)
-//                {
-//                    controlChar = 0;
-//                    if(comPort->bytesAvailable() > 0)
-//                        comPort->getChar(&controlChar);
-//                    //qDebug() << "Recived control char: " << QString("%1").arg((int)controlChar, 0, 16);
-
-//                    if(controlChar == portSettings.Xoff)
-//                        xoffReceived = true;
-//                    if(controlChar == portSettings.Xon)
-//                        xoffReceived = false;
-//                };
-
-//            if(xoffReceived)
-//            {
-//                progressDialog.setLabelText(tr("Waiting for a signal readiness..."));
-//                qApp->processEvents();
-//                continue;
-//            };
-
-//            if(!comPort->putChar(tx.at(i).toLatin1()))
-//            {
-//                //qDebug() << comPort->lastError();
-//                //break;
-//            };
-
-//            progressDialog.setValue(i + 1);
-//            progressDialog.setLabelText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
-//            qApp->processEvents();
-
-//            if(!doNotShowProgressInEditor)
-//            {
-//                activeWindow->textEdit->blockSignals(true);
-//                if(tx.at(i).toLatin1() != '\r')
-//                    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-//                activeWindow->textEdit->setTextCursor(cursor);
-//                activeWindow->textEdit->blockSignals(false);
-//            };
-
-//            if(lineDelay > 0)
-//            {
-//                if(tx.at(i).toLatin1() == '\n')
-//                {
-//                    readyCont = false;
-//                    QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
-//                    while(!readyCont)
-//                    {
-//                        qApp->processEvents();
-//                    };
-//                };
-//            };
-
-//            while(comPort->bytesToWrite() > 0)
-//            {
-//                qApp->processEvents();
-//                comPort->waitForBytesWritten(100);
-//            };
-//            i++;
-//        };
-//    //end*/
-
-
-//    comPort->flush();
-//    comPort->close();
-//    delete comPort;
-//    progressDialog.close();
-//    activeWindow->textEdit->setTextCursor(prevCursor);
-//    receiveAct->setEnabled(true);
-//    sendAct->setEnabled(true);
-//    QApplication::restoreOverrideCursor();
-//}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::sendStartDelayTimeout()
-{
-    if(sendStartDelay > 0)
-        sendStartDelay--;
-    else
-        xoffReceived = false;
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::receiveButtonClicked()
-{
-    QString tx, eobString;
-    int count, i, j;
-    char buf[1024];
-    MdiChild *activeWindow;
-    QTimer *recieveTimeoutTimer;
-
-
-    showError(QSerialPort::NoError);
-    count = 0;
-    recieveTimeoutTimer = NULL;
-
-    loadConfig();
-
-    comPort = new QSerialPort(portName);
-    comPort->clearError();
-    comPort->setBaudRate(portSettings.BaudRate);
-    comPort->setDataBits(portSettings.DataBits);
-    comPort->setParity(portSettings.Parity);
-    comPort->setStopBits(portSettings.StopBits);
-    comPort->setFlowControl(portSettings.FlowControl);
-
-    if (comPort->open(QIODevice::ReadWrite))
-    {
-        stop = false;
-        showError(comPort->error());
-    }
-    else
-    {
-        stop = true;
-        showError(comPort->error());
-        delete comPort;
-        return;
-    };
-
-    //comPort->flush();
-    //comPort->reset();
-    comPort->clear(QSerialPort::AllDirections);
-
-    i = configBox->currentIndex();
-    activeWindow = newFile();
-    if(activeWindow <= NULL)
-        return;
-    configBox->setCurrentIndex(i);
-
-    receiveAct->setEnabled(false);
-    sendAct->setEnabled(false);
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-
-    TransProgressDialog progressDialog(this);
-
-    if(recieveTimeout > 0)
-    {
-        recieveTimeoutTimer = new QTimer(this);
-        connect(recieveTimeoutTimer, SIGNAL(timeout()), &progressDialog, SLOT(close()));
-        recieveTimeoutTimer->setInterval(recieveTimeout * 1000);
-        recieveTimeoutTimer->setSingleShot(true);
-    };
-
-    progressDialog.setRange(0, 0);
-    progressDialog.setModal(true);
-    progressDialog.setWindowTitle(tr("Receiving..."));
-    progressDialog.setLabelText(tr("Waiting for data..."));
-    //progressDialog.open(comPort, (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xon : 0), (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xoff : 0));
-    progressDialog.open(comPort);
-    qApp->processEvents();
-
-    if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-    {
-        comPort->putChar(portSettings.Xon);
-    }
-    else
-        if(portSettings.FlowControl == QSerialPort::HardwareControl)
-        {
-            comPort->setRequestToSend(true);
-            comPort->setDataTerminalReady(true);
-        };
-
-    tx.clear();
-    eobString.clear();
-    forever
-    {
-        i = comPort->bytesAvailable();
-        if(i > 0)
-        {
-            //qDebug() << "Bytes available: " << i;
-            i = comPort->readLine(buf, sizeof(buf) - 1);  //readLine
-
-            if(recieveTimeoutTimer > NULL)
-                recieveTimeoutTimer->start();
-
-            qApp->processEvents();
-
-            if(i < 0)
-            {
-                stop = true;
-                if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-                {
-                    comPort->putChar(portSettings.Xoff);
-                };
-                showError(comPort->error());
-            };
-            buf[i] = '\0';
-            count += i;
-
-            for(j = 0; j < i; j++)
-            {
-                if(deleteControlChars)
-                    if(((buf[j] <= 0x1F) || (buf[j] >= 0x7F))) // is control character (below 0x1F and above 0x7F)
-                        if((buf[j] != 0x0A) && (buf[j] != 0x0D)) // but not LF or CR
-                            continue; //skip this character
-
-                if((buf[j] == 0x0A) || (buf[j] == 0x0D))
-                {
-                    eobString.append(buf[j]);
-                    if(eobString.contains("\n\r\r")) //known EOB codes
-                    {
-                        tx.append("\r\n");
-                        eobString.clear();
-                    }
-                    else
-                        if(eobString.contains("\r\n"))
-                        {
-                            tx.append("\r\n");
-                            eobString.clear();
-                        };
-                }
-                else
-                {
-                    if(!eobString.isEmpty()) //unknown EOB codes or only LF
-                    {
-                        if(eobString.contains("\n"))
-                          eobString.replace("\n", "\r\n");
-
-                        tx.append(eobString);
-                        eobString.clear();
-                    };
-
-                    tx.append(buf[j]);
-                };
-
-            };
-
-            progressDialog.setLabelText(tr("Reciving byte %1").arg(count));
-
-
-
-            if(!doNotShowProgressInEditor)
-            {
-                activeWindow->textEdit->blockSignals(true);
-                activeWindow->textEdit->insertPlainText(tx);
-                tx.clear();
-                activeWindow->textEdit->ensureCursorVisible();
-                activeWindow->textEdit->blockSignals(false);
-            };
-        }
-        else
-            qApp->processEvents();
-
-        if(stop)
-        {
-            if(!eobString.isEmpty())
-            {
-                if(eobString.contains("\n"))
-                  eobString.replace("\n", "\r\n");
-
-                tx.append(eobString);
-                eobString.clear();
-            };
-
-            if(!tx.isEmpty())
-                activeWindow->textEdit->insertPlainText(tx);
-            break;
-        };
-
-        progressDialog.setValue(count);
-        //qApp->processEvents();
-
-        if(progressDialog.wasCanceled())
-        {
-            stop = true;
-
-            if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-            {
-                comPort->putChar(portSettings.Xoff);
-            }
-            else
-                if(portSettings.FlowControl == QSerialPort::HardwareControl)
-                {
-                    comPort->setRequestToSend(false);
-                    comPort->setDataTerminalReady(false);
-                };
-        };
-    };
-
-    comPort->close();
-    delete(comPort);
-    progressDialog.close();
-    receiveAct->setEnabled(true);
-    sendAct->setEnabled(true);
-    if(recieveTimeoutTimer > NULL)
-        delete(recieveTimeoutTimer);
-
-
-    if(activeWindow)
-    {
-        if(activeWindow->textEdit->document()->isEmpty())
-        {
-            activeWindow->textEdit->document()->setModified(false);
-            activeWindow->parentWidget()->close();
-        }
-        else
-        {
-            tx = activeWindow->textEdit->toPlainText();
-
-            if(removeSpaceEOB) //removes white space at end of line added by Fanuc
-            {
-                if(tx.contains("\r\n"))
-                    tx.replace(" \r\n", "\r\n");
-                else tx.replace(" \n", "\r\n");
-            };
-
-            activeWindow->textEdit->clear();
-            activeWindow->textEdit->insertPlainText(tx);
-
-            if(removeEmptyLines)
-                activeWindow->doRemoveEmptyLines();
-            activeWindow->setHighligthMode(MODE_AUTO);
-            if(defaultMdiWindowProperites.defaultReadOnly)
-                activeWindow->textEdit->isReadOnly();
-
-            activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
-        };
-    };
-
-
-
-    QApplication::restoreOverrideCursor();
-}
-
-//void EdytorNc::receiveButtonClicked()
-//{
-//    QString tx, eobString;
-//    int count, i, j;
-//    char buf[1024];
-//    MdiChild *activeWindow;
-//    QTimer *recieveTimeoutTimer;
-
-//    count = 0;
-//    recieveTimeoutTimer = NULL;
-
-//    loadConfig();
-
-//    comPort = new QSerialPort(portName);
-//    comPort->clearError();
-//    comPort->setBaudRate(portSettings.BaudRate);
-//    comPort->setDataBits(portSettings.DataBits);
-//    comPort->setParity(portSettings.Parity);
-//    comPort->setStopBits(portSettings.StopBits);
-//    comPort->setFlowControl(portSettings.FlowControl);
-
-//    if (comPort->open(QIODevice::ReadWrite))
-//    {
-//        stop = false;
-//        //comPort->flush();
-//        //comPort->reset();
-//        showError(comPort->error());
-//    }
-//    else
-//    {
-//        stop = true;
-//        showError(comPort->error());
-//        delete comPort;
-//        return;
-//    };
-
-//    i = configBox->currentIndex();
-//    activeWindow = newFile();
-
-//    if(activeWindow <= NULL)
-//        return;
-
-//    configBox->setCurrentIndex(i);
-
-//    receiveAct->setEnabled(false);
-//    sendAct->setEnabled(false);
-//    QApplication::setOverrideCursor(Qt::BusyCursor);
-
-//    TransProgressDialog progressDialog(this);
-
-//    if(recieveTimeout > 0)
-//    {
-//        recieveTimeoutTimer = new QTimer(this);
-//        connect(recieveTimeoutTimer, SIGNAL(timeout()), &progressDialog, SLOT(close()));
-//        recieveTimeoutTimer->setInterval(recieveTimeout * 1000);
-//        recieveTimeoutTimer->setSingleShot(true);
-//    };
-
-//    progressDialog.setRange(0, 0);
-//    progressDialog.setModal(true);
-//    progressDialog.setWindowTitle(tr("Receiving..."));
-//    progressDialog.setLabelText(tr("Waiting for data..."));
-//    progressDialog.open(comPort,
-//                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xon : 0),
-//                        (portSettings.FlowControl == QSerialPort::SoftwareControl ? portSettings.Xoff : 0));
-//    qApp->processEvents();
-
-//    if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-//    {
-//        comPort->putChar(portSettings.Xon);
-//    }
-//    else
-//        if(portSettings.FlowControl == QSerialPort::HardwareControl)
-//        {
-//            comPort->setRequestToSend(true);
-//            comPort->setDataTerminalReady(true);
-//        };
-
-//    tx.clear();
-//    eobString.clear();
-//    forever
-//    {
-//        progressDialog.setValue(count);
-
-//        //#ifdef Q_OS_UNIX
-//        //      usleep(2000);
-//        //#endif
-
-//        comPort->waitForReadyRead(100);
-//        i = comPort->bytesAvailable();
-//        if(i > 0)
-//        {
-//            //qDebug() << "Bytes available: " << i;
-//            i = comPort->readLine(buf, sizeof(buf) - 1);  //readLine
-
-//            if(recieveTimeoutTimer > NULL)
-//                recieveTimeoutTimer->start();
-
-//            qApp->processEvents();
-
-//            if(i < 0)
-//            {
-//                stop = true;
-//                if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-//                {
-//                    comPort->putChar(portSettings.Xoff);
-//                };
-//                showError(comPort->error());
-//            };
-//            buf[i] = '\0';
-//            count += i;
-
-//            for(j = 0; j < i; j++)
-//            {
-//                if(deleteControlChars)
-//                    if(((buf[j] <= 0x1F) || (buf[j] >= 0x7F))) // is control character (below 0x1F and above 0x7F)
-//                        if((buf[j] != 0x0A) && (buf[j] != 0x0D)) // but not LF or CR
-//                            continue; //skip this character
-
-//                if((buf[j] == 0x0A) || (buf[j] == 0x0D))
-//                {
-//                    eobString.append(buf[j]);
-//                    if(eobString.contains("\n\r\r")) //known EOB codes
-//                    {
-//                        tx.append("\r\n");
-//                        eobString.clear();
-//                    }
-//                    else
-//                        if(eobString.contains("\r\n"))
-//                        {
-//                            tx.append("\r\n");
-//                            eobString.clear();
-//                        };
-//                }
-//                else
-//                {
-//                    if(!eobString.isEmpty()) //unknown EOB codes or only LF
-//                    {
-//                        if(eobString.contains("\n"))
-//                          eobString.replace("\n", "\r\n");
-
-//                        tx.append(eobString);
-//                        eobString.clear();
-//                    };
-
-//                    tx.append(buf[j]);
-//                };
-
-//            };
-
-//            progressDialog.setLabelText(tr("Reciving byte %1").arg(count));
-
-
-
-//            if(!doNotShowProgressInEditor)
-//            {
-//                activeWindow->textEdit->blockSignals(true);
-//                activeWindow->textEdit->insertPlainText(tx);
-//                tx.clear();
-//                activeWindow->textEdit->ensureCursorVisible();
-//                activeWindow->textEdit->blockSignals(false);
-//            };
-//        }
-//        else
-//            qApp->processEvents();
-
-//        if(stop)
-//        {
-//            if(!eobString.isEmpty())
-//            {
-//                if(eobString.contains("\n"))
-//                  eobString.replace("\n", "\r\n");
-
-//                tx.append(eobString);
-//                eobString.clear();
-//            };
-
-//            if(!tx.isEmpty())
-//                activeWindow->textEdit->insertPlainText(tx);
-//            break;
-//        };
-
-//        progressDialog.setValue(count);
-//        //qApp->processEvents();
-
-//        if(progressDialog.wasCanceled())
-//        {
-//            stop = true;
-
-//            if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-//            {
-//                comPort->putChar(portSettings.Xoff);
-//            }
-//            else
-//                if(portSettings.FlowControl == QSerialPort::HardwareControl)
-//                {
-//                    comPort->setRequestToSend(false);
-//                    comPort->setDataTerminalReady(false);
-//                };
-//        };
-//    };
-
-//    comPort->close();
-//    delete comPort;
-//    progressDialog.close();
-//    receiveAct->setEnabled(true);
-//    sendAct->setEnabled(true);
-//    if(recieveTimeoutTimer > NULL)
-//        delete(recieveTimeoutTimer);
-
-
-//    if(activeWindow)
-//    {
-//        if(activeWindow->textEdit->document()->isEmpty())
-//        {
-//            activeWindow->textEdit->document()->setModified(false);
-//            activeWindow->parentWidget()->close();
-//        }
-//        else
-//        {
-//            tx = activeWindow->textEdit->toPlainText();
-
-//            if(removeSpaceEOB) //removes white space at end of line added by Fanuc
-//            {
-//                if(tx.contains("\r\n"))
-//                    tx.replace(" \r\n", "\r\n");
-//                else tx.replace(" \n", "\r\n");
-//            };
-
-//            activeWindow->textEdit->clear();
-//            activeWindow->textEdit->insertPlainText(tx);
-
-//            if(removeEmptyLines)
-//                activeWindow->doRemoveEmptyLines();
-//            activeWindow->setHighligthMode(MODE_AUTO);
-//            if(defaultMdiWindowProperites.defaultReadOnly)
-//                activeWindow->textEdit->isReadOnly();
-
-//            activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
-//        };
-//    };
-
-
-
-//    QApplication::restoreOverrideCursor();
-//}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::stopButtonClicked()
-{
-    stop = true;
-    qApp->processEvents();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void EdytorNc::showError(int error)
-{
-    QString text;
-    QMessageBox msgBox;
-
-    switch(error)
-    {
-        case QSerialPort::NoError                   : text = tr("No Error has occured");
-            statusBar()->showMessage(text);
-            return;
-        case QSerialPort::DeviceNotFoundError       : text = tr("Attempting to open an non-existing device");
-            break;
-        case QSerialPort::PermissionError           : text = tr("Attempting to open an already opened device by another process or user not having enough permission and credentials to open");
-            break;
-        case QSerialPort::OpenError                 : text = tr("Attempting to open an already opened device in this object");
-            break;
-        case QSerialPort::ParityError               : text = tr("Parity error detected by the hardware while reading data");
-            break;
-        case QSerialPort::FramingError              : text = tr("Framing error detected by the hardware while reading data");
-            break;
-        case QSerialPort::BreakConditionError       : text = tr("Break condition detected by the hardware on the input line");
-            break;
-        case QSerialPort::WriteError                : text = tr("An I/O error occurred while writing the data");
-            break;
-        case QSerialPort::ReadError                 : text = tr("An I/O error occurred while reading the data");
-            break;
-        case QSerialPort::ResourceError             : text = tr("An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system");
-            break;
-        case QSerialPort::UnsupportedOperationError : text = tr("Receive buffer overflow");
-            break;
-        case QSerialPort::UnknownError              : text = tr("An unidentified error occurred");
-           break;
-        case QSerialPort::TimeoutError              : text = tr("Transmit buffer overflow");
-           break;
-        case QSerialPort::NotOpenError              : text = tr("An operation is executed that can only be successfully performed if the device is open");
-           break;
-        default                                     : text = tr("Unknown error");
-    };
-
-
-    statusBar()->showMessage(text);
-    msgBox.setText(text);
-    msgBox.setIcon(QMessageBox::Warning);
-    msgBox.exec();
-
 }
 
 //**************************************************************************************************
@@ -4974,13 +3945,17 @@ void EdytorNc::fileTreeViewChangeRootDir()
     if(tabWidget->currentIndex() != 1)
         return;
 
-    if(fileTreeView == NULL || dirModel == NULL)
+    if((fileTreeView == NULL) || (dirModel == NULL))
         return;
 
-    if(currentPathCheckBox->isChecked() && (activeMdiChild() != 0))
+    if(currentPathCheckBox->isChecked() && (activeMdiChild() > NULL))
     {
         path = activeMdiChild()->currentFile();
-        path = QFileInfo(path).canonicalPath();
+
+        if(QFileInfo(path).exists())
+            path = QFileInfo(path).canonicalPath();
+        else
+            path = path.remove(QFileInfo(path).fileName());
     }
     else
         path = lastDir.canonicalPath();
@@ -5159,7 +4134,7 @@ void EdytorNc::doBlockSkip2()
 void EdytorNc::doSemiComment()
 {
     if(activeMdiChild())
-        activeMdiChild()->semicomment();
+        activeMdiChild()->semiComment();
 }
 
 //**************************************************************************************************
@@ -5169,7 +4144,7 @@ void EdytorNc::doSemiComment()
 void EdytorNc::doParaComment()
 {
     if(activeMdiChild())
-        activeMdiChild()->paracomment();
+        activeMdiChild()->paraComment();
 }
 
 //**************************************************************************************************
@@ -5178,7 +4153,6 @@ void EdytorNc::doParaComment()
 
 void EdytorNc::displayCleanUpDialog()
 {
-
     MdiChild *editorWindow = activeMdiChild();
 
     if(editorWindow)
@@ -5195,8 +4169,6 @@ void EdytorNc::displayCleanUpDialog()
 
         delete(dialog);
     };
-
-
 }
 
 //**************************************************************************************************
@@ -5236,4 +4208,316 @@ void EdytorNc::doSwapAxes()
     };
 
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::updateSessionMenus()
+{
+    sessionsMenu->clear();
+
+    QActionGroup *actionGroup = new QActionGroup(sessionsMenu);
+    actionGroup->setExclusive(true);
+
+    QStringList::const_iterator constIterator;
+    for(constIterator = sessionList.constBegin(); constIterator != sessionList.constEnd(); ++constIterator)
+    {
+        QString name = (*constIterator).toLocal8Bit().constData();
+        QAction *action = actionGroup->addAction(name);
+        action->setCheckable(true);
+        action->setChecked(name == currentSession);
+    };
+
+    sessionsMenu->addActions(actionGroup->actions());
+}
+
+//**************************************************************************************************
+// Load new session
+//**************************************************************************************************
+
+void EdytorNc::changeSession(QAction *action)
+{
+    QString name = action->text();
+    if(currentSession == name)
+        return;
+
+    saveSession(currentSession);
+    mdiArea->closeAllSubWindows();
+
+    action->setChecked(true);
+    loadSession(name);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::loadSession(QString name)
+{
+    QSettings settings("EdytorNC", "EdytorNC");
+    settings.beginGroup("Sessions");
+
+    int max = settings.beginReadArray(name);
+
+    for(int i = 0; i < max; ++i)
+    {
+        settings.setArrayIndex(i);
+        defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
+
+        defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
+        if(!defaultMdiWindowProperites.fileName.isEmpty())
+        {
+            defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
+            defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", false).toBool();
+            defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
+            defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
+            defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
+            loadFile(defaultMdiWindowProperites, false);
+        };
+    };
+    settings.endArray();
+    settings.endGroup();
+
+    currentSession = name;
+    statusBar()->showMessage(tr("Session %1 loaded").arg(name), 5000);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::saveSession(QString name)
+{
+    QSettings settings("EdytorNC", "EdytorNC");
+    settings.beginGroup("Sessions");
+
+    settings.remove(name);
+
+    settings.beginWriteArray(name);
+    int i = 0;
+    foreach(const QMdiSubWindow *window, mdiArea->subWindowList(QMdiArea::StackingOrder))
+    {
+        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+        _editor_properites Opt = mdiChild->getMdiWindowProperites();
+
+        settings.setArrayIndex(i);
+        settings.setValue("OpenedFile", Opt.fileName);
+        settings.setValue("Cursor", Opt.cursorPos);
+        settings.setValue("ReadOnly", Opt.readOnly);
+        settings.setValue("Geometry", mdiChild->parentWidget()->saveGeometry());
+        settings.setValue("HighlightMode", Opt.hColors.highlightMode);
+        bool maximized = mdiChild->parentWidget()->isMaximized();
+        settings.setValue("MaximizedMdi", maximized);
+
+        i++;
+    };
+    settings.endArray();
+    settings.endGroup();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::sessionMgr()
+{
+    sessionDialog *sesDialog = new sessionDialog(this);
+    sesDialog->setSessionList(sessionList);
+    sesDialog->setSelectedSession(currentSession);
+
+    sesDialog->exec();
+
+    sessionList = sesDialog->sessionList();
+    QString name = sesDialog->selectedSession();
+    if(name != currentSession)
+    {
+        saveSession(currentSession);
+        mdiArea->closeAllSubWindows();
+        loadSession(name);
+    };
+
+    updateSessionMenus();
+
+
+    delete(sesDialog);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::savePrinterSettings(QPrinter *printer)
+{
+    QSettings settings("EdytorNC", "EdytorNC");
+
+    settings.beginGroup("PrinterSettings");
+
+    settings.setValue("PrinterName", printer->printerName());
+    settings.setValue("CollateCopies", printer->collateCopies());
+    settings.setValue("Orientation", printer->orientation());
+    settings.setValue("ColorMode", printer->colorMode());
+    QPageLayout layout = printer->pageLayout();
+    settings.setValue("PageSize", layout.pageSize().id());
+    settings.setValue("Duplex", printer->duplex());
+    //settings.setValue("Resolution", printer->resolution());
+
+    settings.endGroup();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::loadPrinterSettings(QPrinter *printer)
+{
+    QSettings settings("EdytorNC", "EdytorNC");
+
+    settings.beginGroup("PrinterSettings");
+
+    printer->setPrinterName(settings.value("PrinterName").toString());
+    printer->setCollateCopies(settings.value("CollateCopies").toBool());
+    printer->setOrientation((QPrinter::Orientation)settings.value("Orientation").toInt());
+    printer->setColorMode((QPrinter::ColorMode)settings.value("ColorMode").toInt());
+
+    QPageLayout layout = printer->pageLayout();
+    layout.setPageSize(QPageSize((QPageSize::PageSizeId)settings.value("PageSize", (int)QPageSize::A4).toInt()));
+    printer->setPageLayout(layout);
+
+    //printer->setPaperSize((QPrinter::PaperSize)settings.value("PageSize", (int)QPrinter::A4).toInt());
+    printer->setDuplex((QPrinter::DuplexMode)settings.value("Duplex").toInt());
+    //printer->setResolution(settings.value("Resolution").toInt());
+
+    settings.endGroup();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::serialConfig()
+{
+    SPConfigDialog *serialConfigDialog = new SPConfigDialog(this, configBox->currentText());
+
+    if(serialConfigDialog->exec() == QDialog::Accepted)
+        loadSerialConfignames();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::loadSerialConfignames()
+{
+    int id;
+    QStringList list;
+    QString item;
+
+    QSettings settings("EdytorNC", "EdytorNC");
+    settings.beginGroup("SerialPortConfigs");
+
+    configBox->clear();
+    list = settings.value("SettingsList", QStringList(tr("Default"))).toStringList();
+    list.sort();
+    configBox->addItems(list);
+    item = settings.value("CurrentSerialPortSettings", tr("Default")).toString();
+    id = configBox->findText(item);
+    configBox->setCurrentIndex(id);
+
+    settings.endGroup();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::serialConfigTest()
+{
+    TransmissionDialog *trDialog = new TransmissionDialog(this);
+
+    trDialog->show();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::sendButtonClicked()
+{
+    QString tx;
+    MdiChild *activeWindow;
+
+    activeWindow = activeMdiChild();
+    if(activeWindow <= NULL)
+        return;
+
+    receiveAct->setEnabled(false);
+    sendAct->setEnabled(false);
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+
+    tx.append(activeWindow->textEdit->toPlainText());
+
+    SerialTransmissionDialog transmissionDialog(this);
+    transmissionDialog.sendData(tx, configBox->currentText());
+
+    receiveAct->setEnabled(true);
+    sendAct->setEnabled(true);
+    QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::receiveButtonClicked()
+{
+    QString tx;
+    MdiChild *activeWindow;
+
+
+    activeWindow = activeMdiChild();
+    if(activeWindow <= NULL)
+        return;
+
+    receiveAct->setEnabled(false);
+    sendAct->setEnabled(false);
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+
+    SerialTransmissionDialog transmissionDialog(this);
+    transmissionDialog.receiveData(&tx, configBox->currentText());
+
+    if(!tx.isEmpty() && !tx.isNull())
+    {
+        int i = configBox->currentIndex();
+        activeWindow = newFile();
+        if(activeWindow <= NULL)
+            return;
+        configBox->setCurrentIndex(i);
+
+        if(activeWindow)
+        {
+            activeWindow->textEdit->clear();
+            activeWindow->textEdit->insertPlainText(tx);
+
+            activeWindow->setHighligthMode(MODE_AUTO);
+            if(defaultMdiWindowProperites.defaultReadOnly)
+                activeWindow->textEdit->isReadOnly();
+
+            activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
+
+        };
+    };
+
+    receiveAct->setEnabled(true);
+    sendAct->setEnabled(true);
+    QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+
+
+
 

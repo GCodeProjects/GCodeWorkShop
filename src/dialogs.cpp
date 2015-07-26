@@ -1997,19 +1997,11 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
    tabBar = new QTabWidget(this);
    pageLayout->addWidget(tabBar);
 
-   connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-   connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
-   connect(clearAllButton, SIGNAL(clicked()), SLOT(clearAll()));
-
 
    BHCTab *page1 = new BHCTab(this);
-   connect(page1, SIGNAL(commonChk()), SLOT(comChk()));
    BHCTab *page2 = new BHCTab(this);
-   connect(page2, SIGNAL(commonChk()), SLOT(comChk()));
    BHCTab *page3 = new BHCTab(this);
-   connect(page3, SIGNAL(commonChk()), SLOT(comChk()));
    BHCTab *page4 = new BHCTab(this);
-   connect(page4, SIGNAL(commonChk()), SLOT(comChk()));
 
    tabBar->addTab(page1, tr("Circle 1 - green"));
    tabBar->addTab(page2, tr("Circle 2 - blue"));
@@ -2045,6 +2037,13 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 
    settings.endGroup();
 
+   connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
+   connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
+   connect(clearAllButton, SIGNAL(clicked()), SLOT(clearAll()));
+   connect(page1, SIGNAL(commonChk()), SLOT(comChk()));
+   connect(page2, SIGNAL(commonChk()), SLOT(comChk()));
+   connect(page3, SIGNAL(commonChk()), SLOT(comChk()));
+   connect(page4, SIGNAL(commonChk()), SLOT(comChk()));
 
    adjustSize();
 }
@@ -3029,7 +3028,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    calcLineEdit->setText(editProp.calcBinary);
    clearUndocheckBox->setChecked(editProp.clearUndoHistory);
    clearUnderlinecheckBox->setChecked(editProp.clearUnderlineHistory);
-   editorToolTipsCheckBox->setChecked(editProp.editorToolTips);  
+   editorToolTipsCheckBox->setChecked(editProp.editorToolTips);
    startEmptyCheckBox->setChecked(editProp.startEmpty);
 
    QStringListIterator extIterator(editProp.extensions);
@@ -3258,7 +3257,7 @@ void SetupDialog::changeColor(QAbstractButton *button)
    if(color.isValid())
    {
       palette.setColor(button->foregroundRole(), color);
-      button->setPalette(palette);      
+      button->setPalette(palette);
    };
 
 
@@ -3483,10 +3482,16 @@ void SetupDialog::on_btnDeleteExtension_clicked()
 
 void SetupDialog::on_btnBrowseDirectory_clicked()
 {
-    edtSaveDirectory->setText(QFileDialog::getExistingDirectory(
-                          this,
-                          tr("Select default save directory"),
-                          edtSaveDirectory->text()));
+    QString dir = edtSaveDirectory->text();
+    if(dir.isEmpty())
+        dir = QDir::homePath();
+
+    dir = QFileDialog::getExistingDirectory(
+                this,
+                tr("Select default save directory"),
+                dir);
+    if(!dir.isEmpty())
+        edtSaveDirectory->setText(dir);
 }
 
 //**************************************************************************************************

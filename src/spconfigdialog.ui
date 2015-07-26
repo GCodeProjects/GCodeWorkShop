@@ -602,19 +602,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </spacer>
        </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="doNotShowProgressInEditor">
-         <property name="toolTip">
-          <string>Enable this option for lower transmission latency on high baud rate</string>
-         </property>
-         <property name="text">
-          <string>Disable text selection</string>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="3">
         <widget class="QLabel" name="label_8">
          <property name="text">
@@ -622,7 +609,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="6" column="3">
+       <item row="7" column="3">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -685,7 +672,7 @@ p, li { white-space: pre-wrap; }
        <item row="3" column="4">
         <widget class="QLineEdit" name="xoffInput">
          <property name="toolTip">
-          <string>XOFF 19 Dec. 0x13 Hex.</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;XOFF 19 Dec. 0x13 Hex.&lt;/p&gt;&lt;p&gt;This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="inputMask">
           <string>90</string>
@@ -701,7 +688,7 @@ p, li { white-space: pre-wrap; }
        <item row="2" column="4">
         <widget class="QLineEdit" name="xonInput">
          <property name="toolTip">
-          <string>XON 17 Dec. 0x11 Hex.</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;XON 17 Dec. 0x11 Hex.&lt;/p&gt;&lt;p&gt;This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="inputMask">
           <string>90</string>
@@ -714,16 +701,10 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="removeEmptyLines">
-         <property name="toolTip">
-          <string>Remove empty lines after receive is complete</string>
-         </property>
+       <item row="0" column="3">
+        <widget class="QLabel" name="label_9">
          <property name="text">
-          <string>Remove empty lines</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
+          <string>Send at start:</string>
          </property>
         </widget>
        </item>
@@ -749,23 +730,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="3">
-        <widget class="QLabel" name="label_6">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>XOFF character:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Send at start:</string>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="3">
         <widget class="QLabel" name="label_5">
          <property name="enabled">
@@ -773,6 +737,16 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="text">
           <string>XON character:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QLabel" name="label_6">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>XOFF character:</string>
          </property>
         </widget>
        </item>
@@ -785,14 +759,27 @@ p, li { white-space: pre-wrap; }
           <string>s</string>
          </property>
          <property name="maximum">
-          <number>60</number>
+          <number>360</number>
          </property>
          <property name="value">
-          <number>15</number>
+          <number>0</number>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="removeEmptyLines">
+         <property name="toolTip">
+          <string>Remove empty lines after receive is complete</string>
+         </property>
+         <property name="text">
+          <string>Remove empty lines</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
         <widget class="QCheckBox" name="removeBefore">
          <property name="toolTip">
           <string>When sending, discard all characters before %</string>
@@ -803,6 +790,16 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="4" column="0">
+        <widget class="QCheckBox" name="removeSpaceEOB">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove white space just before the end of line, sometimes added by Fanuc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Remove white space at end of line</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
         <widget class="QCheckBox" name="endOfBlockLF">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -812,13 +809,29 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QCheckBox" name="removeSpaceEOB">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove white space just before the end of line, sometimes added by Fanuc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
+       <item row="6" column="3">
+        <widget class="QLabel" name="label_15">
          <property name="text">
-          <string>Remove white space at end of line</string>
+          <string>Auto close transmission dialog:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="4">
+        <widget class="QSpinBox" name="autoCloseSpinBox">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Auto close transmission dialog after last character which was sent/received.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="suffix">
+          <string>s</string>
+         </property>
+         <property name="minimum">
+          <number>5</number>
+         </property>
+         <property name="maximum">
+          <number>360</number>
+         </property>
+         <property name="value">
+          <number>15</number>
          </property>
         </widget>
        </item>
@@ -1107,11 +1120,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>saveCloseButton</tabstop>
   <tabstop>closeButton</tabstop>
   <tabstop>deleteControlChars</tabstop>
-  <tabstop>doNotShowProgressInEditor</tabstop>
-  <tabstop>removeEmptyLines</tabstop>
-  <tabstop>removeBefore</tabstop>
-  <tabstop>endOfBlockLF</tabstop>
-  <tabstop>removeSpaceEOB</tabstop>
   <tabstop>stInput</tabstop>
   <tabstop>eotInput</tabstop>
   <tabstop>xonInput</tabstop>

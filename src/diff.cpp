@@ -114,12 +114,12 @@ bool equal( const LineData& l1, const LineData& l2, bool bStrict )
 
 static bool isLineOrBufEnd( const QChar* p, int i, int size )
 {
-   return 
+   return
       i>=size        // End of file
       || p[i]=='\n'  // Normal end of line
 
-      // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.      
-      // || ( p[i]=='\r' && (i>=size-1 || p[i+1]!='\n') 
+      // No support for Mac-end of line yet, because incompatible with GNU-diff-routines.
+      // || ( p[i]=='\r' && (i>=size-1 || p[i+1]!='\n')
       //                 && (i==0        || p[i-1]!='\n') )  // Special case: '\r' without '\n'
       ;
 }
@@ -161,7 +161,7 @@ SourceData::~SourceData()
 
 void SourceData::reset()
 {
-   m_pEncoding = 0;   
+   m_pEncoding = 0;
    m_fileAccess = FileAccess();
    m_normalData.reset();
    m_lmppData.reset();
@@ -185,13 +185,13 @@ void SourceData::setFilename( const QString& filename )
    }
 }
 
-bool SourceData::isEmpty() 
-{ 
-   return getFilename().isEmpty(); 
+bool SourceData::isEmpty()
+{
+   return getFilename().isEmpty();
 }
 
-bool SourceData::hasData() 
-{ 
+bool SourceData::hasData()
+{
    return m_normalData.m_pBuf != 0;
 }
 
@@ -284,7 +284,7 @@ bool SourceData::isText()
 {
    return m_normalData.m_bIsText;
 }
- 
+
 bool SourceData::isFromBuffer()
 {
    return !m_fileAccess.isValid();
@@ -575,7 +575,7 @@ void SourceData::readAndPreprocess( QTextCodec* pEncoding, bool bAutoDetectUnico
       m_lmppData.m_vSize = m_normalData.m_vSize;
    }
 
-   // Internal Preprocessing: Uppercase-conversion   
+   // Internal Preprocessing: Uppercase-conversion
    if ( false ) //m_pOptionDialog->m_bIgnoreCase
    {
       int i;
@@ -1221,7 +1221,7 @@ void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManua
    for( iMDHL =  pManualDiffHelpList->begin(); iMDHL != pManualDiffHelpList->end(); ++iMDHL )
    {
       Diff3LineList::iterator i3 = d3ll.begin();
-      int winIdxPreferred = 0;
+      //int winIdxPreferred = 0;
       int missingWinIdx = 0;
       int alignedSum = (iMDHL->lineA1<0?0:1) + (iMDHL->lineB1<0?0:1) + (iMDHL->lineC1<0?0:1);
       if (alignedSum==2)
@@ -1230,7 +1230,7 @@ void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManua
          // If only A & C are aligned then let B rather be aligned with A
          // If only B & C are aligned then let A rather be aligned with B
          missingWinIdx = iMDHL->lineA1<0 ? 1 : (iMDHL->lineB1<0 ? 2 : 3 );
-         winIdxPreferred = missingWinIdx == 1 ? 2 : 1; 
+         //winIdxPreferred = missingWinIdx == 1 ? 2 : 1;
       }
       else if (alignedSum<=1)
       {
@@ -1299,7 +1299,7 @@ void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManua
                i3->bBEqC = false;
                d3ll.insert( iDest, d3l );
             }
-            else 
+            else
             {
                // align the found line with the line we already have here
                if ( i3 != iDest )
@@ -1309,21 +1309,21 @@ void correctManualDiffAlignment( Diff3LineList& d3ll, ManualDiffHelpList* pManua
                      iDest->lineA = i3->lineA;
                      i3->lineA = -1;
                      i3->bAEqB = false;
-                     i3->bAEqC = false;                   
+                     i3->bAEqC = false;
                   }
                   else if (wi2==2)
                   {
                      iDest->lineB = i3->lineB;
                      i3->lineB = -1;
                      i3->bAEqB = false;
-                     i3->bBEqC = false;                   
+                     i3->bBEqC = false;
                   }
                   else if (wi2==3)
                   {
                      iDest->lineC = i3->lineC;
                      i3->lineC = -1;
                      i3->bBEqC = false;
-                     i3->bAEqC = false;                   
+                     i3->bAEqC = false;
                   }
                }
 
@@ -1388,7 +1388,7 @@ void calcDiff3LineListTrim(
    Diff3LineList::iterator i3C = d3ll.begin();
 
    int line=0;  // diff3line counters
-   int lineA=0; // 
+   int lineA=0; //
    int lineB=0;
    int lineC=0;
 
@@ -1463,7 +1463,7 @@ void calcDiff3LineListTrim(
          ++lineC;
       }
 
-      if( line>lineA && (*i3).lineA != -1 && !(*i3).bAEqB && !(*i3).bAEqC && 
+      if( line>lineA && (*i3).lineA != -1 && !(*i3).bAEqB && !(*i3).bAEqC &&
           isValidMove( pManualDiffHelpList, (*i3).lineA, (*i3A).lineB, 1, 2 ) &&
           isValidMove( pManualDiffHelpList, (*i3).lineA, (*i3A).lineC, 1, 3 ) )      {
          // Empty space for A. A doesn't match B or C. Move it up.
@@ -1895,7 +1895,7 @@ void fineDiff(
 
             for( dli = pDiffList->begin(); dli!=pDiffList->end(); ++dli)
             {
-               if( dli->nofEquals < 4  &&  (dli->diff1>0 || dli->diff2>0) 
+               if( dli->nofEquals < 4  &&  (dli->diff1>0 || dli->diff2>0)
                   && !( bUsefulFineDiff && dli==pDiffList->begin() )
                )
                {
