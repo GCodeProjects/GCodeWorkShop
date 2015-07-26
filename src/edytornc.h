@@ -32,10 +32,12 @@
 #include "findinf.h"
 #include "dialogs.h"
 #include "serialtransmission.h"
+#include "serialtransmissiondialog.h"
 #include "kdiff3.h"
 #include "cleanupdialog.h"
 #include "swapaxesdialog.h"
 #include "newfiledialog.h"
+#include "sessiondialog.h"
 
 #include "ui_edytornc.h"
 
@@ -70,6 +72,8 @@ private slots:
     void saveAll();
     void saveAs();
     void printFile();
+    void filePrintPreview();
+    void printPreview(QPrinter *printer);
     void cut();
     void undo();
     void redo();
@@ -117,13 +121,10 @@ private slots:
     void createSerialToolBar();
     void serialConfig();
     void serialConfigTest();
-    void loadConfig();
     void closeSerialToolbar();
     void sendButtonClicked();
     void receiveButtonClicked();
-    void stopButtonClicked();
     void doCmpMacro();
-    void lineDelaySlot();
     void attachToDirButtonClicked(bool attach = true);
     void deAttachToDirButtonClicked();
     void setHighLightMode(int mode);
@@ -131,7 +132,6 @@ private slots:
     void createUserToolTipsFile();
     void attachHighlightToDirActClicked();
     void deAttachHighlightToDirActClicked();
-    void sendStartDelayTimeout();
     void doDiffL();
     void doDiffR();
     void doDiff();
@@ -159,7 +159,8 @@ private slots:
     void doBlockSkip();
     void doBlockSkip1();
     void doBlockSkip2();
-
+    void changeSession(QAction *action);
+    void sessionMgr();
 
 
  signals:
@@ -174,7 +175,6 @@ private:
     void readSettings();
     void writeSettings();
     void loadSerialConfignames();
-    void showError(int error);
     void updateCurrentSerialConfig();
     void attachHighlighterToDirButtonClicked(bool attach);
     int defaultHighlightMode(QString filePath);
@@ -186,7 +186,15 @@ private:
     MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     void createDiffApp();
+    void updateSessionMenus();
+    void loadSession(QString name);
+    void saveSession(QString name);
+    void savePrinterSettings(QPrinter *printer);
+    void loadPrinterSettings(QPrinter *printer);
 
+
+    QStringList sessionList;
+    QString currentSession;
 
     _editor_properites defaultMdiWindowProperites;
     FindInFiles *findFiles;
@@ -217,6 +225,7 @@ private:
     QMenu *blockSkipMenu;
     QMenu *windowMenu;
     QMenu *helpMenu;
+    QMenu *sessionsMenu;
 
     QToolBar *fileToolBar;
     QToolBar *editToolBar;
@@ -232,6 +241,7 @@ private:
     QAction *exitAct;
     QAction *findFilesAct;
     QAction *printAct;
+    QAction *printPreviewAct;
     QAction *cutAct;
     QAction *copyAct;
     QAction *pasteAct;
@@ -253,6 +263,8 @@ private:
     QAction *insertBlockSkipAct;
     QAction *insertBlockSkip1Act;
     QAction *insertBlockSkip2Act;
+
+    QAction *sessionMgrAct;
 
     QAction *semiCommAct;
     QAction *paraCommAct;
@@ -324,30 +336,7 @@ private:
     QAction *serialCloseAct;
     QComboBox *configBox;
 
-
-
-    bool stop;
-    QString portName, sendAtEnd, sendAtBegining;
-    int baudRate;
-    int dataBits;
-    int stopBits;
-    int parity;
-    int flowControl;
-    double lineDelay;
-    QSerialPort *comPort;
-    bool readyCont;
-    bool xoffReceived;
-    bool deleteControlChars;
-    bool removeEmptyLines;
-    bool removeBefore;
-    bool endOfBlockLF;
-    bool removeSpaceEOB;
-    int sendStartDelay;
-    bool doNotShowProgressInEditor;
-    int recieveTimeout;
     QStringList selectedExpressions;
-
-    PortSettings portSettings;
 
 
 };

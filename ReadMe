@@ -5,42 +5,44 @@ Source code of EdytorNC can be downloaded from SVN server on sourceforge.net (ht
 
 
 Some features :
-  bolt holes calculation
-  solutions of triangles calculation
-  speed, feed calculation
-  send/receive through serial port
-  conversion inch/mm, mm/inch. You can write inches in format 1.3/4  1/4 ...
-  find in files
-  simple project managment - you can keep links to (almost) all files related to your part programm in one place. 
-  first comment in program is displayed in title bar. In first comment you can write part name.
-  comment with date will be replaced with current date on file save. Comment format: (dd-/.mm-/.yyyy) or ;dd-/.mm-/.yyyy - now system localization settings are used.
-  block renumbering - whole program or selection
-  code colorizing. Now with help function - click on "Help"->"Create cnc tooltips" and put mouse pointer above G, M or other codes - should appear tooltip with short information about pointed code. 
+    *   Bolt holes calculation
+    *   Solutions of triangles calculation
+    *   Speed, feed calculation
+    *   Send/receive through serial port
+    *   Conversion inch/mm, mm/inch. You can write inches in format 1.3/4  1/4 ...
+    *   Find in files
+    *   Simple project management - you can keep links to (almost) all files related to your part program in one place. 
+    *   First comment in program is displayed in title bar. In first comment you can write part name.
+    *   Comment with date will be replaced with current date on file save. Comment format: (dd-/.mm-/.yyyy) or ;dd-/.mm-/.yyyy - now system localization settings are used.
+    *   Block renumbering - whole program or selection
+    *   Code colorizing. Now with help function - click on "Help"->"Create cnc tooltips" and put mouse pointer above G, M or other codes - should appear tooltip with short information about pointed code. 
                    Default tooltips are in file "cnc_tooltips_lang_code.txt" (lang_code = pl_PL - for Polish) in folder with application settings (~.config on Linux. C:\Documents and Settings\USERNAME\Application Data\EdytorNC on Windows).
 		   You may copy it to folder with cnc programs and customize for your machine. File must be renamed to "cnc_tips.txt". Now this is done by functions in help menu.
 		   Currently tooltip file contains some information about codes for OKUMA, SINUMERIK 850 and FANUC.
 		   Code colorizing detects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC
-  ctrl+;  Comments/uncoments selected text with semicolon ;
-  ctrl+9  Comments/uncoments selected text with parentheses ()
-  Ctrl+2  Adds Block Skip (/) and/or increments it
-  Ctrl+3  Adds Block Skip (/) and/or decrements it
-  Ctrl+1  Removes Block Skip (/) 
-  
-  Find/Replace can be used to addition, subtraction, multiplication, division on numbers.
-	  in Find: Y$$ in Replace $$*2 will multiply by 2 all numbers found with Y
-	  in Find: Y$100 $10 in Replace $$*2 will multiply by 2 only numbers between 10 and 100 found with Y
+    *   ctrl+;  Comments/uncoments selected text with semicolon ;
+    *   ctrl+9  Comments/uncoments selected text with parentheses ()
+    *   Ctrl+2  Adds Block Skip (/) and/or increments it
+    *   Ctrl+3  Adds Block Skip (/) and/or decrements it
+    *   Ctrl+1  Removes Block Skip (/)   
+    *   Find/Replace can be used to addition, subtraction, multiplication, division on numbers.
+            in Find: Y$$ in Replace $$*2 will multiply by 2 all numbers found with Y
+            in Find: Y$100 $10 in Replace $$*2 will multiply by 2 only numbers between 10 and 100 found with Y
+            Find can be used also to highlight specific program blocks
+    *   Sessions - to save/restore open file list
   
  
 Experimental features :
-  macro program - parametric programming. See EXAMPLES dir.
-  split file - if file contains more than one program this function tries to split it into separate files. No auto save yet.
+    *   macro program - parametric programming. See EXAMPLES dir.
+    *   split file - if file contains more than one program this function tries to split it into separate files. No auto save yet.
 
+    
 Command line options:
 open file -> edytornc file.nc
 diff two files -> edytornc -diff file1.nc file2.nc
 
 
-EdytorNC is developed in QT Creator (best for compile EdytorNC) (libs Qt 4.8) : http://www.qtsoftware.com/products/developer-tools
+EdytorNC is developed in QT Creator (best for compile EdytorNC) (libs Qt 5.4) : http://www.qtsoftware.com/products/developer-tools
 Cross platform installer made by BitRock InstallBuilder for Qt : http://installbuilder.bitrock.com
 
 

@@ -41,7 +41,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 //**************************************************************************************************
 
 void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
-{  
+{
    font = fnt;
    highlightColors = hColors;
 
@@ -498,7 +498,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
                   case '#'         : format.setForeground(QColor(highlightColors.rColor));
                                      setFormat(pos, sellen, format);
                                      break;
-                  case 'C'         :                              
+                  case 'C'         :
                   case '@'         :
                   case 'V'         :
                   case 'E'         :
@@ -743,7 +743,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
                   case 'S'         : format.setForeground(QColor(highlightColors.fsColor));
                                      setFormat(pos, sellen, format);
                                      break;
-                  case 'D'         :                 
+                  case 'D'         :
                   case 'T'         : format.setForeground(QColor(highlightColors.dhtColor));
                                      setFormat(pos, sellen, format);
                                      break;
@@ -1252,7 +1252,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
                   case 'V'         :
                   case 'E'         :
                   case 'I'         :
-                  case 'J'         :   
+                  case 'J'         :
                   case 'P'         :
                   case 'X'         :
                   case 'Y'         :
@@ -1831,18 +1831,10 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
 
 void Highlighter::highlightBlockToolTipsRule(const QString &tx)
 {
-   int pos;
    QTextCharFormat format;
    HighlightingRule ruleP;
 
-
    format.setFontWeight(QFont::Normal);
-   pos = 0;
-
-
-//   keywords << "^[A-Z]{1,1}[A-Z0-9_]{1,30}"
-//            << "(<b>[A-Z]{1,1}[A-Z0-9_]{1,30}</b>)";
-//   keywordPatterns.append(keywords);
 
    keywordFormat.setForeground(QColor(highlightColors.macroColor));
    keywordFormat.setFontWeight(QFont::Bold);

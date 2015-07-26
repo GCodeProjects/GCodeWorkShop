@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TransProgressDialog</class>
- <widget class="QDialog" name="TransProgressDialog">
+ <class>SerialTransmissionDialog</class>
+ <widget class="QDialog" name="SerialTransmissionDialog">
   <property name="windowModality">
-   <enum>Qt::NonModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>409</width>
-    <height>127</height>
+    <width>357</width>
+    <height>134</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,6 +19,9 @@
   <property name="windowIcon">
    <iconset resource="application.qrc">
     <normaloff>:/images/serial.png</normaloff>:/images/serial.png</iconset>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -177,6 +180,9 @@
        <property name="toolTip">
         <string>Data Terminal Ready</string>
        </property>
+       <property name="statusTip">
+        <string/>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -186,7 +192,7 @@
       </widget>
      </item>
      <item row="1" column="10">
-      <widget class="QLabel" name="LedLabel55">
+      <widget class="QLabel" name="LedLabel55_2">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -210,14 +216,14 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QProgressBar" name="progressBar">
      <property name="value">
-      <number>24</number>
+      <number>0</number>
      </property>
     </widget>
    </item>
@@ -246,7 +252,7 @@
      <item>
       <widget class="QPushButton" name="cancelButton">
        <property name="text">
-        <string>&amp;Cancel</string>
+        <string>&amp;Close</string>
        </property>
        <property name="icon">
         <iconset resource="application.qrc">

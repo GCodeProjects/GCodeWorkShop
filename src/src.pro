@@ -71,7 +71,9 @@ SOURCES += edytornc.cpp \
     mergeresultwindow.cpp \
     cleanupdialog.cpp \
     swapaxesdialog.cpp \
-    newfiledialog.cpp
+    newfiledialog.cpp \
+    sessiondialog.cpp \
+    serialtransmissiondialog.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -96,11 +98,14 @@ HEADERS += edytornc.h \
     cleanupdialog.h \
     tooltips.h \
     swapaxesdialog.h \
-    newfiledialog.h
+    newfiledialog.h \
+    sessiondialog.h \
+    serialtransmissiondialog.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \
     qt
+#CONFIG += CONSOLE
 #CONFIG += release
 QT *= network
 QT += widgets
@@ -122,11 +127,13 @@ FORMS += i2mdialog.ui \
     setupdialog.ui \
     spconfigdialog.ui \
     transmissiondialog.ui \
-    transprogressdialog.ui \
     edytornc.ui \
     cleanupdialog.ui \
     swapaxesdialog.ui \
-    newfiledialog.ui
+    newfiledialog.ui \
+    sessiondialog.ui \
+    newsessiondialog.ui \
+    serialtransmissiondialog.ui
 #TRANSLATIONS = edytornc_pl.ts \
 #    edytornc_ca.ts \
 #    edytornc_de.ts \

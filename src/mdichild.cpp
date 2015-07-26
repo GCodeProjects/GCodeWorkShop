@@ -52,6 +52,10 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    splitterH->setBackgroundRole(QPalette::Base);
    marginWidget->setBackgroundRole(QPalette::Base);
 
+   createContextMenuActions();
+   textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+   connect(textEdit, SIGNAL(customContextMenuRequested(const QPoint&)),
+              this, SLOT(showContextMenu(const QPoint &)));
 }
 
 //**************************************************************************************************
@@ -76,6 +80,7 @@ void MdiChild::newFile()
     curFile = tr("program%1.nc").arg(sequenceNumber++);
     setWindowTitle(curFile + "[*]");
     curFileInfo = curFile;
+    textEdit->document()->setModified(false);
 
     connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 }
@@ -145,8 +150,10 @@ bool MdiChild::loadFile(const QString &fileName)
 
 bool MdiChild::save()
 {
-   bool result;
+   bool result = false;
+
    setFocus();
+
    if(isUntitled)
    {
       result = saveAs();
@@ -166,7 +173,7 @@ bool MdiChild::save()
 
       if(mdiWindowProperites.clearUnderlineHistory)
       {
-         
+
          QTextCursor cursorPos = textEdit->textCursor();
          textEdit->blockSignals(true);
          textEdit->selectAll();
@@ -234,16 +241,20 @@ bool MdiChild::saveAs()
 
 
    if(isUntitled)
-      fileName = guessFileName();
+   {
+       fileName = guessFileName();
+   }
    else
-      fileName = curFile;
+       fileName = curFile;
 
    QString file = QFileDialog::getSaveFileName(
-            this,
-            tr("Save file as..."),
-            fileName,
-            filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
+               this,
+               tr("Save file as..."),
+               fileName,
+               filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
 
+   if(file.isEmpty() || file.isNull())
+       return false;
 
    if((QFile(file).exists()))
    {
@@ -254,21 +265,22 @@ bool MdiChild::saveAs()
       msgBox.setDefaultButton(QMessageBox::Discard);
       msgBox.setIcon(QMessageBox::Warning);
       int ret = msgBox.exec();
-      switch (ret)
+
+      switch(ret)
       {
-      case QMessageBox::Save    : break;
-      case QMessageBox::Discard : return false;
-         break;
-      default                   : return false;
-         break;
+         case QMessageBox::Save    :
+              break;
+         case QMessageBox::Discard :
+              return false;
+              break;
+         default                   :
+              return false;
+              break;
       } ;
 
    };
 
-   if(file.isNull())
-      return false;
-   else
-      return saveFile(file);
+   return saveFile(file);
 
 }
 
@@ -294,7 +306,7 @@ bool MdiChild::saveFile(const QString &fileName)
 
    QApplication::setOverrideCursor(Qt::WaitCursor);
    curPos = textEdit->textCursor().position();
-   
+
    QDate dat = QDate::currentDate();
 
 
@@ -528,7 +540,7 @@ _editor_properites MdiChild::getMdiWindowProperites()
 void MdiChild::setMdiWindowProperites(_editor_properites opt)
 {
    disconnect(textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-   
+
    mdiWindowProperites = opt;
    textEdit->setReadOnly(mdiWindowProperites.readOnly);
    setFont(QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
@@ -573,7 +585,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 {
     //qDebug() << "E" << ev->type() << obj->objectName();
 
-    //proper word selection
+    //better word selection
     if((obj == textEdit->viewport()) && (ev->type() == QEvent::MouseButtonDblClick))
     {
         QString key = "";
@@ -1497,34 +1509,40 @@ bool MdiChild::event(QEvent *event)
                key.insert(1, "0");
       };
 
-      fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips.txt";
-      if(QFile::exists(fileName))
+      if(key.isEmpty())
+          text = "";
+      else
       {
-         QSettings settings(fileName, QSettings::IniFormat);
-         settings.beginGroup(group);
-         text = settings.value(key, "").toString();
-         settings.endGroup();
-      };
+          fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips.txt";
+          if(QFile::exists(fileName))
+          {
+              QSettings settings(fileName, QSettings::IniFormat);
+              settings.beginGroup(group);
+              text = settings.value(key, "").toString();
+              settings.endGroup();
+          };
 
-      if(text.isEmpty() || text.isNull())
-      {
-         QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-         QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
 
-         fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+          if(text.isEmpty() || text.isNull())
+          {
+              QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
+              QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
 
-         if(QFile::exists(fileName))
-         {
-            QSettings settings(fileName, QSettings::IniFormat);
-            settings.beginGroup(group);
-            text = settings.value(key, "").toString();
-            settings.endGroup();
-         }
-         else
-         {
-            event->accept();
-            return true;
-         };
+              fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+
+              if(QFile::exists(fileName))
+              {
+                  QSettings settings(fileName, QSettings::IniFormat);
+                  settings.beginGroup(group);
+                  text = settings.value(key, "").toString();
+                  settings.endGroup();
+              }
+              else
+              {
+                  event->accept();
+                  return true;
+              };
+          };
       };
 
       if(!text.isEmpty())
@@ -2632,8 +2650,10 @@ void MdiChild::detectHighligthMode()
    if(highlighter == NULL)
       return;
 
+   bool mod = textEdit->document()->isModified();  // something below clears document modified state
+
    if(mdiWindowProperites.hColors.highlightMode == MODE_AUTO)
-   { 
+   {
       text = textEdit->toPlainText();
       mdiWindowProperites.hColors.highlightMode = autoDetectHighligthMode(text.toUpper());
       if(mdiWindowProperites.hColors.highlightMode == MODE_AUTO)
@@ -2642,6 +2662,8 @@ void MdiChild::detectHighligthMode()
 
    highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
    highlighter->rehighlight();
+
+   textEdit->document()->setModified(mod);
 }
 
 //**************************************************************************************************
@@ -2899,7 +2921,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
       };
 
       cur_line = cursor.block().text();
-      cur_line_column = cursor.columnNumber();     
+      cur_line_column = cursor.columnNumber();
 
       if(found && ignoreComments)
       {
@@ -2937,7 +2959,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
          if(((val >= min) && (val <= max)))
          {
             inComment = false;
-            textEdit->setTextCursor(cursor);           
+            textEdit->setTextCursor(cursor);
          }
          else
             inComment = true;
@@ -3075,10 +3097,12 @@ QString MdiChild::guessFileName()
 
     };
 
-
     fileName = fileName.simplified();
     //fileName.append(mdiWindowProperites.saveExtension);
-    fileName.prepend(mdiWindowProperites.saveDirectory + "/");
+    if(mdiWindowProperites.saveDirectory.isEmpty())
+        fileName.prepend(mdiWindowProperites.lastDir + "/");
+    else
+        fileName.prepend(mdiWindowProperites.saveDirectory + "/");
 
     fileName = QDir::cleanPath(fileName);
 
@@ -3340,7 +3364,7 @@ void MdiChild::blockSkip(bool remove, bool inc)
 //  comments/uncomments selected text using ;
 //**************************************************************************************************
 
-void MdiChild::semicomment()
+void MdiChild::semiComment()
 {
     int idx;
 
@@ -3386,7 +3410,7 @@ void MdiChild::semicomment()
 //  comments/uncomments selected text using ()
 //**************************************************************************************************
 
-void MdiChild::paracomment()
+void MdiChild::paraComment()
 {
     if(textEdit->textCursor().hasSelection())
     {
@@ -3627,21 +3651,21 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 
     cursorStart = 0;
     cursorEnd = 0;
-    
+
     if(textEdit->isReadOnly())
         return false;
-    
+
     if(textToFind.isEmpty())
         return false;
-    
+
     if(options & QTextDocument::FindCaseSensitively)
         regExp.setCaseSensitivity(Qt::CaseSensitive);
     else
         regExp.setCaseSensitivity(Qt::CaseInsensitive);
 
-    
+
     textEdit->blockSignals(true);
-    
+
     inSelection = textEdit->textCursor().hasSelection();
 
     if(inSelection)
@@ -3704,7 +3728,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
         else
             inComment = false;
 
-        
+
         if(found && !inComment)
         {
             foundText = cursor.selectedText();
@@ -3725,7 +3749,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                     continue;
                 };
             };
-            
+
             if((modifier == 0) && (oper == 3))  //divide by 0
                 modifier = 1;
 
@@ -3759,7 +3783,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                 newText = replacedText;
             };
 
-            
+
             if(mdiWindowProperites.underlineChanges)
             {
                 QTextCharFormat format = cursor.charFormat();
@@ -3769,9 +3793,9 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
             };
             cursor.insertText(newText);
         };
-        
+
     }while(found);
-    
+
 
     if(inSelection)
     {
@@ -3803,16 +3827,16 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, double max,
                           int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments)
 {
-    
+
     if(textEdit->isReadOnly())
         return;
-    
+
     if(textToFind.isEmpty())
         return;
-    
+
     QTextCursor startCursor = textEdit->textCursor();
     startCursor.beginEditBlock();
-    
+
     if(textToFind != replacedText)
     {
         swapAxes(replacedText, QString("~%1").arg(replacedText), min, max, -1, modifier, options, ignoreComments);
@@ -3821,12 +3845,12 @@ void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, 
     }
     else
         swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
-    
+
     startCursor.movePosition(QTextCursor::StartOfLine);
     startCursor.endEditBlock();
     textEdit->setTextCursor(startCursor);
-    
-    
+
+
 }
 
 //**************************************************************************************************
@@ -3923,4 +3947,129 @@ QTextCursor MdiChild::textCursor()
 //
 //**************************************************************************************************
 
+void MdiChild::createContextMenuActions()
+{
 
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::semiCommentSlot()
+{
+    semiComment();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::paraCommentSlot()
+{
+    paraComment();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::blockSkipRemSlot()
+{
+    blockSkip(true);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::blockSkipIncSlot()
+{
+    blockSkip(false, true);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::blockSkipDecSlot()
+{
+    blockSkip(false, false);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::showContextMenu(const QPoint &pt)
+{
+    QMenu *menu = textEdit->createStandardContextMenu();
+    menu->addSeparator();
+
+    QAction *semiCommAct = new QAction(QIcon(":/images/semicomment.png"), tr("Comment ;"), this);
+    semiCommAct->setShortcut(tr("Ctrl+;"));
+    semiCommAct->setToolTip(tr("Comment/uncomment selected text using semicolon"));
+    connect(semiCommAct, SIGNAL(triggered()), this, SLOT(semiCommentSlot()));
+    semiCommAct->setEnabled(hasSelection());
+    menu->addAction(semiCommAct);
+
+    QAction *paraCommAct = new QAction(QIcon(":/images/paracomment.png"), tr("Comment ()"), this);
+    paraCommAct->setShortcut(tr("Ctrl+9"));
+    paraCommAct->setToolTip(tr("Comment/uncomment selected text using parentheses"));
+    connect(paraCommAct, SIGNAL(triggered()), this, SLOT(paraCommentSlot()));
+    paraCommAct->setEnabled(hasSelection());
+    menu->addAction(paraCommAct);
+    menu->addSeparator();
+
+    QAction *insertBlockSkipAct = new QAction(QIcon(":/images/blockskipr.png"), tr("Block Skip remove"), this);
+    insertBlockSkipAct->setShortcut(tr("Ctrl+1"));
+    insertBlockSkipAct->setToolTip(tr("Remove Block Skip /"));
+    connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(blockSkipRemSlot()));
+    insertBlockSkipAct->setEnabled(hasSelection());
+    menu->addAction(insertBlockSkipAct);
+
+    QAction *insertBlockSkip1Act = new QAction(QIcon(":/images/blockskip+.png"), tr("Block Skip +"), this);
+    insertBlockSkip1Act->setShortcut(tr("Ctrl+2"));
+    insertBlockSkip1Act->setToolTip(tr("Insert/increase Block Skip /"));
+    connect(insertBlockSkip1Act, SIGNAL(triggered()), this, SLOT(blockSkipIncSlot()));
+    insertBlockSkip1Act->setEnabled(hasSelection());
+    menu->addAction(insertBlockSkip1Act);
+
+    QAction *insertBlockSkip2Act = new QAction(QIcon(":/images/blockskip-.png"), tr("Block Skip -"), this);
+    insertBlockSkip2Act->setShortcut(tr("Ctrl+3"));
+    insertBlockSkip2Act->setToolTip(tr("Insert/decrease Block Skip /"));
+    connect(insertBlockSkip2Act, SIGNAL(triggered()), this, SLOT(blockSkipDecSlot()));
+    insertBlockSkip2Act->setEnabled(hasSelection());
+    menu->addAction(insertBlockSkip2Act);
+
+
+    menu->exec(textEdit->mapToGlobal(pt));
+
+    delete insertBlockSkipAct;
+    delete insertBlockSkip1Act;
+    delete insertBlockSkip2Act;
+    delete semiCommAct;
+    delete paraCommAct;
+    delete menu;
+}
+
+//**************************************************************************************************
+//  Returns filename with full path
+//**************************************************************************************************
+
+QString MdiChild::currentFile()
+{
+    QString path = curFile;
+
+    if(isUntitled)
+        path = mdiWindowProperites.lastDir + "/" + path;
+
+    path = QDir::cleanPath(path);
+
+    return QDir::toNativeSeparators(path);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************

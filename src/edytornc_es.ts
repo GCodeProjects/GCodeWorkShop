@@ -55,6 +55,10 @@
         <source>Center Position : X%1 Y%2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clear &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BHCDraw</name>
@@ -416,10 +420,6 @@
     </message>
     <message>
         <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
         <translation></translation>
     </message>
     <message>
@@ -1196,39 +1196,39 @@
     </message>
     <message>
         <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation>Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
+        <translation type="vanished">Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
     </message>
     <message>
         <source>Unable to allocate memory tables</source>
-        <translation>No se puede asignar tablas de memoria</translation>
+        <translation type="vanished">No se puede asignar tablas de memoria</translation>
     </message>
     <message>
         <source>Caught a non-blocked signal</source>
-        <translation>Fue cogida una señal no bloqueante</translation>
+        <translation type="vanished">Fue cogida una señal no bloqueante</translation>
     </message>
     <message>
         <source>Operation timed out</source>
-        <translation>Se agotó el tiempo para la operación</translation>
+        <translation type="vanished">Se agotó el tiempo para la operación</translation>
     </message>
     <message>
         <source>The file opened by the port is not a character device</source>
-        <translation>El archivo abierto por el puerto no es un dispositivo de caracteres (character device)</translation>
+        <translation type="vanished">El archivo abierto por el puerto no es un dispositivo de caracteres (character device)</translation>
     </message>
     <message>
         <source>The port detected a break condition</source>
-        <translation>El puerto detectó una situación de ruptura (break condition)</translation>
+        <translation type="vanished">El puerto detectó una situación de ruptura (break condition)</translation>
     </message>
     <message>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation>El puerto detecta un error de framing (configuración de velocidad de transmisión incorrectos?)</translation>
+        <translation type="vanished">El puerto detecta un error de framing (configuración de velocidad de transmisión incorrectos?)</translation>
     </message>
     <message>
         <source>There was an I/O error while communicating with the port</source>
-        <translation>Se ha producido un error de E/S durante la comunicación con el puerto</translation>
+        <translation type="vanished">Se ha producido un error de E/S durante la comunicación con el puerto</translation>
     </message>
     <message>
         <source>Character buffer overrun</source>
-        <translation>Búfer de caracteres sobrepasado</translation>
+        <translation type="vanished">Búfer de caracteres sobrepasado</translation>
     </message>
     <message>
         <source>Receive buffer overflow</source>
@@ -1236,7 +1236,7 @@
     </message>
     <message>
         <source>The port detected a parity error in the received data</source>
-        <translation>El puerto detectó un error de paridad en los datos recibidos</translation>
+        <translation type="vanished">El puerto detectó un error de paridad en los datos recibidos</translation>
     </message>
     <message>
         <source>Transmit buffer overflow</source>
@@ -1244,11 +1244,11 @@
     </message>
     <message>
         <source>General read operation failure</source>
-        <translation>Falla general en operación de lectura</translation>
+        <translation type="vanished">Falla general en operación de lectura</translation>
     </message>
     <message>
         <source>General write operation failure</source>
-        <translation>Falla general en operación de escritura</translation>
+        <translation type="vanished">Falla general en operación de escritura</translation>
     </message>
     <message>
         <source>No Error has occured</source>
@@ -1321,10 +1321,6 @@
         <translation>Cerrar</translation>
     </message>
     <message>
-        <source>&lt;br /&gt;Spanish translation thanks to Otto Huamani</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Saved %1 files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1352,6 +1348,90 @@
         <source>Save all modified documents to disk</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Print Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The document was sent to a printer %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br /&gt;German translation and other fixes thanks to Michael Numberger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br /&gt;Spanish translation and other fixes thanks to Otto Huamani</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pr&amp;int preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Session manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sessions manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sessions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attempting to open an non-existing device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attempting to open an already opened device by another process or user not having enough permission and credentials to open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attempting to open an already opened device in this object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parity error detected by the hardware while reading data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Framing error detected by the hardware while reading data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Break condition detected by the hardware on the input line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An I/O error occurred while writing the data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An I/O error occurred while reading the data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An unidentified error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An operation is executed that can only be successfully performed if the device is open</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FeedsDialog</name>
@@ -1362,10 +1442,6 @@
     <message>
         <source>Cutting speed</source>
         <translation>Velocidad de corte</translation>
-    </message>
-    <message>
-        <source> Vc :</source>
-        <translation></translation>
     </message>
     <message>
         <source>Cutting speed (m/min)</source>
@@ -1473,6 +1549,10 @@
     </message>
     <message>
         <source>inches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vc :</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1961,6 +2041,66 @@ Comprobar +-*/.
         <source>DATE</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Comment ;</source>
+        <translation type="unfinished">Comentar ;</translation>
+    </message>
+    <message>
+        <source>Ctrl+;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment/uncomment selected text using semicolon</source>
+        <translation type="unfinished">Comentar/Des-comentar texto seleccionado usando semicolon</translation>
+    </message>
+    <message>
+        <source>Comment ()</source>
+        <translation type="unfinished">Comentar ()</translation>
+    </message>
+    <message>
+        <source>Ctrl+9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment/uncomment selected text using parentheses</source>
+        <translation type="unfinished">Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
+    </message>
+    <message>
+        <source>Block Skip remove</source>
+        <translation type="unfinished">Remover salto de bloque</translation>
+    </message>
+    <message>
+        <source>Ctrl+1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Block Skip /</source>
+        <translation type="unfinished">Remover salto de bloque /</translation>
+    </message>
+    <message>
+        <source>Block Skip +</source>
+        <translation type="unfinished">Salto de bloque +</translation>
+    </message>
+    <message>
+        <source>Ctrl+2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert/increase Block Skip /</source>
+        <translation type="unfinished">Insertar/incrementar salto de bloque /</translation>
+    </message>
+    <message>
+        <source>Block Skip -</source>
+        <translation type="unfinished">Salto de bloque -</translation>
+    </message>
+    <message>
+        <source>Ctrl+3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert/decrease Block Skip /</source>
+        <translation type="unfinished">Insertar/disminuir salto de bloque /</translation>
+    </message>
 </context>
 <context>
     <name>MergeResultWindow</name>
@@ -2018,79 +2158,79 @@ Comprobar +-*/.
     <name>QextSerialPort</name>
     <message>
         <source>No Error has occurred</source>
-        <translation>Nu hubieron errores</translation>
+        <translation type="vanished">Nu hubieron errores</translation>
     </message>
     <message>
         <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation>Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
+        <translation type="vanished">Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
     </message>
     <message>
         <source>Unable to allocate memory tables (POSIX)</source>
-        <translation>No se puede asignar tablas de memoria (POSIX)</translation>
+        <translation type="vanished">No se puede asignar tablas de memoria (POSIX)</translation>
     </message>
     <message>
         <source>Caught a non-blocked signal (POSIX)</source>
-        <translation>Fue cogida una señal no bloqueante (POSIX)</translation>
+        <translation type="vanished">Fue cogida una señal no bloqueante (POSIX)</translation>
     </message>
     <message>
         <source>Operation timed out (POSIX)</source>
-        <translation>Se agotó el tiempo para la operación (POSIX)</translation>
+        <translation type="vanished">Se agotó el tiempo para la operación (POSIX)</translation>
     </message>
     <message>
         <source>The file opened by the port is not a valid device</source>
-        <translation>El archivo abierto por el puerto no es un dispositivo válido</translation>
+        <translation type="vanished">El archivo abierto por el puerto no es un dispositivo válido</translation>
     </message>
     <message>
         <source>The port detected a break condition</source>
-        <translation>El puerto detectó una situación de ruptura (break condition)</translation>
+        <translation type="vanished">El puerto detectó una situación de ruptura (break condition)</translation>
     </message>
     <message>
         <source>The port detected a framing error (usually caused by incorrect baud rate settings)</source>
-        <translation>El puerto detectó un error de framing (generalmente causado por una velocidad de transmisión incorrectos)</translation>
+        <translation type="vanished">El puerto detectó un error de framing (generalmente causado por una velocidad de transmisión incorrectos)</translation>
     </message>
     <message>
         <source>There was an I/O error while communicating with the port</source>
-        <translation>Se ha producido un error de E/S durante la comunicación con el puerto</translation>
+        <translation type="vanished">Se ha producido un error de E/S durante la comunicación con el puerto</translation>
     </message>
     <message>
         <source>Character buffer overrun</source>
-        <translation>Búfer de caracteres sobrepasado</translation>
+        <translation type="vanished">Búfer de caracteres sobrepasado</translation>
     </message>
     <message>
         <source>Receive buffer overflow</source>
-        <translation>Desbordamiento del búfer de recepción</translation>
+        <translation type="vanished">Desbordamiento del búfer de recepción</translation>
     </message>
     <message>
         <source>The port detected a parity error in the received data</source>
-        <translation>El puerto detectó un error de paridad en los datos recibidos</translation>
+        <translation type="vanished">El puerto detectó un error de paridad en los datos recibidos</translation>
     </message>
     <message>
         <source>Transmit buffer overflow</source>
-        <translation>Desbordamiento del búfer de transmisión</translation>
+        <translation type="vanished">Desbordamiento del búfer de transmisión</translation>
     </message>
     <message>
         <source>General read operation failure</source>
-        <translation>Falla general en operación de lectura</translation>
+        <translation type="vanished">Falla general en operación de lectura</translation>
     </message>
     <message>
         <source>General write operation failure</source>
-        <translation>Falla general en operación de escritura</translation>
+        <translation type="vanished">Falla general en operación de escritura</translation>
     </message>
     <message>
         <source>The %1 file doesn&apos;t exists</source>
-        <translation>El archivo %1 no existe</translation>
+        <translation type="vanished">El archivo %1 no existe</translation>
     </message>
     <message>
         <source>Permission denied</source>
-        <translation>Permiso denegado</translation>
+        <translation type="vanished">Permiso denegado</translation>
     </message>
     <message>
         <source>Device is already locked</source>
-        <translation>El dispositivo ya está bloqueado</translation>
+        <translation type="vanished">El dispositivo ya está bloqueado</translation>
     </message>
     <message>
         <source>Unknown error: %1</source>
-        <translation>Error desconocido: %1</translation>
+        <translation type="vanished">Error desconocido: %1</translation>
     </message>
 </context>
 <context>
@@ -2235,14 +2375,6 @@ Comprobar +-*/.
         <translation>Velocidad de transmisión</translation>
     </message>
     <message>
-        <source>300</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>600</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>115200</source>
         <translation></translation>
     </message>
@@ -2272,10 +2404,6 @@ Comprobar +-*/.
     </message>
     <message>
         <source>57600</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>56000</source>
         <translation></translation>
     </message>
     <message>
@@ -2560,6 +2688,69 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Remove white space at end of line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial port information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information about serial port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description       :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manufacturer      :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SerialNumber      :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System location   :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vendor identifier :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Product identifier:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description       : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manufacturer      : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SerialNumber      : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System location   : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vendor identifier : %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Product identifier: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialog</name>
+    <message>
+        <source>N/A</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3064,67 +3255,67 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation>Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
+        <translation type="vanished">Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
     </message>
     <message>
         <source>Unable to allocate memory tables</source>
-        <translation>No se puede asignar tablas de memoria</translation>
+        <translation type="vanished">No se puede asignar tablas de memoria</translation>
     </message>
     <message>
         <source>Caught a non-blocked signal</source>
-        <translation>Fue cogida una señal no bloqueante</translation>
+        <translation type="vanished">Fue cogida una señal no bloqueante</translation>
     </message>
     <message>
         <source>Operation timed out</source>
-        <translation>Se agotó el tiempo para la operación</translation>
+        <translation type="vanished">Se agotó el tiempo para la operación</translation>
     </message>
     <message>
         <source>The file opened by the port is not a character device</source>
-        <translation>El archivo abierto por el puerto no es un dispositivo de caracteres (character device)</translation>
+        <translation type="vanished">El archivo abierto por el puerto no es un dispositivo de caracteres (character device)</translation>
     </message>
     <message>
         <source>The port detected a break condition</source>
-        <translation>El puerto detectó una situación de ruptura (break condition)</translation>
+        <translation type="vanished">El puerto detectó una situación de ruptura (break condition)</translation>
     </message>
     <message>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation>El puerto detecta un error de framing (configuración de velocidad de transmisión incorrectos?)</translation>
+        <translation type="vanished">El puerto detecta un error de framing (configuración de velocidad de transmisión incorrectos?)</translation>
     </message>
     <message>
         <source>There was an I/O error while communicating with the port</source>
-        <translation>Se ha producido un error de E/S durante la comunicación con el puerto</translation>
+        <translation type="vanished">Se ha producido un error de E/S durante la comunicación con el puerto</translation>
     </message>
     <message>
         <source>Character buffer overrun</source>
-        <translation>Búfer de caracteres sobrepasado</translation>
+        <translation type="vanished">Búfer de caracteres sobrepasado</translation>
     </message>
     <message>
         <source>Receive buffer overflow</source>
-        <translation>Desbordamiento del búfer de recepción</translation>
+        <translation type="vanished">Desbordamiento del búfer de recepción</translation>
     </message>
     <message>
         <source>The port detected a parity error in the received data</source>
-        <translation>El puerto detectó un error de paridad en los datos recibidos</translation>
+        <translation type="vanished">El puerto detectó un error de paridad en los datos recibidos</translation>
     </message>
     <message>
         <source>Transmit buffer overflow</source>
-        <translation>Desbordamiento del búfer de transmisión</translation>
+        <translation type="vanished">Desbordamiento del búfer de transmisión</translation>
     </message>
     <message>
         <source>General read operation failure</source>
-        <translation>Falla general en operación de lectura</translation>
+        <translation type="vanished">Falla general en operación de lectura</translation>
     </message>
     <message>
         <source>General write operation failure</source>
-        <translation>Falla general en operación de escritura</translation>
+        <translation type="vanished">Falla general en operación de escritura</translation>
     </message>
     <message>
         <source>No Error has occured</source>
-        <translation>Nu hubieron errores</translation>
+        <translation type="vanished">Nu hubieron errores</translation>
     </message>
     <message>
         <source>Unknown error</source>
-        <translation>Error desconocido</translation>
+        <translation type="vanished">Error desconocido</translation>
     </message>
     <message>
         <source>Waiting...</source>
@@ -3289,6 +3480,60 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Choose template path</source>
         <translation>Elegir ruta de Plantilla</translation>
+    </message>
+</context>
+<context>
+    <name>newSessionDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the name of the session:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New session...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>sessionDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nuevo</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished">&amp;Borrar</translation>
+    </message>
+    <message>
+        <source>&amp;Switch to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore last session on startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Session manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
