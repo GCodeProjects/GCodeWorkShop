@@ -21,7 +21,7 @@
     <normaloff>:/images/serial.png</normaloff>:/images/serial.png</iconset>
   </property>
   <property name="sizeGripEnabled">
-   <bool>true</bool>
+   <bool>false</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

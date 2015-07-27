@@ -2977,19 +2977,19 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options, b
 
 QString MdiChild::guessFileName()
 {
-    QTextCursor cursor;
+    //QTextCursor cursor;
     QString fileName;
     QString text;
     int pos;
     QRegExp expression;
 
-    cursor = textEdit->textCursor();
+    //cursor = textEdit->textCursor();
     text = textEdit->toPlainText();
 
     if(mdiWindowProperites.guessFileNameByProgNum)
     {
 
-        while(1)
+        forever
         {
             expression.setPattern(FILENAME_SINU840);
             pos = text.indexOf(expression);
@@ -3069,7 +3069,7 @@ QString MdiChild::guessFileName()
     }
     else
     {
-        while(true)
+        forever
         {
             expression.setPattern("(;)[\\w:*=+ -]{4,64}");
             pos = text.indexOf(expression);
@@ -3098,6 +3098,7 @@ QString MdiChild::guessFileName()
     };
 
     fileName = fileName.simplified();
+    fileName = fileName.trimmed();
     //fileName.append(mdiWindowProperites.saveExtension);
     if(mdiWindowProperites.saveDirectory.isEmpty())
         fileName.prepend(mdiWindowProperites.lastDir + "/");
@@ -3106,7 +3107,7 @@ QString MdiChild::guessFileName()
 
     fileName = QDir::cleanPath(fileName);
 
-    textEdit->setTextCursor(cursor);
+    //textEdit->setTextCursor(cursor);
 
     return fileName;
 }

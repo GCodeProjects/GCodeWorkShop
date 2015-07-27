@@ -26,65 +26,11 @@
 #include <QtWidgets>
 
 
-#include "ui_spconfigdialog.h"
 #include "ui_transmissiondialog.h"
+#include "serialportconfigdialog.h"
 #include <qserialport.h>
 
-struct PortSettings
-{
-    QSerialPort::BaudRate BaudRate;
-    QSerialPort::DataBits DataBits;
-    QSerialPort::Parity Parity;
-    QSerialPort::StopBits StopBits;
-    QSerialPort::FlowControl FlowControl;
-    long Timeout_Millisec;
-    char Xon;
-    char Xoff;
-};
 
-class SPConfigDialog : public QDialog, private Ui::SPConfigDialog
-{
-   Q_OBJECT
-
-   public:
-     SPConfigDialog(QWidget *parent = 0, QString confName = "", Qt::WindowFlags f = Qt::Dialog);
-     ~SPConfigDialog();
-
-   public slots:
-
-
-   protected:
-
-   signals :
-
-
-
-   private slots:
-     void browseButtonClicked();
-     void saveButtonClicked();
-     void loadSettings();
-     void changeSettings();
-     void closeButtonClicked();
-     void deleteButtonClicked();
-     void saveCloseButtonClicked();
-     void flowCtlGroupReleased();
-     void browse1ButtonClicked();
-     void browse2ButtonClicked();
-     void browse3ButtonClicked();
-     void portNameComboBoxIndexChanged(QString name);
-
-
-   private:
-     QString browseForDir(const QString dir);
-
-     QButtonGroup *baudGroup;
-     QButtonGroup *dataBitsGroup;
-     QButtonGroup *stopBitsGroup;
-     QButtonGroup *parityGroup;
-     QButtonGroup *flowCtlGroup;
-     QString configName;
-
-};
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =========================================================================================

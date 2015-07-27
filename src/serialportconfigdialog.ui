@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SPConfigDialog</class>
- <widget class="QDialog" name="SPConfigDialog">
+ <class>SerialPortConfigDialog</class>
+ <widget class="QDialog" name="SerialPortConfigDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -105,7 +105,7 @@
       <bool>true</bool>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -825,7 +825,7 @@ p, li { white-space: pre-wrap; }
           <string>s</string>
          </property>
          <property name="minimum">
-          <number>5</number>
+          <number>0</number>
          </property>
          <property name="maximum">
           <number>360</number>
@@ -845,104 +845,257 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>Recieve timeout:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="recieveTimeoutSpinBox">
+          <widget class="QCheckBox" name="autoSaveCheckBox">
            <property name="toolTip">
-            <string>After recieve last character, close the recieve dialog after this time</string>
+            <string>Automatically save the received file.
+If the file name has not been automatically detected, the file name will be the current date and time.</string>
            </property>
-           <property name="suffix">
-            <string>s</string>
+           <property name="text">
+            <string>Automatically save the received file</string>
            </property>
-           <property name="maximum">
-            <number>300</number>
-           </property>
-           <property name="value">
-            <number>15</number>
+           <property name="checked">
+            <bool>false</bool>
            </property>
           </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </item>
        <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
         <layout class="QGridLayout" name="gridLayout_6">
-         <item row="0" column="0">
+         <item row="1" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Main program path</string>
+            <string>Save path</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item row="1" column="1">
           <widget class="QLineEdit" name="path1LineEdit">
            <property name="text">
-            <string>Under construction</string>
+            <string/>
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item row="1" column="2">
           <widget class="QPushButton" name="browse1PushButton">
            <property name="text">
             <string>Browse</string>
            </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QComboBox" name="ext1ComboBox"/>
-         </item>
-         <item row="5" column="1">
-          <widget class="QLineEdit" name="path3LineEdit"/>
-         </item>
-         <item row="5" column="2">
-          <widget class="QPushButton" name="browse3PushButton">
-           <property name="text">
-            <string>Browse</string>
+           <property name="icon">
+            <iconset resource="application.qrc">
+             <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="label_13">
+         <item row="1" column="3">
+          <widget class="QComboBox" name="ext1ComboBox">
+           <property name="toolTip">
+            <string>Choose file extension or &quot;KEEP&quot; to use extension from received file.</string>
+           </property>
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <property name="currentText">
+            <string/>
+           </property>
+           <property name="duplicatesEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_10">
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="removeLettersCheckBox">
+           <property name="text">
+            <string>Remove letters from filename</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="renameCheckBox">
+           <property name="text">
+            <string>Create backup if file exists</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="detectFormFileNameCheckBox">
+           <property name="toolTip">
+            <string>Get filename from program name or form first comment</string>
+           </property>
+           <property name="text">
+            <string>Filename from program name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="appendExtCheckBox">
+           <property name="toolTip">
+            <string>If program name contains extension, append it at end of filename.
+Can't be used with extension set to &quot;KEEP&quot;.</string>
+           </property>
+           <property name="text">
+            <string>Append extension at end</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="logFileCheckBox">
+           <property name="toolTip">
+            <string>Save debug information to log file: &quot;Settings name&quot;_log.txt in save path.</string>
+           </property>
+           <property name="text">
+            <string>Create log file</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="fileServerTab">
+      <attribute name="title">
+       <string>File server</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QCheckBox" name="autoSaveCheckBox_2">
+         <property name="toolTip">
+          <string>Automatically save the received file.
+If the file name has not been automatically detected, the file name will be the current date and time.</string>
+         </property>
+         <property name="text">
+          <string>File server</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_13">
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Read path</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="path2LineEdit">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="browse2PushButton">
+           <property name="text">
+            <string>Browse</string>
+           </property>
+           <property name="icon">
+            <iconset resource="application.qrc">
+             <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QComboBox" name="ext2ComboBox">
+           <property name="toolTip">
+            <string>Choose file extension or &quot;KEEP&quot; to use extension from received file.</string>
+           </property>
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <property name="currentText">
+            <string/>
+           </property>
+           <property name="duplicatesEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
+          <widget class="QLineEdit" name="path3LineEdit_3"/>
+         </item>
+         <item row="10" column="3">
+          <widget class="QComboBox" name="ext3ComboBox_3">
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0">
+          <widget class="QLabel" name="label_18">
            <property name="text">
             <string>All other path</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="3">
-          <widget class="QComboBox" name="ext3ComboBox"/>
-         </item>
-         <item row="3" column="3">
-          <widget class="QComboBox" name="ext2ComboBox"/>
-         </item>
-         <item row="3" column="2">
-          <widget class="QPushButton" name="browse2PushButton">
+         <item row="10" column="2">
+          <widget class="QPushButton" name="browse3PushButton_3">
            <property name="text">
             <string>Browse</string>
            </property>
+           <property name="icon">
+            <iconset resource="application.qrc">
+             <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
+           </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="path2LineEdit"/>
+         <item row="8" column="3">
+          <widget class="QComboBox" name="ext2ComboBox_3">
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <property name="duplicatesEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_14">
+         <item row="8" column="2">
+          <widget class="QPushButton" name="browse2PushButton_3">
+           <property name="text">
+            <string>Browse</string>
+           </property>
+           <property name="icon">
+            <iconset resource="application.qrc">
+             <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QLineEdit" name="path2LineEdit_3">
+           <property name="text">
+            <string>Under construction</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="label_19">
            <property name="text">
             <string>Sub program path</string>
            </property>
@@ -951,74 +1104,66 @@ p, li { white-space: pre-wrap; }
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QGroupBox" name="groupBox_5">
-           <property name="title">
-            <string>If file exists</string>
+        <layout class="QGridLayout" name="gridLayout_14">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="detectFormFileNameCheckBox_3">
+           <property name="toolTip">
+            <string>Get filename from program name or form first comment</string>
            </property>
-           <layout class="QGridLayout" name="gridLayout_10">
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="overwriteCheckBox">
-              <property name="text">
-               <string>Overwrite</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="renameCheckBox">
-              <property name="text">
-               <string>Rename</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_6">
-           <property name="title">
-            <string>File name</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_11">
-            <item row="1" column="1">
-             <widget class="QSpinBox" name="spinBox">
-              <property name="minimum">
-               <number>3</number>
-              </property>
-              <property name="maximum">
-               <number>8</number>
-              </property>
-              <property name="value">
-               <number>4</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>No. of digits</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox_2">
-              <property name="text">
-               <string>Remowe letters</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBox">
            <property name="text">
-            <string>CheckBox</string>
+            <string>Filename from program name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="logFileCheckBox_3">
+           <property name="toolTip">
+            <string>Save debug information to log file: &quot;Settings name&quot;_log.txt in save path.</string>
+           </property>
+           <property name="text">
+            <string>Create log file</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="removeLettersCheckBox_3">
+           <property name="text">
+            <string>Remove letters from filename</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="appendExtCheckBox_3">
+           <property name="toolTip">
+            <string>If program name contains extension, append it at end of filename.
+Can't be used with extension set to &quot;KEEP&quot;.</string>
+           </property>
+           <property name="text">
+            <string>Append extension at end</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="renameCheckBox_3">
+           <property name="text">
+            <string>Create backup if file exists</string>
            </property>
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -1128,18 +1273,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>startDelaySpinBox</tabstop>
   <tabstop>browse1PushButton</tabstop>
   <tabstop>ext1ComboBox</tabstop>
-  <tabstop>path3LineEdit</tabstop>
-  <tabstop>browse3PushButton</tabstop>
-  <tabstop>ext3ComboBox</tabstop>
-  <tabstop>ext2ComboBox</tabstop>
-  <tabstop>browse2PushButton</tabstop>
-  <tabstop>path2LineEdit</tabstop>
-  <tabstop>overwriteCheckBox</tabstop>
-  <tabstop>renameCheckBox</tabstop>
-  <tabstop>spinBox</tabstop>
-  <tabstop>checkBox_2</tabstop>
-  <tabstop>checkBox</tabstop>
-  <tabstop>recieveTimeoutSpinBox</tabstop>
   <tabstop>path1LineEdit</tabstop>
  </tabstops>
  <resources>
