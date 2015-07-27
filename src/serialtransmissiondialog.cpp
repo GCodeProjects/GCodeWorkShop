@@ -63,6 +63,12 @@ SerialTransmissionDialog::~SerialTransmissionDialog()
     updateLedsTimer->stop();
     autoCloseTimer->stop();
 
+    if(logFile.isOpen())
+    {
+        logFile.flush();
+        logFile.close();
+    };
+
     if(serialPort.isOpen())
     {
         serialPort.flush();
@@ -292,9 +298,9 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
     };
 
 
-    //statusBar()->showMessage(text);
+    msgBox.setWindowTitle(tr("EdytorNC - serial transmission"));
     msgBox.setText(text);
-    msgBox.setIcon(QMessageBox::Warning);
+    msgBox.setIcon(QMessageBox::Critical);
     msgBox.exec();
 }
 
@@ -519,7 +525,6 @@ void SerialTransmissionDialog::loadConfig(QString configName)
 
     stop = true;
     QSettings settings("EdytorNC", "EdytorNC");
-
     settings.beginGroup("SerialPortConfigs");
 
 #ifdef Q_OS_WIN32
@@ -529,7 +534,6 @@ void SerialTransmissionDialog::loadConfig(QString configName)
 #endif
 
     settings.beginGroup(configName);
-
 
     portName = settings.value("PortName", port).toString();
     portSettings.BaudRate = (QSerialPort::BaudRate) settings.value("BaudRate", QSerialPort::Baud9600).toInt();
@@ -549,8 +553,20 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     removeSpaceEOB = settings.value("RemoveSpaceEOB", false).toBool();
     autoCloseCountnerReloadValue = settings.value("AutoCloseTime", 15).toInt();
     sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
-    doNotShowProgressInEditor = settings.value("DoNotShowProgressInEditor", false).toBool();
     recieveTimeout = settings.value("RecieveTimeout", 0).toInt();
+
+
+    autoSave = settings.value("AutoSave", false).toBool();
+
+    createLogFile = settings.value("CreateLogFile", true).toBool();
+    renameIfExists = settings.value("CreateBackup", true).toBool();
+    removeLetters = settings.value("RemoveLetters", true).toBool();
+    guessFileNameByProgName = settings.value("DetectFormFileName", true).toBool();
+    appendExt = settings.value("AppendExtension", false).toBool();
+
+    savePath = settings.value("SavePath", "").toString();
+    saveExt = settings.value("SaveExt", ".nc").toString();
+
 
 
     settings.endGroup();
@@ -576,6 +592,19 @@ void SerialTransmissionDialog::loadConfig(QString configName)
         sendAtEnd.replace(pos, exp.matchedLength(), QString(chr));
     };
     sendAtEnd.remove(" ");
+
+
+    // log file
+    if((!savePath.isEmpty()) && createLogFile)
+    {
+        logFile.setFileName(savePath+ "/" + configName + "_serial_log" + ".txt");
+        if(logFile.open(QIODevice::WriteOnly | QIODevice::Append))
+        {
+            qDebug() << "Cannot create log file";
+        };
+
+    };
+
 }
 
 //**************************************************************************************************
@@ -591,10 +620,10 @@ void SerialTransmissionDialog::lineDelaySlot()
 //
 //**************************************************************************************************
 
-void SerialTransmissionDialog::receiveData(QString *readData, QString configName)
+QString SerialTransmissionDialog::receiveData(QString *readData, QString configName)
 {
     if(configName.isEmpty())
-        return;
+        return "";
 
     loadConfig(configName);
 
@@ -638,7 +667,7 @@ void SerialTransmissionDialog::receiveData(QString *readData, QString configName
     else
     {
         stop = true;
-        return;
+        return "";
     };
 
 
@@ -650,7 +679,7 @@ void SerialTransmissionDialog::receiveData(QString *readData, QString configName
     readData->clear();
 
     if(serialPortReadBuffer.isEmpty())
-        return;
+        return "";
 
     QString eobString;
     qint64 j;
@@ -715,7 +744,287 @@ void SerialTransmissionDialog::receiveData(QString *readData, QString configName
             };
         };
     };
+
+
+    return saveDataToFile(readData);
+
 }
+
+//**************************************************************************************************
+// Tries to guess the file name
+//**************************************************************************************************
+
+QString SerialTransmissionDialog::guessFileName(QString *text, bool byProgNum = true)
+{
+    QString fileName;
+    int pos;
+    QRegExp expression;
+
+    if(text->isEmpty())
+        return "";
+
+    if(byProgNum)
+    {
+        forever
+        {
+            expression.setPattern(FILENAME_SINU840);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                fileName.remove("%_N_");
+                //fileName.remove(QRegExp("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
+                fileName.replace('_', '.');
+                qDebug() << "3" << fileName;
+                break;
+            };
+
+            expression.setPattern(FILENAME_OSP);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                fileName.remove("$");
+                fileName.remove(QRegExp("[%]{0,1}"));
+                //fileName.remove(QRegExp(".(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
+                qDebug() << "10" << fileName;
+                break;
+            };
+
+            expression.setPattern(FILENAME_SINU);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                //fileName.remove(QRegExp("%(MPF|SPF|TEA)[\\s]{0,3}"));
+
+                expression.setPattern("%(MPF|SPF|TEA)[\\s]{0,3}");
+                QString ext = ext.mid(pos, expression.matchedLength());
+                fileName.remove(expression);
+                ext.remove(" ");
+                ext.remove("%");
+                ext.prepend('.');
+                fileName.append(ext);
+                qDebug() << "11" << fileName << ext;
+                break;
+            };
+
+            expression.setPattern(FILENAME_PHIL);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                fileName.remove(QRegExp("%PM[\\s]{1,}[N]{1,1}"));
+                qDebug() << "12" << fileName;
+                break;
+            };
+
+            expression.setPattern(FILENAME_FANUC);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+
+                if(fileName.at(0)!='O')
+                    fileName[0]='O';
+                if(fileName.at(0)=='O' && fileName.at(1)=='O')
+                    fileName.remove(0,1);
+                qDebug() << "13" << fileName;
+                break;
+            }
+
+            expression.setPattern(FILENAME_HEID1);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                fileName.remove("%");
+                fileName.remove(QRegExp("\\s"));
+                qDebug() << "14" << fileName;
+                break;
+            };
+
+            expression.setPattern(FILENAME_HEID2);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                fileName.remove(QRegExp("(BEGIN)(\\sPGM\\s)"));
+                fileName.remove(QRegExp("(\\sMM|\\sINCH)"));
+                qDebug() << "15" << fileName;
+                break;
+            };
+
+            fileName = "";
+            break;
+        };
+
+    }
+    else
+    {
+        forever
+        {
+            expression.setPattern("(;)[\\w:*=+ -/]{4,64}");
+            pos = text->indexOf(expression);
+            if(pos >= 2)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                fileName.remove(";");
+                qDebug() << "16" << fileName;
+                break;
+            };
+
+            expression.setPattern("(\\()[\\w:*=+ -/]{4,64}(\\))");
+            pos = text->indexOf(expression);
+            if(pos >= 2)
+            {
+                fileName = text->mid(pos, expression.matchedLength());
+                fileName.remove("(");
+                fileName.remove(")");
+                qDebug() << "17" << fileName;
+                break;
+            };
+
+            fileName = "";
+            break;
+
+        };
+
+    };
+
+    fileName = fileName.simplified();
+    fileName = fileName.trimmed();
+
+    return fileName;
+}
+
+//**************************************************************************************************
+//  Save received program to file. Return filename and empty program text if succes or leave program text unchanged
+//**************************************************************************************************
+
+QString SerialTransmissionDialog::saveDataToFile(QString *text)
+{
+    QFile file;
+
+    if(!autoSave)
+        return "";
+
+    if(text->isNull() || text->isEmpty())
+        return "";
+
+    QString dateTime = QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " + QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
+
+    QString fileName = guessFileName(text, guessFileNameByProgName);
+
+
+    if(fileName.isEmpty())
+    {
+        fileName = savePath + "/" + dateTime + saveExt;
+        qDebug() << "18" << fileName;
+    }
+    else
+    {
+        QString ext = "";
+        int pos = fileName.indexOf('.');
+        if(pos >= 0)
+            ext = fileName.mid(pos, fileName.length());
+        fileName.remove(ext);
+         qDebug() << "19" << fileName << ext;
+
+        if(removeLetters)
+        {
+            QString tmpName = fileName;
+            tmpName.remove(QRegExp("[a-zA-Z.]{1,}"));
+            if(!tmpName.isEmpty()) // do not allow empty file name at this point
+                fileName = tmpName;
+        };
+
+        if(saveExt == "KEEP")
+            fileName = savePath + "/" + fileName + ext;
+        else
+        {
+            if(appendExt)
+                fileName = savePath + "/" + fileName + ext.replace('.', '_') + saveExt;
+            else
+                fileName = savePath + "/" + fileName + saveExt;
+        };
+    };
+
+
+    qDebug() << "15" << fileName;
+    file.setFileName(fileName);
+
+    if(file.exists() && renameIfExists)
+    {
+        QString oldName = fileName;
+        oldName.replace(saveExt, ".bak");
+        QFile::remove(oldName);
+
+        if(file.rename(fileName, oldName))
+        {
+            // write to log file
+            writeLog(tr("SUCCES: Renaming file: \"%1\".\r\n").arg(fileName), dateTime);
+        }
+        else
+        {
+            // write error to log file
+            writeLog(tr("ERROR: Renaming file \"%1\". %2\r\n").arg(fileName).arg(file.errorString()), dateTime);
+        };
+    };
+
+    if(file.open(QIODevice::WriteOnly))
+    {
+        // save received data to file
+        QTextStream out(&file);
+        out << *text;
+        file.close();
+
+        text->clear(); // return empty text
+
+
+        // write to log file
+        writeLog(tr("SUCCES: Saved file: \"%1\".\r\n").arg(fileName), dateTime);
+    }
+    else
+    {
+        // write error to log file
+        writeLog(tr("ERROR: Saving file \"%1\". %2\r\n").arg(fileName).arg(file.errorString()), dateTime);
+    };
+
+    return fileName;
+
+}
+
+//**************************************************************************************************
+//  Write to log file
+//**************************************************************************************************
+
+void SerialTransmissionDialog::writeLog(QString msg, QString timeStamp = "")
+{
+    QByteArray text;
+
+    if(logFile.isOpen())
+    {
+        if(timeStamp.isEmpty())
+        {
+            text.append(QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " + QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+")));
+        }
+        else
+            text.append(timeStamp);
+
+        text.append("\t");
+        logFile.write(text, text.length());
+
+        text.clear();
+        text.append(msg);
+        logFile.write(text, text.length());
+    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 
 //**************************************************************************************************
 //

@@ -29,6 +29,7 @@
 #include <QtSerialPort/QSerialPort>
 
 #include "serialtransmission.h"
+#include "commoninc.h"
 
 #include "ui_serialtransmissiondialog.h"
 
@@ -39,7 +40,7 @@ class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionD
 public:
     SerialTransmissionDialog(QWidget *parent = 0);
     ~SerialTransmissionDialog();
-    void receiveData(QString *readData, QString configName);
+    QString receiveData(QString *readData, QString configName);
     void sendData(QString dataToSend, QString configName);
 
 public slots:
@@ -72,6 +73,9 @@ private:
     void setValue(int val);
     void setLabelText(const QString text);
     void loadConfig(QString configName);
+    QString guessFileName(QString *text, bool byProgNum);
+    QString saveDataToFile(QString *text);
+    void writeLog(QString msg, QString timeStamp);
 
 
     QSerialPort serialPort;
@@ -87,6 +91,11 @@ private:
     bool prevXoffReceived;
     int autoCloseCountner;
     int autoCloseCountnerReloadValue;
+    bool guessFileNameByProgName;
+    bool createLogFile;
+    bool renameIfExists;
+    bool removeLetters;
+    bool appendExt;
 
     bool stop;
     QString portName, sendAtEnd, sendAtBegining;
@@ -104,9 +113,13 @@ private:
     bool endOfBlockLF;
     bool removeSpaceEOB;
     int sendStartDelay;
-    bool doNotShowProgressInEditor;
     int recieveTimeout;
 
+    bool autoSave;
+    QString savePath;
+    QString saveExt;
+
+    QFile logFile;
 
 
 };

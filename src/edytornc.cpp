@@ -4397,7 +4397,7 @@ void EdytorNc::loadPrinterSettings(QPrinter *printer)
 
 void EdytorNc::serialConfig()
 {
-    SPConfigDialog *serialConfigDialog = new SPConfigDialog(this, configBox->currentText());
+    SerialPortConfigDialog *serialConfigDialog = new SerialPortConfigDialog(this, configBox->currentText());
 
     if(serialConfigDialog->exec() == QDialog::Accepted)
         loadSerialConfignames();
@@ -4484,29 +4484,40 @@ void EdytorNc::receiveButtonClicked()
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     SerialTransmissionDialog transmissionDialog(this);
-    transmissionDialog.receiveData(&tx, configBox->currentText());
+    QString fileName = transmissionDialog.receiveData(&tx, configBox->currentText());
 
-    if(!tx.isEmpty() && !tx.isNull())
+    if(fileName.isEmpty())
     {
-        int i = configBox->currentIndex();
-        activeWindow = newFile();
-        if(activeWindow <= NULL)
-            return;
-        configBox->setCurrentIndex(i);
-
-        if(activeWindow)
+        if(!tx.isEmpty() && !tx.isNull())
         {
-            activeWindow->textEdit->clear();
-            activeWindow->textEdit->insertPlainText(tx);
+            int i = configBox->currentIndex();
+            activeWindow = newFile();
+            if(activeWindow <= NULL)
+                return;
+            configBox->setCurrentIndex(i);
 
-            activeWindow->setHighligthMode(MODE_AUTO);
-            if(defaultMdiWindowProperites.defaultReadOnly)
-                activeWindow->textEdit->isReadOnly();
+            if(activeWindow)
+            {
+                activeWindow->textEdit->clear();
+                activeWindow->textEdit->insertPlainText(tx);
 
-            activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
+                activeWindow->setHighligthMode(MODE_AUTO);
+                if(defaultMdiWindowProperites.defaultReadOnly)
+                    activeWindow->textEdit->isReadOnly();
 
+                activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
+
+            };
         };
+    }
+    else
+    {
+        int id = configBox->currentIndex();
+        openFile(fileName);
+        configBox->setCurrentIndex(id);
     };
+
+
 
     receiveAct->setEnabled(true);
     sendAct->setEnabled(true);
