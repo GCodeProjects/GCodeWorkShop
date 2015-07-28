@@ -989,6 +989,9 @@ QString SerialTransmissionDialog::guessFileName(QString *text)
 
     qDebug() << "19" << fileName << extension << appendExt << useAsExt;
 
+    if(fileName.isEmpty())
+        return fileName;
+
     if(removeLetters)
     {
         QString tmpName = fileName;
@@ -1148,52 +1151,49 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
        {
            exp.clear();
            exp.append(expTx);
-           tx = expTx;
            break;
        };
    };
 
-   QRegExp expression(tx);
-   progs = text->split(expression);
 
-//   //  prepare program list
-//   index = 0;
-//   foreach(const QString expTx, exp)
-//   {
-//      QRegExp expression(expTx);
-//      do
-//      {
-//         index = text->indexOf(expression, index);
-//         if(index >= 0)
-//         {
-//            progBegins.append(index);
-//            index += expression.matchedLength();
-//         }
-//         else
-//            index = 0;
+   //  prepare program list
+   index = 0;
+   foreach(const QString expTx, exp)
+   {
+      QRegExp expression(expTx);
+      do
+      {
+         index = text->indexOf(expression, index);
+         if(index >= 0)
+         {
+            progBegins.append(index);
+            index += expression.matchedLength();
+         }
+         else
+            index = 0;
 
-//      }while(index > 0);
-//   };
-//   qSort(progBegins.begin(), progBegins.end());
+      }while(index > 0);
+   };
+   qSort(progBegins.begin(), progBegins.end());
 
 
-//   // split file
-//   QList<int>::const_iterator it = progBegins.constBegin();
-//   while(it != progBegins.constEnd())
-//   {
-//      progBegin = *it;
-//      it++;
-//      if(it != progBegins.constEnd())
-//         progEnd = *it;
-//      else
-//         progEnd = text->size();
+   // split file  TODO: data can be lost if filename detection fails
+   QList<int>::const_iterator it = progBegins.constBegin();
+   while(it != progBegins.constEnd())
+   {
+      progBegin = *it;
+      it++;
+      if(it != progBegins.constEnd())
+         progEnd = *it;
+      else
+         progEnd = text->size();
 
-//      tx = text->mid(progBegin, progEnd - progBegin);
-//      if(!tx.isEmpty())
-//      {
-//         progs.append(tx);
-//      };
-//   };
+      tx = text->mid(progBegin, progEnd - progBegin);
+      if(!tx.isEmpty())
+      {
+         progs.append(tx);
+      };
+   };
 
    return progs;
 }
