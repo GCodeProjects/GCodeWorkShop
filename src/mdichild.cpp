@@ -3007,7 +3007,7 @@ QString MdiChild::guessFileName()
             {
                 fileName = text.mid(pos, expression.matchedLength());
                 fileName.remove(QLatin1String("$"));
-                fileName.remove(QRegExp(".(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
+                fileName.remove(QRegExp("\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
                 break;
             };
 
@@ -3134,6 +3134,19 @@ QStringList MdiChild::splitFile()
        << FILENAME_HEID2
        << FILENAME_PHIL ;
 
+
+   // detect CNC control type
+   foreach(const QString expTx, exp)
+   {
+       QRegExp expression(expTx);
+       if(text.contains(expression))
+       {
+           exp.clear();
+           exp.append(expTx);
+           break;
+       };
+   };
+
    index = 0;
    foreach(const QString expTx, exp)
    {
@@ -3172,72 +3185,6 @@ QStringList MdiChild::splitFile()
 
    return progs;
 }
-
-//**************************************************************************************************
-//  insert/remove block skip /
-//**************************************************************************************************
-
-//void MdiChild::blockSkip()
-//{
-//    int idx;
-
-//    if(textEdit->textCursor().hasSelection())
-//    {
-//        QTextCursor cursor = textEdit->textCursor();
-
-//        int start = textEdit->textCursor().selectionStart();
-//        int end = textEdit->textCursor().selectionEnd();
-//        if(start < end)  // selection always in same direction
-//        {
-//            cursor.setPosition(end, QTextCursor::MoveAnchor);
-//            cursor.setPosition(start, QTextCursor::KeepAnchor);
-//        };
-
-//        cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
-//        textEdit->setTextCursor(cursor);
-//        QString selText = cursor.selectedText();
-
-//        QStringList list = selText.split(QChar::ParagraphSeparator);
-//        if(list.isEmpty())
-//            list.append(selText);
-
-//        bool remove = false;
-
-//        if(selText[0] == '/')
-//            remove = true;
-
-//        selText.clear();
-
-//        foreach(QString txLine, list)
-//        {
-//            if(remove)
-//            {
-//                if(txLine.length() > 0)
-//                {
-//                    idx = txLine.indexOf("/ ");
-//                    if(idx == 0)
-//                        txLine.remove(idx, 2);
-//                    else
-//                    {
-//                        idx = txLine.indexOf("/");
-//                        if(idx == 0)
-//                            txLine.remove(idx, 1);
-//                    };
-//                };
-//            }
-//            else
-//                txLine.prepend("/");
-
-//            txLine.append("\n");
-//            selText.append(txLine);
-//        };
-
-//        selText.remove(selText.length() - 1, 1);
-
-//        textEdit->insertPlainText(selText);
-//        textEdit->setTextCursor(cursor);
-//    };
-//}
 
 //**************************************************************************************************
 //  insert/remove block skip /

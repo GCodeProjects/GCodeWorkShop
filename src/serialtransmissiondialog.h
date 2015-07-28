@@ -40,7 +40,7 @@ class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionD
 public:
     SerialTransmissionDialog(QWidget *parent = 0);
     ~SerialTransmissionDialog();
-    QString receiveData(QString *readData, QString configName);
+    QStringList receiveData(QString configName);
     void sendData(QString dataToSend, QString configName);
 
 public slots:
@@ -73,9 +73,11 @@ private:
     void setValue(int val);
     void setLabelText(const QString text);
     void loadConfig(QString configName);
-    QString guessFileName(QString *text, bool byProgNum);
+    QString guessFileName(QString *text);
     QString saveDataToFile(QString *text);
-    void writeLog(QString msg, QString timeStamp);
+    void writeLog(QString msg, QString timeStamp = "");
+    QStringList splitFile(QString *text);
+    QStringList processReceivedData();
 
 
     QSerialPort serialPort;
@@ -96,6 +98,9 @@ private:
     bool renameIfExists;
     bool removeLetters;
     bool appendExt;
+    bool useAsExt;
+    bool splitPrograms;
+    QString endOfProgChar;
 
     bool stop;
     QString portName, sendAtEnd, sendAtBegining;

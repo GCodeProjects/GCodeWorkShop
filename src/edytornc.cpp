@@ -4471,53 +4471,53 @@ void EdytorNc::sendButtonClicked()
 
 void EdytorNc::receiveButtonClicked()
 {
-    QString tx;
     MdiChild *activeWindow;
-
-
-    activeWindow = activeMdiChild();
-    if(activeWindow <= NULL)
-        return;
 
     receiveAct->setEnabled(false);
     sendAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     SerialTransmissionDialog transmissionDialog(this);
-    QString fileName = transmissionDialog.receiveData(&tx, configBox->currentText());
+    QStringList progList = transmissionDialog.receiveData(configBox->currentText());
 
-    if(fileName.isEmpty())
+    if(!progList.isEmpty())
     {
-        if(!tx.isEmpty() && !tx.isNull())
+        int id = configBox->currentIndex();
+
+        QStringList::const_iterator it = progList.constBegin();
+        if((*it) == "#FILE_LIST#")
         {
-            int i = configBox->currentIndex();
-            activeWindow = newFile();
-            if(activeWindow <= NULL)
-                return;
-            configBox->setCurrentIndex(i);
-
-            if(activeWindow)
+            while(it != progList.constEnd())
             {
-                activeWindow->textEdit->clear();
-                activeWindow->textEdit->insertPlainText(tx);
+                openFile(*it);  // #TODO: notification about file change
+                it++;
+            };
+        }
+        else
+        {
+            if(!(*it).isEmpty() && !(*it).isNull())
+            {
+                activeWindow = newFile();
+                if(activeWindow <= NULL)
+                    return;
 
-                activeWindow->setHighligthMode(MODE_AUTO);
-                if(defaultMdiWindowProperites.defaultReadOnly)
-                    activeWindow->textEdit->isReadOnly();
+                if(activeWindow)
+                {
+                    activeWindow->textEdit->clear();
+                    activeWindow->textEdit->insertPlainText(*it);
 
-                activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
+                    activeWindow->setHighligthMode(MODE_AUTO);
+                    if(defaultMdiWindowProperites.defaultReadOnly)
+                        activeWindow->textEdit->isReadOnly();
+
+                    activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
+
+                };
 
             };
         };
-    }
-    else
-    {
-        int id = configBox->currentIndex();
-        openFile(fileName);
         configBox->setCurrentIndex(id);
     };
-
-
 
     receiveAct->setEnabled(true);
     sendAct->setEnabled(true);
