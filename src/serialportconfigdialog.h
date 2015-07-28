@@ -73,10 +73,12 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
      void browse1ButtonClicked();
      void browse2ButtonClicked();
      void browse3ButtonClicked();
+     void browse4ButtonClicked();
      void portNameComboBoxIndexChanged(QString name);
      void autoSaveCheckBoxChanged(int state);
-     void ext1BoxChanged(const QString text);
      void appendExtCheckBoxChanged(int state);
+     void useAsExtCheckBoxChanged(int state);
+     void fileServerCheckBoxChanged(int state);
 
 
    private:

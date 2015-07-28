@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>641</width>
-    <height>370</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -835,6 +835,16 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="logFileCheckBox">
+         <property name="toolTip">
+          <string>Save debug information to log file: &quot;Settings name&quot;_log.txt in save path.</string>
+         </property>
+         <property name="text">
+          <string>Create log file</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="autoSaveTab">
@@ -877,9 +887,15 @@ If the file name has not been automatically detected, the file name will be the 
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="path1LineEdit">
+          <widget class="QLineEdit" name="savePathLineEdit">
            <property name="text">
             <string/>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -895,7 +911,7 @@ If the file name has not been automatically detected, the file name will be the 
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QComboBox" name="ext1ComboBox">
+          <widget class="QComboBox" name="saveExtComboBox">
            <property name="toolTip">
             <string>Choose file extension or &quot;KEEP&quot; to use extension from received file.</string>
            </property>
@@ -914,14 +930,14 @@ If the file name has not been automatically detected, the file name will be the 
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_10">
-         <item row="2" column="0">
+         <item row="4" column="0">
           <widget class="QCheckBox" name="removeLettersCheckBox">
            <property name="text">
             <string>Remove letters from filename</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="3" column="0">
           <widget class="QCheckBox" name="renameCheckBox">
            <property name="text">
             <string>Create backup if file exists</string>
@@ -938,24 +954,62 @@ If the file name has not been automatically detected, the file name will be the 
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="appendExtCheckBox">
-           <property name="toolTip">
-            <string>If program name contains extension, append it at end of filename.
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QCheckBox" name="useAsExtCheckBox">
+             <property name="text">
+              <string>Use program name extension as file extension</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="appendExtCheckBox">
+             <property name="toolTip">
+              <string>If program name contains extension, append it at end of filename.
 Can't be used with extension set to &quot;KEEP&quot;.</string>
-           </property>
+             </property>
+             <property name="text">
+              <string>Append extension at end</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="splitProgramsCheckBox">
            <property name="text">
-            <string>Append extension at end</string>
+            <string>Split programs</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="logFileCheckBox">
-           <property name="toolTip">
-            <string>Save debug information to log file: &quot;Settings name&quot;_log.txt in save path.</string>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>End of program characters</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="endOfProgCharLineEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
            <property name="text">
-            <string>Create log file</string>
+            <string>M30</string>
            </property>
           </widget>
          </item>
@@ -982,7 +1036,7 @@ Can't be used with extension set to &quot;KEEP&quot;.</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QCheckBox" name="autoSaveCheckBox_2">
+        <widget class="QCheckBox" name="fileServerCheckBox">
          <property name="toolTip">
           <string>Automatically save the received file.
 If the file name has not been automatically detected, the file name will be the current date and time.</string>
@@ -996,18 +1050,31 @@ If the file name has not been automatically detected, the file name will be the 
         </widget>
        </item>
        <item>
+        <widget class="Line" name="line_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
         <layout class="QGridLayout" name="gridLayout_13">
          <item row="1" column="0">
           <widget class="QLabel" name="label_10">
            <property name="text">
-            <string>Read path</string>
+            <string>Search path 1</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="path2LineEdit">
+          <widget class="QLineEdit" name="searchPath1LineEdit">
            <property name="text">
             <string/>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -1023,7 +1090,7 @@ If the file name has not been automatically detected, the file name will be the 
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QComboBox" name="ext2ComboBox">
+          <widget class="QComboBox" name="searchExt1ComboBox">
            <property name="toolTip">
             <string>Choose file extension or &quot;KEEP&quot; to use extension from received file.</string>
            </property>
@@ -1039,10 +1106,17 @@ If the file name has not been automatically detected, the file name will be the 
           </widget>
          </item>
          <item row="10" column="1">
-          <widget class="QLineEdit" name="path3LineEdit_3"/>
+          <widget class="QLineEdit" name="searchPath3LineEdit">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item row="10" column="3">
-          <widget class="QComboBox" name="ext3ComboBox_3">
+          <widget class="QComboBox" name="searchExt3ComboBox">
            <property name="editable">
             <bool>false</bool>
            </property>
@@ -1051,12 +1125,12 @@ If the file name has not been automatically detected, the file name will be the 
          <item row="10" column="0">
           <widget class="QLabel" name="label_18">
            <property name="text">
-            <string>All other path</string>
+            <string>Search path 3</string>
            </property>
           </widget>
          </item>
          <item row="10" column="2">
-          <widget class="QPushButton" name="browse3PushButton_3">
+          <widget class="QPushButton" name="browse4PushButton">
            <property name="text">
             <string>Browse</string>
            </property>
@@ -1067,7 +1141,7 @@ If the file name has not been automatically detected, the file name will be the 
           </widget>
          </item>
          <item row="8" column="3">
-          <widget class="QComboBox" name="ext2ComboBox_3">
+          <widget class="QComboBox" name="searchExt2ComboBox">
            <property name="editable">
             <bool>false</bool>
            </property>
@@ -1077,7 +1151,7 @@ If the file name has not been automatically detected, the file name will be the 
           </widget>
          </item>
          <item row="8" column="2">
-          <widget class="QPushButton" name="browse2PushButton_3">
+          <widget class="QPushButton" name="browse3PushButton">
            <property name="text">
             <string>Browse</string>
            </property>
@@ -1088,16 +1162,39 @@ If the file name has not been automatically detected, the file name will be the 
           </widget>
          </item>
          <item row="8" column="1">
-          <widget class="QLineEdit" name="path2LineEdit_3">
+          <widget class="QLineEdit" name="searchPath2LineEdit">
            <property name="text">
-            <string>Under construction</string>
+            <string/>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item row="8" column="0">
           <widget class="QLabel" name="label_19">
            <property name="text">
-            <string>Sub program path</string>
+            <string>Search path 2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="callerLineEdit">
+           <property name="text">
+            <string>O0001</string>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Caller filename</string>
            </property>
           </widget>
          </item>
@@ -1112,16 +1209,6 @@ If the file name has not been automatically detected, the file name will be the 
            </property>
            <property name="text">
             <string>Filename from program name</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="logFileCheckBox_3">
-           <property name="toolTip">
-            <string>Save debug information to log file: &quot;Settings name&quot;_log.txt in save path.</string>
-           </property>
-           <property name="text">
-            <string>Create log file</string>
            </property>
           </widget>
          </item>
@@ -1272,8 +1359,8 @@ Can't be used with extension set to &quot;KEEP&quot;.</string>
   <tabstop>delayDoubleSpinBox</tabstop>
   <tabstop>startDelaySpinBox</tabstop>
   <tabstop>browse1PushButton</tabstop>
-  <tabstop>ext1ComboBox</tabstop>
-  <tabstop>path1LineEdit</tabstop>
+  <tabstop>saveExtComboBox</tabstop>
+  <tabstop>savePathLineEdit</tabstop>
  </tabstops>
  <resources>
   <include location="application.qrc"/>
