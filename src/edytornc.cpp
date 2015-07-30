@@ -48,6 +48,7 @@ EdytorNc::EdytorNc()
     findFiles = NULL;
     dirModel = NULL;
     openExampleAct = NULL;
+    spServer = NULL;
 
     selectedExpressions.clear();
 
@@ -74,6 +75,8 @@ EdytorNc::EdytorNc()
 
     connect(hideButton, SIGNAL(clicked()), this, SLOT(hidePanel()));
 
+    fileChangeMonitor = new QFileSystemWatcher(this);
+    connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this, SLOT(fileChanged(const QString)));
 
     currentProjectModified = false;
 
@@ -133,7 +136,9 @@ void EdytorNc::closeTab(int i)
 {
     QTabBar* tab = mdiArea->findChild<QTabBar*>();
     if(tab != NULL)
+    {
         tab->removeTab(i);
+    };
 }
 
 //**************************************************************************************************
@@ -143,6 +148,15 @@ void EdytorNc::closeTab(int i)
 void EdytorNc::closeCurrentWindow()
 {
     mdiArea->closeActiveSubWindow();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::closeAllMdiWindows()
+{
+    mdiArea->closeAllSubWindows();
 }
 
 //**************************************************************************************************
@@ -447,8 +461,11 @@ void EdytorNc::openFile(const QString fileName)
 
 void EdytorNc::save()
 {
-    if(activeMdiChild() && activeMdiChild()->save())
-        statusBar()->showMessage(tr("File saved"), 5000);
+    if(activeMdiChild())
+    {
+        if(activeMdiChild()->save())
+            statusBar()->showMessage(tr("File saved"), 5000);
+    };
 }
 
 //**************************************************************************************************
@@ -491,7 +508,9 @@ void EdytorNc::saveAll()
 void EdytorNc::saveAs()
 {
     if(activeMdiChild() && activeMdiChild()->saveAs())
+    {
         statusBar()->showMessage(tr("File saved"), 5000);
+    };
 }
 
 //**************************************************************************************************
@@ -1660,7 +1679,7 @@ MdiChild *EdytorNc::createMdiChild()
 {
     MdiChild *child = new MdiChild();
     mdiArea->addSubWindow(child);
-
+    child->setFileChangeMonitor(fileChangeMonitor);
 
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
@@ -1956,7 +1975,7 @@ void EdytorNc::createActions()
 
     closeAllAct = new QAction(QIcon(":/images/window-close.png"), tr("Close &All"), this);
     closeAllAct->setToolTip(tr("Close all the windows"));
-    connect(closeAllAct, SIGNAL(triggered()), mdiArea, SLOT(closeAllSubWindows()));
+    connect(closeAllAct, SIGNAL(triggered()), this, SLOT(closeAllMdiWindows()));
 
     tileAct = new QAction(QIcon(":/images/tile_h.png"), tr("&Tile"), this);
     tileAct->setToolTip(tr("Tile the windows"));
@@ -2357,28 +2376,6 @@ void EdytorNc::readSettings()
         currentSession = settings.value("CurrentSession", tr("default")).toString();
     else
         currentSession = tr("default");
-
-
-//    if(!defaultMdiWindowProperites.startEmpty)
-//    {
-//        int max = settings.beginReadArray(currentSession);
-//        for(int i = 0; i < max; ++i)
-//        {
-//            settings.setArrayIndex(i);
-//            defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
-
-//            defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
-//            if(!defaultMdiWindowProperites.fileName.isEmpty())
-//            {
-//                defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
-//                defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", false).toBool();
-//                defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
-//                defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode", MODE_AUTO).toInt();
-//                loadFile(defaultMdiWindowProperites, false);
-//            };
-//        };
-//        settings.endArray();
-//    };
 
     settings.endGroup();
 
@@ -2994,6 +2991,12 @@ void EdytorNc::createSerialToolBar()
         serialCloseAct->setToolTip(tr("Close send/receive toolbar"));
         connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
 
+        spServerAct = new QAction(QIcon(":/images/spserver.png"), tr("Start serial port file server"), this);
+        //diagAct->setShortcut(tr("F3"));
+        spServerAct->setToolTip(tr("Start serial port file server"));
+        spServerAct->setCheckable(true);
+        spServerAct->setChecked(false);
+        connect(spServerAct, SIGNAL(triggered()), this, SLOT(startSerialPortServer()));
 
         configBox = new QComboBox();
         configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -3001,6 +3004,7 @@ void EdytorNc::createSerialToolBar()
 
 
         //serialToolBar->addSeparator();
+        serialToolBar->addAction(spServerAct);
         serialToolBar->addAction(attachToDirAct);
         serialToolBar->addAction(deAttachToDirAct);
         serialToolBar->addSeparator();
@@ -3130,7 +3134,7 @@ void EdytorNc::doCmpMacro()
 
     if((child->compileMacro() == -1))
     {
-        child->textEdit->document()->setModified(false);
+        child->setModified(false);
         //child->close();
         return;
     };
@@ -4422,7 +4426,8 @@ void EdytorNc::loadSerialConfignames()
     configBox->addItems(list);
     item = settings.value("CurrentSerialPortSettings", tr("Default")).toString();
     id = configBox->findText(item);
-    configBox->setCurrentIndex(id);
+    if(id >= 0)
+        configBox->setCurrentIndex(id);
 
     settings.endGroup();
 }
@@ -4453,6 +4458,7 @@ void EdytorNc::sendButtonClicked()
 
     receiveAct->setEnabled(false);
     sendAct->setEnabled(false);
+    spServerAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     tx.append(activeWindow->textEdit->toPlainText());
@@ -4462,6 +4468,7 @@ void EdytorNc::sendButtonClicked()
 
     receiveAct->setEnabled(true);
     sendAct->setEnabled(true);
+    spServerAct->setEnabled(true);
     QApplication::restoreOverrideCursor();
 }
 
@@ -4475,6 +4482,7 @@ void EdytorNc::receiveButtonClicked()
 
     receiveAct->setEnabled(false);
     sendAct->setEnabled(false);
+    spServerAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     SerialTransmissionDialog transmissionDialog(this);
@@ -4487,9 +4495,10 @@ void EdytorNc::receiveButtonClicked()
         QStringList::const_iterator it = progList.constBegin();
         if((*it) == "#FILE_LIST#")
         {
+            it++;
             while(it != progList.constEnd())
             {
-                openFile(*it);  // #TODO: notification about file change
+                openFile(*it);
                 it++;
             };
         }
@@ -4521,7 +4530,88 @@ void EdytorNc::receiveButtonClicked()
 
     receiveAct->setEnabled(true);
     sendAct->setEnabled(true);
+    spServerAct->setEnabled(true);
     QApplication::restoreOverrideCursor();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::fileChanged(const QString fileName)
+{
+    QMdiSubWindow *existing;
+    MdiChild *mdiChild = NULL;
+    bool modified = false;
+
+    existing = findMdiChild(fileName);
+    if(existing)
+    {
+        mdiChild = qobject_cast<MdiChild *>(existing->widget());
+        modified = mdiChild->isModified();
+        mdiArea->setActiveSubWindow(existing);
+    }
+    else
+    {
+        fileChangeMonitor->removePath(fileName);
+        return;
+    };
+
+    fileChangeMonitor->addPath(fileName);
+
+    QMessageBox msgBox;
+    msgBox.setText(tr("File \"%1\" <b>was modified on disk.</b><p>Do you want to reload it?</p>%2")
+                   .arg(fileName)
+                   .arg((modified ? tr("<p><b>Warning</b> File in editor contains unsaved changes.</p>") : "")));
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    msgBox.setIcon(QMessageBox::Warning);
+
+    int ret = msgBox.exec();
+    switch(ret)
+    {
+       case QMessageBox::Yes : mdiChild->loadFile(fileName);
+                               break;
+       case QMessageBox::No  : break;
+       default               : break;
+    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::startSerialPortServer()
+{
+    bool stop = false;
+
+    if(spServer <= NULL)
+    {
+        spServer = new SerialTransmissionDialog(this);
+        if(spServer <= NULL)
+        {
+            spServerAct->setChecked(false);
+        };
+    };
+
+    if(spServer > NULL)
+    {
+        spServer->setModal(false);
+        spServer->showNormal();
+        stop = spServer->startFileServer(configBox->currentText(), spServerAct->isChecked());
+        qDebug() << " Start 3" << spServer << !spServerAct->isChecked() << stop;
+        if(stop)
+        {
+            spServer->close();
+            delete(spServer);
+            spServer = NULL;
+        };
+
+    };
+
+    receiveAct->setEnabled(stop);
+    sendAct->setEnabled(stop);
+    spServerAct->setChecked(!stop);
 }
 
 //**************************************************************************************************

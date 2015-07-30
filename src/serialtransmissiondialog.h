@@ -42,6 +42,7 @@ public:
     ~SerialTransmissionDialog();
     QStringList receiveData(QString configName);
     void sendData(QString dataToSend, QString configName);
+    bool startFileServer(QString configName, bool state = false);
 
 public slots:
     bool wasCanceled();
@@ -66,6 +67,9 @@ private slots:
     void serialPortReadyRead();
     void serialPortRequestToSend(bool set);
     void lineDelaySlot();
+    void fileServerReadyRead();
+    void fileServerReceiveTimeout();
+    void fileServerBytesWritten(qint64 bytes);
 
 
 private:
@@ -78,6 +82,8 @@ private:
     void writeLog(QString msg, QString timeStamp = "");
     QStringList splitFile(QString *text);
     QStringList processReceivedData();
+    void prepareDataBeforeSending(QString *data);
+    void proccesSpecialCharacters(QString *text, QString *fileData);
 
 
     QSerialPort serialPort;
@@ -87,12 +93,15 @@ private:
     QStringList serialPortWriteBuffer;
     QTimer *updateLedsTimer;
     QTimer *autoCloseTimer;
+    QTimer *fileServerDataTimeoutTimer;
     qint64 bytesWritten;
     qint64 noOfBytes;
-    QStringList::iterator it;
+    QStringList::iterator writeBufferIterator;
     bool prevXoffReceived;
     int autoCloseCountner;
     int autoCloseCountnerReloadValue;
+    int fileServerDataTimeoutCountner;
+    int fileServerDataTimeoutCountnerReloadValue;
     bool guessFileNameByProgName;
     bool createLogFile;
     bool renameIfExists;
@@ -101,6 +110,7 @@ private:
     bool useAsExt;
     bool splitPrograms;
     QString endOfProgChar;
+    int eobChar;
 
     bool stop;
     QString portName, sendAtEnd, sendAtBegining;
@@ -115,7 +125,6 @@ private:
     bool deleteControlChars;
     bool removeEmptyLines;
     bool removeBefore;
-    bool endOfBlockLF;
     bool removeSpaceEOB;
     int sendStartDelay;
     int recieveTimeout;
@@ -124,7 +133,7 @@ private:
     QString savePath;
     QString saveExt;
 
-    QFile logFile;
+
 
 
 };

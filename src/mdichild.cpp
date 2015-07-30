@@ -48,11 +48,11 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    textEdit->viewport()->installEventFilter(this);
    setWindowIcon(QIcon(":/images/ncfile.png"));
 
+   fileChangeMonitor = NULL;
 
    splitterH->setBackgroundRole(QPalette::Base);
    marginWidget->setBackgroundRole(QPalette::Base);
 
-   createContextMenuActions();
    textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
    connect(textEdit, SIGNAL(customContextMenuRequested(const QPoint&)),
               this, SLOT(showContextMenu(const QPoint &)));
@@ -92,14 +92,7 @@ void MdiChild::newFile()
 void MdiChild::newFile(const QString &fileName)
 {
     QFile file(fileName);
-    if(!file.open(QIODevice::ReadOnly))
-    {
-        QMessageBox::warning(this, tr("EdytorNC"),
-                             tr("Cannot read file \"%1\".\n %2")
-                             .arg(fileName)
-                             .arg(file.errorString()));
-    }
-    else
+    if(file.open(QIODevice::ReadOnly))
     {
         QTextStream in(&file);
         QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -108,6 +101,15 @@ void MdiChild::newFile(const QString &fileName)
         textEdit->setPlainText(tex);
         file.close();
         QApplication::restoreOverrideCursor();
+        fileChangeMonitorAddPath(file.fileName());
+
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("EdytorNC"),
+                             tr("Cannot read file \"%1\".\n %2")
+                             .arg(fileName)
+                             .arg(file.errorString()));
     };
 
     newFile();
@@ -119,29 +121,30 @@ void MdiChild::newFile(const QString &fileName)
 
 bool MdiChild::loadFile(const QString &fileName)
 {
+    QFile file(fileName);
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QTextStream in(&file);
+        QApplication::setOverrideCursor(Qt::WaitCursor);
 
-   QFile file(fileName);
-   if(!file.open(QIODevice::ReadOnly))
-   {
-      QMessageBox::warning(this, tr("EdytorNC"),
-                           tr("Cannot read file \"%1\".\n %2")
-                           .arg(fileName)
-                           .arg(file.errorString()));
-      return false;
-   }
+        QString tex = in.readAll();
+        textEdit->setPlainText(tex);
+        file.close();
+        QApplication::restoreOverrideCursor();
 
-   QTextStream in(&file);
-   QApplication::setOverrideCursor(Qt::WaitCursor);
-
-   QString tex = in.readAll();
-   textEdit->setPlainText(tex);
-   file.close();
-   QApplication::restoreOverrideCursor();
-
-   setCurrentFile(fileName, tex);
-   connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
-
-   return true;
+        setCurrentFile(fileName, tex);
+        connect(textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+        fileChangeMonitorAddPath(fileName);
+        return true;
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("EdytorNC"),
+                             tr("Cannot read file \"%1\".\n %2")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return false;
+    };
 }
 
 //**************************************************************************************************
@@ -204,83 +207,90 @@ bool MdiChild::save()
 
 bool MdiChild::saveAs()
 {
-   QString fileName, filters, saveExt;
+    QString fileName, filters, saveExt;
 
 
 
 #ifdef Q_OS_LINUX
 
-   QString extText = tr("CNC programs files %1 (%1);;");
+    QString extText = tr("CNC programs files %1 (%1);;");
 
 #endif
 
 #ifdef Q_OS_WIN32
 
-   QString extText = tr("CNC programs files (%1);;");
+    QString extText = tr("CNC programs files (%1);;");
 
 #endif
 
 #ifdef Q_OS_MACX
 
-   QString extText = tr("CNC programs files %1 (%1);;");
+    QString extText = tr("CNC programs files %1 (%1);;");
 
 #endif
 
 
-   filters = extText.arg(mdiWindowProperites.saveExtension);
+    filters = extText.arg(mdiWindowProperites.saveExtension);
 
-   foreach(const QString ext, mdiWindowProperites.extensions)
-   {
-      saveExt = extText.arg(ext);
-      if(ext != mdiWindowProperites.saveExtension)
-        filters.append(saveExt);
-   };
+    foreach(const QString ext, mdiWindowProperites.extensions)
+    {
+        saveExt = extText.arg(ext);
+        if(ext != mdiWindowProperites.saveExtension)
+            filters.append(saveExt);
+    };
 
-   filters.append(tr("Text files (*.txt);;"
-                     "All files (*.* *)"));
+    filters.append(tr("Text files (*.txt);;"
+                      "All files (*.* *)"));
 
 
-   if(isUntitled)
-   {
-       fileName = guessFileName();
-   }
-   else
-       fileName = curFile;
+    if(isUntitled)
+    {
+        fileName = guessFileName();
+    }
+    else
+        fileName = curFile;
 
-   QString file = QFileDialog::getSaveFileName(
-               this,
-               tr("Save file as..."),
-               fileName,
-               filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
+    if(QFileInfo(fileName).suffix() == "") // sometimes when file has no extension QFileDialog::getSaveFileName will no apply choosen filter (extension)
+    {
+        fileName.append(".nc");
+    };
 
-   if(file.isEmpty() || file.isNull())
-       return false;
+    QString file = QFileDialog::getSaveFileName(
+                this,
+                tr("Save file as..."),
+                fileName,
+                filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
 
-   if((QFile(file).exists()))
-   {
-      QMessageBox msgBox;
-      msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(file));
-      msgBox.setInformativeText(tr("Do you want overwrite it ?"));
-      msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
-      msgBox.setDefaultButton(QMessageBox::Discard);
-      msgBox.setIcon(QMessageBox::Warning);
-      int ret = msgBox.exec();
+    if(file.isEmpty() || file.isNull())
+        return false;
 
-      switch(ret)
-      {
-         case QMessageBox::Save    :
-              break;
-         case QMessageBox::Discard :
-              return false;
-              break;
-         default                   :
-              return false;
-              break;
-      } ;
+    if(QFileInfo(file).suffix() == "")
+    {
+    };
 
-   };
+    if((QFile(file).exists()))
+    {
+        QMessageBox msgBox;
+        msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(file));
+        msgBox.setInformativeText(tr("Do you want overwrite it ?"));
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
+        msgBox.setDefaultButton(QMessageBox::Discard);
+        msgBox.setIcon(QMessageBox::Warning);
+        int ret = msgBox.exec();
 
-   return saveFile(file);
+        switch(ret)
+        {
+            case QMessageBox::Save    : break;
+            case QMessageBox::Discard : return false;
+                                        break;
+            default                   : return false;
+                                        break;
+        } ;
+
+    };
+
+    fileChangeMonitor->removePath(fileName);
+    return saveFile(file);
 
 }
 
@@ -303,6 +313,8 @@ bool MdiChild::saveFile(const QString &fileName)
                            .arg(file.errorString()));
       return false;
    };
+
+   fileChangeMonitorRemovePath(file.fileName());
 
    QApplication::setOverrideCursor(Qt::WaitCursor);
    curPos = textEdit->textCursor().position();
@@ -360,6 +372,7 @@ bool MdiChild::saveFile(const QString &fileName)
    textEdit->setTextCursor(cursor);
 
    setCurrentFile(fileName, tex);
+   fileChangeMonitorAddPath(file.fileName());
    return true;
 }
 
@@ -369,14 +382,15 @@ bool MdiChild::saveFile(const QString &fileName)
 
 void MdiChild::closeEvent(QCloseEvent *event)
 {
-   if(maybeSave())
-   {
-      event->accept();
-   }
-   else
-   {
-      event->ignore();
-   }
+    if(maybeSave())
+    {
+        fileChangeMonitorRemovePath(currentFile());
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
 }
 
 //**************************************************************************************************
@@ -3035,10 +3049,12 @@ QString MdiChild::guessFileName()
             {
                 fileName = text.mid(pos, expression.matchedLength());
 
-                if(fileName.at(0)!='O')
-                    fileName[0]='O';
-                if(fileName.at(0)=='O' && fileName.at(1)=='O')
-                    fileName.remove(0,1);
+                fileName.replace(':', 'O');
+
+//                if(fileName.at(0)!='O')
+//                    fileName[0]='O';
+//                if(fileName.at(0)=='O' && fileName.at(1)=='O')
+//                    fileName.remove(0,1);
                 break;
             }
 
@@ -3841,6 +3857,15 @@ bool MdiChild::isModified()
 //
 //**************************************************************************************************
 
+void MdiChild::setModified(bool mod)
+{
+    textEdit->document()->setModified(mod);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
 bool MdiChild::isReadOnly()
 {
     return textEdit->isReadOnly();
@@ -3895,11 +3920,11 @@ QTextCursor MdiChild::textCursor()
 //
 //**************************************************************************************************
 
-void MdiChild::createContextMenuActions()
-{
+//void MdiChild::createContextMenuActions()
+//{
 
 
-}
+//}
 
 //**************************************************************************************************
 //
@@ -4016,6 +4041,35 @@ QString MdiChild::currentFile()
     path = QDir::cleanPath(path);
 
     return QDir::toNativeSeparators(path);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::setFileChangeMonitor(QFileSystemWatcher *monitor)
+{
+    fileChangeMonitor = monitor;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::fileChangeMonitorAddPath(QString fileName)
+{
+    if(fileChangeMonitor > NULL)
+        fileChangeMonitor->addPath(fileName);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::fileChangeMonitorRemovePath(QString fileName)
+{
+    if(fileChangeMonitor > NULL)
+        fileChangeMonitor->removePath(fileName);
 }
 
 //**************************************************************************************************

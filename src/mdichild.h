@@ -91,13 +91,14 @@ public:
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
     void filePrintPreview();
     bool isModified();
+    void setModified(bool mod = false);
     bool isReadOnly();
     bool hasSelection();
     bool isUndoAvailable();
     bool isRedoAvailable();
     bool overwriteMode();
     QTextCursor textCursor();
-
+    void setFileChangeMonitor(QFileSystemWatcher *monitor);
 
 
 
@@ -115,6 +116,8 @@ private:
     void macroShowBasicError(int error);
     void detectHighligthMode();
     bool findText(const QString &text, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
+    void fileChangeMonitorAddPath(QString fileName);
+    void fileChangeMonitorRemovePath(QString fileName);
 
 
 
@@ -130,12 +133,13 @@ private:
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
     QList<QTextEdit::ExtraSelection> blockExtraSelections;
+    QFileSystemWatcher *fileChangeMonitor;
 
 
 private slots :
     void highlightCurrentLine();
     void printPreview(QPrinter *printer);
-    void createContextMenuActions();
+    //void createContextMenuActions();
     void showContextMenu(const QPoint &pt);
     void documentWasModified();
     void cleanUp(QString *str);

@@ -39,9 +39,42 @@ struct PortSettings
     QSerialPort::Parity Parity;
     QSerialPort::StopBits StopBits;
     QSerialPort::FlowControl FlowControl;
-    long Timeout_Millisec;
+    QString configName;
+    QString portName;
+    QString sendAtEnd;
+    QString sendAtBegining;
+    QString  savePat;
+    QString saveExt;
+    QString endOfProgChar;
+    QString callerProgName;
+    double lineDelay;
+    int autoCloseCountnerReloadValue;
+    int sendStartDelay;
+    int eobChar;
     char Xon;
     char Xoff;
+    bool createLogFile;
+    bool autoSave;
+    bool deleteControlChars;
+    bool removeEmptyLines;
+    bool removeBefore;
+    bool removeSpaceEOB;
+    bool renameIfExists;
+    bool removeLetters;
+    bool guessFileNameByProgName;
+    bool appendExt;
+    bool useAsExt;
+    bool splitPrograms;
+    bool fileNameLowerCase;
+    bool fileServer;
+    QString searchPath1;
+    QString searchExt1;
+    QString searchPath2;
+    QString searchExt2;
+    QString searchPath3;
+    QString searchExt3;
+    QString fileNameExp;
+
 };
 
 class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialog
@@ -79,6 +112,8 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
      void appendExtCheckBoxChanged(int state);
      void useAsExtCheckBoxChanged(int state);
      void fileServerCheckBoxChanged(int state);
+     void addButtonClicked();
+     void removeButtonClicked();
 
 
    private:
