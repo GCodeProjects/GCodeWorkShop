@@ -100,5 +100,6 @@
         <file>images/blockskip-.png</file>
         <file>images/filesaveall.png</file>
         <file>images/document-print-preview.png</file>
+        <file>images/spserver.png</file>
     </qresource>
 </RCC>

@@ -124,6 +124,7 @@ private slots:
     void closeSerialToolbar();
     void sendButtonClicked();
     void receiveButtonClicked();
+    void startSerialPortServer();
     void doCmpMacro();
     void attachToDirButtonClicked(bool attach = true);
     void deAttachToDirButtonClicked();
@@ -151,6 +152,7 @@ private slots:
     void diffEditorFile();
     void closeTab(int i);
     void closeCurrentWindow();
+    void closeAllMdiWindows();
     void goToLine(QString fileName, int line);
     void doSemiComment();
     void doParaComment();
@@ -161,6 +163,7 @@ private slots:
     void doBlockSkip2();
     void changeSession(QAction *action);
     void sessionMgr();
+    void fileChanged(const QString fileName);
 
 
  signals:
@@ -334,9 +337,14 @@ private:
     QAction *deAttachToDirAct;
     QAction *diagAct;
     QAction *serialCloseAct;
+    QAction *spServerAct;
     QComboBox *configBox;
 
     QStringList selectedExpressions;
+
+    QFileSystemWatcher *fileChangeMonitor;
+
+    SerialTransmissionDialog *spServer;
 
 
 };
