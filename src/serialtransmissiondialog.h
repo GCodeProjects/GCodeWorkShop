@@ -38,7 +38,7 @@ class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionD
     Q_OBJECT
 
 public:
-    SerialTransmissionDialog(QWidget *parent = 0);
+    SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     ~SerialTransmissionDialog();
     QStringList receiveData(QString configName);
     void sendData(QString dataToSend, QString configName);
@@ -75,7 +75,7 @@ private slots:
 private:
     void setRange(int min, int max);
     void setValue(int val);
-    void setLabelText(const QString text);
+    void setLabelText(const QString text, bool multiline = false);
     void loadConfig(QString configName);
     QString guessFileName(QString *text);
     QString saveDataToFile(QString *text);
@@ -133,6 +133,7 @@ private:
     QString savePath;
     QString saveExt;
 
+    //QPlainTextEdit plainTextEdit;
 
 
 
