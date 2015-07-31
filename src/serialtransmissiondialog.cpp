@@ -154,7 +154,7 @@ void SerialTransmissionDialog::setLabelText(const QString text, bool multiline)
 
             QString timeStamp = QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " + QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
             plainTextEdit->setCenterOnScroll(false);
-            plainTextEdit->insertPlainText(timeStamp + "\t" + text + "\n");
+            plainTextEdit->insertPlainText(timeStamp + "  " + text + "\n");
             plainTextEdit->ensureCursorVisible();
         };
     }
