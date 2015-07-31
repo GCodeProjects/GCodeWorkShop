@@ -114,6 +114,8 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
      void fileServerCheckBoxChanged(int state);
      void addButtonClicked();
      void removeButtonClicked();
+     void addEobButtonClicked();
+     void deleteEobButtonClicked();
 
 
    private:

@@ -99,6 +99,9 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(addButton, SIGNAL(clicked()), SLOT(addButtonClicked()));
    connect(removeButton, SIGNAL(clicked()), SLOT(removeButtonClicked()));
 
+   connect(addEobButton, SIGNAL(clicked()), SLOT(addEobButtonClicked()));
+   connect(deleteEobButton, SIGNAL(clicked()), SLOT(deleteEobButtonClicked()));
+
    connect(autoSaveCheckBox, SIGNAL(stateChanged(int)), SLOT(autoSaveCheckBoxChanged(int)));
    connect(fileServerCheckBox, SIGNAL(stateChanged(int)), SLOT(fileServerCheckBoxChanged(int)));
    connect(appendExtCheckBox, SIGNAL(stateChanged(int)), SLOT(appendExtCheckBoxChanged(int)));
@@ -244,12 +247,12 @@ void SerialPortConfigDialog::saveButtonClicked()
     settings.setValue("UseAsExtension", useAsExtCheckBox->isChecked());
     settings.setValue("SplitPrograms", splitProgramsCheckBox->isChecked());
     settings.setValue("SavePath", savePathLineEdit->text());
-    settings.setValue("EndOfProgChar", endOfProgCharLineEdit->text());
     settings.setValue("SaveExt", saveExtComboBox->currentText());
 
 
     settings.setValue("FileServer", fileServerCheckBox->isChecked());
     settings.setValue("FileNameExpSelected", fileNameExpComboBox->currentText());
+    settings.setValue("EndOfProgExpSelected", endOfProgComboBox->currentText());
     settings.setValue("FileNameLowerCase", fileNameLowerCaseCheckBox->isChecked());
     settings.setValue("CallerProg", callerProgNameLineEdit->text());
     settings.setValue("SearchPath1", searchPath1LineEdit->text());
@@ -270,6 +273,18 @@ void SerialPortConfigDialog::saveButtonClicked()
     };
     eList.sort();
     settings.setValue("FileNameExp", eList);
+
+    eList.clear();
+    eList.prepend(endOfProgComboBox->currentText());
+    for(int i = 0; i <= endOfProgComboBox->count(); i++)
+    {
+       item = endOfProgComboBox->itemText(i);
+       if(!item.isEmpty())
+         if(!eList.contains(item))
+           eList.prepend(item);
+    };
+    eList.sort();
+    settings.setValue("EndOfProgExp", eList);
 
 
     settings.endGroup();
@@ -399,7 +414,6 @@ void SerialPortConfigDialog::changeSettings()
     removeBefore->setChecked(settings.value("RemoveBefore", false).toBool());
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
     autoCloseSpinBox->setValue(settings.value("AutoCloseTime", 15).toInt());
-    //endOfBlockLF->setChecked(settings.value("EndOfBlockLF", false).toBool());
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
     logFileCheckBox->setChecked(settings.value("CreateLogFile", true).toBool());
     eobComboBox->setCurrentIndex(settings.value("EobChar", 0).toInt());
@@ -412,12 +426,15 @@ void SerialPortConfigDialog::changeSettings()
     appendExtCheckBox->setChecked(settings.value("AppendExtension", false).toBool());
     useAsExtCheckBox->setChecked(settings.value("UseAsExtension", false).toBool());
     splitProgramsCheckBox->setChecked(settings.value("SplitPrograms", true).toBool());
-    endOfProgCharLineEdit->setText(settings.value("EndOfProgChar", "M30").toString());
     savePathLineEdit->setText(settings.value("SavePath", "").toString());
     id = saveExtComboBox->findText(settings.value("SaveExt", ".nc").toString());
     if(id >= 0)
        saveExtComboBox->setCurrentIndex(id);
 
+    endOfProgComboBox->insertItems(0, settings.value("EndOfProgExp", (QStringList() << "" << "")).toStringList());
+    id = endOfProgComboBox->findText(settings.value("EndOfProgExpSelected", "").toString());
+    if(id >= 0)
+       endOfProgComboBox->setCurrentIndex(id);
 
     fileServerCheckBox->setChecked(settings.value("FileServer", false).toBool());
     callerProgNameLineEdit->setText(settings.value("CallerProg", "O0001").toString());
@@ -628,7 +645,9 @@ void SerialPortConfigDialog::autoSaveCheckBoxChanged(int state)
     appendExtCheckBox->setEnabled(state == Qt::Checked);
     useAsExtCheckBox->setEnabled(state == Qt::Checked);
     splitProgramsCheckBox->setEnabled(state == Qt::Checked);
-    endOfProgCharLineEdit->setEnabled(state == Qt::Checked);
+    endOfProgComboBox->setEnabled(state == Qt::Checked);
+    addEobButton->setEnabled(state == Qt::Checked);
+    deleteEobButton->setEnabled(state == Qt::Checked);
     tabWidget->setTabEnabled(3, state == Qt::Checked);
     if(fileServerCheckBox->isChecked() && !(state == Qt::Checked))
         fileServerCheckBox->setChecked(false);
@@ -681,6 +700,9 @@ void SerialPortConfigDialog::fileServerCheckBoxChanged(int state)
    browse2PushButton->setEnabled(state == Qt::Checked);
    browse3PushButton->setEnabled(state == Qt::Checked);
    browse4PushButton->setEnabled(state == Qt::Checked);
+   fileNameExpComboBox->setEnabled(state == Qt::Checked);
+   removeButton->setEnabled(state == Qt::Checked);
+   addButton->setEnabled(state == Qt::Checked);
    callerProgNameLineEdit->setEnabled(state == Qt::Checked);
    fileNameLowerCaseCheckBox->setEnabled(state == Qt::Checked);
    flowCtlGroupReleased();
@@ -704,4 +726,24 @@ void SerialPortConfigDialog::addButtonClicked()
 void SerialPortConfigDialog::removeButtonClicked()
 {
     fileNameExpComboBox->removeItem(fileNameExpComboBox->currentIndex());
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::addEobButtonClicked()
+{
+    QString text = endOfProgComboBox->currentText();
+    if(!text.isEmpty())
+        endOfProgComboBox->insertItem(0, text);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::deleteEobButtonClicked()
+{
+    endOfProgComboBox->removeItem(endOfProgComboBox->currentIndex());
 }
