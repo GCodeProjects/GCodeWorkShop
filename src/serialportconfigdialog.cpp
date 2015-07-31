@@ -112,7 +112,7 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(configNameBox, SIGNAL(currentIndexChanged(int)), SLOT(changeSettings()));
    connect(portNameComboBox, SIGNAL(currentIndexChanged(QString)), SLOT(portNameComboBoxIndexChanged(QString)));
 
-   //tabWidget->setCurrentIndex(0);
+   tabWidget->setCurrentIndex(0);
 
    setResult(QDialog::Rejected);
 }
@@ -133,10 +133,7 @@ SerialPortConfigDialog::~SerialPortConfigDialog()
 void SerialPortConfigDialog::flowCtlGroupReleased()
 {
     if(f2CheckBox->isChecked())
-        if(!fileServerCheckBox->isChecked())
-            startDelaySpinBox->setValue(1);
-        else
-            startDelaySpinBox->setValue(0);
+        startDelaySpinBox->setValue(1);
 
     if(f3CheckBox->isChecked())
         startDelaySpinBox->setValue(0);

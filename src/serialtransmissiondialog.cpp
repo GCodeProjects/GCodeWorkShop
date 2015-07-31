@@ -451,39 +451,39 @@ void SerialTransmissionDialog::serialPortReadyRead()
 {
     QByteArray buff(serialPort.readAll());
 
-    int xoffPos = buff.lastIndexOf(portSettings.Xoff);
-    int xonPos = buff.lastIndexOf(portSettings.Xon);
-
-    if(xoffPos >= 0) //only XOFF received
+    // software flow control at application level
+    if((portSettings.Xoff > 0) || (portSettings.Xon > 0))  // disabled when Xon or Xoff set to 0
     {
-        xoffReceived = true;
-        setLabelText(tr("XOFF received..."));
-    };
+        int xoffPos = buff.lastIndexOf(portSettings.Xoff);
+        int xonPos = buff.lastIndexOf(portSettings.Xon);
 
-    if(xonPos >= 0)  //only XON received
-    {
+        if(xoffPos >= 0) //only XOFF received
+        {
+            xoffReceived = true;
+            setLabelText(tr("XOFF received..."));
+        };
+
+        if(xonPos >= 0)  //only XON received
+        {
+            xoffReceived = false;
+            sendStartDelay = 0;
+            setLabelText(tr("XON received..."));
+        };
+
+        if(xoffPos > xonPos) //both XOFF/XON received but XOFF last
+        {
+            xoffReceived = true;
+            setLabelText(tr("XOFF received..."));
+        };
+    }
+    else
         xoffReceived = false;
-        sendStartDelay = 0;
-        setLabelText(tr("XON received..."));
-    };
-
-    if(xoffPos > xonPos) //both XOFF/XON received but XOFF last
-    {
-        xoffReceived = true;
-        setLabelText(tr("XOFF received..."));
-    };
 
     serialPortReadBuffer.append(buff);
 
     setLabelText(tr("Receiving byte %1").arg(serialPortReadBuffer.size() - 1));
 
     //qDebug() << "Data read" << buff << "xoffReceived" << xoffReceived;
-
-//    if(QString(buff).contains(endOfProgChar) && (!endOfProgChar.isEmpty()))
-//    {
-//        qDebug() << "endOfProgChar" << endOfProgChar;
-//        qDebug() << "Procces data" << processReceivedData();
-//    };
 
     autoCloseCountner = autoCloseCountnerReloadValue;
     if(!autoCloseTimer->isActive())
@@ -1554,27 +1554,34 @@ void SerialTransmissionDialog::fileServerReadyRead()
 
     QByteArray buff(serialPort.readAll());
 
-    int xoffPos = buff.lastIndexOf(portSettings.Xoff);
-    int xonPos = buff.lastIndexOf(portSettings.Xon);
-
-    if(xoffPos >= 0) //only XOFF received
+    // software flow control at application level
+    if((portSettings.Xoff > 0) || (portSettings.Xon > 0))  // disabled when Xon or Xoff set to 0
     {
-        xoffReceived = true;
-        setLabelText(tr("XOFF received..."));
-    };
+        int xoffPos = buff.lastIndexOf(portSettings.Xoff);
+        int xonPos = buff.lastIndexOf(portSettings.Xon);
 
-    if(xonPos >= 0)  //only XON received
-    {
+        if(xoffPos >= 0) //only XOFF received
+        {
+            xoffReceived = true;
+            setLabelText(tr("XOFF received..."));
+        };
+
+        if(xonPos >= 0)  //only XON received
+        {
+            xoffReceived = false;
+            sendStartDelay = 0;
+            setLabelText(tr("XON received..."));
+        };
+
+        if(xoffPos > xonPos) //both XOFF/XON received but XOFF last
+        {
+            xoffReceived = true;
+            setLabelText(tr("XOFF received..."));
+        };
+    }
+    else
         xoffReceived = false;
-        sendStartDelay = 0;
-        setLabelText(tr("XON received..."));
-    };
 
-    if(xoffPos > xonPos) //both XOFF/XON received but XOFF last
-    {
-        xoffReceived = true;
-        setLabelText(tr("XOFF received..."));
-    };
 
     serialPortReadBuffer.append(buff);
 
@@ -1582,11 +1589,6 @@ void SerialTransmissionDialog::fileServerReadyRead()
 
     qDebug() << "Data read" << buff << "xoffReceived" << xoffReceived;
 
-//    if(buff.indexOf(endOfProgChar) && (!endOfProgChar.isEmpty()))
-//    {
-//        qDebug() << "endOfProgChar" << endOfProgChar;
-//        qDebug() << "Procces data" << processReceivedData();
-//    };
 
     fileServerDataTimeoutCountner = fileServerDataTimeoutCountnerReloadValue;
     if(!fileServerDataTimeoutTimer->isActive())
