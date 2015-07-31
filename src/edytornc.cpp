@@ -214,6 +214,12 @@ void EdytorNc::closeEvent(QCloseEvent *event)
         findFiles = NULL;
     };
 
+    if(spServer != NULL)
+    {
+        spServer->close();
+        spServer = NULL;
+    };
+
 }
 
 //**************************************************************************************************
@@ -4591,6 +4597,7 @@ void EdytorNc::startSerialPortServer()
         if(spServer <= NULL)
         {
             spServerAct->setChecked(false);
+            mdiArea->addSubWindow(spServer);
         };
     };
 

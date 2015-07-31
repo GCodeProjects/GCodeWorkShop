@@ -104,7 +104,7 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(appendExtCheckBox, SIGNAL(stateChanged(int)), SLOT(appendExtCheckBoxChanged(int)));
    connect(useAsExtCheckBox, SIGNAL(stateChanged(int)), SLOT(useAsExtCheckBoxChanged(int)));
 
-   //connect(flowCtlGroup, SIGNAL(buttonReleased(int)), SLOT(flowCtlGroupReleased()));
+   connect(flowCtlGroup, SIGNAL(buttonReleased(int)), SLOT(flowCtlGroupReleased()));
 
    loadSettings();
    flowCtlGroupReleased();
@@ -132,15 +132,15 @@ SerialPortConfigDialog::~SerialPortConfigDialog()
 
 void SerialPortConfigDialog::flowCtlGroupReleased()
 {
-//   if(f2CheckBox->isChecked())
-//   {
-//      startDelaySpinBox->setEnabled(false);
-//      startDelaySpinBox->setValue(0);
-//   }
-//   else
-//   {
-//      startDelaySpinBox->setEnabled(true);
-//   };
+    if(f2CheckBox->isChecked())
+        if(!fileServerCheckBox->isChecked())
+            startDelaySpinBox->setValue(1);
+        else
+            startDelaySpinBox->setValue(0);
+
+    if(f3CheckBox->isChecked())
+        startDelaySpinBox->setValue(0);
+
 }
 
 //**************************************************************************************************
@@ -529,7 +529,6 @@ void SerialPortConfigDialog::portNameComboBoxIndexChanged(QString name)
 
 void SerialPortConfigDialog::deleteButtonClicked()
 {
-
     QSettings settings("EdytorNC", "EdytorNC");
 
     settings.beginGroup("SerialPortConfigs");
@@ -538,7 +537,6 @@ void SerialPortConfigDialog::deleteButtonClicked()
 
     int id = configNameBox->findText(configNameBox->currentText());
     configNameBox->removeItem(id);
-
 }
 
 //**************************************************************************************************
@@ -597,7 +595,7 @@ QString SerialPortConfigDialog::browseForDir(QString dir, QString windowTitle)
 
 void SerialPortConfigDialog::browse1ButtonClicked()
 {
-   savePathLineEdit->setText(browseForDir(savePathLineEdit->text(), tr("Select search path")));
+    savePathLineEdit->setText(browseForDir(savePathLineEdit->text(), tr("Select search path")));
 }
 
 //**************************************************************************************************
@@ -606,7 +604,7 @@ void SerialPortConfigDialog::browse1ButtonClicked()
 
 void SerialPortConfigDialog::browse2ButtonClicked()
 {
-   searchPath1LineEdit->setText(browseForDir(searchPath1LineEdit->text(), tr("Select search path")));
+    searchPath1LineEdit->setText(browseForDir(searchPath1LineEdit->text(), tr("Select search path")));
 }
 
 //**************************************************************************************************
@@ -615,7 +613,7 @@ void SerialPortConfigDialog::browse2ButtonClicked()
 
 void SerialPortConfigDialog::browse3ButtonClicked()
 {
-   searchPath2LineEdit->setText(browseForDir(searchPath2LineEdit->text(), tr("Select search path")));
+    searchPath2LineEdit->setText(browseForDir(searchPath2LineEdit->text(), tr("Select search path")));
 }
 
 //**************************************************************************************************
@@ -624,19 +622,21 @@ void SerialPortConfigDialog::browse3ButtonClicked()
 
 void SerialPortConfigDialog::autoSaveCheckBoxChanged(int state)
 {
-   savePathLineEdit->setEnabled(state == Qt::Checked);
-   saveExtComboBox->setEnabled(state == Qt::Checked);
-   browse1PushButton->setEnabled(state == Qt::Checked);
-   renameCheckBox->setEnabled(state == Qt::Checked);
-   removeLettersCheckBox->setEnabled(state == Qt::Checked);
-   detectFormFileNameCheckBox->setEnabled(state == Qt::Checked);
-   appendExtCheckBox->setEnabled(state == Qt::Checked);
-   useAsExtCheckBox->setEnabled(state == Qt::Checked);
-   splitProgramsCheckBox->setEnabled(state == Qt::Checked);
-   endOfProgCharLineEdit->setEnabled(state == Qt::Checked);
-   tabWidget->setTabEnabled(3, state == Qt::Checked);
-   if(fileServerCheckBox->isChecked() && !(state == Qt::Checked))
-       fileServerCheckBox->setChecked(false);
+    savePathLineEdit->setEnabled(state == Qt::Checked);
+    saveExtComboBox->setEnabled(state == Qt::Checked);
+    browse1PushButton->setEnabled(state == Qt::Checked);
+    renameCheckBox->setEnabled(state == Qt::Checked);
+    removeLettersCheckBox->setEnabled(state == Qt::Checked);
+    detectFormFileNameCheckBox->setEnabled(state == Qt::Checked);
+    appendExtCheckBox->setEnabled(state == Qt::Checked);
+    useAsExtCheckBox->setEnabled(state == Qt::Checked);
+    splitProgramsCheckBox->setEnabled(state == Qt::Checked);
+    endOfProgCharLineEdit->setEnabled(state == Qt::Checked);
+    tabWidget->setTabEnabled(3, state == Qt::Checked);
+    if(fileServerCheckBox->isChecked() && !(state == Qt::Checked))
+        fileServerCheckBox->setChecked(false);
+
+    flowCtlGroupReleased();
 }
 
 //**************************************************************************************************
@@ -645,7 +645,7 @@ void SerialPortConfigDialog::autoSaveCheckBoxChanged(int state)
 
 void SerialPortConfigDialog::browse4ButtonClicked()
 {
-   searchPath3LineEdit->setText(browseForDir(searchPath3LineEdit->text(), tr("Select search path")));
+    searchPath3LineEdit->setText(browseForDir(searchPath3LineEdit->text(), tr("Select search path")));
 }
 
 //**************************************************************************************************
@@ -686,6 +686,8 @@ void SerialPortConfigDialog::fileServerCheckBoxChanged(int state)
    browse4PushButton->setEnabled(state == Qt::Checked);
    callerProgNameLineEdit->setEnabled(state == Qt::Checked);
    fileNameLowerCaseCheckBox->setEnabled(state == Qt::Checked);
+   startDelaySpinBox->setEnabled(state == Qt::Checked);
+   flowCtlGroupReleased();
 }
 
 //**************************************************************************************************

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>357</width>
-    <height>134</height>
+    <width>564</width>
+    <height>214</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,25 +21,59 @@
     <normaloff>:/images/serial.png</normaloff>:/images/serial.png</iconset>
   </property>
   <property name="sizeGripEnabled">
-   <bool>false</bool>
+   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="2">
-      <widget class="QLabel" name="LedLabel11">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="settingsNameLabel">
        <property name="toolTip">
-        <string>Clear To Send</string>
+        <string>Settings name</string>
        </property>
        <property name="text">
-        <string>CTS</string>
+        <string/>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item>
+      <widget class="QLabel" name="portLabel">
+       <property name="toolTip">
+        <string>Port name</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>5</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QLabel" name="ctsLabel">
        <property name="enabled">
         <bool>false</bool>
@@ -61,7 +95,20 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
+     <item>
+      <widget class="QLabel" name="LedLabel11">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="toolTip">
+        <string>Clear To Send</string>
+       </property>
+       <property name="text">
+        <string>CTS</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="dsrLabel">
        <property name="enabled">
         <bool>false</bool>
@@ -83,7 +130,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="4">
+     <item>
       <widget class="QLabel" name="LedLabel22">
        <property name="enabled">
         <bool>true</bool>
@@ -96,7 +143,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="5">
+     <item>
       <widget class="QLabel" name="dcdLabel">
        <property name="enabled">
         <bool>false</bool>
@@ -118,7 +165,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="6">
+     <item>
       <widget class="QLabel" name="LedLabel33">
        <property name="enabled">
         <bool>true</bool>
@@ -131,7 +178,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="7">
+     <item>
       <widget class="QLabel" name="rtsLabel">
        <property name="enabled">
         <bool>false</bool>
@@ -153,7 +200,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="8">
+     <item>
       <widget class="QLabel" name="LedLabel44">
        <property name="enabled">
         <bool>true</bool>
@@ -166,7 +213,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="9">
+     <item>
       <widget class="QLabel" name="dtrLabel">
        <property name="enabled">
         <bool>false</bool>
@@ -191,7 +238,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="10">
+     <item>
       <widget class="QLabel" name="LedLabel55_2">
        <property name="enabled">
         <bool>true</bool>
@@ -203,6 +250,22 @@
         <string>DTR</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>5</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -228,7 +291,40 @@
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line_6">
+    <widget class="QPlainTextEdit" name="plainTextEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
+     <property name="undoRedoEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="lineWrapMode">
+      <enum>QPlainTextEdit::NoWrap</enum>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="plainText">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="bottomLine">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
