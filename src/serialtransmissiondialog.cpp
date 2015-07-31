@@ -320,6 +320,8 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
     msgBox.setText(text);
     msgBox.setIcon(QMessageBox::Critical);
     msgBox.exec();
+    serialPort.clearError();
+    close();
 }
 
 //**************************************************************************************************
@@ -330,8 +332,8 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 {
     bytesWritten += bytes;
 
-    setValue(bytesWritten - 1);
-    setLabelText(tr("Sending byte %1 of %2").arg(bytesWritten - 1).arg(noOfBytes));
+    setValue(bytesWritten);
+    setLabelText(tr("Sending byte %1 of %2").arg(bytesWritten).arg(noOfBytes));
 
     //qDebug() << "Bytes written" << bytesWritten << " of " << noOfBytes;
 
@@ -631,9 +633,9 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
 
     switch(eobChar)  // add to noOfBytes number of extra eob characters
     {
-       case 0:  noOfBytes += (serialPortWriteBuffer.size()); // CRLF
+       case 0:  noOfBytes += (serialPortWriteBuffer.size() + 1); // CRLF
                 break;
-       case 3:  noOfBytes +=  (2 * (serialPortWriteBuffer.size())); // CRCRLF
+       case 3:  noOfBytes +=  (2 * (serialPortWriteBuffer.size() + 1)); // CRCRLF
                 break;
        default: // only one LF or CR, already counted
                 break;
@@ -767,7 +769,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     eobChar = settings.value("EobChar", 0).toInt();
 
     autoSave = settings.value("AutoSave", false).toBool();
-    endOfProgChar = settings.value("EndOfProgChar", "M30").toString();
+    endOfProgChar = settings.value("FileNameExpSelected", "").toString();
     renameIfExists = settings.value("CreateBackup", true).toBool();
     removeLetters = settings.value("RemoveLetters", true).toBool();
     guessFileNameByProgName = settings.value("DetectFormFileName", true).toBool();
@@ -798,8 +800,6 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     portLabel->setText(portName);
     settingsNameLabel->setText(portSettings.configName);
 
-    QString tmp;
-    proccesSpecialCharacters(&endOfProgChar, &tmp);
 }
 
 //**************************************************************************************************
@@ -1236,7 +1236,7 @@ QString SerialTransmissionDialog::guessFileName(QString *text)
 }
 
 //**************************************************************************************************
-//  Save received program to file. Return filename and empty program text if succes or leave program text unchanged
+//  Save received program to a file. Return filename and empty program text if succes or leave program text unchanged
 //**************************************************************************************************
 
 QString SerialTransmissionDialog::saveDataToFile(QString *text)
@@ -1274,7 +1274,7 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
         if(file.rename(fileName, oldName))
         {
             // write to log file
-            writeLog(tr("SUCCES:\t Renaming file: \"%1\" to \"%2\".\r\n").arg(fileName).arg(oldName), dateTime);
+            writeLog(tr("OK:\t Renaming file: \"%1\" to \"%2\".\r\n").arg(fileName).arg(oldName), dateTime);
         }
         else
         {
@@ -1288,13 +1288,14 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
         // save received data to file
         QTextStream out(&file);
         out << *text;
+        file.flush();
         file.close();
 
-        text->clear(); // return empty text
+        text->clear();
 
 
         // write to log file
-        writeLog(tr("SUCCES:\t Saving file: \"%1\".\r\n").arg(fileName), dateTime);
+        writeLog(tr("OK:\t Saving file: \"%1\".\r\n").arg(fileName), dateTime);
     }
     else
     {
@@ -1395,8 +1396,6 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
     };
 
     //  prepare program list
-
-
     index = 0;
     foreach(const QString expTx, exp)
     {
@@ -1419,12 +1418,13 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
     if(!endOfProgChar.isEmpty())
     {
         index = 0;
+        QRegExp expression(endOfProgChar);
         do
         {
             index = text->indexOf(endOfProgChar, index);
             if(index >= 0)
             {
-                index += endOfProgChar.length();
+                index += expression.matchedLength();
                 progBegins.append(index);
             }
             else
@@ -1607,6 +1607,8 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
     QString fileName, ext, path, tmpBuff;
     QFileInfo fileInfo;
 
+    fileServerDataTimeoutTimer->stop();
+
     if(fileServerDataTimeoutCountnerReloadValue == 0)
     {
         fileServerDataTimeoutTimer->stop();
@@ -1619,6 +1621,7 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
         setLabelText(tr("Wainting for data..."));
 
         QStringList progList = processReceivedData();
+        serialPortReadBuffer.clear();
 
 
         if(!progList.isEmpty())
@@ -1717,8 +1720,8 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
                                 writeBufferIterator = serialPortWriteBuffer.begin();
                                 fileServerBytesWritten(0);  // start
 
-                                setLabelText(tr("SUCCES:\t Sending file: \"%1\".").arg(path), true);
-                                writeLog(tr("SUCCES:\t Sending file: \"%1\".\r\n").arg(path));
+                                setLabelText(tr("OK:\t Sending file: \"%1\".").arg(path), true);
+                                writeLog(tr("OK:\t Sending file: \"%1\".\r\n").arg(path));
 
 
                             }
@@ -1731,8 +1734,8 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
 
                         break;
                     }
-                    setLabelText(tr("SUCCES:\t Received file: \"%1\".").arg(fileName), true);
-                    writeLog(tr("SUCCES:\t Received file: \"%1\".\r\n").arg(fileName));
+                    setLabelText(tr("OK:\t Received file: \"%1\".").arg(fileName), true);
+                    writeLog(tr("OK:\t Received file: \"%1\".\r\n").arg(fileName));
                     itp++;
                 };
             };
@@ -1750,7 +1753,7 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
            setLabelText(tr("Wainting for data..."));
 
     };
-
+    fileServerDataTimeoutTimer->start();
 }
 
 //**************************************************************************************************
@@ -1761,8 +1764,8 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
 {
     bytesWritten += bytes;
 
-    setValue(bytesWritten - 1);
-    setLabelText(tr("Sending byte %1 of %2").arg(bytesWritten - 1).arg(noOfBytes));
+    setValue(bytesWritten);
+    setLabelText(tr("Sending byte %1 of %2").arg(bytesWritten).arg(noOfBytes));
 
     //qDebug() << "Bytes written" << bytesWritten << " of " << noOfBytes;
 
@@ -1772,7 +1775,7 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
     if(writeBufferIterator == serialPortWriteBuffer.end())
     {
         //stop = true;
-        setLabelText(tr("SUCCES:\t Sending a file completed."), true);
+        setLabelText(tr("OK:\t Sending a file completed."), true);
         setLabelText(tr("Wainting for data..."));
         setRange(0, 0);
         return;
@@ -1812,7 +1815,6 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
     };
 
     //qDebug() << "xoffReceived" << xoffReceived << " Stop" << stop;
-
 }
 
 //**************************************************************************************************

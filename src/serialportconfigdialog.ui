@@ -104,8 +104,11 @@
      <property name="enabled">
       <bool>true</bool>
      </property>
+     <property name="toolTip">
+      <string>Delete from list</string>
+     </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -781,7 +784,8 @@ AND/OR
        <item row="7" column="4">
         <widget class="QSpinBox" name="autoCloseSpinBox">
          <property name="toolTip">
-          <string>Auto close transmission dialog after last character was sent/received.</string>
+          <string>Automatically close transmission dialog after the last character was sent/received.
+This setting is also used in file server mode to detect end of incoming transmission.</string>
          </property>
          <property name="suffix">
           <string>s</string>
@@ -946,6 +950,9 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="1" column="2">
           <widget class="QPushButton" name="browse1PushButton">
+           <property name="toolTip">
+            <string>Browse for save path</string>
+           </property>
            <property name="text">
             <string>Browse</string>
            </property>
@@ -958,7 +965,7 @@ If the file name has not been automatically detected, the file name will be the 
          <item row="1" column="3">
           <widget class="QComboBox" name="saveExtComboBox">
            <property name="toolTip">
-            <string>Choose file extension or &quot;KEEP&quot; to use extension from received file.</string>
+            <string>Extension of saved file</string>
            </property>
            <property name="editable">
             <bool>false</bool>
@@ -976,14 +983,10 @@ If the file name has not been automatically detected, the file name will be the 
        <item>
         <layout class="QGridLayout" name="gridLayout_10">
          <item row="4" column="0">
-          <widget class="QCheckBox" name="removeLettersCheckBox">
-           <property name="text">
-            <string>Remove letters from filename</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
           <widget class="QCheckBox" name="renameCheckBox">
+           <property name="toolTip">
+            <string>If save path will already contain a file, old file will be renamed to *.bak</string>
+           </property>
            <property name="text">
             <string>Create backup if file exists</string>
            </property>
@@ -992,7 +995,8 @@ If the file name has not been automatically detected, the file name will be the 
          <item row="0" column="0">
           <widget class="QCheckBox" name="detectFormFileNameCheckBox">
            <property name="toolTip">
-            <string>Get filename from program name or form first comment</string>
+            <string>If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%...
+Otherwise, the text of the first comment in the program will be used</string>
            </property>
            <property name="text">
             <string>Filename from program name</string>
@@ -1003,6 +1007,9 @@ If the file name has not been automatically detected, the file name will be the 
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QCheckBox" name="useAsExtCheckBox">
+             <property name="toolTip">
+              <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting file extension will be ignored.</string>
+             </property>
              <property name="text">
               <string>Use program name extension as file extension</string>
              </property>
@@ -1014,8 +1021,8 @@ If the file name has not been automatically detected, the file name will be the 
            <item>
             <widget class="QCheckBox" name="appendExtCheckBox">
              <property name="toolTip">
-              <string>If program name contains extension, append it at end of filename.
-Can't be used with extension set to &quot;KEEP&quot;.</string>
+              <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character '_'  (eg O0004_MIN.nc)  
+Choosen file extension will be used.</string>
              </property>
              <property name="text">
               <string>Append extension at end</string>
@@ -1027,35 +1034,75 @@ Can't be used with extension set to &quot;KEEP&quot;.</string>
            </item>
           </layout>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <widget class="QCheckBox" name="splitProgramsCheckBox">
+           <property name="toolTip">
+            <string>If received data will contain more than one CNC program, they will be saved in independent files
+This setting can cause data loss if detection of filename fails.</string>
+           </property>
            <property name="text">
             <string>Split programs</string>
            </property>
           </widget>
          </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="removeLettersCheckBox">
+           <property name="toolTip">
+            <string>Letters in detected filename will be removed (only digits will be left).
+If in result filename becomes empty, version with letters will be used.</string>
+           </property>
+           <property name="text">
+            <string>Remove letters from filename</string>
+           </property>
+          </widget>
+         </item>
          <item row="5" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="1" column="3">
+            <widget class="QPushButton" name="deleteEobButton">
+             <property name="text">
+              <string>&amp;Delete</string>
+             </property>
+             <property name="icon">
+              <iconset resource="application.qrc">
+               <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="endOfProgComboBox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of CNC program.&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
             <widget class="QLabel" name="label_11">
              <property name="text">
               <string>End of program characters</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QLineEdit" name="endOfProgCharLineEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="addEobButton">
              <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Rarrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>Add to list</string>
              </property>
              <property name="text">
-              <string>M30</string>
+              <string>&amp;Add</string>
+             </property>
+             <property name="icon">
+              <iconset resource="application.qrc">
+               <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
              </property>
             </widget>
            </item>
@@ -1097,8 +1144,21 @@ Can't be used with extension set to &quot;KEEP&quot;.</string>
        <item>
         <widget class="QCheckBox" name="fileServerCheckBox">
          <property name="toolTip">
-          <string>Automatically save the received file.
-If the file name has not been automatically detected, the file name will be the current date and time.</string>
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Serial port file server.&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:'arial,sans-serif';&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Start file server in EdytorNC&lt;/li&gt;
+&lt;li style=&quot; font-family:'arial,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Send any file from CNC, it will be saved in computer (as is set in Autosave tab)&lt;/li&gt;
+&lt;li style=&quot; font-family:'arial,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Send special program from CNC: &lt;/li&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,sans-serif';&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,sans-serif';&quot;&gt;:0001(CALLER)&lt;/span&gt;&lt;span style=&quot; font-family:'arial,sans-serif'; font-style:italic;&quot;&gt; -&amp;gt; O0001 or 0001 set in File Server tab &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,sans-serif';&quot;&gt;(0032)  &lt;/span&gt;&lt;span style=&quot; font-family:'arial,sans-serif'; font-style:italic;&quot;&gt;-&amp;gt; 0032 filename to send back to CNC&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,sans-serif';&quot;&gt;M30&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,sans-serif';&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;li style=&quot; font-family:'arial,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Sans Serif';&quot;&gt;after time set in &amp;quot;Auto close transmission dialog:&amp;quot; file server will send back file 0032 (paths, file extension are set in File Server tab)&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot; font-family:'arial,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and again ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>File server</string>
@@ -1142,6 +1202,9 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="4" column="1">
           <widget class="QLineEdit" name="searchPath1LineEdit">
+           <property name="toolTip">
+            <string>The first path to search for files.</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -1155,6 +1218,9 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="4" column="3">
           <widget class="QPushButton" name="browse2PushButton">
+           <property name="toolTip">
+            <string/>
+           </property>
            <property name="text">
             <string>Browse</string>
            </property>
@@ -1167,7 +1233,8 @@ If the file name has not been automatically detected, the file name will be the 
          <item row="4" column="4">
           <widget class="QComboBox" name="searchExt1ComboBox">
            <property name="toolTip">
-            <string>Choose file extension or &quot;KEEP&quot; to use extension from received file.</string>
+            <string>File extension. 
+If detected the filename will contain an extension, then this setting will be ignored</string>
            </property>
            <property name="editable">
             <bool>false</bool>
@@ -1182,6 +1249,9 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="14" column="1">
           <widget class="QLineEdit" name="searchPath3LineEdit">
+           <property name="toolTip">
+            <string>The third path to search for files.</string>
+           </property>
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -1189,6 +1259,10 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="14" column="4">
           <widget class="QComboBox" name="searchExt3ComboBox">
+           <property name="toolTip">
+            <string>File extension. 
+If detected the filename will contain an extension, then this setting will be ignored</string>
+           </property>
            <property name="editable">
             <bool>false</bool>
            </property>
@@ -1203,6 +1277,10 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="12" column="4">
           <widget class="QComboBox" name="searchExt2ComboBox">
+           <property name="toolTip">
+            <string>File extension. 
+If detected the filename will contain an extension, then this setting will be ignored</string>
+           </property>
            <property name="editable">
             <bool>false</bool>
            </property>
@@ -1242,6 +1320,9 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="12" column="1">
           <widget class="QLineEdit" name="searchPath2LineEdit">
+           <property name="toolTip">
+            <string>The second path to search for files.</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -1260,7 +1341,9 @@ If the file name has not been automatically detected, the file name will be the 
          <item row="0" column="1">
           <widget class="QLineEdit" name="callerProgNameLineEdit">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;Caller program&amp;quot;.&lt;/p&gt;&lt;p&gt;Set this file name as other files received from this machine.&lt;/p&gt;&lt;p&gt;If program of that name will be received from CNC, it will be searched for filename to send back to CNC.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&quot;Caller program&quot;.
+If program of that name will be received from CNC, it will be searched for a program filename to send back to CNC.
+Set this file name as other files received from this machine.</string>
            </property>
            <property name="text">
             <string>O0001</string>
@@ -1272,6 +1355,15 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="2" column="1">
           <widget class="QComboBox" name="fileNameExpComboBox">
+           <property name="toolTip">
+            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This field contains expression used to find filename in &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="editable">
             <bool>true</bool>
            </property>
@@ -1279,6 +1371,9 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="2" column="4">
           <widget class="QPushButton" name="removeButton">
+           <property name="toolTip">
+            <string>Delete from list</string>
+           </property>
            <property name="text">
             <string>&amp;Delete</string>
            </property>
@@ -1290,6 +1385,9 @@ If the file name has not been automatically detected, the file name will be the 
          </item>
          <item row="2" column="3">
           <widget class="QPushButton" name="addButton">
+           <property name="toolTip">
+            <string>Add to list</string>
+           </property>
            <property name="text">
             <string>&amp;Add</string>
            </property>
@@ -1313,26 +1411,12 @@ If the file name has not been automatically detected, the file name will be the 
          <item row="0" column="0">
           <widget class="QCheckBox" name="fileNameLowerCaseCheckBox">
            <property name="toolTip">
-            <string>Get filename from program name or form first comment</string>
+            <string>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</string>
            </property>
            <property name="text">
             <string>Change received filename to lowercase</string>
            </property>
           </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="label_16">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="spinBox"/>
          </item>
         </layout>
        </item>
