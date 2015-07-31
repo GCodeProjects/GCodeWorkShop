@@ -686,7 +686,6 @@ void SerialPortConfigDialog::fileServerCheckBoxChanged(int state)
    browse4PushButton->setEnabled(state == Qt::Checked);
    callerProgNameLineEdit->setEnabled(state == Qt::Checked);
    fileNameLowerCaseCheckBox->setEnabled(state == Qt::Checked);
-   startDelaySpinBox->setEnabled(state == Qt::Checked);
    flowCtlGroupReleased();
 }
 
