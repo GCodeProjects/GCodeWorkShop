@@ -905,6 +905,11 @@ Works only when receiving file.</string>
              <string>CRCRLF</string>
             </property>
            </item>
+           <item>
+            <property name="text">
+             <string>LFCRCR</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
