@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>641</width>
+    <width>667</width>
     <height>431</height>
    </rect>
   </property>
@@ -797,7 +797,7 @@ AND/OR
         <widget class="QSpinBox" name="autoCloseSpinBox">
          <property name="toolTip">
           <string>Automatically close transmission dialog after the last character was sent/received.
-This setting is also used in file server mode to detect end of incoming transmission.</string>
+This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to swich CNC into reciving mode.</string>
          </property>
          <property name="suffix">
           <string>s</string>
@@ -1090,11 +1090,16 @@ If in result filename becomes empty, version with letters will be used.</string>
               </sizepolicy>
              </property>
              <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of CNC program.&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="editable">
               <bool>true</bool>
              </property>
+             <item>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="1" column="0">

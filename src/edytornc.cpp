@@ -4593,11 +4593,11 @@ void EdytorNc::startSerialPortServer()
 
     if(spServer <= NULL)
     {
-        spServer = new SerialTransmissionDialog(this);
+        spServer = new SerialTransmissionDialog(this, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint, true);
         if(spServer <= NULL)
         {
             spServerAct->setChecked(false);
-            mdiArea->addSubWindow(spServer);
+            //mdiArea->addSubWindow(spServer);
         };
     };
 

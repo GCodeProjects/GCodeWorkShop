@@ -26,12 +26,14 @@
 
 
 
-SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFlags f, bool mode) : QDialog(parent, f)
 {
    setupUi(this);
    setWindowTitle(tr("Serial transmission"));
    setModal(true);
-   setWindowFlags(Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+
+   serverMode = mode;
+
    canceled = false;
    xoffReceived = false;
    prevXoffReceived = false;
@@ -42,7 +44,25 @@ SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFl
    fileServerDataTimeoutCountner = 5;
    fileServerDataTimeoutCountnerReloadValue = 5;
 
+   if(serverMode)
+   {
+       // not needed in this mode
+       setModal(false);
+       cancelButton->hide();
+       bottomLine->hide();
 
+       fileServerDataTimeoutTimer = new QTimer(this);
+       fileServerDataTimeoutTimer->setInterval(1000);
+       fileServerDataTimeoutTimer->stop();
+       connect(fileServerDataTimeoutTimer, SIGNAL(timeout()), this, SLOT(fileServerReceiveTimeout()));
+
+   }
+   else
+   {
+       delete(plainTextEdit);
+       adjustSize();
+
+   };
    connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
    connect(this, SIGNAL(rejected()), SLOT(cancelButtonClicked()));
 
@@ -69,7 +89,10 @@ SerialTransmissionDialog::~SerialTransmissionDialog()
 
     if(serialPort.isOpen())
     {
+        //serialPort.clearError();
         serialPort.flush();
+        //serialPort.clear();
+        //serialPort.clearError();
         serialPort.close();
     };
 }
@@ -83,6 +106,16 @@ void SerialTransmissionDialog::closeEvent(QCloseEvent *event)
    updateLedsTimer->stop();
    autoCloseTimer->stop();
    canceled = true;
+
+//   if(serialPort.isOpen())
+//   {
+//       serialPort.clearError();
+//       serialPort.flush();
+//       serialPort.clear();
+//       serialPort.clearError();
+//       serialPort.close();
+//   };
+
    event->accept();
 }
 
@@ -143,7 +176,7 @@ bool SerialTransmissionDialog::wasCanceled()
 
 void SerialTransmissionDialog::setLabelText(const QString text, bool multiline)
 {
-    if(multiline)
+    if(multiline && serverMode)
     {
         if(plainTextEdit)
         {
@@ -182,8 +215,8 @@ void SerialTransmissionDialog::setRange(int min, int max)
    if(max == 0)
    {
       progressBar->hide();
-      cancelButton->setText(tr("&Close"));
-      cancelButton->setIcon(QIcon(":/images/window-close.png"));
+      //cancelButton->setText(tr("&Close"));
+      //cancelButton->setIcon(QIcon(":/images/window-close.png"));
       adjustSize();
    }
    else
@@ -216,7 +249,7 @@ void SerialTransmissionDialog::updateLeds()
    if(sendStartDelay > 0)
        setLabelText(tr("Start in %1s").arg(sendStartDelay));
    else
-       if(xoffReceived) //  || !(status & QSerialPort::ClearToSendSignal)
+       if(xoffReceived || !(status & QSerialPort::ClearToSendSignal)) //  || !(status & QSerialPort::ClearToSendSignal)
        {
            setLabelText(tr("Waiting for a signal readiness..."));
        };
@@ -330,7 +363,8 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
 
 void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 {
-    bytesWritten += bytes;
+    if(bytes > 0)
+        bytesWritten += bytes;
 
     setValue(bytesWritten);
     setLabelText(tr("Sending byte %1 of %2").arg(bytesWritten).arg(noOfBytes));
@@ -385,6 +419,8 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
     //qDebug() << "xoffReceived" << xoffReceived << " Stop" << stop;
 
     autoCloseCountner = autoCloseCountnerReloadValue;
+    if(!autoCloseTimer->isActive())
+        autoCloseTimer->start();
 }
 
 //**************************************************************************************************
@@ -451,6 +487,9 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 
 void SerialTransmissionDialog::serialPortReadyRead()
 {
+//    autoCloseTimer->stop();
+//    fileServerDataTimeoutTimer->stop();
+
     QByteArray buff(serialPort.readAll());
 
     // software flow control at application level
@@ -487,10 +526,49 @@ void SerialTransmissionDialog::serialPortReadyRead()
 
     //qDebug() << "Data read" << buff << "xoffReceived" << xoffReceived;
 
-    autoCloseCountner = autoCloseCountnerReloadValue;
-    if(!autoCloseTimer->isActive())
-        autoCloseTimer->start();
+    if(serverMode)
+    {
+        fileServerDataTimeoutCountner = fileServerDataTimeoutCountnerReloadValue;
+    }
+    else
+    {
+        autoCloseCountner = autoCloseCountnerReloadValue;
 
+        if(!endOfProgChar.isEmpty())
+        {
+//            QString tmp;
+//            tmp.clear();
+//            tmp.append(buff);
+
+            QRegExp exp(endOfProgChar);
+
+            //int pos = tmp.indexOf(exp, Qt::CaseInsensitive);
+            qDebug() << "Check EOF" << exp;
+            if(QString(buff).lastIndexOf(exp, Qt::CaseInsensitive) >= 0)
+            {
+                qDebug() << "Program received";
+
+                setLabelText(tr("Program received"));
+
+                autoCloseCountner = 1;
+            };
+        };
+    };
+
+    if(serverMode)
+    {
+        //fileServerDataTimeoutCountner = fileServerDataTimeoutCountnerReloadValue;
+        if(!fileServerDataTimeoutTimer->isActive())
+            fileServerDataTimeoutTimer->start();
+
+        autoCloseTimer->stop();
+    }
+    else
+    {
+        //autoCloseCountner = autoCloseCountnerReloadValue;
+        if(!autoCloseTimer->isActive())
+            autoCloseTimer->start();
+    };
 }
 
 //**************************************************************************************************
@@ -499,7 +577,7 @@ void SerialTransmissionDialog::serialPortReadyRead()
 
 void SerialTransmissionDialog::serialPortRequestToSend(bool set)
 {
-    qDebug() << "Request To Send RTS " << set;
+    qDebug() << "Request To Send - RTS " << set;
 }
 
 //**************************************************************************************************
@@ -526,20 +604,14 @@ void SerialTransmissionDialog::sendData(QString dataToSend, QString configName)
     serialPortWriteBuffer.clear();
     autoCloseTimer->stop();
 
-    delete(plainTextEdit);
-    adjustSize();
-
-
-
     prepareDataBeforeSending(&dataToSend);
 
     // prepare serial port
-    serialPort.setPortName(portName);
-
     connect(&serialPort, SIGNAL(error(QSerialPort::SerialPortError)), SLOT(showSerialPortError(QSerialPort::SerialPortError)));
     connect(&serialPort, SIGNAL(bytesWritten(qint64)), SLOT(serialPortBytesWritten(qint64)));
     connect(&serialPort, SIGNAL(readyRead()), SLOT(serialPortReadyRead()));
 
+    serialPort.setPortName(portName);
     serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Output);
     serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Input);
     serialPort.setDataBits(portSettings.DataBits);
@@ -639,7 +711,7 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
         };
     };
 
-    serialPortWriteBuffer = data->split("\n", QString::KeepEmptyParts); // \n is not appended to a string only \r are left
+    serialPortWriteBuffer = data->split("\n", QString::SkipEmptyParts); // \n is not appended to a string only \r are left
 
     switch(eobChar)  // insert line endings. \r is replaced with choosen line ending
        {
@@ -799,7 +871,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     eobChar = settings.value("EobChar", 0).toInt();
 
     autoSave = settings.value("AutoSave", false).toBool();
-    endOfProgChar = settings.value("FileNameExpSelected", "").toString();
+    endOfProgChar = settings.value("EndOfProgExpSelected", "").toString();
     renameIfExists = settings.value("CreateBackup", true).toBool();
     removeLetters = settings.value("RemoveLetters", true).toBool();
     guessFileNameByProgName = settings.value("DetectFormFileName", true).toBool();
@@ -863,17 +935,12 @@ QStringList SerialTransmissionDialog::receiveData(QString configName)
     serialPortWriteBuffer.clear();
     writeBufferIterator = serialPortWriteBuffer.end(); // we don't send anything
     autoCloseTimer->stop();
-
-    delete(plainTextEdit);
-    adjustSize();
+    sendStartDelay = 0;  // not needed when receiving
 
     setRange(0, 0); // do not display progress bar
 
 
     // prepare serial port
-    serialPort.setPortName(portName);
-
-
     connect(&serialPort, SIGNAL(error(QSerialPort::SerialPortError)), SLOT(showSerialPortError(QSerialPort::SerialPortError)));
     //connect(serialPort, SIGNAL(bytesWritten(qint64)), SLOT(serialPortBytesWritten(qint64)));
     connect(&serialPort, SIGNAL(readyRead()), SLOT(serialPortReadyRead()));
@@ -881,6 +948,7 @@ QStringList SerialTransmissionDialog::receiveData(QString configName)
     if(portSettings.FlowControl == QSerialPort::HardwareControl)
         connect(&serialPort, SIGNAL(requestToSendChanged(bool)), SLOT(serialPortRequestToSend(bool)));
 
+    serialPort.setPortName(portName);
     serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Output);
     serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Input);
     serialPort.setDataBits(portSettings.DataBits);
@@ -1010,6 +1078,7 @@ QStringList SerialTransmissionDialog::processReceivedData()
                 readData.remove(tmpData);
                 outputList.append(saveDataToFile(&tmpData));
                 it++;
+
             };
 
             qDebug() << "LOST DATA" << readData;
@@ -1398,6 +1467,7 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
     QList<int> progBegins;
     int index;
     QString tx;
+    QRegExp expression;
 
     progs.clear();
     if(text->isNull() || text->isEmpty())
@@ -1416,7 +1486,7 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
     // detect CNC control type
     foreach(const QString expTx, exp)
     {
-        QRegExp expression(expTx);
+        expression.setPattern(expTx);
         if(text->contains(expression))
         {
             exp.clear();
@@ -1429,7 +1499,7 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
     index = 0;
     foreach(const QString expTx, exp)
     {
-        QRegExp expression(expTx);
+        expression.setPattern(expTx);
         do
         {
             index = text->indexOf(expression, index);
@@ -1445,24 +1515,23 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
     };
 
 
-    if(!endOfProgChar.isEmpty())
-    {
-        index = 0;
-        QRegExp expression(endOfProgChar);
-        do
-        {
-            index = text->indexOf(endOfProgChar, index);
-            if(index >= 0)
-            {
-                index += expression.matchedLength();
-                progBegins.append(index);
-            }
-            else
-                index = 0;
+//    if(!endOfProgChar.isEmpty())
+//    {
+//        index = 0;
+//        expression.setPattern(endOfProgChar);
+//        do
+//        {
+//            index = text->indexOf(expression, index);
+//            if(index >= 0)
+//            {
+//                index += expression.matchedLength();
+//                progBegins.append(index);
+//            }
+//            else
+//                index = 0;
 
-        }while(index > 0);
-    };
-
+//        }while(index > 0);
+//    };
 
     qSort(progBegins.begin(), progBegins.end());
 
@@ -1506,10 +1575,6 @@ bool SerialTransmissionDialog::startFileServer(QString configName, bool state)
         if(!portSettings.fileServer)
             return stop;
 
-        fileServerDataTimeoutTimer = new QTimer(this);
-        fileServerDataTimeoutTimer->setInterval(1000);
-        fileServerDataTimeoutTimer->stop();
-        connect(fileServerDataTimeoutTimer, SIGNAL(timeout()), this, SLOT(fileServerReceiveTimeout()));
 
         sendStartDelay = 0;
         bytesWritten = 0;
@@ -1520,11 +1585,7 @@ bool SerialTransmissionDialog::startFileServer(QString configName, bool state)
         serialPortWriteBuffer.clear();
         autoCloseTimer->stop();
         fileServerDataTimeoutCountnerReloadValue = autoCloseCountnerReloadValue;
-
-        setModal(false);
-        cancelButton->hide(); // not needed in this mode
-        bottomLine->hide();
-
+        //sendStartDelay = 0;  // not needed when receiving
 
 
         setWindowTitle(tr("Serial transmission File Server"));
@@ -1533,12 +1594,11 @@ bool SerialTransmissionDialog::startFileServer(QString configName, bool state)
         setLabelText(tr("Waiting for data..."));
 
         // prepare serial port
-        serialPort.setPortName(portName);
-
         connect(&serialPort, SIGNAL(error(QSerialPort::SerialPortError)), SLOT(showSerialPortError(QSerialPort::SerialPortError)));
         connect(&serialPort, SIGNAL(bytesWritten(qint64)), SLOT(fileServerBytesWritten(qint64)));
-        connect(&serialPort, SIGNAL(readyRead()), SLOT(fileServerReadyRead()));
+        connect(&serialPort, SIGNAL(readyRead()), SLOT(serialPortReadyRead()));
 
+        serialPort.setPortName(portName);
         serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Output);
         serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Input);
         serialPort.setDataBits(portSettings.DataBits);
@@ -1792,7 +1852,8 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
 
 void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
 {
-    bytesWritten += bytes;
+    if(bytes > 0)
+        bytesWritten += bytes;
 
     setValue(bytesWritten);
     setLabelText(tr("Sending byte %1 of %2").arg(bytesWritten).arg(noOfBytes));
