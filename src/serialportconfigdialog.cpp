@@ -102,6 +102,10 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(addEobButton, SIGNAL(clicked()), SLOT(addEobButtonClicked()));
    connect(deleteEobButton, SIGNAL(clicked()), SLOT(deleteEobButtonClicked()));
 
+   connect(addEobCharButton, SIGNAL(clicked()), SLOT(addEobCharButtonClicked()));
+   connect(deleteEobCharButton, SIGNAL(clicked()), SLOT(deleteEobCharButtonClicked()));
+   connect(eobComboBox, SIGNAL(editTextChanged(const QString)), SLOT(eobComboBoxEditTextChanged(const QString)));
+
    connect(autoSaveCheckBox, SIGNAL(stateChanged(int)), SLOT(autoSaveCheckBoxChanged(int)));
    connect(fileServerCheckBox, SIGNAL(stateChanged(int)), SLOT(fileServerCheckBoxChanged(int)));
    connect(appendExtCheckBox, SIGNAL(stateChanged(int)), SLOT(appendExtCheckBoxChanged(int)));
@@ -116,6 +120,11 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(portNameComboBox, SIGNAL(currentIndexChanged(QString)), SLOT(portNameComboBoxIndexChanged(QString)));
 
    tabWidget->setCurrentIndex(0);
+
+   QRegExp rx("(LF|CR){1,6}");
+   rx.setCaseSensitivity(Qt::CaseInsensitive);
+   QValidator *eobInputValid = new QRegExpValidator(rx, this );
+   eobComboBox->setValidator(eobInputValid);
 
    setResult(QDialog::Rejected);
 }
@@ -232,7 +241,7 @@ void SerialPortConfigDialog::saveButtonClicked()
     settings.setValue("AutoCloseTime", autoCloseSpinBox->value());
     //settings.setValue("EndOfBlockLF", endOfBlockLF->isChecked());
     settings.setValue("RemoveSpaceEOB", removeSpaceEOB->isChecked());
-    settings.setValue("EobChar", eobComboBox->currentIndex());
+    settings.setValue("EobChar", eobComboBox->currentText());
 
     settings.setValue("AutoSave", autoSaveCheckBox->isChecked());
     settings.setValue("CreateLogFile", logFileCheckBox->isChecked());
@@ -281,6 +290,18 @@ void SerialPortConfigDialog::saveButtonClicked()
     };
     eList.sort();
     settings.setValue("EndOfProgExp", eList);
+
+    eList.clear();
+    eList.prepend(eobComboBox->currentText());
+    for(int i = 0; i <= eobComboBox->count(); i++)
+    {
+       item = eobComboBox->itemText(i);
+       if(!item.isEmpty())
+         if(!eList.contains(item))
+           eList.prepend(item);
+    };
+    eList.sort();
+    settings.setValue("EndOfBlockCodes", eList);
 
 
     settings.endGroup();
@@ -412,8 +433,10 @@ void SerialPortConfigDialog::changeSettings()
     autoCloseSpinBox->setValue(settings.value("AutoCloseTime", 15).toInt());
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
     logFileCheckBox->setChecked(settings.value("CreateLogFile", true).toBool());
-    eobComboBox->setCurrentIndex(settings.value("EobChar", 0).toInt());
-
+    eobComboBox->insertItems(0, settings.value("EndOfBlockCodes", (QStringList() << "LF" << "CR" << "LFCR" << "CRCRLF" << "LFCRCR" << "")).toStringList());
+    id = eobComboBox->findText(settings.value("EobChar", "CRLF").toString());
+    if(id >= 0)
+        eobComboBox->setCurrentIndex(id);
 
     autoSaveCheckBox->setChecked(settings.value("AutoSave", false).toBool());
     renameCheckBox->setChecked(settings.value("CreateBackup", true).toBool());
@@ -456,11 +479,6 @@ void SerialPortConfigDialog::changeSettings()
     id = searchExt3ComboBox->findText(settings.value("SearchExt3", ".nc").toString());
     if(id >= 0)
        searchExt3ComboBox->setCurrentIndex(id);
-
-
-
-
-
 
     settings.endGroup();
     settings.endGroup();
@@ -742,4 +760,33 @@ void SerialPortConfigDialog::addEobButtonClicked()
 void SerialPortConfigDialog::deleteEobButtonClicked()
 {
     endOfProgComboBox->removeItem(endOfProgComboBox->currentIndex());
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::addEobCharButtonClicked()
+{
+    QString text = eobComboBox->currentText();
+    if(!text.isEmpty())
+        eobComboBox->insertItem(0, text);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::deleteEobCharButtonClicked()
+{
+    eobComboBox->removeItem(eobComboBox->currentIndex());
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::eobComboBoxEditTextChanged(const QString text)
+{
+    eobComboBox->setCurrentText(text.toUpper());
 }

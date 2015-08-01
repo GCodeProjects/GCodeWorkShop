@@ -83,7 +83,7 @@ private:
     QStringList splitFile(QString *text);
     QStringList processReceivedData();
     void prepareDataBeforeSending(QString *data);
-    void proccesSpecialCharacters(QString *text, QString *fileData);
+    void procesSpecialCharacters(QString *text, QString *fileData);
 
 
     QSerialPort serialPort;
@@ -102,36 +102,37 @@ private:
     int autoCloseCountnerReloadValue;
     int fileServerDataTimeoutCountner;
     int fileServerDataTimeoutCountnerReloadValue;
-    bool guessFileNameByProgName;
-    bool createLogFile;
-    bool renameIfExists;
-    bool removeLetters;
-    bool appendExt;
-    bool useAsExt;
-    bool splitPrograms;
-    QString endOfProgChar;
-    int eobChar;
+//    bool guessFileNameByProgName;
+//    bool createLogFile;
+//    bool renameIfExists;
+//    bool removeLetters;
+//    bool appendExt;
+//    bool useAsExt;
+//    bool splitPrograms;
+
+
 
     bool stop;
-    QString portName, sendAtEnd, sendAtBegining;
-    int baudRate;
-    int dataBits;
-    int stopBits;
-    int parity;
-    int flowControl;
-    double lineDelay;
-    bool readyCont;
     bool xoffReceived;
-    bool deleteControlChars;
-    bool removeEmptyLines;
-    bool removeBefore;
-    bool removeSpaceEOB;
-    int sendStartDelay;
-    int recieveTimeout;
+//    QString portName, sendAtEnd, sendAtBegining;
+//    int baudRate;
+//    int dataBits;
+//    int stopBits;
+//    int parity;
+//    int flowControl;
+//    double lineDelay;
+//    bool readyCont;
 
-    bool autoSave;
-    QString savePath;
-    QString saveExt;
+//    bool deleteControlChars;
+//    bool removeEmptyLines;
+//    bool removeBefore;
+//    bool removeSpaceEOB;
+//    int sendStartDelay;
+//    int recieveTimeout;
+
+//    bool autoSave;
+//    QString savePath;
+//    QString saveExt;
     bool serverMode;
 
     //QPlainTextEdit plainTextEdit;
