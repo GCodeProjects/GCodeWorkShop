@@ -43,14 +43,13 @@ struct PortSettings
     QString portName;
     QString sendAtEnd;
     QString sendAtBegining;
-    QString  savePat;
+    QString savePath;
     QString saveExt;
     QString endOfProgChar;
     QString callerProgName;
     double lineDelay;
-    int autoCloseCountnerReloadValue;
     int sendStartDelay;
-    int eobChar;
+    int autoCloseCountnerReloadValue;
     char Xon;
     char Xoff;
     bool createLogFile;
@@ -74,7 +73,7 @@ struct PortSettings
     QString searchPath3;
     QString searchExt3;
     QString fileNameExp;
-
+    QString eobChar;
 };
 
 class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialog
@@ -116,6 +115,9 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
      void removeButtonClicked();
      void addEobButtonClicked();
      void deleteEobButtonClicked();
+     void addEobCharButtonClicked();
+     void deleteEobCharButtonClicked();
+     void eobComboBoxEditTextChanged(const QString text);
 
 
    private:
