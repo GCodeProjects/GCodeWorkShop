@@ -696,20 +696,25 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
         data->replace("\r\r\n", "\r\n");
     }
     else
-    {
-        if(!data->contains("\r\n"))
+        if(data->contains("\n\r\r"))
         {
-            if(data->contains("\n"))
+            data->replace("\n\r\r", "\r\n");
+        }
+        else
+        {
+            if(!data->contains("\r\n"))
             {
-                data->replace("\n", "\r\n");
-            }
-            else
-                if(data->contains("\r"))
+                if(data->contains("\n"))
                 {
-                    data->replace("\r", "\r\n");
-                };
+                    data->replace("\n", "\r\n");
+                }
+                else
+                    if(data->contains("\r"))
+                    {
+                        data->replace("\r", "\r\n");
+                    };
+            };
         };
-    };
 
     serialPortWriteBuffer = data->split("\n", QString::SkipEmptyParts); // \n is not appended to a string only \r are left
 
@@ -722,6 +727,8 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
           case 2:  //  no change only /r
                    break;
           case 3:  serialPortWriteBuffer.replaceInStrings("\r", "\r\r\n");
+                   break;
+          case 4:  serialPortWriteBuffer.replaceInStrings("\r", "\n\r\r");
                    break;
           default: serialPortWriteBuffer.replaceInStrings("\r", "\r\n");
                    break;
