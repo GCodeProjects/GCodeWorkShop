@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>641</width>
-    <height>429</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -108,7 +108,7 @@
       <string>Delete from list</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -664,6 +664,9 @@ Set XON or XOFF to 0 if you want disable it.</string>
          <property name="maxLength">
           <number>2</number>
          </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="2" column="4">
@@ -682,6 +685,9 @@ Set XON or XOFF to 0 if you want disable it.</string>
          </property>
          <property name="maxLength">
           <number>2</number>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -719,6 +725,9 @@ AND/OR
          <property name="maxLength">
           <number>128</number>
          </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="0" column="3">
@@ -751,6 +760,9 @@ AND/OR
          </property>
          <property name="maxLength">
           <number>128</number>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -834,7 +846,7 @@ This setting is also used in file server mode to detect end of incoming transmis
         <widget class="QSpinBox" name="startDelaySpinBox">
          <property name="toolTip">
           <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
-This setting works also with hardware flow control, set it to 1 or more to start trasmission without waiting for XON.
+This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
 This setting is ignored in serial File Server.</string>
          </property>
          <property name="suffix">

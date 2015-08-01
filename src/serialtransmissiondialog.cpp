@@ -361,19 +361,19 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
         buff.clear();
         buff.append(*writeBufferIterator);
 
-        switch(eobChar)  // insert line endings
-        {
-           case 0:  buff.append("\r\n");
-                    break;
-           case 1:  buff.append("\n");
-                    break;
-           case 2:  buff.append("\r");
-                    break;
-           case 3:  buff.append("\r\r\n");
-                    break;
-           default: buff.append("\r\n");
-                    break;
-        };
+//        switch(eobChar)  // insert line endings
+//        {
+//           case 0:  buff.append("\r\n");
+//                    break;
+//           case 1:  buff.append("\n");
+//                    break;
+//           case 2:  buff.append("\r");
+//                    break;
+//           case 3:  buff.append("\r\r\n");
+//                    break;
+//           default: buff.append("\r\n");
+//                    break;
+//        };
 
         //qDebug() << "W data:" << buff;
 
@@ -574,8 +574,16 @@ void SerialTransmissionDialog::sendData(QString dataToSend, QString configName)
 
     if((sendStartDelay == 0)) // && (portSettings.FlowControl == QSerialPort::SoftwareControl)
     {
-        xoffReceived = true;
-        prevXoffReceived = true;
+        if((portSettings.FlowControl == QSerialPort::HardwareControl) && ((portSettings.Xoff == 0) || (portSettings.Xon == 0)))
+        {
+            xoffReceived = false;
+            prevXoffReceived = false;
+        }
+        else
+        {
+            xoffReceived = true;
+            prevXoffReceived = true;
+        };
     };
 
     writeBufferIterator = serialPortWriteBuffer.begin();
@@ -610,39 +618,61 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
         data->append(sendAtEnd);
     };
 
-    // ensure that data contains only LF line endings
+    // ensure that data contains only CRLF line endings
     if(data->contains("\r\r\n"))
     {
-        data->replace("\r\r\n", "\n");
+        data->replace("\r\r\n", "\r\n");
     }
     else
     {
-        if(data->contains("\r\n"))
+        if(!data->contains("\r\n"))
         {
-            data->replace("\r\n", "\n");
-        }
-        else
-            if(data->contains("\r"))
+            if(data->contains("\n"))
             {
-                data->replace("\r", "\n");
-            };
+                data->replace("\n", "\r\n");
+            }
+            else
+                if(data->contains("\r"))
+                {
+                    data->replace("\r", "\r\n");
+                };
+        };
     };
 
-    serialPortWriteBuffer = data->split("\n", QString::KeepEmptyParts);
-    noOfBytes = data->length();
+    serialPortWriteBuffer = data->split("\n", QString::KeepEmptyParts); // \n is not appended to a string only \r are left
 
-    switch(eobChar)  // add to noOfBytes number of extra eob characters
-    {
-       case 0:  noOfBytes += (serialPortWriteBuffer.size() + 1); // CRLF
-                break;
-       case 3:  noOfBytes +=  (2 * (serialPortWriteBuffer.size() + 1)); // CRCRLF
-                break;
-       default: // only one LF or CR, already counted
-                break;
-    };
+    switch(eobChar)  // insert line endings. \r is replaced with choosen line ending
+       {
+          case 0:  serialPortWriteBuffer.replaceInStrings("\r", "\r\n");
+                   break;
+          case 1:  serialPortWriteBuffer.replaceInStrings("\r", "\n");
+                   break;
+          case 2:  //  no change only /r
+                   break;
+          case 3:  serialPortWriteBuffer.replaceInStrings("\r", "\r\r\n");
+                   break;
+          default: serialPortWriteBuffer.replaceInStrings("\r", "\r\n");
+                   break;
+       };
+
+
+    noOfBytes = serialPortWriteBuffer.join("").length();  // get new size
+
+
+    //noOfBytes = data->length();
+
+//    switch(eobChar)  // add to noOfBytes number of extra eob characters
+//    {
+//       case 0:  noOfBytes += (serialPortWriteBuffer.size() + 1); // CRLF
+//                break;
+//       case 3:  noOfBytes +=  (2 * (serialPortWriteBuffer.size() + 1)); // CRCRLF
+//                break;
+//       default: // only one LF or CR, already counted
+//                break;
+//    };
 
     setRange(0, noOfBytes);
-
+qDebug() << serialPortWriteBuffer;
 }
 
 //**************************************************************************************************
@@ -755,8 +785,8 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     portSettings.Parity = (QSerialPort::Parity) settings.value("Parity", QSerialPort::NoParity).toInt();
     portSettings.FlowControl = (QSerialPort::FlowControl) settings.value("FlowControl", QSerialPort::HardwareControl).toInt();
     lineDelay = settings.value("LineDelay", 0).toDouble();
-    portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
-    portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
+    portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 0);
+    portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 0);
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
     deleteControlChars = settings.value("DeleteControlChars", true).toBool();
@@ -1793,19 +1823,19 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
         buff.clear();
         buff.append(*writeBufferIterator);
 
-        switch(eobChar)  // insert line endings
-        {
-           case 0:  buff.append("\r\n");
-                    break;
-           case 1:  buff.append("\n");
-                    break;
-           case 2:  buff.append("\r");
-                    break;
-           case 3:  buff.append("\r\r\n");
-                    break;
-           default: buff.append("\r\n");
-                    break;
-        };
+//        switch(eobChar)  // insert line endings
+//        {
+//           case 0:  buff.append("\r\n");
+//                    break;
+//           case 1:  buff.append("\n");
+//                    break;
+//           case 2:  buff.append("\r");
+//                    break;
+//           case 3:  buff.append("\r\r\n");
+//                    break;
+//           default: buff.append("\r\n");
+//                    break;
+//        };
 
         //qDebug() << "W data:" << buff;
 
