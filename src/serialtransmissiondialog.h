@@ -38,7 +38,7 @@ class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionD
     Q_OBJECT
 
 public:
-    SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog, bool mode = false);
     ~SerialTransmissionDialog();
     QStringList receiveData(QString configName);
     void sendData(QString dataToSend, QString configName);
@@ -132,6 +132,7 @@ private:
     bool autoSave;
     QString savePath;
     QString saveExt;
+    bool serverMode;
 
     //QPlainTextEdit plainTextEdit;
 

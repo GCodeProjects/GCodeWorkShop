@@ -107,7 +107,7 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(appendExtCheckBox, SIGNAL(stateChanged(int)), SLOT(appendExtCheckBoxChanged(int)));
    connect(useAsExtCheckBox, SIGNAL(stateChanged(int)), SLOT(useAsExtCheckBoxChanged(int)));
 
-   connect(flowCtlGroup, SIGNAL(buttonReleased(int)), SLOT(flowCtlGroupReleased()));
+   //connect(flowCtlGroup, SIGNAL(buttonReleased(int)), SLOT(flowCtlGroupReleased()));
 
    loadSettings();
    flowCtlGroupReleased();
@@ -135,11 +135,7 @@ SerialPortConfigDialog::~SerialPortConfigDialog()
 
 void SerialPortConfigDialog::flowCtlGroupReleased()
 {
-    if(f2CheckBox->isChecked())
-        startDelaySpinBox->setValue(1);
 
-    if(f3CheckBox->isChecked())
-        startDelaySpinBox->setValue(0);
 
 }
 
