@@ -423,8 +423,8 @@ void SerialPortConfigDialog::changeSettings()
 
     eotInput->setText(settings.value("SendAtEnd", "").toString());
     stInput->setText(settings.value("SendAtBegining", "").toString());
-    xonInput->setText(settings.value("Xon", "17").toString());
-    xoffInput->setText(settings.value("Xoff", "19").toString());
+    xonInput->setText(settings.value("Xon", "0").toString());
+    xoffInput->setText(settings.value("Xoff", "0").toString());
     delayDoubleSpinBox->setValue(settings.value("LineDelay", 0).toDouble());
     deleteControlChars->setChecked(settings.value("DeleteControlChars", true).toBool());
     removeEmptyLines->setChecked(settings.value("RemoveEmptyLines", true).toBool());
@@ -458,7 +458,7 @@ void SerialPortConfigDialog::changeSettings()
     fileServerCheckBox->setChecked(settings.value("FileServer", false).toBool());
     callerProgNameLineEdit->setText(settings.value("CallerProg", "O0001").toString());
     fileNameLowerCaseCheckBox->setChecked(settings.value("FileNameLowerCase", true).toBool());
-    fileNameExpComboBox->insertItems(0, settings.value("FileNameExp", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)")).toStringList());
+    fileNameExpComboBox->insertItems(0, settings.value("FileNameExp", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\((O|:)[0-9]{4,4}\)")).toStringList());
     id = fileNameExpComboBox->findText(settings.value("FileNameExpSelected", "").toString());
     if(id >= 0)
        fileNameExpComboBox->setCurrentIndex(id);
