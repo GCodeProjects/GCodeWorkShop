@@ -108,7 +108,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -1494,7 +1494,7 @@ If program of that name will be received from CNC, it will be searched for a pro
 Set this file name as other files received from this machine.</string>
            </property>
            <property name="text">
-            <string>O0001</string>
+            <string/>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>

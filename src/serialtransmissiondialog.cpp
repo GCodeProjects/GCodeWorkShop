@@ -107,14 +107,14 @@ void SerialTransmissionDialog::closeEvent(QCloseEvent *event)
    autoCloseTimer->stop();
    canceled = true;
 
-//   if(serialPort.isOpen())
-//   {
-//       serialPort.clearError();
-//       serialPort.flush();
-//       serialPort.clear();
-//       serialPort.clearError();
-//       serialPort.close();
-//   };
+   if(serialPort.isOpen())
+   {
+       serialPort.clearError();
+       serialPort.flush();
+       //serialPort.clear();
+       serialPort.clearError();
+       serialPort.close();
+   };
 
    event->accept();
 }
@@ -217,10 +217,13 @@ void SerialTransmissionDialog::setRange(int min, int max)
       progressBar->hide();
       //cancelButton->setText(tr("&Close"));
       //cancelButton->setIcon(QIcon(":/images/window-close.png"));
-      adjustSize();
+      //adjustSize();
    }
    else
+   {
       progressBar->setRange(min, max);
+      progressBar->show();
+   };
 
    progressBar->setValue(0);
 }
@@ -249,7 +252,7 @@ void SerialTransmissionDialog::updateLeds()
    if(portSettings.sendStartDelay > 0)
        setLabelText(tr("Start in %1s").arg(portSettings.sendStartDelay));
    else
-       if(xoffReceived || !(status & QSerialPort::ClearToSendSignal)) //  || !(status & QSerialPort::ClearToSendSignal)
+       if(xoffReceived) //  || !(status & QSerialPort::ClearToSendSignal)
        {
            setLabelText(tr("Waiting for a signal readiness..."));
        };
@@ -679,50 +682,38 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
     };
 
     // ensure that data contains only CRLF line endings
-    if(data->contains("\r\r\n"))
-    {
-        data->replace("\r\r\n", "\r\n");
-    }
-    else
-        if(data->contains("\n\r\r"))
-        {
-            data->replace("\n\r\r", "\r\n");
-        }
-        else
-        {
-            if(!data->contains("\r\n"))
-            {
-                if(data->contains("\n"))
-                {
-                    data->replace("\n", "\r\n");
-                }
-                else
-                    if(data->contains("\r"))
-                    {
-                        data->replace("\r", "\r\n");
-                    };
-            };
-        };
+    data->replace(QRegExp("[\\n\\r]{1,}"), "\r\n");
+
+//    if(data->contains("\r\r\n"))
+//    {
+//        data->replace("\r\r\n", "\r\n");
+//    }
+//    else
+//        if(data->contains("\n\r\r"))
+//        {
+//            data->replace("\n\r\r", "\r\n");
+//        }
+//        else
+//        {
+//            if(!data->contains("\r\n"))
+//            {
+//                if(data->contains("\n"))
+//                {
+//                    data->replace("\n", "\r\n");
+//                }
+//                else
+//                    if(data->contains("\r"))
+//                    {
+//                        data->replace("\r", "\r\n");
+//                    };
+//            };
+//        };
+
+
+
 
     serialPortWriteBuffer = data->split("\n", QString::SkipEmptyParts); // \n is not appended to a string only \r are left
     serialPortWriteBuffer.replaceInStrings("\r", portSettings.eobChar); // insert line endings. \r is replaced with choosen line ending
-
-//    switch(eobChar)
-//       {
-//          case 0:  serialPortWriteBuffer.replaceInStrings("\r", "\r\n");
-//                   break;
-//          case 1:  serialPortWriteBuffer.replaceInStrings("\r", "\n");
-//                   break;
-//          case 2:  //  no change only /r
-//                   break;
-//          case 3:  serialPortWriteBuffer.replaceInStrings("\r", "\r\r\n");
-//                   break;
-//          case 4:  serialPortWriteBuffer.replaceInStrings("\r", "\n\r\r");
-//                   break;
-//          default: serialPortWriteBuffer.replaceInStrings("\r", "\r\n");
-//                   break;
-//       };
-
 
     noOfBytes = serialPortWriteBuffer.join("").length();  // get new size
     setRange(0, noOfBytes);
@@ -748,15 +739,10 @@ void SerialTransmissionDialog::procesSpecialCharacters(QString *text, QString *f
         fileName = file.fileName();
         fileExt = file.suffix();
         if(!fileExt.isEmpty())
+        {
             fileExt.prepend('.');
-        fileName.remove(fileExt);
-
-//        int pos = fileName.lastIndexOf('.');
-//        if(pos >= 0)
-//        {
-//            fileExt =  fileName.mid(pos, fileName.length());
-//            fileName.remove(fileExt);
-//        };
+            fileName.remove(fileExt);
+        };
 
         int pos = fileName.lastIndexOf('_');
         if(pos >= 0)
@@ -981,6 +967,58 @@ QStringList SerialTransmissionDialog::processReceivedData()
         return outputList;
 
 
+//    i = serialPortReadBuffer.size();
+//    for(j = 0; j < i; j++)
+//    {
+//        if(portSettings.deleteControlChars)
+//            if(((serialPortReadBuffer.at(j) <= 0x1F) || (serialPortReadBuffer.at(j) >= 0x7F))) // is control character (below 0x1F and above 0x7F)
+//                if((serialPortReadBuffer.at(j) != 0x0A) && (serialPortReadBuffer.at(j) != 0x0D)) // but not LF or CR
+//                    continue; //skip this character
+
+//        if((serialPortReadBuffer.at(j) == 0x0A) || (serialPortReadBuffer.at(j) == 0x0D))
+//        {
+//            eobString.append(serialPortReadBuffer.at(j));
+//            if(eobString.contains("\n\r\r")) //known EOB codes
+//            {
+//                readData.append("\r\n");
+//                eobString.clear();
+//            }
+//            else
+//                if(eobString.contains("\r\n\n"))
+//                {
+//                    readData.append("\r\n");
+//                    eobString.clear();
+//                }
+//                else
+//                    if(eobString.contains("\r\n"))
+//                    {
+//                        readData.append("\r\n");
+//                        eobString.clear();
+//                    }
+//                    else
+//                        if(eobString.contains(portSettings.endOfProgChar))
+//                        {
+//                            readData.append("\r\n");
+//                            eobString.clear();
+//                        };
+//        }
+//        else
+//        {
+//            if(!eobString.isEmpty()) //unknown EOB codes or only LF
+//            {
+//                if(eobString.contains("\n"))
+//                    eobString.replace("\n", "\r\n");
+
+//                readData.append(eobString);
+//                eobString.clear();
+//            };
+
+//            readData.append(serialPortReadBuffer.at(j));
+//        };
+//    };
+
+
+
     i = serialPortReadBuffer.size();
     for(j = 0; j < i; j++)
     {
@@ -989,42 +1027,20 @@ QStringList SerialTransmissionDialog::processReceivedData()
                 if((serialPortReadBuffer.at(j) != 0x0A) && (serialPortReadBuffer.at(j) != 0x0D)) // but not LF or CR
                     continue; //skip this character
 
-        if((serialPortReadBuffer.at(j) == 0x0A) || (serialPortReadBuffer.at(j) == 0x0D))
-        {
-            eobString.append(serialPortReadBuffer.at(j));
-            if(eobString.contains("\n\r\r")) //known EOB codes
-            {
-                readData.append("\r\n");
-                eobString.clear();
-            }
-            else
-                if(eobString.contains("\r\n"))
-                {
-                    readData.append("\r\n");
-                    eobString.clear();
-                };
-        }
-        else
-        {
-            if(!eobString.isEmpty()) //unknown EOB codes or only LF
-            {
-                if(eobString.contains("\n"))
-                    eobString.replace("\n", "\r\n");
+        readData.append(serialPortReadBuffer.at(j));
 
-                readData.append(eobString);
-                eobString.clear();
-            };
-
-            readData.append(serialPortReadBuffer.at(j));
-        };
     };
+
+    readData.replace(QRegExp("[\\n\\r]{1,}"), "\r\n");
 
     if(portSettings.removeSpaceEOB) //removes white space at end of line added by Fanuc
     {
-        if(readData.contains("\r\n"))
-            readData.replace(" \r\n", "\r\n");
-        else
-            readData.replace(" \n", "\r\n");
+//        if(readData.contains("\r\n"))
+//            readData.replace(" \r\n", "\r\n");
+//        else
+//            readData.replace(" \n", "\r\n");
+
+        readData.replace(QRegExp("( )[\\n\\r]{1,}"), "\r\n");
     };
 
     if(portSettings.removeEmptyLines)
@@ -1711,6 +1727,8 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
                 {
                     fileInfo.setFile(*itp);
                     fileName = fileInfo.fileName();
+                    //fileName.remove(fileInfo.suffix());
+                    //fileName.remove('.');
                     qDebug() << "File Server 0013" << *itp << fileName << portSettings.callerProgName;
                     if(fileName == portSettings.callerProgName)
                     {
@@ -1724,14 +1742,17 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
                             file.close();
                         };
 
+                        fileName.clear();
+                        ext.clear();
                         tmpBuff.clear();
                         tmpBuff.append(buff);
                         QRegExp exp(portSettings.fileNameExp);
                         int pos = tmpBuff.indexOf(exp, Qt::CaseInsensitive);
+
                         qDebug() << "File Server 0015" << buff << pos;
+
                         if(pos >= 1)
                         {
-                            fileName.clear();
                             fileName.append(tmpBuff.mid(pos, exp.matchedLength()));
                             fileName.remove(';');
                             fileName.remove('(');
@@ -1740,17 +1761,19 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
                             fileInfo.setFile(fileName);
                             ext = fileInfo.suffix();
                             if(!ext.isEmpty())
+                            {
                                 ext.prepend('.');
-                            fileName.remove(ext);
+                                fileName.remove(ext);
+                            };
 
                             if(portSettings.fileNameLowerCase)
                             {
                                 fileName = fileName.toLower();
                                 ext = ext.toLower();
                             };
-
-                            qDebug() << "File Server 1" << fileName << ext;
                         };
+
+                        qDebug() << "File Server 1" << fileName << ext;
 
                         if(!fileName.isEmpty())
                         {
@@ -1758,57 +1781,75 @@ void SerialTransmissionDialog::fileServerReceiveTimeout()
                             fileInfo.setFile(path);
                             if(!fileInfo.exists())
                             {
+                                setLabelText(tr("ERROR:\t Can't find file in path 1: \"%1\".").arg(path), true);
+                                writeLog(tr("ERROR:\t Can't find file in path 1: \"%1\".").arg(path));
+
                                 path = portSettings.searchPath2 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt2 : ext);
                                 fileInfo.setFile(path);
                                 if(!fileInfo.exists())
+                                {
+                                    setLabelText(tr("ERROR:\t Can't find file in path 2: \"%1\".").arg(path), true);
+                                    writeLog(tr("ERROR:\t Can't find file in path 2: \"%1\".").arg(path));
+
                                     path = portSettings.searchPath3 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt3 : ext);
+                                    fileInfo.setFile(path);
+                                    if(!fileInfo.exists())
+                                    {
+                                        setLabelText(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path), true);
+                                        writeLog(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path));
+                                        path.clear();
+                                    };
+                                };
                             };
 
-                            qDebug() << "File Server 0016" << path;
+                            qDebug() << "File Server 0016" << path << fileName << ext;
 
-                            setLabelText(tr("INFO:\t Preparing to send file: \"%1\".").arg(path), true);
-                            writeLog(tr("INFO:\t Preparing to send file: \"%1\".\r\n").arg(path));
-                            file.setFileName(path);
-                            if(file.open(QIODevice::ReadOnly))
+                            if(!path.isEmpty())
                             {
-                                qDebug() << "File Server 2" << path;
+                                setLabelText(tr("INFO:\t Preparing to send file: \"%1\".").arg(path), true);
+                                writeLog(tr("INFO:\t Preparing to send file: \"%1\".\r\n").arg(path));
+                                file.setFileName(path);
+                                if(file.open(QIODevice::ReadOnly))
+                                {
+                                    qDebug() << "File Server 2" << path;
 
 
-                                buff = file.readAll();
-                                file.close();
+                                    buff = file.readAll();
+                                    file.close();
 
-                                bytesWritten = 0;
-                                xoffReceived = false;
-                                prevXoffReceived = false;
-                                stop = false;
-                                serialPortReadBuffer.clear();
-                                serialPortWriteBuffer.clear();
+                                    bytesWritten = 0;
+                                    xoffReceived = false;
+                                    prevXoffReceived = false;
+                                    stop = false;
+                                    serialPortReadBuffer.clear();
+                                    serialPortWriteBuffer.clear();
 
-                                tmpBuff.clear();
-                                tmpBuff.append(buff);
+                                    tmpBuff.clear();
+                                    tmpBuff.append(buff);
 
-                                prepareDataBeforeSending(&tmpBuff);
-                                setRange(0, noOfBytes);
+                                    prepareDataBeforeSending(&tmpBuff);
+                                    setRange(0, noOfBytes);
 
-                                writeBufferIterator = serialPortWriteBuffer.begin();
-                                fileServerBytesWritten(0);  // start
+                                    writeBufferIterator = serialPortWriteBuffer.begin();
+                                    fileServerBytesWritten(0);  // start
 
-                                setLabelText(tr("OK:\t Sending file: \"%1\".").arg(path), true);
-                                writeLog(tr("OK:\t Sending file: \"%1\".\r\n").arg(path));
+                                    setLabelText(tr("OK:\t Sending file: \"%1\".").arg(path), true);
+                                    writeLog(tr("OK:\t Sending file: \"%1\".\r\n").arg(path));
 
 
-                            }
-                            else
-                            {
-                                setLabelText(tr("ERROR:\t Can't send file: \"%1\". %2").arg(path).arg(file.errorString()), true);
-                                writeLog(tr("ERROR:\t Can't send file: \"%1\". %2\r\n").arg(path).arg(file.errorString()));
+                                }
+                                else
+                                {
+                                    setLabelText(tr("ERROR:\t Can't send file: \"%1\". %2").arg(path).arg(file.errorString()), true);
+                                    writeLog(tr("ERROR:\t Can't send file: \"%1\". %2\r\n").arg(path).arg(file.errorString()));
+                                };
                             };
                         };
 
                         break;
                     }
-                    setLabelText(tr("OK:\t Received file: \"%1\".").arg(fileName), true);
-                    writeLog(tr("OK:\t Received file: \"%1\".\r\n").arg(fileName));
+                    setLabelText(tr("OK:\t Received file: \"%1\".").arg(*itp), true);
+                    writeLog(tr("OK:\t Received file: \"%1\".\r\n").arg(*itp));
                     itp++;
                 };
             };
@@ -1866,22 +1907,6 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
         QByteArray buff;
         buff.clear();
         buff.append(*writeBufferIterator);
-
-//        switch(eobChar)  // insert line endings
-//        {
-//           case 0:  buff.append("\r\n");
-//                    break;
-//           case 1:  buff.append("\n");
-//                    break;
-//           case 2:  buff.append("\r");
-//                    break;
-//           case 3:  buff.append("\r\r\n");
-//                    break;
-//           default: buff.append("\r\n");
-//                    break;
-//        };
-
-        //qDebug() << "W data:" << buff;
 
         serialPort.write(buff, buff.size());
         writeBufferIterator++;
