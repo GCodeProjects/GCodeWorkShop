@@ -72,8 +72,10 @@ struct PortSettings
     QString searchExt2;
     QString searchPath3;
     QString searchExt3;
-    QString fileNameExp;
+    QString fileNameExpFs;
+    QString fileNameExpAs;
     QString eobChar;
+    QString fileNameExpSaveFile;
 };
 
 class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialog
@@ -118,9 +120,11 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
      void addEobCharButtonClicked();
      void deleteEobCharButtonClicked();
      void eobComboBoxEditTextChanged(const QString text);
+     void addFileNameButtonClicked();
+     void removeFileNameButtonClicked();
 
 
-   private:
+private:
      QString browseForDir(const QString dir, QString windowTitle);
 
      QButtonGroup *baudGroup;

@@ -300,80 +300,80 @@ bool MdiChild::saveAs()
 
 bool MdiChild::saveFile(const QString &fileName)
 {
-   int curPos;
-   QRegExp exp;
-   QTextCursor cursor;
+    int curPos;
+    QRegExp exp;
+    QTextCursor cursor;
 
-   QFile file(fileName);
-   if(!file.open(QIODevice::WriteOnly))
-   {
-      QMessageBox::warning(this, tr("EdytorNC"),
-                           tr("Cannot write file \"%1\".\n %2")
-                           .arg(fileName)
-                           .arg(file.errorString()));
-      return false;
-   };
+    QFile file(fileName);
+    if(file.open(QIODevice::WriteOnly))
+    {
+        fileChangeMonitorRemovePath(file.fileName());
 
-   fileChangeMonitorRemovePath(file.fileName());
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        curPos = textEdit->textCursor().position();
 
-   QApplication::setOverrideCursor(Qt::WaitCursor);
-   curPos = textEdit->textCursor().position();
+        QDate dat = QDate::currentDate();
+        exp.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
+        cursor = textEdit->textCursor();
+        cursor.setPosition(0);
+        //setTextCursor(cursor);
 
-   QDate dat = QDate::currentDate();
+        cursor = textEdit->document()->find(exp, cursor);
+        if(!cursor.isNull())
+        {
+            textEdit->setUpdatesEnabled(false);
+            cursor.beginEditBlock();
+            cursor.removeSelectedText();
+            cursor.insertText(tr("DATE") + ": " + dat.toString(Qt::DefaultLocaleShortDate));
+            cursor.endEditBlock();
 
+            textEdit->setUpdatesEnabled(true);
+            textEdit->repaint();
+        }
+        else
+        {
+            exp.setPattern("[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
+            cursor = textEdit->textCursor();
+            cursor.setPosition(0);
+            cursor = textEdit->document()->find(exp, cursor);
+            if(!cursor.isNull())
+            {
+                textEdit->setUpdatesEnabled(false);
+                cursor.beginEditBlock();
+                cursor.removeSelectedText();
+                cursor.insertText(dat.toString(Qt::DefaultLocaleShortDate));
+                cursor.endEditBlock();
 
-   exp.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
-   cursor = textEdit->textCursor();
-   cursor.setPosition(0);
-   //setTextCursor(cursor);
+                textEdit->setUpdatesEnabled(true);
+                textEdit->repaint();
+            }
+        };
 
-   cursor = textEdit->document()->find(exp, cursor);
-   if(!cursor.isNull())
-   {
-      textEdit->setUpdatesEnabled(false);
-      cursor.beginEditBlock();
-      cursor.removeSelectedText();
-      cursor.insertText(tr("DATE") + ": " + dat.toString(Qt::DefaultLocaleShortDate));
-      cursor.endEditBlock();
+        QTextStream out(&file);
 
-      textEdit->setUpdatesEnabled(true);
-      textEdit->repaint();
-   }
-   else
-   {
-      exp.setPattern("[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
-      cursor = textEdit->textCursor();
-      cursor.setPosition(0);
-      cursor = textEdit->document()->find(exp, cursor);
-      if(!cursor.isNull())
-      {
-         textEdit->setUpdatesEnabled(false);
-         cursor.beginEditBlock();
-         cursor.removeSelectedText();
-         cursor.insertText(dat.toString(Qt::DefaultLocaleShortDate));
-         cursor.endEditBlock();
+        QString tex = textEdit->toPlainText();
+        if(!tex.contains(QLatin1String("\r\n")))
+            tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
+        out << tex;
+        file.close();
+        QApplication::restoreOverrideCursor();
 
-         textEdit->setUpdatesEnabled(true);
-         textEdit->repaint();
-      }
-   };
+        cursor = textEdit->textCursor();
+        cursor.setPosition(curPos);
+        textEdit->setTextCursor(cursor);
 
-   QTextStream out(&file);
-
-   QString tex = textEdit->toPlainText();
-   if(!tex.contains(QLatin1String("\r\n")))
-      tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
-   out << tex;
-   file.close();
-   QApplication::restoreOverrideCursor();
-
-   cursor = textEdit->textCursor();
-   cursor.setPosition(curPos);
-   textEdit->setTextCursor(cursor);
-
-   setCurrentFile(fileName, tex);
-   fileChangeMonitorAddPath(file.fileName());
-   return true;
+        setCurrentFile(fileName, tex);
+        fileChangeMonitorAddPath(file.fileName());
+        return true;
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("EdytorNC"),
+                             tr("Cannot write file \"%1\".\n %2")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return false;
+    };
 }
 
 //**************************************************************************************************

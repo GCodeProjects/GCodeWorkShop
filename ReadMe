@@ -8,7 +8,7 @@ Some features :
     *   Bolt holes calculation
     *   Solutions of triangles calculation
     *   Speed, feed calculation
-    *   Send/receive through serial port
+    *   Send/receive through serial port with automatic file saving and File server - possibility to download new CNC program directly from machine (beta function, look in tooltips in serial port configuration dialog).
     *   Conversion inch/mm, mm/inch. You can write inches in format 1.3/4  1/4 ...
     *   Find in files
     *   Simple project management - you can keep links to (almost) all files related to your part program in one place. 
