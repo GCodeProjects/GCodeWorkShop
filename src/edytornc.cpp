@@ -4568,7 +4568,7 @@ void EdytorNc::fileChanged(const QString fileName)
     QMessageBox msgBox;
     msgBox.setText(tr("File \"%1\" <b>was modified on disk.</b><p>Do you want to reload it?</p>%2")
                    .arg(fileName)
-                   .arg((modified ? tr("<p><b>Warning</b> File in editor contains unsaved changes.</p>") : "")));
+                   .arg((modified ? tr("<p><b>Warning:</b> File in editor contains unsaved changes.</p>") : "")));
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
     msgBox.setIcon(QMessageBox::Warning);
@@ -4616,6 +4616,7 @@ void EdytorNc::startSerialPortServer()
 
     };
 
+    configBox->setEnabled(stop);
     receiveAct->setEnabled(stop);
     configPortAct->setEnabled(stop);
     diagAct->setEnabled(stop);

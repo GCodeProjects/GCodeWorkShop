@@ -102,6 +102,9 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(addEobButton, SIGNAL(clicked()), SLOT(addEobButtonClicked()));
    connect(deleteEobButton, SIGNAL(clicked()), SLOT(deleteEobButtonClicked()));
 
+   connect(addfileNameButton, SIGNAL(clicked()), SLOT(addFileNameButtonClicked()));
+   connect(removeFileNameButton, SIGNAL(clicked()), SLOT(removeFileNameButtonClicked()));
+
    connect(addEobCharButton, SIGNAL(clicked()), SLOT(addEobCharButtonClicked()));
    connect(deleteEobCharButton, SIGNAL(clicked()), SLOT(deleteEobCharButtonClicked()));
    connect(eobComboBox, SIGNAL(editTextChanged(const QString)), SLOT(eobComboBoxEditTextChanged(const QString)));
@@ -256,7 +259,8 @@ void SerialPortConfigDialog::saveButtonClicked()
 
 
     settings.setValue("FileServer", fileServerCheckBox->isChecked());
-    settings.setValue("FileNameExpSelected", fileNameExpComboBox->currentText());
+    settings.setValue("FileNameExpFSSelected", fileNameExpFSComboBox->currentText());
+    settings.setValue("FileNameExpASSelected", fileNameExpASComboBox->currentText());
     settings.setValue("EndOfProgExpSelected", endOfProgComboBox->currentText());
     settings.setValue("FileNameLowerCase", fileNameLowerCaseCheckBox->isChecked());
     settings.setValue("CallerProg", callerProgNameLineEdit->text());
@@ -268,16 +272,30 @@ void SerialPortConfigDialog::saveButtonClicked()
     settings.setValue("SearchExt3", searchExt3ComboBox->currentText());
 
     QStringList eList;
-    eList.prepend(fileNameExpComboBox->currentText());
-    for(int i = 0; i <= fileNameExpComboBox->count(); i++)
+    eList.prepend(fileNameExpFSComboBox->currentText());
+    for(int i = 0; i <= fileNameExpFSComboBox->count(); i++)
     {
-       item = fileNameExpComboBox->itemText(i);
+       item = fileNameExpFSComboBox->itemText(i);
        if(!item.isEmpty())
          if(!eList.contains(item))
            eList.prepend(item);
     };
+    eList.removeDuplicates();
     eList.sort();
-    settings.setValue("FileNameExp", eList);
+    settings.setValue("FileNameExpFS", eList);
+
+    eList.clear();
+    eList.prepend(fileNameExpASComboBox->currentText());
+    for(int i = 0; i <= fileNameExpASComboBox->count(); i++)
+    {
+       item = fileNameExpASComboBox->itemText(i);
+       if(!item.isEmpty())
+         if(!eList.contains(item))
+           eList.prepend(item);
+    };
+    eList.removeDuplicates();
+    eList.sort();
+    settings.setValue("FileNameExpAS", eList);
 
     eList.clear();
     eList.prepend(endOfProgComboBox->currentText());
@@ -288,6 +306,7 @@ void SerialPortConfigDialog::saveButtonClicked()
          if(!eList.contains(item))
            eList.prepend(item);
     };
+    eList.removeDuplicates();
     eList.sort();
     settings.setValue("EndOfProgExp", eList);
 
@@ -300,6 +319,7 @@ void SerialPortConfigDialog::saveButtonClicked()
          if(!eList.contains(item))
            eList.prepend(item);
     };
+    eList.removeDuplicates();
     eList.sort();
     settings.setValue("EndOfBlockCodes", eList);
 
@@ -433,7 +453,7 @@ void SerialPortConfigDialog::changeSettings()
     autoCloseSpinBox->setValue(settings.value("AutoCloseTime", 15).toInt());
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
     logFileCheckBox->setChecked(settings.value("CreateLogFile", true).toBool());
-    eobComboBox->insertItems(0, settings.value("EndOfBlockCodes", (QStringList() << "LF" << "CR" << "LFCR" << "CRCRLF" << "LFCRCR" << "")).toStringList());
+    eobComboBox->insertItems(0, settings.value("EndOfBlockCodes", (QStringList() << "LF" << "CR" << "CRLF" << "CRCRLF" << "LFCRCR" << "")).toStringList());
     id = eobComboBox->findText(settings.value("EobChar", "CRLF").toString());
     if(id >= 0)
         eobComboBox->setCurrentIndex(id);
@@ -458,11 +478,15 @@ void SerialPortConfigDialog::changeSettings()
     fileServerCheckBox->setChecked(settings.value("FileServer", false).toBool());
     callerProgNameLineEdit->setText(settings.value("CallerProg", "O0001").toString());
     fileNameLowerCaseCheckBox->setChecked(settings.value("FileNameLowerCase", true).toBool());
-    fileNameExpComboBox->insertItems(0, settings.value("FileNameExp", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\((O|:)[0-9]{4,4}\)")).toStringList());
-    id = fileNameExpComboBox->findText(settings.value("FileNameExpSelected", "").toString());
+    fileNameExpFSComboBox->insertItems(0, settings.value("FileNameExpFS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+    id = fileNameExpFSComboBox->findText(settings.value("FileNameExpFSSelected", "").toString());
     if(id >= 0)
-       fileNameExpComboBox->setCurrentIndex(id);
+       fileNameExpFSComboBox->setCurrentIndex(id);
 
+    fileNameExpASComboBox->insertItems(0, settings.value("FileNameExpAS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+    id = fileNameExpASComboBox->findText(settings.value("FileNameExpASSelected", "").toString());
+    if(id >= 0)
+       fileNameExpASComboBox->setCurrentIndex(id);
 
 
     searchPath1LineEdit->setText(settings.value("SearchPath1", "").toString());
@@ -714,7 +738,7 @@ void SerialPortConfigDialog::fileServerCheckBoxChanged(int state)
    browse2PushButton->setEnabled(state == Qt::Checked);
    browse3PushButton->setEnabled(state == Qt::Checked);
    browse4PushButton->setEnabled(state == Qt::Checked);
-   fileNameExpComboBox->setEnabled(state == Qt::Checked);
+   fileNameExpFSComboBox->setEnabled(state == Qt::Checked);
    removeButton->setEnabled(state == Qt::Checked);
    addButton->setEnabled(state == Qt::Checked);
    callerProgNameLineEdit->setEnabled(state == Qt::Checked);
@@ -728,9 +752,9 @@ void SerialPortConfigDialog::fileServerCheckBoxChanged(int state)
 
 void SerialPortConfigDialog::addButtonClicked()
 {
-    QString text = fileNameExpComboBox->currentText();
+    QString text = fileNameExpFSComboBox->currentText();
     if(!text.isEmpty())
-        fileNameExpComboBox->insertItem(0, text);
+        fileNameExpFSComboBox->insertItem(0, text);
 }
 
 //**************************************************************************************************
@@ -739,7 +763,7 @@ void SerialPortConfigDialog::addButtonClicked()
 
 void SerialPortConfigDialog::removeButtonClicked()
 {
-    fileNameExpComboBox->removeItem(fileNameExpComboBox->currentIndex());
+    fileNameExpFSComboBox->removeItem(fileNameExpFSComboBox->currentIndex());
 }
 
 //**************************************************************************************************
@@ -789,4 +813,24 @@ void SerialPortConfigDialog::deleteEobCharButtonClicked()
 void SerialPortConfigDialog::eobComboBoxEditTextChanged(const QString text)
 {
     eobComboBox->setCurrentText(text.toUpper());
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::addFileNameButtonClicked()
+{
+    QString text = fileNameExpASComboBox->currentText();
+    if(!text.isEmpty())
+        fileNameExpASComboBox->insertItem(0, text);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::removeFileNameButtonClicked()
+{
+    fileNameExpASComboBox->removeItem(fileNameExpASComboBox->currentIndex());
 }

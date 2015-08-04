@@ -75,9 +75,9 @@ private slots:
 private:
     void setRange(int min, int max);
     void setValue(int val);
-    void setLabelText(const QString text, bool multiline = false);
+    void setLabelText(const QString text, bool multiline = false, bool writeToLog = false);
     void loadConfig(QString configName);
-    QString guessFileName(QString *text);
+    QStringList guessFileName(QString *text);
     QString saveDataToFile(QString *text);
     void writeLog(QString msg, QString timeStamp = "");
     QStringList splitFile(QString *text);
@@ -97,48 +97,15 @@ private:
     qint64 bytesWritten;
     qint64 noOfBytes;
     QStringList::iterator writeBufferIterator;
+    bool xoffReceived;
     bool prevXoffReceived;
     int autoCloseCountner;
     int autoCloseCountnerReloadValue;
     int fileServerDataTimeoutCountner;
     int fileServerDataTimeoutCountnerReloadValue;
-//    bool guessFileNameByProgName;
-//    bool createLogFile;
-//    bool renameIfExists;
-//    bool removeLetters;
-//    bool appendExt;
-//    bool useAsExt;
-//    bool splitPrograms;
-
-
-
     bool stop;
-    bool xoffReceived;
-//    QString portName, sendAtEnd, sendAtBegining;
-//    int baudRate;
-//    int dataBits;
-//    int stopBits;
-//    int parity;
-//    int flowControl;
-//    double lineDelay;
-//    bool readyCont;
-
-//    bool deleteControlChars;
-//    bool removeEmptyLines;
-//    bool removeBefore;
-//    bool removeSpaceEOB;
-//    int sendStartDelay;
-//    int recieveTimeout;
-
-//    bool autoSave;
-//    QString savePath;
-//    QString saveExt;
     bool serverMode;
-
-    //QPlainTextEdit plainTextEdit;
-
-
-
+    QTimer *sendStartDelayTimer;
 };
 
 #endif // SERIALTRANSMISSIONDIALOG_H

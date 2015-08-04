@@ -1392,6 +1392,18 @@
         <source>Session %1 loaded</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Start serial port file server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Warning&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FeedsDialog</name>
@@ -2734,7 +2746,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Example:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;   - % and new line characters&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;  - space character and new line characters&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Space and control characters can only be written as hex numbers - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
@@ -2768,7 +2780,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;Example:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;   - % and new line characters&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;  - space character and new line characters&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;Space and control characters can only be written as hex numbers - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
@@ -2782,19 +2794,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Retrasar antes de enviar el siguiente bloque:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;XOFF 19 Dec. 0x13 Hex.&lt;/p&gt;&lt;p&gt;This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>90</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>19</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;XON 17 Dec. 0x11 Hex.&lt;/p&gt;&lt;p&gt;This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2819,7 +2823,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
-        <translation type="unfinished">Si 0 entonces esperar a XON, si&gt; 0 esperar al tiempo de espera o XON, el que llegue primero.</translation>
+        <translation type="obsolete">Si 0 entonces esperar a XON, si&gt; 0 esperar al tiempo de espera o XON, el que llegue primero.</translation>
     </message>
     <message>
         <source>Remove empty lines after receive is complete</source>
@@ -2838,31 +2842,19 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Quitar los caracteres antes de %</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove white space just before the end of line, sometimes added by Fanuc&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remove white space at end of line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si se marca, sólo LF se envía al final del bloque. Por defecto se envía CRLF.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si se marca, sólo LF se envía al final del bloque. Por defecto se envía CRLF.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Send only LF at the end of block</source>
-        <translation type="unfinished">Enviar sólo LF al final del bloque</translation>
+        <translation type="obsolete">Enviar sólo LF al final del bloque</translation>
     </message>
     <message>
         <source>Auto close transmission dialog:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Auto close transmission dialog after last character which was sent/received.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save debug information to log file: &quot;Settings name&quot;_log.txt in save path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2891,10 +2883,6 @@ If the file name has not been automatically detected, the file name will be the 
         <translation type="unfinished">Examinar</translation>
     </message>
     <message>
-        <source>Choose file extension or &quot;KEEP&quot; to use extension from received file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remove letters from filename</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2903,20 +2891,11 @@ If the file name has not been automatically detected, the file name will be the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Get filename from program name or form first comment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Filename from program name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use program name extension as file extension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If program name contains extension, append it at end of filename.
-Can&apos;t be used with extension set to &quot;KEEP&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2929,10 +2908,6 @@ Can&apos;t be used with extension set to &quot;KEEP&quot;.</source>
     </message>
     <message>
         <source>End of program characters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>M30</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2949,10 +2924,6 @@ Can&apos;t be used with extension set to &quot;KEEP&quot;.</source>
     </message>
     <message>
         <source>Search path 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>O0001</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3005,6 +2976,189 @@ Can&apos;t be used with extension set to &quot;KEEP&quot;.</source>
     </message>
     <message>
         <source>Select search path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove white space just before the end of line, sometimes added by Fanuc.
+Works only when receiving file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of block character:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line (block) endings charcters.
+Only uppercase LF, CR character are allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can write here:
+	Plain text
+AND/OR
+	Hex codes of ASCII characters.
+	Example: 
+	% 0x0A 0x0D - % and new line characters
+	0x20 0x0A 0x0D - space character and new line characters
+	Space and control characters can only be written as hex numbers:
+	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
+AND/OR
+	Special characters codes can be used:
+	LF - Line Feed also Rarrige Return (replaced later by end of block characters)
+	SP - Space
+	TAB - Tabulation
+	FN - FileName
+	FE - Filename Extension (part after dot)
+	FA - Filename extension Appended at end of filename (part after _ character and before dot)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XON (DC1) - 17 Dec. 0x11 Hex.
+XON (DC2) - 18 Dec. 0x12 Hex.
+This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
+Set XON or XOFF to 0 if you want disable it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
+This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
+This setting is ignored in serial File Server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically close transmission dialog after the last character was sent/received.
+This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to swich CNC into reciving mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XOFF (DC3) - 19 Dec. 0x13 Hex.
+XOFF (DC4) - 20 Dec. 0x14 Hex.
+This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
+Set XON or XOFF to 0 if you want disable it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse for save path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extension of saved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If save path will already contain a file, old file will be renamed to *.bak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%...
+Otherwise, the text of the first comment in the program will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting file extension will be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character &apos;_&apos;  (eg O0004_MIN.nc)  
+Choosen file extension will be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If received data will contain more than one CNC program, they will be saved in independent files
+This setting can cause data loss if detection of filename fails.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letters in detected filename will be removed (only digits will be left).
+If in result filename becomes empty, version with letters will be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished">&amp;Borrar</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save debug information to log file:
+&quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Serial port file server.&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Start file server in EdytorNC&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Send any file from CNC, it will be saved in computer (as is set in Autosave tab)&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Send special program from CNC: &lt;/li&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;:0001(CALLER)&lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt; -&amp;gt; O0001 or 0001 set in File Server tab &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;(0032)  &lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt;-&amp;gt; 0032 filename to send back to CNC&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;M30&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;after time set in &amp;quot;Auto close transmission dialog:&amp;quot; file server will send back file 0032 (paths, file extension are set in File Server tab)&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and again ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The first path to search for files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File extension. 
+If detected the filename will contain an extension, then this setting will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The third path to search for files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The second path to search for files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Caller program&quot;.
+If program of that name will be received from CNC, it will be searched for a program filename to send back to CNC.
+Set this file name as other files received from this machine.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This field contains expression used to find filename in &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete from list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for filename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change received filename to lowercase</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3151,12 +3305,24 @@ Can&apos;t be used with extension set to &quot;KEEP&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Settings name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Program received</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>WARNING:	 Coulnd not find program name.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SUCCES:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.
+        <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3166,13 +3332,95 @@ Can&apos;t be used with extension set to &quot;KEEP&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SUCCES:	 Saving file: &quot;%1&quot;.
+        <source>OK:	 Saving file: &quot;%1&quot;.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ERROR:	 Saving file: &quot;%1&quot;. %2
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log file truncated, size &gt; 1MB.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial transmission File Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for data...</source>
+        <translation type="unfinished">Esperando datos...</translation>
+    </message>
+    <message>
+        <source>Wainting for data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO:	 Received caller prog: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO:	 Received caller prog: &quot;%1&quot;.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Can&apos;t find file in path 1: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Can&apos;t find file in path 2: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Can&apos;t find file in path 3: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO:	 Preparing to send file: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO:	 Preparing to send file: &quot;%1&quot;.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Sending file: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Sending file: &quot;%1&quot;.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Received file: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Received file: &quot;%1&quot;.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received data. Start processing in %1s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Sending a file completed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
