@@ -572,20 +572,23 @@
          </item>
          <item>
           <widget class="QLineEdit" name="xonInput">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="toolTip">
             <string>XON (DC1) - 17 Dec. 0x11 Hex.
 XON (DC2) - 18 Dec. 0x12 Hex.
 This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</string>
            </property>
-           <property name="inputMask">
-            <string>90</string>
-           </property>
            <property name="text">
-            <string>17</string>
+            <string>0</string>
            </property>
            <property name="maxLength">
-            <number>2</number>
+            <number>32767</number>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
@@ -618,7 +621,7 @@ Set XON or XOFF to 0 if you want disable it.</string>
          <item>
           <widget class="QLineEdit" name="xoffInput">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -629,14 +632,11 @@ XOFF (DC4) - 20 Dec. 0x14 Hex.
 This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</string>
            </property>
-           <property name="inputMask">
-            <string>90</string>
-           </property>
            <property name="text">
-            <string>19</string>
+            <string>0</string>
            </property>
            <property name="maxLength">
-            <number>2</number>
+            <number>3</number>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
@@ -712,7 +712,7 @@ Works only when receiving file.</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="3">
+       <item row="12" column="3">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -739,9 +739,12 @@ Works only when receiving file.</string>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::MinimumExpanding</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>4</width>
              <height>20</height>
             </size>
            </property>
@@ -811,13 +814,13 @@ This setting is also used in file server mode to detect end of incoming transmis
             <string>s</string>
            </property>
            <property name="minimum">
-            <number>5</number>
+            <number>0</number>
            </property>
            <property name="maximum">
             <number>3600</number>
            </property>
            <property name="value">
-            <number>15</number>
+            <number>10</number>
            </property>
           </widget>
          </item>
@@ -837,9 +840,12 @@ This setting is also used in file server mode to detect end of incoming transmis
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::MinimumExpanding</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>4</width>
              <height>20</height>
             </size>
            </property>
@@ -1018,6 +1024,80 @@ Only uppercase LF, CR character are allowed.</string>
          </property>
         </spacer>
        </item>
+       <item row="10" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>Send timeout:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="sendTimeoutSpinBox">
+           <property name="suffix">
+            <string>s</string>
+           </property>
+           <property name="minimum">
+            <number>2</number>
+           </property>
+           <property name="maximum">
+            <number>60</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="11" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <item>
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>Receive timeout:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="receiveTimeoutSpinBox">
+           <property name="suffix">
+            <string>s</string>
+           </property>
+           <property name="minimum">
+            <number>2</number>
+           </property>
+           <property name="maximum">
+            <number>60</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="autoSaveTab">
@@ -1174,6 +1254,9 @@ If checked, user definied regular expression will be used first, if not found na
              </property>
              <property name="text">
               <string>Use program name extension as file extension</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
              </property>
              <property name="autoExclusive">
               <bool>false</bool>

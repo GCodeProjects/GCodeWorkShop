@@ -42,11 +42,12 @@ public:
     ~SerialTransmissionDialog();
     QStringList receiveData(QString configName);
     void sendData(QString dataToSend, QString configName);
-    bool startFileServer(QString configName, bool state = false);
+    void startFileServer(QString configName);
+    QString configName();
 
 public slots:
     bool wasCanceled();
-
+    void portReset();
 
 
 protected:
@@ -58,18 +59,20 @@ signals :
 
 private slots:
     void cancelButtonClicked();
-    void updateLeds();
+    void updateStatus();
     void sendStartDelayTimeout();
     void stopButtonClicked();
-    void autoClose();
+    void autoCloseTimerTimeout();
     void showSerialPortError(QSerialPort::SerialPortError error);
     void serialPortBytesWritten(qint64 bytes);
     void serialPortReadyRead();
     void serialPortRequestToSend(bool set);
     void lineDelaySlot();
-    void fileServerReadyRead();
-    void fileServerReceiveTimeout();
+    void fileServerProcessData();
     void fileServerBytesWritten(qint64 bytes);
+    void sendTimeoutTimerTimeout();
+    void receiveTimeoutTimerTimeout();
+    void reset(bool re);
 
 
 private:
@@ -84,6 +87,7 @@ private:
     QStringList processReceivedData();
     void prepareDataBeforeSending(QString *data);
     void procesSpecialCharacters(QString *text, QString *fileData);
+    void resetTransmission(bool portRestart = false);
 
 
     QSerialPort serialPort;
@@ -91,21 +95,30 @@ private:
     PortSettings portSettings;
     QByteArray serialPortReadBuffer;
     QStringList serialPortWriteBuffer;
-    QTimer *updateLedsTimer;
-    QTimer *autoCloseTimer;
-    QTimer *fileServerDataTimeoutTimer;
     qint64 bytesWritten;
     qint64 noOfBytes;
     QStringList::iterator writeBufferIterator;
     bool xoffReceived;
     bool prevXoffReceived;
-    int autoCloseCountner;
-    int autoCloseCountnerReloadValue;
-    int fileServerDataTimeoutCountner;
-    int fileServerDataTimeoutCountnerReloadValue;
+    unsigned int autoCloseCountner;
+    unsigned int sendStartDelayCountner;
+    //int autoCloseCountnerReloadValue;
+//    int fileServerDataTimeoutCountner;
+//    int fileServerDataTimeoutCountnerReloadValue;
+    unsigned int sendTimeoutCountner;
+    //int sendTimeoutCountnerReloadValue;
+    unsigned int receiveTimeoutCountner;
+    //int receiveTimeoutCountnerReloadValue;
     bool stop;
     bool serverMode;
+    bool sending;
     QTimer *sendStartDelayTimer;
+    QTimer *updateStatusTimer;
+    QTimer *autoCloseTimer;
+    //QTimer *fileServerDataTimeoutTimer;
+    QTimer *sendTimeoutTimer;
+    QTimer *receiveTimeoutTimer;
+
 };
 
 #endif // SERIALTRANSMISSIONDIALOG_H

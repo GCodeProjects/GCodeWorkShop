@@ -48,7 +48,8 @@ EdytorNc::EdytorNc()
     findFiles = NULL;
     dirModel = NULL;
     openExampleAct = NULL;
-    spServer = NULL;
+    //spServer = NULL;
+    commApp = NULL;
 
     selectedExpressions.clear();
 
@@ -126,6 +127,9 @@ EdytorNc::~EdytorNc()
         proc->close();
         delete(proc);
     };
+
+    if(commApp)
+        commApp->close();
 }
 
 //**************************************************************************************************
@@ -162,7 +166,6 @@ void EdytorNc::closeAllMdiWindows()
 //**************************************************************************************************
 //
 //**************************************************************************************************
-
 
 void EdytorNc::closeEvent(QCloseEvent *event)
 {
@@ -214,10 +217,10 @@ void EdytorNc::closeEvent(QCloseEvent *event)
         findFiles = NULL;
     };
 
-    if(spServer != NULL)
+    //if(spServer != NULL)
     {
-        spServer->close();
-        spServer = NULL;
+        //spServer->close();
+        //spServer = NULL;
     };
 
 }
@@ -1501,7 +1504,8 @@ void EdytorNc::updateMenus()
     pasteAct->setEnabled(hasMdiChild);
     closeAct->setEnabled(hasMdiChild);
     closeAllAct->setEnabled(hasMdiChild);
-    tileAct->setEnabled(hasMdiChild);
+    tileHAct->setEnabled(hasMdiChild);
+    tileVAct->setEnabled(hasMdiChild);
     cascadeAct->setEnabled(hasMdiChild);
     nextAct->setEnabled(hasMdiChild);
     previousAct->setEnabled(hasMdiChild);
@@ -1643,7 +1647,8 @@ void EdytorNc::updateWindowMenu()
     windowMenu->addAction(closeAct);
     windowMenu->addAction(closeAllAct);
     windowMenu->addSeparator();
-    windowMenu->addAction(tileAct);
+    windowMenu->addAction(tileHAct);
+    windowMenu->addAction(tileVAct);
     windowMenu->addAction(cascadeAct);
     windowMenu->addSeparator();
     windowMenu->addAction(nextAct);
@@ -1983,9 +1988,13 @@ void EdytorNc::createActions()
     closeAllAct->setToolTip(tr("Close all the windows"));
     connect(closeAllAct, SIGNAL(triggered()), this, SLOT(closeAllMdiWindows()));
 
-    tileAct = new QAction(QIcon(":/images/tile_h.png"), tr("&Tile"), this);
-    tileAct->setToolTip(tr("Tile the windows"));
-    connect(tileAct, SIGNAL(triggered()), mdiArea, SLOT(tileSubWindows()));
+    tileHAct = new QAction(QIcon(":/images/tile_h.png"), tr("Tile &horyzontally"), this);
+    tileHAct->setToolTip(tr("Tile the windows horyzontally"));
+    connect(tileHAct, SIGNAL(triggered()), mdiArea, SLOT(tileSubWindows()));
+
+    tileVAct = new QAction(QIcon(":/images/tile_v.png"), tr("Tile &vertycally"), this);
+    tileVAct->setToolTip(tr("Tile the windows vertycally"));
+    connect(tileVAct, SIGNAL(triggered()), this, SLOT(tileSubWindowsVertycally()));
 
     cascadeAct = new QAction(QIcon(":/images/cascade.png"), tr("&Cascade"), this);
     cascadeAct->setToolTip(tr("Cascade the windows"));
@@ -2997,12 +3006,10 @@ void EdytorNc::createSerialToolBar()
         serialCloseAct->setToolTip(tr("Close send/receive toolbar"));
         connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
 
-        spServerAct = new QAction(QIcon(":/images/spserver.png"), tr("Start serial port file server"), this);
+        commAppAct = new QAction(QIcon(":/images/spserver.png"), tr("Start serial port file server application"), this);
         //diagAct->setShortcut(tr("F3"));
-        spServerAct->setToolTip(tr("Start serial port file server"));
-        spServerAct->setCheckable(true);
-        spServerAct->setChecked(false);
-        connect(spServerAct, SIGNAL(triggered()), this, SLOT(startSerialPortServer()));
+        commAppAct->setToolTip(tr("Start serial port file server application"));
+        connect(commAppAct, SIGNAL(triggered()), this, SLOT(startSerialPortServer()));
 
         configBox = new QComboBox();
         configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -3010,7 +3017,7 @@ void EdytorNc::createSerialToolBar()
 
 
         //serialToolBar->addSeparator();
-        serialToolBar->addAction(spServerAct);
+        serialToolBar->addAction(commAppAct);
         serialToolBar->addAction(attachToDirAct);
         serialToolBar->addAction(deAttachToDirAct);
         serialToolBar->addSeparator();
@@ -4359,6 +4366,8 @@ void EdytorNc::sessionMgr()
 
 void EdytorNc::savePrinterSettings(QPrinter *printer)
 {
+#ifndef QT_NO_PRINTER
+
     QSettings settings("EdytorNC", "EdytorNC");
 
     settings.beginGroup("PrinterSettings");
@@ -4373,6 +4382,8 @@ void EdytorNc::savePrinterSettings(QPrinter *printer)
     //settings.setValue("Resolution", printer->resolution());
 
     settings.endGroup();
+
+#endif
 }
 
 //**************************************************************************************************
@@ -4381,6 +4392,8 @@ void EdytorNc::savePrinterSettings(QPrinter *printer)
 
 void EdytorNc::loadPrinterSettings(QPrinter *printer)
 {
+#ifndef QT_NO_PRINTER
+
     QSettings settings("EdytorNC", "EdytorNC");
 
     settings.beginGroup("PrinterSettings");
@@ -4399,6 +4412,8 @@ void EdytorNc::loadPrinterSettings(QPrinter *printer)
     //printer->setResolution(settings.value("Resolution").toInt());
 
     settings.endGroup();
+
+#endif
 }
 
 //**************************************************************************************************
@@ -4464,7 +4479,7 @@ void EdytorNc::sendButtonClicked()
 
     receiveAct->setEnabled(false);
     sendAct->setEnabled(false);
-    spServerAct->setEnabled(false);
+    commAppAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     tx.append(activeWindow->textEdit->toPlainText());
@@ -4474,7 +4489,7 @@ void EdytorNc::sendButtonClicked()
 
     receiveAct->setEnabled(true);
     sendAct->setEnabled(true);
-    spServerAct->setEnabled(true);
+    commAppAct->setEnabled(true);
     QApplication::restoreOverrideCursor();
 }
 
@@ -4488,7 +4503,7 @@ void EdytorNc::receiveButtonClicked()
 
     receiveAct->setEnabled(false);
     sendAct->setEnabled(false);
-    spServerAct->setEnabled(false);
+    commAppAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
     SerialTransmissionDialog transmissionDialog(this);
@@ -4536,7 +4551,7 @@ void EdytorNc::receiveButtonClicked()
 
     receiveAct->setEnabled(true);
     sendAct->setEnabled(true);
-    spServerAct->setEnabled(true);
+    commAppAct->setEnabled(true);
     QApplication::restoreOverrideCursor();
 }
 
@@ -4589,40 +4604,40 @@ void EdytorNc::fileChanged(const QString fileName)
 
 void EdytorNc::startSerialPortServer()
 {
-    bool stop = false;
 
-    if(spServer <= NULL)
+    //commApp = findChild<CommApp *>("CommApp", Qt::FindChildrenRecursively);
+
+    qDebug() << "CHILD" << commApp;
+
+    if(commApp)
     {
-        spServer = new SerialTransmissionDialog(this, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowTitleHint, true);
-        if(spServer <= NULL)
-        {
-            spServerAct->setChecked(false);
-            //mdiArea->addSubWindow(spServer);
-        };
+        commApp->show();
+    }
+    else
+    {
+        commApp = new CommApp();
     };
 
-    if(spServer > NULL)
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::tileSubWindowsVertycally()
+{
+    if(mdiArea->subWindowList().isEmpty())
+        return;
+
+    QPoint position(0, 0);
+    foreach(QMdiSubWindow *window, mdiArea->subWindowList())
     {
-        spServer->setModal(false);
-        spServer->showNormal();
-        stop = spServer->startFileServer(configBox->currentText(), spServerAct->isChecked());
-        qDebug() << " Start 3" << spServer << !spServerAct->isChecked() << stop;
-        if(stop)
-        {
-            spServer->close();
-            delete(spServer);
-            spServer = NULL;
-        };
-
-    };
-
-    configBox->setEnabled(stop);
-    receiveAct->setEnabled(stop);
-    configPortAct->setEnabled(stop);
-    diagAct->setEnabled(stop);
-    sendAct->setEnabled(stop);
-    serialCloseAct->setEnabled(stop);
-    spServerAct->setChecked(!stop);
+        QRect rect(0, 0, mdiArea->width(),
+                   mdiArea->height() / mdiArea->subWindowList().count());
+        window->setGeometry(rect);
+        window->move(position);
+        position.setY(position.y() + window->height());
+    }
 }
 
 //**************************************************************************************************

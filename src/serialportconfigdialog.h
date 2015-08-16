@@ -48,8 +48,10 @@ struct PortSettings
     QString endOfProgChar;
     QString callerProgName;
     double lineDelay;
-    int sendStartDelay;
-    int autoCloseCountnerReloadValue;
+    unsigned int sendStartDelayReloadValue;
+    unsigned int autoCloseTimeout;
+    unsigned int sendTimeout;
+    unsigned int receiveTimeout;
     char Xon;
     char Xoff;
     bool createLogFile;

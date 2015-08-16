@@ -29,58 +29,68 @@
 SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFlags f, bool mode) : QDialog(parent, f)
 {
    setupUi(this);
-   setWindowTitle(tr("Serial transmission"));
-   setModal(true);
+
 
    serverMode = mode;
+   canceled = false;
+   sending = false;
+   xoffReceived = false;
+   prevXoffReceived = false;
+   autoCloseCountner = 15;
+   sendStartDelayCountner = 0;
+   sendTimeoutCountner = 2;
+   receiveTimeoutCountner = 2;
+
+   sendTimeoutTimer = new QTimer(this);
+   sendTimeoutTimer->setInterval(1000);
+   sendTimeoutTimer->stop();
+   connect(sendTimeoutTimer, SIGNAL(timeout()), this, SLOT(sendTimeoutTimerTimeout()));
+
+   receiveTimeoutTimer = new QTimer(this);
+   receiveTimeoutTimer->setInterval(1000);
+   receiveTimeoutTimer->stop();
+   connect(receiveTimeoutTimer, SIGNAL(timeout()), this, SLOT(receiveTimeoutTimerTimeout()));
 
    sendStartDelayTimer = new QTimer(this);
    sendStartDelayTimer->setInterval(1000);
    sendStartDelayTimer->stop();
    connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
 
-
-   canceled = false;
-   xoffReceived = false;
-   prevXoffReceived = false;
-   autoCloseCountnerReloadValue = 15;
-   autoCloseCountner = 15;
-   //portLabel->setText("");
-
-   fileServerDataTimeoutCountner = 5;
-   fileServerDataTimeoutCountnerReloadValue = 5;
-
    if(serverMode)
    {
-       // not needed in this mode
        setModal(false);
+       setAttribute(Qt::WA_DeleteOnClose);
        cancelButton->hide();
        bottomLine->hide();
+       setWindowIcon(QIcon(":/images/spserver.png"));
 
-       fileServerDataTimeoutTimer = new QTimer(this);
-       fileServerDataTimeoutTimer->setInterval(1000);
-       fileServerDataTimeoutTimer->stop();
-       connect(fileServerDataTimeoutTimer, SIGNAL(timeout()), this, SLOT(fileServerReceiveTimeout()));
+//       fileServerDataTimeoutTimer = new QTimer(this);
+//       fileServerDataTimeoutTimer->setInterval(1000);
+//       fileServerDataTimeoutTimer->stop();
+//       connect(fileServerDataTimeoutTimer, SIGNAL(timeout()), this, SLOT(fileServerProcessData()));
 
    }
    else
    {
+       setWindowTitle(tr("Serial transmission"));
+       setModal(true);
+       connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
        delete(plainTextEdit);
        adjustSize();
 
    };
-   connect(cancelButton, SIGNAL(clicked()), SLOT(cancelButtonClicked()));
+
    connect(this, SIGNAL(rejected()), SLOT(cancelButtonClicked()));
 
-   updateLedsTimer = new QTimer(this);
-   connect(updateLedsTimer, SIGNAL(timeout()), this, SLOT(updateLeds()));
+   updateStatusTimer = new QTimer(this);
+   connect(updateStatusTimer, SIGNAL(timeout()), this, SLOT(updateStatus()));
 
    autoCloseTimer = new QTimer(this);
    autoCloseTimer->setInterval(1000);
    autoCloseTimer->stop();
-   connect(autoCloseTimer, SIGNAL(timeout()), this, SLOT(autoClose()));
+   connect(autoCloseTimer, SIGNAL(timeout()), this, SLOT(autoCloseTimerTimeout()));
 
-   updateLedsTimer->start(80);
+   updateStatusTimer->start(80);
 
 }
 
@@ -90,17 +100,7 @@ SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFl
 
 SerialTransmissionDialog::~SerialTransmissionDialog()
 {
-    updateLedsTimer->stop();
-    autoCloseTimer->stop();
 
-    if(serialPort.isOpen())
-    {
-        //serialPort.clearError();
-        serialPort.flush();
-        //serialPort.clear();
-        //serialPort.clearError();
-        serialPort.close();
-    };
 }
 
 //**************************************************************************************************
@@ -109,29 +109,27 @@ SerialTransmissionDialog::~SerialTransmissionDialog()
 
 void SerialTransmissionDialog::closeEvent(QCloseEvent *event)
 {
-   updateLedsTimer->stop();
+   updateStatusTimer->stop();
    autoCloseTimer->stop();
    canceled = true;
 
    if(serialPort.isOpen())
    {
-       serialPort.clearError();
-       serialPort.flush();
-       //serialPort.clear();
-       serialPort.clearError();
+       //serialPort.clearError();
        serialPort.close();
    };
-
    event->accept();
+
+   qDebug() << "CLOSE EVENT 20365" << event;
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-void SerialTransmissionDialog::autoClose()
+void SerialTransmissionDialog::autoCloseTimerTimeout()
 {
-    if(autoCloseCountnerReloadValue == 0)
+    if(autoCloseCountner == 0)
     {
         autoCloseTimer->stop();
         return;
@@ -139,6 +137,7 @@ void SerialTransmissionDialog::autoClose()
 
     if(autoCloseCountner <= 1)
     {
+        autoCloseCountner = 0;
         cancelButtonClicked();
     }
     else
@@ -147,7 +146,7 @@ void SerialTransmissionDialog::autoClose()
             autoCloseCountner--;
     };
 
-    if(autoCloseCountner <= (autoCloseCountnerReloadValue - 2))
+    if(autoCloseCountner <= (portSettings.autoCloseTimeout - 2))
     {
         cancelButton->setText(tr("Auto &closing in %1s").arg(autoCloseCountner));
     }
@@ -161,7 +160,7 @@ void SerialTransmissionDialog::autoClose()
 
 void SerialTransmissionDialog::cancelButtonClicked()
 {
-   updateLedsTimer->stop();
+   updateStatusTimer->stop();
    autoCloseTimer->stop();
    canceled = true;
    close();
@@ -242,44 +241,64 @@ void SerialTransmissionDialog::setRange(int min, int max)
 //
 //**************************************************************************************************
 
-void SerialTransmissionDialog::updateLeds()
+void SerialTransmissionDialog::updateStatus()
 {
-   updateLedsTimer->stop();
+   updateStatusTimer->stop();
 
-   if(!serialPort.isOpen())
-      return;
-
-   QSerialPort::PinoutSignals status = serialPort.pinoutSignals();
-
-   ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
-   dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
-   dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
-   rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
-   dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
-   //rngLabel->setEnabled(status & QSerialPort::RingIndicatorSignal);
-
-
-   if(portSettings.sendStartDelay > 0)
-       setLabelText(tr("Start in %1s").arg(portSettings.sendStartDelay));
+   if(xoffReceived)
+        xoffLabel->setText("<html><head/><body><p><span style=\" font-weight:600;color:#ff0000;\">XOFF</span></p></body></html>");
    else
-       if(xoffReceived) //  || !(status & QSerialPort::ClearToSendSignal)
-       {
-           setLabelText(tr("Waiting for a signal readiness..."));
-       };
+       xoffLabel->setText("<html><head/><body><p><span style=\" font-weight:600;color:#005500;\">XON</span></p></body></html>");
 
 
-   if((xoffReceived || prevXoffReceived))  // catch change of xoffReceived
+   connected1Label->setText(tr("<html><head/><body><p>Port: <span style=\" font-weight:600;\">%1</span> is</p></body></html>").arg(portSettings.portName));
+   if(serialPort.isOpen())
    {
-       prevXoffReceived = xoffReceived;
-       if(!xoffReceived) // try to restart trasmission
-           if(serialPort.bytesToWrite() == 0)
-               serialPortBytesWritten(0);
+       connectedLabel->setText(tr("<html><head/><body><p><span style=\" font-weight:600; color:#009500;\">OPEN</span></p></body></html>"));
 
-       qDebug() << "CHANGED xoffReceived" << xoffReceived;
+       QSerialPort::PinoutSignals status = serialPort.pinoutSignals();
+
+       ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
+       dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
+       dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
+       rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
+       dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
+
+       xoff1Label->setEnabled(!xoffReceived);
+
+       if(sendStartDelayCountner > 0)
+           setLabelText(tr("Sending starts in %1s").arg(sendStartDelayCountner));
+       else
+           if(xoffReceived) //  || !(status & QSerialPort::ClearToSendSignal)
+           {
+               setLabelText(tr("Waiting for a signal readiness..."));
+           };
+
+       if((xoffReceived != prevXoffReceived))  // catch change of xoffReceived
+       {
+           qDebug() << "CHANGED xoffReceived" << xoffReceived << prevXoffReceived;
+
+           prevXoffReceived = xoffReceived;
+           if(!xoffReceived) // try to restart trasmission
+               if(serialPort.bytesToWrite() == 0)
+                   serialPortBytesWritten(0);
+       };
+   }
+   else
+   {
+       ctsLabel->setEnabled(false);
+       dsrLabel->setEnabled(false);
+       dcdLabel->setEnabled(false);
+       rtsLabel->setEnabled(false);
+       dtrLabel->setEnabled(false);
+       xoff1Label->setEnabled(xoffReceived);
+
+       connectedLabel->setText(tr("<html><head/><body><p><span style=\" font-weight:600; color:#ff0000;\">CLOSED</span></p></body></html>"));
+       //connectedLabel->setText(tr("<html><head/><body><p><span style="" font-weight:600; color:#ff0000;"">CLOSED</span></p></body></html>"));
+       //connectedLabel->setText(tr("<html><head/><body><p>Port: <span style="" font-weight:600;"">%1</span> is <span style="" font-weight:600; color:#ff0000;"">CLOSED</span></p></body></html>").arg(portSettings.portName));
    };
 
-
-   updateLedsTimer->start();
+   updateStatusTimer->start();
 }
 
 //**************************************************************************************************
@@ -288,12 +307,13 @@ void SerialTransmissionDialog::updateLeds()
 
 void SerialTransmissionDialog::sendStartDelayTimeout()
 {
-    if(portSettings.sendStartDelay > 0)
-        portSettings.sendStartDelay--;
+    if(sendStartDelayCountner > 0)
+        sendStartDelayCountner--;
     else
     {
         sendStartDelayTimer->stop();
         xoffReceived = false;
+        //prevXoffReceived = false;
     };
 }
 
@@ -364,14 +384,22 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
         default                                     : text = tr("An unidentified error occurred");
     };
 
-    writeLog(tr("ERROR:\tSerial port error: \"%1\".").arg(serialPort.errorString()), "");
-
-    msgBox.setWindowTitle(tr("EdytorNC - serial transmission"));
-    msgBox.setText(text);
-    msgBox.setIcon(QMessageBox::Critical);
-    msgBox.exec();
-    serialPort.clearError();
-    close();
+    if(serverMode)
+    {
+        setLabelText(tr("ERROR:\t Serial port error %1: \"%2\".").arg(error).arg(serialPort.errorString()), serverMode, true);
+        serialPort.clearError();
+    }
+    else
+    {
+        writeLog(tr("ERROR:\t Serial port error %1: \"%2\".").arg(error).arg(serialPort.errorString()), "");
+        msgBox.setWindowTitle(tr("EdytorNC - serial transmission"));
+        msgBox.setText(text);
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        canceled = true;
+        stop = true;
+        close();
+    };
 }
 
 //**************************************************************************************************
@@ -381,22 +409,47 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
 void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 {
     if(bytes > 0)
+    {
         bytesWritten += bytes;
+    };
+
+    if(serverMode)
+    {
+        sendTimeoutCountner = portSettings.sendTimeout;
+        if(!sendTimeoutTimer->isActive())
+            sendTimeoutTimer->start();
+    };
 
     setValue(bytesWritten);
     setLabelText(tr("Sending byte %1 of %2").arg(bytesWritten).arg(noOfBytes));
 
-    //qDebug() << "Bytes written" << bytesWritten << " of " << noOfBytes;
+    qDebug() << "Bytes written" << bytesWritten << " of " << noOfBytes;
+
+
 
     if(stop)
         return;
 
-    if(writeBufferIterator == serialPortWriteBuffer.end())
+    if(writeBufferIterator == serialPortWriteBuffer.end()) // all data sent
     {
-        stop = true;
-        autoCloseCountner = autoCloseCountnerReloadValue;
-        if(!autoCloseTimer->isActive())
-            autoCloseTimer->start();
+        if(serverMode)
+        {
+            sendTimeoutCountner = 0;
+            sendTimeoutTimer->stop();
+            setLabelText(tr("OK:\t Sending a file completed."), serverMode, true);
+            setLabelText(tr("Wainting for data..."));
+            setRange(0, 0);
+        }
+        else
+        {
+            autoCloseCountner = portSettings.autoCloseTimeout;
+            if(!autoCloseTimer->isActive())
+                autoCloseTimer->start();
+
+            stop = true;
+        };
+
+        sending = false;
         return;
     };
 
@@ -413,14 +466,11 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
         buff.append(*writeBufferIterator);
         serialPort.write(buff, buff.size());
         writeBufferIterator++;
+        qDebug() << "*** ***";
 
     };
 
-    //qDebug() << "xoffReceived" << xoffReceived << " Stop" << stop;
-
-    autoCloseCountner = autoCloseCountnerReloadValue;
-    if(!autoCloseTimer->isActive())
-        autoCloseTimer->start();
+    qDebug() << "*** xoffReceived ***" << xoffReceived << " Stop" << stop;
 }
 
 //**************************************************************************************************
@@ -487,9 +537,6 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 
 void SerialTransmissionDialog::serialPortReadyRead()
 {
-//    autoCloseTimer->stop();
-//    fileServerDataTimeoutTimer->stop();
-
     QByteArray buff(serialPort.readAll());
 
     // software flow control at application level
@@ -507,7 +554,7 @@ void SerialTransmissionDialog::serialPortReadyRead()
         if(xonPos >= 0)  //only XON received
         {
             xoffReceived = false;
-            portSettings.sendStartDelay = 0;
+            sendStartDelayCountner = 1;
             setLabelText(tr("XON received..."));
         };
 
@@ -520,43 +567,29 @@ void SerialTransmissionDialog::serialPortReadyRead()
     else
         xoffReceived = false;
 
+    if(sending)
+        return;
+
     serialPortReadBuffer.append(buff);
 
     setLabelText(tr("Receiving byte %1").arg(serialPortReadBuffer.size() - 1));
 
-    //qDebug() << "Data read" << buff << "xoffReceived" << xoffReceived;
+    qDebug() << "Data read" << buff << "xoffReceived" << xoffReceived;
 
-    if(serverMode)
-    {
-        fileServerDataTimeoutCountner = fileServerDataTimeoutCountnerReloadValue;
-    }
-    else
-    {
-        autoCloseCountner = autoCloseCountnerReloadValue;
+    receiveTimeoutCountner = portSettings.receiveTimeout;
 
-        if(!portSettings.endOfProgChar.isEmpty())
+    if(!portSettings.endOfProgChar.isEmpty())
+    {
+        QRegExp exp(portSettings.endOfProgChar);
+        if(QString(buff).lastIndexOf(exp, Qt::CaseInsensitive) >= 0)
         {
-            QRegExp exp(portSettings.endOfProgChar);
-            if(QString(buff).lastIndexOf(exp, Qt::CaseInsensitive) >= 0)
-            {
-                setLabelText(tr("Program received"));
-                autoCloseCountner = 1;
-            };
+            setLabelText(tr("Program received"));
+            receiveTimeoutCountner = 1;
         };
     };
 
-    if(serverMode)
-    {
-        if(!fileServerDataTimeoutTimer->isActive())
-            fileServerDataTimeoutTimer->start();
-
-        autoCloseTimer->stop();
-    }
-    else
-    {
-        if(!autoCloseTimer->isActive())
-            autoCloseTimer->start();
-    };
+    if(!receiveTimeoutTimer->isActive())
+        receiveTimeoutTimer->start();
 }
 
 //**************************************************************************************************
@@ -584,52 +617,16 @@ void SerialTransmissionDialog::sendData(QString dataToSend, QString configName)
 
     loadConfig(configName);
 
-    bytesWritten = 0;
-    xoffReceived = false;
-    prevXoffReceived = false;
-    stop = false;
-    serialPortReadBuffer.clear();
-    serialPortWriteBuffer.clear();
-    autoCloseTimer->stop();
+    resetTransmission(true);
 
     prepareDataBeforeSending(&dataToSend);
 
-    // prepare serial port
-    connect(&serialPort, SIGNAL(error(QSerialPort::SerialPortError)), SLOT(showSerialPortError(QSerialPort::SerialPortError)));
-    connect(&serialPort, SIGNAL(bytesWritten(qint64)), SLOT(serialPortBytesWritten(qint64)));
-    connect(&serialPort, SIGNAL(readyRead()), SLOT(serialPortReadyRead()));
 
-    serialPort.setPortName(portSettings.portName);
-    serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Output);
-    serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Input);
-    serialPort.setDataBits(portSettings.DataBits);
-    serialPort.setParity(portSettings.Parity);
-    serialPort.setStopBits(portSettings.StopBits);
-    serialPort.setFlowControl(portSettings.FlowControl);
-
-    if(portSettings.FlowControl == QSerialPort::HardwareControl)
-        connect(&serialPort, SIGNAL(requestToSendChanged(bool)), SLOT(serialPortRequestToSend(bool)));
-
-    if(serialPort.open(QIODevice::ReadWrite))
-    {
-        stop = false;
-//        serialPort.clear(QSerialPort::Output);
-//        serialPort.clear(QSerialPort::Input);
-    }
-    else
-    {
-        stop = true;
+    if(stop)
         return;
-    };
 
-    if(portSettings.sendStartDelay > 0)
-    {
-        xoffReceived = true;
-        prevXoffReceived = true;
-        sendStartDelayTimer->start();
-    };
-
-    if((portSettings.sendStartDelay == 0)) // && (portSettings.FlowControl == QSerialPort::SoftwareControl)
+    sending = true;
+    if((portSettings.sendStartDelayReloadValue == 0)) // && (portSettings.FlowControl == QSerialPort::SoftwareControl)
     {
         if((portSettings.FlowControl == QSerialPort::HardwareControl) && ((portSettings.Xoff == 0) || (portSettings.Xon == 0)))
         {
@@ -641,11 +638,19 @@ void SerialTransmissionDialog::sendData(QString dataToSend, QString configName)
             xoffReceived = true;
             prevXoffReceived = true;
         };
+    }
+    else
+    {
+        xoffReceived = true;
+        prevXoffReceived = true;
+        sendStartDelayCountner = portSettings.sendStartDelayReloadValue;
+        sendStartDelayTimer->start();
     };
 
     writeBufferIterator = serialPortWriteBuffer.begin();
     serialPortBytesWritten(0);  // start
     exec();
+    sending = false;
 }
 
 //**************************************************************************************************
@@ -684,37 +689,6 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
         QString tx = data->mid(i, exp.matchedLength());
         data->replace(tx, "\r\n");
     };
-
-
-//    data->replace(QRegExp("[\\n\\r]{1,}"), "\r\n");
-
-//    if(data->contains("\r\r\n"))
-//    {
-//        data->replace("\r\r\n", "\r\n");
-//    }
-//    else
-//        if(data->contains("\n\r\r"))
-//        {
-//            data->replace("\n\r\r", "\r\n");
-//        }
-//        else
-//        {
-//            if(!data->contains("\r\n"))
-//            {
-//                if(data->contains("\n"))
-//                {
-//                    data->replace("\n", "\r\n");
-//                }
-//                else
-//                    if(data->contains("\r"))
-//                    {
-//                        data->replace("\r", "\r\n");
-//                    };
-//            };
-//        };
-
-
-
 
     serialPortWriteBuffer = data->split("\n", QString::SkipEmptyParts); // \n is not appended to a string only \r are left
     serialPortWriteBuffer.replaceInStrings("\r", portSettings.eobChar); // insert line endings. \r is replaced with choosen line ending
@@ -837,10 +811,12 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     portSettings.removeEmptyLines = settings.value("RemoveEmptyLines", true).toBool();
     portSettings.removeBefore = settings.value("RemoveBefore", false).toBool();
     portSettings.removeSpaceEOB = settings.value("RemoveSpaceEOB", false).toBool();
-    autoCloseCountnerReloadValue = settings.value("AutoCloseTime", 15).toInt();
-    portSettings.sendStartDelay = settings.value("SendingStartDelay", 0).toInt();
+    portSettings.autoCloseTimeout = settings.value("AutoCloseTime", 15).toInt();
+    portSettings.sendStartDelayReloadValue = settings.value("SendingStartDelay", 0).toInt();
     portSettings.createLogFile = settings.value("CreateLogFile", true).toBool();
     portSettings.eobChar = settings.value("EobChar", "CRLF").toString();
+    portSettings.sendTimeout = settings.value("SendTimeoutTime", 2).toInt();
+    portSettings.receiveTimeout = settings.value("ReceiveTimeoutTime", 2).toInt();
 
     portSettings.autoSave = settings.value("AutoSave", false).toBool();
     portSettings.endOfProgChar = settings.value("EndOfProgExpSelected", "").toString();
@@ -878,8 +854,8 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     if(portSettings.eobChar.contains("CR"))
         portSettings.eobChar.replace("CR", "\r");
 
-    portLabel->setText(portSettings.portName);
-    settingsNameLabel->setText(portSettings.configName);
+    //portLabel->setText(portSettings.portName);
+    //settingsNameLabel->setText(portSettings.configName);
 
 }
 
@@ -906,47 +882,15 @@ QStringList SerialTransmissionDialog::receiveData(QString configName)
 
     loadConfig(configName);
 
-    bytesWritten = 0;
-    xoffReceived = false;
-    prevXoffReceived = false;
-    stop = false;
-    serialPortReadBuffer.clear();
-    serialPortWriteBuffer.clear();
-    writeBufferIterator = serialPortWriteBuffer.end(); // we don't send anything
-    autoCloseTimer->stop();
-    portSettings.sendStartDelay = 0;  // not needed when receiving
+    resetTransmission(true);
+
+    if(stop)
+        return QStringList("");
+
+    sendStartDelayCountner = 0;  // not needed when receiving
 
     setRange(0, 0); // do not display progress bar
 
-
-    // prepare serial port
-    connect(&serialPort, SIGNAL(error(QSerialPort::SerialPortError)), SLOT(showSerialPortError(QSerialPort::SerialPortError)));
-    //connect(serialPort, SIGNAL(bytesWritten(qint64)), SLOT(serialPortBytesWritten(qint64)));
-    connect(&serialPort, SIGNAL(readyRead()), SLOT(serialPortReadyRead()));
-
-    if(portSettings.FlowControl == QSerialPort::HardwareControl)
-        connect(&serialPort, SIGNAL(requestToSendChanged(bool)), SLOT(serialPortRequestToSend(bool)));
-
-    serialPort.setPortName(portSettings.portName);
-    serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Output);
-    serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Input);
-    serialPort.setDataBits(portSettings.DataBits);
-    serialPort.setParity(portSettings.Parity);
-    serialPort.setStopBits(portSettings.StopBits);
-    serialPort.setFlowControl(portSettings.FlowControl);
-
-
-    if(serialPort.open(QIODevice::ReadWrite))
-    {
-        stop = false;
-//        serialPort.clear(QSerialPort::Output);
-//        serialPort.clear(QSerialPort::Input);
-    }
-    else
-    {
-        stop = true;
-        return outputList;
-    };
 
     setLabelText(tr("Receiving byte %1").arg(0));
 
@@ -992,7 +936,7 @@ QStringList SerialTransmissionDialog::processReceivedData()
 
     if(portSettings.removeSpaceEOB) //removes white space at end of line added by Fanuc
     {
-        readData.replace(QRegExp("( )[\\n\\r]{1,}"), "\r\n");
+        readData.replace(" \r\n", "\r\n");
     };
 
     if(portSettings.removeEmptyLines)
@@ -1248,7 +1192,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
         };
 
-    name2.remove(".");
+    //name2.remove(".");
     name2.remove(",");
     name2 = name2.simplified();
     name2 = name2.trimmed();
@@ -1267,30 +1211,39 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
     qDebug() << "16" << name2 << ext2;
 
-    if(portSettings.guessFileNameByProgName)
+    if(name1 != portSettings.callerProgName)
     {
-        if(name1.isEmpty())
+        if(portSettings.guessFileNameByProgName)
         {
-            fileName = name2;
-            extension = ext2;
+            if(name1.isEmpty())
+            {
+                fileName = name2;
+                extension = ext2;
+            }
+            else
+            {
+                fileName = name1;
+                extension = ext1;
+            };
         }
         else
-        {
-            fileName = name1;
-            extension = ext1;
-        };
+            if(name2.isEmpty())
+            {
+                fileName = name1;
+                extension = ext1;
+            }
+            else
+            {
+                fileName = name2;
+                extension = ext2;
+            };
     }
     else
-        if(name2.isEmpty())
-        {
-            fileName = name1;
-            extension = ext1;
-        }
-        else
-        {
-            fileName = name2;
-            extension = ext2;
-        };
+    {
+        fileName = name1;
+        extension = ext1;
+    };
+
 
     qDebug() << "17.1" << fileName << extension << portSettings.guessFileNameByProgName;
 
@@ -1304,13 +1257,12 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
         QString dateTime = QDate::currentDate().toString("yyyy-MM-dd") + "_" + QTime::currentTime().toString("HH_mm_ss").remove(QRegularExpression(" \\w+"));
         fileName = portSettings.savePath + "/" + dateTime + portSettings.saveExt;
         //writeLog(tr("WARNING:\t Coulnd not find program name."), dateTime);
-        setLabelText(tr("WARNING:\t Coulnd not find program name."), serverMode);
+        setLabelText(tr("WARNING:\t Coulnd not find program name. Using date time code."), serverMode);
 
         qDebug() << "18" << fileName;
     }
     else
     {
-
         if(portSettings.useAsExt && (!extension.isEmpty()))
             fileName = portSettings.savePath + "/" + fileName + extension;
         else
@@ -1344,7 +1296,11 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
     if(text->isNull() || text->isEmpty())
         return "";
 
-
+    if(text->length() < 20)
+    {
+        setLabelText(tr("ERROR:\t Received file to small (less than 20 characters)."), serverMode, true);
+        return "";
+    };
 
     QStringList list = guessFileName(text);
 
@@ -1353,19 +1309,15 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
 
     fileName = list.at(2);
 
-    if(list.at(0).isEmpty())
-    {
-//        QString dateTime = QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " + QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
-//        fileName = portSettings.savePath + "/" + dateTime + portSettings.saveExt;
-        //writeLog(tr("WARNING:\t Coulnd not find program name."), dateTime);
-        setLabelText(tr("WARNING:\t Coulnd not find program name."), serverMode, true);
+//    if(list.at(0).isEmpty())
+//    {
+////        QString dateTime = QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " + QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
+////        fileName = portSettings.savePath + "/" + dateTime + portSettings.saveExt;
+//        //writeLog(tr("WARNING:\t Coulnd not find program name."), dateTime);
+//        setLabelText(tr("WARNING:\t Coulnd not find program name."), serverMode, true);
 
-        qDebug() << "18" << fileName;
-    }
-
-
-
-
+//        qDebug() << "18" << fileName;
+//    }
 
     qDebug() << "20" << fileName;
     file.setFileName(fileName);
@@ -1386,7 +1338,7 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
         {
             // write error to log file
             //writeLog(tr("ERROR:\t Renaming file: \"%1\". %2").arg(fileName).arg(file.errorString()), dateTime);
-            setLabelText(tr("ERROR:\tRenaming file: \"%1\". %2").arg(fileName).arg(file.errorString()), serverMode, true);
+            setLabelText(tr("ERROR:\t Renaming file: \"%1\". %2").arg(fileName).arg(file.errorString()), serverMode, true);
         };
     };
 
@@ -1409,7 +1361,7 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
     {
         // write error to log file
         //writeLog(tr("ERROR:\t Saving file: \"%1\". %2").arg(fileName).arg(file.errorString()), dateTime);
-        setLabelText(tr("ERROR:\tSaving file: \"%1\". %2").arg(fileName).arg(file.errorString()), serverMode, true);
+        setLabelText(tr("ERROR:\t Saving file: \"%1\". %2").arg(fileName).arg(file.errorString()), serverMode, true);
     };
 
     return fileName;
@@ -1570,15 +1522,13 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
 //
 //**************************************************************************************************
 
-bool SerialTransmissionDialog::startFileServer(QString configName, bool state)
+void SerialTransmissionDialog::startFileServer(QString configName)
 {
     stop = true;
 
     if(configName.isEmpty())
-        return stop;
+        return;
 
-    if(state)
-    {
         loadConfig(configName);
 
         if(!portSettings.fileServer)
@@ -1586,330 +1536,205 @@ bool SerialTransmissionDialog::startFileServer(QString configName, bool state)
             QMessageBox::information(this, tr("Serial transmission - File server"),
                                  tr("Can't start.\n"
                                     "File server option is not enabled in serial port settings"));
-            return stop;
+            return;
         };
 
-        bytesWritten = 0;
-        xoffReceived = false;
-        prevXoffReceived = false;
-        stop = false;
-        serialPortReadBuffer.clear();
-        serialPortWriteBuffer.clear();
-        autoCloseTimer->stop();
-        fileServerDataTimeoutCountnerReloadValue = autoCloseCountnerReloadValue;
-        portSettings.sendStartDelay = 0;  // not needed when receiving
+
+        resetTransmission(true);
 
 
-        setWindowTitle(tr("Serial transmission - File server"));
-        //setWindowFlags(Qt::Window);
+
+        setWindowTitle(tr("%1").arg(configName)); //"Serial transmission - File server -> %1"
         setRange(0, 0);
         setLabelText(tr("Waiting for data..."));
+qDebug() << "START 1" << configName;
 
-        // prepare serial port
-        connect(&serialPort, SIGNAL(error(QSerialPort::SerialPortError)), SLOT(showSerialPortError(QSerialPort::SerialPortError)));
-        connect(&serialPort, SIGNAL(bytesWritten(qint64)), SLOT(fileServerBytesWritten(qint64)));
-        connect(&serialPort, SIGNAL(readyRead()), SLOT(serialPortReadyRead()));
 
-        serialPort.setPortName(portSettings.portName);
-        serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Output);
-        serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Input);
-        serialPort.setDataBits(portSettings.DataBits);
-        serialPort.setParity(portSettings.Parity);
-        serialPort.setStopBits(portSettings.StopBits);
-        serialPort.setFlowControl(portSettings.FlowControl);
 
-        if(portSettings.FlowControl == QSerialPort::HardwareControl)
-            connect(&serialPort, SIGNAL(requestToSendChanged(bool)), SLOT(serialPortRequestToSend(bool)));
-        qDebug() << " Start 335" << stop;
-        if(serialPort.open(QIODevice::ReadWrite))
-        {
-            stop = false;
-    //        serialPort.clear(QSerialPort::Output);
-    //        serialPort.clear(QSerialPort::Input);
-
-            qDebug() << " Start 336" << stop;
-        }
-        else
-        {
-            stop = true;
-            return stop;
-        };
-
-    }
-    else
-    {
-        stop = true;
-        close();
-
-    };
-    return stop;
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-void SerialTransmissionDialog::fileServerReadyRead()
-{
-    if(fileServerDataTimeoutTimer == NULL)
-        return;
-
-    QByteArray buff(serialPort.readAll());
-
-    // software flow control at application level
-    if((portSettings.Xoff > 0) || (portSettings.Xon > 0))  // disabled when Xon or Xoff set to 0
-    {
-        int xoffPos = buff.lastIndexOf(portSettings.Xoff);
-        int xonPos = buff.lastIndexOf(portSettings.Xon);
-
-        if(xoffPos >= 0) //only XOFF received
-        {
-            xoffReceived = true;
-            setLabelText(tr("XOFF received..."));
-        };
-
-        if(xonPos >= 0)  //only XON received
-        {
-            xoffReceived = false;
-            portSettings.sendStartDelay = 0;
-            setLabelText(tr("XON received..."));
-        };
-
-        if(xoffPos > xonPos) //both XOFF/XON received but XOFF last
-        {
-            xoffReceived = true;
-            setLabelText(tr("XOFF received..."));
-        };
-    }
-    else
-        xoffReceived = false;
-
-
-    serialPortReadBuffer.append(buff);
-
-    setLabelText(tr("Receiving byte %1").arg(serialPortReadBuffer.size() - 1));
-
-    qDebug() << "Data read" << buff << "xoffReceived" << xoffReceived;
-
-
-    fileServerDataTimeoutCountner = fileServerDataTimeoutCountnerReloadValue;
-    if(!fileServerDataTimeoutTimer->isActive())
-        fileServerDataTimeoutTimer->start();
-
-    autoCloseTimer->stop();
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-void SerialTransmissionDialog::fileServerReceiveTimeout()
+void SerialTransmissionDialog::fileServerProcessData()
 {
     QByteArray buff;
     QString fileName, ext, path, tmpBuff;
     QFileInfo fileInfo;
 
-    fileServerDataTimeoutTimer->stop();
 
-    if(fileServerDataTimeoutCountnerReloadValue == 0)
+    setLabelText(tr("Received data..."));
+
+
+    QStringList progList = processReceivedData();
+    serialPortReadBuffer.clear();
+
+
+    if(!progList.isEmpty())
     {
-        fileServerDataTimeoutTimer->stop();
-        return;
-    };
 
-    if(fileServerDataTimeoutCountner <= 1)
-    {
-        fileServerDataTimeoutTimer->stop();
-        setLabelText(tr("Wainting for data..."));
+        QStringList::const_iterator itp = progList.constBegin();
 
-        QStringList progList = processReceivedData();
-        serialPortReadBuffer.clear();
-
-
-        if(!progList.isEmpty())
+        if((*itp) == "#FILE_LIST#")
         {
+            qDebug() << "File Server 0012" << *itp;
 
-            QStringList::const_iterator itp = progList.constBegin();
-
-            if((*itp) == "#FILE_LIST#")
+            itp++;
+            while(itp != progList.constEnd())
             {
-                qDebug() << "File Server 0012" << *itp;
+                fileInfo.setFile(*itp);
+                fileName = fileInfo.fileName();
 
-                itp++;
-                while(itp != progList.constEnd())
+                qDebug() << "File Server 0013" << *itp << fileName << portSettings.callerProgName;
+
+                if(fileName == portSettings.callerProgName)
                 {
-                    fileInfo.setFile(*itp);
-                    fileName = fileInfo.fileName();
+                    setLabelText(tr("INFO:\t Received \"Caller\" program: \"%1\".").arg(fileName), serverMode, true);
+                    //writeLog(tr("INFO:\t Received caller prog: \"%1\".\r\n").arg(fileName));
 
-                    qDebug() << "File Server 0013" << *itp << fileName << portSettings.callerProgName;
-
-                    if(fileName == portSettings.callerProgName)
+                    QFile file(*itp);
+                    if(file.open(QIODevice::ReadOnly))
                     {
-                        setLabelText(tr("INFO:\t Received \"Caller\" program: \"%1\".").arg(fileName), serverMode, true);
-                        //writeLog(tr("INFO:\t Received caller prog: \"%1\".\r\n").arg(fileName));
-                        QFile file(*itp);
-                        if(file.open(QIODevice::ReadOnly))
+                        qDebug() << "File Server 0014" << *itp;
+                        buff = file.readAll();
+                        file.close();
+                    };
+
+                    fileName.clear();
+                    ext.clear();
+                    tmpBuff.clear();
+                    tmpBuff.append(buff);
+                    QRegExp exp(portSettings.fileNameExpFs);
+                    int pos = tmpBuff.indexOf(exp, Qt::CaseInsensitive);
+
+                    qDebug() << "File Server 0015" << buff << pos;
+
+                    if(pos >= 1)
+                    {
+                        fileName.append(tmpBuff.mid(pos, exp.matchedLength()));
+                        fileName.remove(';');
+                        fileName.remove('(');
+                        fileName.remove(')');
+
+                        fileInfo.setFile(fileName);
+                        ext = fileInfo.suffix();
+                        if(!ext.isEmpty())
                         {
-                            qDebug() << "File Server 0014" << *itp;
-                            buff = file.readAll();
-                            file.close();
+                            ext.prepend('.');
+                            fileName.remove(ext);
                         };
 
-                        fileName.clear();
-                        ext.clear();
-                        tmpBuff.clear();
-                        tmpBuff.append(buff);
-                        QRegExp exp(portSettings.fileNameExpFs);
-                        int pos = tmpBuff.indexOf(exp, Qt::CaseInsensitive);
-
-                        qDebug() << "File Server 0015" << buff << pos;
-
-                        if(pos >= 1)
+                        if(portSettings.fileNameLowerCase)
                         {
-                            fileName.append(tmpBuff.mid(pos, exp.matchedLength()));
-                            fileName.remove(';');
-                            fileName.remove('(');
-                            fileName.remove(')');
-
-                            fileInfo.setFile(fileName);
-                            ext = fileInfo.suffix();
-                            if(!ext.isEmpty())
-                            {
-                                ext.prepend('.');
-                                fileName.remove(ext);
-                            };
-
-                            if(portSettings.fileNameLowerCase)
-                            {
-                                fileName = fileName.toLower();
-                                ext = ext.toLower();
-                            };
+                            fileName = fileName.toLower();
+                            ext = ext.toLower();
                         };
+                    };
 
-                        qDebug() << "File Server 1" << fileName << ext;
+                    qDebug() << "File Server 1" << fileName << ext;
 
-                        if(!fileName.isEmpty())
+                    if(!fileName.isEmpty())
+                    {
+                        path = portSettings.searchPath1 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt1 : ext);
+                        fileInfo.setFile(path);
+                        if(!fileInfo.exists())
                         {
-                            path = portSettings.searchPath1 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt1 : ext);
+                            setLabelText(tr("ERROR:\t Can't find file in path 1: \"%1\".").arg(path), serverMode, true);
+                            //writeLog(tr("ERROR:\t Can't find file in path 1: \"%1\".\r\n").arg(path));
+
+                            path = portSettings.searchPath2 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt2 : ext);
                             fileInfo.setFile(path);
                             if(!fileInfo.exists())
                             {
-                                setLabelText(tr("ERROR:\tCan't find file in path 1: \"%1\".").arg(path), serverMode, true);
-                                //writeLog(tr("ERROR:\t Can't find file in path 1: \"%1\".\r\n").arg(path));
+                                setLabelText(tr("ERROR:\t Can't find file in path 2: \"%1\".").arg(path), serverMode, true);
+                                //writeLog(tr("ERROR:\t Can't find file in path 2: \"%1\".\r\n").arg(path));
 
-                                path = portSettings.searchPath2 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt2 : ext);
+                                path = portSettings.searchPath3 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt3 : ext);
                                 fileInfo.setFile(path);
                                 if(!fileInfo.exists())
                                 {
-                                    setLabelText(tr("ERROR:\tCan't find file in path 2: \"%1\".").arg(path), serverMode, true);
-                                    //writeLog(tr("ERROR:\t Can't find file in path 2: \"%1\".\r\n").arg(path));
-
-                                    path = portSettings.searchPath3 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt3 : ext);
-                                    fileInfo.setFile(path);
-                                    if(!fileInfo.exists())
-                                    {
-                                        setLabelText(tr("ERROR:\tCan't find file in path 3: \"%1\".").arg(path), serverMode, true);
-                                        //writeLog(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path));
-                                        path.clear();
-                                    };
+                                    setLabelText(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path), serverMode, true);
+                                    //writeLog(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path));
+                                    path.clear();
                                 };
                             };
+                        };
 
-                            qDebug() << "File Server 0016" << path << fileName << ext;
+                        qDebug() << "File Server 0016" << path << fileName << ext;
 
-                            if(!path.isEmpty())
+                        if(!path.isEmpty())
+                        {
+                            setLabelText(tr("INFO:\t Preparing to send file: \"%1\".").arg(path), serverMode, true);
+                            //writeLog(tr("INFO:\t Preparing to send file: \"%1\".\r\n").arg(path));
+                            file.setFileName(path);
+                            if(file.open(QIODevice::ReadOnly))
                             {
-                                setLabelText(tr("INFO:\t Preparing to send file: \"%1\".").arg(path), serverMode, true);
-                                //writeLog(tr("INFO:\t Preparing to send file: \"%1\".\r\n").arg(path));
-                                file.setFileName(path);
-                                if(file.open(QIODevice::ReadOnly))
+                                qDebug() << "File Server 2" << path;
+
+
+                                buff = file.readAll();
+                                file.close();
+
+                                resetTransmission();
+
+                                tmpBuff.clear();
+                                tmpBuff.append(buff);
+
+                                prepareDataBeforeSending(&tmpBuff);
+                                setRange(0, noOfBytes);
+                                sending = true;
+                                writeBufferIterator = serialPortWriteBuffer.begin();
+
+                                if((portSettings.sendStartDelayReloadValue == 0)) // && (portSettings.FlowControl == QSerialPort::SoftwareControl)
                                 {
-                                    qDebug() << "File Server 2" << path;
-
-
-                                    buff = file.readAll();
-                                    file.close();
-
-                                    bytesWritten = 0;
-                                    xoffReceived = false;
-                                    prevXoffReceived = false;
-                                    stop = false;
-                                    serialPortReadBuffer.clear();
-                                    serialPortWriteBuffer.clear();
-
-                                    tmpBuff.clear();
-                                    tmpBuff.append(buff);
-
-                                    prepareDataBeforeSending(&tmpBuff);
-                                    setRange(0, noOfBytes);
-
-                                    writeBufferIterator = serialPortWriteBuffer.begin();
-
-
-                                    if(portSettings.sendStartDelay > 0)
+                                    if((portSettings.FlowControl == QSerialPort::HardwareControl) && ((portSettings.Xoff == 0) || (portSettings.Xon == 0)))
+                                    {
+                                        xoffReceived = false;
+                                        prevXoffReceived = false;
+                                    }
+                                    else
                                     {
                                         xoffReceived = true;
                                         prevXoffReceived = true;
-                                        sendStartDelayTimer->start();
                                     };
-
-                                    if((portSettings.sendStartDelay == 0)) // && (portSettings.FlowControl == QSerialPort::SoftwareControl)
-                                    {
-                                        if((portSettings.FlowControl == QSerialPort::HardwareControl) && ((portSettings.Xoff == 0) || (portSettings.Xon == 0)))
-                                        {
-                                            xoffReceived = false;
-                                            prevXoffReceived = false;
-                                        }
-                                        else
-                                        {
-                                            xoffReceived = true;
-                                            prevXoffReceived = true;
-                                        };
-                                    };
-
-
-                                    fileServerBytesWritten(0);  // start
-
-                                    setLabelText(tr("OK:\t Sending file: \"%1\".").arg(path), serverMode, true);
-                                    //writeLog(tr("OK:\t Sending file: \"%1\".\r\n").arg(path));
-
-
                                 }
                                 else
                                 {
-                                    setLabelText(tr("ERROR:\tCan't send file: \"%1\". %2").arg(path).arg(file.errorString()), serverMode, true);
-                                    //writeLog(tr("ERROR:\t Can't send file: \"%1\". %2\r\n").arg(path).arg(file.errorString()));
+                                    xoffReceived = true;
+                                    prevXoffReceived = true;
+                                    sendStartDelayCountner = portSettings.sendStartDelayReloadValue;
+                                    sendStartDelayTimer->start();
                                 };
-                            };
-                        }
-                        else
-                        {
-                            setLabelText(tr("ERROR:\tCan't find program name to send in \"Caller\" program.").arg(path), serverMode, true);
-                        };
 
-                        break;
+
+                                fileServerBytesWritten(0);  // start
+
+                                setLabelText(tr("OK:\t Sending a file: \"%1\".").arg(path), serverMode, true);
+                                //writeLog(tr("OK:\t Sending file: \"%1\".\r\n").arg(path));
+                            }
+                            else
+                            {
+                                setLabelText(tr("ERROR:\t Can't send file: \"%1\". %2").arg(path).arg(file.errorString()), serverMode, true);
+                                //writeLog(tr("ERROR:\t Can't send file: \"%1\". %2\r\n").arg(path).arg(file.errorString()));
+                            };
+                        };
                     }
-//                    if(!fileName.isEmpty())
-//                        setLabelText(tr("OK:\t Received file: \"%1\".").arg(*itp), serverMode, true);
-                    //writeLog(tr("OK:\t Received file: \"%1\".\r\n").arg(*itp));
-                    itp++;
-                };
+                    else
+                    {
+                        setLabelText(tr("ERROR:\t Can't find program name to send in \"Caller\" program.").arg(path), serverMode, true);
+                    };
+
+                    break;
+                }
+                //                    if(!fileName.isEmpty())
+                //                        setLabelText(tr("OK:\t Received file: \"%1\".").arg(*itp), serverMode, true);
+                //writeLog(tr("OK:\t Received file: \"%1\".\r\n").arg(*itp));
+                itp++;
             };
         };
-    }
-    else
-    {
-        fileServerDataTimeoutCountner--;
-
-        if(fileServerDataTimeoutCountner <= (fileServerDataTimeoutCountnerReloadValue - 1))
-        {
-            setLabelText(tr("Received data. Start processing in %1s").arg(fileServerDataTimeoutCountner));
-        }
-        else
-           setLabelText(tr("Wainting for data..."));
-
     };
-    fileServerDataTimeoutTimer->start();
+    setLabelText(tr("Wainting for data..."));
 }
 
 //**************************************************************************************************
@@ -1932,6 +1757,7 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
     if(writeBufferIterator == serialPortWriteBuffer.end())
     {
         //stop = true;
+        sending = false;
         setLabelText(tr("OK:\t Sending a file completed."), serverMode, true);
         setLabelText(tr("Wainting for data..."));
         setRange(0, 0);
@@ -1952,7 +1778,6 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
 
         serialPort.write(buff, buff.size());
         writeBufferIterator++;
-
     };
 
     //qDebug() << "xoffReceived" << xoffReceived << " Stop" << stop;
@@ -1962,5 +1787,165 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
 //
 //**************************************************************************************************
 
+void SerialTransmissionDialog::sendTimeoutTimerTimeout()
+{
 
+    qDebug() << "sendTimeoutTimerTimeout" << sendTimeoutCountner;
+
+    if(sendTimeoutCountner == 0)
+    {
+        setLabelText(tr("ERROR:\t Sending timedout. Reseting."), serverMode, true);
+        sendTimeoutTimer->stop();
+        reset(false);
+        return;
+    };
+
+
+
+//    if(sendTimeoutCountner <= 1)
+//    {
+//        sending = false;
+//        sendTimeoutCountner = 0;
+//        if(!serverMode)
+//        {
+//            autoCloseCountner = portSettings.autoCloseTimeout;
+//            if(!autoCloseTimer->isActive())
+//                autoCloseTimer->start();
+//        };
+//    }
+//    else
+//    {
+//        if(!xoffReceived)
+//            sendTimeoutCountner--;
+//    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialTransmissionDialog::receiveTimeoutTimerTimeout()
+{
+
+    qDebug() << "receiveTimeoutTimerTimeout" << receiveTimeoutCountner;
+
+    if(receiveTimeoutCountner == 0)
+    {
+        receiveTimeoutTimer->stop();
+        return;
+    };
+
+    if(receiveTimeoutCountner <= 1)
+    {
+        receiveTimeoutCountner = 0;
+        if(serverMode)
+        {
+            fileServerProcessData();
+        }
+        else
+        {
+            autoCloseCountner = portSettings.autoCloseTimeout;
+            if(!autoCloseTimer->isActive())
+                autoCloseTimer->start();
+        };
+    }
+    else
+    {
+        if(!xoffReceived)
+            receiveTimeoutCountner--;
+    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialTransmissionDialog::resetTransmission(bool portRestart)
+{
+    autoCloseTimer->stop();
+    serialPort.clearError();
+    bytesWritten = 0;
+    xoffReceived = false;
+    prevXoffReceived = false;
+    stop = false;
+    serialPortReadBuffer.clear();
+    serialPortWriteBuffer.clear();
+    writeBufferIterator = serialPortWriteBuffer.end(); // we don't send anything yet
+
+    if(portRestart)
+    {
+        disconnect(&serialPort, 0, 0, 0);
+
+        if(serialPort.isOpen())
+        {
+            // try to clear the serial port, clear() reports error on windows
+            serialPort.setFlowControl(QSerialPort::NoFlowControl);
+            serialPort.flush();
+            serialPort.readAll();
+            serialPort.setFlowControl(portSettings.FlowControl);
+            serialPort.close();
+            serialPort.clearError();
+        };
+
+        qApp->processEvents();
+
+        connect(&serialPort, SIGNAL(error(QSerialPort::SerialPortError)), this, SLOT(showSerialPortError(QSerialPort::SerialPortError)));
+        connect(&serialPort, SIGNAL(bytesWritten(qint64)), this, SLOT(serialPortBytesWritten(qint64)));
+        connect(&serialPort, SIGNAL(readyRead()), this, SLOT(serialPortReadyRead()));
+        if(portSettings.FlowControl == QSerialPort::HardwareControl)
+            connect(&serialPort, SIGNAL(requestToSendChanged(bool)), this, SLOT(serialPortRequestToSend(bool)));
+
+        qApp->processEvents();
+
+        serialPort.clearError();
+        serialPort.setPortName(portSettings.portName);
+        serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Output);
+        serialPort.setBaudRate(portSettings.BaudRate, QSerialPort::Input);
+        serialPort.setDataBits(portSettings.DataBits);
+        serialPort.setParity(portSettings.Parity);
+        serialPort.setStopBits(portSettings.StopBits);
+        serialPort.setFlowControl(portSettings.FlowControl);
+
+        if(serialPort.open(QIODevice::ReadWrite))
+        {
+            stop = false;
+        }
+        else
+        {
+            stop = true;
+        };
+
+
+    };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialTransmissionDialog::reset(bool re)
+{
+    Q_UNUSED(re);
+
+    resetTransmission(true);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+QString SerialTransmissionDialog::configName()
+{
+    return portSettings.configName;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialTransmissionDialog::portReset()
+{
+    reset(true);
+}
 

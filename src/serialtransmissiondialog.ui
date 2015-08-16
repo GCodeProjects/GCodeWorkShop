@@ -3,18 +3,15 @@
  <class>SerialTransmissionDialog</class>
  <widget class="QDialog" name="SerialTransmissionDialog">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>564</width>
-    <height>234</height>
+    <height>245</height>
    </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Dialog</string>
   </property>
   <property name="windowIcon">
    <iconset resource="application.qrc">
@@ -27,7 +24,20 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="settingsNameLabel">
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="connected1Label">
        <property name="toolTip">
         <string>Settings name</string>
        </property>
@@ -37,14 +47,20 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="portLabel">
-       <property name="toolTip">
-        <string>Port name</string>
+      <widget class="QLabel" name="connectedLabel"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="text">
-        <string/>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -252,6 +268,50 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="xoff1Label">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Data Terminal Ready</string>
+       </property>
+       <property name="statusTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="application.qrc">:/images/led.png</pixmap>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="xoffLabel">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="toolTip">
+        <string>Data Terminal Ready</string>
+       </property>
+       <property name="text">
+        <string>XOFF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_4">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -300,7 +360,8 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <family>Courier 10 Pitch</family>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="autoFillBackground">

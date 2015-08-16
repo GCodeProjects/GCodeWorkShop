@@ -305,10 +305,9 @@ bool MdiChild::saveFile(const QString &fileName)
     QTextCursor cursor;
 
     QFile file(fileName);
+    fileChangeMonitorRemovePath(file.fileName());
     if(file.open(QIODevice::WriteOnly))
     {
-        fileChangeMonitorRemovePath(file.fileName());
-
         QApplication::setOverrideCursor(Qt::WaitCursor);
         curPos = textEdit->textCursor().position();
 
@@ -372,8 +371,8 @@ bool MdiChild::saveFile(const QString &fileName)
                              tr("Cannot write file \"%1\".\n %2")
                              .arg(fileName)
                              .arg(file.errorString()));
-        return false;
     };
+    return false;
 }
 
 //**************************************************************************************************

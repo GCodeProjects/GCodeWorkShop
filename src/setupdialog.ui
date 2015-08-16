@@ -492,10 +492,13 @@
            <item>
             <widget class="QLineEdit" name="edtExtension">
              <property name="inputMask">
-              <string>*.Axx</string>
+              <string/>
              </property>
              <property name="text">
               <string>*.</string>
+             </property>
+             <property name="maxLength">
+              <number>5</number>
              </property>
             </widget>
            </item>

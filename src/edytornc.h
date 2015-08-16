@@ -38,6 +38,7 @@
 #include "swapaxesdialog.h"
 #include "newfiledialog.h"
 #include "sessiondialog.h"
+#include "commapp.h"
 
 #include "ui_edytornc.h"
 
@@ -164,9 +165,9 @@ private slots:
     void changeSession(QAction *action);
     void sessionMgr();
     void fileChanged(const QString fileName);
+    void tileSubWindowsVertycally();
 
-
- signals:
+signals:
     void needToShow();
 
 
@@ -250,7 +251,8 @@ private:
     QAction *pasteAct;
     QAction *closeAct;
     QAction *closeAllAct;
-    QAction *tileAct;
+    QAction *tileHAct;
+    QAction *tileVAct;
     QAction *cascadeAct;
     QAction *nextAct;
     QAction *previousAct;
@@ -337,14 +339,13 @@ private:
     QAction *deAttachToDirAct;
     QAction *diagAct;
     QAction *serialCloseAct;
-    QAction *spServerAct;
+    QAction *commAppAct;
     QComboBox *configBox;
 
     QStringList selectedExpressions;
-
     QFileSystemWatcher *fileChangeMonitor;
 
-    SerialTransmissionDialog *spServer;
+    QPointer<CommApp> commApp;
 
 
 };
