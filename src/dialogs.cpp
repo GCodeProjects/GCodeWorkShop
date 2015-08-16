@@ -3057,6 +3057,11 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    int id = highlightModeComboBox->findData(editProp.defaultHighlightMode);
    highlightModeComboBox->setCurrentIndex(id);
 
+   QRegExp rx("(\\*\\.)[A-Z0-9]{1,3}");
+   rx.setCaseSensitivity(Qt::CaseInsensitive);
+   QValidator *edtExtensionValid = new QRegExpValidator(rx, this);
+   edtExtension->setValidator(edtExtensionValid);
+
    connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));

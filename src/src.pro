@@ -74,7 +74,8 @@ SOURCES += edytornc.cpp \
     newfiledialog.cpp \
     sessiondialog.cpp \
     serialtransmissiondialog.cpp \
-    serialportconfigdialog.cpp
+    serialportconfigdialog.cpp \
+    commapp.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -102,7 +103,8 @@ HEADERS += edytornc.h \
     newfiledialog.h \
     sessiondialog.h \
     serialtransmissiondialog.h \
-    serialportconfigdialog.h
+    serialportconfigdialog.h \
+    commapp.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \
@@ -135,7 +137,8 @@ FORMS += i2mdialog.ui \
     sessiondialog.ui \
     newsessiondialog.ui \
     serialtransmissiondialog.ui \
-    serialportconfigdialog.ui
+    serialportconfigdialog.ui \
+    commapp.ui
 #TRANSLATIONS = edytornc_pl.ts \
 #    edytornc_ca.ts \
 #    edytornc_de.ts \

@@ -126,8 +126,15 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
 
    QRegExp rx("(LF|CR){1,6}");
    rx.setCaseSensitivity(Qt::CaseInsensitive);
-   QValidator *eobInputValid = new QRegExpValidator(rx, this );
+   QValidator *eobInputValid = new QRegExpValidator(rx, this);
    eobComboBox->setValidator(eobInputValid);
+
+   QValidator *xonInputValid = new QIntValidator(0, 127, this);
+   xonInput->setValidator(xonInputValid);
+
+   QValidator *xoffInputtValid = new QIntValidator(0, 127, this);
+   xonInput->setValidator(xoffInputtValid);
+
 
    setResult(QDialog::Rejected);
 }
@@ -241,6 +248,8 @@ void SerialPortConfigDialog::saveButtonClicked()
     settings.setValue("RemoveEmptyLines", removeEmptyLines->isChecked());
     settings.setValue("RemoveBefore",removeBefore->isChecked());
     settings.setValue("SendingStartDelay", startDelaySpinBox->value());
+    settings.setValue("ReceiveTimeoutTime", receiveTimeoutSpinBox->value());
+    settings.setValue("SendTimeoutTime", sendTimeoutSpinBox->value());
     settings.setValue("AutoCloseTime", autoCloseSpinBox->value());
     //settings.setValue("EndOfBlockLF", endOfBlockLF->isChecked());
     settings.setValue("RemoveSpaceEOB", removeSpaceEOB->isChecked());
@@ -270,6 +279,10 @@ void SerialPortConfigDialog::saveButtonClicked()
     settings.setValue("SearchExt2", searchExt2ComboBox->currentText());
     settings.setValue("SearchPath3", searchPath3LineEdit->text());
     settings.setValue("SearchExt3", searchExt3ComboBox->currentText());
+
+
+
+    settings.endGroup();
 
     QStringList eList;
     eList.prepend(fileNameExpFSComboBox->currentText());
@@ -325,7 +338,6 @@ void SerialPortConfigDialog::saveButtonClicked()
 
 
     settings.endGroup();
-    settings.endGroup();
 
 
     configNameBox->clear();
@@ -358,6 +370,12 @@ void SerialPortConfigDialog::changeSettings()
 
 
     settings.beginGroup("SerialPortConfigs");
+
+    eobComboBox->insertItems(0, settings.value("EndOfBlockCodes", (QStringList() << "LF" << "CR" << "CRLF" << "CRCRLF" << "LFCRCR" << "")).toStringList());
+    endOfProgComboBox->insertItems(0, settings.value("EndOfProgExp", (QStringList() << "" << "")).toStringList());
+    fileNameExpFSComboBox->insertItems(0, settings.value("FileNameExpFS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+    fileNameExpASComboBox->insertItems(0, settings.value("FileNameExpAS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+
     settings.beginGroup(configNameBox->currentText());
 
 #ifdef Q_OS_WIN32
@@ -451,9 +469,11 @@ void SerialPortConfigDialog::changeSettings()
     removeBefore->setChecked(settings.value("RemoveBefore", false).toBool());
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
     autoCloseSpinBox->setValue(settings.value("AutoCloseTime", 15).toInt());
+    sendTimeoutSpinBox->setValue(settings.value("SendTimeoutTime", 30).toInt());
+    receiveTimeoutSpinBox->setValue(settings.value("ReceiveTimeoutTime", 2).toInt());
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
     logFileCheckBox->setChecked(settings.value("CreateLogFile", true).toBool());
-    eobComboBox->insertItems(0, settings.value("EndOfBlockCodes", (QStringList() << "LF" << "CR" << "CRLF" << "CRCRLF" << "LFCRCR" << "")).toStringList());
+
     id = eobComboBox->findText(settings.value("EobChar", "CRLF").toString());
     if(id >= 0)
         eobComboBox->setCurrentIndex(id);
@@ -470,20 +490,20 @@ void SerialPortConfigDialog::changeSettings()
     if(id >= 0)
        saveExtComboBox->setCurrentIndex(id);
 
-    endOfProgComboBox->insertItems(0, settings.value("EndOfProgExp", (QStringList() << "" << "")).toStringList());
+
     id = endOfProgComboBox->findText(settings.value("EndOfProgExpSelected", "").toString());
     if(id >= 0)
        endOfProgComboBox->setCurrentIndex(id);
 
     fileServerCheckBox->setChecked(settings.value("FileServer", false).toBool());
-    callerProgNameLineEdit->setText(settings.value("CallerProg", "O0001").toString());
+    callerProgNameLineEdit->setText(settings.value("CallerProg", "O0001.nc").toString());
     fileNameLowerCaseCheckBox->setChecked(settings.value("FileNameLowerCase", true).toBool());
-    fileNameExpFSComboBox->insertItems(0, settings.value("FileNameExpFS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+
     id = fileNameExpFSComboBox->findText(settings.value("FileNameExpFSSelected", "").toString());
     if(id >= 0)
        fileNameExpFSComboBox->setCurrentIndex(id);
 
-    fileNameExpASComboBox->insertItems(0, settings.value("FileNameExpAS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+
     id = fileNameExpASComboBox->findText(settings.value("FileNameExpASSelected", "").toString());
     if(id >= 0)
        fileNameExpASComboBox->setCurrentIndex(id);
