@@ -124,7 +124,7 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
      void eobComboBoxEditTextChanged(const QString text);
      void addFileNameButtonClicked();
      void removeFileNameButtonClicked();
-
+     void helpButtonClicked();
 
 private:
      QString browseForDir(const QString dir, QString windowTitle);

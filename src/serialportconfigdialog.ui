@@ -108,7 +108,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -559,66 +559,8 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="text">
-            <string>XON character:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="xonInput">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="toolTip">
-            <string>XON (DC1) - 17 Dec. 0x11 Hex.
-XON (DC2) - 18 Dec. 0x12 Hex.
-This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
-Set XON or XOFF to 0 if you want disable it.</string>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-           <property name="maxLength">
-            <number>32767</number>
-           </property>
-           <property name="clearButtonEnabled">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_8">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="text">
-            <string>XOFF character:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
+        <layout class="QGridLayout" name="gridLayout_15">
+         <item row="1" column="3">
           <widget class="QLineEdit" name="xoffInput">
            <property name="sizePolicy">
             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -643,168 +585,42 @@ Set XON or XOFF to 0 if you want disable it.</string>
            </property>
           </widget>
          </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>2</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="optionTab">
-      <attribute name="title">
-       <string>Options</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_8">
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="removeSpaceEOB">
-         <property name="toolTip">
-          <string>Remove white space just before the end of line, sometimes added by Fanuc.
-Works only when receiving file.</string>
-         </property>
-         <property name="text">
-          <string>Remove white space at end of line</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="removeBefore">
-         <property name="toolTip">
-          <string>When sending, discard all characters before %</string>
-         </property>
-         <property name="text">
-          <string>Remove characters before %</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="removeEmptyLines">
-         <property name="toolTip">
-          <string>Remove empty lines after receive is complete</string>
-         </property>
-         <property name="text">
-          <string>Remove empty lines</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="deleteControlChars">
-         <property name="toolTip">
-          <string>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</string>
-         </property>
-         <property name="text">
-          <string>Delete control chars</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="3">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="3">
-        <layout class="QHBoxLayout" name="horizontalLayout_11">
-         <item>
-          <widget class="QLabel" name="label_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="text">
-            <string>Send at end:</string>
+            <string>XON character:</string>
            </property>
           </widget>
          </item>
-         <item>
-          <spacer name="horizontalSpacer_10">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="0" column="3">
+          <widget class="QLineEdit" name="xonInput">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::MinimumExpanding</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>4</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="eotInput">
            <property name="toolTip">
-            <string>These characters will be added at the end of the program.
-You can write here:
-	Plain text
-AND/OR
-	Hex codes of ASCII characters.
-	Example: 
-	% 0x0A 0x0D - % and new line characters
-	0x20 0x0A 0x0D - space character and new line characters
-	Space and control characters can only be written as hex numbers:
-	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
-AND/OR
-	Special characters codes can be used:
-	LF - Line Feed also Rarrige Return (replaced later by end of block characters)
-	SP - Space
-	TAB - Tabulation
-	FN - FileName
-	FE - Filename Extension (part after dot)
-	FA - Filename extension Appended at end of filename (part after _ character and before dot)</string>
+            <string>XON (DC1) - 17 Dec. 0x11 Hex.
+XON (DC2) - 18 Dec. 0x12 Hex.
+This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
+Set XON or XOFF to 0 if you want disable it.</string>
+           </property>
+           <property name="text">
+            <string>0</string>
            </property>
            <property name="maxLength">
-            <number>128</number>
+            <number>32767</number>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-        </layout>
-       </item>
-       <item row="9" column="3">
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QLabel" name="label_15">
-           <property name="text">
-            <string>Auto close transmission dialog:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
+         <item row="0" column="6">
           <widget class="QSpinBox" name="autoCloseSpinBox">
            <property name="toolTip">
             <string>Automatically close transmission dialog after the last character was sent/received.
@@ -824,82 +640,25 @@ This setting is also used in file server mode to detect end of incoming transmis
            </property>
           </widget>
          </item>
-        </layout>
-       </item>
-       <item row="0" column="3">
-        <layout class="QHBoxLayout" name="horizontalLayout_13">
-         <item>
-          <widget class="QLabel" name="label_9">
-           <property name="text">
-            <string>Send at start:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_11">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::MinimumExpanding</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>4</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="stInput">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="toolTip">
-            <string>These characters will be added at the beginning of the program. 
-You can write here:
-	Plain text
-AND/OR
-	Hex codes of ASCII characters.
-	Example: 
-	% 0x0A 0x0D - % and new line characters
-	0x20 0x0A 0x0D - space character and new line characters
-	Space and control characters can only be written as hex numbers:
-	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
-AND/OR
-	Special characters codes can be used:
-	LF - Line Feed also Rarrige Return (replaced later by end of block characters)
-	SP - Space
-	TAB - Tabulation
-	FN - FileName
-	FE - Filename Extension (part after dot)
-	FA - Filename extension Appended at end of filename (part after _ character and before dot)</string>
-           </property>
-           <property name="maxLength">
-            <number>128</number>
-           </property>
-           <property name="clearButtonEnabled">
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="enabled">
             <bool>true</bool>
            </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="3" column="3">
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Start sending after:</string>
+            <string>XOFF character:</string>
            </property>
           </widget>
          </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
+         <item row="0" column="5">
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>Auto close transmission dialog:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <spacer name="horizontalSpacer_8">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -911,106 +670,28 @@ AND/OR
            </property>
           </spacer>
          </item>
-         <item>
-          <widget class="QSpinBox" name="startDelaySpinBox">
-           <property name="toolTip">
-            <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
-This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
-This setting is ignored in serial File Server.</string>
-           </property>
-           <property name="suffix">
-            <string>s</string>
-           </property>
-           <property name="maximum">
-            <number>360</number>
-           </property>
-           <property name="value">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
-       <item row="2" column="3">
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="text">
-            <string>Delay before sending the next block:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="delayDoubleSpinBox">
-           <property name="toolTip">
-            <string/>
-           </property>
-           <property name="prefix">
-            <string/>
-           </property>
-           <property name="suffix">
-            <string>s</string>
-           </property>
-           <property name="decimals">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <double>10.000000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>2</height>
+          </size>
+         </property>
+        </spacer>
        </item>
-       <item row="9" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_13">
-           <property name="text">
-            <string>End of block character:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="eobComboBox">
-           <property name="toolTip">
-            <string>Line (block) endings charcters.
-Only uppercase LF, CR character are allowed.</string>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxCount">
-            <number>16</number>
-           </property>
-           <property name="minimumContentsLength">
-            <number>4</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="addEobCharButton">
-           <property name="icon">
-            <iconset resource="application.qrc">
-             <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="deleteEobCharButton">
-           <property name="icon">
-            <iconset resource="application.qrc">
-             <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="optionTab">
+      <attribute name="title">
+       <string>Options - receiving</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_8">
        <item row="2" column="2">
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
@@ -1024,44 +705,7 @@ Only uppercase LF, CR character are allowed.</string>
          </property>
         </spacer>
        </item>
-       <item row="10" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_10">
-         <item>
-          <widget class="QLabel" name="label_16">
-           <property name="text">
-            <string>Send timeout:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_9">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="sendTimeoutSpinBox">
-           <property name="suffix">
-            <string>s</string>
-           </property>
-           <property name="minimum">
-            <number>2</number>
-           </property>
-           <property name="maximum">
-            <number>60</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="11" column="0">
+       <item row="12" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_14">
          <item>
           <widget class="QLabel" name="label_17">
@@ -1097,6 +741,317 @@ Only uppercase LF, CR character are allowed.</string>
           </widget>
          </item>
         </layout>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="removeSpaceEOB">
+         <property name="toolTip">
+          <string>Remove white space just before the end of line, sometimes added by Fanuc.
+Works only when receiving file.</string>
+         </property>
+         <property name="text">
+          <string>Remove white space at end of line</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="removeEmptyLines">
+         <property name="toolTip">
+          <string>Remove empty lines after receive is complete</string>
+         </property>
+         <property name="text">
+          <string>Remove empty lines</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Options - sending</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_12">
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <layout class="QGridLayout" name="gridLayout_16">
+         <item row="1" column="2">
+          <widget class="QLineEdit" name="eotInput">
+           <property name="toolTip">
+            <string>These characters will be added at the end of the program.
+You can write here:
+	Plain text
+AND/OR
+	Hex codes of ASCII characters.
+	Example: 
+	% 0x0A 0x0D - % and new line characters
+	0x20 0x0A 0x0D - space character and new line characters
+	Space and control characters can only be written as hex numbers:
+	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
+AND/OR
+	Special characters codes can be used:
+	LF - Line Feed also Carrige Return (replaced later by end of block characters)
+	SP - Space
+	TAB - Tabulation
+	FN - FileName
+	FE - Filename Extension (part after dot)
+	FA - Filename extension Appended at end of filename (part after _ character and before dot)</string>
+           </property>
+           <property name="maxLength">
+            <number>128</number>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLineEdit" name="stInput">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>These characters will be added at the beginning of the program. 
+You can write here:
+	Plain text
+AND/OR
+	Hex codes of ASCII characters.
+	Example: 
+	% 0x0A 0x0D - % and new line characters
+	0x20 0x0A 0x0D - space character and new line characters
+	Space and control characters can only be written as hex numbers:
+	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
+AND/OR
+	Special characters codes can be used:
+	LF - Line Feed also Carrige Return (replaced later by end of block characters)
+	SP - Space
+	TAB - Tabulation
+	FN - FileName
+	FE - Filename Extension (part after dot)
+	FA - Filename extension Appended at end of filename (part after _ character and before dot)</string>
+           </property>
+           <property name="maxLength">
+            <number>128</number>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLabel" name="label_4">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Delay before sending the next block:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>Send timeout:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QSpinBox" name="startDelaySpinBox">
+           <property name="toolTip">
+            <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
+This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
+This setting is ignored in serial File Server.</string>
+           </property>
+           <property name="suffix">
+            <string>s</string>
+           </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
+           <property name="value">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Send at end:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Send at start:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QSpinBox" name="sendTimeoutSpinBox">
+           <property name="suffix">
+            <string>s</string>
+           </property>
+           <property name="minimum">
+            <number>2</number>
+           </property>
+           <property name="maximum">
+            <number>60</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Start sending after:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QDoubleSpinBox" name="delayDoubleSpinBox">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="suffix">
+            <string>s</string>
+           </property>
+           <property name="decimals">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QToolButton" name="deleteEobCharButton">
+           <property name="icon">
+            <iconset resource="application.qrc">
+             <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QToolButton" name="addEobCharButton">
+           <property name="icon">
+            <iconset resource="application.qrc">
+             <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QComboBox" name="eobComboBox">
+           <property name="toolTip">
+            <string>Line (block) endings charcters.
+Only uppercase LF, CR character are allowed.</string>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="maxCount">
+            <number>16</number>
+           </property>
+           <property name="minimumContentsLength">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>End of block character:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_17">
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="removeBefore">
+           <property name="toolTip">
+            <string>When sending, discard all characters before %</string>
+           </property>
+           <property name="text">
+            <string>Remove characters before %</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="deleteControlChars">
+           <property name="toolTip">
+            <string>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</string>
+           </property>
+           <property name="text">
+            <string>Delete control chars</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="7" column="0">
+        <spacer name="verticalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -1235,34 +1190,30 @@ If checked, user definied regular expression will be used first, if not found na
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_10">
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="renameCheckBox">
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="removeLettersCheckBox">
            <property name="toolTip">
-            <string>If save path will already contain a file, old file will be renamed to *.bak</string>
+            <string>Letters in detected filename will be removed (only digits will be left).
+If in result filename becomes empty, version with letters will be used.</string>
            </property>
            <property name="text">
-            <string>Create backup if file exists</string>
+            <string>Remove letters from filename</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="7" column="0">
+          <widget class="QCheckBox" name="logFileCheckBox">
+           <property name="toolTip">
+            <string>Save debug information to log file:
+&quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</string>
+           </property>
+           <property name="text">
+            <string>Create log file</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QCheckBox" name="useAsExtCheckBox">
-             <property name="toolTip">
-              <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting file extension will be ignored.</string>
-             </property>
-             <property name="text">
-              <string>Use program name extension as file extension</string>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-             <property name="autoExclusive">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
            <item>
             <widget class="QCheckBox" name="appendExtCheckBox">
              <property name="toolTip">
@@ -1279,7 +1230,33 @@ Choosen file extension will be used.</string>
            </item>
           </layout>
          </item>
-         <item row="3" column="0">
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="useAsExtCheckBox">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If detected file name contains &amp;quot;extension&amp;quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting &amp;quot;file extension&amp;quot; will be ignored.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Use program name extension as file extension</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="renameCheckBox">
+           <property name="toolTip">
+            <string>If save path will already contain a file, old file will be renamed to *.bak</string>
+           </property>
+           <property name="text">
+            <string>Create backup if file exists</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
           <widget class="QCheckBox" name="splitProgramsCheckBox">
            <property name="toolTip">
             <string>If received data will contain more than one CNC program, they will be saved in independent files
@@ -1287,17 +1264,6 @@ This setting can cause data loss if detection of filename fails.</string>
            </property>
            <property name="text">
             <string>Split programs</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="removeLettersCheckBox">
-           <property name="toolTip">
-            <string>Letters in detected filename will be removed (only digits will be left).
-If in result filename becomes empty, version with letters will be used.</string>
-           </property>
-           <property name="text">
-            <string>Remove letters from filename</string>
            </property>
           </widget>
          </item>
@@ -1362,17 +1328,6 @@ If in result filename becomes empty, version with letters will be used.</string>
           </layout>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="logFileCheckBox">
-         <property name="toolTip">
-          <string>Save debug information to log file:
-&quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</string>
-         </property>
-         <property name="text">
-          <string>Create log file</string>
-         </property>
-        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_4">
@@ -1494,7 +1449,7 @@ p, li { white-space: pre-wrap; }
           <widget class="QComboBox" name="searchExt1ComboBox">
            <property name="toolTip">
             <string>File extension. 
-If detected the filename will contain an extension, then this setting will be ignored</string>
+If detected filename will contain an extension, then this setting will be ignored</string>
            </property>
            <property name="editable">
             <bool>false</bool>
@@ -1521,7 +1476,7 @@ If detected the filename will contain an extension, then this setting will be ig
           <widget class="QComboBox" name="searchExt3ComboBox">
            <property name="toolTip">
             <string>File extension. 
-If detected the filename will contain an extension, then this setting will be ignored</string>
+If detected filename will contain an extension, then this setting will be ignored</string>
            </property>
            <property name="editable">
             <bool>false</bool>
@@ -1546,7 +1501,7 @@ If detected the filename will contain an extension, then this setting will be ig
           <widget class="QComboBox" name="searchExt2ComboBox">
            <property name="toolTip">
             <string>File extension. 
-If detected the filename will contain an extension, then this setting will be ignored</string>
+If detected filename will contain an extension, then this setting will be ignored</string>
            </property>
            <property name="editable">
             <bool>false</bool>
@@ -1696,6 +1651,13 @@ p, li { white-space: pre-wrap; }
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QPushButton" name="helpButton">
+       <property name="text">
+        <string>&amp;Help</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -1788,7 +1750,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>f3CheckBox</tabstop>
   <tabstop>saveCloseButton</tabstop>
   <tabstop>closeButton</tabstop>
-  <tabstop>deleteControlChars</tabstop>
   <tabstop>browse1PushButton</tabstop>
   <tabstop>saveExtComboBox</tabstop>
   <tabstop>savePathLineEdit</tabstop>

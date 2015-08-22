@@ -3006,9 +3006,9 @@ void EdytorNc::createSerialToolBar()
         serialCloseAct->setToolTip(tr("Close send/receive toolbar"));
         connect(serialCloseAct, SIGNAL(triggered()), this, SLOT(closeSerialToolbar()));
 
-        commAppAct = new QAction(QIcon(":/images/spserver.png"), tr("Start serial port file server application"), this);
+        commAppAct = new QAction(QIcon(":/images/spserver.png"), tr("Start application \"Serial port file server\""), this);
         //diagAct->setShortcut(tr("F3"));
-        commAppAct->setToolTip(tr("Start serial port file server application"));
+        commAppAct->setToolTip(tr("Start application \"Serial port file server\""));
         connect(commAppAct, SIGNAL(triggered()), this, SLOT(startSerialPortServer()));
 
         configBox = new QComboBox();
@@ -4606,8 +4606,6 @@ void EdytorNc::startSerialPortServer()
 {
 
     //commApp = findChild<CommApp *>("CommApp", Qt::FindChildrenRecursively);
-
-    qDebug() << "CHILD" << commApp;
 
     if(commApp)
     {

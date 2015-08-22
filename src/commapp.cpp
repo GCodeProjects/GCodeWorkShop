@@ -71,16 +71,13 @@ CommApp::~CommApp()
 void CommApp::closeEvent(QCloseEvent *event)
 {
     saveSettings();
-    qDebug() << "CLOSE 2";
+
     foreach(const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder))
     {
         SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
         mdiChild->close();
         mdiChild->parentWidget()->close();
     };
-
-    qDebug() << "CLOSE 3";
-
 
     event->accept();
 }
@@ -123,17 +120,12 @@ void CommApp::loadSettings()
     activeConfigs.removeAll("");
     settings.endGroup();
 
-    qDebug() << "CONFIGS" << activeConfigs;
-
     QStringList list = activeConfigs;
     QStringList::Iterator it = list.begin();
     while(it != list.end())
     {
         SerialTransmissionDialog *spServer = createSerialPortServer(*it);
         spServer->show();
-
-
-        qDebug() << "CONFIGS 2" << *it;
         ++it;
     };
 }
@@ -181,12 +173,13 @@ void CommApp::stopSerialPortServer()
     QString _config = configBox->currentText();
 
     SerialTransmissionDialog *_existing = findMdiChild(_config);
-    qDebug() << "CLOSE 1" << _config << _existing;
     if(_existing > NULL)
     {
         _existing->close();
         _existing->parentWidget()->close();
     };
+
+    changeActiveWindow();
 }
 
 //**************************************************************************************************
@@ -347,8 +340,6 @@ void CommApp::setActiveSubWindow(QWidget *window)
     if(!window)
         return;
     ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
-
-    qDebug() << "setActiveSubWindow";
 }
 
 //**************************************************************************************************
@@ -405,8 +396,6 @@ void CommApp::activeWindowChanged(QMdiSubWindow *window)
 void CommApp::changeActiveWindow()
 {
     SerialTransmissionDialog *mdiChild = findMdiChild(configBox->currentText());
-
-    qDebug() << "mdiChild" << mdiChild;
 
     if(mdiChild > NULL)
     {
