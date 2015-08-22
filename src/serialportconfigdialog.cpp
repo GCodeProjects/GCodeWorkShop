@@ -23,6 +23,7 @@
 
 
 #include "serialportconfigdialog.h"
+#include "serialportcfghelpdialog.h"
 
 
 static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
@@ -95,6 +96,7 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(saveCloseButton, SIGNAL(clicked()), SLOT(saveCloseButtonClicked()));
    connect(deleteButton, SIGNAL(clicked()), SLOT(deleteButtonClicked()));
    connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
+   connect(helpButton, SIGNAL(clicked()), SLOT(helpButtonClicked()));
 
    connect(addButton, SIGNAL(clicked()), SLOT(addButtonClicked()));
    connect(removeButton, SIGNAL(clicked()), SLOT(removeButtonClicked()));
@@ -357,6 +359,7 @@ void SerialPortConfigDialog::changeSettings()
 {
     int id;
     QString item, port;
+    QStringList list;
 
     QSettings settings("EdytorNC", "EdytorNC");
 
@@ -371,10 +374,25 @@ void SerialPortConfigDialog::changeSettings()
 
     settings.beginGroup("SerialPortConfigs");
 
-    eobComboBox->insertItems(0, settings.value("EndOfBlockCodes", (QStringList() << "LF" << "CR" << "CRLF" << "CRCRLF" << "LFCRCR" << "")).toStringList());
-    endOfProgComboBox->insertItems(0, settings.value("EndOfProgExp", (QStringList() << "" << "")).toStringList());
-    fileNameExpFSComboBox->insertItems(0, settings.value("FileNameExpFS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
-    fileNameExpASComboBox->insertItems(0, settings.value("FileNameExpAS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+    list.clear();
+    list.append(settings.value("EndOfBlockCodes", (QStringList() << "LF" << "CR" << "CRLF" << "CRCRLF" << "LFCRCR" << "")).toStringList());
+    list.removeDuplicates();
+    eobComboBox->insertItems(0, list);
+
+    list.clear();
+    list.append(settings.value("EndOfProgExp", (QStringList() << "" << "")).toStringList());
+    list.removeDuplicates();
+    endOfProgComboBox->insertItems(0, list);
+
+    list.clear();
+    list.append(settings.value("FileNameExpFS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+    list.removeDuplicates();
+    fileNameExpFSComboBox->insertItems(0, list);
+
+    list.clear();
+    list.append(settings.value("FileNameExpAS", (QStringList() << "\\([0-9]{4,4}\\)" << "\\([0-9]{4,4}\\.NC\\)" << "\\((O|:){0,1}[0-9]{4,4}\\.(NC|CNC|AGC){1,1}\\)")).toStringList());
+    list.removeDuplicates();
+    fileNameExpASComboBox->insertItems(0, list);
 
     settings.beginGroup(configNameBox->currentText());
 
@@ -854,3 +872,14 @@ void SerialPortConfigDialog::removeFileNameButtonClicked()
 {
     fileNameExpASComboBox->removeItem(fileNameExpASComboBox->currentIndex());
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::helpButtonClicked()
+{
+    SerialPortCfgHelpDialog helpDialog;
+    helpDialog.exec();
+}
+
