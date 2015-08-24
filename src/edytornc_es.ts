@@ -226,6 +226,45 @@
     </message>
 </context>
 <context>
+    <name>CommApp</name>
+    <message>
+        <source>MainWindow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>toolBar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EdytorNC - File server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial port configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset serial port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DiffTextWindow</name>
     <message>
         <source>File</source>
@@ -904,11 +943,11 @@
     </message>
     <message>
         <source>&amp;Tile</source>
-        <translation>&amp;Mosaico</translation>
+        <translation type="vanished">&amp;Mosaico</translation>
     </message>
     <message>
         <source>Tile the windows</source>
-        <translation>Ventanas en mosaico</translation>
+        <translation type="vanished">Ventanas en mosaico</translation>
     </message>
     <message>
         <source>&amp;Cascade</source>
@@ -1393,15 +1432,40 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start serial port file server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;&lt;b&gt;Warning&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
+        <source>EdytorNC - Serial port file server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial port file server is running.
+Close anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tile &amp;horyzontally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tile the windows horyzontally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tile &amp;vertycally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tile the windows vertycally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start application &quot;Serial port file server&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2544,6 +2608,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>SerialPortCfgHelpDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SerialPortConfigDialog</name>
     <message>
         <source>Dialog</source>
@@ -2735,7 +2806,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opciones</translation>
+        <translation type="obsolete">Opciones</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2792,18 +2863,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delay before sending the next block:</source>
         <translation type="unfinished">Retrasar antes de enviar el siguiente bloque:</translation>
-    </message>
-    <message>
-        <source>90</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>19</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>17</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Send at start:</source>
@@ -2993,26 +3052,6 @@ Only uppercase LF, CR character are allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can write here:
-	Plain text
-AND/OR
-	Hex codes of ASCII characters.
-	Example: 
-	% 0x0A 0x0D - % and new line characters
-	0x20 0x0A 0x0D - space character and new line characters
-	Space and control characters can only be written as hex numbers:
-	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
-AND/OR
-	Special characters codes can be used:
-	LF - Line Feed also Rarrige Return (replaced later by end of block characters)
-	SP - Space
-	TAB - Tabulation
-	FN - FileName
-	FE - Filename Extension (part after dot)
-	FA - Filename extension Appended at end of filename (part after _ character and before dot)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>XON (DC1) - 17 Dec. 0x11 Hex.
 XON (DC2) - 18 Dec. 0x12 Hex.
 This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
@@ -3047,15 +3086,6 @@ Set XON or XOFF to 0 if you want disable it.</source>
     </message>
     <message>
         <source>If save path will already contain a file, old file will be renamed to *.bak</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%...
-Otherwise, the text of the first comment in the program will be used</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting file extension will be ignored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3117,11 +3147,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File extension. 
-If detected the filename will contain an extension, then this setting will be ignored</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The third path to search for files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3161,13 +3186,99 @@ p, li { white-space: pre-wrap; }
         <source>Change received filename to lowercase</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options - receiving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receive timeout:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options - sending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>These characters will be added at the end of the program.
+You can write here:
+	Plain text
+AND/OR
+	Hex codes of ASCII characters.
+	Example: 
+	% 0x0A 0x0D - % and new line characters
+	0x20 0x0A 0x0D - space character and new line characters
+	Space and control characters can only be written as hex numbers:
+	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
+AND/OR
+	Special characters codes can be used:
+	LF - Line Feed also Carrige Return (replaced later by end of block characters)
+	SP - Space
+	TAB - Tabulation
+	FN - FileName
+	FE - Filename Extension (part after dot)
+	FA - Filename extension Appended at end of filename (part after _ character and before dot)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>These characters will be added at the beginning of the program. 
+You can write here:
+	Plain text
+AND/OR
+	Hex codes of ASCII characters.
+	Example: 
+	% 0x0A 0x0D - % and new line characters
+	0x20 0x0A 0x0D - space character and new line characters
+	Space and control characters can only be written as hex numbers:
+	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
+AND/OR
+	Special characters codes can be used:
+	LF - Line Feed also Carrige Return (replaced later by end of block characters)
+	SP - Space
+	TAB - Tabulation
+	FN - FileName
+	FE - Filename Extension (part after dot)
+	FA - Filename extension Appended at end of filename (part after _ character and before dot)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send timeout:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. 
+
+If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User defined regular expression to find filename in program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If detected file name contains &amp;quot;extension&amp;quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting &amp;quot;file extension&amp;quot; will be ignored.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File extension. 
+If detected filename will contain an extension, then this setting will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Ayuda</translation>
+    </message>
 </context>
 <context>
     <name>SerialTransmissionDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Clear To Send</source>
         <translation type="unfinished"></translation>
@@ -3222,7 +3333,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Start in %1s</source>
-        <translation type="unfinished">Iniciar en %1s</translation>
+        <translation type="obsolete">Iniciar en %1s</translation>
     </message>
     <message>
         <source>Waiting for a signal readiness...</source>
@@ -3309,45 +3420,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Port name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Program received</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WARNING:	 Coulnd not find program name.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ERROR:	 Renaming file: &quot;%1&quot;. %2
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK:	 Saving file: &quot;%1&quot;.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ERROR:	 Saving file: &quot;%1&quot;. %2
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Log file truncated, size &gt; 1MB.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Serial transmission File Server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3356,15 +3429,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Wainting for data...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>INFO:	 Received caller prog: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>INFO:	 Received caller prog: &quot;%1&quot;.
-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3384,43 +3448,96 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>INFO:	 Preparing to send file: &quot;%1&quot;.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK:	 Sending file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK:	 Sending file: &quot;%1&quot;.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK:	 Received file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK:	 Received file: &quot;%1&quot;.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received data. Start processing in %1s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>OK:	 Sending a file completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XOFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Port: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;OPEN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending starts in %1s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;CLOSED&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Serial port error %1: &quot;%2&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING:	 Coulnd not find program name. Using date time code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Received file to small (less than 20 characters).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Renaming file: &quot;%1&quot;. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Saving file: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Saving file: &quot;%1&quot;. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log file truncated, size &gt; 1MB.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial transmission - File server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t start.
+File server option is not enabled in serial port settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO:	 Received &quot;Caller&quot; program: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Sending a file: &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Can&apos;t find program name to send in &quot;Caller&quot; program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Sending timedout. Reseting.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3760,10 +3877,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Select default save directory</source>
         <translation>Seleccionar el directorio predeterminado para guardar</translation>
-    </message>
-    <message>
-        <source>*.Axx</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>*.Aaa</source>
