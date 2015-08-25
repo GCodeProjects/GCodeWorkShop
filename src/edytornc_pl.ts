@@ -3741,6 +3741,11 @@ If checked, user definied regular expression will be used first, if not found na
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="serialportconfigdialog.ui" line="1157"/>
+        <source>User defined regular expression to find filename in program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="serialportconfigdialog.ui" line="1181"/>
         <source>...</source>
         <translation type="unfinished">...</translation>

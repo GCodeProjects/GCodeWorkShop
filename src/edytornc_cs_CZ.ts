@@ -3687,6 +3687,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="serialportconfigdialog.ui" line="1157"/>
+        <source>User defined regular expression to find filename in program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="serialportconfigdialog.ui" line="1252"/>
         <source>If save path will already contain a file, old file will be renamed to *.bak</source>
         <translation type="unfinished"></translation>

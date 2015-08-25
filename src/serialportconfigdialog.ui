@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
+    <width>732</width>
     <height>435</height>
    </rect>
   </property>
@@ -108,7 +108,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -1233,7 +1233,7 @@ Choosen file extension will be used.</string>
          <item row="1" column="0">
           <widget class="QCheckBox" name="useAsExtCheckBox">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If detected file name contains &amp;quot;extension&amp;quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting &amp;quot;file extension&amp;quot; will be ignored.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in %MPF456...) it will be used as extension of saved file. Setting &quot;file extension&quot; will be ignored.</string>
            </property>
            <property name="text">
             <string>Use program name extension as file extension</string>
@@ -1557,8 +1557,9 @@ If detected filename will contain an extension, then this setting will be ignore
           <widget class="QLineEdit" name="callerProgNameLineEdit">
            <property name="toolTip">
             <string>&quot;Caller program&quot;.
-If program of that name will be received from CNC, it will be searched for a program filename to send back to CNC.
-Set this file name as other files received from this machine.</string>
+If program of that name (without extension) will be received from CNC, it will be searched for a program filename to send back to CNC.
+Set this file name as other files received from this machine.
+</string>
            </property>
            <property name="text">
             <string/>

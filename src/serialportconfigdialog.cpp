@@ -724,7 +724,7 @@ void SerialPortConfigDialog::autoSaveCheckBoxChanged(int state)
     endOfProgComboBox->setEnabled(state == Qt::Checked);
     addEobButton->setEnabled(state == Qt::Checked);
     deleteEobButton->setEnabled(state == Qt::Checked);
-    tabWidget->setTabEnabled(3, state == Qt::Checked);
+    tabWidget->setTabEnabled(4, state == Qt::Checked);
     if(fileServerCheckBox->isChecked() && !(state == Qt::Checked))
         fileServerCheckBox->setChecked(false);
 

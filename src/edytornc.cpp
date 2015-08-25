@@ -1448,13 +1448,14 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + QString("%1 BETA").arg(QDate::currentDate().toString("yyyy.MM.dd")) +
+                       trUtf8("<P>Version: ") + "2015-08-25" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
                        trUtf8("<br />Czech translation thanks to Pavel Fric") +
                        trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
                        trUtf8("<br />Spanish translation and other fixes thanks to Otto Huamani") +
+                       trUtf8("<br />Dutch translation thanks to Henk van Andel") +
                        trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
                        trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                        trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +

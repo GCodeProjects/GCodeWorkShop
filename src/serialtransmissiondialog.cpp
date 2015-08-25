@@ -56,6 +56,12 @@ SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFl
    sendStartDelayTimer->stop();
    connect(sendStartDelayTimer, SIGNAL(timeout()), this, SLOT(sendStartDelayTimeout()));
 
+   reconnectTimer = new QTimer(this);
+   reconnectTimer->setInterval(60 * 1000);
+   reconnectTimer->stop();
+   connect(reconnectTimer, SIGNAL(timeout()), this, SLOT(reconnectTimerTimeout()));
+
+
    if(serverMode)
    {
        setModal(false);
@@ -1171,6 +1177,8 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
                 name2.remove(";");
                 name2.remove("(");
                 name2.remove(")");
+                name2.remove("[");
+                name2.remove("]");
 
                 pos = name2.lastIndexOf('.');
                 if(pos >= 0)
@@ -1192,12 +1200,16 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
         };
 
-    //name2.remove(".");
+    name2.remove("*");
     name2.remove(",");
     name2 = name2.simplified();
     name2 = name2.trimmed();
     ext2 = ext2.simplified();
     ext2 = ext2.trimmed();
+
+    if(!ext2.isEmpty())
+        name2.remove(ext2);
+
 
     if(portSettings.removeLetters)
     {
@@ -1276,7 +1288,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
     list.append(fileName); // full path
 
-    qDebug() << "17.5" << fileName;
+    qDebug() << "17.5" << fileName << portSettings.appendExt;
 
     return list;
 }
@@ -1296,9 +1308,9 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
     if(text->isNull() || text->isEmpty())
         return "";
 
-    if(text->length() < 20)
+    if(text->length() < 15)
     {
-        setLabelText(tr("ERROR:\t Received file to small (less than 20 characters)."), serverMode, true);
+        setLabelText(tr("ERROR:\t Received file to small (less than 15 characters)."), serverMode, true);
         return "";
     };
 
@@ -1325,7 +1337,7 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
     if(file.exists() && portSettings.renameIfExists)
     {
         QString oldName = fileName;
-        oldName.replace(portSettings.saveExt, ".bak");
+        oldName.replace(QRegExp("\\.[a-zA-Z0-9]{1,3}"), ".bak");
         QFile::remove(oldName);
 
         if(file.rename(fileName, oldName))
@@ -1584,13 +1596,13 @@ void SerialTransmissionDialog::fileServerProcessData()
             while(itp != progList.constEnd())
             {
                 fileInfo.setFile(*itp);
-                fileName = fileInfo.fileName();
+                fileName = fileInfo.baseName();
 
                 qDebug() << "File Server 0013" << *itp << fileName << portSettings.callerProgName;
 
                 if(fileName == portSettings.callerProgName)
                 {
-                    setLabelText(tr("INFO:\t Received \"Caller\" program: \"%1\".").arg(fileName), serverMode, true);
+                    setLabelText(tr("INFO:\t Received \"Caller\" program: \"%1\".").arg(fileInfo.fileName()), serverMode, true);
                     //writeLog(tr("INFO:\t Received caller prog: \"%1\".\r\n").arg(fileName));
 
                     QFile file(*itp);
@@ -1862,6 +1874,8 @@ void SerialTransmissionDialog::receiveTimeoutTimerTimeout()
 
 void SerialTransmissionDialog::resetTransmission(bool portRestart)
 {
+    reconnectTimer->stop();
+
     autoCloseTimer->stop();
     serialPort.clearError();
     bytesWritten = 0;
@@ -1915,9 +1929,10 @@ void SerialTransmissionDialog::resetTransmission(bool portRestart)
             stop = true;
         };
 
-
     };
 
+    if(serverMode)
+        reconnectTimer->start();
 }
 
 //**************************************************************************************************
@@ -1949,3 +1964,12 @@ void SerialTransmissionDialog::portReset()
     reset(true);
 }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialTransmissionDialog::reconnectTimerTimeout()
+{
+    if(!serialPort.isOpen())
+        reset(true);
+}
