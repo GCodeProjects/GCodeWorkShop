@@ -73,7 +73,7 @@ private slots:
     void sendTimeoutTimerTimeout();
     void receiveTimeoutTimerTimeout();
     void reset(bool re);
-
+    void reconnectTimerTimeout();
 
 private:
     void setRange(int min, int max);
@@ -118,6 +118,7 @@ private:
     //QTimer *fileServerDataTimeoutTimer;
     QTimer *sendTimeoutTimer;
     QTimer *receiveTimeoutTimer;
+    QTimer *reconnectTimer;
 
 };
 

@@ -1195,6 +1195,11 @@
         <translation>Achsen wechseln</translation>
     </message>
     <message>
+        <location filename="edytornc.cpp" line="1999"/>
+        <source>Tile the windows horyzontally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="edytornc.cpp" line="4591"/>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
         <translation type="unfinished"></translation>
