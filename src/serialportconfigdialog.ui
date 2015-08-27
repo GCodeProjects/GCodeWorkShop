@@ -108,7 +108,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -779,6 +779,19 @@ Works only when receiving file.</string>
          </property>
         </widget>
        </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="deleteControlChars">
+         <property name="toolTip">
+          <string>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</string>
+         </property>
+         <property name="text">
+          <string>Delete control chars</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab">
@@ -1009,19 +1022,6 @@ Only uppercase LF, CR character are allowed.</string>
            </property>
            <property name="text">
             <string>Remove characters before %</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="deleteControlChars">
-           <property name="toolTip">
-            <string>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</string>
-           </property>
-           <property name="text">
-            <string>Delete control chars</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
            </property>
           </widget>
          </item>

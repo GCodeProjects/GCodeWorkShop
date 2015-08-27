@@ -67,7 +67,9 @@ private:
     QAction *startServerAct;
     QAction *stopServerAct;
     QAction *resetServerAct;
+    QAction *closeServerAct;
     QComboBox *configBox;
+    QToolBar *fileToolBar;
 
 
 

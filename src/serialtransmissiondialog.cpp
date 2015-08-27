@@ -69,12 +69,6 @@ SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFl
        cancelButton->hide();
        bottomLine->hide();
        setWindowIcon(QIcon(":/images/spserver.png"));
-
-//       fileServerDataTimeoutTimer = new QTimer(this);
-//       fileServerDataTimeoutTimer->setInterval(1000);
-//       fileServerDataTimeoutTimer->stop();
-//       connect(fileServerDataTimeoutTimer, SIGNAL(timeout()), this, SLOT(fileServerProcessData()));
-
    }
    else
    {
@@ -125,8 +119,6 @@ void SerialTransmissionDialog::closeEvent(QCloseEvent *event)
        serialPort.close();
    };
    event->accept();
-
-   qDebug() << "CLOSE EVENT 20365" << event;
 }
 
 //**************************************************************************************************
@@ -300,8 +292,6 @@ void SerialTransmissionDialog::updateStatus()
        xoff1Label->setEnabled(xoffReceived);
 
        connectedLabel->setText(tr("<html><head/><body><p><span style=\" font-weight:600; color:#ff0000;\">CLOSED</span></p></body></html>"));
-       //connectedLabel->setText(tr("<html><head/><body><p><span style="" font-weight:600; color:#ff0000;"">CLOSED</span></p></body></html>"));
-       //connectedLabel->setText(tr("<html><head/><body><p>Port: <span style="" font-weight:600;"">%1</span> is <span style="" font-weight:600; color:#ff0000;"">CLOSED</span></p></body></html>").arg(portSettings.portName));
    };
 
    updateStatusTimer->start();
@@ -674,6 +664,16 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
         data->remove(0, data->indexOf("%"));
     };
 
+    // ensure that data contains only CRLF line endings
+    QRegExp exp;
+    exp.setPattern("[\\n\\r]{1,}");
+    int i = data->indexOf(exp); // detecting EOB combination used
+    if(i >= 0)
+    {
+        QString tx = data->mid(i, exp.matchedLength());
+        data->replace(tx, "\r\n");
+    };
+
     if(!portSettings.sendAtBegining.isEmpty())
     {
         procesSpecialCharacters(&portSettings.sendAtBegining, data);
@@ -684,16 +684,6 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
     {
         procesSpecialCharacters(&portSettings.sendAtEnd, data);
         data->append(portSettings.sendAtEnd);
-    };
-
-    // ensure that data contains only CRLF line endings
-    QRegExp exp;
-    exp.setPattern("[\\n\\r]{1,}");
-    int i = data->indexOf(exp); // detecting EOB combination used
-    if(i >= 0)
-    {
-        QString tx = data->mid(i, exp.matchedLength());
-        data->replace(tx, "\r\n");
     };
 
     serialPortWriteBuffer = data->split("\n", QString::SkipEmptyParts); // \n is not appended to a string only \r are left
@@ -752,10 +742,10 @@ void SerialTransmissionDialog::procesSpecialCharacters(QString *text, QString *f
 
 
     if(text->contains("LF"))
-        text->replace("LF", "\n");
+        text->replace("LF", "\r\n");
 
     if(text->contains("CR"))
-        text->replace("CR", "\r");
+        text->replace("CR", "\r\n");
 
     if(text->contains("TAB"))
         text->replace("TAB", "\t");
@@ -837,7 +827,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
 
 
     portSettings.fileServer = settings.value("FileServer", false).toBool();
-    portSettings.callerProgName = settings.value("CallerProg", "O0001").toString();
+    portSettings.callerProgName = settings.value("CallerProg", "O5555").toString();
     portSettings.searchPath1 = settings.value("SearchPath1", "").toString();
     portSettings.searchExt1 = settings.value("SearchExt1", ".nc").toString();
     portSettings.searchPath2 = settings.value("SearchPath2", "").toString();
@@ -1555,14 +1545,9 @@ void SerialTransmissionDialog::startFileServer(QString configName)
         resetTransmission(true);
 
 
-
         setWindowTitle(tr("%1").arg(configName)); //"Serial transmission - File server -> %1"
         setRange(0, 0);
         setLabelText(tr("Waiting for data..."));
-qDebug() << "START 1" << configName;
-
-
-
 }
 
 //**************************************************************************************************
@@ -1801,9 +1786,6 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
 
 void SerialTransmissionDialog::sendTimeoutTimerTimeout()
 {
-
-    qDebug() << "sendTimeoutTimerTimeout" << sendTimeoutCountner;
-
     if(sendTimeoutCountner == 0)
     {
         setLabelText(tr("ERROR:\t Sending timedout. Reseting."), serverMode, true);
@@ -1811,25 +1793,6 @@ void SerialTransmissionDialog::sendTimeoutTimerTimeout()
         reset(false);
         return;
     };
-
-
-
-//    if(sendTimeoutCountner <= 1)
-//    {
-//        sending = false;
-//        sendTimeoutCountner = 0;
-//        if(!serverMode)
-//        {
-//            autoCloseCountner = portSettings.autoCloseTimeout;
-//            if(!autoCloseTimer->isActive())
-//                autoCloseTimer->start();
-//        };
-//    }
-//    else
-//    {
-//        if(!xoffReceived)
-//            sendTimeoutCountner--;
-//    };
 }
 
 //**************************************************************************************************

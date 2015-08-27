@@ -193,20 +193,25 @@ void CommApp::createSerialToolBar()
     configPortAct->setToolTip(tr("Serial port configuration"));
     connect(configPortAct, SIGNAL(triggered()), this, SLOT(serialConfig()));
 
-    startServerAct = new QAction(QIcon(":/images/connect_creating.png"), tr("Start"), this);
+    startServerAct = new QAction(QIcon(":/images/connect_creating.png"), tr("&Start"), this);
     //receiveAct->setShortcut(tr("Shift+F3"));
     startServerAct->setToolTip(tr("Start"));
     connect(startServerAct, SIGNAL(triggered()), this, SLOT(startSerialPortServer()));
 
-    stopServerAct = new QAction(QIcon(":/images/stop.png"), tr("Stop"), this);
+    stopServerAct = new QAction(QIcon(":/images/stop.png"), tr("S&top"), this);
     //sendAct->setShortcut(tr("F3"));
     stopServerAct->setToolTip(tr("Stop"));
     connect(stopServerAct, SIGNAL(triggered()), this, SLOT(stopSerialPortServer()));
 
 
-    resetServerAct = new QAction(QIcon(":/images/reset.png"), tr("Reset"), this);
+    resetServerAct = new QAction(QIcon(":/images/reset.png"), tr("&Reset"), this);
     resetServerAct->setToolTip(tr("Reset serial port"));
     connect(resetServerAct, SIGNAL(triggered()), this, SLOT(doPortReset()));
+
+
+    closeServerAct = new QAction(QIcon(":/images/exit.png"), tr("&Close"), this);
+    closeServerAct->setToolTip(tr("Close"));
+    connect(closeServerAct, SIGNAL(triggered()), this, SLOT(close()));
 
 
     configBox = new QComboBox();
@@ -223,6 +228,14 @@ void CommApp::createSerialToolBar()
 
     ui->toolBar->addSeparator();
     ui->toolBar->addAction(resetServerAct);
+
+    fileToolBar = new QToolBar(tr("FileToolBar"));
+    addToolBar(Qt::TopToolBarArea, fileToolBar);
+    fileToolBar->setObjectName("FileToolBar");
+    fileToolBar->addAction(closeServerAct);
+
+    ui->menu_File->addAction(closeServerAct);
+
 
     loadSerialConfignames();
     configBox->adjustSize();
