@@ -33,7 +33,7 @@ CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
 
     setWindowModality(Qt::NonModal);
 
-    setWindowTitle(tr("EdytorNC - File server"));
+    setWindowTitle(tr("EdytorNC - Serial port file server"));
 
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));

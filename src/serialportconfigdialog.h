@@ -52,6 +52,7 @@ struct PortSettings
     unsigned int autoCloseTimeout;
     unsigned int sendTimeout;
     unsigned int receiveTimeout;
+    unsigned int reconnectTime;
     char Xon;
     char Xoff;
     bool createLogFile;
@@ -125,6 +126,9 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
      void addFileNameButtonClicked();
      void removeFileNameButtonClicked();
      void helpButtonClicked();
+     void readPath1Changed(const QString text);
+     void readPath2Changed(const QString text);
+     void readPath3Changed(const QString text);
 
 private:
      QString browseForDir(const QString dir, QString windowTitle);
