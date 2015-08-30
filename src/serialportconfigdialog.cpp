@@ -116,6 +116,11 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
    connect(appendExtCheckBox, SIGNAL(stateChanged(int)), SLOT(appendExtCheckBoxChanged(int)));
    connect(useAsExtCheckBox, SIGNAL(stateChanged(int)), SLOT(useAsExtCheckBoxChanged(int)));
 
+
+   connect(searchPath1LineEdit, SIGNAL(textChanged(const QString)), SLOT(readPath1Changed(const QString)));
+   connect(searchPath2LineEdit, SIGNAL(textChanged(const QString)), SLOT(readPath2Changed(const QString)));
+   connect(searchPath3LineEdit, SIGNAL(textChanged(const QString)), SLOT(readPath3Changed(const QString)));
+
    //connect(flowCtlGroup, SIGNAL(buttonReleased(int)), SLOT(flowCtlGroupReleased()));
 
    loadSettings();
@@ -488,7 +493,7 @@ void SerialPortConfigDialog::changeSettings()
     startDelaySpinBox->setValue(settings.value("SendingStartDelay", 0).toInt());
     autoCloseSpinBox->setValue(settings.value("AutoCloseTime", 15).toInt());
     sendTimeoutSpinBox->setValue(settings.value("SendTimeoutTime", 30).toInt());
-    receiveTimeoutSpinBox->setValue(settings.value("ReceiveTimeoutTime", 2).toInt());
+    receiveTimeoutSpinBox->setValue(settings.value("ReceiveTimeoutTime", 3).toInt());
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
     logFileCheckBox->setChecked(settings.value("CreateLogFile", true).toBool());
 
@@ -514,8 +519,9 @@ void SerialPortConfigDialog::changeSettings()
        endOfProgComboBox->setCurrentIndex(id);
 
     fileServerCheckBox->setChecked(settings.value("FileServer", false).toBool());
-    callerProgNameLineEdit->setText(settings.value("CallerProg", "O0001.nc").toString());
+    callerProgNameLineEdit->setText(settings.value("CallerProg", "O5555").toString());
     fileNameLowerCaseCheckBox->setChecked(settings.value("FileNameLowerCase", true).toBool());
+    reconnectSpinBox->setValue(settings.value("ReconnectTimeoutTime", 60).toInt());
 
     id = fileNameExpFSComboBox->findText(settings.value("FileNameExpFSSelected", "").toString());
     if(id >= 0)
@@ -883,3 +889,65 @@ void SerialPortConfigDialog::helpButtonClicked()
     helpDialog.exec();
 }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::readPath1Changed(const QString text)
+{
+    QPalette palette;
+
+    if(text.isEmpty())
+        return;
+
+    palette.setColor(searchPath1LineEdit->foregroundRole(), Qt::red);
+
+    QDir dir;
+    dir.setPath(text);
+    if(dir.exists())
+      searchPath1LineEdit->setPalette(QPalette());
+    else
+      searchPath1LineEdit->setPalette(palette);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::readPath2Changed(const QString text)
+{
+    QPalette palette;
+
+    if(text.isEmpty())
+        return;
+
+    palette.setColor(searchPath2LineEdit->foregroundRole(), Qt::red);
+
+    QDir dir;
+    dir.setPath(text);
+    if(dir.exists())
+      searchPath2LineEdit->setPalette(QPalette());
+    else
+      searchPath2LineEdit->setPalette(palette);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void SerialPortConfigDialog::readPath3Changed(const QString text)
+{
+    QPalette palette;
+
+    if(text.isEmpty())
+        return;
+
+    palette.setColor(searchPath3LineEdit->foregroundRole(), Qt::red);
+
+    QDir dir;
+    dir.setPath(text);
+    if(dir.exists())
+      searchPath3LineEdit->setPalette(QPalette());
+    else
+      searchPath3LineEdit->setPalette(palette);
+}

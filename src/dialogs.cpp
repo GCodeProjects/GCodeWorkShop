@@ -322,24 +322,24 @@ void FeedsDialog::checkBoxChanged()
 {
    if(mmCheckBox->isChecked())
    {
-       vcInput->setToolTip("Cutting speed (m/min)");
-       fzInput->setToolTip("Feed (chip load) per tooth (mm)");
-       dInput->setToolTip("Tool diameter (mm)");
-       zInput->setToolTip("Number of teeth on the cutter");
-       fInput->setToolTip("Table feed (mm/min)");
-       sInput->setToolTip("Spindle speed (revs/min)");
+       vcInput->setToolTip(tr("Cutting speed (m/min)"));
+       fzInput->setToolTip(tr("Feed (chip load) per tooth (mm)"));
+       dInput->setToolTip(tr("Tool diameter (mm)"));
+       zInput->setToolTip(tr("Number of teeth on the cutter"));
+       fInput->setToolTip(tr("Table feed (mm/min)"));
+       sInput->setToolTip(tr("Spindle speed (revs/min)"));
        fInput->setMaxLength(9);
        fzInput->setMaxLength(8);
    }
    else
      if(inchCheckBox->isChecked())
      {
-         vcInput->setToolTip("Cutting speed (ft/min)");
-         fzInput->setToolTip("Feed (chip load) per tooth (inches)");
-         dInput->setToolTip("Tool diameter (inches)");
-         zInput->setToolTip("Number of teeth on the cutter");
-         fInput->setToolTip("Table feed (inches/min)");
-         sInput->setToolTip("Spindle speed (revs/min)");
+         vcInput->setToolTip(tr("Cutting speed (ft/min)"));
+         fzInput->setToolTip(tr("Feed (chip load) per tooth (inches)"));
+         dInput->setToolTip(tr("Tool diameter (inches)"));
+         zInput->setToolTip(tr("Number of teeth on the cutter"));
+         fInput->setToolTip(tr("Table feed (inches/min)"));
+         sInput->setToolTip(tr("Spindle speed (revs/min)"));
          fInput->setMaxLength(10);
          fzInput->setMaxLength(9);
      };

@@ -828,6 +828,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
 
     portSettings.fileServer = settings.value("FileServer", false).toBool();
     portSettings.callerProgName = settings.value("CallerProg", "O5555").toString();
+    portSettings.reconnectTime = settings.value("ReconnectTimeoutTime", 60).toInt();
     portSettings.searchPath1 = settings.value("SearchPath1", "").toString();
     portSettings.searchExt1 = settings.value("SearchExt1", ".nc").toString();
     portSettings.searchPath2 = settings.value("SearchPath2", "").toString();
@@ -1637,21 +1638,24 @@ void SerialTransmissionDialog::fileServerProcessData()
                         fileInfo.setFile(path);
                         if(!fileInfo.exists())
                         {
-                            setLabelText(tr("ERROR:\t Can't find file in path 1: \"%1\".").arg(path), serverMode, true);
+                            if(!portSettings.searchPath1.isEmpty())
+                                setLabelText(tr("ERROR:\t Can't find file in path 1: \"%1\".").arg(path), serverMode, true);
                             //writeLog(tr("ERROR:\t Can't find file in path 1: \"%1\".\r\n").arg(path));
 
                             path = portSettings.searchPath2 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt2 : ext);
                             fileInfo.setFile(path);
                             if(!fileInfo.exists())
                             {
-                                setLabelText(tr("ERROR:\t Can't find file in path 2: \"%1\".").arg(path), serverMode, true);
+                                if(!portSettings.searchPath2.isEmpty())
+                                    setLabelText(tr("ERROR:\t Can't find file in path 2: \"%1\".").arg(path), serverMode, true);
                                 //writeLog(tr("ERROR:\t Can't find file in path 2: \"%1\".\r\n").arg(path));
 
                                 path = portSettings.searchPath3 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt3 : ext);
                                 fileInfo.setFile(path);
                                 if(!fileInfo.exists())
                                 {
-                                    setLabelText(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path), serverMode, true);
+                                    if(!portSettings.searchPath3.isEmpty())
+                                        setLabelText(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path), serverMode, true);
                                     //writeLog(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path));
                                     path.clear();
                                 };
@@ -1895,7 +1899,13 @@ void SerialTransmissionDialog::resetTransmission(bool portRestart)
     };
 
     if(serverMode)
-        reconnectTimer->start();
+    {
+        if(portSettings.reconnectTime < 300)
+        {
+            reconnectTimer->setInterval(portSettings.reconnectTime * 1000);
+            reconnectTimer->start();
+        };
+    };
 }
 
 //**************************************************************************************************
