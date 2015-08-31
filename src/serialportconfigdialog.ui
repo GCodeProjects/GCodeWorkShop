@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>756</width>
-    <height>442</height>
+    <height>580</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -520,7 +520,7 @@
             <item row="0" column="0">
              <widget class="QCheckBox" name="f1CheckBox">
               <property name="text">
-               <string>Off</string>
+               <string>None</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
@@ -1107,15 +1107,15 @@ If the file name has not been automatically detected, the file name will be the 
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_6">
-         <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Save path</string>
+            <string>Save path:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item>
           <widget class="QLineEdit" name="savePathLineEdit">
            <property name="text">
             <string/>
@@ -1125,7 +1125,7 @@ If the file name has not been automatically detected, the file name will be the 
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
+         <item>
           <widget class="QPushButton" name="browse1PushButton">
            <property name="toolTip">
             <string>Browse for save path</string>
@@ -1139,43 +1139,196 @@ If the file name has not been automatically detected, the file name will be the 
            </property>
           </widget>
          </item>
-         <item row="1" column="3">
-          <widget class="QComboBox" name="saveExtComboBox">
-           <property name="toolTip">
-            <string>Extension of saved file</string>
-           </property>
-           <property name="editable">
-            <bool>false</bool>
-           </property>
-           <property name="currentText">
-            <string/>
-           </property>
-           <property name="duplicatesEnabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <widget class="QGroupBox" name="fileNameGroupBox">
+         <property name="title">
+          <string>File name</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_18">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="detectFormFileNameCheckBox">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>Built-in name detection</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
+            <item>
+             <widget class="QCheckBox" name="checkBox">
+              <property name="text">
+               <string>User expression:</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="fileNameExpASComboBox">
+              <property name="toolTip">
+               <string>User defined regular expression to find filename in program.</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="maxCount">
+               <number>64</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="addfileNameButton">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="application.qrc">
+                <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="removeFileNameButton">
+              <property name="text">
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="application.qrc">
+                <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
+            <item>
+             <widget class="QCheckBox" name="removeLettersCheckBox">
+              <property name="toolTip">
+               <string>Letters in detected filename will be removed (only digits will be left).
+If in result filename becomes empty, version with letters will be used.</string>
+              </property>
+              <property name="text">
+               <string>Remove letters from filename</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="fileNameLowerCaseCheckBox">
+              <property name="toolTip">
+               <string>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</string>
+              </property>
+              <property name="text">
+               <string>Change filename to lowercase</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>Extension </string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_17">
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="useAsExtCheckBox">
+            <property name="toolTip">
+             <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in %MPF456...) it will be used as extension of saved file.
+Setting &quot;file extension&quot; will be ignored.</string>
+            </property>
+            <property name="text">
+             <string>Use detected extension as file extension</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="appendExtCheckBox">
+            <property name="toolTip">
+             <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character '_'  (eg O0004_MIN.nc).
+Selected file extension will be used.</string>
+            </property>
+            <property name="text">
+             <string>Append extension at end</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="label_21">
+              <property name="text">
+               <string>Default extension:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="saveExtComboBox">
+              <property name="toolTip">
+               <string>Extension of saved file</string>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <property name="currentText">
+               <string/>
+              </property>
+              <property name="duplicatesEnabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QCheckBox" name="detectFormFileNameCheckBox">
-           <property name="toolTip">
-            <string>If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. 
-
-If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.
-</string>
-           </property>
+          <widget class="QLabel" name="label_11">
            <property name="text">
-            <string>Filename from program name</string>
+            <string>End of program characters:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="fileNameExpASComboBox">
+          <widget class="QComboBox" name="endOfProgComboBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="toolTip">
-            <string>User defined regular expression to find filename in program.</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="editable">
             <bool>true</bool>
@@ -1183,12 +1336,20 @@ If checked, user definied regular expression will be used first, if not found na
            <property name="maxCount">
             <number>64</number>
            </property>
+           <item>
+            <property name="text">
+             <string/>
+            </property>
+           </item>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="addfileNameButton">
+          <widget class="QToolButton" name="addEobButton">
+           <property name="toolTip">
+            <string>Add to list</string>
+           </property>
            <property name="text">
-            <string/>
+            <string>&amp;Add</string>
            </property>
            <property name="icon">
             <iconset resource="application.qrc">
@@ -1197,9 +1358,9 @@ If checked, user definied regular expression will be used first, if not found na
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="removeFileNameButton">
+          <widget class="QToolButton" name="deleteEobButton">
            <property name="text">
-            <string>...</string>
+            <string>&amp;Delete</string>
            </property>
            <property name="icon">
             <iconset resource="application.qrc">
@@ -1210,146 +1371,36 @@ If checked, user definied regular expression will be used first, if not found na
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_10">
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="removeLettersCheckBox">
-           <property name="toolTip">
-            <string>Letters in detected filename will be removed (only digits will be left).
-If in result filename becomes empty, version with letters will be used.</string>
-           </property>
-           <property name="text">
-            <string>Remove letters from filename</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QCheckBox" name="logFileCheckBox">
-           <property name="toolTip">
-            <string>Save debug information to log file:
-&quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</string>
-           </property>
-           <property name="text">
-            <string>Create log file</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QCheckBox" name="appendExtCheckBox">
-             <property name="toolTip">
-              <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character '_'  (eg O0004_MIN.nc).
-Selected file extension will be used.</string>
-             </property>
-             <property name="text">
-              <string>Append extension at end</string>
-             </property>
-             <property name="autoExclusive">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="useAsExtCheckBox">
-           <property name="toolTip">
-            <string>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in %MPF456...) it will be used as extension of saved file.
-Setting &quot;file extension&quot; will be ignored.</string>
-           </property>
-           <property name="text">
-            <string>Use program name extension as file extension</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-           <property name="autoExclusive">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QCheckBox" name="renameCheckBox">
-           <property name="toolTip">
-            <string>If save path will already contain a file, old file will be renamed to *.bak</string>
-           </property>
-           <property name="text">
-            <string>Create backup if file exists</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="splitProgramsCheckBox">
-           <property name="toolTip">
-            <string>If received data will contain more than one CNC program, they will be saved in independent files
+        <widget class="QCheckBox" name="splitProgramsCheckBox">
+         <property name="toolTip">
+          <string>If received data will contain more than one CNC program, they will be saved in independent files
 This setting can cause data loss if detection of filename fails.</string>
-           </property>
-           <property name="text">
-            <string>Split programs</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <layout class="QGridLayout" name="gridLayout_11">
-           <item row="1" column="1">
-            <widget class="QComboBox" name="endOfProgComboBox">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="editable">
-              <bool>true</bool>
-             </property>
-             <property name="maxCount">
-              <number>64</number>
-             </property>
-             <item>
-              <property name="text">
-               <string/>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>End of program characters</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QToolButton" name="addEobButton">
-             <property name="toolTip">
-              <string>Add to list</string>
-             </property>
-             <property name="text">
-              <string>&amp;Add</string>
-             </property>
-             <property name="icon">
-              <iconset resource="application.qrc">
-               <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3">
-            <widget class="QToolButton" name="deleteEobButton">
-             <property name="text">
-              <string>&amp;Delete</string>
-             </property>
-             <property name="icon">
-              <iconset resource="application.qrc">
-               <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
+         </property>
+         <property name="text">
+          <string>Split programs</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="renameCheckBox">
+         <property name="toolTip">
+          <string>If save path will already contain a file, old file will be renamed to *.bak</string>
+         </property>
+         <property name="text">
+          <string>Create backup if file exists</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="logFileCheckBox">
+         <property name="toolTip">
+          <string>Save debug information to log file:
+&quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</string>
+         </property>
+         <property name="text">
+          <string>Create log file</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_4">
@@ -1623,16 +1674,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_14">
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="fileNameLowerCaseCheckBox">
-           <property name="toolTip">
-            <string>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</string>
-           </property>
-           <property name="text">
-            <string>Change received filename to lowercase</string>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
@@ -1802,7 +1843,6 @@ Set to 300s to disable timer.</string>
   <tabstop>saveCloseButton</tabstop>
   <tabstop>closeButton</tabstop>
   <tabstop>browse1PushButton</tabstop>
-  <tabstop>saveExtComboBox</tabstop>
   <tabstop>savePathLineEdit</tabstop>
  </tabstops>
  <resources>

@@ -1212,9 +1212,23 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
             name2 = tmpName;
     };
 
+    if(portSettings.fileNameLowerCase)
+    {
+        name1 = name1.toLower();
+        ext1 = ext1.toLower();
+
+        name2 = name2.toLower();
+        ext2 = ext2.toLower();
+    };
+
     qDebug() << "16" << name2 << ext2;
 
-    if(name1 != portSettings.callerProgName)
+    if(name1 == portSettings.callerProgName)
+    {
+        fileName = name1;
+        extension = ext1;
+    }
+    else
     {
         if(portSettings.guessFileNameByProgName)
         {
@@ -1240,11 +1254,6 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
                 fileName = name2;
                 extension = ext2;
             };
-    }
-    else
-    {
-        fileName = name1;
-        extension = ext1;
     };
 
 
@@ -1279,7 +1288,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
     list.append(fileName); // full path
 
-    qDebug() << "17.5" << fileName << portSettings.appendExt;
+    qDebug() << "17.5" << fileName << portSettings.appendExt << portSettings.useAsExt;
 
     return list;
 }
