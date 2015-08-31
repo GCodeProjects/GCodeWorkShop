@@ -174,7 +174,7 @@ void SerialPortConfigDialog::browseButtonClicked()
    QString fileName = QFileDialog::getOpenFileName(
                          this,
                          tr("Select serial port device"),
-                         portNameComboBox->currentText(),
+                         "/dev/",
                          tr("All files (*)"));
 
    QFileInfo file(fileName);
