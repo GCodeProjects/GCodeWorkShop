@@ -48,7 +48,6 @@ EdytorNc::EdytorNc()
     findFiles = NULL;
     dirModel = NULL;
     openExampleAct = NULL;
-    //spServer = NULL;
     commApp = NULL;
 
     selectedExpressions.clear();
@@ -1565,7 +1564,7 @@ void EdytorNc::updateMenus()
 
     if(hasMdiChild)
     {
-        if(findToolBar != NULL)
+        if(findToolBar)
             activeMdiChild()->highlightFindText(findEdit->text(),
                                                 ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
                                                  (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
@@ -2317,6 +2316,9 @@ void EdytorNc::readSettings()
         showSerialToolBarAct->setChecked(true);
     };
 
+    if(settings.value("FindToolBarShown", false).toBool())
+        createFindToolBar();
+
     restoreState(settings.value("State", QByteArray()).toByteArray());
 
     lastDir = settings.value("LastDir",  QDir::homePath()).toString();
@@ -2491,7 +2493,7 @@ void EdytorNc::writeSettings()
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
 
-    settings.setValue("SerialToolbarShown", (serialToolBar != NULL));
+    settings.setValue("SerialToolbarShown", (!serialToolBar.isNull()));
 
     settings.setValue("CurrentProjectName", currentProjectName);
 
@@ -2508,6 +2510,7 @@ void EdytorNc::writeSettings()
     settings.setValue("PanelHidden", panelHidden);
     settings.setValue("FileBrowserShowCurrentFileDir", currentPathCheckBox->isChecked());
 
+    settings.setValue("FindToolBarShown", !findToolBar.isNull());
 
     settings.beginGroup("Highlight");
     settings.setValue("HighlightOn", defaultMdiWindowProperites.syntaxH);
@@ -2731,7 +2734,7 @@ void EdytorNc::createFindToolBar()
     QString selText;
     QTextCursor cursor;
 
-    if(findToolBar == NULL)
+    if(!findToolBar)
     {
         findToolBar = new QToolBar(tr("Find"));
         addToolBar(Qt::BottomToolBarArea, findToolBar);
@@ -2813,41 +2816,45 @@ void EdytorNc::createFindToolBar()
     else
         findToolBar->show();
 
-    disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
 
-    if(!activeMdiChild()->hasSelection())
+    if(activeMdiChild())
     {
-        cursor = activeMdiChild()->textCursor();
-        cursor.select(QTextCursor::WordUnderCursor);
-        selText = cursor.selectedText();
-        if((selText.size() > 32) || (selText.size() < 2))
-            cursor.clearSelection();
-        activeMdiChild()->textEdit->setTextCursor(cursor);
-    };
-
-    cursor = activeMdiChild()->textCursor();
-
-    if(cursor.hasSelection())
-    {
-        selText = cursor.selectedText();
-
-        if((selText.size() < 32))
-            findEdit->setText(selText);
-        else
+        disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
+        if(!activeMdiChild()->hasSelection())
         {
-            cursor.clearSelection();
+            cursor = activeMdiChild()->textCursor();
+            cursor.select(QTextCursor::WordUnderCursor);
+            selText = cursor.selectedText();
+            if((selText.size() > 32) || (selText.size() < 2))
+                cursor.clearSelection();
             activeMdiChild()->textEdit->setTextCursor(cursor);
         };
+
+        cursor = activeMdiChild()->textCursor();
+
+        if(cursor.hasSelection())
+        {
+            selText = cursor.selectedText();
+
+            if((selText.size() < 32))
+                findEdit->setText(selText);
+            else
+            {
+                cursor.clearSelection();
+                activeMdiChild()->textEdit->setTextCursor(cursor);
+            };
+        };
+
+
+        findEdit->setPalette(QPalette());
+        connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
+        findEdit->setFocus(Qt::MouseFocusReason);
+
+        activeMdiChild()->highlightFindText(findEdit->text(),
+                                            ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
+                                             (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
+
     };
-
-    findEdit->setPalette(QPalette());
-    connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
-    findEdit->setFocus(Qt::MouseFocusReason);
-
-    activeMdiChild()->highlightFindText(findEdit->text(),
-                                        ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(0)) |
-                                         (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(0))), mCheckIgnoreComments->isChecked());
-
     findEdit->selectAll();
 }
 
@@ -2870,7 +2877,7 @@ void EdytorNc::closeFindToolBar()
     settings.setValue("FindIgnoreCase", mCheckIgnoreCase->isChecked());
 
     findToolBar->close();
-    findToolBar = NULL;
+    //findToolBar = NULL;
 }
 
 //**************************************************************************************************
