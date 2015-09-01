@@ -314,7 +314,7 @@ private:
     QToolButton *deAttachHighlightButton;
 
 
-    QToolBar *findToolBar;
+    QPointer<QToolBar> findToolBar;
     QLineEdit *findEdit;
     QLineEdit *replaceEdit;
     QLabel *findLabel;
@@ -330,7 +330,7 @@ private:
     QCheckBox *mCheckIgnoreComments;
 
 
-    QToolBar *serialToolBar;
+    QPointer<QToolBar> serialToolBar;
     QAction *showSerialToolBarAct;
     QAction *configPortAct;
     QAction *receiveAct;
