@@ -73,11 +73,11 @@
            <number>3</number>
           </property>
           <widget class="QTabWidget" name="tabWidget">
-           <property name="tabShape">
-            <enum>QTabWidget::Rounded</enum>
-           </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>2</number>
+           </property>
+           <property name="usesScrollButtons">
+            <bool>true</bool>
            </property>
            <property name="documentMode">
             <bool>false</bool>
@@ -376,6 +376,60 @@
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="clipboardTab">
+            <attribute name="title">
+             <string>Clipboard</string>
+            </attribute>
+            <attribute name="toolTip">
+             <string>Clipboard</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>1</number>
+             </property>
+             <property name="topMargin">
+              <number>1</number>
+             </property>
+             <property name="rightMargin">
+              <number>1</number>
+             </property>
+             <property name="bottomMargin">
+              <number>1</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QToolButton" name="addToClipboardButton">
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="application.qrc">
+                   <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="deleteFromClipboardButton">
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="application.qrc">
+                   <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QTreeView" name="clipboardTreeView"/>
+             </item>
+            </layout>
+           </widget>
           </widget>
           <widget class="QTableWidget" name="openFileTableWidget">
            <property name="mouseTracking">
@@ -413,9 +467,6 @@
            </property>
            <property name="gridStyle">
             <enum>Qt::NoPen</enum>
-           </property>
-           <property name="sortingEnabled">
-            <bool>false</bool>
            </property>
            <property name="wordWrap">
             <bool>false</bool>

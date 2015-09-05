@@ -69,6 +69,9 @@ struct PortSettings
     bool splitPrograms;
     bool fileNameLowerCase;
     bool fileServer;
+    bool logData;
+    bool waitForCts;
+    bool waitForXon;
     QString searchPath1;
     QString searchExt1;
     QString searchPath2;

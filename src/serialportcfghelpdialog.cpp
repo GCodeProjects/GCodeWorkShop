@@ -30,6 +30,8 @@ SerialPortCfgHelpDialog::SerialPortCfgHelpDialog(QWidget *parent) :
     ui(new Ui::SerialPortCfgHelpDialog)
 {
     ui->setupUi(this);
+    ui->textBrowser->setOpenLinks(false);
+    ui->textBrowser->setSource(*new QUrl("EdytorNC_SerialTransmission_Help.html"));
 }
 
 SerialPortCfgHelpDialog::~SerialPortCfgHelpDialog()

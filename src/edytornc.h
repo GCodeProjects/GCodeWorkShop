@@ -166,6 +166,7 @@ private slots:
     void sessionMgr();
     void fileChanged(const QString fileName);
     void tileSubWindowsVertycally();
+    void clipboardChanged();
 
 signals:
     void needToShow();
