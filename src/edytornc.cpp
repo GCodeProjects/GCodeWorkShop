@@ -54,7 +54,7 @@ EdytorNc::EdytorNc()
 
 
     clipboard = QApplication::clipboard();
-    connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged));
+    connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
 
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
