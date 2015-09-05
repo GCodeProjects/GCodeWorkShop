@@ -108,7 +108,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="portTab">
       <attribute name="title">
@@ -742,7 +742,7 @@ Works only when receiving file.</string>
               <item>
                <widget class="QLabel" name="label_17">
                 <property name="text">
-                 <string>Timeout:</string>
+                 <string>Time out:</string>
                 </property>
                </widget>
               </item>
@@ -811,7 +811,7 @@ Works only when receiving file.</string>
             <item>
              <widget class="QToolButton" name="addEobButton">
               <property name="toolTip">
-               <string>Add to list</string>
+               <string>Add to the list</string>
               </property>
               <property name="text">
                <string>&amp;Add</string>
@@ -824,6 +824,9 @@ Works only when receiving file.</string>
             </item>
             <item>
              <widget class="QToolButton" name="deleteEobButton">
+              <property name="toolTip">
+               <string>Delete from the list</string>
+              </property>
               <property name="text">
                <string>&amp;Delete</string>
               </property>
@@ -858,36 +861,19 @@ Works only when receiving file.</string>
        <string>Options - sending</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_12">
-       <item row="0" column="1">
+       <item row="1" column="1">
         <layout class="QGridLayout" name="gridLayout_16">
-         <item row="0" column="1">
+         <item row="1" column="1">
           <widget class="QLabel" name="label_9">
            <property name="text">
             <string>Send at start:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
+         <item row="2" column="2">
           <widget class="QLineEdit" name="eotInput">
            <property name="toolTip">
-            <string>These characters will be added at the end of the program.
-You can write here:
-	Plain text
-AND/OR
-	Hex codes of ASCII characters.
-	Example: 
-	% 0x0A 0x0D - % and new line characters
-	0x20 0x0A 0x0D - space character and new line characters
-	Space and control characters can only be written as hex numbers:
-	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
-AND/OR
-	Special characters codes can be used:
-	LF - Line Feed also Carrige Return (replaced later by end of block characters)
-	SP - Space
-	TAB - Tabulation
-	FN - FileName
-	FE - Filename Extension (part after dot)
-	FA - Filename extension Appended at end of filename (part after _ character and before dot)</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="maxLength">
             <number>128</number>
@@ -897,7 +883,7 @@ AND/OR
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item row="1" column="2">
           <widget class="QLineEdit" name="stInput">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -906,24 +892,7 @@ AND/OR
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>These characters will be added at the beginning of the program. 
-You can write here:
-	Plain text
-AND/OR
-	Hex codes of ASCII characters.
-	Example: 
-	% 0x0A 0x0D - % and new line characters
-	0x20 0x0A 0x0D - space character and new line characters
-	Space and control characters can only be written as hex numbers:
-	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
-AND/OR
-	Special characters codes can be used:
-	LF - Line Feed also Carrige Return (replaced later by end of block characters)
-	SP - Space
-	TAB - Tabulation
-	FN - FileName
-	FE - Filename Extension (part after dot)
-	FA - Filename extension Appended at end of filename (part after _ character and before dot)</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="maxLength">
             <number>128</number>
@@ -933,37 +902,43 @@ AND/OR
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="2" column="1">
           <widget class="QLabel" name="label_3">
            <property name="text">
             <string>Send at end:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="4">
+         <item row="3" column="4">
           <widget class="QToolButton" name="deleteEobCharButton">
+           <property name="toolTip">
+            <string>Delete from the list</string>
+           </property>
            <property name="icon">
             <iconset resource="application.qrc">
              <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
+         <item row="3" column="1">
           <widget class="QLabel" name="label_13">
            <property name="text">
-            <string>End of block character:</string>
+            <string>End of block characters:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="3">
+         <item row="3" column="3">
           <widget class="QToolButton" name="addEobCharButton">
+           <property name="toolTip">
+            <string>Add to the list</string>
+           </property>
            <property name="icon">
             <iconset resource="application.qrc">
              <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
            </property>
           </widget>
          </item>
-         <item row="2" column="2">
+         <item row="3" column="2">
           <widget class="QComboBox" name="eobComboBox">
            <property name="toolTip">
             <string>Line (block) endings charcters.
@@ -980,7 +955,7 @@ Only uppercase LF, CR character are allowed.</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
+         <item row="5" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_9">
            <item>
             <widget class="QLabel" name="label_4">
@@ -1029,7 +1004,7 @@ Only uppercase LF, CR character are allowed.</string>
            </item>
           </layout>
          </item>
-         <item row="7" column="1">
+         <item row="8" column="1">
           <widget class="QCheckBox" name="removeBefore">
            <property name="toolTip">
             <string>When sending, discard all characters before %</string>
@@ -1039,54 +1014,12 @@ Only uppercase LF, CR character are allowed.</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout_8">
-           <item>
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Start sending after:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_11">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="startDelaySpinBox">
-             <property name="toolTip">
-              <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
-This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
-This setting is ignored in serial File Server.</string>
-             </property>
-             <property name="suffix">
-              <string>s</string>
-             </property>
-             <property name="maximum">
-              <number>360</number>
-             </property>
-             <property name="value">
-              <number>1</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="6" column="1">
+         <item row="7" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <item>
             <widget class="QLabel" name="label_16">
              <property name="text">
-              <string>Send timeout:</string>
+              <string>Send time out:</string>
              </property>
             </widget>
            </item>
@@ -1120,7 +1053,7 @@ This setting is ignored in serial File Server.</string>
          </item>
         </layout>
        </item>
-       <item row="1" column="1">
+       <item row="3" column="1">
         <spacer name="verticalSpacer_7">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1132,6 +1065,96 @@ This setting is ignored in serial File Server.</string>
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="0" column="1">
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="title">
+          <string>Start delay</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Start sending after:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Minimum</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="startDelaySpinBox">
+              <property name="toolTip">
+               <string>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
+This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
+This setting is ignored in serial File Server.</string>
+              </property>
+              <property name="suffix">
+               <string>s</string>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+              <property name="value">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Minimum</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="waitForCtsCheckBox">
+            <property name="toolTip">
+             <string>Start sending after Clear To Send (CTS) signal </string>
+            </property>
+            <property name="text">
+             <string>Wait for CTS</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="waitForXonCheckBox">
+            <property name="toolTip">
+             <string>Start sending after receiving XON character </string>
+            </property>
+            <property name="text">
+             <string>Wait for XON</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1252,6 +1275,9 @@ If the file name has not been automatically detected, the file name will be the 
             </item>
             <item>
              <widget class="QToolButton" name="addfileNameButton">
+              <property name="toolTip">
+               <string>Add to the list</string>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -1263,6 +1289,9 @@ If the file name has not been automatically detected, the file name will be the 
             </item>
             <item>
              <widget class="QToolButton" name="removeFileNameButton">
+              <property name="toolTip">
+               <string>Delete from the list</string>
+              </property>
               <property name="text">
                <string>...</string>
               </property>
@@ -1283,7 +1312,7 @@ If the file name has not been automatically detected, the file name will be the 
 If in result filename becomes empty, version with letters will be used.</string>
               </property>
               <property name="text">
-               <string>Remove letters from filename</string>
+               <string>Remove letters from file name</string>
               </property>
              </widget>
             </item>
@@ -1293,7 +1322,7 @@ If in result filename becomes empty, version with letters will be used.</string>
                <string>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</string>
               </property>
               <property name="text">
-               <string>Change filename to lowercase</string>
+               <string>Change file name to lowercase</string>
               </property>
              </widget>
             </item>
@@ -1402,6 +1431,13 @@ This setting can cause data loss if detection of filename fails.</string>
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="logDataCheckBox">
+         <property name="text">
+          <string>Write data to log file</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_4">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1460,7 +1496,7 @@ p, li { white-space: pre-wrap; }
          <item row="2" column="0">
           <widget class="QLabel" name="label_14">
            <property name="text">
-            <string>Search for filename:</string>
+            <string>Search for file name:</string>
            </property>
           </widget>
          </item>
@@ -1553,7 +1589,7 @@ If detected filename will contain an extension, then this setting will be ignore
          <item row="0" column="0">
           <widget class="QLabel" name="label_7">
            <property name="text">
-            <string>Caller filename:</string>
+            <string>Caller file name:</string>
            </property>
           </widget>
          </item>
@@ -1644,7 +1680,7 @@ p, li { white-space: pre-wrap; }
          <item row="2" column="4">
           <widget class="QPushButton" name="removeButton">
            <property name="toolTip">
-            <string>Delete from list</string>
+            <string>Delete from the list</string>
            </property>
            <property name="text">
             <string>&amp;Delete</string>
@@ -1658,7 +1694,7 @@ p, li { white-space: pre-wrap; }
          <item row="2" column="3">
           <widget class="QPushButton" name="addButton">
            <property name="toolTip">
-            <string>Add to list</string>
+            <string>Add to the list</string>
            </property>
            <property name="text">
             <string>&amp;Add</string>

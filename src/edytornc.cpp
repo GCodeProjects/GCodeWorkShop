@@ -54,7 +54,7 @@ EdytorNc::EdytorNc()
 
 
     clipboard = QApplication::clipboard();
-    connect(clipboard, SIGNAL(dataChanged()), this, SLOT(updateMenus()));
+    connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged));
 
 
     connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
@@ -1878,7 +1878,7 @@ void EdytorNc::createActions()
     insertEmptyLinesAct->setToolTip(tr("Insert empty lines"));
     connect(insertEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
 
-    cleanUpDialogAct = new QAction(QIcon(":/images/cleanup.png"), tr("Clean&up"), this);
+    cleanUpDialogAct = new QAction(QIcon(":/images/cleanup.png"), tr("Clean &up"), this);
     //cleanUpDialogAct->setShortcut(QKeySequence::Print);
     cleanUpDialogAct->setToolTip(tr("Remove text using regular expressions"));
     connect(cleanUpDialogAct, SIGNAL(triggered()), this, SLOT(displayCleanUpDialog()));
@@ -3447,7 +3447,7 @@ void EdytorNc::projectAdd()
     projectTreeView->expandAll(); //model->indexFromItem(currentProject));
 
     currentProjectModified = true;
-    statusBar()->showMessage(tr("Project opened"), 2000);
+    statusBar()->showMessage(tr("Project opened"), 5000);
 }
 
 //**************************************************************************************************
@@ -3900,8 +3900,9 @@ void EdytorNc::updateOpenFileList()
 
     QList<QMdiSubWindow *> windows = mdiArea->subWindowList();
 
+    openFileTableWidget->setSortingEnabled(false);
     openFileTableWidget->setRowCount(windows.size());
-    for (int i = 0; i < windows.size(); ++i)
+    for(int i = 0; i < windows.size(); ++i)
     {
         MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
 
@@ -3913,6 +3914,7 @@ void EdytorNc::updateOpenFileList()
             newItem->setToolTip(child->currentFile());
         else
             newItem->setToolTip(QDir::toNativeSeparators(file.canonicalFilePath()));
+
         openFileTableWidget->setItem(i, 1, newItem);
 
         newItem = new QTableWidgetItem(child->currentFileInfo());
@@ -3937,6 +3939,7 @@ void EdytorNc::updateOpenFileList()
     openFileTableWidget->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 
     //openFileTableWidget->resizeColumnsToContents();
+    openFileTableWidget->setSortingEnabled(true);
     openFileTableWidget->setVisible(true);
 
     openFileTableWidget->setUpdatesEnabled(true);
@@ -4651,6 +4654,18 @@ void EdytorNc::tileSubWindowsVertycally()
         window->move(position);
         position.setY(position.y() + window->height());
     }
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::clipboardChanged()
+{
+    updateMenus();
+
+
+
 }
 
 //**************************************************************************************************

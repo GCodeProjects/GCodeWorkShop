@@ -261,6 +261,10 @@ void SerialPortConfigDialog::saveButtonClicked()
     //settings.setValue("EndOfBlockLF", endOfBlockLF->isChecked());
     settings.setValue("RemoveSpaceEOB", removeSpaceEOB->isChecked());
     settings.setValue("EobChar", eobComboBox->currentText());
+    settings.setValue("DataToLogFile", logDataCheckBox->isChecked());
+    settings.setValue("WaitForCTS", waitForCtsCheckBox->isChecked());
+    settings.setValue("WaitForXON", waitForXonCheckBox->isChecked());
+
 
     settings.setValue("AutoSave", autoSaveCheckBox->isChecked());
     settings.setValue("CreateLogFile", logFileCheckBox->isChecked());
@@ -385,7 +389,7 @@ void SerialPortConfigDialog::changeSettings()
     eobComboBox->insertItems(0, list);
 
     list.clear();
-    list.append(settings.value("EndOfProgExp", (QStringList() << "" << "")).toStringList());
+    list.append(settings.value("EndOfProgExp", (QStringList() << "(M30|M02|M2|M99)[\\n\\r\\s]{1,}%" << "")).toStringList());
     list.removeDuplicates();
     endOfProgComboBox->insertItems(0, list);
 
@@ -496,6 +500,11 @@ void SerialPortConfigDialog::changeSettings()
     receiveTimeoutSpinBox->setValue(settings.value("ReceiveTimeoutTime", 3).toInt());
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
     logFileCheckBox->setChecked(settings.value("CreateLogFile", true).toBool());
+    logDataCheckBox->setChecked(settings.value("DataToLogFile", false).toBool());
+
+    waitForCtsCheckBox->setChecked(settings.value("WaitForCTS", false).toBool());
+    waitForXonCheckBox->setChecked(settings.value("WaitForXON", false).toBool());
+
 
     id = eobComboBox->findText(settings.value("EobChar", "CRLF").toString());
     if(id >= 0)
@@ -885,8 +894,9 @@ void SerialPortConfigDialog::removeFileNameButtonClicked()
 
 void SerialPortConfigDialog::helpButtonClicked()
 {
-    SerialPortCfgHelpDialog helpDialog;
-    helpDialog.exec();
+    QDesktopServices::openUrl(QUrl(QString("file:///%1/EdytorNC_SerialTransmission_Help.html").arg(QCoreApplication::applicationDirPath()), QUrl::TolerantMode));
+//    SerialPortCfgHelpDialog helpDialog;
+//    helpDialog.exec();
 }
 
 //**************************************************************************************************
