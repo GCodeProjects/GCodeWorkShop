@@ -73,6 +73,16 @@ EdytorNc::EdytorNc()
     connect(projectLoadButton, SIGNAL(clicked()), this, SLOT(projectOpen()));
     connect(projectRemoveButton, SIGNAL(clicked()), this, SLOT(projectTreeRemoveItem()));
 
+
+    clipboardModel = new QStandardItemModel();
+    clipboardTreeView->setModel(clipboardModel);
+    clipboardTreeView->setRootIsDecorated(false);
+    clipboardTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
+
+
+    connect(deleteFromClipboardButton, SIGNAL(clicked()), this, SLOT(deleteFromClipboardButtonClicked()));
+    connect(clipboardTreeView, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(clipboardTreeViewContextMenu(const QPoint &)));
+
     connect(hideButton, SIGNAL(clicked()), this, SLOT(hidePanel()));
 
     fileChangeMonitor = new QFileSystemWatcher(this);
@@ -96,6 +106,8 @@ EdytorNc::EdytorNc()
     setWindowTitle(tr("EdytorNC"));
     setWindowIcon(QIcon(":/images/edytornc.png"));
     createStatusBar();
+
+    clipboardLoad();
 
     if(defaultMdiWindowProperites.windowMode & TABBED_MODE)
     {
@@ -183,6 +195,7 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 
     setUpdatesEnabled(false);
     writeSettings();
+    clipboardSave();
 
     if(!maybeSaveProject())
     {
@@ -1447,7 +1460,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2015-08-30 BETA" +
+                       trUtf8("<P>Version: ") + "2015-09-07 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
@@ -2934,7 +2947,7 @@ bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
 {
     if((obj == findEdit) || (obj == replaceEdit))
     {
-        if( ev->type() == QEvent::KeyPress )
+        if(ev->type() == QEvent::KeyPress)
         {
             QKeyEvent *k = (QKeyEvent*) ev;
 
@@ -4662,7 +4675,209 @@ void EdytorNc::tileSubWindowsVertycally()
 
 void EdytorNc::clipboardChanged()
 {
+    QStandardItem *item;
+    QFont font;
+
     updateMenus();
+
+    QString text = clipboard->text();
+
+    if(!text.isEmpty())
+    {
+        QStandardItem *parentItem = clipboardModel->invisibleRootItem();
+
+        clipboardTreeView->setSortingEnabled(false);
+
+        if(parentItem->rowCount() >= 5)
+        {
+            item = parentItem->child(5, 0);
+
+            if(item)
+            {
+                if(item->text() == "")
+                    parentItem->removeRow(5);
+            };
+        };
+
+        item = new QStandardItem(QIcon(":/images/editpaste.png"), "");
+        item->setEditable(true);
+        font = item->font();
+        font.setBold(true);
+        font.setPointSize(font.pointSize() + 1);
+        item->setFont(font);
+        parentItem->insertRow(0, item);
+        parentItem = item;
+
+        item = new QStandardItem(text);
+        item->setEditable(false);
+        font = item->font();
+        font.setFixedPitch(true);
+        //font.setFamily("Courier");
+        item->setFont(font);
+        parentItem->appendRow(item);
+
+        clipboardTreeView->setSortingEnabled(true);
+    };
+
+    clipboardTreeView->expandAll();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::clipboardTreeViewContextMenu(const QPoint &point)
+{
+    Q_UNUSED(point);
+
+    QStandardItem *item;
+    QString text;
+
+    QModelIndexList list = clipboardTreeView->selectionModel()->selectedIndexes();
+    QModelIndexList::Iterator it = list.begin();
+
+    while(it != list.end())
+    {
+        item = clipboardModel->itemFromIndex(*it);
+
+        if(item == NULL)
+            return;
+
+        if(item->hasChildren())
+        {
+            item = item->child(0, 0);
+
+            if(item)
+                text = item->text();
+        }
+        else
+        {
+            text = item->text();
+        };
+
+        if(!text.isEmpty())
+        {
+            disconnect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
+            clipboard->setText(text);
+            connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
+        };
+
+        ++it;
+    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::deleteFromClipboardButtonClicked()
+{
+    QStandardItem *item;
+
+    QModelIndexList list = clipboardTreeView->selectionModel()->selectedIndexes();
+    QModelIndexList::Iterator it = list.begin();
+
+    while(it != list.end())
+    {
+        item = clipboardModel->itemFromIndex(*it);
+
+        if(item == NULL)
+            return;
+
+        clipboardTreeView->setSortingEnabled(false);
+        clipboardModel->removeRow(item->row(), clipboardModel->invisibleRootItem()->index());
+        clipboardTreeView->setSortingEnabled(true);
+
+        ++it;
+    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::clipboardSave()
+{
+    QString itemText, parentText;
+    int count;
+    QStandardItem *item;
+
+
+    QSettings settings("Clipboard", QSettings::IniFormat);
+
+    settings.remove("ClipboardItems");
+    settings.beginWriteArray("ClipboardItems");
+
+    QStandardItem *parentItem = clipboardModel->invisibleRootItem();
+
+    count = 0;
+    for(int i = 0; i < parentItem->rowCount(); i++)
+    {
+        item = parentItem->child(i, 0);
+        parentText = item->text();
+        for(int j = 0; j < item->rowCount(); j++)
+        {
+            itemText = item->child(j, 0)->text();
+
+            settings.setArrayIndex(count);
+            settings.setValue("Title", parentText);
+            settings.setValue("ItemText", itemText);
+            count++;
+        };
+    };
+
+    settings.endArray();
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void EdytorNc::clipboardLoad()
+{
+    QString itemText;
+    QStandardItem *item;
+    QStandardItem *parentItem;
+    QFont font;
+
+    clipboardModel->clear();
+    clipboardTreeView->setSortingEnabled(false);
+
+    QSettings settings("Clipboard", QSettings::IniFormat);
+
+    int max = settings.beginReadArray("ClipboardItems");
+    for(int i = 0; i < max; ++i)
+    {
+        settings.setArrayIndex(i);
+        itemText = settings.value("Title", "").toString();
+
+        parentItem = clipboardModel->invisibleRootItem();
+        item = new QStandardItem(QIcon(":/images/editpaste.png"), itemText);
+        item->setEditable(true);
+        font = item->font();
+        font.setBold(true);
+        font.setPointSize(font.pointSize() + 1);
+        item->setFont(font);
+        parentItem->insertRow(0, item);
+        parentItem = item;
+
+        itemText = settings.value("ItemText", "").toString();
+        item = new QStandardItem(itemText);
+        item->setEditable(false);
+        font = item->font();
+        font.setFixedPitch(true);
+        //font.setFamily("Courier");
+        item->setFont(font);
+        parentItem->appendRow(item);
+
+    };
+    settings.endArray();
+
+    clipboardTreeView->setSortingEnabled(true);
+    clipboardModel->setHorizontalHeaderLabels(QStringList() << "Clipboard");
+    clipboardModel->sort(Qt::AscendingOrder);
+    clipboardTreeView->expandAll();
 
 
 

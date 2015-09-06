@@ -236,10 +236,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>EdytorNC - File server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Serial port configuration</source>
         <translation type="unfinished"></translation>
     </message>
@@ -252,15 +248,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reset serial port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Archivo</translation>
+    </message>
+    <message>
+        <source>EdytorNC - Serial port file server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Start</source>
+        <translation type="unfinished">&amp;Iniciar</translation>
+    </message>
+    <message>
+        <source>S&amp;top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Cerrar</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Cerrar</translation>
+    </message>
+    <message>
+        <source>FileToolBar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -747,7 +771,7 @@
     </message>
     <message>
         <source>Clean&amp;up</source>
-        <translation>&amp;Limpieza</translation>
+        <translation type="vanished">&amp;Limpieza</translation>
     </message>
     <message>
         <source>Remove text using regular expressions</source>
@@ -1468,6 +1492,33 @@ Close anyway?</source>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete selected item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right click to copy item to Clipboard.
+Double click on item title to edit it. 
+Items with non empty titles are not deleted automatically.
+Items with empty titles are the last five texts copied to system clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clean &amp;up</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FeedsDialog</name>
@@ -1481,7 +1532,7 @@ Close anyway?</source>
     </message>
     <message>
         <source>Cutting speed (m/min)</source>
-        <translation type="vanished">Velocidad de corte (m/min)</translation>
+        <translation>Velocidad de corte (m/min)</translation>
     </message>
     <message>
         <source>90</source>
@@ -1509,7 +1560,7 @@ Close anyway?</source>
     </message>
     <message>
         <source>Tool diameter (mm)</source>
-        <translation type="vanished">Diámetro de herramienta (mm)</translation>
+        <translation>Diámetro de herramienta (mm)</translation>
     </message>
     <message>
         <source>10</source>
@@ -1553,7 +1604,7 @@ Close anyway?</source>
     </message>
     <message>
         <source>Table feed (mm/min)</source>
-        <translation type="vanished">Avance de los ejes (mm/min)</translation>
+        <translation>Avance de los ejes (mm/min)</translation>
     </message>
     <message>
         <source>Compute spindle speed and table feed</source>
@@ -1589,6 +1640,34 @@ Close anyway?</source>
     </message>
     <message>
         <source>Vc :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed (chip load) per tooth (mm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of teeth on the cutter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spindle speed (revs/min)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutting speed (ft/min)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feed (chip load) per tooth (inches)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool diameter (inches)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Table feed (inches/min)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2610,7 +2689,15 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>SerialPortCfgHelpDialog</name>
     <message>
-        <source>Dialog</source>
+        <source>Help - Serial port configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2793,10 +2880,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Control de flujo</translation>
     </message>
     <message>
-        <source>Off</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Hardware</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2922,7 +3005,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Autosave</source>
-        <translation type="unfinished">Guardado automático</translation>
+        <translation type="obsolete">Guardado automático</translation>
     </message>
     <message>
         <source>Automatically save the received file.
@@ -2934,27 +3017,11 @@ If the file name has not been automatically detected, the file name will be the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Browse</source>
         <translation type="unfinished">Examinar</translation>
     </message>
     <message>
-        <source>Remove letters from filename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create backup if file exists</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Filename from program name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use program name extension as file extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2966,27 +3033,7 @@ If the file name has not been automatically detected, the file name will be the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>End of program characters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>File server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search path 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search path 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search path 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Caller filename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3043,10 +3090,6 @@ Works only when receiving file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>End of block character:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Line (block) endings charcters.
 Only uppercase LF, CR character are allowed.</source>
         <translation type="unfinished"></translation>
@@ -3089,11 +3132,6 @@ Set XON or XOFF to 0 if you want disable it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character &apos;_&apos;  (eg O0004_MIN.nc)  
-Choosen file extension will be used.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>If received data will contain more than one CNC program, they will be saved in independent files
 This setting can cause data loss if detection of filename fails.</source>
         <translation type="unfinished"></translation>
@@ -3109,10 +3147,6 @@ If in result filename becomes empty, version with letters will be used.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add to list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3155,12 +3189,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&quot;Caller program&quot;.
-If program of that name will be received from CNC, it will be searched for a program filename to send back to CNC.
-Set this file name as other files received from this machine.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3171,19 +3199,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete from list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search for filename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change received filename to lowercase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3195,64 +3211,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Receive timeout:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Options - sending</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>These characters will be added at the end of the program.
-You can write here:
-	Plain text
-AND/OR
-	Hex codes of ASCII characters.
-	Example: 
-	% 0x0A 0x0D - % and new line characters
-	0x20 0x0A 0x0D - space character and new line characters
-	Space and control characters can only be written as hex numbers:
-	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
-AND/OR
-	Special characters codes can be used:
-	LF - Line Feed also Carrige Return (replaced later by end of block characters)
-	SP - Space
-	TAB - Tabulation
-	FN - FileName
-	FE - Filename Extension (part after dot)
-	FA - Filename extension Appended at end of filename (part after _ character and before dot)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>These characters will be added at the beginning of the program. 
-You can write here:
-	Plain text
-AND/OR
-	Hex codes of ASCII characters.
-	Example: 
-	% 0x0A 0x0D - % and new line characters
-	0x20 0x0A 0x0D - space character and new line characters
-	Space and control characters can only be written as hex numbers:
-	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...
-AND/OR
-	Special characters codes can be used:
-	LF - Line Feed also Carrige Return (replaced later by end of block characters)
-	SP - Space
-	TAB - Tabulation
-	FN - FileName
-	FE - Filename Extension (part after dot)
-	FA - Filename extension Appended at end of filename (part after _ character and before dot)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Send timeout:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. 
-
-If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.
-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3264,10 +3223,6 @@ If checked, user definied regular expression will be used first, if not found na
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If detected file name contains &amp;quot;extension&amp;quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as extension of saved file. Setting &amp;quot;file extension&amp;quot; will be ignored.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>File extension. 
 If detected filename will contain an extension, then this setting will be ignored</source>
         <translation type="unfinished"></translation>
@@ -3275,6 +3230,156 @@ If detected filename will contain an extension, then this setting will be ignore
     <message>
         <source>&amp;Help</source>
         <translation type="unfinished">&amp;Ayuda</translation>
+    </message>
+    <message>
+        <source>End of receiving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time out:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of program characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete from the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of block characters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send time out:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start sending after Clear To Send (CTS) signal </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wait for CTS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start sending after receiving XON character </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wait for XON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File name</source>
+        <translation type="unfinished">Nombre del archivo</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built-in name detection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User expression:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove letters from file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change file name to lowercase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extension </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in %MPF456...) it will be used as extension of saved file.
+Setting &quot;file extension&quot; will be ignored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use detected extension as file extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character &apos;_&apos;  (eg O0004_MIN.nc).
+Selected file extension will be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default extension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write data to log file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for file name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search path 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search path 3:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search path 2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Caller file name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Caller program&quot;.
+If program of that name (without extension) will be received from CNC, it will be searched for a program filename to send back to CNC.
+Set this file name as other files received from this machine.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reconnect time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If port will not be open try to open it after set time.
+Set to 300s to disable timer.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3337,7 +3442,7 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <source>Waiting for a signal readiness...</source>
-        <translation type="unfinished">Esperando señal de disponibilidad...</translation>
+        <translation type="obsolete">Esperando señal de disponibilidad...</translation>
     </message>
     <message>
         <source>No Error has occured</source>
@@ -3444,10 +3549,6 @@ If detected filename will contain an extension, then this setting will be ignore
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>INFO:	 Preparing to send file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3481,10 +3582,6 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <source>WARNING:	 Coulnd not find program name. Using date time code.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ERROR:	 Received file to small (less than 20 characters).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3538,6 +3635,35 @@ File server option is not enabled in serial port settings</source>
     </message>
     <message>
         <source>ERROR:	 Sending timedout. Reseting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending a file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiving a file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for CTS signal...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for XON character...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK:	 Sending completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received data
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERROR:	 Received file to small (less than 15 characters).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

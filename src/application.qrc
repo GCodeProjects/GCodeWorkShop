@@ -105,5 +105,6 @@
         <file>images/tile_v.png</file>
         <file>images/reset.png</file>
         <file>images/connect_creating.png</file>
+        <file>images/clipboard.png</file>
     </qresource>
 </RCC>
