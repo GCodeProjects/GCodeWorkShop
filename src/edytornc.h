@@ -167,6 +167,8 @@ private slots:
     void fileChanged(const QString fileName);
     void tileSubWindowsVertycally();
     void clipboardChanged();
+    void deleteFromClipboardButtonClicked();
+    void clipboardTreeViewContextMenu(const QPoint &point);
 
 signals:
     void needToShow();
@@ -196,6 +198,8 @@ private:
     void saveSession(QString name);
     void savePrinterSettings(QPrinter *printer);
     void loadPrinterSettings(QPrinter *printer);
+    void clipboardSave();
+    void clipboardLoad();
 
 
     QStringList sessionList;
@@ -215,6 +219,7 @@ private:
 
     QFileSystemModel *dirModel;
     QStandardItemModel *model;
+    QStandardItemModel *clipboardModel;
     QStandardItem *currentProject;
     bool currentProjectModified;
     QString currentProjectName;
@@ -347,6 +352,8 @@ private:
     QFileSystemWatcher *fileChangeMonitor;
 
     QPointer<CommApp> commApp;
+
+
 
 
 };

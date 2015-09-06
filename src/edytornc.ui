@@ -76,12 +76,6 @@
            <property name="currentIndex">
             <number>2</number>
            </property>
-           <property name="usesScrollButtons">
-            <bool>true</bool>
-           </property>
-           <property name="documentMode">
-            <bool>false</bool>
-           </property>
            <widget class="QWidget" name="projectTab">
             <attribute name="icon">
              <iconset resource="application.qrc">
@@ -377,6 +371,10 @@
             </layout>
            </widget>
            <widget class="QWidget" name="clipboardTab">
+            <attribute name="icon">
+             <iconset resource="application.qrc">
+              <normaloff>:/images/clipboard.png</normaloff>:/images/clipboard.png</iconset>
+            </attribute>
             <attribute name="title">
              <string>Clipboard</string>
             </attribute>
@@ -402,18 +400,10 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <item>
-                <widget class="QToolButton" name="addToClipboardButton">
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="application.qrc">
-                   <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QToolButton" name="deleteFromClipboardButton">
+                 <property name="toolTip">
+                  <string>Delete selected item</string>
+                 </property>
                  <property name="text">
                   <string>...</string>
                  </property>
@@ -423,10 +413,48 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
               </layout>
              </item>
              <item>
-              <widget class="QTreeView" name="clipboardTreeView"/>
+              <widget class="QTreeView" name="clipboardTreeView">
+               <property name="toolTip">
+                <string>Right click to copy item back to system clipboard.
+Items with empty titles are the last five texts copied to system clipboard.
+Double click on item title to edit it. 
+Items with non empty titles are not deleted automatically.</string>
+               </property>
+               <property name="autoScrollMargin">
+                <number>20</number>
+               </property>
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+               <property name="verticalScrollMode">
+                <enum>QAbstractItemView::ScrollPerPixel</enum>
+               </property>
+               <property name="indentation">
+                <number>20</number>
+               </property>
+               <property name="sortingEnabled">
+                <bool>true</bool>
+               </property>
+               <property name="animated">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
