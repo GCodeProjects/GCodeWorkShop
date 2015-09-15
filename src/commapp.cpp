@@ -39,6 +39,7 @@ CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
     connect(ui->mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(activeWindowChanged(QMdiSubWindow *)));
 
+
     ui->mdiArea->setViewMode(QMdiArea::TabbedView);
     QTabBar* tab = ui->mdiArea->findChild<QTabBar*>();
     if(tab)
@@ -213,6 +214,13 @@ void CommApp::createSerialToolBar()
     closeServerAct->setToolTip(tr("Close"));
     connect(closeServerAct, SIGNAL(triggered()), this, SLOT(close()));
 
+    browseSaveFolderAct = new QAction(QIcon(":/images/browse.png"), tr("&Browse save folder"), this);
+    browseSaveFolderAct->setToolTip(tr("Browse save folder"));
+    connect(browseSaveFolderAct, SIGNAL(triggered()), this, SLOT(close()));
+
+    showNewFilesAct = new QAction(QIcon(":/images/exit.png"), tr("&Show saved files"), this);
+    showNewFilesAct->setToolTip(tr("Show saved files"));
+    connect(showNewFilesAct, SIGNAL(triggered()), this, SLOT(close()));
 
     configBox = new QComboBox();
     configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -400,6 +408,7 @@ void CommApp::activeWindowChanged(QMdiSubWindow *window)
         resetServerAct->setEnabled(false);
         stopServerAct->setEnabled(false);
     };
+
 }
 
 //**************************************************************************************************

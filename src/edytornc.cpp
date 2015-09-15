@@ -1471,6 +1471,7 @@ void EdytorNc::about()
                        trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
                        trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                        trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
+                       trUtf8("<P><a href=\"https://plus.google.com/communities/117267107585407507443/\">EdytorNC Google Plus Community</a>") +
                        trUtf8("<P>") +
                        trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
                        trUtf8("<P>") +
@@ -2109,9 +2110,9 @@ void EdytorNc::createMenus()
     editMenu->addAction(paraCommAct);
     blockSkipMenu = editMenu->addMenu(tr("&Block Skip"));
     blockSkipMenu->setIcon(QIcon(":/images/blockskip.png"));
-    blockSkipMenu->addAction(insertBlockSkipAct);
     blockSkipMenu->addAction(insertBlockSkip1Act);
     blockSkipMenu->addAction(insertBlockSkip2Act);
+    blockSkipMenu->addAction(insertBlockSkipAct);
     editMenu->addSeparator();
     editMenu->addAction(readOnlyAct);
     editMenu->addSeparator();
@@ -3714,6 +3715,7 @@ void EdytorNc::hidePanel()
         vSplitter->hide();
         //openFileTableWidget->hide();
         hideButton->setText(">>");
+        hideButton->setToolTip(tr("Show"));
         panelHidden = true;
     }
     else
@@ -3724,6 +3726,7 @@ void EdytorNc::hidePanel()
         vSplitter->show();
         //openFileTableWidget->show();
         hideButton->setText("<<");
+        hideButton->setToolTip(tr("Hide"));
         hSplitter->restoreState(panelState);
     };
 

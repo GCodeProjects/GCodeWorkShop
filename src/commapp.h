@@ -68,10 +68,10 @@ private:
     QAction *stopServerAct;
     QAction *resetServerAct;
     QAction *closeServerAct;
+    QAction *browseSaveFolderAct;
+    QAction *showNewFilesAct;
     QComboBox *configBox;
     QToolBar *fileToolBar;
-
-
 
 
     void saveSettings();

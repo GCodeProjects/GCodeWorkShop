@@ -72,6 +72,7 @@ struct PortSettings
     bool logData;
     bool waitForCts;
     bool waitForXon;
+    bool sendXon;
     QString searchPath1;
     QString searchExt1;
     QString searchPath2;

@@ -466,6 +466,9 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
 
 void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 {
+    if(noOfBytes == 0)
+        return;
+
     if(bytes > 0)
     {
         bytesWritten += bytes;
@@ -850,6 +853,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
 
 
     portSettings.configName = configName;
+    setObjectName(portSettings.configName);
     stop = true;
     QSettings settings("EdytorNC", "EdytorNC");
     settings.beginGroup("SerialPortConfigs");
@@ -898,6 +902,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     portSettings.logData = settings.value("DataToLogFile", false).toBool();
     portSettings.waitForCts = settings.value("WaitForCTS", false).toBool();
     portSettings.waitForXon = settings.value("WaitForXON", false).toBool();
+    portSettings.sendXon = settings.value("SendXONAtStart", false).toBool();
 
     portSettings.fileServer = settings.value("FileServer", false).toBool();
     portSettings.callerProgName = settings.value("CallerProg", "O5555").toString();
@@ -963,6 +968,10 @@ QStringList SerialTransmissionDialog::receiveData(QString configName)
 
 
     setLabelText(tr("Receiving byte %1").arg(0));
+
+    if(serialPort.isOpen())
+        if(portSettings.sendXon && (!sending))
+            serialPort.write(&portSettings.Xon, 1);
 
     exec();
 
@@ -1292,6 +1301,14 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
         name2 = name2.toLower();
         ext2 = ext2.toLower();
+    }
+    else
+    {
+        name1 = name1.toUpper();
+        ext1 = ext1.toUpper();
+
+        name2 = name2.toUpper();
+        ext2 = ext2.toUpper();
     };
 
     qDebug() << "16" << name2 << ext2;
@@ -1341,8 +1358,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
     {
         QString dateTime = QDate::currentDate().toString("yyyy-MM-dd") + "_" + QTime::currentTime().toString("HH_mm_ss").remove(QRegularExpression(" \\w+"));
         fileName = portSettings.savePath + "/" + dateTime + portSettings.saveExt;
-        //writeLog(tr("WARNING:\t Coulnd not find program name."), dateTime);
-        setLabelText(tr("WARNING:\t Coulnd not find program name. Using date time code."), serverMode);
+        setLabelText(tr("WARNING:\t Could not find program name. Using date time code."), serverMode);
 
         qDebug() << "18" << fileName;
     }
@@ -1394,16 +1410,6 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
 
     fileName = list.at(2);
 
-//    if(list.at(0).isEmpty())
-//    {
-////        QString dateTime = QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " + QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
-////        fileName = portSettings.savePath + "/" + dateTime + portSettings.saveExt;
-//        //writeLog(tr("WARNING:\t Coulnd not find program name."), dateTime);
-//        setLabelText(tr("WARNING:\t Coulnd not find program name."), serverMode, true);
-
-//        qDebug() << "18" << fileName;
-//    }
-
     qDebug() << "20" << fileName;
     file.setFileName(fileName);
 
@@ -1416,13 +1422,11 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
         if(file.rename(fileName, oldName))
         {
             // write to log file
-            //writeLog(tr("OK:\t Renaming file: \"%1\" to \"%2\".").arg(fileName).arg(oldName), dateTime);
             setLabelText(tr("OK:\t Renaming file: \"%1\" to \"%2\".").arg(fileName).arg(oldName), serverMode, true);
         }
         else
         {
             // write error to log file
-            //writeLog(tr("ERROR:\t Renaming file: \"%1\". %2").arg(fileName).arg(file.errorString()), dateTime);
             setLabelText(tr("ERROR:\t Renaming file: \"%1\". %2").arg(fileName).arg(file.errorString()), serverMode, true);
         };
     };
@@ -1439,13 +1443,11 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
 
 
         // write to log file
-        //writeLog(tr("OK:\t Saving file: \"%1\".").arg(fileName), dateTime);
         setLabelText(tr("OK:\t Saving file: \"%1\".").arg(fileName), serverMode, true);
     }
     else
     {
         // write error to log file
-        //writeLog(tr("ERROR:\t Saving file: \"%1\". %2").arg(fileName).arg(file.errorString()), dateTime);
         setLabelText(tr("ERROR:\t Saving file: \"%1\". %2").arg(fileName).arg(file.errorString()), serverMode, true);
     };
 
@@ -1627,6 +1629,9 @@ void SerialTransmissionDialog::startFileServer(QString configName)
 
         resetTransmission(true);
 
+        if(serialPort.isOpen())
+            if(portSettings.sendXon && (!sending))
+                serialPort.write(&portSettings.Xon, 1);
 
         setWindowTitle(tr("%1").arg(configName)); //"Serial transmission - File server -> %1"
         setRange(0, 0);
@@ -1671,7 +1676,6 @@ void SerialTransmissionDialog::fileServerProcessData()
                 if(fileName == portSettings.callerProgName)
                 {
                     setLabelText(tr("INFO:\t Received \"Caller\" program: \"%1\".").arg(fileInfo.fileName()), serverMode, true);
-                    //writeLog(tr("INFO:\t Received caller prog: \"%1\".\r\n").arg(fileName));
 
                     QFile file(*itp);
                     if(file.open(QIODevice::ReadOnly))
@@ -1713,6 +1717,11 @@ void SerialTransmissionDialog::fileServerProcessData()
                         {
                             fileName = fileName.toLower();
                             ext = ext.toLower();
+                        }
+                        else
+                        {
+                            fileName = fileName.toUpper();
+                            ext = ext.toUpper();
                         };
                     };
 
@@ -1726,7 +1735,6 @@ void SerialTransmissionDialog::fileServerProcessData()
                         {
                             if(!portSettings.searchPath1.isEmpty())
                                 setLabelText(tr("ERROR:\t Can't find file in path 1: \"%1\".").arg(path), serverMode, true);
-                            //writeLog(tr("ERROR:\t Can't find file in path 1: \"%1\".\r\n").arg(path));
 
                             path = portSettings.searchPath2 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt2 : ext);
                             fileInfo.setFile(path);
@@ -1734,7 +1742,6 @@ void SerialTransmissionDialog::fileServerProcessData()
                             {
                                 if(!portSettings.searchPath2.isEmpty())
                                     setLabelText(tr("ERROR:\t Can't find file in path 2: \"%1\".").arg(path), serverMode, true);
-                                //writeLog(tr("ERROR:\t Can't find file in path 2: \"%1\".\r\n").arg(path));
 
                                 path = portSettings.searchPath3 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt3 : ext);
                                 fileInfo.setFile(path);
@@ -1742,7 +1749,7 @@ void SerialTransmissionDialog::fileServerProcessData()
                                 {
                                     if(!portSettings.searchPath3.isEmpty())
                                         setLabelText(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path), serverMode, true);
-                                    //writeLog(tr("ERROR:\t Can't find file in path 3: \"%1\".").arg(path));
+
                                     path.clear();
                                 };
                             };
@@ -1752,8 +1759,6 @@ void SerialTransmissionDialog::fileServerProcessData()
 
                         if(!path.isEmpty())
                         {
-                            //setLabelText(tr("INFO:\t Preparing to send file: \"%1\".").arg(path), serverMode, true);
-                            //writeLog(tr("INFO:\t Preparing to send file: \"%1\".\r\n").arg(path));
                             file.setFileName(path);
                             if(file.open(QIODevice::ReadOnly))
                             {
@@ -1799,12 +1804,10 @@ void SerialTransmissionDialog::fileServerProcessData()
                                 fileServerBytesWritten(0);  // start
 
                                 setLabelText(tr("OK:\t Sending a file: \"%1\".").arg(path), serverMode, true);
-                                //writeLog(tr("OK:\t Sending file: \"%1\".\r\n").arg(path));
                             }
                             else
                             {
                                 setLabelText(tr("ERROR:\t Can't send file: \"%1\". %2").arg(path).arg(file.errorString()), serverMode, true);
-                                //writeLog(tr("ERROR:\t Can't send file: \"%1\". %2\r\n").arg(path).arg(file.errorString()));
                             };
                         };
                     }
@@ -1815,9 +1818,6 @@ void SerialTransmissionDialog::fileServerProcessData()
 
                     break;
                 }
-                //                    if(!fileName.isEmpty())
-                //                        setLabelText(tr("OK:\t Received file: \"%1\".").arg(*itp), serverMode, true);
-                //writeLog(tr("OK:\t Received file: \"%1\".\r\n").arg(*itp));
                 itp++;
             };
         };
@@ -1847,7 +1847,7 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
         //stop = true;
         sending = false;
         setLabelText(tr("OK:\t Sending a file completed."), serverMode, true);
-        setLabelText(tr("Wainting for data..."));
+        setLabelText(tr("Waiting for data..."));
         setRange(0, 0);
         return;
     };
@@ -1940,6 +1940,7 @@ void SerialTransmissionDialog::resetTransmission(bool portRestart)
     serialPortReadBuffer.clear();
     serialPortWriteBuffer.clear();
     writeBufferIterator = serialPortWriteBuffer.end(); // we don't send anything yet
+    noOfBytes = 0;
 
     if(portRestart)
     {

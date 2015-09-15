@@ -264,6 +264,7 @@ void SerialPortConfigDialog::saveButtonClicked()
     settings.setValue("DataToLogFile", logDataCheckBox->isChecked());
     settings.setValue("WaitForCTS", waitForCtsCheckBox->isChecked());
     settings.setValue("WaitForXON", waitForXonCheckBox->isChecked());
+    settings.setValue("SendXONAtStart", sendXonCheckBox->isChecked());
 
 
     settings.setValue("AutoSave", autoSaveCheckBox->isChecked());
@@ -501,10 +502,9 @@ void SerialPortConfigDialog::changeSettings()
     removeSpaceEOB->setChecked(settings.value("RemoveSpaceEOB", false).toBool());
     logFileCheckBox->setChecked(settings.value("CreateLogFile", true).toBool());
     logDataCheckBox->setChecked(settings.value("DataToLogFile", false).toBool());
-
     waitForCtsCheckBox->setChecked(settings.value("WaitForCTS", false).toBool());
     waitForXonCheckBox->setChecked(settings.value("WaitForXON", false).toBool());
-
+    sendXonCheckBox->setChecked(settings.value("SendXONAtStart", false).toBool());
 
     id = eobComboBox->findText(settings.value("EobChar", "CRLF").toString());
     if(id >= 0)
