@@ -1699,6 +1699,7 @@ BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
     setWindowTitle(tr("Bolt circle - preview"));
     setAttribute(Qt::WA_DeleteOnClose);
+    //sizeGripEnabled(true);
 
     setToolTip(tr("Click to close"));
 

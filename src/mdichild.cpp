@@ -331,7 +331,7 @@ bool MdiChild::saveFile(const QString &fileName)
         }
         else
         {
-            exp.setPattern("[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
+            exp.setPattern("(\\(|;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}(\\)){0,1}");
             cursor = textEdit->textCursor();
             cursor.setPosition(0);
             cursor = textEdit->document()->find(exp, cursor);
@@ -339,8 +339,14 @@ bool MdiChild::saveFile(const QString &fileName)
             {
                 textEdit->setUpdatesEnabled(false);
                 cursor.beginEditBlock();
+                QString text = cursor.selectedText();
                 cursor.removeSelectedText();
-                cursor.insertText(dat.toString(Qt::DefaultLocaleShortDate));
+                if(text.contains('('))
+                    text = "(" + dat.toString(Qt::DefaultLocaleShortDate) + ")";
+                else
+                    text = ";" + dat.toString(Qt::DefaultLocaleShortDate);
+
+                cursor.insertText(text);
                 cursor.endEditBlock();
 
                 textEdit->setUpdatesEnabled(true);
@@ -3209,7 +3215,6 @@ void MdiChild::blockSkip(bool remove, bool inc)
 {
     int idx, num;
     QRegExp regExp;
-    bool replace = false;
     bool ok;
     int start, end;
     QTextCursor cursor;
@@ -3231,9 +3236,7 @@ void MdiChild::blockSkip(bool remove, bool inc)
         textEdit->setTextCursor(cursor);
         QString selText = cursor.selectedText();
 
-        QStringList list = selText.split(QChar::ParagraphSeparator);
-        if(list.isEmpty())
-            list.append(selText);
+
 
 
         regExp.setPattern(QString("/[0-9]{0,1}"));
@@ -3247,6 +3250,7 @@ void MdiChild::blockSkip(bool remove, bool inc)
             if(idx >= 0)
             {
                 QString tx = regExp.cap(0);
+                selText.remove(regExp);
                 tx.remove('/');
                 tx.remove(' ');
 
@@ -3268,10 +3272,13 @@ void MdiChild::blockSkip(bool remove, bool inc)
                     if(num < 0)
                         num = 0;
                 };
-                replace = true;
             };
         };
 
+
+        QStringList list = selText.split(QChar::ParagraphSeparator);
+        if(list.isEmpty())
+            list.append(selText);
 
         selText.clear();
 
@@ -3285,21 +3292,16 @@ void MdiChild::blockSkip(bool remove, bool inc)
                 };
             }
             else
-                if(replace)
+            {
+                idx = txLine.indexOf(QRegExp("[;/(]{1,1}"));
+                if((idx > 1) || (idx < 0))
                 {
-                    if(txLine.length() > 0)
-                    {
-                        if(num == 0)
-                            txLine.replace(regExp, "/");
-                        else
-                            txLine.replace(regExp, QString("/%1").arg(num));
-                    };
-                }
-                else
                     if(num == 0)
-                      txLine.prepend("/");
+                        txLine.prepend("/");
                     else
                         txLine.prepend(QString("/%1").arg(num));
+                };
+            };
 
             txLine.append("\n");
             selText.append(txLine);
@@ -3994,13 +3996,6 @@ void MdiChild::showContextMenu(const QPoint &pt)
     menu->addAction(paraCommAct);
     menu->addSeparator();
 
-    QAction *insertBlockSkipAct = new QAction(QIcon(":/images/blockskipr.png"), tr("Block Skip remove"), this);
-    insertBlockSkipAct->setShortcut(tr("Ctrl+1"));
-    insertBlockSkipAct->setToolTip(tr("Remove Block Skip /"));
-    connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(blockSkipRemSlot()));
-    insertBlockSkipAct->setEnabled(hasSelection());
-    menu->addAction(insertBlockSkipAct);
-
     QAction *insertBlockSkip1Act = new QAction(QIcon(":/images/blockskip+.png"), tr("Block Skip +"), this);
     insertBlockSkip1Act->setShortcut(tr("Ctrl+2"));
     insertBlockSkip1Act->setToolTip(tr("Insert/increase Block Skip /"));
@@ -4014,6 +4009,13 @@ void MdiChild::showContextMenu(const QPoint &pt)
     connect(insertBlockSkip2Act, SIGNAL(triggered()), this, SLOT(blockSkipDecSlot()));
     insertBlockSkip2Act->setEnabled(hasSelection());
     menu->addAction(insertBlockSkip2Act);
+
+    QAction *insertBlockSkipAct = new QAction(QIcon(":/images/blockskipr.png"), tr("Block Skip remove"), this);
+    insertBlockSkipAct->setShortcut(tr("Ctrl+1"));
+    insertBlockSkipAct->setToolTip(tr("Remove Block Skip /"));
+    connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(blockSkipRemSlot()));
+    insertBlockSkipAct->setEnabled(hasSelection());
+    menu->addAction(insertBlockSkipAct);
 
 
     menu->exec(textEdit->mapToGlobal(pt));
