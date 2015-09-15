@@ -53,11 +53,11 @@
     </message>
     <message>
         <source>Center Position : X%1 Y%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Posición del Centro : X%1 Y%2</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpi&amp;ar Todo</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>Select rows &amp; right click for menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar filas &amp; click derecho para menú</translation>
     </message>
 </context>
 <context>
@@ -229,63 +229,63 @@
     <name>CommApp</name>
     <message>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración del puerto serie</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar</translation>
     </message>
     <message>
         <source>Reset serial port</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinicializar puerto serie</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Archivo</translation>
+        <translation>&amp;Archivo</translation>
     </message>
     <message>
         <source>EdytorNC - Serial port file server</source>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - Servidor de Archivos por puerto serie</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished">&amp;Iniciar</translation>
+        <translation>&amp;Iniciar</translation>
     </message>
     <message>
         <source>S&amp;top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Parar</translation>
     </message>
     <message>
         <source>&amp;Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reinicializar</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Cerrar</translation>
+        <translation>&amp;Cerrar</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Cerrar</translation>
+        <translation>Cerrar</translation>
     </message>
     <message>
         <source>FileToolBar</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -326,7 +326,7 @@
     </message>
     <message>
         <source>Insert &amp;dot at address</source>
-        <translation>Insertar punto decimal en la(s) dirección(es)</translation>
+        <translation>Insertar punto &amp;decimal en la(s) dirección(es)</translation>
     </message>
     <message>
         <source>&gt;Aaaaaaaaaaaaaaaaaaaaa; </source>
@@ -475,7 +475,7 @@
     </message>
     <message>
         <source>&lt;P&gt;Version: </source>
-        <translation>Versión: </translation>
+        <translation>&lt;P&gt;Versión: </translation>
     </message>
     <message>
         <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
@@ -483,23 +483,23 @@
     </message>
     <message>
         <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation></translation>
+        <translation>&lt;P&gt;Traducción al catalán y deb package gracias aJordi Sayol i Salomó</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
-        <translation></translation>
+        <translation>&lt;br /&gt;Traducción al checo gracias a Pavel Fric</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju</source>
-        <translation></translation>
+        <translation>&lt;br /&gt;Traducción al finlandés gracias a Janne Mäntyharju</translation>
     </message>
     <message>
         <source>&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju</source>
-        <translation></translation>
+        <translation>&lt;br /&gt;Parche para OS X y otras actualizaciones gracias a Janne Mäntyharju</translation>
     </message>
     <message>
         <source>&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski</source>
-        <translation></translation>
+        <translation>&lt;P&gt;Nuevo ícono EdytorNC gracias a Jakub Gajewski</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
@@ -575,7 +575,7 @@
     </message>
     <message>
         <source>&amp;Open example...</source>
-        <translation>&amp;Abrir archivo de ejemplo...</translation>
+        <translation>Abrir archiv&amp;o de ejemplo...</translation>
     </message>
     <message>
         <source>Open an example file</source>
@@ -643,7 +643,7 @@
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation>C&amp;ortar</translation>
+        <translation>Cor&amp;tar</translation>
     </message>
     <message>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
@@ -959,7 +959,7 @@
     </message>
     <message>
         <source>Close &amp;All</source>
-        <translation>Cerrar &amp;Todo</translation>
+        <translation>Cerr&amp;ar Todo</translation>
     </message>
     <message>
         <source>Close all the windows</source>
@@ -1147,7 +1147,7 @@
     </message>
     <message>
         <source>Replace &amp;&amp; find previous</source>
-        <translation>Reemplazar &amp; buscar anterior</translation>
+        <translation>Reemplazar &amp;&amp; buscar anterior</translation>
     </message>
     <message>
         <source>Replace all</source>
@@ -1175,7 +1175,7 @@
     </message>
     <message>
         <source>Ignore c&amp;ase</source>
-        <translation>I&amp;gnorar mayúsculas/minúsculas</translation>
+        <translation>Ignor&amp;ar mayúsculas/minúsculas</translation>
     </message>
     <message>
         <source>&amp;Whole words only</source>
@@ -1385,139 +1385,143 @@
     </message>
     <message>
         <source>Saved %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 archivos guardados</translation>
     </message>
     <message>
         <source>&amp;Save &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Gu&amp;ardar &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Save &quot;%1&quot; &amp;As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gu&amp;ardar &quot;%1&quot; Como...</translation>
     </message>
     <message>
         <source>Cl&amp;ose &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>C&amp;errar &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Save A&amp;ll</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar T&amp;odo</translation>
     </message>
     <message>
         <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+ Mayús+ S</translation>
     </message>
     <message>
         <source>Save all modified documents to disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar todos los documentos modificados al disco</translation>
     </message>
     <message>
         <source>Print Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimir Documento</translation>
     </message>
     <message>
         <source>The document was sent to a printer %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>El documento fué enviado a la impresora %1...</translation>
     </message>
     <message>
         <source>&lt;br /&gt;German translation and other fixes thanks to Michael Numberger</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Traducción al alemán y otras correcciones alemanes gracias a Michael Numberger</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Spanish translation and other fixes thanks to Otto Huamani</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Traducción al castellano y otras correcciones gracias a Otto Huamaní</translation>
     </message>
     <message>
         <source>Pr&amp;int preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Prev&amp;isualizar impresión</translation>
     </message>
     <message>
         <source>Preview printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsualizar impresión</translation>
     </message>
     <message>
         <source>Session manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestión de sesión...</translation>
     </message>
     <message>
         <source>Sessions manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestión de sesiones</translation>
     </message>
     <message>
         <source>Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesiones</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>predeterminado</translation>
     </message>
     <message>
         <source>Session %1 loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión %1 cargada</translation>
     </message>
     <message>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo &quot;%1&quot; &lt;b&gt;fue modificado en el disco.&lt;/b&gt;&lt;p&gt;Quieres recargarlo?&lt;/p&gt;%2</translation>
     </message>
     <message>
         <source>EdytorNC - Serial port file server</source>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - Servidor de Archivos por puerto serie</translation>
     </message>
     <message>
         <source>Serial port file server is running.
 Close anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>El Servidor De Archivos está activo.
+Cerrar de todas maneras?</translation>
     </message>
     <message>
         <source>Tile &amp;horyzontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Mozaico &amp;horizontal</translation>
     </message>
     <message>
         <source>Tile the windows horyzontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventanas en mosaico horizontal</translation>
     </message>
     <message>
         <source>Tile &amp;vertycally</source>
-        <translation type="unfinished"></translation>
+        <translation>Mozaico &amp;vertical</translation>
     </message>
     <message>
         <source>Tile the windows vertycally</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventanas en mosaico vertical</translation>
     </message>
     <message>
         <source>Start application &quot;Serial port file server&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar aplicación &quot;Servidor de Archivos por puerto serie&quot;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Advertencia:&lt;/b&gt; Archivo en el editor contiene cambios no guardados.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Portapapeles</translation>
     </message>
     <message>
         <source>Delete selected item</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar item seleccionado</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Right click to copy item to Clipboard.
 Double click on item title to edit it. 
 Items with non empty titles are not deleted automatically.
 Items with empty titles are the last five texts copied to system clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Click derecho para copiar ítem al Portapapeles.
+Doble click en el título del ítem para editarlo.
+Ítems sin títulos vacíos no son borrados automáticamente.
+Ítems con títulos vacíos son los últimos cinco textos copiados al portapapeles del sistema.</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Traducción al holandés gracias a Henk van Andel</translation>
     </message>
     <message>
         <source>Clean &amp;up</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Limpieza</translation>
     </message>
 </context>
 <context>
@@ -1632,43 +1636,43 @@ Items with empty titles are the last five texts copied to system clipboard.</sou
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>inches</source>
-        <translation type="unfinished"></translation>
+        <translation>pulgadas</translation>
     </message>
     <message>
         <source>Vc :</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Feed (chip load) per tooth (mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Avance (carga de viruta) por diente (mm)</translation>
     </message>
     <message>
         <source>Number of teeth on the cutter</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de dientes en la herramienta de corte</translation>
     </message>
     <message>
         <source>Spindle speed (revs/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de giro (revs/min)</translation>
     </message>
     <message>
         <source>Cutting speed (ft/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad de corte (pie/min)</translation>
     </message>
     <message>
         <source>Feed (chip load) per tooth (inches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Avance (carga de viruta) por diente (pulgadas)</translation>
     </message>
     <message>
         <source>Tool diameter (inches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Diámetro de herramienta (pulgadas)</translation>
     </message>
     <message>
         <source>Table feed (inches/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Avance de los ejes (pulgadas/min)</translation>
     </message>
 </context>
 <context>
@@ -2150,86 +2154,86 @@ Comprobar +-*/.
     </message>
     <message>
         <source>(DATE)</source>
-        <translation type="unfinished"></translation>
+        <translation>(FECHA)</translation>
     </message>
     <message>
         <source>DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>FECHA</translation>
     </message>
     <message>
         <source>Comment ;</source>
-        <translation type="unfinished">Comentar ;</translation>
+        <translation>Comentar ;</translation>
     </message>
     <message>
         <source>Ctrl+;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Comment/uncomment selected text using semicolon</source>
-        <translation type="unfinished">Comentar/Des-comentar texto seleccionado usando semicolon</translation>
+        <translation>Comentar/Des-comentar texto seleccionado usando semicolon</translation>
     </message>
     <message>
         <source>Comment ()</source>
-        <translation type="unfinished">Comentar ()</translation>
+        <translation>Comentar ()</translation>
     </message>
     <message>
         <source>Ctrl+9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Comment/uncomment selected text using parentheses</source>
-        <translation type="unfinished">Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
+        <translation>Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
     </message>
     <message>
         <source>Block Skip remove</source>
-        <translation type="unfinished">Remover salto de bloque</translation>
+        <translation>Remover salto de bloque</translation>
     </message>
     <message>
         <source>Ctrl+1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Remove Block Skip /</source>
-        <translation type="unfinished">Remover salto de bloque /</translation>
+        <translation>Eliminar salto de bloque /</translation>
     </message>
     <message>
         <source>Block Skip +</source>
-        <translation type="unfinished">Salto de bloque +</translation>
+        <translation>Salto de bloque +</translation>
     </message>
     <message>
         <source>Ctrl+2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Insert/increase Block Skip /</source>
-        <translation type="unfinished">Insertar/incrementar salto de bloque /</translation>
+        <translation>Insertar/incrementar salto de bloque /</translation>
     </message>
     <message>
         <source>Block Skip -</source>
-        <translation type="unfinished">Salto de bloque -</translation>
+        <translation>Salto de bloque -</translation>
     </message>
     <message>
         <source>Ctrl+3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Insert/decrease Block Skip /</source>
-        <translation type="unfinished">Insertar/disminuir salto de bloque /</translation>
+        <translation>Insertar/disminuir salto de bloque /</translation>
     </message>
 </context>
 <context>
     <name>MergeResultWindow</name>
     <message>
         <source>&lt;No src line&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Sin línea fuente&gt;</translation>
     </message>
     <message>
         <source>&lt;Merge Conflict (Whitespace only)&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Combinar Conflicto (Sólo espacio en blanco)&gt;</translation>
     </message>
     <message>
         <source>&lt;Merge Conflict&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Combinar Conflicto&gt;</translation>
     </message>
 </context>
 <context>
@@ -2262,11 +2266,11 @@ Comprobar +-*/.
     <name>QObject</name>
     <message>
         <source>CNC programs files (</source>
-        <translation type="unfinished">Archivos de programa CNC (</translation>
+        <translation>Archivos de programa CNC (</translation>
     </message>
     <message>
         <source>);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="unfinished">);;Archivos de texto (*.txt);; Todos los archivos (*.* *)</translation>
+        <translation>);;Archivos de texto (*.txt);; Todos los archivos (*.* *)</translation>
     </message>
 </context>
 <context>
@@ -2690,7 +2694,7 @@ p, li { white-space: pre-wrap; }
     <name>SerialPortCfgHelpDialog</name>
     <message>
         <source>Help - Serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayuda - Configuración del puerto serie</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2698,194 +2702,194 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>SerialPortConfigDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Delete configuration</source>
-        <translation type="unfinished">Borrar configuración</translation>
+        <translation>Borrar configuración</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Save configuration</source>
-        <translation type="unfinished">Guardar configuración</translation>
+        <translation>Guardar configuración</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Guardar</translation>
+        <translation>&amp;Guardar</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <source>Settings file:</source>
-        <translation type="unfinished">Archivo de configuración:</translation>
+        <translation>Archivo de configuración:</translation>
     </message>
     <message>
         <source>Port settings</source>
-        <translation type="unfinished">Ajustes del puerto</translation>
+        <translation>Ajustes del puerto</translation>
     </message>
     <message>
         <source>/dev/ttyS0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>/dev/ttyS1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>/dev/ttyUSB0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>/dev/ttyUSB1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Serial port :</source>
-        <translation type="unfinished">Puerto serie :</translation>
+        <translation>Puerto serie :</translation>
     </message>
     <message>
         <source>&amp;Browse</source>
-        <translation type="unfinished">&amp;Examinar</translation>
+        <translation>&amp;Examinar</translation>
     </message>
     <message>
         <source>Serial port information</source>
-        <translation type="unfinished"></translation>
+        <translation>Información del puerto serie</translation>
     </message>
     <message>
         <source>Information about serial port</source>
-        <translation type="unfinished"></translation>
+        <translation>Información acerca del puerto serie</translation>
     </message>
     <message>
         <source>Description       :</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción       :</translation>
     </message>
     <message>
         <source>Manufacturer      :</source>
-        <translation type="unfinished"></translation>
+        <translation>Fabricante      :</translation>
     </message>
     <message>
         <source>SerialNumber      :</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de Serie      :</translation>
     </message>
     <message>
         <source>System location   :</source>
-        <translation type="unfinished"></translation>
+        <translation>Localización en el sistema   :</translation>
     </message>
     <message>
         <source>Vendor identifier :</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador del Vendedor :</translation>
     </message>
     <message>
         <source>Product identifier:</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador del Producto:</translation>
     </message>
     <message>
         <source>Baud rate</source>
-        <translation type="unfinished">Velocidad de transmisión</translation>
+        <translation>Velocidad de transmisión</translation>
     </message>
     <message>
         <source>1200</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>2400</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>4800</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9600</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>19200</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>38400</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>57600</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>115200</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Data bit&apos;s</source>
-        <translation type="unfinished">Bits de datos</translation>
+        <translation>Bits de datos</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Stop bit&apos;s</source>
-        <translation type="unfinished">Bits de parada</translation>
+        <translation>Bits de parada</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Parity</source>
-        <translation type="unfinished">Paridad</translation>
+        <translation>Paridad</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Ninguna</translation>
+        <translation>Ninguna</translation>
     </message>
     <message>
         <source>Even</source>
-        <translation type="unfinished">Par</translation>
+        <translation>Par</translation>
     </message>
     <message>
         <source>Odd</source>
-        <translation type="unfinished">Impar</translation>
+        <translation>Impar</translation>
     </message>
     <message>
         <source>Flow control</source>
-        <translation type="unfinished">Control de flujo</translation>
+        <translation>Control de flujo</translation>
     </message>
     <message>
         <source>Hardware</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>XON, XOFF</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Options</source>
@@ -2911,19 +2915,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Start sending after:</source>
-        <translation type="unfinished">Iniciar envío después de:</translation>
+        <translation>Iniciar envío después de:</translation>
     </message>
     <message>
         <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
-        <translation type="unfinished">Eliminar todos los caracteres de control (&lt;0x3F; &gt; 0x7F) en archivo recibido</translation>
+        <translation>Eliminar todos los caracteres de control (&lt;0x3F; &gt; 0x7F) en archivo recibido</translation>
     </message>
     <message>
         <source>Delete control chars</source>
-        <translation type="unfinished">Eliminar caracteres de control</translation>
+        <translation>Eliminar caracteres de control</translation>
     </message>
     <message>
         <source>Send at end:</source>
-        <translation type="unfinished">Enviar al final:</translation>
+        <translation>Enviar al final:</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2945,23 +2949,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delay before sending the next block:</source>
-        <translation type="unfinished">Retrasar antes de enviar el siguiente bloque:</translation>
+        <translation>Retrasar antes de enviar el siguiente bloque:</translation>
     </message>
     <message>
         <source>Send at start:</source>
-        <translation type="unfinished">Enviar al inicio:</translation>
+        <translation>Enviar al inicio:</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>XON character:</source>
-        <translation type="unfinished">Caracter XON:</translation>
+        <translation>Caracter XON:</translation>
     </message>
     <message>
         <source>XOFF character:</source>
-        <translation type="unfinished">Caracter XOFF:</translation>
+        <translation>Caracter XOFF:</translation>
     </message>
     <message>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
@@ -2969,23 +2973,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Remove empty lines after receive is complete</source>
-        <translation type="unfinished">Eliminar líneas en blanco después que la recepción es completada</translation>
+        <translation>Eliminar líneas en blanco después que la recepción es completada</translation>
     </message>
     <message>
         <source>Remove empty lines</source>
-        <translation type="unfinished">Remover líneas vacías</translation>
+        <translation>Eliminar líneas vacías</translation>
     </message>
     <message>
         <source>When sending, discard all characters before %</source>
-        <translation type="unfinished">Al enviar, desechar todos los caracteres antes de %</translation>
+        <translation>Al enviar, desechar todos los caracteres antes de %</translation>
     </message>
     <message>
         <source>Remove characters before %</source>
-        <translation type="unfinished">Quitar los caracteres antes de %</translation>
+        <translation>Eliminar los caracteres antes de %</translation>
     </message>
     <message>
         <source>Remove white space at end of line</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar espacios en blanco al final de la línea</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2997,11 +3001,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto close transmission dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cierre automático del diálogo de transmisión:</translation>
     </message>
     <message>
         <source>Create log file</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear archivo log</translation>
     </message>
     <message>
         <source>Autosave</source>
@@ -3010,153 +3014,169 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Automatically save the received file.
 If the file name has not been automatically detected, the file name will be the current date and time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar automáticamente el archivo recibido
+Si el nombre del archivo no fué detectado automáticamente, será la fecha y hora actual.</translation>
     </message>
     <message>
         <source>Automatically save the received file</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar automáticamente el archivo recibido</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type="unfinished">Examinar</translation>
+        <translation>Examinar</translation>
     </message>
     <message>
         <source>Create backup if file exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear respaldo si el archivo existe</translation>
     </message>
     <message>
         <source>Append extension at end</source>
-        <translation type="unfinished"></translation>
+        <translation>Anexar extensión al final</translation>
     </message>
     <message>
         <source>Split programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Dividir programas</translation>
     </message>
     <message>
         <source>File server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor De Archivos</translation>
     </message>
     <message>
         <source>&amp;Save &amp;&amp; close</source>
-        <translation type="unfinished">&amp;Guardar &amp; cerrar</translation>
+        <translation>&amp;Guardar &amp;&amp; cerrar</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Cancelar</translation>
+        <translation>&amp;Cancelar</translation>
     </message>
     <message>
         <source>Serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración del puerto serie</translation>
     </message>
     <message>
         <source>Select serial port device</source>
-        <translation type="unfinished">Seleccionar dispositivo de puerto serie</translation>
+        <translation>Seleccionar dispositivo de puerto serie</translation>
     </message>
     <message>
         <source>All files (*)</source>
-        <translation type="unfinished">Todos los archivos (*)</translation>
+        <translation>Todos los archivos (*)</translation>
     </message>
     <message>
         <source>Description       : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción       : %1</translation>
     </message>
     <message>
         <source>Manufacturer      : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fabricante      : %1</translation>
     </message>
     <message>
         <source>SerialNumber      : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de Serie      : %1</translation>
     </message>
     <message>
         <source>System location   : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Localización en el sistema   : %1</translation>
     </message>
     <message>
         <source>Vendor identifier : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador del Vendedor : %1</translation>
     </message>
     <message>
         <source>Product identifier: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador del Producto: %1</translation>
     </message>
     <message>
         <source>Select search path</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar ruta de búsqueda</translation>
     </message>
     <message>
         <source>Remove white space just before the end of line, sometimes added by Fanuc.
 Works only when receiving file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina espacios en blanco justo al final de líneas, agregado algunas veces por controles Fanuc.
+Funciona sólo para recepción.</translation>
     </message>
     <message>
         <source>Line (block) endings charcters.
 Only uppercase LF, CR character are allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Caracteres para fin de línea (EOB).
+Sólo son permitidos caracteres LFy CR, en mayúsculas.</translation>
     </message>
     <message>
         <source>XON (DC1) - 17 Dec. 0x11 Hex.
 XON (DC2) - 18 Dec. 0x12 Hex.
 This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</source>
-        <translation type="unfinished"></translation>
+        <translation>XON (DC1) - 17 Dec. 0x11 Hex.
+XON (DC2) - 18 Dec. 0x12 Hex.
+Este ajuste sólo es usado por EdytorNC (no es aplicado al puerto serie) y trabaja con controles de flujo por hardware y software.
+Ajuste XON o XOFF a 0 si quiere deshabilitarlo.</translation>
     </message>
     <message>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
 This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
 This setting is ignored in serial File Server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si es 0 espera por XON, si &gt;0 espera por XON o que se agote el tiempo de espera, el que sea primero.
+Este ajuste también trabajo con control de flujo por hardware, ajuste los caracteres XON o XOFF a 0 para iniciar la transmisión sin esperar por XON.
+Este ajuste es ignorado en el modo Servidor De Archivos.
+</translation>
     </message>
     <message>
         <source>Automatically close transmission dialog after the last character was sent/received.
 This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to swich CNC into reciving mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cierra Automáticamente el diálogo de transmisión después que el último caracter ha sido enviado/recibido.
+Este ajuste también es usado en el modo Servidor De Archivos para detectar el fin de transmisión entrante y da tiempo al operador para pasar el CNC a modo recepción.</translation>
     </message>
     <message>
         <source>XOFF (DC3) - 19 Dec. 0x13 Hex.
 XOFF (DC4) - 20 Dec. 0x14 Hex.
 This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</source>
-        <translation type="unfinished"></translation>
+        <translation>XOFF (DC3) - 19 Dec. 0x13 Hex.
+XOFF (DC4) - 20 Dec. 0x14 Hex.
+Este ajuste es usado sólo en EdytorNC (no es aplicado al puerto serie) y trabaja con control de flujo por hardware/software.
+Ajuste XON o XOFF a 0 si quiere deshabilitarlo.</translation>
     </message>
     <message>
         <source>Browse for save path</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar ruta para guardado</translation>
     </message>
     <message>
         <source>Extension of saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensión del archivo guardado</translation>
     </message>
     <message>
         <source>If save path will already contain a file, old file will be renamed to *.bak</source>
-        <translation type="unfinished"></translation>
+        <translation>Si la ruta para guardado ya contiene un archivo, el anterior será renombrado a *.bak</translation>
     </message>
     <message>
         <source>If received data will contain more than one CNC program, they will be saved in independent files
 This setting can cause data loss if detection of filename fails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si los datos recibidos contienen mas de un programa CNC, serán guardados en archivos independientes.
+Este ajuste puede causar pérdida de datos si falla la detección del nombre de archivo.</translation>
     </message>
     <message>
         <source>Letters in detected filename will be removed (only digits will be left).
 If in result filename becomes empty, version with letters will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Letras en el nombre de archivo detectado serán eliminadas (sólo quedarán dígitos).
+Si el nombre de archivo resulta vacío, se usará la versión con letras.</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Borrar</translation>
+        <translation>&amp;Borrar</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Este campo contiene expresión usada para encontrar el fin del programa CNC recibido (fin de la transmisión).&lt;/p&gt;&lt;p&gt;Debe contener una expresión regular QT (QRexExp) válida. Ver &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;En EdytorNC puedes verificar esta expresión en la función &amp;quot;Limpieza&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Agregar</translation>
     </message>
     <message>
         <source>Save debug information to log file:
 &quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Guarda información de depuración al archivo log:
+&quot;Ruta de guardado&quot;.&quot;nombre de la configuración&quot;_serial_log.txt</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3174,19 +3194,33 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;after time set in &amp;quot;Auto close transmission dialog:&amp;quot; file server will send back file 0032 (paths, file extension are set in File Server tab)&lt;/span&gt;&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and again ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Servidor de Archivos por puerto serie.&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Iniciar el Servidor de Archivos en EdytorNC&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enviar cualquier archivo desde el CNC, será guardado automáticamente en el computador (tal como está configurado en la pestaña Guardado Automático)&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enviar un programa especial desde el CNC: &lt;/li&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;:0001(CALLER)&lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt; -&amp;gt; O0001 o 0001 a ser configurado en la pestaña Servidor de Archivos &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;(0032)  &lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt;-&amp;gt; 0032  es el archivo a ser enviado de vuelta al CNC&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;M30&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;despues del tiempo ajustado en  &amp;quot;Cierre automático del diálogo de transmisión:&amp;quot; el Servidor de Archivos enviará de vuelta el archivo 0032 (rutas y extension del archivo son ajustadas en la pestaña Servidor De Archivos)&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... y otra vez ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>The first path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Primera ruta para buscar archivos.</translation>
     </message>
     <message>
         <source>The third path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tercera ruta para buscar archivos.</translation>
     </message>
     <message>
         <source>The second path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Segunda ruta para buscar archivos.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3196,245 +3230,258 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This field contains expression used to find filename in &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Este campo contiene expresión usada para encontrar el nombre de archivo en el programa &amp;quot;Caller&amp;quot;.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Debe contener una expresión regular QT (QRexExp) válida. Ver &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;En EdytorNC puede verificar esta expresión en la función &amp;quot;Limpieza&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</source>
-        <translation type="unfinished"></translation>
+        <translation>El nombre de archivo extraído del programa &quot;Caller&quot; será cambiado a minúsculas (puede ser importante si tu  sistema operativo es sensible a las letras capitales).</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Options - receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones - recibiendo</translation>
     </message>
     <message>
         <source>Options - sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones - enviando</translation>
     </message>
     <message>
         <source>User defined regular expression to find filename in program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Expresión Regular definida por el usuario para encontrar el nombre de archivo dentro del programa.</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>File extension. 
 If detected filename will contain an extension, then this setting will be ignored</source>
-        <translation type="unfinished"></translation>
+        <translation>Extension del archivo.
+Si el nombre de archivo detectado contiene una extensión, este ajuste será ignorado</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Ayuda</translation>
+        <translation>&amp;Ayuda</translation>
     </message>
     <message>
         <source>End of receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin de recepción</translation>
     </message>
     <message>
         <source>Time out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de espera:</translation>
     </message>
     <message>
         <source>End of program characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Caracteres para fin de programa:</translation>
     </message>
     <message>
         <source>Add to the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Agragar a la lista</translation>
     </message>
     <message>
         <source>Delete from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar de la lista</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estos caracteres serán agregados al final del programa.&lt;/p&gt;&lt;p&gt;Aquí puedes escribir:&lt;/p&gt;&lt;p&gt;	Texto sin formato&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Códigos hexadecimales de caracteres ASCII.&lt;/p&gt;&lt;p&gt;	Ejemplo: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % caracteres de línea nueva&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - caracter de espacio y caracteres de linea nueva&lt;/p&gt;&lt;p&gt;	caracteres de espacio y de control sólo pueden ser escritos como números hexadecimales:&lt;/p&gt;&lt;p&gt;	0x20 (espacio), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;Y/O&lt;/p&gt;&lt;p&gt;	Pueden ser usados caracteres especiales:&lt;/p&gt;&lt;p&gt;	LF - Line Feed también Carrige Return (reemplazado luego por caracteres de fin de bloque)&lt;/p&gt;&lt;p&gt;	SP - Espacio&lt;/p&gt;&lt;p&gt;	TAB - Tabulación&lt;/p&gt;&lt;p&gt;	FN - Nombre de archivo&lt;/p&gt;&lt;p&gt;	FE - Extensión del archivo (la parte despues del punto)&lt;/p&gt;&lt;p&gt;	FA - Extensión del archivo agregado al final del nombre del archivo (la parte después del caracter _ y antes del punto)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estos caracteres serán agregados al inicio del programa. &lt;/p&gt;&lt;p&gt;Aquí puedes escribir:&lt;/p&gt;&lt;p&gt;	Texto sin formato&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Códigos hexadecimales de caracteres ASCII.&lt;/p&gt;&lt;p&gt;	Ejemplo: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % caracteres de línea nueva&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - caracter de espacio y caracteres de linea nueva&lt;/p&gt;&lt;p&gt;	caracteres de espacio y de control sólo pueden ser escritos como números hexadecimales:&lt;/p&gt;&lt;p&gt;	0x20 (espacio), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;Y/O&lt;/p&gt;&lt;p&gt;	Pueden ser usados caracteres especiales:&lt;/p&gt;&lt;p&gt;	LF - Line Feed, también Carrige Return (reemplazado luego por caracteres de fin de bloque)&lt;/p&gt;&lt;p&gt;	SP - Espacio&lt;/p&gt;&lt;p&gt;	TAB - Tabulación&lt;/p&gt;&lt;p&gt;	FN - Nombre de archivo&lt;/p&gt;&lt;p&gt;	FE - Extensión del archivo (la parte despues del punto)&lt;/p&gt;&lt;p&gt;	FA - Extensión del archivo agregado al final del nombre del archivo (la parte después del caracter _ y antes del punto)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>End of block characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Caracteres para fin de bloque:</translation>
     </message>
     <message>
         <source>Send time out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de espera para envío:</translation>
     </message>
     <message>
         <source>Start delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Retardo de inicio</translation>
     </message>
     <message>
         <source>Start sending after Clear To Send (CTS) signal </source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar envío después de la señal CTS (Clear To Send) </translation>
     </message>
     <message>
         <source>Wait for CTS</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando CTS</translation>
     </message>
     <message>
         <source>Start sending after receiving XON character </source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar envío después de recibir el caracter XON </translation>
     </message>
     <message>
         <source>Wait for XON</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperandor XON</translation>
     </message>
     <message>
         <source>Auto save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardado Automático</translation>
     </message>
     <message>
         <source>Save path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de guardado:</translation>
     </message>
     <message>
         <source>File name</source>
-        <translation type="unfinished">Nombre del archivo</translation>
+        <translation>Nombre de archivo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si es seleccionada, el nombre de archivo del programa a guardar será tomado del nombre del programa ejm. O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;Si el nombre de archivo está vacío (no fue encontrado) será usada la expresión regular definida por el usuario. Si no es encontrado, código fecha-hora será usado como nombre de archivo. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Si es seleccionada, primero será usada la expresión regular definida por el usuario. Si no es encontrado, será usado el nombre del programa y si no es encontrado sera usado el código fecha-hora&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Built-in name detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Detección de nombres integrado</translation>
     </message>
     <message>
         <source>User expression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Expresión del usuario:</translation>
     </message>
     <message>
         <source>Remove letters from file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar letras del nombre de archivo</translation>
     </message>
     <message>
         <source>Change file name to lowercase</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar nombre de archivo a minúscula</translation>
     </message>
     <message>
         <source>Extension </source>
-        <translation type="unfinished"></translation>
+        <translation>Extensión</translation>
     </message>
     <message>
         <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in %MPF456...) it will be used as extension of saved file.
 Setting &quot;file extension&quot; will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si el nombre de archivo detectado contiene &quot;extensión&quot;(ejm. MPF en %_N_PR25475002_MPF, MIN en $O0004.MIN% o MPF en %MPF456...), éste será usado como extensión del archivo guardado.
+Será ignorado el ajuste &quot;extensión del archivo&quot;.</translation>
     </message>
     <message>
         <source>Use detected extension as file extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar extensión detectada como extensión del archivo</translation>
     </message>
     <message>
         <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character &apos;_&apos;  (eg O0004_MIN.nc).
 Selected file extension will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si el nombre de archivo detectado contiene &quot;extensión&quot;(ejm MPF en %_N_PR25475002_MPF, MIN en $O0004.MIN% o MPF en %MPF456...), éste será usado como parte del nombre de archivo, al final y despues del caracter &apos;_&apos;  (ejm O0004_MIN.nc).
+Será utilizada la extensión de archivo seleccionada.</translation>
     </message>
     <message>
         <source>Default extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensión predeterminada:</translation>
     </message>
     <message>
         <source>Write data to log file</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribir datos al archivo log</translation>
     </message>
     <message>
         <source>Search for file name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Búsqueda de nombre de archivo:</translation>
     </message>
     <message>
         <source>Search path 1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de búsqueda 1:</translation>
     </message>
     <message>
         <source>Search path 3:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de búsqueda 3:</translation>
     </message>
     <message>
         <source>Search path 2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de búsqueda 2:</translation>
     </message>
     <message>
         <source>Caller file name:</source>
-        <translation type="unfinished"></translation>
+        <translation>nombre del archivo &quot;caller&quot;:</translation>
     </message>
     <message>
         <source>&quot;Caller program&quot;.
 If program of that name (without extension) will be received from CNC, it will be searched for a program filename to send back to CNC.
 Set this file name as other files received from this machine.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Programa &apos;caller&apos;&quot;.
+Si un programa de ese nombre (sin extensión) es recibido desde el CNC, se hará una búsqueda del nombre de archivo del programa para ser enviado de vuelta al CNC.
+Ajusta este nombre de archivo con el archivo recibido desde esta máquina.
+</translation>
     </message>
     <message>
         <source>Reconnect time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo para reconexión:</translation>
     </message>
     <message>
         <source>If port will not be open try to open it after set time.
 Set to 300s to disable timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si el puerto no estará abierto, se intentará abrirlo despues del tiempo establecido.
+Ajuste el temporizador a 300s para desactivarlo.</translation>
     </message>
 </context>
 <context>
     <name>SerialTransmissionDialog</name>
     <message>
         <source>Clear To Send</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>CTS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Data Set Ready </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DSR</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Data Carrier Detect</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DCD</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Request To Send</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>RTS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Data Terminal Ready</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DTR</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Cerrar</translation>
+        <translation>&amp;Cerrar</translation>
     </message>
     <message>
         <source>Serial transmission</source>
-        <translation type="unfinished"></translation>
+        <translation>Transmisión Serial</translation>
     </message>
     <message>
         <source>Auto &amp;closing in %1s</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cierre automático en %1s</translation>
     </message>
     <message>
         <source>Start in %1s</source>
@@ -3446,239 +3493,241 @@ Set to 300s to disable timer.</source>
     </message>
     <message>
         <source>No Error has occured</source>
-        <translation type="unfinished">Nu hubieron errores</translation>
+        <translation>Nu hubieron errores</translation>
     </message>
     <message>
         <source>An error occurred while attempting to open an non-existing serial port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error mientras se intentaba abrir un puerto serie no existente.</translation>
     </message>
     <message>
         <source>An error occurred while attempting to open an already opened serial port by another process or a user not having enough permission and credentials to open.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error mientras se intentaba abrir un puerto serie ya abierto por otro proceso o abrirlo por un usuario sin los permisos o credenciales necesarios.</translation>
     </message>
     <message>
         <source>An error occurred while attempting to open an already opened serial port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error mientras se intentaba abrir un puerto serie ya abierto.</translation>
     </message>
     <message>
         <source>Serial port is not opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>El puerto serie no está abierto.</translation>
     </message>
     <message>
         <source>Parity error detected by the hardware while reading data</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de paridad detectado por el hardware mientras se leían datos</translation>
     </message>
     <message>
         <source>Framing error detected by the hardware while reading data</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de encuadre detectado por el hardware mientras se leían datos</translation>
     </message>
     <message>
         <source>Break condition detected by the hardware on the input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Condición de interrupción detectada por el hardware en la línea de entrada</translation>
     </message>
     <message>
         <source>An I/O error occurred while writing the data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error de E/S mientras se escribían datos</translation>
     </message>
     <message>
         <source>An I/O error occurred while reading the data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error de E/S mientras se leían datos</translation>
     </message>
     <message>
         <source>An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error de E/S cuando un recurso se vuelve no disponible, ejm. cuando el dispositivo es removido inesperadamente del sistema</translation>
     </message>
     <message>
         <source>The requested serial port operation is not supported or prohibited by the running operating system.</source>
-        <translation type="unfinished"></translation>
+        <translation>La operación requerida al puerto serie no es soportada o es prohibida por el sistema operativo actual.</translation>
     </message>
     <message>
         <source>A timeout error occurred.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error de tiempo de espera.</translation>
     </message>
     <message>
         <source>An unidentified error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha ocurrido un error no identificado</translation>
     </message>
     <message>
         <source>EdytorNC - serial transmission</source>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - transmisión serial</translation>
     </message>
     <message>
         <source>Sending byte %1 of %2</source>
-        <translation type="unfinished">Enviando byte %1 de %2</translation>
+        <translation>Enviando byte %1 de %2</translation>
     </message>
     <message>
         <source>XOFF received...</source>
-        <translation type="unfinished"></translation>
+        <translation>XOFF recibido...</translation>
     </message>
     <message>
         <source>XON received...</source>
-        <translation type="unfinished"></translation>
+        <translation>XON recibido...</translation>
     </message>
     <message>
         <source>Receiving byte %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recibiendo byte %1</translation>
     </message>
     <message>
         <source>Settings name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la configuración</translation>
     </message>
     <message>
         <source>Program received</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa recibido</translation>
     </message>
     <message>
         <source>Waiting for data...</source>
-        <translation type="unfinished">Esperando datos...</translation>
+        <translation>Esperando datos...</translation>
     </message>
     <message>
         <source>Wainting for data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando datos...</translation>
     </message>
     <message>
         <source>ERROR:	 Can&apos;t find file in path 1: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 No se puede encontrar el archivo en la ruta 1: &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>ERROR:	 Can&apos;t find file in path 2: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 No se puede encontrar el archivo en la ruta 2: &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>ERROR:	 Can&apos;t find file in path 3: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 No se puede encontrar el archivo en la ruta 3: &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 No se puede enviar el archivo: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <source>OK:	 Sending a file completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	Completado enviando archivo.</translation>
     </message>
     <message>
         <source>XOFF</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Port: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Puerto: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;OPEN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;ABIERTO&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Sending starts in %1s</source>
-        <translation type="unfinished"></translation>
+        <translation>Envío inicia en %1s</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;CLOSED&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;CERRADO&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>ERROR:	 Serial port error %1: &quot;%2&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 Error en puerto serie %1: &quot;%2&quot;.</translation>
     </message>
     <message>
         <source>WARNING:	 Coulnd not find program name. Using date time code.</source>
-        <translation type="unfinished"></translation>
+        <translation>ADVERTENCIA:	 No se pudo encontrar el nombre del archivo. Usando código fecha-hora.</translation>
     </message>
     <message>
         <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Renombrando archivo: &quot;%1&quot; a &quot;%2&quot;.</translation>
     </message>
     <message>
         <source>ERROR:	 Renaming file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 Renombrando archivo: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <source>OK:	 Saving file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Guardando archivo: &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>ERROR:	 Saving file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 Guardando archivo: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <source>Log file truncated, size &gt; 1MB.</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo log truncado, tamaño &gt; 1MB.</translation>
     </message>
     <message>
         <source>Serial transmission - File server</source>
-        <translation type="unfinished"></translation>
+        <translation>Transmisión serial - Servidor De Archivos</translation>
     </message>
     <message>
         <source>Can&apos;t start.
 File server option is not enabled in serial port settings</source>
-        <translation type="unfinished"></translation>
+        <translation>No es posible iniciar.
+Opción Servidor De Archivos no está habilitado en la configuración del puerto serie</translation>
     </message>
     <message>
         <source>%1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Received data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos recibidos...</translation>
     </message>
     <message>
         <source>INFO:	 Received &quot;Caller&quot; program: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>INFO:	 Fue recibido el programa &quot;Caller&quot;: &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>OK:	 Sending a file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Enviando archivo: &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>ERROR:	 Can&apos;t find program name to send in &quot;Caller&quot; program.</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 No se pudo encontrar dentro del programa &quot;Caller&quot; el nombre del programa a enviar.</translation>
     </message>
     <message>
         <source>ERROR:	 Sending timedout. Reseting.</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 Tiempo de espera para enviar ha vencido. Reinicializando.</translation>
     </message>
     <message>
         <source>Sending a file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviando archivo...</translation>
     </message>
     <message>
         <source>Receiving a file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Recibiendo archivo...</translation>
     </message>
     <message>
         <source>Waiting for CTS signal...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando señal CTS...</translation>
     </message>
     <message>
         <source>Waiting for XON character...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando caracter XON...</translation>
     </message>
     <message>
         <source>OK:	 Sending completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Envío completado.</translation>
     </message>
     <message>
         <source>Received data
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Datos recibidos
+</translation>
     </message>
     <message>
         <source>ERROR:	 Received file to small (less than 15 characters).</source>
-        <translation type="unfinished"></translation>
+        <translation>ERROR:	 Archivo recibido es muy pequeñol (menos de 15 caracteres).</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
     <message>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>N/A</translation>
     </message>
 </context>
 <context>
     <name>SetupDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Velocidad de giro</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Font&amp;&amp;colors</source>
@@ -4006,7 +4055,7 @@ File server option is not enabled in serial port settings</source>
     </message>
     <message>
         <source>*.Aaa</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -4354,54 +4403,54 @@ File server option is not enabled in serial port settings</source>
     <name>newSessionDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Enter the name of the session:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingrese el nombre de la sesión:</translation>
     </message>
     <message>
         <source>New session...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva sesión...</translation>
     </message>
 </context>
 <context>
     <name>sessionDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nuevo</translation>
+        <translation>&amp;Nuevo</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Renombrar</translation>
     </message>
     <message>
         <source>&amp;Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Clonar</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Borrar</translation>
+        <translation>&amp;Borrar</translation>
     </message>
     <message>
         <source>&amp;Switch to</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pasar a</translation>
     </message>
     <message>
         <source>Restore last session on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurar la última sesión al iniciar</translation>
     </message>
     <message>
         <source>Session manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestión de sesión</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
 </context>
 <context>
