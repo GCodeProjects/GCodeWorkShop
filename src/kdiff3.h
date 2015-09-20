@@ -91,7 +91,7 @@ public:
    bool isPart();
 
    // Finish initialisation (virtual, so that it can be called from the shell too.)
-   virtual void completeInit(const QString& fn1="", const QString& fn2="");
+   virtual bool completeInit(const QString& fn1="", const QString& fn2="");
 
    virtual bool isFileSaved();
    virtual bool isDirComparison();
@@ -178,7 +178,7 @@ private:
 
    QMenu *contextMenu;
 
-   void init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true );
+   bool init( bool bAuto=false, TotalDiffStatus* pTotalDiffStatus=0, bool bLoadFiles=true );
 
 
    virtual bool eventFilter( QObject* o, QEvent* e );

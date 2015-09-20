@@ -1035,6 +1035,8 @@ void EdytorNc::doDiffL()
             fileName = activeMdiChild()->currentFile();
         if(fileName.isEmpty())
             fileName = lastDir.canonicalPath();
+
+//        diffApp->close();
         diffApp->completeInit("", fileName);
 
         diffLAct->setEnabled(true);
@@ -1066,6 +1068,8 @@ void EdytorNc::doDiffR()
             fileName = activeMdiChild()->currentFile();
         if(fileName.isEmpty())
             fileName = lastDir.canonicalPath();
+
+//        diffApp->close();
         diffApp->completeInit(fileName, "");
 
         diffLAct->setEnabled(true);
@@ -1085,6 +1089,7 @@ void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
     if(diffApp != NULL)
     {
         diffAct->setChecked(true);
+//        diffApp->close();
         diffApp->completeInit(filename1, filename2);
 
         QList<int> sizes;
@@ -1135,6 +1140,7 @@ void EdytorNc::diffEditorFile()
         file.close();
 
         diffAct->setChecked(true);
+//        diffApp->close();
         diffApp->completeInit(fileName, fileName1);
 
         if(file.exists())
@@ -1164,6 +1170,8 @@ void EdytorNc::doDiff()
             fileName = activeMdiChild()->currentFile();
         if(fileName.isEmpty())
             fileName = lastDir.canonicalPath();
+
+//        diffApp->close();
         diffApp->completeInit(QFileInfo(fileName).canonicalPath(), QFileInfo(fileName).canonicalPath());
 
     }
@@ -4844,8 +4852,11 @@ void EdytorNc::clipboardLoad()
     QStandardItem *parentItem;
     QFont font;
 
-    clipboardModel->clear();
     clipboardTreeView->setSortingEnabled(false);
+    clipboardModel->clear();
+    clipboardModel->setColumnCount(1);
+    clipboardModel->setHorizontalHeaderLabels(QStringList() << "Clipboard");
+
 
     QSettings settings("Clipboard", QSettings::IniFormat);
 
@@ -4878,7 +4889,6 @@ void EdytorNc::clipboardLoad()
     settings.endArray();
 
     clipboardTreeView->setSortingEnabled(true);
-    clipboardModel->setHorizontalHeaderLabels(QStringList() << "Clipboard");
     clipboardModel->sort(Qt::AscendingOrder);
     clipboardTreeView->expandAll();
 

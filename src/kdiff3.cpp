@@ -101,7 +101,7 @@ KDiff3App::KDiff3App(QWidget* pParent, const char* , QStringList extensions): QW
 }
 
 
-void KDiff3App::completeInit( const QString& fn1, const QString& fn2)
+bool KDiff3App::completeInit( const QString& fn1, const QString& fn2)
 {
    if(!fn1.isEmpty())
    {
@@ -134,8 +134,9 @@ void KDiff3App::completeInit( const QString& fn1, const QString& fn2)
       };
    };
 
-   init(false);
+   bool result = init(false);
    slotUpdateAvailabilities();
+   return result;
 }
 
 KDiff3App::~KDiff3App()

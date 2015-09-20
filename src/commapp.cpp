@@ -216,11 +216,11 @@ void CommApp::createSerialToolBar()
 
     browseSaveFolderAct = new QAction(QIcon(":/images/browse.png"), tr("&Browse save folder"), this);
     browseSaveFolderAct->setToolTip(tr("Browse save folder"));
-    connect(browseSaveFolderAct, SIGNAL(triggered()), this, SLOT(close()));
+    connect(browseSaveFolderAct, SIGNAL(triggered()), this, SLOT(browseSaveFolder()));
 
-    showNewFilesAct = new QAction(QIcon(":/images/exit.png"), tr("&Show saved files"), this);
+    showNewFilesAct = new QAction(QIcon(":/images/project_new.png"), tr("&Show saved files"), this);
     showNewFilesAct->setToolTip(tr("Show saved files"));
-    connect(showNewFilesAct, SIGNAL(triggered()), this, SLOT(close()));
+    connect(showNewFilesAct, SIGNAL(triggered()), this, SLOT(showNewFiles()));
 
     configBox = new QComboBox();
     configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -240,6 +240,10 @@ void CommApp::createSerialToolBar()
     fileToolBar = new QToolBar(tr("FileToolBar"));
     addToolBar(Qt::TopToolBarArea, fileToolBar);
     fileToolBar->setObjectName("FileToolBar");
+
+    fileToolBar->addAction(browseSaveFolderAct);
+    fileToolBar->addAction(showNewFilesAct);
+    fileToolBar->addSeparator();
     fileToolBar->addAction(closeServerAct);
 
     ui->menu_File->addAction(closeServerAct);
@@ -459,6 +463,40 @@ void CommApp::doPortReset()
     if(mdiChild > NULL)
         mdiChild->portReset();
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void CommApp::showNewFiles()
+{
+    SerialTransmissionDialog *mdiChild = activeMdiChild();
+    if(mdiChild > NULL)
+    {
+        QSettings settings("EdytorNC", "EdytorNC");
+        QStringList extensions = settings.value("Extensions", "").toStringList();
+        extensions.removeDuplicates();
+        extensions.sort();
+
+        FileChecker *fileCheck = new FileChecker(this);
+        fileCheck->setData(mdiChild->savePath(), mdiChild->readPaths(), extensions);
+        fileCheck->findFiles();
+        fileCheck->exec();
+    };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void CommApp::browseSaveFolder()
+{
+    SerialTransmissionDialog *mdiChild = activeMdiChild();
+    if(mdiChild > NULL)
+        QDesktopServices::openUrl(QUrl(mdiChild->savePath(), QUrl::TolerantMode));
+}
+
 
 
 

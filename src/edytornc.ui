@@ -526,7 +526,7 @@ Items with non empty titles are not deleted automatically.</string>
            </attribute>
            <column>
             <property name="text">
-             <string>Part</string>
+             <string>Info</string>
             </property>
            </column>
            <column>

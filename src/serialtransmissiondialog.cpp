@@ -2035,3 +2035,21 @@ void SerialTransmissionDialog::reconnectTimerTimeout()
     if(!serialPort.isOpen())
         reset(true);
 }
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+QString SerialTransmissionDialog::savePath()
+{
+    return portSettings.savePath;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+QStringList SerialTransmissionDialog::readPaths()
+{
+    return QStringList() << portSettings.searchPath1 << portSettings.searchPath2 << portSettings.searchPath3;
+}
