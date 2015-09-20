@@ -134,7 +134,7 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
       }
       else
       {
-         diffList.front().nofEquals += equalLinesAtStart;   
+         diffList.front().nofEquals += equalLinesAtStart;
          currentLine1 += equalLinesAtStart;
          currentLine2 += equalLinesAtStart;
 
@@ -229,7 +229,7 @@ bool KDiff3App::runDiff( const LineData* p1, int size1, const LineData* p2, int 
    return true;
 }
 
-void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles )
+bool KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadFiles )
 {
    ProgressProxy pp;
 
@@ -238,7 +238,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    // When doing a full analysis in the directory-comparison, then the statistics-results
    // will be stored in the given TotalDiffStatus. Otherwise it will be 0.
    bool bGUI = pTotalDiffStatus == 0;
-   if (pTotalDiffStatus==0) 
+   if (pTotalDiffStatus==0)
       pTotalDiffStatus = &m_totalDiffStatus;
 
    bool bVisibleMergeResultWindow = ! m_outputFilename.isEmpty();
@@ -271,6 +271,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
       pp.setMaxNofSteps( 2 );  // 1 comparison, 1 finediff
    }
 
+
    pTotalDiffStatus->reset();
    // Run the diff.
 
@@ -284,9 +285,11 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
       pp.setInformation(tr("Linediff: A <-> B"));
       calcDiff3LineListUsingAB( &m_diffList12, m_diff3LineList );
       fineDiff( m_diff3LineList, 1, m_sd1.getLineDataForDisplay(), m_sd2.getLineDataForDisplay(), pTotalDiffStatus->bTextAEqB );
-      if ( m_sd1.getSizeBytes()==0 ) pTotalDiffStatus->bTextAEqB=false;
+      if ( m_sd1.getSizeBytes()==0 )
+          pTotalDiffStatus->bTextAEqB=false;
 
       pp.step();
+
 
 
    m_diffBufferInfo.init( &m_diff3LineList, &m_diff3LineVector,
@@ -305,7 +308,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 
    if (bGUI)
    {
-      
+
       const ManualDiffHelpList* pMDHL = &m_manualDiffHelpList;
 
       //qDebug() << "m_sd1.getAliasName()" << m_sd1.getAliasName();
@@ -334,7 +337,6 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
 
    setHScrollBarRange();
 
-
    if ( bLoadFiles )
    {
       /*if ( bVisibleMergeResultWindow && !bAuto )
@@ -359,6 +361,7 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
             else if ( pTotalDiffStatus->bTextBEqC ) totalInfo += tr("Files %1 and %2 have equal text, but are not binary equal. \n").arg(QString("B"),QString("C"));
          }
 
+         //QMessageBox::information( this, tr("Diff"), totalInfo );
 //         if ( !totalInfo.isEmpty() )
 //            KMessageBox::information( this, totalInfo );
       }
@@ -382,6 +385,8 @@ void KDiff3App::init( bool bAuto, TotalDiffStatus* pTotalDiffStatus, bool bLoadF
    {
       m_pDiffTextWindow1->setFocus();
    }
+
+   return pTotalDiffStatus->bTextAEqB;
 }
 
 
@@ -1068,7 +1073,7 @@ void KDiff3App::recalcWordWrap(int nofVisibleColumns) // nofVisibleColumns is >=
 {
    bool bPrinting = nofVisibleColumns>=0;
    int firstD3LIdx = 0;
-   if( m_pDiffTextWindow1 ) 
+   if( m_pDiffTextWindow1 )
       firstD3LIdx = m_pDiffTextWindow1->convertLineToDiff3LineIdx( m_pDiffTextWindow1->getFirstLine() );
 
    // Convert selection to D3L-coords (converting back happens in DiffTextWindow::recalcWordWrap()
@@ -1302,7 +1307,7 @@ void KDiff3App::slotWinFocusNext()
 
    std::list<QWidget*>::iterator i = std::find( visibleWidgetList.begin(),  visibleWidgetList.end(), focus);
    ++i;
-   if ( i==visibleWidgetList.end() ) 
+   if ( i==visibleWidgetList.end() )
       i = visibleWidgetList.begin();
    if ( i!=visibleWidgetList.end() )
    {

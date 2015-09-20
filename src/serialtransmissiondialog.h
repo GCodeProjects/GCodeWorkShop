@@ -44,6 +44,8 @@ public:
     void sendData(QString dataToSend, QString configName);
     void startFileServer(QString configName);
     QString configName();
+    QString savePath();
+    QStringList readPaths();
 
 public slots:
     bool wasCanceled();

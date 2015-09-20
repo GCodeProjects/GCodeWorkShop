@@ -76,7 +76,8 @@ SOURCES += edytornc.cpp \
     serialtransmissiondialog.cpp \
     serialportconfigdialog.cpp \
     commapp.cpp \
-    serialportcfghelpdialog.cpp
+    serialportcfghelpdialog.cpp \
+    filechecker.cpp
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -106,7 +107,8 @@ HEADERS += edytornc.h \
     serialtransmissiondialog.h \
     serialportconfigdialog.h \
     commapp.h \
-    serialportcfghelpdialog.h
+    serialportcfghelpdialog.h \
+    filechecker.h
 TEMPLATE = app
 CONFIG += warn_on \
     thread \
@@ -141,7 +143,8 @@ FORMS += i2mdialog.ui \
     serialtransmissiondialog.ui \
     serialportconfigdialog.ui \
     commapp.ui \
-    serialportcfghelpdialog.ui
+    serialportcfghelpdialog.ui \
+    filechecker.ui
 #TRANSLATIONS = edytornc_pl.ts \
 #    edytornc_ca.ts \
 #    edytornc_de.ts \
@@ -173,7 +176,7 @@ unix:desktop.files = edytornc.desktop
 unix:mimetypes.path = $${PREFIX}/share/icons/hicolor/32x32/mimetypes/
 unix:mimetypes.files = images/application-x-g-code.png
 unix:icon.path = $${PREFIX}/share/icons/hicolor/48x48/apps/
-unix:icon.files = images/edytornc.png    
+unix:icon.files = images/edytornc.png
 unix:INSTALLS += target translate mime desktop mimetypes icon examples doc
 macx:LIBS += -framework IOKit -framework CoreFoundation
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this

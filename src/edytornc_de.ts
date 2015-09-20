@@ -297,71 +297,81 @@
     <message>
         <location filename="commapp.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished">Hauptfenster</translation>
+        <translation>Hauptfenster</translation>
     </message>
     <message>
         <location filename="commapp.ui" line="57"/>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Datei</translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <location filename="commapp.ui" line="65"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menüleiste</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="36"/>
         <source>EdytorNC - Serial port file server</source>
         <oldsource>EdytorNC - File server</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - Serial Port Datei Server</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="191"/>
         <location filename="commapp.cpp" line="193"/>
         <source>Serial port configuration</source>
-        <translation type="unfinished">Einstellungen serielle Schnittstelle</translation>
+        <translation>Einstellungen serielle Schnittstelle</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="196"/>
+        <source>&amp;Start</source>
+        <translation>&amp;Start</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="198"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="201"/>
+        <source>S&amp;top</source>
+        <translation>S&amp;top</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="203"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="207"/>
         <source>&amp;Reset</source>
         <oldsource>Reset</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reset</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="208"/>
         <source>Reset serial port</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset serielle Schnittstelle</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="212"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Schließen</translation>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="213"/>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="232"/>
         <source>FileToolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei-Menüleiste</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="271"/>
         <location filename="commapp.cpp" line="274"/>
         <source>Default</source>
-        <translation type="unfinished">Vorgaben</translation>
+        <translation>Vorgaben</translation>
     </message>
 </context>
 <context>
@@ -530,25 +540,32 @@
         <location filename="edytornc.ui" line="379"/>
         <location filename="edytornc.ui" line="382"/>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwischenablage</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="405"/>
         <source>Delete selected item</source>
-        <translation type="unfinished"></translation>
+        <translation>Löche gewähltes Objekt</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="408"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="434"/>
-        <source>Right click to copy item to Clipboard.
+        <source>Right click to copy item back to system clipboard.
+Items with empty titles are the last five texts copied to system clipboard.
+Double click on item title to edit it. 
+Items with non empty titles are not deleted automatically.</source>
+        <oldsource>Right click to copy item to Clipboard.
 Double click on item title to edit it. 
 Items with non empty titles are not deleted automatically.
-Items with empty titles are the last five texts copied to system clipboard.</source>
-        <translation type="unfinished"></translation>
+Items with empty titles are the last five texts copied to system clipboard.</oldsource>
+        <translation>Rechts-Klick im Objekt wieder zurück zur System-Zsischenablage zu kopieren.
+Objekte mit leeren Beschriftungen sind die letzten 5 Texte aus der System-Zwischenablage.
+Doppel-Klickauf ein Objekt um es zu editieren. 
+Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="513"/>
@@ -1240,17 +1257,17 @@ Items with empty titles are the last five texts copied to system clipboard.</sou
     <message>
         <location filename="edytornc.cpp" line="2012"/>
         <source>Tile the windows horyzontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenster horizontal beschriften</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="4615"/>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation>File &quot;%1&quot; &lt;b&gt;wurde auf der Festplatte verändert.&lt;/b&gt;&lt;p&gt;Neu laden?&lt;/p&gt;%2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="4617"/>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Warnung:&lt;/b&gt; Die Datei im Editor beinhaltet nicht gespeicherte Änderungen.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Swap/modify axes</source>
@@ -1369,13 +1386,14 @@ Items with empty titles are the last five texts copied to system clipboard.</sou
     <message>
         <location filename="edytornc.cpp" line="185"/>
         <source>EdytorNC - Serial port file server</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="186"/>
         <source>Serial port file server is running.
 Close anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Serial port file server läuft.
+Abbrechen?</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="529"/>
@@ -1406,7 +1424,7 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="1470"/>
         <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Niederländische Übersetzung Danke an Henk van Andel</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1587"/>
@@ -1444,22 +1462,22 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="1894"/>
         <source>Clean &amp;up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sä&amp;ubern</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2011"/>
         <source>Tile &amp;horyzontally</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Horizontal anordnen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2015"/>
         <source>Tile &amp;vertycally</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vertikal anordnen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2016"/>
         <source>Tile the windows vertycally</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Fenster vertikal anordnen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2079"/>
@@ -1706,7 +1724,7 @@ Close anyway?</source>
         <location filename="edytornc.cpp" line="3037"/>
         <location filename="edytornc.cpp" line="3039"/>
         <source>Start application &quot;Serial port file server&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte den &quot;Serial port file server&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="4331"/>
@@ -1880,12 +1898,12 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="1993"/>
         <source>Insert/increase Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Einsetzen/Erhöhen Block Sprung /</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1996"/>
         <source>Block Skip -</source>
-        <translation type="unfinished"></translation>
+        <translation>Block Sprung -</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1997"/>
@@ -1895,7 +1913,7 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="1998"/>
         <source>Insert/decrease Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Einsetzen/Erniedrigen Block Sprung /</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3851"/>
@@ -2017,39 +2035,39 @@ Close anyway?</source>
     <message>
         <location filename="dialogs.cpp" line="326"/>
         <source>Feed (chip load) per tooth (mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorschub pro Zahn (mm)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="328"/>
         <location filename="dialogs.cpp" line="340"/>
         <source>Number of teeth on the cutter</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der Schneiden am Fräser</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="330"/>
         <location filename="dialogs.cpp" line="342"/>
         <source>Spindle speed (revs/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spindeldrehzahl (U/min)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="337"/>
         <source>Cutting speed (ft/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorschubgeschwindigkeit (mm/min)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="338"/>
         <source>Feed (chip load) per tooth (inches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorschub pro Zahn (inch)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="339"/>
         <source>Tool diameter (inches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeug Durchmesser (inch)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="341"/>
         <source>Table feed (inches/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Achsvorschub (inch/min)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="79"/>
@@ -2858,7 +2876,7 @@ Weiter mit eigenem Risiko.</translation>
     <message>
         <location filename="mdichild.cpp" line="3997"/>
         <source>Block Skip remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Block Sprung löschen</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="3998"/>
@@ -2868,12 +2886,12 @@ Weiter mit eigenem Risiko.</translation>
     <message>
         <location filename="mdichild.cpp" line="3999"/>
         <source>Remove Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Block Sprung löschen /</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4004"/>
         <source>Block Skip +</source>
-        <translation type="unfinished"></translation>
+        <translation>Block Sprung +</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4005"/>
@@ -2883,12 +2901,12 @@ Weiter mit eigenem Risiko.</translation>
     <message>
         <location filename="mdichild.cpp" line="4006"/>
         <source>Insert/increase Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen/Erhöhen Block Sprung /</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4011"/>
         <source>Block Skip -</source>
-        <translation type="unfinished"></translation>
+        <translation>Block Sprung -</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4012"/>
@@ -2898,7 +2916,7 @@ Weiter mit eigenem Risiko.</translation>
     <message>
         <location filename="mdichild.cpp" line="4013"/>
         <source>Insert/decrease Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen/Erniedrigen Block Sprung /</translation>
     </message>
     <message>
         <location filename="mdichildform.ui" line="29"/>
@@ -3436,7 +3454,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportcfghelpdialog.ui" line="14"/>
         <source>Help - Serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe Serielle Schnittstelle Einstellungen</translation>
     </message>
     <message>
         <location filename="serialportcfghelpdialog.ui" line="23"/>
@@ -3445,7 +3463,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -3676,27 +3694,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportconfigdialog.ui" line="1436"/>
         <source>Write data to log file</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten in Log-Datei schreiben</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1499"/>
         <source>Search for file name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Dateiname:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1506"/>
         <source>Search path 1:</source>
-        <translation type="unfinished">Suchpfad 1:</translation>
+        <translation>Suchpfad 1:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1574"/>
         <source>Search path 2:</source>
-        <translation type="unfinished">Suchpfad 2:</translation>
+        <translation>Suchpfad 2:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1592"/>
         <source>Caller file name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anrufer Dateiname:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1648"/>
@@ -3704,18 +3722,20 @@ p, li { white-space: pre-wrap; }
 If program of that name (without extension) will be received from CNC, it will be searched for a program filename to send back to CNC.
 Set this file name as other files received from this machine.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Anrufer Programm&quot;.
+Wenn ein Programm mit diesem Namen (ohne Erweiterung) von der CNC empfangen wird, wird nach einen Programm mit diesem Namen gesucht und zurück an die CNC gesendet.
+Setze diesen Dateinamen wenn auch andere Dateien von der Maschine empfangen werden.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1717"/>
         <source>Reconnect time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit wiederverbinden:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1724"/>
         <source>If port will not be open try to open it after set time.
 Set to 300s to disable timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn der Port nicht geöffnet werden kann nach der Zeit. Setze auf 300s um den Timer zu deaktivieren.</translation>
     </message>
     <message>
         <source>Off</source>
@@ -3734,47 +3754,47 @@ Set to 300s to disable timer.</source>
     <message>
         <location filename="serialportconfigdialog.ui" line="1022"/>
         <source>Send time out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sende Time-out:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1072"/>
         <source>Start delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Start Verzögerung</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1139"/>
         <source>Start sending after Clear To Send (CTS) signal </source>
-        <translation type="unfinished"></translation>
+        <translation>Start Senden nach CTS Signal (Clear To Send) </translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1142"/>
         <source>Wait for CTS</source>
-        <translation type="unfinished"></translation>
+        <translation>Warten auf CTS</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1149"/>
         <source>Start sending after receiving XON character </source>
-        <translation type="unfinished"></translation>
+        <translation>Start Senden nach Empfang von XON Zeichnen</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1152"/>
         <source>Wait for XON</source>
-        <translation type="unfinished"></translation>
+        <translation>Warten auf XON</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1163"/>
         <source>Auto save</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto Speichern</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1196"/>
         <source>Save path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad Speichern:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1229"/>
         <source>File name</source>
-        <translation type="unfinished">Datei Name</translation>
+        <translation>Datei Name</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1235"/>
@@ -3789,22 +3809,22 @@ Set to 300s to disable timer.</source>
     <message>
         <location filename="serialportconfigdialog.ui" line="1253"/>
         <source>User expression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer Erweiterung:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1315"/>
         <source>Remove letters from file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne Buchstaben von Dateinamen</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1325"/>
         <source>Change file name to lowercase</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändere Dateinamen auf Kleinbuchstaben</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1337"/>
         <source>Extension </source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterung </translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1343"/>
@@ -3815,7 +3835,7 @@ Setting &quot;file extension&quot; will be ignored.</source>
     <message>
         <location filename="serialportconfigdialog.ui" line="1347"/>
         <source>Use detected extension as file extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende erkannte Endung als Dateiendung</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1360"/>
@@ -3826,24 +3846,24 @@ Selected file extension will be used.</source>
     <message>
         <location filename="serialportconfigdialog.ui" line="1376"/>
         <source>Default extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Voreingestellte Dateiendung:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1383"/>
         <source>Extension of saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Endung der gespeicherten Datei</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="817"/>
         <location filename="serialportconfigdialog.ui" line="1700"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Addiere</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="831"/>
         <location filename="serialportconfigdialog.ui" line="1686"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Löschen</translation>
+        <translation>&amp;Löschen</translation>
     </message>
     <message>
         <source>Options</source>
@@ -3972,17 +3992,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportconfigdialog.ui" line="735"/>
         <source>End of receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Ende vom Empfangen</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="745"/>
         <source>Time out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitüberschreitung:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="783"/>
         <source>End of program characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm-Ende Zeichen:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="814"/>
@@ -3990,7 +4010,7 @@ p, li { white-space: pre-wrap; }
         <location filename="serialportconfigdialog.ui" line="1279"/>
         <location filename="serialportconfigdialog.ui" line="1697"/>
         <source>Add to the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Addieren zur Liste</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="828"/>
@@ -3998,7 +4018,7 @@ p, li { white-space: pre-wrap; }
         <location filename="serialportconfigdialog.ui" line="1293"/>
         <location filename="serialportconfigdialog.ui" line="1683"/>
         <source>Delete from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche von der Liste</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="876"/>
@@ -4013,7 +4033,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportconfigdialog.ui" line="926"/>
         <source>End of block characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ende des Blocks Zeichen:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1010"/>
@@ -4045,7 +4065,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportconfigdialog.ui" line="656"/>
         <source>Auto close transmission dialog:</source>
-        <translation>Auto-Schließen Übertragungsfenster</translation>
+        <translation>Automatisches-Schließen des Übertragungsfenster:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Auto close transmission dialog after last character which was sent/received.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4095,7 +4115,7 @@ This setting is also used in file server mode to detect end of incoming transmis
     <message>
         <location filename="serialportconfigdialog.ui" line="692"/>
         <source>Options - receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen - Empfangen</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="698"/>
@@ -4106,7 +4126,7 @@ Works only when receiving file.</source>
     <message>
         <location filename="serialportconfigdialog.ui" line="861"/>
         <source>Options - sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen - Senden</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1103"/>
@@ -4140,7 +4160,7 @@ Wenn der Dateiname nicht automatisch erkannt wurde, wird er aus dem aktuellen Da
     <message>
         <location filename="serialportconfigdialog.ui" line="1213"/>
         <source>Browse for save path</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchsuchen für Speicher Pfad</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1216"/>
@@ -4179,7 +4199,7 @@ Wenn der Dateiname nicht automatisch erkannt wurde, wird er aus dem aktuellen Da
     <message>
         <location filename="serialportconfigdialog.ui" line="1296"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1311"/>
@@ -4211,7 +4231,7 @@ Kannt nicht verwendet werden mit der Option &quot;BEHALTE&quot;.</translation>
     <message>
         <location filename="serialportconfigdialog.ui" line="1415"/>
         <source>If save path will already contain a file, old file will be renamed to *.bak</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn im Speicher-Pfad es schon diese Datei gibt, wird diese umbenannt zu *.bak</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1404"/>
@@ -4269,7 +4289,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportconfigdialog.ui" line="1513"/>
         <source>The first path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der erste Pfad um Dateien zu suchen.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1540"/>
@@ -4282,12 +4302,12 @@ If detected filename will contain an extension, then this setting will be ignore
     <message>
         <location filename="serialportconfigdialog.ui" line="1557"/>
         <source>Search path 3:</source>
-        <translation type="unfinished">Suchpfad 3:</translation>
+        <translation>Suchpfad 3:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1564"/>
         <source>The third path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der dritte Pfad um Dateien zu suchen.</translation>
     </message>
     <message>
         <source>Search path 3</source>
@@ -4308,7 +4328,7 @@ If detected filename will contain an extension, then this setting will be ignore
     <message>
         <location filename="serialportconfigdialog.ui" line="1635"/>
         <source>The second path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der zweite Pfad um Dateien zu suchen.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1664"/>
@@ -4329,7 +4349,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportconfigdialog.ui" line="1783"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Hilfe</translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1809"/>
@@ -4404,7 +4424,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialtransmissiondialog.ui" line="42"/>
         <source>Settings name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name Einstellungen</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="104"/>
@@ -4466,7 +4486,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialtransmissiondialog.ui" line="310"/>
         <source>XOFF</source>
-        <translation type="unfinished"></translation>
+        <translation>XOFF</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="448"/>
@@ -4491,17 +4511,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialtransmissiondialog.cpp" line="281"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Port: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="284"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;OPEN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;Offen&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="297"/>
         <source>Sending starts in %1s</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden startet in %1s</translation>
     </message>
     <message>
         <source>Waiting for a signal readiness...</source>
@@ -4510,7 +4530,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialtransmissiondialog.cpp" line="356"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;CLOSED&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;Geschlossen&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="401"/>
@@ -4587,7 +4607,7 @@ p, li { white-space: pre-wrap; }
         <location filename="serialtransmissiondialog.cpp" line="447"/>
         <location filename="serialtransmissiondialog.cpp" line="452"/>
         <source>ERROR:	 Serial port error %1: &quot;%2&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER:	 Serial Port Fehler %1: &quot;%2&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="453"/>
@@ -4603,50 +4623,50 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialtransmissiondialog.cpp" line="495"/>
         <source>OK:	 Sending completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Senden komplett.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="628"/>
         <source>Received data
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Empfangene Daten</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1386"/>
         <source>ERROR:	 Received file to small (less than 15 characters).</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler:	 Empfangene Datei zu klein (weniger als 15 Zeichen).</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1849"/>
         <source>OK:	 Sending a file completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 SEnden der Datei komplett.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="496"/>
         <location filename="serialtransmissiondialog.cpp" line="1850"/>
         <source>Wainting for data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Warten aud Daten...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="263"/>
         <source>Sending a file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden einer Datei...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="276"/>
         <source>Receiving a file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfangen einer Datei...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="315"/>
         <source>Waiting for CTS signal...</source>
-        <translation type="unfinished"></translation>
+        <translation>Warten auf CTS Signal...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="320"/>
         <location filename="serialtransmissiondialog.cpp" line="324"/>
         <source>Waiting for XON character...</source>
-        <translation type="unfinished"></translation>
+        <translation>Warten auf XON Zeichen...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="607"/>
@@ -4668,53 +4688,54 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialtransmissiondialog.cpp" line="645"/>
         <source>Program received</source>
-        <translation type="unfinished"></translation>
+        <translation>Pregramm empfangen</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1345"/>
         <source>WARNING:	 Coulnd not find program name. Using date time code.</source>
-        <translation type="unfinished"></translation>
+        <translation>WARNUNG:	 Kann Pregramm Name nicht finden. Verwende Datum Zeit Kodierung.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1420"/>
         <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Datei umbenennen: &quot;%1&quot; in &quot;%2&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1426"/>
         <source>ERROR:	 Renaming file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished">Fehler:	 Datei umbenennen: &quot;%1&quot;. %2 {1&quot;?} {2?}</translation>
+        <translation>Fehler:	 Datei umbenennen: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1443"/>
         <source>OK:	 Saving file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Speichere Datei: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1449"/>
         <source>ERROR:	 Saving file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished">Fehler:	 Datei speichern: &quot;%1&quot;. %2 {1&quot;?} {2?}</translation>
+        <translation>Fehler:	 Datei speichern: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1480"/>
         <source>Log file truncated, size &gt; 1MB.</source>
-        <translation type="unfinished"></translation>
+        <translation>Log Dateo gekürzt, Größe &gt; 1MB.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1621"/>
         <source>Serial transmission - File server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serielle Übertragung - Datei Server</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1622"/>
         <source>Can&apos;t start.
 File server option is not enabled in serial port settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann nicht starten.
+Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1631"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="258"/>
@@ -4722,52 +4743,52 @@ File server option is not enabled in serial port settings</source>
         <location filename="serialtransmissiondialog.cpp" line="1633"/>
         <location filename="serialtransmissiondialog.cpp" line="1825"/>
         <source>Waiting for data...</source>
-        <translation type="unfinished">Warten auf Daten...</translation>
+        <translation>Warten auf Daten...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1647"/>
         <source>Received data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfangene Daten...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1673"/>
         <source>INFO:	 Received &quot;Caller&quot; program: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>INFO:	 Angekommenes Anrufer Programm: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1728"/>
         <source>ERROR:	 Can&apos;t find file in path 1: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER:	 Kann Datei nicht in Pfad 1 finden: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1736"/>
         <source>ERROR:	 Can&apos;t find file in path 2: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER:	 Kann Datei nicht in Pfad 2 finden: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1744"/>
         <source>ERROR:	 Can&apos;t find file in path 3: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER:	 Kann Datei nicht in Pfad 3 finden: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1801"/>
         <source>OK:	 Sending a file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Sende eine Datei: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1806"/>
         <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER:	 Kann Datei nicht senden: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1813"/>
         <source>ERROR:	 Can&apos;t find program name to send in &quot;Caller&quot; program.</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER:	 Kann Programm Name laut &quot;Anrufer&quot; Programm nicht finden.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1882"/>
         <source>ERROR:	 Sending timedout. Reseting.</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER:	 Senden Timeout. Reseting.</translation>
     </message>
     <message>
         <source>WARNING:	 Coulnd not find program name.

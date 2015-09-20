@@ -21,68 +21,57 @@
  ***************************************************************************/
 
 
+#ifndef FILECHECKER_H
+#define FILECHECKER_H
 
-#ifndef COMMAPP_H
-#define COMMAPP_H
+#include <QDialog>
+#include <QFile>
+#include <QDir>
+#include <QStringList>
+#include <QPointer>
+#include <QDateTime>
+#include <QTextStream>
+#include <QtDebug>
+#include <QDir>
+#include <QToolButton>
+#include <QSettings>
 
-#include <QMainWindow>
-#include <QComboBox>
+#include "kdiff3.h"
 
-#include "serialtransmissiondialog.h"
-#include "serialportconfigdialog.h"
-#include "filechecker.h"
-
-
-namespace Ui
-{
-class CommApp;
+namespace Ui {
+class FileChecker;
 }
 
-class CommApp : public QMainWindow
+class FileChecker : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit CommApp(QWidget *parent = 0);
-    ~CommApp();
-
-protected:
-    void closeEvent(QCloseEvent *event);
-
+    explicit FileChecker(QWidget *parent = 0);
+    ~FileChecker();
+    void setData(const QString startDir, QStringList readPaths, QStringList fileFilter);
+    void findFiles();
 private slots:
-    void serialConfig();
-    void tileSubWindowsVertycally();
-    void setActiveSubWindow(QWidget *window);
-    void startSerialPortServer();
-    void stopSerialPortServer();
-    void activeWindowChanged(QMdiSubWindow *window);
-    void changeActiveWindow();
-    void closeTab(int i);
-    void doPortReset();
-    void showNewFiles();
-    void browseSaveFolder();
+    void filesTableClicked(int row, int col);
+    void acceptFile();
+    void deleteFile();
+    void readPathComboBoxChanged(QString text);
+    void filesTableCurrentCellChanged(int row, int col, int pRow, int pCol);
 private:
-    Ui::CommApp *ui;
-    QSignalMapper *windowMapper;
+    Ui::FileChecker *ui;
+    QPointer<KDiff3App> diffApp;
+    QStringList extensions;
+    QPointer<QToolButton> okBtn;
+    QPointer<QToolButton> noBtn;
+    int prevRow;
+    QStringList readPathList;
+    QString savePath;
+    QByteArray splitterState;
 
-    QAction *configPortAct;
-    QAction *startServerAct;
-    QAction *stopServerAct;
-    QAction *resetServerAct;
-    QAction *closeServerAct;
-    QAction *browseSaveFolderAct;
-    QAction *showNewFilesAct;
-    QComboBox *configBox;
-    QToolBar *fileToolBar;
+    void createDiff();
+    void findFiles(const QString startDir, QStringList fileFilter);
 
-
-    void saveSettings();
-    void loadSettings();
-    void loadSerialConfignames();
-    void createSerialToolBar();
-    SerialTransmissionDialog *findMdiChild(const QString __config);
-    SerialTransmissionDialog *createSerialPortServer(QString __config);
-    SerialTransmissionDialog *activeMdiChild();
+    void preliminaryDiff(QString file1, QString file2);
 };
 
-#endif // COMMAPP_H
+#endif // FILECHECKER_H

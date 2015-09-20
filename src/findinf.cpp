@@ -296,14 +296,16 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
                   word = true;
          };
 
+         size = file.size();
+
          if((textFounded && (!wholeWordsCheckBox->isChecked())) ||
             (textFounded && (wholeWordsCheckBox->isChecked() && !word)))
          {
             notFound = false;
             textFounded = false;
             word = false;
-            size = file.size();
 
+            comment_tx.clear();
             pos = 0;
             while((pos = line.indexOf(exp, pos)) >= 0)
             {
@@ -392,7 +394,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
         if(!list.contains(item))
           list.append(item);
    };
-   
+
    while(list.size() > MAXLISTS)
    {
       list.removeLast();
@@ -416,7 +418,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    };
    settings.setValue("Filters", list);
    settings.setValue("SelectedFilter", fileComboBox->currentText());
-   
+
    list.clear();
    list.append(textComboBox->currentText());
    for(int i = 0; i <= textComboBox->count(); i++)
@@ -430,7 +432,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
    while(list.size() > MAXLISTS)
    {
       list.removeLast();
-   }; 
+   };
    settings.setValue("Texts", list);
    settings.setValue("SelectedText", textComboBox->currentText());
 
@@ -448,11 +450,11 @@ void FindInFiles::readSettings()
    QStringList list;
    QString item;
    int i;
-   
 
-   textComboBox->clear(); 
-   directoryComboBox->clear(); 
-   fileComboBox->clear(); 
+
+   textComboBox->clear();
+   directoryComboBox->clear();
+   fileComboBox->clear();
 
    QSettings settings("EdytorNC", "EdytorNC");
 
@@ -501,7 +503,7 @@ void FindInFiles::readSettings()
 void FindInFiles::filesTableClicked(int x, int y)
 {
    Q_UNUSED(y);
-   
+
    QTableWidgetItem *item = filesTable->item(x, 0);
 
    QString dir = directoryComboBox->currentText();
@@ -632,8 +634,8 @@ bool FindInFiles::findText(const QString & exp, QTextDocument::FindFlags options
 
 //**************************************************************************************************
 //
-//************************************************************************************************** 
- 
+//**************************************************************************************************
+
 void FindInFiles::setHighlightColors(const _h_colors colors)
 {
    highligh = true;
@@ -642,8 +644,8 @@ void FindInFiles::setHighlightColors(const _h_colors colors)
 
 //**************************************************************************************************
 //
-//************************************************************************************************** 
- 
+//**************************************************************************************************
+
 void FindInFiles::setDir(const QString dir)
 {
    directoryComboBox->addItem(QDir::toNativeSeparators(dir));
@@ -670,7 +672,7 @@ void FindInFiles::highlightFindText(QString searchString, QTextDocument::FindFla
        if(!cursor.isNull())
        {
           selection.cursor = cursor;
-          
+
           QTextCharFormat format = cursor.charFormat();
           format.setFontPointSize(16);
           qApp->processEvents();
