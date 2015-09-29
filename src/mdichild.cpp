@@ -803,7 +803,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       if(mode == 4) //renumber lines without N
       {
          num = startAt;
-         lineCount = textEdit->document()->lineCount() - 1;
+         lineCount = textEdit->document()->lineCount();
          for(i = 0; i < lineCount; i++)
          {
             line = tx.section(QLatin1Char('\n'), i, i);
@@ -918,7 +918,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
       if(mode == 2) //renumber all
       {
          num = startAt;
-         exp.setPattern("[N]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+         exp.setPattern("[Nn]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
          if(selection)
          {
              lineCount = tx.count('\n');
@@ -927,7 +927,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
          else
          {
              lineCount = textEdit->document()->lineCount();
-             lineCount--;
+             //lineCount--;
          };
 
          for(i = 0; i < lineCount; i++)
@@ -954,7 +954,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                if(((pos = line.indexOf(exp, pos)) >= 0) && (line.at(0) != QLatin1Char('$')))
                {
                   i_tx = line.mid(pos, exp.matchedLength());
-
+                  i_tx.remove('\n');
                   if((!(i_tx.contains(QLatin1Char('('))) && !(i_tx.contains(QLatin1Char('\''))) && (!i_tx.contains(QLatin1Char(';')))))
                   {
                      f_tx = QString(QLatin1String("N%1")).arg(num, prec);
@@ -963,6 +963,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                      count++;
                      f_tx.append(QLatin1String(" "));
                      line.replace(i_tx, f_tx);
+                     qDebug() << line << i_tx << f_tx;
                      break;
                   }
                   else
