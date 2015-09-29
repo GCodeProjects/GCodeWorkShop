@@ -229,6 +229,10 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
 
             QTableWidgetItem *statusItem = new QTableWidgetItem(comment_tx);
             statusItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+            statusItem->setToolTip(tr("Status of received file:\n"
+                                      "New - file does not exists in Search path.\n"
+                                      "Equal - received file and file in Search path are identical.\n"
+                                      "Changed - received file is modified"));
             ui->fileTableWidget->setItem(row, 4, statusItem);
 
 
