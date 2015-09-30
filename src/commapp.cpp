@@ -494,7 +494,7 @@ void CommApp::browseSaveFolder()
 {
     SerialTransmissionDialog *mdiChild = activeMdiChild();
     if(mdiChild > NULL)
-        QDesktopServices::openUrl(QUrl(mdiChild->savePath(), QUrl::TolerantMode));
+        QDesktopServices::openUrl(QUrl(QString("file:///%1").arg(mdiChild->savePath()), QUrl::TolerantMode));
 }
 
 

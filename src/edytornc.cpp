@@ -1468,7 +1468,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2015-09-29 BETA" +
+                       trUtf8("<P>Version: ") + "2015-09-30 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
@@ -4688,15 +4688,30 @@ void EdytorNc::clipboardChanged()
 {
     QStandardItem *item;
     QFont font;
+    bool notFound = true;
 
     updateMenus();
 
     QString text = clipboard->text();
 
-    if(!text.isEmpty())
-    {
-        QStandardItem *parentItem = clipboardModel->invisibleRootItem();
+    if(text.isEmpty())
+        return;
 
+    QStandardItem *parentItem = clipboardModel->invisibleRootItem();
+
+    for(int i = 0; i < parentItem->rowCount(); i++) // check that text is already in clipboard
+    {
+        item = parentItem->child(i, 0);
+        if(text == item->child(0, 0)->text())
+        {
+            notFound = false;
+            break;
+        };
+
+    };
+
+    if(notFound)
+    {
         clipboardTreeView->setSortingEnabled(false);
 
         if(parentItem->rowCount() >= 5)
@@ -4809,10 +4824,7 @@ void EdytorNc::deleteFromClipboardButtonClicked()
 
 void EdytorNc::clipboardSave()
 {
-    QString itemText, parentText;
-    int count;
     QStandardItem *item;
-
 
     QSettings settings("Clipboard", QSettings::IniFormat);
 
@@ -4821,20 +4833,13 @@ void EdytorNc::clipboardSave()
 
     QStandardItem *parentItem = clipboardModel->invisibleRootItem();
 
-    count = 0;
     for(int i = 0; i < parentItem->rowCount(); i++)
     {
         item = parentItem->child(i, 0);
-        parentText = item->text();
-        for(int j = 0; j < item->rowCount(); j++)
-        {
-            itemText = item->child(j, 0)->text();
 
-            settings.setArrayIndex(count);
-            settings.setValue("Title", parentText);
-            settings.setValue("ItemText", itemText);
-            count++;
-        };
+        settings.setArrayIndex(i);
+        settings.setValue("Title", item->text());
+        settings.setValue("ItemText", item->child(0, 0)->text());
     };
 
     settings.endArray();
