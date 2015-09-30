@@ -183,7 +183,7 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
             sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
             QTableWidgetItem *dateItem = new QTableWidgetItem();
-            dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+            dateItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
             dateItem->setData(Qt::DisplayRole, QFileInfo(file).lastModified());
 
 
@@ -195,8 +195,6 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
             ui->fileTableWidget->setItem(row, 6, dateItem);
 
             file.close();
-
-
 
             QString path2 = ui->readPathComboBox->currentText();
             if(!path2.endsWith("/"))
@@ -226,9 +224,8 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
                 comment_tx = tr("New");
             };
 
-
             QTableWidgetItem *statusItem = new QTableWidgetItem(comment_tx);
-            statusItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+            statusItem->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
             statusItem->setToolTip(tr("Status of received file:\n"
                                       "New - file does not exists in Search path.\n"
                                       "Equal - received file and file in Search path are identical.\n"
@@ -451,34 +448,38 @@ void FileChecker::filesTableCurrentCellChanged(int row, int col, int pRow, int p
     Q_UNUSED(pCol);
 
 
+    QString path1 = ui->savePathLabel->text();
+    if(!path1.endsWith("/"))
+        path1 = path1 + "/";
+
+    QString path2 = ui->readPathComboBox->currentText();
+    if(!path2.endsWith("/"))
+        path2 = path2 + "/";
+
+    if(path1 == path2)
+        return;
+
 
     QTableWidgetItem *item = ui->fileTableWidget->item(row, 0);
     if(item)
     {
-
-        QString path1 = ui->savePathLabel->text();
-        if(!path1.endsWith("/"))
-            path1 = path1 + "/";
-
-        QString path2 = ui->readPathComboBox->currentText();
-        if(!path2.endsWith("/"))
-            path2 = path2 + "/";
-
-        path1 = path1 + item->text();
-        path2 = path2 + item->text();
-
-
-
-        if(path1 == path2)
-            return;
-
         setUpdatesEnabled(false);
         if((pRow >= 0) && (pRow < ui->fileTableWidget->rowCount()))
         {
-            ui->fileTableWidget->setCellWidget(pRow, 2, new QLabel);
-            ui->fileTableWidget->setCellWidget(pRow, 3, new QLabel);
+            QTableWidgetItem *pItem = ui->fileTableWidget->item(pRow, 0);
+            if(pItem)
+            {
+                if(QFile::exists(path1 + pItem->text()))
+                {
+                    ui->fileTableWidget->setCellWidget(pRow, 2, new QLabel);
+                    ui->fileTableWidget->setCellWidget(pRow, 3, new QLabel);
+                };
+            };
         };
 
+
+        path1 = path1 + item->text();
+        path2 = path2 + item->text();
 
         if(QFile::exists(path1))
         {
