@@ -53,6 +53,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    splitterH->setBackgroundRole(QPalette::Base);
    marginWidget->setBackgroundRole(QPalette::Base);
 
+
    textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
    connect(textEdit, SIGNAL(customContextMenuRequested(const QPoint&)),
               this, SLOT(showContextMenu(const QPoint &)));
@@ -1598,12 +1599,14 @@ int MdiChild::compute(QString *str)
    bool ok, ok1, dot, minus;
 
    pos = 0;
+   exp.setCaseSensitivity(Qt::CaseInsensitive);
    exp.setPattern("[$A-Z]+");
 
-   while((pos = str->indexOf(exp, pos)) > 0)
+   while((pos = str->indexOf(exp, 0)) >= 0)
    {
       j = pos;
       oper = str->mid(pos, exp.matchedLength());
+      oper = oper.toUpper();
       pos += exp.matchedLength();
       val1 = "";
       dot = false;
@@ -1630,9 +1633,15 @@ int MdiChild::compute(QString *str)
          pos++;
       };
 
-      //pos--;
+      qDebug() << "123" << val1 << oper << oper << *str;
+
       if(val1.isEmpty())
-         return(ERR_NO_PARAM);
+      {
+          if(oper == "PI")
+              val1 = "(1)";
+          else
+              return(ERR_NO_PARAM);
+      };
 
       err = processBrc(&val1);
       if(err < 0)
@@ -1644,6 +1653,7 @@ int MdiChild::compute(QString *str)
       result = val1.toDouble(&ok);
       if(!ok)
          return(ERR_CONVERT);
+
 
       while(1)
       {
@@ -1706,7 +1716,7 @@ int MdiChild::compute(QString *str)
    pos = 0;
    exp.setPattern("[/*]{1,1}");
 
-   while((pos = str->indexOf(exp, pos)) > 0)
+   while((pos = str->indexOf(exp, 0)) >= 0)
    {
       oper = str->mid(pos, 1);
 
@@ -1730,6 +1740,8 @@ int MdiChild::compute(QString *str)
                break;
             };
             minus = true;
+            if(minus && val2.length() > 0)
+                break;
          };
 
          if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
@@ -1769,6 +1781,8 @@ int MdiChild::compute(QString *str)
          val1.prepend(str->at(j));
       };
       j++;
+
+       qDebug() << "456" << val1 << oper << val2 << *str;
 
       if(val1.isEmpty())
          return(ERR_NO_PARAM);  // val1 = "0";
@@ -1799,14 +1813,15 @@ int MdiChild::compute(QString *str)
       pos++;
 
       partmp.number(result, 'g', 3);
-      str->replace(j, (i-j)+1, QString( "%1" ).arg( result, 3, 'f', 3 ));
+      str->replace(j, (i-j)+1, QString("%1").arg(result, 3, 'f', 3));
    };
 
+   qDebug() << "9857" << val1 << val2 << *str;
 
    pos = 0;
    exp.setPattern("[+-]{1,1}");
 
-   while((pos = str->indexOf(exp, pos)) > 0)
+   while((pos = str->indexOf(exp, 1)) >= 0)
    {
       oper = str->mid(pos, 1);
 
@@ -1830,6 +1845,8 @@ int MdiChild::compute(QString *str)
                break;
             };
             minus = true;
+            if(minus && val2.length() > 0)
+                break;
          };
 
          if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
@@ -1865,10 +1882,12 @@ int MdiChild::compute(QString *str)
 
          if(!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-'))))
             break;
+
          val1.prepend(str->at(j));
       };
       j++;
 
+      qDebug() << "789" << val1 << oper << val2 << *str;
 
       if(val1.isEmpty())
          val1 = "0";  //return(ERR_NO_PARAM);
@@ -1911,7 +1930,7 @@ int MdiChild::processBrc(QString *str)
 {
 
    QRegExp exp;
-   QString par, val, partmp;
+   QString par, partmp;
    int pos, err;
 
 
@@ -1921,8 +1940,9 @@ int MdiChild::processBrc(QString *str)
 
    pos = 0;
    exp.setPattern("\\([-+/*.0-9A-Z]*\\b[.]*\\)");
+   exp.setCaseSensitivity(Qt::CaseInsensitive);
 
-   while((pos = str->indexOf(exp, pos)) > 0)
+   while((pos = str->indexOf(exp, 0)) >= 0)
    {
       par = str->mid(pos, exp.matchedLength());
       partmp = par;
@@ -1930,17 +1950,20 @@ int MdiChild::processBrc(QString *str)
 
       par.remove(' ');
 
+      qDebug() << "147" << par << pos;
+
       err = compute(&par);
       if(err < 0)
          return(err);
 
-      str->replace(str->indexOf(partmp, 0), partmp.length(), par);
+      str->replace(partmp, par, Qt::CaseInsensitive);
       par.remove(' ');
       err = processBrc(str);
       if(err < 0)
          return(err);
    };
 
+   qDebug() << "852" << *str;
    err = compute(str);
    return(err);
 }
@@ -2018,7 +2041,7 @@ int MdiChild::compileMacro()
 
       i = defEnd;
 
-      while((i = text.indexOf(param, i)) > 0)
+      while((i = text.indexOf(param, i)) >= 0)
       {
          text.replace(i, param.length(), val);
       };
@@ -2029,7 +2052,7 @@ int MdiChild::compileMacro()
    pos = 0;
    exp.setPattern("\\{[-+*=.,()$/0-9A-Z\\s]*\\b[-+*=.,()$/0-9A-Z\\s]*[}]");
 
-   while((pos = text.indexOf(exp, 0)) > 0)
+   while((pos = text.indexOf(exp, 0)) >= 0)
    {
       i = pos;
       param = "";
@@ -4072,6 +4095,111 @@ void MdiChild::fileChangeMonitorRemovePath(QString fileName)
 {
     if(fileChangeMonitor > NULL)
         fileChangeMonitor->removePath(fileName);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::showInLineCalc()
+{
+    if(!calcLineEdit)
+    {
+        calcLineEdit = new QLineEdit(this);
+        calcLineEdit->setClearButtonEnabled(true);
+        calcLineEdit->setMinimumWidth(100);
+        calcLineEdit->adjustSize();
+        calcLineEdit->setAttribute(Qt::WA_DeleteOnClose);
+        calcLineEdit->setToolTip(tr("You can use operators:\n") +
+                                 "+ - * /\n" +
+                                 "SIN(x)\n" +
+                                 "COS(x)\n" +
+                                 "TAN(x)\n" +
+                                 "SQRT(x)\n" +
+                                 "SQR(x)\n" +
+                                 "ABS(x)\n" +
+                                 "TRUNC(x)\n" +
+                                 "PI\n" +
+                                 tr("Press Enter to accept or click anywere to canacel"));
+
+        connect(calcLineEdit, SIGNAL(editingFinished()), this, SLOT(inLineCalcEditingFinished()));
+        connect(calcLineEdit, SIGNAL(returnPressed()), this, SLOT(inLineCalcReturnPressed()));
+
+
+        //calcLineEditWordList << "COS(" << "PI";
+        QCompleter *completer = new QCompleter(calcLineEditWordList, this);
+        completer->setCaseSensitivity(Qt::CaseInsensitive);
+        completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+        calcLineEdit->setCompleter(completer);
+    };
+
+    if(calcLineEdit)
+    {
+        inLineCalcChar = '0';
+        if(textEdit->textCursor().hasSelection())
+        {
+            QString selText = textEdit->textCursor().selectedText();
+
+            if(selText.length() > 1)
+                if(selText.at(0).isLetter())
+                    inLineCalcChar = selText.at(0);
+
+            if(inLineCalcChar.isLetter())
+            {
+                selText.remove(inLineCalcChar);
+                selText.remove(" ");
+                calcLineEdit->setText(selText);
+            };
+        };
+
+        QRect rect = textEdit->cursorRect();
+        //qDebug() << "rect" << rect << rect.width() << rect.height();
+        calcLineEdit->move(rect.x() + rect.height(), rect.top());
+        calcLineEdit->setFocus();
+        calcLineEdit->show();
+    };
+
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::inLineCalcEditingFinished()
+{
+    if(calcLineEdit)
+    {
+        calcLineEdit->close();
+    };
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void MdiChild::inLineCalcReturnPressed()
+{
+    if(calcLineEdit)
+    {
+        QString text = calcLineEdit->text();
+        text.replace(',', '.');
+
+        calcLineEditWordList.append(text);
+        calcLineEditWordList.removeDuplicates();
+
+        int result = processBrc(&text);
+        text = removeZeros(text);
+
+        if(inLineCalcChar.isLetter())
+            text.prepend(inLineCalcChar);
+
+        qDebug() << "Text" << text << result;
+
+        if(result >= 0)
+            textEdit->insertPlainText(text);
+
+        calcLineEdit->close();
+    };
 }
 
 //**************************************************************************************************

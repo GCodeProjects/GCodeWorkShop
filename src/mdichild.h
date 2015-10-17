@@ -99,6 +99,7 @@ public:
     bool overwriteMode();
     QTextCursor textCursor();
     void setFileChangeMonitor(QFileSystemWatcher *monitor);
+    void showInLineCalc();
 
 
 
@@ -134,6 +135,9 @@ private:
     QTextEdit::ExtraSelection selection;
     QList<QTextEdit::ExtraSelection> blockExtraSelections;
     QFileSystemWatcher *fileChangeMonitor;
+    QPointer<QLineEdit> calcLineEdit;
+    QStringList calcLineEditWordList;
+    QChar inLineCalcChar;
 
 
 private slots :
@@ -148,7 +152,8 @@ private slots :
     void blockSkipRemSlot();
     void blockSkipIncSlot();
     void blockSkipDecSlot();
-
+    void inLineCalcEditingFinished();
+    void inLineCalcReturnPressed();
 signals:
     void message(const QString&, int );
 

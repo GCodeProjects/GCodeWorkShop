@@ -135,6 +135,10 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
 
     //   progressDialog->setLabelText(tr("Searching in folder: \"%1\"").arg(QDir::toNativeSeparators(directory.absolutePath())));
 
+    QString path2 = ui->readPathComboBox->currentText();
+    if(!path2.endsWith("/"))
+        path2 = path2 + "/";
+
     ui->fileTableWidget->setSortingEnabled(false);
     for(int i = 0; i < files.size(); ++i)
     {
@@ -196,14 +200,9 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
 
             file.close();
 
-            QString path2 = ui->readPathComboBox->currentText();
-            if(!path2.endsWith("/"))
-                path2 = path2 + "/";
-
-            path2 = path2 + files[i];
 
             comment_tx = "";
-            if(QFile::exists(path2))
+            if(QFile::exists(QDir::toNativeSeparators((path2 + files[i]))))
             {
                 if(diffApp)
                 {

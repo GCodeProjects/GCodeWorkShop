@@ -169,7 +169,7 @@ private slots:
     void clipboardChanged();
     void deleteFromClipboardButtonClicked();
     void clipboardTreeViewContextMenu(const QPoint &point);
-
+    void doShowInLineCalc();
 signals:
     void needToShow();
 
@@ -274,6 +274,7 @@ private:
     QAction *insertBlockSkipAct;
     QAction *insertBlockSkip1Act;
     QAction *insertBlockSkip2Act;
+    QAction *inLineCalcAct;
 
     QAction *sessionMgrAct;
 

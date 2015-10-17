@@ -1468,7 +1468,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2015-09-30 BETA" +
+                       trUtf8("<P>Version: ") + "2015-10-18 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
@@ -1871,8 +1871,9 @@ void EdytorNc::createActions()
     configAct->setToolTip(tr("Open configuration dialog"));
     connect(configAct, SIGNAL(triggered()), this, SLOT(config()));
 
-
-
+    inLineCalcAct = new QAction(QIcon(":/images/calc.png"), tr("Inline calculator"), this);
+    inLineCalcAct->setShortcut(tr("Ctrl+K"));
+    connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(doShowInLineCalc()));
 
 
     bhcAct = new QAction(QIcon(":/images/bhc.png"), tr("&Bolt hole circle"), this);
@@ -2154,6 +2155,7 @@ void EdytorNc::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction(cmpMacroAct);
     toolsMenu->addSeparator();
+    toolsMenu->addAction(inLineCalcAct);
     toolsMenu->addAction(calcAct);
 
     windowMenu = menuBar()->addMenu(tr("&Window"));
@@ -4897,8 +4899,16 @@ void EdytorNc::clipboardLoad()
     clipboardModel->sort(Qt::AscendingOrder);
     clipboardTreeView->expandAll();
 
+}
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
+void EdytorNc::doShowInLineCalc()
+{
+    if(activeMdiChild())
+        activeMdiChild()->showInLineCalc();
 }
 
 //**************************************************************************************************

@@ -83,6 +83,7 @@ struct PortSettings
     QString fileNameExpAs;
     QString eobChar;
     QString fileNameExpSaveFile;
+    QString removeFromRecieved;
 };
 
 class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialog

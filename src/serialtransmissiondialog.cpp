@@ -988,6 +988,7 @@ QStringList SerialTransmissionDialog::processReceivedData()
     QStringList outputList;
     qint64 j;
     qint64 i;
+    QRegExp exp;
 
     outputList.clear();
     if(serialPortReadBuffer.isEmpty())
@@ -1004,9 +1005,15 @@ QStringList SerialTransmissionDialog::processReceivedData()
         readData.append(serialPortReadBuffer.at(j));
     };
 
-    QRegExp exp;
+    exp.setCaseSensitivity(Qt::CaseInsensitive);
+    if(!portSettings.removeFromRecieved.isEmpty())
+    {
+        exp.setPattern(portSettings.removeFromRecieved);
+        readData.remove(exp);
+    };
+
     exp.setPattern("[\\n\\r]{1,}");
-    i = readData.indexOf(exp); // detecting EOB combination used
+    i = readData.indexOf(exp); // detecting what EOB combination is used
     if(i >= 0)
     {
         QString tx = readData.mid(i, exp.matchedLength());
@@ -1410,7 +1417,6 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
 
     fileName = list.at(2);
 
-    qDebug() << "20" << fileName;
     file.setFileName(fileName);
 
     if(file.exists() && portSettings.renameIfExists)
