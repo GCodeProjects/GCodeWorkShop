@@ -239,9 +239,11 @@ FeedsDialog::FeedsDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent,
 
    QValidator *fzInputValid = new QDoubleValidator(0.0001, 999, 4, this );
    fzInput->setValidator(fzInputValid);
+   fzInput->installEventFilter(this);
 
    QValidator *dInputValid = new QDoubleValidator(0.01, 9000, 4, this );
    dInput->setValidator(dInputValid);
+   dInput->installEventFilter(this);
 
    QValidator *zInputValid = new QIntValidator(1, 500, this );
    zInput->setValidator(zInputValid);
@@ -251,6 +253,7 @@ FeedsDialog::FeedsDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(parent,
 
    QValidator *fInputValid = new QDoubleValidator(0.01, 99999, 4, this );
    fInput->setValidator(fInputValid);
+   fInput->installEventFilter(this);
 
 
    connect(vcInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
@@ -292,6 +295,43 @@ FeedsDialog::~FeedsDialog()
     settings.beginGroup("FeedSpeedDialog");
     settings.setValue("MM", mmCheckBox->isChecked());
     settings.endGroup();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool FeedsDialog::eventFilter(QObject *obj, QEvent *ev)
+{
+    if(qobject_cast<QLineEdit *>(obj))
+    {
+        if(ev->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *k = (QKeyEvent*) ev;
+
+            if(QLocale().decimalPoint() == '.')
+                if(k->key() == Qt::Key_Comma)
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
+                    return true;
+                };
+
+            if(QLocale().decimalPoint() == ',')
+                if(k->key() == Qt::Key_Period)
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Comma, Qt::NoModifier, ",", false, 1));
+                    return true;
+                };
+
+        };
+
+        return false;
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return eventFilter(obj, ev);
+    };
 }
 
 //**************************************************************************************************
@@ -885,21 +925,27 @@ TriangleDialog::TriangleDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(p
 
    QValidator *aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
    aInput->setValidator(aInputValid);
+   aInput->installEventFilter(this);
 
    QValidator *bInputValid = new QDoubleValidator(0.001, 9999, 3, this);
    bInput->setValidator(bInputValid);
+   bInput->installEventFilter(this);
 
    QValidator *cInputValid = new QDoubleValidator(0.001, 9999, 3, this);
    cInput->setValidator(cInputValid);
+   cInput->installEventFilter(this);
 
    aAInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
    aAInput->setValidator(aAInputValid);
+   aAInput->installEventFilter(this);
 
    aBInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
    aBInput->setValidator(aBInputValid);
+   aBInput->installEventFilter(this);
 
    aCInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
    aCInput->setValidator(aCInputValid);
+   aCInput->installEventFilter(this);
 
 
    setMaximumSize(width(), height());
@@ -922,6 +968,43 @@ TriangleDialog::TriangleDialog( QWidget * parent, Qt::WindowFlags f) : QDialog(p
 TriangleDialog::~TriangleDialog()
 {
 
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool TriangleDialog::eventFilter(QObject *obj, QEvent *ev)
+{
+    if(qobject_cast<QLineEdit *>(obj))
+    {
+        if(ev->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *k = (QKeyEvent*) ev;
+
+            if(QLocale().decimalPoint() == '.')
+                if(k->key() == Qt::Key_Comma)
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
+                    return true;
+                };
+
+            if(QLocale().decimalPoint() == ',')
+                if(k->key() == Qt::Key_Period)
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Comma, Qt::NoModifier, ",", false, 1));
+                    return true;
+                };
+
+        };
+
+        return false;
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return eventFilter(obj, ev);
+    };
 }
 
 //**************************************************************************************************
@@ -1480,16 +1563,21 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
 
    QValidator *xCenterInputValid = new QDoubleValidator(-9999, 9999, 3, this);
    xCenterInput->setValidator(xCenterInputValid);
+   xCenterInput->installEventFilter(this);
    QValidator *yCenterInputValid = new QDoubleValidator(-9999, 9999, 3, this);
    yCenterInput->setValidator(yCenterInputValid);
+   yCenterInput->installEventFilter(this);
    QValidator *diaInputValid = new QDoubleValidator(1, 9999, 3, this);
    diaInput->setValidator(diaInputValid);
+   diaInput->installEventFilter(this);
    QValidator *holesInputValid = new QIntValidator(1, 360, this);
    holesInput->setValidator(holesInputValid);
    QValidator *angleStartInputValid = new QDoubleValidator(0, 360, 3, this);
    angleStartInput->setValidator(angleStartInputValid);
+   angleStartInput->installEventFilter(this);
    QValidator *angleBeetwenInputValid = new QDoubleValidator(0, 360, 3, this);
    angleBeetwenInput->setValidator(angleBeetwenInputValid);
+   angleBeetwenInput->installEventFilter(this);
 
    connect(roateInput, SIGNAL(valueChanged(int)), SLOT(inputChk()));
    connect(mirrorX, SIGNAL(toggled(bool)), SLOT(inputChk()));
@@ -1549,6 +1637,43 @@ BHCTab::BHCTab( QWidget * parent) : QWidget(parent)
 BHCTab::~BHCTab()
 {
 
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+bool BHCTab::eventFilter(QObject *obj, QEvent *ev)
+{
+    if(qobject_cast<QLineEdit *>(obj))
+    {
+        if(ev->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *k = (QKeyEvent*) ev;
+
+            if(QLocale().decimalPoint() == '.')
+                if(k->key() == Qt::Key_Comma)
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
+                    return true;
+                };
+
+            if(QLocale().decimalPoint() == ',')
+                if(k->key() == Qt::Key_Period)
+                {
+                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Comma, Qt::NoModifier, ",", false, 1));
+                    return true;
+                };
+
+        };
+
+        return false;
+    }
+    else
+    {
+        // pass the event on to the parent class
+        return eventFilter(obj, ev);
+    };
 }
 
 //**************************************************************************************************

@@ -265,6 +265,7 @@ void SerialPortConfigDialog::saveButtonClicked()
     settings.setValue("WaitForCTS", waitForCtsCheckBox->isChecked());
     settings.setValue("WaitForXON", waitForXonCheckBox->isChecked());
     settings.setValue("SendXONAtStart", sendXonCheckBox->isChecked());
+    settings.setValue("RemoveFromReceived", removeLineEdit->text());
 
 
     settings.setValue("AutoSave", autoSaveCheckBox->isChecked());
@@ -505,6 +506,7 @@ void SerialPortConfigDialog::changeSettings()
     waitForCtsCheckBox->setChecked(settings.value("WaitForCTS", false).toBool());
     waitForXonCheckBox->setChecked(settings.value("WaitForXON", false).toBool());
     sendXonCheckBox->setChecked(settings.value("SendXONAtStart", false).toBool());
+    removeLineEdit->setText(settings.value("RemoveFromReceived", "").toString());
 
     id = eobComboBox->findText(settings.value("EobChar", "CRLF").toString());
     if(id >= 0)

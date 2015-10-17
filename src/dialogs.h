@@ -92,25 +92,27 @@ class FeedsDialog : public QDialog, private Ui::FeedsDialog
 {
   Q_OBJECT
 
-  public:
+public:
     FeedsDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
 
     ~FeedsDialog();
 
 
-  public:
+public:
 
+protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
 
-  protected slots:
+protected slots:
     void inputChanged();
 
-  private slots:
+private slots:
     void computeButtonClicked();
     void computeVcButtonClicked();
     void setDefButton();
     void checkBoxChanged();
 
-  private:
+private:
 
 };
 
@@ -203,8 +205,8 @@ class TriangleDialog : public QDialog, private Ui::TriangleDialog
     ~TriangleDialog();
 
 
-  public:
-
+protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
 
   protected slots:
     void inputChanged();
@@ -245,8 +247,8 @@ class BHCTab : public QWidget, public Ui::BHCTab
     ~BHCTab();
 
 
-  public:
-
+protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
 
   protected slots:
     void contextMenuReq(const QPoint & pos);
