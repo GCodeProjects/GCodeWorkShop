@@ -53,11 +53,15 @@
     </message>
     <message>
         <source>Center Position : X%1 Y%2</source>
-        <translation>Posición del Centro : X%1 Y%2</translation>
+        <translation type="vanished">Posición del Centro : X%1 Y%2</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
         <translation>Limpi&amp;ar Todo</translation>
+    </message>
+    <message>
+        <source>Center position : X%1 Y%2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -228,10 +232,6 @@
 <context>
     <name>CommApp</name>
     <message>
-        <source>MainWindow</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>toolBar</source>
         <translation></translation>
     </message>
@@ -286,6 +286,22 @@
     <message>
         <source>FileToolBar</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>&amp;Browse save folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse save folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Show saved files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show saved files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -409,7 +425,7 @@
     </message>
     <message>
         <source>Part</source>
-        <translation>Parte</translation>
+        <translation type="vanished">Parte</translation>
     </message>
     <message>
         <source>File Name</source>
@@ -1510,7 +1526,7 @@ Cerrar de todas maneras?</translation>
 Double click on item title to edit it. 
 Items with non empty titles are not deleted automatically.
 Items with empty titles are the last five texts copied to system clipboard.</source>
-        <translation>Click derecho para copiar ítem al Portapapeles.
+        <translation type="vanished">Click derecho para copiar ítem al Portapapeles.
 Doble click en el título del ítem para editarlo.
 Ítems sin títulos vacíos no son borrados automáticamente.
 Ítems con títulos vacíos son los últimos cinco textos copiados al portapapeles del sistema.</translation>
@@ -1522,6 +1538,33 @@ Doble click en el título del ítem para editarlo.
     <message>
         <source>Clean &amp;up</source>
         <translation>&amp;Limpieza</translation>
+    </message>
+    <message>
+        <source>Right click to copy item back to system clipboard.
+Items with empty titles are the last five texts copied to system clipboard.
+Double click on item title to edit it. 
+Items with non empty titles are not deleted automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inline calculator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+K</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished">Ocultar</translation>
     </message>
 </context>
 <context>
@@ -1680,6 +1723,93 @@ Doble click en el título del ítem para editarlo.
     <message>
         <source>Reading directory: </source>
         <translation>Leyendo directorio:</translation>
+    </message>
+</context>
+<context>
+    <name>FileChecker</name>
+    <message>
+        <source>EdytorNC - File checker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save path:</source>
+        <translation type="unfinished">Ruta de guardado:</translation>
+    </message>
+    <message>
+        <source>Auto save path as set in serial port configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search path as set in serial port configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of files in save path (received files).
+Click to compare with file with the same name in selected search path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Name</source>
+        <translation type="unfinished">Nombre del archivo</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished">Información</translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Borrar</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Tamaño</translation>
+    </message>
+    <message>
+        <source>Modification date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Equal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status of received file:
+New - file does not exists in Search path.
+Equal - received file and file in Search path are identical.
+Changed - received file is modified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept received file and move it to selected search path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete received file</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2219,6 +2349,15 @@ Comprobar +-*/.
     <message>
         <source>Insert/decrease Block Skip /</source>
         <translation>Insertar/disminuir salto de bloque /</translation>
+    </message>
+    <message>
+        <source>You can use operators:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press Enter to accept or click anywere to canacel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3428,6 +3567,23 @@ Set to 300s to disable timer.</source>
         <translation>Si el puerto no estará abierto, se intentará abrirlo despues del tiempo establecido.
 Ajuste el temporizador a 300s para desactivarlo.</translation>
     </message>
+    <message>
+        <source>Send XON character to initiate transmission.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send XON at start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use this to remove some unwanted characters from received data.
+Vailid QtRegExp should be entered.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SerialTransmissionDialog</name>
@@ -3629,7 +3785,7 @@ Ajuste el temporizador a 300s para desactivarlo.</translation>
     </message>
     <message>
         <source>WARNING:	 Coulnd not find program name. Using date time code.</source>
-        <translation>ADVERTENCIA:	 No se pudo encontrar el nombre del archivo. Usando código fecha-hora.</translation>
+        <translation type="vanished">ADVERTENCIA:	 No se pudo encontrar el nombre del archivo. Usando código fecha-hora.</translation>
     </message>
     <message>
         <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
@@ -3714,6 +3870,10 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     <message>
         <source>ERROR:	 Received file to small (less than 15 characters).</source>
         <translation>ERROR:	 Archivo recibido es muy pequeñol (menos de 15 caracteres).</translation>
+    </message>
+    <message>
+        <source>WARNING:	 Could not find program name. Using date time code.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
