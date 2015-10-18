@@ -4153,12 +4153,11 @@ void MdiChild::showInLineCalc()
         };
 
         QRect rect = textEdit->cursorRect();
-        //qDebug() << "rect" << rect << rect.width() << rect.height();
-        calcLineEdit->move(rect.x() + rect.height(), rect.top());
+        int h = (calcLineEdit->height() - rect.height()) / 2;
+        calcLineEdit->move(rect.x() + rect.height(), rect.top() - h);
         calcLineEdit->setFocus();
         calcLineEdit->show();
     };
-
 }
 
 //**************************************************************************************************

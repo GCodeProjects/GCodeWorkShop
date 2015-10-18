@@ -2580,7 +2580,7 @@ void BHCDialog::computeButtonClicked()
       drawing->printText(textPosX, textPosY, 1-dir, QString(tr("Number of holes : %1")).arg(holeCount), col);
       drawing->printText(textPosX, textPosY, 2-dir, QString(tr("Angle of first hole : %1")).arg(firstAngle), col);
       drawing->printText(textPosX, textPosY, 3-dir, QString(tr("Angle beetwen holes : %1")).arg(angleBeetwen), col);
-      drawing->printText(textPosX, textPosY, 4-dir, QString(tr("Center Position : X%1 Y%2")).arg(xCenter).arg(yCenter), col);
+      drawing->printText(textPosX, textPosY, 4-dir, QString(tr("Center position : X%1 Y%2")).arg(xCenter).arg(yCenter), col);
       firstAngle += roate;
 
       tab->resultTable->setRowCount(holeCount);
