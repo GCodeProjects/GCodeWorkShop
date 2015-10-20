@@ -1468,7 +1468,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2015-10-18 BETA" +
+                       trUtf8("<P>Version: ") + "2015-10-20 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
@@ -1564,6 +1564,7 @@ void EdytorNc::updateMenus()
     insertBlockSkipAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     insertBlockSkip1Act->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     insertBlockSkip2Act->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    inLineCalcAct->setEnabled(hasMdiChild);
 
 
 
@@ -1872,7 +1873,7 @@ void EdytorNc::createActions()
     connect(configAct, SIGNAL(triggered()), this, SLOT(config()));
 
     inLineCalcAct = new QAction(QIcon(":/images/calc.png"), tr("Inline calculator"), this);
-    inLineCalcAct->setShortcut(tr("Ctrl+K"));
+    inLineCalcAct->setShortcut(tr("Ctrl+0"));
     connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(doShowInLineCalc()));
 
 
