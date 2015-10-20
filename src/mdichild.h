@@ -99,6 +99,8 @@ public:
     bool overwriteMode();
     QTextCursor textCursor();
     void setFileChangeMonitor(QFileSystemWatcher *monitor);
+
+public slots :
     void showInLineCalc();
 
 

@@ -183,3 +183,6 @@ win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt bus
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
 VERSION = 2015.07
+
+SUBDIRS += \
+    src_sfs.pro

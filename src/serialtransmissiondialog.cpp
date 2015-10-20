@@ -887,6 +887,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     portSettings.eobChar = settings.value("EobChar", "CRLF").toString();
     portSettings.sendTimeout = settings.value("SendTimeoutTime", 3).toInt();
     portSettings.receiveTimeout = settings.value("ReceiveTimeoutTime", 5).toInt();
+    portSettings.removeFromRecieved = settings.value("RemoveFromReceived", "").toString();
 
     portSettings.autoSave = settings.value("AutoSave", false).toBool();
     portSettings.endOfProgChar = settings.value("EndOfProgExpSelected", "").toString();

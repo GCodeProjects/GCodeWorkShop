@@ -33,7 +33,7 @@ Some features :
             in Find: Y$100 $10 in Replace $$*2 will multiply by 2 only numbers between 10 and 100 found with Y
             Find can be used also to highlight specific program blocks
     *   Sessions - to save/restore open file list
-    *	Ctrl+K 	In line calculator, you can do some math operations directly in editor. You can select address (eg X123.45) before pressing Ctrl+K, value will be entered in the calc.
+    *	Ctrl+0 	In line calculator, you can do some math operations directly in editor. You can select address (eg X123.45) before pressing Ctrl+0, value will be entered in the calc.
 	    After presing Enter (and if no error) result will be pasted in cursor position. Supported operators: + - * / SIN(x) COS(x) TAN(x) SQRT(x) SQR(x) ABS(x) TRUNC(x) PI
     * 	Clipboard to store five last texts copied to system clipboard. Later they can be stored permanently (by editing item title).
 	    

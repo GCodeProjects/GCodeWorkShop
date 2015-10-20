@@ -4040,6 +4040,12 @@ void MdiChild::showContextMenu(const QPoint &pt)
     connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(blockSkipRemSlot()));
     insertBlockSkipAct->setEnabled(hasSelection());
     menu->addAction(insertBlockSkipAct);
+    menu->addSeparator();
+
+    QAction *inLineCalcAct = new QAction(QIcon(":/images/calc.png"), tr("Inline calculator"), this);
+    inLineCalcAct->setShortcut(tr("Ctrl+0"));
+    connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(showInLineCalc()));
+    menu->addAction(inLineCalcAct);
 
 
     menu->exec(textEdit->mapToGlobal(pt));
@@ -4049,6 +4055,7 @@ void MdiChild::showContextMenu(const QPoint &pt)
     delete insertBlockSkip2Act;
     delete semiCommAct;
     delete paraCommAct;
+    delete inLineCalcAct;
     delete menu;
 }
 
@@ -4110,8 +4117,8 @@ void MdiChild::showInLineCalc()
         calcLineEdit->setMinimumWidth(100);
         calcLineEdit->adjustSize();
         calcLineEdit->setAttribute(Qt::WA_DeleteOnClose);
-        calcLineEdit->setToolTip(tr("You can use operators:\n") +
-                                 "+ - * /\n" +
+        calcLineEdit->setToolTip(tr("You can use:\n") +
+                                 "+ - * / ()\n" +
                                  "SIN(x)\n" +
                                  "COS(x)\n" +
                                  "TAN(x)\n" +
