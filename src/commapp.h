@@ -61,6 +61,8 @@ private slots:
     void doPortReset();
     void showNewFiles();
     void browseSaveFolder();
+    void iconActivated(QSystemTrayIcon::ActivationReason reason);
+    void quitApp();
 private:
     Ui::CommApp *ui;
     QSignalMapper *windowMapper;
@@ -74,15 +76,26 @@ private:
     QAction *showNewFilesAct;
     QComboBox *configBox;
     QToolBar *fileToolBar;
+    QAction *minimizeAction;
+    QAction *maximizeAction;
+    QAction *restoreAction;
+    QAction *quitAction;
+
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayIconMenu;
+    bool closable;
 
 
     void saveSettings();
     void loadSettings();
     void loadSerialConfignames();
     void createSerialToolBar();
+    void createActions();
+    void createTrayIcon();
     SerialTransmissionDialog *findMdiChild(const QString __config);
     SerialTransmissionDialog *createSerialPortServer(QString __config);
     SerialTransmissionDialog *activeMdiChild();
+
 };
 
 #endif // COMMAPP_H

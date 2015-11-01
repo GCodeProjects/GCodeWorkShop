@@ -39,7 +39,7 @@ CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
     connect(ui->mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(activeWindowChanged(QMdiSubWindow *)));
 
-
+    closable = false;
     ui->mdiArea->setViewMode(QMdiArea::TabbedView);
     QTabBar* tab = ui->mdiArea->findChild<QTabBar*>();
     if(tab)
@@ -51,6 +51,9 @@ CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
     };
 
     createSerialToolBar();
+
+    createActions();
+    createTrayIcon();
 
     showNormal();
     loadSettings();
@@ -71,16 +74,46 @@ CommApp::~CommApp()
 
 void CommApp::closeEvent(QCloseEvent *event)
 {
-    saveSettings();
 
-    foreach(const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder))
+//    QMessageBox::StandardButton result = QMessageBox::warning(this, tr("EdytorNC - Serial port file server"),
+//                                                              tr("You are trying to close a file server.\nAre you shure?"),
+//                                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+
+//    if(result == QMessageBox::No)
+//    {
+//        event->ignore();
+//        return;
+//    };
+
+
+    if(closable)
     {
-        SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
-        mdiChild->close();
-        mdiChild->parentWidget()->close();
+        event->accept();
+    }
+    else
+    {
+        if(trayIcon->isVisible())
+        {
+            QMessageBox::information(this, tr("EdytorNC - Serial port file server"),
+                                     tr("The program will keep running in the "
+                                        "system tray. To terminate the program, "
+                                        "choose <b>Quit</b> in the context menu "
+                                        "of the system tray entry."));
+            hide();
+            event->ignore();
+        };
     };
 
-    event->accept();
+//    saveSettings();
+
+//    foreach(const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder))
+//    {
+//        SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
+//        mdiChild->close();
+//        mdiChild->parentWidget()->close();
+//    };
+
+//    event->accept();
 }
 
 //**************************************************************************************************
@@ -497,6 +530,90 @@ void CommApp::browseSaveFolder()
         QDesktopServices::openUrl(QUrl(QString("file:///%1").arg(mdiChild->savePath()), QUrl::TolerantMode));
 }
 
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
+void CommApp::createActions()
+{
+    minimizeAction = new QAction(tr("Mi&nimize"), this);
+    connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
+
+    maximizeAction = new QAction(tr("Ma&ximize"), this);
+    connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
+
+    restoreAction = new QAction(tr("&Restore"), this);
+    connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+
+    quitAction = new QAction(QIcon(":/images/exit.png"), tr("&Quit"), this);
+    connect(quitAction, SIGNAL(triggered()), this, SLOT(quitApp()));
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void CommApp::createTrayIcon()
+{
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(minimizeAction);
+    trayIconMenu->addAction(maximizeAction);
+    trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setContextMenu(trayIconMenu);
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+
+    trayIcon->setIcon(QIcon(":/images/serial.png"));
+    trayIcon->show();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void CommApp::iconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch(reason)
+    {
+    case QSystemTrayIcon::Trigger:
+        if(isVisible())
+            hide();
+        else
+            showNormal();
+        break;
+    case QSystemTrayIcon::DoubleClick:
+        break;
+    case QSystemTrayIcon::MiddleClick:
+        break;
+    default:
+        ;
+    }
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void CommApp::quitApp()
+{
+    saveSettings();
+
+    foreach(const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder))
+    {
+        SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
+        mdiChild->close();
+        mdiChild->parentWidget()->close();
+    };
+
+    closable = true;
+    close();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
 
 

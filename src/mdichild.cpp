@@ -702,6 +702,11 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
         cursor.setPosition(posStart, QTextCursor::MoveAnchor);
         cursor.setPosition(posEnd, QTextCursor::KeepAnchor);
         textEdit->setTextCursor(cursor);
+
+        QKeyEvent *k = (QKeyEvent*) ev;
+        if(k->modifiers() == Qt::ControlModifier)
+            showInLineCalc();
+
         return true;
     };
 
