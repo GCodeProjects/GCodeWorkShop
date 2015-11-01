@@ -1,5 +1,11 @@
 SUBDIRS += src
 TEMPLATE = subdirs
+
+SUBDIRS = src sfs
+
+src.file = src/src.pro
+sfs.file = src/src_sfs.pro
+
 CONFIG += warn_on \
           qt \
           thread
