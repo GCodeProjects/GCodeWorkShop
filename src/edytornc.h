@@ -310,6 +310,7 @@ private:
     QAction *diffEditorAct;
 
     QProcess *proc;
+    QProcess *sfsProc;
     QDir lastDir;
 
     QLabel *labelStat1;

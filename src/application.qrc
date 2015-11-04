@@ -106,5 +106,6 @@
         <file>images/reset.png</file>
         <file>images/connect_creating.png</file>
         <file>images/clipboard.png</file>
+        <file>images/inlinecalc.png</file>
     </qresource>
 </RCC>

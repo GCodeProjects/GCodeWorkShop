@@ -77,7 +77,13 @@
      <string>&amp;File</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -93,6 +99,7 @@
   </widget>
  </widget>
  <resources>
+  <include location="application.qrc"/>
   <include location="application.qrc"/>
  </resources>
  <connections/>
