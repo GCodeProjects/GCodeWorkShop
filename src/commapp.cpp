@@ -50,13 +50,16 @@ CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
         tab->setExpanding(false);
     };
 
-    createSerialToolBar();
-
     createActions();
+
     createTrayIcon();
 
-    showNormal();
     loadSettings();
+
+    if(startMinimizedAction->isChecked())
+        QTimer::singleShot(500, this, SLOT(hide()));
+    else
+        showNormal();
 }
 
 //**************************************************************************************************
@@ -133,6 +136,7 @@ void CommApp::saveSettings()
 
     QSettings settings("EdytorNC", "EdytorNC");
     settings.beginGroup("CommApp");
+    settings.setValue("StartMinimized", startMinimizedAction->isChecked());
     settings.remove("ActiveConfigs");
     activeConfigs.removeDuplicates();
     activeConfigs.removeAll("");
@@ -148,6 +152,8 @@ void CommApp::loadSettings()
 {
     QSettings settings("EdytorNC", "EdytorNC");
     settings.beginGroup("CommApp");
+
+    startMinimizedAction->setChecked(settings.value("StartMinimized", false).toBool());
 
     QStringList activeConfigs = settings.value("ActiveConfigs", (QStringList() << "")).toStringList();
     activeConfigs.removeDuplicates();
@@ -220,7 +226,7 @@ void CommApp::stopSerialPortServer()
 //
 //**************************************************************************************************
 
-void CommApp::createSerialToolBar()
+void CommApp::createActions()
 {
     configPortAct = new QAction(QIcon(":/images/serialconfig.png"), tr("Serial port configuration"), this);
     //configPortAct->setShortcut(tr("F3"));
@@ -243,9 +249,9 @@ void CommApp::createSerialToolBar()
     connect(resetServerAct, SIGNAL(triggered()), this, SLOT(doPortReset()));
 
 
-    closeServerAct = new QAction(QIcon(":/images/exit.png"), tr("&Close"), this);
-    closeServerAct->setToolTip(tr("Close"));
-    connect(closeServerAct, SIGNAL(triggered()), this, SLOT(close()));
+    closeServerAct = new QAction(QIcon(":/images/window-close.png"), tr("&Minimize to tray"), this);
+    closeServerAct->setToolTip(tr("Minimize to system tray"));
+    connect(closeServerAct, SIGNAL(triggered()), this, SLOT(hide()));
 
     browseSaveFolderAct = new QAction(QIcon(":/images/browse.png"), tr("&Browse save folder"), this);
     browseSaveFolderAct->setToolTip(tr("Browse save folder"));
@@ -254,6 +260,27 @@ void CommApp::createSerialToolBar()
     showNewFilesAct = new QAction(QIcon(":/images/project_new.png"), tr("&Show saved files"), this);
     showNewFilesAct->setToolTip(tr("Show saved files"));
     connect(showNewFilesAct, SIGNAL(triggered()), this, SLOT(showNewFiles()));
+
+    aboutAction = new QAction(tr("&About"), this);
+    aboutAction->setToolTip(tr("Show the application's About box"));
+    connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
+
+
+    minimizeAction = new QAction(tr("Mi&nimize"), this);
+    connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
+
+    maximizeAction = new QAction(tr("Ma&ximize"), this);
+    connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
+
+    restoreAction = new QAction(tr("&Restore"), this);
+    connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+
+    quitAction = new QAction(QIcon(":/images/exit.png"), tr("&Quit"), this);
+    connect(quitAction, SIGNAL(triggered()), this, SLOT(quitApp()));
+
+    startMinimizedAction = new QAction(tr("Start minimized"), this);
+    startMinimizedAction->setCheckable(true);
+    startMinimizedAction->setChecked(false);
 
     configBox = new QComboBox();
     configBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -274,12 +301,22 @@ void CommApp::createSerialToolBar()
     addToolBar(Qt::TopToolBarArea, fileToolBar);
     fileToolBar->setObjectName("FileToolBar");
 
+
     fileToolBar->addAction(browseSaveFolderAct);
     fileToolBar->addAction(showNewFilesAct);
     fileToolBar->addSeparator();
     fileToolBar->addAction(closeServerAct);
 
+    ui->menu_File->addAction(startMinimizedAction);
+    ui->menu_File->addSeparator();
+//    ui->menu_File->addAction(browseSaveFolderAct);
+//    ui->menu_File->addAction(showNewFilesAct);
+//    ui->menu_File->addSeparator();
     ui->menu_File->addAction(closeServerAct);
+    ui->menu_File->addSeparator();
+    ui->menu_File->addAction(quitAction);
+
+    ui->menu_Help->addAction(aboutAction);
 
 
     loadSerialConfignames();
@@ -534,31 +571,14 @@ void CommApp::browseSaveFolder()
 //
 //**************************************************************************************************
 
-void CommApp::createActions()
-{
-    minimizeAction = new QAction(tr("Mi&nimize"), this);
-    connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
-
-    maximizeAction = new QAction(tr("Ma&ximize"), this);
-    connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
-
-    restoreAction = new QAction(tr("&Restore"), this);
-    connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
-
-    quitAction = new QAction(QIcon(":/images/exit.png"), tr("&Quit"), this);
-    connect(quitAction, SIGNAL(triggered()), this, SLOT(quitApp()));
-}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void CommApp::createTrayIcon()
 {
     trayIconMenu = new QMenu(this);
     trayIconMenu->addAction(minimizeAction);
     trayIconMenu->addAction(maximizeAction);
     trayIconMenu->addAction(restoreAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(aboutAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
 
@@ -610,6 +630,28 @@ void CommApp::quitApp()
 
     closable = true;
     close();
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void CommApp::about()
+{
+    QMessageBox::about(this, trUtf8("About EdytorNC - Serial port file server"),
+                       trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
+                       trUtf8("<P>Version: same as EdytorNC") +
+                       trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
+                       trUtf8("<P>") +
+                       trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
+                       trUtf8("<P>") +
+                       trUtf8("<P><i>EdytorNC - Serial port file server is free software; you can redistribute it and/or modify"
+                              "it under the terms of the GNU General Public License  as published by"
+                              "the Free Software Foundation; either version 2 of the License, or"
+                              "(at your option) any later version.</i>") +
+                       trUtf8("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
+                              "INCLUDING THE WARRANTY OF DESIGN,"
+                              "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
 }
 
 //**************************************************************************************************

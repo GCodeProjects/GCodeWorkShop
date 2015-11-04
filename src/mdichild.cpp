@@ -4047,7 +4047,7 @@ void MdiChild::showContextMenu(const QPoint &pt)
     menu->addAction(insertBlockSkipAct);
     menu->addSeparator();
 
-    QAction *inLineCalcAct = new QAction(QIcon(":/images/calc.png"), tr("Inline calculator"), this);
+    QAction *inLineCalcAct = new QAction(QIcon(":/images/inlinecalc.png"), tr("Inline calculator"), this);
     inLineCalcAct->setShortcut(tr("Ctrl+0"));
     connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(showInLineCalc()));
     menu->addAction(inLineCalcAct);

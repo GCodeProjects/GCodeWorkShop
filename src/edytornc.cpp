@@ -1371,11 +1371,12 @@ void EdytorNc::doCalc()
         return;
     };
 
-    proc = findChild<QProcess *>();
+    proc = findChild<QProcess *>("Calc569");
 
     if(!proc)
     {
         proc = new QProcess(this);
+        proc->setObjectName("Calc569");
         proc->start(defaultMdiWindowProperites.calcBinary);
     }
     else
@@ -1872,7 +1873,7 @@ void EdytorNc::createActions()
     configAct->setToolTip(tr("Open configuration dialog"));
     connect(configAct, SIGNAL(triggered()), this, SLOT(config()));
 
-    inLineCalcAct = new QAction(QIcon(":/images/calc.png"), tr("Inline calculator"), this);
+    inLineCalcAct = new QAction(QIcon(":/images/inlinecalc.png"), tr("Inline calculator"), this);
     inLineCalcAct->setShortcut(tr("Ctrl+0"));
     connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(doShowInLineCalc()));
 
@@ -4650,16 +4651,43 @@ void EdytorNc::fileChanged(const QString fileName)
 void EdytorNc::startSerialPortServer()
 {
 
+    QString fileName;
     //commApp = findChild<CommApp *>("CommApp", Qt::FindChildrenRecursively);
 
-    if(commApp)
+//    if(commApp)
+//    {
+//        commApp->show();
+//    }
+//    else
+//    {
+//        commApp = new CommApp();
+//    };
+
+#ifdef Q_OS_LINUX
+    fileName = "sfs";
+#endif
+
+#ifdef Q_OS_WIN32
+    fileName = "sfs.exe";
+#endif
+
+    fileName = QApplication::applicationDirPath() + "/" + fileName;
+
+
+
+    sfsProc = findChild<QProcess *>("sfs");
+
+    qDebug() << fileName << sfsProc;
+
+    if(!sfsProc)
     {
-        commApp->show();
+        sfsProc = new QProcess(this);
+        sfsProc->setObjectName("sfs");
+        sfsProc->startDetached(fileName);
     }
     else
-    {
-        commApp = new CommApp();
-    };
+        if(sfsProc->pid() == 0)
+            sfsProc->startDetached(fileName);
 
 }
 
