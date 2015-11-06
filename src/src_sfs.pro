@@ -107,10 +107,10 @@ unix:desktop.files = edytornc.desktop
 unix:mimetypes.path = $${PREFIX}/share/icons/hicolor/32x32/mimetypes/
 unix:mimetypes.files = images/application-x-g-code.png
 unix:icon.path = $${PREFIX}/share/icons/hicolor/48x48/apps/
-unix:icon.files = images/edytornc.png
+unix:icon.files = images/serial.png
 unix:INSTALLS += target translate mime desktop mimetypes icon examples doc
 macx:LIBS += -framework IOKit -framework CoreFoundation
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/sfs
-VERSION = 2015.07
+VERSION = 2015.11

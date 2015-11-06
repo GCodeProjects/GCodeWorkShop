@@ -182,7 +182,7 @@ macx:LIBS += -framework IOKit -framework CoreFoundation
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
-VERSION = 2015.07
+VERSION = 2015.11
 
 SUBDIRS += \
     src_sfs.pro

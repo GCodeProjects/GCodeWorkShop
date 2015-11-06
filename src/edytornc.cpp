@@ -1469,7 +1469,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2015-10-20 BETA" +
+                       trUtf8("<P>Version: ") + "2015-11-04 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
@@ -4651,7 +4651,7 @@ void EdytorNc::fileChanged(const QString fileName)
 void EdytorNc::startSerialPortServer()
 {
 
-    QString fileName;
+    QString fileName, path;
     //commApp = findChild<CommApp *>("CommApp", Qt::FindChildrenRecursively);
 
 //    if(commApp)
@@ -4671,23 +4671,23 @@ void EdytorNc::startSerialPortServer()
     fileName = "sfs.exe";
 #endif
 
-    fileName = QApplication::applicationDirPath() + "/" + fileName;
-
-
+    path = QApplication::applicationDirPath() + "/";
 
     sfsProc = findChild<QProcess *>("sfs");
-
-    qDebug() << fileName << sfsProc;
 
     if(!sfsProc)
     {
         sfsProc = new QProcess(this);
         sfsProc->setObjectName("sfs");
+        sfsProc->setWorkingDirectory(QDir::toNativeSeparators(path));
         sfsProc->startDetached(fileName);
     }
     else
         if(sfsProc->pid() == 0)
+        {
+            sfsProc->setWorkingDirectory(QDir::toNativeSeparators(path));
             sfsProc->startDetached(fileName);
+        };
 
 }
 

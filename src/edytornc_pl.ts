@@ -308,93 +308,188 @@
         <translation>&amp;Plik</translation>
     </message>
     <message>
-        <location filename="commapp.ui" line="85"/>
+        <location filename="commapp.ui" line="82"/>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Pomoc</translation>
+    </message>
+    <message>
+        <location filename="commapp.ui" line="91"/>
         <source>toolBar</source>
         <translation></translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="36"/>
+        <location filename="commapp.cpp" line="100"/>
         <source>EdytorNC - Serial port file server</source>
         <oldsource>EdytorNC - File server</oldsource>
         <translation type="unfinished">EdytorNC - Serwer plików przez port szeregowy</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="192"/>
-        <location filename="commapp.cpp" line="194"/>
+        <location filename="commapp.cpp" line="101"/>
+        <source>The program will keep running in the system tray. To terminate the program, choose &lt;b&gt;Quit&lt;/b&gt; in the context menu of the system tray entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="231"/>
+        <location filename="commapp.cpp" line="233"/>
         <source>Serial port configuration</source>
         <translation>Konfiguracja portu szeregowego</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="197"/>
+        <location filename="commapp.cpp" line="236"/>
         <source>&amp;Start</source>
         <translation type="unfinished">&amp;Start</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="199"/>
+        <location filename="commapp.cpp" line="238"/>
         <source>Start</source>
         <translation type="unfinished">Uruchom</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="202"/>
+        <location filename="commapp.cpp" line="241"/>
         <source>S&amp;top</source>
         <translation type="unfinished">&amp;Zatrzymaj</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="204"/>
+        <location filename="commapp.cpp" line="243"/>
         <source>Stop</source>
         <translation type="unfinished">Zatrzymaj</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="208"/>
+        <location filename="commapp.cpp" line="247"/>
         <source>&amp;Reset</source>
         <oldsource>Reset</oldsource>
         <translation type="unfinished">&amp;Reset</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="209"/>
+        <location filename="commapp.cpp" line="248"/>
         <source>Reset serial port</source>
         <translation type="unfinished">Zresetuj port szeregowy</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="213"/>
+        <location filename="commapp.cpp" line="252"/>
+        <source>&amp;Minimize to tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="253"/>
+        <source>Minimize to system tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Close</source>
-        <translation>&amp;Zamknij</translation>
+        <translation type="vanished">&amp;Zamknij</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="214"/>
         <source>Close</source>
-        <translation>Zamknij</translation>
+        <translation type="vanished">Zamknij</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="217"/>
+        <location filename="commapp.cpp" line="256"/>
         <source>&amp;Browse save folder</source>
         <translation type="unfinished">&amp;Preglądaj folder zapisu</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="218"/>
+        <location filename="commapp.cpp" line="257"/>
         <source>Browse save folder</source>
         <translation type="unfinished">Przegladaj folder zapisu</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="221"/>
+        <location filename="commapp.cpp" line="260"/>
         <source>&amp;Show saved files</source>
         <translation type="unfinished">Pokaż &amp;odebrane pliki</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="222"/>
+        <location filename="commapp.cpp" line="261"/>
         <source>Show saved files</source>
         <translation type="unfinished">Pokaż odebrane pliki</translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="240"/>
+        <location filename="commapp.cpp" line="264"/>
+        <source>&amp;About</source>
+        <translation type="unfinished">&amp;O edytorze</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="265"/>
+        <source>Show the application&apos;s About box</source>
+        <translation type="unfinished">Wyświetla okienko inforacyjne o programie</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="269"/>
+        <source>Mi&amp;nimize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="272"/>
+        <source>Ma&amp;ximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="275"/>
+        <source>&amp;Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="278"/>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="281"/>
+        <source>Start minimized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="300"/>
         <source>FileToolBar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="commapp.cpp" line="283"/>
-        <location filename="commapp.cpp" line="286"/>
+        <location filename="commapp.cpp" line="353"/>
+        <location filename="commapp.cpp" line="356"/>
         <source>Default</source>
         <translation>Domyślne</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="641"/>
+        <source>About EdytorNC - Serial port file server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="642"/>
+        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
+        <translation type="unfinished">&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="643"/>
+        <source>&lt;P&gt;Version: same as EdytorNC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="644"/>
+        <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
+        <translation type="unfinished">&lt;P&gt;Copyright (C) 1998 - 2013 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt; {1998 ?} {2015 ?} {78@?}</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="645"/>
+        <location filename="commapp.cpp" line="647"/>
+        <source>&lt;P&gt;</source>
+        <translation type="unfinished">&lt;P&gt;</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="646"/>
+        <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
+        <translation type="unfinished">&lt;P&gt;EdytorNC zawiera fragmenty kodu z innych projektów Wolnego Oprogramowania.</translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="648"/>
+        <source>&lt;P&gt;&lt;i&gt;EdytorNC - Serial port file server is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="commapp.cpp" line="652"/>
+        <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <translation type="unfinished">&lt;P&gt;&lt;i&gt;Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych informacji - Powszechna Licencja Publiczna GNU.&lt;/i&gt;</translation>
     </message>
 </context>
 <context>
@@ -529,7 +624,7 @@
     <message>
         <location filename="edytornc.ui" line="205"/>
         <location filename="edytornc.ui" line="208"/>
-        <location filename="edytornc.cpp" line="3409"/>
+        <location filename="edytornc.cpp" line="3411"/>
         <source>Add files to project</source>
         <translation>Dodaj pliki do projektu</translation>
     </message>
@@ -592,7 +687,7 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="534"/>
-        <location filename="edytornc.cpp" line="3923"/>
+        <location filename="edytornc.cpp" line="3925"/>
         <source>File Name</source>
         <translation>Nazwa pliku</translation>
     </message>
@@ -679,17 +774,17 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation>Wpisz nazwę programu kalkulatora w konfiguracji edytora.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1469"/>
+        <location filename="edytornc.cpp" line="1470"/>
         <source>About EdytorNC</source>
         <translation>O EdytorNC</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1470"/>
+        <location filename="edytornc.cpp" line="1471"/>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
         <translation>&lt;b&gt;EdytorNC&lt;/b&gt; jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1471"/>
+        <location filename="edytornc.cpp" line="1472"/>
         <source>&lt;P&gt;Version: </source>
         <translation>&lt;P&gt;Wersja: </translation>
     </message>
@@ -698,7 +793,7 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1473"/>
+        <location filename="edytornc.cpp" line="1474"/>
         <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
         <translation>&lt;br /&gt;Tłumaczenie na język kataloński Jordi Sayol i Salomó</translation>
     </message>
@@ -707,39 +802,39 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="vanished">&lt;br /&gt;Tłumaczenie na język niemiecki Michael Numberger</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1475"/>
+        <location filename="edytornc.cpp" line="1476"/>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
         <translation>&lt;br /&gt;Tłumaczenie na język czeski Pavel Fric</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1476"/>
+        <location filename="edytornc.cpp" line="1477"/>
         <source>&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju</source>
         <translation>&lt;br /&gt;Tłumaczenie na język fiński Janne Mäntyharju</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1479"/>
+        <location filename="edytornc.cpp" line="1480"/>
         <source>&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju</source>
         <translation type="unfinished">&lt;br /&gt;Poprawki dla systemu OS X  i inne aktalizacje dzięki Janne Mäntyharju</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1480"/>
+        <location filename="edytornc.cpp" line="1481"/>
         <source>&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski</source>
         <translation>&lt;P&gt;Nowa ikona EdytorNC dzięki Jakub Gajewski</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1481"/>
+        <location filename="edytornc.cpp" line="1482"/>
         <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
         <translation>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1483"/>
-        <location filename="edytornc.cpp" line="1485"/>
-        <location filename="edytornc.cpp" line="1487"/>
+        <location filename="edytornc.cpp" line="1484"/>
+        <location filename="edytornc.cpp" line="1486"/>
+        <location filename="edytornc.cpp" line="1488"/>
         <source>&lt;P&gt;</source>
         <translation>&lt;P&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1484"/>
+        <location filename="edytornc.cpp" line="1485"/>
         <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
         <translation>&lt;P&gt;Wieloplatformowy instalator dzięki &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
     </message>
@@ -748,87 +843,87 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="obsolete">&lt;P&gt;EdytorNC zdobył &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1486"/>
+        <location filename="edytornc.cpp" line="1487"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
         <translation>&lt;P&gt;EdytorNC zawiera fragmenty kodu z innych projektów Wolnego Oprogramowania.</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1488"/>
+        <location filename="edytornc.cpp" line="1489"/>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
         <translation>&lt;P&gt;&lt;i&gt;EdytorNC jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU, wydanej przez Fundację Wolnego Oprogramowania - według wersji 2-giej tej Licencji lub którejś z późniejszych wersji.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1492"/>
+        <location filename="edytornc.cpp" line="1493"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation>&lt;P&gt;&lt;i&gt;Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych informacji - Powszechna Licencja Publiczna GNU.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1658"/>
+        <location filename="edytornc.cpp" line="1660"/>
         <source> Col: </source>
         <translation> Kolumna: </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1659"/>
+        <location filename="edytornc.cpp" line="1661"/>
         <source>  Line: </source>
         <translation>  Wiersz: </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1660"/>
+        <location filename="edytornc.cpp" line="1662"/>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
         <translation>  &lt;b&gt;Zmieniony&lt;/b&gt;  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1661"/>
+        <location filename="edytornc.cpp" line="1663"/>
         <source> Read only  </source>
         <translation> Tylko do odczytu  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1662"/>
+        <location filename="edytornc.cpp" line="1664"/>
         <source> Overwrite  </source>
         <translation> Nadpisz  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1662"/>
+        <location filename="edytornc.cpp" line="1664"/>
         <source> Insert </source>
         <translation> Wstaw  </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1698"/>
+        <location filename="edytornc.cpp" line="1700"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1702"/>
+        <location filename="edytornc.cpp" line="1704"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1752"/>
+        <location filename="edytornc.cpp" line="1754"/>
         <source>&amp;New</source>
         <translation>&amp;Nowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1754"/>
+        <location filename="edytornc.cpp" line="1756"/>
         <source>Create a new file</source>
         <translation>Utwórz nowy plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1757"/>
+        <location filename="edytornc.cpp" line="1759"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otwórz...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1759"/>
+        <location filename="edytornc.cpp" line="1761"/>
         <source>Open an existing file</source>
         <translation>Otwórz istniejący plik...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1764"/>
+        <location filename="edytornc.cpp" line="1766"/>
         <source>&amp;Open example...</source>
         <translation>O&amp;twórz przykład...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1765"/>
+        <location filename="edytornc.cpp" line="1767"/>
         <source>Open an example file</source>
         <translation>Otwórz przykładowy plik...</translation>
     </message>
@@ -845,7 +940,7 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="vanished">&amp;Zapisz</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1771"/>
+        <location filename="edytornc.cpp" line="1773"/>
         <source>Save the document to disk</source>
         <translation>Zapisz plik na dysku</translation>
     </message>
@@ -854,491 +949,486 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="vanished">Zapisz &amp;jako...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1781"/>
+        <location filename="edytornc.cpp" line="1783"/>
         <source>Save the document under a new name</source>
         <translation>Zapisz plik pod nową nazwą</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1784"/>
+        <location filename="edytornc.cpp" line="1786"/>
         <source>E&amp;xit</source>
         <translation>Z&amp;amknij edytor</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1786"/>
+        <location filename="edytornc.cpp" line="1788"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1787"/>
+        <location filename="edytornc.cpp" line="1789"/>
         <source>Exit the application</source>
         <translation>Zamknięcie edytora</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1790"/>
+        <location filename="edytornc.cpp" line="1792"/>
         <source>&amp;Find files...</source>
         <translation>&amp;Znajdź pliki...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1793"/>
+        <location filename="edytornc.cpp" line="1795"/>
         <source>Find files</source>
         <translation>Znajdź w plikach (znajdź pliki)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1796"/>
+        <location filename="edytornc.cpp" line="1798"/>
         <source>&amp;Print</source>
         <translation>Wy&amp;drukuj...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1798"/>
+        <location filename="edytornc.cpp" line="1800"/>
         <source>Print file</source>
         <translation>Wydrukuj plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1801"/>
+        <location filename="edytornc.cpp" line="1803"/>
         <source>Pr&amp;int preview</source>
         <translation>Podgląd &amp;wydruku</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1803"/>
+        <location filename="edytornc.cpp" line="1805"/>
         <source>Preview printing</source>
         <translation>Pogląd wydruku</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1806"/>
+        <location filename="edytornc.cpp" line="1808"/>
         <source>Session manager...</source>
         <translation>Menadżer sesji...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1807"/>
+        <location filename="edytornc.cpp" line="1809"/>
         <source>Sessions manager</source>
         <translation>Menadżer sesji</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1811"/>
+        <location filename="edytornc.cpp" line="1813"/>
         <source>&amp;Undo</source>
         <translation>&amp;Cofnij</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1813"/>
+        <location filename="edytornc.cpp" line="1815"/>
         <source>Undo last operation</source>
         <translation>Cofnij ostatnią operację</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1817"/>
+        <location filename="edytornc.cpp" line="1819"/>
         <source>&amp;Redo</source>
         <translation>&amp;Przywróć</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1819"/>
+        <location filename="edytornc.cpp" line="1821"/>
         <source>Redo last operation</source>
         <translation>Przywróć ostatnią operację</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1823"/>
+        <location filename="edytornc.cpp" line="1825"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Wy&amp;tnij</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1825"/>
+        <location filename="edytornc.cpp" line="1827"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Wycina aktualnie zaznaczony tekst do schowka</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1829"/>
+        <location filename="edytornc.cpp" line="1831"/>
         <source>&amp;Copy</source>
         <translation>S&amp;kopiuj</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1831"/>
+        <location filename="edytornc.cpp" line="1833"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopiuje aktualnie zaznaczony tekst do schowka</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1835"/>
+        <location filename="edytornc.cpp" line="1837"/>
         <source>&amp;Paste</source>
         <translation>Wk&amp;lej</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1837"/>
+        <location filename="edytornc.cpp" line="1839"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Wstawia tekst ze schowka</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1842"/>
+        <location filename="edytornc.cpp" line="1844"/>
         <source>&amp;Find</source>
         <translation>&amp;Znajdź</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1844"/>
+        <location filename="edytornc.cpp" line="1846"/>
         <source>Find text</source>
         <translation>Znajdź tekst</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1847"/>
+        <location filename="edytornc.cpp" line="1849"/>
         <source>&amp;Replace</source>
         <translation>Za&amp;mień</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1848"/>
+        <location filename="edytornc.cpp" line="1850"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1849"/>
+        <location filename="edytornc.cpp" line="1851"/>
         <source>Find and replace text</source>
         <translation>Znajdź i zamień tekst</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1853"/>
+        <location filename="edytornc.cpp" line="1855"/>
         <source>&amp;Delete</source>
         <translation>&amp;Usuń</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1855"/>
+        <location filename="edytornc.cpp" line="1857"/>
         <source>Removes selected text</source>
         <translation>Usuwa zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1858"/>
+        <location filename="edytornc.cpp" line="1860"/>
         <source>&amp;Select all</source>
         <translation>Zaznacz &amp;wszystko</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1860"/>
+        <location filename="edytornc.cpp" line="1862"/>
         <source>Select all text</source>
         <translation>Zaznacza cały tekst</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1863"/>
+        <location filename="edytornc.cpp" line="1865"/>
         <source>Read &amp;only</source>
         <translation>Tylko do odczyt&amp;u</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1864"/>
+        <location filename="edytornc.cpp" line="1866"/>
         <source>F12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1866"/>
+        <location filename="edytornc.cpp" line="1868"/>
         <source>Makes text read only</source>
         <translation>Blokuje możliwość edytowania tekstu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1869"/>
+        <location filename="edytornc.cpp" line="1871"/>
         <source>Configuration</source>
         <translation>Konfiguracja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1871"/>
+        <location filename="edytornc.cpp" line="1873"/>
         <source>Open configuration dialog</source>
         <translation>Ustawienia edytora</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1874"/>
+        <location filename="edytornc.cpp" line="1876"/>
         <source>Inline calculator</source>
         <translation>Podręczny kalkulator</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1875"/>
-        <source>Ctrl+K</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="edytornc.cpp" line="1879"/>
+        <location filename="edytornc.cpp" line="1881"/>
         <source>&amp;Bolt hole circle</source>
         <translation>&amp;Otwory na okręgu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1880"/>
+        <location filename="edytornc.cpp" line="1882"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1881"/>
+        <location filename="edytornc.cpp" line="1883"/>
         <source>Calculate bolt hole&apos;s positions</source>
         <translation>Oblicz współrzędne otworów rozmieszczonych na okręgu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1884"/>
+        <location filename="edytornc.cpp" line="1886"/>
         <source>&amp;Insert spaces</source>
         <translation>&amp;Wstaw spacje</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1885"/>
+        <location filename="edytornc.cpp" line="1887"/>
         <source>F4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1886"/>
+        <location filename="edytornc.cpp" line="1888"/>
         <source>Inserts spaces</source>
         <translation>Wstawia spacje do programu </translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1889"/>
+        <location filename="edytornc.cpp" line="1891"/>
         <source>Remove spaces</source>
         <translation>Usuń spacje</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1890"/>
+        <location filename="edytornc.cpp" line="1892"/>
         <source>F5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1891"/>
+        <location filename="edytornc.cpp" line="1893"/>
         <source>Removes spaces</source>
         <translation>Usuwa spacje z programu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1894"/>
+        <location filename="edytornc.cpp" line="1896"/>
         <source>Remove empty lines</source>
         <translation>Usuń puste linie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1896"/>
+        <location filename="edytornc.cpp" line="1898"/>
         <source>Removes empty lines</source>
         <translation>Usuń puste linie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1899"/>
         <location filename="edytornc.cpp" line="1901"/>
+        <location filename="edytornc.cpp" line="1903"/>
         <source>Insert empty lines</source>
         <translation>Wstaw puste linie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1904"/>
+        <location filename="edytornc.cpp" line="1906"/>
         <source>Clean &amp;up</source>
         <translation type="unfinished">Cz&amp;yszczenie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1909"/>
+        <location filename="edytornc.cpp" line="1911"/>
         <source>Insert dots</source>
         <translation>Wstaw kropki</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1910"/>
+        <location filename="edytornc.cpp" line="1912"/>
         <source>F6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1911"/>
+        <location filename="edytornc.cpp" line="1913"/>
         <source>Inserts decimal dot</source>
         <translation>Wstaw kropki dziesiętne</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1914"/>
+        <location filename="edytornc.cpp" line="1916"/>
         <source>Renumber</source>
         <translation>Przenumeruj</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1915"/>
+        <location filename="edytornc.cpp" line="1917"/>
         <source>F7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1916"/>
+        <location filename="edytornc.cpp" line="1918"/>
         <source>Renumber program blocks</source>
         <translation>Przenumeruj linie programu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1919"/>
+        <location filename="edytornc.cpp" line="1921"/>
         <source>Feed&apos;s speed&apos;s</source>
         <translation>Parametry skrawania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1920"/>
+        <location filename="edytornc.cpp" line="1922"/>
         <source>F9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1921"/>
+        <location filename="edytornc.cpp" line="1923"/>
         <source>Calculate speed, feed, cutting speed</source>
         <translation>Obliczanie parametrów skrawania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1924"/>
+        <location filename="edytornc.cpp" line="1926"/>
         <source>Chamfer</source>
         <translation>Fazka</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1926"/>
+        <location filename="edytornc.cpp" line="1928"/>
         <source>Calculate chamfer</source>
         <translation>Obliczenia zfazowania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1929"/>
         <location filename="edytornc.cpp" line="1931"/>
+        <location filename="edytornc.cpp" line="1933"/>
         <source>Solution of triangles</source>
         <translation>Obliczenia trójkątów</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1934"/>
         <location filename="edytornc.cpp" line="1936"/>
+        <location filename="edytornc.cpp" line="1938"/>
         <source>Convert inch &lt;-&gt; mm</source>
         <translation>Przelicz mm &lt;-&gt; cale</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1939"/>
         <location filename="edytornc.cpp" line="1941"/>
+        <location filename="edytornc.cpp" line="1943"/>
         <source>Convert program inch &lt;-&gt; mm</source>
         <translation>Zamień program cale &lt;-&gt; mm</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1944"/>
+        <location filename="edytornc.cpp" line="1946"/>
         <source>Calculator</source>
         <translation>Kalkulator</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1946"/>
+        <location filename="edytornc.cpp" line="1948"/>
         <source>Run calculator</source>
         <translation>Uruchom kalkulator</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1949"/>
-        <location filename="edytornc.cpp" line="1952"/>
+        <location filename="edytornc.cpp" line="1951"/>
+        <location filename="edytornc.cpp" line="1954"/>
         <source>Serial port send/receive</source>
         <translation>Wysyłanie/odbieranie przez port szeregowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1955"/>
+        <location filename="edytornc.cpp" line="1957"/>
         <source>Compile macro - experimental</source>
         <translation>Kompiluj makro - funkcja eksperymentalna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1957"/>
+        <location filename="edytornc.cpp" line="1959"/>
         <source>Translate EdytorNC macro into CNC program</source>
         <translation>Przetłumacz makro EdytorNC na program CNC</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1960"/>
-        <location filename="edytornc.cpp" line="1961"/>
+        <location filename="edytornc.cpp" line="1962"/>
+        <location filename="edytornc.cpp" line="1963"/>
         <source>Show diff - open current file in right diff window</source>
         <translation>Porównywanie plików - otwórz plik w prawym oknie porównywania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1964"/>
-        <location filename="edytornc.cpp" line="1965"/>
+        <location filename="edytornc.cpp" line="1966"/>
+        <location filename="edytornc.cpp" line="1967"/>
         <source>Show diff - open current file in left diff window</source>
         <translation>Porównywanie plików - otwórz plik w lewym oknie porównywania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1968"/>
+        <location filename="edytornc.cpp" line="1970"/>
         <source>On/off diff window</source>
         <translation>Włącz/wyłącz okno porównywania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1970"/>
+        <location filename="edytornc.cpp" line="1972"/>
         <source>Show diff window</source>
         <translation>Pokarz okno porównywania plików</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1973"/>
+        <location filename="edytornc.cpp" line="1975"/>
         <source>Show unsaved changes</source>
         <translation>Pokaż niezapisane zmiany</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1974"/>
+        <location filename="edytornc.cpp" line="1976"/>
         <source>Show diff of currently edited file and file on disk</source>
         <translation>Pokazuje różnice pomiędzy aktualnie edytowanym plikiem a plikiem zapisanym na dysku</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1977"/>
-        <location filename="edytornc.cpp" line="1978"/>
+        <location filename="edytornc.cpp" line="1979"/>
+        <location filename="edytornc.cpp" line="1980"/>
         <source>Split file</source>
         <translation>Podziel plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1993"/>
+        <location filename="edytornc.cpp" line="1995"/>
         <source>Swap/modify axes, selected text or entire program</source>
         <translation>Zamień/zmodyfikuj osie w wybranym tekscie lub całym programie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1996"/>
+        <location filename="edytornc.cpp" line="1998"/>
         <source>Block Skip remove</source>
         <translation>Usuń pominięcie linii</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1997"/>
+        <location filename="edytornc.cpp" line="1999"/>
         <source>Ctrl+1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1998"/>
+        <location filename="edytornc.cpp" line="2000"/>
         <source>Remove Block Skip /</source>
         <translation>Usuń pominięcie linii /</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2001"/>
+        <location filename="edytornc.cpp" line="2003"/>
         <source>Block Skip +</source>
         <translation>Pominięcie linii +</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2002"/>
+        <location filename="edytornc.cpp" line="2004"/>
         <source>Ctrl+2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2003"/>
+        <location filename="edytornc.cpp" line="2005"/>
         <source>Insert/increase Block Skip /</source>
         <translation>Wstaw/zwiększ Pominięcie linii /</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2006"/>
+        <location filename="edytornc.cpp" line="2008"/>
         <source>Block Skip -</source>
         <translation>Pominięcie linii -</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2007"/>
+        <location filename="edytornc.cpp" line="2009"/>
         <source>Ctrl+3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2008"/>
+        <location filename="edytornc.cpp" line="2010"/>
         <source>Insert/decrease Block Skip /</source>
         <translation>Wstaw/zmniejsz Pominięcie linii /</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2021"/>
+        <location filename="edytornc.cpp" line="2023"/>
         <source>Tile &amp;horyzontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2022"/>
+        <location filename="edytornc.cpp" line="2024"/>
         <source>Tile the windows horyzontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2025"/>
+        <location filename="edytornc.cpp" line="2027"/>
         <source>Tile &amp;vertycally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2026"/>
+        <location filename="edytornc.cpp" line="2028"/>
         <source>Tile the windows vertycally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3048"/>
         <location filename="edytornc.cpp" line="3050"/>
+        <location filename="edytornc.cpp" line="3052"/>
         <source>Start application &quot;Serial port file server&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3728"/>
+        <location filename="edytornc.cpp" line="3730"/>
         <source>Show</source>
         <translation>Pokaż</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3739"/>
+        <location filename="edytornc.cpp" line="3741"/>
         <source>Hide</source>
         <translation>Ukryj</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4628"/>
+        <location filename="edytornc.cpp" line="4630"/>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
         <translation type="unfinished">Plik &quot;%1&quot; &lt;b&gt;został zmieniony na dysku.&lt;/b&gt;&lt;p&gt;Chcesz go ponownie wczytać?&lt;/p&gt;%2</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4630"/>
+        <location filename="edytornc.cpp" line="4632"/>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;&lt;b&gt;Ostrzerzenie:&lt;/b&gt; Plik w edytorze zawiera niezapisane zmiany.&lt;/p&gt;</translation>
     </message>
@@ -1347,17 +1437,17 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="vanished">&amp;Zamknij</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2014"/>
+        <location filename="edytornc.cpp" line="2016"/>
         <source>Close the active window</source>
         <translation>Zamknij aktywne okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2017"/>
+        <location filename="edytornc.cpp" line="2019"/>
         <source>Close &amp;All</source>
         <translation>Zamknij &amp;wszystkie okna</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2018"/>
+        <location filename="edytornc.cpp" line="2020"/>
         <source>Close all the windows</source>
         <translation>Zamknij wszystkie okna</translation>
     </message>
@@ -1370,32 +1460,32 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="vanished">Rozmieść okna kafelkowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2029"/>
+        <location filename="edytornc.cpp" line="2031"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Rozmieść kaskadowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2030"/>
+        <location filename="edytornc.cpp" line="2032"/>
         <source>Cascade the windows</source>
         <translation>Rozmieść okna kaskadowo</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2033"/>
+        <location filename="edytornc.cpp" line="2035"/>
         <source>Ne&amp;xt</source>
         <translation>&amp;Następne</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2035"/>
+        <location filename="edytornc.cpp" line="2037"/>
         <source>Move the focus to the next window</source>
         <translation>Uaktywnia kolejne okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2038"/>
+        <location filename="edytornc.cpp" line="2040"/>
         <source>Pre&amp;vious</source>
         <translation>&amp;Poprzednie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2040"/>
+        <location filename="edytornc.cpp" line="2042"/>
         <source>Move the focus to the previous window</source>
         <translation>Uaktywnia poprzednie okno</translation>
     </message>
@@ -1416,42 +1506,42 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="obsolete">&amp;Usuń</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1906"/>
+        <location filename="edytornc.cpp" line="1908"/>
         <source>Remove text using regular expressions</source>
         <translation>Usuń tekst używająć wyrażeń regularnych</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1981"/>
+        <location filename="edytornc.cpp" line="1983"/>
         <source>Comment ;</source>
         <translation>Komentarz ;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1982"/>
+        <location filename="edytornc.cpp" line="1984"/>
         <source>Ctrl+;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1983"/>
+        <location filename="edytornc.cpp" line="1985"/>
         <source>Comment/uncomment selected text using semicolon</source>
         <translation>Zakomentuj/odkomentuj używając średnika</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1986"/>
+        <location filename="edytornc.cpp" line="1988"/>
         <source>Comment ()</source>
         <translation>Komentarz ()</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1987"/>
+        <location filename="edytornc.cpp" line="1989"/>
         <source>Ctrl+9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1988"/>
+        <location filename="edytornc.cpp" line="1990"/>
         <source>Comment/uncomment selected text using parentheses</source>
         <translation>Zakomentuj/odkomentuj używając nawiasów</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1991"/>
+        <location filename="edytornc.cpp" line="1993"/>
         <source>Swap axes</source>
         <translation>Zamień osie</translation>
     </message>
@@ -1460,47 +1550,47 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
         <translation type="vanished">Zamień/zmodyfikuj osie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2058"/>
+        <location filename="edytornc.cpp" line="2060"/>
         <source>&amp;About</source>
         <translation>&amp;O edytorze</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2059"/>
+        <location filename="edytornc.cpp" line="2061"/>
         <source>Show the application&apos;s About box</source>
         <translation>Wyświetla okienko inforacyjne o programie</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2062"/>
+        <location filename="edytornc.cpp" line="2064"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2063"/>
+        <location filename="edytornc.cpp" line="2065"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>Wyświetla okienko inforacyjne o biblotekach Qt</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2073"/>
+        <location filename="edytornc.cpp" line="2075"/>
         <source>&amp;File</source>
         <translation>&amp;Plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2079"/>
+        <location filename="edytornc.cpp" line="2081"/>
         <source>&amp;Recent files</source>
         <translation>O&amp;statnio otwarte</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2103"/>
+        <location filename="edytornc.cpp" line="2105"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edycja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2130"/>
+        <location filename="edytornc.cpp" line="2132"/>
         <source>&amp;Tools</source>
         <translation>&amp;Narzędzia</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2120"/>
+        <location filename="edytornc.cpp" line="2122"/>
         <source>&amp;Block Skip</source>
         <translation>Po&amp;minięcie linii</translation>
     </message>
@@ -1532,307 +1622,312 @@ Close anyway?</source>
         <translation>Dokument został wysłany na drukarkę %1</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1474"/>
+        <location filename="edytornc.cpp" line="1475"/>
         <source>&lt;br /&gt;German translation and other fixes thanks to Michael Numberger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1477"/>
+        <location filename="edytornc.cpp" line="1478"/>
         <source>&lt;br /&gt;Spanish translation and other fixes thanks to Otto Huamani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1478"/>
+        <location filename="edytornc.cpp" line="1479"/>
         <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1482"/>
+        <location filename="edytornc.cpp" line="1483"/>
         <source>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1596"/>
-        <location filename="edytornc.cpp" line="1769"/>
+        <location filename="edytornc.cpp" line="1598"/>
+        <location filename="edytornc.cpp" line="1771"/>
         <source>&amp;Save &quot;%1&quot;</source>
         <translation>&amp;Zapisz &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1597"/>
-        <location filename="edytornc.cpp" line="1779"/>
+        <location filename="edytornc.cpp" line="1599"/>
+        <location filename="edytornc.cpp" line="1781"/>
         <source>Save &quot;%1&quot; &amp;As...</source>
         <translation>Z&amp;apisz &quot;%1&quot; jako...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1598"/>
-        <location filename="edytornc.cpp" line="2012"/>
+        <location filename="edytornc.cpp" line="1600"/>
+        <location filename="edytornc.cpp" line="2014"/>
         <source>Cl&amp;ose &quot;%1&quot;</source>
         <translation>&amp;Zamknij &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1774"/>
+        <location filename="edytornc.cpp" line="1776"/>
         <source>Save A&amp;ll</source>
         <translation>Zapisz &amp;wszystko</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1775"/>
+        <location filename="edytornc.cpp" line="1777"/>
         <source>Ctrl+Shift+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1776"/>
+        <location filename="edytornc.cpp" line="1778"/>
         <source>Save all modified documents to disk</source>
         <translation>Zapisz wszystie zmienione dokumenty</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2089"/>
+        <location filename="edytornc.cpp" line="1877"/>
+        <source>Ctrl+0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="edytornc.cpp" line="2091"/>
         <source>Sessions</source>
         <translation>Sesje</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2161"/>
+        <location filename="edytornc.cpp" line="2163"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2167"/>
+        <location filename="edytornc.cpp" line="2169"/>
         <source>&amp;Help</source>
         <translation>&amp;Pomoc</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2181"/>
+        <location filename="edytornc.cpp" line="2183"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2193"/>
+        <location filename="edytornc.cpp" line="2195"/>
         <source>Edit</source>
         <translation>Edycja</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2216"/>
+        <location filename="edytornc.cpp" line="2218"/>
         <source>Tools</source>
         <translation>Narzędzia</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2241"/>
+        <location filename="edytornc.cpp" line="2243"/>
         <source>Window</source>
         <translation>Okno</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2261"/>
+        <location filename="edytornc.cpp" line="2263"/>
         <source>Highlight style and tooltip mode</source>
         <translation>Styl kolorowania i tryb podpowiedzi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2263"/>
+        <location filename="edytornc.cpp" line="2265"/>
         <source>AUTO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2264"/>
+        <location filename="edytornc.cpp" line="2266"/>
         <source>FANUC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2265"/>
+        <location filename="edytornc.cpp" line="2267"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2266"/>
+        <location filename="edytornc.cpp" line="2268"/>
         <source>HEIDENHAIN ISO</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2267"/>
+        <location filename="edytornc.cpp" line="2269"/>
         <source>OKUMA OSP</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2268"/>
+        <location filename="edytornc.cpp" line="2270"/>
         <source>PHILIPS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2269"/>
+        <location filename="edytornc.cpp" line="2271"/>
         <source>SINUMERIK OLD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2270"/>
+        <location filename="edytornc.cpp" line="2272"/>
         <source>SINUMERIK NEW</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2271"/>
+        <location filename="edytornc.cpp" line="2273"/>
         <source>LinuxCNC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2272"/>
+        <location filename="edytornc.cpp" line="2274"/>
         <source>TOOLTIPS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2276"/>
-        <location filename="edytornc.cpp" line="2277"/>
+        <location filename="edytornc.cpp" line="2278"/>
+        <location filename="edytornc.cpp" line="2279"/>
         <source>Attach current highlight setting to current directory of programs</source>
         <translation>Powiąż aktualne ustawienia podświetlania z aktualnym katalogiem programów</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2283"/>
-        <location filename="edytornc.cpp" line="2284"/>
+        <location filename="edytornc.cpp" line="2285"/>
+        <location filename="edytornc.cpp" line="2286"/>
         <source>Remove highlight settings from the directory</source>
         <translation>Usuń informacje o stylu podświetlania z bierzącego katalogu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2302"/>
+        <location filename="edytornc.cpp" line="2304"/>
         <source>Ready</source>
         <translation>Gotowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2422"/>
-        <location filename="edytornc.cpp" line="2425"/>
+        <location filename="edytornc.cpp" line="2424"/>
         <location filename="edytornc.cpp" line="2427"/>
+        <location filename="edytornc.cpp" line="2429"/>
         <source>default</source>
         <translation>Domyślne</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2763"/>
+        <location filename="edytornc.cpp" line="2765"/>
         <source>Find</source>
         <translation>Znajdź</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2769"/>
         <location filename="edytornc.cpp" line="2771"/>
+        <location filename="edytornc.cpp" line="2773"/>
         <source>Find next</source>
         <translation>Znajdź następny</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2774"/>
         <location filename="edytornc.cpp" line="2776"/>
+        <location filename="edytornc.cpp" line="2778"/>
         <source>Find previous</source>
         <translation>Znajdź poprzedni</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2779"/>
         <location filename="edytornc.cpp" line="2781"/>
+        <location filename="edytornc.cpp" line="2783"/>
         <source>Replace &amp;&amp; find next</source>
         <translation>Znajdź i zamień następny</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2784"/>
         <location filename="edytornc.cpp" line="2786"/>
+        <location filename="edytornc.cpp" line="2788"/>
         <source>Replace &amp;&amp; find previous</source>
         <translation>Znajdź i zamień poprzedni</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2789"/>
         <location filename="edytornc.cpp" line="2791"/>
+        <location filename="edytornc.cpp" line="2793"/>
         <source>Replace all</source>
         <translation>Zamień wszysko</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2794"/>
-        <location filename="edytornc.cpp" line="2795"/>
+        <location filename="edytornc.cpp" line="2796"/>
+        <location filename="edytornc.cpp" line="2797"/>
         <source>Close find toolbar</source>
         <translation>Zamknij pasek wyszukiwania</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2798"/>
+        <location filename="edytornc.cpp" line="2800"/>
         <source>Find:</source>
         <translation>Znajdź:</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2801"/>
+        <location filename="edytornc.cpp" line="2803"/>
         <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
         <translation type="unfinished">&lt;b&gt;Litera$$&lt;/b&gt; - znajduje dowolną liczbę.&lt;p&gt;&lt;b&gt;Litera$max$min&lt;/b&gt; - znajduje liczbę &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; można pominąć, wtedy równe 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - znajduje wszystkie X z liczbą od -10 do 100&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2810"/>
+        <location filename="edytornc.cpp" line="2812"/>
         <source>Replace with:</source>
         <translation>Zamień na:</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2813"/>
+        <location filename="edytornc.cpp" line="2815"/>
         <source>&lt;b&gt;$$OperatorNumber&lt;/b&gt; - do some math on replaced numbers. Operator +-*/&lt;p&gt;$$+1 - will add 1 to replaced numbers&lt;/p&gt;</source>
         <translation type="unfinished">&lt;b&gt;$$OperatorLiczba&lt;/b&gt; - wykonuje operacje matematyczne na wyszukanych liczbach. Operator +-*/&lt;p&gt;$$+1 - doda 1 do wyszukanych liczb&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2822"/>
+        <location filename="edytornc.cpp" line="2824"/>
         <source>Ignore c&amp;ase</source>
         <translation>&amp;Ignoruj wielkość znaków</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2825"/>
+        <location filename="edytornc.cpp" line="2827"/>
         <source>&amp;Whole words only</source>
         <translation>&amp;Tylko całe wyrazy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2829"/>
+        <location filename="edytornc.cpp" line="2831"/>
         <source>Ignore c&amp;omments</source>
         <translation>Ignoruj k&amp;omentarze</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3009"/>
+        <location filename="edytornc.cpp" line="3011"/>
         <source>Serial port toolbar</source>
         <translation>Pasek narzędzi port szeregowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3014"/>
         <location filename="edytornc.cpp" line="3016"/>
+        <location filename="edytornc.cpp" line="3018"/>
         <source>Serial port configuration</source>
         <translation>Konfiguracja portu szeregowego</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3019"/>
         <location filename="edytornc.cpp" line="3021"/>
+        <location filename="edytornc.cpp" line="3023"/>
         <source>Receive new file</source>
         <translation>Odbierz nowy plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3024"/>
         <location filename="edytornc.cpp" line="3026"/>
+        <location filename="edytornc.cpp" line="3028"/>
         <source>Send current file</source>
         <translation>Wyślij aktualny plik</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3029"/>
         <location filename="edytornc.cpp" line="3031"/>
+        <location filename="edytornc.cpp" line="3033"/>
         <source>Attach current port settings to current directory of programs</source>
         <translation>Powiąż aktualne ustawienia portu z aktualnym katalogiem programów</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3034"/>
+        <location filename="edytornc.cpp" line="3036"/>
         <source>Remove settings from the current directory</source>
         <translation>Usuń przypisanie ustawień do aktualnego katalogu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3036"/>
+        <location filename="edytornc.cpp" line="3038"/>
         <source>Remove settings from the directory</source>
         <translation>Usuń z bierzącego katalogu informacje o konfiguracji portu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3039"/>
         <location filename="edytornc.cpp" line="3041"/>
+        <location filename="edytornc.cpp" line="3043"/>
         <source>Check serial port settings</source>
         <translation>Testowanie ustawień portu szeregowego</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3044"/>
-        <location filename="edytornc.cpp" line="3045"/>
+        <location filename="edytornc.cpp" line="3046"/>
+        <location filename="edytornc.cpp" line="3047"/>
         <source>Close send/receive toolbar</source>
         <translation>Zamknij pasek wysyłania/odbierania przez port szeregowy</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4344"/>
+        <location filename="edytornc.cpp" line="4346"/>
         <source>Session %1 loaded</source>
         <translation>Sesja %1 załadowana</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="4489"/>
-        <location filename="edytornc.cpp" line="4492"/>
+        <location filename="edytornc.cpp" line="4491"/>
+        <location filename="edytornc.cpp" line="4494"/>
         <source>Default</source>
         <translation>Domyślne</translation>
     </message>
@@ -1893,12 +1988,12 @@ Close anyway?</source>
         <translation type="vanished">Nieznany błąd</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3242"/>
+        <location filename="edytornc.cpp" line="3244"/>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3244"/>
+        <location filename="edytornc.cpp" line="3246"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1987,22 +2082,22 @@ Close anyway?</source>
         <translation type="obsolete">&lt;b&gt;RET&lt;/b&gt; - zakończenie podprogramu</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3386"/>
+        <location filename="edytornc.cpp" line="3388"/>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3396"/>
+        <location filename="edytornc.cpp" line="3398"/>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3951"/>
+        <location filename="edytornc.cpp" line="3953"/>
         <source>Close</source>
         <translation>Zamknij</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3863"/>
+        <location filename="edytornc.cpp" line="3865"/>
         <source>&lt;b&gt;Project: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Projekt: &quot;%1&quot;
@@ -2014,28 +2109,28 @@ Close anyway?</source>
         <translation>PUSTY PLIK</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="1472"/>
+        <location filename="edytornc.cpp" line="1473"/>
         <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3864"/>
+        <location filename="edytornc.cpp" line="3866"/>
         <source>Do you want to save your changes ?</source>
         <translation>Czy chcesz zachować zmiany ?</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3907"/>
+        <location filename="edytornc.cpp" line="3909"/>
         <source>Open files</source>
         <translation>Otwarte pliki</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="529"/>
-        <location filename="edytornc.cpp" line="3923"/>
+        <location filename="edytornc.cpp" line="3925"/>
         <source>Info</source>
         <translation>Opis</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3474"/>
+        <location filename="edytornc.cpp" line="3476"/>
         <source>Project opened</source>
         <translation>Projekt został otwarty</translation>
     </message>
@@ -2051,22 +2146,22 @@ Close anyway?</source>
         <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2011 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2050"/>
+        <location filename="edytornc.cpp" line="2052"/>
         <source>&amp;Create global cnc tooltips</source>
         <translation type="unfinished">&amp;Utwórz globalny plik podpowiedzi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2051"/>
+        <location filename="edytornc.cpp" line="2053"/>
         <source>Create default global cnc tooltips file</source>
         <translation type="unfinished">Tworzy globalny plik podpowiedzi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2054"/>
+        <location filename="edytornc.cpp" line="2056"/>
         <source>&amp;Create user cnc tooltips</source>
         <translation type="unfinished">&amp;Utwórz plik podpowiedzi</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="2055"/>
+        <location filename="edytornc.cpp" line="2057"/>
         <source>Create/edit user cnc tooltips file</source>
         <translation type="unfinished">Tworzy/edytuje plik podpowiedzi uzytkownika</translation>
     </message>
@@ -2083,29 +2178,29 @@ Close anyway?</source>
         <translation type="obsolete">Wszystkie pliki (*.* *);;Pliki programów CNC (*.nc);;Pliki programów CNC (*.nc *.min *.anc *.cnc);;Dokumenty (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Rysunki (*.dwg *.dxf);;Obrazy (*.jpg *.bmp *.svg);;Pliki tekstowe (*.txt)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3518"/>
+        <location filename="edytornc.cpp" line="3520"/>
         <source>Project saved</source>
         <translation>Projekt został zapisany</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3666"/>
-        <location filename="edytornc.cpp" line="3694"/>
+        <location filename="edytornc.cpp" line="3668"/>
+        <location filename="edytornc.cpp" line="3696"/>
         <source>EdytorNC project file *.ncp (*.ncp)</source>
         <translation>Pliki projektu *.ncp (*.ncp)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3670"/>
-        <location filename="edytornc.cpp" line="3698"/>
+        <location filename="edytornc.cpp" line="3672"/>
+        <location filename="edytornc.cpp" line="3700"/>
         <source>EdytorNC project file (*.ncp)</source>
         <translation>Pliki projektu (*.ncp)</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3675"/>
+        <location filename="edytornc.cpp" line="3677"/>
         <source>Select the project name and location...</source>
         <translation>Wybierz nazwę projektu i jego lokalizację...</translation>
     </message>
     <message>
-        <location filename="edytornc.cpp" line="3703"/>
+        <location filename="edytornc.cpp" line="3705"/>
         <source>Open the project file...</source>
         <translation>Otwórz projekt...</translation>
     </message>
@@ -2879,23 +2974,23 @@ został zmieniony.&lt;/b&gt;</translation>
         <translation>Czy chcesz zachować zmiany ?</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1317"/>
+        <location filename="mdichild.cpp" line="1322"/>
         <source>Inserted : %1 dots.</source>
         <translation>Wstawiono : %1 kropek.</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1397"/>
+        <location filename="mdichild.cpp" line="1402"/>
         <source>Converted : %1 numbers.</source>
         <translation>Przeliczono : %1 liczb.</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1999"/>
-        <location filename="mdichild.cpp" line="2190"/>
+        <location filename="mdichild.cpp" line="2004"/>
+        <location filename="mdichild.cpp" line="2195"/>
         <source>EdytorNc - compile macro</source>
         <translation>EdytorNC - kompiluj makro</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="1999"/>
+        <location filename="mdichild.cpp" line="2004"/>
         <source>No constant definition .
 {BEGIN}
 ...
@@ -2908,26 +3003,26 @@ został zmieniony.&lt;/b&gt;</translation>
 To nie jest program makro ?</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2179"/>
+        <location filename="mdichild.cpp" line="2184"/>
         <source>Function parameter not found ! 
  Check +-*/.
 &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2183"/>
+        <location filename="mdichild.cpp" line="2188"/>
         <source>Unknown math function !
 &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2185"/>
+        <location filename="mdichild.cpp" line="2190"/>
         <source>Decimal point or minus writed two times !
 &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2034"/>
+        <location filename="mdichild.cpp" line="2039"/>
         <source>EdytorNC - compile macro</source>
         <translation>EdytorNC - kompiluj makro</translation>
     </message>
@@ -2958,188 +3053,203 @@ To nie jest program makro ?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2034"/>
+        <location filename="mdichild.cpp" line="2039"/>
         <source>Param list: no bracket &apos;}&apos; !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2177"/>
+        <location filename="mdichild.cpp" line="2182"/>
         <source>No ( or ) !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2181"/>
+        <location filename="mdichild.cpp" line="2186"/>
         <source>Wrong number !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2187"/>
+        <location filename="mdichild.cpp" line="2192"/>
         <source>Unknown error !</source>
         <translation>Nieznany błąd !</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2204"/>
+        <location filename="mdichild.cpp" line="2209"/>
         <source>Syntax error</source>
         <translation>Błąd składni</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2206"/>
+        <location filename="mdichild.cpp" line="2211"/>
         <source>Unbalanced parentheses</source>
         <translation>Bark otwierającego/zamykającego nawiasu</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2208"/>
+        <location filename="mdichild.cpp" line="2213"/>
         <source>No expression present</source>
         <translation>Nie znaleziono wyrażenia</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2210"/>
+        <location filename="mdichild.cpp" line="2215"/>
         <source>Equals sign expected</source>
         <translation>Spodziewano się znaku równości</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2212"/>
+        <location filename="mdichild.cpp" line="2217"/>
         <source>Not a variable</source>
         <translation>To nie jest zmienna</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2214"/>
+        <location filename="mdichild.cpp" line="2219"/>
         <source>Label table full</source>
         <translation>Pełna tabela etykiet</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2216"/>
+        <location filename="mdichild.cpp" line="2221"/>
         <source>Duplicate label</source>
         <translation>Podana etykieta już istnieje</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2218"/>
+        <location filename="mdichild.cpp" line="2223"/>
         <source>Undefined label</source>
         <translation>Nieznana etykieta</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2220"/>
+        <location filename="mdichild.cpp" line="2225"/>
         <source>THEN expected</source>
         <translation>Spodziewano się THEN</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2222"/>
+        <location filename="mdichild.cpp" line="2227"/>
         <source>TO expected</source>
         <translation>Spodziewano się TO</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2224"/>
+        <location filename="mdichild.cpp" line="2229"/>
         <source>Too many nested FOR loops</source>
         <translation>Za dużo pętli FOR</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2226"/>
+        <location filename="mdichild.cpp" line="2231"/>
         <source>NEXT without FOR</source>
         <translation>Podano NEXT ale brakuje FOR</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2228"/>
+        <location filename="mdichild.cpp" line="2233"/>
         <source>Too many nested GOSUBs</source>
         <translation>Za dużo wywołań GOSUB</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2230"/>
+        <location filename="mdichild.cpp" line="2235"/>
         <source>RETURN without GOSUBs</source>
         <translation>Podano RETURN ale brakuje GOSUB</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2232"/>
+        <location filename="mdichild.cpp" line="2237"/>
         <source>Unknown error</source>
         <translation>Nieznany błąd</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="2234"/>
+        <location filename="mdichild.cpp" line="2239"/>
         <source>EdytorNc - compile basic</source>
         <translation>EdytorNC - kompiluj basic</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4008"/>
+        <location filename="mdichild.cpp" line="4013"/>
         <source>Comment ;</source>
         <translation>Komentarz ;</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4009"/>
+        <location filename="mdichild.cpp" line="4014"/>
         <source>Ctrl+;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4010"/>
+        <location filename="mdichild.cpp" line="4015"/>
         <source>Comment/uncomment selected text using semicolon</source>
         <translation>Zakomentuj/odkomentuj używając średnika</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4015"/>
+        <location filename="mdichild.cpp" line="4020"/>
         <source>Comment ()</source>
         <translation>Komentarz ()</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4016"/>
+        <location filename="mdichild.cpp" line="4021"/>
         <source>Ctrl+9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4017"/>
+        <location filename="mdichild.cpp" line="4022"/>
         <source>Comment/uncomment selected text using parentheses</source>
         <translation>Zakomentuj/odkomentuj używając nawiasów</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4037"/>
+        <location filename="mdichild.cpp" line="4042"/>
         <source>Block Skip remove</source>
         <translation>Usuń pominięcie linii /</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4038"/>
+        <location filename="mdichild.cpp" line="4043"/>
         <source>Ctrl+1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4039"/>
+        <location filename="mdichild.cpp" line="4044"/>
         <source>Remove Block Skip /</source>
         <translation>Usuń pominięcie linii /</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4113"/>
-        <source>You can use operators:
-</source>
-        <translation>Możesz użyć operatorów:</translation>
+        <location filename="mdichild.cpp" line="4050"/>
+        <source>Inline calculator</source>
+        <translation type="unfinished">Podręczny kalkulator</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4123"/>
+        <location filename="mdichild.cpp" line="4051"/>
+        <source>Ctrl+0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="4125"/>
+        <source>You can use:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can use operators:
+</source>
+        <translation type="vanished">Możesz użyć operatorów:</translation>
+    </message>
+    <message>
+        <location filename="mdichild.cpp" line="4135"/>
         <source>Press Enter to accept or click anywere to canacel</source>
         <translation>Naciśnij Enter by zaakceptować lub kliknij gdziekolwiek by anulować</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4023"/>
+        <location filename="mdichild.cpp" line="4028"/>
         <source>Block Skip +</source>
         <translation>Pominięcie linii +</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4024"/>
+        <location filename="mdichild.cpp" line="4029"/>
         <source>Ctrl+2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4025"/>
+        <location filename="mdichild.cpp" line="4030"/>
         <source>Insert/increase Block Skip /</source>
         <translation>Wstaw/zwiększ Pominięcie linii /</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4030"/>
+        <location filename="mdichild.cpp" line="4035"/>
         <source>Block Skip -</source>
         <translation>Pominięcie linii -</translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4031"/>
+        <location filename="mdichild.cpp" line="4036"/>
         <source>Ctrl+3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mdichild.cpp" line="4032"/>
+        <location filename="mdichild.cpp" line="4037"/>
         <source>Insert/decrease Block Skip /</source>
         <translation>Wstaw/zmniejsz Pominięcie linii /</translation>
     </message>
@@ -4523,7 +4633,7 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="485"/>
-        <location filename="serialtransmissiondialog.cpp" line="1844"/>
+        <location filename="serialtransmissiondialog.cpp" line="1845"/>
         <source>Sending byte %1 of %2</source>
         <translation>Wysyłanie bajtu %1 z %2</translation>
     </message>
@@ -4552,7 +4662,7 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="639"/>
-        <location filename="serialtransmissiondialog.cpp" line="970"/>
+        <location filename="serialtransmissiondialog.cpp" line="971"/>
         <source>Receiving byte %1</source>
         <translation>Odbieranie bajtu %1</translation>
     </message>
@@ -4562,77 +4672,77 @@ If detected filename will contain an extension, then this setting will be ignore
         <translation>Odebrano program</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1431"/>
+        <location filename="serialtransmissiondialog.cpp" line="1432"/>
         <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
         <translation>OK:	 Zmiana nazwy pliku: &quot;%1&quot; na &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1436"/>
+        <location filename="serialtransmissiondialog.cpp" line="1437"/>
         <source>ERROR:	 Renaming file: &quot;%1&quot;. %2</source>
         <translation>BŁĄD:	 Zmina nazwy pliku: &quot;%1&quot;. %2</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1452"/>
+        <location filename="serialtransmissiondialog.cpp" line="1453"/>
         <source>OK:	 Saving file: &quot;%1&quot;.</source>
         <translation>OK:	 Zapisano plik: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1457"/>
+        <location filename="serialtransmissiondialog.cpp" line="1458"/>
         <source>ERROR:	 Saving file: &quot;%1&quot;. %2</source>
         <translation>BŁAD:	 Zapis pliku: &quot;%1&quot;. %2</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1488"/>
+        <location filename="serialtransmissiondialog.cpp" line="1489"/>
         <source>Log file truncated, size &gt; 1MB.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1629"/>
+        <location filename="serialtransmissiondialog.cpp" line="1630"/>
         <source>Serial transmission - File server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1630"/>
+        <location filename="serialtransmissiondialog.cpp" line="1631"/>
         <source>Can&apos;t start.
 File server option is not enabled in serial port settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1642"/>
+        <location filename="serialtransmissiondialog.cpp" line="1643"/>
         <source>%1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1658"/>
+        <location filename="serialtransmissiondialog.cpp" line="1659"/>
         <source>Received data...</source>
         <translation>Odebrane dane...</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1684"/>
+        <location filename="serialtransmissiondialog.cpp" line="1685"/>
         <source>INFO:	 Received &quot;Caller&quot; program: &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1812"/>
+        <location filename="serialtransmissiondialog.cpp" line="1813"/>
         <source>OK:	 Sending a file: &quot;%1&quot;.</source>
         <translation>OK:	 Wysyłanie pliku: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1822"/>
+        <location filename="serialtransmissiondialog.cpp" line="1823"/>
         <source>ERROR:	 Can&apos;t find program name to send in &quot;Caller&quot; program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1888"/>
+        <location filename="serialtransmissiondialog.cpp" line="1889"/>
         <source>ERROR:	 Sending timedout. Reseting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="258"/>
         <location filename="serialtransmissiondialog.cpp" line="271"/>
-        <location filename="serialtransmissiondialog.cpp" line="1644"/>
-        <location filename="serialtransmissiondialog.cpp" line="1831"/>
-        <location filename="serialtransmissiondialog.cpp" line="1856"/>
+        <location filename="serialtransmissiondialog.cpp" line="1645"/>
+        <location filename="serialtransmissiondialog.cpp" line="1832"/>
+        <location filename="serialtransmissiondialog.cpp" line="1857"/>
         <source>Waiting for data...</source>
         <translation>Oczekiwanie na dane...</translation>
     </message>
@@ -4663,37 +4773,37 @@ File server option is not enabled in serial port settings</source>
         <translation>Oczekiwanie na dane...</translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1368"/>
+        <location filename="serialtransmissiondialog.cpp" line="1369"/>
         <source>WARNING:	 Could not find program name. Using date time code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1409"/>
+        <location filename="serialtransmissiondialog.cpp" line="1410"/>
         <source>ERROR:	 Received file to small (less than 15 characters).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1743"/>
+        <location filename="serialtransmissiondialog.cpp" line="1744"/>
         <source>ERROR:	 Can&apos;t find file in path 1: &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1750"/>
+        <location filename="serialtransmissiondialog.cpp" line="1751"/>
         <source>ERROR:	 Can&apos;t find file in path 2: &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1757"/>
+        <location filename="serialtransmissiondialog.cpp" line="1758"/>
         <source>ERROR:	 Can&apos;t find file in path 3: &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1816"/>
+        <location filename="serialtransmissiondialog.cpp" line="1817"/>
         <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialtransmissiondialog.cpp" line="1855"/>
+        <location filename="serialtransmissiondialog.cpp" line="1856"/>
         <source>OK:	 Sending a file completed.</source>
         <translation>OK:	 Zakończono wysyłanie pliku.</translation>
     </message>
