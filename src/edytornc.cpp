@@ -2800,6 +2800,7 @@ void EdytorNc::createFindToolBar()
         findLabel = new QLabel(tr("Find:"));
         findToolBar->addWidget(findLabel);
         findEdit = new QLineEdit();
+        findEdit->setClearButtonEnabled(true);
         findEdit->setToolTip(tr("<b>Letter$$</b> - matches any number.<p><b>Letter$max$min</b> - matches number &lt;=max &gt;=min.</p>" \
                                 "<p><b>$min</b> can be ommited, then equal 0</p>" \
                                 "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
@@ -2812,6 +2813,7 @@ void EdytorNc::createFindToolBar()
         replaceLabel = new QLabel(tr("Replace with:"));
         findToolBar->addWidget(replaceLabel);
         replaceEdit = new QLineEdit();
+        replaceEdit->setClearButtonEnabled(true);
         replaceEdit->setToolTip(tr("<b>$$OperatorNumber</b> - do some math on replaced numbers. Operator +-*/" \
                                    "<p>$$+1 - will add 1 to replaced numbers</p>"));
         replaceEdit->installEventFilter(this);

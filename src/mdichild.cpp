@@ -1607,7 +1607,7 @@ int MdiChild::compute(QString *str)
    exp.setCaseSensitivity(Qt::CaseInsensitive);
    exp.setPattern("[$A-Z]+");
 
-   while((pos = str->indexOf(exp, 0)) >= 0)
+   while((pos = str->indexOf(exp, pos)) >= 0)
    {
       j = pos;
       oper = str->mid(pos, exp.matchedLength());
@@ -1616,6 +1616,7 @@ int MdiChild::compute(QString *str)
       val1 = "";
       dot = false;
       minus = false;
+
       while((str->at(pos) == '-') || (str->at(pos) == '.') || (str->at(pos).isDigit()))
       {
          if(str->at(pos) == '.')
@@ -1631,7 +1632,11 @@ int MdiChild::compute(QString *str)
             {
                break;
             };
-            minus = true;
+            if(pos == 0)
+                minus = true;
+            else
+                if((str->at(pos - 1) == '*') || (str->at(pos - 1) == '/') || (str->at(pos - 1) == '+') || (str->at(pos - 1) == '-') || (str->at(pos - 1) == '('))
+                    minus = true;
          };
 
          val1 += str->at(pos);
@@ -1721,7 +1726,7 @@ int MdiChild::compute(QString *str)
    pos = 0;
    exp.setPattern("[/*]{1,1}");
 
-   while((pos = str->indexOf(exp, 0)) >= 0)
+   while((pos = str->indexOf(exp, pos)) >= 0)
    {
       oper = str->mid(pos, 1);
 
@@ -1731,6 +1736,8 @@ int MdiChild::compute(QString *str)
 
       for(i = pos+1; i <= str->length(); i++)
       {
+          qDebug() << "456,123" << val2 << str->at(i);
+
          if((str->at(i) == '.'))
          {
             if((dot))
@@ -1744,13 +1751,20 @@ int MdiChild::compute(QString *str)
             {
                break;
             };
-            minus = true;
-            if(minus && val2.length() > 0)
-                break;
+
+            if(i == 0)
+                minus = true;
+            else
+                if((str->at(i - 1) == '*') || (str->at(i - 1) == '/') || (str->at(i - 1) == '+') || (str->at(i - 1) == '-') || (str->at(i - 1) == '('))
+                    minus = true;
+
+//            if(minus && val2.length() > 0)
+//                break;
          };
 
          if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
             break;
+
          val2 += str->at(i);
       };
       i--;
@@ -1778,11 +1792,17 @@ int MdiChild::compute(QString *str)
             {
                break;
             };
-            minus = true;
+
+            if(j == 0)
+                minus = true;
+            else
+                if((str->at(j - 1) == '*') || (str->at(j - 1) == '/') || (str->at(j - 1) == '+') || (str->at(j - 1) == '-') || (str->at(j - 1) == '('))
+                    minus = true;
          };
 
          if(!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-'))))
             break;
+
          val1.prepend(str->at(j));
       };
       j++;
@@ -1823,12 +1843,14 @@ int MdiChild::compute(QString *str)
 
    qDebug() << "9857" << val1 << val2 << *str;
 
-   pos = 0;
+   pos = 1;
    exp.setPattern("[+-]{1,1}");
 
-   while((pos = str->indexOf(exp, 1)) >= 0)
+   while((pos = str->indexOf(exp, pos)) >= 0)
    {
       oper = str->mid(pos, 1);
+
+      qDebug() << "789,000" << oper << pos;
 
       val2 = "";
       dot = false;
@@ -1836,6 +1858,8 @@ int MdiChild::compute(QString *str)
 
       for(i = pos+1; i <= str->length(); i++)
       {
+          qDebug() << "789,123" << val2 << str->at(i);
+
          if((str->at(i) == '.'))
          {
             if((dot))
@@ -1849,13 +1873,24 @@ int MdiChild::compute(QString *str)
             {
                break;
             };
-            minus = true;
-            if(minus && val2.length() > 0)
-                break;
+
+            if(i == 0)
+                minus = true;
+            else
+            {
+                if((str->at(i - 1) == '*') || (str->at(i - 1) == '/') || (str->at(i - 1) == '+') || (str->at(i - 1) == '-') || (str->at(i - 1) == '('))
+                    minus = true;
+                else
+                    break;
+            };
+
+//            if(minus && val2.length() > 0)
+//                break;
          };
 
          if(!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-'))))
             break;
+
          val2 += str->at(i);
       };
       i--;
@@ -1867,6 +1902,8 @@ int MdiChild::compute(QString *str)
 
       for(j = pos-1; j >= 0; j--)
       {
+          qDebug() << "789,456" << val1 << str->at(j);
+
          if((str->at(j) == '.'))
          {
             if((dot))
@@ -1882,7 +1919,12 @@ int MdiChild::compute(QString *str)
             {
                break;
             };
-            minus = true;
+
+            if(j == 0)
+                minus = true;
+            else
+                if((str->at(j - 1) == '*') || (str->at(j - 1) == '/') || (str->at(j - 1) == '+') || (str->at(j - 1) == '-') || (str->at(j - 1) == '('))
+                    minus = true;
          };
 
          if(!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-'))))
@@ -1891,6 +1933,12 @@ int MdiChild::compute(QString *str)
          val1.prepend(str->at(j));
       };
       j++;
+
+      if((val1 == "-") && (oper == "-"))
+      {
+         val1 = "0";
+         oper = "+";
+      };
 
       qDebug() << "789" << val1 << oper << val2 << *str;
 
