@@ -85,12 +85,7 @@ EdytorNc::EdytorNc()
 
     connect(hideButton, SIGNAL(clicked()), this, SLOT(hidePanel()));
 
-    fileChangeMonitor = new QFileSystemWatcher(this);
-    connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this, SLOT(fileChanged(const QString)));
-
     currentProjectModified = false;
-
-
 
     createActions();
     createMenus();
@@ -101,6 +96,16 @@ EdytorNc::EdytorNc()
     readSettings();
 
     createFileBrowseTabs();
+
+    if(defaultMdiWindowProperites.disableFileChangeMonitor)
+    {
+        fileChangeMonitor = NULL;
+    }
+    else
+    {
+        fileChangeMonitor = new QFileSystemWatcher(this);
+        connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this, SLOT(fileChanged(const QString)));
+    };
 
 
     setWindowTitle(tr("EdytorNC"));
@@ -2371,6 +2376,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.clearUnderlineHistory = settings.value("ClearUnderline", false).toBool();
     defaultMdiWindowProperites.editorToolTips = settings.value("EditorToolTips", true).toBool();
     defaultMdiWindowProperites.startEmpty = settings.value("StartEmpty", false).toBool();
+    defaultMdiWindowProperites.disableFileChangeMonitor = settings.value("DisableFileChangeMonitor", false).toBool();
 
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
@@ -2513,6 +2519,7 @@ void EdytorNc::writeSettings()
     settings.setValue("ViewerMode", defaultMdiWindowProperites.defaultReadOnly);
     settings.setValue("DefaultHighlightMode", defaultMdiWindowProperites.defaultHighlightMode);
     settings.setValue("StartEmpty", defaultMdiWindowProperites.startEmpty);
+    settings.setValue("DisableFileChangeMonitor", defaultMdiWindowProperites.disableFileChangeMonitor);
 
     settings.setValue("GessFileNameByProgNum", defaultMdiWindowProperites.guessFileNameByProgNum);
 
@@ -4665,15 +4672,18 @@ void EdytorNc::startSerialPortServer()
 //        commApp = new CommApp();
 //    };
 
+    path = QApplication::applicationDirPath() + "/";
+    path = QDir::toNativeSeparators(path);
+
 #ifdef Q_OS_LINUX
-    fileName = "sfs";
+    fileName = path + "sfs";
 #endif
 
 #ifdef Q_OS_WIN32
     fileName = "sfs.exe";
 #endif
 
-    path = QApplication::applicationDirPath() + "/";
+
 
     sfsProc = findChild<QProcess *>("sfs");
 
@@ -4681,13 +4691,16 @@ void EdytorNc::startSerialPortServer()
     {
         sfsProc = new QProcess(this);
         sfsProc->setObjectName("sfs");
-        sfsProc->setWorkingDirectory(QDir::toNativeSeparators(path));
+        sfsProc->setWorkingDirectory(path);
         sfsProc->startDetached(fileName);
+
+//        qDebug() << QDir::toNativeSeparators(path) << fileName << sfsProc;
+//        qDebug() << sfsProc->errorString() << sfsProc->error();
     }
     else
         if(sfsProc->pid() == 0)
         {
-            sfsProc->setWorkingDirectory(QDir::toNativeSeparators(path));
+            sfsProc->setWorkingDirectory(path);
             sfsProc->startDetached(fileName);
         };
 

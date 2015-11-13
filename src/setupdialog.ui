@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>535</width>
-    <height>353</height>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="fontColorTab">
       <attribute name="title">
@@ -739,7 +739,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
+            <item row="4" column="0">
              <spacer name="verticalSpacer_5">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -778,7 +778,7 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="6" column="1">
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -791,14 +791,14 @@
               </property>
              </spacer>
             </item>
-            <item row="4" column="1">
+            <item row="5" column="1">
              <widget class="QComboBox" name="highlightModeComboBox">
               <property name="toolTip">
                <string>Default highlight style and tooltip mode</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="4" column="1">
              <widget class="QLabel" name="label_6">
               <property name="text">
                <string>Default highlight style:</string>
@@ -812,6 +812,16 @@
               </property>
               <property name="text">
                <string>Start empty window</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="disableFileChangeMonitorCheckBox">
+              <property name="toolTip">
+               <string>Do not show warning message when open file is modified by another application.</string>
+              </property>
+              <property name="text">
+               <string>Disable file change monitor</string>
               </property>
              </widget>
             </item>
@@ -975,6 +985,7 @@
   <tabstop>cancelButton</tabstop>
  </tabstops>
  <resources>
+  <include location="application.qrc"/>
   <include location="application.qrc"/>
  </resources>
  <connections/>

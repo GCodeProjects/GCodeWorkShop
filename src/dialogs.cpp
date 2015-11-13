@@ -3156,6 +3156,7 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    clearUnderlinecheckBox->setChecked(editProp.clearUnderlineHistory);
    editorToolTipsCheckBox->setChecked(editProp.editorToolTips);
    startEmptyCheckBox->setChecked(editProp.startEmpty);
+   disableFileChangeMonitorCheckBox->setChecked(editProp.disableFileChangeMonitor);
 
    QStringListIterator extIterator(editProp.extensions);
    while (extIterator.hasNext())
@@ -3277,6 +3278,7 @@ _editor_properites SetupDialog::getSettings()
    editProp.editorToolTips = editorToolTipsCheckBox->isChecked();
    editProp.defaultReadOnly = readOnlyModeCheckBox->isChecked();
    editProp.startEmpty = startEmptyCheckBox->isChecked();
+   editProp.disableFileChangeMonitor = disableFileChangeMonitorCheckBox->isChecked();
 
    int id = highlightModeComboBox->currentIndex();
    if(id >= 0)
@@ -3548,6 +3550,7 @@ void SetupDialog::setDefaultProp()
    titleCheckBox->setChecked(false);
    editorToolTipsCheckBox->setChecked(true);
    readOnlyModeCheckBox->setChecked(false);
+   disableFileChangeMonitorCheckBox->setChecked(false);
    editProp.fontName = "Courier";
    editProp.fontSize = 12;
 

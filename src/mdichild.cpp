@@ -332,10 +332,19 @@ bool MdiChild::saveFile(const QString &fileName)
         }
         else
         {
-            exp.setPattern("(\\(|;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}(\\)){0,1}");
             cursor = textEdit->textCursor();
+
+            exp.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
             cursor.setPosition(0);
             cursor = textEdit->document()->find(exp, cursor);
+
+            if(cursor.isNull())
+            {
+            exp.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
+            cursor.setPosition(0);
+            cursor = textEdit->document()->find(exp, cursor);
+            };
+
             if(!cursor.isNull())
             {
                 textEdit->setUpdatesEnabled(false);

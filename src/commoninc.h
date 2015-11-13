@@ -117,6 +117,7 @@ struct _editor_properites
    QString curFile;  // replace by filename
    QString curFileInfo;
    bool guessFileNameByProgNum;
+   bool disableFileChangeMonitor;
 };
 
 
