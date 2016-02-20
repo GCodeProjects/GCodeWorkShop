@@ -3169,6 +3169,16 @@ QString MdiChild::guessFileName()
                 break;
             };
 
+            expression.setPattern(FILENAME_FADAL);
+            pos = text.indexOf(expression);
+            if(pos >= 0)
+            {
+                fileName = text.mid(pos, expression.matchedLength());
+
+                fileName.remove("N1");
+                break;
+            }
+
             fileName = "";
             break;
         };
@@ -3239,7 +3249,8 @@ QStringList MdiChild::splitFile()
        << FILENAME_SINU
        << FILENAME_HEID1
        << FILENAME_HEID2
-       << FILENAME_PHIL ;
+       << FILENAME_PHIL
+       << FILENAME_FADAL;
 
 
    // detect CNC control type

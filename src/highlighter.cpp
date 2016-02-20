@@ -1980,6 +1980,12 @@ int autoDetectHighligthMode(const QString text)
       {
          return MODE_TOOLTIPS;
       };
+
+      if(text.contains(QRegExp("N1O[0-9]{1,}")))
+      {
+         return MODE_FANUC;
+      };
+
    };
 
    return MODE_AUTO;
