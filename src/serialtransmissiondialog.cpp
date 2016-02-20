@@ -1196,7 +1196,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
                 ext1.clear();
                 qDebug() << "13" << name1 << ext1;
                 break;
-            }
+            };
 
             expression.setPattern(FILENAME_HEID1);
             pos = text->indexOf(expression);
@@ -1219,6 +1219,18 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
                 name1.remove(QRegExp("(\\sMM|\\sINCH)"));
                 ext1.clear();
 
+                break;
+            };
+
+            expression.setPattern(FILENAME_FADAL);
+            pos = text->indexOf(expression);
+            if(pos >= 0)
+            {
+                name1 = text->mid(pos, expression.matchedLength());
+                name1.remove("N1");
+
+                ext1.clear();
+                qDebug() << "13" << name1 << ext1;
                 break;
             };
 
@@ -1535,7 +1547,8 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
         << FILENAME_SINU
         << FILENAME_HEID1
         << FILENAME_HEID2
-        << FILENAME_PHIL;
+        << FILENAME_PHIL
+        << FILENAME_FADAL;
 
 
     // detect CNC control type

@@ -3189,6 +3189,13 @@ SetupDialog::SetupDialog( QWidget* parent, const _editor_properites* prop, Qt::W
    QValidator *edtExtensionValid = new QRegExpValidator(rx, this);
    edtExtension->setValidator(edtExtensionValid);
 
+
+//   QRegExp ext("(\\(|;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[-./]{1,1}(M|MM|d|dd)[-./]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}");
+//   // (\\(;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[.-/]{1,1}(M|MM|d|dd)[.-/]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}
+//   ext.setCaseSensitivity(Qt::CaseSensitive);
+//   QValidator *dateFormatValidator = new QRegExpValidator(ext, this);
+//   dateFormatComboBox->setValidator(dateFormatValidator);
+
    connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));

@@ -4301,6 +4301,14 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <source>*.Aaa</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Do not show warning message when open file is modified by another application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable file change monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SourceData</name>
