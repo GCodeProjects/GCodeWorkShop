@@ -5,7 +5,7 @@
     <name>BHCDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Taladrado Circunferencial</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>&amp;Compute</source>
@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Center position : X%1 Y%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Posición del Centro : X%1 Y%2</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@
     <name>BHCTab</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>X Center :</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Roate by (x0.1) :</source>
-        <translation>Rotación (x0.1) :</translation>
+        <translation>Rotar en (x0.1) :</translation>
     </message>
     <message>
         <source>Diameter :</source>
@@ -182,7 +182,7 @@
     <name>ChamferDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Chaflán</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Known data</source>
@@ -190,23 +190,23 @@
     </message>
     <message>
         <source>Angle: B</source>
-        <translation>B: Ángulo</translation>
+        <translation>Ángulo: B</translation>
     </message>
     <message>
         <source>Diameter 2: X2</source>
-        <translation>X2: Diámetro 2</translation>
+        <translation>Diámetro 2 : X2</translation>
     </message>
     <message>
         <source>Diameter 1: X1</source>
-        <translation>X1: Diámetro 1</translation>
+        <translation>Diámetro 1 : X1</translation>
     </message>
     <message>
         <source>Chamfer length in X : XL</source>
-        <translation>XL: Longitud del Chaflán en X</translation>
+        <translation>Longitud del Chaflán en X : XL</translation>
     </message>
     <message>
         <source>Chamfer length in Z : ZL</source>
-        <translation>ZL: Longitud del Chaflán en Z</translation>
+        <translation>Longitud del Chaflán en Z : ZL</translation>
     </message>
     <message>
         <source>45</source>
@@ -233,7 +233,7 @@
     <name>CommApp</name>
     <message>
         <source>toolBar</source>
-        <translation></translation>
+        <translation>Barra de Herramienta</translation>
     </message>
     <message>
         <source>Serial port configuration</source>
@@ -261,7 +261,7 @@
     </message>
     <message>
         <source>EdytorNC - Serial port file server</source>
-        <translation>EdytorNC - Servidor de Archivos por puerto serie</translation>
+        <translation>EdytorNC - Servidor de Archivos por Puerto Serie</translation>
     </message>
     <message>
         <source>&amp;Start</source>
@@ -285,99 +285,99 @@
     </message>
     <message>
         <source>FileToolBar</source>
-        <translation></translation>
+        <translation>Barra de Herramientas Archivo</translation>
     </message>
     <message>
         <source>&amp;Browse save folder</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Buscar carpeta para guardado</translation>
     </message>
     <message>
         <source>Browse save folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar carpeta para guardado</translation>
     </message>
     <message>
         <source>&amp;Show saved files</source>
-        <translation type="unfinished"></translation>
+        <translation>Mo&amp;strar archivos guardados</translation>
     </message>
     <message>
         <source>Show saved files</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar archivos guardados</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Ayuda</translation>
+        <translation>&amp;Ayuda</translation>
     </message>
     <message>
         <source>The program will keep running in the system tray. To terminate the program, choose &lt;b&gt;Quit&lt;/b&gt; in the context menu of the system tray entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>El programa seguirá en ejecución en la bandeja del sistema. Para terminar el programa, elija &lt;b&gt;Salir&lt;/b&gt; en el menú contextual de la entrada en la bandeja del sistema.</translation>
     </message>
     <message>
         <source>&amp;Minimize to tray</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Minimizar a la bandeja</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimizar a la bandeja del sistema</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Acerca de</translation>
+        <translation>&amp;Acerca de</translation>
     </message>
     <message>
         <source>Show the application&apos;s About box</source>
-        <translation type="unfinished">Mostrar cuadro Acerca de la aplicación</translation>
+        <translation>Mostrar cuadro &quot;Acerca de&quot; de la aplicación</translation>
     </message>
     <message>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi&amp;nimizar</translation>
     </message>
     <message>
         <source>Ma&amp;ximize</source>
-        <translation type="unfinished"></translation>
+        <translation>Ma&amp;ximizar</translation>
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Restaurar</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Salir</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar minimizado</translation>
     </message>
     <message>
         <source>About EdytorNC - Serial port file server</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de EdytorNC - Servidor de Archivos por Puerto Serie</translation>
     </message>
     <message>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation type="unfinished">&lt;b&gt;EdytorNC&lt;/b&gt;es un editor de texto para programadores de CNC.</translation>
+        <translation>&lt;b&gt;EdytorNC&lt;/b&gt; es un editor de texto para programadores CNC.</translation>
     </message>
     <message>
         <source>&lt;P&gt;Version: same as EdytorNC</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Versión: la misma de EdytorNC</translation>
     </message>
     <message>
         <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation type="unfinished">&lt;P&gt;EdytorNC contiene piezas de código de otros proyectos de código abierto.</translation>
+        <translation>&lt;P&gt;EdytorNC contiene piezas de código de otros proyectos &quot;Open Source&quot;.</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC - Serial port file server is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;&lt;i&gt;EdytorNC - Servidor de Archivos por Puerto Serie es &quot;free software&quot;; puedes re-distribuirlo y/o modificarlo bajo los términos de &quot;the GNU General Public License&quot; tal como está publicado por &quot;the Free Software Foundation&quot;; sea esta la versión 2 de la Licencia o(a opción tuya) cualquier versión posterior.&lt;/i&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="unfinished">&lt;P&gt;&lt;i&gt;El programa se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, INCLUYENDO LA GARANTÍA DE DISEÑO, COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR.&lt;/i&gt;</translation>
+        <translation>&lt;P&gt;&lt;i&gt;El programa se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, INCLUYENDO LA GARANTÍA DE DISEÑO, COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR.&lt;/i&gt;</translation>
     </message>
 </context>
 <context>
@@ -414,7 +414,7 @@
     <name>DotDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Insertar Punto Decimal</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Insert &amp;dot at address</source>
@@ -453,7 +453,7 @@
     <name>EdytorNc</name>
     <message>
         <source>MainWindow</source>
-        <translation></translation>
+        <translation>Ventana Principal</translation>
     </message>
     <message>
         <source>Manage project</source>
@@ -563,7 +563,7 @@
     </message>
     <message>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation>&lt;b&gt;EdytorNC&lt;/b&gt;es un editor de texto para programadores de CNC.</translation>
+        <translation>&lt;b&gt;EdytorNC&lt;/b&gt; es un editor de texto para programadores CNC.</translation>
     </message>
     <message>
         <source>&lt;P&gt;Version: </source>
@@ -607,11 +607,11 @@
     </message>
     <message>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation>&lt;P&gt;EdytorNC contiene piezas de código de otros proyectos de código abierto.</translation>
+        <translation>&lt;P&gt;EdytorNC contiene piezas de código de otros proyectos Open Source.</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation>&lt;P&gt;&lt;i&gt;EdytorNC es software libre; puedes redistribuirlo y / o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Fundación para el Software Libre; ya sea la versión 2 de la Licencia, o (a su elección) cualquier versión posterior.&lt;/i&gt;</translation>
+        <translation>&lt;P&gt;&lt;i&gt;EdytorNC es software libre; puedes redistribuirlo y/o modificarlo bajo los términos de &quot;the GNU General Public License&quot; publicada por &quot;the Free Software Foundation&quot;; ya sea la versión 2 de la Licencia, o (a su elección) cualquier versión posterior.&lt;/i&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
@@ -891,7 +891,7 @@
     </message>
     <message>
         <source>Renumber program blocks</source>
-        <translation>Renumera bloques de p[rograma</translation>
+        <translation>Renumera bloques de programa</translation>
     </message>
     <message>
         <source>Feed&apos;s speed&apos;s</source>
@@ -1111,7 +1111,7 @@
     </message>
     <message>
         <source>Show the application&apos;s About box</source>
-        <translation>Mostrar cuadro Acerca de la aplicación</translation>
+        <translation>Mostrar cuadro &quot;Acerca de&quot; de la aplicación</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -1119,7 +1119,7 @@
     </message>
     <message>
         <source>Show the Qt library&apos;s About box</source>
-        <translation>Mostrar cuadro Acerca de las librerías Qt</translation>
+        <translation>Mostrar cuadro &quot;Acerca de&quot; de las librerías Qt</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -1419,7 +1419,7 @@
     </message>
     <message>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
-        <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - detención del programa, inconditional&quot;</translation>
+        <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - detención del programa, incondicional&quot;</translation>
     </message>
     <message>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
@@ -1457,11 +1457,11 @@
         <source>&lt;b&gt;Project: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;El projecto: &quot;%1&quot;
- fue modificado.&lt;/b&gt;</translation>
+ ha sido modificado.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Do you want to save your changes ?</source>
-        <translation>¿Quiere guardar los cambios?</translation>
+        <translation>¿Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Open files</source>
@@ -1553,7 +1553,7 @@
     </message>
     <message>
         <source>EdytorNC - Serial port file server</source>
-        <translation>EdytorNC - Servidor de Archivos por puerto serie</translation>
+        <translation>EdytorNC - Servidor de Archivos por Puerto Serie</translation>
     </message>
     <message>
         <source>Serial port file server is running.
@@ -1579,7 +1579,7 @@ Cerrar de todas maneras?</translation>
     </message>
     <message>
         <source>Start application &quot;Serial port file server&quot;</source>
-        <translation>Iniciar aplicación &quot;Servidor de Archivos por puerto serie&quot;</translation>
+        <translation>Iniciar aplicación &quot;Servidor de Archivos por Puerto Serie&quot;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
@@ -1620,34 +1620,37 @@ Doble click en el título del ítem para editarlo.
 Items with empty titles are the last five texts copied to system clipboard.
 Double click on item title to edit it. 
 Items with non empty titles are not deleted automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Click derecho para copiar el ítem al portapapeles del sistema
+Los ítems con títulos vacíos son los últimos 5 textos copiados al portapapeles del sistema.
+Doble click en el título del ítem para editarlo.
+Los ítems con títulos no vacíos no son borrados automáticamente.</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Inline calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculador en línea</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished">Ocultar</translation>
+        <translation>Ocultar</translation>
     </message>
     <message>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>FeedsDialog</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Cutting speed</source>
@@ -1805,94 +1808,99 @@ Items with non empty titles are not deleted automatically.</source>
     <name>FileChecker</name>
     <message>
         <source>EdytorNC - File checker</source>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - Verificador de archivo</translation>
     </message>
     <message>
         <source>Save path:</source>
-        <translation type="unfinished">Ruta de guardado:</translation>
+        <translation>Ruta de guardado:</translation>
     </message>
     <message>
         <source>Auto save path as set in serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de autoguardado tal como está seleccionado en la configuración del puerto serie</translation>
     </message>
     <message>
         <source>Search path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de búsqueda:</translation>
     </message>
     <message>
         <source>Search path as set in serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de búsqueda tal como está seleccionado en la configuración del puerto serie</translation>
     </message>
     <message>
         <source>List of files in save path (received files).
 Click to compare with file with the same name in selected search path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de archivos en ruta de guardado (archivos recibidos).
+Click para comparar con archivo con el mismo nombre en la ruta de búsqueda seleccionada.</translation>
     </message>
     <message>
         <source>File Name</source>
-        <translation type="unfinished">Nombre del archivo</translation>
+        <translation>Nombre del archivo</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished">Información</translation>
+        <translation>Información</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Tamaño</translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Modification date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha de modificación</translation>
     </message>
     <message>
         <source>%1 KB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Equal</source>
-        <translation type="unfinished"></translation>
+        <translation>Igual</translation>
     </message>
     <message>
         <source>Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiado</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo</translation>
     </message>
     <message>
         <source>Status of received file:
 New - file does not exists in Search path.
 Equal - received file and file in Search path are identical.
 Changed - received file is modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado del archivo recibido:
+Nuevo - el archivo no existe en la ruta de búsqueda.
+Igual - el archivo recibido y el archivo en la ruta de búsqueda son idénticos.
+Cambiado - el archivo recibido está modificado
+</translation>
     </message>
     <message>
         <source>Accept received file and move it to selected search path</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceptar archivo recibido y moverlo a la ruta de búsqueda seleccionada</translation>
     </message>
     <message>
         <source>Delete received file</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar archivo recibido</translation>
     </message>
 </context>
 <context>
     <name>FindInFiles</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Oneclick - preview, doubleclick - opens file in editor.</source>
@@ -2007,7 +2015,7 @@ Changed - received file is modified</source>
     <name>I2MDialog</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Inch :</source>
@@ -2068,7 +2076,7 @@ Changed - received file is modified</source>
     <name>I2MProgDialog</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Convert numbers at address :</source>
@@ -2084,7 +2092,7 @@ Changed - received file is modified</source>
     </message>
     <message>
         <source>Prec. :</source>
-        <translation>Decimales :</translation>
+        <translation>Precisión :</translation>
     </message>
     <message>
         <source>&amp;Inch to mm</source>
@@ -2119,7 +2127,7 @@ Changed - received file is modified</source>
     </message>
     <message>
         <source>Diff: A &lt;-&gt; B</source>
-        <translation>Comparación:  A &lt;-&gt; B</translation>
+        <translation>Comparar:  A &lt;-&gt; B</translation>
     </message>
     <message>
         <source>Linediff: A &lt;-&gt; B</source>
@@ -2356,7 +2364,7 @@ Comprobar +-*/.
     </message>
     <message>
         <source>EdytorNc - compile basic</source>
-        <translation>EdytorNC: compilar base</translation>
+        <translation>EdytorNC: compilar basic</translation>
     </message>
     <message>
         <source>(DATE)</source>
@@ -2428,20 +2436,21 @@ Comprobar +-*/.
     </message>
     <message>
         <source>Press Enter to accept or click anywere to canacel</source>
-        <translation type="unfinished"></translation>
+        <translation>Presiona Ingresar para aceptar a click en cualquier otra parte para cancelar</translation>
     </message>
     <message>
         <source>Inline calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculador en línea</translation>
     </message>
     <message>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>You can use:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Puedes usar:
+</translation>
     </message>
 </context>
 <context>
@@ -2579,7 +2588,7 @@ Comprobar +-*/.
     <name>RenumberDialog</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Renumber lines that already have line numbers</source>
@@ -3208,7 +3217,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Remove characters before %</source>
-        <translation>Eliminar los caracteres antes de %</translation>
+        <translation>Eliminar caracteres antes de %</translation>
     </message>
     <message>
         <source>Remove white space at end of line</source>
@@ -3421,7 +3430,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Servidor de Archivos por puerto serie.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Servidor de Archivos por Puerto Serie.&lt;/p&gt;
 &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Iniciar el Servidor de Archivos en EdytorNC&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enviar cualquier archivo desde el CNC, será guardado automáticamente en el computador (tal como está configurado en la pestaña Guardado Automático)&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enviar un programa especial desde el CNC: &lt;/li&gt;
@@ -3541,7 +3550,7 @@ Si el nombre de archivo detectado contiene una extensión, este ajuste será ign
     </message>
     <message>
         <source>Wait for CTS</source>
-        <translation>Esperando CTS</translation>
+        <translation>Esperar CTS</translation>
     </message>
     <message>
         <source>Start sending after receiving XON character </source>
@@ -3549,7 +3558,7 @@ Si el nombre de archivo detectado contiene una extensión, este ajuste será ign
     </message>
     <message>
         <source>Wait for XON</source>
-        <translation>Esperandor XON</translation>
+        <translation>Esperar XON</translation>
     </message>
     <message>
         <source>Auto save</source>
@@ -3653,20 +3662,21 @@ Ajuste el temporizador a 300s para desactivarlo.</translation>
     </message>
     <message>
         <source>Send XON character to initiate transmission.</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar caracter XON para iniciar transmisión.</translation>
     </message>
     <message>
         <source>Send XON at start</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar XON al inicio</translation>
     </message>
     <message>
         <source>Remove: </source>
-        <translation type="unfinished"></translation>
+        <translation>Remover:</translation>
     </message>
     <message>
         <source>Use this to remove some unwanted characters from received data.
 Vailid QtRegExp should be entered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa esto para remover algunos caracteres no deseados de los datos recibidos.
+Debería ser ingresado un QTRegExp válido.</translation>
     </message>
 </context>
 <context>
@@ -3849,7 +3859,7 @@ Vailid QtRegExp should be entered.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Port: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Puerto: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Puerto: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; está&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;OPEN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3957,7 +3967,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     </message>
     <message>
         <source>WARNING:	 Could not find program name. Using date time code.</source>
-        <translation type="unfinished"></translation>
+        <translation>ADVERTENCIA:	 No se pudo encontrar el nombre del archivo. Usando código fecha-hora.</translation>
     </message>
 </context>
 <context>
@@ -4303,11 +4313,11 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     </message>
     <message>
         <source>Do not show warning message when open file is modified by another application.</source>
-        <translation type="unfinished"></translation>
+        <translation>No mostrar mensaje de advertencia cuando el archivo esta modificado por otra aplicación.</translation>
     </message>
     <message>
         <source>Disable file change monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar monitor de cambio de archivo</translation>
     </message>
 </context>
 <context>
@@ -4332,7 +4342,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     <name>TransmissionDialog</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Default</source>
@@ -4503,7 +4513,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     <name>TriangleDialog</name>
     <message>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>Known data</source>
