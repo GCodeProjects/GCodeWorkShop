@@ -1474,7 +1474,7 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2016-02-21 BETA" +
+                       trUtf8("<P>Version: ") + "2016-04-18 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2016 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
@@ -2527,6 +2527,13 @@ void EdytorNc::writeSettings()
     settings.setValue("RecentFiles", m_recentFiles);
 
     settings.setValue("SerialToolbarShown", (!serialToolBar.isNull()));
+    if(!serialToolBar.isNull())
+    {
+        settings.beginGroup("SerialPortConfigs");
+        settings.setValue("CurrentSerialPortSettings", configBox->currentText());
+        settings.endGroup();
+    };
+
 
     settings.setValue("CurrentProjectName", currentProjectName);
 
