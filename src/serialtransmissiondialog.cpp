@@ -336,7 +336,7 @@ void SerialTransmissionDialog::updateStatus()
 
        };
 
-       if(portSettings.waitForCts)
+       if(portSettings.waitForCts || (portSettings.FlowControl == QSerialPort::HardwareControl))
        {
            if(!(status & QSerialPort::ClearToSendSignal))
                xoffReceived = true;
@@ -1678,7 +1678,6 @@ void SerialTransmissionDialog::fileServerProcessData()
 
     if(!progList.isEmpty())
     {
-
         QStringList::const_iterator itp = progList.constBegin();
 
         if((*itp) == "#FILE_LIST#")
