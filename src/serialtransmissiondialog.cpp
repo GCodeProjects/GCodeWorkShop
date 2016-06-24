@@ -310,7 +310,7 @@ void SerialTransmissionDialog::updateStatus()
            {
                if(sending)
                {
-                   if(portSettings.waitForCts && !(status & QSerialPort::ClearToSendSignal))
+                   if((portSettings.waitForCts || (portSettings.FlowControl == QSerialPort::HardwareControl)) && !(status & QSerialPort::ClearToSendSignal))
                    {
                        setLabelText(tr("Waiting for CTS signal..."));
                    }
