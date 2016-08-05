@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>BHCDialog</name>
     <message>
@@ -21,7 +21,7 @@
     <message>
         <location filename="bhcdialog.ui" line="112"/>
         <source>Clear &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyč&amp;istit vše</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="2115"/>
@@ -72,7 +72,7 @@
         <location filename="dialogs.cpp" line="2583"/>
         <source>Center position : X%1 Y%2</source>
         <oldsource>Center Position : X%1 Y%2</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Poloha středu: X%1 Y%2</translation>
     </message>
 </context>
 <context>
@@ -158,7 +158,7 @@
     <message>
         <location filename="bhctabform.ui" line="374"/>
         <source>Select rows &amp; right click for menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte řádky a klepněte pravým tlačítkem myši pro vyvolání nabídky</translation>
     </message>
     <message>
         <location filename="bhctabform.ui" line="402"/>
@@ -198,24 +198,24 @@
     <message>
         <location filename="dialogs.cpp" line="1607"/>
         <source>Add ; comments</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat ; komentáře</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1610"/>
         <source>Add () comments</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat () komentáře</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1793"/>
         <source>(DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>(Průměr: %1, počet otvorů: %2, počáteční úhel: %3)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="1797"/>
         <source>;DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>;Průměr: %1, počet otvorů: %2, počáteční úhel: %3</translation>
     </message>
     <message>
         <source>Add comments</source>
@@ -299,76 +299,76 @@
     <message>
         <location filename="commapp.ui" line="77"/>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Soubor</translation>
+        <translation>&amp;Soubor</translation>
     </message>
     <message>
         <location filename="commapp.ui" line="82"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Nápověda</translation>
+        <translation>&amp;Nápověda</translation>
     </message>
     <message>
         <location filename="commapp.ui" line="91"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástrojový pruh</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="36"/>
         <location filename="commapp.cpp" line="100"/>
         <source>EdytorNC - Serial port file server</source>
         <oldsource>EdytorNC - File server</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - souborový server pro sériovou přípojku</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="101"/>
         <source>The program will keep running in the system tray. To terminate the program, choose &lt;b&gt;Quit&lt;/b&gt; in the context menu of the system tray entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program poběží v oznamovací oblasti panelu. Pro ukončení programu zvolte &lt;b&gt;Ukončit&lt;/b&gt; v nabídce souvisejících činností vyvolané klepnutím na ikonu v oznamovací oblasti panelu.</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="231"/>
         <location filename="commapp.cpp" line="233"/>
         <source>Serial port configuration</source>
-        <translation type="unfinished">Nastavení sériové přípojky</translation>
+        <translation>Nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="236"/>
         <source>&amp;Start</source>
-        <translation type="unfinished">&amp;Spustit</translation>
+        <translation>&amp;Spustit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="238"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="241"/>
         <source>S&amp;top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zastavit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="243"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Zastavit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="247"/>
         <source>&amp;Reset</source>
         <oldsource>Reset</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nastavit znovu</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="248"/>
         <source>Reset serial port</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit znovu sériovou přípojku</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="252"/>
         <source>&amp;Minimize to tray</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zmenšit do oznamovací oblasti panelu</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="253"/>
         <source>Minimize to system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšit do oznamovací části panelu</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -377,109 +377,109 @@
     <message>
         <location filename="commapp.cpp" line="256"/>
         <source>&amp;Browse save folder</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Procházet cestu k ukládací složce</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="257"/>
         <source>Browse save folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Procházet cestu k ukládací složce</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="260"/>
         <source>&amp;Show saved files</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ukázat uložené soubory</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="261"/>
         <source>Show saved files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat uložené soubory</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="264"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;O programu</translation>
+        <translation>&amp;O programu</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="265"/>
         <source>Show the application&apos;s About box</source>
-        <translation type="unfinished">Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
+        <translation>Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="269"/>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zmenšit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="272"/>
         <source>Ma&amp;ximize</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvě&amp;tšit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="275"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Obnovit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="278"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ukončit</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="281"/>
         <source>Start minimized</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit zmenšené v oznamovací oblasti panelu</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="300"/>
         <source>FileToolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástrojový panel pro soubor</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="353"/>
         <location filename="commapp.cpp" line="356"/>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="641"/>
         <source>About EdytorNC - Serial port file server</source>
-        <translation type="unfinished"></translation>
+        <translation>O programu EdytorNC - souborový server pro sériovou přípojku</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="642"/>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation type="unfinished">&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
+        <translation>&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="643"/>
         <source>&lt;P&gt;Version: same as EdytorNC</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Verze: táž jako EdytorNC</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="644"/>
         <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="645"/>
         <location filename="commapp.cpp" line="647"/>
         <source>&lt;P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="646"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation type="unfinished">&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
+        <translation>&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="648"/>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC - Serial port file server is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;&lt;i&gt;EdytorNC - souborový server pro sériovou přípojku je svobodný program. Můžete jej šířit a/nebo upravovat za podmínek GNU General Public License, jak jsou zveřejněny Free Software Foundation; buď ve verzi 2 tohoto povolení, nebo (podle svého uvážení) v jakékoli pozdější verzi.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="commapp.cpp" line="652"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="unfinished">&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
+        <translation>&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
     </message>
 </context>
 <context>
@@ -580,85 +580,85 @@
     <message>
         <location filename="edytornc.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavní okno</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="88"/>
         <source>Manage project</source>
-        <translation type="unfinished"></translation>
+        <translation>Spravovat projekt</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="155"/>
         <location filename="edytornc.ui" line="158"/>
         <location filename="edytornc.ui" line="175"/>
         <source>Save project</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit projekt</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="121"/>
         <location filename="edytornc.ui" line="124"/>
         <source>New project</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový projekt</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="138"/>
         <location filename="edytornc.ui" line="141"/>
         <source>Open project</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít projekt</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="172"/>
         <source>Save project as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit projekt jako...</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="205"/>
         <location filename="edytornc.ui" line="208"/>
         <location filename="edytornc.cpp" line="3420"/>
         <source>Add files to project</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat soubory do projektu</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="222"/>
         <location filename="edytornc.ui" line="225"/>
         <source>Remove file from project</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit soubor z projektu</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="291"/>
         <source>Browse files</source>
-        <translation type="unfinished"></translation>
+        <translation>Procházet soubory</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="336"/>
         <source>If checked, show the list of files in the current directory, otherwise the last opened directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Je-li zaškrtnuto, ukázat seznam souborů v nynějším adresáři, jinak naposledy otevřený adresář</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="339"/>
         <source>Current directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Nynější adresář</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="359"/>
         <source>Preview no. of file lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukáže počet řádků souboru</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="379"/>
         <location filename="edytornc.ui" line="382"/>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Schránka</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="421"/>
         <source>Delete selected item</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vybranou položku</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="424"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="450"/>
@@ -666,29 +666,32 @@
 Items with empty titles are the last five texts copied to system clipboard.
 Double click on item title to edit it. 
 Items with non empty titles are not deleted automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klepnutí pravým tlačítkem myši pro zkopírování položky zpět do systémové schránky.
+Položky s prázdnými názvy jsou posledních pět textů zkopírovaných do systémové schránky.
+Dvakrát klepněte na název položky pro její upravení.
+Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="534"/>
         <location filename="edytornc.cpp" line="3934"/>
         <source>File Name</source>
-        <translation type="unfinished">Název souboru</translation>
+        <translation>Název souboru</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="539"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="560"/>
         <source>&lt;&lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;&lt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="111"/>
         <location filename="edytornc.cpp" line="1132"/>
         <source>EdytorNC</source>
-        <translation type="unfinished">EdytorNC</translation>
+        <translation>EdytorNC</translation>
     </message>
     <message>
         <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
@@ -702,13 +705,13 @@ Items with non empty titles are not deleted automatically.</source>
         <location filename="edytornc.cpp" line="337"/>
         <location filename="edytornc.cpp" line="407"/>
         <source>Select one or more files to open</source>
-        <translation type="unfinished">Vyberte jeden nebo více souborů k otevření</translation>
+        <translation>Vyberte jeden nebo více souborů k otevření</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="380"/>
         <location filename="edytornc.cpp" line="450"/>
         <source>File loaded</source>
-        <translation type="unfinished">Soubor nahrán</translation>
+        <translation>Soubor nahrán</translation>
     </message>
     <message>
         <source>CNC programs files *.nc (*.nc);;All files (*.* *)</source>
@@ -734,42 +737,42 @@ Items with non empty titles are not deleted automatically.</source>
         <location filename="edytornc.cpp" line="500"/>
         <location filename="edytornc.cpp" line="545"/>
         <source>File saved</source>
-        <translation type="unfinished">Soubor uložen</translation>
+        <translation>Soubor uložen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1270"/>
         <source>Removed : %1 line numbers.</source>
-        <translation type="unfinished">Odstraněno: %1 čísel řádků.</translation>
+        <translation>Odstraněno: %1 čísel řádků.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1272"/>
         <source>Renumbered : %1 lines.</source>
-        <translation type="unfinished">Přečíslováno: %1 řádků.</translation>
+        <translation>Přečíslováno: %1 řádků.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1374"/>
         <source>Information</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1375"/>
         <source>Set correct calculator program name in configuration dialog.</source>
-        <translation type="unfinished">V dialogu nastavení nastavit správný název programu pro výpočty.</translation>
+        <translation>V dialogu nastavení nastavit správný název programu pro výpočty.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1475"/>
         <source>About EdytorNC</source>
-        <translation type="unfinished">O programu EdytorNC</translation>
+        <translation>O programu EdytorNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1476"/>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation type="unfinished">&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
+        <translation>&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1477"/>
         <source>&lt;P&gt;Version: </source>
-        <translation type="unfinished">&lt;P&gt;Verze: </translation>
+        <translation>&lt;P&gt;Verze: </translation>
     </message>
     <message>
         <source>&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</source>
@@ -778,7 +781,7 @@ Items with non empty titles are not deleted automatically.</source>
     <message>
         <location filename="edytornc.cpp" line="1479"/>
         <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation type="unfinished">&lt;P&gt;Poděkování Jordi Sayol i Salomó za překlad do katalánštiny a balíček pro Debian</translation>
+        <translation>&lt;P&gt;Poděkování Jordi Sayol i Salomó za překlad do katalánštiny a balíček pro Debian</translation>
     </message>
     <message>
         <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
@@ -788,41 +791,41 @@ Items with non empty titles are not deleted automatically.</source>
         <location filename="edytornc.cpp" line="1481"/>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
         <oldsource>&lt;br&gt;Czech translation thanks to Pavel Fric</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Poděkování Pavlu Fricovi za překlad do češtiny</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1482"/>
         <source>&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju</source>
         <oldsource>&lt;br&gt;Finnish translation thanks to Janne Mäntyharju</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Poděkování Janne Mäntyharjuovi za překlad do finštiny</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1485"/>
         <source>&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju</source>
         <oldsource>&lt;br&gt;OS X patch and other updates thanks to Janne Mäntyharju</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Poděkování Janne Mäntyharjuovi za záplatu pro OS X a jiné aktualizace</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1486"/>
         <source>&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Poděkování Jakubovi Gajewskimu za novou ikonu pro EdytorNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1487"/>
         <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</translation>
+        <translation>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1489"/>
         <location filename="edytornc.cpp" line="1491"/>
         <location filename="edytornc.cpp" line="1493"/>
         <source>&lt;P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1490"/>
         <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;P&gt;Instalátor pro více operačních systémů vytvořen &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
+        <translation>&lt;P&gt;Instalátor pro více operačních systémů vytvořen &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
@@ -831,87 +834,87 @@ Items with non empty titles are not deleted automatically.</source>
     <message>
         <location filename="edytornc.cpp" line="1492"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation type="unfinished">&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
+        <translation>&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1494"/>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation type="unfinished">&lt;P&gt;&lt;i&gt;EdytorNC je svobodný program. Můžete jej šířit a/nebo upravovat za podmínek GNU General Public License, jak jsou zveřejněny Free Software Foundation; buď ve verzi 2 tohoto povolení, nebo (podle svého uvážení) v jakékoli pozdější verzi.&lt;/i&gt;</translation>
+        <translation>&lt;P&gt;&lt;i&gt;EdytorNC je svobodný program. Můžete jej šířit a/nebo upravovat za podmínek GNU General Public License, jak jsou zveřejněny Free Software Foundation; buď ve verzi 2 tohoto povolení, nebo (podle svého uvážení) v jakékoli pozdější verzi.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1498"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="unfinished">&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
+        <translation>&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1665"/>
         <source> Col: </source>
-        <translation type="unfinished"> Sloupec: </translation>
+        <translation> Sloupec: </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1666"/>
         <source>  Line: </source>
-        <translation type="unfinished"> Řádek: </translation>
+        <translation> Řádek: </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1667"/>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
-        <translation type="unfinished">  &lt;b&gt;Upraveno&lt;/b&gt;  </translation>
+        <translation>  &lt;b&gt;Upraveno&lt;/b&gt;  </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1668"/>
         <source> Read only  </source>
-        <translation type="unfinished">Pouze pro čtení</translation>
+        <translation>Pouze pro čtení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1669"/>
         <source> Overwrite  </source>
-        <translation type="unfinished"> Přepsat  </translation>
+        <translation> Přepsat  </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1669"/>
         <source> Insert </source>
-        <translation type="unfinished"> Vložit </translation>
+        <translation> Vložit </translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1705"/>
         <source>&amp;%1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;%1 %2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1709"/>
         <source>%1 %2</source>
-        <translation type="unfinished">%1 %2</translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1759"/>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nový</translation>
+        <translation>&amp;Nový</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1761"/>
         <source>Create a new file</source>
-        <translation type="unfinished">Vytvořit nový soubor</translation>
+        <translation>Vytvořit nový soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1764"/>
         <source>&amp;Open...</source>
-        <translation type="unfinished">&amp;Otevřít...</translation>
+        <translation>&amp;Otevřít...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1766"/>
         <source>Open an existing file</source>
-        <translation type="unfinished">Otevřít stávající soubor</translation>
+        <translation>Otevřít stávající soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1771"/>
         <source>&amp;Open example...</source>
-        <translation type="unfinished">&amp;Otevřít příklad...</translation>
+        <translation>&amp;Otevřít příklad...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1772"/>
         <source>Open an example file</source>
-        <translation type="unfinished">Otevřít soubor s příkladem</translation>
+        <translation>Otevřít soubor s příkladem</translation>
     </message>
     <message>
         <source>&amp;Open file with preview</source>
@@ -928,7 +931,7 @@ Items with non empty titles are not deleted automatically.</source>
     <message>
         <location filename="edytornc.cpp" line="1778"/>
         <source>Save the document to disk</source>
-        <translation type="unfinished">Uložit dokument na disk</translation>
+        <translation>Uložit dokument na disk</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -937,441 +940,441 @@ Items with non empty titles are not deleted automatically.</source>
     <message>
         <location filename="edytornc.cpp" line="1788"/>
         <source>Save the document under a new name</source>
-        <translation type="unfinished">Uložit dokument pod novým názvem</translation>
+        <translation>Uložit dokument pod novým názvem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1791"/>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Ukončit</translation>
+        <translation>&amp;Ukončit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1793"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished">Ctrl+Q</translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1794"/>
         <source>Exit the application</source>
-        <translation type="unfinished">Ukončit program</translation>
+        <translation>Ukončit program</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1797"/>
         <source>&amp;Find files...</source>
-        <translation type="unfinished">&amp;Hledat soubory...</translation>
+        <translation>&amp;Hledat soubory...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1800"/>
         <source>Find files</source>
-        <translation type="unfinished"></translation>
+        <translation>Najít soubory</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1803"/>
         <source>&amp;Print</source>
-        <translation type="unfinished">&amp;Tisk</translation>
+        <translation>&amp;Tisk</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1805"/>
         <source>Print file</source>
-        <translation type="unfinished">Vytisknout soubor</translation>
+        <translation>Vytisknout soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1808"/>
         <source>Pr&amp;int preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled &amp;tisku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1810"/>
         <source>Preview printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled na tisk</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1813"/>
         <source>Session manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce sezení...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1814"/>
         <source>Sessions manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce sezení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1818"/>
         <source>&amp;Undo</source>
-        <translation type="unfinished">&amp;Zpět</translation>
+        <translation>&amp;Zpět</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1820"/>
         <source>Undo last operation</source>
-        <translation type="unfinished">Zpět poslední operaci</translation>
+        <translation>Zpět poslední operaci</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1824"/>
         <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Znovu</translation>
+        <translation>&amp;Znovu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1826"/>
         <source>Redo last operation</source>
-        <translation type="unfinished">Znovu poslední operaci</translation>
+        <translation>Znovu poslední operaci</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1830"/>
         <source>Cu&amp;t</source>
-        <translation type="unfinished">Vyj&amp;mout</translation>
+        <translation>Vyj&amp;mout</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1832"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
-        <translation type="unfinished">Vyjmout obsah nynějšího výběru do schránky</translation>
+        <translation>Vyjmout obsah nynějšího výběru do schránky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1836"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Kopírovat</translation>
+        <translation>&amp;Kopírovat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1838"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation type="unfinished">Kopírovat obsah nynějšího výběru do schránky</translation>
+        <translation>Kopírovat obsah nynějšího výběru do schránky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1842"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished">&amp;Vložit</translation>
+        <translation>&amp;Vložit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1844"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
-        <translation type="unfinished">Vložit obsah schránky do nynějšího výběru</translation>
+        <translation>Vložit obsah schránky do nynějšího výběru</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1849"/>
         <source>&amp;Find</source>
-        <translation type="unfinished">&amp;Najít</translation>
+        <translation>&amp;Najít</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1851"/>
         <source>Find text</source>
-        <translation type="unfinished">Najít text</translation>
+        <translation>Najít text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1854"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished">&amp;Nahradit</translation>
+        <translation>&amp;Nahradit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1855"/>
         <source>Ctrl+R</source>
-        <translation type="unfinished">Ctrl+R</translation>
+        <translation>Ctrl+R</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1856"/>
         <source>Find and replace text</source>
-        <translation type="unfinished">Najít a nahradit text</translation>
+        <translation>Najít a nahradit text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1860"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Smazat</translation>
+        <translation>&amp;Smazat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1862"/>
         <source>Removes selected text</source>
-        <translation type="unfinished">Odstraní vybraný text</translation>
+        <translation>Odstraní vybraný text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1865"/>
         <source>&amp;Select all</source>
-        <translation type="unfinished">&amp;Vybrat vše</translation>
+        <translation>&amp;Vybrat vše</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1867"/>
         <source>Select all text</source>
-        <translation type="unfinished">Vybrat všechen text</translation>
+        <translation>Vybrat všechen text</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1870"/>
         <source>Read &amp;only</source>
-        <translation type="unfinished">&amp;Pouze pro čtení</translation>
+        <translation>&amp;Pouze pro čtení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1871"/>
         <source>F12</source>
-        <translation type="unfinished">F12</translation>
+        <translation>F12</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1873"/>
         <source>Makes text read only</source>
-        <translation type="unfinished">Udělá text pouze pro čtení</translation>
+        <translation>Udělá text pouze pro čtení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1876"/>
         <source>Configuration</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1878"/>
         <source>Open configuration dialog</source>
-        <translation type="unfinished">Otevřít dialog nastavení</translation>
+        <translation>Otevřít dialog nastavení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1881"/>
         <source>Inline calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Vestavěná kalkulačka</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1886"/>
         <source>&amp;Bolt hole circle</source>
-        <translation type="unfinished">&amp;Kruh otvoru šroubu</translation>
+        <translation>&amp;Kruh otvoru šroubu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1887"/>
         <source>F8</source>
-        <translation type="unfinished">F8</translation>
+        <translation>F8</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1888"/>
         <source>Calculate bolt hole&apos;s positions</source>
-        <translation type="unfinished">Spočítat polohy otvorů šroubu</translation>
+        <translation>Spočítat polohy vrtání v kruzích otvorů</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1891"/>
         <source>&amp;Insert spaces</source>
-        <translation type="unfinished">&amp;Vložit mezery</translation>
+        <translation>&amp;Vložit mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1892"/>
         <source>F4</source>
-        <translation type="unfinished">F4</translation>
+        <translation>F4</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1893"/>
         <source>Inserts spaces</source>
-        <translation type="unfinished">Vložit mezery</translation>
+        <translation>Vloží mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1896"/>
         <source>Remove spaces</source>
-        <translation type="unfinished">Odstranit mezery</translation>
+        <translation>Odstranit mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1897"/>
         <source>F5</source>
-        <translation type="unfinished">F5</translation>
+        <translation>F5</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1898"/>
         <source>Removes spaces</source>
-        <translation type="unfinished">Odstraní mezery</translation>
+        <translation>Odstraní mezery</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1901"/>
         <source>Remove empty lines</source>
-        <translation type="unfinished">Odstranit prázdné řádky</translation>
+        <translation>Odstranit prázdné řádky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1903"/>
         <source>Removes empty lines</source>
-        <translation type="unfinished">Odstraní prázdné řádky</translation>
+        <translation>Odstraní prázdné řádky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1906"/>
         <location filename="edytornc.cpp" line="1908"/>
         <source>Insert empty lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit prázdné řádky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1911"/>
         <source>Clean &amp;up</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vyčistit</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1916"/>
         <source>Insert dots</source>
-        <translation type="unfinished">Vložit tečky</translation>
+        <translation>Vložit tečky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1917"/>
         <source>F6</source>
-        <translation type="unfinished">F6</translation>
+        <translation>F6</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1918"/>
         <source>Inserts decimal dot</source>
-        <translation type="unfinished">Vložit desetinnou tečku</translation>
+        <translation>Vloží desetinnou tečku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1921"/>
         <source>Renumber</source>
-        <translation type="unfinished">Přečíslovat</translation>
+        <translation>Přečíslovat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1922"/>
         <source>F7</source>
-        <translation type="unfinished">F7</translation>
+        <translation>F7</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1923"/>
         <source>Renumber program blocks</source>
-        <translation type="unfinished">Přečíslovat programové bloky</translation>
+        <translation>Přečíslovat programové bloky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1926"/>
         <source>Feed&apos;s speed&apos;s</source>
-        <translation type="unfinished">Počet otáček + Posun</translation>
+        <translation>Počet otáček + Posun</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1927"/>
         <source>F9</source>
-        <translation type="unfinished">F9</translation>
+        <translation>F9</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1928"/>
         <source>Calculate speed, feed, cutting speed</source>
-        <translation type="unfinished">Spočítat počet otáček, posun a rychlost řezání</translation>
+        <translation>Spočítat počet otáček, posun a rychlost řezání</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1931"/>
         <source>Chamfer</source>
-        <translation type="unfinished">Zkosení</translation>
+        <translation>Zkosení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1933"/>
         <source>Calculate chamfer</source>
-        <translation type="unfinished">Spočítat zkosení</translation>
+        <translation>Spočítat zkosení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1936"/>
         <location filename="edytornc.cpp" line="1938"/>
         <source>Solution of triangles</source>
-        <translation type="unfinished">Spočítat trojúhelníky</translation>
+        <translation>Spočítat trojúhelníky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1941"/>
         <location filename="edytornc.cpp" line="1943"/>
         <source>Convert inch &lt;-&gt; mm</source>
-        <translation type="unfinished">Převést inch &lt;-&gt; mm</translation>
+        <translation>Převést inch &lt;-&gt; mm</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1946"/>
         <location filename="edytornc.cpp" line="1948"/>
         <source>Convert program inch &lt;-&gt; mm</source>
-        <translation type="unfinished">Převáděcí program inch &lt;-&gt; mm (palce &lt;-&gt; milimetry)</translation>
+        <translation>Převáděcí program inch &lt;-&gt; mm (palce &lt;-&gt; milimetry)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1951"/>
         <source>Calculator</source>
-        <translation type="unfinished">Kalkulačka</translation>
+        <translation>Kalkulačka</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1953"/>
         <source>Run calculator</source>
-        <translation type="unfinished">Spustit kalkulačku</translation>
+        <translation>Spustit kalkulačku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1956"/>
         <location filename="edytornc.cpp" line="1959"/>
         <source>Serial port send/receive</source>
-        <translation type="unfinished">Sériová přípojka poslat/přijmout</translation>
+        <translation>Sériová přípojka poslat/přijmout</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1962"/>
         <source>Compile macro - experimental</source>
-        <translation type="unfinished">Sestavit makra - pokusná funkce</translation>
+        <translation>Sestavit makra - pokusná funkce</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1964"/>
         <source>Translate EdytorNC macro into CNC program</source>
-        <translation type="unfinished">Přeložit makro EdytorNC do programu CNC</translation>
+        <translation>Přeložit makro EdytorNC do programu CNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1967"/>
         <location filename="edytornc.cpp" line="1968"/>
         <source>Show diff - open current file in right diff window</source>
-        <translation type="unfinished">Ukázat rozdíly - otevřít nynější soubor v pravém okně s rozdíly</translation>
+        <translation>Ukázat rozdíly - otevřít nynější soubor v pravém okně s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1971"/>
         <location filename="edytornc.cpp" line="1972"/>
         <source>Show diff - open current file in left diff window</source>
-        <translation type="unfinished">Ukázat rozdíly - otevřít nynější soubor v levém okně s rozdíly</translation>
+        <translation>Ukázat rozdíly - otevřít nynější soubor v levém okně s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1975"/>
         <source>On/off diff window</source>
-        <translation type="unfinished">Zapnout/Vypnout okno s rozdíly</translation>
+        <translation>Zapnout/Vypnout okno s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1977"/>
         <source>Show diff window</source>
-        <translation type="unfinished">Ukázat okno s rozdíly</translation>
+        <translation>Ukázat okno s rozdíly</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1980"/>
         <source>Show unsaved changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat neuložené změny</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1981"/>
         <source>Show diff of currently edited file and file on disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat rozdíly nyní upravovaného souboru a souboru na disku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1984"/>
         <location filename="edytornc.cpp" line="1985"/>
         <source>Split file</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdělit soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1998"/>
         <source>Swap axes</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohodit osy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2028"/>
         <source>Tile &amp;horyzontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspořádat &amp;vodorovně</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2029"/>
         <source>Tile the windows horyzontally</source>
-        <translation type="unfinished"></translation>
+        <translation>Klást okna vedle sebe vodorovně</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2032"/>
         <source>Tile &amp;vertycally</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspořádat &amp;svisle</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2033"/>
         <source>Tile the windows vertycally</source>
-        <translation type="unfinished"></translation>
+        <translation>Klást okna vedle sebe svisle</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3059"/>
         <location filename="edytornc.cpp" line="3061"/>
         <source>Start application &quot;Serial port file server&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit program &quot;souborový server pro sériovou přípojku&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3739"/>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3750"/>
         <source>Hide</source>
-        <translation type="unfinished">Skrýt</translation>
+        <translation>Skrýt</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="4639"/>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor &quot;%1&quot; &lt;b&gt;byl na disku změněn.&lt;/b&gt;&lt;p&gt;Chcete jej nahrát znovu?&lt;/p&gt;%2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="4641"/>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Varování:&lt;/b&gt; Soubor v editoru obsahuje neuložené změny.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ctrl+F4</source>
@@ -1380,17 +1383,17 @@ Items with non empty titles are not deleted automatically.</source>
     <message>
         <location filename="edytornc.cpp" line="2021"/>
         <source>Close the active window</source>
-        <translation type="unfinished">Zavřít činné okno</translation>
+        <translation>Zavřít činné okno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2024"/>
         <source>Close &amp;All</source>
-        <translation type="unfinished">Zavřít &amp;vše</translation>
+        <translation>Zavřít &amp;vše</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2025"/>
         <source>Close all the windows</source>
-        <translation type="unfinished">Zavřít všechna okna</translation>
+        <translation>Zavřít všechna okna</translation>
     </message>
     <message>
         <source>&amp;Tile</source>
@@ -1403,32 +1406,32 @@ Items with non empty titles are not deleted automatically.</source>
     <message>
         <location filename="edytornc.cpp" line="2036"/>
         <source>&amp;Cascade</source>
-        <translation type="unfinished">&amp;Překrývat</translation>
+        <translation>&amp;Překrývat</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2037"/>
         <source>Cascade the windows</source>
-        <translation type="unfinished">Překrývat okna</translation>
+        <translation>Překrývat okna</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2040"/>
         <source>Ne&amp;xt</source>
-        <translation type="unfinished">Da&amp;lší</translation>
+        <translation>Da&amp;lší</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2042"/>
         <source>Move the focus to the next window</source>
-        <translation type="unfinished">Přesunout pozornost na další okno</translation>
+        <translation>Přesunout zaměření na další okno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2045"/>
         <source>Pre&amp;vious</source>
-        <translation type="unfinished">Před&amp;chozí</translation>
+        <translation>Před&amp;chozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2047"/>
         <source>Move the focus to the previous window</source>
-        <translation type="unfinished">Přesunout pozornost na předchozí okno</translation>
+        <translation>Přesunout zaměření na předchozí okno</translation>
     </message>
     <message>
         <source>&amp;Create cnc tooltips</source>
@@ -1441,382 +1444,383 @@ Items with non empty titles are not deleted automatically.</source>
     <message>
         <location filename="edytornc.cpp" line="2065"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;O programu</translation>
+        <translation>&amp;O programu</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2066"/>
         <source>Show the application&apos;s About box</source>
-        <translation type="unfinished">Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
+        <translation>Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2069"/>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">O &amp;Qt</translation>
+        <translation>O &amp;Qt</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2070"/>
         <source>Show the Qt library&apos;s About box</source>
-        <translation type="unfinished">Ukázat dialog &quot;O Qt&quot;</translation>
+        <translation>Ukázat dialog &quot;O Qt&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2080"/>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Soubor</translation>
+        <translation>&amp;Soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2086"/>
         <source>&amp;Recent files</source>
-        <translation type="unfinished">&amp;Naposledy otevřené soubory</translation>
+        <translation>&amp;Naposledy otevřené soubory</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2110"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Úpravy</translation>
+        <translation>Úp&amp;ravy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2137"/>
         <source>&amp;Tools</source>
-        <translation type="unfinished">&amp;Nástroje</translation>
+        <translation>&amp;Nástroje</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2127"/>
         <source>&amp;Block Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeskočení &amp;bloku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="190"/>
         <source>EdytorNC - Serial port file server</source>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - souborový server pro sériovou přípojku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="191"/>
         <source>Serial port file server is running.
 Close anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Souborový server pro sériovou přípojku běží.
+Přesto zavřít?</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="534"/>
         <source>Saved %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Uloženo %1 souborů</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="567"/>
         <source>Print Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytisknout dokument</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="577"/>
         <location filename="edytornc.cpp" line="631"/>
         <source>The document was sent to a printer %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument byl odeslán do tiskárny %1...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1480"/>
         <source>&lt;br /&gt;German translation and other fixes thanks to Michael Numberger</source>
         <oldsource>&lt;br&gt;German translation and other fixes thanks to Michael Numberger</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Poděkování Michaelovi Numbergerovi za překlad do němčiny a jiné opravy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1483"/>
         <source>&lt;br /&gt;Spanish translation and other fixes thanks to Otto Huamani</source>
         <oldsource>&lt;br&gt;Spanish translation and other fixes thanks to Otto Huamani</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;Poděkování Ottovi Huamaniovi za překlad do španělštiny a jiné opravy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1484"/>
         <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
         <oldsource>&lt;br&gt;Dutch translation thanks to Henk van Andel</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Poděkování Henkovi van Andelovi za překlad do nizozemštiny (holandštiny)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1488"/>
         <source>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1603"/>
         <location filename="edytornc.cpp" line="1776"/>
         <source>&amp;Save &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Uložit &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1604"/>
         <location filename="edytornc.cpp" line="1786"/>
         <source>Save &quot;%1&quot; &amp;As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit &quot;%1&quot; &amp;jako...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1605"/>
         <location filename="edytornc.cpp" line="2019"/>
         <source>Cl&amp;ose &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zavřít &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1781"/>
         <source>Save A&amp;ll</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Uložit vše</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1782"/>
         <source>Ctrl+Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1783"/>
         <source>Save all modified documents to disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit všechny změněné dokumenty na disk</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1882"/>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+0</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2096"/>
         <source>Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sezení</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2168"/>
         <source>&amp;Window</source>
-        <translation type="unfinished">&amp;Okno</translation>
+        <translation>&amp;Okno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2174"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Nápověda</translation>
+        <translation>&amp;Nápověda</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2188"/>
         <source>File</source>
-        <translation type="unfinished">Soubor</translation>
+        <translation>Soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2200"/>
         <source>Edit</source>
-        <translation type="unfinished">Úpravy</translation>
+        <translation>Úpravy</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2223"/>
         <source>Tools</source>
-        <translation type="unfinished">Nástroje</translation>
+        <translation>Nástroje</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2248"/>
         <source>Window</source>
-        <translation type="unfinished">Okno</translation>
+        <translation>Okno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2268"/>
         <source>Highlight style and tooltip mode</source>
-        <translation type="unfinished">Zvýraznit režim stylu a nástrojových rad</translation>
+        <translation>Zvýraznit režim stylu a nástrojových rad</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2270"/>
         <source>AUTO</source>
-        <translation type="unfinished"></translation>
+        <translation>AUTO</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2271"/>
         <source>FANUC</source>
-        <translation type="unfinished"></translation>
+        <translation>FANUC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2272"/>
         <source>HEIDENHAIN DIALOG</source>
-        <translation type="unfinished"></translation>
+        <translation>HEIDENHAIN DIALOG</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2273"/>
         <source>HEIDENHAIN ISO</source>
-        <translation type="unfinished"></translation>
+        <translation>HEIDENHAIN ISO</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2274"/>
         <source>OKUMA OSP</source>
-        <translation type="unfinished"></translation>
+        <translation>OKUMA OSP</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2275"/>
         <source>PHILIPS</source>
-        <translation type="unfinished"></translation>
+        <translation>PHILIPS</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2276"/>
         <source>SINUMERIK OLD</source>
-        <translation type="unfinished">STARÝ SINUMERIK</translation>
+        <translation>STARÝ SINUMERIK</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2277"/>
         <source>SINUMERIK NEW</source>
-        <translation type="unfinished">NOVÝ SINUMERIK</translation>
+        <translation>NOVÝ SINUMERIK</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2279"/>
         <source>TOOLTIPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástrojové rady</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2283"/>
         <location filename="edytornc.cpp" line="2284"/>
         <source>Attach current highlight setting to current directory of programs</source>
-        <translation type="unfinished">Přiložit současné nastavení zvýrazňování do nynějšího adresáře s programem</translation>
+        <translation>Přiložit současné nastavení zvýrazňování do nynějšího adresáře s programem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2290"/>
         <location filename="edytornc.cpp" line="2291"/>
         <source>Remove highlight settings from the directory</source>
-        <translation type="unfinished">Odstranit nastavení zvýrazňování z adresáře s programem</translation>
+        <translation>Odstranit nastavení zvýrazňování z adresáře s programem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2309"/>
         <source>Ready</source>
-        <translation type="unfinished">Připraven</translation>
+        <translation>Připraven</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2430"/>
         <location filename="edytornc.cpp" line="2433"/>
         <location filename="edytornc.cpp" line="2435"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2772"/>
         <source>Find</source>
-        <translation type="unfinished">Najít</translation>
+        <translation>Najít</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2778"/>
         <location filename="edytornc.cpp" line="2780"/>
         <source>Find next</source>
-        <translation type="unfinished">Najít další</translation>
+        <translation>Najít další</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2783"/>
         <location filename="edytornc.cpp" line="2785"/>
         <source>Find previous</source>
-        <translation type="unfinished">Najít předchozí</translation>
+        <translation>Najít předchozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2788"/>
         <location filename="edytornc.cpp" line="2790"/>
         <source>Replace &amp;&amp; find next</source>
-        <translation type="unfinished">Nahradit a najít další</translation>
+        <translation>Nahradit a najít další</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2793"/>
         <location filename="edytornc.cpp" line="2795"/>
         <source>Replace &amp;&amp; find previous</source>
-        <translation type="unfinished">Nahradit a najít předchozí</translation>
+        <translation>Nahradit a najít předchozí</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2798"/>
         <location filename="edytornc.cpp" line="2800"/>
         <source>Replace all</source>
-        <translation type="unfinished">Nahradit vše</translation>
+        <translation>Nahradit vše</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2803"/>
         <location filename="edytornc.cpp" line="2804"/>
         <source>Close find toolbar</source>
-        <translation type="unfinished">Zavřít nástrojový pruh pro hledání</translation>
+        <translation>Zavřít nástrojový pruh pro hledání</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2807"/>
         <source>Find:</source>
-        <translation type="unfinished">Hledat:</translation>
+        <translation>Hledat:</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2811"/>
         <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Letter$$&lt;/b&gt; - odpovídá všem číslům.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - odpovídá číslu &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; může být vynecháno, potom rovno 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - odpovídá všem X s hodnotou -10 to 100&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2820"/>
         <source>Replace with:</source>
-        <translation type="unfinished">Nahradit:</translation>
+        <translation>Nahradit:</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2824"/>
         <source>&lt;b&gt;$$OperatorNumber&lt;/b&gt; - do some math on replaced numbers. Operator +-*/&lt;p&gt;$$+1 - will add 1 to replaced numbers&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;$$OperatorNumber&lt;/b&gt; - udělat nějaké výpočty nad nahrazenými čísly. Operátor +-*/&lt;p&gt;$$+1 - přidá 1 nahrazeným číslům&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2833"/>
         <source>Ignore c&amp;ase</source>
-        <translation type="unfinished">Nevšímat si psaní v&amp;elkých a malých písmen</translation>
+        <translation>Nevšímat si psaní v&amp;elkých a malých písmen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2836"/>
         <source>&amp;Whole words only</source>
-        <translation type="unfinished">Pouze celá &amp;slova</translation>
+        <translation>Pouze celá &amp;slova</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2840"/>
         <source>Ignore c&amp;omments</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevšímat si &amp;komentářů</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3020"/>
         <source>Serial port toolbar</source>
-        <translation type="unfinished">Nástrojový pruh pro sériovou přípojku</translation>
+        <translation>Nástrojový pruh pro sériovou přípojku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3025"/>
         <location filename="edytornc.cpp" line="3027"/>
         <source>Serial port configuration</source>
-        <translation type="unfinished">Nastavení sériové přípojky</translation>
+        <translation>Nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3030"/>
         <location filename="edytornc.cpp" line="3032"/>
         <source>Receive new file</source>
-        <translation type="unfinished">Přijmout nový soubor</translation>
+        <translation>Přijmout nový soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3035"/>
         <location filename="edytornc.cpp" line="3037"/>
         <source>Send current file</source>
-        <translation type="unfinished">Poslat nynější soubor</translation>
+        <translation>Poslat nynější soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3040"/>
         <location filename="edytornc.cpp" line="3042"/>
         <source>Attach current port settings to current directory of programs</source>
-        <translation type="unfinished">Přiložit současné nastavení přípojky do nynějšího adresáře s programem</translation>
+        <translation>Přiložit současné nastavení přípojky do nynějšího adresáře s programem</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3045"/>
         <source>Remove settings from the current directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit nastavení přípojky z nynějšího adresáře</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3047"/>
         <source>Remove settings from the directory</source>
-        <translation type="unfinished">Odstranit nastavení z adresáře s programem</translation>
+        <translation>Odstranit nastavení přípojky z adresáře</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3050"/>
         <location filename="edytornc.cpp" line="3052"/>
         <source>Check serial port settings</source>
-        <translation type="unfinished">Prověřit nastavení sériové přípojky</translation>
+        <translation>Prověřit nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3055"/>
         <location filename="edytornc.cpp" line="3056"/>
         <source>Close send/receive toolbar</source>
-        <translation type="unfinished">Zavřít nástrojový pruh poslat/přijmout</translation>
+        <translation>Zavřít nástrojový pruh poslat/přijmout</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="4355"/>
         <source>Session %1 loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Sezení %1 nahráno</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="4500"/>
         <location filename="edytornc.cpp" line="4503"/>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <source>Sending...</source>
@@ -1917,12 +1921,12 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="3253"/>
         <source># ++++++ EXAMPLE ++++++</source>
-        <translation type="unfinished"></translation>
+        <translation># ++++++ Příklad ++++++</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3255"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - zastavení programu, bezpodmíněčné&quot;</translation>
     </message>
     <message>
         <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
@@ -2051,92 +2055,92 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="1913"/>
         <source>Remove text using regular expressions</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit text pomocí regulárních výrazů</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1988"/>
         <source>Comment ;</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář ;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1989"/>
         <source>Ctrl+;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1990"/>
         <source>Comment/uncomment selected text using semicolon</source>
-        <translation type="unfinished"></translation>
+        <translation>Okomentovat vybraný text pomocí středníku/Zrušit okomentování</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1993"/>
         <source>Comment ()</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář ()</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1994"/>
         <source>Ctrl+9</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+9</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1995"/>
         <source>Comment/uncomment selected text using parentheses</source>
-        <translation type="unfinished"></translation>
+        <translation>Okomentovat vybraný text pomocí kulatých závorek/Zrušit okomentování</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2000"/>
         <source>Swap/modify axes, selected text or entire program</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohodit/Změnit osy, vybraný text nebo celý program</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2003"/>
         <source>Block Skip remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranění přeskočení bloku</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2004"/>
         <source>Ctrl+1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+1</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2005"/>
         <source>Remove Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit přeskočení bloku /</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2008"/>
         <source>Block Skip +</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeskočení bloku +</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2009"/>
         <source>Ctrl+2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+2</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2010"/>
         <source>Insert/increase Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit/Zvětšit přeskočení bloku /</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2013"/>
         <source>Block Skip -</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeskočení bloku -</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2014"/>
         <source>Ctrl+3</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+3</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2015"/>
         <source>Insert/decrease Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit/Zmenšit přeskočení bloku /</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2278"/>
         <source>LinuxCNC</source>
-        <translation type="unfinished"></translation>
+        <translation>LinuxCNC</translation>
     </message>
     <message>
         <source>&lt;b&gt;M48&lt;/b&gt; - spindle speed override ignore cancel</source>
@@ -2245,60 +2249,62 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="3397"/>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny soubory (*.* *);;Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Dokumenty *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Kresby *.dwg *.dxf (*.dwg *.dxf);;Obrázky *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Textové soubory *.txt (*.txt)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3407"/>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny soubory (*.* *);;Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.ngc *.min *.anc *.cnc);;Dokumenty (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Kresby (*.dwg *.dxf);;Obrázky (*.jpg *.bmp *.svg);;Textové soubory (*.txt)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3962"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3874"/>
         <source>&lt;b&gt;Project: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Projekt: &quot;%1&quot;
+ byl upraven.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="271"/>
         <source>EMPTY FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>Prázdný soubor</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1478"/>
         <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3875"/>
         <source>Do you want to save your changes ?</source>
-        <translation type="unfinished">Chcete uložit své změny?</translation>
+        <translation>Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3918"/>
         <source>Open files</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít soubory</translation>
     </message>
     <message>
         <location filename="edytornc.ui" line="529"/>
         <location filename="edytornc.cpp" line="3934"/>
         <source>Info</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3485"/>
         <source>Project opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekt otevřen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="1133"/>
         <source>Cannot write tmp file &quot;%1&quot;.
  %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze zapsat dočasný soubor &quot;%1&quot;.
+ %2</translation>
     </message>
     <message>
         <source>&lt;P&gt;Copyright (C) 1998 - 2011 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</source>
@@ -2307,22 +2313,22 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="2057"/>
         <source>&amp;Create global cnc tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vytvořit celkové nástrojové rady CNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2058"/>
         <source>Create default global cnc tooltips file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit soubor s výchozími celkovými nástrojovými radami CNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2061"/>
         <source>&amp;Create user cnc tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vytvořit uživatelské nástrojové rady CNC</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="2062"/>
         <source>Create/edit user cnc tooltips file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit/Upravit uživatelské nástrojové rady CNC</translation>
     </message>
     <message>
         <source>&lt;b&gt;M44&lt;/b&gt; - spindle gear range 4</source>
@@ -2331,29 +2337,29 @@ Close anyway?</source>
     <message>
         <location filename="edytornc.cpp" line="3529"/>
         <source>Project saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekt uložen</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3677"/>
         <location filename="edytornc.cpp" line="3705"/>
         <source>EdytorNC project file *.ncp (*.ncp)</source>
-        <translation type="unfinished"></translation>
+        <translation>Projektový soubor EdytorNC *.ncp (*.ncp)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3681"/>
         <location filename="edytornc.cpp" line="3709"/>
         <source>EdytorNC project file (*.ncp)</source>
-        <translation type="unfinished"></translation>
+        <translation>Projektový soubor EdytorNC (*.ncp)</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3686"/>
         <source>Select the project name and location...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte název a umístění projektu...</translation>
     </message>
     <message>
         <location filename="edytornc.cpp" line="3714"/>
         <source>Open the project file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít projektový soubor...</translation>
     </message>
 </context>
 <context>
@@ -2366,12 +2372,12 @@ Close anyway?</source>
     <message>
         <location filename="feedsdialog.ui" line="29"/>
         <source>mm</source>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="42"/>
         <source>inches</source>
-        <translation type="unfinished"></translation>
+        <translation>palců</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="95"/>
@@ -2382,7 +2388,7 @@ Close anyway?</source>
         <location filename="feedsdialog.ui" line="98"/>
         <source>Vc :</source>
         <oldsource> Vc :</oldsource>
-        <translation type="unfinished">Rychlost řezání:</translation>
+        <translation>Rychlost řezání:</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="365"/>
@@ -2392,39 +2398,39 @@ Close anyway?</source>
     <message>
         <location filename="dialogs.cpp" line="366"/>
         <source>Feed (chip load) per tooth (mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun na zub (mm)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="368"/>
         <location filename="dialogs.cpp" line="380"/>
         <source>Number of teeth on the cutter</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet zubů na fréze</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="370"/>
         <location filename="dialogs.cpp" line="382"/>
         <source>Spindle speed (revs/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet otáček/obrátek vřetene (otáček/min)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="377"/>
         <source>Cutting speed (ft/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rychlost řezání (mm/min)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="378"/>
         <source>Feed (chip load) per tooth (inches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun na zub (palců)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="379"/>
         <source>Tool diameter (inches)</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměr nástroje (palců)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="381"/>
         <source>Table feed (inches/min)</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun stolu (palců/min)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="79"/>
@@ -2443,11 +2449,11 @@ Close anyway?</source>
     </message>
     <message>
         <source>Feed per tooth (mm)</source>
-        <translation type="vanished">Posun na zub (mm)</translation>
+        <translation>Posun na zub (mm)</translation>
     </message>
     <message>
         <source>0.2</source>
-        <translation type="vanished">0.2</translation>
+        <translation>0.2</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="143"/>
@@ -2496,7 +2502,7 @@ Close anyway?</source>
     </message>
     <message>
         <source>Spindle speed (r/min)</source>
-        <translation type="vanished">Rychlost osy (r/min)</translation>
+        <translation>Rychlost osy (r/min)</translation>
     </message>
     <message>
         <location filename="feedsdialog.ui" line="115"/>
@@ -2564,88 +2570,89 @@ Close anyway?</source>
     <message>
         <location filename="filechecker.ui" line="14"/>
         <source>EdytorNC - File checker</source>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNc - přezkušovač souboru</translation>
     </message>
     <message>
         <location filename="filechecker.ui" line="34"/>
         <source>Save path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukládací cesta:</translation>
     </message>
     <message>
         <location filename="filechecker.ui" line="41"/>
         <source>Auto save path as set in serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta pro automatické ukládání nastavena v nastavení pro sériovou přípojku</translation>
     </message>
     <message>
         <location filename="filechecker.ui" line="61"/>
         <source>Search path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledávaná cesta:</translation>
     </message>
     <message>
         <location filename="filechecker.ui" line="68"/>
         <source>Search path as set in serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta pro hledání nastavena v nastavení pro sériovou přípojku</translation>
     </message>
     <message>
         <location filename="filechecker.ui" line="96"/>
         <source>List of files in save path (received files).
 Click to compare with file with the same name in selected search path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam souborů v ukládací cestě (přijaté soubory).
+Klepněte pro srovnání se souborem se stejným názvem ve vybrané vyhledávací cestě.</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="121"/>
         <source>File Name</source>
-        <translation type="unfinished">Název souboru</translation>
+        <translation>Název souboru</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="121"/>
         <source>Info</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="121"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijmout</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="121"/>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="121"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="121"/>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="121"/>
         <source>Modification date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum úprav</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="186"/>
         <source>%1 KB</source>
-        <translation type="unfinished">%1 KB</translation>
+        <translation>%1 KB</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="215"/>
         <source>Equal</source>
-        <translation type="unfinished"></translation>
+        <translation>Stejný</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="217"/>
         <source>Changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Změněn</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="223"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="228"/>
@@ -2653,17 +2660,20 @@ Click to compare with file with the same name in selected search path.</source>
 New - file does not exists in Search path.
 Equal - received file and file in Search path are identical.
 Changed - received file is modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav přijatého souboru:
+Nový - soubor neexistuje ve vyhledávací cestě.
+Stejný - přijatý soubor a soubor ve vyhledávací cestě jsou totožné.
+Změněn - přijatý soubor je upraven</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="487"/>
         <source>Accept received file and move it to selected search path</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijmout přijatý soubor a přesunout jej do vybrané vyhledávací cesty</translation>
     </message>
     <message>
         <location filename="filechecker.cpp" line="492"/>
         <source>Delete received file</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat přijatý soubor</translation>
     </message>
 </context>
 <context>
@@ -2716,27 +2726,27 @@ Changed - received file is modified</source>
     <message>
         <location filename="findinfilesdialog.ui" line="344"/>
         <source>Search subfolders</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledávat podsložky</translation>
     </message>
     <message>
         <location filename="findinfilesdialog.ui" line="347"/>
         <source>Subfolders</source>
-        <translation type="unfinished"></translation>
+        <translation>Podsložky</translation>
     </message>
     <message>
         <location filename="findinfilesdialog.ui" line="354"/>
         <source>;...</source>
-        <translation type="unfinished"></translation>
+        <translation>;...</translation>
     </message>
     <message>
         <location filename="findinfilesdialog.ui" line="364"/>
         <source>(...)</source>
-        <translation type="unfinished"></translation>
+        <translation>(...)</translation>
     </message>
     <message>
         <location filename="findinfilesdialog.ui" line="374"/>
         <source>Ignore comments</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevšímat si komentářů</translation>
     </message>
     <message>
         <location filename="findinfilesdialog.ui" line="407"/>
@@ -2787,7 +2797,7 @@ Changed - received file is modified</source>
     <message>
         <location filename="findinf.cpp" line="216"/>
         <source>Searching in folder: &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledá se ve složce: &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="findinf.cpp" line="365"/>
@@ -2832,7 +2842,14 @@ Changed - received file is modified</source>
 .1/4
 1.3/4
 2.5/8</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijaté hodnoty (příklady): 
+1.5 
+0.5 
+.5
+1/2
+.1/4
+1.3/4
+2.5/8</translation>
     </message>
     <message>
         <location filename="i2mdialog.ui" line="69"/>
@@ -3007,12 +3024,12 @@ Pokračujte na vlastní nebezpečí.</translation>
     <message>
         <location filename="pdiff.cpp" line="478"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Kopírovat</translation>
+        <translation>&amp;Kopírovat</translation>
     </message>
     <message>
         <location filename="pdiff.cpp" line="480"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation type="unfinished">Kopírovat obsah nynějšího výběru do schránky</translation>
+        <translation>Kopírovat obsah nynějšího výběru do schránky</translation>
     </message>
 </context>
 <context>
@@ -3025,7 +3042,7 @@ Pokračujte na vlastní nebezpečí.</translation>
         <location filename="mdichild.cpp" line="81"/>
         <source>program%1.nc</source>
         <oldsource>document%1.nc</oldsource>
-        <translation type="unfinished">dokument%1.nc</translation>
+        <translation>Soubor%1.nc</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="110"/>
@@ -3109,17 +3126,17 @@ Pokračujte na vlastní nebezpečí.</translation>
         <location filename="mdichild.cpp" line="217"/>
         <location filename="mdichild.cpp" line="229"/>
         <source>CNC programs files %1 (%1);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Programové soubory CNC %1 (%1);;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="223"/>
         <source>CNC programs files (%1);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Programové soubory CNC (%1);;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="243"/>
         <source>Text files (*.txt);;All files (*.* *)</source>
-        <translation type="unfinished"></translation>
+        <translation>Textové soubory (*.txt);;Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="387"/>
@@ -3131,12 +3148,12 @@ Pokračujte na vlastní nebezpečí.</translation>
     <message>
         <location filename="mdichild.cpp" line="316"/>
         <source>(DATE)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Datum)</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="327"/>
         <source>DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="429"/>
@@ -3310,103 +3327,103 @@ Prověřte +-*/.
     <message>
         <location filename="mdichild.cpp" line="4070"/>
         <source>Comment ;</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář ;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4071"/>
         <source>Ctrl+;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+;</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4072"/>
         <source>Comment/uncomment selected text using semicolon</source>
-        <translation type="unfinished"></translation>
+        <translation>Okomentovat vybraný text pomocí středníku</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4077"/>
         <source>Comment ()</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář ()</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4078"/>
         <source>Ctrl+9</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+9</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4079"/>
         <source>Comment/uncomment selected text using parentheses</source>
-        <translation type="unfinished"></translation>
+        <translation>Okomentovat vybraný text pomocí kulatých závorek</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4099"/>
         <source>Block Skip remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranění přeskočení bloku</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4100"/>
         <source>Ctrl+1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+1</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4101"/>
         <source>Remove Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit přeskočení bloku /</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4107"/>
         <source>Inline calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Vestavěná kalkulačka</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4108"/>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+0</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4182"/>
         <source>You can use:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Můžete použít:</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4192"/>
         <source>Press Enter to accept or click anywere to canacel</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiskněte klávesu Enter nebo klepněte kamkoli pro zrušení</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4085"/>
         <source>Block Skip +</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeskočení bloku +</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4086"/>
         <source>Ctrl+2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+2</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4087"/>
         <source>Insert/increase Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit/Zvětšit přeskočení bloku /</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4092"/>
         <source>Block Skip -</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeskočení bloku -</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4093"/>
         <source>Ctrl+3</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+3</translation>
     </message>
     <message>
         <location filename="mdichild.cpp" line="4094"/>
         <source>Insert/decrease Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit/Zmenšit přeskočení bloku /</translation>
     </message>
     <message>
         <location filename="mdichildform.ui" line="29"/>
         <source>MdiChild</source>
-        <translation type="unfinished"></translation>
+        <translation>MdiChild</translation>
     </message>
 </context>
 <context>
@@ -3464,12 +3481,12 @@ Prověřte +-*/.
     <message>
         <location filename="common.cpp" line="204"/>
         <source>CNC programs files (</source>
-        <translation type="unfinished"></translation>
+        <translation>Programové soubory CNC (</translation>
     </message>
     <message>
         <location filename="common.cpp" line="208"/>
         <source>);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="unfinished"></translation>
+        <translation>);;Textové soubory (*.txt);;Všechny soubory (*.* *)</translation>
     </message>
 </context>
 <context>
@@ -3613,103 +3630,103 @@ Prověřte +-*/.
     <name>SPConfigDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <source>Settings file:</source>
-        <translation type="vanished">Soubor s nastavením:</translation>
+        <translation>Soubor s nastavením:</translation>
     </message>
     <message>
         <source>Serial port :</source>
-        <translation type="vanished">Sériová přípojka:</translation>
+        <translation>Sériová přípojka:</translation>
     </message>
     <message>
         <source>Save configuration</source>
-        <translation type="vanished">Uložit nastavení</translation>
+        <translation>Uložit nastavení</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="vanished">&amp;Uložit</translation>
+        <translation>&amp;Uložit</translation>
     </message>
     <message>
         <source>Delete configuration</source>
-        <translation type="vanished">Smazat nastavení</translation>
+        <translation>Smazat nastavení</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>&amp;Browse</source>
-        <translation type="vanished">&amp;Procházet</translation>
+        <translation>&amp;Procházet</translation>
     </message>
     <message>
         <source>Baud rate</source>
-        <translation type="vanished">Rychlost přenosu dat (bit/s) pro modemy (baud rate)</translation>
+        <translation>Rychlost přenosu dat (bit/s) pro modemy (baud rate)</translation>
     </message>
     <message>
         <source>Data bit&apos;s</source>
-        <translation type="vanished">Datové bity</translation>
+        <translation>Datové bity</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="vanished">7</translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="vanished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="vanished">8</translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="vanished">6</translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>Stop bit&apos;s</source>
-        <translation type="vanished">Zastavovací bity</translation>
+        <translation>Zastavovací bity</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="vanished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="vanished">2</translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>Parity</source>
-        <translation type="vanished">Rovnost</translation>
+        <translation>Rovnost</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="vanished">Žádný</translation>
+        <translation>Žádný</translation>
     </message>
     <message>
         <source>Even</source>
-        <translation type="vanished">Sudý</translation>
+        <translation>Sudý</translation>
     </message>
     <message>
         <source>Odd</source>
-        <translation type="vanished">Lichý</translation>
+        <translation>Lichý</translation>
     </message>
     <message>
         <source>Flow control</source>
-        <translation type="vanished">Ovládání toku</translation>
+        <translation>Ovládání toku</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="vanished">Vypnuto</translation>
+        <translation>Vypnuto</translation>
     </message>
     <message>
         <source>Hardware</source>
-        <translation type="vanished">Technické vybavení (hardware)</translation>
+        <translation>Technické vybavení (hardware)</translation>
     </message>
     <message>
         <source>Delay before sending the next block:</source>
@@ -3744,55 +3761,55 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Send at start:</source>
-        <translation type="vanished">Poslat na začátku:</translation>
+        <translation>Poslat na začátku:</translation>
     </message>
     <message>
         <source>XOFF character:</source>
-        <translation type="vanished">Znak XOFF:</translation>
+        <translation>Znak XOFF:</translation>
     </message>
     <message>
         <source>Delete control chars</source>
-        <translation type="vanished">Smazat ovládací znaky</translation>
+        <translation>Smazat ovládací znaky</translation>
     </message>
     <message>
         <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
-        <translation type="vanished">Smazat všechny ovládací znaky (&lt;0x3F; &gt;0x7F) z přijatého souboru</translation>
+        <translation>Smazat všechny ovládací znaky (&lt;0x3F; &gt;0x7F) z přijatého souboru</translation>
     </message>
     <message>
         <source>Send at end:</source>
-        <translation type="vanished">Poslat na konec:</translation>
+        <translation>Poslat na konec:</translation>
     </message>
     <message>
         <source>XON character:</source>
-        <translation type="vanished">Znak XON:</translation>
+        <translation>Znak XON:</translation>
     </message>
     <message>
         <source>Enable this option for lower transmission latency on high baud rate</source>
-        <translation type="vanished">Tuto volbu povolte kvůli menší prodlevě při přenosu při vysoké rychlosti přenosu dat (bit/s) pro modemy (baud rate)</translation>
+        <translation>Tuto volbu povolte kvůli menší prodlevě při přenosu při vysoké rychlosti přenosu dat (bit/s) pro modemy (baud rate)</translation>
     </message>
     <message>
         <source>Disable text selection</source>
-        <translation type="vanished">Zakázat výběr textu</translation>
+        <translation>Zakázat výběr textu</translation>
     </message>
     <message>
         <source>&amp;Save &amp;&amp; close</source>
-        <translation type="vanished">&amp;Uložit a zavřít</translation>
+        <translation>&amp;Uložit a zavřít</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <source>Serial port configuration</source>
-        <translation type="vanished">Nastavení sériové přípojky</translation>
+        <translation>Nastavení sériové přípojky</translation>
     </message>
     <message>
         <source>Select serial port device</source>
-        <translation type="vanished">Vybrat zařízení se sériovou přípojkou</translation>
+        <translation>Vybrat zařízení se sériovou přípojkou</translation>
     </message>
     <message>
         <source>All files (*)</source>
-        <translation type="vanished">Všechny soubory (*)</translation>
+        <translation>Všechny soubory (*)</translation>
     </message>
 </context>
 <context>
@@ -3804,7 +3821,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportcfghelpdialog.ui" line="14"/>
         <source>Help - Serial port configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Nápověda - Nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="serialportcfghelpdialog.ui" line="23"/>
@@ -3813,7 +3830,11 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -3821,246 +3842,247 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="serialportconfigdialog.ui" line="20"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="89"/>
         <source>Delete configuration</source>
-        <translation type="unfinished">Smazat nastavení</translation>
+        <translation>Smazat nastavení</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="92"/>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="69"/>
         <location filename="serialportconfigdialog.ui" line="1854"/>
         <source>Save configuration</source>
-        <translation type="unfinished">Uložit nastavení</translation>
+        <translation>Uložit nastavení</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="75"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Uložit</translation>
+        <translation>&amp;Uložit</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="41"/>
         <location filename="serialportconfigdialog.cpp" line="594"/>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="49"/>
         <source>Settings file:</source>
-        <translation type="unfinished">Soubor s nastavením:</translation>
+        <translation>Soubor s nastavením:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="118"/>
         <source>Port settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení přípojky</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="138"/>
         <source>/dev/ttyS0</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev/ttyS0</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="143"/>
         <source>/dev/ttyS1</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev/ttyS1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="148"/>
         <source>/dev/ttyUSB0</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev/ttyUSB0</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="153"/>
         <source>/dev/ttyUSB1</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev/ttyUSB1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="174"/>
         <source>Serial port :</source>
-        <translation type="unfinished">Sériová přípojka:</translation>
+        <translation>Sériová přípojka:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="181"/>
         <source>&amp;Browse</source>
-        <translation type="unfinished">&amp;Procházet</translation>
+        <translation>&amp;Procházet</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="197"/>
         <source>Serial port information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o sériové přípojce</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="200"/>
         <source>Information about serial port</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o sériové přípojce</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="216"/>
         <source>Description       :</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="221"/>
         <source>Manufacturer      :</source>
-        <translation type="unfinished"></translation>
+        <translation>Výrobce:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="226"/>
         <source>SerialNumber      :</source>
-        <translation type="unfinished"></translation>
+        <translation>Sériové číslo:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="231"/>
         <source>System location   :</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojení:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="236"/>
         <source>Vendor identifier :</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifikační číslo dodavatele:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="241"/>
         <source>Product identifier:</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifikační číslo výrobku:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="272"/>
         <source>Baud rate</source>
-        <translation type="unfinished">Rychlost přenosu dat (bit/s) pro modemy (baud rate)</translation>
+        <translation>Rychlost přenosu dat (bit/s) pro modemy (baud rate)</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="284"/>
         <source>1200</source>
-        <translation type="unfinished">1200</translation>
+        <translation>1200</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="294"/>
         <source>2400</source>
-        <translation type="unfinished">2400</translation>
+        <translation>2400</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="304"/>
         <source>4800</source>
-        <translation type="unfinished">4800</translation>
+        <translation>4800</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="314"/>
         <source>9600</source>
-        <translation type="unfinished">9600</translation>
+        <translation>9600</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="327"/>
         <source>19200</source>
-        <translation type="unfinished">19200</translation>
+        <translation>19200</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="337"/>
         <source>38400</source>
-        <translation type="unfinished">38400</translation>
+        <translation>38400</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="347"/>
         <source>57600</source>
-        <translation type="unfinished">57600</translation>
+        <translation>57600</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="357"/>
         <source>115200</source>
-        <translation type="unfinished">115200</translation>
+        <translation>115200</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="370"/>
         <source>Data bit&apos;s</source>
-        <translation type="unfinished">Datové bity</translation>
+        <translation>Datové bity</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="382"/>
         <source>7</source>
-        <translation type="unfinished">7</translation>
+        <translation>7</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="392"/>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="402"/>
         <source>8</source>
-        <translation type="unfinished">8</translation>
+        <translation>8</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="415"/>
         <source>6</source>
-        <translation type="unfinished">6</translation>
+        <translation>6</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="428"/>
         <source>Stop bit&apos;s</source>
-        <translation type="unfinished">Zastavovací bity</translation>
+        <translation>Zastavovací bity</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="440"/>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="450"/>
         <source>2</source>
-        <translation type="unfinished">2</translation>
+        <translation>2</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="466"/>
         <source>Parity</source>
-        <translation type="unfinished">Rovnost</translation>
+        <translation>Rovnost</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="478"/>
         <location filename="serialportconfigdialog.ui" line="526"/>
         <source>None</source>
-        <translation type="unfinished">Žádný</translation>
+        <translation>Žádný</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="491"/>
         <source>Even</source>
-        <translation type="unfinished">Sudý</translation>
+        <translation>Sudý</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="501"/>
         <source>Odd</source>
-        <translation type="unfinished">Lichý</translation>
+        <translation>Lichý</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="514"/>
         <source>Flow control</source>
-        <translation type="unfinished">Ovládání toku</translation>
+        <translation>Ovládání toku</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="738"/>
         <source>Send XON character to initiate transmission.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat znak XON pro zahájení přenosu.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="741"/>
         <source>Send XON at start</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat XON na začátku</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="750"/>
         <source>Remove: </source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="757"/>
         <source>Use this to remove some unwanted characters from received data.
 Vailid QtRegExp should be entered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto použijte k odstranění některých nechtěných znaků z přijatých dat.
+Mají se zadat platné QtRegExp.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1699"/>
@@ -4068,18 +4090,21 @@ Vailid QtRegExp should be entered.</source>
 If program of that name (without extension) will be received from CNC, it will be searched for a program filename to send back to CNC.
 Set this file name as other files received from this machine.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Program Caller&quot;.
+Pokud bude program s tímto názvem (bez přípony) přijat z CNC, bude prohledán na název souboru programu k poslání zpět do CNC.
+Nastavte tento název souboru jako jiné soubory přijaté z tohoto stroje.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1768"/>
         <source>Reconnect time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas znovupřipojení:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1775"/>
         <source>If port will not be open try to open it after set time.
 Set to 300s to disable timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud nebude přípojka otevřena, pokuste se ji otevřít po stanoveném čase.
+Nastavte na 300 s pro zakázání časovače.</translation>
     </message>
     <message>
         <source>Off</source>
@@ -4088,196 +4113,198 @@ Set to 300s to disable timer.</source>
     <message>
         <location filename="serialportconfigdialog.ui" line="536"/>
         <source>Hardware</source>
-        <translation type="unfinished">Technické vybavení (hardware)</translation>
+        <translation>Technické vybavení</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="552"/>
         <source>XON, XOFF</source>
-        <translation type="unfinished"></translation>
+        <translation>XON, XOFF</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1073"/>
         <source>Send time out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat překročení času:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1123"/>
         <source>Start delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpoždění začátku</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1190"/>
         <source>Start sending after Clear To Send (CTS) signal </source>
-        <translation type="unfinished"></translation>
+        <translation>Poslání začátku po signálu CTS (Clear To Send)</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1193"/>
         <source>Wait for CTS</source>
-        <translation type="unfinished"></translation>
+        <translation>Počkat na CTS</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1200"/>
         <source>Start sending after receiving XON character </source>
-        <translation type="unfinished"></translation>
+        <translation>Poslání začátku po přijetí znaku XON</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1203"/>
         <source>Wait for XON</source>
-        <translation type="unfinished"></translation>
+        <translation>Počkat na XON</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1214"/>
         <source>Auto save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit automaticky</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1247"/>
         <source>Save path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukládací cesta:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1280"/>
         <source>File name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název souboru</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1286"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Je-li zaškrtnuto, název souboru programu k uložení bude vzat z názvu programu, např. O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;Pokud bude název souboru prázdný (nenalezen), použije se uživatelsky stanovený regulární výraz. Pokud nebude nalezen, použije se jako název souboru kód složený z data a času. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Je-li zaškrtnuto, použije se nejprve uživatelsky stanovený regulární výraz, pokud ten nebude nalezen, použije se  název programu, a pokud nebude nalezen ani ten, použije se kód vytvořený z data.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1289"/>
         <source>Built-in name detection</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozpoznání názvu souboru</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1304"/>
         <source>User expression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatelský výraz:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1366"/>
         <source>Remove letters from file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit písmena z názvu souboru</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1376"/>
         <source>Change file name to lowercase</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit název souboru na malá písmena</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1388"/>
         <source>Extension </source>
-        <translation type="unfinished"></translation>
+        <translation>Přípona </translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1394"/>
         <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in %MPF456...) it will be used as extension of saved file.
 Setting &quot;file extension&quot; will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud zjištěný název souboru obsahuje &quot;extension&quot; (např. MPF v %_N_PR25475002_MPF, MIN v $O0004.MIN% nebo MPF v  %MPF456...), použije se tato jako přípona uloženého souboru.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1398"/>
         <source>Use detected extension as file extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít zjištěnou příponu jako příponu souboru</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1411"/>
         <source>If detected file name contains &quot;extension&quot; (eg MPF in %_N_PR25475002_MPF, MIN in $O0004.MIN% or MPF in  %MPF456...) it will be used as part of filename. At end of the filename after character &apos;_&apos;  (eg O0004_MIN.nc).
 Selected file extension will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud zjištěný název souboru obsahuje &quot;extension&quot; (např. MPF v %_N_PR25475002_MPF, MIN v $O0004.MIN% nebo MPF v  %MPF456...), použije se tato jako část souboru. Na konci názvu souboru po znaku &apos;_&apos;  (např. O0004_MIN.nc).
+Použije se vybraná přípona názvu souboru.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1427"/>
         <source>Default extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí přípona:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1434"/>
         <source>Extension of saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Přípona uloženého souboru</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1317"/>
         <source>User defined regular expression to find filename in program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatelsky stanovený regulární výraz pro hledání názvu souboru v programu.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1466"/>
         <source>If save path will already contain a file, old file will be renamed to *.bak</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud již ukládací cesta bude obsahovat soubor, starý soubor bude přejmenován na *.bak</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="868"/>
         <location filename="serialportconfigdialog.ui" line="1751"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přid&amp;at</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1476"/>
         <source>Save debug information to log file:
 &quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit informace o ladění do souboru se zápisem:
+&quot;ukládací cesta&quot; &quot;název nastavení&quot;_serial_log.txt</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1487"/>
         <source>Write data to log file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapsat data do souboru se zápisem</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1550"/>
         <source>Search for file name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat název souboru:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1557"/>
         <source>Search path 1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledávaná cesta 1:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1608"/>
         <source>Search path 3:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledávaná cesta 3:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1625"/>
         <source>Search path 2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledávaná cesta 2:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1643"/>
         <source>Caller file name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název souboru volajícího (Caller):</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1686"/>
         <source>The second path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhá cesta, ve které se budou hledat soubory.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1131"/>
         <source>Start sending after:</source>
-        <translation type="unfinished"></translation>
+        <translation>Začít posílání po:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="725"/>
         <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
-        <translation type="unfinished">Smazat všechny ovládací znaky (&lt;0x3F; &gt;0x7F) z přijatého souboru</translation>
+        <translation>Smazat všechny ovládací znaky (&lt;0x3F; &gt;0x7F) z přijatého souboru</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="728"/>
         <source>Delete control chars</source>
-        <translation type="unfinished">Smazat ovládací znaky</translation>
+        <translation>Smazat ovládací znaky</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="959"/>
         <source>Send at end:</source>
-        <translation type="unfinished">Poslat na konec:</translation>
+        <translation>Poslat na konec:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1017"/>
         <source>Delay before sending the next block:</source>
-        <translation type="unfinished">Zpoždění před odesláním dalšího bloku (s)</translation>
+        <translation>Zpoždění před odesláním dalšího bloku:</translation>
     </message>
     <message>
         <source>90</source>
@@ -4294,7 +4321,7 @@ Selected file extension will be used.</source>
     <message>
         <location filename="serialportconfigdialog.ui" line="920"/>
         <source>Send at start:</source>
-        <translation type="unfinished">Poslat na začátku:</translation>
+        <translation>Poslat na začátku:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="633"/>
@@ -4304,42 +4331,42 @@ Selected file extension will be used.</source>
         <location filename="serialportconfigdialog.ui" line="1159"/>
         <location filename="serialportconfigdialog.ui" line="1779"/>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="597"/>
         <source>XON character:</source>
-        <translation type="unfinished">Znak XON:</translation>
+        <translation>Znak XON:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="652"/>
         <source>XOFF character:</source>
-        <translation type="unfinished">Znak XOFF:</translation>
+        <translation>Znak XOFF:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="712"/>
         <source>Remove empty lines after receive is complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit prázdné řádky po dokončení přijetí</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="715"/>
         <source>Remove empty lines</source>
-        <translation type="unfinished">Odstranit prázdné řádky</translation>
+        <translation>Odstranit prázdné řádky</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="786"/>
         <source>End of receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec přijímání</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="796"/>
         <source>Time out:</source>
-        <translation type="unfinished"></translation>
+        <translation>Překročení času:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="834"/>
         <source>End of program characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znaky ukončení programu:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="865"/>
@@ -4347,7 +4374,7 @@ Selected file extension will be used.</source>
         <location filename="serialportconfigdialog.ui" line="1330"/>
         <location filename="serialportconfigdialog.ui" line="1748"/>
         <source>Add to the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat do seznamu</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="879"/>
@@ -4355,59 +4382,61 @@ Selected file extension will be used.</source>
         <location filename="serialportconfigdialog.ui" line="1344"/>
         <location filename="serialportconfigdialog.ui" line="1734"/>
         <source>Delete from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat ze seznamu</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="927"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tyto znaky budou přidány na konec programu.&lt;/p&gt;&lt;p&gt;Psát můžete sem:&lt;/p&gt;&lt;p&gt;	Prostý text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Šestnáctkové kódy znaků ASCII.&lt;/p&gt;&lt;p&gt;	Příklad: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % a znaky pro nový řádek&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - znak mezery a znaky pro nový řádek&lt;/p&gt;&lt;p&gt;	znaky pro mezeru a control lze zapsat jen jako šestnáctková čísla:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Lze použít kódy pro zvláštní znaky:&lt;/p&gt;&lt;p&gt;	LF - vložení řádku (operace připravující vložení dalšího znaku na další řádek) (nahrazeny později znaky pro konec bloku)&lt;/p&gt;&lt;p&gt;	SP - Mezera&lt;/p&gt;&lt;p&gt;	TAB - zarážka (tabulátor)&lt;/p&gt;&lt;p&gt;	FN - název souboru&lt;/p&gt;&lt;p&gt;	FE - přípona názvu souboru (část po tečce)&lt;/p&gt;&lt;p&gt;	FA - přípona názvu souboru připojená na konec názvu souboru (část po znaku podtržítka _ a před tečkou)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="946"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tyto znaky budou přidány na začátek programu.&lt;/p&gt;&lt;p&gt;Psát můžete sem:&lt;/p&gt;&lt;p&gt;	Prostý text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Šestnáctkové kódy znaků ASCII.&lt;/p&gt;&lt;p&gt;	Příklad: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % a znaky pro nový řádek&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - znak mezery a znaky pro nový řádek&lt;/p&gt;&lt;p&gt;	znaky pro mezeru a control lze zapsat jen jako šestnáctková čísla:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Lze použít kódy pro zvláštní znaky:&lt;/p&gt;&lt;p&gt;	LF - vložení řádku (operace připravující vložení dalšího znaku na další řádek) (nahrazeny později znaky pro konec bloku)&lt;/p&gt;&lt;p&gt;	SP - Mezera&lt;/p&gt;&lt;p&gt;	TAB - zarážka (tabulátor)&lt;/p&gt;&lt;p&gt;	FN - název souboru&lt;/p&gt;&lt;p&gt;	FE - přípona názvu souboru (část po tečce)&lt;/p&gt;&lt;p&gt;	FA - přípona názvu souboru připojená na konec názvu souboru (část po znaku podtržítka _ a před tečkou)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="977"/>
         <source>End of block characters:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znaky ukončení bloku:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1061"/>
         <source>When sending, discard all characters before %</source>
-        <translation type="unfinished"></translation>
+        <translation>Při posílání zahodit všechny znaky před %</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1064"/>
         <source>Remove characters before %</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit znaky před %</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="705"/>
         <source>Remove white space at end of line</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit prázdné místo na konci řádku</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="659"/>
         <source>Auto close transmission dialog:</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické zavření přenosového okna:</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1480"/>
         <source>Create log file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit soubor se zápisem</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="701"/>
         <source>Remove white space just before the end of line, sometimes added by Fanuc.
 Works only when receiving file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit prázdné místo jen před koncem řádku, někdy přidáno Fanuc.
+Pracuje jen při přijímání souboru.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="995"/>
         <source>Line (block) endings charcters.
 Only uppercase LF, CR character are allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Znaky pro konec řádku (bloku).
+Jsou povolena jen velká písmena LF, CR.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="610"/>
@@ -4415,20 +4444,26 @@ Only uppercase LF, CR character are allowed.</source>
 XON (DC2) - 18 Dec. 0x12 Hex.
 This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</source>
-        <translation type="unfinished"></translation>
+        <translation>XON (DC1) - 17 Dec. 0x11 Hex.
+XON (DC2) - 18 Dec. 0x12 Hex.
+Toto nastavení se používá jen v EdytorNC (není použito na sériovou přípojku) a pracuje s ovládáním hardware a software.
+Nastavte XON nebo XOFF na 0, pokud je chcete zakázat.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1154"/>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
 This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
 This setting is ignored in serial File Server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud 0, potom čeká na XON, pokud &gt;0 čeká se na překročení času nebo XON, který z nich nejprve.
+Toto nastavení pracuje s ovládáním hardware a software. Dejte 0 na znaky XON na XOFF pro spuštění přenosu bez čekání na XON.
+Toto nastavení se v sériovém souborovém serveru přehlíží.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="629"/>
         <source>Automatically close transmission dialog after the last character was sent/received.
 This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to swich CNC into reciving mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky zavřít přenosové okno po poslání/přijetí posledního znaku.
+Toto nastavení se používá také v režimu souborového serveru ke zjištění konce příchozího přenosu a dává operátorovi čas na přepnutí CNC do přijímacího režimu.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="575"/>
@@ -4436,39 +4471,43 @@ This setting is also used in file server mode to detect end of incoming transmis
 XOFF (DC4) - 20 Dec. 0x14 Hex.
 This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</source>
-        <translation type="unfinished"></translation>
+        <translation>XOFF (DC3) - 19 Dec. 0x13 Hex.
+XOFF (DC4) - 20 Dec. 0x14 Hex.
+Toto nastavení se používá jen v EdytorNC (není použito na sériovou přípojku) a pracuje s ovládáním hardware a software.
+Nastavte XON nebo XOFF na 0, pokud je chcete zakázat.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="581"/>
         <location filename="serialportconfigdialog.ui" line="616"/>
         <source>0</source>
-        <translation type="unfinished">0</translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="695"/>
         <source>Options - receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Volby - přijímání</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="912"/>
         <source>Options - sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Volby - posílání</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1222"/>
         <source>Automatically save the received file.
 If the file name has not been automatically detected, the file name will be the current date and time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické uložení přijatého souboru.
+Pokud nebyl název souboru zjištěn automaticky, bude názvem souboru nynější datum a čas.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1226"/>
         <source>Automatically save the received file</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické uložení přijatého souboru</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1264"/>
         <source>Browse for save path</source>
-        <translation type="unfinished"></translation>
+        <translation>Procházet pro ukládací cestu</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1267"/>
@@ -4476,56 +4515,58 @@ If the file name has not been automatically detected, the file name will be the 
         <location filename="serialportconfigdialog.ui" line="1664"/>
         <location filename="serialportconfigdialog.ui" line="1675"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Procházet</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1347"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1469"/>
         <source>Create backup if file exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit zálohu, pokud soubor existuje</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1415"/>
         <source>Append extension at end</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit příponu na konec</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1455"/>
         <source>If received data will contain more than one CNC program, they will be saved in independent files
 This setting can cause data loss if detection of filename fails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud přijatá data obsahují více než jeden program CNC, budou uložena do nezávislých souborů.
+Toto nastavení může způsobit ztrátu dat, pokud zjištění názvu souboru selže.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1459"/>
         <source>Split programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdělit programy</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1362"/>
         <source>Letters in detected filename will be removed (only digits will be left).
 If in result filename becomes empty, version with letters will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmena ve zjištěném názvu souboru budou odstraněna (budou ponechána jen čísla).
+Pokud zůstane ve výsledku název souboru prázdný, použije se verze s písmeny.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="882"/>
         <location filename="serialportconfigdialog.ui" line="1737"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Smazat</translation>
+        <translation>&amp;Smazat</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="847"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toto pole obsahuje výraz používaný k nalezení konce přijatého programu CNC (konec přenosu).&lt;/p&gt;&lt;p&gt;Musí obsahovat platný regulární výraz Qt  (QRexExp). Podívejte se na &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;V EdytorNC můžete tento výraz zkontrolovat ve funkci &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1508"/>
         <location filename="serialportconfigdialog.ui" line="1531"/>
         <source>File server</source>
-        <translation type="unfinished"></translation>
+        <translation>Souborový server</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1514"/>
@@ -4544,17 +4585,31 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;after time set in &amp;quot;Auto close transmission dialog:&amp;quot; file server will send back file 0032 (paths, file extension are set in File Server tab)&lt;/span&gt;&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and again ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Souborový server sériové přípojky.&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Spustit souborový server v EdytorNC&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Pošlete jakýkoli soubor z CNC, bude uložen v počítači (jak je to nastaveno na kartě pro automatické ukládání)&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Pošlete zvláštní program z CNC: &lt;/li&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;:0001(CALLER)&lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt; -&amp;gt; O0001 nebo 0001 nastaveno na kartě pro souborový server &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;(0032)  &lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt;-&amp;gt; 0032 název souboru k poslání zpět do CNC&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;M30&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;po čase nastaveném v &amp;quot;dialogu pro automatické zavření přenosového okna:&amp;quot; pošle souborový server zpět soubor 0032 (cesty, souborová přípona jsou nastaveny na kartě pro souborový server)&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... a znovu ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1564"/>
         <source>The first path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>První cesta, ve které se budou hledat soubory.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1615"/>
         <source>The third path to search for files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Třetí cesta, ve které se budou hledat soubory.</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1715"/>
@@ -4565,7 +4620,13 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This field contains expression used to find filename in &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Toto pole obsahuje výraz používaný k nalezení názvu souboru v &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Musí obsahovat platný regulární výraz Qt (QRexExp). Podívejte se na &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;V EdytorNC tento výraz můžete zkontrolovat v &amp;quot;Vyčistit&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1591"/>
@@ -4573,72 +4634,73 @@ p, li { white-space: pre-wrap; }
         <location filename="serialportconfigdialog.ui" line="1650"/>
         <source>File extension. 
 If detected filename will contain an extension, then this setting will be ignored</source>
-        <translation type="unfinished"></translation>
+        <translation>Souborová přípona.
+Pokud zjištěný soubor obsahuje příponu, potom se toto nastavení bude přehlížet</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1373"/>
         <source>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</source>
-        <translation type="unfinished"></translation>
+        <translation>Název souboru vytažený z volajícího programu (Caller) bude změněn na malá písmena (může být důležité, pokud váš operační systém rozlišuje velikost písmen).</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1834"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Nápověda</translation>
+        <translation>&amp;Nápověda</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1860"/>
         <source>&amp;Save &amp;&amp; close</source>
-        <translation type="unfinished">&amp;Uložit a zavřít</translation>
+        <translation>&amp;Uložit a zavřít</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.ui" line="1887"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="36"/>
         <source>Serial port configuration</source>
-        <translation type="unfinished">Nastavení sériové přípojky</translation>
+        <translation>Nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="176"/>
         <source>Select serial port device</source>
-        <translation type="unfinished">Vybrat zařízení se sériovou přípojkou</translation>
+        <translation>Vybrat zařízení se sériovou přípojkou</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="178"/>
         <source>All files (*)</source>
-        <translation type="unfinished">Všechny soubory (*)</translation>
+        <translation>Všechny soubory (*)</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="623"/>
         <source>Description       : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis: %1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="624"/>
         <source>Manufacturer      : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Výrobce: %1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="625"/>
         <source>SerialNumber      : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sériové číslo: %1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="626"/>
         <source>System location   : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojení: %1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="627"/>
         <source>Vendor identifier : %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifikační číslo dodavatele: %1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="628"/>
         <source>Product identifier: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifikační číslo výrobku: %1</translation>
     </message>
     <message>
         <location filename="serialportconfigdialog.cpp" line="705"/>
@@ -4646,7 +4708,7 @@ If detected filename will contain an extension, then this setting will be ignore
         <location filename="serialportconfigdialog.cpp" line="723"/>
         <location filename="serialportconfigdialog.cpp" line="757"/>
         <source>Select search path</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat prohledávanou cestu</translation>
     </message>
 </context>
 <context>
@@ -4658,51 +4720,51 @@ If detected filename will contain an extension, then this setting will be ignore
     <message>
         <location filename="serialtransmissiondialog.ui" line="42"/>
         <source>Settings name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název nastavení</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="104"/>
         <location filename="serialtransmissiondialog.ui" line="120"/>
         <source>Clear To Send</source>
-        <translation type="unfinished">Vyprázdnit &apos;Poslat&apos;</translation>
+        <translation>Vyprázdnit &apos;Poslat&apos;</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="123"/>
         <source>CTS</source>
-        <translation type="unfinished"></translation>
+        <translation>CTS</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="139"/>
         <location filename="serialtransmissiondialog.ui" line="155"/>
         <source>Data Set Ready </source>
-        <translation type="unfinished">Soubor dat připraven</translation>
+        <translation>Soubor dat připraven</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="158"/>
         <source>DSR</source>
-        <translation type="unfinished"></translation>
+        <translation>DSR</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="174"/>
         <location filename="serialtransmissiondialog.ui" line="190"/>
         <source>Data Carrier Detect</source>
-        <translation type="unfinished">Zjištění přepravce dat</translation>
+        <translation>Zjištění nosiče dat</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="193"/>
         <source>DCD</source>
-        <translation type="unfinished"></translation>
+        <translation>DCD</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="209"/>
         <location filename="serialtransmissiondialog.ui" line="225"/>
         <source>Request To Send</source>
-        <translation type="unfinished">Požadavek na &apos;Poslat&apos;</translation>
+        <translation>Požadavek k poslání</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="228"/>
         <source>RTS</source>
-        <translation type="unfinished"></translation>
+        <translation>RTS</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="244"/>
@@ -4710,33 +4772,33 @@ If detected filename will contain an extension, then this setting will be ignore
         <location filename="serialtransmissiondialog.ui" line="288"/>
         <location filename="serialtransmissiondialog.ui" line="307"/>
         <source>Data Terminal Ready</source>
-        <translation type="unfinished">Datový terminál připraven</translation>
+        <translation>Datový terminál připraven</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="266"/>
         <source>DTR</source>
-        <translation type="unfinished"></translation>
+        <translation>DTR</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="310"/>
         <source>XOFF</source>
-        <translation type="unfinished"></translation>
+        <translation>XOFF</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.ui" line="432"/>
         <location filename="serialtransmissiondialog.cpp" line="154"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Zavřít</translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="77"/>
         <source>Serial transmission</source>
-        <translation type="unfinished"></translation>
+        <translation>Sériový přenos</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="151"/>
         <source>Auto &amp;closing in %1s</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické &amp;zavření za %1 s</translation>
     </message>
     <message>
         <source>Start in %1s</source>
@@ -4745,17 +4807,17 @@ If detected filename will contain an extension, then this setting will be ignore
     <message>
         <location filename="serialtransmissiondialog.cpp" line="281"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Port: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Přípojka: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; je&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="284"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;OPEN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#009500;&quot;&gt;Otevřeno&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="297"/>
         <source>Sending starts in %1s</source>
-        <translation type="unfinished"></translation>
+        <translation>Posílání začíná za %1 s</translation>
     </message>
     <message>
         <source>Waiting for a signal readiness...</source>
@@ -4764,194 +4826,195 @@ If detected filename will contain an extension, then this setting will be ignore
     <message>
         <location filename="serialtransmissiondialog.cpp" line="356"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;CLOSED&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;Zavřeno&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="401"/>
         <source>No Error has occured</source>
-        <translation type="unfinished">Nevyskytla se žádná chyba</translation>
+        <translation>Nevyskytla se žádná chyba</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="404"/>
         <source>An error occurred while attempting to open an non-existing serial port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Při pokusu o otevření neexistující sériové přípojky se vyskytla chyba.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="407"/>
         <source>An error occurred while attempting to open an already opened serial port by another process or a user not having enough permission and credentials to open.</source>
-        <translation type="unfinished"></translation>
+        <translation>Při pokusu o otevření již otevřené sériové přípojky jiným procesem nebo uživatelem bez dostatečných oprávnění a přihlašovacích údajů se vyskytla chyba.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="410"/>
         <source>An error occurred while attempting to open an already opened serial port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Při pokusu o otevření již otevřené sériové přípojky se vyskytla chyba.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="413"/>
         <source>Serial port is not opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sériová přípojka není otevřena.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="416"/>
         <source>Parity error detected by the hardware while reading data</source>
-        <translation type="unfinished"></translation>
+        <translation>Při čtení dat vybavením (hardware) zjištěna chyba rovnosti</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="419"/>
         <source>Framing error detected by the hardware while reading data</source>
-        <translation type="unfinished"></translation>
+        <translation>Při čtení dat vybavením (hardware) zjištěna chyba rámování</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="422"/>
         <source>Break condition detected by the hardware on the input line</source>
-        <translation type="unfinished"></translation>
+        <translation>V zadávacím řádku vybavením (hardware) zjištěno přerušení</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="425"/>
         <source>An I/O error occurred while writing the data</source>
-        <translation type="unfinished"></translation>
+        <translation>Při zápisu dat se vyskytla chyba vstupu/výstupu (I/O)</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="427"/>
         <source>An I/O error occurred while reading the data</source>
-        <translation type="unfinished"></translation>
+        <translation>Při čtení dat se vyskytla chyba vstupu/výstupu (I/O)</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="430"/>
         <source>An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system</source>
-        <translation type="unfinished"></translation>
+        <translation>Při nedostupnosti zdroje se vyskytne chyba vstupu/výstupu (I/O), např. když je zařízení neočekávaně odstraněno ze systému</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="433"/>
         <source>The requested serial port operation is not supported or prohibited by the running operating system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Požadovaná operace sériové přípojky není podporována nebo je zakázána běžícím operačním systémem.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="436"/>
         <source>A timeout error occurred.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyskytla se chyba týkající se překročení času.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="439"/>
         <location filename="serialtransmissiondialog.cpp" line="442"/>
         <source>An unidentified error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyskytla se neznámá chyba</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="447"/>
         <location filename="serialtransmissiondialog.cpp" line="452"/>
         <source>ERROR:	 Serial port error %1: &quot;%2&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Chyba sériové přípojky %1: &quot;%2&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="453"/>
         <source>EdytorNC - serial transmission</source>
-        <translation type="unfinished"></translation>
+        <translation>EdytorNC - sériový přenos</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="485"/>
         <location filename="serialtransmissiondialog.cpp" line="1845"/>
         <source>Sending byte %1 of %2</source>
-        <translation type="unfinished">Posílají se byty: %1 z %2</translation>
+        <translation>Posílají se byty: %1 z %2</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="498"/>
         <source>OK:	 Sending completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Poslání dokončeno.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="610"/>
         <location filename="serialtransmissiondialog.cpp" line="623"/>
         <source>XOFF received...</source>
-        <translation type="unfinished"></translation>
+        <translation>XOFF přijat...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="617"/>
         <source>XON received...</source>
-        <translation type="unfinished"></translation>
+        <translation>XON přijat...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="631"/>
         <source>Received data
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Přijatá data</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="639"/>
         <location filename="serialtransmissiondialog.cpp" line="971"/>
         <source>Receiving byte %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijímají se byty %1</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="648"/>
         <source>Program received</source>
-        <translation type="unfinished"></translation>
+        <translation>Program přijat</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1432"/>
         <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Přejmenovává se soubor: &quot;%1&quot; na &quot;%2&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1437"/>
         <source>ERROR:	 Renaming file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Přejmenovává se soubor: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1453"/>
         <source>OK:	 Saving file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Ukládá se soubor: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1458"/>
         <source>ERROR:	 Saving file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Ukládá se soubor: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1489"/>
         <source>Log file truncated, size &gt; 1MB.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor se zápisem zkrácen &gt; 1MB.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1630"/>
         <source>Serial transmission - File server</source>
-        <translation type="unfinished"></translation>
+        <translation>Sériový přenos - souborový server</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1631"/>
         <source>Can&apos;t start.
 File server option is not enabled in serial port settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze spustit.
+Volba souborového serveru není povolena v nastavení sériové přípojky</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1643"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1659"/>
         <source>Received data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijatá data...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1685"/>
         <source>INFO:	 Received &quot;Caller&quot; program: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>INFO:	 Příchozí &quot;volající&quot; program (Caller): &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1813"/>
         <source>OK:	 Sending a file: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Posílá se soubor: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1823"/>
         <source>ERROR:	 Can&apos;t find program name to send in &quot;Caller&quot; program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Nelze najít název programu k poslání &quot;volajícímu&quot; programu (Caller).</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1889"/>
         <source>ERROR:	 Sending timedout. Reseting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Při poslání došlo k překročení času. Nastavuje se znovu.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="258"/>
@@ -4960,68 +5023,68 @@ File server option is not enabled in serial port settings</source>
         <location filename="serialtransmissiondialog.cpp" line="1832"/>
         <location filename="serialtransmissiondialog.cpp" line="1857"/>
         <source>Waiting for data...</source>
-        <translation type="unfinished">Čeká se na data...</translation>
+        <translation>Čeká se na data...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="263"/>
         <source>Sending a file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Posílá se soubor...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="276"/>
         <source>Receiving a file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijímá se soubor...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="315"/>
         <source>Waiting for CTS signal...</source>
-        <translation type="unfinished"></translation>
+        <translation>Čeká se na signál CTS...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="320"/>
         <location filename="serialtransmissiondialog.cpp" line="324"/>
         <source>Waiting for XON character...</source>
-        <translation type="unfinished"></translation>
+        <translation>Čeká se na znak XON...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="499"/>
         <source>Wainting for data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Čeká se na data...</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1369"/>
         <source>WARNING:	 Could not find program name. Using date time code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varování:	 Nepodařilo se najít název programu. Používá se datum.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1410"/>
         <source>ERROR:	 Received file to small (less than 15 characters).</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Přijatý soubor je příliš malý (méně než 15 znaků).</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1744"/>
         <source>ERROR:	 Can&apos;t find file in path 1: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Nelze najít soubor v cestě 1: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1751"/>
         <source>ERROR:	 Can&apos;t find file in path 2: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Nelze najít soubor v cestě 2: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1758"/>
         <source>ERROR:	 Can&apos;t find file in path 3: &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Nelze najít soubor v cestě 3: &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1817"/>
         <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba:	 Nelze poslat soubor: &quot;%1&quot;. %2</translation>
     </message>
     <message>
         <location filename="serialtransmissiondialog.cpp" line="1856"/>
         <source>OK:	 Sending a file completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>OK:	 Poslání souboru dokončeno.</translation>
     </message>
 </context>
 <context>
@@ -5029,7 +5092,7 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="serialportconfigdialog.cpp" line="29"/>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedostupné</translation>
     </message>
 </context>
 <context>
@@ -5042,7 +5105,7 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="setupdialog.ui" line="27"/>
         <source>Font&amp;&amp;colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo a barvy</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="54"/>
@@ -5058,7 +5121,7 @@ File server option is not enabled in serial port settings</source>
         <location filename="setupdialog.ui" line="95"/>
         <source>Highlight colors</source>
         <oldsource>Syntax highlight colors</oldsource>
-        <translation type="unfinished">Barevné zvýraznění skladby</translation>
+        <translation>Barvy zvýraznění</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="243"/>
@@ -5138,7 +5201,7 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="setupdialog.ui" line="299"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Volby</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="364"/>
@@ -5148,7 +5211,7 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="setupdialog.ui" line="804"/>
         <source>Default highlight style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí zvýrazňovací styl:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="305"/>
@@ -5188,127 +5251,127 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="setupdialog.ui" line="418"/>
         <source>File</source>
-        <translation type="unfinished">Soubor</translation>
+        <translation>Soubor</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="651"/>
         <source>Default save directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí ukládací adresář:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="663"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Procházet...</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="447"/>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="263"/>
         <source>Default color</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí barva</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="273"/>
         <source>Backgroud</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozadí</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="488"/>
         <source>Extension to add: </source>
-        <translation type="unfinished"></translation>
+        <translation>Přípona k přidání:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="498"/>
         <source>*.</source>
-        <translation type="unfinished"></translation>
+        <translation>*.</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="508"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="557"/>
         <source>Extension to be added to filename when saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Přípona, která se přidá při ukládání souboru</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="560"/>
         <source>*.Aaa</source>
-        <translation type="unfinished"></translation>
+        <translation>*.Aaa</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="563"/>
         <source>*.nc</source>
-        <translation type="unfinished"></translation>
+        <translation>*.nc</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="601"/>
         <source>Guess file name by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navrhnout název souboru podle:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="610"/>
         <source>Program number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo programu</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="626"/>
         <source>Ensure that first comment in program is valid file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ujistit se, že první komentář (poznámka) v programu je platný název programu</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="629"/>
         <source>First comment</source>
-        <translation type="unfinished"></translation>
+        <translation>První komentář</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="681"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="689"/>
         <source>Calculator exe :</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalkulačka exe:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="703"/>
         <source>&amp;Browse</source>
-        <translation type="unfinished">&amp;Procházet</translation>
+        <translation>&amp;Procházet</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="718"/>
         <source>Window title</source>
-        <translation type="unfinished"></translation>
+        <translation>Název okna</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="724"/>
         <source>Show file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat název souboru</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="731"/>
         <source>Show file path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat cestu k souboru</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="738"/>
         <source>Show program title</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat název programu</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="774"/>
         <source>If set, all files will be opened in read-only mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Je-li nastaveno, všechny soubory budou otevřeny v režimu pouze pro čtení</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="777"/>
         <source>&amp;Viewer mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim &amp;prohlížeče</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="696"/>
@@ -5339,32 +5402,32 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="setupdialog.ui" line="550"/>
         <source>Default save extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí ukládací přípona:</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="797"/>
         <source>Default highlight style and tooltip mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí zvýrazňovací styl a režim nástrojových rad</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="811"/>
         <source>Do not reopen the editor windows at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Neotvírat znovu okna editoru při spuštění</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="814"/>
         <source>Start empty window</source>
-        <translation type="unfinished"></translation>
+        <translation>Začínat s prázdnými okny</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="821"/>
         <source>Do not show warning message when open file is modified by another application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neukazovat varovnou zprávu, když byl otevřený soubor změněn jiným programem.</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="824"/>
         <source>Disable file change monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnout hlášení o změně zdrojového souboru</translation>
     </message>
     <message>
         <location filename="setupdialog.ui" line="855"/>
@@ -5396,72 +5459,72 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="dialogs.cpp" line="3173"/>
         <source>AUTO</source>
-        <translation type="unfinished"></translation>
+        <translation>AUTO</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3174"/>
         <source>FANUC</source>
-        <translation type="unfinished"></translation>
+        <translation>FANUC</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3175"/>
         <source>HEIDENHAIN DIALOG</source>
-        <translation type="unfinished"></translation>
+        <translation>HEIDENHAIN DIALOG</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3176"/>
         <source>HEIDENHAIN ISO</source>
-        <translation type="unfinished"></translation>
+        <translation>HEIDENHAIN ISO</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3177"/>
         <source>OKUMA OSP</source>
-        <translation type="unfinished"></translation>
+        <translation>OKUMA OSP</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3178"/>
         <source>PHILIPS</source>
-        <translation type="unfinished"></translation>
+        <translation>PHILIPS</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3179"/>
         <source>SINUMERIK OLD</source>
-        <translation type="unfinished">STARÝ SINUMERIK</translation>
+        <translation>STARÝ SINUMERIK</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3180"/>
         <source>SINUMERIK NEW</source>
-        <translation type="unfinished">NOVÝ SINUMERIK</translation>
+        <translation>NOVÝ SINUMERIK</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3181"/>
         <source>LinuxCNC</source>
-        <translation type="unfinished"></translation>
+        <translation>LinuxCNC</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3182"/>
         <source>TOOLTIPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástrojové rady</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3239"/>
         <source>Executables (*.exe)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustitelné soubory (*.exe)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3241"/>
         <source>All files (*)</source>
-        <translation type="unfinished">Všechny soubory (*)</translation>
+        <translation>Všechny soubory (*)</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3246"/>
         <source>Select calculator executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat spustitelný soubor kalkulačky</translation>
     </message>
     <message>
         <location filename="dialogs.cpp" line="3632"/>
         <source>Select default save directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat výchozí ukládací adresář</translation>
     </message>
 </context>
 <context>
@@ -5476,39 +5539,39 @@ File server option is not enabled in serial port settings</source>
     <name>TransProgressDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>Clear To Send</source>
-        <translation type="vanished">Vyprázdnit &apos;Poslat&apos;</translation>
+        <translation>Vyprázdnit &apos;Poslat&apos;</translation>
     </message>
     <message>
         <source>Data Set Ready </source>
-        <translation type="vanished">Soubor dat připraven</translation>
+        <translation>Soubor dat připraven</translation>
     </message>
     <message>
         <source>Data Carrier Detect</source>
-        <translation type="vanished">Zjištění přepravce dat</translation>
+        <translation>Zjištění přepravce dat</translation>
     </message>
     <message>
         <source>Request To Send</source>
-        <translation type="vanished">Požadavek na &apos;Poslat&apos;</translation>
+        <translation>Požadavek na &apos;Poslat&apos;</translation>
     </message>
     <message>
         <source>Data Terminal Ready</source>
-        <translation type="vanished">Datový terminál připraven</translation>
+        <translation>Datový terminál připraven</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="vanished">Textový štítek</translation>
+        <translation>Textový štítek</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Zavřít</translation>
+        <translation>&amp;Zavřít</translation>
     </message>
 </context>
 <context>
@@ -5640,67 +5703,67 @@ File server option is not enabled in serial port settings</source>
     </message>
     <message>
         <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="vanished">Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
+        <translation>Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
     </message>
     <message>
         <source>Unable to allocate memory tables</source>
-        <translation type="vanished">Nelze přidělit paměťové tabulky</translation>
+        <translation>Nelze přidělit paměťové tabulky</translation>
     </message>
     <message>
         <source>Caught a non-blocked signal</source>
-        <translation type="vanished">Zachycen ne-blokovaný signál</translation>
+        <translation>Zachycen ne-blokovaný signál</translation>
     </message>
     <message>
         <source>Operation timed out</source>
-        <translation type="vanished">Překročení času u operace</translation>
+        <translation>Překročení času u operace</translation>
     </message>
     <message>
         <source>The file opened by the port is not a character device</source>
-        <translation type="vanished">Soubor otevřený přípojkou není typickým zařízením</translation>
+        <translation>Soubor otevřený přípojkou není typickým zařízením</translation>
     </message>
     <message>
         <source>The port detected a break condition</source>
-        <translation type="vanished">Přípojka zjistila podmínku přerušení</translation>
+        <translation>Přípojka zjistila podmínku přerušení</translation>
     </message>
     <message>
         <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="vanished">Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
+        <translation>Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
     </message>
     <message>
         <source>There was an I/O error while communicating with the port</source>
-        <translation type="vanished">Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
+        <translation>Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
     </message>
     <message>
         <source>Character buffer overrun</source>
-        <translation type="vanished">Překročení vyrovnávací paměti znaku</translation>
+        <translation>Překročení vyrovnávací paměti znaku</translation>
     </message>
     <message>
         <source>Receive buffer overflow</source>
-        <translation type="vanished">Přetečení vyrovnávací paměti pro příjem</translation>
+        <translation>Přetečení vyrovnávací paměti pro příjem</translation>
     </message>
     <message>
         <source>The port detected a parity error in the received data</source>
-        <translation type="vanished">Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
+        <translation>Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
     </message>
     <message>
         <source>Transmit buffer overflow</source>
-        <translation type="vanished">Přetečení vyrovnávací paměti pro přenos</translation>
+        <translation>Přetečení vyrovnávací paměti pro přenos</translation>
     </message>
     <message>
         <source>General read operation failure</source>
-        <translation type="vanished">Selhání operace běžného čtení</translation>
+        <translation>Selhání operace běžného čtení</translation>
     </message>
     <message>
         <source>General write operation failure</source>
-        <translation type="vanished">Selhání operace běžného zápisu</translation>
+        <translation>Selhání operace běžného zápisu</translation>
     </message>
     <message>
         <source>No Error has occured</source>
-        <translation type="vanished">Nevyskytla se žádná chyba</translation>
+        <translation>Nevyskytla se žádná chyba</translation>
     </message>
     <message>
         <source>Unknown error</source>
-        <translation type="vanished">Neznámá chyba</translation>
+        <translation>Neznámá chyba</translation>
     </message>
     <message>
         <location filename="serialtransmission.cpp" line="526"/>
@@ -5827,62 +5890,62 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="cleanupdialog.ui" line="17"/>
         <source>Remove text using regular expressions</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit text pomocí regulárních výrazů</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="32"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Information about: &lt;a href=&quot;http://doc.qt.digia.com/qt/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Qt regular expressions&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;http://doc.qt.digia.com/qt/qregexp.html&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Informace o: &lt;a href=&quot;http://doc.qt.digia.com/qt/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Regulární výrazy Qt&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;http://doc.qt.digia.com/qt/qregexp.html&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="45"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámka</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="50"/>
         <source>Expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Výraz</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="55"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="68"/>
         <source>Preview, changes will not be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled, změny nebudou uloženy</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="95"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close and save changes.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Delete the text that matches the regular expression selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zavřít a uložit změny.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Smazat text, který odpovídá vybranému regulárnímu výrazu.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="98"/>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="123"/>
         <source>Close and cancel all changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít a zrušit všechny změny</translation>
     </message>
     <message>
         <location filename="cleanupdialog.ui" line="126"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <location filename="cleanupdialog.cpp" line="62"/>
         <source>Delete &amp;row</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat řá&amp;dek</translation>
     </message>
     <message>
         <location filename="cleanupdialog.cpp" line="64"/>
         <source>Delete current row</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat nynější řádek</translation>
     </message>
 </context>
 <context>
@@ -6873,29 +6936,29 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="newfiledialog.ui" line="14"/>
         <source>New file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový soubor</translation>
     </message>
     <message>
         <location filename="newfiledialog.ui" line="24"/>
         <source>Templates path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta k předlohám:</translation>
     </message>
     <message>
         <location filename="newfiledialog.ui" line="40"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Procházet...</translation>
     </message>
     <message>
         <location filename="newfiledialog.ui" line="69"/>
         <location filename="newfiledialog.cpp" line="101"/>
         <location filename="newfiledialog.cpp" line="127"/>
         <source>EMPTY FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>Prázdný soubor</translation>
     </message>
     <message>
         <location filename="newfiledialog.cpp" line="82"/>
         <source>Choose template path</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat cestu k předlohám</translation>
     </message>
 </context>
 <context>
@@ -6903,17 +6966,17 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="newsessiondialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="newsessiondialog.ui" line="20"/>
         <source>Enter the name of the session:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte název nového sezení:</translation>
     </message>
     <message>
         <location filename="sessiondialog.cpp" line="323"/>
         <source>New session...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nové sezení...</translation>
     </message>
 </context>
 <context>
@@ -6921,48 +6984,48 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="sessiondialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="sessiondialog.ui" line="40"/>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nový</translation>
+        <translation>&amp;Nový</translation>
     </message>
     <message>
         <location filename="sessiondialog.ui" line="53"/>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Přejmenovat</translation>
     </message>
     <message>
         <location filename="sessiondialog.ui" line="66"/>
         <source>&amp;Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Klonovat</translation>
     </message>
     <message>
         <location filename="sessiondialog.ui" line="79"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Smazat</translation>
+        <translation>&amp;Smazat</translation>
     </message>
     <message>
         <location filename="sessiondialog.ui" line="92"/>
         <source>&amp;Switch to</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Přepnout na</translation>
     </message>
     <message>
         <location filename="sessiondialog.ui" line="122"/>
         <source>Restore last session on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit poslední sezení při spuštění</translation>
     </message>
     <message>
         <location filename="sessiondialog.cpp" line="31"/>
         <source>Session manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce sezení</translation>
     </message>
     <message>
         <location filename="sessiondialog.cpp" line="94"/>
         <location filename="sessiondialog.cpp" line="141"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí</translation>
     </message>
 </context>
 <context>
@@ -6970,123 +7033,123 @@ File server option is not enabled in serial port settings</source>
     <message>
         <location filename="swapaxesdialog.ui" line="20"/>
         <source>Swap/modify axes</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohodit/Změnit osy</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="64"/>
         <location filename="swapaxesdialog.ui" line="130"/>
         <source>X</source>
-        <translation type="unfinished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="69"/>
         <location filename="swapaxesdialog.ui" line="135"/>
         <source>Y</source>
-        <translation type="unfinished">Y</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="74"/>
         <location filename="swapaxesdialog.ui" line="140"/>
         <source>Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="79"/>
         <location filename="swapaxesdialog.ui" line="145"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="84"/>
         <location filename="swapaxesdialog.ui" line="150"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="89"/>
         <location filename="swapaxesdialog.ui" line="155"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="94"/>
         <location filename="swapaxesdialog.ui" line="160"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="99"/>
         <location filename="swapaxesdialog.ui" line="165"/>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="104"/>
         <location filename="swapaxesdialog.ui" line="170"/>
         <source>V</source>
-        <translation type="unfinished"></translation>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="109"/>
         <location filename="swapaxesdialog.ui" line="175"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="196"/>
         <source>Min:</source>
-        <translation type="unfinished"></translation>
+        <translation>Min:</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="203"/>
         <source>Swap: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vyměnit:</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="210"/>
         <source>Max:</source>
         <oldsource>Max</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Max:</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="267"/>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Na:</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="278"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="283"/>
         <source>Subtract</source>
-        <translation type="unfinished"></translation>
+        <translation>Odečíst</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="288"/>
         <source>Multiply</source>
-        <translation type="unfinished"></translation>
+        <translation>Násobit</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="293"/>
         <source>Divide</source>
-        <translation type="unfinished"></translation>
+        <translation>Dělit</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="326"/>
         <source>Between</source>
-        <translation type="unfinished"></translation>
+        <translation>Mezi</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="333"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit</translation>
     </message>
     <message>
         <location filename="swapaxesdialog.ui" line="370"/>
         <source>Remember the values at closing</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapamatovat si hodnoty při zavření</translation>
     </message>
 </context>
 </TS>
