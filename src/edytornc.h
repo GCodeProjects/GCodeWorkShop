@@ -170,6 +170,8 @@ private slots:
     void deleteFromClipboardButtonClicked();
     void clipboardTreeViewContextMenu(const QPoint &point);
     void doShowInLineCalc();
+    void watchFile(const QString& fileName, bool add);
+
 signals:
     void needToShow();
 
@@ -351,11 +353,11 @@ private:
     QComboBox *configBox;
 
     QStringList selectedExpressions;
-    QFileSystemWatcher *fileChangeMonitor;
+
 
     QPointer<CommApp> commApp;
 
-
+    QPointer<QFileSystemWatcher> fileChangeMonitor;
 
 
 };

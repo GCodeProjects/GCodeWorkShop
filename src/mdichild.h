@@ -98,7 +98,7 @@ public:
     bool isRedoAvailable();
     bool overwriteMode();
     QTextCursor textCursor();
-    void setFileChangeMonitor(QFileSystemWatcher *monitor);
+//    void setFileChangeMonitor(QFileSystemWatcher *monitor);
 
 public slots :
     void showInLineCalc();
@@ -123,7 +123,6 @@ private:
     void fileChangeMonitorRemovePath(QString fileName);
 
 
-
     QString curFileInfo;
     QString curFile;
     QString saveFileFilter;
@@ -136,7 +135,7 @@ private:
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
     QList<QTextEdit::ExtraSelection> blockExtraSelections;
-    QFileSystemWatcher *fileChangeMonitor;
+    //QPointer<QFileSystemWatcher> fileChangeMonitor; //QFileSystemWatcher *fileChangeMonitor;
     QPointer<QLineEdit> calcLineEdit;
     QStringList calcLineEditWordList;
     QChar inLineCalcChar;
@@ -158,6 +157,7 @@ private slots :
     void inLineCalcReturnPressed();
 signals:
     void message(const QString&, int );
+    void addRemoveFileWatch(const QString&, bool );
 
 };
 

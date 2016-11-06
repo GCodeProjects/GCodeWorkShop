@@ -48,7 +48,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
    textEdit->viewport()->installEventFilter(this);
    setWindowIcon(QIcon(":/images/ncfile.png"));
 
-   fileChangeMonitor = NULL;
+   //fileChangeMonitor.clear();
 
    splitterH->setBackgroundRole(QPalette::Base);
    marginWidget->setBackgroundRole(QPalette::Base);
@@ -290,7 +290,7 @@ bool MdiChild::saveAs()
 
     };
 
-    fileChangeMonitor->removePath(fileName);
+    fileChangeMonitorRemovePath(fileName);
     return saveFile(file);
 
 }
@@ -4152,10 +4152,10 @@ QString MdiChild::currentFile()
 //
 //**************************************************************************************************
 
-void MdiChild::setFileChangeMonitor(QFileSystemWatcher *monitor)
-{
-    fileChangeMonitor = monitor;
-}
+//void MdiChild::setFileChangeMonitor(QFileSystemWatcher *monitor)
+//{
+//    fileChangeMonitor = monitor;
+//}
 
 //**************************************************************************************************
 //
@@ -4163,8 +4163,11 @@ void MdiChild::setFileChangeMonitor(QFileSystemWatcher *monitor)
 
 void MdiChild::fileChangeMonitorAddPath(QString fileName)
 {
-    if(fileChangeMonitor > NULL)
-        fileChangeMonitor->addPath(fileName);
+    //if(fileChangeMonitor > NULL)
+        //fileChangeMonitor->addPath(fileName);
+
+    emit addRemoveFileWatch(fileName, true);
+
 }
 
 //**************************************************************************************************
@@ -4173,8 +4176,10 @@ void MdiChild::fileChangeMonitorAddPath(QString fileName)
 
 void MdiChild::fileChangeMonitorRemovePath(QString fileName)
 {
-    if(fileChangeMonitor > NULL)
-        fileChangeMonitor->removePath(fileName);
+    //if(fileChangeMonitor > NULL)
+        //fileChangeMonitor->removePath(fileName);
+
+    emit addRemoveFileWatch(fileName, false);
 }
 
 //**************************************************************************************************
