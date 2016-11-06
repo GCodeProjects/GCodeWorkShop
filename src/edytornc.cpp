@@ -25,8 +25,8 @@
 #include "tooltips.h"
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrintPreviewDialog>
-//#include <QtSerialPort/QSerialPort>
+#include <QPrintPreviewDialog>
+#include <QtSerialPort/QtSerialPort>
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
@@ -97,15 +97,7 @@ EdytorNc::EdytorNc()
 
     createFileBrowseTabs();
 
-    if(defaultMdiWindowProperites.disableFileChangeMonitor)
-    {
-        fileChangeMonitor = NULL;
-    }
-    else
-    {
-        fileChangeMonitor = new QFileSystemWatcher(this);
-        connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this, SLOT(fileChanged(const QString)));
-    };
+
 
 
     setWindowTitle(tr("EdytorNC"));
@@ -1726,7 +1718,7 @@ MdiChild *EdytorNc::createMdiChild()
 {
     MdiChild *child = new MdiChild();
     mdiArea->addSubWindow(child);
-    child->setFileChangeMonitor(fileChangeMonitor);
+//    child->setFileChangeMonitor(fileChangeMonitor);
 
     connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
@@ -1734,7 +1726,7 @@ MdiChild *EdytorNc::createMdiChild()
     connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
     connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
     connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(showMessage(const QString&, int)));
-
+    connect(child, SIGNAL(addRemoveFileWatch(const QString&, bool)), this, SLOT(watchFile(const QString&, bool)));
 
 //    connect(child->textEdit, SIGNAL(copyAvailable(bool)), this, SLOT(updateMenus()));
 //    connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
@@ -2350,6 +2342,17 @@ void EdytorNc::readSettings()
     if(settings.value("FindToolBarShown", false).toBool())
         createFindToolBar();
 
+    defaultMdiWindowProperites.disableFileChangeMonitor = settings.value("DisableFileChangeMonitor", false).toBool();
+    if(defaultMdiWindowProperites.disableFileChangeMonitor)
+    {
+        fileChangeMonitor.clear();
+    }
+    else
+    {
+        fileChangeMonitor = new QFileSystemWatcher(this);
+        connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this, SLOT(fileChanged(const QString)));
+    };
+
     restoreState(settings.value("State", QByteArray()).toByteArray());
 
     lastDir = settings.value("LastDir",  QDir::homePath()).toString();
@@ -2376,7 +2379,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.clearUnderlineHistory = settings.value("ClearUnderline", false).toBool();
     defaultMdiWindowProperites.editorToolTips = settings.value("EditorToolTips", true).toBool();
     defaultMdiWindowProperites.startEmpty = settings.value("StartEmpty", false).toBool();
-    defaultMdiWindowProperites.disableFileChangeMonitor = settings.value("DisableFileChangeMonitor", false).toBool();
+
 
     defaultMdiWindowProperites.lineColor = settings.value("LineColor", 0xFEFFB6).toInt();
     defaultMdiWindowProperites.underlineColor = settings.value("UnderlineColor", 0x00FF00).toInt();
@@ -4967,6 +4970,26 @@ void EdytorNc::doShowInLineCalc()
 //**************************************************************************************************
 
 
+void EdytorNc::watchFile(const QString& fileName, bool add)
+{
+    if(fileChangeMonitor)
+    {
 
+        bool exists = fileChangeMonitor->files().contains(fileName);
 
+        if(add)
+        {
+            if(!exists)
+                fileChangeMonitor->addPath(fileName);
+        }
+        else
+        {
+            if(exists)
+                fileChangeMonitor->removePath(fileName);
+        };
+    };
+}
 
+//**************************************************************************************************
+//
+//**************************************************************************************************

@@ -41,7 +41,6 @@ win32:LIBS             += -lsetupapi -ladvapi32 -luser32
 linux*:DEFINES += __linux__
 
 
-
 #EdytorNC
 
 SOURCES += edytornc.cpp \
@@ -111,7 +110,6 @@ HEADERS += edytornc.h \
     filechecker.h
 TEMPLATE = app
 CONFIG += warn_on \
-    thread \
     qt
 #CONFIG += CONSOLE
 #CONFIG += release
@@ -182,7 +180,7 @@ macx:LIBS += -framework IOKit -framework CoreFoundation
 win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
 win32:LIBS += -lsetupapi
 win32:TARGET = ../bin/edytornc
-VERSION = 2015.11
+VERSION = 2016.11
 
 SUBDIRS += \
     src_sfs.pro
