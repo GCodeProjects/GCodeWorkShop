@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2015 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2018 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -1466,8 +1466,8 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2016-04-18 BETA" +
-                       trUtf8("<P>Copyright (C) 1998 - 2016 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
+                       trUtf8("<P>Version: ") + "2018-04-18 BETA" +
+                       trUtf8("<P>Copyright (C) 1998 - 2018 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
                        trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
                        trUtf8("<br />Czech translation thanks to Pavel Fric") +
@@ -4261,7 +4261,7 @@ void EdytorNc::doSwapAxes()
 {
     QString first, second;
     double min, max, modi;
-    int oper;
+    int oper, prec;
     bool ignoreComments = true;
     QTextDocument::FindFlags findOptions = 0; //QTextDocument::FindWholeWords;
 
@@ -4282,8 +4282,9 @@ void EdytorNc::doSwapAxes()
             max = swapDialog->getMaxValue();
             oper = swapDialog->getOperator();
             modi = swapDialog->getModiferValue();
+            prec = swapDialog->getPrecision();
 
-            editorWindow->doSwapAxes(first, second, min, max, oper, modi, findOptions, ignoreComments);
+            editorWindow->doSwapAxes(first, second, min, max, oper, modi, findOptions, ignoreComments, prec);
         };
 
         delete(swapDialog);
