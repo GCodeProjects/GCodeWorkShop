@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2015 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2018 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -38,7 +38,7 @@ class swapAxesDialog;
 class swapAxesDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
     explicit swapAxesDialog(QWidget *parent = 0);
     ~swapAxesDialog();
@@ -46,13 +46,14 @@ public:
     double getMinValue();
     double getMaxValue();
     double getModiferValue();
+    int getPrecision();
     int getOperator();
     QString getFirstAxis();
     QString getSecondAxis();
     int exec();
 
 
-    
+
 private:
     Ui::swapAxesDialog *ui;
 
@@ -62,6 +63,7 @@ private slots:
     void saveSettings();
     void betweenCheckBoxClicked(bool checked);
     void modifyCheckBoxClicked(bool checked);
+    void precisionSpinBoxChanded(int val);
 
 
 

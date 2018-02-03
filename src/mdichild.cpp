@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2015 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2018 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -3699,7 +3699,7 @@ bool MdiChild::replaceAll(QString textToFind, QString replacedText, QTextDocumen
 //**************************************************************************************************
 
 bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, double max,
-                        int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments)
+                        int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments, int prec)
 {
     double val, val1;
     QRegExp regExp;
@@ -3833,12 +3833,12 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
             {
                 if(replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N" || replacedText == "n")
                 {
-                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
                     if(newText[newText.length() - 1] == '.')
                         newText = newText.remove((newText.length() - 1), 1);
                 }
                 else
-                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
             }
             else
             {
@@ -3887,7 +3887,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 //**************************************************************************************************
 
 void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, double max,
-                          int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments)
+                          int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments, int precision)
 {
 
     if(textEdit->isReadOnly())
@@ -3901,12 +3901,12 @@ void MdiChild::doSwapAxes(QString textToFind, QString replacedText, double min, 
 
     if(textToFind != replacedText)
     {
-        swapAxes(replacedText, QString("~%1").arg(replacedText), min, max, -1, modifier, options, ignoreComments);
-        swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
-        swapAxes(QString("~%1").arg(replacedText), textToFind, -999999, 0, -1, 0, options, ignoreComments);
+        swapAxes(replacedText, QString("~%1").arg(replacedText), min, max, -1, modifier, options, ignoreComments, precision);
+        swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments, precision);
+        swapAxes(QString("~%1").arg(replacedText), textToFind, -999999, 0, -1, 0, options, ignoreComments, precision);
     }
     else
-        swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments);
+        swapAxes(textToFind, replacedText, min, max, oper, modifier, options, ignoreComments, precision);
 
     startCursor.movePosition(QTextCursor::StartOfLine);
     startCursor.endEditBlock();

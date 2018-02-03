@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2015 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2018 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -86,8 +86,8 @@ public:
     bool findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments);
     bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
     bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
-    bool swapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments);
-    void doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments);
+    bool swapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments, int prec);
+    void doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments, int precision);
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
     void filePrintPreview();
     bool isModified();

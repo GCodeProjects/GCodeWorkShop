@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2006-2015 by Artur Kozioł                               *
+ *   Copyright (C) 2006-2018 by Artur Kozioł                               *
  *   artkoz78@gmail.com                                                    *
  *                                                                         *
  *   This file is part of EdytorNC.                                        *
@@ -67,6 +67,7 @@ swapAxesDialog::swapAxesDialog(QWidget *parent) :
 
 
         ui->operatorComboBox->setCurrentIndex(settings.value("OperatorComboIndex", 0).toInt(&ok));
+        ui->precisionSpinBox->setValue(settings.value("Precision", 3).toInt(&ok));
     };
 
     settings.endGroup();
@@ -81,6 +82,8 @@ swapAxesDialog::swapAxesDialog(QWidget *parent) :
 
     connect(ui->betweenCheckBox, SIGNAL(clicked(bool)), this, SLOT(betweenCheckBoxClicked(bool)));
     connect(ui->modifyCheckBox, SIGNAL(clicked(bool)), this, SLOT(modifyCheckBoxClicked(bool)));
+
+    connect(ui->precisionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(precisionSpinBoxChanded(int)));
 
 
     connect(this, SIGNAL(accepted()), this, SLOT(saveSettings()));
@@ -145,6 +148,8 @@ void swapAxesDialog::saveSettings()
         settings.setValue("Max", ui->maxDoubleSpinBox->value());
         settings.setValue("Modifer", ui->modiferDoubleSpinBox->value());
 
+        settings.setValue("Precision", ui->precisionSpinBox->value());
+
         settings.setValue("OperatorComboIndex", ui->operatorComboBox->currentIndex());
 
     };
@@ -161,6 +166,15 @@ void swapAxesDialog::betweenCheckBoxClicked(bool checked)
 {
     ui->minDoubleSpinBox->setEnabled(checked);
     ui->maxDoubleSpinBox->setEnabled(checked);
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+void swapAxesDialog::precisionSpinBoxChanded(int val)
+{
+
 }
 
 //**************************************************************************************************
@@ -211,6 +225,19 @@ double swapAxesDialog::getModiferValue()
 
     if(ui->modiferDoubleSpinBox->isEnabled())
         val = ui->modiferDoubleSpinBox->value();
+
+    return val;
+}
+
+//**************************************************************************************************
+//
+//**************************************************************************************************
+
+int swapAxesDialog::getPrecision()
+{
+    int val = 0;
+
+    val = ui->precisionSpinBox->value();
 
     return val;
 }
