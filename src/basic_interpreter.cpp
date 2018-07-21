@@ -532,7 +532,7 @@ char *BasicInterpreter::find_label(char *s)
 
    for(t = 0; t < NUM_LAB; ++t)
       if(!strcmp(label_table[t].name,s)) return label_table[t].p;
-   return '\0'; /* error condition */
+   return nullptr; /* error condition */
 }
 
 //**************************************************************************************************
@@ -548,7 +548,7 @@ void BasicInterpreter::exec_goto()
    get_token(); /* get label to go to */
    /* find the location of the label */
    loc = find_label(token);
-   if(loc == '\0')
+   if(loc == nullptr)
       serror(7); /* label not defined */
 
    else prog = loc;  /* start program running at that loc */
@@ -685,7 +685,7 @@ void BasicInterpreter::gosub()
    get_token();
    /* find the label to call */
    loc = find_label(token);
-   if(loc == '\0')
+   if(loc == nullptr)
       serror(7); /* label not defined */
    else
    {
