@@ -40,6 +40,7 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
 
    baudGroup = new QButtonGroup(this);
    baudGroup->setExclusive(true);
+   baudGroup->addButton(b1CheckBox, 300);
    baudGroup->addButton(b3CheckBox, QSerialPort::Baud1200);
    baudGroup->addButton(b4CheckBox, QSerialPort::Baud2400);
    baudGroup->addButton(b5CheckBox, QSerialPort::Baud4800);
@@ -426,6 +427,8 @@ void SerialPortConfigDialog::changeSettings()
     id = settings.value("BaudRate", QSerialPort::Baud9600).toInt();
     switch(id)
     {
+           case 300   : b1CheckBox->setChecked(true);
+                break;
            case QSerialPort::Baud1200   : b3CheckBox->setChecked(true);
                 break;
            case QSerialPort::Baud2400   : b4CheckBox->setChecked(true);
