@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>756</width>
+    <width>868</width>
     <height>613</height>
    </rect>
   </property>
@@ -278,40 +278,40 @@
             <property name="rightMargin">
              <number>3</number>
             </property>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="b11CheckBox">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="b1CheckBox">
               <property name="text">
-               <string>115200</string>
+               <string>300</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="b9CheckBox">
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="b2CheckBox">
               <property name="text">
-               <string>57600</string>
+               <string>600</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="b8CheckBox">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="b4CheckBox">
               <property name="text">
-               <string>38400</string>
+               <string>2400</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="b7CheckBox">
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="b3CheckBox">
               <property name="text">
-               <string>19200</string>
+               <string>1200</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
@@ -319,6 +319,16 @@
              </widget>
             </item>
             <item row="1" column="1">
+             <widget class="QCheckBox" name="b5CheckBox">
+              <property name="text">
+               <string>4800</string>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
              <widget class="QCheckBox" name="b6CheckBox">
               <property name="text">
                <string>9600</string>
@@ -331,40 +341,40 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="b5CheckBox">
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="b7CheckBox">
               <property name="text">
-               <string>4800</string>
+               <string>19200</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="b4CheckBox">
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="b8CheckBox">
               <property name="text">
-               <string>2400</string>
+               <string>38400</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="b3CheckBox">
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="b9CheckBox">
               <property name="text">
-               <string>1200</string>
+               <string>57600</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="b1CheckBox">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="b11CheckBox">
               <property name="text">
-               <string>300</string>
+               <string>115200</string>
               </property>
               <property name="autoExclusive">
                <bool>true</bool>
