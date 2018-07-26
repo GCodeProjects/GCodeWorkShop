@@ -1466,21 +1466,21 @@ void EdytorNc::about()
 {
     QMessageBox::about(this, trUtf8("About EdytorNC"),
                        trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2018-07-22 BETA" +
+                       trUtf8("<P>Version: ") + "2018-07-26 BETA" +
                        trUtf8("<P>Copyright (C) 1998 - 2018 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>") +
-                       trUtf8("<P>Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
+                       trUtf8("<P>Spanish translation, fixes and other help thanks to Otto Huamani") +
+                       trUtf8("<br />Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
                        trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
                        trUtf8("<br />Czech translation thanks to Pavel Fric") +
                        trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
-                       trUtf8("<br />Spanish translation and other fixes thanks to Otto Huamani") +
                        trUtf8("<br />Dutch translation thanks to Henk van Andel") +
                        trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
                        trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
                        trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>") +
                        trUtf8("<P><a href=\"https://plus.google.com/communities/117267107585407507443/\">EdytorNC Google Plus Community</a>") +
                        trUtf8("<P>") +
-                       trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
-                       trUtf8("<P>") +
+//                       trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
+//                       trUtf8("<P>") +
                        trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
                        trUtf8("<P>") +
                        trUtf8("<P><i>EdytorNC is free software; you can redistribute it and/or modify"
