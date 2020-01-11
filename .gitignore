@@ -1,0 +1,10 @@
+
+bin/
+build/
+
+/edytornc.pro.user
+*.autosave
+
+/Makefile
+/src/Makefile
+/src/Makefile.src

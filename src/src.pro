@@ -1,45 +1,18 @@
 
-##qextserialport
+include(../common.pri)
 
-INCLUDEPATH += $$PWD
-DEPENDPATH += $$PWD
+TEMPLATE = app
+DESTDIR = $${BIN_PATH}/
+TARGET = edytornc
 
-#PUBLIC_HEADERS         += $$PWD/qextserialport.h \
-#                          $$PWD/qextserialenumerator.h \
-#                          $$PWD/qextserialport_global.h
+VERSION = 2018.07
 
-#HEADERS                += $$PUBLIC_HEADERS \
-#                          $$PWD/qextserialport_p.h \
-#                          $$PWD/qextserialenumerator_p.h \
+CONFIG += qt
 
-
-#SOURCES                += $$PWD/qextserialport.cpp \
-#                          $$PWD/qextserialenumerator.cpp \
-
-#unix {
-#    SOURCES            += $$PWD/qextserialport_unix.cpp
-#    linux* {
-#        SOURCES        += $$PWD/qextserialenumerator_linux.cpp
-#    } else:macx {
-#        SOURCES        += $$PWD/qextserialenumerator_osx.cpp
-#    } else {
-#        SOURCES        += $$PWD/qextserialenumerator_unix.cpp
-#    }
-#}
-#win32:SOURCES          += $$PWD/qextserialport_win.cpp \
-#                          $$PWD/qextserialenumerator_win.cpp
-
-#linux*{
-#    !qesp_linux_udev:DEFINES += QESP_NO_UDEV
-#    qesp_linux_udev: LIBS += -ludev
-#}
-
-macx:LIBS              += -framework IOKit -framework CoreFoundation
-win32:LIBS             += -lsetupapi -ladvapi32 -luser32
+QT *= widgets printsupport serialport network
 
 # moc doesn't detect Q_OS_LINUX correctly, so add this to make it work
 linux*:DEFINES += __linux__
-
 
 #EdytorNC
 
@@ -77,6 +50,7 @@ SOURCES += edytornc.cpp \
     commapp.cpp \
     serialportcfghelpdialog.cpp \
     filechecker.cpp
+
 HEADERS += edytornc.h \
     highlighter.h \
     mdichild.h \
@@ -108,17 +82,7 @@ HEADERS += edytornc.h \
     commapp.h \
     serialportcfghelpdialog.h \
     filechecker.h
-TEMPLATE = app
-CONFIG += warn_on \
-    qt
-#CONFIG += CONSOLE
-#CONFIG += release
-QT *= network
-QT += widgets
-QT += printsupport
-QT += serialport
-RESOURCES = application.qrc
-RC_FILE = edytornc.rc
+
 FORMS += i2mdialog.ui \
     feedsdialog.ui \
     renumberdialog.ui \
@@ -143,44 +107,53 @@ FORMS += i2mdialog.ui \
     commapp.ui \
     serialportcfghelpdialog.ui \
     filechecker.ui
-#TRANSLATIONS = edytornc_pl.ts \
-#    edytornc_ca.ts \
-#    edytornc_de.ts \
-#    edytornc_fi.ts \
-#    edytornc_cs_CZ.ts \
-#    edytornc_es.ts
-OBJECTS_DIR = build/obj
-MOC_DIR = build/moc
-unix:update.commands = lupdate src.pro
-unix:update.depends = $$SOURCES $$HEADERS $$FORMS $$TRANSLATIONS
-unix:release.commands = lrelease src.pro
-unix:release.depends = update
-unix:translate.path = $${PREFIX}/share/edytornc/lang/
-unix:translate.files = ./*.qm
-unix:translate.depends = release
-unix:examples.files = ../EXAMPLES/*
-unix:examples.path = $${PREFIX}/share/edytornc/EXAMPLES
-unix:doc.files = ../ReadMe
-unix:doc.path = $${PREFIX}/share/doc/edytornc/
-unix:QMAKE_EXTRA_TARGETS += update release translate
-unix:TARGET = edytornc
-unix:UNAME = $$system(uname -a)
-unix:contains( UNAME, x86_64 ):TARGET = ../bin/x86_64/edytornc
-unix:target.path = $${PREFIX}/bin
-unix:mime.path = $${PREFIX}/share/mime/packages/
-unix:mime.files = application-x-g-code.xml
-unix:desktop.path = $${PREFIX}/share/applications/
-unix:desktop.files = edytornc.desktop
-unix:mimetypes.path = $${PREFIX}/share/icons/hicolor/32x32/mimetypes/
-unix:mimetypes.files = images/application-x-g-code.png
-unix:icon.path = $${PREFIX}/share/icons/hicolor/48x48/apps/
-unix:icon.files = images/edytornc.png
-unix:INSTALLS += target translate mime desktop mimetypes icon examples doc
-macx:LIBS += -framework IOKit -framework CoreFoundation
-win32:DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
-win32:LIBS += -lsetupapi
-win32:TARGET = ../bin/edytornc
-VERSION = 2018.07
 
-SUBDIRS += \
-    src_sfs.pro
+TRANSLATIONS = edytornc_pl.ts \
+    edytornc_ca.ts \
+    edytornc_de.ts \
+    edytornc_fi.ts \
+    edytornc_cs_CZ.ts \
+    edytornc_es.ts
+
+RESOURCES = application.qrc
+RC_FILE = edytornc.rc
+
+QMAKE_EXTRA_TARGETS += update debug release translate
+
+update.commands = lupdate src.pro
+update.depends = $$SOURCES $$HEADERS $$FORMS $$TRANSLATIONS
+release.commands = lrelease src.pro
+release.depends = update
+debug.commands = lrelease src.pro
+debug.depends = update
+translate.path = $${PREFIX}/share/edytornc/lang/
+translate.files = ./*.qm
+translate.depends = release
+examples.files = ../examples/*
+doc.files = ../README.md
+
+unix {
+    mime.files = ../install/linux/application-x-g-code.xml
+    mimetypes.files = ../install/images/application-x-g-code.png
+    desktop.files = ../install/linux/edytornc.desktop
+    icon.files = ../install/linux/images/edytornc.png
+    examples.path = $${PREFIX}/share/edytornc/examples
+    doc.path = $${PREFIX}/share/doc/edytornc/
+    UNAME = $$system(uname -a)
+    contains( UNAME, x86_64 ):TARGET = ../bin/x86_64/edytornc
+    target.path = $${PREFIX}/bin
+    mime.path = $${PREFIX}/share/mime/packages/
+    desktop.path = $${PREFIX}/share/applications/
+    mimetypes.path = $${PREFIX}/share/icons/hicolor/32x32/mimetypes/
+    icon.path = $${PREFIX}/share/icons/hicolor/48x48/apps/
+    INSTALLS += target translate mime desktop mimetypes icon examples doc
+}
+
+macx {
+    LIBS += -framework IOKit -framework CoreFoundation
+}
+
+win32 {
+    DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
+    LIBS += -lsetupapi -ladvapi32 -luser32
+}
