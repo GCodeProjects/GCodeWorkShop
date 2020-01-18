@@ -20,78 +20,79 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
-#include "edytornc.h"
 #include "qtsingleapplication.h"
 
-//#include <QMessageBox>
+#include "edytornc.h"
 
 
 #define LOCALE_PATH         "/usr/share/edytornc/lang/"
 
-
-
-
 int main(int argc, char *argv[])
-{   
-   bool argProccesed;
+{
+    bool argProccesed;
 
-   Q_INIT_RESOURCE(application);
-   QtSingleApplication app("EdytorNC", argc, argv);
+    Q_INIT_RESOURCE(application);
+    QtSingleApplication app("EdytorNC", argc, argv);
 
-   QString txMessage;
-   for(int i = 1; i < argc; ++i)
-   {
-      txMessage += argv[i];
-      if(i < argc - 1)
-         txMessage += ";";
-   };
+    QString txMessage;
 
-   if(app.sendMessage(txMessage))
-      return 0;
+    for (int i = 1; i < argc; ++i) {
+        txMessage += argv[i];
 
-   QTranslator qtTranslator; // Try to load Qt translations from QLibraryInfo::TranslationsPath if this fails looks for translations in app dir.
-   if(!qtTranslator.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-      qtTranslator.load("qt_" + QLocale::system().name(), app.applicationDirPath());
-   app.installTranslator(&qtTranslator);
+        if (i < argc - 1) {
+            txMessage += ";";
+        }
+    }
 
-   QTranslator myappTranslator; // Try to load EdytorNC translations from LOCALE_PATH if this fails looks for translations in app dir.
-   if(!myappTranslator.load("edytornc_" + QLocale::system().name(), LOCALE_PATH))
-      myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
-   app.installTranslator(&myappTranslator);
+    if (app.sendMessage(txMessage)) {
+        return 0;
+    }
 
-   EdytorNc *mw = new EdytorNc();
+    QTranslator
+    qtTranslator; // Try to load Qt translations from QLibraryInfo::TranslationsPath if this fails looks for translations in app dir.
 
-   argProccesed = false;
-   if(argc >= 3)
-   {
-      if(QString(argv[1]).trimmed() == "-diff")
-      {  
-         mw->diffTwoFiles(QString(argv[2]).trimmed(), QString(argv[3]).trimmed());
-         argProccesed = true;
-      };
-   };
+    if (!qtTranslator.load("qt_" + QLocale::system().name(),
+                           QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+        qtTranslator.load("qt_" + QLocale::system().name(), app.applicationDirPath());
+    }
 
-   if(!argProccesed)
-   {
-      for(int i = 1; i < argc; ++i)
-      {
-         //qDebug() << argc << argv[i] << i;
-         mw->openFile(argv[i]);
-      };
-   };
+    app.installTranslator(&qtTranslator);
 
-   mw->show();
+    QTranslator
+    myappTranslator; // Try to load EdytorNC translations from LOCALE_PATH if this fails looks for translations in app dir.
 
-   app.setActivationWindow(mw, false);
+    if (!myappTranslator.load("edytornc_" + QLocale::system().name(), LOCALE_PATH)) {
+        myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
+    }
 
-   QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
-                    mw, SLOT(messReceived(const QString&)));
+    app.installTranslator(&myappTranslator);
 
-   QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
+    EdytorNc *mw = new EdytorNc();
 
-   return app.exec();
+    argProccesed = false;
 
+    if (argc >= 3) {
+        if (QString(argv[1]).trimmed() == "-diff") {
+            mw->diffTwoFiles(QString(argv[2]).trimmed(), QString(argv[3]).trimmed());
+            argProccesed = true;
+        }
+    }
+
+    if (!argProccesed) {
+        for (int i = 1; i < argc; ++i) {
+            //qDebug() << argc << argv[i] << i;
+            mw->openFile(argv[i]);
+        }
+    }
+
+    mw->show();
+
+    app.setActivationWindow(mw, false);
+
+    QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
+                     mw, SLOT(messReceived(const QString &)));
+
+    QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
+
+    return app.exec();
 }
-

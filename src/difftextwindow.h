@@ -18,153 +18,130 @@
 #ifndef DIFFTEXTWINDOW_H
 #define DIFFTEXTWINDOW_H
 
+#include <QWidget>
+
 #include "diff.h"
 #include "mergeresultwindow.h"
-
-#include <QWidget>
 
 class OptionDialog;
 class DiffTextWindowData;
 class DiffTextWindowFrame;
 
-
-//enum e_MergeDetails
-//{
-//   eDefault,
-//   eNoChange,
-//   eBChanged,
-//   eCChanged,
-//   eBCChanged,         // conflict
-//   eBCChangedAndEqual, // possible conflict
-//   eBDeleted,
-//   eCDeleted,
-//   eBCDeleted,         // possible conflict
-//
-//   eBChanged_CDeleted, // conflict
-//   eCChanged_BDeleted, // conflict
-//   eBAdded,
-//   eCAdded,
-//   eBCAdded,           // conflict
-//   eBCAddedAndEqual    // possible conflict
-//};
-
-
 class DiffTextWindow : public QWidget
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   DiffTextWindow(
-      DiffTextWindowFrame* pParent,
-      OptionDialog* pOptionDialog,
-      int winIdx
-      );
-   ~DiffTextWindow();
-   void init(
-      const QString& fileName,
-      QTextCodec* pCodec,
-      //e_LineEndStyle eLineEndStyle,
-      const LineData* pLineData,
-      int size,
-      const Diff3LineVector* pDiff3LineVector,
-      const ManualDiffHelpList* pManualDiffHelpList,
-      bool bTriple
-      );
-   void reset();
-   void convertToLinePos( int x, int y, int& line, int& pos );
+    DiffTextWindow(
+        DiffTextWindowFrame *pParent,
+        OptionDialog *pOptionDialog,
+        int winIdx
+    );
+    ~DiffTextWindow();
 
-   QString getSelection();
-   int getFirstLine();
-   int calcTopLineInFile( int firstLine );
+    void init(
+        const QString &fileName,
+        QTextCodec *pCodec,
+        //e_LineEndStyle eLineEndStyle,
+        const LineData *pLineData,
+        int size,
+        const Diff3LineVector *pDiff3LineVector,
+        const ManualDiffHelpList *pManualDiffHelpList,
+        bool bTriple
+    );
 
-   int getNofColumns();
-   int getNofLines();
-   int getNofVisibleLines();
-   int getNofVisibleColumns();
+    void reset();
+    void convertToLinePos(int x, int y, int &line, int &pos);
 
-   int convertLineToDiff3LineIdx( int line );
-   int convertDiff3LineIdxToLine( int d3lIdx );
+    QString getSelection();
+    int getFirstLine();
+    int calcTopLineInFile(int firstLine);
 
-   void convertD3LCoordsToLineCoords( int d3LIdx, int d3LPos, int& line, int& pos );
-   void convertLineCoordsToD3LCoords( int line, int pos, int& d3LIdx, int& d3LPos );
+    int getNofColumns();
+    int getNofLines();
+    int getNofVisibleLines();
+    int getNofVisibleColumns();
 
-   void convertSelectionToD3LCoords();
+    int convertLineToDiff3LineIdx(int line);
+    int convertDiff3LineIdxToLine(int d3lIdx);
 
-   bool findString( const QString& s, int& d3vLine, int& posInLine, bool bDirDown, bool bCaseSensitive );
-   void setSelection( int firstLine, int startPos, int lastLine, int endPos, int& l, int& p );
-   void getSelectionRange( int* firstLine, int* lastLine, e_CoordType coordType );
+    void convertD3LCoordsToLineCoords(int d3LIdx, int d3LPos, int &line, int &pos);
+    void convertLineCoordsToD3LCoords(int line, int pos, int &d3LIdx, int &d3LPos);
 
-   void setPaintingAllowed( bool bAllowPainting );
-   void recalcWordWrap( bool bWordWrap, int wrapLineVectorSize, int nofVisibleColumns );
-   void print( MyPainter& painter, const QRect& r, int firstLine, int nofLinesPerPage );
+    void convertSelectionToD3LCoords();
+
+    bool findString(const QString &s, int &d3vLine, int &posInLine, bool bDirDown,
+                    bool bCaseSensitive);
+    void setSelection(int firstLine, int startPos, int lastLine, int endPos, int &l, int &p);
+    void getSelectionRange(int *firstLine, int *lastLine, e_CoordType coordType);
+
+    void setPaintingAllowed(bool bAllowPainting);
+    void recalcWordWrap(bool bWordWrap, int wrapLineVectorSize, int nofVisibleColumns);
+    void print(MyPainter &painter, const QRect &r, int firstLine, int nofLinesPerPage);
+
 signals:
-   void resizeSignal( int nofVisibleColumns, int nofVisibleLines );
-   void scroll( int deltaX, int deltaY );
-   void newSelection();
-   void selectionEnd();
-   void setFastSelectorLine( int line );
-   void gotFocus();
-   void lineClicked(QString fileName, int line);
-   void showPopupMenu(const QPoint& point);
+    void resizeSignal(int nofVisibleColumns, int nofVisibleLines);
+    void scroll(int deltaX, int deltaY);
+    void newSelection();
+    void selectionEnd();
+    void setFastSelectorLine(int line);
+    void gotFocus();
+    void lineClicked(QString fileName, int line);
+    void showPopupMenu(const QPoint &point);
 
 public slots:
-   void setFirstLine( int line );
-   void setFirstColumn( int col );
-   void resetSelection();
-   void setFastSelectorRange( int line1, int nofLines );
+    void setFirstLine(int line);
+    void setFirstColumn(int col);
+    void resetSelection();
+    void setFastSelectorRange(int line1, int nofLines);
 
 protected:
-   virtual void mousePressEvent ( QMouseEvent * );
-   virtual void mouseReleaseEvent ( QMouseEvent * );
-   virtual void mouseMoveEvent ( QMouseEvent * );
-   virtual void mouseDoubleClickEvent ( QMouseEvent * e );
+    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent *);
+    virtual void mouseMoveEvent(QMouseEvent *);
+    virtual void mouseDoubleClickEvent(QMouseEvent *e);
 
-   virtual void paintEvent( QPaintEvent*  );
-   virtual void dragEnterEvent( QDragEnterEvent* e );
-   virtual void focusInEvent( QFocusEvent* e );
+    virtual void paintEvent(QPaintEvent *);
+    virtual void dragEnterEvent(QDragEnterEvent *e);
+    virtual void focusInEvent(QFocusEvent *e);
 
-   virtual void resizeEvent( QResizeEvent* );
-   virtual void timerEvent(QTimerEvent*);
+    virtual void resizeEvent(QResizeEvent *);
+    virtual void timerEvent(QTimerEvent *);
 
 private:
-   DiffTextWindowData* d;
-   void showStatusLine( int line );
-   friend class DiffTextWindowFrame;
-
+    DiffTextWindowData *d;
+    void showStatusLine(int line);
+    friend class DiffTextWindowFrame;
 };
-
 
 class DiffTextWindowFrameData;
 
 class DiffTextWindowFrame : public QWidget
 {
-   Q_OBJECT
+    Q_OBJECT
+
 public:
-   DiffTextWindowFrame( QWidget* pParent, OptionDialog* pOptionDialog, int winIdx, QStringList extensions);
-   ~DiffTextWindowFrame();
-   DiffTextWindow* getDiffTextWindow();
-   void init();
-   void setFirstLine(int firstLine);
+    DiffTextWindowFrame(QWidget *pParent, OptionDialog *pOptionDialog, int winIdx,
+                        QStringList extensions);
+    ~DiffTextWindowFrame();
+
+    DiffTextWindow *getDiffTextWindow();
+    void init();
+    void setFirstLine(int firstLine);
 
 signals:
-   void fileNameChanged(const QString&, int);
+    void fileNameChanged(const QString &, int);
 
 protected:
-   bool eventFilter( QObject*, QEvent* );
-   //void paintEvent(QPaintEvent*);
+    bool eventFilter(QObject *, QEvent *);
+    //void paintEvent(QPaintEvent*);
 
 private slots:
-   void slotReturnPressed();
-   void slotBrowseButtonClicked();
+    void slotReturnPressed();
+    void slotBrowseButtonClicked();
 
 private:
-   DiffTextWindowFrameData* d;
-   QStringList m_extensions;
-
+    DiffTextWindowFrameData *d;
+    QStringList m_extensions;
 };
 
-
-
-
-
-#endif
-
+#endif // DIFFTEXTWINDOW_H

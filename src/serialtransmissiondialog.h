@@ -20,7 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
 #ifndef SERIALTRANSMISSIONDIALOG_H
 #define SERIALTRANSMISSIONDIALOG_H
 
@@ -38,8 +37,10 @@ class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionD
     Q_OBJECT
 
 public:
-    SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog, bool mode = false);
+    SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog,
+                             bool mode = false);
     ~SerialTransmissionDialog();
+
     QStringList receiveData(QString configName);
     void sendData(QString dataToSend, QString configName);
     void startFileServer(QString configName);
@@ -51,13 +52,8 @@ public slots:
     bool wasCanceled();
     void portReset();
 
-
 protected:
     void closeEvent(QCloseEvent *event);
-
-signals :
-
-
 
 private slots:
     void cancelButtonClicked();
@@ -91,7 +87,6 @@ private:
     void procesSpecialCharacters(QString *text, QString *fileData);
     void resetTransmission(bool portRestart = false);
 
-
     QSerialPort serialPort;
     bool canceled;
     PortSettings portSettings;
@@ -105,8 +100,8 @@ private:
     unsigned int autoCloseCountner;
     unsigned int sendStartDelayCountner;
     //int autoCloseCountnerReloadValue;
-//    int fileServerDataTimeoutCountner;
-//    int fileServerDataTimeoutCountnerReloadValue;
+    //    int fileServerDataTimeoutCountner;
+    //    int fileServerDataTimeoutCountnerReloadValue;
     unsigned int sendTimeoutCountner;
     //int sendTimeoutCountnerReloadValue;
     unsigned int receiveTimeoutCountner;
@@ -121,7 +116,6 @@ private:
     QTimer *sendTimeoutTimer;
     QTimer *receiveTimeoutTimer;
     QTimer *reconnectTimer;
-
 };
 
 #endif // SERIALTRANSMISSIONDIALOG_H

@@ -1,0 +1,31 @@
+# astyle version 3.1
+
+--max-code-length=96
+
+# Indents
+--convert-tabs
+--indent=spaces=4
+--indent-col1-comments
+--max-instatement-indent=40
+--min-conditional-indent=2
+--indent-preproc-block
+--indent-preproc-define
+
+# Brace Style Options
+--style=kr
+--attach-namespaces
+--attach-closing-while      # not present in astyle v2.5
+--break-one-line-headers    # not present in astyle v2.5
+--add-braces
+
+# Empty Lines
+--break-blocks
+#--delete-empty-lines
+
+# White Space
+--pad-oper
+--pad-comma                 # not present in astyle v2.5
+--pad-header
+--unpad-paren
+
+--align-pointer=name

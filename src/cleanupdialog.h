@@ -20,16 +20,11 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-#include <QtWidgets>
-
-
-
 #ifndef CLEANUPDIALOG_H
 #define CLEANUPDIALOG_H
 
+#include <QtWidgets>
 #include <QDialog>
-
 
 
 namespace Ui {
@@ -39,15 +34,14 @@ class cleanUpDialog;
 class cleanUpDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
     explicit cleanUpDialog(QWidget *parent = 0);
     ~cleanUpDialog();
-    
+
     void setText(QString text);
     QStringList getSelectedExpressions();
     int exec(QStringList selList, QString text);
-
 
 private:
     Ui::cleanUpDialog *ui;
@@ -65,10 +59,6 @@ private:
     void highlightFindText(QRegExp exp);
     void newRow();
 
-
-
-
-
 private slots:
     void highlightText(int row, int col);
     void cellChangedSlot(int row, int col);
@@ -76,11 +66,6 @@ private slots:
     void okButtonClicked();
     void contextMenuReq(const QPoint &pos);
     void removeRow();
-
-
-
-
-
 };
 
 #endif // CLEANUPDIALOG_H

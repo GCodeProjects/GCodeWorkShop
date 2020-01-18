@@ -20,7 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
 #ifndef SESSIONDIALOG_H
 #define SESSIONDIALOG_H
 
@@ -28,84 +27,54 @@
 #include <QString>
 #include <QStringList>
 
-
 #include "ui_sessiondialog.h"
 #include "ui_newsessiondialog.h"
 
+
+/**
+ * @brief The sessionDialog class
+ */
 class sessionDialog: public QDialog, private Ui::sessionDialog
 {
-   Q_OBJECT
+    Q_OBJECT
 
-   public:
-     sessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-     ~sessionDialog();
+public:
+    sessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ~sessionDialog();
 
-     void setSelectedSession(QString name);
-     QString selectedSession();
-     QStringList sessionList();
-     void setSessionList(QStringList list);
+    void setSelectedSession(QString name);
+    QString selectedSession();
+    QStringList sessionList();
+    void setSessionList(QStringList list);
 
+private slots:
+    void newButtonClicked();
+    void renameButtonClicked();
+    void deleteButtonClicked();
+    void cloneButtonClicked();
+    void switchButtonClicked();
+    void sessionListItemitemActivated(QListWidgetItem *item);
 
-public slots:
-
-
-   protected:
-
-   signals :
-
-
-
-   private slots:
-     void newButtonClicked();
-     void renameButtonClicked();
-     void deleteButtonClicked();
-     void cloneButtonClicked();
-     void switchButtonClicked();
-     void sessionListItemitemActivated(QListWidgetItem *item);
-
-
-
-   private:
-     void clearChecked();
-     void copySession(QString oldName, QString newName, bool deleteOld = false);
-     void deleteSession(QString name);
-
-
+private:
+    void clearChecked();
+    void copySession(QString oldName, QString newName, bool deleteOld = false);
+    void deleteSession(QString name);
 };
 
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-
+/**
+ * @brief The newSessionDialog class
+ */
 class newSessionDialog: public QDialog, private Ui::newSessionDialog
 {
-   Q_OBJECT
+    Q_OBJECT
 
-   public:
-     newSessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-     ~newSessionDialog();
+public:
+    newSessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ~newSessionDialog();
 
-   public slots:
-     QString getName();
-     void setName(QString name);
-
-   protected:
-
-   signals :
-
-
-
-   private slots:
-
-
-
-   private:
-
-
-
+public slots:
+    QString getName();
+    void setName(QString name);
 };
-
 
 #endif // SESSIONDIALOG_H

@@ -21,12 +21,9 @@
 #ifndef OPTION_DIALOG_H
 #define OPTION_DIALOG_H
 
+#include <list>
 #include <QtWidgets>
 
-//#include <kpagedialog.h>
-#include <qstringlist.h>
-#include <list>
-//#include <kcmdlineargs.h>
 
 class OptionItem;
 class OptionCheckBox;
@@ -34,30 +31,29 @@ class OptionEncodingComboBox;
 class OptionLineEdit;
 class KKeyDialog;
 
-enum e_LineEndStyle
-{
-   eLineEndStyleUnix=0,
-   eLineEndStyleDos,
-   eLineEndStyleAutoDetect,
-   eLineEndStyleUndefined, // only one line exists
-   eLineEndStyleConflict,   // User must resolve manually
+enum e_LineEndStyle {
+    eLineEndStyleUnix = 0,
+    eLineEndStyleDos,
+    eLineEndStyleAutoDetect,
+    eLineEndStyleUndefined, // only one line exists
+    eLineEndStyleConflict,   // User must resolve manually
 };
 
 class OptionDialog : public QTabWidget
 {
-   Q_OBJECT
+    Q_OBJECT
 
 public:
-
     OptionDialog(QWidget *parent = 0);
-    ~OptionDialog( void );
-    QString parseOptions( const QStringList& optionList );
+    ~OptionDialog(void);
+
+    QString parseOptions(const QStringList &optionList);
     QString calcOptionHelp();
 
     // Some settings are not available in the option dialog:
     QSize  m_geometry;
     QPoint m_position;
-    bool   m_bMaximised; 
+    bool   m_bMaximised;
     bool   m_bShowToolBar;
     bool   m_bShowStatusBar;
     int    m_toolBarPos;
@@ -88,15 +84,15 @@ public:
     int  m_tabSize;
     bool m_bAutoCopySelection;
     bool m_bSameEncoding;
-    QTextCodec*  m_pEncodingA;
+    QTextCodec  *m_pEncodingA;
     bool m_bAutoDetectUnicodeA;
-    QTextCodec*  m_pEncodingB;
+    QTextCodec  *m_pEncodingB;
     bool m_bAutoDetectUnicodeB;
-    QTextCodec*  m_pEncodingC;
+    QTextCodec  *m_pEncodingC;
     bool m_bAutoDetectUnicodeC;
-    QTextCodec*  m_pEncodingOut;
+    QTextCodec  *m_pEncodingOut;
     bool m_bAutoSelectOutEncoding;
-    QTextCodec*  m_pEncodingPP;
+    QTextCodec  *m_pEncodingPP;
     int  m_lineEndStyle;
 
     bool m_bPreserveCarriageReturn;
@@ -169,40 +165,43 @@ public:
 
     void setState(); // Must be called before calling exec();
 
-    void addOptionItem(OptionItem*);
-    KKeyDialog* m_pKeyDialog;
+    void addOptionItem(OptionItem *);
+    KKeyDialog *m_pKeyDialog;
+
 protected slots:
-    virtual void slotDefault( void );
-    virtual void slotOk( void );
-    virtual void slotApply( void );
+    virtual void slotDefault(void);
+    virtual void slotOk(void);
+    virtual void slotApply(void);
 
     void slotEncodingChanged();
     void slotHistoryMergeRegExpTester();
     //void slotIntegrateWithClearCase();
     //void slotRemoveClearCaseIntegration();
+
 signals:
     void applyDone();
+
 private:
     void resetToDefaults();
 
-    std::list<OptionItem*> m_optionItemList;
+    std::list<OptionItem *> m_optionItemList;
 
-    OptionCheckBox* m_pSameEncoding;
-    OptionEncodingComboBox* m_pEncodingAComboBox;
-    OptionCheckBox* m_pAutoDetectUnicodeA;
-    OptionEncodingComboBox* m_pEncodingBComboBox;
-    OptionCheckBox* m_pAutoDetectUnicodeB;
-    OptionEncodingComboBox* m_pEncodingCComboBox;
-    OptionCheckBox* m_pAutoDetectUnicodeC;
-    OptionEncodingComboBox* m_pEncodingOutComboBox;
-    OptionCheckBox* m_pAutoSelectOutEncoding;
-    OptionEncodingComboBox* m_pEncodingPPComboBox;
-    OptionCheckBox* m_pHistoryAutoMerge;
-    OptionLineEdit* m_pAutoMergeRegExpLineEdit;
-    OptionLineEdit* m_pHistoryStartRegExpLineEdit;
-    OptionLineEdit* m_pHistoryEntryStartRegExpLineEdit;
-    OptionCheckBox* m_pHistoryMergeSorting;
-    OptionLineEdit* m_pHistorySortKeyOrderLineEdit;
+    OptionCheckBox *m_pSameEncoding;
+    OptionEncodingComboBox *m_pEncodingAComboBox;
+    OptionCheckBox *m_pAutoDetectUnicodeA;
+    OptionEncodingComboBox *m_pEncodingBComboBox;
+    OptionCheckBox *m_pAutoDetectUnicodeB;
+    OptionEncodingComboBox *m_pEncodingCComboBox;
+    OptionCheckBox *m_pAutoDetectUnicodeC;
+    OptionEncodingComboBox *m_pEncodingOutComboBox;
+    OptionCheckBox *m_pAutoSelectOutEncoding;
+    OptionEncodingComboBox *m_pEncodingPPComboBox;
+    OptionCheckBox *m_pHistoryAutoMerge;
+    OptionLineEdit *m_pAutoMergeRegExpLineEdit;
+    OptionLineEdit *m_pHistoryStartRegExpLineEdit;
+    OptionLineEdit *m_pHistoryEntryStartRegExpLineEdit;
+    OptionCheckBox *m_pHistoryMergeSorting;
+    OptionLineEdit *m_pHistorySortKeyOrderLineEdit;
 
 private:
     void setupFontPage();
@@ -217,14 +216,4 @@ private:
     void setupOtherOptions();
 };
 
-
-
-
-#endif
-
-
-
-
-
-
-
+#endif // OPTION_DIALOG_H

@@ -20,384 +20,327 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
 #include "serialtransmissiondialog.h"
-
 
 
 TransmissionDialog::TransmissionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
-   setupUi(this);
-   setAttribute(Qt::WA_DeleteOnClose);
-   setWindowTitle(tr("Serial transmission test"));
+    setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
+    setWindowTitle(tr("Serial transmission test"));
 
-   comPort = NULL;
+    comPort = NULL;
 
-   connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
+    connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
 
-   connect(clearButton, SIGNAL(clicked()), SLOT(clearButtonClicked()));
-   connect(configButton, SIGNAL(clicked()), SLOT(configButtonClicked()));
+    connect(clearButton, SIGNAL(clicked()), SLOT(clearButtonClicked()));
+    connect(configButton, SIGNAL(clicked()), SLOT(configButtonClicked()));
 
-   connect(connectButton, SIGNAL(toggled(bool)), SLOT(connectButtonToggled(bool)));
+    connect(connectButton, SIGNAL(toggled(bool)), SLOT(connectButtonToggled(bool)));
 
-   connect(setRtsButton, SIGNAL(clicked()), SLOT(setRtsButtonClicked()));
-   connect(setDtrButton, SIGNAL(clicked()), SLOT(setDtrButtonClicked()));
+    connect(setRtsButton, SIGNAL(clicked()), SLOT(setRtsButtonClicked()));
+    connect(setDtrButton, SIGNAL(clicked()), SLOT(setDtrButtonClicked()));
 
-   loadSerialConfignames();
-   changeSettings();
-   connect(configBox, SIGNAL(currentIndexChanged(int)), SLOT(changeSettings()));
+    loadSerialConfignames();
+    changeSettings();
+    connect(configBox, SIGNAL(currentIndexChanged(int)), SLOT(changeSettings()));
 
-   timer = new QTimer(this);
-   connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
 
-   connect(sendLineEdit, SIGNAL(returnPressed()), SLOT(sendTextEditChanged()));
+    connect(sendLineEdit, SIGNAL(returnPressed()), SLOT(sendTextEditChanged()));
 
-   connect(setXonButton, SIGNAL(clicked()), SLOT(setXonButtonClicked()));
-   connect(setXoffButton, SIGNAL(clicked()), SLOT(setXoffButtonClicked()));
-
-
-   connect(textEdit->verticalScrollBar(), SIGNAL(valueChanged(int)), SLOT(textEditScroll(int)));
-   connect(hexTextEdit->verticalScrollBar(), SIGNAL(valueChanged(int)), SLOT(hexTextEditScroll(int)));
+    connect(setXonButton, SIGNAL(clicked()), SLOT(setXonButtonClicked()));
+    connect(setXoffButton, SIGNAL(clicked()), SLOT(setXoffButtonClicked()));
 
 
+    connect(textEdit->verticalScrollBar(), SIGNAL(valueChanged(int)), SLOT(textEditScroll(int)));
+    connect(hexTextEdit->verticalScrollBar(), SIGNAL(valueChanged(int)),
+            SLOT(hexTextEditScroll(int)));
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 TransmissionDialog::~TransmissionDialog()
 {
-
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::textEditScroll(int pos)
 {
-   Q_UNUSED(pos);
-   hexTextEdit->verticalScrollBar()->setSliderPosition(textEdit->verticalScrollBar()->sliderPosition());
+    Q_UNUSED(pos);
+    hexTextEdit->verticalScrollBar()->setSliderPosition(
+        textEdit->verticalScrollBar()->sliderPosition());
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::hexTextEditScroll(int pos)
 {
-   Q_UNUSED(pos);
-   textEdit->verticalScrollBar()->setSliderPosition(hexTextEdit->verticalScrollBar()->sliderPosition());
+    Q_UNUSED(pos);
+    textEdit->verticalScrollBar()->setSliderPosition(
+        hexTextEdit->verticalScrollBar()->sliderPosition());
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::sendTextEditChanged()
 {
-   QString tx, ty;
-   int i;
+    QString tx, ty;
+    int i;
 
-   tx = sendLineEdit->text();
-   sendLineEdit->clear();
+    tx = sendLineEdit->text();
+    sendLineEdit->clear();
 
-   tx.append("\r\n");
+    tx.append("\r\n");
 
-   sendText(tx);
+    sendText(tx);
 
-   QTextCursor cr = textEdit->textCursor();
-   QTextCharFormat format = cr.charFormat();
-   format.setForeground(Qt::black);
-   cr.setCharFormat(format);
-   cr.insertText(tx);
-   textEdit->setTextCursor(cr);
+    QTextCursor cr = textEdit->textCursor();
+    QTextCharFormat format = cr.charFormat();
+    format.setForeground(Qt::black);
+    cr.setCharFormat(format);
+    cr.insertText(tx);
+    textEdit->setTextCursor(cr);
 
-   cr = hexTextEdit->textCursor();
-   format = cr.charFormat();
-   format.setForeground(Qt::black);
-   cr.setCharFormat(format);
-   for(i = 0; i < tx.size(); i++)
-   {
-      ty = QString("%1 ").arg((int)tx.at(i).toLatin1(), 2, 16, (QChar)'0');
+    cr = hexTextEdit->textCursor();
+    format = cr.charFormat();
+    format.setForeground(Qt::black);
+    cr.setCharFormat(format);
 
-      cr.insertText(ty);
-   };
-   hexTextEdit->setTextCursor(cr);
-   hexTextEdit->insertPlainText("\n");
+    for (i = 0; i < tx.size(); i++) {
+        ty = QString("%1 ").arg((int)tx.at(i).toLatin1(), 2, 16, (QChar)'0');
 
-   textEdit->ensureCursorVisible();
-   hexTextEdit->ensureCursorVisible();
+        cr.insertText(ty);
+    }
+
+    hexTextEdit->setTextCursor(cr);
+    hexTextEdit->insertPlainText("\n");
+
+    textEdit->ensureCursorVisible();
+    hexTextEdit->ensureCursorVisible();
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::closeButtonClicked()
 {
-   stop = true;
-   qApp->processEvents();
-   if(comPort != NULL)
-   {
-      //comPort->close();
-      //delete(comPort);
-   };
+    stop = true;
+    qApp->processEvents();
 
-   close();
+    if (comPort != NULL) {
+        //comPort->close();
+        //delete(comPort);
+    }
+
+    close();
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::clearButtonClicked()
 {
-   textEdit->clear();
-   hexTextEdit->clear();
-   sendLineEdit->clear();
+    textEdit->clear();
+    hexTextEdit->clear();
+    sendLineEdit->clear();
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::connectButtonToggled(bool tg)
 {
-   if(tg)
-   {
+    if (tg) {
 
-      connectButton->setIcon(QIcon(":/images/connect_established.png"));
-      connectButton->setText(tr("&Disconnect"));
+        connectButton->setIcon(QIcon(":/images/connect_established.png"));
+        connectButton->setText(tr("&Disconnect"));
 
-      textEdit->clear();
-      hexTextEdit->clear();
-      sendLineEdit->clear();
+        textEdit->clear();
+        hexTextEdit->clear();
+        sendLineEdit->clear();
 
-      count = 0;
+        count = 0;
 
-      if(comPort != NULL)
-      {
-         comPort->reset();
-         comPort->close();
-         delete comPort;
-      };
+        if (comPort != NULL) {
+            comPort->reset();
+            comPort->close();
+            delete comPort;
+        }
 
-      comPort = new QSerialPort(portName);
-      comPort->clearError();
-      comPort->setBaudRate(portSettings.BaudRate);
-      comPort->setDataBits(portSettings.DataBits);
-      comPort->setParity(portSettings.Parity);
-      comPort->setStopBits(portSettings.StopBits);
-      comPort->setFlowControl(portSettings.FlowControl);
-      if (!comPort->open(QIODevice::ReadWrite))
-      {
-          showError(comPort->error());
-          delete comPort;
-          comPort = NULL;
-          connectButton->setChecked(false);
-          return;
-      };
+        comPort = new QSerialPort(portName);
+        comPort->clearError();
+        comPort->setBaudRate(portSettings.BaudRate);
+        comPort->setDataBits(portSettings.DataBits);
+        comPort->setParity(portSettings.Parity);
+        comPort->setStopBits(portSettings.StopBits);
+        comPort->setFlowControl(portSettings.FlowControl);
 
-      comPort->clear(QSerialPort::AllDirections);
+        if (!comPort->open(QIODevice::ReadWrite)) {
+            showError(comPort->error());
+            delete comPort;
+            comPort = NULL;
+            connectButton->setChecked(false);
+            return;
+        }
 
-//      if(portSettings.FlowControl == FLOW_XONXOFF)
-//      {
-//         comPort->putChar(portSettings.Xon);
-//      };
+        comPort->clear(QSerialPort::AllDirections);
 
-      setDtrButton->setEnabled(true);
-      setDtrButton->setChecked(false);
-      setRtsButton->setEnabled(true);
-      setRtsButton->setChecked(false);
+        //      if(portSettings.FlowControl == FLOW_XONXOFF)
+        //      {
+        //         comPort->putChar(portSettings.Xon);
+        //      }
 
-      configBox->setEnabled(false);
-      configButton->setEnabled(false);
+        setDtrButton->setEnabled(true);
+        setDtrButton->setChecked(false);
+        setRtsButton->setEnabled(true);
+        setRtsButton->setChecked(false);
 
+        configBox->setEnabled(false);
+        configButton->setEnabled(false);
 
-      bool en = portSettings.FlowControl == QSerialPort::SoftwareControl;
-      setXonButton->setEnabled(en);
-      setXoffButton->setEnabled(en);
+        bool en = portSettings.FlowControl == QSerialPort::SoftwareControl;
+        setXonButton->setEnabled(en);
+        setXoffButton->setEnabled(en);
 
-      sendLineEdit->setReadOnly(false);
-      sendLineEdit->setFocus(Qt::MouseFocusReason);
+        sendLineEdit->setReadOnly(false);
+        sendLineEdit->setFocus(Qt::MouseFocusReason);
 
-      showError(comPort->error());
+        showError(comPort->error());
 
-      stop = false;
-      timer->start(20);
+        stop = false;
+        timer->start(20);
 
-   }
-   else
-   {
-      timer->stop();
-      //qApp->processEvents();
-      connectButton->setIcon(QIcon(":/images/connect_no.png"));
-      connectButton->setText(tr("&Connect"));
+    } else {
+        timer->stop();
+        //qApp->processEvents();
+        connectButton->setIcon(QIcon(":/images/connect_no.png"));
+        connectButton->setText(tr("&Connect"));
 
-      stop = true;
-      qApp->processEvents();
-      setDtrButton->setEnabled(false);
-      setRtsButton->setEnabled(false);
-      setXonButton->setEnabled(false);
-      setXoffButton->setEnabled(false);
+        stop = true;
+        qApp->processEvents();
+        setDtrButton->setEnabled(false);
+        setRtsButton->setEnabled(false);
+        setXonButton->setEnabled(false);
+        setXoffButton->setEnabled(false);
 
-      ctsLabel->setEnabled(false);
-      dsrLabel->setEnabled(false);
-      dcdLabel->setEnabled(false);
-      rtsLabel->setEnabled(false);
-      dtrLabel->setEnabled(false);
+        ctsLabel->setEnabled(false);
+        dsrLabel->setEnabled(false);
+        dcdLabel->setEnabled(false);
+        rtsLabel->setEnabled(false);
+        dtrLabel->setEnabled(false);
 
-      connectButton->setChecked(false);
+        connectButton->setChecked(false);
 
-      configBox->setEnabled(true);
-      configButton->setEnabled(true);
+        configBox->setEnabled(true);
+        configButton->setEnabled(true);
 
-      sendLineEdit->setReadOnly(true);
-   };
+        sendLineEdit->setReadOnly(true);
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::setXonButtonClicked()
 {
-   if(comPort->isOpen())
-     comPort->putChar(portSettings.Xon);
+    if (comPort->isOpen()) {
+        comPort->putChar(portSettings.Xon);
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::setXoffButtonClicked()
 {
-   if(comPort->isOpen())
-     comPort->putChar(portSettings.Xoff);
+    if (comPort->isOpen()) {
+        comPort->putChar(portSettings.Xoff);
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::setDtrButtonClicked()
 {
-   if(comPort->isOpen())
-     comPort->setDataTerminalReady(setDtrButton->isChecked());
+    if (comPort->isOpen()) {
+        comPort->setDataTerminalReady(setDtrButton->isChecked());
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::setRtsButtonClicked()
 {
-   if(comPort->isOpen())
-     comPort->setRequestToSend(setRtsButton->isChecked());
+    if (comPort->isOpen()) {
+        comPort->setRequestToSend(setRtsButton->isChecked());
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::updateLeds()
 {
-   QSerialPort::PinoutSignals status;
-   bool ok;
-   QString tx;
-   char ch;
-   int i;
-   QTextCursor cr;
-   QTextCharFormat format;
+    QSerialPort::PinoutSignals status;
+    bool ok;
+    QString tx;
+    char ch;
+    int i;
+    QTextCursor cr;
+    QTextCharFormat format;
+
+    timer->stop();
+
+    if (comPort == NULL) {
+        return;
+    }
+
+    if (!comPort->isOpen()) {
+        return;
+    }
+
+    while (!stop) {
+        status = comPort->pinoutSignals();
+
+        ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
+        dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
+        dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
+        rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
+        setRtsButton->setChecked(status & QSerialPort::RequestToSendSignal);
+        dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
+        setDtrButton->setChecked(status & QSerialPort::DataTerminalReadySignal);
 
 
-   timer->stop();
-   if(comPort == NULL)
-      return;
+        i = comPort->bytesAvailable();
+        qApp->processEvents();
 
-   if(!comPort->isOpen())
-      return;
+        if (i > 0) {
+            ok = comPort->getChar(&ch);
 
-   while(!stop)
-   {
+            if (!ok) {
+                showError(comPort->error());
+                return;
+            }
 
-      status = comPort->pinoutSignals();
+            count++;
+            errorLabel->setText(tr("Recived: %1 bytes.").arg(count));
+            tx = ch;
 
-      ctsLabel->setEnabled(status & QSerialPort::ClearToSendSignal);
-      dsrLabel->setEnabled(status & QSerialPort::DataSetReadySignal);
-      dcdLabel->setEnabled(status & QSerialPort::DataCarrierDetectSignal);
-      rtsLabel->setEnabled(status & QSerialPort::RequestToSendSignal);
-      setRtsButton->setChecked(status & QSerialPort::RequestToSendSignal);
-      dtrLabel->setEnabled(status & QSerialPort::DataTerminalReadySignal);
-      setDtrButton->setChecked(status & QSerialPort::DataTerminalReadySignal);
+            qApp->processEvents();
 
+            if (ch != '\r') {
+                cr = textEdit->textCursor();
+                format = cr.charFormat();
+                format.setForeground(Qt::blue);
+                cr.setCharFormat(format);
+                cr.insertText(tx);
+                textEdit->setTextCursor(cr);
+            }
 
-      i = comPort->bytesAvailable();
-      qApp->processEvents();
-      if(i > 0)
-      {
-         ok = comPort->getChar(&ch);
-         if(!ok)
-         {
-            showError(comPort->error());
-            return;
-         };
-         count++;
-         errorLabel->setText(tr("Recived: %1 bytes.").arg(count));
-         tx = ch;
-
-         qApp->processEvents();
-
-         if(ch != '\r')
-         {
-            cr = textEdit->textCursor();
+            tx = QString("%1 ").arg((int)ch, 2, 16, (QChar)'0');
+            cr = hexTextEdit->textCursor();
             format = cr.charFormat();
             format.setForeground(Qt::blue);
             cr.setCharFormat(format);
             cr.insertText(tx);
-            textEdit->setTextCursor(cr);
-         };
+            hexTextEdit->setTextCursor(cr);
 
-         tx = QString("%1 ").arg((int)ch, 2, 16, (QChar)'0');
-         cr = hexTextEdit->textCursor();
-         format = cr.charFormat();
-         format.setForeground(Qt::blue);
-         cr.setCharFormat(format);
-         cr.insertText(tx);
-         hexTextEdit->setTextCursor(cr);
+            if (ch == '\n') {
+                hexTextEdit->insertPlainText("\n");
+            }
 
-         if(ch == '\n')
-            hexTextEdit->insertPlainText("\n");
-
-         textEdit->ensureCursorVisible();
-         hexTextEdit->ensureCursorVisible();
-      }
-      else
-         if(i < 0)
+            textEdit->ensureCursorVisible();
+            hexTextEdit->ensureCursorVisible();
+        } else if (i < 0) {
             showError(comPort->error());
+        }
+    }
 
-   };
-   comPort->close();
+    comPort->close();
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::configButtonClicked()
 {
-   SerialPortConfigDialog *serialConfigDialog = new SerialPortConfigDialog(this, configBox->currentText());
+    SerialPortConfigDialog *serialConfigDialog = new SerialPortConfigDialog(this,
+            configBox->currentText());
 
-   if(serialConfigDialog->exec() == QDialog::Accepted)
-      changeSettings();
+    if (serialConfigDialog->exec() == QDialog::Accepted) {
+        changeSettings();
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::changeSettings()
 {
@@ -409,9 +352,9 @@ void TransmissionDialog::changeSettings()
     settings.beginGroup("SerialPortConfigs");
 
 #ifdef Q_OS_WIN32
-       port = "COM1";
+    port = "COM1";
 #else
-       port = "/dev/ttyS0";
+    port = "/dev/ttyS0";
 
 #endif
 
@@ -419,29 +362,29 @@ void TransmissionDialog::changeSettings()
 
     portName = settings.value("PortName", port).toString();
 
-    portSettings.BaudRate = (QSerialPort::BaudRate) settings.value("BaudRate", QSerialPort::Baud9600).toInt();
-    portSettings.DataBits = (QSerialPort::DataBits) settings.value("DataBits", QSerialPort::Data8).toInt();
-    portSettings.StopBits = (QSerialPort::StopBits) settings.value("StopBits", QSerialPort::TwoStop).toInt();
-    portSettings.Parity = (QSerialPort::Parity) settings.value("Parity", QSerialPort::NoParity).toInt();
-    portSettings.FlowControl = (QSerialPort::FlowControl) settings.value("FlowControl", QSerialPort::HardwareControl).toInt();
+    portSettings.BaudRate = (QSerialPort::BaudRate) settings.value("BaudRate",
+                            QSerialPort::Baud9600).toInt();
+    portSettings.DataBits = (QSerialPort::DataBits) settings.value("DataBits",
+                            QSerialPort::Data8).toInt();
+    portSettings.StopBits = (QSerialPort::StopBits) settings.value("StopBits",
+                            QSerialPort::TwoStop).toInt();
+    portSettings.Parity = (QSerialPort::Parity) settings.value("Parity",
+                          QSerialPort::NoParity).toInt();
+    portSettings.FlowControl = (QSerialPort::FlowControl) settings.value("FlowControl",
+                               QSerialPort::HardwareControl).toInt();
     portSettings.Xon = settings.value("Xon", "17").toString().toInt(&ok, 10);
     portSettings.Xoff = settings.value("Xoff", "19").toString().toInt(&ok, 10);
     sendAtEnd = settings.value("SendAtEnd", "").toString();
     sendAtBegining = settings.value("SendAtBegining", "").toString();
     lineDelay = settings.value("LineDelay", 0).toDouble();
 
-
     settings.endGroup();
     settings.endGroup();
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void TransmissionDialog::loadSerialConfignames()
 {
-   int id;
+    int id;
     QStringList list;
     QString item;
 
@@ -459,146 +402,158 @@ void TransmissionDialog::loadSerialConfignames()
     settings.endGroup();
 }
 
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void TransmissionDialog::showError(int error)
 {
-   switch(error)
-   {
-   case QSerialPort::NoError                   : errorLabel->setText("No Error has occured");
-       break;
-   case QSerialPort::DeviceNotFoundError       : errorLabel->setText("Attempting to open an non-existing device");
-       break;
-   case QSerialPort::PermissionError           : errorLabel->setText("Attempting to open an already opened device by another process or user not having enough permission and credentials to open");
-       break;
-   case QSerialPort::OpenError                 : errorLabel->setText("Attempting to open an already opened device in this object");
-       break;
-   case QSerialPort::ParityError               : errorLabel->setText("Parity error detected by the hardware while reading data");
-       break;
-   case QSerialPort::FramingError              : errorLabel->setText("Framing error detected by the hardware while reading data");
-       break;
-   case QSerialPort::BreakConditionError       : errorLabel->setText("Break condition detected by the hardware on the input line");
-       break;
-   case QSerialPort::WriteError                : errorLabel->setText("An I/O error occurred while writing the data");
-       break;
-   case QSerialPort::ReadError                 : errorLabel->setText("An I/O error occurred while reading the data");
-       break;
-   case QSerialPort::ResourceError             : errorLabel->setText("An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system");
-       break;
-   case QSerialPort::UnsupportedOperationError : errorLabel->setText("Receive buffer overflow");
-       break;
-   case QSerialPort::UnknownError              : errorLabel->setText("An unidentified error occurred");
-       break;
-   case QSerialPort::TimeoutError              : errorLabel->setText("Transmit buffer overflow");
-       break;
-   case QSerialPort::NotOpenError              : errorLabel->setText("An operation is executed that can only be successfully performed if the device is open");
-       break;
-   default                                     : errorLabel->setText("Unknown error");
-   }
+    switch (error) {
+    case QSerialPort::NoError:
+        errorLabel->setText("No Error has occured");
+        break;
 
+    case QSerialPort::DeviceNotFoundError:
+        errorLabel->setText("Attempting to open an non-existing device");
+        break;
 
+    case QSerialPort::PermissionError:
+        errorLabel->setText("Attempting to open an already opened device by another process or user not having enough permission and credentials to open");
+        break;
+
+    case QSerialPort::OpenError:
+        errorLabel->setText("Attempting to open an already opened device in this object");
+        break;
+
+    case QSerialPort::ParityError:
+        errorLabel->setText("Parity error detected by the hardware while reading data");
+        break;
+
+    case QSerialPort::FramingError:
+        errorLabel->setText("Framing error detected by the hardware while reading data");
+        break;
+
+    case QSerialPort::BreakConditionError:
+        errorLabel->setText("Break condition detected by the hardware on the input line");
+        break;
+
+    case QSerialPort::WriteError:
+        errorLabel->setText("An I/O error occurred while writing the data");
+        break;
+
+    case QSerialPort::ReadError:
+        errorLabel->setText("An I/O error occurred while reading the data");
+        break;
+
+    case QSerialPort::ResourceError:
+        errorLabel->setText("An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system");
+        break;
+
+    case QSerialPort::UnsupportedOperationError:
+        errorLabel->setText("Receive buffer overflow");
+        break;
+
+    case QSerialPort::UnknownError:
+        errorLabel->setText("An unidentified error occurred");
+        break;
+
+    case QSerialPort::TimeoutError:
+        errorLabel->setText("Transmit buffer overflow");
+        break;
+
+    case QSerialPort::NotOpenError:
+        errorLabel->setText("An operation is executed that can only be successfully performed if the device is open");
+        break;
+
+    default:
+        errorLabel->setText("Unknown error");
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::sendText(QString tx)
 {
-   int i;
-   bool xoffReceived;
-   char controlChar;
-   int bytesToWrite;
+    int i;
+    bool xoffReceived;
+    char controlChar;
+    int bytesToWrite;
 
-   if(comPort == NULL)
-   return;
+    if (comPort == NULL) {
+        return;
+    }
 
-   if(comPort->isOpen())
-   {
-      tx.prepend(sendAtBegining);
-      tx.append(sendAtEnd);
-      if(!tx.contains("\r\n"))
-         tx.replace("\n", "\r\n");
+    if (comPort->isOpen()) {
+        tx.prepend(sendAtBegining);
+        tx.append(sendAtEnd);
 
-      errorLabel->setText(tr("Waiting..."));
-      qApp->processEvents();
+        if (!tx.contains("\r\n")) {
+            tx.replace("\n", "\r\n");
+        }
 
-      i = 0;
-      xoffReceived = true;
-      while(i < tx.size())
-      {
-         if(xoffReceived)
-            errorLabel->setText(tr("Waiting for a signal readiness..."));
-         qApp->processEvents();
+        errorLabel->setText(tr("Waiting..."));
+        qApp->processEvents();
 
-         if(stop)
-            break;
+        i = 0;
+        xoffReceived = true;
 
-         if(portSettings.FlowControl == QSerialPort::SoftwareControl)
-         {
-            controlChar = 0;
-            if(comPort->bytesAvailable() > 0)
-            {
-               comPort->getChar(&controlChar);
-            };
+        while (i < tx.size()) {
+            if (xoffReceived) {
+                errorLabel->setText(tr("Waiting for a signal readiness..."));
+            }
 
-            if(controlChar == portSettings.Xoff)
-               xoffReceived = true;
-            if(controlChar == portSettings.Xon)
-               xoffReceived = false;
-            //setXoffButton->setChecked(xoffReceived);
-            //setXonButton->setChecked(!xoffReceived);
-         }
-         else
-            xoffReceived = false;
-
-         bytesToWrite = comPort->bytesToWrite();
-
-         if((bytesToWrite == 0) && (!xoffReceived))
-         {
-            if(!comPort->putChar(tx[i].toLatin1()))
-               showError(comPort->error());
-
-            errorLabel->setText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
             qApp->processEvents();
 
-            if(lineDelay > 0)
-            {
-               if(tx[i].toLatin1() == '\n')
-               {
-                  readyCont = false;
-                  QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
-                  while(!readyCont)
-                  {
-                     qApp->processEvents();
-                  };
-               };
-            };
+            if (stop) {
+                break;
+            }
 
-            i++;
-         };
-      };
-   };
+            if (portSettings.FlowControl == QSerialPort::SoftwareControl) {
+                controlChar = 0;
 
+                if (comPort->bytesAvailable() > 0) {
+                    comPort->getChar(&controlChar);
+                }
+
+                if (controlChar == portSettings.Xoff) {
+                    xoffReceived = true;
+                }
+
+                if (controlChar == portSettings.Xon) {
+                    xoffReceived = false;
+                }
+
+                //setXoffButton->setChecked(xoffReceived);
+                //setXonButton->setChecked(!xoffReceived);
+            } else {
+                xoffReceived = false;
+            }
+
+            bytesToWrite = comPort->bytesToWrite();
+
+            if ((bytesToWrite == 0) && (!xoffReceived)) {
+                if (!comPort->putChar(tx[i].toLatin1())) {
+                    showError(comPort->error());
+                }
+
+                errorLabel->setText(tr("Sending byte %1 of %2").arg(i + 1).arg(tx.size()));
+                qApp->processEvents();
+
+                if (lineDelay > 0) {
+                    if (tx[i].toLatin1() == '\n') {
+                        readyCont = false;
+                        QTimer::singleShot(int(lineDelay * 1000), this, SLOT(lineDelaySlot()));
+
+                        while (!readyCont) {
+                            qApp->processEvents();
+                        }
+                    }
+                }
+
+                i++;
+            }
+        }
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void TransmissionDialog::lineDelaySlot()
 {
-   readyCont = true;
+    readyCont = true;
 }
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 //TransProgressDialog::TransProgressDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 //{
@@ -616,18 +571,10 @@ void TransmissionDialog::lineDelaySlot()
 //   connect(timer, SIGNAL(timeout()), this, SLOT(updateLeds()));
 //}
 
-////**************************************************************************************************
-////
-////**************************************************************************************************
-
 //TransProgressDialog::~TransProgressDialog()
 //{
 //   timer->stop();
 //}
-
-////**************************************************************************************************
-////
-////**************************************************************************************************
 
 //void TransProgressDialog::closeEvent(QCloseEvent *event)
 //{
@@ -636,10 +583,6 @@ void TransmissionDialog::lineDelaySlot()
 //   event->accept();
 //}
 
-////**************************************************************************************************
-////
-////**************************************************************************************************
-
 //void TransProgressDialog::cancelButtonClicked()
 //{
 //   timer->stop();
@@ -647,36 +590,20 @@ void TransmissionDialog::lineDelaySlot()
 //   close();
 //}
 
-////**************************************************************************************************
-////
-////**************************************************************************************************
-
 //bool TransProgressDialog::wasCanceled()
 //{
 //   return canceled;
 //}
-
-////**************************************************************************************************
-////
-////**************************************************************************************************
 
 //void TransProgressDialog::setLabelText(const QString text)
 //{
 //   label->setText(text);
 //}
 
-////**************************************************************************************************
-////
-////**************************************************************************************************
-
 //void TransProgressDialog::setValue(int val)
 //{
 //   progressBar->setValue(val);
 //}
-
-////**************************************************************************************************
-////
-////**************************************************************************************************
 
 //void TransProgressDialog::setRange(int min, int max)
 //{
@@ -692,10 +619,6 @@ void TransmissionDialog::lineDelaySlot()
 //   progressBar->setValue(0);
 //}
 
-////**************************************************************************************************
-////
-////**************************************************************************************************
-
 //void TransProgressDialog::open(QSerialPort *port)
 //{
 //   if(port != NULL)
@@ -704,12 +627,8 @@ void TransmissionDialog::lineDelaySlot()
 //      show();
 //      comPort = port;
 //      timer->start(20);
-//   };
+//   }
 //}
-
-////**************************************************************************************************
-////
-////**************************************************************************************************
 
 //void TransProgressDialog::updateLeds()
 //{
@@ -729,24 +648,3 @@ void TransmissionDialog::lineDelaySlot()
 
 //   timer->start();
 //}
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-

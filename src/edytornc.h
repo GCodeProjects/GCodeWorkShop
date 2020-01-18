@@ -20,8 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -50,11 +48,11 @@ class EdytorNc : public QMainWindow, public Ui::EdytorNc
 public:
     EdytorNc();
     ~EdytorNc();
+
     void openFile(const QString fileName);
     void diffTwoFiles(const QString filename1, const QString filename2);
 
     enum { MAX_RECENTFILES = 16 };
-
 
 public slots:
     void messReceived(const QString &text = "");
@@ -86,8 +84,8 @@ private slots:
     MdiChild *createMdiChild();
     void setActiveSubWindow(QWidget *window);
     void loadFile(_editor_properites options, bool checkAlreadyLoaded = true);
-    void updateRecentFiles( const QString& filename );
-    void fileOpenRecent( QAction *act );
+    void updateRecentFiles(const QString &filename);
+    void fileOpenRecent(QAction *act);
     void updateRecentFilesMenu();
     void activeWindowChanged(QMdiSubWindow *window);
     void deleteText();
@@ -141,8 +139,8 @@ private slots:
     void projectSave();
     void projectSaveAs();
     void projectNew();
-    void projectTreeViewDoubleClicked(const QModelIndex & index);
-    void fileTreeViewDoubleClicked(const QModelIndex & index);
+    void projectTreeViewDoubleClicked(const QModelIndex &index);
+    void fileTreeViewDoubleClicked(const QModelIndex &index);
     void hidePanel();
     void projectTreeRemoveItem();
     void projectLoad(QString projectName);
@@ -170,11 +168,10 @@ private slots:
     void deleteFromClipboardButtonClicked();
     void clipboardTreeViewContextMenu(const QPoint &point);
     void doShowInLineCalc();
-    void watchFile(const QString& fileName, bool add);
+    void watchFile(const QString &fileName, bool add);
 
 signals:
     void needToShow();
-
 
 private:
     void createActions();
@@ -203,7 +200,6 @@ private:
     void clipboardSave();
     void clipboardLoad();
 
-
     QStringList sessionList;
     QString currentSession;
 
@@ -212,7 +208,6 @@ private:
 
     bool panelHidden;
     QByteArray panelState;
-
 
     QClipboard *clipboard;
     QByteArray fileDialogState;
@@ -225,7 +220,6 @@ private:
     QStandardItem *currentProject;
     bool currentProjectModified;
     QString currentProjectName;
-
 
     QSignalMapper *windowMapper;
     QStringList m_recentFiles;
@@ -323,7 +317,6 @@ private:
     QAction *deAttachHighlightToDirAct;
     QToolButton *deAttachHighlightButton;
 
-
     QPointer<QToolBar> findToolBar;
     QLineEdit *findEdit;
     QLineEdit *replaceEdit;
@@ -339,7 +332,6 @@ private:
     QCheckBox *mCheckIgnoreCase;
     QCheckBox *mCheckIgnoreComments;
 
-
     QPointer<QToolBar> serialToolBar;
     QAction *showSerialToolBarAct;
     QAction *configPortAct;
@@ -354,12 +346,9 @@ private:
 
     QStringList selectedExpressions;
 
-
     QPointer<CommApp> commApp;
 
     QPointer<QFileSystemWatcher> fileChangeMonitor;
-
-
 };
 
-#endif
+#endif // MAINWINDOW_H

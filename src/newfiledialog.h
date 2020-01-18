@@ -20,10 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
-
-
 #ifndef NEWFILEDIALOG_H
 #define NEWFILEDIALOG_H
 
@@ -36,7 +32,6 @@
 
 #define TEMPLATE_PATH             "/usr/share/edytornc/TEMPLATE"
 
-
 namespace Ui {
 class newFileDialog;
 }
@@ -44,29 +39,23 @@ class newFileDialog;
 class newFileDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
     explicit newFileDialog(QWidget *parent = 0);
     ~newFileDialog();
-    
 
     int exec();
     QString getChosenFile();
-
-
 
 private:
     Ui::newFileDialog *ui;
 
     QDir path;
 
-
 private slots:
     void fillFileCombo();
     void saveSettings();
     void browseButtonClicked();
-
-
 };
 
 #endif // NEWFILEDIALOG_H

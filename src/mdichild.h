@@ -57,7 +57,8 @@ public:
     QString currentFile();  //filename with full path
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
-    int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked);
+    int doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to,
+                   bool &renumEmpty, bool &renumComm, bool &renumMarked);
     void doRemoveSpace();
     void doRemoveEmptyLines();
     void doRemoveTextByRegExp(QStringList exp);
@@ -66,7 +67,8 @@ public:
     void doInsertDot();
     void doI2M();
     int compileMacro();
-    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
+    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0,
+                           bool ignoreComments = true);
     void doUndo();
     void doRedo();
     QString filePath();
@@ -84,10 +86,14 @@ public:
     void semiComment();
     void paraComment();
     bool findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments);
-    bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
-    bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options, bool ignoreComments);
-    bool swapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments, int prec);
-    void doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments, int precision);
+    bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options,
+                     bool ignoreComments);
+    bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options,
+                    bool ignoreComments);
+    bool swapAxes(QString textToFind, QString replacedText, double min, double max, int oper,
+                  double modifier, QTextDocument::FindFlags options, bool ignoreComments, int prec);
+    void doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper,
+                    double modifier, QTextDocument::FindFlags options, bool ignoreComments, int precision);
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
     void filePrintPreview();
     bool isModified();
@@ -98,12 +104,10 @@ public:
     bool isRedoAvailable();
     bool overwriteMode();
     QTextCursor textCursor();
-//    void setFileChangeMonitor(QFileSystemWatcher *monitor);
+    //    void setFileChangeMonitor(QFileSystemWatcher *monitor);
 
 public slots :
     void showInLineCalc();
-
-
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -118,10 +122,10 @@ private:
     void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
     void detectHighligthMode();
-    bool findText(const QString &text, QTextDocument::FindFlags options = 0, bool ignoreComments = true);
+    bool findText(const QString &text, QTextDocument::FindFlags options = 0,
+                  bool ignoreComments = true);
     void fileChangeMonitorAddPath(QString fileName);
     void fileChangeMonitorRemovePath(QString fileName);
-
 
     QString curFileInfo;
     QString curFile;
@@ -140,7 +144,6 @@ private:
     QStringList calcLineEditWordList;
     QChar inLineCalcChar;
 
-
 private slots :
     void highlightCurrentLine();
     void printPreview(QPrinter *printer);
@@ -155,11 +158,10 @@ private slots :
     void blockSkipDecSlot();
     void inLineCalcEditingFinished();
     void inLineCalcReturnPressed();
-signals:
-    void message(const QString&, int );
-    void addRemoveFileWatch(const QString&, bool );
 
+signals:
+    void message(const QString &, int);
+    void addRemoveFileWatch(const QString &, bool);
 };
 
-
-#endif
+#endif // MDICHILD_H

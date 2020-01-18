@@ -24,17 +24,15 @@
 #define HIGHLIGHTER_H
 
 #include <QSyntaxHighlighter>
-
 #include <QHash>
 #include <QTextCharFormat>
 
 #include "commoninc.h"
 
+
 QT_BEGIN_NAMESPACE
 class QTextDocument;
 QT_END_NAMESPACE
-
-
 
 int autoDetectHighligthMode(const QString text);
 
@@ -44,6 +42,7 @@ class Highlighter : public QSyntaxHighlighter
 
 public:
     Highlighter(QTextDocument *parent);
+
     void setHColors(const _h_colors hColors, const QFont fnt);
 
 protected:
@@ -64,44 +63,32 @@ private:
     QFont font;
     int mode;
 
-
-
-
-     struct HighlightingRule
-     {
+    struct HighlightingRule {
         QRegExp pattern;
         QTextCharFormat format;
-     };
+    };
 
-     QVector<HighlightingRule> highlightRules;
-     QVector<HighlightingRule> commentHighlightRules;
+    QVector<HighlightingRule> highlightRules;
+    QVector<HighlightingRule> commentHighlightRules;
 
-
-     struct ProgNameHighlightingRule
-     {
+    struct ProgNameHighlightingRule {
         QRegExp pattern;
         QTextCharFormat format;
         int mode;
-     };
+    };
 
-     QVector<ProgNameHighlightingRule> progNameHighlightRules;
+    QVector<ProgNameHighlightingRule> progNameHighlightRules;
 
-     QRegExp commentStartExpression;
-     QRegExp commentEndExpression;
+    QRegExp commentStartExpression;
+    QRegExp commentEndExpression;
 
+    QTextCharFormat keywordFormat;
 
-     QTextCharFormat keywordFormat;
+    QTextCharFormat commentFormat;
 
-     QTextCharFormat commentFormat;
-
-
-     QTextCharFormat operatorFormat;
-     QTextCharFormat progNameFormat;
-     //QTextCharFormat adressFormat;
-
-
-
-
+    QTextCharFormat operatorFormat;
+    QTextCharFormat progNameFormat;
+    //QTextCharFormat adressFormat;
 };
 
-#endif
+#endif // HIGHLIGHTER_H

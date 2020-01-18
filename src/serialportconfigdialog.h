@@ -20,20 +20,17 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
 #ifndef SERIALPORTCONFIGDIALOG_H
 #define SERIALPORTCONFIGDIALOG_H
 
-
 #include <QtWidgets>
-
-#include "ui_serialportconfigdialog.h"
 #include <QtSerialPort/QSerialPortInfo>
 #include <QtSerialPort/QSerialPort>
 
+#include "ui_serialportconfigdialog.h"
 
-struct PortSettings
-{
+
+struct PortSettings {
     QSerialPort::BaudRate BaudRate;
     QSerialPort::DataBits DataBits;
     QSerialPort::Parity Parity;
@@ -88,64 +85,54 @@ struct PortSettings
 
 class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialog
 {
-   Q_OBJECT
+    Q_OBJECT
 
-   public:
-     SerialPortConfigDialog(QWidget *parent = 0, QString confName = "", Qt::WindowFlags f = Qt::Dialog);
-     ~SerialPortConfigDialog();
+public:
+    SerialPortConfigDialog(QWidget *parent = 0, QString confName = "",
+                           Qt::WindowFlags f = Qt::Dialog);
+    ~SerialPortConfigDialog();
 
-   public slots:
-
-
-   protected:
-
-   signals :
-
-
-
-   private slots:
-     void browseButtonClicked();
-     void saveButtonClicked();
-     void loadSettings();
-     void changeSettings();
-     void closeButtonClicked();
-     void deleteButtonClicked();
-     void saveCloseButtonClicked();
-     void flowCtlGroupReleased();
-     void browse1ButtonClicked();
-     void browse2ButtonClicked();
-     void browse3ButtonClicked();
-     void browse4ButtonClicked();
-     void portNameComboBoxIndexChanged(QString name);
-     void autoSaveCheckBoxChanged(int state);
-     void appendExtCheckBoxChanged(int state);
-     void useAsExtCheckBoxChanged(int state);
-     void fileServerCheckBoxChanged(int state);
-     void addButtonClicked();
-     void removeButtonClicked();
-     void addEobButtonClicked();
-     void deleteEobButtonClicked();
-     void addEobCharButtonClicked();
-     void deleteEobCharButtonClicked();
-     void eobComboBoxEditTextChanged(const QString text);
-     void addFileNameButtonClicked();
-     void removeFileNameButtonClicked();
-     void helpButtonClicked();
-     void readPath1Changed(const QString text);
-     void readPath2Changed(const QString text);
-     void readPath3Changed(const QString text);
+private slots:
+    void browseButtonClicked();
+    void saveButtonClicked();
+    void loadSettings();
+    void changeSettings();
+    void closeButtonClicked();
+    void deleteButtonClicked();
+    void saveCloseButtonClicked();
+    void flowCtlGroupReleased();
+    void browse1ButtonClicked();
+    void browse2ButtonClicked();
+    void browse3ButtonClicked();
+    void browse4ButtonClicked();
+    void portNameComboBoxIndexChanged(QString name);
+    void autoSaveCheckBoxChanged(int state);
+    void appendExtCheckBoxChanged(int state);
+    void useAsExtCheckBoxChanged(int state);
+    void fileServerCheckBoxChanged(int state);
+    void addButtonClicked();
+    void removeButtonClicked();
+    void addEobButtonClicked();
+    void deleteEobButtonClicked();
+    void addEobCharButtonClicked();
+    void deleteEobCharButtonClicked();
+    void eobComboBoxEditTextChanged(const QString text);
+    void addFileNameButtonClicked();
+    void removeFileNameButtonClicked();
+    void helpButtonClicked();
+    void readPath1Changed(const QString text);
+    void readPath2Changed(const QString text);
+    void readPath3Changed(const QString text);
 
 private:
-     QString browseForDir(const QString dir, QString windowTitle);
+    QString browseForDir(const QString dir, QString windowTitle);
 
-     QButtonGroup *baudGroup;
-     QButtonGroup *dataBitsGroup;
-     QButtonGroup *stopBitsGroup;
-     QButtonGroup *parityGroup;
-     QButtonGroup *flowCtlGroup;
-     QString configName;
-
+    QButtonGroup *baudGroup;
+    QButtonGroup *dataBitsGroup;
+    QButtonGroup *stopBitsGroup;
+    QButtonGroup *parityGroup;
+    QButtonGroup *flowCtlGroup;
+    QString configName;
 };
-
 
 #endif // SERIALPORTCONFIGDIALOG_H

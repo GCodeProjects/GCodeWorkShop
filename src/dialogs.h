@@ -23,7 +23,6 @@
 #ifndef DIALOGS_H
 #define DIALOGS_H
 
-
 #include <QtWidgets>
 #include <QTextDocument>
 
@@ -40,65 +39,39 @@
 #include "ui_i2mprogdialog.h"
 #include "ui_setupdialog.h"
 
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
+/**
+ * @brief removeZeros
+ * @param str
+ * @return
+ */
 QString removeZeros(QString str);
 
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The I2MDialog class
+ */
 class I2MDialog : public QDialog, private Ui::I2MDialog
-
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    I2MDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    I2MDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~I2MDialog();
 
-
-  public:
-
-
-  protected slots:
+protected slots:
     void inputChanged();
     void checkBoxToggled();
-
-
-  private slots:
-
-  private:
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The FeedsDialog class
+ */
 class FeedsDialog : public QDialog, private Ui::FeedsDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-    FeedsDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+    FeedsDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~FeedsDialog();
-
-
-public:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
@@ -111,35 +84,24 @@ private slots:
     void computeVcButtonClicked();
     void setDefButton();
     void checkBoxChanged();
-
-private:
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The RenumberDialog class
+ */
 class RenumberDialog : public QDialog, private Ui::RenumberDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    RenumberDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    RenumberDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~RenumberDialog();
 
-  public slots:
-    void getState(int &mode, int &startAt, int &from, int &prec, int &inc, int &to, bool &renumEmpty, bool &renumComm, bool &renumMarked);
+public slots:
+    void getState(int &mode, int &startAt, int &from, int &prec, int &inc, int &to,
+                  bool &renumEmpty, bool &renumComm, bool &renumMarked);
 
-
-  protected:
-
-  signals :
-
-  private slots:
+private slots:
     void okButtonClicked();
     void atEndClicked();
     void divideClicked();
@@ -147,198 +109,155 @@ class RenumberDialog : public QDialog, private Ui::RenumberDialog
     void allLinesClicked();
     void removeAllClicked();
     void mRenumHeClicked();
-
-  private:
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The DotDialog class
+ */
 class DotDialog : public QDialog, private Ui::DotDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    DotDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    DotDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~DotDialog();
 
-  public slots:
+public slots:
     void getState(QString &text, bool &at_end, bool &div, int &x);
     void setState(const QString &txt, bool at_end, bool div, int x);
 
-
-
-  protected:
-
-  signals :
-
-
-  private slots:
+private slots:
     void inputChanged(const QString &text);
     void okButtonClicked();
     void atEndClicked();
     void divideClicked();
     void spinBoxVal(int val);
-
-  private:
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The TriangleDialog class
+ */
 class TriangleDialog : public QDialog, private Ui::TriangleDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    TriangleDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    TriangleDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~TriangleDialog();
-
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
 
-  protected slots:
+protected slots:
     void inputChanged();
     void checkBoxToggled();
     void rightTriangleCheckBoxToggled();
 
-
-  private slots:
+private slots:
     void computeButtonClicked();
     int option1();
     int option2();
     int option3();
     void option4();
 
-  private:
+private:
     uint mode;
     QPixmap *pic1;
     QPixmap *pic2;
     QDoubleValidator *aAInputValid;
     QDoubleValidator *aBInputValid;
     QDoubleValidator *aCInputValid;
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The BHCTab class
+ */
 class BHCTab : public QWidget, public Ui::BHCTab
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    BHCTab( QWidget * parent = 0);
-
+public:
+    BHCTab(QWidget *parent = 0);
     ~BHCTab();
-
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
 
-  protected slots:
-    void contextMenuReq(const QPoint & pos);
+protected slots:
+    void contextMenuReq(const QPoint &pos);
     void inputChk();
 
-  signals:
+signals:
     void commonChk();
 
-  private slots:
+private slots:
     void copySelection();
     void sellAll();
     void inputChanged();
 
-  private:
+private:
     QMenu *contextMenu;
     QAbstractItemModel *model;
     QAction *addCommentsId;
     QAction *addCommentsParaId;
     QActionGroup *commentActGroup;
-
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The BHCDraw class
+ */
 class BHCDraw : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    BHCDraw(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::Tool);
-
+public:
+    BHCDraw(QWidget *parent = 0,
+            Qt::WindowFlags f = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::Tool);
     ~BHCDraw();
 
-
-  public slots:
+public slots:
     void clear();
     void printText(int x, int y, int line, const QString &text, QColor color);
-    void drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool first = false, bool last = false, QColor color = Qt::green);
+    void drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool first = false,
+                  bool last = false, QColor color = Qt::green);
     void init(int w, int h);
     void drawLines(qreal dia, qreal ang, QColor cl);
     void setScale(double sc);
 
-
-  private slots:
+private slots:
     void drawLines();
 
-  protected:
+protected:
     void paintEvent(QPaintEvent *);
     void focusOutEvent(QFocusEvent *);
     void mousePressEvent(QMouseEvent *event);
 
-  private:
+private:
     double scale;
     QPixmap *pm;
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The BHCDialog class
+ */
 class BHCDialog : public QDialog, private Ui::BHCDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    BHCDialog( QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    BHCDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~BHCDialog();
 
-
-  public slots:
-
-  protected:
+protected:
     //void windowActivationChange(bool oldActive);
 
-  private slots:
+private slots:
     void comChk();
     void computeButtonClicked();
     void closeButtonClicked();
     void clearAll();
 
-  private:
+private:
     QTabWidget *tabBar;
     BHCDraw *drawing;
 
@@ -346,90 +265,61 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
     int parentWidth;
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The ChamferDialog class
+ */
 class ChamferDialog : public QDialog, private Ui::ChamferDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ChamferDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    ChamferDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~ChamferDialog();
 
-
-  public:
-
-
-  protected slots:
+protected slots:
     void inputChanged();
     void checkBoxToggled();
 
-
-  private slots:
+private slots:
     void computeButtonClicked();
-
-  private:
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The I2MProgDialog class
+ */
 class I2MProgDialog : public QDialog, private Ui::I2MProgDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    I2MProgDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    I2MProgDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
     ~I2MProgDialog();
 
-
-  public slots:
+public slots:
     void getState(QString &txt, int &x, bool &in);
     void setState(const QString &txt, int x, bool in);
 
-  protected slots:
-
-  private slots:
+private slots:
     void inputChanged();
     void okButtonClicked();
-
-  private:
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+/**
+ * @brief The SetupDialog class
+ */
 class SetupDialog : public QDialog, private Ui::SetupDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    SetupDialog( QWidget* parent = 0, const _editor_properites* prop = 0, Qt::WindowFlags f = Qt::Dialog);
-
+public:
+    SetupDialog(QWidget *parent = 0, const _editor_properites *prop = 0,
+                Qt::WindowFlags f = Qt::Dialog);
     ~SetupDialog();
 
-
-  public slots:
+public slots:
     _editor_properites getSettings();
 
-  protected slots:
-
-
-  private slots:
+private slots:
     void on_btnBrowseDirectory_clicked();
     void on_btnDeleteExtension_clicked();
     void on_btnAddExtension_clicked();
@@ -438,66 +328,9 @@ class SetupDialog : public QDialog, private Ui::SetupDialog
     void setDefaultProp();
     void browseButtonClicked();
 
-
-  private:
+private:
     _editor_properites editProp;
     QButtonGroup *colorButtons;
-
-
-
 };
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif
-
-
+#endif // DIALOGS_H

@@ -20,11 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
-
-
-
 #ifndef SWAPAXESDIALOG_H
 #define SWAPAXESDIALOG_H
 
@@ -52,22 +47,14 @@ public:
     QString getSecondAxis();
     int exec();
 
-
-
 private:
     Ui::swapAxesDialog *ui;
-
-
 
 private slots:
     void saveSettings();
     void betweenCheckBoxClicked(bool checked);
     void modifyCheckBoxClicked(bool checked);
     void precisionSpinBoxChanded(int val);
-
-
-
-
 };
 
 #endif // SWAPAXESDIALOG_H

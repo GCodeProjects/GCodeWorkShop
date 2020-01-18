@@ -24,38 +24,36 @@
 class Merger
 {
 public:
+    Merger(const DiffList *pDiffList1, const DiffList *pDiffList2);
 
-   Merger( const DiffList* pDiffList1, const DiffList* pDiffList2 );
+    /** Go one step. */
+    void next();
 
-   /** Go one step. */
-   void next();
+    /** Information about what changed. Can be used for coloring.
+        The return value is 0 if nothing changed here,
+        bit 1 is set if a difference from pDiffList1 was detected,
+        bit 2 is set if a difference from pDiffList2 was detected.
+    */
+    int whatChanged();
 
-   /** Information about what changed. Can be used for coloring.
-       The return value is 0 if nothing changed here,
-       bit 1 is set if a difference from pDiffList1 was detected,
-       bit 2 is set if a difference from pDiffList2 was detected.
-   */
-   int whatChanged();
+    /** End of both diff lists reached. */
+    bool isEndReached();
 
-   /** End of both diff lists reached. */
-   bool isEndReached();
 private:
+    struct MergeData {
+        DiffList::const_iterator it;
+        const DiffList *pDiffList;
+        Diff d;
+        int idx;
 
-   struct MergeData
-   {
-      DiffList::const_iterator it;
-      const DiffList* pDiffList;
-      Diff d;
-      int idx;
-    
-      MergeData( const DiffList* p, int i );
-      bool eq();
-      void update();
-      bool isEnd();
-   };
+        MergeData(const DiffList *p, int i);
+        bool eq();
+        void update();
+        bool isEnd();
+    };
 
-   MergeData md1;
-   MergeData md2;
+    MergeData md1;
+    MergeData md2;
 };
 
-#endif
+#endif // MERGER_H

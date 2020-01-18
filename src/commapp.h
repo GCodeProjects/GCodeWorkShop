@@ -20,8 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
 #ifndef COMMAPP_H
 #define COMMAPP_H
 
@@ -33,8 +31,7 @@
 #include "filechecker.h"
 
 
-namespace Ui
-{
+namespace Ui {
 class CommApp;
 }
 
@@ -64,6 +61,7 @@ private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void quitApp();
     void about();
+
 private:
     Ui::CommApp *ui;
     QSignalMapper *windowMapper;

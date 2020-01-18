@@ -24,129 +24,82 @@
 #define SERIALTRANSMISSION_H
 
 #include <QtWidgets>
-
+#include <qserialport.h>
 
 #include "ui_transmissiondialog.h"
 #include "serialportconfigdialog.h"
-#include <qserialport.h>
 
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 class TransmissionDialog : public QDialog, private Ui::TransmissionDialog
 {
-   Q_OBJECT
+    Q_OBJECT
 
-   public:
-     TransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-     ~TransmissionDialog();
+public:
+    TransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ~TransmissionDialog();
 
-   public slots:
+private slots:
+    void closeButtonClicked();
+    void clearButtonClicked();
+    void connectButtonToggled(bool tg);
+    void configButtonClicked();
+    void changeSettings();
+    void updateLeds();
+    void setRtsButtonClicked();
+    void setDtrButtonClicked();
+    void sendTextEditChanged();
+    void lineDelaySlot();
+    void setXonButtonClicked();
+    void setXoffButtonClicked();
+    void textEditScroll(int pos);
+    void hexTextEditScroll(int pos);
 
+private:
+    void loadSerialConfignames();
+    void showError(int error);
+    void sendText(QString tx);
 
-   protected:
+    bool stop;
+    QString portName;
+    QString sendAtEnd;
+    QString sendAtBegining;
 
-   signals :
-
-
-
-   private slots:
-     void closeButtonClicked();
-     void clearButtonClicked();
-     void connectButtonToggled(bool tg);
-     void configButtonClicked();
-     void changeSettings();
-     void updateLeds();
-     void setRtsButtonClicked();
-     void setDtrButtonClicked();
-     void sendTextEditChanged();
-     void lineDelaySlot();
-     void setXonButtonClicked();
-     void setXoffButtonClicked();
-     void textEditScroll(int pos);
-     void hexTextEditScroll(int pos);
-
-
-
-   private:
-     void loadSerialConfignames();
-     void showError(int error);
-     void sendText(QString tx);
-
-
-     bool stop;
-     QString portName;
-     QString sendAtEnd;
-     QString sendAtBegining;
-
-     QSerialPort *comPort;
-     QTimer *timer;
-     long int count;
-     double lineDelay;
-     bool readyCont;
-     PortSettings portSettings;
-
-
-
-
+    QSerialPort *comPort;
+    QTimer *timer;
+    long int count;
+    double lineDelay;
+    bool readyCont;
+    PortSettings portSettings;
 };
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 //class TransProgressDialog : public QDialog, private Ui::TransProgressDialog
 //{
-//   Q_OBJECT
+//    Q_OBJECT
 
-//   public:
-//     TransProgressDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-//     ~TransProgressDialog();
+//public:
+//    TransProgressDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+//    ~TransProgressDialog();
 
-//   public slots:
-//     void setLabelText(const QString text);
-//     void open(QSerialPort *port);
-//     bool wasCanceled();
-//     void setRange(int min, int max);
-//     void setValue(int val);
+//public slots:
+//    void setLabelText(const QString text);
+//    void open(QSerialPort *port);
+//    bool wasCanceled();
+//    void setRange(int min, int max);
+//    void setValue(int val);
 
+//protected:
+//    void closeEvent(QCloseEvent *event);
 
-//   protected:
-//     void closeEvent(QCloseEvent *event);
-
-//   signals :
-
-
-
-//   private slots:
-//     void cancelButtonClicked();
-//     void updateLeds();
+//private slots:
+//    void cancelButtonClicked();
+//    void updateLeds();
 
 
-//   private:
-//     QSerialPort *comPort;
-//     bool canceled;
+//private:
+//    QSerialPort *comPort;
+//    bool canceled;
 
-//     QTimer *timer;
-
-
-
-
+//    QTimer *timer;
 //};
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-=========================================================================================
-
-=========================================================================================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
 
 #endif // SERIALTRANSMISSION_H

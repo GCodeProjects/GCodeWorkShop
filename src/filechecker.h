@@ -20,7 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
 #ifndef FILECHECKER_H
 #define FILECHECKER_H
 
@@ -38,6 +37,7 @@
 
 #include "kdiff3.h"
 
+
 namespace Ui {
 class FileChecker;
 }
@@ -49,14 +49,17 @@ class FileChecker : public QDialog
 public:
     explicit FileChecker(QWidget *parent = 0);
     ~FileChecker();
+
     void setData(const QString startDir, QStringList readPaths, QStringList fileFilter);
     void findFiles();
+
 private slots:
     void filesTableClicked(int row, int col);
     void acceptFile();
     void deleteFile();
     void readPathComboBoxChanged(QString text);
     void filesTableCurrentCellChanged(int row, int col, int pRow, int pCol);
+
 private:
     Ui::FileChecker *ui;
     QPointer<KDiff3App> diffApp;

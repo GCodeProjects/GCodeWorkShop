@@ -15,8 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "difftextwindow.h"
-
 #include <iostream>
 #include <assert.h>
 
@@ -38,111 +36,93 @@
 #include <QPrinter>
 #include <QPrintDialog>
 
-
-
 // application specific includes
 #include "kdiff3.h"
 #include "optiondialog.h"
 #include "fileaccess.h"
 
+#include "difftextwindow.h"
 
 
 bool KDiff3App::isFileSaved()
 {
-   return m_bFileSaved;
+    return m_bFileSaved;
 }
 
 bool KDiff3App::isDirComparison()
 {
-   return m_bDirCompare;
+    return m_bDirCompare;
 }
 
-KDiff3App::KDiff3App(QWidget* pParent, const char* , QStringList extensions): QWidget(pParent)
+KDiff3App::KDiff3App(QWidget *pParent, const char *, QStringList extensions): QWidget(pParent)
 {
-   setObjectName( "KDiff3App" );
-   setAttribute(Qt::WA_DeleteOnClose);
+    setObjectName("KDiff3App");
+    setAttribute(Qt::WA_DeleteOnClose);
 
-   setUpdatesEnabled(false);
+    setUpdatesEnabled(false);
 
-   m_pCornerWidget = 0;
-   m_pDiffTextWindow1 = 0;
-   m_pDiffTextWindow2 = 0;
-   m_pDiffTextWindowFrame1 = 0;
-   m_pDiffTextWindowFrame2 = 0;
-   m_pDiffWindowSplitter = 0;
-   m_pOverview = 0;
-   m_bTripleDiff = false;
-   m_pMergeResultWindow = 0;
-   m_bOutputModified = false;
-   m_bFileSaved = false;
-   m_bTimerBlock = false;
-   m_pHScrollBar = 0;
-   m_pDiffVScrollBar = 0;
-   m_pMergeVScrollBar = 0;
-   m_extensions = extensions;
+    m_pCornerWidget = 0;
+    m_pDiffTextWindow1 = 0;
+    m_pDiffTextWindow2 = 0;
+    m_pDiffTextWindowFrame1 = 0;
+    m_pDiffTextWindowFrame2 = 0;
+    m_pDiffWindowSplitter = 0;
+    m_pOverview = 0;
+    m_bTripleDiff = false;
+    m_pMergeResultWindow = 0;
+    m_bOutputModified = false;
+    m_bFileSaved = false;
+    m_bTimerBlock = false;
+    m_pHScrollBar = 0;
+    m_pDiffVScrollBar = 0;
+    m_pMergeVScrollBar = 0;
+    m_extensions = extensions;
 
-   // Needed before any file operations via FileAccess happen.
-   if (!g_pProgressDialog)
-   {
-      g_pProgressDialog = new ProgressDialog(0);
-      g_pProgressDialog->setStayHidden( true );
-   }
+    // Needed before any file operations via FileAccess happen.
+    if (!g_pProgressDialog) {
+        g_pProgressDialog = new ProgressDialog(0);
+        g_pProgressDialog->setStayHidden(true);
+    }
 
-   // All default values must be set before calling readOptions().
-   m_pOptionDialog = new OptionDialog(this);
+    // All default values must be set before calling readOptions().
+    m_pOptionDialog = new OptionDialog(this);
 
+    m_sd1.setOptionDialog(m_pOptionDialog);
+    m_sd2.setOptionDialog(m_pOptionDialog);
 
-   m_sd1.setOptionDialog(m_pOptionDialog);
-   m_sd2.setOptionDialog(m_pOptionDialog);
-
-
-   slotRefresh();
-   initView();
+    slotRefresh();
+    initView();
 }
 
-
-bool KDiff3App::completeInit( const QString& fn1, const QString& fn2)
+bool KDiff3App::completeInit(const QString &fn1, const QString &fn2)
 {
-   if(!fn1.isEmpty())
-   {
-      m_sd1.setFilename(fn1);
-      m_sd1.setAliasName(fn1);
+    if (!fn1.isEmpty()) {
+        m_sd1.setFilename(fn1);
+        m_sd1.setAliasName(fn1);
+    } else {
+        if (!fn2.isEmpty() && m_sd1.isEmpty()) {
+            QString fileName1 = QFileInfo(fn2).canonicalPath();
+            m_sd1.setFilename(fileName1);
+            m_sd1.setAliasName(fileName1);
+        }
+    }
 
-   }
-   else
-   {
-      if(!fn2.isEmpty() && m_sd1.isEmpty())
-      {
-         QString fileName1 = QFileInfo(fn2).canonicalPath();
-         m_sd1.setFilename(fileName1);
-         m_sd1.setAliasName(fileName1);
-      };
-   };
+    if (!fn2.isEmpty()) {
+        m_sd2.setFilename(fn2);
+        m_sd2.setAliasName(fn2);
+    } else {
+        if (!fn1.isEmpty() && m_sd2.isEmpty()) {
+            QString fileName2 = QFileInfo(fn1).canonicalPath();
+            m_sd2.setFilename(fileName2);
+            m_sd2.setAliasName(fileName2);
+        }
+    }
 
-   if(!fn2.isEmpty())
-   {
-      m_sd2.setFilename(fn2);
-      m_sd2.setAliasName(fn2);
-   }
-   else
-   {
-      if(!fn1.isEmpty() && m_sd2.isEmpty())
-      {
-         QString fileName2 = QFileInfo(fn1).canonicalPath();
-         m_sd2.setFilename(fileName2);
-         m_sd2.setAliasName(fileName2);
-      };
-   };
-
-   bool result = init(false);
-   slotUpdateAvailabilities();
-   return result;
+    bool result = init(false);
+    slotUpdateAvailabilities();
+    return result;
 }
 
 KDiff3App::~KDiff3App()
 {
-
 }
-
-
-

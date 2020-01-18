@@ -20,8 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
-
 #include "sessiondialog.h"
 
 
@@ -46,13 +44,10 @@ sessionDialog::sessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(paren
     connect(deletePushButton, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
     connect(switchPushButton, SIGNAL(clicked()), this, SLOT(switchButtonClicked()));
 
-    connect(sessionListWidget, SIGNAL(itemActivated(QListWidgetItem *)), this, SLOT(sessionListItemitemActivated(QListWidgetItem *)));
+    connect(sessionListWidget, SIGNAL(itemActivated(QListWidgetItem *)), this,
+            SLOT(sessionListItemitemActivated(QListWidgetItem *)));
 
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 sessionDialog::~sessionDialog()
 {
@@ -63,55 +58,47 @@ sessionDialog::~sessionDialog()
     settings.endGroup();
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void sessionDialog::newButtonClicked()
 {
     newSessionDialog *newSesDialog = new newSessionDialog(this);
     newSesDialog->setName("");
     int result = newSesDialog->exec();
-    if(result == QDialog::Accepted)
-    {
+
+    if (result == QDialog::Accepted) {
         QString tx = newSesDialog->getName().simplified();
-        if(!tx.isEmpty())
-        {
+
+        if (!tx.isEmpty()) {
             sessionListWidget->insertItem(sessionListWidget->count(), tx);
             sessionListWidget->item(sessionListWidget->count() - 1)->setCheckState(Qt::Unchecked);
-        };
-    };
+        }
+    }
+
     delete newSesDialog;
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void sessionDialog::renameButtonClicked()
 {
     QString currName = sessionListWidget->currentItem()->text();
-    if(currName == tr("default"))
+
+    if (currName == tr("default")) {
         return;
+    }
 
     newSessionDialog *newSesDialog = new newSessionDialog(this);
     newSesDialog->setName(currName);
     int result = newSesDialog->exec();
-    if(result == QDialog::Accepted)
-    {
+
+    if (result == QDialog::Accepted) {
         QString newName = newSesDialog->getName().simplified();
-        if(!newName.isEmpty())
-        {
+
+        if (!newName.isEmpty()) {
             sessionListWidget->currentItem()->setText(newName);
             copySession(currName, newName, true);
-        };
-    };
+        }
+    }
+
     delete newSesDialog;
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void sessionDialog::cloneButtonClicked()
 {
@@ -119,36 +106,28 @@ void sessionDialog::cloneButtonClicked()
     newSessionDialog *newSesDialog = new newSessionDialog(this);
     newSesDialog->setName(currName);
     int result = newSesDialog->exec();
-    if(result == QDialog::Accepted)
-    {
+
+    if (result == QDialog::Accepted) {
         QString newName = newSesDialog->getName().simplified();
-        if(!newName.isEmpty())
-        {
+
+        if (!newName.isEmpty()) {
             sessionListWidget->insertItem(sessionListWidget->count(), newName);
             sessionListWidget->item(sessionListWidget->count() - 1)->setCheckState(Qt::Unchecked);
             copySession(currName, newName, false);
-        };
-    };
+        }
+    }
+
     delete newSesDialog;
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void sessionDialog::deleteButtonClicked()
 {
-    if(sessionListWidget->currentItem()->text() != tr("default"))
-    {
+    if (sessionListWidget->currentItem()->text() != tr("default")) {
         deleteSession(sessionListWidget->selectedItems().at(0)->text());
         qDeleteAll(sessionListWidget->selectedItems());
         switchButtonClicked();
-    };
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void sessionDialog::switchButtonClicked()
 {
@@ -156,10 +135,6 @@ void sessionDialog::switchButtonClicked()
     sessionListWidget->currentItem()->setCheckState(Qt::Checked);
     accept();
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void sessionDialog::sessionListItemitemActivated(QListWidgetItem *item)
 {
@@ -172,10 +147,6 @@ void sessionDialog::sessionListItemitemActivated(QListWidgetItem *item)
     switchPushButton->setEnabled(hasSelection);
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void sessionDialog::setSessionList(QStringList list)
 {
     list.removeDuplicates();
@@ -184,70 +155,49 @@ void sessionDialog::setSessionList(QStringList list)
     clearChecked();
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 QStringList sessionDialog::sessionList()
 {
     QStringList sessionList;
-    for(int i = 0; i < sessionListWidget->count(); i++)
-    {
+
+    for (int i = 0; i < sessionListWidget->count(); i++) {
         sessionList.append(sessionListWidget->item(i)->text());
         sessionList.removeDuplicates();
         sessionList.sort();
-    };
+    }
+
     return sessionList;
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void sessionDialog::setSelectedSession(QString name)
 {
     QList<QListWidgetItem *> items = sessionListWidget->findItems(name, Qt::MatchExactly);
-    if(items.size() > 0)
-    {
+
+    if (items.size() > 0) {
         items.at(0)->setCheckState(Qt::Checked);
         sessionListWidget->setCurrentItem(items.at(0));
-    };
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 QString sessionDialog::selectedSession()
 {
     QString name;
-    for(int i = 0; i < sessionListWidget->count(); i++)
-    {
-        if(sessionListWidget->item(i)->checkState() == Qt::Checked)
-        {
+
+    for (int i = 0; i < sessionListWidget->count(); i++) {
+        if (sessionListWidget->item(i)->checkState() == Qt::Checked) {
             name = sessionListWidget->item(i)->text();
             break;
-        };
-    };
+        }
+    }
 
     return name;
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void sessionDialog::clearChecked()
 {
-    for(int i = 0; i < sessionListWidget->count(); i++)
-    {
+    for (int i = 0; i < sessionListWidget->count(); i++) {
         sessionListWidget->item(i)->setCheckState(Qt::Unchecked);
-    };
+    }
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void sessionDialog::copySession(QString oldName, QString newName, bool deleteOld)
 {
@@ -258,15 +208,13 @@ void sessionDialog::copySession(QString oldName, QString newName, bool deleteOld
     int highlightMode;
     bool maximized;
 
-
     QSettings settings("EdytorNC", "EdytorNC");
     settings.beginGroup("Sessions");
 
     int max = settings.beginReadArray(oldName);
     settings.endArray();
 
-    for(int i = 0; i < max; ++i)
-    {
+    for (int i = 0; i < max; ++i) {
         // read
         settings.beginReadArray(oldName);
         settings.setArrayIndex(i);
@@ -288,18 +236,14 @@ void sessionDialog::copySession(QString oldName, QString newName, bool deleteOld
         settings.setValue("HighlightMode", highlightMode);
         settings.setValue("MaximizedMdi", maximized);
         settings.endArray();
+    }
 
-    };
-
-    if(deleteOld)
+    if (deleteOld) {
         settings.remove(oldName);
+    }
 
     settings.endGroup();
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 void sessionDialog::deleteSession(QString name)
 {
@@ -308,13 +252,6 @@ void sessionDialog::deleteSession(QString name)
     settings.remove(name);
     settings.endGroup();
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 newSessionDialog::newSessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
@@ -327,35 +264,16 @@ newSessionDialog::newSessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 newSessionDialog::~newSessionDialog()
 {
-
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
 
 QString newSessionDialog::getName()
 {
     return lineEdit->text();
 }
 
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
 void newSessionDialog::setName(QString name)
 {
     lineEdit->setText(name);
 }
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-

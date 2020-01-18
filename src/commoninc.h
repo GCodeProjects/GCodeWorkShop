@@ -26,11 +26,11 @@
 #include<QString>
 #include<QRegExp>
 
+
 #define TABBED_MODE              0x01
 #define SHOW_FILENAME            0x02
 #define SHOW_FILEPATH            0x04
 #define SHOW_PROGTITLE           0x08
-
 
 #define MODE_AUTO                0x00
 #define MODE_OKUMA               0x02
@@ -55,73 +55,68 @@
 #define FILENAME_FADAL       "(N1)(O|:)[0-9]{1,}"
 
 
-struct _h_colors
-{
-   int commentColor;
-   int gColor;
-   int mColor;
-   int nColor;
-   int lColor;
-   int fsColor;
-   int dhtColor;
-   int rColor;
-   int macroColor;
-   int keyWordColor;
-   int progNameColor;
-   int operatorColor;
-   int zColor;
-   int aColor;
-   int bColor;
-   int defaultColor;
-   int backgroundColor;
-   int highlightMode;
-
+struct _h_colors {
+    int commentColor;
+    int gColor;
+    int mColor;
+    int nColor;
+    int lColor;
+    int fsColor;
+    int dhtColor;
+    int rColor;
+    int macroColor;
+    int keyWordColor;
+    int progNameColor;
+    int operatorColor;
+    int zColor;
+    int aColor;
+    int bColor;
+    int defaultColor;
+    int backgroundColor;
+    int highlightMode;
 };
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-struct _editor_properites
-{
-   bool isRedo, isUndo, isSel;
-   bool readOnly;
-   bool ins;
-   bool modified;
-   int cursorPos;
-   QString lastDir, dotAdr, i2mAdr;
-   QString fileName;
-   bool atEnd, dotAfter;
-   int dotAftrerCount;
-   int i2mprec;
-   bool inch;
-   QString fontName;
-   int fontSize;
-   bool intCapsLock;
-   bool syntaxH;
-   _h_colors hColors;
-   QByteArray geometry;
-   bool maximized;
-   bool underlineChanges;
-   int lineColor;
-   int underlineColor;
-   int windowMode;
-   QString calcBinary;
-   bool clearUndoHistory;
-   bool clearUnderlineHistory;
-   bool editorToolTips;
-   bool defaultReadOnly;
-   QStringList extensions;
-   QString saveExtension;
-   QString saveDirectory;
-   int defaultHighlightMode;
-   bool startEmpty;
-   QString curFile;  // replace by filename
-   QString curFileInfo;
-   bool guessFileNameByProgNum;
-   bool disableFileChangeMonitor;
+struct _editor_properites {
+    bool isRedo, isUndo, isSel;
+    bool readOnly;
+    bool ins;
+    bool modified;
+    int cursorPos;
+    QString lastDir, dotAdr, i2mAdr;
+    QString fileName;
+    bool atEnd, dotAfter;
+    int dotAftrerCount;
+    int i2mprec;
+    bool inch;
+    QString fontName;
+    int fontSize;
+    bool intCapsLock;
+    bool syntaxH;
+    _h_colors hColors;
+    QByteArray geometry;
+    bool maximized;
+    bool underlineChanges;
+    int lineColor;
+    int underlineColor;
+    int windowMode;
+    QString calcBinary;
+    bool clearUndoHistory;
+    bool clearUnderlineHistory;
+    bool editorToolTips;
+    bool defaultReadOnly;
+    QStringList extensions;
+    QString saveExtension;
+    QString saveDirectory;
+    int defaultHighlightMode;
+    bool startEmpty;
+    QString curFile;  // replace by filename
+    QString curFileInfo;
+    bool guessFileNameByProgNum;
+    bool disableFileChangeMonitor;
 };
 
-
-
-#endif
+#endif // COMMONINC_H

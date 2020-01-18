@@ -27,20 +27,10 @@
  *                                                                         *
  ***************************************************************************/
 
-
-#include "math.h"
-#include "ctype.h"
-#include "stdlib.h"
-#include "string.h"
-
-#include <QString>
-
-
-
 #ifndef BASIC_INTERPRETER_H
 #define BASIC_INTERPRETER_H
 
-
+#include <QString>
 
 
 #define NUM_LAB      100
@@ -53,8 +43,8 @@
 #define VARIABLE     2
 #define NUMBER       3
 #define COMMAND      4
-#define STRING	     5
-#define QUOTE	     6
+#define STRING       5
+#define QUOTE        6
 
 #define PRINT        1
 #define SIN          2
@@ -78,108 +68,88 @@
 #define PI           20
 
 
-struct for_stack
-{
-   int var; /* counter variable */
-   char *loc;
-   double target;  /* target value */
+struct for_stack {
+    int     var;    /* counter variable */
+    char    *loc;
+    double  target; /* target value */
 };
 
 
 class BasicInterpreter
 {
-
 private:
 
-   QString result;
-   int error;
+    QString result;
+    int error;
 
-   struct commands /* keyword lookup table */
-   {
-      char command[20];
-      char tok;
-   }table[32]; /* 20 Commands must be entered lowercase */
+    struct commands { /* keyword lookup table */
+        char command[20];
+        char tok;
+    } table[32]; /* 20 Commands must be entered lowercase */
 
-   double variables[26];   /* 26 user variables,  A-Z */
-   char *prog;  /* holds expression to be analyzed */
-
-
-   char token[1024];
-   char token_type, tok;
-
-   struct label
-   {
-      char name[LAB_LEN];
-      char *p;
-   };
-   struct label label_table[NUM_LAB];
+    double variables[26];   /* 26 user variables,  A-Z */
+    char *prog;  /* holds expression to be analyzed */
 
 
-   struct for_stack fstack[FOR_NEST];
-   //char *find_label(), *gpop();
+    char token[1024];
+    char token_type, tok;
 
+    struct label {
+        char name[LAB_LEN];
+        char *p;
+    };
+    struct label label_table[NUM_LAB];
 
-   //struct for_stack fpop();
-   char *gstack[SUB_NEST];
-   int ftos;
-   int gtos;
+    struct for_stack fstack[FOR_NEST];
+    char *gstack[SUB_NEST];
+    int ftos;
+    int gtos;
 
+    void gpush(char *s);
+    char *gpop();
+    void fpush(struct for_stack i);
+    void exec_for();
+    void find_eol();
 
-   void gpush(char *s);
-   char *gpop();
-   void fpush(struct for_stack i);
-   void exec_for();
-   void find_eol();
+    void label_init();
+    void get_exp(double *result);
 
-   void label_init();
-   void get_exp(double *result);
+    int look_up(char *s);
 
-   int look_up(char *s);
+    int isdelim(char c);
+    int iswhite(char c);
+    void putback();
+    int get_next_label(char *s);
+    void serror(int err);
+    int get_token();
+    void assignment();
+    void print();
+    void scan_labels();
+    char *find_label(char *s);
 
-   int isdelim(char c);
-   int iswhite(char c);
-   void putback();
-   int get_next_label(char *s);
-   void serror(int err);
-   int get_token();
-   void assignment();
-   void print();
-   void scan_labels();
-   char *find_label(char *s);
+    void exec_goto();
+    void exec_if();
+    void next();
 
+    struct for_stack fpop();
 
-   void exec_goto();
-   void exec_if();
-   void next();
-
-   struct for_stack fpop();
-
-   void exec_sin();
-   void gosub();
-   void greturn();
-   double find_var(char *s);
-   void primitive(double *result);
-   void level6(double *result);
-   void level5(double *result);
-   void level4(double *result);
-   void level3(double *result);
-   void level2(double *result);
-   void arith(char o, double *r, double *h);
-   void unary(char o, double *r);
-
+    void exec_sin();
+    void gosub();
+    void greturn();
+    double find_var(char *s);
+    void primitive(double *result);
+    void level6(double *result);
+    void level5(double *result);
+    void level4(double *result);
+    void level3(double *result);
+    void level2(double *result);
+    void arith(char o, double *r, double *h);
+    void unary(char o, double *r);
 
 public:
+    BasicInterpreter();
 
-   BasicInterpreter();
-
-   int interpretBasic(QString &code);
-
-
+    int interpretBasic(QString &code);
 };
-
-
-
-
-
 
 #endif // BASIC_INTERPRETER_H

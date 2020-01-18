@@ -25,7 +25,6 @@
 
 #include <QtWidgets>
 
-
 #include "commoninc.h"
 #include "highlighter.h"
 
@@ -39,7 +38,6 @@ class QLabel;
 class QPushButton;
 class QTableWidget;
 QT_END_NAMESPACE
-
 
 class FindInFiles : public QWidget, private Ui::FindInFiles
 {
@@ -60,19 +58,18 @@ private slots:
     void filePreview(int x, int y);
     void hideDlg();
 
-
 protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
 
 private:
     bool findFiles(const QString startDir, QString mainDir, bool notFound,
-                    const QString findText, QString fileFilter, QProgressDialog *progressDialog);
+                   const QString findText, QString fileFilter, QProgressDialog *progressDialog);
     void showFiles(const QDir &directory, const QStringList &files);
     void createFilesTable();
     void readSettings();
     void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
-    bool findText(const QString & exp, QTextDocument::FindFlags options, bool ignoreComments = true);
+    bool findText(const QString &exp, QTextDocument::FindFlags options, bool ignoreComments = true);
 
     Highlighter *highlighter;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
@@ -83,11 +80,8 @@ private:
     QList<int> currentHeight;
     QSplitter *f_parent;
 
-
 signals:
-    void fileClicked(const QString&);
-   
+    void fileClicked(const QString &);
 };
 
-
-#endif
+#endif // FINDINFILES_H

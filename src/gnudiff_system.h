@@ -25,7 +25,6 @@
 #define GNUDIFF_SYSTEM_H
 
 
-
 /* Don't bother to support K&R C compilers any more; it's not worth
    the trouble.  These macros prevent some library modules from being
    compiled in K&R C mode.  */
@@ -35,51 +34,51 @@
 /* Verify a requirement at compile-time (unlike assert, which is runtime).  */
 #define verify(name, assertion) struct name { char a[(assertion) ? 1 : -1]; }
 
-
 /* Determine whether an integer type is signed, and its bounds.
    This code assumes two's (or one's!) complement with no holes.  */
 
 /* The extra casts work around common compiler bugs,
    e.g. Cray C 5.0.3.0 when t == time_t.  */
 #ifndef TYPE_SIGNED
-# define TYPE_SIGNED(t) (! ((t) 0 < (t) -1))
+    #define TYPE_SIGNED(t) (! ((t) 0 < (t) -1))
 #endif
 #ifndef TYPE_MINIMUM
 # define TYPE_MINIMUM(t) ((t) (TYPE_SIGNED (t) \
-			       ? ~ (t) 0 << (sizeof (t) * CHAR_BIT - 1) \
-			       : (t) 0))
+                               ? ~ (t) 0 << (sizeof (t) * CHAR_BIT - 1) \
+                               : (t) 0))
 #endif
 #ifndef TYPE_MAXIMUM
-# define TYPE_MAXIMUM(t) ((t) (~ (t) 0 - TYPE_MINIMUM (t)))
+    #define TYPE_MAXIMUM(t) ((t) (~ (t) 0 - TYPE_MINIMUM (t)))
 #endif
 
 #include <sys/types.h>
 #include <sys/stat.h>
 
-
 # include <stdlib.h>
+
 #ifndef EXIT_SUCCESS
-# define EXIT_SUCCESS 0
+    #define EXIT_SUCCESS 0
 #endif
 #if !EXIT_FAILURE
-# undef EXIT_FAILURE /* Sony NEWS-OS 4.0C defines EXIT_FAILURE to 0.  */
-# define EXIT_FAILURE 1
+    #undef EXIT_FAILURE /* Sony NEWS-OS 4.0C defines EXIT_FAILURE to 0.  */
+    #define EXIT_FAILURE 1
 #endif
 #define EXIT_TROUBLE 2
 
 #include <limits.h>
+
 #ifndef SSIZE_MAX
-# define SSIZE_MAX TYPE_MAXIMUM (ssize_t)
+    #define SSIZE_MAX TYPE_MAXIMUM (ssize_t)
 #endif
 
 #ifndef PTRDIFF_MAX
-# define PTRDIFF_MAX TYPE_MAXIMUM (ptrdiff_t)
+    #define PTRDIFF_MAX TYPE_MAXIMUM (ptrdiff_t)
 #endif
 #ifndef SIZE_MAX
-# define SIZE_MAX TYPE_MAXIMUM (size_t)
+    #define SIZE_MAX TYPE_MAXIMUM (size_t)
 #endif
 #ifndef UINTMAX_MAX
-# define UINTMAX_MAX TYPE_MAXIMUM (uintmax_t)
+    #define UINTMAX_MAX TYPE_MAXIMUM (uintmax_t)
 #endif
 
 #include <stddef.h>
@@ -108,14 +107,13 @@
 #define MIN(a, b) ((a) <= (b) ? (a) : (b))
 #define MAX(a, b) ((a) >= (b) ? (a) : (b))
 
-
 /* The integer type of a line number.  Since files are read into main
    memory, ptrdiff_t should be wide enough.  */
 
 typedef ptrdiff_t lin;
 #define LIN_MAX PTRDIFF_MAX
-verify (lin_is_signed, TYPE_SIGNED (lin));
-verify (lin_is_wide_enough, sizeof (ptrdiff_t) <= sizeof (lin));
-verify (lin_is_printable_as_long, sizeof (lin) <= sizeof (long));
+verify(lin_is_signed, TYPE_SIGNED(lin));
+verify(lin_is_wide_enough, sizeof(ptrdiff_t) <= sizeof(lin));
+verify(lin_is_printable_as_long, sizeof(lin) <= sizeof(long));
 
-#endif
+#endif // GNUDIFF_SYSTEM_H

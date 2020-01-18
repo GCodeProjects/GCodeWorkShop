@@ -20,15 +20,14 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
 #ifndef SERIALPORTCFGHELPDIALOG_H
 #define SERIALPORTCFGHELPDIALOG_H
 
 #include <QDialog>
 
-namespace Ui
-{
-    class SerialPortCfgHelpDialog;
+
+namespace Ui {
+class SerialPortCfgHelpDialog;
 }
 
 class SerialPortCfgHelpDialog : public QDialog
