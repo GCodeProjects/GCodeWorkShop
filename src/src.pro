@@ -14,6 +14,8 @@ QT *= widgets printsupport serialport network
 # moc doesn't detect Q_OS_LINUX correctly, so add this to make it work
 linux*:DEFINES += __linux__
 
+INCLUDEPATH += include/
+
 #EdytorNC
 
 SOURCES += edytornc.cpp \
@@ -107,6 +109,18 @@ FORMS += i2mdialog.ui \
     commapp.ui \
     serialportcfghelpdialog.ui \
     filechecker.ui
+
+
+# utils
+#######################################
+
+HEADERS += include/ui/longjobhelper.h
+
+SOURCES += ui/longjobhelper.cpp
+
+
+# translations
+#######################################
 
 TRANSLATIONS = edytornc_pl.ts \
     edytornc_ca.ts \
