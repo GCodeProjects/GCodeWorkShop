@@ -29,6 +29,7 @@
 #include "highlighter.h"
 #include "commoninc.h"
 #include "basic_interpreter.h"
+#include "ui/longjobhelper.h"
 
 #include "ui_mdichildform.h"
 
@@ -143,6 +144,7 @@ private:
     QPointer<QLineEdit> calcLineEdit;
     QStringList calcLineEditWordList;
     QChar inLineCalcChar;
+    LongJobHelper *m_Helper;
 
 private slots :
     void highlightCurrentLine();

@@ -1490,7 +1490,7 @@ void EdytorNc::updateWindowMenu()
 
 MdiChild *EdytorNc::createMdiChild()
 {
-    MdiChild *child = new MdiChild();
+    MdiChild *child = new MdiChild(this);
     mdiArea->addSubWindow(child);
     //    child->setFileChangeMonitor(fileChangeMonitor);
 

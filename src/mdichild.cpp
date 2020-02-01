@@ -51,6 +51,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(textEdit, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(showContextMenu(const QPoint &)));
+    m_Helper = new LongJobHelper(parent);
 }
 
 MdiChild::~MdiChild()
@@ -58,6 +59,8 @@ MdiChild::~MdiChild()
     if (highlighter != NULL) {
         delete highlighter;
     }
+
+    delete m_Helper;
 }
 
 void MdiChild::newFile()
@@ -931,10 +934,14 @@ void MdiChild::doRemoveSpace()
     int i;
     QString tx;
 
-    QApplication::setOverrideCursor(Qt::BusyCursor);
     tx = textEdit->toPlainText();
+    m_Helper->begin(tx.length(), tr("Remove space", "Slow operation title in MDIChild"));
 
     for (i = 0; i < tx.length(); i++) {
+        if (m_Helper->check(i) == LongJobHelper::CANCEL) {
+            return;
+        }
+
         if (tx.at(i) == QLatin1Char('('))
             do {
                 i++;
@@ -968,12 +975,12 @@ void MdiChild::doRemoveSpace()
         }
     }
 
+    m_Helper->end();
     textEdit->selectAll();
     textEdit->insertPlainText(tx);
     QTextCursor cursor = textEdit->textCursor();
     cursor.setPosition(0);
     textEdit->setTextCursor(cursor);
-    QApplication::restoreOverrideCursor();
 }
 
 void MdiChild::doRemoveEmptyLines()
@@ -1066,15 +1073,19 @@ void MdiChild::doInsertSpace()
     QString tx;
     QRegExp exp;
 
-    QApplication::setOverrideCursor(Qt::BusyCursor);
     exp.setCaseSensitivity(Qt::CaseInsensitive);
 
     exp.setPattern("[A-Z]+|[#@;:(\\']");
 
     tx = textEdit->toPlainText();
     pos = 1;
+    m_Helper->begin(tx.length(), tr("Insert space", "Slow operation title in MDIChild"));
 
     while ((pos = tx.indexOf(exp, pos)) > 0) {
+        if (m_Helper->check(pos) == LongJobHelper::CANCEL) {
+            return;
+        }
+
         while (1) {
 
             if (tx.at(pos) == QLatin1Char('(')) {
@@ -1144,12 +1155,12 @@ void MdiChild::doInsertSpace()
         pos +=  exp.matchedLength();
     }
 
+    m_Helper->end();
     textEdit->selectAll();
     textEdit->insertPlainText(tx);
     QTextCursor cursor = textEdit->textCursor();
     cursor.setPosition(0);
     textEdit->setTextCursor(cursor);
-    QApplication::restoreOverrideCursor();
 }
 
 void MdiChild::doInsertDot()
