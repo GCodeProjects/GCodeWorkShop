@@ -931,56 +931,101 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
 
 void MdiChild::doRemoveSpace()
 {
-    int i;
-    QString tx;
+    enum {
+        NORMAL_FLOW,
+        AFTER_APOSTROPHE,
+        AFTER_PARETHESIS,
+        AFTER_SEMICOLON
+    } state = NORMAL_FLOW;
 
-    tx = textEdit->toPlainText();
+    QString *updatedText = new QString();
+    QString tx = textEdit->toPlainText();
+    int pos = 0;
+    bool wasLetter = false;
+    bool skipChar;
+    bool openAddress = false;
+    bool hasChanged = false;
+    QChar currentChar = 0;
+
     m_Helper->begin(tx.length(), tr("Remove space", "Slow operation title in MDIChild"));
 
-    for (i = 0; i < tx.length(); i++) {
-        if (m_Helper->check(i) == LongJobHelper::CANCEL) {
+    while (pos < tx.length()) {
+        if (m_Helper->check(pos) == LongJobHelper::CANCEL) {
             return;
         }
 
-        if (tx.at(i) == QLatin1Char('('))
-            do {
-                i++;
+        currentChar = tx.at(pos++);
+        skipChar = false;
 
-                if (i > tx.length()) {
-                    break;
+        switch (state) {
+        case AFTER_APOSTROPHE:
+            if (currentChar == '\'' || currentChar == '\n') {
+                state = NORMAL_FLOW;
+            }
+
+            break;
+
+        case AFTER_PARETHESIS:
+            if (currentChar == ')' || currentChar == '\n') {
+                state = NORMAL_FLOW;
+            }
+
+            break;
+
+        case AFTER_SEMICOLON:
+            if (currentChar == '\n') {
+                state = NORMAL_FLOW;
+            }
+
+            break;
+
+        default:
+            if (currentChar == '\'') {
+                state = AFTER_APOSTROPHE;
+            } else if (currentChar == '(') {
+                state = AFTER_PARETHESIS;
+            } else if (currentChar == ';') {
+                state = AFTER_SEMICOLON;
+            } else {
+                if (currentChar == ' ' || currentChar == '\t') {
+                    skipChar = true;
+                    hasChanged = true;
+
+                    if (wasLetter) {
+                        openAddress = true;
+                    }
+                } else if ((currentChar >= 'A' && currentChar <= 'Z') ||
+                           (currentChar >= 'a' && currentChar <= 'z') ||
+                           currentChar == '#') {
+                    if (openAddress) {
+                        updatedText->append(' ');
+                    }
+
+                    wasLetter = true;
+                    openAddress = false;
+                } else {
+                    wasLetter = false;
+                    openAddress = false;
                 }
-            } while (!((tx.at(i) == QLatin1Char(')')) || (tx.at(i) == QLatin1Char('\n'))));
+            }
+        }
 
-        if (tx.at(i) == QLatin1Char('\''))
-            do {
-                i++;
-
-                if (i > tx.length()) {
-                    break;
-                }
-            } while (!((tx.at(i) == QLatin1Char('\'')) || (tx.at(i) == QLatin1Char('\n'))));
-
-        if (tx.at(i) == QLatin1Char(';'))
-            do {
-                i++;
-
-                if (i > tx.length()) {
-                    break;
-                }
-            } while (!((tx.at(i) == QLatin1Char('\n'))));
-
-        if (tx.at(i) == ' ' || tx.at(i) == '\t') {
-            tx.remove(i, 1);
-            i--;
+        if (!skipChar) {
+            updatedText->append(currentChar);
         }
     }
 
     m_Helper->end();
-    textEdit->selectAll();
-    textEdit->insertPlainText(tx);
-    QTextCursor cursor = textEdit->textCursor();
-    cursor.setPosition(0);
-    textEdit->setTextCursor(cursor);
+
+    if (hasChanged) {
+        textEdit->selectAll();
+        textEdit->insertPlainText(*updatedText);
+        QTextCursor cursor = textEdit->textCursor();
+        cursor.setPosition(0);
+        textEdit->setTextCursor(cursor);
+    }
+
+    delete updatedText;
 }
 
 void MdiChild::doRemoveEmptyLines()
