@@ -515,6 +515,8 @@ private:
 
 class OptionEncodingComboBox : public QComboBox, public OptionItem
 {
+    Q_OBJECT // for work translations
+
     std::vector<QTextCodec *> m_codecVec;
     QTextCodec **m_ppVarCodec;
 public:

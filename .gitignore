@@ -1,6 +1,7 @@
 
 bin/
 build/
+lang/*.qm
 
 /edytornc.pro.user
 *.autosave

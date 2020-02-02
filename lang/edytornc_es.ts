@@ -570,12 +570,8 @@
         <translation>&lt;P&gt;Versión: </translation>
     </message>
     <message>
-        <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation>&lt;P&gt;Traducción al catalán y deb package gracias aJordi Sayol i Salomó</translation>
+        <translation type="vanished">&lt;P&gt;Traducción al catalán y deb package gracias aJordi Sayol i Salomó</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
@@ -599,10 +595,6 @@
     </message>
     <message>
         <source>&lt;P&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
         <translation></translation>
     </message>
     <message>
@@ -1517,7 +1509,7 @@
     </message>
     <message>
         <source>&lt;br /&gt;Spanish translation and other fixes thanks to Otto Huamani</source>
-        <translation>&lt;br /&gt;Traducción al castellano y otras correcciones gracias a Otto Huamaní</translation>
+        <translation type="vanished">&lt;br /&gt;Traducción al castellano y otras correcciones gracias a Otto Huamaní</translation>
     </message>
     <message>
         <source>Pr&amp;int preview</source>
@@ -1644,6 +1636,18 @@ Los ítems con títulos no vacíos no son borrados automáticamente.</translatio
     <message>
         <source>Ctrl+0</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2451,6 +2455,16 @@ Comprobar +-*/.
 </source>
         <translation>Puedes usar:
 </translation>
+    </message>
+    <message>
+        <source>Remove space</source>
+        <comment>Slow operation title in MDIChild</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert space</source>
+        <comment>Slow operation title in MDIChild</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3678,6 +3692,14 @@ Vailid QtRegExp should be entered.</source>
         <translation>Usa esto para remover algunos caracteres no deseados de los datos recibidos.
 Debería ser ingresado un QTRegExp válido.</translation>
     </message>
+    <message>
+        <source>300</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>600</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SerialTransmissionDialog</name>
@@ -4804,6 +4826,10 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     <message>
         <source>Remember the values at closing</source>
         <translation>Recordar los valores al cerrar</translation>
+    </message>
+    <message>
+        <source>Decimals</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

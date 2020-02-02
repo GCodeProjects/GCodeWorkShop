@@ -119,32 +119,44 @@ HEADERS += include/ui/longjobhelper.h
 SOURCES += ui/longjobhelper.cpp
 
 
-# translations
+# resources
 #######################################
-
-TRANSLATIONS = edytornc_pl.ts \
-    edytornc_ca.ts \
-    edytornc_de.ts \
-    edytornc_fi.ts \
-    edytornc_cs_CZ.ts \
-    edytornc_es.ts
 
 RESOURCES = application.qrc
 RC_FILE = edytornc.rc
 
-QMAKE_EXTRA_TARGETS += update debug release translate
 
-update.commands = lupdate src.pro
-update.depends = $$SOURCES $$HEADERS $$FORMS $$TRANSLATIONS
-release.commands = lrelease src.pro
-release.depends = update
-debug.commands = lrelease src.pro
-debug.depends = update
-translate.path = $${PREFIX}/share/edytornc/lang/
-translate.files = ./*.qm
-translate.depends = release
+# translations
+#######################################
+
+TRANSLATIONS = ../lang/edytornc_pl.ts \
+    ../lang/edytornc_ca.ts \
+    ../lang/edytornc_de.ts \
+    ../lang/edytornc_fi.ts \
+    ../lang/edytornc_cs_CZ.ts \
+    ../lang/edytornc_es.ts
+
+QMAKE_EXTRA_TARGETS += langupdate langrelease translate
+
+langupdate.target = lang_update
+langupdate.commands = lupdate src.pro
+langupdate.depends = $$SOURCES $$HEADERS $$FORMS $$TRANSLATIONS
+langrelease.commands = lrelease src.pro
+#langrelease.depends = langupdate
+translate.files = ../lang/*.qm
+translate.depends = langrelease
+#PRE_TARGETDEPS += lang_update
+
+
+# other files
+#######################################
+
 examples.files = ../examples/*
 doc.files = ../README.md
+
+
+# target platforms dependencies
+#######################################
 
 unix {
     mime.files = ../install/linux/application-x-g-code.xml
@@ -160,6 +172,7 @@ unix {
     desktop.path = $${PREFIX}/share/applications/
     mimetypes.path = $${PREFIX}/share/icons/hicolor/32x32/mimetypes/
     icon.path = $${PREFIX}/share/icons/hicolor/48x48/apps/
+    translate.path = $${APP_PATH}/share/edytornc/lang/
     INSTALLS += target translate mime desktop mimetypes icon examples doc
 }
 
