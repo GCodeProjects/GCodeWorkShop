@@ -987,6 +987,8 @@ void MdiChild::doRemoveSpace()
             } else if (currentChar == ';') {
                 state = AFTER_SEMICOLON;
             } else {
+                // Some spaces are not removed to avoid merging words.
+                // If there are letters before and after spaces, then one space is left.
                 if (currentChar == ' ' || currentChar == '\t') {
                     skipChar = true;
                     hasChanged = true;
@@ -1114,98 +1116,111 @@ void MdiChild::doInsertEmptyLines()
 
 void MdiChild::doInsertSpace()
 {
-    int pos;
-    QString tx;
-    QRegExp exp;
+    enum {
+        NORMAL_FLOW,
+        AFTER_APOSTROPHE,
+        AFTER_PARETHESIS,
+        AFTER_SEMICOLON
+    } state = NORMAL_FLOW;
 
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
+    int pos = 0;
+    QChar currentChar = 0;
+    QChar previosChar = 0;
+    bool hasChanged = false;
 
-    exp.setPattern("[A-Z]+|[#@;:(\\']");
+    QString *updatedText = new QString();
+    QString tx = textEdit->toPlainText();
 
-    tx = textEdit->toPlainText();
-    pos = 1;
     m_Helper->begin(tx.length(), tr("Insert space", "Slow operation title in MDIChild"));
 
-    while ((pos = tx.indexOf(exp, pos)) > 0) {
+    while (pos < tx.length()) {
         if (m_Helper->check(pos) == LongJobHelper::CANCEL) {
             return;
         }
 
-        while (1) {
+        previosChar = currentChar;
+        currentChar = tx.at(pos++);
+        bool insert = false;
 
-            if (tx.at(pos) == QLatin1Char('(')) {
-                if ((tx.at(pos - 1) != QLatin1Char(' ')) && (tx.at(pos - 1) != QLatin1Char('\n'))) {
-                    tx.insert(pos, QLatin1Char(' '));
-                    pos++;
-                }
-
-                do {
-                    pos++;
-
-                    if (pos > tx.length()) {
-                        break;
-                    }
-                } while (!((tx.at(pos) == QLatin1Char(')')) || (tx.at(pos) == QLatin1Char('\n'))));
-
-                break;
-            }
-
-            if (tx.at(pos) == QLatin1Char(';')) {
-                if ((tx.at(pos - 1) != QLatin1Char(' ')) && (tx.at(pos - 1) != QLatin1Char('\n'))) {
-                    tx.insert(pos, QLatin1Char(' '));
-                    pos++;
-                }
-
-                do {
-                    pos++;
-
-                    if (pos > tx.length()) {
-                        break;
-                    }
-                } while (!((tx.at(pos) == QLatin1Char('\n'))));
-
-                break;
-            }
-
-            if (tx.at(pos) == QLatin1Char('\'')) {
-                do {
-                    pos++;
-
-                    if (pos > tx.length()) {
-                        break;
-                    }
-                } while (!((tx.at(pos) == QLatin1Char('\'')) || (tx.at(pos) == QLatin1Char('\n'))));
-
-                break;
-            }
-
-            if ((tx.at(pos) == QLatin1Char('#'))) {
-                if (tx.at(pos - 1).isDigit()) {
-                    tx.insert(pos, QLatin1Char(' '));
-                    pos++;
-                }
-
-                break;
-            }
-
-            if ((tx.at(pos - 1) != QLatin1Char(' ')) && (tx.at(pos - 1) != QLatin1Char('\n'))) {
-                tx.insert(pos, QLatin1Char(' '));
-                pos++;
-                break;
+        switch (state) {
+        case AFTER_APOSTROPHE:
+            if (currentChar == '\'' || currentChar == '\n') {
+                state = NORMAL_FLOW;
             }
 
             break;
+
+        case AFTER_PARETHESIS:
+            if (currentChar == ')' || currentChar == '\n') {
+                state = NORMAL_FLOW;
+            }
+
+            break;
+
+        case AFTER_SEMICOLON:
+            if (currentChar == '\n') {
+                state = NORMAL_FLOW;
+            }
+
+            break;
+
+        default:
+            if (currentChar == '\'') {
+                state = AFTER_APOSTROPHE;
+
+                if (previosChar != ' ' && previosChar != '\n') {
+                    insert = true;
+                }
+            } else if (currentChar == '(') {
+                state = AFTER_PARETHESIS;
+
+                if (previosChar != ' ' && previosChar != '\n') {
+                    insert = true;
+                }
+            } else if (currentChar == ';') {
+                state = AFTER_SEMICOLON;
+
+                if (previosChar != ' ' && previosChar != '\n') {
+                    insert = true;
+                }
+            } else if (previosChar == ' ' || currentChar == ' ') {
+                // do nothing
+            } else if (previosChar == '\n') {
+                // do nothing
+            } else if (currentChar == '#' && previosChar != '#' && previosChar != '['
+                       && previosChar != '-' && previosChar != '+' && previosChar != '*'
+                       && previosChar != '/' && previosChar != '=') {
+                insert = true;
+            } else if ((previosChar >= 'A' && previosChar <= 'Z') ||
+                       (previosChar >= 'a' && previosChar <= 'z') ||
+                       previosChar == ',') {
+                // do nothing
+            } else if ((currentChar >= 'A' && currentChar <= 'Z') ||
+                       (currentChar >= 'A' && currentChar <= 'Z') ||
+                       currentChar == ',') {
+                insert = true;
+            }
         }
 
-        pos +=  exp.matchedLength();
+        if (insert) {
+            hasChanged = true;
+            updatedText->append(' ');
+        }
+
+        updatedText->append(currentChar);
     }
 
     m_Helper->end();
-    textEdit->selectAll();
-    textEdit->insertPlainText(tx);
-    QTextCursor cursor = textEdit->textCursor();
-    cursor.setPosition(0);
-    textEdit->setTextCursor(cursor);
+
+    if (hasChanged) {
+        textEdit->selectAll();
+        textEdit->insertPlainText(*updatedText);
+        QTextCursor cursor = textEdit->textCursor();
+        cursor.setPosition(0);
+        textEdit->setTextCursor(cursor);
+    }
+
+    delete updatedText;
 }
 
 void MdiChild::doInsertDot()
