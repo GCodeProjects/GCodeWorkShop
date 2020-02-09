@@ -29,3 +29,23 @@ OBJECTS_DIR = $${BUILD_PATH}/obj/
 LIBS += -L$${LIBS_PATH}/
 INCLUDEPATH += $${INC_PATH}/
 INCLUDEPATH += $${IMPORT_PATH}/
+
+
+#
+# function findFiles(dir, basename)
+# Returns a list of files with this basename.
+# The function searches for dir and subdir recursively.
+#
+defineReplace(findFiles) {
+    dir = $$1
+    basemane = $$2
+
+    file_list = $$files($$dir/$$basemane)
+    path_list = $$files($$dir/*)
+
+    for(path, path_list) {
+        file_list += $$findFiles($$path, $$basemane)
+    }
+
+    return ($$file_list)
+}

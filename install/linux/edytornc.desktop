@@ -1,21 +1,18 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
+Type=Application
 Categories=Development;
-Comment[pl]=G-code QT text editor
-Comment=G-code QT text editor
-Exec=/home/artur/Dokumenty/Projekty/edytornc-build-Desktop-Release/bin/x86_64/edytornc
-GenericName[pl]=
-GenericName=
-Icon=/home/artur/Dokumenty/Projekty/edytornc/src/images/edytornc48.png
-MimeType=
-Name[pl]=EdytorNC
+Version=1.0
+
 Name=EdytorNC
-Path=
+GenericName=G-code text editor
+Comment=The EdytorNC is text editor for CNC programmers.
+Comment[pl]=EdytorNC jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.
+
+Exec=edytornc %F
+Icon=edytornc
+MimeType=application/x-g-code;
+
 StartupNotify=true
 Terminal=false
-TerminalOptions=
-Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

@@ -159,21 +159,23 @@ doc.files = ../README.md
 #######################################
 
 unix {
+    PREFIX = /usr/local/
+
     mime.files = ../install/linux/application-x-g-code.xml
-    mimetypes.files = ../install/images/application-x-g-code.png
     desktop.files = ../install/linux/edytornc.desktop
-    icon.files = ../install/linux/images/edytornc.png
     examples.path = $${PREFIX}/share/edytornc/examples
     doc.path = $${PREFIX}/share/doc/edytornc/
-    UNAME = $$system(uname -a)
-    contains( UNAME, x86_64 ):TARGET = ../bin/x86_64/edytornc
     target.path = $${PREFIX}/bin
     mime.path = $${PREFIX}/share/mime/packages/
     desktop.path = $${PREFIX}/share/applications/
-    mimetypes.path = $${PREFIX}/share/icons/hicolor/32x32/mimetypes/
-    icon.path = $${PREFIX}/share/icons/hicolor/48x48/apps/
-    translate.path = $${APP_PATH}/share/edytornc/lang/
-    INSTALLS += target translate mime desktop mimetypes icon examples doc
+    translate.path = $${PREFIX}/share/edytornc/lang/
+
+    ICONS_BASE_PATH = $$PROJECT_ROOT_PATH/install/linux/images/
+    icons.base = $$ICONS_BASE_PATH
+    icons.files = $$findFiles($$ICONS_BASE_PATH, *.png)
+    icons.path = $${PREFIX}/share/icons/
+
+    INSTALLS += target translate mime desktop icons examples doc
 }
 
 macx {
@@ -184,3 +186,4 @@ win32 {
     DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
     LIBS += -lsetupapi -ladvapi32 -luser32
 }
+
