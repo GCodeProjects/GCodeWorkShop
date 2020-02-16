@@ -23,18 +23,16 @@
 
 LongJobHelper::LongJobHelper(QWidget *parent,
                              const QString &title,
-                             int lazyCheck,
                              int deadLine):
     m_ProgressDialog(parent, Qt::Dialog)
 {
-    m_LazyCheck = lazyCheck;
     m_DeadLine = deadLine;
     m_ProgressDialog.setWindowModality(Qt::WindowModal);
     m_ProgressDialog.setWindowTitle(title);
     m_ProgressDialog.cancel();
 }
 
-void LongJobHelper::begin(int maximum, const QString &message)
+void LongJobHelper::begin(int maximum, const QString &message, int lazyCheck)
 {
     m_Maximum = maximum;
     m_Message = message;
@@ -42,6 +40,7 @@ void LongJobHelper::begin(int maximum, const QString &message)
     m_StartPoint = clock();
     m_TotalTime = 0;
     m_CheckCount = 0;
+    m_LazyCheck = lazyCheck;
     QApplication::setOverrideCursor(Qt::BusyCursor);
 }
 
@@ -63,9 +62,9 @@ int LongJobHelper::real_check(int progress)
     m_TotalTime = time_ms();
 
     if (!m_IsLongJob) {
-        clock_t remaining = m_TotalTime * m_Maximum / (m_Maximum - progress);
+        int remaining = m_TotalTime * m_Maximum / (m_Maximum - progress);
 
-        if (remaining > m_DeadLine) {
+        if (m_TotalTime > m_DeadLine || remaining > m_DeadLine) {
             m_IsLongJob = true;
             m_ProgressDialog.setLabelText(m_Message);
             m_ProgressDialog.setRange(0, m_Maximum);

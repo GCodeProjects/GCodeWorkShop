@@ -63,13 +63,11 @@ public:
      * @brief Construct LongJobHelper
      * @param parent A parent widget for QProgressDialog.
      * @param title A title for QProgressDialog.
-     * @param lazyCheck The function check() does the real check once from lazyCheck.
      * @param deadLine Allowable time to execute operation without show
      *        QProgressDialog, in msec.
      */
     LongJobHelper(QWidget *parent = 0,
                   const QString &title = "Slow operation",
-                  int lazyCheck = DEFAULT_LAZY_CHECK,
                   int deadLine = DEFAULT_DEADLINE);
     ~LongJobHelper() {;}
 
@@ -79,8 +77,9 @@ public:
      * @param maximum Maximum number of iteration. It used to calculate remaining time of
      *        execute operation and to show progress bar.
      * @param message
+     * @param lazyCheck The function check() does the real check once from lazyCheck.
      */
-    void begin(int maximum, const QString &message);
+    void begin(int maximum, const QString &message, int lazyCheck = DEFAULT_LAZY_CHECK);
 
     /**
      * @brief End of checks.
