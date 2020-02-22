@@ -1,15 +1,6 @@
 ## EdytorNC
 
-EdytorNC is text editor for CNC programmers.
-
-http://sourceforge.net/projects/edytornc/
-
-EdytorNC Google Plus Community: https://plus.google.com/communities/117267107585407507443/
-
-Any user feedback are welcomed.
-
-Source code of EdytorNC can be downloaded from SVN server on sourceforge.net (http://sourceforge.net/p/edytornc/code/HEAD/tree/)
-
+This is a [fork](http://sourceforge.net/projects/edytornc/) of EdytorNC, a text editor for CNC programmers.
 
 ### Some features
 
@@ -31,7 +22,7 @@ Source code of EdytorNC can be downloaded from SVN server on sourceforge.net (ht
 
     Currently tooltip file contains some information about codes for OKUMA, SINUMERIK 850 and FANUC.
 
-	  Code colourizing detects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC
+    Code colourizing detects control type by 'in file' file name eg. : $EXAMPLE.MIN%  $SUBS.SSB% - OKUMA; :0110 O1234 - FANUC
 *   Ctrl+;  Comments/uncomments selected text with semicolon ;
 *   Ctrl+9  Comments/uncomments selected text with parentheses ()
 *   Ctrl+2  Adds Block Skip (/) and/or increments it
@@ -63,36 +54,23 @@ Source code of EdytorNC can be downloaded from SVN server on sourceforge.net (ht
     diff two files -> edytornc -diff file1.nc file2.nc
 
 
-EdytorNC is developed in QT Creator (best for compile EdytorNC) (libs Qt 5.4) : http://www.qtsoftware.com/products/developer-tools
-Cross platform installer made by BitRock InstallBuilder for Qt : http://installbuilder.bitrock.com
-
-If you have any suggestion (bug/translations mistakes) about EdytorNC please email me - artkoz78(at)gmail.com.
-
-
 ### Compile EdytorNC
-- install Qt5 SDK. Download: http://www.qt.io/download-open-source/#section-2  or use your software manager
-- download latest version of EdytorNC source files (http://sourceforge.net/p/edytornc/code/HEAD/tree/  Click on "Download Snapshot")
+
+#### Ubuntu
+
+run terminal
+
+    sudo apt install qt5-default qtbase5-dev-tools qt5-qmake
+    cd ~
+    git clone https://github.com/u-235/edytornc.git
+    cd edytornc
+    qmake
+    make
+
+#### Windows
+
+- [Install Qt5](http://www.qt.io/download-open-source)
+- download latest version of EdytorNC [source files](https://github.com/u-235/edytornc/archive/master.zip)
 - unzip downloaded file
-- run Terminal (Console application)
-- go to the EdytorNC src directory (cd /user_dir/unzipped_folder)
-
-  - run qmake (this creates proper Makefile)
-  - run make clean
-  - run make (there is no make install)
-  - go to (cd /user_dir/unzipped_folder/bin) and execute edytornc file
-
-   or
-
-  - open edytornc.pro in Qt Creator
-  - press Ctrl+R
-
-http://wiki.qt.io/Deploying-Windows-Applications
-
-To translate EdytorNC to your language you may use "Qt Linguist Download"
-http://qt-apps.org/content/show.php/Qt+Linguist+Download?content=89360
-Qt Linguist maybe also included in Qt SDK
-More about translations : http://doc.qt.io/qt-5/qtlinguist-index.html
-
-
-
-
+- open edytornc.pro in Qt Creator
+- press Ctrl+R
