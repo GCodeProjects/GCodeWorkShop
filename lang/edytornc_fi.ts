@@ -217,15 +217,6 @@
 </source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Add comments</source>
-        <translation type="obsolete">Lisää kommentteja</translation>
-    </message>
-    <message>
-        <source>(Diameter: %1, no. of holes: %2, start angle: %3)
-</source>
-        <translation type="obsolete">(Halkaisija: %1, reikien lkm.: %2, aloituskulma: %3)</translation>
-    </message>
 </context>
 <context>
     <name>ChamferDialog</name>
@@ -295,10 +286,6 @@
 </context>
 <context>
     <name>CommApp</name>
-    <message>
-        <source>MainWindow</source>
-        <translation type="obsolete">Pääikkuna</translation>
-    </message>
     <message>
         <location filename="../src/commapp.ui" line="77"/>
         <source>&amp;File</source>
@@ -372,14 +359,6 @@
         <location filename="../src/commapp.cpp" line="219"/>
         <source>Minimize to system tray</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Sulje</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Sulje</translation>
     </message>
     <message>
         <location filename="../src/commapp.cpp" line="222"/>
@@ -487,43 +466,6 @@
         <location filename="../src/commapp.cpp" line="566"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DiffTextWindow</name>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="381"/>
-        <source>File</source>
-        <translation>Tiedosto</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="384"/>
-        <source>Line</source>
-        <translation>Rivi</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="386"/>
-        <source>Line not available</source>
-        <translation>Ei riviä</translation>
-    </message>
-</context>
-<context>
-    <name>DiffTextWindowFrame</name>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="1794"/>
-        <location filename="../src/difftextwindow.cpp" line="1977"/>
-        <source>Open file...</source>
-        <translation>Avaa tiedosto...</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="1888"/>
-        <source>Top line</source>
-        <translation>Ylin rivi</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="1898"/>
-        <source>End</source>
-        <translation>Loppu</translation>
     </message>
 </context>
 <context>
@@ -668,10 +610,6 @@ Items with non empty titles are not deleted automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Part</source>
-        <translation type="vanished">Osa</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.ui" line="534"/>
         <location filename="../src/edytornc.cpp" line="3559"/>
         <source>File Name</source>
@@ -759,15 +697,6 @@ Items with non empty titles are not deleted automatically.</source>
         <translation>&lt;P&gt;Versio: </translation>
     </message>
     <message>
-        <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <oldsource>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i SalomÃ³</oldsource>
-        <translation type="vanished">&lt;P&gt;Katalaaninkielinen käännös ja deb paketti: Jordi Sayol i Salomó</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
-        <translation type="vanished">&lt;br /&gt;Saksankielinen käännös: Michael Numberger</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="1275"/>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
         <oldsource>&lt;br&gt;Czech translation thanks to Pavel Fric</oldsource>
@@ -794,14 +723,6 @@ Items with non empty titles are not deleted automatically.</source>
         <location filename="../src/edytornc.cpp" line="1288"/>
         <source>&lt;P&gt;</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
-        <translation type="vanished">&lt;P&gt;Asennusohjelma tehty &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;EdytorNC on saanut palkinnon: &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1287"/>
@@ -889,17 +810,9 @@ Items with non empty titles are not deleted automatically.</source>
         <translation>Avaa esimerkkitiedosto</translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Tallenna</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="1542"/>
         <source>Save the document to disk</source>
         <translation>Tallenna tiedosto levylle</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="vanished">Tallenna &amp;nimellä...</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1553"/>
@@ -1335,10 +1248,6 @@ Items with non empty titles are not deleted automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cl&amp;ose</source>
-        <translation type="vanished">&amp;Sulje</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="1793"/>
         <source>Close the active window</source>
         <translation>Sulje avoinna oleva ikkuna</translation>
@@ -1352,14 +1261,6 @@ Items with non empty titles are not deleted automatically.</source>
         <location filename="../src/edytornc.cpp" line="1797"/>
         <source>Close all the windows</source>
         <translation>Sulje kaikki ikkunat</translation>
-    </message>
-    <message>
-        <source>&amp;Tile</source>
-        <translation type="vanished">&amp;Vierekkäin</translation>
-    </message>
-    <message>
-        <source>Tile the windows</source>
-        <translation type="vanished">Aseta ikkunat vierekkäin</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1808"/>
@@ -1791,102 +1692,6 @@ Close anyway?</source>
         <translation>Oletus</translation>
     </message>
     <message>
-        <source>Sending...</source>
-        <translation type="vanished">Lähetetään...</translation>
-    </message>
-    <message>
-        <source>Waiting...</source>
-        <translation type="vanished">Odotetaan...</translation>
-    </message>
-    <message>
-        <source>Start in %1s</source>
-        <translation type="vanished">Aloitetaan %1s päästä</translation>
-    </message>
-    <message>
-        <source>Waiting for a signal readiness...</source>
-        <translation type="vanished">Odotetaan työstökonetta...</translation>
-    </message>
-    <message>
-        <source>Sending byte %1 of %2</source>
-        <translation type="vanished">Lähetetään tavu %1 / %2</translation>
-    </message>
-    <message>
-        <source>Receiving...</source>
-        <translation type="vanished">Vastaanotetaan...</translation>
-    </message>
-    <message>
-        <source>Waiting for data...</source>
-        <translation type="vanished">Odotetaan dataa...</translation>
-    </message>
-    <message>
-        <source>Reciving byte %1</source>
-        <translation type="vanished">Vastaanotetaan tavua %1</translation>
-    </message>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="vanished">Tuntematon laitetiedosto (porttia ei voitu avata)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="vanished">Virhe varattaessa muistia</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal</source>
-        <translation type="vanished">Tuntematon signaali</translation>
-    </message>
-    <message>
-        <source>Operation timed out</source>
-        <translation type="vanished">Operaation aika ylittyi</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="vanished">Avattu tiedosto ei ole sarjaporttilaite</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="vanished">Break-tila havaittu</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="vanished">Kehysvirhe (väärä nopeus valittu?)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="vanished">I/O virhe</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="vanished">Merkkipuskuri ylitetty</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="vanished">Vastaanottopuskurin ylivuoto</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="vanished">Pariteettivirhe</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="vanished">Lähetyspuskurin ylivuoto</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="vanished">Määrittelemätön lukuvirhe</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="vanished">Määrittelemätön kirjoitusvirhe</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="vanished">Ei virhettä</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Tuntematon virhe</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="2954"/>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation># ++++++ ESIMERKKI ++++++</translation>
@@ -1895,78 +1700,6 @@ Close anyway?</source>
         <location filename="../src/edytornc.cpp" line="2956"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
         <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - ohjelman pysäytys, ehdoton&quot;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
-        <translation type="obsolete">&lt;b&gt;M00&lt;/b&gt; - ohjelman pysäytys, ehdoton</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M01&lt;/b&gt; - optional program stop</source>
-        <translation type="obsolete">&lt;b&gt;M01&lt;/b&gt; - Valinnainen ohjelman pysäytys</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M02&lt;/b&gt; - end of program</source>
-        <translation type="obsolete">&lt;b&gt;M02&lt;/b&gt; - Ohjelman loppu</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M03&lt;/b&gt; - start spindle CW</source>
-        <translation type="obsolete">&lt;b&gt;M03&lt;/b&gt; - käynnistä kara myötäpäivään</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M04&lt;/b&gt; - start spindle CCW</source>
-        <translation type="obsolete">&lt;b&gt;M04&lt;/b&gt; - käynnistä kara vastapäivään</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M05&lt;/b&gt; - spindle stop</source>
-        <translation type="obsolete">&lt;b&gt;M05&lt;/b&gt; - pysäytä kara</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M06&lt;/b&gt; - tool change</source>
-        <translation type="obsolete">&lt;b&gt;M06&lt;/b&gt; - työkalun vaihto</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M08&lt;/b&gt; - coolant on</source>
-        <translation type="obsolete">&lt;b&gt;M08&lt;/b&gt; - jäähdytys päälle</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M09&lt;/b&gt; - coolant off</source>
-        <translation type="obsolete">&lt;b&gt;M09&lt;/b&gt; - jäähdytys pois</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M12&lt;/b&gt; - M-tool spindle STOP</source>
-        <translation type="obsolete">&lt;b&gt;M12&lt;/b&gt; - Työkalun karan pysäytys</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M13&lt;/b&gt; - M-tool spindle CW</source>
-        <translation type="obsolete">&lt;b&gt;M13&lt;/b&gt; - Työkalukara myötäpäivään</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M14&lt;/b&gt; - M-tool spindle CCW</source>
-        <translation type="obsolete">&lt;b&gt;M14&lt;/b&gt; - Työkalukara vastapäivään</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M30&lt;/b&gt; - end of program</source>
-        <translation type="obsolete">&lt;b&gt;M30&lt;/b&gt; - ohjelman lopetus</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M40&lt;/b&gt; - spindle gear range neutral</source>
-        <translation type="obsolete">&lt;b&gt;M40&lt;/b&gt; - karan vaihde vapaalle</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M41&lt;/b&gt; - spindle gear range 1</source>
-        <translation type="obsolete">&lt;b&gt;M41&lt;/b&gt; - karan vaihde 1</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 2</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - karan vaihde 2</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M43&lt;/b&gt; - spindle gear range 3</source>
-        <translation type="obsolete">&lt;b&gt;M43&lt;/b&gt; - karan vaihde 3</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 4</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - karan vaihde 4</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1278"/>
@@ -2081,18 +1814,6 @@ Close anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;M44&lt;/b&gt; - spindle gear range 4</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - karan vaihde 4 {44&lt;?}</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M58&lt;/b&gt; - chucking pressure low</source>
-        <translation type="obsolete">&lt;b&gt;M58&lt;/b&gt; - pakan paine matala</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M59&lt;/b&gt; - chucking pressure high</source>
-        <translation type="obsolete">&lt;b&gt;M59&lt;/b&gt; - pakan paine korkea</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="3074"/>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
         <translation type="unfinished"></translation>
@@ -2101,14 +1822,6 @@ Close anyway?</source>
         <location filename="../src/edytornc.cpp" line="3084"/>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
-        <translation type="obsolete">Kaikki tiedostot (*.* *);;CNC-Tiedostot *.nc (*.nc);;CNC-Tiedostot *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Dokumentit *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Piirrokset *.dwg *.dxf (*.dwg *.dxf);;Kuvat *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Tekstitiedostot *.txt (*.txt)</translation>
-    </message>
-    <message>
-        <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
-        <translation type="obsolete">Kaikki tiedostot (*.* *);;CNC-Tiedostot *.nc (*.nc);;CNC-Tiedostot *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Dokumentit *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Piirrokset *.dwg *.dxf (*.dwg *.dxf);;Kuvat *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Tekstitiedostot *.txt (*.txt)</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="3160"/>
@@ -2257,14 +1970,6 @@ Close anyway?</source>
         <translation>Fz :</translation>
     </message>
     <message>
-        <source>Feed per tooth (mm)</source>
-        <translation type="vanished">Syöttö per hammas (mm)</translation>
-    </message>
-    <message>
-        <source>0.2</source>
-        <translation type="vanished">0.2</translation>
-    </message>
-    <message>
         <location filename="../src/feedsdialog.ui" line="143"/>
         <source>Tool diameter</source>
         <translation>Terän halkaisija</translation>
@@ -2308,10 +2013,6 @@ Close anyway?</source>
         <location filename="../src/feedsdialog.ui" line="210"/>
         <source>S :</source>
         <translation>S :</translation>
-    </message>
-    <message>
-        <source>Spindle speed (r/min)</source>
-        <translation type="vanished">Karan nopeus (1/min)</translation>
     </message>
     <message>
         <location filename="../src/feedsdialog.ui" line="115"/>
@@ -2364,14 +2065,6 @@ Close anyway?</source>
         <location filename="../src/dialogs.cpp" line="194"/>
         <source>Cutting parameters</source>
         <translation>Leikkuuparametrit</translation>
-    </message>
-</context>
-<context>
-    <name>FileAccessJobHandler</name>
-    <message>
-        <location filename="../src/fileaccess.cpp" line="1390"/>
-        <source>Reading directory: </source>
-        <translation>Luetaan hakemistoa: </translation>
     </message>
 </context>
 <context>
@@ -2747,86 +2440,6 @@ Changed - received file is modified</source>
     </message>
 </context>
 <context>
-    <name>KDiff3App</name>
-    <message>
-        <location filename="../src/pdiff.cpp" line="260"/>
-        <source>Loading A</source>
-        <translation>Ladataan A</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="264"/>
-        <source>Loading B</source>
-        <translation>Ladataan B</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="275"/>
-        <source>Diff: A &lt;-&gt; B</source>
-        <translation>Eroa A &lt;-&gt; B</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="282"/>
-        <source>Linediff: A &lt;-&gt; B</source>
-        <translation>Rivierot: A &lt;-&gt; B</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="342"/>
-        <source>All input files are binary equal.</source>
-        <translation>Kaikki tiedostot ovat identtisiä.</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="344"/>
-        <source>All input files contain the same text, but are not binary equal.</source>
-        <translation>Tiedostot sisältävät samat tekstit, mutta eivät ole täysin identtisiä.</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="347"/>
-        <location filename="../src/pdiff.cpp" line="354"/>
-        <location filename="../src/pdiff.cpp" line="361"/>
-        <source>Files %1 and %2 are binary equal.
-</source>
-        <translation>Tiedostot %1 ja %2 ovat identtisiä.
-</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="349"/>
-        <location filename="../src/pdiff.cpp" line="356"/>
-        <location filename="../src/pdiff.cpp" line="363"/>
-        <source>Files %1 and %2 have equal text, but are not binary equal. 
-</source>
-        <translation>Tiedostot %1 ja %2 sisältävät samat tekstit, mutta eivät ole täysin identtisiä.
-</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="374"/>
-        <source>Diff</source>
-        <translation>Vertaa</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="374"/>
-        <source>Some inputfiles don&apos;t seem to be pure textfiles.
-Note that the KDiff3-merge was not meant for binary data.
-Continue at your own risk.</source>
-        <translation>Kaikki tiedostot eivät näytä olevat tekstitiedostoja
-Huomaa että KDiff3 ei ole tarkoitettu binääritiedostoille.
-Jatka omalla vastuullasi.</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="493"/>
-        <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="495"/>
-        <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="965"/>
-        <source>Opening of these files failed:</source>
-        <translation>Näiden tiedostojen avaus epäonnistui:</translation>
-    </message>
-</context>
-<context>
     <name>MdiChild</name>
     <message>
         <location filename="../src/mdichildform.ui" line="29"/>
@@ -3181,108 +2794,6 @@ Jatka omalla vastuullasi.</translation>
     </message>
 </context>
 <context>
-    <name>MergeResultWindow</name>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="1794"/>
-        <source>&lt;No src line&gt;</source>
-        <translation>&lt;Ei lähderiviä&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="1804"/>
-        <source>&lt;Merge Conflict (Whitespace only)&gt;</source>
-        <translation>&lt;Ratkaise konflikti (Vain välilyöntejä)&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="1806"/>
-        <location filename="../src/mergeresultwindow.cpp" line="2717"/>
-        <source>&lt;Merge Conflict&gt;</source>
-        <translation>&lt;Ratkaise konflikti&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>OptionEncodingComboBox</name>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="528"/>
-        <source>Unicode, 8 bit</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="529"/>
-        <source>Unicode</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="530"/>
-        <source>Latin1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="550"/>
-        <source>Change this if non-ASCII characters are not displayed correctly.</source>
-        <translation>Vaihda asetusta, jos ei-ASCII-merkit eivät näy oikein.</translation>
-    </message>
-</context>
-<context>
-    <name>ProgressDialog</name>
-    <message>
-        <location filename="../src/fileaccess.cpp" line="1656"/>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Peruuta</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <location filename="../src/common.cpp" line="212"/>
-        <source>CNC programs files (</source>
-        <translation>CNC ohejelmatiedostot (</translation>
-    </message>
-    <message>
-        <location filename="../src/common.cpp" line="218"/>
-        <source>);;Text files (*.txt);; All files (*.* *)</source>
-        <translation>);;Tekstitiedostot (*.txt);; Kaikki tiedostot (*.* *)</translation>
-    </message>
-</context>
-<context>
-    <name>QextSerialPort</name>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="obsolete">Tuntematon laitetiedosto (porttia ei voitu avata)</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="obsolete">Break-tila havaittu</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="obsolete">I/O virhe</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="obsolete">Merkkipuskuri ylitetty</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="obsolete">Vastaanottopuskurin ylivuoto</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="obsolete">Pariteettivirhe</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="obsolete">Lähetyspuskurin ylivuoto</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="obsolete">Määrittelemätön lukuvirhe</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="obsolete">Määrittelemätön kirjoitusvirhe</translation>
-    </message>
-</context>
-<context>
     <name>RenumberDialog</name>
     <message>
         <location filename="../src/renumberdialog.ui" line="23"/>
@@ -3378,252 +2889,6 @@ Jatka omalla vastuullasi.</translation>
         <location filename="../src/dialogs.cpp" line="431"/>
         <source>Renumber lines</source>
         <translation>Uudelleennumeroi rivit</translation>
-    </message>
-</context>
-<context>
-    <name>SPConfigDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Sarjaportin asetukset</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Oletus</translation>
-    </message>
-    <message>
-        <source>Settings file:</source>
-        <translation type="vanished">Asetustiedosto:</translation>
-    </message>
-    <message>
-        <source>Save configuration</source>
-        <translation type="vanished">Tallenna</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Tallenna</translation>
-    </message>
-    <message>
-        <source>Delete configuration</source>
-        <translation type="vanished">Poista asetukset</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="vanished">Poista</translation>
-    </message>
-    <message>
-        <source>Port settings</source>
-        <translation type="vanished">Portin asetukset</translation>
-    </message>
-    <message>
-        <source>Serial port :</source>
-        <translation type="vanished">Sarjaportti :</translation>
-    </message>
-    <message>
-        <source>&amp;Browse</source>
-        <translation type="vanished">S&amp;elaa</translation>
-    </message>
-    <message>
-        <source>Baud rate</source>
-        <translation type="vanished">Nopeus baudeina</translation>
-    </message>
-    <message>
-        <source>Data bit&apos;s</source>
-        <translation type="vanished">Databitit</translation>
-    </message>
-    <message>
-        <source>Stop bit&apos;s</source>
-        <translation type="vanished">Stopbitit</translation>
-    </message>
-    <message>
-        <source>Parity</source>
-        <translation type="vanished">Pariteetti</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Ei mitään</translation>
-    </message>
-    <message>
-        <source>Even</source>
-        <translation type="vanished">Parillinen</translation>
-    </message>
-    <message>
-        <source>Odd</source>
-        <translation type="vanished">Pariton</translation>
-    </message>
-    <message>
-        <source>Flow control</source>
-        <translation type="vanished">Vuonohjaus</translation>
-    </message>
-    <message>
-        <source>Off</source>
-        <translation type="vanished">Pois päältä</translation>
-    </message>
-    <message>
-        <source>Hardware</source>
-        <translation type="vanished">Laitteisto</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="vanished">Valinnat</translation>
-    </message>
-    <message>
-        <source>90</source>
-        <translation type="obsolete">90</translation>
-    </message>
-    <message>
-        <source>XON character:</source>
-        <translation type="vanished">XON merkki:</translation>
-    </message>
-    <message>
-        <source>XOFF character:</source>
-        <translation type="vanished">XOFF merkki:</translation>
-    </message>
-    <message>
-        <source>Delay before sending the next block:</source>
-        <translation type="vanished">Viive ennen seuraavan lohkon lähetystä:</translation>
-    </message>
-    <message>
-        <source>Start sending after:</source>
-        <translation type="vanished">Aloita lähetys ajan jälkeen:</translation>
-    </message>
-    <message>
-        <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
-        <oldsource>If 0 then waits for XON, if &gt;0 waits for timeout or XON  wich one  first </oldsource>
-        <translation type="vanished">Jos 0, odotetaan XON-merkkiä.Jos suurempi kuin nolla, odotetaan valittu aika tai XON-merkki.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Voit kirjoittaa tekstin ja/tai käyttää ASCII-merkkien heksakoodeja. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % ja rivinvaihtomerkkejä&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - välilyönti ja rivinvaihtomerkit&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Välilyönti voidaan kirjoittaa vain heksadesimaalina - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Send at start:</source>
-        <translation type="vanished">Lähetä aluksi:</translation>
-    </message>
-    <message>
-        <source>Send at end:</source>
-        <translation type="vanished">Lähetä lopuksi:</translation>
-    </message>
-    <message>
-        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
-        <translation type="vanished">Poista ohjausmerkit (&lt;0x3F; &gt;0x7F) vastaanotetusta tiedostosta</translation>
-    </message>
-    <message>
-        <source>Delete control chars</source>
-        <translation type="vanished">Poista ohjausmerkit</translation>
-    </message>
-    <message>
-        <source>Enable this option for lower transmission latency on high baud rate</source>
-        <translation type="vanished">Poista tämä optio nopeuttaaksesi ohjelmaa korkeilla siirtonopeuksilla</translation>
-    </message>
-    <message>
-        <source>Disable text selection</source>
-        <translation type="vanished">Estä tekstin valinta</translation>
-    </message>
-    <message>
-        <source>Remove empty lines after receive is complete</source>
-        <translation type="vanished">Poista tyhjät rivit vastaanoton jälkeen</translation>
-    </message>
-    <message>
-        <source>Remove empty lines</source>
-        <translation type="vanished">Poista tyhjät rivit</translation>
-    </message>
-    <message>
-        <source>When sending, discard all characters before %</source>
-        <translation type="vanished">Tiedostoa lähetettäessä ohita kaikki merkit ennen ensimmäistä %-merkkiä</translation>
-    </message>
-    <message>
-        <source>Remove characters before %</source>
-        <translation type="vanished">Ohita merkit ennen %</translation>
-    </message>
-    <message>
-        <source>Autosave</source>
-        <translation type="vanished">Automaattitallennus</translation>
-    </message>
-    <message>
-        <source>Recieve timeout:</source>
-        <translation type="vanished">Vastaanoton aikakatkaisu:</translation>
-    </message>
-    <message>
-        <source>After recieve last character, close the recieve dialog after this time</source>
-        <translation type="vanished">Lopeta vastaanotto automaattisesti kun N sekunttia on kulunut viimeisen merkin vastaanotosta</translation>
-    </message>
-    <message>
-        <source>Main program path</source>
-        <translation type="vanished">Pääohjelmahakemisto</translation>
-    </message>
-    <message>
-        <source>Under construction</source>
-        <translation type="vanished">Työn alla</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="vanished">Selaa</translation>
-    </message>
-    <message>
-        <source>All other path</source>
-        <translation type="vanished">Muiden hakemisto</translation>
-    </message>
-    <message>
-        <source>Sub program path</source>
-        <translation type="vanished">Aliohjelmahakemisto</translation>
-    </message>
-    <message>
-        <source>If file exists</source>
-        <translation type="vanished">Jos tiedosto on olemassa</translation>
-    </message>
-    <message>
-        <source>Overwrite</source>
-        <translation type="vanished">Ylikirjoita</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="vanished">Uudelleennimeä</translation>
-    </message>
-    <message>
-        <source>File name</source>
-        <translation type="vanished">Tiedoston nimi</translation>
-    </message>
-    <message>
-        <source>No. of digits</source>
-        <translation type="vanished">Numeroiden määrä</translation>
-    </message>
-    <message>
-        <source>Remowe letters</source>
-        <translation type="vanished">Poista teksti</translation>
-    </message>
-    <message>
-        <source>&amp;Save &amp;&amp; close</source>
-        <translation type="vanished">&amp;Tallenna ja sulje</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Peruuta</translation>
-    </message>
-    <message>
-        <source>Serial port configuration</source>
-        <translation type="vanished">Sarjaportin asetukset</translation>
-    </message>
-    <message>
-        <source>Select serial port device</source>
-        <translation type="vanished">Valitse sarjaporttilaite</translation>
-    </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Kaikki tiedostot (*)</translation>
     </message>
 </context>
 <context>
@@ -3909,10 +3174,6 @@ Set to 300s to disable timer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Off</source>
-        <translation type="obsolete">Pois päältä</translation>
-    </message>
-    <message>
         <location filename="../src/serialportconfigdialog.ui" line="556"/>
         <source>Hardware</source>
         <translation type="unfinished">Laitteisto</translation>
@@ -3921,10 +3182,6 @@ Set to 300s to disable timer.</source>
         <location filename="../src/serialportconfigdialog.ui" line="572"/>
         <source>XON, XOFF</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Valinnat</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="1454"/>
@@ -4162,18 +3419,6 @@ Selected file extension will be used.</source>
         <translation type="unfinished">Viive ennen seuraavan lohkon lähetystä:</translation>
     </message>
     <message>
-        <source>90</source>
-        <translation type="obsolete">90</translation>
-    </message>
-    <message>
-        <source>19</source>
-        <translation type="obsolete">19</translation>
-    </message>
-    <message>
-        <source>17</source>
-        <translation type="obsolete">17</translation>
-    </message>
-    <message>
         <location filename="../src/serialportconfigdialog.ui" line="940"/>
         <source>Send at start:</source>
         <translation type="unfinished">Lähetä aluksi:</translation>
@@ -4197,10 +3442,6 @@ Selected file extension will be used.</source>
         <location filename="../src/serialportconfigdialog.ui" line="672"/>
         <source>XOFF character:</source>
         <translation type="unfinished">XOFF merkki:</translation>
-    </message>
-    <message>
-        <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
-        <translation type="obsolete">Jos 0, odotetaan XON-merkkiä.Jos suurempi kuin nolla, odotetaan valittu aika tai XON-merkki.</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="732"/>
@@ -4236,10 +3477,6 @@ Selected file extension will be used.</source>
         <location filename="../src/serialportconfigdialog.ui" line="1500"/>
         <source>Create log file</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Autosave</source>
-        <translation type="obsolete">Automaattitallennus</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="721"/>
@@ -4582,10 +3819,6 @@ If detected filename will contain an extension, then this setting will be ignore
         <location filename="../src/serialtransmissiondialog.cpp" line="126"/>
         <source>Auto &amp;closing in %1s</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start in %1s</source>
-        <translation type="obsolete">Aloitetaan %1s päästä</translation>
     </message>
     <message>
         <location filename="../src/serialtransmissiondialog.cpp" line="219"/>
@@ -5068,10 +4301,6 @@ File server option is not enabled in serial port settings</source>
         <translation>Selaa...</translation>
     </message>
     <message>
-        <source>File extensions</source>
-        <translation type="obsolete">Tiedoston päätteet</translation>
-    </message>
-    <message>
         <location filename="../src/setupdialog.ui" line="447"/>
         <source>Delete</source>
         <translation>Poista</translation>
@@ -5095,10 +4324,6 @@ File server option is not enabled in serial port settings</source>
         <location filename="../src/setupdialog.ui" line="550"/>
         <source>Default save extension:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save extension:</source>
-        <translation type="obsolete">Tallennuspääte:</translation>
     </message>
     <message>
         <location filename="../src/setupdialog.ui" line="557"/>
@@ -5314,29 +4539,6 @@ File server option is not enabled in serial port settings</source>
     </message>
 </context>
 <context>
-    <name>SourceData</name>
-    <message>
-        <location filename="../src/diff.cpp" line="249"/>
-        <source>From Clipboard</source>
-        <translation>Leikepöydältä</translation>
-    </message>
-</context>
-<context>
-    <name>TransProgressDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Tiedonsiirtotesti</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Peruuta</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Sulje</translation>
-    </message>
-</context>
-<context>
     <name>TransmissionDialog</name>
     <message>
         <location filename="../src/transmissiondialog.ui" line="14"/>
@@ -5464,70 +4666,6 @@ File server option is not enabled in serial port settings</source>
         <translation>Vastaanotettu: %1 tavua.</translation>
     </message>
     <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="vanished">Tuntematon laitetiedosto (porttia ei voitu avata)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="vanished">Virhe varattaessa muistia</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal</source>
-        <translation type="vanished">Tuntematon signaali</translation>
-    </message>
-    <message>
-        <source>Operation timed out</source>
-        <translation type="vanished">Operaation aika ylittyi</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="vanished">Avattu tiedosto ei ole sarjaporttilaite</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="vanished">Break-tila havaittu</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="vanished">Kehysvirhe (väärä nopeus valittu?)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="vanished">I/O virhe</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="vanished">Merkkipuskuri ylitetty</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="vanished">Vastaanottopuskurin ylivuoto</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="vanished">Pariteettivirhe</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="vanished">Lähetyspuskurin ylivuoto</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="vanished">Määrittelemätön lukuvirhe</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="vanished">Määrittelemätön kirjoitusvirhe</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="vanished">Ei virhettä</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Tuntematon virhe</translation>
-    </message>
-    <message>
         <location filename="../src/serialtransmission.cpp" line="488"/>
         <source>Waiting...</source>
         <translation>Odottaa...</translation>
@@ -5614,37 +4752,6 @@ File server option is not enabled in serial port settings</source>
         <location filename="../src/dialogs.cpp" line="732"/>
         <source>Solution of triangles</source>
         <translation>Kolmion ratkaisu</translation>
-    </message>
-</context>
-<context>
-    <name>WindowTitleWidget</name>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3330"/>
-        <source>Output</source>
-        <translation>Tulos</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3342"/>
-        <location filename="../src/mergeresultwindow.cpp" line="3539"/>
-        <source>[Modified]</source>
-        <translation>[Muutettu]</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3349"/>
-        <source>Encoding for saving</source>
-        <translation>Merkistökoodaus</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3357"/>
-        <source>Line end style:</source>
-        <translation>Rivin lopetus:</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3474"/>
-        <location filename="../src/mergeresultwindow.cpp" line="3479"/>
-        <location filename="../src/mergeresultwindow.cpp" line="3484"/>
-        <source>Codec from</source>
-        <translation>Korostus</translation>
     </message>
 </context>
 <context>

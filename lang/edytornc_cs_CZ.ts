@@ -217,16 +217,6 @@
 </source>
         <translation>;Průměr: %1, počet otvorů: %2, počáteční úhel: %3</translation>
     </message>
-    <message>
-        <source>Add comments</source>
-        <translation type="obsolete">Přidat poznámky</translation>
-    </message>
-    <message>
-        <source>(Diameter: %1, no. of holes: %2, start angle: %3)
-</source>
-        <translation type="obsolete">(Průměr: %1, počet otvorů: %2, počáteční úhel: %3)
-</translation>
-    </message>
 </context>
 <context>
     <name>ChamferDialog</name>
@@ -371,10 +361,6 @@
         <translation>Zmenšit do oznamovací části panelu</translation>
     </message>
     <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Zavřít</translation>
-    </message>
-    <message>
         <location filename="../src/commapp.cpp" line="222"/>
         <source>&amp;Browse save folder</source>
         <translation>&amp;Procházet cestu k ukládací složce</translation>
@@ -480,51 +466,6 @@
         <location filename="../src/commapp.cpp" line="566"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation>&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>DiffTextWindow</name>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="381"/>
-        <source>File</source>
-        <translation>Soubor</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="384"/>
-        <source>Line</source>
-        <translation>Řádek</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="386"/>
-        <source>Line not available</source>
-        <translation>Řádek není dostupný</translation>
-    </message>
-</context>
-<context>
-    <name>DiffTextWindowFrame</name>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="1794"/>
-        <location filename="../src/difftextwindow.cpp" line="1977"/>
-        <source>Open file...</source>
-        <translation>Otevřít soubor...</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="1888"/>
-        <source>Top line</source>
-        <translation>Horní řádek</translation>
-    </message>
-    <message>
-        <location filename="../src/difftextwindow.cpp" line="1898"/>
-        <source>End</source>
-        <translation>Konec</translation>
-    </message>
-    <message>
-        <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.min *.anc *.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
     </message>
 </context>
 <context>
@@ -694,14 +635,6 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <translation>EdytorNC</translation>
     </message>
     <message>
-        <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.min *.anc *.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="290"/>
         <location filename="../src/edytornc.cpp" line="357"/>
         <source>Select one or more files to open</source>
@@ -712,26 +645,6 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <location filename="../src/edytornc.cpp" line="403"/>
         <source>File loaded</source>
         <translation>Soubor nahrán</translation>
-    </message>
-    <message>
-        <source>CNC programs files *.nc (*.nc);;All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc *.min *.anc *.cnc)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc *.min *.anc *.cnc)</translation>
-    </message>
-    <message>
-        <source>Text files (*.txt)</source>
-        <translation type="obsolete">Textové soubory (*.txt)</translation>
-    </message>
-    <message>
-        <source>All files (*.* *)</source>
-        <translation type="obsolete">Všechny soubory (*.* *)</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="443"/>
@@ -775,18 +688,6 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <translation>&lt;P&gt;Verze: </translation>
     </message>
     <message>
-        <source>&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation type="vanished">&lt;P&gt;Poděkování Jordi Sayol i Salomó za překlad do katalánštiny a balíček pro Debian</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
-        <translation type="obsolete">&lt;P&gt;Poděkování Michaelovi Numbergerovi za překlad do němčiny</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="1275"/>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
         <oldsource>&lt;br&gt;Czech translation thanks to Pavel Fric</oldsource>
@@ -819,14 +720,6 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <location filename="../src/edytornc.cpp" line="1288"/>
         <source>&lt;P&gt;</source>
         <translation>&lt;P&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
-        <translation type="vanished">&lt;P&gt;Instalátor pro více operačních systémů vytvořen &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;EdytorNC získal &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE cenu poskytnutou Softpedií&quot;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1287"/>
@@ -914,25 +807,9 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <translation>Otevřít soubor s příkladem</translation>
     </message>
     <message>
-        <source>&amp;Open file with preview</source>
-        <translation type="obsolete">&amp;Otevřít soubor s náhledem</translation>
-    </message>
-    <message>
-        <source>Open an existing file (Openfile dialog with preview)</source>
-        <translation type="obsolete">Otevřít stávající soubor (dialog otevření souboru s náhledem)</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Uložit</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="1542"/>
         <source>Save the document to disk</source>
         <translation>Uložit dokument na disk</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="obsolete">Uložit &amp;jako...</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1553"/>
@@ -1374,10 +1251,6 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <translation>&lt;p&gt;&lt;b&gt;Varování:&lt;/b&gt; Soubor v editoru obsahuje neuložené změny.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Ctrl+F4</source>
-        <translation type="obsolete">Ctrl+F4</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="1793"/>
         <source>Close the active window</source>
         <translation>Zavřít činné okno</translation>
@@ -1391,14 +1264,6 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <location filename="../src/edytornc.cpp" line="1797"/>
         <source>Close all the windows</source>
         <translation>Zavřít všechna okna</translation>
-    </message>
-    <message>
-        <source>&amp;Tile</source>
-        <translation type="obsolete">Klást jedno &amp;vedle druhého</translation>
-    </message>
-    <message>
-        <source>Tile the windows</source>
-        <translation type="obsolete">Klást jedno okno vedle druhého</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1808"/>
@@ -1429,14 +1294,6 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <location filename="../src/edytornc.cpp" line="1819"/>
         <source>Move the focus to the previous window</source>
         <translation>Přesunout zaměření na předchozí okno</translation>
-    </message>
-    <message>
-        <source>&amp;Create cnc tooltips</source>
-        <translation type="obsolete">&amp;Vytvořit nástrojové rady CNC</translation>
-    </message>
-    <message>
-        <source>Create default cnc tooltips file</source>
-        <translation type="obsolete">Vytvořit soubor s výchozími nástrojovými radami CNC</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1836"/>
@@ -1531,11 +1388,6 @@ Přesto zavřít?</translation>
         <source>&lt;br /&gt;German translation and other fixes thanks to Michael Numberger</source>
         <oldsource>&lt;br&gt;German translation and other fixes thanks to Michael Numberger</oldsource>
         <translation>&lt;br /&gt;Poděkování Michaelovi Numbergerovi za překlad do němčiny a jiné opravy</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;Spanish translation and other fixes thanks to Otto Huamani</source>
-        <oldsource>&lt;br&gt;Spanish translation and other fixes thanks to Otto Huamani</oldsource>
-        <translation type="vanished">&lt;br /&gt;Poděkování Ottovi Huamaniovi za překlad do španělštiny a jiné opravy</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1277"/>
@@ -1834,102 +1686,6 @@ Přesto zavřít?</translation>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <source>Sending...</source>
-        <translation type="obsolete">Posílá se...</translation>
-    </message>
-    <message>
-        <source>Waiting...</source>
-        <translation type="obsolete">Čeká se...</translation>
-    </message>
-    <message>
-        <source>Start in %1s</source>
-        <translation type="obsolete">Začátek za %1s</translation>
-    </message>
-    <message>
-        <source>Waiting for a signal readiness...</source>
-        <translation type="obsolete">Čeká se na připravenost signálu...</translation>
-    </message>
-    <message>
-        <source>Sending byte %1 of %2</source>
-        <translation type="obsolete">Posílají se byty: %1 z %2</translation>
-    </message>
-    <message>
-        <source>Receiving...</source>
-        <translation type="obsolete">Přijímá se...</translation>
-    </message>
-    <message>
-        <source>Waiting for data...</source>
-        <translation type="obsolete">Čeká se na data...</translation>
-    </message>
-    <message>
-        <source>Reciving byte %1</source>
-        <translation type="obsolete">Přijímají se byty %1</translation>
-    </message>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="obsolete">Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="obsolete">Nelze přidělit paměťové tabulky</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal</source>
-        <translation type="obsolete">Zachycen ne-blokovaný signál</translation>
-    </message>
-    <message>
-        <source>Operation timed out</source>
-        <translation type="obsolete">Překročení času u operace</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="obsolete">Soubor otevřený přípojkou není typickým zařízením</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="obsolete">Přípojka zjistila podmínku přerušení</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="obsolete">Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="obsolete">Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="obsolete">Překročení vyrovnávací paměti znaku</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="obsolete">Přetečení vyrovnávací paměti pro příjem</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="obsolete">Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="obsolete">Přetečení vyrovnávací paměti pro přenos</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="obsolete">Selhání operace běžného čtení</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="obsolete">Selhání operace běžného zápisu</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="obsolete">Nevyskytla se žádná chyba</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="obsolete">Neznámá chyba</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="2954"/>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation># ++++++ Příklad ++++++</translation>
@@ -1938,130 +1694,6 @@ Přesto zavřít?</translation>
         <location filename="../src/edytornc.cpp" line="2956"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
         <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - zastavení programu, bezpodmíněčné&quot;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
-        <translation type="obsolete">&lt;b&gt;M00&lt;/b&gt; - zastavení programu, naprosté</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M01&lt;/b&gt; - optional program stop</source>
-        <translation type="obsolete">&lt;b&gt;M01&lt;/b&gt; - volitelné zastavení programu</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M02&lt;/b&gt; - end of program</source>
-        <translation type="obsolete">&lt;b&gt;M02&lt;/b&gt; - ukončení programu</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M03&lt;/b&gt; - start spindle CW</source>
-        <translation type="obsolete">&lt;b&gt;M03&lt;/b&gt; - spuštění hřídele CW (po směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M04&lt;/b&gt; - start spindle CCW</source>
-        <translation type="obsolete">&lt;b&gt;M04&lt;/b&gt; - spuštění hřídele CCW (proti směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M05&lt;/b&gt; - spindle stop</source>
-        <translation type="obsolete">&lt;b&gt;M05&lt;/b&gt; - zastavení hřídele</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M06&lt;/b&gt; - tool change</source>
-        <translation type="obsolete">&lt;b&gt;M06&lt;/b&gt; - změna nástroje</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M08&lt;/b&gt; - coolant on</source>
-        <translation type="obsolete">&lt;b&gt;M08&lt;/b&gt; - zapnutí chladicí kapaliny/směsi/média</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M09&lt;/b&gt; - coolant off</source>
-        <translation type="obsolete">&lt;b&gt;M09&lt;/b&gt; - vypnutí chladicí kapaliny/směsi/média</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M12&lt;/b&gt; - M-tool spindle STOP</source>
-        <translation type="obsolete">&lt;b&gt;M12&lt;/b&gt; - M-nástroj ZASTAVENÍ hřídele</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M13&lt;/b&gt; - M-tool spindle CW</source>
-        <translation type="obsolete">&lt;b&gt;M13&lt;/b&gt; - M-nástroj hřídele CW (po směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M14&lt;/b&gt; - M-tool spindle CCW</source>
-        <translation type="obsolete">&lt;b&gt;M14&lt;/b&gt; - M-nástroj hřídele CCW (proti směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M15&lt;/b&gt; - B or C-axis positioning, plus direction CW</source>
-        <translation type="obsolete">&lt;b&gt;M15&lt;/b&gt; - polohování osy B nebo C, plus směr CW (po směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M16&lt;/b&gt; - B or C-axis positioning, minus direction CCW</source>
-        <translation type="obsolete">&lt;b&gt;M16&lt;/b&gt; - polohování osy B nebo C, minus směr CCW (proti směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M19&lt;/b&gt; - oriented spindle stop</source>
-        <translation type="obsolete">&lt;b&gt;M19&lt;/b&gt; - zaměřené zastavení hřídele</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M20&lt;/b&gt; - tailstock barrier OFF</source>
-        <translation type="obsolete">&lt;b&gt;M20&lt;/b&gt; - zábrana koníka VYPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M21&lt;/b&gt; - tailstock barrier ON</source>
-        <translation type="obsolete">&lt;b&gt;M21&lt;/b&gt; - zábrana koníka ZAPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M22&lt;/b&gt; - chamfering OFF (for thread cutting cycle)</source>
-        <translation type="obsolete">&lt;b&gt;M22&lt;/b&gt; - zkosení VYPNUTO (pro periodu řezání závitu)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M23&lt;/b&gt; - chamfering ON (for thread cutting cycle)</source>
-        <translation type="obsolete">&lt;b&gt;M23&lt;/b&gt; - zkosení ZAPNUTO (pro periodu řezání závitu)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M24&lt;/b&gt; - chuck barrier OFF</source>
-        <translation type="obsolete">&lt;b&gt;M24&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) VYPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M25&lt;/b&gt; - chuck barrier ON</source>
-        <translation type="obsolete">&lt;b&gt;M25&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) ZAPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M26&lt;/b&gt; - thread lead along Z-axis</source>
-        <translation type="obsolete">&lt;b&gt;M26&lt;/b&gt; - vedení závitu podél osy Z</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M27&lt;/b&gt; - thread lead along X-axis</source>
-        <translation type="obsolete">&lt;b&gt;M27&lt;/b&gt; - vedení závitu podél osy X</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function OFF</source>
-        <translation type="obsolete">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje VYPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function ON</source>
-        <translation type="obsolete">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje ZAPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M30&lt;/b&gt; - end of program</source>
-        <translation type="obsolete">&lt;b&gt;M30&lt;/b&gt; - ukončení programu</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M40&lt;/b&gt; - spindle gear range neutral</source>
-        <translation type="obsolete">&lt;b&gt;M40&lt;/b&gt; - neutrální rozsah převodu osy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M41&lt;/b&gt; - spindle gear range 1</source>
-        <translation type="obsolete">&lt;b&gt;M41&lt;/b&gt; - rozsah převodu osy 1</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 2</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 2</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M43&lt;/b&gt; - spindle gear range 3</source>
-        <translation type="obsolete">&lt;b&gt;M43&lt;/b&gt; - rozsah převodu osy 3</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 4</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 4</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="1679"/>
@@ -2154,110 +1786,6 @@ Přesto zavřít?</translation>
         <translation>LinuxCNC</translation>
     </message>
     <message>
-        <source>&lt;b&gt;M48&lt;/b&gt; - spindle speed override ignore cancel</source>
-        <translation type="obsolete">&lt;b&gt;M48&lt;/b&gt; - zrušení opomíjení potlačení automatického ovládání rychlosti osy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M49&lt;/b&gt; - spindle speed override ignore</source>
-        <translation type="obsolete">&lt;b&gt;M49&lt;/b&gt; -opomíjení potlačení automatického ovládání rychlosti osy</translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - mode of return to upper limit level</source>
-        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - režim návratu k horní úrovni omezení</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </source>
-        <translation type="obsolete">&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - mode of return to a specified point level set by G71</source>
-        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - režim návratu k stanovené bodové úrovni nastavené G71</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - </source>
-        <translation type="obsolete">&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; -  {53&lt;?}</translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - mode of return to the point R level</source>
-        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - režim návratu k bodové úrovni R</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - </source>
-        <translation type="obsolete">&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; -  {54&lt;?}</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M55&lt;/b&gt; - tailstock spindle retract</source>
-        <translation type="obsolete">&lt;b&gt;M55&lt;/b&gt; - zatáhnutí osy koníka</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M56&lt;/b&gt; - tailstock spindle advanced</source>
-        <translation type="obsolete">&lt;b&gt;M56&lt;/b&gt; - předsunutí osy koníka</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M58&lt;/b&gt; - chucking pressure low</source>
-        <translation type="obsolete">&lt;b&gt;M58&lt;/b&gt; - nízký tlak svírací čelisti</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M59&lt;/b&gt; - chucking pressure high</source>
-        <translation type="obsolete">&lt;b&gt;M59&lt;/b&gt; - vysoký tlak svírací čelisti</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M60&lt;/b&gt; - cancel of M61</source>
-        <translation type="obsolete">&lt;b&gt;M60&lt;/b&gt; - zrušení M61</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M61&lt;/b&gt; - Ignoring fixed rpm arrival in constant speed cutting</source>
-        <translation type="obsolete">&lt;b&gt;M61&lt;/b&gt; - opomíjí se pevný příjezd rpm při řezání stálou rychlostí</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M62&lt;/b&gt; - cancel of M64</source>
-        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M64</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M63&lt;/b&gt; - ignoring spindle rotation M code answer</source>
-        <translation type="obsolete">&lt;b&gt;M63&lt;/b&gt; - opomíjí se odpověď kódu M otáčení osy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M64&lt;/b&gt; - ignoring general M code answer</source>
-        <translation type="obsolete">&lt;b&gt;M64&lt;/b&gt; - opomíjí se obecná odpověď kódu M</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M65&lt;/b&gt; - ignoring T code answer</source>
-        <translation type="obsolete">&lt;b&gt;M65&lt;/b&gt; - opomíjí se odpověď kódu T</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M66&lt;/b&gt; - turret indexing position free</source>
-        <translation type="obsolete">&lt;b&gt;M66&lt;/b&gt; -volná poloha indexace revolverové hlavy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M78&lt;/b&gt; - steady rest unclamp</source>
-        <translation type="obsolete">&lt;b&gt;M78&lt;/b&gt; - stálé povolení svorky opěrky</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M79&lt;/b&gt; - steady rest clamp</source>
-        <translation type="obsolete">&lt;b&gt;M79&lt;/b&gt; - stálé sevření opěrky svorkou</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M83&lt;/b&gt; - chuck clamp</source>
-        <translation type="obsolete">&lt;b&gt;M83&lt;/b&gt; - sevření svíracích čelistí svorkou</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M84&lt;/b&gt; - chuck unclamp</source>
-        <translation type="obsolete">&lt;b&gt;M84&lt;/b&gt; - povolení svorky svíracích čelistí</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M109&lt;/b&gt; - cancel of M110</source>
-        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M110 {109&lt;?}</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M162&lt;/b&gt; - cancel of M163</source>
-        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M163 {162&lt;?}</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;G10&lt;/b&gt; - cancel of G11</source>
-        <translation type="obsolete">&lt;b&gt;G10&lt;/b&gt; - zrušení G11</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="3074"/>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
         <translation>Všechny soubory (*.* *);;Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Dokumenty *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Kresby *.dwg *.dxf (*.dwg *.dxf);;Obrázky *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Textové soubory *.txt (*.txt)</translation>
@@ -2283,10 +1811,6 @@ Přesto zavřít?</translation>
         <location filename="../src/edytornc.cpp" line="222"/>
         <source>EMPTY FILE</source>
         <translation>Prázdný soubor</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation type="vanished">&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="3498"/>
@@ -2317,10 +1841,6 @@ Přesto zavřít?</translation>
  %2</translation>
     </message>
     <message>
-        <source>&lt;P&gt;Copyright (C) 1998 - 2011 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt; {1998 ?} {2011 ?}</translation>
-    </message>
-    <message>
         <location filename="../src/edytornc.cpp" line="1828"/>
         <source>&amp;Create global cnc tooltips</source>
         <translation>&amp;Vytvořit celkové nástrojové rady CNC</translation>
@@ -2339,10 +1859,6 @@ Přesto zavřít?</translation>
         <location filename="../src/edytornc.cpp" line="1833"/>
         <source>Create/edit user cnc tooltips file</source>
         <translation>Vytvořit/Upravit uživatelské nástrojové rady CNC</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M44&lt;/b&gt; - spindle gear range 4</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 4 {44&lt;?}</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="3200"/>
@@ -2458,14 +1974,6 @@ Přesto zavřít?</translation>
         <translation>Posun na zub:</translation>
     </message>
     <message>
-        <source>Feed per tooth (mm)</source>
-        <translation type="vanished">Posun na zub (mm)</translation>
-    </message>
-    <message>
-        <source>0.2</source>
-        <translation type="vanished">0.2</translation>
-    </message>
-    <message>
         <location filename="../src/feedsdialog.ui" line="143"/>
         <source>Tool diameter</source>
         <translation>Průměr nástroje</translation>
@@ -2509,10 +2017,6 @@ Přesto zavřít?</translation>
         <location filename="../src/feedsdialog.ui" line="210"/>
         <source>S :</source>
         <translation>Rychlost osy:</translation>
-    </message>
-    <message>
-        <source>Spindle speed (r/min)</source>
-        <translation type="vanished">Rychlost osy (r/min)</translation>
     </message>
     <message>
         <location filename="../src/feedsdialog.ui" line="115"/>
@@ -2565,14 +2069,6 @@ Přesto zavřít?</translation>
         <location filename="../src/dialogs.cpp" line="194"/>
         <source>Cutting parameters</source>
         <translation>Parametry řezání</translation>
-    </message>
-</context>
-<context>
-    <name>FileAccessJobHandler</name>
-    <message>
-        <location filename="../src/fileaccess.cpp" line="1390"/>
-        <source>Reading directory: </source>
-        <translation>Adresář pro čtení:</translation>
     </message>
 </context>
 <context>
@@ -2959,95 +2455,7 @@ Změněn - přijatý soubor je upraven</translation>
     </message>
 </context>
 <context>
-    <name>KDiff3App</name>
-    <message>
-        <source>Option --auto used, but no output file specified.</source>
-        <translation type="obsolete">Volba --auto se používá, ale není zadán žádný výstupní soubor.</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="965"/>
-        <source>Opening of these files failed:</source>
-        <translation>Nepodařilo se otevřít tyto soubory:</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="260"/>
-        <source>Loading A</source>
-        <translation>Nahrává se A</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="264"/>
-        <source>Loading B</source>
-        <translation>Nahrává se B</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="275"/>
-        <source>Diff: A &lt;-&gt; B</source>
-        <translation>Rozdíly: A &lt;-&gt; B</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="282"/>
-        <source>Linediff: A &lt;-&gt; B</source>
-        <translation>Řádkové rozdíly: A &lt;-&gt; B</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="342"/>
-        <source>All input files are binary equal.</source>
-        <translation>Všechny vstupní soubory jsou binárně stejné.</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="344"/>
-        <source>All input files contain the same text, but are not binary equal.</source>
-        <translation>Všechny vstupní soubory obsahují tentýž text, ale nejsou binárně stejné.</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="347"/>
-        <location filename="../src/pdiff.cpp" line="354"/>
-        <location filename="../src/pdiff.cpp" line="361"/>
-        <source>Files %1 and %2 are binary equal.
-</source>
-        <translation>Soubory %1 a %2 jsou binárně stejné.
-</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="349"/>
-        <location filename="../src/pdiff.cpp" line="356"/>
-        <location filename="../src/pdiff.cpp" line="363"/>
-        <source>Files %1 and %2 have equal text, but are not binary equal. 
-</source>
-        <translation>Soubory %1 a %2 obsahují tentýž text, ale nejsou binárně stejné.
-</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="374"/>
-        <source>Diff</source>
-        <translation>Rozdíly</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="374"/>
-        <source>Some inputfiles don&apos;t seem to be pure textfiles.
-Note that the KDiff3-merge was not meant for binary data.
-Continue at your own risk.</source>
-        <translation>Některé vstupní soubory vypadají, že nejsou jako soubory čistě textové.
-Všimněte si, že KDiff3-merge nebyl zamýšlen pro práci s binárními daty.
-Pokračujte na vlastní nebezpečí.</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="493"/>
-        <source>&amp;Copy</source>
-        <translation>&amp;Kopírovat</translation>
-    </message>
-    <message>
-        <location filename="../src/pdiff.cpp" line="495"/>
-        <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation>Kopírovat obsah nynějšího výběru do schránky</translation>
-    </message>
-</context>
-<context>
     <name>MdiChild</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulář</translation>
-    </message>
     <message>
         <location filename="../src/mdichild.cpp" line="71"/>
         <source>program%1.nc</source>
@@ -3070,14 +2478,6 @@ Pokračujte na vlastní nebezpečí.</translation>
  %2</translation>
     </message>
     <message>
-        <source>CNC programs files *.nc (*.nc);;CNC programs files *.anc (*.anc);;CNC programs files *.min (*.min);;CNC programs files *.cnc (*.cnc);;Text files *.txt (*.txt);;All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc);;CNC programs files (*.anc);;CNC programs files (*.min);;CNC programs files (*.cnc);;Text files (*.txt);;All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory (*.nc);;Programové soubory CNC (*.anc);;Programové soubory CNC (*.min);;Programové soubory CNC (*.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
         <location filename="../src/mdichild.cpp" line="212"/>
         <source>Save file as...</source>
         <translation>Uložit soubor jako...</translation>
@@ -3091,46 +2491,6 @@ Pokračujte na vlastní nebezpečí.</translation>
         <location filename="../src/mdichild.cpp" line="226"/>
         <source>Do you want overwrite it ?</source>
         <translation>Chcete jej přepsat?</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.min)</source>
-        <translation type="obsolete">Programové soubory CNC (*.min)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.anc)</source>
-        <translation type="obsolete">Programové soubory CNC (*.anc)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.cnc)</source>
-        <translation type="obsolete">Programové soubory CNC (*.cnc)</translation>
-    </message>
-    <message>
-        <source>Text files (*.txt)</source>
-        <translation type="obsolete">Textové soubory (*.txt)</translation>
-    </message>
-    <message>
-        <source>All files (*.* *)</source>
-        <translation type="obsolete">Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Varování</translation>
-    </message>
-    <message>
-        <source>File : %1 exists. Overwrite ?</source>
-        <translation type="obsolete">Soubor: &quot;%1&quot; existuje. Přepsat?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Ano</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Ne</translation>
     </message>
     <message>
         <location filename="../src/mdichild.cpp" line="179"/>
@@ -3449,108 +2809,6 @@ Prověřte +-*/.
     </message>
 </context>
 <context>
-    <name>MergeResultWindow</name>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="1794"/>
-        <source>&lt;No src line&gt;</source>
-        <translation>&lt;Žádný řádek src&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="1804"/>
-        <source>&lt;Merge Conflict (Whitespace only)&gt;</source>
-        <translation>&lt;Střet při sloučení (pouze prázdná místa)&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="1806"/>
-        <location filename="../src/mergeresultwindow.cpp" line="2717"/>
-        <source>&lt;Merge Conflict&gt;</source>
-        <translation>&lt;Střet při sloučení&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>OptionEncodingComboBox</name>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="528"/>
-        <source>Unicode, 8 bit</source>
-        <translation>Unicode, 8 bitů</translation>
-    </message>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="529"/>
-        <source>Unicode</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="530"/>
-        <source>Latin1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/optiondialog.cpp" line="550"/>
-        <source>Change this if non-ASCII characters are not displayed correctly.</source>
-        <translation>Toto změňte v případě, že se ne-ASCII znaky nezobrazují správně.</translation>
-    </message>
-</context>
-<context>
-    <name>ProgressDialog</name>
-    <message>
-        <location filename="../src/fileaccess.cpp" line="1656"/>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Zrušit</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <location filename="../src/common.cpp" line="212"/>
-        <source>CNC programs files (</source>
-        <translation>Programové soubory CNC (</translation>
-    </message>
-    <message>
-        <location filename="../src/common.cpp" line="218"/>
-        <source>);;Text files (*.txt);; All files (*.* *)</source>
-        <translation>);;Textové soubory (*.txt);;Všechny soubory (*.* *)</translation>
-    </message>
-</context>
-<context>
-    <name>QextSerialPort</name>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="obsolete">Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="obsolete">Přípojka zjistila podmínku přerušení</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="obsolete">Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="obsolete">Překročení vyrovnávací paměti znaku</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="obsolete">Přetečení vyrovnávací paměti pro příjem</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="obsolete">Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="obsolete">Přetečení vyrovnávací paměti pro přenos</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="obsolete">Selhání operace běžného čtení</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="obsolete">Selhání operace běžného zápisu</translation>
-    </message>
-</context>
-<context>
     <name>RenumberDialog</name>
     <message>
         <location filename="../src/renumberdialog.ui" line="23"/>
@@ -3649,197 +2907,7 @@ Prověřte +-*/.
     </message>
 </context>
 <context>
-    <name>SPConfigDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialog</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Výchozí</translation>
-    </message>
-    <message>
-        <source>Settings file:</source>
-        <translation type="vanished">Soubor s nastavením:</translation>
-    </message>
-    <message>
-        <source>Serial port :</source>
-        <translation type="vanished">Sériová přípojka:</translation>
-    </message>
-    <message>
-        <source>Save configuration</source>
-        <translation type="vanished">Uložit nastavení</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Uložit</translation>
-    </message>
-    <message>
-        <source>Delete configuration</source>
-        <translation type="vanished">Smazat nastavení</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="vanished">Smazat</translation>
-    </message>
-    <message>
-        <source>&amp;Browse</source>
-        <translation type="vanished">&amp;Procházet</translation>
-    </message>
-    <message>
-        <source>Baud rate</source>
-        <translation type="vanished">Rychlost přenosu dat (bit/s) pro modemy (baud rate)</translation>
-    </message>
-    <message>
-        <source>Data bit&apos;s</source>
-        <translation type="vanished">Datové bity</translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="vanished">7</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="vanished">5</translation>
-    </message>
-    <message>
-        <source>8</source>
-        <translation type="vanished">8</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="vanished">6</translation>
-    </message>
-    <message>
-        <source>Stop bit&apos;s</source>
-        <translation type="vanished">Zastavovací bity</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="vanished">1</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="vanished">2</translation>
-    </message>
-    <message>
-        <source>Parity</source>
-        <translation type="vanished">Rovnost</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Žádný</translation>
-    </message>
-    <message>
-        <source>Even</source>
-        <translation type="vanished">Sudý</translation>
-    </message>
-    <message>
-        <source>Odd</source>
-        <translation type="vanished">Lichý</translation>
-    </message>
-    <message>
-        <source>Flow control</source>
-        <translation type="vanished">Ovládání toku</translation>
-    </message>
-    <message>
-        <source>Off</source>
-        <translation type="vanished">Vypnuto</translation>
-    </message>
-    <message>
-        <source>Hardware</source>
-        <translation type="vanished">Technické vybavení (hardware)</translation>
-    </message>
-    <message>
-        <source>Delay before sending the next block:</source>
-        <oldsource>Delay before sending the next block (s)</oldsource>
-        <translation type="obsolete">Zpoždění před odesláním dalšího bloku (s)</translation>
-    </message>
-    <message>
-        <source>90</source>
-        <translation type="obsolete">90</translation>
-    </message>
-    <message>
-        <source>Remove empty lines</source>
-        <translation type="obsolete">Odstranit prázdné řádky</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Example:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - space character and new line characters&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Space character can only be written as hex number - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Příklad:	&lt;span style=&quot; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;   - % a znaky pro nový řádek&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;	&lt;span style=&quot; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;  - znak pro mezeru a znaky pro nový řádek&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Znak pro mezeru lze zapsat pouze jako šestnáctkové číslo (hex) - 0x20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Send at start:</source>
-        <translation type="vanished">Poslat na začátku:</translation>
-    </message>
-    <message>
-        <source>XOFF character:</source>
-        <translation type="vanished">Znak XOFF:</translation>
-    </message>
-    <message>
-        <source>Delete control chars</source>
-        <translation type="vanished">Smazat ovládací znaky</translation>
-    </message>
-    <message>
-        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
-        <translation type="vanished">Smazat všechny ovládací znaky (&lt;0x3F; &gt;0x7F) z přijatého souboru</translation>
-    </message>
-    <message>
-        <source>Send at end:</source>
-        <translation type="vanished">Poslat na konec:</translation>
-    </message>
-    <message>
-        <source>XON character:</source>
-        <translation type="vanished">Znak XON:</translation>
-    </message>
-    <message>
-        <source>Enable this option for lower transmission latency on high baud rate</source>
-        <translation type="vanished">Tuto volbu povolte kvůli menší prodlevě při přenosu při vysoké rychlosti přenosu dat (bit/s) pro modemy (baud rate)</translation>
-    </message>
-    <message>
-        <source>Disable text selection</source>
-        <translation type="vanished">Zakázat výběr textu</translation>
-    </message>
-    <message>
-        <source>&amp;Save &amp;&amp; close</source>
-        <translation type="vanished">&amp;Uložit a zavřít</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Zrušit</translation>
-    </message>
-    <message>
-        <source>Serial port configuration</source>
-        <translation type="vanished">Nastavení sériové přípojky</translation>
-    </message>
-    <message>
-        <source>Select serial port device</source>
-        <translation type="vanished">Vybrat zařízení se sériovou přípojkou</translation>
-    </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Všechny soubory (*)</translation>
-    </message>
-</context>
-<context>
     <name>SerialPortCfgHelpDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
     <message>
         <location filename="../src/serialportcfghelpdialog.ui" line="14"/>
         <source>Help - Serial port configuration</source>
@@ -4139,10 +3207,6 @@ Set to 300s to disable timer.</source>
 Nastavte na 300 s pro zakázání časovače.</translation>
     </message>
     <message>
-        <source>Off</source>
-        <translation type="obsolete">Vypnuto</translation>
-    </message>
-    <message>
         <location filename="../src/serialportconfigdialog.ui" line="556"/>
         <source>Hardware</source>
         <translation>Technické vybavení</translation>
@@ -4337,18 +3401,6 @@ Použije se vybraná přípona názvu souboru.</translation>
         <location filename="../src/serialportconfigdialog.ui" line="1037"/>
         <source>Delay before sending the next block:</source>
         <translation>Zpoždění před odesláním dalšího bloku:</translation>
-    </message>
-    <message>
-        <source>90</source>
-        <translation type="obsolete">90</translation>
-    </message>
-    <message>
-        <source>19</source>
-        <translation type="obsolete">19</translation>
-    </message>
-    <message>
-        <source>17</source>
-        <translation type="obsolete">17</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="940"/>
@@ -4746,10 +3798,6 @@ Pokud zjištěný soubor obsahuje příponu, potom se toto nastavení bude přeh
 <context>
     <name>SerialTransmissionDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
         <location filename="../src/serialtransmissiondialog.ui" line="42"/>
         <source>Settings name</source>
         <translation>Název nastavení</translation>
@@ -4833,10 +3881,6 @@ Pokud zjištěný soubor obsahuje příponu, potom se toto nastavení bude přeh
         <translation>Automatické &amp;zavření za %1 s</translation>
     </message>
     <message>
-        <source>Start in %1s</source>
-        <translation type="obsolete">Začátek za %1s</translation>
-    </message>
-    <message>
         <location filename="../src/serialtransmissiondialog.cpp" line="219"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Port: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Přípojka: &lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; je&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -4850,10 +3894,6 @@ Pokud zjištěný soubor obsahuje příponu, potom se toto nastavení bude přeh
         <location filename="../src/serialtransmissiondialog.cpp" line="237"/>
         <source>Sending starts in %1s</source>
         <translation>Posílání začíná za %1 s</translation>
-    </message>
-    <message>
-        <source>Waiting for a signal readiness...</source>
-        <translation type="obsolete">Čeká se na připravenost signálu...</translation>
     </message>
     <message>
         <location filename="../src/serialtransmissiondialog.cpp" line="284"/>
@@ -5560,53 +4600,6 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
     </message>
 </context>
 <context>
-    <name>SourceData</name>
-    <message>
-        <location filename="../src/diff.cpp" line="249"/>
-        <source>From Clipboard</source>
-        <translation>Ze schránky</translation>
-    </message>
-</context>
-<context>
-    <name>TransProgressDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dialog</translation>
-    </message>
-    <message>
-        <source>Clear To Send</source>
-        <translation type="vanished">Vyprázdnit &apos;Poslat&apos;</translation>
-    </message>
-    <message>
-        <source>Data Set Ready </source>
-        <translation type="vanished">Soubor dat připraven</translation>
-    </message>
-    <message>
-        <source>Data Carrier Detect</source>
-        <translation type="vanished">Zjištění přepravce dat</translation>
-    </message>
-    <message>
-        <source>Request To Send</source>
-        <translation type="vanished">Požadavek na &apos;Poslat&apos;</translation>
-    </message>
-    <message>
-        <source>Data Terminal Ready</source>
-        <translation type="vanished">Datový terminál připraven</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="vanished">Textový štítek</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Zrušit</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Zavřít</translation>
-    </message>
-</context>
-<context>
     <name>TransmissionDialog</name>
     <message>
         <location filename="../src/transmissiondialog.ui" line="14"/>
@@ -5734,70 +4727,6 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
         <translation>Přijato: %1 bytů.</translation>
     </message>
     <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="vanished">Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="vanished">Nelze přidělit paměťové tabulky</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal</source>
-        <translation type="vanished">Zachycen ne-blokovaný signál</translation>
-    </message>
-    <message>
-        <source>Operation timed out</source>
-        <translation type="vanished">Překročení času u operace</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="vanished">Soubor otevřený přípojkou není typickým zařízením</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="vanished">Přípojka zjistila podmínku přerušení</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="vanished">Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="vanished">Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="vanished">Překročení vyrovnávací paměti znaku</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="vanished">Přetečení vyrovnávací paměti pro příjem</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="vanished">Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="vanished">Přetečení vyrovnávací paměti pro přenos</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="vanished">Selhání operace běžného čtení</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="vanished">Selhání operace běžného zápisu</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="vanished">Nevyskytla se žádná chyba</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Neznámá chyba</translation>
-    </message>
-    <message>
         <location filename="../src/serialtransmission.cpp" line="488"/>
         <source>Waiting...</source>
         <translation>Čeká se...</translation>
@@ -5887,37 +4816,6 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
     </message>
 </context>
 <context>
-    <name>WindowTitleWidget</name>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3330"/>
-        <source>Output</source>
-        <translation>Výstup</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3342"/>
-        <location filename="../src/mergeresultwindow.cpp" line="3539"/>
-        <source>[Modified]</source>
-        <translation>[Upraveno]</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3349"/>
-        <source>Encoding for saving</source>
-        <translation>Kódování pro uložení</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3357"/>
-        <source>Line end style:</source>
-        <translation>Čára a styl:</translation>
-    </message>
-    <message>
-        <location filename="../src/mergeresultwindow.cpp" line="3474"/>
-        <location filename="../src/mergeresultwindow.cpp" line="3479"/>
-        <location filename="../src/mergeresultwindow.cpp" line="3484"/>
-        <source>Codec from</source>
-        <translation>Kodek od</translation>
-    </message>
-</context>
-<context>
     <name>cleanUpDialog</name>
     <message>
         <location filename="../src/cleanupdialog.ui" line="17"/>
@@ -5978,989 +4876,6 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
         <location filename="../src/cleanupdialog.cpp" line="63"/>
         <source>Delete current row</source>
         <translation>Smazat nynější řádek</translation>
-    </message>
-</context>
-<context>
-    <name>edytornc</name>
-    <message>
-        <source>EdytorNC</source>
-        <translation type="obsolete">EdytorNC</translation>
-    </message>
-    <message>
-        <source>CNC programs files *.nc (*.nc);;CNC programs files *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Text files *.txt (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.min *.anc *.cnc (*.nc *.min *.anc *.cnc);;Textové soubory *.txt (*.txt);; Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc);;CNC programs files (*.nc *.min *.anc *.cnc);;Text files (*.txt);; All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.min *.anc *.cnc);;Textové soubory (*.txt);; Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>Select one or more files to open</source>
-        <translation type="obsolete">Vyberte jeden nebo více souborů k otevření</translation>
-    </message>
-    <message>
-        <source>File loaded</source>
-        <translation type="obsolete">Soubor nahrán</translation>
-    </message>
-    <message>
-        <source>CNC programs files *.nc (*.nc);;All files (*.* *)</source>
-        <translation type="obsolete">Programové soubory CNC *.nc (*.nc);;Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc)</translation>
-    </message>
-    <message>
-        <source>CNC programs files (*.nc *.min *.anc *.cnc)</source>
-        <translation type="obsolete">Programové soubory CNC (*.nc *.min *.anc *.cnc)</translation>
-    </message>
-    <message>
-        <source>Text files (*.txt)</source>
-        <translation type="obsolete">Textové soubory (*.txt)</translation>
-    </message>
-    <message>
-        <source>All files (*.* *)</source>
-        <translation type="obsolete">Všechny soubory (*.* *)</translation>
-    </message>
-    <message>
-        <source>File saved</source>
-        <translation type="obsolete">Soubor uložen</translation>
-    </message>
-    <message>
-        <source>Removed : %1 line numbers.</source>
-        <translation type="obsolete">Odstraněno: %1 čísel řádků.</translation>
-    </message>
-    <message>
-        <source>Renumbered : %1 lines.</source>
-        <translation type="obsolete">Přečíslováno: %1 řádků.</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Informace</translation>
-    </message>
-    <message>
-        <source>Set correct calculator program name in configuration dialog.</source>
-        <translation type="obsolete">V dialogu nastavení nastavit správný název programu pro výpočty.</translation>
-    </message>
-    <message>
-        <source>About EdytorNC</source>
-        <translation type="obsolete">O programu EdytorNC</translation>
-    </message>
-    <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation type="obsolete">&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Version: </source>
-        <translation type="obsolete">&lt;P&gt;Verze: </translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2010 by &lt;a href=&quot;mailto:artkoz@poczta.onet.pl&quot;&gt;Artur Koziol&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation type="obsolete">&lt;P&gt;Poděkování Jordi Sayol i Salomó za překlad do katalánštiny a balíček pro Debian</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;German translation thanks to Michael Numberger</source>
-        <translation type="obsolete">&lt;P&gt;Poděkování Michaelovi Numbergerovi za překlad do němčiny</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Cross platform installer made by &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;Instalátor pro více operačních systémů vytvořen &lt;a href=&quot;http://installbuilder.bitrock.com/&quot;&gt;BitRock InstallBuilder for Qt&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC wins &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE award granted by Softpedia&quot;&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;P&gt;EdytorNC získal &lt;a href=&quot;http://www.softpedia.com/progClean/EdytorNC-Clean-144736.html/&quot;&gt;&quot;100% FREE cenu poskytnutou Softpedií&quot;&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation type="obsolete">&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;P&gt;&lt;i&gt;EdytorNC je svobodný program. Můžete jej šířit a/nebo upravovat za podmínek GNU General Public License, jak jsou zveřejněny Free Software Foundation; buď ve verzi 2 tohoto povolení, nebo (podle svého uvážení) v jakékoli pozdější verzi.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="obsolete">&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
-    </message>
-    <message>
-        <source> Col: </source>
-        <translation type="obsolete"> Sloupec: </translation>
-    </message>
-    <message>
-        <source>  Line: </source>
-        <translation type="obsolete"> Řádek: </translation>
-    </message>
-    <message>
-        <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
-        <translation type="obsolete">  &lt;b&gt;Upraveno&lt;/b&gt;  </translation>
-    </message>
-    <message>
-        <source> Read only  </source>
-        <translation type="obsolete">Pouze pro čtení</translation>
-    </message>
-    <message>
-        <source> Overwrite  </source>
-        <translation type="obsolete"> Přepsat  </translation>
-    </message>
-    <message>
-        <source> Insert </source>
-        <translation type="obsolete"> Vložit </translation>
-    </message>
-    <message>
-        <source>%1 %2</source>
-        <translation type="obsolete">%1 %2</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="obsolete">&amp;Nový</translation>
-    </message>
-    <message>
-        <source>Create a new file</source>
-        <translation type="obsolete">Vytvořit nový soubor</translation>
-    </message>
-    <message>
-        <source>&amp;Open...</source>
-        <translation type="obsolete">&amp;Otevřít...</translation>
-    </message>
-    <message>
-        <source>Open an existing file</source>
-        <translation type="obsolete">Otevřít stávající soubor</translation>
-    </message>
-    <message>
-        <source>&amp;Open example...</source>
-        <translation type="obsolete">&amp;Otevřít příklad...</translation>
-    </message>
-    <message>
-        <source>Open an example file</source>
-        <translation type="obsolete">Otevřít soubor s příkladem</translation>
-    </message>
-    <message>
-        <source>&amp;Open file with preview</source>
-        <translation type="obsolete">&amp;Otevřít soubor s náhledem</translation>
-    </message>
-    <message>
-        <source>Open an existing file (Openfile dialog with preview)</source>
-        <translation type="obsolete">Otevřít stávající soubor (dialog otevření souboru s náhledem)</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Uložit</translation>
-    </message>
-    <message>
-        <source>Save the document to disk</source>
-        <translation type="obsolete">Uložit dokument na disk</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="obsolete">Uložit &amp;jako...</translation>
-    </message>
-    <message>
-        <source>Save the document under a new name</source>
-        <translation type="obsolete">Uložit dokument pod novým názvem</translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation type="obsolete">&amp;Ukončit</translation>
-    </message>
-    <message>
-        <source>Ctrl+Q</source>
-        <translation type="obsolete">Ctrl+Q</translation>
-    </message>
-    <message>
-        <source>Exit the application</source>
-        <translation type="obsolete">Ukončit program</translation>
-    </message>
-    <message>
-        <source>&amp;Find files...</source>
-        <translation type="obsolete">&amp;Hledat soubory...</translation>
-    </message>
-    <message>
-        <source>Find files</source>
-        <translation type="obsolete">Hledat soubory</translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation type="obsolete">&amp;Tisk</translation>
-    </message>
-    <message>
-        <source>Print file</source>
-        <translation type="obsolete">Vytisknout soubor</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <translation type="obsolete">&amp;Zpět</translation>
-    </message>
-    <message>
-        <source>Undo last operation</source>
-        <translation type="obsolete">Zpět poslední operaci</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">&amp;Znovu</translation>
-    </message>
-    <message>
-        <source>Redo last operation</source>
-        <translation type="obsolete">Znovu poslední operaci</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t</source>
-        <translation type="obsolete">Vyj&amp;mout</translation>
-    </message>
-    <message>
-        <source>Cut the current selection&apos;s contents to the clipboard</source>
-        <translation type="obsolete">Vyjmout obsah nynějšího výběru do schránky</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Kopírovat</translation>
-    </message>
-    <message>
-        <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation type="obsolete">Kopírovat obsah nynějšího výběru do schránky</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">&amp;Vložit</translation>
-    </message>
-    <message>
-        <source>Paste the clipboard&apos;s contents into the current selection</source>
-        <translation type="obsolete">Vložit obsah schránky do nynějšího výběru</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Najít</translation>
-    </message>
-    <message>
-        <source>Find text</source>
-        <translation type="obsolete">Najít text</translation>
-    </message>
-    <message>
-        <source>&amp;Replace</source>
-        <translation type="obsolete">&amp;Nahradit</translation>
-    </message>
-    <message>
-        <source>Ctrl+R</source>
-        <translation type="obsolete">Ctrl+R</translation>
-    </message>
-    <message>
-        <source>Find and replace text</source>
-        <translation type="obsolete">Najít a nahradit text</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Smazat</translation>
-    </message>
-    <message>
-        <source>Removes selected text</source>
-        <translation type="obsolete">Odstraní vybraný text</translation>
-    </message>
-    <message>
-        <source>&amp;Select all</source>
-        <translation type="obsolete">&amp;Vybrat vše</translation>
-    </message>
-    <message>
-        <source>Select all text</source>
-        <translation type="obsolete">Vybrat všechen text</translation>
-    </message>
-    <message>
-        <source>Read &amp;only</source>
-        <translation type="obsolete">&amp;Pouze pro čtení</translation>
-    </message>
-    <message>
-        <source>F12</source>
-        <translation type="obsolete">F12</translation>
-    </message>
-    <message>
-        <source>Makes text read only</source>
-        <translation type="obsolete">Udělá text pouze pro čtení</translation>
-    </message>
-    <message>
-        <source>Configuration</source>
-        <translation type="obsolete">Nastavení</translation>
-    </message>
-    <message>
-        <source>Open configuration dialog</source>
-        <translation type="obsolete">Otevřít dialog nastavení</translation>
-    </message>
-    <message>
-        <source>&amp;Bolt hole circle</source>
-        <translation type="obsolete">&amp;Kruh otvoru šroubu</translation>
-    </message>
-    <message>
-        <source>F8</source>
-        <translation type="obsolete">F8</translation>
-    </message>
-    <message>
-        <source>Calculate bolt hole&apos;s positions</source>
-        <translation type="obsolete">Spočítat polohy otvorů šroubu</translation>
-    </message>
-    <message>
-        <source>&amp;Insert spaces</source>
-        <translation type="obsolete">&amp;Vložit mezery</translation>
-    </message>
-    <message>
-        <source>F4</source>
-        <translation type="obsolete">F4</translation>
-    </message>
-    <message>
-        <source>Inserts spaces</source>
-        <translation type="obsolete">Vložit mezery</translation>
-    </message>
-    <message>
-        <source>Remove spaces</source>
-        <translation type="obsolete">Odstranit mezery</translation>
-    </message>
-    <message>
-        <source>F5</source>
-        <translation type="obsolete">F5</translation>
-    </message>
-    <message>
-        <source>Removes spaces</source>
-        <translation type="obsolete">Odstraní mezery</translation>
-    </message>
-    <message>
-        <source>Remove empty lines</source>
-        <translation type="obsolete">Odstranit prázdné řádky</translation>
-    </message>
-    <message>
-        <source>Removes empty lines</source>
-        <translation type="obsolete">Odstraní prázdné řádky</translation>
-    </message>
-    <message>
-        <source>Insert dots</source>
-        <translation type="obsolete">Vložit tečky</translation>
-    </message>
-    <message>
-        <source>F6</source>
-        <translation type="obsolete">F6</translation>
-    </message>
-    <message>
-        <source>Inserts decimal dot</source>
-        <translation type="obsolete">Vložit desetinnou tečku</translation>
-    </message>
-    <message>
-        <source>Renumber</source>
-        <translation type="obsolete">Přečíslovat</translation>
-    </message>
-    <message>
-        <source>F7</source>
-        <translation type="obsolete">F7</translation>
-    </message>
-    <message>
-        <source>Renumber program blocks</source>
-        <translation type="obsolete">Přečíslovat programové bloky</translation>
-    </message>
-    <message>
-        <source>Feed&apos;s speed&apos;s</source>
-        <translation type="obsolete">Počet otáček + Posun</translation>
-    </message>
-    <message>
-        <source>F9</source>
-        <translation type="obsolete">F9</translation>
-    </message>
-    <message>
-        <source>Calculate speed, feed, cutting speed</source>
-        <translation type="obsolete">Spočítat počet otáček, posun a rychlost řezání</translation>
-    </message>
-    <message>
-        <source>Chamfer</source>
-        <translation type="obsolete">Zkosení</translation>
-    </message>
-    <message>
-        <source>Calculate chamfer</source>
-        <translation type="obsolete">Spočítat zkosení</translation>
-    </message>
-    <message>
-        <source>Solution of triangles</source>
-        <translation type="obsolete">Spočítat trojúhelníky</translation>
-    </message>
-    <message>
-        <source>Convert inch &lt;-&gt; mm</source>
-        <translation type="obsolete">Převést inch &lt;-&gt; mm</translation>
-    </message>
-    <message>
-        <source>Convert program inch &lt;-&gt; mm</source>
-        <translation type="obsolete">Převáděcí program inch &lt;-&gt; mm (palce &lt;-&gt; milimetry)</translation>
-    </message>
-    <message>
-        <source>Calculator</source>
-        <translation type="obsolete">Kalkulačka</translation>
-    </message>
-    <message>
-        <source>Run calculator</source>
-        <translation type="obsolete">Spustit kalkulačku</translation>
-    </message>
-    <message>
-        <source>Serial port send/receive</source>
-        <translation type="obsolete">Sériová přípojka poslat/přijmout</translation>
-    </message>
-    <message>
-        <source>Compile macro - experimental</source>
-        <translation type="obsolete">Sestavit makra - pokusná funkce</translation>
-    </message>
-    <message>
-        <source>Translate EdytorNC macro into CNC program</source>
-        <translation type="obsolete">Přeložit makro EdytorNC do programu CNC</translation>
-    </message>
-    <message>
-        <source>Show diff - open current file in right diff window</source>
-        <translation type="obsolete">Ukázat rozdíly - otevřít nynější soubor v pravém okně s rozdíly</translation>
-    </message>
-    <message>
-        <source>Show diff - open current file in left diff window</source>
-        <translation type="obsolete">Ukázat rozdíly - otevřít nynější soubor v levém okně s rozdíly</translation>
-    </message>
-    <message>
-        <source>On/off diff window</source>
-        <translation type="obsolete">Zapnout/Vypnout okno s rozdíly</translation>
-    </message>
-    <message>
-        <source>Show diff window</source>
-        <translation type="obsolete">Ukázat okno s rozdíly</translation>
-    </message>
-    <message>
-        <source>Cl&amp;ose</source>
-        <translation type="obsolete">Za&amp;vřít</translation>
-    </message>
-    <message>
-        <source>Ctrl+F4</source>
-        <translation type="obsolete">Ctrl+F4</translation>
-    </message>
-    <message>
-        <source>Close the active window</source>
-        <translation type="obsolete">Zavřít činné okno</translation>
-    </message>
-    <message>
-        <source>Close &amp;All</source>
-        <translation type="obsolete">Zavřít &amp;vše</translation>
-    </message>
-    <message>
-        <source>Close all the windows</source>
-        <translation type="obsolete">Zavřít všechna okna</translation>
-    </message>
-    <message>
-        <source>&amp;Tile</source>
-        <translation type="obsolete">Klást jedno &amp;vedle druhého</translation>
-    </message>
-    <message>
-        <source>Tile the windows</source>
-        <translation type="obsolete">Klást jedno okno vedle druhého</translation>
-    </message>
-    <message>
-        <source>&amp;Cascade</source>
-        <translation type="obsolete">&amp;Překrývat</translation>
-    </message>
-    <message>
-        <source>Cascade the windows</source>
-        <translation type="obsolete">Překrývat okna</translation>
-    </message>
-    <message>
-        <source>Ne&amp;xt</source>
-        <translation type="obsolete">Da&amp;lší</translation>
-    </message>
-    <message>
-        <source>Move the focus to the next window</source>
-        <translation type="obsolete">Přesunout pozornost na další okno</translation>
-    </message>
-    <message>
-        <source>Pre&amp;vious</source>
-        <translation type="obsolete">Před&amp;chozí</translation>
-    </message>
-    <message>
-        <source>Move the focus to the previous window</source>
-        <translation type="obsolete">Přesunout pozornost na předchozí okno</translation>
-    </message>
-    <message>
-        <source>&amp;Create cnc tooltips</source>
-        <translation type="obsolete">&amp;Vytvořit nástrojové rady CNC</translation>
-    </message>
-    <message>
-        <source>Create default cnc tooltips file</source>
-        <translation type="obsolete">Vytvořit soubor s výchozími nástrojovými radami CNC</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation type="obsolete">&amp;O programu</translation>
-    </message>
-    <message>
-        <source>Show the application&apos;s About box</source>
-        <translation type="obsolete">Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation type="obsolete">O &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Show the Qt library&apos;s About box</source>
-        <translation type="obsolete">Ukázat dialog &quot;O Qt&quot;</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;Soubor</translation>
-    </message>
-    <message>
-        <source>&amp;Recent files</source>
-        <translation type="obsolete">&amp;Naposledy otevřené soubory</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Úpravy</translation>
-    </message>
-    <message>
-        <source>&amp;Tools</source>
-        <translation type="obsolete">&amp;Nástroje</translation>
-    </message>
-    <message>
-        <source>&amp;Window</source>
-        <translation type="obsolete">&amp;Okno</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">&amp;Nápověda</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Soubor</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Úpravy</translation>
-    </message>
-    <message>
-        <source>Tools</source>
-        <translation type="obsolete">Nástroje</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation type="obsolete">Okno</translation>
-    </message>
-    <message>
-        <source>Highlight style and tooltip mode</source>
-        <translation type="obsolete">Zvýraznit režim stylu a nástrojových rad</translation>
-    </message>
-    <message>
-        <source>SINUMERIK OLD</source>
-        <translation type="obsolete">STARÝ SINUMERIK</translation>
-    </message>
-    <message>
-        <source>SINUMERIK NEW</source>
-        <translation type="obsolete">NOVÝ SINUMERIK</translation>
-    </message>
-    <message>
-        <source>Attach current highlight setting to current directory of programs</source>
-        <translation type="obsolete">Přiložit současné nastavení zvýrazňování do nynějšího adresáře s programem</translation>
-    </message>
-    <message>
-        <source>Remove highlight settings from the directory</source>
-        <translation type="obsolete">Odstranit nastavení zvýrazňování z adresáře s programem</translation>
-    </message>
-    <message>
-        <source>Ready</source>
-        <translation type="obsolete">Připraven</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Najít</translation>
-    </message>
-    <message>
-        <source>Find next</source>
-        <translation type="obsolete">Najít další</translation>
-    </message>
-    <message>
-        <source>Find previous</source>
-        <translation type="obsolete">Najít předchozí</translation>
-    </message>
-    <message>
-        <source>Replace &amp;&amp; find next</source>
-        <translation type="obsolete">Nahradit a najít další</translation>
-    </message>
-    <message>
-        <source>Replace &amp;&amp; find previous</source>
-        <translation type="obsolete">Nahradit a najít předchozí</translation>
-    </message>
-    <message>
-        <source>Replace all</source>
-        <translation type="obsolete">Nahradit vše</translation>
-    </message>
-    <message>
-        <source>Close find toolbar</source>
-        <translation type="obsolete">Zavřít nástrojový pruh pro hledání</translation>
-    </message>
-    <message>
-        <source>Find:</source>
-        <translation type="obsolete">Hledat:</translation>
-    </message>
-    <message>
-        <source>Replace with:</source>
-        <translation type="obsolete">Nahradit:</translation>
-    </message>
-    <message>
-        <source>Ignore c&amp;ase</source>
-        <translation type="obsolete">Nevšímat si psaní v&amp;elkých a malých písmen</translation>
-    </message>
-    <message>
-        <source>&amp;Whole words only</source>
-        <translation type="obsolete">Pouze celá &amp;slova</translation>
-    </message>
-    <message>
-        <source>Serial port toolbar</source>
-        <translation type="obsolete">Nástrojový pruh pro sériovou přípojku</translation>
-    </message>
-    <message>
-        <source>Serial port configuration</source>
-        <translation type="obsolete">Nastavení sériové přípojky</translation>
-    </message>
-    <message>
-        <source>Receive new file</source>
-        <translation type="obsolete">Přijmout nový soubor</translation>
-    </message>
-    <message>
-        <source>Send current file</source>
-        <translation type="obsolete">Poslat nynější soubor</translation>
-    </message>
-    <message>
-        <source>Attach current port settings to current directory of programs</source>
-        <translation type="obsolete">Přiložit současné nastavení přípojky do nynějšího adresáře s programem</translation>
-    </message>
-    <message>
-        <source>Remove settings from the directory</source>
-        <translation type="obsolete">Odstranit nastavení z adresáře s programem</translation>
-    </message>
-    <message>
-        <source>Check serial port settings</source>
-        <translation type="obsolete">Prověřit nastavení sériové přípojky</translation>
-    </message>
-    <message>
-        <source>Close send/receive toolbar</source>
-        <translation type="obsolete">Zavřít nástrojový pruh poslat/přijmout</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="obsolete">Výchozí</translation>
-    </message>
-    <message>
-        <source>Sending...</source>
-        <translation type="obsolete">Posílá se...</translation>
-    </message>
-    <message>
-        <source>Waiting...</source>
-        <translation type="obsolete">Čeká se...</translation>
-    </message>
-    <message>
-        <source>Start in %1s</source>
-        <translation type="obsolete">Začátek za %1s</translation>
-    </message>
-    <message>
-        <source>Waiting for a signal readiness...</source>
-        <translation type="obsolete">Čeká se na připravenost signálu...</translation>
-    </message>
-    <message>
-        <source>Sending byte %1 of %2</source>
-        <translation type="obsolete">Posílají se byty: %1 z %2</translation>
-    </message>
-    <message>
-        <source>Receiving...</source>
-        <translation type="obsolete">Přijímá se...</translation>
-    </message>
-    <message>
-        <source>Waiting for data...</source>
-        <translation type="obsolete">Čeká se na data...</translation>
-    </message>
-    <message>
-        <source>Reciving byte %1</source>
-        <translation type="obsolete">Přijímají se byty %1</translation>
-    </message>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="obsolete">Neplatný popis souboru (přípojka nebyla otevřena správně)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="obsolete">Nelze přidělit paměťové tabulky</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal</source>
-        <translation type="obsolete">Zachycen ne-blokovaný signál</translation>
-    </message>
-    <message>
-        <source>Operation timed out</source>
-        <translation type="obsolete">Překročení času u operace</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="obsolete">Soubor otevřený přípojkou není typickým zařízením</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="obsolete">Přípojka zjistila podmínku přerušení</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="obsolete">Přípojka zjistila chybu v rámování (nesprávné nastavení rychlosti přenosu dat (bit/s) pro modemy (baud rate)?)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="obsolete">Při komunikaci s přípojkou se vyskytla chyba na vstupu/výstupu (I/O)</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="obsolete">Překročení vyrovnávací paměti znaku</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="obsolete">Přetečení vyrovnávací paměti pro příjem</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="obsolete">Přípojka v přijjímaných datech zjistila chybu v rovnosti</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="obsolete">Přetečení vyrovnávací paměti pro přenos</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="obsolete">Selhání operace běžného čtení</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="obsolete">Selhání operace běžného zápisu</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="obsolete">Nevyskytla se žádná chyba</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="obsolete">Neznámá chyba</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional</source>
-        <translation type="obsolete">&lt;b&gt;M00&lt;/b&gt; - zastavení programu, naprosté</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M01&lt;/b&gt; - optional program stop</source>
-        <translation type="obsolete">&lt;b&gt;M01&lt;/b&gt; - volitelné zastavení programu</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M02&lt;/b&gt; - end of program</source>
-        <translation type="obsolete">&lt;b&gt;M02&lt;/b&gt; - ukončení programu</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M03&lt;/b&gt; - start spindle CW</source>
-        <translation type="obsolete">&lt;b&gt;M03&lt;/b&gt; - spuštění hřídele CW (po směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M04&lt;/b&gt; - start spindle CCW</source>
-        <translation type="obsolete">&lt;b&gt;M04&lt;/b&gt; - spuštění hřídele CCW (proti směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M05&lt;/b&gt; - spindle stop</source>
-        <translation type="obsolete">&lt;b&gt;M05&lt;/b&gt; - zastavení hřídele</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M06&lt;/b&gt; - tool change</source>
-        <translation type="obsolete">&lt;b&gt;M06&lt;/b&gt; - změna nástroje</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M08&lt;/b&gt; - coolant on</source>
-        <translation type="obsolete">&lt;b&gt;M08&lt;/b&gt; - zapnutí chladicí kapaliny/směsi/média</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M09&lt;/b&gt; - coolant off</source>
-        <translation type="obsolete">&lt;b&gt;M09&lt;/b&gt; - vypnutí chladicí kapaliny/směsi/média</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M12&lt;/b&gt; - M-tool spindle STOP</source>
-        <translation type="obsolete">&lt;b&gt;M12&lt;/b&gt; - M-nástroj ZASTAVENÍ hřídele</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M13&lt;/b&gt; - M-tool spindle CW</source>
-        <translation type="obsolete">&lt;b&gt;M13&lt;/b&gt; - M-nástroj hřídele CW (po směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M14&lt;/b&gt; - M-tool spindle CCW</source>
-        <translation type="obsolete">&lt;b&gt;M14&lt;/b&gt; - M-nástroj hřídele CCW (proti směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M15&lt;/b&gt; - B or C-axis positioning, plus direction CW</source>
-        <translation type="obsolete">&lt;b&gt;M15&lt;/b&gt; - polohování osy B nebo C, plus směr CW (po směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M16&lt;/b&gt; - B or C-axis positioning, minus direction CCW</source>
-        <translation type="obsolete">&lt;b&gt;M16&lt;/b&gt; - polohování osy B nebo C, minus směr CCW (proti směru hodinových ručiček)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M19&lt;/b&gt; - oriented spindle stop</source>
-        <translation type="obsolete">&lt;b&gt;M19&lt;/b&gt; - zaměřené zastavení hřídele</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M20&lt;/b&gt; - tailstock barrier OFF</source>
-        <translation type="obsolete">&lt;b&gt;M20&lt;/b&gt; - zábrana koníka VYPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M21&lt;/b&gt; - tailstock barrier ON</source>
-        <translation type="obsolete">&lt;b&gt;M21&lt;/b&gt; - zábrana koníka ZAPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M22&lt;/b&gt; - chamfering OFF (for thread cutting cycle)</source>
-        <translation type="obsolete">&lt;b&gt;M22&lt;/b&gt; - zkosení VYPNUTO (pro periodu řezání závitu)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M23&lt;/b&gt; - chamfering ON (for thread cutting cycle)</source>
-        <translation type="obsolete">&lt;b&gt;M23&lt;/b&gt; - zkosení ZAPNUTO (pro periodu řezání závitu)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M24&lt;/b&gt; - chuck barrier OFF</source>
-        <translation type="obsolete">&lt;b&gt;M24&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) VYPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M25&lt;/b&gt; - chuck barrier ON</source>
-        <translation type="obsolete">&lt;b&gt;M25&lt;/b&gt; - zábrana sklíčidla (svíracích čelistí) ZAPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M26&lt;/b&gt; - thread lead along Z-axis</source>
-        <translation type="obsolete">&lt;b&gt;M26&lt;/b&gt; - vedení závitu podél osy Z</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M27&lt;/b&gt; - thread lead along X-axis</source>
-        <translation type="obsolete">&lt;b&gt;M27&lt;/b&gt; - vedení závitu podél osy X</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function OFF</source>
-        <translation type="obsolete">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje VYPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M28&lt;/b&gt; - tool interference check function ON</source>
-        <translation type="obsolete">&lt;b&gt;M28&lt;/b&gt; - funkce přezkoušení rušení nástroje ZAPNUTA</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M30&lt;/b&gt; - end of program</source>
-        <translation type="obsolete">&lt;b&gt;M30&lt;/b&gt; - ukončení programu</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M40&lt;/b&gt; - spindle gear range neutral</source>
-        <translation type="obsolete">&lt;b&gt;M40&lt;/b&gt; - neutrální rozsah převodu osy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M41&lt;/b&gt; - spindle gear range 1</source>
-        <translation type="obsolete">&lt;b&gt;M41&lt;/b&gt; - rozsah převodu osy 1</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 2</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 2</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M43&lt;/b&gt; - spindle gear range 3</source>
-        <translation type="obsolete">&lt;b&gt;M43&lt;/b&gt; - rozsah převodu osy 3</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M42&lt;/b&gt; - spindle gear range 4</source>
-        <translation type="obsolete">&lt;b&gt;M42&lt;/b&gt; - rozsah převodu osy 4</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M48&lt;/b&gt; - spindle speed override ignore cancel</source>
-        <translation type="obsolete">&lt;b&gt;M48&lt;/b&gt; - zrušení opomíjení potlačení automatického ovládání rychlosti osy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M49&lt;/b&gt; - spindle speed override ignore</source>
-        <translation type="obsolete">&lt;b&gt;M49&lt;/b&gt; -opomíjení potlačení automatického ovládání rychlosti osy</translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - mode of return to upper limit level</source>
-        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - režim návratu k horní úrovni omezení</translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </source>
-        <translation type="obsolete">&lt;br /&gt;&lt;i&gt;v.L&lt;/i&gt; &lt;b&gt;M52&lt;/b&gt; - </translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - mode of return to a specified point level set by G71</source>
-        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M53&lt;/b&gt; - režim návratu k stanovené bodové úrovni nastavené G71</translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - mode of return to the point R level</source>
-        <translation type="obsolete">&lt;i&gt;v.M&lt;/i&gt; &lt;b&gt;M54&lt;/b&gt; - režim návratu k bodové úrovni R</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M55&lt;/b&gt; - tailstock spindle retract</source>
-        <translation type="obsolete">&lt;b&gt;M55&lt;/b&gt; - zatáhnutí osy koníka</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M56&lt;/b&gt; - tailstock spindle advanced</source>
-        <translation type="obsolete">&lt;b&gt;M56&lt;/b&gt; - předsunutí osy koníka</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M58&lt;/b&gt; - chucking pressure low</source>
-        <translation type="obsolete">&lt;b&gt;M58&lt;/b&gt; - nízký tlak svírací čelisti</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M59&lt;/b&gt; - chucking pressure high</source>
-        <translation type="obsolete">&lt;b&gt;M59&lt;/b&gt; - vysoký tlak svírací čelisti</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M60&lt;/b&gt; - cancel of M61</source>
-        <translation type="obsolete">&lt;b&gt;M60&lt;/b&gt; - zrušení M61</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M61&lt;/b&gt; - Ignoring fixed rpm arrival in constant speed cutting</source>
-        <translation type="obsolete">&lt;b&gt;M61&lt;/b&gt; - opomíjí se pevný příjezd rpm při řezání stálou rychlostí</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M62&lt;/b&gt; - cancel of M64</source>
-        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M64</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M63&lt;/b&gt; - ignoring spindle rotation M code answer</source>
-        <translation type="obsolete">&lt;b&gt;M63&lt;/b&gt; - opomíjí se odpověď kódu M otáčení osy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M64&lt;/b&gt; - ignoring general M code answer</source>
-        <translation type="obsolete">&lt;b&gt;M64&lt;/b&gt; - opomíjí se obecná odpověď kódu M</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M65&lt;/b&gt; - ignoring T code answer</source>
-        <translation type="obsolete">&lt;b&gt;M65&lt;/b&gt; - opomíjí se odpověď kódu T</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M66&lt;/b&gt; - turret indexing position free</source>
-        <translation type="obsolete">&lt;b&gt;M66&lt;/b&gt; -volná poloha indexace revolverové hlavy</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M78&lt;/b&gt; - steady rest unclamp</source>
-        <translation type="obsolete">&lt;b&gt;M78&lt;/b&gt; - stálé povolení svorky opěrky</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M79&lt;/b&gt; - steady rest clamp</source>
-        <translation type="obsolete">&lt;b&gt;M79&lt;/b&gt; - stálé sevření opěrky svorkou</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M83&lt;/b&gt; - chuck clamp</source>
-        <translation type="obsolete">&lt;b&gt;M83&lt;/b&gt; - sevření svíracích čelistí svorkou</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M84&lt;/b&gt; - chuck unclamp</source>
-        <translation type="obsolete">&lt;b&gt;M84&lt;/b&gt; - povolení svorky svíracích čelistí</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M109&lt;/b&gt; - cancel of M110</source>
-        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M110 {109&lt;?}</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;M162&lt;/b&gt; - cancel of M163</source>
-        <translation type="obsolete">&lt;b&gt;M62&lt;/b&gt; - zrušení M163 {162&lt;?}</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;G10&lt;/b&gt; - cancel of G11</source>
-        <translation type="obsolete">&lt;b&gt;G10&lt;/b&gt; - zrušení G11</translation>
     </message>
 </context>
 <context>

@@ -31,7 +31,7 @@
 #include "dialogs.h"
 #include "serialtransmission.h"
 #include "serialtransmissiondialog.h"
-#include "kdiff3.h"
+#include "kdiff3/kdiff3.h"
 #include "cleanupdialog.h"
 #include "swapaxesdialog.h"
 #include "newfiledialog.h"

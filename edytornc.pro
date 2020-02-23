@@ -1,6 +1,7 @@
 
 TEMPLATE = subdirs
 
-SUBDIRS = src
+CONFIG += ordered
 
-src.file = src/src.pro
+SUBDIRS = 3rdparty/kdiff3 \
+    src

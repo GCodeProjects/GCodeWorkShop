@@ -52,10 +52,6 @@
         <translation>Ángulo entre Agujeros : %1</translation>
     </message>
     <message>
-        <source>Center Position : X%1 Y%2</source>
-        <translation type="vanished">Posición del Centro : X%1 Y%2</translation>
-    </message>
-    <message>
         <source>Clear &amp;All</source>
         <translation>Limpi&amp;ar Todo</translation>
     </message>
@@ -276,14 +272,6 @@
         <translation>&amp;Reinicializar</translation>
     </message>
     <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Cerrar</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="vanished">Cerrar</translation>
-    </message>
-    <message>
         <source>FileToolBar</source>
         <translation>Barra de Herramientas Archivo</translation>
     </message>
@@ -381,36 +369,6 @@
     </message>
 </context>
 <context>
-    <name>DiffTextWindow</name>
-    <message>
-        <source>File</source>
-        <translation>Archivo</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation>Línea</translation>
-    </message>
-    <message>
-        <source>Line not available</source>
-        <translation>Línea no disponible</translation>
-    </message>
-</context>
-<context>
-    <name>DiffTextWindowFrame</name>
-    <message>
-        <source>Open file...</source>
-        <translation>Abrir Archivo...</translation>
-    </message>
-    <message>
-        <source>Top line</source>
-        <translation>Línea superior</translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation>Fin</translation>
-    </message>
-</context>
-<context>
     <name>DotDialog</name>
     <message>
         <source>Dialog</source>
@@ -500,10 +458,6 @@
         <translation>Vista previa del N° de líneas del archivo</translation>
     </message>
     <message>
-        <source>Part</source>
-        <translation type="vanished">Parte</translation>
-    </message>
-    <message>
         <source>File Name</source>
         <translation>Nombre del archivo</translation>
     </message>
@@ -568,10 +522,6 @@
     <message>
         <source>&lt;P&gt;Version: </source>
         <translation>&lt;P&gt;Versión: </translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation type="vanished">&lt;P&gt;Traducción al catalán y deb package gracias aJordi Sayol i Salomó</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
@@ -666,16 +616,8 @@
         <translation>Abrir archivo de ejemplo</translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Guardar</translation>
-    </message>
-    <message>
         <source>Save the document to disk</source>
         <translation>Guardar documento en el disco</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="vanished">Guardar &amp;Como...</translation>
     </message>
     <message>
         <source>Save the document under a new name</source>
@@ -854,10 +796,6 @@
         <translation>Insertar líneas vacías</translation>
     </message>
     <message>
-        <source>Clean&amp;up</source>
-        <translation type="vanished">&amp;Limpieza</translation>
-    </message>
-    <message>
         <source>Remove text using regular expressions</source>
         <translation>Remover texto con expresiones regulares</translation>
     </message>
@@ -1034,10 +972,6 @@
         <translation>Insertar/disminuir salto de bloque /</translation>
     </message>
     <message>
-        <source>Cl&amp;ose</source>
-        <translation type="vanished">C&amp;errar</translation>
-    </message>
-    <message>
         <source>Close the active window</source>
         <translation>Cerrar ventana activa</translation>
     </message>
@@ -1048,14 +982,6 @@
     <message>
         <source>Close all the windows</source>
         <translation>Cerrar todas las ventanas</translation>
-    </message>
-    <message>
-        <source>&amp;Tile</source>
-        <translation type="vanished">&amp;Mosaico</translation>
-    </message>
-    <message>
-        <source>Tile the windows</source>
-        <translation type="vanished">Ventanas en mosaico</translation>
     </message>
     <message>
         <source>&amp;Cascade</source>
@@ -1310,102 +1236,6 @@
         <translation>Predeterminado</translation>
     </message>
     <message>
-        <source>Sending...</source>
-        <translation type="vanished">Enviando...</translation>
-    </message>
-    <message>
-        <source>Waiting...</source>
-        <translation type="vanished">Esperando...</translation>
-    </message>
-    <message>
-        <source>Start in %1s</source>
-        <translation type="vanished">Iniciar en %1s</translation>
-    </message>
-    <message>
-        <source>Waiting for a signal readiness...</source>
-        <translation type="vanished">Esperando señal de disponibilidad...</translation>
-    </message>
-    <message>
-        <source>Sending byte %1 of %2</source>
-        <translation type="vanished">Enviando byte %1 de %2</translation>
-    </message>
-    <message>
-        <source>Receiving...</source>
-        <translation type="vanished">Recibiendo...</translation>
-    </message>
-    <message>
-        <source>Waiting for data...</source>
-        <translation type="vanished">Esperando datos...</translation>
-    </message>
-    <message>
-        <source>Reciving byte %1</source>
-        <translation type="vanished">Recibiendo byte %1</translation>
-    </message>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="vanished">Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="vanished">No se puede asignar tablas de memoria</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal</source>
-        <translation type="vanished">Fue cogida una señal no bloqueante</translation>
-    </message>
-    <message>
-        <source>Operation timed out</source>
-        <translation type="vanished">Se agotó el tiempo para la operación</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="vanished">El archivo abierto por el puerto no es un dispositivo de caracteres (character device)</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="vanished">El puerto detectó una situación de ruptura (break condition)</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="vanished">El puerto detecta un error de framing (configuración de velocidad de transmisión incorrectos?)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="vanished">Se ha producido un error de E/S durante la comunicación con el puerto</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="vanished">Búfer de caracteres sobrepasado</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="vanished">Desbordamiento del búfer de recepción</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="vanished">El puerto detectó un error de paridad en los datos recibidos</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="vanished">Desbordamiento del búfer de transmisión</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="vanished">Falla general en operación de lectura</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="vanished">Falla general en operación de escritura</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="vanished">Nu hubieron errores</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Error desconocido</translation>
-    </message>
-    <message>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation># ++++++ EJEMPLO ++++++</translation>
     </message>
@@ -1508,10 +1338,6 @@
         <translation>&lt;br /&gt;Traducción al alemán y otras correcciones alemanes gracias a Michael Numberger</translation>
     </message>
     <message>
-        <source>&lt;br /&gt;Spanish translation and other fixes thanks to Otto Huamani</source>
-        <translation type="vanished">&lt;br /&gt;Traducción al castellano y otras correcciones gracias a Otto Huamaní</translation>
-    </message>
-    <message>
         <source>Pr&amp;int preview</source>
         <translation>Prev&amp;isualizar impresión</translation>
     </message>
@@ -1588,16 +1414,6 @@ Cerrar de todas maneras?</translation>
     <message>
         <source>...</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Right click to copy item to Clipboard.
-Double click on item title to edit it. 
-Items with non empty titles are not deleted automatically.
-Items with empty titles are the last five texts copied to system clipboard.</source>
-        <translation type="vanished">Click derecho para copiar ítem al Portapapeles.
-Doble click en el título del ítem para editarlo.
-Ítems sin títulos vacíos no son borrados automáticamente.
-Ítems con títulos vacíos son los últimos cinco textos copiados al portapapeles del sistema.</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
@@ -1677,10 +1493,6 @@ Los ítems con títulos no vacíos no son borrados automáticamente.</translatio
         <translation></translation>
     </message>
     <message>
-        <source>Feed per tooth (mm)</source>
-        <translation type="vanished">Avance por diente (mm)</translation>
-    </message>
-    <message>
         <source>Tool diameter</source>
         <translation>Diámetro de herramienta</translation>
     </message>
@@ -1715,10 +1527,6 @@ Los ítems con títulos no vacíos no son borrados automáticamente.</translatio
     <message>
         <source>S :</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Spindle speed (r/min)</source>
-        <translation type="vanished">Velocidad de giro (r/min)</translation>
     </message>
     <message>
         <source>0</source>
@@ -1799,13 +1607,6 @@ Los ítems con títulos no vacíos no son borrados automáticamente.</translatio
     <message>
         <source>Table feed (inches/min)</source>
         <translation>Avance de los ejes (pulgadas/min)</translation>
-    </message>
-</context>
-<context>
-    <name>FileAccessJobHandler</name>
-    <message>
-        <source>Reading directory: </source>
-        <translation>Leyendo directorio:</translation>
     </message>
 </context>
 <context>
@@ -2120,69 +1921,6 @@ Cambiado - el archivo recibido está modificado
     </message>
 </context>
 <context>
-    <name>KDiff3App</name>
-    <message>
-        <source>Loading A</source>
-        <translation>Cargando A</translation>
-    </message>
-    <message>
-        <source>Loading B</source>
-        <translation>Cargando B</translation>
-    </message>
-    <message>
-        <source>Diff: A &lt;-&gt; B</source>
-        <translation>Comparar:  A &lt;-&gt; B</translation>
-    </message>
-    <message>
-        <source>Linediff: A &lt;-&gt; B</source>
-        <translation>Comparación de línea: A &lt;-&gt; B</translation>
-    </message>
-    <message>
-        <source>All input files are binary equal.</source>
-        <translation>Todos los archivos de entrada son idénticos a nivel binario.</translation>
-    </message>
-    <message>
-        <source>All input files contain the same text, but are not binary equal.</source>
-        <translation>Todos los archivos de entrada contienen el mismo texto, pero no son idénticos a nivel binario.</translation>
-    </message>
-    <message>
-        <source>Files %1 and %2 are binary equal.
-</source>
-        <translation>Archivos %1 y %2 son idénticos a nivel binario.
-</translation>
-    </message>
-    <message>
-        <source>Files %1 and %2 have equal text, but are not binary equal. 
-</source>
-        <translation>Archivos %1 y %2 tienen igual texto, pero no son idénticos a nivel binariol. 
-</translation>
-    </message>
-    <message>
-        <source>Diff</source>
-        <translation>Comparar</translation>
-    </message>
-    <message>
-        <source>Some inputfiles don&apos;t seem to be pure textfiles.
-Note that the KDiff3-merge was not meant for binary data.
-Continue at your own risk.</source>
-        <translation>Algunos archivos de entrada parecen no ser archivos puros de texto.
-Tenga en cuenta que KDiff3-merge no fue pensado para datos binarios.
-Continuar bajo su propio riesgo.</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation>&amp;Copiar</translation>
-    </message>
-    <message>
-        <source>Copy the current selection&apos;s contents to the clipboard</source>
-        <translation>Copiar lo seleccionado al portapapeles</translation>
-    </message>
-    <message>
-        <source>Opening of these files failed:</source>
-        <translation>Hubo un fallo al abrir los archivos:</translation>
-    </message>
-</context>
-<context>
     <name>MdiChild</name>
     <message>
         <source>MdiChild</source>
@@ -2468,137 +2206,6 @@ Comprobar +-*/.
     </message>
 </context>
 <context>
-    <name>MergeResultWindow</name>
-    <message>
-        <source>&lt;No src line&gt;</source>
-        <translation>&lt;Sin línea fuente&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;Merge Conflict (Whitespace only)&gt;</source>
-        <translation>&lt;Combinar Conflicto (Sólo espacio en blanco)&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;Merge Conflict&gt;</source>
-        <translation>&lt;Combinar Conflicto&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>OptionEncodingComboBox</name>
-    <message>
-        <source>Unicode, 8 bit</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Unicode</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Latin1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Change this if non-ASCII characters are not displayed correctly.</source>
-        <translation>Cambiar esto si los caracteres no-ASCII no se muestran correctamente.</translation>
-    </message>
-</context>
-<context>
-    <name>ProgressDialog</name>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>CNC programs files (</source>
-        <translation>Archivos de programa CNC (</translation>
-    </message>
-    <message>
-        <source>);;Text files (*.txt);; All files (*.* *)</source>
-        <translation>);;Archivos de texto (*.txt);; Todos los archivos (*.* *)</translation>
-    </message>
-</context>
-<context>
-    <name>QextSerialPort</name>
-    <message>
-        <source>No Error has occurred</source>
-        <translation type="vanished">Nu hubieron errores</translation>
-    </message>
-    <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="vanished">Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables (POSIX)</source>
-        <translation type="vanished">No se puede asignar tablas de memoria (POSIX)</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal (POSIX)</source>
-        <translation type="vanished">Fue cogida una señal no bloqueante (POSIX)</translation>
-    </message>
-    <message>
-        <source>Operation timed out (POSIX)</source>
-        <translation type="vanished">Se agotó el tiempo para la operación (POSIX)</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a valid device</source>
-        <translation type="vanished">El archivo abierto por el puerto no es un dispositivo válido</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="vanished">El puerto detectó una situación de ruptura (break condition)</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (usually caused by incorrect baud rate settings)</source>
-        <translation type="vanished">El puerto detectó un error de framing (generalmente causado por una velocidad de transmisión incorrectos)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="vanished">Se ha producido un error de E/S durante la comunicación con el puerto</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="vanished">Búfer de caracteres sobrepasado</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="vanished">Desbordamiento del búfer de recepción</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="vanished">El puerto detectó un error de paridad en los datos recibidos</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="vanished">Desbordamiento del búfer de transmisión</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="vanished">Falla general en operación de lectura</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="vanished">Falla general en operación de escritura</translation>
-    </message>
-    <message>
-        <source>The %1 file doesn&apos;t exists</source>
-        <translation type="vanished">El archivo %1 no existe</translation>
-    </message>
-    <message>
-        <source>Permission denied</source>
-        <translation type="vanished">Permiso denegado</translation>
-    </message>
-    <message>
-        <source>Device is already locked</source>
-        <translation type="vanished">El dispositivo ya está bloqueado</translation>
-    </message>
-    <message>
-        <source>Unknown error: %1</source>
-        <translation type="vanished">Error desconocido: %1</translation>
-    </message>
-</context>
-<context>
     <name>RenumberDialog</name>
     <message>
         <source>Dialog</source>
@@ -2675,265 +2282,6 @@ Comprobar +-*/.
     <message>
         <source>Renumber lines</source>
         <translation>Renumerar líneas</translation>
-    </message>
-</context>
-<context>
-    <name>SPConfigDialog</name>
-    <message>
-        <source>Delete configuration</source>
-        <translation type="vanished">Borrar configuración</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="vanished">Borrar</translation>
-    </message>
-    <message>
-        <source>Save configuration</source>
-        <translation type="vanished">Guardar configuración</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Guardar</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Por defecto</translation>
-    </message>
-    <message>
-        <source>Settings file:</source>
-        <translation type="vanished">Archivo de configuración:</translation>
-    </message>
-    <message>
-        <source>Port settings</source>
-        <translation type="vanished">Ajustes del puerto</translation>
-    </message>
-    <message>
-        <source>Serial port :</source>
-        <translation type="vanished">Puerto serie :</translation>
-    </message>
-    <message>
-        <source>&amp;Browse</source>
-        <translation type="vanished">&amp;Examinar</translation>
-    </message>
-    <message>
-        <source>Baud rate</source>
-        <translation type="vanished">Velocidad de transmisión</translation>
-    </message>
-    <message>
-        <source>Data bit&apos;s</source>
-        <translation type="vanished">Bits de datos</translation>
-    </message>
-    <message>
-        <source>Stop bit&apos;s</source>
-        <translation type="vanished">Bits de parada</translation>
-    </message>
-    <message>
-        <source>Parity</source>
-        <translation type="vanished">Paridad</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Ninguna</translation>
-    </message>
-    <message>
-        <source>Even</source>
-        <translation type="vanished">Par</translation>
-    </message>
-    <message>
-        <source>Odd</source>
-        <translation type="vanished">Impar</translation>
-    </message>
-    <message>
-        <source>Flow control</source>
-        <translation type="vanished">Control de flujo</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="vanished">Opciones</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Example:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;   - % and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;  - space character and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Space and control characters can only be written as hex numbers - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Puedes escribir texto plano y/o códigos hexadecimales de caracteres ASCII. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Ejemplo:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;   - % y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;  - caracter espacio y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Caracteres espacio y de control sólo pueden ser escritos como números hexadecimales - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Enable this option for lower transmission latency on high baud rate</source>
-        <translation type="vanished">Active esta opción para bajar la latencia en velocidades de transmisión altas</translation>
-    </message>
-    <message>
-        <source>Disable text selection</source>
-        <translation type="vanished">Desactivar selección de texto</translation>
-    </message>
-    <message>
-        <source>Start sending after:</source>
-        <translation type="vanished">Iniciar envío después de:</translation>
-    </message>
-    <message>
-        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
-        <translation type="vanished">Eliminar todos los caracteres de control (&lt;0x3F; &gt; 0x7F) en archivo recibido</translation>
-    </message>
-    <message>
-        <source>Delete control chars</source>
-        <translation type="vanished">Eliminar caracteres de control</translation>
-    </message>
-    <message>
-        <source>Send at end:</source>
-        <translation type="vanished">Enviar al final:</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;Example:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;   - % and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;  - space character and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;Space and control characters can only be written as hex numbers - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Puedes escribir texto plano y/o códigos hexadecimales de caracteres ASCII. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Ejemplo:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;   - % y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;  - caracter espacio y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Caracteres espacio y de control sólo pueden ser escritos como números hexadecimales - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Delay before sending the next block:</source>
-        <translation type="vanished">Retrasar antes de enviar el siguiente bloque:</translation>
-    </message>
-    <message>
-        <source>Remove empty lines after receive is complete</source>
-        <translation type="vanished">Eliminar líneas en blanco después que la recepción es completada</translation>
-    </message>
-    <message>
-        <source>Remove empty lines</source>
-        <translation type="vanished">Remover líneas vacías</translation>
-    </message>
-    <message>
-        <source>XOFF character:</source>
-        <translation type="vanished">Caracter XOFF:</translation>
-    </message>
-    <message>
-        <source>Send at start:</source>
-        <translation type="vanished">Enviar al inicio:</translation>
-    </message>
-    <message>
-        <source>XON character:</source>
-        <translation type="vanished">Caracter XON:</translation>
-    </message>
-    <message>
-        <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
-        <translation type="vanished">Si 0 entonces esperar a XON, si&gt; 0 esperar al tiempo de espera o XON, el que llegue primero.</translation>
-    </message>
-    <message>
-        <source>When sending, discard all characters before %</source>
-        <translation type="vanished">Al enviar, desechar todos los caracteres antes de %</translation>
-    </message>
-    <message>
-        <source>Remove characters before %</source>
-        <translation type="vanished">Quitar los caracteres antes de %</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si se marca, sólo LF se envía al final del bloque. Por defecto se envía CRLF.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Send only LF at the end of block</source>
-        <translation type="vanished">Enviar sólo LF al final del bloque</translation>
-    </message>
-    <message>
-        <source>Autosave</source>
-        <translation type="vanished">Guardado automático</translation>
-    </message>
-    <message>
-        <source>Recieve timeout:</source>
-        <translation type="vanished">Tiempo de espera al recibir:</translation>
-    </message>
-    <message>
-        <source>After recieve last character, close the recieve dialog after this time</source>
-        <translation type="vanished">Después de recibir el último caracter, cerrar el cuadro de diálogo &quot;recibir&quot; después de este tiempo</translation>
-    </message>
-    <message>
-        <source>Main program path</source>
-        <translation type="vanished">Ruta del programa principal</translation>
-    </message>
-    <message>
-        <source>Under construction</source>
-        <translation type="vanished">En construcción</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="vanished">Examinar</translation>
-    </message>
-    <message>
-        <source>All other path</source>
-        <translation type="vanished">Todas las otras rutas</translation>
-    </message>
-    <message>
-        <source>Sub program path</source>
-        <translation type="vanished">Ruta del sub-programa</translation>
-    </message>
-    <message>
-        <source>If file exists</source>
-        <translation type="vanished">Si existe el archivo</translation>
-    </message>
-    <message>
-        <source>Overwrite</source>
-        <translation type="vanished"> Sobre-escribir</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="vanished">Renombrar</translation>
-    </message>
-    <message>
-        <source>File name</source>
-        <translation type="vanished">Nombre del archivo</translation>
-    </message>
-    <message>
-        <source>No. of digits</source>
-        <translation type="vanished">Nº de dígitos</translation>
-    </message>
-    <message>
-        <source>Remowe letters</source>
-        <translation type="vanished">Remover letras</translation>
-    </message>
-    <message>
-        <source>CheckBox</source>
-        <translation type="vanished">Casilla de verificación</translation>
-    </message>
-    <message>
-        <source>&amp;Save &amp;&amp; close</source>
-        <translation type="vanished">&amp;Guardar &amp; cerrar</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Serial port configuration</source>
-        <translation type="vanished">Configuración del Puerto Serie</translation>
-    </message>
-    <message>
-        <source>Select serial port device</source>
-        <translation type="vanished">Seleccionar dispositivo de puerto serie</translation>
-    </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Todos los archivos (*)</translation>
     </message>
 </context>
 <context>
@@ -3138,28 +2486,6 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>Options</source>
-        <translation type="obsolete">Opciones</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Example:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;   - % and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;  - space character and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Space and control characters can only be written as hex numbers - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Puedes escribir texto plano y/o códigos hexadecimales de caracteres ASCII. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Ejemplo:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;   - % y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;  - caracter espacio y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Caracteres espacio y de control sólo pueden ser escritos como números hexadecimales - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Start sending after:</source>
         <translation>Iniciar envío después de:</translation>
     </message>
@@ -3174,24 +2500,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Send at end:</source>
         <translation>Enviar al final:</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;You can write plain text or/and hex codes of ASCII characters. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;Example:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;   - % and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;  - space character and new line characters&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-weight:400;&quot;&gt;Space and control characters can only be written as hex numbers - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:200; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Puedes escribir texto plano y/o códigos hexadecimales de caracteres ASCII. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Ejemplo:	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;% 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;   - % y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;; font-style:italic;&quot;&gt;0x20 0x0A 0x0D&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;  - caracter espacio y caracteres de línea nueva&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Caracteres espacio y de control sólo pueden ser escritos como números hexadecimales - 0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Delay before sending the next block:</source>
@@ -3214,10 +2522,6 @@ p, li { white-space: pre-wrap; }
         <translation>Caracter XOFF:</translation>
     </message>
     <message>
-        <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.</source>
-        <translation type="obsolete">Si 0 entonces esperar a XON, si&gt; 0 esperar al tiempo de espera o XON, el que llegue primero.</translation>
-    </message>
-    <message>
         <source>Remove empty lines after receive is complete</source>
         <translation>Eliminar líneas en blanco después que la recepción es completada</translation>
     </message>
@@ -3238,24 +2542,12 @@ p, li { white-space: pre-wrap; }
         <translation>Eliminar espacios en blanco al final de la línea</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, only LF is sent at the end of block. By default CRLF is sent.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si se marca, sólo LF se envía al final del bloque. Por defecto se envía CRLF.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Send only LF at the end of block</source>
-        <translation type="obsolete">Enviar sólo LF al final del bloque</translation>
-    </message>
-    <message>
         <source>Auto close transmission dialog:</source>
         <translation>Cierre automático del diálogo de transmisión:</translation>
     </message>
     <message>
         <source>Create log file</source>
         <translation>Crear archivo log</translation>
-    </message>
-    <message>
-        <source>Autosave</source>
-        <translation type="obsolete">Guardado automático</translation>
     </message>
     <message>
         <source>Automatically save the received file.
@@ -3756,14 +3048,6 @@ Debería ser ingresado un QTRegExp válido.</translation>
         <translation>&amp;Cierre automático en %1s</translation>
     </message>
     <message>
-        <source>Start in %1s</source>
-        <translation type="obsolete">Iniciar en %1s</translation>
-    </message>
-    <message>
-        <source>Waiting for a signal readiness...</source>
-        <translation type="obsolete">Esperando señal de disponibilidad...</translation>
-    </message>
-    <message>
         <source>No Error has occured</source>
         <translation>Nu hubieron errores</translation>
     </message>
@@ -3898,10 +3182,6 @@ Debería ser ingresado un QTRegExp válido.</translation>
     <message>
         <source>ERROR:	 Serial port error %1: &quot;%2&quot;.</source>
         <translation>ERROR:	 Error en puerto serie %1: &quot;%2&quot;.</translation>
-    </message>
-    <message>
-        <source>WARNING:	 Coulnd not find program name. Using date time code.</source>
-        <translation type="vanished">ADVERTENCIA:	 No se pudo encontrar el nombre del archivo. Usando código fecha-hora.</translation>
     </message>
     <message>
         <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
@@ -4343,24 +3623,6 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     </message>
 </context>
 <context>
-    <name>SourceData</name>
-    <message>
-        <source>From Clipboard</source>
-        <translation>Desde el portapapeles</translation>
-    </message>
-</context>
-<context>
-    <name>TransProgressDialog</name>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Cerrar</translation>
-    </message>
-</context>
-<context>
     <name>TransmissionDialog</name>
     <message>
         <source>Dialog</source>
@@ -4455,70 +3717,6 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation>Recibido: %1 bytes.</translation>
     </message>
     <message>
-        <source>Invalid file descriptor (port was not opened correctly)</source>
-        <translation type="vanished">Descriptor de archivo no válido (puerto no se abrió correctamente)</translation>
-    </message>
-    <message>
-        <source>Unable to allocate memory tables</source>
-        <translation type="vanished">No se puede asignar tablas de memoria</translation>
-    </message>
-    <message>
-        <source>Caught a non-blocked signal</source>
-        <translation type="vanished">Fue cogida una señal no bloqueante</translation>
-    </message>
-    <message>
-        <source>Operation timed out</source>
-        <translation type="vanished">Se agotó el tiempo para la operación</translation>
-    </message>
-    <message>
-        <source>The file opened by the port is not a character device</source>
-        <translation type="vanished">El archivo abierto por el puerto no es un dispositivo de caracteres (character device)</translation>
-    </message>
-    <message>
-        <source>The port detected a break condition</source>
-        <translation type="vanished">El puerto detectó una situación de ruptura (break condition)</translation>
-    </message>
-    <message>
-        <source>The port detected a framing error (incorrect baud rate settings ?)</source>
-        <translation type="vanished">El puerto detecta un error de framing (configuración de velocidad de transmisión incorrectos?)</translation>
-    </message>
-    <message>
-        <source>There was an I/O error while communicating with the port</source>
-        <translation type="vanished">Se ha producido un error de E/S durante la comunicación con el puerto</translation>
-    </message>
-    <message>
-        <source>Character buffer overrun</source>
-        <translation type="vanished">Búfer de caracteres sobrepasado</translation>
-    </message>
-    <message>
-        <source>Receive buffer overflow</source>
-        <translation type="vanished">Desbordamiento del búfer de recepción</translation>
-    </message>
-    <message>
-        <source>The port detected a parity error in the received data</source>
-        <translation type="vanished">El puerto detectó un error de paridad en los datos recibidos</translation>
-    </message>
-    <message>
-        <source>Transmit buffer overflow</source>
-        <translation type="vanished">Desbordamiento del búfer de transmisión</translation>
-    </message>
-    <message>
-        <source>General read operation failure</source>
-        <translation type="vanished">Falla general en operación de lectura</translation>
-    </message>
-    <message>
-        <source>General write operation failure</source>
-        <translation type="vanished">Falla general en operación de escritura</translation>
-    </message>
-    <message>
-        <source>No Error has occured</source>
-        <translation type="vanished">Nu hubieron errores</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Error desconocido</translation>
-    </message>
-    <message>
         <source>Waiting...</source>
         <translation>Esperando...</translation>
     </message>
@@ -4584,29 +3782,6 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     <message>
         <source>Solution of triangles</source>
         <translation>Solucionador de triángulos</translation>
-    </message>
-</context>
-<context>
-    <name>WindowTitleWidget</name>
-    <message>
-        <source>Output</source>
-        <translation>Salida</translation>
-    </message>
-    <message>
-        <source>[Modified]</source>
-        <translation>[Modificado]</translation>
-    </message>
-    <message>
-        <source>Encoding for saving</source>
-        <translation>Codificación para guardar</translation>
-    </message>
-    <message>
-        <source>Line end style:</source>
-        <translation>Línea y estilo:</translation>
-    </message>
-    <message>
-        <source>Codec from</source>
-        <translation>Códec desde</translation>
     </message>
 </context>
 <context>

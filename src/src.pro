@@ -31,18 +31,6 @@ SOURCES += edytornc.cpp \
     qtlockedfile.cpp \
     serialtransmission.cpp \
     basic_interpreter.cpp \
-    difftextwindow.cpp \
-    diff.cpp \
-    merger.cpp \
-    optiondialog.cpp \
-    common.cpp \
-    fileaccess.cpp \
-    kdiff3.cpp \
-    gnudiff_xmalloc.cpp \
-    gnudiff_io.cpp \
-    gnudiff_analyze.cpp \
-    pdiff.cpp \
-    mergeresultwindow.cpp \
     cleanupdialog.cpp \
     swapaxesdialog.cpp \
     newfiledialog.cpp \
@@ -64,16 +52,6 @@ HEADERS += edytornc.h \
     qtlocalpeer.h \
     serialtransmission.h \
     basic_interpreter.h \
-    difftextwindow.h \
-    diff.h \
-    merger.h \
-    optiondialog.h \
-    common.h \
-    fileaccess.h \
-    kdiff3.h \
-    gnudiff_system.h \
-    gnudiff_diff.h \
-    mergeresultwindow.h \
     cleanupdialog.h \
     tooltips.h \
     swapaxesdialog.h \
@@ -129,12 +107,13 @@ RC_FILE = edytornc.rc
 # translations
 #######################################
 
-TRANSLATIONS = ../lang/edytornc_pl.ts \
-    ../lang/edytornc_ca.ts \
-    ../lang/edytornc_de.ts \
-    ../lang/edytornc_fi.ts \
-    ../lang/edytornc_cs_CZ.ts \
-    ../lang/edytornc_es.ts
+TRANSLATIONS = \
+    $${LANG_PATH}/edytornc_pl.ts \
+    $${LANG_PATH}/edytornc_ca.ts \
+    $${LANG_PATH}/edytornc_de.ts \
+    $${LANG_PATH}/edytornc_fi.ts \
+    $${LANG_PATH}/edytornc_cs_CZ.ts \
+    $${LANG_PATH}/edytornc_es.ts
 
 QMAKE_EXTRA_TARGETS += langupdate langrelease translate
 
@@ -187,3 +166,7 @@ win32 {
     LIBS += -lsetupapi -ladvapi32 -luser32
 }
 
+
+# static libs from subprojects
+
+LIBS += -lkdiff3

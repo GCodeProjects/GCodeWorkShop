@@ -67,6 +67,12 @@ int main(int argc, char *argv[])
 
     app.installTranslator(&myappTranslator);
 
+    if (!myappTranslator.load("kdiff3_" + QLocale::system().name(), LOCALE_PATH)) {
+        myappTranslator.load("kdiff3_" + QLocale::system().name(), app.applicationDirPath());
+    }
+
+    app.installTranslator(&myappTranslator);
+
     EdytorNc *mw = new EdytorNc();
 
     argProccesed = false;

@@ -35,7 +35,7 @@
 #include <QToolButton>
 #include <QSettings>
 
-#include "kdiff3.h"
+#include "kdiff3/kdiff3.h"
 
 
 namespace Ui {

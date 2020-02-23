@@ -20,7 +20,7 @@
 
 // include files for QT
 #include <qdir.h>
-#include <qprinter.h>
+//#include <qprinter.h>
 #include <qpainter.h>
 #include <qsplitter.h>
 #include <qlineedit.h>
@@ -33,8 +33,8 @@
 #include <QPaintDevice>
 #include <QStatusBar>
 #include <QDesktopWidget>
-#include <QPrinter>
-#include <QPrintDialog>
+//#include <QPrinter>
+//#include <QPrintDialog>
 
 // application specific includes
 #include "kdiff3.h"
