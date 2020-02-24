@@ -424,7 +424,7 @@
         <location filename="../src/commapp.cpp" line="314"/>
         <location filename="../src/commapp.cpp" line="317"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Predeterminat</translation>
     </message>
     <message>
         <location filename="../src/commapp.cpp" line="554"/>
@@ -2118,7 +2118,7 @@ Click to compare with file with the same name in selected search path.</source>
     <message>
         <location filename="../src/filechecker.cpp" line="107"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">SuprimeixSuprimeix</translation>
     </message>
     <message>
         <location filename="../src/filechecker.cpp" line="107"/>
@@ -2923,7 +2923,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="92"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">SuprimeixSuprimeix</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="69"/>
@@ -2940,7 +2940,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/serialportconfigdialog.ui" line="41"/>
         <location filename="../src/serialportconfigdialog.cpp" line="629"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Predeterminat</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="49"/>
@@ -3451,7 +3451,7 @@ Selected file extension will be used.</source>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="735"/>
         <source>Remove empty lines</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Elimina línies buides</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.ui" line="1081"/>
@@ -3694,7 +3694,7 @@ If detected filename will contain an extension, then this setting will be ignore
     <message>
         <location filename="../src/serialportconfigdialog.cpp" line="158"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tots els fitxers (*)</translation>
     </message>
     <message>
         <location filename="../src/serialportconfigdialog.cpp" line="654"/>
@@ -3757,7 +3757,7 @@ If detected filename will contain an extension, then this setting will be ignore
         <location filename="../src/serialtransmissiondialog.ui" line="139"/>
         <location filename="../src/serialtransmissiondialog.ui" line="155"/>
         <source>Data Set Ready </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Conjunt de dades llest</translation>
     </message>
     <message>
         <location filename="../src/serialtransmissiondialog.ui" line="158"/>
@@ -3792,7 +3792,7 @@ If detected filename will contain an extension, then this setting will be ignore
         <location filename="../src/serialtransmissiondialog.ui" line="288"/>
         <location filename="../src/serialtransmissiondialog.ui" line="307"/>
         <source>Data Terminal Ready</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Terminal de dades llest</translation>
     </message>
     <message>
         <location filename="../src/serialtransmissiondialog.ui" line="266"/>
@@ -3926,7 +3926,7 @@ If detected filename will contain an extension, then this setting will be ignore
         <location filename="../src/serialtransmissiondialog.cpp" line="424"/>
         <location filename="../src/serialtransmissiondialog.cpp" line="1715"/>
         <source>Sending byte %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enviant el byte %1 de %2</translation>
     </message>
     <message>
         <location filename="../src/serialtransmissiondialog.cpp" line="436"/>

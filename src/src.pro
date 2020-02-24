@@ -24,11 +24,6 @@ SOURCES += edytornc.cpp \
     mdichild.cpp \
     dialogs.cpp \
     findinf.cpp \
-    qtsingleapplication.cpp \
-    qtlocalpeer.cpp \
-    qtlockedfile_win.cpp \
-    qtlockedfile_unix.cpp \
-    qtlockedfile.cpp \
     serialtransmission.cpp \
     basic_interpreter.cpp \
     cleanupdialog.cpp \
@@ -47,9 +42,6 @@ HEADERS += edytornc.h \
     commoninc.h \
     dialogs.h \
     findinf.h \
-    qtsingleapplication.h \
-    qtlockedfile.h \
-    qtlocalpeer.h \
     serialtransmission.h \
     basic_interpreter.h \
     cleanupdialog.h \
@@ -169,4 +161,4 @@ win32 {
 
 # static libs from subprojects
 
-LIBS += -lkdiff3
+LIBS += -lkdiff3 -lqtsingleapplication

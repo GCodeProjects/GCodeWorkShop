@@ -38,94 +38,68 @@
 **
 ****************************************************************************/
 
-#include <string.h>
-#include <errno.h>
-#include <unistd.h>
-#include <fcntl.h>
+#ifndef QTSINGLEAPPLICATION_H
+#define QTSINGLEAPPLICATION_H
 
-#include "qtlockedfile.h"
+#include <QApplication>
 
+class QtLocalPeer;
 
-bool QtLockedFile::lock(LockMode mode, bool block)
+#if defined(Q_OS_WIN)
+#  if !defined(QT_QTSINGLEAPPLICATION_EXPORT) && !defined(QT_QTSINGLEAPPLICATION_IMPORT)
+#    define QT_QTSINGLEAPPLICATION_EXPORT
+#  elif defined(QT_QTSINGLEAPPLICATION_IMPORT)
+#    if defined(QT_QTSINGLEAPPLICATION_EXPORT)
+#      undef QT_QTSINGLEAPPLICATION_EXPORT
+#    endif
+#    define QT_QTSINGLEAPPLICATION_EXPORT __declspec(dllimport)
+#  elif defined(QT_QTSINGLEAPPLICATION_EXPORT)
+#    undef QT_QTSINGLEAPPLICATION_EXPORT
+#    define QT_QTSINGLEAPPLICATION_EXPORT __declspec(dllexport)
+#  endif
+#else
+#  define QT_QTSINGLEAPPLICATION_EXPORT
+#endif
+
+class QT_QTSINGLEAPPLICATION_EXPORT QtSingleApplication : public QApplication
 {
-    if (!isOpen()) {
-        qWarning("QtLockedFile::lock(): file is not opened");
-        return false;
-    }
+    Q_OBJECT
 
-    if (mode == NoLock) {
-        return unlock();
-    }
+public:
+    QtSingleApplication(int &argc, char **argv, bool GUIenabled = true);
+    QtSingleApplication(const QString &id, int &argc, char **argv);
+#if QT_VERSION < 0x050000
+    QtSingleApplication(int &argc, char **argv, Type type);
+#  if defined(Q_WS_X11)
+    QtSingleApplication(Display* dpy, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
+    QtSingleApplication(Display *dpy, int &argc, char **argv, Qt::HANDLE visual = 0, Qt::HANDLE cmap= 0);
+    QtSingleApplication(Display* dpy, const QString &appId, int argc, char **argv, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
+#  endif // Q_WS_X11
+#endif // QT_VERSION < 0x050000
 
-    if (mode == m_lock_mode) {
-        return true;
-    }
+    bool isRunning();
+    QString id() const;
 
-    if (m_lock_mode != NoLock) {
-        unlock();
-    }
+    void setActivationWindow(QWidget* aw, bool activateOnMessage = true);
+    QWidget* activationWindow() const;
 
-    struct flock fl;
+    // Obsolete:
+    void initialize(bool dummy = true)
+        { isRunning(); Q_UNUSED(dummy) }
 
-    fl.l_whence = SEEK_SET;
+public Q_SLOTS:
+    bool sendMessage(const QString &message, int timeout = 5000);
+    void activateWindow();
 
-    fl.l_start = 0;
 
-    fl.l_len = 0;
+Q_SIGNALS:
+    void messageReceived(const QString &message);
 
-    fl.l_type = (mode == ReadLock) ? F_RDLCK : F_WRLCK;
 
-    int cmd = block ? F_SETLKW : F_SETLK;
+private:
+    void sysInit(const QString &appId = QString());
+    QtLocalPeer *peer;
+    QWidget *actWin;
+};
 
-    int ret = fcntl(handle(), cmd, &fl);
-
-    if (ret == -1) {
-        if (errno != EINTR && errno != EAGAIN) {
-            qWarning("QtLockedFile::lock(): fcntl: %s", strerror(errno));
-        }
-
-        return false;
-    }
-
-    m_lock_mode = mode;
-    return true;
-}
-
-bool QtLockedFile::unlock()
-{
-    if (!isOpen()) {
-        qWarning("QtLockedFile::unlock(): file is not opened");
-        return false;
-    }
-
-    if (!isLocked()) {
-        return true;
-    }
-
-    struct flock fl;
-
-    fl.l_whence = SEEK_SET;
-
-    fl.l_start = 0;
-
-    fl.l_len = 0;
-
-    fl.l_type = F_UNLCK;
-
-    int ret = fcntl(handle(), F_SETLKW, &fl);
-
-    if (ret == -1) {
-        qWarning("QtLockedFile::lock(): fcntl: %s", strerror(errno));
-        return false;
-    }
-
-    m_lock_mode = NoLock;
-    return true;
-}
-
-QtLockedFile::~QtLockedFile()
-{
-    if (isOpen()) {
-        unlock();
-    }
-}
+#endif // QTSINGLEAPPLICATION_H

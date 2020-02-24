@@ -3926,7 +3926,7 @@ If detected filename will contain an extension, then this setting will be ignore
         <location filename="../src/serialtransmissiondialog.cpp" line="424"/>
         <location filename="../src/serialtransmissiondialog.cpp" line="1715"/>
         <source>Sending byte %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lähetetään %1:s tavu %2:ta</translation>
     </message>
     <message>
         <location filename="../src/serialtransmissiondialog.cpp" line="436"/>

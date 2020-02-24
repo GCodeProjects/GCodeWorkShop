@@ -38,44 +38,78 @@
 **
 ****************************************************************************/
 
-#ifndef QTLOCALPEER_H
-#define QTLOCALPEER_H
-
-#include <QLocalServer>
-#include <QLocalSocket>
-#include <QDir>
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 #include "qtlockedfile.h"
 
-
-class QtLocalPeer : public QObject
+bool QtLockedFile::lock(LockMode mode, bool block)
 {
-    Q_OBJECT
+    if (!isOpen()) {
+        qWarning("QtLockedFile::lock(): file is not opened");
+        return false;
+    }
+ 
+    if (mode == NoLock)
+        return unlock();
+           
+    if (mode == m_lock_mode)
+        return true;
 
-public:
-    QtLocalPeer(QObject *parent = 0, const QString &appId = QString());
+    if (m_lock_mode != NoLock)
+        unlock();
 
-    bool isClient();
-    bool sendMessage(const QString &message, int timeout);
-    QString applicationId() const
-    {
-        return id;
+    struct flock fl;
+    fl.l_whence = SEEK_SET;
+    fl.l_start = 0;
+    fl.l_len = 0;
+    fl.l_type = (mode == ReadLock) ? F_RDLCK : F_WRLCK;
+    int cmd = block ? F_SETLKW : F_SETLK;
+    int ret = fcntl(handle(), cmd, &fl);
+    
+    if (ret == -1) {
+        if (errno != EINTR && errno != EAGAIN)
+            qWarning("QtLockedFile::lock(): fcntl: %s", strerror(errno));
+        return false;
     }
 
-Q_SIGNALS:
-    void messageReceived(const QString &message);
+    
+    m_lock_mode = mode;
+    return true;
+}
 
-protected Q_SLOTS:
-    void receiveConnection();
 
-protected:
-    QString id;
-    QString socketName;
-    QLocalServer *server;
-    QtLP_Private::QtLockedFile lockFile;
+bool QtLockedFile::unlock()
+{
+    if (!isOpen()) {
+        qWarning("QtLockedFile::unlock(): file is not opened");
+        return false;
+    }
 
-private:
-    static const char *ack;
-};
+    if (!isLocked())
+        return true;
 
-#endif // QTLOCALPEER_H
+    struct flock fl;
+    fl.l_whence = SEEK_SET;
+    fl.l_start = 0;
+    fl.l_len = 0;
+    fl.l_type = F_UNLCK;
+    int ret = fcntl(handle(), F_SETLKW, &fl);
+    
+    if (ret == -1) {
+        qWarning("QtLockedFile::lock(): fcntl: %s", strerror(errno));
+        return false;
+    }
+    
+    m_lock_mode = NoLock;
+    return true;
+}
+
+QtLockedFile::~QtLockedFile()
+{
+    if (isOpen())
+        unlock();
+}
+
