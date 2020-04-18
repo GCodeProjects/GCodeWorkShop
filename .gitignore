@@ -1,6 +1,7 @@
 
 bin/
 build/
+doc/html
 lang/*.qm
 
 /edytornc.pro.user
