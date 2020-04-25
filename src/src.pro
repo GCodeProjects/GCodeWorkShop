@@ -53,7 +53,8 @@ HEADERS += edytornc.h \
     serialportconfigdialog.h \
     commapp.h \
     serialportcfghelpdialog.h \
-    filechecker.h
+    filechecker.h \
+    mainwindow.h
 
 FORMS += i2mdialog.ui \
     feedsdialog.ui \
@@ -84,10 +85,15 @@ FORMS += i2mdialog.ui \
 # utils
 #######################################
 
-HEADERS += include/ui/longjobhelper.h
+HEADERS += include/ui/longjobhelper.h \
+    include/utils/config.h \
+    include/utils/medium.h
 
-SOURCES += ui/longjobhelper.cpp
+SOURCES += ui/longjobhelper.cpp \
+    utils/config.cpp \
+    utils/medium.cpp
 
+unix:SOURCES += utils/medium_linux.cpp
 
 # resources
 #######################################
