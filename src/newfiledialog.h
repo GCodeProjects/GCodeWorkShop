@@ -26,7 +26,6 @@
 #include <QDialog>
 #include <QString>
 #include <QDir>
-#include <QSettings>
 #include <QFileDialog>
 
 

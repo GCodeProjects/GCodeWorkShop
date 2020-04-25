@@ -33,9 +33,9 @@
 #include <QtDebug>
 #include <QDir>
 #include <QToolButton>
-#include <QSettings>
 
 #include "kdiff3/kdiff3.h"
+#include "utils/medium.h"
 
 
 namespace Ui {

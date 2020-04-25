@@ -20,8 +20,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef EDYTORNC_H
+#define EDYTORNC_H
 
 #include <QtWidgets>
 
@@ -37,17 +37,29 @@
 #include "newfiledialog.h"
 #include "sessiondialog.h"
 #include "commapp.h"
+#include "utils/medium.h"
 
 #include "ui_edytornc.h"
-
 
 class EdytorNc : public QMainWindow, public Ui::EdytorNc
 {
     Q_OBJECT
 
 public:
-    EdytorNc();
+    EdytorNc(Medium *medium);
     ~EdytorNc();
+
+protected:
+    Medium *m_medium;
+    struct MWConfig : Config {
+        MWConfig(Config *config) : Config(config, "mainwindow") {}
+
+        CfgQPoint  pos {this, "pos", QPoint(0, 0), false};
+        CfgQSize   size {this, "size", QSize(400, 240), false};
+        Cfgbool    maximized {this, "maximized", false, false};
+    } m_config;
+
+public:
 
     void openFile(const QString fileName);
     void diffTwoFiles(const QString filename1, const QString filename2);
@@ -351,4 +363,4 @@ private:
     QPointer<QFileSystemWatcher> fileChangeMonitor;
 };
 
-#endif // MAINWINDOW_H
+#endif // EDYTORNC_H

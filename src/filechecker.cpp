@@ -22,6 +22,7 @@
 
 #include "filechecker.h"
 #include "ui_filechecker.h"
+#include "utils/medium.h"
 
 
 FileChecker::FileChecker(QWidget *parent) :
@@ -46,7 +47,7 @@ FileChecker::FileChecker(QWidget *parent) :
 
     createDiff();
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("FileCheck");
     splitterState = settings.value("VSplitterState", QByteArray()).toByteArray();
     ui->vSplitter->restoreState(splitterState);
@@ -57,7 +58,7 @@ FileChecker::FileChecker(QWidget *parent) :
 
 FileChecker::~FileChecker()
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("FileCheck");
     settings.setValue("VSplitterState", ui->vSplitter->saveState());
     settings.endGroup();

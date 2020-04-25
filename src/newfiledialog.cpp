@@ -22,6 +22,7 @@
 
 #include "newfiledialog.h"
 #include "ui_newfiledialog.h"
+#include "utils/medium.h"
 
 
 newFileDialog::newFileDialog(QWidget *parent) :
@@ -40,7 +41,7 @@ newFileDialog::newFileDialog(QWidget *parent) :
         path.setPath(QDir::homePath());
     }
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     QDir savedPath(settings.value("TemplatePath", path.canonicalPath()).toString());
 
@@ -86,7 +87,7 @@ void newFileDialog::fillFileCombo()
 
 void newFileDialog::saveSettings()
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.setValue("TemplatePath", path.canonicalPath());
 }

@@ -22,6 +22,7 @@
 
 #include "commapp.h"
 #include "ui_commapp.h"
+#include "utils/medium.h"
 
 
 CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
@@ -117,7 +118,7 @@ void CommApp::saveSettings()
         }
     }
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("CommApp");
     settings.setValue("StartMinimized", startMinimizedAction->isChecked());
     settings.remove("ActiveConfigs");
@@ -129,7 +130,7 @@ void CommApp::saveSettings()
 
 void CommApp::loadSettings()
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("CommApp");
 
     startMinimizedAction->setChecked(settings.value("StartMinimized", false).toBool());
@@ -307,7 +308,7 @@ void CommApp::loadSerialConfignames()
     QStringList list;
     QString item;
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("SerialPortConfigs");
 
     configBox->clear();
@@ -470,7 +471,7 @@ void CommApp::showNewFiles()
     SerialTransmissionDialog *mdiChild = activeMdiChild();
 
     if (mdiChild > NULL) {
-        QSettings settings("EdytorNC", "EdytorNC");
+        QSettings &settings = *Medium::instance().settings();
         QStringList extensions = settings.value("Extensions", "").toStringList();
         extensions.removeDuplicates();
         extensions.sort();

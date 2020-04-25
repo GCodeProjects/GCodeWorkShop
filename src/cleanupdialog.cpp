@@ -20,10 +20,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QSettings>
-
 #include "cleanupdialog.h"
 #include "ui_cleanupdialog.h"
+#include "utils/medium.h"
 
 
 #define EXAMPLE_EXP        "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))$" << "(\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))" << "[\n]{2,}"
@@ -78,7 +77,7 @@ cleanUpDialog::cleanUpDialog(QWidget *parent) :
     expressionsComment.clear();
     selectedExpressions.clear();
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("CleanUpDialog");
 
@@ -243,7 +242,7 @@ void cleanUpDialog::okButtonClicked()
         }
     }
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("CleanUpDialog");
 
     settings.setValue("Expressions", expressions);

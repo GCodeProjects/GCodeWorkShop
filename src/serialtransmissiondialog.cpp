@@ -21,7 +21,7 @@
  ***************************************************************************/
 
 #include "serialtransmissiondialog.h"
-
+#include "utils/medium.h"
 
 SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFlags f,
         bool mode) : QDialog(parent, f)
@@ -762,7 +762,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
     portSettings.configName = configName;
     setObjectName(portSettings.configName);
     stop = true;
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("SerialPortConfigs");
 
 #ifdef Q_OS_WIN32

@@ -21,6 +21,7 @@
  ***************************************************************************/
 
 #include "findinf.h"
+#include "utils/medium.h"
 
 
 #define MAXLISTS        20
@@ -360,7 +361,7 @@ void FindInFiles::closeEvent(QCloseEvent *event)
     QStringList list;
     QString item;
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("FindFileDialog");
 
     settings.setValue("WholeWords", wholeWordsCheckBox->isChecked());
@@ -440,7 +441,7 @@ void FindInFiles::readSettings()
     directoryComboBox->clear();
     fileComboBox->clear();
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     intCapsLock = settings.value("IntCapsLock", true).toBool();
 

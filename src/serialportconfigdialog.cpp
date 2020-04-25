@@ -22,6 +22,7 @@
 
 #include "serialportconfigdialog.h"
 #include "serialportcfghelpdialog.h"
+#include "utils/medium.h"
 
 
 static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
@@ -170,7 +171,7 @@ void SerialPortConfigDialog::saveButtonClicked()
     QStringList list;
     QString item, curItem;
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("SerialPortConfigs");
 
@@ -350,7 +351,7 @@ void SerialPortConfigDialog::changeSettings()
     QString item, port;
     QStringList list;
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     QStringList extensions = settings.value("Extensions",
                                             (QStringList() << "*.nc" << "*.cnc")).toStringList();
@@ -612,7 +613,7 @@ void SerialPortConfigDialog::loadSettings()
     int id;
     QStringList list;
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("SerialPortConfigs");
 
@@ -666,7 +667,7 @@ void SerialPortConfigDialog::portNameComboBoxIndexChanged(QString name)
 
 void SerialPortConfigDialog::deleteButtonClicked()
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("SerialPortConfigs");
     settings.remove(configNameBox->currentText());
@@ -678,7 +679,7 @@ void SerialPortConfigDialog::deleteButtonClicked()
 
 void SerialPortConfigDialog::closeButtonClicked()
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("SerialPortConfigs");
     settings.setValue("CurrentSerialPortSettings", configNameBox->currentText());
     settings.endGroup();

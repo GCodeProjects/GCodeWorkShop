@@ -22,6 +22,7 @@
 
 #include "swapaxesdialog.h"
 #include "ui_swapaxesdialog.h"
+#include "utils/medium.h"
 
 
 swapAxesDialog::swapAxesDialog(QWidget *parent) :
@@ -30,7 +31,7 @@ swapAxesDialog::swapAxesDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("SwapAxisDialog");
 
@@ -87,7 +88,7 @@ swapAxesDialog::~swapAxesDialog()
 void swapAxesDialog::saveSettings()
 {
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("SwapAxisDialog");
 

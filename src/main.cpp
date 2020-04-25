@@ -23,9 +23,8 @@
 #include "QtSingleApplication"
 
 #include "edytornc.h"
+#include "utils/medium.h"
 
-
-#define LOCALE_PATH         "/usr/share/edytornc/lang/"
 
 int main(int argc, char *argv[])
 {
@@ -48,32 +47,10 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    QTranslator
-    qtTranslator; // Try to load Qt translations from QLibraryInfo::TranslationsPath if this fails looks for translations in app dir.
-
-    if (!qtTranslator.load("qt_" + QLocale::system().name(),
-                           QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
-        qtTranslator.load("qt_" + QLocale::system().name(), app.applicationDirPath());
-    }
-
-    app.installTranslator(&qtTranslator);
-
-    QTranslator
-    myappTranslator; // Try to load EdytorNC translations from LOCALE_PATH if this fails looks for translations in app dir.
-
-    if (!myappTranslator.load("edytornc_" + QLocale::system().name(), LOCALE_PATH)) {
-        myappTranslator.load("edytornc_" + QLocale::system().name(), app.applicationDirPath());
-    }
-
-    app.installTranslator(&myappTranslator);
-
-    if (!myappTranslator.load("kdiff3_" + QLocale::system().name(), LOCALE_PATH)) {
-        myappTranslator.load("kdiff3_" + QLocale::system().name(), app.applicationDirPath());
-    }
-
-    app.installTranslator(&myappTranslator);
-
-    EdytorNc *mw = new EdytorNc();
+    Medium &medium=Medium::instance();
+    medium.addTranslationUnit("kdiff3");
+    medium.updateTranslation();
+    EdytorNc *mw = medium.mainWindow();
 
     argProccesed = false;
 
@@ -97,7 +74,6 @@ int main(int argc, char *argv[])
 
     QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
                      mw, SLOT(messReceived(const QString &)));
-
     QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
 
     return app.exec();

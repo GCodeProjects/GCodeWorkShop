@@ -28,12 +28,16 @@
 #include "edytornc.h"
 #include "mdichild.h"
 #include "tooltips.h"
+#include "utils/medium.h"
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
 
-EdytorNc::EdytorNc()
+EdytorNc::EdytorNc(Medium *medium)
+    : QMainWindow(NULL), m_config(medium->generalConfig())
 {
+    m_medium = medium;
+
     setAttribute(Qt::WA_DeleteOnClose);
 
     setupUi(this);
@@ -2087,7 +2091,7 @@ void EdytorNc::setHighLightMode(int mode)
 
 void EdytorNc::readSettings()
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     QPoint pos = settings.value("Pos", QPoint(0, 0)).toPoint();
     QSize size = settings.value("Size", QSize(800, 600)).toSize();
@@ -2254,7 +2258,7 @@ void EdytorNc::writeSettings()
     //    MdiChild *mdiChild;
     //    bool maximized = false;
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.setValue("Pos", pos());
     settings.setValue("Size", size());
@@ -2603,7 +2607,7 @@ void EdytorNc::createFindToolBar()
         findToolBar->addSeparator();
         findToolBar->addAction(findCloseAct);
 
-        QSettings settings("EdytorNC", "EdytorNC");
+        QSettings &settings = *Medium::instance().settings();
         mCheckIgnoreComments->setChecked(settings.value("FindIgnoreComments", true).toBool());
         mCheckFindWholeWords->setChecked(settings.value("FindWholeWords", false).toBool());
         mCheckIgnoreCase->setChecked(settings.value("FindIgnoreCase", true).toBool());
@@ -2661,7 +2665,7 @@ void EdytorNc::closeFindToolBar()
         activeMdiChild()->textEdit->centerCursor();
     }
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.setValue("FindIgnoreComments", mCheckIgnoreComments->isChecked());
     settings.setValue("FindWholeWords", mCheckFindWholeWords->isChecked());
     settings.setValue("FindIgnoreCase", mCheckIgnoreCase->isChecked());
@@ -3907,7 +3911,7 @@ void EdytorNc::changeSession(QAction *action)
 
 void EdytorNc::loadSession(QString name)
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("Sessions");
 
     int max = settings.beginReadArray(name);
@@ -3938,7 +3942,7 @@ void EdytorNc::loadSession(QString name)
 
 void EdytorNc::saveSession(QString name)
 {
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("Sessions");
 
     settings.remove(name);
@@ -3993,7 +3997,7 @@ void EdytorNc::savePrinterSettings(QPrinter *printer)
 {
 #ifndef QT_NO_PRINTER
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("PrinterSettings");
 
@@ -4015,7 +4019,7 @@ void EdytorNc::loadPrinterSettings(QPrinter *printer)
 {
 #ifndef QT_NO_PRINTER
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("PrinterSettings");
 
@@ -4054,7 +4058,7 @@ void EdytorNc::loadSerialConfignames()
     QStringList list;
     QString item;
 
-    QSettings settings("EdytorNC", "EdytorNC");
+    QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("SerialPortConfigs");
 
     configBox->clear();
@@ -4387,7 +4391,7 @@ void EdytorNc::clipboardSave()
 {
     QStandardItem *item;
 
-    QSettings settings("Clipboard", QSettings::IniFormat);
+    QSettings settings(Medium::instance().settingsDir() + "/clipboard", QSettings::IniFormat);
 
     settings.remove("ClipboardItems");
     settings.beginWriteArray("ClipboardItems");
@@ -4417,7 +4421,7 @@ void EdytorNc::clipboardLoad()
     clipboardModel->setColumnCount(1);
     clipboardModel->setHorizontalHeaderLabels(QStringList() << "Clipboard");
 
-    QSettings settings("Clipboard", QSettings::IniFormat);
+    QSettings settings(Medium::instance().settingsDir() + "/clipboard", QSettings::IniFormat);
 
     int max = settings.beginReadArray("ClipboardItems");
 
