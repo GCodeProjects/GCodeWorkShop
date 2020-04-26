@@ -90,17 +90,17 @@ public:
 
     QString settingsDir()
     {
-        return m_settingsDir;
+        return mSettingsDir;
     }
 
     QSettings *settings()
     {
-        return m_settings;
+        return mSettings;
     }
 
     GeneralConfig *generalConfig()
     {
-        return m_generalConfig;
+        return mGeneralConfig;
     }
 
     MainWindow *mainWindow();
@@ -116,17 +116,17 @@ protected slots:
 protected:
     explicit Medium(QObject *parent = 0);
 
-    QStringList m_translationDirs;
-    QStringList m_translationUnits;
-    QList<QTranslator *> m_translators;
+    QStringList mTranslationDirs;
+    QStringList mTranslationUnits;
+    QList<QTranslator *> mTranslators;
 
-    QStringList m_shareDirs;
-    QString m_settingsDir;
+    QStringList mShareDirs;
+    QString mSettingsDir;
 
-    QSettings *m_settings;
-    GeneralConfig *m_generalConfig;
+    QSettings *mSettings;
+    GeneralConfig *mGeneralConfig;
 
-    MainWindow *m_mainWindow;
+    MainWindow *mMainWindow;
 
 private:
     int checkLaunch();

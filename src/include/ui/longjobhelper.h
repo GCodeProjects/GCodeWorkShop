@@ -98,11 +98,11 @@ public:
      */
     inline int check(int progress)
     {
-        if (m_CheckCount++ < m_LazyCheck) {
+        if (mCheckCount++ < mLazyCheck) {
             return CONTINUE;
         }
 
-        m_CheckCount = 0;
+        mCheckCount = 0;
 
         return real_check(progress);
     }
@@ -126,15 +126,15 @@ protected:
 
     int time_ms();
 
-    int m_Maximum;
-    clock_t m_StartPoint;
-    int m_TotalTime;
-    int m_LazyCheck;
-    int m_DeadLine;
-    int m_CheckCount;
-    bool m_IsLongJob;
-    QString m_Message;
-    QProgressDialog m_ProgressDialog;
+    int mMaximum;
+    clock_t mStartPoint;
+    int mTotalTime;
+    int mLazyCheck;
+    int mDeadLine;
+    int mCheckCount;
+    bool mIsLongJob;
+    QString mMessage;
+    QProgressDialog mProgressDialog;
 };
 
 #endif // LONGJOBHELPER_H

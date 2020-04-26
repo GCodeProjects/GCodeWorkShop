@@ -38,21 +38,21 @@ Medium::Medium(QObject *parent) :
 
     setupDirs();
 
-    QString settingFile = m_settingsDir;
+    QString settingFile = mSettingsDir;
     settingFile.append("/").append(APP_NAME).append(".ini");
-    m_settings = new QSettings(settingFile, QSettings::IniFormat);
-    m_generalConfig = new GeneralConfig(m_settings);
-    m_generalConfig->sync();
+    mSettings = new QSettings(settingFile, QSettings::IniFormat);
+    mGeneralConfig = new GeneralConfig(mSettings);
+    mGeneralConfig->sync();
 
     updateTranslation();
 
-    m_mainWindow = 0;
+    mMainWindow = 0;
 }
 
 Medium::~Medium()
 {
-    m_settings->sync();
-    delete m_settings;
+    mSettings->sync();
+    delete mSettings;
 }
 
 Medium &Medium::instance()
@@ -63,33 +63,33 @@ Medium &Medium::instance()
 
 void Medium::addTranslationDir(const QString &dir)
 {
-    if (!m_translationDirs.contains(dir)) {
-        m_translationDirs.append(dir);
+    if (!mTranslationDirs.contains(dir)) {
+        mTranslationDirs.append(dir);
     }
 }
 
 void Medium::removeTranslationDir(const QString &dir)
 {
-    int i = m_translationDirs.indexOf(dir);
+    int i = mTranslationDirs.indexOf(dir);
 
     if (i >= 0) {
-        m_translationDirs.removeAt(i);
+        mTranslationDirs.removeAt(i);
     }
 }
 
 void Medium::addTranslationUnit(const QString &unit)
 {
-    if (!m_translationUnits.contains(unit)) {
-        m_translationUnits.append(unit);
+    if (!mTranslationUnits.contains(unit)) {
+        mTranslationUnits.append(unit);
     }
 }
 
 void Medium::removeTranslationUnit(const QString &unit)
 {
-    int i = m_translationUnits.indexOf(unit);
+    int i = mTranslationUnits.indexOf(unit);
 
     if (i >= 0) {
-        m_translationUnits.removeAt(i);
+        mTranslationUnits.removeAt(i);
     }
 }
 
@@ -97,7 +97,7 @@ QList<QLocale> Medium::findTranslation(bool skipQtDir)
 {
     QList<QLocale> localeList;
 
-    foreach (QString dir, m_translationDirs) {
+    foreach (QString dir, mTranslationDirs) {
         QStringList fileList = QDir(dir).entryList(QDir::Files);
 
         // Skip Qt translation directory.
@@ -125,12 +125,12 @@ QList<QLocale> Medium::findTranslation(bool skipQtDir)
 
 QLocale Medium::uiLocale()
 {
-    return m_generalConfig->localeUI();
+    return mGeneralConfig->localeUI();
 }
 
 void Medium::setUiLocale(const QLocale &locale)
 {
-    m_generalConfig->localeUI = locale;
+    mGeneralConfig->localeUI = locale;
 }
 
 void Medium::updateTranslation()
@@ -139,15 +139,15 @@ void Medium::updateTranslation()
     QTranslator *qtTranslator = 0;
     QCoreApplication *app = QCoreApplication::instance();
 
-    foreach (QTranslator *trans, m_translators) {
+    foreach (QTranslator *trans, mTranslators) {
         app->removeTranslator(trans);
         trans->deleteLater();
     }
 
-    m_translators.clear();
+    mTranslators.clear();
 
-    foreach (QString dir, m_translationDirs) {
-        foreach (QString file, m_translationUnits) {
+    foreach (QString dir, mTranslationDirs) {
+        foreach (QString file, mTranslationUnits) {
             if (qtTranslator == 0) {
                 qtTranslator = new QTranslator();
             }
@@ -156,7 +156,7 @@ void Medium::updateTranslation()
             file.append("_").append(locale.name());
 
             if (qtTranslator->load(file, dir)) {
-                m_translators.append(qtTranslator);
+                mTranslators.append(qtTranslator);
                 qtTranslator = 0;
                 qDebug() << "  OK";
             } else {
@@ -169,7 +169,7 @@ void Medium::updateTranslation()
         delete qtTranslator;
     }
 
-    foreach (QTranslator *trans, m_translators) {
+    foreach (QTranslator *trans, mTranslators) {
         app->installTranslator(trans);
     }
 
@@ -178,21 +178,21 @@ void Medium::updateTranslation()
 
 MainWindow *Medium::mainWindow()
 {
-    if (m_mainWindow == 0) {
-        m_mainWindow = new MainWindow(this);
-        connect(m_mainWindow, SIGNAL(destroyed(QObject *)), this,
+    if (mMainWindow == 0) {
+        mMainWindow = new MainWindow(this);
+        connect(mMainWindow, SIGNAL(destroyed(QObject *)), this,
                 SLOT(onMainWindowDestroed(QObject *)));
     }
 
-    return m_mainWindow;
+    return mMainWindow;
 }
 
 void Medium::onMainWindowDestroed(QObject *)
 {
-    if (m_mainWindow != 0) {
-        disconnect(m_mainWindow, SIGNAL(destroyed(QObject *)), this,
+    if (mMainWindow != 0) {
+        disconnect(mMainWindow, SIGNAL(destroyed(QObject *)), this,
                    SLOT(onMainWindowDestroed(QObject *)));
-        m_mainWindow = 0;
+        mMainWindow = 0;
         qDebug() << "Main window destroyed";
     }
 }

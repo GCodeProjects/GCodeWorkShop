@@ -24,33 +24,33 @@
 LongJobHelper::LongJobHelper(QWidget *parent,
                              const QString &title,
                              int deadLine):
-    m_ProgressDialog(parent, Qt::Dialog)
+    mProgressDialog(parent, Qt::Dialog)
 {
-    m_DeadLine = deadLine;
-    m_ProgressDialog.setWindowModality(Qt::WindowModal);
-    m_ProgressDialog.setWindowTitle(title);
-    m_ProgressDialog.cancel();
+    mDeadLine = deadLine;
+    mProgressDialog.setWindowModality(Qt::WindowModal);
+    mProgressDialog.setWindowTitle(title);
+    mProgressDialog.cancel();
 }
 
 void LongJobHelper::begin(int maximum, const QString &message, int lazyCheck)
 {
-    m_Maximum = maximum;
-    m_Message = message;
-    m_IsLongJob = false;
-    m_StartPoint = clock();
-    m_TotalTime = 0;
-    m_CheckCount = 0;
-    m_LazyCheck = lazyCheck;
+    mMaximum = maximum;
+    mMessage = message;
+    mIsLongJob = false;
+    mStartPoint = clock();
+    mTotalTime = 0;
+    mCheckCount = 0;
+    mLazyCheck = lazyCheck;
     QApplication::setOverrideCursor(Qt::BusyCursor);
 }
 
 void LongJobHelper::end()
 {
-    m_TotalTime = time_ms();
+    mTotalTime = time_ms();
 
-    if (m_IsLongJob) {
-        m_IsLongJob = false;
-        m_ProgressDialog.hide();
+    if (mIsLongJob) {
+        mIsLongJob = false;
+        mProgressDialog.hide();
     }
 
     QApplication::restoreOverrideCursor();
@@ -59,27 +59,27 @@ void LongJobHelper::end()
 
 int LongJobHelper::real_check(int progress)
 {
-    m_TotalTime = time_ms();
+    mTotalTime = time_ms();
 
-    if (!m_IsLongJob) {
-        int remaining = m_TotalTime * m_Maximum / (m_Maximum - progress);
+    if (!mIsLongJob) {
+        int remaining = mTotalTime * mMaximum / (mMaximum - progress);
 
-        if (m_TotalTime > m_DeadLine || remaining > m_DeadLine) {
-            m_IsLongJob = true;
-            m_ProgressDialog.setLabelText(m_Message);
-            m_ProgressDialog.setRange(0, m_Maximum);
-            m_ProgressDialog.reset();
-            m_ProgressDialog.show();
+        if (mTotalTime > mDeadLine || remaining > mDeadLine) {
+            mIsLongJob = true;
+            mProgressDialog.setLabelText(mMessage);
+            mProgressDialog.setRange(0, mMaximum);
+            mProgressDialog.reset();
+            mProgressDialog.show();
         }
     }
 
-    if (m_IsLongJob) {
-        m_ProgressDialog.setValue(progress);
+    if (mIsLongJob) {
+        mProgressDialog.setValue(progress);
         QApplication::processEvents();
 
-        if (m_ProgressDialog.wasCanceled()) {
-            m_IsLongJob = false;
-            m_ProgressDialog.hide();
+        if (mProgressDialog.wasCanceled()) {
+            mIsLongJob = false;
+            mProgressDialog.hide();
             QApplication::restoreOverrideCursor();
             return CANCEL;
         }
@@ -90,10 +90,10 @@ int LongJobHelper::real_check(int progress)
 
 int LongJobHelper::time()
 {
-    return m_TotalTime;
+    return mTotalTime;
 }
 
 int LongJobHelper::time_ms()
 {
-    return (clock() - m_StartPoint) / (CLOCKS_PER_SEC / 1000);
+    return (clock() - mStartPoint) / (CLOCKS_PER_SEC / 1000);
 }

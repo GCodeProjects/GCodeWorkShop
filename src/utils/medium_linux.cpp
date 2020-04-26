@@ -50,8 +50,8 @@ void Medium::setupDirs()
     QString langDir;
 
     shareDir = QApplication::applicationDirPath();
-    m_settingsDir = QDir::homePath();
-    m_settingsDir.append(QLatin1String("/.config/enc"));
+    mSettingsDir = QDir::homePath();
+    mSettingsDir.append(QLatin1String("/.config/enc"));
 
     switch (lauchType) {
     case LAUNCH_SYSTEM:
@@ -65,8 +65,8 @@ void Medium::setupDirs()
         shareDir.remove(QLatin1String("/bin/release"));
         shareDir.remove(QLatin1String("/bin/debug"));
         langDir = shareDir;
-        m_settingsDir = shareDir;
-        m_settingsDir.append(QLatin1String("/bin"));
+        mSettingsDir = shareDir;
+        mSettingsDir.append(QLatin1String("/bin"));
         shareDir.append(QLatin1String("/install/share"));
         break;
 
@@ -74,7 +74,7 @@ void Medium::setupDirs()
     default:
         shareDir.remove("/bin");
         langDir = shareDir;
-        m_settingsDir = shareDir;
+        mSettingsDir = shareDir;
         shareDir.append(QLatin1String("/share"));
     }
 
@@ -82,12 +82,12 @@ void Medium::setupDirs()
     addTranslationDir(QLatin1String(":/lang"));
     addTranslationDir(langDir);
 
-    m_shareDirs.append(shareDir);
-    m_shareDirs.append(QLatin1String(":"));
+    mShareDirs.append(shareDir);
+    mShareDirs.append(QLatin1String(":"));
 
     qInfo() << "Set of directoryes :";
-    qInfo() << "  translation   " << m_translationDirs;
-    qInfo() << "  config        " << m_settingsDir;
-    qInfo() << "  programm data " << m_shareDirs;
+    qInfo() << "  translation   " << mTranslationDirs;
+    qInfo() << "  config        " << mSettingsDir;
+    qInfo() << "  programm data " << mShareDirs;
     qInfo() << "";
 }
