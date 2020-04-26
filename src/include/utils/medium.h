@@ -33,23 +33,7 @@
 #include "utils/config.h"
 #include "mainwindow.h"
 
-/**
- * @brief The GeneralConfig class store general application settings.
- */
-class GeneralConfig : public Config
-{
-public:
-    /** UI locale, used to translate text in widgets. */
-    CfgQLocale localeUI {this, "uilocale", QLocale::system()};
-
-protected:
-    GeneralConfig(QSettings *setting) :
-        Config(setting)
-    {
-    }
-
-    friend class Medium;
-};
+class GeneralConfig;
 
 /**
  * @brief The Medium class provides various information about application environment.

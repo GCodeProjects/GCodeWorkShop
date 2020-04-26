@@ -34,9 +34,11 @@
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
 
 EdytorNc::EdytorNc(Medium *medium)
-    : QMainWindow(NULL), m_config(medium->generalConfig())
+    : QMainWindow(NULL),
+      mGeneralConfig(*medium->generalConfig()),
+      mMWConfig(medium->generalConfig())
 {
-    m_medium = medium;
+    mMedium = medium;
 
     setAttribute(Qt::WA_DeleteOnClose);
 
@@ -94,6 +96,14 @@ EdytorNc::EdytorNc(Medium *medium)
 
     readSettings();
 
+    if (mGeneralConfig.disableFileChangeMonitor()) {
+        fileChangeMonitor.clear();
+    } else {
+        fileChangeMonitor = new QFileSystemWatcher(this);
+        connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this,
+                SLOT(fileChanged(const QString)));
+    }
+
     createFileBrowseTabs();
 
     setWindowTitle(tr("EdytorNC"));
@@ -129,6 +139,24 @@ EdytorNc::~EdytorNc()
     if (commApp) {
         commApp->close();
     }
+}
+
+void EdytorNc::resizeEvent(QResizeEvent *event)
+{
+        if(windowState() == Qt::WindowNoState && event->oldSize().isValid()){
+            mMWConfig.size = event->size();
+        }
+
+        QMainWindow::resizeEvent(event);
+}
+
+void EdytorNc::moveEvent(QMoveEvent *event)
+{
+    if(windowState() == Qt::WindowNoState){
+        mMWConfig.pos = geometry().topLeft();
+    }
+
+    QMainWindow::moveEvent(event);
 }
 
 void EdytorNc::closeTab(int i)
@@ -229,7 +257,7 @@ MdiChild *EdytorNc::newFileFromTemplate()
             child->newFile();
         }
 
-        defaultMdiWindowProperites.lastDir = lastDir.canonicalPath();
+        defaultMdiWindowProperites.lastDir = mGeneralConfig.lastDir();
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = false;
         //defaultMdiWindowProperites.maximized = false;
@@ -259,7 +287,7 @@ MdiChild *EdytorNc::newFile()
     MdiChild *child = createMdiChild();
     child->newFile();
 
-    defaultMdiWindowProperites.lastDir = lastDir.canonicalPath();
+    defaultMdiWindowProperites.lastDir = mGeneralConfig.lastDir();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.readOnly = false;
     //defaultMdiWindowProperites.maximized = false;
@@ -292,7 +320,7 @@ void EdytorNc::open()
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Select one or more files to open"),
-                            lastDir.absolutePath(),
+                            mGeneralConfig.lastDir(),
                             *filters, 0);
 
     delete filters;
@@ -305,7 +333,7 @@ void EdytorNc::open()
         existing = findMdiChild(*it);
 
         if ((file.exists()) && (file.isReadable()) && !existing) {
-            lastDir = file.absoluteDir();
+            mGeneralConfig.lastDir = file.absolutePath();
             fileTreeViewChangeRootDir();
             MdiChild *child = createMdiChild();
 
@@ -372,7 +400,7 @@ void EdytorNc::openExample()
         existing = findMdiChild(*it);
 
         if ((file.exists()) && (file.isReadable()) && !existing) {
-            lastDir = file.absoluteDir();
+            mGeneralConfig.lastDir = file.absolutePath();
             fileTreeViewChangeRootDir();
             MdiChild *child = createMdiChild();
 
@@ -416,7 +444,7 @@ void EdytorNc::openFile(const QString fileName)
     QMdiSubWindow *existing = findMdiChild(fileName);
 
     if ((file.exists()) && (file.isReadable()) && !existing) {
-        lastDir = file.absoluteDir();
+        mGeneralConfig.lastDir = file.absolutePath();
         fileTreeViewChangeRootDir();
         MdiChild *child = createMdiChild();
 
@@ -908,7 +936,7 @@ void EdytorNc::doDiffL()
         }
 
         if (fileName.isEmpty()) {
-            fileName = lastDir.canonicalPath();
+            fileName = mGeneralConfig.lastDir();
         }
 
         //        diffApp->close();
@@ -938,7 +966,7 @@ void EdytorNc::doDiffR()
         }
 
         if (fileName.isEmpty()) {
-            fileName = lastDir.canonicalPath();
+            fileName = mGeneralConfig.lastDir();
         }
 
         //        diffApp->close();
@@ -1037,7 +1065,7 @@ void EdytorNc::doDiff()
         }
 
         if (fileName.isEmpty()) {
-            fileName = lastDir.canonicalPath();
+            fileName = mGeneralConfig.lastDir();
         }
 
         //        diffApp->close();
@@ -2093,10 +2121,9 @@ void EdytorNc::readSettings()
 {
     QSettings &settings = *Medium::instance().settings();
 
-    QPoint pos = settings.value("Pos", QPoint(0, 0)).toPoint();
-    QSize size = settings.value("Size", QSize(800, 600)).toSize();
-    move(pos);
-    resize(size);
+    setGeometry(QRect(mMWConfig.pos(), mMWConfig.size()));
+    setWindowState(mMWConfig.maximized() ? Qt::WindowMaximized : Qt::WindowNoState);
+    restoreState(mMWConfig.state());
 
     if (settings.value("SerialToolbarShown", false).toBool()) {
         createSerialToolBar();
@@ -2106,21 +2133,6 @@ void EdytorNc::readSettings()
     if (settings.value("FindToolBarShown", false).toBool()) {
         createFindToolBar();
     }
-
-    defaultMdiWindowProperites.disableFileChangeMonitor = settings.value("DisableFileChangeMonitor",
-            false).toBool();
-
-    if (defaultMdiWindowProperites.disableFileChangeMonitor) {
-        fileChangeMonitor.clear();
-    } else {
-        fileChangeMonitor = new QFileSystemWatcher(this);
-        connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this,
-                SLOT(fileChanged(const QString)));
-    }
-
-    restoreState(settings.value("State", QByteArray()).toByteArray());
-
-    lastDir = settings.value("LastDir",  QDir::homePath()).toString();
 
     defaultMdiWindowProperites.extensions = settings.value("Extensions",
                                             (QStringList() << "*.nc" <<  "*.cnc")).toStringList();
@@ -2156,7 +2168,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.defaultHighlightMode = settings.value("DefaultHighlightMode",
             MODE_AUTO).toInt();
 
-    defaultMdiWindowProperites.guessFileNameByProgNum = settings.value("GessFileNameByProgNum",
+    defaultMdiWindowProperites.guessFileNameByProgNum = settings.value("GuessFileNameByProgNum",
             true).toBool();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
@@ -2255,17 +2267,10 @@ void EdytorNc::readSettings()
 
 void EdytorNc::writeSettings()
 {
-    //    MdiChild *mdiChild;
-    //    bool maximized = false;
-
     QSettings &settings = *Medium::instance().settings();
 
-    settings.setValue("Pos", pos());
-    settings.setValue("Size", size());
-
-    settings.setValue("State", saveState());
-
-    settings.setValue("LastDir", lastDir.path());
+    mMWConfig.maximized = isMaximized();
+    mMWConfig.state = saveState();
 
     settings.setValue("Extensions", defaultMdiWindowProperites.extensions);
     settings.setValue("DefaultSaveExtension", defaultMdiWindowProperites.saveExtension);
@@ -2294,10 +2299,8 @@ void EdytorNc::writeSettings()
     settings.setValue("ViewerMode", defaultMdiWindowProperites.defaultReadOnly);
     settings.setValue("DefaultHighlightMode", defaultMdiWindowProperites.defaultHighlightMode);
     settings.setValue("StartEmpty", defaultMdiWindowProperites.startEmpty);
-    settings.setValue("DisableFileChangeMonitor",
-                      defaultMdiWindowProperites.disableFileChangeMonitor);
 
-    settings.setValue("GessFileNameByProgNum", defaultMdiWindowProperites.guessFileNameByProgNum);
+    settings.setValue("GuessFileNameByProgNum", defaultMdiWindowProperites.guessFileNameByProgNum);
 
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
@@ -3097,7 +3100,7 @@ void EdytorNc::projectAdd()
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Add files to project"),
-                            lastDir.absolutePath(),
+                            mGeneralConfig.lastDir(),
                             filters, 0);
 
     QStringList list = files;
@@ -3654,7 +3657,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
             path = path.remove(QFileInfo(path).fileName());
         }
     } else {
-        path = lastDir.canonicalPath();
+        path = mGeneralConfig.lastDir();
     }
 
     if (path.isEmpty()) {
@@ -3918,7 +3921,7 @@ void EdytorNc::loadSession(QString name)
 
     for (int i = 0; i < max; ++i) {
         settings.setArrayIndex(i);
-        defaultMdiWindowProperites.lastDir = lastDir.absolutePath();
+        defaultMdiWindowProperites.lastDir = mGeneralConfig.lastDir();
 
         defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
 

@@ -54,7 +54,8 @@ HEADERS += edytornc.h \
     commapp.h \
     serialportcfghelpdialog.h \
     filechecker.h \
-    mainwindow.h
+    mainwindow.h \
+    include/generalconfig.h
 
 FORMS += i2mdialog.ui \
     feedsdialog.ui \

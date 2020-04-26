@@ -38,6 +38,7 @@
 #include "sessiondialog.h"
 #include "commapp.h"
 #include "utils/medium.h"
+#include "generalconfig.h"
 
 #include "ui_edytornc.h"
 
@@ -49,18 +50,24 @@ public:
     EdytorNc(Medium *medium);
     ~EdytorNc();
 
+    void resizeEvent(QResizeEvent *event);
+    void moveEvent(QMoveEvent *event);
+
 protected:
-    Medium *m_medium;
+    Medium *mMedium;
+
+    GeneralConfig &mGeneralConfig;
+
     struct MWConfig : Config {
         MWConfig(Config *config) : Config(config, "mainwindow") {}
 
-        CfgQPoint  pos {this, "pos", QPoint(0, 0), false};
-        CfgQSize   size {this, "size", QSize(400, 240), false};
-        Cfgbool    maximized {this, "maximized", false, false};
-    } m_config;
+        CfgQPoint       pos {this, "pos", QPoint(0, 0), false};
+        CfgQSize        size {this, "size", QSize(400, 240), false};
+        Cfgbool         maximized {this, "maximized", false, false};
+        CfgQByteArray   state {this, "state", QByteArray(), false};
+    } mMWConfig;
 
 public:
-
     void openFile(const QString fileName);
     void diffTwoFiles(const QString filename1, const QString filename2);
 
@@ -319,7 +326,6 @@ private:
 
     QProcess *proc;
     QProcess *sfsProc;
-    QDir lastDir;
 
     QLabel *labelStat1;
     QToolButton *readOnlyButton;

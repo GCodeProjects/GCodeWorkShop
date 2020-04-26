@@ -25,6 +25,7 @@
 #include <QDir>
 
 #include "utils/medium.h"
+#include "generalconfig.h"
 #include "edytornc.h"
 
 Medium::Medium(QObject *parent) :
