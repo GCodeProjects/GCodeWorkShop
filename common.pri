@@ -11,6 +11,8 @@ CONFIG(debug, debug|release) {
     LIB_SUFFIX = d
 } else {
     BUILD_FLAG = release
+    # Supress debug message
+    DEFINES += QT_NO_DEBUG_OUTPUT # QT_NO_INFO_OUTPUT
 }
 
 CONFIG += c++11 warn_on
