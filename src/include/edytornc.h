@@ -37,23 +37,29 @@
 #include "newfiledialog.h"
 #include "sessiondialog.h"
 #include "commapp.h"
-#include "utils/medium.h"
 #include "generalconfig.h"
 
 #include "ui_edytornc.h"
+
+class Medium;
 
 class EdytorNc : public QMainWindow, public Ui::EdytorNc
 {
     Q_OBJECT
 
 public:
-    EdytorNc(Medium *medium);
+    static EdytorNc *instance();
+
     ~EdytorNc();
 
     void resizeEvent(QResizeEvent *event);
     void moveEvent(QMoveEvent *event);
 
 protected:
+    static EdytorNc *SINGLETON;
+
+    EdytorNc(Medium *medium);
+
     Medium *mMedium;
 
     GeneralConfig &mGeneralConfig;

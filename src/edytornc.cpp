@@ -33,6 +33,17 @@
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
 
+EdytorNc *EdytorNc::SINGLETON;
+
+EdytorNc *EdytorNc::instance()
+{
+    if (SINGLETON == 0) {
+        SINGLETON = new EdytorNc(&Medium::instance());
+    }
+
+    return SINGLETON;
+}
+
 EdytorNc::EdytorNc(Medium *medium)
     : QMainWindow(NULL),
       mGeneralConfig(*medium->generalConfig()),

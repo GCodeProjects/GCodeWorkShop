@@ -47,10 +47,10 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    Medium &medium=Medium::instance();
+    Medium &medium = Medium::instance();
     medium.addTranslationUnit("kdiff3");
     medium.updateTranslation();
-    EdytorNc *mw = medium.mainWindow();
+    EdytorNc *mw = EdytorNc::instance();
 
     argProccesed = false;
 

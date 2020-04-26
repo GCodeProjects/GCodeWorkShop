@@ -25,7 +25,6 @@
 #include <QApplication>
 
 #include "utils/medium.h"
-#include "mainwindow.h"
 
 int Medium::checkLaunch()
 {

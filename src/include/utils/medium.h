@@ -31,7 +31,6 @@
 #include <QLocale>
 
 #include "utils/config.h"
-#include "mainwindow.h"
 
 class GeneralConfig;
 
@@ -103,15 +102,8 @@ public:
         return mGeneralConfig;
     }
 
-    MainWindow *mainWindow();
-
 signals:
     void translationChanged();
-
-public slots:
-
-protected slots:
-    void onMainWindowDestroed(QObject *);
 
 protected:
     explicit Medium(QObject *parent = 0);
@@ -125,8 +117,6 @@ protected:
 
     QSettings *mSettings;
     GeneralConfig *mGeneralConfig;
-
-    MainWindow *mMainWindow;
 
 private:
     int checkLaunch();

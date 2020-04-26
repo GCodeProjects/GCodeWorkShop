@@ -20,13 +20,13 @@
  *      along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <QCoreApplication>
 #include <QLibraryInfo>
 #include <QDebug>
 #include <QDir>
 
 #include "utils/medium.h"
 #include "generalconfig.h"
-#include "edytornc.h"
 
 Medium::Medium(QObject *parent) :
     QObject(parent),
@@ -45,8 +45,6 @@ Medium::Medium(QObject *parent) :
     mGeneralConfig->sync();
 
     updateTranslation();
-
-    mMainWindow = 0;
 }
 
 Medium::~Medium()
@@ -174,25 +172,4 @@ void Medium::updateTranslation()
     }
 
     emit translationChanged();
-}
-
-MainWindow *Medium::mainWindow()
-{
-    if (mMainWindow == 0) {
-        mMainWindow = new MainWindow(this);
-        connect(mMainWindow, SIGNAL(destroyed(QObject *)), this,
-                SLOT(onMainWindowDestroed(QObject *)));
-    }
-
-    return mMainWindow;
-}
-
-void Medium::onMainWindowDestroed(QObject *)
-{
-    if (mMainWindow != 0) {
-        disconnect(mMainWindow, SIGNAL(destroyed(QObject *)), this,
-                   SLOT(onMainWindowDestroed(QObject *)));
-        mMainWindow = 0;
-        qDebug() << "Main window destroyed";
-    }
 }
