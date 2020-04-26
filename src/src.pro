@@ -36,7 +36,7 @@ SOURCES += edytornc.cpp \
     serialportcfghelpdialog.cpp \
     filechecker.cpp
 
-HEADERS += edytornc.h \
+HEADERS += include/edytornc.h \
     highlighter.h \
     mdichild.h \
     commoninc.h \
@@ -54,7 +54,7 @@ HEADERS += edytornc.h \
     commapp.h \
     serialportcfghelpdialog.h \
     filechecker.h \
-    mainwindow.h \
+    include/mainwindow.h \
     include/generalconfig.h
 
 FORMS += i2mdialog.ui \
