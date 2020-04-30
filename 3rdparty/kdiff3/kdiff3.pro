@@ -1,10 +1,11 @@
 # part of http://kdiff3.sourceforge.net/
 
+TEMPLATE = lib
+TARGET = kdiff3
+CONFIG += qt staticlib
+
 include(../../common.pri)
 
-TEMPLATE = lib
-CONFIG += qt staticlib
-TARGET = kdiff3
 DESTDIR = $${IMPORT_LIBS_PATH}/ # or BIN_PATH for shared lib
 
 QT *= widgets
@@ -43,8 +44,10 @@ TRANSLATIONS = \
     $${LANG_PATH}/kdiff3_cs.ts \
     $${LANG_PATH}/kdiff3_es.ts
 
-QMAKE_EXTRA_TARGETS += langupdate
-langupdate.target = lang_update
+QMAKE_EXTRA_TARGETS += langupdate langrelease
 langupdate.commands = lupdate kdiff3.pro
 langupdate.depends = $$SOURCES $$HEADERS $$TRANSLATIONS
+langrelease.target = lang_update
+langrelease.commands = lrelease kdiff3.pro
+langrelease.depends = langupdate
 PRE_TARGETDEPS += lang_update

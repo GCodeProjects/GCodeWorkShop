@@ -1,10 +1,11 @@
 # part of https://github.com/qtproject/qt-solutions/tree/master/qtsingleapplication
 
+TEMPLATE = lib
+TARGET = qtsingleapplication
+CONFIG += qt staticlib
+
 include(../../common.pri)
 
-TEMPLATE = lib
-CONFIG += qt staticlib
-TARGET = qtsingleapplication
 DESTDIR = $${IMPORT_LIBS_PATH}/ # or BIN_PATH for shared lib
 
 QT *= widgets network

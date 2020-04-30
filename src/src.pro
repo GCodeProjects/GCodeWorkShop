@@ -1,13 +1,12 @@
 
+VERSION = 2018.07
+TEMPLATE = app
+TARGET = edytornc
+CONFIG += qt
+
 include(../common.pri)
 
-TEMPLATE = app
 DESTDIR = $${BIN_PATH}/
-TARGET = edytornc
-
-VERSION = 2018.07
-
-CONFIG += qt
 
 QT *= widgets printsupport serialport network
 
@@ -115,14 +114,15 @@ TRANSLATIONS = \
 
 QMAKE_EXTRA_TARGETS += langupdate langrelease translate
 
-langupdate.target = lang_update
 langupdate.commands = lupdate src.pro
 langupdate.depends = $$SOURCES $$HEADERS $$FORMS $$TRANSLATIONS
+langrelease.target = lang_update
 langrelease.commands = lrelease src.pro
-#langrelease.depends = langupdate
+langrelease.depends = langupdate
+PRE_TARGETDEPS += lang_update
+
 translate.files = ../lang/*.qm
-translate.depends = langrelease
-#PRE_TARGETDEPS += lang_update
+#translate.depends = langrelease
 
 
 # other files

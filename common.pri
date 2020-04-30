@@ -16,6 +16,7 @@ CONFIG(debug, debug|release) {
 }
 
 CONFIG += c++11 warn_on
+CONFIG -= debug_and_release debug_and_release_target
 
 LANG_PATH = $${PROJECT_ROOT_PATH}/lang/
 IMPORT_PATH = $${PROJECT_ROOT_PATH}/3rdparty/
