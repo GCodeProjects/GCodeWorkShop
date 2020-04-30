@@ -50,13 +50,15 @@ void Medium::setupDirs()
 
     shareDir = QApplication::applicationDirPath();
     mSettingsDir = QDir::homePath();
-    mSettingsDir.append(QLatin1String("/.config/enc"));
+    mSettingsDir.append(QLatin1String("/.config/"));
+    mSettingsDir.append(APP_NAME);
 
     switch (lauchType) {
     case LAUNCH_SYSTEM:
     case LAUNCH_USER:
         shareDir.remove(QLatin1String("/bin"));
-        shareDir.append(QLatin1String("/share/enc"));
+        shareDir.append(QLatin1String("/share/"));
+        shareDir.append(APP_NAME);
         langDir = shareDir;
         break;
 
