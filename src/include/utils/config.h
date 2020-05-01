@@ -69,7 +69,13 @@ public:
     template<typename T>
     inline T value(const QString &key, const T &defaultValue) const
     {
-        return m_storage->value(key, defaultValue).value<T>();
+        /*
+         * It's a difficult moment for my understanding.
+         * Since the template member depends on the template parameter, we must tell
+         * the compiler that it's a template.
+         * https://exceptionshub.com/c-template-compilation-error-expected-primary-expression-before-token.html
+         */
+        return m_storage->value(key, defaultValue).template value<T>();
     }
 
     /* Special case : QLocale stored as string */
