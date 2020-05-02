@@ -6,8 +6,6 @@ CONFIG += qt staticlib
 
 include(../../common.pri)
 
-DESTDIR = $${IMPORT_LIBS_PATH}/ # or BIN_PATH for shared lib
-
 QT *= widgets network
 
 SOURCES += \

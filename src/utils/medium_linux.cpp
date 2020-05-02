@@ -35,8 +35,13 @@ int Medium::checkLaunch()
         return LAUNCH_SYSTEM;
     } else if (dir.endsWith(QLatin1String(".local/bin"))) {
         return LAUNCH_USER;
-    } else if (dir.endsWith(QLatin1String("bin/debug"))
-               || dir.endsWith(QLatin1String("bin/release"))) {
+    }
+
+    dir = dir.section('/', -2, -1);
+
+    if (dir.startsWith(QLatin1String("bin/"))
+            || dir.endsWith(QLatin1String(".debug"))
+            || dir.endsWith(QLatin1String(".release"))) {
         return LAUNCH_SANDBOX;
     }
 
@@ -49,9 +54,6 @@ void Medium::setupDirs()
     QString langDir;
 
     shareDir = QApplication::applicationDirPath();
-    mSettingsDir = QDir::homePath();
-    mSettingsDir.append(QLatin1String("/.config/"));
-    mSettingsDir.append(APP_NAME);
 
     switch (lauchType) {
     case LAUNCH_SYSTEM:
@@ -60,11 +62,13 @@ void Medium::setupDirs()
         shareDir.append(QLatin1String("/share/"));
         shareDir.append(APP_NAME);
         langDir = shareDir;
+        mSettingsDir = QDir::homePath();
+        mSettingsDir.append(QLatin1String("/.config/"));
+        mSettingsDir.append(APP_NAME);
         break;
 
     case LAUNCH_SANDBOX:
-        shareDir.remove(QLatin1String("/bin/release"));
-        shareDir.remove(QLatin1String("/bin/debug"));
+        shareDir = shareDir.section('/', 0, -3);
         langDir = shareDir;
         mSettingsDir = shareDir;
         mSettingsDir.append(QLatin1String("/bin"));

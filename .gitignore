@@ -4,16 +4,13 @@ build/
 doc/html
 lang/*.qm
 
-/edytornc.pro.user
+/edytornc.pro.user*
 *.autosave
 
 /Makefile
 /src/Makefile*
 
+/3rdparty/lib/*release
+/3rdparty/lib/*debug
 /3rdparty/Makefile
-/3rdparty/kdiff3/Makefile
-/3rdparty/lib/linux/libkdiff3*
-/3rdparty/lib/linux/kdiff3*
-/3rdparty/qtsingleapplication/Makefile
-/3rdparty/lib/linux/libqtsingleapplication*
-/3rdparty/lib/linux/qtsingleapplication*
+/3rdparty/*/Makefile

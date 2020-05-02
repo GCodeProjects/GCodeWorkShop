@@ -50,8 +50,8 @@ This is a [fork](http://sourceforge.net/projects/edytornc/) of EdytorNC, a text 
 
 ### Command line options
 
-    open file -> edytornc file.nc
-    diff two files -> edytornc -diff file1.nc file2.nc
+- open file -> `edytornc file.nc`
+- diff two files -> `edytornc -diff file1.nc file2.nc`
 
 
 ### Compile EdytorNC
@@ -59,13 +59,14 @@ This is a [fork](http://sourceforge.net/projects/edytornc/) of EdytorNC, a text 
 #### Ubuntu
 
 run terminal
-
-    sudo apt install qt5-default qtbase5-dev-tools qt5-qmake
-    cd ~
-    git clone https://github.com/u-235/edytornc.git
-    cd edytornc
-    qmake
-    make
+```
+sudo apt install qt5-default qtbase5-dev-tools qt5-qmake
+cd ~
+git clone https://github.com/u-235/edytornc
+cd edytornc
+qmake -r [CONFIG+=debug] [PREFIX=/usr/ | PREFIX=~/.local/bin/]
+make
+```
 
 #### Windows
 

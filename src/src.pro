@@ -6,12 +6,7 @@ CONFIG += qt
 
 include(../common.pri)
 
-DESTDIR = $${BIN_PATH}/
-
 QT *= widgets printsupport serialport network
-
-# moc doesn't detect Q_OS_LINUX correctly, so add this to make it work
-linux*:DEFINES += __linux__
 
 INCLUDEPATH += include/
 
@@ -136,7 +131,10 @@ doc.files = ../README.md
 #######################################
 
 unix {
-    PREFIX = /usr/local/
+    !defined(PREFIX, var) {
+        PREFIX = /usr/local/
+        message(seting PREFIX = $$PREFIX)
+    }
 
     mime.files = ../install/linux/application-x-g-code.xml
     desktop.files = ../install/linux/edytornc.desktop
