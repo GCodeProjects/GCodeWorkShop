@@ -121,6 +121,19 @@ protected:
 private:
     int checkLaunch();
     void setupDirs();
+
+protected:
+    static const QString SLASH;
+    static const QString COLON;
+    static const QString BIN;
+    static const QString SLASH_BIN;
+    static const QString LANG;
+    static const QString SLASH_LANG;
+    static const QString DEBUG;
+    static const QString RELEASE;
+    static const QString SANDBOX_SHARE;
+    static const QString SHARE;
+    static const QString SLASH_SHARE;
 };
 
 #endif // MEDIUM_H

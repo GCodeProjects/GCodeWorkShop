@@ -14,3 +14,6 @@ lang/*.qm
 /3rdparty/lib/*debug
 /3rdparty/Makefile
 /3rdparty/*/Makefile
+
+*object_script.*
+*.stash

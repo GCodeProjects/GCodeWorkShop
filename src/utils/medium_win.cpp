@@ -2,9 +2,9 @@
  * @file
  * @brief The Medium class provides various information about application environment.
  *
- * @date 19.04.2020 (2020-04-19) created by Nick Egorrov
+ * @date 02.05.2020 (2020-05-02) created by Nick Egorrov
  * @author Nick Egorrov
- * @copyright Copyright (C) 2019  Nick Egorrov
+ * @copyright Copyright (C) 2020  Nick Egorrov
  * @copyright
  *      This program is free software: you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -23,20 +23,20 @@
 #include <QDir>
 #include <QApplication>
 
+#include <shlobj.h>
+
 #include "utils/medium.h"
 
 
 int Medium::checkLaunch()
 {
-    QString dir = QApplication::applicationDirPath();
+    QString dir = QDir::fromNativeSeparators(QApplication::applicationDirPath());
+    WCHAR buf[MAX_PATH];
 
-    if (dir.startsWith(QLatin1String("/usr/"))
-            && dir.endsWith(QLatin1String("/bin"))) {
+    SHGetFolderPathW(NULL,  CSIDL_PROGRAM_FILES, NULL, 0, buf);
+
+    if (dir.startsWith(QDir::fromNativeSeparators(QString::fromWCharArray(buf)))) {
         return LAUNCH_SYSTEM;
-    }
-
-    if (dir.endsWith(QLatin1String(".local/bin"))) {
-        return LAUNCH_USER;
     }
 
     dir = dir.section(SLASH, -2, -1);
@@ -53,17 +53,24 @@ void Medium::setupDirs()
     QString shareDir;
     QString langDir;
 
-    shareDir = QApplication::applicationDirPath();
+    shareDir = QDir::fromNativeSeparators(QApplication::applicationDirPath());
+
+    int folderId = CSIDL_LOCAL_APPDATA;
 
     switch (lauchType) {
     case LAUNCH_SYSTEM:
-    case LAUNCH_USER:
-        shareDir.remove(SLASH_BIN);
+        folderId = CSIDL_APPDATA;
 
-        shareDir.append(SLASH_SHARE).append(SLASH).append(APP_NAME);
+    case LAUNCH_USER:
+        if (shareDir.endsWith(SLASH_BIN)) {
+            shareDir.remove(SLASH_BIN);
+        }
+
         langDir = shareDir;
-        mSettingsDir = QDir::homePath();
-        mSettingsDir.append(QLatin1String("/.config")).append(SLASH).append(APP_NAME);
+        WCHAR buf[MAX_PATH];
+        SHGetFolderPathW(NULL,  folderId, NULL, 0, buf);
+        mSettingsDir = QDir::fromNativeSeparators(QString::fromWCharArray(buf));
+        mSettingsDir.append(SLASH).append(APP_NAME);
         break;
 
     case LAUNCH_SANDBOX:

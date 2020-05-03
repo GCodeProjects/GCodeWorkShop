@@ -28,6 +28,18 @@
 #include "utils/medium.h"
 #include "generalconfig.h"
 
+const QString Medium::SLASH = QLatin1String("/");
+const QString Medium::COLON = QLatin1String(":");
+const QString Medium::BIN = QLatin1String("bin");
+const QString Medium::SLASH_BIN = SLASH + BIN;
+const QString Medium::LANG = QLatin1String("lang");
+const QString Medium::SLASH_LANG = SLASH + LANG;
+const QString Medium::DEBUG = QLatin1String(".debug");
+const QString Medium::RELEASE = QLatin1String(".release");
+const QString Medium::SANDBOX_SHARE = QLatin1String("/install/share");
+const QString Medium::SHARE = QLatin1String("share");
+const QString Medium::SLASH_SHARE = SLASH + QLatin1String("share");
+
 Medium::Medium(QObject *parent) :
     QObject(parent),
     lauchType(checkLaunch())
@@ -38,8 +50,13 @@ Medium::Medium(QObject *parent) :
 
     setupDirs();
 
+    qDebug() << "Seting directoryes:";
+    qDebug() << "  translation   " << mTranslationDirs;
+    qDebug() << "  config        " << mSettingsDir;
+    qDebug() << "  programm data " << mShareDirs;
+
     QString settingFile = mSettingsDir;
-    settingFile.append("/").append(APP_NAME).append(".ini");
+    settingFile.append(SLASH).append(APP_NAME).append(".ini");
     mSettings = new QSettings(settingFile, QSettings::IniFormat);
     mGeneralConfig = new GeneralConfig(mSettings);
     mGeneralConfig->sync();

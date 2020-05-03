@@ -88,6 +88,7 @@ SOURCES += ui/longjobhelper.cpp \
     utils/medium.cpp
 
 unix:SOURCES += utils/medium_linux.cpp
+win32:SOURCES += utils/medium_win.cpp
 
 # resources
 #######################################
@@ -158,8 +159,6 @@ macx {
 }
 
 win32 {
-    DEFINES += WINVER=0x0501 # needed for mingw to pull in appropriate dbt business...probably a better way to do this
-    LIBS += -lsetupapi -ladvapi32 -luser32
 }
 
 
