@@ -469,6 +469,29 @@
     </message>
 </context>
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="116"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="89"/>
+        <source>Default</source>
+        <translation type="unfinished">Vorgaben</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="14"/>
+        <source>Settings</source>
+        <translation type="unfinished">Einstellungen</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="146"/>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+</context>
+<context>
     <name>DotDialog</name>
     <message>
         <location filename="../src/dotdialog.ui" line="14"/>
@@ -605,15 +628,15 @@
         <location filename="../src/edytornc.ui" line="450"/>
         <source>Right click to copy item back to system clipboard.
 Items with empty titles are the last five texts copied to system clipboard.
-Double click on item title to edit it. 
+Double click on item title to edit it.
 Items with non empty titles are not deleted automatically.</source>
         <oldsource>Right click to copy item to Clipboard.
-Double click on item title to edit it. 
+Double click on item title to edit it.
 Items with non empty titles are not deleted automatically.
 Items with empty titles are the last five texts copied to system clipboard.</oldsource>
         <translation>Rechts-Klick im Objekt wieder zurück zur System-Zsischenablage zu kopieren.
 Objekte mit leeren Beschriftungen sind die letzten 5 Texte aus der System-Zwischenablage.
-Doppel-Klickauf ein Objekt um es zu editieren. 
+Doppel-Klickauf ein Objekt um es zu editieren.
 Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
     </message>
     <message>
@@ -2339,17 +2362,17 @@ Verändert - Empfange Datei ist verändert</translation>
     </message>
     <message>
         <location filename="../src/i2mdialog.ui" line="59"/>
-        <source>Accepted values (examples): 
-1.5 
-0.5 
+        <source>Accepted values (examples):
+1.5
+0.5
 .5
 1/2
 .1/4
 1.3/4
 2.5/8</source>
-        <translation>Akzeptierte Wertes (Beispiele): 
-1.5 
-0.5 
+        <translation>Akzeptierte Wertes (Beispiele):
+1.5
+0.5
 .5
 1/2
 .1/4
@@ -2596,10 +2619,10 @@ Verändert - Empfange Datei ist verändert</translation>
     </message>
     <message>
         <location filename="../src/mdichild.cpp" line="2144"/>
-        <source>Function parameter not found ! 
+        <source>Function parameter not found !
  Check +-*/.
 &quot;%1&quot;</source>
-        <translation>Kunktionsparameter nicht gefunden ! 
+        <translation>Kunktionsparameter nicht gefunden !
  Überprüfe +-*/.
 &quot;%1&quot;</translation>
     </message>
@@ -3664,7 +3687,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/serialportconfigdialog.ui" line="1611"/>
         <location filename="../src/serialportconfigdialog.ui" line="1652"/>
         <location filename="../src/serialportconfigdialog.ui" line="1670"/>
-        <source>File extension. 
+        <source>File extension.
 If detected filename will contain an extension, then this setting will be ignored</source>
         <translation type="unfinished"></translation>
     </message>

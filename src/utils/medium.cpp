@@ -188,5 +188,5 @@ void Medium::updateTranslation()
         app->installTranslator(trans);
     }
 
-    emit translationChanged();
+    emit onRetranslateUI();
 }

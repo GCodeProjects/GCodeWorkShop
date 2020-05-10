@@ -103,7 +103,7 @@ public:
     }
 
 signals:
-    void translationChanged();
+    void onRetranslateUI();
 
 protected:
     explicit Medium(QObject *parent = 0);

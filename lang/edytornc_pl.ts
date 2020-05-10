@@ -473,6 +473,29 @@
     </message>
 </context>
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="116"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Anuluj</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="89"/>
+        <source>Default</source>
+        <translation type="unfinished">Domyślne</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="14"/>
+        <source>Settings</source>
+        <translation type="unfinished">Ustawienia</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="146"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DotDialog</name>
     <message>
         <location filename="../src/dialogs.cpp" line="649"/>
@@ -609,7 +632,7 @@
         <location filename="../src/edytornc.ui" line="450"/>
         <source>Right click to copy item back to system clipboard.
 Items with empty titles are the last five texts copied to system clipboard.
-Double click on item title to edit it. 
+Double click on item title to edit it.
 Items with non empty titles are not deleted automatically.</source>
         <translation type="unfinished">Kliknij prawym aby skopiować wpis z powrotem do schowka systemowego.
 Wpisy bez tytułu to pięć ostatnich wpisów skopiowanych do schowka systemowego.
@@ -2357,17 +2380,17 @@ Changed - received file is modified</source>
     </message>
     <message>
         <location filename="../src/i2mdialog.ui" line="59"/>
-        <source>Accepted values (examples): 
-1.5 
-0.5 
+        <source>Accepted values (examples):
+1.5
+0.5
 .5
 1/2
 .1/4
 1.3/4
 2.5/8</source>
-        <translation>Akceptowane wartości (przykłady): 
-1.5 
-0.5 
+        <translation>Akceptowane wartości (przykłady):
+1.5
+0.5
 .5
 1/2
 .1/4
@@ -2550,7 +2573,7 @@ To nie jest program makro ?</translation>
     </message>
     <message>
         <location filename="../src/mdichild.cpp" line="2144"/>
-        <source>Function parameter not found ! 
+        <source>Function parameter not found !
  Check +-*/.
 &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
@@ -3677,7 +3700,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/serialportconfigdialog.ui" line="1611"/>
         <location filename="../src/serialportconfigdialog.ui" line="1652"/>
         <location filename="../src/serialportconfigdialog.ui" line="1670"/>
-        <source>File extension. 
+        <source>File extension.
 If detected filename will contain an extension, then this setting will be ignored</source>
         <translation type="unfinished"></translation>
     </message>

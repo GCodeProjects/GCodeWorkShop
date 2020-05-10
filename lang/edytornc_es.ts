@@ -369,6 +369,25 @@
     </message>
 </context>
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Predeterminado</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Configuración</translation>
+    </message>
+</context>
+<context>
     <name>DotDialog</name>
     <message>
         <source>Dialog</source>
@@ -1426,7 +1445,7 @@ Cerrar de todas maneras?</translation>
     <message>
         <source>Right click to copy item back to system clipboard.
 Items with empty titles are the last five texts copied to system clipboard.
-Double click on item title to edit it. 
+Double click on item title to edit it.
 Items with non empty titles are not deleted automatically.</source>
         <translation>Click derecho para copiar el ítem al portapapeles del sistema
 Los ítems con títulos vacíos son los últimos 5 textos copiados al portapapeles del sistema.
@@ -1827,17 +1846,17 @@ Cambiado - el archivo recibido está modificado
         <translation>Pulgada:</translation>
     </message>
     <message>
-        <source>Accepted values (examples): 
-1.5 
-0.5 
+        <source>Accepted values (examples):
+1.5
+0.5
 .5
 1/2
 .1/4
 1.3/4
 2.5/8</source>
-        <translation>Valores aceptados (ejemplos): 
-1.5 
-0.5 
+        <translation>Valores aceptados (ejemplos):
+1.5
+0.5
 .5
 1/2
 .1/4
@@ -2017,10 +2036,10 @@ Cambiado - el archivo recibido está modificado
         <translation></translation>
     </message>
     <message>
-        <source>Function parameter not found ! 
+        <source>Function parameter not found !
  Check +-*/.
 &quot;%1&quot;</source>
-        <translation>Parámetro de función no encontrado ! 
+        <translation>Parámetro de función no encontrado !
 Comprobar +-*/.
 &quot;%1&quot;</translation>
     </message>
@@ -2801,7 +2820,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <source>File extension. 
+        <source>File extension.
 If detected filename will contain an extension, then this setting will be ignored</source>
         <translation>Extension del archivo.
 Si el nombre de archivo detectado contiene una extensión, este ajuste será ignorado</translation>

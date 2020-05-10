@@ -469,6 +469,29 @@
     </message>
 </context>
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="116"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Canceŀla</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="89"/>
+        <source>Default</source>
+        <translation type="unfinished">Predeterminat</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="14"/>
+        <source>Settings</source>
+        <translation type="unfinished">Configuració</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configdialog.ui" line="146"/>
+        <source>Ok</source>
+        <translation type="unfinished">d&apos;Acord</translation>
+    </message>
+</context>
+<context>
     <name>DotDialog</name>
     <message>
         <location filename="../src/dotdialog.ui" line="14"/>
@@ -605,7 +628,7 @@
         <location filename="../src/edytornc.ui" line="450"/>
         <source>Right click to copy item back to system clipboard.
 Items with empty titles are the last five texts copied to system clipboard.
-Double click on item title to edit it. 
+Double click on item title to edit it.
 Items with non empty titles are not deleted automatically.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2332,9 +2355,9 @@ Changed - received file is modified</source>
     </message>
     <message>
         <location filename="../src/i2mdialog.ui" line="59"/>
-        <source>Accepted values (examples): 
-1.5 
-0.5 
+        <source>Accepted values (examples):
+1.5
+0.5
 .5
 1/2
 .1/4
@@ -2580,7 +2603,7 @@ Cap marcro?</translation>
     </message>
     <message>
         <location filename="../src/mdichild.cpp" line="2144"/>
-        <source>Function parameter not found ! 
+        <source>Function parameter not found !
  Check +-*/.
 &quot;%1&quot;</source>
         <translation>Paràmetre de funció no trobat!
@@ -3657,7 +3680,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/serialportconfigdialog.ui" line="1611"/>
         <location filename="../src/serialportconfigdialog.ui" line="1652"/>
         <location filename="../src/serialportconfigdialog.ui" line="1670"/>
-        <source>File extension. 
+        <source>File extension.
 If detected filename will contain an extension, then this setting will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
