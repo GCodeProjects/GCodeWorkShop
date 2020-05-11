@@ -112,12 +112,13 @@ TRANSLATIONS = \
     $${LANG_PATH}/edytornc_de.ts \
     $${LANG_PATH}/edytornc_fi.ts \
     $${LANG_PATH}/edytornc_cs_CZ.ts \
-    $${LANG_PATH}/edytornc_es.ts
+    $${LANG_PATH}/edytornc_es.ts \
+    $${LANG_PATH}/edytornc_nl.ts \
+    $${LANG_PATH}/edytornc_ru.ts
 
 QMAKE_EXTRA_TARGETS += langupdate langrelease translate
 
 langupdate.commands = lupdate src.pro
-langupdate.depends = $$SOURCES $$HEADERS $$FORMS $$TRANSLATIONS
 langrelease.target = lang_update
 langrelease.commands = lrelease src.pro
 langrelease.depends = langupdate

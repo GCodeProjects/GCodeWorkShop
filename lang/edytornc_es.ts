@@ -1447,7 +1447,7 @@ Cerrar de todas maneras?</translation>
 Items with empty titles are the last five texts copied to system clipboard.
 Double click on item title to edit it.
 Items with non empty titles are not deleted automatically.</source>
-        <translation>Click derecho para copiar el ítem al portapapeles del sistema
+        <translation type="vanished">Click derecho para copiar el ítem al portapapeles del sistema
 Los ítems con títulos vacíos son los últimos 5 textos copiados al portapapeles del sistema.
 Doble click en el título del ítem para editarlo.
 Los ítems con títulos no vacíos no son borrados automáticamente.</translation>
@@ -1482,6 +1482,13 @@ Los ítems con títulos no vacíos no son borrados automáticamente.</translatio
     </message>
     <message>
         <source>&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right click to copy item back to system clipboard.
+Items with empty titles are the last five texts copied to system clipboard.
+Double click on item title to edit it. 
+Items with non empty titles are not deleted automatically.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1854,7 +1861,7 @@ Cambiado - el archivo recibido está modificado
 .1/4
 1.3/4
 2.5/8</source>
-        <translation>Valores aceptados (ejemplos):
+        <translation type="vanished">Valores aceptados (ejemplos):
 1.5
 0.5
 .5
@@ -1894,6 +1901,17 @@ Cambiado - el archivo recibido está modificado
     <message>
         <source>mm</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Accepted values (examples): 
+1.5 
+0.5 
+.5
+1/2
+.1/4
+1.3/4
+2.5/8</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2039,7 +2057,7 @@ Cambiado - el archivo recibido está modificado
         <source>Function parameter not found !
  Check +-*/.
 &quot;%1&quot;</source>
-        <translation>Parámetro de función no encontrado !
+        <translation type="vanished">Parámetro de función no encontrado !
 Comprobar +-*/.
 &quot;%1&quot;</translation>
     </message>
@@ -2221,6 +2239,12 @@ Comprobar +-*/.
     <message>
         <source>Insert space</source>
         <comment>Slow operation title in MDIChild</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function parameter not found ! 
+ Check +-*/.
+&quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2822,7 +2846,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>File extension.
 If detected filename will contain an extension, then this setting will be ignored</source>
-        <translation>Extension del archivo.
+        <translation type="vanished">Extension del archivo.
 Si el nombre de archivo detectado contiene una extensión, este ajuste será ignorado</translation>
     </message>
     <message>
@@ -3009,6 +3033,11 @@ Debería ser ingresado un QTRegExp válido.</translation>
     </message>
     <message>
         <source>600</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File extension. 
+If detected filename will contain an extension, then this setting will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

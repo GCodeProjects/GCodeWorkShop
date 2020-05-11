@@ -40,11 +40,12 @@ TRANSLATIONS = \
     $${LANG_PATH}/kdiff3_de.ts \
     $${LANG_PATH}/kdiff3_fi.ts \
     $${LANG_PATH}/kdiff3_cs.ts \
-    $${LANG_PATH}/kdiff3_es.ts
+    $${LANG_PATH}/kdiff3_es.ts \
+    $${LANG_PATH}/kdiff3_nl.ts \
+    $${LANG_PATH}/kdiff3_ru.ts
 
 QMAKE_EXTRA_TARGETS += langupdate langrelease
 langupdate.commands = lupdate kdiff3.pro
-langupdate.depends = $$SOURCES $$HEADERS $$TRANSLATIONS
 langrelease.target = lang_update
 langrelease.commands = lrelease kdiff3.pro
 langrelease.depends = langupdate

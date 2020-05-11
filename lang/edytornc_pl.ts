@@ -632,9 +632,16 @@
         <location filename="../src/edytornc.ui" line="450"/>
         <source>Right click to copy item back to system clipboard.
 Items with empty titles are the last five texts copied to system clipboard.
+Double click on item title to edit it. 
+Items with non empty titles are not deleted automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right click to copy item back to system clipboard.
+Items with empty titles are the last five texts copied to system clipboard.
 Double click on item title to edit it.
 Items with non empty titles are not deleted automatically.</source>
-        <translation type="unfinished">Kliknij prawym aby skopiować wpis z powrotem do schowka systemowego.
+        <translation type="obsolete">Kliknij prawym aby skopiować wpis z powrotem do schowka systemowego.
 Wpisy bez tytułu to pięć ostatnich wpisów skopiowanych do schowka systemowego.
 Podwójne kliknięcie na wpisie umożliwia zmianę tytułu.
 Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
@@ -2379,7 +2386,6 @@ Changed - received file is modified</source>
         <translation>Cale :</translation>
     </message>
     <message>
-        <location filename="../src/i2mdialog.ui" line="59"/>
         <source>Accepted values (examples):
 1.5
 0.5
@@ -2388,7 +2394,7 @@ Changed - received file is modified</source>
 .1/4
 1.3/4
 2.5/8</source>
-        <translation>Akceptowane wartości (przykłady):
+        <translation type="vanished">Akceptowane wartości (przykłady):
 1.5
 0.5
 .5
@@ -2417,6 +2423,18 @@ Changed - received file is modified</source>
         <location filename="../src/i2mdialog.ui" line="114"/>
         <source>&amp;Inch to mm</source>
         <translation>&amp;cale na mm</translation>
+    </message>
+    <message>
+        <location filename="../src/i2mdialog.ui" line="59"/>
+        <source>Accepted values (examples): 
+1.5 
+0.5 
+.5
+1/2
+.1/4
+1.3/4
+2.5/8</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/i2mdialog.ui" line="157"/>
@@ -2572,13 +2590,6 @@ został zmieniony.&lt;/b&gt;</translation>
 To nie jest program makro ?</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2144"/>
-        <source>Function parameter not found !
- Check +-*/.
-&quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/mdichild.cpp" line="2152"/>
         <source>Unknown math function !
 &quot;%1&quot;</source>
@@ -2641,6 +2652,13 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="../src/mdichild.cpp" line="2140"/>
         <source>No ( or ) !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mdichild.cpp" line="2144"/>
+        <source>Function parameter not found ! 
+ Check +-*/.
+&quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3371,6 +3389,14 @@ Selected file extension will be used.</source>
         <translation>Ścieżka wyszukiwania 1:</translation>
     </message>
     <message>
+        <location filename="../src/serialportconfigdialog.ui" line="1611"/>
+        <location filename="../src/serialportconfigdialog.ui" line="1652"/>
+        <location filename="../src/serialportconfigdialog.ui" line="1670"/>
+        <source>File extension. 
+If detected filename will contain an extension, then this setting will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/serialportconfigdialog.ui" line="1628"/>
         <source>Search path 3:</source>
         <translation>Ścieżka wyszukiwania 3:</translation>
@@ -3694,14 +3720,6 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This field contains expression used to find filename in &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/serialportconfigdialog.ui" line="1611"/>
-        <location filename="../src/serialportconfigdialog.ui" line="1652"/>
-        <location filename="../src/serialportconfigdialog.ui" line="1670"/>
-        <source>File extension.
-If detected filename will contain an extension, then this setting will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
