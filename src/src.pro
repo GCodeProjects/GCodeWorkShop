@@ -96,6 +96,7 @@ win32:SOURCES += utils/medium_win.cpp
 
 FORMS += utils/configdialog.ui
 
+
 # resources
 #######################################
 
@@ -106,33 +107,7 @@ RC_FILE = edytornc.rc
 # translations
 #######################################
 
-TRANSLATIONS = \
-    $${LANG_PATH}/edytornc_pl.ts \
-    $${LANG_PATH}/edytornc_ca.ts \
-    $${LANG_PATH}/edytornc_de.ts \
-    $${LANG_PATH}/edytornc_fi.ts \
-    $${LANG_PATH}/edytornc_cs_CZ.ts \
-    $${LANG_PATH}/edytornc_es.ts \
-    $${LANG_PATH}/edytornc_nl.ts \
-    $${LANG_PATH}/edytornc_ru.ts
-
-QMAKE_EXTRA_TARGETS += langupdate langrelease translate
-
-langupdate.commands = lupdate src.pro
-langrelease.target = lang_update
-langrelease.commands = lrelease src.pro
-langrelease.depends = langupdate
-PRE_TARGETDEPS += lang_update
-
-translate.files = ../lang/*.qm
-#translate.depends = langrelease
-
-
-# other files
-#######################################
-
-examples.files = ../examples/*
-doc.files = ../README.md
+TRANSLATIONS = $$tsFiles()
 
 
 # target platforms dependencies
@@ -144,21 +119,9 @@ unix {
         message(seting PREFIX = $$PREFIX)
     }
 
-    mime.files = ../install/linux/application-x-g-code.xml
-    desktop.files = ../install/linux/edytornc.desktop
-    examples.path = $${PREFIX}/share/edytornc/examples
-    doc.path = $${PREFIX}/share/doc/edytornc/
     target.path = $${PREFIX}/bin
-    mime.path = $${PREFIX}/share/mime/packages/
-    desktop.path = $${PREFIX}/share/applications/
-    translate.path = $${PREFIX}/share/edytornc/lang/
 
-    ICONS_BASE_PATH = $$PROJECT_ROOT_PATH/install/linux/images/
-    icons.base = $$ICONS_BASE_PATH
-    icons.files = $$findFiles($$ICONS_BASE_PATH, *.png)
-    icons.path = $${PREFIX}/share/icons/
-
-    INSTALLS += target translate mime desktop icons examples doc
+    INSTALLS += target
 }
 
 macx {
@@ -170,5 +133,6 @@ win32 {
 
 
 # static libs from subprojects
+#######################################
 
 LIBS += -lkdiff3 -lqtsingleapplication
