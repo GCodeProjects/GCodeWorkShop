@@ -1,0 +1,36 @@
+name: CI
+
+env:
+  QT_VERSION:     "5.12.7"
+  MINGW_VERSION:  "win32_mingw73"
+  MINGW_PATH:     "mingw73_32"
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+
+    - name: Install correct version of mingw
+      run: |
+        choco uninstall mingw --force
+        choco uninstall strawberryperl --force
+    - uses: numworks/setup-msys2@v1
+      with:
+        msystem: MINGW32
+
+    - name: Install Qtqmake
+      uses: jurplel/install-qt-action@v2.5.3
+      with:
+        version: ${{ env.QT_VERSION }}
+        arch:    ${{ env.MINGW_VERSION }}
+        extra:   --external 7z
+
+    - name: Build
+      run: |
+        qmake -r
+        make
+      
+  
+  
