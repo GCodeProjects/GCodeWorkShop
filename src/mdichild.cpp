@@ -33,7 +33,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     isUntitled = true;
     textEdit->setWordWrapMode(QTextOption::NoWrap);
     textEdit->document()->setDocumentMargin(8);
-    highlighter = NULL;
+    highlighter = nullptr;
     setFocusProxy(textEdit);
 
     marginWidget->setAutoFillBackground(true);
@@ -56,7 +56,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 
 MdiChild::~MdiChild()
 {
-    if (highlighter != NULL) {
+    if (highlighter != nullptr) {
         delete highlighter;
     }
 
@@ -505,19 +505,19 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
     setPalette(pal);
 
     if (mdiWindowProperites.syntaxH) {
-        if (highlighter == NULL) {
+        if (highlighter == nullptr) {
             highlighter = new Highlighter(textEdit->document());
         }
 
-        if (highlighter != NULL) {
+        if (highlighter != nullptr) {
             detectHighligthMode();
         }
     } else {
-        if (highlighter != NULL) {
+        if (highlighter != nullptr) {
             delete (highlighter);
         }
 
-        highlighter = NULL;
+        highlighter = nullptr;
     }
 
     QTextCursor cursor = textEdit->textCursor();
@@ -2637,7 +2637,7 @@ void MdiChild::detectHighligthMode()
         return;
     }
 
-    if (highlighter == NULL) {
+    if (highlighter == nullptr) {
         return;
     }
 
@@ -3913,7 +3913,7 @@ QString MdiChild::currentFile()
 
 void MdiChild::fileChangeMonitorAddPath(QString fileName)
 {
-    //if(fileChangeMonitor != NULL)
+    //if(fileChangeMonitor != nullptr)
     //fileChangeMonitor->addPath(fileName);
 
     emit addRemoveFileWatch(fileName, true);
@@ -3921,7 +3921,7 @@ void MdiChild::fileChangeMonitorAddPath(QString fileName)
 
 void MdiChild::fileChangeMonitorRemovePath(QString fileName)
 {
-    //if(fileChangeMonitor != NULL)
+    //if(fileChangeMonitor != nullptr)
     //fileChangeMonitor->removePath(fileName);
 
     emit addRemoveFileWatch(fileName, false);

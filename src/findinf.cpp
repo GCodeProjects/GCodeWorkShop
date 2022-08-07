@@ -33,7 +33,7 @@ FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
     setAttribute(Qt::WA_DeleteOnClose);
     setObjectName("FindInFiles");
 
-    highlighter = NULL;
+    highlighter = nullptr;
     highligh = false;
 
     connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
@@ -527,11 +527,11 @@ void FindInFiles::filePreview(int x, int y)
         file.close();
 
         if (highligh) {
-            if (highlighter == NULL) {
+            if (highlighter == nullptr) {
                 highlighter = new Highlighter(preview->document());
             }
 
-            if (highlighter != NULL) {
+            if (highlighter != nullptr) {
                 highlighterColors.highlightMode = autoDetectHighligthMode(preview->toPlainText().toUpper());
                 highlighter->setHColors(highlighterColors, preview->font());
                 highlighter->rehighlight();

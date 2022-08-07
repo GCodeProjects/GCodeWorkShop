@@ -52,7 +52,7 @@ QList<QSharedPointer<ConfigPage> > ConfigPage::pages()
 
 QWidget *ConfigPage::widget()
 {
-    if (mWidget == NULL) {
+    if (mWidget == nullptr) {
         mWidget = doWidget();
         connect(mWidget, SIGNAL(destroyed(QObject *)), SLOT(widgetDestroed(QObject *)));
     }

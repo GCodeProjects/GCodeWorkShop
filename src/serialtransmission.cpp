@@ -30,7 +30,7 @@ TransmissionDialog::TransmissionDialog(QWidget *parent, Qt::WindowFlags f) : QDi
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Serial transmission test"));
 
-    comPort = NULL;
+    comPort = nullptr;
 
     connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
 
@@ -120,7 +120,7 @@ void TransmissionDialog::closeButtonClicked()
     stop = true;
     qApp->processEvents();
 
-    if (comPort != NULL) {
+    if (comPort != nullptr) {
         //comPort->close();
         //delete(comPort);
     }
@@ -148,7 +148,7 @@ void TransmissionDialog::connectButtonToggled(bool tg)
 
         count = 0;
 
-        if (comPort != NULL) {
+        if (comPort != nullptr) {
             comPort->reset();
             comPort->close();
             delete comPort;
@@ -165,7 +165,7 @@ void TransmissionDialog::connectButtonToggled(bool tg)
         if (!comPort->open(QIODevice::ReadWrite)) {
             showError(comPort->error());
             delete comPort;
-            comPort = NULL;
+            comPort = nullptr;
             connectButton->setChecked(false);
             return;
         }
@@ -265,7 +265,7 @@ void TransmissionDialog::updateLeds()
 
     timer->stop();
 
-    if (comPort == NULL) {
+    if (comPort == nullptr) {
         return;
     }
 
@@ -474,7 +474,7 @@ void TransmissionDialog::sendText(QString tx)
     char controlChar;
     int bytesToWrite;
 
-    if (comPort == NULL) {
+    if (comPort == nullptr) {
         return;
     }
 
@@ -561,7 +561,7 @@ void TransmissionDialog::lineDelaySlot()
 //   setupUi(this);
 //   //setWindowTitle(tr("Serial transmission"));
 
-//   comPort = NULL;
+//   comPort = nullptr;
 
 //   canceled = true;
 
@@ -622,7 +622,7 @@ void TransmissionDialog::lineDelaySlot()
 
 //void TransProgressDialog::open(QSerialPort *port)
 //{
-//   if(port != NULL)
+//   if(port != nullptr)
 //   {
 //      canceled = false;
 //      show();
@@ -634,7 +634,7 @@ void TransmissionDialog::lineDelaySlot()
 //void TransProgressDialog::updateLeds()
 //{
 //   timer->stop();
-//   if(comPort == NULL)
+//   if(comPort == nullptr)
 //      return;
 
 //   if(!comPort->isOpen())

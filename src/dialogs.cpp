@@ -1828,7 +1828,7 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
     setWindowTitle(tr("Bolt circle"));
     //setFocusPolicy(QWidget::StrongFocus);
 
-    drawing = NULL;
+    drawing = nullptr;
 
     parentHeight = parent->height() - 10;
     parentWidth = parent->width() - 15;
@@ -1852,7 +1852,7 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
     for (int tabId = 0; tabId < tabBar->count(); tabId++) {
         BHCTab *tab = (BHCTab *)tabBar->widget(tabId);
 
-        if (tab == NULL) {
+        if (tab == nullptr) {
             continue;
         }
 
@@ -1894,7 +1894,7 @@ BHCDialog::~BHCDialog()
     for (int tabId = 0; tabId < tabBar->count(); tabId++) {
         BHCTab *tab = (BHCTab *)tabBar->widget(tabId);
 
-        if (tab == NULL) {
+        if (tab == nullptr) {
             continue;
         }
 
@@ -1944,7 +1944,7 @@ void BHCDialog::comChk()
         for (tabId = 0; tabId < tabBar->count(); tabId++) {
             tab = (BHCTab *)tabBar->widget(tabId);
 
-            if (tab == NULL) {
+            if (tab == nullptr) {
                 continue;
             }
 
@@ -1968,7 +1968,7 @@ void BHCDialog::clearAll()
     for (int tabId = 0; tabId < tabBar->count(); tabId++) {
         BHCTab *tab = (BHCTab *)tabBar->widget(tabId);
 
-        if (tab == NULL) {
+        if (tab == nullptr) {
             continue;
         }
 
@@ -1985,7 +1985,7 @@ void BHCDialog::clearAll()
 
     }
 
-    if (drawing != NULL) {
+    if (drawing != nullptr) {
         drawing->close();
     }
 }
@@ -2010,7 +2010,7 @@ void BHCDialog::computeButtonClicked()
     for (tabId = 0; tabId <= tabBar->count(); tabId++) {
         tab = (BHCTab *)tabBar->widget(tabId);
 
-        if (tab == NULL) {
+        if (tab == nullptr) {
             continue;
         }
 
@@ -2025,7 +2025,7 @@ void BHCDialog::computeButtonClicked()
     for (tabId = 0; tabId < tabBar->count(); tabId++) {
         tab = (BHCTab *)tabBar->widget(tabId);
 
-        if (tab == NULL) {
+        if (tab == nullptr) {
             continue;
         }
 

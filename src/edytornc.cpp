@@ -45,7 +45,7 @@ EdytorNc *EdytorNc::instance()
 }
 
 EdytorNc::EdytorNc(Medium *medium)
-    : QMainWindow(NULL),
+    : QMainWindow(nullptr),
       mGeneralConfig(*medium->generalConfig()),
       mMWConfig(medium->generalConfig())
 {
@@ -55,13 +55,13 @@ EdytorNc::EdytorNc(Medium *medium)
 
     setupUi(this);
 
-    findToolBar = NULL;
-    serialToolBar = NULL;
-    diffApp = NULL;
-    findFiles = NULL;
-    dirModel = NULL;
-    openExampleAct = NULL;
-    commApp = NULL;
+    findToolBar = nullptr;
+    serialToolBar = nullptr;
+    diffApp = nullptr;
+    findFiles = nullptr;
+    dirModel = nullptr;
+    openExampleAct = nullptr;
+    commApp = nullptr;
 
     selectedExpressions.clear();
 
@@ -74,7 +74,7 @@ EdytorNc::EdytorNc(Medium *medium)
 
     model = new QStandardItemModel();
     projectTreeView->setModel(model);
-    currentProject = NULL;
+    currentProject = nullptr;
 
     connect(projectTreeView, SIGNAL(doubleClicked(QModelIndex)), this,
             SLOT(projectTreeViewDoubleClicked(QModelIndex)));
@@ -174,7 +174,7 @@ void EdytorNc::closeTab(int i)
 {
     QTabBar *tab = mdiArea->findChild<QTabBar *>();
 
-    if (tab != NULL) {
+    if (tab != nullptr) {
         tab->removeTab(i);
     }
 }
@@ -242,9 +242,9 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 
     setUpdatesEnabled(true);
 
-    if (findFiles != NULL) {
+    if (findFiles != nullptr) {
         findFiles->close();
-        findFiles = NULL;
+        findFiles = nullptr;
     }
 }
 
@@ -508,7 +508,7 @@ void EdytorNc::saveAll()
         mdiChild->blockSignals(false);
     }
 
-    if (currentMdiChild != NULL) {
+    if (currentMdiChild != nullptr) {
         currentMdiChild->setFocus();
     }
 
@@ -614,7 +614,7 @@ void EdytorNc::copy()
 
 void EdytorNc::findInFl()
 {
-    if (findFiles == NULL) {
+    if (findFiles == nullptr) {
         findFiles = new FindInFiles(splitter);
 
         if (defaultMdiWindowProperites.syntaxH) {
@@ -628,7 +628,7 @@ void EdytorNc::findInFl()
         connect(findFiles, SIGNAL(fileClicked(QString)), this, SLOT(loadFoundedFile(QString)));
     } else if (!findFilesAct->isChecked()) {
         findFiles->close();
-        findFiles = NULL;
+        findFiles = nullptr;
     } else {
         findFiles->show();
         findFilesAct->setChecked(true);
@@ -856,7 +856,7 @@ void EdytorNc::config()
             opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
             opt.extensions = defaultMdiWindowProperites.extensions;
 
-            if (dirModel != NULL) {
+            if (dirModel != nullptr) {
                 dirModel->setNameFilters(defaultMdiWindowProperites.extensions);
             }
 
@@ -922,7 +922,7 @@ void EdytorNc::goToLine(QString fileName, int line)
 
 void EdytorNc::createDiffApp()
 {
-    if (diffApp == NULL) {
+    if (diffApp == nullptr) {
         diffApp = new KDiff3App(splitter, "DiffApp", defaultMdiWindowProperites.extensions);
 
         connect(diffApp, SIGNAL(lineClicked(QString, int)), this, SLOT(goToLine(QString, int)));
@@ -935,7 +935,7 @@ void EdytorNc::doDiffL()
 
     createDiffApp();
 
-    if (diffApp != NULL) {
+    if (diffApp != nullptr) {
         diffLAct->setEnabled(false);
         diffRAct->setEnabled(false);
         diffAct->setEnabled(false);
@@ -965,7 +965,7 @@ void EdytorNc::doDiffR()
 
     createDiffApp();
 
-    if (diffApp != NULL) {
+    if (diffApp != nullptr) {
         diffLAct->setEnabled(false);
         diffRAct->setEnabled(false);
         diffAct->setEnabled(false);
@@ -993,7 +993,7 @@ void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
 {
     createDiffApp();
 
-    if (diffApp != NULL) {
+    if (diffApp != nullptr) {
         diffAct->setChecked(true);
         //        diffApp->close();
         diffApp->completeInit(filename1, filename2);
@@ -1016,7 +1016,7 @@ void EdytorNc::diffEditorFile()
 
     createDiffApp();
 
-    if (diffApp != NULL) {
+    if (diffApp != nullptr) {
         QString fileName = child->currentFile();
 
         if (fileName.isEmpty()) {
@@ -1068,7 +1068,7 @@ void EdytorNc::doDiff()
 {
     QString fileName;
 
-    if (diffApp == NULL) {
+    if (diffApp == nullptr) {
         createDiffApp();
 
         if (activeMdiChild()) {
@@ -1085,7 +1085,7 @@ void EdytorNc::doDiff()
     } else if (!diffAct->isChecked()) {
         diffAct->setChecked(false);
         diffApp->close();
-        diffApp = NULL;
+        diffApp = nullptr;
     }
 }
 
@@ -1343,7 +1343,7 @@ void EdytorNc::updateMenus()
     bool hasMdiChildNotReadOnly;
     bool hasSelection;
     bool hasModifiedMdiChild;
-    bool hasMdiChild = (activeMdiChild() != NULL);
+    bool hasMdiChild = (activeMdiChild() != nullptr);
 
     if (hasMdiChild) {
         hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
@@ -1440,9 +1440,9 @@ void EdytorNc::updateCurrentSerialConfig()
     int id;
     QDir dir;
 
-    bool hasMdiChild = (activeMdiChild() != NULL);
+    bool hasMdiChild = (activeMdiChild() != nullptr);
 
-    if (hasMdiChild && (serialToolBar != NULL)) {
+    if (hasMdiChild && (serialToolBar != nullptr)) {
         dir.setPath(activeMdiChild()->filePath());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
@@ -1468,7 +1468,7 @@ void EdytorNc::updateStatusBar()
     int line = 1;
     int id;
 
-    bool hasMdiChild = (activeMdiChild() != NULL);
+    bool hasMdiChild = (activeMdiChild() != nullptr);
     bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
 
     if (hasMdiChild) {
@@ -1891,7 +1891,7 @@ void EdytorNc::createMenus()
     fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
 
-    if (openExampleAct != NULL) {
+    if (openExampleAct != nullptr) {
         fileMenu->addAction(openExampleAct);
     }
 
@@ -2685,7 +2685,7 @@ void EdytorNc::closeFindToolBar()
     settings.setValue("FindIgnoreCase", mCheckIgnoreCase->isChecked());
 
     findToolBar->close();
-    //findToolBar = NULL;
+    //findToolBar = nullptr;
 }
 
 void EdytorNc::findTextChanged()
@@ -2767,7 +2767,7 @@ bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
 
 void EdytorNc::createSerialToolBar()
 {
-    if (serialToolBar == NULL) {
+    if (serialToolBar == nullptr) {
         serialToolBar = new QToolBar(tr("Serial port toolbar"));
         addToolBar(Qt::TopToolBarArea, serialToolBar);
         serialToolBar->setObjectName("SerialToolBar");
@@ -2852,7 +2852,7 @@ void EdytorNc::closeSerialToolbar()
 {
     serialToolBar->close();
     delete (serialToolBar);
-    serialToolBar = NULL;
+    serialToolBar = nullptr;
     showSerialToolBarAct->setChecked(false);
 }
 
@@ -2864,7 +2864,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 
     bool hasMdiChild = (activeMdiChild() != 0);
 
-    if (hasMdiChild && (serialToolBar != NULL)) {
+    if (hasMdiChild && (serialToolBar != nullptr)) {
         QDir dir;
         dir.setPath(activeMdiChild()->filePath());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -3084,7 +3084,7 @@ void EdytorNc::projectAdd()
     QStandardItem *item;
     QIcon icon;
 
-    if (currentProject == NULL) {
+    if (currentProject == nullptr) {
         return;
     }
 
@@ -3185,7 +3185,7 @@ void EdytorNc::projectSave()
     QStandardItem *item;
 
 
-    if (currentProjectName.isEmpty() || currentProject == NULL) {
+    if (currentProjectName.isEmpty() || currentProject == nullptr) {
         return;
     }
 
@@ -3269,7 +3269,7 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex &index)
 
     QStandardItem *item = model->itemFromIndex(index);
 
-    if (item == NULL) {
+    if (item == nullptr) {
         return;
     }
 
@@ -3421,7 +3421,7 @@ void EdytorNc::projectTreeRemoveItem()
     while (it != list.end()) {
         item = model->itemFromIndex(*it);
 
-        if (item == NULL) {
+        if (item == nullptr) {
             return;
         }
 
@@ -3655,11 +3655,11 @@ void EdytorNc::fileTreeViewChangeRootDir()
         return;
     }
 
-    if ((fileTreeView == NULL) || (dirModel == NULL)) {
+    if ((fileTreeView == nullptr) || (dirModel == nullptr)) {
         return;
     }
 
-    if (currentPathCheckBox->isChecked() && (activeMdiChild() != NULL)) {
+    if (currentPathCheckBox->isChecked() && (activeMdiChild() != nullptr)) {
         path = activeMdiChild()->currentFile();
 
         if (QFileInfo(path).exists()) {
@@ -3771,7 +3771,7 @@ void EdytorNc::doSplitPrograms()
 {
     MdiChild *activeWindow = activeMdiChild();
 
-    if (activeWindow != NULL) {
+    if (activeWindow != nullptr) {
         return;
     }
 
@@ -3789,7 +3789,7 @@ void EdytorNc::doSplitPrograms()
     while (it != list.constEnd()) {
         activeWindow = newFile();
 
-        if (activeWindow != NULL) {
+        if (activeWindow != nullptr) {
             QApplication::restoreOverrideCursor();
             return;
         }
@@ -4103,7 +4103,7 @@ void EdytorNc::sendButtonClicked()
 
     activeWindow = activeMdiChild();
 
-    if (activeWindow != NULL) {
+    if (activeWindow != nullptr) {
         return;
     }
 
@@ -4151,7 +4151,7 @@ void EdytorNc::receiveButtonClicked()
             if (!(*it).isEmpty() && !(*it).isNull()) {
                 activeWindow = newFile();
 
-                if (activeWindow != NULL) {
+                if (activeWindow != nullptr) {
                     return;
                 }
 
@@ -4182,7 +4182,7 @@ void EdytorNc::receiveButtonClicked()
 void EdytorNc::fileChanged(const QString fileName)
 {
     QMdiSubWindow *existing;
-    MdiChild *mdiChild = NULL;
+    MdiChild *mdiChild = nullptr;
     bool modified = false;
 
     existing = findMdiChild(fileName);
@@ -4355,7 +4355,7 @@ void EdytorNc::clipboardTreeViewContextMenu(const QPoint &point)
     while (it != list.end()) {
         item = clipboardModel->itemFromIndex(*it);
 
-        if (item == NULL) {
+        if (item == nullptr) {
             return;
         }
 
@@ -4389,7 +4389,7 @@ void EdytorNc::deleteFromClipboardButtonClicked()
     while (it != list.end()) {
         item = clipboardModel->itemFromIndex(*it);
 
-        if (item == NULL) {
+        if (item == nullptr) {
             return;
         }
 

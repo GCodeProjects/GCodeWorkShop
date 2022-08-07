@@ -586,7 +586,7 @@ void SerialTransmissionDialog::serialPortRequestToSend(bool set)
 
 void SerialTransmissionDialog::sendData(QString dataToSend, QString configName)
 {
-    //QTimer *sendStartDelayTimer = NULL;
+    //QTimer *sendStartDelayTimer = nullptr;
 
     if (dataToSend.isEmpty()) {
         return;

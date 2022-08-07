@@ -33,7 +33,7 @@ int Medium::checkLaunch()
     QString dir = QDir::fromNativeSeparators(QApplication::applicationDirPath());
     WCHAR buf[MAX_PATH];
 
-    SHGetFolderPathW(NULL,  CSIDL_PROGRAM_FILES, NULL, 0, buf);
+    SHGetFolderPathW(nullptr,  CSIDL_PROGRAM_FILES, nullptr, 0, buf);
 
     if (dir.startsWith(QDir::fromNativeSeparators(QString::fromWCharArray(buf)))) {
         return LAUNCH_SYSTEM;
@@ -68,7 +68,7 @@ void Medium::setupDirs()
 
         langDir = shareDir;
         WCHAR buf[MAX_PATH];
-        SHGetFolderPathW(NULL,  folderId, NULL, 0, buf);
+        SHGetFolderPathW(nullptr,  folderId, nullptr, 0, buf);
         mSettingsDir = QDir::fromNativeSeparators(QString::fromWCharArray(buf));
         mSettingsDir.append(SLASH).append(APP_NAME);
         break;

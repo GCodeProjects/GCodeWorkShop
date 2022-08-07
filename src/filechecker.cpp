@@ -39,8 +39,8 @@ FileChecker::FileChecker(QWidget *parent) :
             SLOT(filesTableCurrentCellChanged(int, int, int, int)));
     //connect(ui->fileTableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(filesTableClicked(int, int)));
 
-    okBtn = NULL;
-    noBtn = NULL;
+    okBtn = nullptr;
+    noBtn = nullptr;
     prevRow = -1;
 
     showMaximized();
