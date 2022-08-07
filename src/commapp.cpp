@@ -113,7 +113,7 @@ void CommApp::saveSettings()
     foreach (QMdiSubWindow *window, ui->mdiArea->subWindowList()) {
         SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
 
-        if (mdiChild > NULL) {
+        if (mdiChild != NULL) {
             activeConfigs.append(mdiChild->configName());
         }
     }
@@ -184,7 +184,7 @@ void CommApp::stopSerialPortServer()
 
     SerialTransmissionDialog *_existing = findMdiChild(_config);
 
-    if (_existing > NULL) {
+    if (_existing != NULL) {
         _existing->close();
         _existing->parentWidget()->close();
     }
@@ -331,7 +331,7 @@ void CommApp::loadSerialConfignames()
 //    QDir dir;
 
 //    bool hasMdiChild = (activeMdiChild() != NULL);
-//    if(hasMdiChild && (serialToolBar > NULL))
+//    if(hasMdiChild && (serialToolBar != NULL))
 //    {
 //        dir.setPath(activeMdiChild()->filePath());
 //        dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -371,7 +371,7 @@ SerialTransmissionDialog *CommApp::findMdiChild(const QString __config)
     foreach (QMdiSubWindow *window, ui->mdiArea->subWindowList()) {
         SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
 
-        if (mdiChild > NULL)
+        if (mdiChild != NULL)
             if (mdiChild->configName() == __config) {
                 return mdiChild;
             }
@@ -407,7 +407,7 @@ void CommApp::activeWindowChanged(QMdiSubWindow *window)
     SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>
                                          (window->widget()); //activeMdiChild();
 
-    if (mdiChild > NULL) {
+    if (mdiChild != NULL) {
         mdiChild->setFocus();
 
         if (configBox) {
@@ -434,7 +434,7 @@ void CommApp::changeActiveWindow()
 {
     SerialTransmissionDialog *mdiChild = findMdiChild(configBox->currentText());
 
-    if (mdiChild > NULL) {
+    if (mdiChild != NULL) {
         mdiChild->setFocus();
         configPortAct->setEnabled(false);
         startServerAct->setEnabled(false);
@@ -452,7 +452,7 @@ void CommApp::closeTab(int i)
 {
     QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
 
-    if (tab > NULL) {
+    if (tab != NULL) {
         tab->removeTab(i);
     }
 }
@@ -461,7 +461,7 @@ void CommApp::doPortReset()
 {
     SerialTransmissionDialog *mdiChild = activeMdiChild();
 
-    if (mdiChild > NULL) {
+    if (mdiChild != NULL) {
         mdiChild->portReset();
     }
 }
@@ -470,7 +470,7 @@ void CommApp::showNewFiles()
 {
     SerialTransmissionDialog *mdiChild = activeMdiChild();
 
-    if (mdiChild > NULL) {
+    if (mdiChild != NULL) {
         QSettings &settings = *Medium::instance().settings();
         QStringList extensions = settings.value("Extensions", "").toStringList();
         extensions.removeDuplicates();
@@ -487,7 +487,7 @@ void CommApp::browseSaveFolder()
 {
     SerialTransmissionDialog *mdiChild = activeMdiChild();
 
-    if (mdiChild > NULL) {
+    if (mdiChild != NULL) {
         QDesktopServices::openUrl(QUrl(QString("file:///%1").arg(mdiChild->savePath()),
                                        QUrl::TolerantMode));
     }

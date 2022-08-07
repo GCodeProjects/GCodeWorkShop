@@ -1985,7 +1985,7 @@ void BHCDialog::clearAll()
 
     }
 
-    if (drawing > NULL) {
+    if (drawing != NULL) {
         drawing->close();
     }
 }

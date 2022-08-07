@@ -3913,7 +3913,7 @@ QString MdiChild::currentFile()
 
 void MdiChild::fileChangeMonitorAddPath(QString fileName)
 {
-    //if(fileChangeMonitor > NULL)
+    //if(fileChangeMonitor != NULL)
     //fileChangeMonitor->addPath(fileName);
 
     emit addRemoveFileWatch(fileName, true);
@@ -3921,7 +3921,7 @@ void MdiChild::fileChangeMonitorAddPath(QString fileName)
 
 void MdiChild::fileChangeMonitorRemovePath(QString fileName)
 {
-    //if(fileChangeMonitor > NULL)
+    //if(fileChangeMonitor != NULL)
     //fileChangeMonitor->removePath(fileName);
 
     emit addRemoveFileWatch(fileName, false);

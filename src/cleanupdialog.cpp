@@ -155,13 +155,13 @@ void cleanUpDialog::newRow()
     if (row > 0) {
         row--;
 
-        if (ui->tableWidget->item(row, 0) > NULL)
+        if (ui->tableWidget->item(row, 0) != NULL)
             if (ui->tableWidget->item(row, 0)->text().isNull()
                     || ui->tableWidget->item(row, 0)->text().isEmpty()) {
                 return;
             }
 
-        if (ui->tableWidget->item(row, 1) > NULL)
+        if (ui->tableWidget->item(row, 1) != NULL)
             if (ui->tableWidget->item(row, 1)->text().isNull()
                     || ui->tableWidget->item(row, 1)->text().isEmpty()) {
                 return;
@@ -192,7 +192,7 @@ void cleanUpDialog::highlightText(int row, int col)
     Q_UNUSED(col);
     QTableWidgetItem *item = ui->tableWidget->item(row, 1);
 
-    if (item > NULL) {
+    if (item != NULL) {
         if (!item->text().isEmpty()) {
             if (item->text() == "$") { //causes endless loop
                 return;

@@ -508,7 +508,7 @@ void EdytorNc::saveAll()
         mdiChild->blockSignals(false);
     }
 
-    if (currentMdiChild > NULL) {
+    if (currentMdiChild != NULL) {
         currentMdiChild->setFocus();
     }
 
@@ -856,7 +856,7 @@ void EdytorNc::config()
             opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
             opt.extensions = defaultMdiWindowProperites.extensions;
 
-            if (dirModel > NULL) {
+            if (dirModel != NULL) {
                 dirModel->setNameFilters(defaultMdiWindowProperites.extensions);
             }
 
@@ -1343,7 +1343,7 @@ void EdytorNc::updateMenus()
     bool hasMdiChildNotReadOnly;
     bool hasSelection;
     bool hasModifiedMdiChild;
-    bool hasMdiChild = (activeMdiChild() > NULL);
+    bool hasMdiChild = (activeMdiChild() != NULL);
 
     if (hasMdiChild) {
         hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
@@ -1442,7 +1442,7 @@ void EdytorNc::updateCurrentSerialConfig()
 
     bool hasMdiChild = (activeMdiChild() != NULL);
 
-    if (hasMdiChild && (serialToolBar > NULL)) {
+    if (hasMdiChild && (serialToolBar != NULL)) {
         dir.setPath(activeMdiChild()->filePath());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
@@ -1468,7 +1468,7 @@ void EdytorNc::updateStatusBar()
     int line = 1;
     int id;
 
-    bool hasMdiChild = (activeMdiChild() > NULL);
+    bool hasMdiChild = (activeMdiChild() != NULL);
     bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
 
     if (hasMdiChild) {
@@ -2864,7 +2864,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 
     bool hasMdiChild = (activeMdiChild() != 0);
 
-    if (hasMdiChild && (serialToolBar > NULL)) {
+    if (hasMdiChild && (serialToolBar != NULL)) {
         QDir dir;
         dir.setPath(activeMdiChild()->filePath());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -3659,7 +3659,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
         return;
     }
 
-    if (currentPathCheckBox->isChecked() && (activeMdiChild() > NULL)) {
+    if (currentPathCheckBox->isChecked() && (activeMdiChild() != NULL)) {
         path = activeMdiChild()->currentFile();
 
         if (QFileInfo(path).exists()) {
@@ -3771,7 +3771,7 @@ void EdytorNc::doSplitPrograms()
 {
     MdiChild *activeWindow = activeMdiChild();
 
-    if (activeWindow <= NULL) {
+    if (activeWindow != NULL) {
         return;
     }
 
@@ -3789,7 +3789,7 @@ void EdytorNc::doSplitPrograms()
     while (it != list.constEnd()) {
         activeWindow = newFile();
 
-        if (activeWindow <= NULL) {
+        if (activeWindow != NULL) {
             QApplication::restoreOverrideCursor();
             return;
         }
@@ -4103,7 +4103,7 @@ void EdytorNc::sendButtonClicked()
 
     activeWindow = activeMdiChild();
 
-    if (activeWindow <= NULL) {
+    if (activeWindow != NULL) {
         return;
     }
 
@@ -4151,7 +4151,7 @@ void EdytorNc::receiveButtonClicked()
             if (!(*it).isEmpty() && !(*it).isNull()) {
                 activeWindow = newFile();
 
-                if (activeWindow <= NULL) {
+                if (activeWindow != NULL) {
                     return;
                 }
 
