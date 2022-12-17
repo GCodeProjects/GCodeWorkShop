@@ -3771,7 +3771,7 @@ void EdytorNc::doSplitPrograms()
 {
     MdiChild *activeWindow = activeMdiChild();
 
-    if (activeWindow != nullptr) {
+	if (activeWindow == nullptr) {
         return;
     }
 
@@ -3789,7 +3789,7 @@ void EdytorNc::doSplitPrograms()
     while (it != list.constEnd()) {
         activeWindow = newFile();
 
-        if (activeWindow != nullptr) {
+		if (activeWindow == nullptr) {
             QApplication::restoreOverrideCursor();
             return;
         }
@@ -4103,7 +4103,7 @@ void EdytorNc::sendButtonClicked()
 
     activeWindow = activeMdiChild();
 
-    if (activeWindow != nullptr) {
+	if (activeWindow == nullptr) {
         return;
     }
 
@@ -4151,7 +4151,7 @@ void EdytorNc::receiveButtonClicked()
             if (!(*it).isEmpty() && !(*it).isNull()) {
                 activeWindow = newFile();
 
-                if (activeWindow != nullptr) {
+				if (activeWindow == nullptr) {
                     return;
                 }
 
