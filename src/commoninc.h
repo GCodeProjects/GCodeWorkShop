@@ -117,6 +117,7 @@ struct _editor_properites {
     QString curFileInfo;
     bool guessFileNameByProgNum;
     bool disableFileChangeMonitor;
+    bool changeDateInComment;
 };
 
 #endif // COMMONINC_H

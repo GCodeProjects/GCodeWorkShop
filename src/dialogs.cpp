@@ -2762,6 +2762,7 @@ SetupDialog::SetupDialog(QWidget *parent, const _editor_properites *prop,
     editorToolTipsCheckBox->setChecked(editProp.editorToolTips);
     startEmptyCheckBox->setChecked(editProp.startEmpty);
     disableFileChangeMonitorCheckBox->setChecked(editProp.disableFileChangeMonitor);
+    changeDateOnSave->setChecked(editProp.changeDateInComment);
 
     QStringListIterator extIterator(editProp.extensions);
 
@@ -2882,6 +2883,7 @@ _editor_properites SetupDialog::getSettings()
     editProp.defaultReadOnly = readOnlyModeCheckBox->isChecked();
     editProp.startEmpty = startEmptyCheckBox->isChecked();
     editProp.disableFileChangeMonitor = disableFileChangeMonitorCheckBox->isChecked();
+    editProp.changeDateInComment = changeDateOnSave->isChecked();
 
     int id = highlightModeComboBox->currentIndex();
 

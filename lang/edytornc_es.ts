@@ -3669,6 +3669,14 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <source>Disable file change monitor</source>
         <translation>Deshabilitar monitor de cambio de archivo</translation>
     </message>
+    <message>
+        <source>When saving, it modifies the date in the comments in the header of the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change date on save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TransmissionDialog</name>

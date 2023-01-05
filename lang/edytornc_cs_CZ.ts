@@ -578,7 +578,7 @@
     <message>
         <location filename="../src/edytornc.ui" line="205"/>
         <location filename="../src/edytornc.ui" line="208"/>
-        <location filename="../src/edytornc.cpp" line="3113"/>
+        <location filename="../src/edytornc.cpp" line="3116"/>
         <source>Add files to project</source>
         <translation>Přidat soubory do projektu</translation>
     </message>
@@ -644,7 +644,7 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
     </message>
     <message>
         <location filename="../src/edytornc.ui" line="534"/>
-        <location filename="../src/edytornc.cpp" line="3577"/>
+        <location filename="../src/edytornc.cpp" line="3580"/>
         <source>File Name</source>
         <translation>Název souboru</translation>
     </message>
@@ -660,7 +660,7 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
     </message>
     <message>
         <location filename="../src/edytornc.cpp" line="120"/>
-        <location filename="../src/edytornc.cpp" line="1033"/>
+        <location filename="../src/edytornc.cpp" line="1034"/>
         <source>EdytorNC</source>
         <translation>EdytorNC</translation>
     </message>
@@ -683,690 +683,690 @@ Položky s neprázdnými názvy nejsou smazány automaticky.</translation>
         <translation>Soubor uložen</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1155"/>
+        <location filename="../src/edytornc.cpp" line="1156"/>
         <source>Removed : %1 line numbers.</source>
         <translation>Odstraněno: %1 čísel řádků.</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1157"/>
+        <location filename="../src/edytornc.cpp" line="1158"/>
         <source>Renumbered : %1 lines.</source>
         <translation>Přečíslováno: %1 řádků.</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1236"/>
+        <location filename="../src/edytornc.cpp" line="1237"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1237"/>
+        <location filename="../src/edytornc.cpp" line="1238"/>
         <source>Set correct calculator program name in configuration dialog.</source>
         <translation>V dialogu nastavení nastavit správný název programu pro výpočty.</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1310"/>
+        <location filename="../src/edytornc.cpp" line="1311"/>
         <source>About EdytorNC</source>
         <translation>O programu EdytorNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1311"/>
+        <location filename="../src/edytornc.cpp" line="1312"/>
         <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
         <translation>&lt;b&gt;EdytorNC&lt;/b&gt; je textovým editorem pro programátory CNC.</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1312"/>
+        <location filename="../src/edytornc.cpp" line="1313"/>
         <source>&lt;P&gt;Version: </source>
         <translation>&lt;P&gt;Verze: </translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1318"/>
+        <location filename="../src/edytornc.cpp" line="1319"/>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
         <oldsource>&lt;br&gt;Czech translation thanks to Pavel Fric</oldsource>
         <translation>&lt;P&gt;Poděkování Pavlu Fricovi za překlad do češtiny</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1319"/>
+        <location filename="../src/edytornc.cpp" line="1320"/>
         <source>&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju</source>
         <oldsource>&lt;br&gt;Finnish translation thanks to Janne Mäntyharju</oldsource>
         <translation>&lt;P&gt;Poděkování Janne Mäntyharjuovi za překlad do finštiny</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1321"/>
+        <location filename="../src/edytornc.cpp" line="1322"/>
         <source>&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju</source>
         <oldsource>&lt;br&gt;OS X patch and other updates thanks to Janne Mäntyharju</oldsource>
         <translation>&lt;P&gt;Poděkování Janne Mäntyharjuovi za záplatu pro OS X a jiné aktualizace</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1322"/>
+        <location filename="../src/edytornc.cpp" line="1323"/>
         <source>&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski</source>
         <translation>&lt;P&gt;Poděkování Jakubovi Gajewskimu za novou ikonu pro EdytorNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1323"/>
+        <location filename="../src/edytornc.cpp" line="1324"/>
         <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
         <translation>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1327"/>
-        <location filename="../src/edytornc.cpp" line="1331"/>
+        <location filename="../src/edytornc.cpp" line="1328"/>
+        <location filename="../src/edytornc.cpp" line="1332"/>
         <source>&lt;P&gt;</source>
         <translation>&lt;P&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1330"/>
+        <location filename="../src/edytornc.cpp" line="1331"/>
         <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
         <translation>&lt;P&gt;EdytorNC obsahuje části kódu z dalších projektů otevřeného zdrojového kódu.</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1332"/>
+        <location filename="../src/edytornc.cpp" line="1333"/>
         <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
         <translation>&lt;P&gt;&lt;i&gt;EdytorNC je svobodný program. Můžete jej šířit a/nebo upravovat za podmínek GNU General Public License, jak jsou zveřejněny Free Software Foundation; buď ve verzi 2 tohoto povolení, nebo (podle svého uvážení) v jakékoli pozdější verzi.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1336"/>
+        <location filename="../src/edytornc.cpp" line="1337"/>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation>&lt;P&gt;&lt;i&gt;Program je poskytován tak, jak je, bez jakékoli záruky, včetně záruky provedení, prodejnosti a vhodnosti pro nějaký zvláštní účel.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1484"/>
+        <location filename="../src/edytornc.cpp" line="1485"/>
         <source> Col: </source>
         <translation> Sloupec: </translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1485"/>
+        <location filename="../src/edytornc.cpp" line="1486"/>
         <source>  Line: </source>
         <translation> Řádek: </translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1486"/>
+        <location filename="../src/edytornc.cpp" line="1487"/>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
         <translation>  &lt;b&gt;Upraveno&lt;/b&gt;  </translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1487"/>
+        <location filename="../src/edytornc.cpp" line="1488"/>
         <source> Read only  </source>
         <translation>Pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1488"/>
+        <location filename="../src/edytornc.cpp" line="1489"/>
         <source> Overwrite  </source>
         <translation> Přepsat  </translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1488"/>
+        <location filename="../src/edytornc.cpp" line="1489"/>
         <source> Insert </source>
         <translation> Vložit </translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1518"/>
+        <location filename="../src/edytornc.cpp" line="1519"/>
         <source>&amp;%1 %2</source>
         <translation>&amp;%1 %2</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1521"/>
+        <location filename="../src/edytornc.cpp" line="1522"/>
         <source>%1 %2</source>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1566"/>
+        <location filename="../src/edytornc.cpp" line="1567"/>
         <source>&amp;New</source>
         <translation>&amp;Nový</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1568"/>
+        <location filename="../src/edytornc.cpp" line="1569"/>
         <source>Create a new file</source>
         <translation>Vytvořit nový soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1571"/>
+        <location filename="../src/edytornc.cpp" line="1572"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otevřít...</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1573"/>
+        <location filename="../src/edytornc.cpp" line="1574"/>
         <source>Open an existing file</source>
         <translation>Otevřít stávající soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1578"/>
+        <location filename="../src/edytornc.cpp" line="1579"/>
         <source>&amp;Open example...</source>
         <translation>&amp;Otevřít příklad...</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1579"/>
+        <location filename="../src/edytornc.cpp" line="1580"/>
         <source>Open an example file</source>
         <translation>Otevřít soubor s příkladem</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1585"/>
+        <location filename="../src/edytornc.cpp" line="1586"/>
         <source>Save the document to disk</source>
         <translation>Uložit dokument na disk</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1596"/>
+        <location filename="../src/edytornc.cpp" line="1597"/>
         <source>Save the document under a new name</source>
         <translation>Uložit dokument pod novým názvem</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1599"/>
+        <location filename="../src/edytornc.cpp" line="1600"/>
         <source>E&amp;xit</source>
         <translation>&amp;Ukončit</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1601"/>
+        <location filename="../src/edytornc.cpp" line="1602"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1602"/>
+        <location filename="../src/edytornc.cpp" line="1603"/>
         <source>Exit the application</source>
         <translation>Ukončit program</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1605"/>
+        <location filename="../src/edytornc.cpp" line="1606"/>
         <source>&amp;Find files...</source>
         <translation>&amp;Hledat soubory...</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1608"/>
+        <location filename="../src/edytornc.cpp" line="1609"/>
         <source>Find files</source>
         <translation>Najít soubory</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1611"/>
+        <location filename="../src/edytornc.cpp" line="1612"/>
         <source>&amp;Print</source>
         <translation>&amp;Tisk</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1613"/>
+        <location filename="../src/edytornc.cpp" line="1614"/>
         <source>Print file</source>
         <translation>Vytisknout soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1617"/>
+        <location filename="../src/edytornc.cpp" line="1618"/>
         <source>Pr&amp;int preview</source>
         <translation>Náhled &amp;tisku</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1619"/>
+        <location filename="../src/edytornc.cpp" line="1620"/>
         <source>Preview printing</source>
         <translation>Náhled na tisk</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1622"/>
+        <location filename="../src/edytornc.cpp" line="1623"/>
         <source>Session manager...</source>
         <translation>Správce sezení...</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1623"/>
+        <location filename="../src/edytornc.cpp" line="1624"/>
         <source>Sessions manager</source>
         <translation>Správce sezení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1627"/>
+        <location filename="../src/edytornc.cpp" line="1628"/>
         <source>&amp;Undo</source>
         <translation>&amp;Zpět</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1629"/>
+        <location filename="../src/edytornc.cpp" line="1630"/>
         <source>Undo last operation</source>
         <translation>Zpět poslední operaci</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1633"/>
+        <location filename="../src/edytornc.cpp" line="1634"/>
         <source>&amp;Redo</source>
         <translation>&amp;Znovu</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1635"/>
+        <location filename="../src/edytornc.cpp" line="1636"/>
         <source>Redo last operation</source>
         <translation>Znovu poslední operaci</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1639"/>
+        <location filename="../src/edytornc.cpp" line="1640"/>
         <source>Cu&amp;t</source>
         <translation>Vyj&amp;mout</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1641"/>
+        <location filename="../src/edytornc.cpp" line="1642"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Vyjmout obsah nynějšího výběru do schránky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1645"/>
+        <location filename="../src/edytornc.cpp" line="1646"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopírovat</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1647"/>
+        <location filename="../src/edytornc.cpp" line="1648"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopírovat obsah nynějšího výběru do schránky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1651"/>
+        <location filename="../src/edytornc.cpp" line="1652"/>
         <source>&amp;Paste</source>
         <translation>&amp;Vložit</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1653"/>
+        <location filename="../src/edytornc.cpp" line="1654"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Vložit obsah schránky do nynějšího výběru</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1657"/>
+        <location filename="../src/edytornc.cpp" line="1658"/>
         <source>&amp;Find</source>
         <translation>&amp;Najít</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1659"/>
+        <location filename="../src/edytornc.cpp" line="1660"/>
         <source>Find text</source>
         <translation>Najít text</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1662"/>
+        <location filename="../src/edytornc.cpp" line="1663"/>
         <source>&amp;Replace</source>
         <translation>&amp;Nahradit</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1663"/>
+        <location filename="../src/edytornc.cpp" line="1664"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1664"/>
+        <location filename="../src/edytornc.cpp" line="1665"/>
         <source>Find and replace text</source>
         <translation>Najít a nahradit text</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1668"/>
+        <location filename="../src/edytornc.cpp" line="1669"/>
         <source>&amp;Delete</source>
         <translation>&amp;Smazat</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1670"/>
+        <location filename="../src/edytornc.cpp" line="1671"/>
         <source>Removes selected text</source>
         <translation>Odstraní vybraný text</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1673"/>
+        <location filename="../src/edytornc.cpp" line="1674"/>
         <source>&amp;Select all</source>
         <translation>&amp;Vybrat vše</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1675"/>
+        <location filename="../src/edytornc.cpp" line="1676"/>
         <source>Select all text</source>
         <translation>Vybrat všechen text</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1678"/>
+        <location filename="../src/edytornc.cpp" line="1679"/>
         <source>Read &amp;only</source>
         <translation>&amp;Pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1679"/>
+        <location filename="../src/edytornc.cpp" line="1680"/>
         <source>F12</source>
         <translation>F12</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1681"/>
+        <location filename="../src/edytornc.cpp" line="1682"/>
         <source>Makes text read only</source>
         <translation>Udělá text pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1684"/>
+        <location filename="../src/edytornc.cpp" line="1685"/>
         <source>Configuration</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1686"/>
+        <location filename="../src/edytornc.cpp" line="1687"/>
         <source>Open configuration dialog</source>
         <translation>Otevřít dialog nastavení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1689"/>
+        <location filename="../src/edytornc.cpp" line="1690"/>
         <source>Inline calculator</source>
         <translation>Vestavěná kalkulačka</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1693"/>
+        <location filename="../src/edytornc.cpp" line="1694"/>
         <source>&amp;Bolt hole circle</source>
         <translation>&amp;Kruh otvoru šroubu</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1694"/>
+        <location filename="../src/edytornc.cpp" line="1695"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1695"/>
+        <location filename="../src/edytornc.cpp" line="1696"/>
         <source>Calculate bolt hole&apos;s positions</source>
         <translation>Spočítat polohy vrtání v kruzích otvorů</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1698"/>
+        <location filename="../src/edytornc.cpp" line="1699"/>
         <source>&amp;Insert spaces</source>
         <translation>&amp;Vložit mezery</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1699"/>
+        <location filename="../src/edytornc.cpp" line="1700"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1700"/>
+        <location filename="../src/edytornc.cpp" line="1701"/>
         <source>Inserts spaces</source>
         <translation>Vloží mezery</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1703"/>
+        <location filename="../src/edytornc.cpp" line="1704"/>
         <source>Remove spaces</source>
         <translation>Odstranit mezery</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1704"/>
+        <location filename="../src/edytornc.cpp" line="1705"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1705"/>
+        <location filename="../src/edytornc.cpp" line="1706"/>
         <source>Removes spaces</source>
         <translation>Odstraní mezery</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1709"/>
+        <location filename="../src/edytornc.cpp" line="1710"/>
         <source>Remove empty lines</source>
         <translation>Odstranit prázdné řádky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1711"/>
+        <location filename="../src/edytornc.cpp" line="1712"/>
         <source>Removes empty lines</source>
         <translation>Odstraní prázdné řádky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1715"/>
-        <location filename="../src/edytornc.cpp" line="1717"/>
+        <location filename="../src/edytornc.cpp" line="1716"/>
+        <location filename="../src/edytornc.cpp" line="1718"/>
         <source>Insert empty lines</source>
         <translation>Vložit prázdné řádky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1720"/>
+        <location filename="../src/edytornc.cpp" line="1721"/>
         <source>Clean &amp;up</source>
         <translation>&amp;Vyčistit</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1725"/>
+        <location filename="../src/edytornc.cpp" line="1726"/>
         <source>Insert dots</source>
         <translation>Vložit tečky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1726"/>
+        <location filename="../src/edytornc.cpp" line="1727"/>
         <source>F6</source>
         <translation>F6</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1727"/>
+        <location filename="../src/edytornc.cpp" line="1728"/>
         <source>Inserts decimal dot</source>
         <translation>Vloží desetinnou tečku</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1730"/>
+        <location filename="../src/edytornc.cpp" line="1731"/>
         <source>Renumber</source>
         <translation>Přečíslovat</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1731"/>
+        <location filename="../src/edytornc.cpp" line="1732"/>
         <source>F7</source>
         <translation>F7</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1732"/>
+        <location filename="../src/edytornc.cpp" line="1733"/>
         <source>Renumber program blocks</source>
         <translation>Přečíslovat programové bloky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1735"/>
+        <location filename="../src/edytornc.cpp" line="1736"/>
         <source>Feed&apos;s speed&apos;s</source>
         <translation>Počet otáček + Posun</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1736"/>
+        <location filename="../src/edytornc.cpp" line="1737"/>
         <source>F9</source>
         <translation>F9</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1737"/>
+        <location filename="../src/edytornc.cpp" line="1738"/>
         <source>Calculate speed, feed, cutting speed</source>
         <translation>Spočítat počet otáček, posun a rychlost řezání</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1740"/>
+        <location filename="../src/edytornc.cpp" line="1741"/>
         <source>Chamfer</source>
         <translation>Zkosení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1742"/>
+        <location filename="../src/edytornc.cpp" line="1743"/>
         <source>Calculate chamfer</source>
         <translation>Spočítat zkosení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1745"/>
-        <location filename="../src/edytornc.cpp" line="1747"/>
+        <location filename="../src/edytornc.cpp" line="1746"/>
+        <location filename="../src/edytornc.cpp" line="1748"/>
         <source>Solution of triangles</source>
         <translation>Spočítat trojúhelníky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1750"/>
-        <location filename="../src/edytornc.cpp" line="1752"/>
+        <location filename="../src/edytornc.cpp" line="1751"/>
+        <location filename="../src/edytornc.cpp" line="1753"/>
         <source>Convert inch &lt;-&gt; mm</source>
         <translation>Převést inch &lt;-&gt; mm</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1755"/>
-        <location filename="../src/edytornc.cpp" line="1758"/>
+        <location filename="../src/edytornc.cpp" line="1756"/>
+        <location filename="../src/edytornc.cpp" line="1759"/>
         <source>Convert program inch &lt;-&gt; mm</source>
         <translation>Převáděcí program inch &lt;-&gt; mm (palce &lt;-&gt; milimetry)</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1761"/>
+        <location filename="../src/edytornc.cpp" line="1762"/>
         <source>Calculator</source>
         <translation>Kalkulačka</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1763"/>
+        <location filename="../src/edytornc.cpp" line="1764"/>
         <source>Run calculator</source>
         <translation>Spustit kalkulačku</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1766"/>
-        <location filename="../src/edytornc.cpp" line="1770"/>
+        <location filename="../src/edytornc.cpp" line="1767"/>
+        <location filename="../src/edytornc.cpp" line="1771"/>
         <source>Serial port send/receive</source>
         <translation>Sériová přípojka poslat/přijmout</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1773"/>
+        <location filename="../src/edytornc.cpp" line="1774"/>
         <source>Compile macro - experimental</source>
         <translation>Sestavit makra - pokusná funkce</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1776"/>
+        <location filename="../src/edytornc.cpp" line="1777"/>
         <source>Translate EdytorNC macro into CNC program</source>
         <translation>Přeložit makro EdytorNC do programu CNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1780"/>
         <location filename="../src/edytornc.cpp" line="1781"/>
+        <location filename="../src/edytornc.cpp" line="1782"/>
         <source>Show diff - open current file in right diff window</source>
         <translation>Ukázat rozdíly - otevřít nynější soubor v pravém okně s rozdíly</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1785"/>
         <location filename="../src/edytornc.cpp" line="1786"/>
+        <location filename="../src/edytornc.cpp" line="1787"/>
         <source>Show diff - open current file in left diff window</source>
         <translation>Ukázat rozdíly - otevřít nynější soubor v levém okně s rozdíly</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1789"/>
+        <location filename="../src/edytornc.cpp" line="1790"/>
         <source>On/off diff window</source>
         <translation>Zapnout/Vypnout okno s rozdíly</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1791"/>
+        <location filename="../src/edytornc.cpp" line="1792"/>
         <source>Show diff window</source>
         <translation>Ukázat okno s rozdíly</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1794"/>
+        <location filename="../src/edytornc.cpp" line="1795"/>
         <source>Show unsaved changes</source>
         <translation>Ukázat neuložené změny</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1796"/>
+        <location filename="../src/edytornc.cpp" line="1797"/>
         <source>Show diff of currently edited file and file on disk</source>
         <translation>Ukázat rozdíly nyní upravovaného souboru a souboru na disku</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1799"/>
         <location filename="../src/edytornc.cpp" line="1800"/>
+        <location filename="../src/edytornc.cpp" line="1801"/>
         <source>Split file</source>
         <translation>Rozdělit soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1813"/>
+        <location filename="../src/edytornc.cpp" line="1814"/>
         <source>Swap axes</source>
         <translation>Prohodit osy</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1843"/>
+        <location filename="../src/edytornc.cpp" line="1844"/>
         <source>Tile &amp;horyzontally</source>
         <translation>Uspořádat &amp;vodorovně</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1844"/>
+        <location filename="../src/edytornc.cpp" line="1845"/>
         <source>Tile the windows horyzontally</source>
         <translation>Klást okna vedle sebe vodorovně</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1847"/>
+        <location filename="../src/edytornc.cpp" line="1848"/>
         <source>Tile &amp;vertycally</source>
         <translation>Uspořádat &amp;svisle</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1848"/>
+        <location filename="../src/edytornc.cpp" line="1849"/>
         <source>Tile the windows vertycally</source>
         <translation>Klást okna vedle sebe svisle</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2814"/>
-        <location filename="../src/edytornc.cpp" line="2816"/>
+        <location filename="../src/edytornc.cpp" line="2817"/>
+        <location filename="../src/edytornc.cpp" line="2819"/>
         <source>Start application &quot;Serial port file server&quot;</source>
         <translation>Spustit program &quot;souborový server pro sériovou přípojku&quot;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3396"/>
+        <location filename="../src/edytornc.cpp" line="3399"/>
         <source>Show</source>
         <translation>Ukázat</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3405"/>
+        <location filename="../src/edytornc.cpp" line="3408"/>
         <source>Hide</source>
         <translation>Skrýt</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="4202"/>
+        <location filename="../src/edytornc.cpp" line="4205"/>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
         <translation>Soubor &quot;%1&quot; &lt;b&gt;byl na disku změněn.&lt;/b&gt;&lt;p&gt;Chcete jej nahrát znovu?&lt;/p&gt;%2</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="4204"/>
+        <location filename="../src/edytornc.cpp" line="4207"/>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;Varování:&lt;/b&gt; Soubor v editoru obsahuje neuložené změny.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1836"/>
+        <location filename="../src/edytornc.cpp" line="1837"/>
         <source>Close the active window</source>
         <translation>Zavřít činné okno</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1839"/>
+        <location filename="../src/edytornc.cpp" line="1840"/>
         <source>Close &amp;All</source>
         <translation>Zavřít &amp;vše</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1840"/>
+        <location filename="../src/edytornc.cpp" line="1841"/>
         <source>Close all the windows</source>
         <translation>Zavřít všechna okna</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1851"/>
+        <location filename="../src/edytornc.cpp" line="1852"/>
         <source>&amp;Cascade</source>
         <translation>&amp;Překrývat</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1852"/>
+        <location filename="../src/edytornc.cpp" line="1853"/>
         <source>Cascade the windows</source>
         <translation>Překrývat okna</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1855"/>
+        <location filename="../src/edytornc.cpp" line="1856"/>
         <source>Ne&amp;xt</source>
         <translation>Da&amp;lší</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1857"/>
+        <location filename="../src/edytornc.cpp" line="1858"/>
         <source>Move the focus to the next window</source>
         <translation>Přesunout zaměření na další okno</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1860"/>
+        <location filename="../src/edytornc.cpp" line="1861"/>
         <source>Pre&amp;vious</source>
         <translation>Před&amp;chozí</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1862"/>
+        <location filename="../src/edytornc.cpp" line="1863"/>
         <source>Move the focus to the previous window</source>
         <translation>Přesunout zaměření na předchozí okno</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1879"/>
+        <location filename="../src/edytornc.cpp" line="1880"/>
         <source>&amp;About</source>
         <translation>&amp;O programu</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1880"/>
+        <location filename="../src/edytornc.cpp" line="1881"/>
         <source>Show the application&apos;s About box</source>
         <translation>Ukázat dialog &quot;O programu EdytorNC&quot;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1883"/>
+        <location filename="../src/edytornc.cpp" line="1884"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1884"/>
+        <location filename="../src/edytornc.cpp" line="1885"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>Ukázat dialog &quot;O Qt&quot;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1890"/>
+        <location filename="../src/edytornc.cpp" line="1891"/>
         <source>&amp;File</source>
         <translation>&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1899"/>
+        <location filename="../src/edytornc.cpp" line="1900"/>
         <source>&amp;Recent files</source>
         <translation>&amp;Naposledy otevřené soubory</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1922"/>
+        <location filename="../src/edytornc.cpp" line="1923"/>
         <source>&amp;Edit</source>
         <translation>Úp&amp;ravy</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1949"/>
+        <location filename="../src/edytornc.cpp" line="1950"/>
         <source>&amp;Tools</source>
         <translation>&amp;Nástroje</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1939"/>
+        <location filename="../src/edytornc.cpp" line="1940"/>
         <source>&amp;Block Skip</source>
         <translation>Přeskočení &amp;bloku</translation>
     </message>
@@ -1399,439 +1399,439 @@ Přesto zavřít?</translation>
         <translation>Dokument byl odeslán do tiskárny %1...</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1313"/>
+        <location filename="../src/edytornc.cpp" line="1314"/>
         <source>&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
         <translation type="unfinished">&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt; {1998 ?} {2018 ?} {78@?}</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1315"/>
+        <location filename="../src/edytornc.cpp" line="1316"/>
         <source>&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1316"/>
+        <location filename="../src/edytornc.cpp" line="1317"/>
         <source>&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1317"/>
+        <location filename="../src/edytornc.cpp" line="1318"/>
         <source>&lt;br /&gt;German translation and other fixes thanks to Michael Numberger</source>
         <oldsource>&lt;br&gt;German translation and other fixes thanks to Michael Numberger</oldsource>
         <translation>&lt;br /&gt;Poděkování Michaelovi Numbergerovi za překlad do němčiny a jiné opravy</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1320"/>
+        <location filename="../src/edytornc.cpp" line="1321"/>
         <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
         <oldsource>&lt;br&gt;Dutch translation thanks to Henk van Andel</oldsource>
         <translation>&lt;P&gt;Poděkování Henkovi van Andelovi za překlad do nizozemštiny (holandštiny)</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1325"/>
+        <location filename="../src/edytornc.cpp" line="1326"/>
         <source>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</source>
         <translation>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1430"/>
-        <location filename="../src/edytornc.cpp" line="1583"/>
+        <location filename="../src/edytornc.cpp" line="1431"/>
+        <location filename="../src/edytornc.cpp" line="1584"/>
         <source>&amp;Save &quot;%1&quot;</source>
         <translation>&amp;Uložit &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1431"/>
-        <location filename="../src/edytornc.cpp" line="1593"/>
+        <location filename="../src/edytornc.cpp" line="1432"/>
+        <location filename="../src/edytornc.cpp" line="1594"/>
         <source>Save &quot;%1&quot; &amp;As...</source>
         <translation>Uložit &quot;%1&quot; &amp;jako...</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1432"/>
-        <location filename="../src/edytornc.cpp" line="1834"/>
+        <location filename="../src/edytornc.cpp" line="1433"/>
+        <location filename="../src/edytornc.cpp" line="1835"/>
         <source>Cl&amp;ose &quot;%1&quot;</source>
         <translation>&amp;Zavřít &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1588"/>
+        <location filename="../src/edytornc.cpp" line="1589"/>
         <source>Save A&amp;ll</source>
         <translation>&amp;Uložit vše</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1589"/>
+        <location filename="../src/edytornc.cpp" line="1590"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1590"/>
+        <location filename="../src/edytornc.cpp" line="1591"/>
         <source>Save all modified documents to disk</source>
         <translation>Uložit všechny změněné dokumenty na disk</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1690"/>
+        <location filename="../src/edytornc.cpp" line="1691"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1909"/>
+        <location filename="../src/edytornc.cpp" line="1910"/>
         <source>Sessions</source>
         <translation>Sezení</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1980"/>
+        <location filename="../src/edytornc.cpp" line="1981"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1986"/>
+        <location filename="../src/edytornc.cpp" line="1987"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1996"/>
+        <location filename="../src/edytornc.cpp" line="1997"/>
         <source>File</source>
         <translation>Soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2008"/>
+        <location filename="../src/edytornc.cpp" line="2009"/>
         <source>Edit</source>
         <translation>Úpravy</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2030"/>
+        <location filename="../src/edytornc.cpp" line="2031"/>
         <source>Tools</source>
         <translation>Nástroje</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2055"/>
+        <location filename="../src/edytornc.cpp" line="2056"/>
         <source>Window</source>
         <translation>Okno</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2069"/>
+        <location filename="../src/edytornc.cpp" line="2070"/>
         <source>Highlight style and tooltip mode</source>
         <translation>Zvýraznit režim stylu a nástrojových rad</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2071"/>
+        <location filename="../src/edytornc.cpp" line="2072"/>
         <source>AUTO</source>
         <translation>AUTO</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2072"/>
+        <location filename="../src/edytornc.cpp" line="2073"/>
         <source>FANUC</source>
         <translation>FANUC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2073"/>
+        <location filename="../src/edytornc.cpp" line="2074"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation>HEIDENHAIN DIALOG</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2074"/>
+        <location filename="../src/edytornc.cpp" line="2075"/>
         <source>HEIDENHAIN ISO</source>
         <translation>HEIDENHAIN ISO</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2075"/>
+        <location filename="../src/edytornc.cpp" line="2076"/>
         <source>OKUMA OSP</source>
         <translation>OKUMA OSP</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2076"/>
+        <location filename="../src/edytornc.cpp" line="2077"/>
         <source>PHILIPS</source>
         <translation>PHILIPS</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2077"/>
+        <location filename="../src/edytornc.cpp" line="2078"/>
         <source>SINUMERIK OLD</source>
         <translation>STARÝ SINUMERIK</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2078"/>
+        <location filename="../src/edytornc.cpp" line="2079"/>
         <source>SINUMERIK NEW</source>
         <translation>NOVÝ SINUMERIK</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2080"/>
+        <location filename="../src/edytornc.cpp" line="2081"/>
         <source>TOOLTIPS</source>
         <translation>Nástrojové rady</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2086"/>
-        <location filename="../src/edytornc.cpp" line="2088"/>
+        <location filename="../src/edytornc.cpp" line="2087"/>
+        <location filename="../src/edytornc.cpp" line="2089"/>
         <source>Attach current highlight setting to current directory of programs</source>
         <translation>Přiložit současné nastavení zvýrazňování do nynějšího adresáře s programem</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2096"/>
         <location filename="../src/edytornc.cpp" line="2097"/>
+        <location filename="../src/edytornc.cpp" line="2098"/>
         <source>Remove highlight settings from the directory</source>
         <translation>Odstranit nastavení zvýrazňování z adresáře s programem</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2115"/>
+        <location filename="../src/edytornc.cpp" line="2116"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2232"/>
-        <location filename="../src/edytornc.cpp" line="2235"/>
+        <location filename="../src/edytornc.cpp" line="2234"/>
         <location filename="../src/edytornc.cpp" line="2237"/>
+        <location filename="../src/edytornc.cpp" line="2239"/>
         <source>default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2545"/>
+        <location filename="../src/edytornc.cpp" line="2548"/>
         <source>Find</source>
         <translation>Najít</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2551"/>
-        <location filename="../src/edytornc.cpp" line="2553"/>
+        <location filename="../src/edytornc.cpp" line="2554"/>
+        <location filename="../src/edytornc.cpp" line="2556"/>
         <source>Find next</source>
         <translation>Najít další</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2556"/>
-        <location filename="../src/edytornc.cpp" line="2558"/>
+        <location filename="../src/edytornc.cpp" line="2559"/>
+        <location filename="../src/edytornc.cpp" line="2561"/>
         <source>Find previous</source>
         <translation>Najít předchozí</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2561"/>
         <location filename="../src/edytornc.cpp" line="2564"/>
+        <location filename="../src/edytornc.cpp" line="2567"/>
         <source>Replace &amp;&amp; find next</source>
         <translation>Nahradit a najít další</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2568"/>
-        <location filename="../src/edytornc.cpp" line="2570"/>
+        <location filename="../src/edytornc.cpp" line="2571"/>
+        <location filename="../src/edytornc.cpp" line="2573"/>
         <source>Replace &amp;&amp; find previous</source>
         <translation>Nahradit a najít předchozí</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2573"/>
-        <location filename="../src/edytornc.cpp" line="2575"/>
+        <location filename="../src/edytornc.cpp" line="2576"/>
+        <location filename="../src/edytornc.cpp" line="2578"/>
         <source>Replace all</source>
         <translation>Nahradit vše</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2578"/>
-        <location filename="../src/edytornc.cpp" line="2579"/>
+        <location filename="../src/edytornc.cpp" line="2581"/>
+        <location filename="../src/edytornc.cpp" line="2582"/>
         <source>Close find toolbar</source>
         <translation>Zavřít nástrojový pruh pro hledání</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2582"/>
+        <location filename="../src/edytornc.cpp" line="2585"/>
         <source>Find:</source>
         <translation>Hledat:</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2587"/>
+        <location filename="../src/edytornc.cpp" line="2590"/>
         <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
         <translation>&lt;b&gt;Letter$$&lt;/b&gt; - odpovídá všem číslům.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - odpovídá číslu &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; může být vynecháno, potom rovno 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - odpovídá všem X s hodnotou -10 to 100&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2597"/>
+        <location filename="../src/edytornc.cpp" line="2600"/>
         <source>Replace with:</source>
         <translation>Nahradit:</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2602"/>
+        <location filename="../src/edytornc.cpp" line="2605"/>
         <source>&lt;b&gt;$$OperatorNumber&lt;/b&gt; - do some math on replaced numbers. Operator +-*/&lt;p&gt;$$+1 - will add 1 to replaced numbers&lt;/p&gt;</source>
         <translation>&lt;b&gt;$$OperatorNumber&lt;/b&gt; - udělat nějaké výpočty nad nahrazenými čísly. Operátor +-*/&lt;p&gt;$$+1 - přidá 1 nahrazeným číslům&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2611"/>
+        <location filename="../src/edytornc.cpp" line="2614"/>
         <source>Ignore c&amp;ase</source>
         <translation>Nevšímat si psaní v&amp;elkých a malých písmen</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2614"/>
+        <location filename="../src/edytornc.cpp" line="2617"/>
         <source>&amp;Whole words only</source>
         <translation>Pouze celá &amp;slova</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2618"/>
+        <location filename="../src/edytornc.cpp" line="2621"/>
         <source>Ignore c&amp;omments</source>
         <translation>Nevšímat si &amp;komentářů</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2771"/>
+        <location filename="../src/edytornc.cpp" line="2774"/>
         <source>Serial port toolbar</source>
         <translation>Nástrojový pruh pro sériovou přípojku</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2775"/>
         <location filename="../src/edytornc.cpp" line="2778"/>
+        <location filename="../src/edytornc.cpp" line="2781"/>
         <source>Serial port configuration</source>
         <translation>Nastavení sériové přípojky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2781"/>
-        <location filename="../src/edytornc.cpp" line="2783"/>
+        <location filename="../src/edytornc.cpp" line="2784"/>
+        <location filename="../src/edytornc.cpp" line="2786"/>
         <source>Receive new file</source>
         <translation>Přijmout nový soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2786"/>
-        <location filename="../src/edytornc.cpp" line="2788"/>
+        <location filename="../src/edytornc.cpp" line="2789"/>
+        <location filename="../src/edytornc.cpp" line="2791"/>
         <source>Send current file</source>
         <translation>Poslat nynější soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2792"/>
-        <location filename="../src/edytornc.cpp" line="2794"/>
+        <location filename="../src/edytornc.cpp" line="2795"/>
+        <location filename="../src/edytornc.cpp" line="2797"/>
         <source>Attach current port settings to current directory of programs</source>
         <translation>Přiložit současné nastavení přípojky do nynějšího adresáře s programem</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2798"/>
+        <location filename="../src/edytornc.cpp" line="2801"/>
         <source>Remove settings from the current directory</source>
         <translation>Odstranit nastavení přípojky z nynějšího adresáře</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2800"/>
+        <location filename="../src/edytornc.cpp" line="2803"/>
         <source>Remove settings from the directory</source>
         <translation>Odstranit nastavení přípojky z adresáře</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2803"/>
-        <location filename="../src/edytornc.cpp" line="2805"/>
+        <location filename="../src/edytornc.cpp" line="2806"/>
+        <location filename="../src/edytornc.cpp" line="2808"/>
         <source>Check serial port settings</source>
         <translation>Prověřit nastavení sériové přípojky</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2809"/>
-        <location filename="../src/edytornc.cpp" line="2810"/>
+        <location filename="../src/edytornc.cpp" line="2812"/>
+        <location filename="../src/edytornc.cpp" line="2813"/>
         <source>Close send/receive toolbar</source>
         <translation>Zavřít nástrojový pruh poslat/přijmout</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3954"/>
+        <location filename="../src/edytornc.cpp" line="3957"/>
         <source>Session %1 loaded</source>
         <translation>Sezení %1 nahráno</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="4079"/>
         <location filename="../src/edytornc.cpp" line="4082"/>
+        <location filename="../src/edytornc.cpp" line="4085"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2972"/>
+        <location filename="../src/edytornc.cpp" line="2975"/>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation># ++++++ Příklad ++++++</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2974"/>
+        <location filename="../src/edytornc.cpp" line="2977"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
         <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - zastavení programu, bezpodmíněčné&quot;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1722"/>
+        <location filename="../src/edytornc.cpp" line="1723"/>
         <source>Remove text using regular expressions</source>
         <translation>Odstranit text pomocí regulárních výrazů</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1803"/>
+        <location filename="../src/edytornc.cpp" line="1804"/>
         <source>Comment ;</source>
         <translation>Komentář ;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1804"/>
+        <location filename="../src/edytornc.cpp" line="1805"/>
         <source>Ctrl+;</source>
         <translation>Ctrl+;</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1805"/>
+        <location filename="../src/edytornc.cpp" line="1806"/>
         <source>Comment/uncomment selected text using semicolon</source>
         <translation>Okomentovat vybraný text pomocí středníku/Zrušit okomentování</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1808"/>
+        <location filename="../src/edytornc.cpp" line="1809"/>
         <source>Comment ()</source>
         <translation>Komentář ()</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1809"/>
+        <location filename="../src/edytornc.cpp" line="1810"/>
         <source>Ctrl+9</source>
         <translation>Ctrl+9</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1810"/>
+        <location filename="../src/edytornc.cpp" line="1811"/>
         <source>Comment/uncomment selected text using parentheses</source>
         <translation>Okomentovat vybraný text pomocí kulatých závorek/Zrušit okomentování</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1815"/>
+        <location filename="../src/edytornc.cpp" line="1816"/>
         <source>Swap/modify axes, selected text or entire program</source>
         <translation>Prohodit/Změnit osy, vybraný text nebo celý program</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1818"/>
+        <location filename="../src/edytornc.cpp" line="1819"/>
         <source>Block Skip remove</source>
         <translation>Odstranění přeskočení bloku</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1820"/>
+        <location filename="../src/edytornc.cpp" line="1821"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1821"/>
+        <location filename="../src/edytornc.cpp" line="1822"/>
         <source>Remove Block Skip /</source>
         <translation>Odstranit přeskočení bloku /</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1824"/>
+        <location filename="../src/edytornc.cpp" line="1825"/>
         <source>Block Skip +</source>
         <translation>Přeskočení bloku +</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1825"/>
+        <location filename="../src/edytornc.cpp" line="1826"/>
         <source>Ctrl+2</source>
         <translation>Ctrl+2</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1826"/>
+        <location filename="../src/edytornc.cpp" line="1827"/>
         <source>Insert/increase Block Skip /</source>
         <translation>Vložit/Zvětšit přeskočení bloku /</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1829"/>
+        <location filename="../src/edytornc.cpp" line="1830"/>
         <source>Block Skip -</source>
         <translation>Přeskočení bloku -</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1830"/>
+        <location filename="../src/edytornc.cpp" line="1831"/>
         <source>Ctrl+3</source>
         <translation>Ctrl+3</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1831"/>
+        <location filename="../src/edytornc.cpp" line="1832"/>
         <source>Insert/decrease Block Skip /</source>
         <translation>Vložit/Zmenšit přeskočení bloku /</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="2079"/>
+        <location filename="../src/edytornc.cpp" line="2080"/>
         <source>LinuxCNC</source>
         <translation>LinuxCNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3092"/>
+        <location filename="../src/edytornc.cpp" line="3095"/>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
         <translation>Všechny soubory (*.* *);;Programové soubory CNC *.nc (*.nc);;Programové soubory CNC *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Dokumenty *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Kresby *.dwg *.dxf (*.dwg *.dxf);;Obrázky *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Textové soubory *.txt (*.txt)</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3102"/>
+        <location filename="../src/edytornc.cpp" line="3105"/>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
         <translation>Všechny soubory (*.* *);;Programové soubory CNC (*.nc);;Programové soubory CNC (*.nc *.ngc *.min *.anc *.cnc);;Dokumenty (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Kresby (*.dwg *.dxf);;Obrázky (*.jpg *.bmp *.svg);;Textové soubory (*.txt)</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3608"/>
+        <location filename="../src/edytornc.cpp" line="3611"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3515"/>
+        <location filename="../src/edytornc.cpp" line="3518"/>
         <source>&lt;b&gt;Project: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Projekt: &quot;%1&quot;
@@ -1843,77 +1843,77 @@ Přesto zavřít?</translation>
         <translation>Prázdný soubor</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3516"/>
+        <location filename="../src/edytornc.cpp" line="3519"/>
         <source>Do you want to save your changes ?</source>
         <translation>Chcete uložit své změny?</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3565"/>
+        <location filename="../src/edytornc.cpp" line="3568"/>
         <source>Open files</source>
         <translation>Otevřít soubory</translation>
     </message>
     <message>
         <location filename="../src/edytornc.ui" line="529"/>
-        <location filename="../src/edytornc.cpp" line="3577"/>
+        <location filename="../src/edytornc.cpp" line="3580"/>
         <source>Info</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3178"/>
+        <location filename="../src/edytornc.cpp" line="3181"/>
         <source>Project opened</source>
         <translation>Projekt otevřen</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1034"/>
+        <location filename="../src/edytornc.cpp" line="1035"/>
         <source>Cannot write tmp file &quot;%1&quot;.
  %2</source>
         <translation>Nelze zapsat dočasný soubor &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1871"/>
+        <location filename="../src/edytornc.cpp" line="1872"/>
         <source>&amp;Create global cnc tooltips</source>
         <translation>&amp;Vytvořit celkové nástrojové rady CNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1872"/>
+        <location filename="../src/edytornc.cpp" line="1873"/>
         <source>Create default global cnc tooltips file</source>
         <translation>Vytvořit soubor s výchozími celkovými nástrojovými radami CNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1875"/>
+        <location filename="../src/edytornc.cpp" line="1876"/>
         <source>&amp;Create user cnc tooltips</source>
         <translation>&amp;Vytvořit uživatelské nástrojové rady CNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="1876"/>
+        <location filename="../src/edytornc.cpp" line="1877"/>
         <source>Create/edit user cnc tooltips file</source>
         <translation>Vytvořit/Upravit uživatelské nástrojové rady CNC</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3218"/>
+        <location filename="../src/edytornc.cpp" line="3221"/>
         <source>Project saved</source>
         <translation>Projekt uložen</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3343"/>
-        <location filename="../src/edytornc.cpp" line="3366"/>
+        <location filename="../src/edytornc.cpp" line="3346"/>
+        <location filename="../src/edytornc.cpp" line="3369"/>
         <source>EdytorNC project file *.ncp (*.ncp)</source>
         <translation>Projektový soubor EdytorNC *.ncp (*.ncp)</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3347"/>
-        <location filename="../src/edytornc.cpp" line="3370"/>
+        <location filename="../src/edytornc.cpp" line="3350"/>
+        <location filename="../src/edytornc.cpp" line="3373"/>
         <source>EdytorNC project file (*.ncp)</source>
         <translation>Projektový soubor EdytorNC (*.ncp)</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3352"/>
+        <location filename="../src/edytornc.cpp" line="3355"/>
         <source>Select the project name and location...</source>
         <translation>Vyberte název a umístění projektu...</translation>
     </message>
     <message>
-        <location filename="../src/edytornc.cpp" line="3375"/>
+        <location filename="../src/edytornc.cpp" line="3378"/>
         <source>Open the project file...</source>
         <translation>Otevřít projektový soubor...</translation>
     </message>
@@ -2506,7 +2506,7 @@ Změněn - přijatý soubor je upraven</translation>
     <message>
         <location filename="../src/mdichild.cpp" line="94"/>
         <location filename="../src/mdichild.cpp" line="121"/>
-        <location filename="../src/mdichild.cpp" line="333"/>
+        <location filename="../src/mdichild.cpp" line="283"/>
         <source>EdytorNC</source>
         <translation></translation>
     </message>
@@ -2550,64 +2550,64 @@ Změněn - přijatý soubor je upraven</translation>
         <translation>Textové soubory (*.txt);;Všechny soubory (*.* *)</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="334"/>
+        <location filename="../src/mdichild.cpp" line="284"/>
         <source>Cannot write file &quot;%1&quot;.
  %2</source>
         <translation>Nelze zapsat soubor &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="264"/>
+        <location filename="../src/mdichild.cpp" line="300"/>
         <source>(DATE)</source>
         <translation>(Datum)</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="275"/>
+        <location filename="../src/mdichild.cpp" line="310"/>
         <source>DATE</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="361"/>
+        <location filename="../src/mdichild.cpp" line="368"/>
         <source>&lt;b&gt;File: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Soubor: &quot;%1&quot;
  byl upraven.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="362"/>
+        <location filename="../src/mdichild.cpp" line="369"/>
         <source>Do you want to save your changes ?</source>
         <translation>Chcete uložit své změny?</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="950"/>
+        <location filename="../src/mdichild.cpp" line="957"/>
         <source>Remove space</source>
         <comment>Slow operation title in MDIChild</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="1134"/>
+        <location filename="../src/mdichild.cpp" line="1141"/>
         <source>Insert space</source>
         <comment>Slow operation title in MDIChild</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="1273"/>
+        <location filename="../src/mdichild.cpp" line="1280"/>
         <source>Inserted : %1 dots.</source>
         <translation>Vloženo: %1 teček.</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="1344"/>
+        <location filename="../src/mdichild.cpp" line="1351"/>
         <source>Converted : %1 numbers.</source>
         <translation>Převedeno: %1 čísel.</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="1972"/>
-        <location filename="../src/mdichild.cpp" line="2163"/>
+        <location filename="../src/mdichild.cpp" line="1979"/>
+        <location filename="../src/mdichild.cpp" line="2170"/>
         <source>EdytorNc - compile macro</source>
         <translation>EdytorNc - sestavit makro</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="1973"/>
+        <location filename="../src/mdichild.cpp" line="1980"/>
         <source>No constant definition .
 {BEGIN}
 ...
@@ -2620,17 +2620,17 @@ Změněn - přijatý soubor je upraven</translation>
  Žádné makro ?</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2010"/>
+        <location filename="../src/mdichild.cpp" line="2017"/>
         <source>EdytorNC - compile macro</source>
         <translation>EdytorNc - sestavit makro</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2011"/>
+        <location filename="../src/mdichild.cpp" line="2018"/>
         <source>Param list: no bracket &apos;}&apos; !</source>
         <translation>Seznam parametrů: žádné závorky &apos;}&apos;!</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2140"/>
+        <location filename="../src/mdichild.cpp" line="2147"/>
         <source>No ( or ) !</source>
         <translation>Žádné (or - nebo)!</translation>
     </message>
@@ -2643,209 +2643,209 @@ Prověřte +-*/.
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2148"/>
+        <location filename="../src/mdichild.cpp" line="2155"/>
         <source>Wrong number !</source>
         <translation>Nesprávné číslo!</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2152"/>
+        <location filename="../src/mdichild.cpp" line="2159"/>
         <source>Unknown math function !
 &quot;%1&quot;</source>
         <translation>Neznámá matematická funkce!
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2156"/>
+        <location filename="../src/mdichild.cpp" line="2163"/>
         <source>Decimal point or minus writed two times !
 &quot;%1&quot;</source>
         <translation>Desetinná tečka nebo mínus zapsáno dvakrát!
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2160"/>
+        <location filename="../src/mdichild.cpp" line="2167"/>
         <source>Unknown error !</source>
         <translation>Neznámá chyba!</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2173"/>
+        <location filename="../src/mdichild.cpp" line="2180"/>
         <source>Syntax error</source>
         <translation>Chyba ve skladbě</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2177"/>
+        <location filename="../src/mdichild.cpp" line="2184"/>
         <source>Unbalanced parentheses</source>
         <translation>Nevyrovnané závorky</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2181"/>
+        <location filename="../src/mdichild.cpp" line="2188"/>
         <source>No expression present</source>
         <translation>Není přítomen žádný výraz</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2185"/>
+        <location filename="../src/mdichild.cpp" line="2192"/>
         <source>Equals sign expected</source>
         <translation>Očekáváno znaménko rovnosti (rovnítko)</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2189"/>
+        <location filename="../src/mdichild.cpp" line="2196"/>
         <source>Not a variable</source>
         <translation>Není proměnná</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2193"/>
+        <location filename="../src/mdichild.cpp" line="2200"/>
         <source>Label table full</source>
         <translation>Oblast proměnných plná</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2197"/>
+        <location filename="../src/mdichild.cpp" line="2204"/>
         <source>Duplicate label</source>
         <translation>Zdvojené označení</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2201"/>
+        <location filename="../src/mdichild.cpp" line="2208"/>
         <source>Undefined label</source>
         <translation>Nestanovené označení</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2205"/>
+        <location filename="../src/mdichild.cpp" line="2212"/>
         <source>THEN expected</source>
         <translation>Očekáváno THEN</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2209"/>
+        <location filename="../src/mdichild.cpp" line="2216"/>
         <source>TO expected</source>
         <translation>Očekáváno TO</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2213"/>
+        <location filename="../src/mdichild.cpp" line="2220"/>
         <source>Too many nested FOR loops</source>
         <translation>Příliš mnoho členitých smyček (FOR)</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2217"/>
+        <location filename="../src/mdichild.cpp" line="2224"/>
         <source>NEXT without FOR</source>
         <translation>NEXT bez FOR</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2221"/>
+        <location filename="../src/mdichild.cpp" line="2228"/>
         <source>Too many nested GOSUBs</source>
         <translation>Příliš mnoho členitých GOSUBs</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2225"/>
+        <location filename="../src/mdichild.cpp" line="2232"/>
         <source>RETURN without GOSUBs</source>
         <translation>RETURN bez GOSUBs</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2229"/>
+        <location filename="../src/mdichild.cpp" line="2236"/>
         <source>Unknown error</source>
         <translation>Neznámá chyba</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2232"/>
+        <location filename="../src/mdichild.cpp" line="2239"/>
         <source>EdytorNc - compile basic</source>
         <translation>EdytorNc - sestavit základy</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3835"/>
+        <location filename="../src/mdichild.cpp" line="3842"/>
         <source>Comment ;</source>
         <translation>Komentář ;</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3836"/>
+        <location filename="../src/mdichild.cpp" line="3843"/>
         <source>Ctrl+;</source>
         <translation>Ctrl+;</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3837"/>
+        <location filename="../src/mdichild.cpp" line="3844"/>
         <source>Comment/uncomment selected text using semicolon</source>
         <translation>Okomentovat vybraný text pomocí středníku</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3842"/>
+        <location filename="../src/mdichild.cpp" line="3849"/>
         <source>Comment ()</source>
         <translation>Komentář ()</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3843"/>
+        <location filename="../src/mdichild.cpp" line="3850"/>
         <source>Ctrl+9</source>
         <translation>Ctrl+9</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3844"/>
+        <location filename="../src/mdichild.cpp" line="3851"/>
         <source>Comment/uncomment selected text using parentheses</source>
         <translation>Okomentovat vybraný text pomocí kulatých závorek</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3867"/>
+        <location filename="../src/mdichild.cpp" line="3874"/>
         <source>Block Skip remove</source>
         <translation>Odstranění přeskočení bloku</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3868"/>
+        <location filename="../src/mdichild.cpp" line="3875"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3869"/>
+        <location filename="../src/mdichild.cpp" line="3876"/>
         <source>Remove Block Skip /</source>
         <translation>Odstranit přeskočení bloku /</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3875"/>
+        <location filename="../src/mdichild.cpp" line="3882"/>
         <source>Inline calculator</source>
         <translation>Vestavěná kalkulačka</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3877"/>
+        <location filename="../src/mdichild.cpp" line="3884"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3938"/>
+        <location filename="../src/mdichild.cpp" line="3945"/>
         <source>You can use:
 </source>
         <translation>Můžete použít:</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3948"/>
+        <location filename="../src/mdichild.cpp" line="3955"/>
         <source>Press Enter to accept or click anywere to canacel</source>
         <translation>Stiskněte klávesu Enter nebo klepněte kamkoli pro zrušení</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3850"/>
+        <location filename="../src/mdichild.cpp" line="3857"/>
         <source>Block Skip +</source>
         <translation>Přeskočení bloku +</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="2144"/>
+        <location filename="../src/mdichild.cpp" line="2151"/>
         <source>Function parameter not found ! 
  Check +-*/.
 &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3852"/>
+        <location filename="../src/mdichild.cpp" line="3859"/>
         <source>Ctrl+2</source>
         <translation>Ctrl+2</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3853"/>
+        <location filename="../src/mdichild.cpp" line="3860"/>
         <source>Insert/increase Block Skip /</source>
         <translation>Vložit/Zvětšit přeskočení bloku /</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3858"/>
+        <location filename="../src/mdichild.cpp" line="3865"/>
         <source>Block Skip -</source>
         <translation>Přeskočení bloku -</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3860"/>
+        <location filename="../src/mdichild.cpp" line="3867"/>
         <source>Ctrl+3</source>
         <translation>Ctrl+3</translation>
     </message>
     <message>
-        <location filename="../src/mdichild.cpp" line="3861"/>
+        <location filename="../src/mdichild.cpp" line="3868"/>
         <source>Insert/decrease Block Skip /</source>
         <translation>Vložit/Zmenšit přeskočení bloku /</translation>
     </message>
@@ -4328,37 +4328,37 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="364"/>
+        <location filename="../src/setupdialog.ui" line="341"/>
         <source>&amp;Internal CAPS LOCK</source>
         <translation>Zapnout &amp;vnitřně nastavovací tlačítko (CAPS LOCK)</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="804"/>
+        <location filename="../src/setupdialog.ui" line="814"/>
         <source>Default highlight style:</source>
         <translation>Výchozí zvýrazňovací styl:</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="305"/>
+        <location filename="../src/setupdialog.ui" line="318"/>
         <source>&amp;Syntax highlight</source>
         <translation>&amp;Zvýraznění skladby</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="312"/>
+        <location filename="../src/setupdialog.ui" line="325"/>
         <source>Highlighed current line color</source>
         <translation>Barevné zvýraznění nynějšího řádku</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="315"/>
+        <location filename="../src/setupdialog.ui" line="328"/>
         <source>Hi&amp;ghlighed current line color</source>
         <translation>Barevné zvý&amp;raznění nynějšího řádku</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="767"/>
+        <location filename="../src/setupdialog.ui" line="777"/>
         <source>&amp;Editor tabbed mode</source>
         <translation>&amp;Editor v režimu s kartami</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="341"/>
+        <location filename="../src/setupdialog.ui" line="374"/>
         <source>Underline changes</source>
         <translation>Podtrhnout změny</translation>
     </message>
@@ -4373,22 +4373,22 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
         <translation>Pod&amp;trhnout barvu</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="418"/>
+        <location filename="../src/setupdialog.ui" line="428"/>
         <source>File</source>
         <translation>Soubor</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="651"/>
+        <location filename="../src/setupdialog.ui" line="661"/>
         <source>Default save directory:</source>
         <translation>Výchozí ukládací adresář:</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="663"/>
+        <location filename="../src/setupdialog.ui" line="673"/>
         <source>Browse...</source>
         <translation>Procházet...</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="447"/>
+        <location filename="../src/setupdialog.ui" line="457"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
@@ -4403,168 +4403,178 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
         <translation>Pozadí</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="488"/>
+        <location filename="../src/setupdialog.ui" line="414"/>
+        <source>When saving, it modifies the date in the comments in the header of the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/setupdialog.ui" line="417"/>
+        <source>Change date on save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/setupdialog.ui" line="498"/>
         <source>Extension to add: </source>
         <translation>Přípona k přidání:</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="498"/>
+        <location filename="../src/setupdialog.ui" line="508"/>
         <source>*.</source>
         <translation>*.</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="508"/>
+        <location filename="../src/setupdialog.ui" line="518"/>
         <source>Add</source>
         <translation>Přidat</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="557"/>
+        <location filename="../src/setupdialog.ui" line="567"/>
         <source>Extension to be added to filename when saving</source>
         <translation>Přípona, která se přidá při ukládání souboru</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="560"/>
+        <location filename="../src/setupdialog.ui" line="570"/>
         <source>*.Aaa</source>
         <translation>*.Aaa</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="563"/>
+        <location filename="../src/setupdialog.ui" line="573"/>
         <source>*.nc</source>
         <translation>*.nc</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="601"/>
+        <location filename="../src/setupdialog.ui" line="611"/>
         <source>Guess file name by:</source>
         <translation>Navrhnout název souboru podle:</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="610"/>
+        <location filename="../src/setupdialog.ui" line="620"/>
         <source>Program number</source>
         <translation>Číslo programu</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="626"/>
+        <location filename="../src/setupdialog.ui" line="636"/>
         <source>Ensure that first comment in program is valid file name</source>
         <translation>Ujistit se, že první komentář (poznámka) v programu je platný název programu</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="629"/>
+        <location filename="../src/setupdialog.ui" line="639"/>
         <source>First comment</source>
         <translation>První komentář</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="681"/>
+        <location filename="../src/setupdialog.ui" line="691"/>
         <source>Other</source>
         <translation>Jiné</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="689"/>
+        <location filename="../src/setupdialog.ui" line="699"/>
         <source>Calculator exe :</source>
         <translation>Kalkulačka exe:</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="703"/>
+        <location filename="../src/setupdialog.ui" line="713"/>
         <source>&amp;Browse</source>
         <translation>&amp;Procházet</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="718"/>
+        <location filename="../src/setupdialog.ui" line="728"/>
         <source>Window title</source>
         <translation>Název okna</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="724"/>
+        <location filename="../src/setupdialog.ui" line="734"/>
         <source>Show file name</source>
         <translation>Ukázat název souboru</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="731"/>
+        <location filename="../src/setupdialog.ui" line="741"/>
         <source>Show file path</source>
         <translation>Ukázat cestu k souboru</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="738"/>
+        <location filename="../src/setupdialog.ui" line="748"/>
         <source>Show program title</source>
         <translation>Ukázat název programu</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="774"/>
+        <location filename="../src/setupdialog.ui" line="784"/>
         <source>If set, all files will be opened in read-only mode</source>
         <translation>Je-li nastaveno, všechny soubory budou otevřeny v režimu pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="777"/>
+        <location filename="../src/setupdialog.ui" line="787"/>
         <source>&amp;Viewer mode</source>
         <translation>Režim &amp;prohlížeče</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="696"/>
+        <location filename="../src/setupdialog.ui" line="706"/>
         <source>Calculator executable</source>
         <translation>Spustitelný soubor kalkulačky</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="381"/>
-        <location filename="../src/setupdialog.ui" line="384"/>
+        <location filename="../src/setupdialog.ui" line="391"/>
+        <location filename="../src/setupdialog.ui" line="394"/>
         <source>Clear undo/redo history on save</source>
         <translation>Vyprázdnit při uložení historii kroků Zpět/Znovu</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="371"/>
+        <location filename="../src/setupdialog.ui" line="381"/>
         <source>Clear underline changes on save</source>
         <translation>Vyprázdnit při uložení podtržení změn</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="374"/>
+        <location filename="../src/setupdialog.ui" line="384"/>
         <source>Clear underline on save</source>
         <translation>Vyprázdnit při uložení podtržení</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="391"/>
+        <location filename="../src/setupdialog.ui" line="364"/>
         <source>Show editor tooltips</source>
         <translation>Ukázat nástrojové rady k editoru</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="550"/>
+        <location filename="../src/setupdialog.ui" line="560"/>
         <source>Default save extension:</source>
         <translation>Výchozí ukládací přípona:</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="797"/>
+        <location filename="../src/setupdialog.ui" line="807"/>
         <source>Default highlight style and tooltip mode</source>
         <translation>Výchozí zvýrazňovací styl a režim nástrojových rad</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="811"/>
+        <location filename="../src/setupdialog.ui" line="821"/>
         <source>Do not reopen the editor windows at startup</source>
         <translation>Neotvírat znovu okna editoru při spuštění</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="814"/>
+        <location filename="../src/setupdialog.ui" line="824"/>
         <source>Start empty window</source>
         <translation>Začínat s prázdnými okny</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="821"/>
+        <location filename="../src/setupdialog.ui" line="831"/>
         <source>Do not show warning message when open file is modified by another application.</source>
         <translation>Neukazovat varovnou zprávu, když byl otevřený soubor změněn jiným programem.</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="824"/>
+        <location filename="../src/setupdialog.ui" line="834"/>
         <source>Disable file change monitor</source>
         <translation>Vypnout hlášení o změně zdrojového souboru</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="855"/>
+        <location filename="../src/setupdialog.ui" line="865"/>
         <source>&amp;Ok</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="882"/>
+        <location filename="../src/setupdialog.ui" line="892"/>
         <source>&amp;Default</source>
         <translation>&amp;Výchozí</translation>
     </message>
     <message>
-        <location filename="../src/setupdialog.ui" line="909"/>
+        <location filename="../src/setupdialog.ui" line="919"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zrušit</translation>
     </message>
@@ -4575,78 +4585,78 @@ Volba souborového serveru není povolena v nastavení sériové přípojky</tra
     </message>
     <message>
         <location filename="../src/dialogs.cpp" line="2617"/>
-        <location filename="../src/dialogs.cpp" line="2823"/>
-        <location filename="../src/dialogs.cpp" line="3168"/>
+        <location filename="../src/dialogs.cpp" line="2824"/>
+        <location filename="../src/dialogs.cpp" line="3170"/>
         <source>Current font : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</source>
         <translation>Nynější písmo: &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2781"/>
+        <location filename="../src/dialogs.cpp" line="2782"/>
         <source>AUTO</source>
         <translation>AUTO</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2782"/>
+        <location filename="../src/dialogs.cpp" line="2783"/>
         <source>FANUC</source>
         <translation>FANUC</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2783"/>
+        <location filename="../src/dialogs.cpp" line="2784"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation>HEIDENHAIN DIALOG</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2784"/>
+        <location filename="../src/dialogs.cpp" line="2785"/>
         <source>HEIDENHAIN ISO</source>
         <translation>HEIDENHAIN ISO</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2785"/>
+        <location filename="../src/dialogs.cpp" line="2786"/>
         <source>OKUMA OSP</source>
         <translation>OKUMA OSP</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2786"/>
+        <location filename="../src/dialogs.cpp" line="2787"/>
         <source>PHILIPS</source>
         <translation>PHILIPS</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2787"/>
+        <location filename="../src/dialogs.cpp" line="2788"/>
         <source>SINUMERIK OLD</source>
         <translation>STARÝ SINUMERIK</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2788"/>
+        <location filename="../src/dialogs.cpp" line="2789"/>
         <source>SINUMERIK NEW</source>
         <translation>NOVÝ SINUMERIK</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2789"/>
+        <location filename="../src/dialogs.cpp" line="2790"/>
         <source>LinuxCNC</source>
         <translation>LinuxCNC</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2790"/>
+        <location filename="../src/dialogs.cpp" line="2791"/>
         <source>TOOLTIPS</source>
         <translation>Nástrojové rady</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2832"/>
+        <location filename="../src/dialogs.cpp" line="2833"/>
         <source>Executables (*.exe)</source>
         <translation>Spustitelné soubory (*.exe)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2834"/>
+        <location filename="../src/dialogs.cpp" line="2835"/>
         <source>All files (*)</source>
         <translation>Všechny soubory (*)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="2839"/>
+        <location filename="../src/dialogs.cpp" line="2840"/>
         <source>Select calculator executable</source>
         <translation>Vybrat spustitelný soubor kalkulačky</translation>
     </message>
     <message>
-        <location filename="../src/dialogs.cpp" line="3211"/>
+        <location filename="../src/dialogs.cpp" line="3213"/>
         <source>Select default save directory</source>
         <translation>Vybrat výchozí ukládací adresář</translation>
     </message>

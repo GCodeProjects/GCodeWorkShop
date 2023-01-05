@@ -72,7 +72,7 @@ defineReplace(findFiles) {
 
 
 #
-# function findFiles(modulename, locales)
+# function tsFiles(modulename, locales)
 # Returns a list of files with this $${LANG_PATH}/modulename_lang.ts
 # example :
 # TARGET = bar

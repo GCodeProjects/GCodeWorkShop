@@ -250,65 +250,15 @@ bool MdiChild::saveAs()
 bool MdiChild::saveFile(const QString &fileName)
 {
     int curPos;
-    QRegExp exp;
     QTextCursor cursor;
-
     QFile file(fileName);
     fileChangeMonitorRemovePath(file.fileName());
+    curPos = textEdit->textCursor().position();
 
     if (file.open(QIODevice::WriteOnly)) {
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        curPos = textEdit->textCursor().position();
 
-        QDate dat = QDate::currentDate();
-        exp.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
-        cursor = textEdit->textCursor();
-        cursor.setPosition(0);
-        //setTextCursor(cursor);
-
-        cursor = textEdit->document()->find(exp, cursor);
-
-        if (!cursor.isNull()) {
-            textEdit->setUpdatesEnabled(false);
-            cursor.beginEditBlock();
-            cursor.removeSelectedText();
-            cursor.insertText(tr("DATE") + ": " + dat.toString(Qt::DefaultLocaleShortDate));
-            cursor.endEditBlock();
-
-            textEdit->setUpdatesEnabled(true);
-            textEdit->repaint();
-        } else {
-            cursor = textEdit->textCursor();
-
-            exp.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
-            cursor.setPosition(0);
-            cursor = textEdit->document()->find(exp, cursor);
-
-            if (cursor.isNull()) {
-                exp.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
-                cursor.setPosition(0);
-                cursor = textEdit->document()->find(exp, cursor);
-            }
-
-            if (!cursor.isNull()) {
-                textEdit->setUpdatesEnabled(false);
-                cursor.beginEditBlock();
-                QString text = cursor.selectedText();
-                cursor.removeSelectedText();
-
-                if (text.contains('(')) {
-                    text = "(" + dat.toString(Qt::DefaultLocaleShortDate) + ")";
-                } else {
-                    text = ";" + dat.toString(Qt::DefaultLocaleShortDate);
-                }
-
-                cursor.insertText(text);
-                cursor.endEditBlock();
-
-                textEdit->setUpdatesEnabled(true);
-                textEdit->repaint();
-            }
-        }
+        changeDateInComment();
 
         QTextStream out(&file);
 
@@ -337,6 +287,63 @@ bool MdiChild::saveFile(const QString &fileName)
     }
 
     return false;
+}
+
+void MdiChild::changeDateInComment()
+{
+    if (!mdiWindowProperites.changeDateInComment) {
+        return;
+    }
+
+    QRegExp exp;
+    QDate dat = QDate::currentDate();
+    exp.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
+    QTextCursor cursor = textEdit->textCursor();
+    cursor.setPosition(0);
+
+    cursor = textEdit->document()->find(exp, cursor);
+
+    if (!cursor.isNull()) {
+        textEdit->setUpdatesEnabled(false);
+        cursor.beginEditBlock();
+        cursor.removeSelectedText();
+        cursor.insertText(tr("DATE") + ": " + dat.toString(Qt::DefaultLocaleShortDate));
+        cursor.endEditBlock();
+
+        textEdit->setUpdatesEnabled(true);
+        textEdit->repaint();
+    } else {
+        cursor = textEdit->textCursor();
+
+        exp.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
+        cursor.setPosition(0);
+        cursor = textEdit->document()->find(exp, cursor);
+
+        if (cursor.isNull()) {
+            exp.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
+            cursor.setPosition(0);
+            cursor = textEdit->document()->find(exp, cursor);
+        }
+
+        if (!cursor.isNull()) {
+            textEdit->setUpdatesEnabled(false);
+            cursor.beginEditBlock();
+            QString text = cursor.selectedText();
+            cursor.removeSelectedText();
+
+            if (text.contains('(')) {
+                text = "(" + dat.toString(Qt::DefaultLocaleShortDate) + ")";
+            } else {
+                text = ";" + dat.toString(Qt::DefaultLocaleShortDate);
+            }
+
+            cursor.insertText(text);
+            cursor.endEditBlock();
+
+            textEdit->setUpdatesEnabled(true);
+            textEdit->repaint();
+        }
+    }
 }
 
 void MdiChild::closeEvent(QCloseEvent *event)

@@ -851,6 +851,7 @@ void EdytorNc::config()
             opt.editorToolTips = defaultMdiWindowProperites.editorToolTips;
             opt.windowMode = defaultMdiWindowProperites.windowMode;
             opt.readOnly = defaultMdiWindowProperites.defaultReadOnly;
+            opt.changeDateInComment = defaultMdiWindowProperites.changeDateInComment;
 
             opt.saveExtension = defaultMdiWindowProperites.saveExtension;
             opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
@@ -2181,6 +2182,7 @@ void EdytorNc::readSettings()
 
     defaultMdiWindowProperites.guessFileNameByProgNum = settings.value("GuessFileNameByProgNum",
             true).toBool();
+    defaultMdiWindowProperites.changeDateInComment = settings.value("ChangeDateInComment", false).toBool();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
 
@@ -2312,6 +2314,7 @@ void EdytorNc::writeSettings()
     settings.setValue("StartEmpty", defaultMdiWindowProperites.startEmpty);
 
     settings.setValue("GuessFileNameByProgNum", defaultMdiWindowProperites.guessFileNameByProgNum);
+    settings.setValue("ChangeDateInComment", defaultMdiWindowProperites.changeDateInComment);
 
     settings.setValue("FileDialogState", fileDialogState);
     settings.setValue("RecentFiles", m_recentFiles);
