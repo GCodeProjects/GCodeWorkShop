@@ -1,7 +1,7 @@
 
 TEMPLATE = subdirs
 CONFIG += ordered
-SUBDIRS = 3rdparty src-common src
+SUBDIRS = 3rdparty src-common src sfs
 
 
 include(common.pri)
@@ -23,6 +23,7 @@ doc.files = $$PROJECT_ROOT_PATH/README.md
 unix {
     mime.files = $$PROJECT_ROOT_PATH/install/linux/application-x-g-code.xml
     desktop.files = $$PROJECT_ROOT_PATH/install/linux/edytornc.desktop
+#   desktop.files += $$PROJECT_ROOT_PATH/install/linux/sfs.desktop
 
     examples.path = $${PREFIX}/share/edytornc/examples
     doc.path = $${PREFIX}/share/doc/edytornc
