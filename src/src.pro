@@ -114,11 +114,6 @@ TRANSLATIONS = $$tsFiles()
 #######################################
 
 unix {
-    !defined(PREFIX, var) {
-        PREFIX = /usr/local/
-        message(seting PREFIX = $$PREFIX)
-    }
-
     target.path = $${PREFIX}/bin
 
     INSTALLS += target

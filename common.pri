@@ -1,26 +1,18 @@
-# http://itnotesblog.ru/note.php?id=3
 
 
 PROJECT_ROOT_PATH = $${PWD}
-
-OS_SUFFIX = unc
-win32:  OS_SUFFIX = win
-linux*: OS_SUFFIX = linux
-macx:   OS_SUFFIX = macx
-
-OS_SUFFIX = $${OS_SUFFIX}.$${QMAKE_HOST.arch}
+PROJECT_BUILD_PATH = $$shadowed($$PROJECT_ROOT_PATH)
 
 CONFIG(debug, debug|release) {
     BUILD_FLAG = debug
+    CONFIG *= warn_on
 } else {
     BUILD_FLAG = release
     # Supress debug message
     DEFINES *= QT_NO_DEBUG_OUTPUT # QT_NO_INFO_OUTPUT
 }
 
-BUILD_FLAG = $${OS_SUFFIX}.$${BUILD_FLAG}
-
-CONFIG *= c++11 warn_on
+CONFIG *= c++11
 CONFIG -= debug_and_release debug_and_release_target
 
 # moc doesn't detect Q_OS_LINUX correctly, so add this to make it work
@@ -30,25 +22,23 @@ LANG_PATH = $${PROJECT_ROOT_PATH}/lang
 # define locales for translation
 LANG_LIST = pl ca de fi cs_CZ es nl ru
 
-IMPORT_PATH = $${PROJECT_ROOT_PATH}/3rdparty
-IMPORT_LIBS_PATH = $${IMPORT_PATH}/lib/$${BUILD_FLAG}
+LIBS_PATH = $${PROJECT_BUILD_PATH}/libs
 BIN_PATH = $${PROJECT_ROOT_PATH}/bin/$${BUILD_FLAG}
-
-BUILD_PATH = $${PROJECT_ROOT_PATH}/build/$${BUILD_FLAG}/$${TARGET}
-RCC_DIR = $${BUILD_PATH}/rcc
-UI_DIR = $${BUILD_PATH}/ui
-MOC_DIR = $${BUILD_PATH}/moc
-OBJECTS_DIR = $${BUILD_PATH}/obj
 
 DESTDIR = $${BIN_PATH}
 CONFIG(staticlib) {
-    DESTDIR = $${IMPORT_LIBS_PATH}
+    DESTDIR = $$LIBS_PATH
 }
 
-LIBS += -L$${IMPORT_LIBS_PATH} -L$${BIN_PATH}
+LIBS += -L$${LIBS_PATH} -L$${BIN_PATH}
 INCLUDEPATH += $${PROJECT_ROOT_PATH}/include
-INCLUDEPATH += $${IMPORT_PATH}
-INCLUDEPATH += $${IMPORT_PATH}/include
+INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty
+INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty/include
+
+!defined(PREFIX, var) {
+    unix:PREFIX = /usr/local/
+    win32:PREFIX = $$(programfiles)
+}
 
 
 #

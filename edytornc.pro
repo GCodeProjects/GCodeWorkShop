@@ -21,11 +21,6 @@ doc.files = $$PROJECT_ROOT_PATH/README.md
 #######################################
 
 unix {
-    !defined(PREFIX, var) {
-        PREFIX = /usr/local
-        message(seting PREFIX = $$PREFIX)
-    }
-
     mime.files = $$PROJECT_ROOT_PATH/install/linux/application-x-g-code.xml
     desktop.files = $$PROJECT_ROOT_PATH/install/linux/edytornc.desktop
 
