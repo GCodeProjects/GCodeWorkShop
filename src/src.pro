@@ -73,7 +73,6 @@ TRANSLATIONS = $$tsFiles()
 
 unix {
     target.path = $${PREFIX}/bin
-
     INSTALLS += target
 }
 
@@ -82,4 +81,6 @@ macx {
 }
 
 win32 {
+    target.path = $${PREFIX}/bin
+    INSTALLS += target
 }

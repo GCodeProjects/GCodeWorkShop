@@ -14,7 +14,7 @@ lrelease.commands = lrelease $$LANG_PATH/*.ts
 
 translate.files = $$LANG_PATH/*.qm
 examples.files = $$PROJECT_ROOT_PATH/examples/*
-doc.files = $$PROJECT_ROOT_PATH/README.md
+doc.files = $$PROJECT_ROOT_PATH/README.md $$PROJECT_ROOT_PATH/doc/EdytorNC_SerialTransmission_Help.html
 
 
 # target platforms dependencies
@@ -43,4 +43,9 @@ macx {
 }
 
 win32 {
+    examples.path = $${PREFIX}/examples
+    doc.path = $${PREFIX}/doc
+    translate.path = $${PREFIX}/lang
+
+    INSTALLS += translate examples doc
 }
