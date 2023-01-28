@@ -1,7 +1,7 @@
 
 TEMPLATE = subdirs
 CONFIG += ordered
-SUBDIRS = 3rdparty src
+SUBDIRS = 3rdparty src-common src
 
 
 include(common.pri)
