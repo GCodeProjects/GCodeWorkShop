@@ -1,0 +1,61 @@
+name: Qt5 build tests
+
+on:
+  push:
+    branches-ignore:
+      - master
+    tags-ignore:
+  pull_request:
+
+env:
+  QT_VERSION: 5.14.1
+  QT_PACKAGES: qtprintsupport qtserialport qtnetwork
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    #continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - {
+            name:  "Win x64",
+            os:    windows-latest,
+            build:  "nmake"
+          }
+        - {
+            name:  "Linux x64",
+            os:    "ubuntu-18.04",
+            build:  "make"
+          }
+        - {
+            name:  "macOS x64",
+            os:    macos-latest,
+            build:  "make"
+          }
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+      with:
+        submodules: true
+
+    - name: MSVC Environment Setup
+      if: contains( matrix.config.os, 'Windows' )
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        #cache: 'true'
+        version:  ${{ env.QT_VERSION }}
+        modules: ${{ env.QT_PACKAGES }}
+
+    - name: Setup project
+      run: qmake -recursive CONFIG+=debug
+
+    - name: Build project
+      run: ${{ matrix.config.build }}
