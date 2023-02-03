@@ -27,6 +27,10 @@
  *                                                                         *
  ***************************************************************************/
 
+// Enable the M_PI constant in MSVC
+// see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
+#define _USE_MATH_DEFINES
+
 #include <math.h>
 #include <ctype.h>
 #include <stdlib.h>
