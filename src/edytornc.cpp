@@ -3091,17 +3091,7 @@ void EdytorNc::projectAdd()
         return;
     }
 
-#ifdef Q_OS_LINUX
-    QString filters = tr("All files (*.* *);;"
-                         "CNC programs files *.nc (*.nc);;"
-                         "CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;"
-                         "Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;"
-                         "Drawings *.dwg *.dxf (*.dwg *.dxf);;"
-                         "Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;"
-                         "Text files *.txt (*.txt)");
-#endif
 
-#ifdef Q_OS_WIN32
     QString filters = tr("All files (*.* *);;"
                          "CNC programs files (*.nc);;"
                          "CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;"
@@ -3109,8 +3099,6 @@ void EdytorNc::projectAdd()
                          "Drawings (*.dwg *.dxf);;"
                          "Pictures (*.jpg *.bmp *.svg);;"
                          "Text files (*.txt)");
-#endif
-
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Add files to project"),
@@ -3342,14 +3330,7 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex &index)
 
 QString EdytorNc::projectSelectName()
 {
-#ifdef Q_OS_LINUX
-    QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
-#endif
-
-#ifdef Q_OS_WIN32
     QString filters = tr("EdytorNC project file (*.ncp)");
-#endif
-
     QString file = QFileDialog::getSaveFileName(
                        this,
                        tr("Select the project name and location..."),
@@ -3365,14 +3346,7 @@ void EdytorNc::projectOpen()
         return;
     }
 
-#ifdef Q_OS_LINUX
-    QString filters = tr("EdytorNC project file *.ncp (*.ncp)");
-#endif
-
-#ifdef Q_OS_WIN32
     QString filters = tr("EdytorNC project file (*.ncp)");
-#endif
-
     QString fileName = QFileDialog::getOpenFileName(
                            this,
                            tr("Open the project file..."),
