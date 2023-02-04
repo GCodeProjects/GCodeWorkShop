@@ -6,11 +6,15 @@ SUBDIRS = 3rdparty src-common src sfs
 
 include(common.pri)
 
-QMAKE_EXTRA_TARGETS += lupdate lrelease
+QMAKE_EXTRA_TARGETS += lupdate
+lupdate.depends = lupdateEdytornc lupdateKdiff3
+QMAKE_EXTRA_TARGETS += lupdateEdytornc lupdateKdiff3
+lupdateEdytornc.commands = lupdate $$PROJECT_ROOT_PATH/src $$PROJECT_ROOT_PATH/src-common $$PROJECT_ROOT_PATH/sfs  -ts $$tsFiles(edytornc)
+lupdateKdiff3.commands = lupdate $$PROJECT_ROOT_PATH/3rdparty/kdiff3  -ts $$tsFiles(kdiff3)
 
-lupdate.commands = lupdate edytornc.pro
+QMAKE_EXTRA_TARGETS += lrelease
 lrelease.target = FORCE
-lrelease.commands = lrelease $$LANG_PATH/*.ts
+lrelease.commands = lrelease $$tsFiles(edytornc) $$tsFiles(kdiff3)
 
 translate.files = $$LANG_PATH/*.qm
 examples.files = $$PROJECT_ROOT_PATH/examples/*

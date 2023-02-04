@@ -16,9 +16,6 @@ LIBS += -lkdiff3 -lqtsingleapplication -ledytornc-common
 SOURCES = main.cpp commapp.cpp filechecker.cpp
 HEADERS = commapp.h filechecker.h
 FORMS = commapp.ui filechecker.ui
-RC_FILE = sfs.rc
-
-#TRANSLATIONS = $$tsFiles()
 
 
 # target platforms dependencies
@@ -30,10 +27,11 @@ unix {
 }
 
 macx {
-    LIBS += -framework IOKit -framework CoreFoundation
 }
 
 win32 {
     target.path = $${PREFIX}/bin
     INSTALLS += target
 }
+
+RC_ICONS = images/edytornc.ico images/edytornc48.ico

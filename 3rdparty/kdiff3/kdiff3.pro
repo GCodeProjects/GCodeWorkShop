@@ -33,5 +33,3 @@ HEADERS += \
     gnudiff_system.h \
     gnudiff_diff.h \
     mergeresultwindow.h
-
-TRANSLATIONS =  $$tsFiles()

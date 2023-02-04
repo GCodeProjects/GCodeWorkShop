@@ -58,9 +58,3 @@ FORMS += utils/configdialog.ui
 #######################################
 
 RESOURCES = application.qrc
-
-
-# translations
-#######################################
-
-TRANSLATIONS = $$tsFiles(edytornc)

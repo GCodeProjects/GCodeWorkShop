@@ -76,11 +76,11 @@ defineReplace(tsFiles) {
     module_name = $$1
     locales = $$2
 
-    !defined($$1, var) {
+    !defined(1, var) {
         module_name = $$TARGET
     }
 
-    !defined($$2, var) {
+    !defined(2, var) {
         locales = $$LANG_LIST
     }
 

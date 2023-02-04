@@ -56,17 +56,6 @@ FORMS += i2mdialog.ui \
     sessiondialog.ui \
     newsessiondialog.ui
 
-# resources
-#######################################
-
-RC_FILE = edytornc.rc
-
-
-# translations
-#######################################
-
-TRANSLATIONS = $$tsFiles()
-
 
 # target platforms dependencies
 #######################################
@@ -77,10 +66,11 @@ unix {
 }
 
 macx {
-    LIBS += -framework IOKit -framework CoreFoundation
 }
 
 win32 {
     target.path = $${PREFIX}/bin
     INSTALLS += target
 }
+
+RC_ICONS = images/edytornc.ico images/edytornc48.ico images/ncfile.ico
