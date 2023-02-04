@@ -22,6 +22,7 @@
    51 Franklin Steet, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #include <stdlib.h>
+#include <type_traits>  // std::is_unsigned
 
 #include "gnudiff_diff.h"
 
@@ -34,7 +35,7 @@
 
 /* The type of a hash value.  */
 typedef size_t hash_value;
-verify(hash_value_is_unsigned, ! TYPE_SIGNED(hash_value));
+static_assert(std::is_unsigned<hash_value>::value, "hash_value must be signed");
 
 /* Lines are put into equivalence classes of lines that match in lines_differ.
    Each equivalence class is represented by one of these structures,
@@ -528,8 +529,7 @@ static unsigned char const prime_offset[] = {
 };
 
 /* Verify that this host's size_t is not too wide for the above table.  */
-verify(enough_prime_offsets,
-       sizeof(size_t) * CHAR_BIT <= sizeof prime_offset);
+static_assert(sizeof(size_t) * CHAR_BIT <= sizeof prime_offset, "size_t is too wide");
 
 /* Given a vector of two file_data objects, read the file associated
    with each one, and build the table of equivalence classes.
@@ -556,7 +556,7 @@ GnuDiff::read_files(struct file_data filevec[], bool /*pretend_binary*/)
     /* Allocate (one plus) a prime number of hash buckets.  Use a prime
        number between 1/3 and 2/3 of the value of equiv_allocs,
        approximately.  */
-    for (i = 9;  1 << i < equivs_alloc / 3; i++) {
+    for (i = 9;  (lin) 1 << i < equivs_alloc / 3; i++) {
         continue;
     }
 

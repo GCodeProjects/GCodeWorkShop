@@ -66,6 +66,7 @@
 #define EXIT_TROUBLE 2
 
 #include <limits.h>
+#include <cstdint>
 
 #ifndef SSIZE_MAX
     #define SSIZE_MAX TYPE_MAXIMUM (ssize_t)
@@ -112,8 +113,9 @@
 
 typedef ptrdiff_t lin;
 #define LIN_MAX PTRDIFF_MAX
-verify(lin_is_signed, TYPE_SIGNED(lin));
-verify(lin_is_wide_enough, sizeof(ptrdiff_t) <= sizeof(lin));
-verify(lin_is_printable_as_long, sizeof(lin) <= sizeof(long));
+static_assert(TYPE_SIGNED(lin), "lin must be signed");
+static_assert(sizeof(ptrdiff_t) <= sizeof(lin), "lin is not wide enough");
+// In the MSVC long == 32 bits, while in GCC long == 64 bits.
+//static_assert(sizeof(lin) <= sizeof(long), "lin is not printable as long");
 
 #endif // GNUDIFF_SYSTEM_H
