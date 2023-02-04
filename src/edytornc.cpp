@@ -952,7 +952,7 @@ void EdytorNc::doDiffL()
         }
 
         //        diffApp->close();
-        diffApp->completeInit("", fileName);
+        diffApp->completeInit(fileName, "");
 
         diffLAct->setEnabled(true);
         diffRAct->setEnabled(true);
@@ -982,7 +982,7 @@ void EdytorNc::doDiffR()
         }
 
         //        diffApp->close();
-        diffApp->completeInit(fileName, "");
+        diffApp->completeInit("", fileName);
 
         diffLAct->setEnabled(true);
         diffRAct->setEnabled(true);
@@ -2024,8 +2024,8 @@ void EdytorNc::createToolBars()
     editToolBar->addSeparator();
     editToolBar->addAction(diffAct);
     editToolBar->addSeparator();
-    editToolBar->addAction(diffRAct);
     editToolBar->addAction(diffLAct);
+    editToolBar->addAction(diffRAct);
     editToolBar->addAction(diffEditorAct);
 
     toolsToolBar = new QToolBar(tr("Tools"));
