@@ -9,7 +9,7 @@ on:
 
 env:
   QT_VERSION: 5.14.1
-  QT_PACKAGES: qtprintsupport qtserialport qtnetwork
+  QT_PACKAGES: icu qtbase qtprintsupport qtserialport qtnetwork qttools qttranslations
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
@@ -23,17 +23,17 @@ jobs:
         config:
         - {
             name:  "Win x64",
-            os:    windows-latest,
+            os:    "windows-2019",
             build:  "nmake"
           }
         - {
             name:  "Linux x64",
-            os:    "ubuntu-18.04",
+            os:    "ubuntu-20.04",
             build:  "make"
           }
         - {
             name:  "macOS x64",
-            os:    macos-latest,
+            os:    "macos-11",
             build:  "make"
           }
 
@@ -50,9 +50,10 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        #cache: 'true'
+        cache: "true"
+        cache-key-prefix: ${{ runner.os }}-${{ runner.arch }}-install-qt
         version:  ${{ env.QT_VERSION }}
-        modules: ${{ env.QT_PACKAGES }}
+        archives: ${{ env.QT_PACKAGES }}
 
     - name: Setup project
       run: qmake -recursive CONFIG+=debug
