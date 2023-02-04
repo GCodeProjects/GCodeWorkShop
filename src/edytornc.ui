@@ -581,7 +581,7 @@ Items with non empty titles are not deleted automatically.</string>
   </widget>
  </widget>
  <resources>
-  <include location="application.qrc"/>
+  <include location="../src-common/application.qrc"/>
  </resources>
  <connections/>
 </ui>

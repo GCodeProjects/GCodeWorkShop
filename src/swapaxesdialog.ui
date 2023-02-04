@@ -468,8 +468,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="application.qrc"/>
-  <include location="application.qrc"/>
+  <include location="../src-common/application.qrc"/>
  </resources>
  <connections>
   <connection>
