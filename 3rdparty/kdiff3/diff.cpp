@@ -746,27 +746,29 @@ static void checkLineForComments(
             }
         }
 
-        // C++-comment
+        // Sinumeric style comment
         else if (p[i] == ';') { //p[i]=='/' && i+1<size && p[i+1] =='/'
             int commentStart = i;
             bCommentInLine = true;
-            i += 2;
+            i++;
 
             for (; !isLineOrBufEnd(p, i, size); ++i)
                 ;
 
             if (!bWhite) {
-                memset(&p[commentStart], ' ', i - commentStart);
+                for (int c = commentStart; c < i; c++) {
+                    p[c] = ' ';
+                }
             }
 
             return;
         }
 
-        // C-comment
+        // Fanuc style comment
         else if (p[i] == '(') { //p[i]=='/' && i+1<size && p[i+1] =='*'
             int commentStart = i;
             bCommentInLine = true;
-            i += 2;
+            i++;
 
             for (; !isLineOrBufEnd(p, i, size); ++i) {
                 if (p[i] == ')') { // end of the comment i+1<size && p[i]=='*' && p[i+1]=='/'
@@ -776,7 +778,9 @@ static void checkLineForComments(
                     checkLineForComments(p, i, size, bWhite, bCommentInLine, bStartsOpenComment);
 
                     if (!bWhite) {
-                        memset(&p[commentStart], ' ', i - commentStart);
+                        for (int c = commentStart; c < i; c++) {
+                            p[c] = ' ';
+                        }
                     }
 
                     return;
@@ -822,7 +826,9 @@ void SourceData::FileData::removeComments()
                     checkLineForComments(p, i, size, bWhite, bCommentInLine, bWithinComment);
 
                     if (!bWhite) {
-                        memset(&p[commentStart], ' ', i - commentStart);
+                        for (int c = commentStart; c < i; c++) {
+                            p[c] = ' ';
+                        }
                     }
 
                     break;
