@@ -7,6 +7,8 @@ CONFIG += qt staticlib
 include(../../common.pri)
 
 QT *= widgets
+# QTextCodec QRegExp in Qt6
+greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
 
 SOURCES += \
     difftextwindow.cpp \

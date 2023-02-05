@@ -24,6 +24,12 @@ jobs:
             archives: icu qtbase qtprintsupport qtnetwork qttools qttranslations qtserialport,
             modules:  ""
           }
+        - {
+            # https://doc.qt.io/qt.html
+            version:    6.2.*,
+            archives:   icu qtbase qtprintsupport qtnetwork qttools qttranslations,
+            modules:    qtserialport qt5compat
+          }
         config:
         - {
             name:     Win_x64,

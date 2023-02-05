@@ -7,6 +7,8 @@ CONFIG += qt
 include(../common.pri)
 
 QT *= widgets printsupport serialport network
+# QTextCodec QRegExp uses in kdiff3. In Qt6 need add core5compat
+greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
 
 INCLUDEPATH += include ../src-common ../src-common/include/ $$shadowed(../src-common) ../sfs
 LIBS += -lkdiff3 -lqtsingleapplication -ledytornc-common
