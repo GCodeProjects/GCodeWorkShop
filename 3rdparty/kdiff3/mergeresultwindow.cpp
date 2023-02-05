@@ -46,6 +46,7 @@
 
 #include <iostream>
 
+#include "compatibility.h"
 #include "mergeresultwindow.h"
 #include "optiondialog.h"
 
@@ -488,8 +489,7 @@ int MergeResultWindow::getNofLines()
 
 int MergeResultWindow::getNofVisibleColumns()
 {
-    QFontMetrics fm = fontMetrics();
-    return width() / fm.width('W') - 4;
+    return width() / ::fontWidth(fontMetrics()) - 4;
 }
 
 int MergeResultWindow::getNofVisibleLines()
@@ -1694,7 +1694,7 @@ void MergeResultWindow::writeLine(
 {
     const QFontMetrics &fm = fontMetrics();
     int fontHeight = fm.height();
-    int fontWidth = fm.width("W");
+    int fontWidth = ::fontWidth(fm);
     int fontAscent = fm.ascent();
 
     int topLineYOffset = 0;
@@ -1861,7 +1861,7 @@ void MergeResultWindow::paintEvent(QPaintEvent *)
     bool bOldSelectionContainsData = m_selection.bSelectionContainsData;
     const QFontMetrics &fm = fontMetrics();
     int fontHeight = fm.height();
-    int fontWidth = fm.width("W");
+    int fontWidth = ::fontWidth(fm);
     int fontAscent = fm.ascent();
 
     if (!m_bCursorUpdate) {  // Don't redraw everything for blinking cursor?
@@ -2037,7 +2037,7 @@ void MergeResultWindow::convertToLinePos(int x, int y, int &line, int &pos)
 {
     const QFontMetrics &fm = fontMetrics();
     int fontHeight = fm.height();
-    int fontWidth = fm.width('W');
+    int fontWidth = ::fontWidth(fm);
     int xOffset = (leftInfoWidth - m_firstColumn) * fontWidth;
     int topLineYOffset = 0;
 
@@ -2190,7 +2190,7 @@ void MergeResultWindow::mouseMoveEvent(QMouseEvent *e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics &fm = fontMetrics();
-        int fontWidth = fm.width('W');
+        int fontWidth = ::fontWidth(fm);
         int topLineYOffset = 0;
         int deltaX = 0;
         int deltaY = 0;
@@ -2240,7 +2240,7 @@ void MergeResultWindow::slotCursorUpdate()
         m_bCursorUpdate = true;
 
         const QFontMetrics &fm = fontMetrics();
-        int fontWidth = fm.width("W");
+        int fontWidth = ::fontWidth(fm);
         int topLineYOffset = 0;
         int xOffset = fontWidth * leftInfoWidth;
         int yOffset = (m_cursorYPos - m_firstLine) * fm.height() + topLineYOffset;

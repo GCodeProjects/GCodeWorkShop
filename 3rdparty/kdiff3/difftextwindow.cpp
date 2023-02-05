@@ -32,6 +32,7 @@
 #include <cstdlib>
 #include <assert.h>
 
+#include "compatibility.h"
 #include "difftextwindow.h"
 #include "merger.h"
 #include "optiondialog.h"
@@ -275,7 +276,7 @@ int DiffTextWindow::getFirstLine()
 
 void DiffTextWindow::setFirstColumn(int firstCol)
 {
-    int fontWidth = fontMetrics().width('W');
+    int fontWidth = ::fontWidth(fontMetrics());
     int xOffset = d->leftInfoWidth() * fontWidth;
 
     int newFirstColumn = max2(0, firstCol);
@@ -543,7 +544,7 @@ void DiffTextWindow::mouseMoveEvent(QMouseEvent *e)
 
         // Scroll because mouse moved out of the window
         const QFontMetrics &fm = fontMetrics();
-        int fontWidth = fm.width('W');
+        int fontWidth = ::fontWidth(fm);
         int deltaX = 0;
         int deltaY = 0;
 
@@ -655,7 +656,7 @@ void DiffTextWindow::convertToLinePos(int x, int y, int &line, int &pos)
 {
     const QFontMetrics &fm = fontMetrics();
     int fontHeight = fm.height();
-    int fontWidth = fm.width('W');
+    int fontWidth = ::fontWidth(fm);
     int xOffset = (d->leftInfoWidth() - d->m_firstColumn) * fontWidth;
 
     int yOffset = - d->m_firstLine * fontHeight;
@@ -827,7 +828,7 @@ public:
 
     void drawText(int x, int y, const QString &s)
     {
-        if (y != m_pos.y() || x != m_pos.x() + m_text.length()*m_fm.width("W")) {
+        if (y != m_pos.y() || x != m_pos.x() + m_text.length()*::fontWidth(m_fm)) {
             draw();
             m_pos = QPoint(x, y);
         }
@@ -864,7 +865,7 @@ void DiffTextWindowData::writeLine(
     int fontHeight = fm.height();
     int fontAscent = fm.ascent();
     int fontDescent = fm.descent();
-    int fontWidth = fm.width('W');
+    int fontWidth = ::fontWidth(fm);
 
     int xOffset = (leftInfoWidth() - m_firstColumn) * fontWidth;
     int yOffset = (line - m_firstLine) * fontHeight;
@@ -1112,7 +1113,7 @@ void DiffTextWindow::paintEvent(QPaintEvent *e)
         //QPixmap pixmap( invalidRect.size() );// Remove for Qt4
 
         MyPainter p(this, false, width(),
-                    fontMetrics().width('W'));   // For Qt4 change pixmap to this //d->m_pOptionDialog->m_bRightToLeftLanguage
+                    ::fontWidth(fontMetrics()));   //d->m_pOptionDialog->m_bRightToLeftLanguage
 
         //p.translate( -invalidRect.x(), -invalidRect.y() );// Remove for Qt4
 
@@ -1128,7 +1129,7 @@ void DiffTextWindow::paintEvent(QPaintEvent *e)
     }
     //    else
     //    {  // no double buffering
-    //       MyPainter p( this, d->m_pOptionDialog->m_bRightToLeftLanguage, width(), fontMetrics().width('W') );
+    //       MyPainter p( this, d->m_pOptionDialog->m_bRightToLeftLanguage, width(), ::fontWidth(fontMetrics()) );
     //       p.setFont( font() );
     //       p.QPainter::fillRect( invalidRect, d->m_pOptionDialog->m_bgColor );
     //       d->draw( p, invalidRect, width(), d->m_firstLine, endLine );
@@ -1155,7 +1156,7 @@ void DiffTextWindow::print(MyPainter &p, const QRect &, int firstLine, int nofLi
     }
 
     resetSelection();
-    //   MyPainter p( this, d->m_pOptionDialog->m_bRightToLeftLanguage, width(), fontMetrics().width('W') );
+    //   MyPainter p( this, d->m_pOptionDialog->m_bRightToLeftLanguage, width(), ::fontWidth(fontMetrics()) );
     int oldFirstLine = d->m_firstLine;
     d->m_firstLine = firstLine;
     QRect invalidRect = QRect(0, 0, 1000000000, 1000000000);
@@ -1317,7 +1318,7 @@ void DiffTextWindow::resizeEvent(QResizeEvent *e)
     QSize s = e->size();
     QFontMetrics fm = fontMetrics();
     int visibleLines = s.height() / fm.height() - 2;
-    int visibleColumns = s.width() / fm.width('W') - d->leftInfoWidth();
+    int visibleColumns = s.width() / ::fontWidth(fm) - d->leftInfoWidth();
     emit resizeSignal(visibleColumns, visibleLines);
     QWidget::resizeEvent(e);
 }
@@ -1333,7 +1334,7 @@ int DiffTextWindow::getNofVisibleLines()
 int DiffTextWindow::getNofVisibleColumns()
 {
     QFontMetrics fm = fontMetrics();
-    return width() / fm.width('W') - d->leftInfoWidth();
+    return width() / ::fontWidth(fm) - d->leftInfoWidth();
 }
 
 QString DiffTextWindow::getSelection()
@@ -1890,8 +1891,8 @@ void DiffTextWindowFrame::setFirstLine(int firstLine)
 
         int l = pDTW->calcTopLineInFile(firstLine);
 
-        int w = d->m_pTopLine->fontMetrics().width(
-                    s + " " + QString().fill('0', lineNumberWidth));
+        int w = d->m_pTopLine->fontMetrics().boundingRect(
+                    s + " " + QString().fill('0', lineNumberWidth)).width();
         d->m_pTopLine->setMinimumWidth(w);
 
         if (l == -1) {

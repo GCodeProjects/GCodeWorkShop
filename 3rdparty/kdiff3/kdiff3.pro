@@ -32,4 +32,5 @@ HEADERS += \
     kdiff3.h \
     gnudiff_system.h \
     gnudiff_diff.h \
-    mergeresultwindow.h
+    mergeresultwindow.h \
+    compatibility.h

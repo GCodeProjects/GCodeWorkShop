@@ -38,6 +38,7 @@
 #include <QFrame>
 #include <QVBoxLayout>
 
+#include "compatibility.h"
 #include "optiondialog.h"
 #include "diff.h"
 
@@ -856,7 +857,7 @@ void OptionDialog::slotOk(void)
     // disabled this. Even QFont::fixedPitch() doesn't work.
     QFontMetrics fm(m_font);
 
-    if (fm.width('W') != fm.width('i')) {
+    if (!::isFontFixed(fm)) {
         //      int result = QMessageBox::warningYesNo(this, tr(
         //         "You selected a variable width font.\n\n"
         //         "Because this program doesn't handle variable width fonts\n"
