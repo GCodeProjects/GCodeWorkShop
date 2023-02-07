@@ -1030,8 +1030,7 @@ void DiffTextWindowData::writeLine(
 
     if (pld != 0) {
         if (m_pOptionDialog->m_bShowLineNumbers && !bWrapLine) { //m_pOptionDialog->m_bShowLineNumbers
-            QString num;
-            num.sprintf("%0*d", m_lineNumberWidth, srcLineIdx + 1);
+            QString num = QString("%1").arg(srcLineIdx + 1, m_lineNumberWidth);
             p.drawText(0, yOffset + fontAscent, num);
             //p.drawLine( xLeft -1, yOffset, xLeft -1, yOffset+fontHeight-1 );
         }
