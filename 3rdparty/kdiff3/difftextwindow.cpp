@@ -1803,7 +1803,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget *pParent, OptionDialog *pOption
     d->m_pDiffTextWindow = new DiffTextWindow(this, pOptionDialog, winIdx);
 
     QVBoxLayout *pVTopLayout = new QVBoxLayout(d->m_pTopLineWidget);
-    pVTopLayout->setMargin(2);
+    pVTopLayout->setContentsMargins(2, 2, 2, 2);
     pVTopLayout->setSpacing(0);
     QHBoxLayout *pHL = new QHBoxLayout();
     QHBoxLayout *pHL2 = new QHBoxLayout();
@@ -1811,7 +1811,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget *pParent, OptionDialog *pOption
     pVTopLayout->addLayout(pHL2);
 
     // Upper line:
-    pHL->setMargin(0);
+    pHL->setContentsMargins(0, 0, 0, 0);
     pHL->setSpacing(2);
 
     pHL->addWidget(d->m_pLabel, 0);
@@ -1820,7 +1820,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget *pParent, OptionDialog *pOption
     pHL->addWidget(d->m_pTopLine, 0);
 
     // Lower line
-    pHL2->setMargin(0);
+    pHL2->setContentsMargins(0, 0, 0, 0);
     pHL2->setSpacing(2);
     pHL2->addWidget(d->m_pTopLine, 0);
     //d->m_pEncoding = new QLabel(tr("Encoding:"));
@@ -1829,7 +1829,7 @@ DiffTextWindowFrame::DiffTextWindowFrame(QWidget *pParent, OptionDialog *pOption
     //pHL2->addWidget(d->m_pLineEndStyle);
 
     QVBoxLayout *pVL = new QVBoxLayout(this);
-    pVL->setMargin(0);
+    pVL->setContentsMargins(0, 0, 0, 0);
     pVL->setSpacing(0);
     pVL->addWidget(d->m_pTopLineWidget, 0);
     pVL->addWidget(d->m_pDiffTextWindow, 1);

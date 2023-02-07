@@ -506,14 +506,14 @@ void KDiff3App::initView()
     //contextMenu->addAction(selAllAct);
 
     QVBoxLayout *pVLayout = new QVBoxLayout();
-    pVLayout->setMargin(0);
+    pVLayout->setContentsMargins(0, 0, 0, 0);
     pVLayout->setSpacing(0);
     setLayout(pVLayout);
 
     QWidget *pDiffWindowFrame = new QWidget(); // Contains diff windows, overview and vert scrollbar
     pDiffWindowFrame->setObjectName("DiffWindowFrame");
     QHBoxLayout *pDiffHLayout = new QHBoxLayout(pDiffWindowFrame);
-    pDiffHLayout->setMargin(0);
+    pDiffHLayout->setContentsMargins(0, 0, 0, 0);
     pDiffHLayout->setSpacing(0);
     pVLayout->addWidget(pDiffWindowFrame);
 

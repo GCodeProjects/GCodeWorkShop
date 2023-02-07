@@ -3323,7 +3323,7 @@ WindowTitleWidget::WindowTitleWidget(OptionDialog *pOptionDialog)
     setAutoFillBackground(true);
 
     QHBoxLayout *pHLayout = new QHBoxLayout(this);
-    pHLayout->setMargin(2);
+    pHLayout->setContentsMargins(2, 2, 2, 2);
     pHLayout->setSpacing(2);
 
     m_pLabel = new QLabel(tr("Output") + ":");
