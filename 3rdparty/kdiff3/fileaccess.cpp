@@ -134,7 +134,11 @@ void FileAccess::setFile(const QString &name, bool bWantToWrite)
             m_bWritable    = fi.isWritable();
             m_bExecutable  = fi.isExecutable();
 #endif
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
             m_creationTime = fi.created();
+#else
+            m_creationTime = fi.birthTime();
+#endif
             m_bHidden    = fi.isHidden();
             m_modificationTime = fi.lastModified();
             m_accessTime = fi.lastRead();
@@ -148,7 +152,7 @@ void FileAccess::setFile(const QString &name, bool bWantToWrite)
             m_absoluteFilePath = fi.absoluteFilePath();
 
             if (m_bSymLink) {
-                m_linkTarget = fi.readLink();
+                m_linkTarget = fi.symLinkTarget();
             }
 
             m_bLocal = true;
@@ -177,7 +181,11 @@ void FileAccess::setFile(const QString &name, bool bWantToWrite)
                 m_bWritable    = fi.isWritable();
                 m_bExecutable  = fi.isExecutable();
 #endif
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
                 m_creationTime = fi.created();
+#else
+                m_creationTime = fi.birthTime();
+#endif
                 m_bHidden    = fi.isHidden();
                 m_modificationTime = fi.lastModified();
                 m_accessTime = fi.lastRead();
