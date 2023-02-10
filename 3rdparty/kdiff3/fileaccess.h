@@ -16,6 +16,7 @@
 #include <QEventLoop>
 #include <QLabel>
 #include <QProgressBar>
+#include <QElapsedTimer>
 #include <QUrl>
 
 #include <list>
@@ -225,8 +226,8 @@ private:
     QLabel *m_pSlowJobInfo;
     QPushButton *m_pAbortButton;
     void recalc(bool bRedrawUpdate);
-    QTime m_t1;
-    QTime m_t2;
+    QElapsedTimer m_t1;
+    QElapsedTimer m_t2;
     bool m_bWasCancelled;
     //KJob* m_pJob;
     QString m_currentJobInfo;  // Needed if the job doesn't stop after a reasonable time.
