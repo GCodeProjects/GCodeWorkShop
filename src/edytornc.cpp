@@ -154,16 +154,16 @@ EdytorNc::~EdytorNc()
 
 void EdytorNc::resizeEvent(QResizeEvent *event)
 {
-        if(windowState() == Qt::WindowNoState && event->oldSize().isValid()){
-            mMWConfig.size = event->size();
-        }
+    if (windowState() == Qt::WindowNoState && event->oldSize().isValid()) {
+        mMWConfig.size = event->size();
+    }
 
-        QMainWindow::resizeEvent(event);
+    QMainWindow::resizeEvent(event);
 }
 
 void EdytorNc::moveEvent(QMoveEvent *event)
 {
-    if(windowState() == Qt::WindowNoState){
+    if (windowState() == Qt::WindowNoState) {
         mMWConfig.pos = geometry().topLeft();
     }
 
@@ -1308,35 +1308,32 @@ void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
 
 void EdytorNc::about()
 {
-    QMessageBox::about(this, trUtf8("About EdytorNC"),
-                       trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: ") + "2018-07-26 BETA" +
-                       trUtf8("<P>Copyright (C) 1998 - 2018 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>")
-                       +
-                       trUtf8("<P>Spanish translation, fixes and other help thanks to Otto Huamani") +
-                       trUtf8("<br />Catalan translation and deb package thanks to Jordi Sayol i Salomó") +
-                       trUtf8("<br />German translation and other fixes thanks to Michael Numberger") +
-                       trUtf8("<br />Czech translation thanks to Pavel Fric") +
-                       trUtf8("<br />Finnish translation thanks to Janne Mäntyharju") +
-                       trUtf8("<br />Dutch translation thanks to Henk van Andel") +
-                       trUtf8("<br />OS X patch and other updates thanks to Janne Mäntyharju") +
-                       trUtf8("<P>New EdytorNC icon thanks to Jakub Gajewski") +
-                       trUtf8("<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>")
-                       +
-                       trUtf8("<P><a href=\"https://plus.google.com/communities/117267107585407507443/\">EdytorNC Google Plus Community</a>")
-                       +
-                       trUtf8("<P>") +
-                       //                       trUtf8("<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>") +
-                       //                       trUtf8("<P>") +
-                       trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
-                       trUtf8("<P>") +
-                       trUtf8("<P><i>EdytorNC is free software; you can redistribute it and/or modify"
-                              "it under the terms of the GNU General Public License  as published by"
-                              "the Free Software Foundation; either version 2 of the License, or"
-                              "(at your option) any later version.</i>") +
-                       trUtf8("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
-                              "INCLUDING THE WARRANTY OF DESIGN,"
-                              "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
+    QMessageBox::about(this, tr("About EdytorNC"),
+                       tr("The <b>EdytorNC</b> is text editor for CNC programmers."
+                          "<P>Version: " "2018-07-26 BETA"
+                          "<P>Copyright (C) 1998 - 2018 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>"
+                          "<P>Spanish translation, fixes and other help thanks to Otto Huamani"
+                          "<br />Catalan translation and deb package thanks to Jordi Sayol i Salomó"
+                          "<br />German translation and other fixes thanks to Michael Numberger"
+                          "<br />Czech translation thanks to Pavel Fric"
+                          "<br />Finnish translation thanks to Janne Mäntyharju"
+                          "<br />Dutch translation thanks to Henk van Andel"
+                          "<br />OS X patch and other updates thanks to Janne Mäntyharju"
+                          "<P>New EdytorNC icon thanks to Jakub Gajewski"
+                          "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
+                          "<P><a href=\"https://plus.google.com/communities/117267107585407507443/\">EdytorNC Google Plus Community</a>"
+                          "<P>"
+                          // "<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>"
+                          // "<P>"
+                          "<P>EdytorNC contains pieces of code from other Open Source projects."
+                          "<P>"
+                          "<P><i>EdytorNC is free software; you can redistribute it and/or modify"
+                          "it under the terms of the GNU General Public License  as published by"
+                          "the Free Software Foundation; either version 2 of the License, or"
+                          "(at your option) any later version.</i>"
+                          "<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
+                          "INCLUDING THE WARRANTY OF DESIGN,"
+                          "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
 }
 
 void EdytorNc::updateMenus()
@@ -2182,7 +2179,8 @@ void EdytorNc::readSettings()
 
     defaultMdiWindowProperites.guessFileNameByProgNum = settings.value("GuessFileNameByProgNum",
             true).toBool();
-    defaultMdiWindowProperites.changeDateInComment = settings.value("ChangeDateInComment", false).toBool();
+    defaultMdiWindowProperites.changeDateInComment = settings.value("ChangeDateInComment",
+            false).toBool();
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
 
@@ -3748,7 +3746,7 @@ void EdytorNc::doSplitPrograms()
 {
     MdiChild *activeWindow = activeMdiChild();
 
-	if (activeWindow == nullptr) {
+    if (activeWindow == nullptr) {
         return;
     }
 
@@ -3766,7 +3764,7 @@ void EdytorNc::doSplitPrograms()
     while (it != list.constEnd()) {
         activeWindow = newFile();
 
-		if (activeWindow == nullptr) {
+        if (activeWindow == nullptr) {
             QApplication::restoreOverrideCursor();
             return;
         }
@@ -4080,7 +4078,7 @@ void EdytorNc::sendButtonClicked()
 
     activeWindow = activeMdiChild();
 
-	if (activeWindow == nullptr) {
+    if (activeWindow == nullptr) {
         return;
     }
 
@@ -4128,7 +4126,7 @@ void EdytorNc::receiveButtonClicked()
             if (!(*it).isEmpty() && !(*it).isNull()) {
                 activeWindow = newFile();
 
-				if (activeWindow == nullptr) {
+                if (activeWindow == nullptr) {
                     return;
                 }
 

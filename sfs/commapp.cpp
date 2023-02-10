@@ -552,19 +552,18 @@ void CommApp::quitApp()
 
 void CommApp::about()
 {
-    QMessageBox::about(this, trUtf8("About EdytorNC - Serial port file server"),
-                       trUtf8("The <b>EdytorNC</b> is text editor for CNC programmers.") +
-                       trUtf8("<P>Version: same as EdytorNC") +
-                       trUtf8("<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>")
-                       +
-                       trUtf8("<P>") +
-                       trUtf8("<P>EdytorNC contains pieces of code from other Open Source projects.") +
-                       trUtf8("<P>") +
-                       trUtf8("<P><i>EdytorNC - Serial port file server is free software; you can redistribute it and/or modify"
-                              "it under the terms of the GNU General Public License  as published by"
-                              "the Free Software Foundation; either version 2 of the License, or"
-                              "(at your option) any later version.</i>") +
-                       trUtf8("<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
-                              "INCLUDING THE WARRANTY OF DESIGN,"
-                              "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
+    QMessageBox::about(this, tr("About EdytorNC - Serial port file server"),
+                       tr("The <b>EdytorNC</b> is text editor for CNC programmers."
+                          "<P>Version: same as EdytorNC"
+                          "<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>"
+                          "<P>"
+                          "<P>EdytorNC contains pieces of code from other Open Source projects."
+                          "<P>"
+                          "<P><i>EdytorNC - Serial port file server is free software; you can redistribute it and/or modify"
+                          "it under the terms of the GNU General Public License  as published by"
+                          "the Free Software Foundation; either version 2 of the License, or"
+                          "(at your option) any later version.</i>"
+                          "<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
+                          "INCLUDING THE WARRANTY OF DESIGN,"
+                          "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
 }
