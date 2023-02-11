@@ -27,7 +27,6 @@
 #include <QDir>
 #include <QRegExp>
 #include <QTextCodec>
-#include <QTextStream>
 #include <QProcess>
 #include <QMessageBox>
 
@@ -365,27 +364,24 @@ static bool convertFileEncoding(const QString &fileNameIn, QTextCodec *pCodecIn,
 {
     QFile in(fileNameIn);
 
-    if (! in.open(QIODevice::ReadOnly)) {
+    if (!in.open(QIODevice::ReadOnly)) {
         return false;
     }
 
-    QTextStream inStream(&in);
-    inStream.setCodec(pCodecIn);
-    inStream.setAutoDetectUnicode(false);
+    QString data = pCodecIn->toUnicode(in.readAll());
+
+    if (in.error() != QFile::NoError) {
+        return false;
+    }
 
     QFile out(fileNameOut);
 
-    if (! out.open(QIODevice::WriteOnly)) {
+    if (!out.open(QIODevice::WriteOnly)) {
         return false;
     }
 
-    QTextStream outStream(&out);
-    outStream.setCodec(pCodecOut);
-
-    QString data = inStream.readAll();
-    outStream << data;
-
-    return true;
+    out.write(pCodecOut->fromUnicode(data));
+    return out.error() == QFile::NoError;
 }
 
 static QTextCodec *detectEncoding(const char *buf, qint64 size, qint64 &skipBytes)
@@ -647,10 +643,7 @@ void SourceData::FileData::preprocess(bool bPreserveCR, QTextCodec *pEncoding)
     }
 
     QByteArray ba = QByteArray::fromRawData(m_pBuf + skipBytes, m_size - skipBytes);
-    QTextStream ts(ba, QIODevice::ReadOnly);
-    ts.setCodec(pEncoding);
-    ts.setAutoDetectUnicode(false);
-    m_unicodeBuf = ts.readAll();
+    m_unicodeBuf = pEncoding->toUnicode(ba);
     ba.clear();
 
     int ucSize = m_unicodeBuf.length();
