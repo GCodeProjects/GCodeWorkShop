@@ -23,15 +23,18 @@
 #ifndef COMMONINC_H
 #define COMMONINC_H
 
+#include<QByteArray>
 #include<QString>
-#include<QRegExp>
+#include<QStringList>
 
 
+// Uses in dialogs.cpp and mdichild.cpp
 #define TABBED_MODE              0x01
 #define SHOW_FILENAME            0x02
 #define SHOW_FILEPATH            0x04
 #define SHOW_PROGTITLE           0x08
 
+// Uses in dialogs.cpp, edytornc.cpp, mdichild.cpp and highlighter.cpp
 #define MODE_AUTO                0x00
 #define MODE_OKUMA               0x02
 #define MODE_FANUC               0x03
@@ -44,7 +47,8 @@
 #define MODE_LINUXCNC            0x0A
 //#define MODE_FADAL               0x0B
 
-
+// Uses in serialtransmissiondialog.cpp and mdichild.cpp
+// TODO: move to CNC-specific class.
 #define FILENAME_SINU840     "%_N_[a-zA-Z0-9_]{1,31}_(MPF|SPF|TEA|COM|PLC|DEF|INI)"
 #define FILENAME_OSP         "\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"
 #define FILENAME_FANUC       "(?:\\n|\\r)(O|:)[0-9]{1,}"
@@ -54,7 +58,8 @@
 #define FILENAME_PHIL        "%PM[\\s]{1,}N[0-9]{4,4}"
 #define FILENAME_FADAL       "(N1)(O|:)[0-9]{1,}"
 
-
+// Uses in findinf.cpp and highlighter.cpp
+// TODO: rename
 struct _h_colors {
     int commentColor;
     int gColor;
@@ -80,6 +85,8 @@ struct _h_colors {
 //
 //**************************************************************************************************
 
+// Uses in mdichild.cpp, edytornc.cpp and dialogs.cpp
+// TODO: rename
 struct _editor_properites {
     bool isRedo, isUndo, isSel;
     bool readOnly;

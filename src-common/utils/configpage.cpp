@@ -21,6 +21,8 @@
  */
 
 #include <QFrame>
+#include <QString>
+#include <QWidget>
 
 #include "utils/configpage.h"
 

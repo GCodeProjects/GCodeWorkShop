@@ -20,7 +20,10 @@
  *      along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "utils/config.h"
+#include <QSettings>
+#include <QString>
+
+#include "utils/config.h" // Config ConfigItem<> IGroupControl
 
 
 Config::Config(QSettings *settings, const QString &group)

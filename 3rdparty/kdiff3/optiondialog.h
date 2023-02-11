@@ -22,14 +22,22 @@
 #define OPTION_DIALOG_H
 
 #include <list>
-#include <QtWidgets>
 
+#include <QColor>
+#include <QFont>
+#include <QPoint>
+#include <QSize>
+#include <QString>
+#include <QStringList>
+#include <QTabWidget>
 
-class OptionItem;
+class KKeyDialog;
 class OptionCheckBox;
 class OptionEncodingComboBox;
 class OptionLineEdit;
-class KKeyDialog;
+class OptionItem;
+class QTextCodec;
+
 
 enum e_LineEndStyle {
     eLineEndStyleUnix = 0,

@@ -20,9 +20,13 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "QtSingleApplication"
-#include "commapp.h"
-#include "utils/medium.h"
+#include <QObject>
+#include <QString>
+
+#include <QtSingleApplication> // QtSingleApplication
+#include <utils/medium.h>      // Medium
+
+#include "commapp.h"      // CommApp
 
 
 int main(int argc, char *argv[])

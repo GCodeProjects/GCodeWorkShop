@@ -20,11 +20,26 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "serialportconfigdialog.h"
-#include "serialportcfghelpdialog.h"
-#include "utils/medium.h"
+#include <QButtonGroup>
+#include <QDesktopServices>
+#include <QDir>
+#include <QFileDialog>
+#include <QPalette>
+#include <QRegExp>
+#include <QRegExpValidator>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QValidator>
+
+#include <utils/medium.h> // Medium
+
+#include "serialportconfigdialog.h"  // QDialog Qt QWidget
 
 
+// TODO: move into class SerialPortConfigDialog
 static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
 
 SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName,
@@ -858,6 +873,7 @@ void SerialPortConfigDialog::removeFileNameButtonClicked()
 
 void SerialPortConfigDialog::helpButtonClicked()
 {
+    // TODO: change a path to the file
     QDesktopServices::openUrl(QUrl(QString("file:///%1/EdytorNC_SerialTransmission_Help.html").arg(
                                        QCoreApplication::applicationDirPath()), QUrl::TolerantMode));
     //    SerialPortCfgHelpDialog helpDialog;

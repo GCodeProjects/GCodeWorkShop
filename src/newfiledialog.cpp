@@ -20,10 +20,18 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "newfiledialog.h"
-#include "ui_newfiledialog.h"
-#include "utils/medium.h"
+#include <QApplication>
+#include <QFileDialog>
+#include <QSettings>
 
+#include <utils/medium.h> // Medium
+
+#include "newfiledialog.h" // newFileDialog QObject QDialog
+
+#include "ui_newfiledialog.h"
+
+// TODO: change a path to the file
+#define TEMPLATE_PATH             "/usr/share/edytornc/TEMPLATE"
 
 newFileDialog::newFileDialog(QWidget *parent) :
     QDialog(parent),

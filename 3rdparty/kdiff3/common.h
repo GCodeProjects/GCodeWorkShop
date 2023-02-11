@@ -84,13 +84,12 @@ T minMaxLimiter(T d, T minimum, T maximum)
 }
 
 #include <map>
-#include <qstring.h>
+#include <QStringList>
 
 class QFont;
 class QColor;
 class QSize;
 class QPoint;
-class QStringList;
 class QTextStream;
 
 class ValueMap

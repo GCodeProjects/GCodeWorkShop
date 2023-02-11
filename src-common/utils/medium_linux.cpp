@@ -22,6 +22,7 @@
 
 #include <QDir>
 #include <QApplication>
+#include <QSettings>
 
 #include "utils/medium.h"
 

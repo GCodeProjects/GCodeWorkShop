@@ -23,17 +23,25 @@
 #ifndef COMMAPP_H
 #define COMMAPP_H
 
+#include <QObject>
 #include <QMainWindow>
-#include <QComboBox>
+#include <QSystemTrayIcon>
+#include <QWidget>
 
-#include "serialtransmissiondialog.h"
-#include "serialportconfigdialog.h"
-#include "filechecker.h"
+class QAction;
+class QComboBox;
+class QCloseEvent;
+class QMenu;
+class QMdiSubWindow;
+class QSignalMapper;
+class QToolBar;
 
+class SerialTransmissionDialog;
 
 namespace Ui {
 class CommApp;
 }
+
 
 class CommApp : public QMainWindow
 {

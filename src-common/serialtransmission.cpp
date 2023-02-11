@@ -20,8 +20,24 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "serialtransmissiondialog.h"
-#include "utils/medium.h"
+#include <QChar>
+#include <QIcon>
+#include <QIODevice>
+#include <QScrollBar>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <Qt>              // Qt::WindowFlags
+#include <QTextCharFormat>
+#include <QTextCursor>
+#include <QtGlobal>        // Q_UNUSED
+#include <QTimer>
+#include <QWidget>
+
+#include <utils/medium.h> // Medium
+
+#include "serialtransmission.h"     // SerialPortSettings QDialog QObject
+#include "serialportconfigdialog.h" // SerialPortConfigDialog
 
 
 TransmissionDialog::TransmissionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)

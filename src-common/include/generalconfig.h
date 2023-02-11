@@ -23,7 +23,14 @@
 #ifndef GENERALCONFIG_H
 #define GENERALCONFIG_H
 
-#include "utils/config.h"
+#include <QDir>
+#include <QLocale>
+#include <QSettings>
+
+#include "utils/config.h" // Config
+
+class Medium;
+
 
 /**
  * @brief The GeneralConfig class store general application settings.
@@ -37,7 +44,7 @@ public:
     Cfgbool disableFileChangeMonitor {this, "DisableFileChangeMonitor", false};
 
 protected:
-    GeneralConfig(QSettings *setting) : Config(setting){}
+    GeneralConfig(QSettings *setting) : Config(setting) {}
 
     friend class Medium;
 };

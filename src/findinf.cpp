@@ -20,8 +20,38 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "findinf.h"
-#include "utils/medium.h"
+#include <QApplication>
+#include <QCloseEvent>
+#include <QColor>
+#include <QComboBox>
+#include <QDateTime>
+#include <QDir>
+#include <QEvent>
+#include <QFile>
+#include <QFileDialog>
+#include <QFont>
+#include <QIODevice>
+#include <QLabel>
+#include <QProgressDialog>
+#include <QPushButton>
+#include <QRegExp>
+#include <QSettings>
+#include <QSplitter>
+#include <QString>
+#include <QStringList>
+#include <Qt>               // Qt::WA_DeleteOnClose
+#include <QtGlobal>         // qint64 Q_UNUSED
+#include <QTableWidgetItem>
+#include <QTextCharFormat>
+#include <QTextCursor>
+#include <QTextDocument>    // QTextDocument::FindFlags
+#include <QTextOption>
+#include <QTextStream>
+
+#include <utils/medium.h> // Medium
+
+#include "findinf.h"     // FindInFiles QObject QWidget
+#include "highlighter.h" // Highlighter
 
 
 #define MAXLISTS        20

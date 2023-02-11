@@ -24,6 +24,7 @@
 #include <QString>
 #include <QProgressDialog>
 
+
 /**
  * @brief The LongJobHelper class help to avoid block GUI in slow operation.
  * @details

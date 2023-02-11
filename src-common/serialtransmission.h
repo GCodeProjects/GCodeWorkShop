@@ -23,11 +23,17 @@
 #ifndef SERIALTRANSMISSION_H
 #define SERIALTRANSMISSION_H
 
-#include <QtWidgets>
-#include <qserialport.h>
+#include <QDialog>
+#include <QObject> // Q_OBJECT
+#include <QString>
+#include <Qt>      // Qt::WindowFlags
+#include <QWidget>
 
+#include "serialportsettings.h"    // SerialPortSettings
 #include "ui_transmissiondialog.h"
-#include "serialportconfigdialog.h"
+
+class QSerialPort;
+class QTimer;
 
 
 class TransmissionDialog : public QDialog, private Ui::TransmissionDialog
@@ -69,7 +75,7 @@ private:
     long int count;
     double lineDelay;
     bool readyCont;
-    PortSettings portSettings;
+    SerialPortSettings portSettings;
 };
 
 //class TransProgressDialog : public QDialog, private Ui::TransProgressDialog

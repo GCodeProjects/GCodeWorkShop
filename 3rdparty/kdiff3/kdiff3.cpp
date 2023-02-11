@@ -32,7 +32,6 @@
 #include <QLayout>
 #include <QPaintDevice>
 #include <QStatusBar>
-#include <QDesktopWidget>
 //#include <QPrinter>
 //#include <QPrintDialog>
 

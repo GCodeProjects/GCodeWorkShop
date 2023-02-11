@@ -24,6 +24,7 @@
 #include <QRegExp>
 #include <QTextStream>
 #include <QKeyEvent>
+#include <QMimeData>
 #include <QMouseEvent>
 #include <QPoint>
 

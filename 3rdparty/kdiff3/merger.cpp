@@ -19,6 +19,9 @@
 #include <iostream>
 #include <iomanip>
 
+#include <QRegExp>
+#include <QTextCodec>
+
 #include "merger.h"
 
 

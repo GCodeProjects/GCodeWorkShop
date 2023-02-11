@@ -22,10 +22,34 @@
 
 #include <algorithm> // std::sort()
 
+#include <QCloseEvent>
+#include <QByteArray>
+#include <QDate>
+#include <QFile>
+#include <QFileInfo>
+#include <QIcon>
+#include <QIODevice>
+#include <QList>
+#include <QMessageBox>
+#include <QPixmap>
+#include <QRegExp>
+#include <QRegularExpression>
+#include <QSerialPort>
+#include <QSettings>
+#include <QString>
 #include <QStringList>
+#include <Qt>                 // Qt::WindowFlags
+#include <QtDebug>            // qDebug() <<
+#include <QTextStream>
+#include <QTime>
+#include <QTimer>
+#include <QWidget>
 
-#include "serialtransmissiondialog.h"
-#include "utils/medium.h"
+#include <utils/medium.h> // Medium
+
+#include "commoninc.h"                // FILENAME_* macroses
+#include "serialtransmissiondialog.h" // SerialPortSettings QDialog QObject
+
 
 SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFlags f,
         bool mode) : QDialog(parent, f)

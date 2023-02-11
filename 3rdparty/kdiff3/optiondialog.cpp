@@ -22,6 +22,8 @@
 #include <map>
 
 #include <QCheckBox>
+#include <QColorDialog>
+#include <QFontDialog>
 #include <QComboBox>
 #include <QLabel>
 #include <QLayout>

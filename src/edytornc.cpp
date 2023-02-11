@@ -20,17 +20,64 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <QAction>
+#include <QActionGroup>
+#include <QCheckBox>
+#include <QClipboard>
+#include <QCloseEvent>
+#include <QComboBox>
+#include <QDesktopServices>
+#include <QEvent>
+#include <QFileDialog>
+#include <QFileIconProvider>
+#include <QFileSystemModel>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMdiSubWindow>
+#include <QMenu>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QModelIndex>
+#include <QMoveEvent>
 #include <QPageLayout>
-#include <QtPrintSupport/QPrinter>
-#include <QtPrintSupport/QPrintDialog>
+#include <QPoint>
+#include <QPrintDialog>
+#include <QPrinter>
 #include <QPrintPreviewDialog>
-#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
-#include <QtSerialPort/QtSerialPort>
+#include <QProcess>
+#include <QResizeEvent>
+#include <QRegExp>
+#include <QtSerialPort>
+#include <QSignalMapper>
+#include <QSize>
+#include <QStandardItem>
+#include <QStandardItemModel>
+#include <Qt>                  // Qt::SplitBehavior
+#include <QTextBlock>
+#include <QtGlobal>            // QT_VERSION QT_VERSION_CHECK
+#include <QToolButton>
+#include <QToolTip>
+#include <QWidget>
 
-#include "edytornc.h"
-#include "mdichild.h"
-#include "tooltips.h"
-#include "utils/medium.h"
+#include <generalconfig.h>            // GeneralConfig
+#include <kdiff3/kdiff3.h>            // KDiff3App
+#include <kdiff3/common.h>            // getFilters()
+#include <serialportconfigdialog.h>   // SerialPortConfigDialog
+#include <serialtransmission.h>       // TransmissionDialog
+#include <serialtransmissiondialog.h> // SerialTransmissionDialog
+#include <utils/medium.h>             // Medium
+
+#include "cleanupdialog.h"  // cleanUpDialog
+// BHCDialog ChamferDialog FeedsDialog SetupDialog DotDialog
+// I2MDialog I2MProgDialog RenumberDialog TriangleDialog
+#include "dialogs.h"
+#include "edytornc.h"       // EdytorNc QObject QMainWindow
+#include "findinf.h"        // FindInFiles
+#include "newfiledialog.h"  // newFileDialog
+#include "mdichild.h"       // MdiChild
+#include "sessiondialog.h"  // sessionDialog
+#include "swapaxesdialog.h" // swapAxesDialog
+#include "tooltips.h"       // writeTooltipFile()
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
@@ -389,6 +436,7 @@ void EdytorNc::openExample()
 
     existing = 0;
 
+    // TODO: change a path to the files
     if (QDir(EXAMPLES_PATH).exists()) {
         dir = EXAMPLES_PATH;
     } else {

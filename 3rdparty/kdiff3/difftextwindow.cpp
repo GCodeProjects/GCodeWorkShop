@@ -18,6 +18,8 @@
 #include <qnamespace.h>
 #include <QDragEnterEvent>
 #include <QDir>
+#include <QFileDialog>
+#include <QRegExp>
 #include <QStatusBar>
 #include <QApplication>
 #include <QToolTip>
@@ -25,6 +27,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLayout>
+#include <QMimeData>
 #include <QTextCodec>
 #include <QUrl>
 

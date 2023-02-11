@@ -20,7 +20,16 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "sessiondialog.h"
+#include <QByteArray>
+#include <QSettings>
+#include <QList>
+#include <QListWidgetItem>
+#include <QString>
+#include <QStringList>
+#include <Qt>              // Qt::WindowFlags
+#include <QWidget>
+
+#include "sessiondialog.h" // newSessionDialog sessionDialog QObject QDialog
 
 
 sessionDialog::sessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)

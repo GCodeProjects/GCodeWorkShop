@@ -20,13 +20,19 @@
  *      along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <QDir>
 #include <QCoreApplication>
 #include <QLibraryInfo>
-#include <QDebug>
-#include <QDir>
+#include <QList>
+#include <QLocale>
+#include <QRegExp>
+#include <QSettings>
+#include <QtDebug>          // qDebug() <<
+#include <QTranslator>
 
-#include "utils/medium.h"
-#include "generalconfig.h"
+#include "utils/medium.h"  // Medium QObject
+#include "generalconfig.h" // GeneralConfig
+
 
 const QString Medium::SLASH = QLatin1String("/");
 const QString Medium::COLON = QLatin1String(":");

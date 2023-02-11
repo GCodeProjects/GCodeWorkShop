@@ -23,16 +23,18 @@
 #ifndef HIGHLIGHTER_H
 #define HIGHLIGHTER_H
 
+#include <QFont>
+#include <QObject>
+#include <QRegExp>
 #include <QSyntaxHighlighter>
-#include <QHash>
 #include <QTextCharFormat>
+#include <QVector>
 
-#include "commoninc.h"
+#include <commoninc.h>
 
-
-QT_BEGIN_NAMESPACE
+class QString;
 class QTextDocument;
-QT_END_NAMESPACE
+
 
 int autoDetectHighligthMode(const QString text);
 

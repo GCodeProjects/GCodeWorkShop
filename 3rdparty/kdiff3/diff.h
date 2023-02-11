@@ -26,8 +26,11 @@
 #include "common.h"
 #include "fileaccess.h"
 
+class QRegExp;
+class QTextCodec;
 
 class OptionDialog;
+
 
 // Each range with matching elements is followed by a range with differences on either side.
 // Then again range of matching elements should follow.

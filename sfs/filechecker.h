@@ -23,24 +23,22 @@
 #ifndef FILECHECKER_H
 #define FILECHECKER_H
 
+#include <QByteArray>
 #include <QDialog>
-#include <QFile>
-#include <QDir>
-#include <QStringList>
+#include <QObject>
 #include <QPointer>
-#include <QDateTime>
-#include <QTextStream>
-#include <QtDebug>
-#include <QDir>
-#include <QToolButton>
+#include <QString>
+#include <QStringList>
+#include <QWidget>
 
-#include "kdiff3/kdiff3.h"
-#include "utils/medium.h"
+class QToolButton;
 
+class KDiff3App;
 
 namespace Ui {
 class FileChecker;
 }
+
 
 class FileChecker : public QDialog
 {

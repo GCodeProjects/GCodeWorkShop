@@ -20,15 +20,34 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "cleanupdialog.h"
+#include <QAbstractItemView>  // QAbstractItemView::NoSelection
+#include <QAction>
+#include <QApplication>
+#include <QColor>
+#include <QIcon>
+#include <QKeySequence>       // QKeySequence::Delete
+#include <QList>
+#include <QMenu>
+#include <QPoint>
+#include <QRegExp>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <Qt>                 // Qt::CustomContextMenu
+#include <QTableWidgetItem>
+#include <QTextCursor>
+#include <QTextDocument>
+
+#include <utils/medium.h>  // Medium
+
+#include "cleanupdialog.h" // cleanUpDialog QDialog QObject
+
 #include "ui_cleanupdialog.h"
-#include "utils/medium.h"
 
 
 #define EXAMPLE_EXP        "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))$" << "(\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))" << "[\n]{2,}"
 
 #define EXAMPLE_EXP_COMM   "Lines with: '(comment)" << "Any: (comment)" << "Empty lines:"
-
 
 cleanUpDialog::cleanUpDialog(QWidget *parent) :
     QDialog(parent),

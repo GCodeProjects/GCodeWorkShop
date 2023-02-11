@@ -25,6 +25,7 @@
 
 #include <QFileInfo>
 #include <QDir>
+#include <QRegExp>
 #include <QTextCodec>
 #include <QTextStream>
 #include <QProcess>

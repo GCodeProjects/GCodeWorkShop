@@ -23,14 +23,23 @@
 #ifndef CLEANUPDIALOG_H
 #define CLEANUPDIALOG_H
 
-#include <QtWidgets>
 #include <QDialog>
+#include <QList>
+#include <QObject>
+#include <QTextEdit>
+#include <QWidget>
 
+class QMenu;
+class QPoint;
+class QRegExp;
 
 namespace Ui {
+// TODO: rename with CleanUpDialog
 class cleanUpDialog;
 }
 
+
+// TODO: rename with CleanUpDialog
 class cleanUpDialog : public QDialog
 {
     Q_OBJECT

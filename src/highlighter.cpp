@@ -20,10 +20,18 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtWidgets>
+#include <QChar>
+#include <QColor>
+#include <QFont>
+#include <QRegExp>
 #include <QString>
+#include <QStringList>
+#include <QTextCharFormat>
+#include <QTextDocument>
 
-#include "highlighter.h"
+#include <commoninc.h> // _h_colors MODE_*
+
+#include "highlighter.h" // Highlighter QObject QSyntaxHighlighter
 
 
 Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)

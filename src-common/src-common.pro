@@ -20,10 +20,12 @@ SOURCES += \
 
 HEADERS += \
     commoninc.h \
+    serialportsettings.h \
     serialtransmission.h \
     serialtransmissiondialog.h \
     serialportconfigdialog.h \
     serialportcfghelpdialog.h \
+    serialportsettings.h \
     include/generalconfig.h
 
 FORMS += \

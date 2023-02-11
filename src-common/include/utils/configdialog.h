@@ -24,6 +24,9 @@
 #define CONFIGDIALOG_H
 
 #include <QDialog>
+#include <QHash>
+#include <QList>
+#include <QObject>        // Q_OBJECT
 #include <QSharedPointer>
 
 

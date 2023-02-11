@@ -23,17 +23,28 @@
 #ifndef SESSIONDIALOG_H
 #define SESSIONDIALOG_H
 
-#include <QtWidgets>
+#include <QDialog>
+#include <QObject>  // Q_OBJECT
 #include <QString>
-#include <QStringList>
+#include <Qt>       // Qt::WindowFlags
+#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
+#include <QWidget>
 
 #include "ui_sessiondialog.h"
 #include "ui_newsessiondialog.h"
+
+class QListWidgetItem;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    class QStringList;
+#else
+    using QStringList = QList<QString>;
+#endif
 
 
 /**
  * @brief The sessionDialog class
  */
+// TODO: rename with SessionDialog
 class sessionDialog: public QDialog, private Ui::sessionDialog
 {
     Q_OBJECT
@@ -64,6 +75,7 @@ private:
 /**
  * @brief The newSessionDialog class
  */
+// TODO: rename with NewSessionDialog
 class newSessionDialog: public QDialog, private Ui::newSessionDialog
 {
     Q_OBJECT

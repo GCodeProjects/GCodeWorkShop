@@ -23,13 +23,19 @@
 #ifndef SWAPAXESDIALOG_H
 #define SWAPAXESDIALOG_H
 
-#include <QtWidgets>
+#include <QDialog>
+#include <QObject>
 
+class QString;
+class QWidget;
 
 namespace Ui {
+// TODO: rename with SwapAxesDialog
 class swapAxesDialog;
 }
 
+
+// TODO: rename with SwapAxesDialog
 class swapAxesDialog : public QDialog
 {
     Q_OBJECT

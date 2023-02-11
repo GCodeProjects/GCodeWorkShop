@@ -23,11 +23,13 @@
 #ifndef CONFIGPAGE_H
 #define CONFIGPAGE_H
 
-#include <QObject>
+#include <QList>
+#include <QObject>        // Q_OBJECT
 #include <QSharedPointer>
 
 class QString;
 class QWidget;
+
 
 /**
  * @brief The ConfigPage class is used in conjunction with ConfigDialog to manage settings.

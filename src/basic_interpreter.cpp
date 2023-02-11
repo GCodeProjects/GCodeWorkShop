@@ -31,12 +31,14 @@
 // see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
 #define _USE_MATH_DEFINES
 
-#include <math.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cctype>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
 
-#include "basic_interpreter.h"
+#include <QString>
+
+#include "basic_interpreter.h" // BasicInterpreter
 
 
 BasicInterpreter::BasicInterpreter()

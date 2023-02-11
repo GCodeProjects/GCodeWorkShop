@@ -24,17 +24,19 @@
 #define NEWFILEDIALOG_H
 
 #include <QDialog>
-#include <QString>
 #include <QDir>
-#include <QFileDialog>
+#include <QObject>
 
-
-#define TEMPLATE_PATH             "/usr/share/edytornc/TEMPLATE"
+class QString;
+class QWidget;
 
 namespace Ui {
+// TODO: rename with NewFileDialog
 class newFileDialog;
 }
 
+
+// TODO: rename with NewFileDialog
 class newFileDialog : public QDialog
 {
     Q_OBJECT

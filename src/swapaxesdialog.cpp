@@ -20,9 +20,17 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "swapaxesdialog.h"
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QtGlobal>    // Q_UNUSED
+#include <QWidget>
+
+#include <utils/medium.h> // Medium
+
+#include "swapaxesdialog.h" // swapAxesDialog QDialog QObject
+
 #include "ui_swapaxesdialog.h"
-#include "utils/medium.h"
 
 
 swapAxesDialog::swapAxesDialog(QWidget *parent) :

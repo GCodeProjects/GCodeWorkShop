@@ -13,7 +13,8 @@
 #include <qapplication.h>
 #include <qpushbutton.h>
 #include <qdir.h>
-#include <qregexp.h>
+#include <QRegExp>
+#include <QTextCodec>
 #include <qtextstream.h>
 #include <qeventloop.h>
 #include <QProcess>

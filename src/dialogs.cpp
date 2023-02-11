@@ -20,8 +20,61 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "dialogs.h"
-#include "utils/medium.h"
+// Enable the M_PI constant in MSVC
+// see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
+#define _USE_MATH_DEFINES
+#include <cmath> // acos() asin() atan() cos() sin() M_PI
+
+#include <QAbstractButton>
+#include <QAbstractItemModel>
+#include <QAbstractItemView>
+#include <QAction>
+#include <QActionGroup>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QClipboard>
+#include <QColor>
+#include <QColorDialog>
+#include <QCursor>
+#include <QDir>
+#include <QDoubleValidator>
+#include <QEvent>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QFocusEvent>
+#include <QFont>
+#include <QFontDialog>
+#include <QFontMetrics>
+#include <QIcon>
+#include <QIntValidator>
+#include <QKeyEvent>
+#include <QLineEdit>
+#include <QLocale>
+#include <QMenu>
+#include <QMouseEvent>
+#include <QObject>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QPalette>
+#include <QPen>
+#include <QPixmap>
+#include <QPoint>
+#include <QRect>
+#include <QRegExp>
+#include <QRegExpValidator>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <Qt>                          // Qt::WindowFlags
+#include <QTableWidgetItem>
+#include <QTabWidget>
+#include <QtGlobal>                    // qreal Q_UNUSED
+#include <QValidator>
+#include <QWidget>
+
+#include <utils/medium.h> // Medium
+
+#include "dialogs.h"      // QDialog QObject
 
 
 QString removeZeros(QString str)

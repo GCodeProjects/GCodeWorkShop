@@ -20,15 +20,61 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <algorithm> // std::sort()
+// Enable the M_PI constant in MSVC
+// see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
+#define _USE_MATH_DEFINES
 
+#include <algorithm> // std::sort()
+#include <cmath>     // cos() pow() sin() sqrt() tan() trunc() M_PI
+
+#include <QAction>
+#include <QApplication>
+#include <QChar>
+#include <QCloseEvent>
+#include <QColor>
+#include <QCompleter>
+#include <QDate>
+#include <QDir>
+#include <QEvent>              // QEvent::KeyPress
+#include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QIcon>
+#include <QIODevice>
+#include <QKeyEvent>
+#include <QLatin1Char>
+#include <QLatin1String>
+#include <QLineEdit>
+#include <QMenu>
+#include <QMessageBox>
 #include <QMarginsF>
 #include <QPageLayout>
+#include <QPalette>
+#include <QPoint>
+#include <QPrinter>
 #include <QPrintPreviewDialog>
-#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
+#include <QRegExp>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <Qt>                  // Qt::WindowFlags
+#include <QtDebug>             // qDebug()
+#include <QTextCharFormat>
+#include <QTextCursor>
+#include <QTextDocument>
+#include <QTextDocumentFragment>
+#include <QTextOption>
+#include <QTextStream>
+#include <QtGlobal>            // QT_VERSION QT_VERSION_CHECK
+#include <QToolTip>
 
-#include "mdichild.h"
-#include "edytornc.h"
+#include <commoninc.h>         // _editor_properites
+#include <ui/longjobhelper.h>  // LongJobHelper
+
+#include "basic_interpreter.h" // BasicInterpreter
+#include "dialogs.h"           // removeZeros()
+#include "highlighter.h"       // Highlighter
+#include "mdichild.h"          // MdiChild QObject QWidget
 
 
 MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)

@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <ctype.h>
 
+#include <QApplication>
 #include <qclipboard.h>
 #include <qscrollbar.h>
 #include <qlayout.h>
@@ -29,9 +30,13 @@
 #include <qlineedit.h>
 #include <qcombobox.h>
 #include <QDropEvent>
+#include <QTextCodec>
+#include <QTreeView>
 #include <QUrl>
 #include <QPoint>
 #include <QProcess>
+#include <QMessageBox>
+#include <QMimeData>
 
 #include <assert.h>
 

@@ -23,25 +23,51 @@
 #ifndef EDYTORNC_H
 #define EDYTORNC_H
 
-#include <QtWidgets>
+#include <QByteArray>
+#include <QFileSystemWatcher>
+#include <QObject>            // Q_OBJECT
+#include <QPointer>
+#include <QString>
+#include <QStringList>
+#include <QToolBar>
+#include <QMainWindow>
 
-#include "commoninc.h"
-#include "mdichild.h"
-#include "findinf.h"
-#include "dialogs.h"
-#include "serialtransmission.h"
-#include "serialtransmissiondialog.h"
-#include "kdiff3/kdiff3.h"
-#include "cleanupdialog.h"
-#include "swapaxesdialog.h"
-#include "newfiledialog.h"
-#include "sessiondialog.h"
-#include "commapp.h"
-#include "generalconfig.h"
+#include <commapp.h>      // CommApp
+#include <commoninc.h>
+#include <utils/config.h> // Config
 
 #include "ui_edytornc.h"
 
+class QAction;
+class QCheckBox;
+class QClipboard;
+class QCloseEvent;
+class QComboBox;
+class QEvent;
+class QFileSystemModel;
+class QLabel;
+class QLineEdit;
+class QMdiSubWindow;
+class QMenu;
+class QModelIndex;
+class QMoveEvent;
+class QPoint;
+class QPrinter;
+class QProcess;
+class QResizeEvent;
+class QSignalMapper;
+class QSize;
+class QStandardItem;
+class QStandardItemModel;
+class QToolButton;
+class QWidget;
+
+class FindInFiles;
+class GeneralConfig;
+class KDiff3App;
+class MdiChild;
 class Medium;
+
 
 class EdytorNc : public QMainWindow, public Ui::EdytorNc
 {

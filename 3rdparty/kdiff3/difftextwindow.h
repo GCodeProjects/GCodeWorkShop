@@ -18,6 +18,7 @@
 #ifndef DIFFTEXTWINDOW_H
 #define DIFFTEXTWINDOW_H
 
+#include <QStringList>
 #include <QWidget>
 
 #include "diff.h"

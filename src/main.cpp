@@ -20,10 +20,14 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "QtSingleApplication"
+#include <QtGlobal> // Q_INIT_RESOURCE
+#include <QObject>
+#include <QString>
 
-#include "edytornc.h"
-#include "utils/medium.h"
+#include <QtSingleApplication> // QtSingleApplication
+#include <utils/medium.h>      // Medium
+
+#include "edytornc.h" // EdytorNc
 
 
 int main(int argc, char *argv[])

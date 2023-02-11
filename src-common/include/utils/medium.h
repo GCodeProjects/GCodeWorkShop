@@ -23,16 +23,17 @@
 #ifndef MEDIUM_H
 #define MEDIUM_H
 
-#include <QObject>
-#include <QSettings>
+#include <QList>
+#include <QObject>     // Q_OBJECT
 #include <QString>
 #include <QStringList>
-#include <QTranslator>
-#include <QLocale>
 
-#include "utils/config.h"
+class QLocale;
+class QTranslator;
+class QSettings;
 
 class GeneralConfig;
+
 
 /**
  * @brief The Medium class provides various information about application environment.

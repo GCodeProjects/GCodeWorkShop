@@ -20,9 +20,33 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "commapp.h"
+#include <QAction>
+#include <QComboBox>
+#include <QCloseEvent>
+#include <QComboBox>
+#include <QDesktopServices>
+#include <QIcon>
+#include <QMenu>
+#include <QMdiSubWindow>
+#include <QMessageBox>
+#include <QSettings>
+#include <QSignalMapper>
+#include <QString>
+#include <QStringList>
+#include <Qt>               // Qt::WA_DeleteOnClose Qt::NonModal
+#include <QTabBar>
+#include <QTimer>
+#include <QToolBar>
+#include <QWidget>
+
+#include <serialportconfigdialog.h>   // SerialPortConfigDialog
+#include <serialtransmissiondialog.h> // SerialTransmissionDialog
+#include <utils/medium.h>             // Medium
+
+#include "commapp.h"     // CommApp QMainWindow QObject
+#include "filechecker.h" // FileChecker
+
 #include "ui_commapp.h"
-#include "utils/medium.h"
 
 
 CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)

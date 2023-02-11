@@ -20,9 +20,29 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include "filechecker.h"
+#include <QByteArray>
+#include <QDir>
+#include <QFile>
+#include <QIcon>
+#include <QIODevice>
+#include <QLabel>
+#include <QList>
+#include <QPixmap>
+#include <QRegExp>
+#include <QSettings>
+#include <Qt>               // Qt::WA_DeleteOnClose Qt::CaseInsensitive
+#include <QTableWidgetItem>
+#include <QTextStream>
+#include <QtGlobal>         // Q_UNUSED
+#include <QToolButton>
+#include <QWidget>
+
+#include <kdiff3/kdiff3.h> // KDiff3App
+#include <utils/medium.h>  // Medium
+
+#include "filechecker.h"   // FileChecker QDialog QObject
+
 #include "ui_filechecker.h"
-#include "utils/medium.h"
 
 
 FileChecker::FileChecker(QWidget *parent) :

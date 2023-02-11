@@ -23,11 +23,14 @@
 #ifndef DIALOGS_H
 #define DIALOGS_H
 
-#include <QtWidgets>
-#include <QTextDocument>
+#include <QDialog>
+#include <QObject>
+#include <Qt>      // Qt::WindowFlags
+#include <QWidget>
 
 #include "commoninc.h"
 
+//TODO: split file by classes
 #include "ui_i2mdialog.h"
 #include "ui_feedsdialog.h"
 #include "ui_renumberdialog.h"
@@ -38,6 +41,24 @@
 #include "ui_chamferdialog.h"
 #include "ui_i2mprogdialog.h"
 #include "ui_setupdialog.h"
+
+class QAbstractButton;
+class QAbstractItemModel;
+class QAction;
+class QActionGroup;
+class QButtonGroup;
+class QDoubleValidator;
+class QEvent;
+class QFocusEvent;
+class QMenu;
+class QMouseEvent;
+class QObject;
+class QPaintEvent;
+class QPixmap;
+class QPoint;
+class QString;
+class QTabWidget;
+
 
 /**
  * @brief removeZeros

@@ -23,65 +23,16 @@
 #ifndef SERIALPORTCONFIGDIALOG_H
 #define SERIALPORTCONFIGDIALOG_H
 
-#include <QtWidgets>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QtSerialPort/QSerialPort>
+#include <QDialog>
+#include <QObject>   // Q_OBJECT
+#include <QString>
+#include <Qt>        // Qt::WindowFlags
+#include <QWidget>
 
 #include "ui_serialportconfigdialog.h"
 
+class QButtonGroup;
 
-struct PortSettings {
-    QSerialPort::BaudRate BaudRate;
-    QSerialPort::DataBits DataBits;
-    QSerialPort::Parity Parity;
-    QSerialPort::StopBits StopBits;
-    QSerialPort::FlowControl FlowControl;
-    QString configName;
-    QString portName;
-    QString sendAtEnd;
-    QString sendAtBegining;
-    QString savePath;
-    QString saveExt;
-    QString endOfProgChar;
-    QString callerProgName;
-    double lineDelay;
-    unsigned int sendStartDelayReloadValue;
-    unsigned int autoCloseTimeout;
-    unsigned int sendTimeout;
-    unsigned int receiveTimeout;
-    unsigned int reconnectTime;
-    char Xon;
-    char Xoff;
-    bool createLogFile;
-    bool autoSave;
-    bool deleteControlChars;
-    bool removeEmptyLines;
-    bool removeBefore;
-    bool removeSpaceEOB;
-    bool renameIfExists;
-    bool removeLetters;
-    bool guessFileNameByProgName;
-    bool appendExt;
-    bool useAsExt;
-    bool splitPrograms;
-    bool fileNameLowerCase;
-    bool fileServer;
-    bool logData;
-    bool waitForCts;
-    bool waitForXon;
-    bool sendXon;
-    QString searchPath1;
-    QString searchExt1;
-    QString searchPath2;
-    QString searchExt2;
-    QString searchPath3;
-    QString searchExt3;
-    QString fileNameExpFs;
-    QString fileNameExpAs;
-    QString eobChar;
-    QString fileNameExpSaveFile;
-    QString removeFromRecieved;
-};
 
 class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialog
 {

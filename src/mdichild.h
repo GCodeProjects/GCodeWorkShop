@@ -23,15 +23,25 @@
 #ifndef MDICHILD_H
 #define MDICHILD_H
 
-#include <QtWidgets>
-#include <QtPrintSupport/QPrinter>
+#include <QByteArray>
+#include <QChar>
+#include <QList>
+#include <QObject>
+#include <QPointer>
+#include <QString>
+#include <Qt>        // Qt::WindowFlags
+#include <QTextEdit> // QTextEdit::ExtraSelection
+#include <QWidget>
 
-#include "highlighter.h"
-#include "commoninc.h"
-#include "basic_interpreter.h"
-#include "ui/longjobhelper.h"
+#include "commoninc.h" // _editor_properites
 
 #include "ui_mdichildform.h"
+
+class QLineEdit;
+class QPrinter;
+
+class Highlighter;
+class LongJobHelper;
 
 
 #define ERR_NO_BRAC       -1
@@ -39,7 +49,6 @@
 #define ERR_CONVERT       -3
 #define ERR_UNKNOWN_FUNC  -4
 #define ERR_DOUBLE_DOT    -5
-
 
 class MdiChild : public QWidget, public Ui::MdiChild
 {

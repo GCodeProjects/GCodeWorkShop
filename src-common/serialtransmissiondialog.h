@@ -23,14 +23,23 @@
 #ifndef SERIALTRANSMISSIONDIALOG_H
 #define SERIALTRANSMISSIONDIALOG_H
 
+#include <QByteArray>
+#include <QDialog>
+#include <QObject>     // Q_OBJECT
+#include <QSerialPort>
+#include <QString>
+#include <QStringList>
+#include <Qt>          // Qt::WindowFlags
+#include <QtGlobal>    // qint64
+#include <QWidget>
 
-#include <QtWidgets>
-#include <QtSerialPort/QSerialPort>
+#include "serialportsettings.h"          // SerialPortSettings
+#include "ui_serialtransmissiondialog.h" // Ui::SerialTransmissionDialog
 
-#include "serialtransmission.h"
-#include "commoninc.h"
+class QCloseEvent;
+class QString;
+class QTimer;
 
-#include "ui_serialtransmissiondialog.h"
 
 class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionDialog
 {
@@ -89,7 +98,7 @@ private:
 
     QSerialPort serialPort;
     bool canceled;
-    PortSettings portSettings;
+    SerialPortSettings portSettings;
     QByteArray serialPortReadBuffer;
     // FIXME: serialPortWriteBuffer must be QList<QBiteArray>
     QStringList serialPortWriteBuffer;

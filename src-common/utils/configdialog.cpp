@@ -20,13 +20,15 @@
  *      along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <QSharedPointer>
 #include <QStackedLayout>
 #include <QTreeWidgetItem>
+#include <QWidget>
 
-#include "utils/configpage.h"
-#include "utils/configdialog.h"
+#include "utils/configpage.h"   // ConfigPage
+#include "utils/configdialog.h" // ConfigDialog QDialog QObject
+
 #include "ui_configdialog.h"
-#include "utils/medium.h"
 
 
 class TreeItem: public QTreeWidgetItem
