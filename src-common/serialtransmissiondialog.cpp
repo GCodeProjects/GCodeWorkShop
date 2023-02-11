@@ -20,6 +20,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <algorithm> // std::sort()
+
 #include "serialtransmissiondialog.h"
 #include "utils/medium.h"
 
@@ -1477,7 +1479,7 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
     //        }while(index > 0);
     //    }
 
-    qSort(progBegins.begin(), progBegins.end());
+    std::sort(progBegins.begin(), progBegins.end());
 
     // split file  TODO: data can be lost if filename detection fails also some garbage are left
     QList<int>::const_iterator it = progBegins.constBegin();

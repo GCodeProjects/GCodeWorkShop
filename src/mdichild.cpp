@@ -20,6 +20,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <algorithm> // std::sort()
+
 #include <QPrintPreviewDialog>
 
 #include "mdichild.h"
@@ -3127,7 +3129,7 @@ QStringList MdiChild::splitFile()
         } while (index > 0);
     }
 
-    qSort(progBegins.begin(), progBegins.end());
+    std::sort(progBegins.begin(), progBegins.end());
 
     QList<int>::const_iterator it = progBegins.constBegin();
 
