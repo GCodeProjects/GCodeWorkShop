@@ -186,7 +186,7 @@ void BasicInterpreter::find_eol()
         */
 void BasicInterpreter::label_init()
 {
-    register int t;
+    int t;
 
     for (t = 0; t < NUM_LAB; ++t) {
         label_table[t].name[0] = '\0';
@@ -212,7 +212,7 @@ void BasicInterpreter::get_exp(double *result)
         */
 int BasicInterpreter::look_up(char *s)
 {
-    register int i;
+    int i;
     char *p;
 
     /* convert to lowercase */
@@ -271,7 +271,7 @@ void BasicInterpreter::putback()
         */
 int BasicInterpreter::get_next_label(char *s)
 {
-    register int t;
+    int t;
 
     for (t = 0; t < NUM_LAB; ++t) {
         if (label_table[t].name[0] == 0) {
@@ -515,7 +515,7 @@ void BasicInterpreter::scan_labels()
         */
 char *BasicInterpreter::find_label(char *s)
 {
-    register int t;
+    int t;
 
     for (t = 0; t < NUM_LAB; ++t) {
         if (!strcmp(label_table[t].name, s)) {
@@ -833,7 +833,7 @@ void BasicInterpreter::level4(double *result)
 /* Multiply or divide two factors. */
 void BasicInterpreter::level3(double *result)
 {
-    register char  op;
+    char  op;
     double hold;
 
     level4(result);
@@ -848,7 +848,7 @@ void BasicInterpreter::level3(double *result)
 /*  Add or subtract two terms. */
 void BasicInterpreter::level2(double *result)
 {
-    register char  op;
+    char  op;
     double hold;
 
     level3(result);

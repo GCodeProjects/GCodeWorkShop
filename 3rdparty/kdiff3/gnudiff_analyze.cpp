@@ -488,7 +488,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
 
     for (f = 0; f < 2; f++) {
         lin end = filevec[f].buffered_lines;
-        register char *discards = discarded[f];
+        char *discards = discarded[f];
 
         for (i = 0; i < end; i++) {
             /* Cancel provisional discards not in middle of run of discards.  */
@@ -496,7 +496,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
                 discards[i] = 0;
             } else if (discards[i] != 0) {
                 /* We have found a nonprovisional discard.  */
-                register lin j;
+                lin j;
                 lin length;
                 lin provisional = 0;
 
@@ -529,7 +529,7 @@ void GnuDiff::discard_confusing_lines(struct file_data filevec[])
                             discards[j] = 0;
                         }
                 } else {
-                    register lin consec;
+                    lin consec;
                     lin minimum = 1;
                     lin tem = length >> 2;
 
