@@ -2277,7 +2277,7 @@ void MdiChild::highlightCurrentLine()
     QString beforeBrace = beforeCursor.selectedText();
 
     proceed = true;
-    findOptions = 0;
+    findOptions = QTextDocument::FindFlags();
 
     if ((brace != QLatin1String("{")) && (brace != QLatin1String("}"))
             && (brace != QLatin1String("[")) && (brace != QLatin1String("]"))

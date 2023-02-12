@@ -646,10 +646,10 @@ bool EdytorNc::findNext()
 
     if (!findEdit->text().isEmpty() && hasMdiChild) {
         found = activeMdiChild()->findNext(findEdit->text(),
-                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                                   0)) |
-                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(
-                                                    0))),
+                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
+                                             QTextDocument::FindFlags()) |
+                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
+                                             QTextDocument::FindFlags())),
                                            mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
@@ -677,10 +677,10 @@ bool EdytorNc::findPrevious()
 
     if (!findEdit->text().isEmpty() && hasMdiChild) {
         found = activeMdiChild()->findNext(findEdit->text(), QTextDocument::FindBackward |
-                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                                   0)) |
-                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(
-                                                    0))),
+                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
+                                             QTextDocument::FindFlags()) |
+                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
+                                             QTextDocument::FindFlags())),
                                            mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
@@ -711,10 +711,10 @@ void EdytorNc::replaceNext()
     if (hasMdiChildNotReadOnly) {
 
         found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
-                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                                      0)) |
-                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(
-                                                       0))),
+                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
+                                                QTextDocument::FindFlags()) |
+                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
+                                                QTextDocument::FindFlags())),
                                               mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
@@ -745,10 +745,10 @@ void EdytorNc::replacePrevious()
 
         found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
                                               QTextDocument::FindBackward |
-                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                                      0)) |
-                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(
-                                                       0))),
+                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
+                                                QTextDocument::FindFlags()) |
+                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
+                                                QTextDocument::FindFlags())),
                                               mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
@@ -779,10 +779,10 @@ void EdytorNc::replaceAll()
         QApplication::setOverrideCursor(Qt::BusyCursor);
 
         found = activeMdiChild()->replaceAll(findEdit->text(), replaceEdit->text(),
-                                             ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                                     0)) |
-                                              (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(
-                                                      0))),
+                                             ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
+                                               QTextDocument::FindFlags()) |
+                                              (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
+                                               QTextDocument::FindFlags())),
                                              mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
@@ -1425,10 +1425,10 @@ void EdytorNc::updateMenus()
     if (hasMdiChild) {
         if (findToolBar)
             activeMdiChild()->highlightFindText(findEdit->text(),
-                                                ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                                        0)) |
-                                                 (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(
-                                                         0))), mCheckIgnoreComments->isChecked());
+                                                ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
+                                                  QTextDocument::FindFlags()) |
+                                                 (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
+                                                  QTextDocument::FindFlags())), mCheckIgnoreComments->isChecked());
         else {
             activeMdiChild()->highlightFindText("");
         }
@@ -2671,10 +2671,10 @@ void EdytorNc::createFindToolBar()
         findEdit->setFocus(Qt::MouseFocusReason);
 
         activeMdiChild()->highlightFindText(findEdit->text(),
-                                            ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                                    0)) |
-                                             (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively : QTextDocument::FindFlags(
-                                                     0))), mCheckIgnoreComments->isChecked());
+                                            ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
+                                              QTextDocument::FindFlags()) |
+                                             (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
+                                              QTextDocument::FindFlags())), mCheckIgnoreComments->isChecked());
     }
 
     findEdit->selectAll();
@@ -3845,7 +3845,8 @@ void EdytorNc::doSwapAxes()
     double min, max, modi;
     int oper, prec;
     bool ignoreComments = true;
-    QTextDocument::FindFlags findOptions = 0; //QTextDocument::FindWholeWords;
+    QTextDocument::FindFlags findOptions =
+        QTextDocument::FindFlags(); //QTextDocument::FindWholeWords;
 
     MdiChild *editorWindow = activeMdiChild();
 

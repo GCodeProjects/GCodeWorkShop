@@ -68,7 +68,8 @@ private:
     void showFiles(const QDir &directory, const QStringList &files);
     void createFilesTable();
     void readSettings();
-    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0);
+    void highlightFindText(QString searchString,
+                           QTextDocument::FindFlags options = QTextDocument::FindFlags());
     bool findText(const QString &exp, QTextDocument::FindFlags options, bool ignoreComments = true);
 
     Highlighter *highlighter;

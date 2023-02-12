@@ -68,7 +68,8 @@ public:
     void doInsertDot();
     void doI2M();
     int compileMacro();
-    void highlightFindText(QString searchString, QTextDocument::FindFlags options = 0,
+    void highlightFindText(QString searchString,
+                           QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                            bool ignoreComments = true);
     void doUndo();
     void doRedo();
@@ -124,7 +125,8 @@ private:
     void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
     void detectHighligthMode();
-    bool findText(const QString &text, QTextDocument::FindFlags options = 0,
+    bool findText(const QString &text,
+                  QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                   bool ignoreComments = true);
     void fileChangeMonitorAddPath(QString fileName);
     void fileChangeMonitorRemovePath(QString fileName);

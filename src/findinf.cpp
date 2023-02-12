@@ -542,12 +542,10 @@ void FindInFiles::filePreview(int x, int y)
 
         if ((!textComboBox->currentText().isEmpty()) && !(textComboBox->currentText() == "*")) {
             highlightFindText(textComboBox->currentText(),
-                              (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                                   0)));
+                              (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags()));
 
             if (findText(textComboBox->currentText(),
-                         (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags(
-                              0))),
+                         (wholeWordsCheckBox->isChecked() ? QTextDocument::FindWholeWords : QTextDocument::FindFlags())),
                     (commentStyle1CheckBox->isChecked() || commentStyle2CheckBox->isChecked())) {
                 preview->centerCursor();
             }
