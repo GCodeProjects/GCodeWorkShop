@@ -485,6 +485,7 @@ void SourceData::readAndPreprocess(QTextCodec *pEncoding, bool bAutoDetectUnicod
             // No preprocessing: Read the file directly:
             m_normalData.readFile(fileNameIn1);
         } else {
+            // NOTE: this branch always is not reached
             QString fileNameInPP = fileNameIn1;
 
             if (false) { //pEncoding1 != m_pOptionDialog->m_pEncodingPP
@@ -500,7 +501,7 @@ void SourceData::readAndPreprocess(QTextCodec *pEncoding, bool bAutoDetectUnicod
             QProcess ppProcess;
             ppProcess.setStandardInputFile(fileNameInPP);
             ppProcess.setStandardOutputFile(fileNameOut1);
-            ppProcess.start(ppCmd);
+            ppProcess.start(ppCmd, QStringList());
             ppProcess.waitForFinished(-1);
             //QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut1+"\"";
             //::system( encodeString(cmd) );
@@ -523,6 +524,7 @@ void SourceData::readAndPreprocess(QTextCodec *pEncoding, bool bAutoDetectUnicod
 
         // LineMatching Preprocessor
         if (false) { // m_pOptionDialog->m_LineMatchingPreProcessorCmd.isEmpty()
+            // NOTE: this branch always is not reached
             fileNameIn2 = fileNameOut1.isEmpty() ? fileNameIn1 : fileNameOut1;
             QString fileNameInPP = fileNameIn2;
             pEncoding2 = pEncoding1;
@@ -539,7 +541,7 @@ void SourceData::readAndPreprocess(QTextCodec *pEncoding, bool bAutoDetectUnicod
             QProcess ppProcess;
             ppProcess.setStandardInputFile(fileNameInPP);
             ppProcess.setStandardOutputFile(fileNameOut2);
-            ppProcess.start(ppCmd);
+            ppProcess.start(ppCmd, QStringList());
             ppProcess.waitForFinished(-1);
             //QString cmd = catCmd + " \"" + fileNameInPP + "\" | " + ppCmd  + " >\"" + fileNameOut2 + "\"";
             //::system( encodeString(cmd) );

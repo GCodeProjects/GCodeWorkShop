@@ -165,9 +165,10 @@ void FileAccess::setFile(const QString &name, bool bWantToWrite)
             if (!m_bExists  && m_absoluteFilePath.contains("@@")) {
                 // Try reading a clearcase file
                 m_localCopy = FileAccess::tempFileName();
-                QString cmd = "cleartool get -to \"" + m_localCopy + "\"  \"" + m_absoluteFilePath + "\"";
+                QString cmd = "cleartool get";
+                QStringList arg = QStringList("-to \"" + m_localCopy + "\"  \"" + m_absoluteFilePath + "\"");
                 QProcess process;
-                process.start(cmd);
+                process.start(cmd, arg);
                 process.waitForFinished(-1);
                 //::system( cmd.local8Bit() );
 

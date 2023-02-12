@@ -1524,10 +1524,11 @@ void KDiff3App::slotNoRelevantChangesDetected()
     if (m_bTripleDiff &&  ! m_outputFilename.isEmpty()) {
         //KMessageBox::information( this, "No relevant changes detected", "KDiff3" );
         if (false) { //!m_pOptionDialog->m_IrrelevantMergeCmd.isEmpty()
+            // NOTE: this branch always is not reached
             QString cmd =
                 ""; //m_pOptionDialog->m_IrrelevantMergeCmd + " \"" + m_sd1.getAliasName()+ "\" \"" + m_sd2.getAliasName() + "\" \"" + m_sd3.getAliasName();
             QProcess process;
-            process.start(cmd);
+            process.start(cmd, QStringList());
             process.waitForFinished(-1);
             //::system( cmd.local8Bit() );
         }

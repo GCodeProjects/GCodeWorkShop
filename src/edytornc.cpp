@@ -1233,7 +1233,7 @@ void EdytorNc::doConvertProg()
 
 void EdytorNc::doCalc()
 {
-    if (defaultMdiWindowProperites.calcBinary.isEmpty()) {
+    if (!QFile::exists(defaultMdiWindowProperites.calcBinary)) {
         QMessageBox::information(this, tr("Information"),
                                  tr("Set correct calculator program name in configuration dialog."));
         return;
@@ -1244,9 +1244,17 @@ void EdytorNc::doCalc()
     if (!proc) {
         proc = new QProcess(this);
         proc->setObjectName("Calc569");
-        proc->start(defaultMdiWindowProperites.calcBinary);
-    } else if (proc->pid() == 0) {
-        proc->start(defaultMdiWindowProperites.calcBinary);
+    }
+
+    bool isNotRun;
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+    isNotRun = proc->pid() == 0;
+#else
+    isNotRun = proc->processId() == 0;
+#endif
+
+    if (isNotRun) {
+        proc->start(defaultMdiWindowProperites.calcBinary, QStringList());
     }
 }
 
@@ -4198,44 +4206,16 @@ void EdytorNc::fileChanged(const QString fileName)
 
 void EdytorNc::startSerialPortServer()
 {
-
-    QString fileName, path;
-    //commApp = findChild<CommApp *>("CommApp", Qt::FindChildrenRecursively);
-
-    //    if(commApp)
-    //    {
-    //        commApp->show();
-    //    }
-    //    else
-    //    {
-    //        commApp = new CommApp();
-    //    }
-
-    path = QApplication::applicationDirPath() + "/";
-    path = QDir::toNativeSeparators(path);
-
-#ifdef Q_OS_LINUX
-    fileName = path + "sfs";
-#endif
+    QString path = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/");
+    QString fileName;
 
 #ifdef Q_OS_WIN32
     fileName = "sfs.exe";
+#else
+    fileName = "sfs";
 #endif
 
-    sfsProc = findChild<QProcess *>("sfs");
-
-    if (!sfsProc) {
-        sfsProc = new QProcess(this);
-        sfsProc->setObjectName("sfs");
-        sfsProc->setWorkingDirectory(path);
-        sfsProc->startDetached(fileName);
-
-        //        qDebug() << QDir::toNativeSeparators(path) << fileName << sfsProc;
-        //        qDebug() << sfsProc->errorString() << sfsProc->error();
-    } else if (sfsProc->pid() == 0) {
-        sfsProc->setWorkingDirectory(path);
-        sfsProc->startDetached(fileName);
-    }
+    QProcess::startDetached(path + fileName, QStringList(), path);
 }
 
 void EdytorNc::tileSubWindowsVertycally()
