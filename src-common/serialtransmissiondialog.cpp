@@ -22,6 +22,8 @@
 
 #include <algorithm> // std::sort()
 
+#include <QStringList>
+
 #include "serialtransmissiondialog.h"
 #include "utils/medium.h"
 
@@ -458,13 +460,10 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
     }
 
     if (!xoffReceived) {
-        QByteArray buff;
-        buff.clear();
-        buff.append(*writeBufferIterator);
+        QByteArray buff = writeBufferIterator->toLatin1();
         serialPort.write(buff, buff.size());
         writeBufferIterator++;
         qDebug() << "*** ***";
-
     }
 
     qDebug() << "*** xoffReceived ***" << xoffReceived << " Stop" << stop;
@@ -1388,12 +1387,10 @@ void SerialTransmissionDialog::writeLog(QString msg, QString timeStamp)
                             QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
             }
 
-            text.append(timeStamp);
-            text.append("  ");
+            text = timeStamp.append("  ").toUtf8();
             logFile.write(text, text.length());
 
-            text.clear();
-            text.append(msg + "\r\n");
+            text = msg.append("\r\n").toUtf8();
             logFile.write(text, text.length());
 
             logFile.close();
@@ -1737,10 +1734,7 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
     }
 
     if (!xoffReceived) {
-        QByteArray buff;
-        buff.clear();
-        buff.append(*writeBufferIterator);
-
+        QByteArray buff = writeBufferIterator->toLatin1();
         serialPort.write(buff, buff.size());
         writeBufferIterator++;
     }

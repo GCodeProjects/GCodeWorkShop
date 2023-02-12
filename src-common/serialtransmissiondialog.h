@@ -91,6 +91,7 @@ private:
     bool canceled;
     PortSettings portSettings;
     QByteArray serialPortReadBuffer;
+    // FIXME: serialPortWriteBuffer must be QList<QBiteArray>
     QStringList serialPortWriteBuffer;
     qint64 bytesWritten;
     qint64 noOfBytes;
