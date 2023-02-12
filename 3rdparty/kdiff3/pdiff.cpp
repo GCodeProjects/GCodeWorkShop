@@ -30,6 +30,7 @@
 #include <qcombobox.h>
 #include <QDropEvent>
 #include <QUrl>
+#include <QPoint>
 #include <QProcess>
 
 #include <assert.h>
@@ -783,12 +784,13 @@ bool KDiff3App::eventFilter(QObject *o, QEvent *e)
         QWheelEvent *w = (QWheelEvent *)e;
         w->accept();
 
-        int deltaX = 0;
+        QPoint d = w->pixelDelta();
 
-        int d = w->delta();
-        int deltaY = -d / 120 * QApplication::wheelScrollLines();
+        if (d.isNull()) {
+            d = - w->angleDelta() / 120 * QApplication::wheelScrollLines();
+        }
 
-        scrollDiffTextWindow(deltaX, deltaY);
+        scrollDiffTextWindow(d.x(), d.y());
         return true;
     } else if (e->type() == QEvent::Drop) {
         QDropEvent *pDropEvent = static_cast<QDropEvent *>(e);

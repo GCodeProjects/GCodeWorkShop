@@ -25,6 +25,7 @@
 #include <QTextStream>
 #include <QKeyEvent>
 #include <QMouseEvent>
+#include <QPoint>
 
 #include <QLineEdit>
 #include <QTextCodec>
@@ -2260,9 +2261,14 @@ void MergeResultWindow::slotCursorUpdate()
 
 void MergeResultWindow::wheelEvent(QWheelEvent *e)
 {
-    int d = -e->delta() * QApplication::wheelScrollLines() / 120;
+    QPoint d = e->pixelDelta();
+
+    if (d.isNull()) {
+        d = - e->angleDelta() / 120 * QApplication::wheelScrollLines();
+    }
+
     e->accept();
-    scroll(0, min2(d, getNofVisibleLines()));
+    scroll(d.x(), min2(d.y(), getNofVisibleLines()));
 }
 
 
