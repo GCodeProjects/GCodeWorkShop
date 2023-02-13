@@ -3298,7 +3298,7 @@ void Overview::paintEvent(QPaintEvent *)
                 m_nofLines += i->linesNeededForDisplay;
             }
         } else {
-            m_nofLines = m_pDiff3LineList->size();
+            m_nofLines = static_cast<int>(m_pDiff3LineList->size());
         }
 
         m_pixmap = QPixmap(size());

@@ -323,8 +323,9 @@ int DiffTextWindow::getNofColumns()
 
 int DiffTextWindow::getNofLines()
 {
-    return d->m_bWordWrap ? d->m_diff3WrapLineVector.size() :
-           d->m_pDiff3LineVector->size();
+    return static_cast<int>(d->m_bWordWrap ?
+                            d->m_diff3WrapLineVector.size() :
+                            d->m_pDiff3LineVector->size());
 }
 
 int DiffTextWindow::convertLineToDiff3LineIdx(int line)
@@ -1348,8 +1349,9 @@ QString DiffTextWindow::getSelection()
     int lineIdx = 0;
 
     int it;
-    int vectorSize = d->m_bWordWrap ? d->m_diff3WrapLineVector.size() :
-                     d->m_pDiff3LineVector->size();
+    int vectorSize = static_cast<int>(d->m_bWordWrap ?
+                                      d->m_diff3WrapLineVector.size() :
+                                      d->m_pDiff3LineVector->size());
 
     for (it = 0; it < vectorSize; ++it) {
         const Diff3Line *d3l = d->m_bWordWrap ? d->m_diff3WrapLineVector[it].pD3L :
@@ -1549,8 +1551,8 @@ int DiffTextWindowData::convertLineOnScreenToLineInSource(int lineOnScreen,
 
         int d3lIdx = m_pDiffTextWindow->convertLineToDiff3LineIdx(lineOnScreen);
 
-        if (!bFirstLine && d3lIdx >= (int)m_pDiff3LineVector->size()) {
-            d3lIdx = m_pDiff3LineVector->size() - 1;
+        if (!bFirstLine && d3lIdx >= static_cast<int>(m_pDiff3LineVector->size())) {
+            d3lIdx = static_cast<int>(m_pDiff3LineVector->size() - 1);
         }
 
         if (coordType == eD3LLineCoords) {
@@ -1702,7 +1704,7 @@ void DiffTextWindow::recalcWordWrap(bool bWordWrap, int wrapLineVectorSize,
 
         int i;
         int wrapLineIdx = 0;
-        int size = d->m_pDiff3LineVector->size();
+        int size = static_cast<int>(d->m_pDiff3LineVector->size());
 
         for (i = 0; i < size; ++i) {
             QString s = d->getString(i);

@@ -298,7 +298,7 @@ bool KDiff3App::init(bool bAuto, TotalDiffStatus *pTotalDiffStatus, bool bLoadFi
     calcDiff3LineVector(m_diff3LineList, m_diff3LineVector);
 
     // Calc needed lines for display
-    m_neededLines = m_diff3LineList.size();
+    m_neededLines = static_cast<int>(m_diff3LineList.size());
 
     setVisible(bGUI);
 
@@ -1250,7 +1250,7 @@ void KDiff3App::recalcWordWrap(int
 
         m_neededLines = sumOfLines;
     } else {
-        m_neededLines = m_diff3LineVector.size();
+        m_neededLines = static_cast<int>(m_diff3LineVector.size());
 
         if (m_pDiffTextWindow1) {
             m_pDiffTextWindow1->recalcWordWrap(false, 0, 0);

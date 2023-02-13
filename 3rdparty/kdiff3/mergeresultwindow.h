@@ -321,7 +321,7 @@ private:
         int size()
         {
             if (!m_pTotalSize) {
-                m_size = BASE::size();
+                m_size = static_cast<int>(BASE::size());
             }
 
             return m_size;
