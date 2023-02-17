@@ -31,9 +31,6 @@
 #define PARAMS(Args) Args
 #define PROTOTYPES 1
 
-/* Verify a requirement at compile-time (unlike assert, which is runtime).  */
-#define verify(name, assertion) struct name { char a[(assertion) ? 1 : -1]; }
-
 /* Determine whether an integer type is signed, and its bounds.
    This code assumes two's (or one's!) complement with no holes.  */
 
