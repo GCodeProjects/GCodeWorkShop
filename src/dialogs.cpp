@@ -709,19 +709,19 @@ void DotDialog::divideClicked()
 
 void DotDialog::spinBoxVal(int val)
 {
-    if ((val == 99)) {
+    if (val == 99) {
         mSpinBox->setValue(10);
-    } else if ((val == 999)) {
+    } else if (val == 999) {
         mSpinBox->setValue(10);
-    } else if ((val == 9999)) {
+    } else if (val == 9999) {
         mSpinBox->setValue(100);
     }
 
-    if ((val == 11)) {
+    if (val == 11) {
         mSpinBox->setValue(100);
-    } else if ((val == 101)) {
+    } else if (val == 101) {
         mSpinBox->setValue(1000);
-    } else if ((val == 1001)) {
+    } else if (val == 1001) {
         mSpinBox->setValue(10000);
     }
 }

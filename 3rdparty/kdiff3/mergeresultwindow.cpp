@@ -287,8 +287,8 @@ void MergeResultWindow::merge(bool bAutoSolve, int defaultSelector, bool bConfli
 
             // Automatic solving for only whitespace changes.
             if (ml.bConflict &&
-                    (m_pldC == 0 && (d.bAEqB || (d.bWhiteLineA && d.bWhiteLineB))  ||
-                     m_pldC != 0 && ((d.bAEqB && d.bAEqC) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC)))) {
+                    ((m_pldC == 0 && (d.bAEqB || (d.bWhiteLineA && d.bWhiteLineB)))  ||
+                     (m_pldC != 0 && ((d.bAEqB && d.bAEqC) || (d.bWhiteLineA && d.bWhiteLineB && d.bWhiteLineC))))) {
                 ml.bWhiteSpaceConflict = true;
             }
 
@@ -578,9 +578,9 @@ void MergeResultWindow::go(e_Direction eDir, e_EndPoint eEndPoint)
             } else {
                 ++i;
             }
-        } while (isItAtEnd(eDir != eUp, i) && (i->bConflict == false || bSkipWhiteConflicts
+        } while (isItAtEnd(eDir != eUp, i) && (i->bConflict == false || (bSkipWhiteConflicts
 
-                                               && i->bWhiteSpaceConflict));
+                                               && i->bWhiteSpaceConflict)));
     } else if (isItAtEnd(eDir != eUp, i)  &&  eEndPoint == eUnsolvedConflict) {
         do {
             if (eDir == eUp) {
@@ -2064,7 +2064,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent *e)
     bool bMMB = e->button() == Qt::MidButton;
     bool bRMB = e->button() == Qt::RightButton;
 
-    if (bLMB && pos < m_firstColumn || bRMB) {       // Fast range selection
+    if ((bLMB && pos < m_firstColumn) || bRMB) {       // Fast range selection
         m_cursorXPos = 0;
         m_cursorOldXPos = 0;
         m_cursorYPos = max2(line, 0);
@@ -3182,13 +3182,13 @@ void Overview::drawColumn(QPainter &p, e_OverviewMode eOverviewMode, int x, int 
             case eBDeleted:
             case eBChanged:
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorB;
-                bWhiteSpaceChange = d3l.bAEqB || d3l.bWhiteLineA && d3l.bWhiteLineB;
+                bWhiteSpaceChange = d3l.bAEqB || (d3l.bWhiteLineA && d3l.bWhiteLineB);
                 break;
 
             case eCAdded:
             case eCDeleted:
             case eCChanged:
-                bWhiteSpaceChange = d3l.bAEqC || d3l.bWhiteLineA && d3l.bWhiteLineC;
+                bWhiteSpaceChange = d3l.bAEqC || (d3l.bWhiteLineA && d3l.bWhiteLineC);
                 c = bConflict ? m_pOptions->m_colorForConflict : m_pOptions->m_colorC;
                 break;
 
@@ -3217,7 +3217,7 @@ void Overview::drawColumn(QPainter &p, e_OverviewMode eOverviewMode, int x, int 
 
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.bAEqB || d3l.bWhiteLineA && d3l.bWhiteLineB;
+                bWhiteSpaceChange = d3l.bAEqB || (d3l.bWhiteLineA && d3l.bWhiteLineB);
                 break;
             }
         } else if (eOverviewMode == eOMAvsC) {
@@ -3231,7 +3231,7 @@ void Overview::drawColumn(QPainter &p, e_OverviewMode eOverviewMode, int x, int 
 
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.bAEqC || d3l.bWhiteLineA && d3l.bWhiteLineC;
+                bWhiteSpaceChange = d3l.bAEqC || (d3l.bWhiteLineA && d3l.bWhiteLineC);
                 break;
             }
         } else if (eOverviewMode == eOMBvsC) {
@@ -3245,7 +3245,7 @@ void Overview::drawColumn(QPainter &p, e_OverviewMode eOverviewMode, int x, int 
 
             default:
                 c = m_pOptions->m_colorForConflict;
-                bWhiteSpaceChange = d3l.bBEqC || d3l.bWhiteLineB && d3l.bWhiteLineC;
+                bWhiteSpaceChange = d3l.bBEqC || (d3l.bWhiteLineB && d3l.bWhiteLineC);
                 break;
             }
         }

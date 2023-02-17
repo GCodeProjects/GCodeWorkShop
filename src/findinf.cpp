@@ -657,7 +657,7 @@ void FindInFiles::highlightFindText(QString searchString, QTextDocument::FindFla
 
 bool FindInFiles::eventFilter(QObject *obj, QEvent *ev)
 {
-    if ((obj == textComboBox)) {
+    if (obj == textComboBox) {
         if (ev->type() == QEvent::KeyPress) {
             QKeyEvent *k = (QKeyEvent *) ev;
 
