@@ -22,7 +22,10 @@
 
 #include <algorithm> // std::sort()
 
+#include <QMarginsF>
+#include <QPageLayout>
 #include <QPrintPreviewDialog>
+#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
 
 #include "mdichild.h"
 #include "edytornc.h"
@@ -3752,7 +3755,11 @@ void MdiChild::filePrintPreview()
 {
 #ifndef QT_NO_PRINTER
     QPrinter printer(QPrinter::HighResolution);
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
     printer.setPageMargins(15, 10, 10, 10, QPrinter::Millimeter);
+#else
+    printer.setPageMargins(QMarginsF(15, 10, 10, 10), QPageLayout::Millimeter);
+#endif
     QPrintPreviewDialog preview(&printer, this);
     preview.setWindowFlags(Qt::Window);
     connect(&preview, SIGNAL(paintRequested(QPrinter *)), SLOT(printPreview(QPrinter *)));

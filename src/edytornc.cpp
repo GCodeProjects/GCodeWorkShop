@@ -20,9 +20,11 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <QPageLayout>
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QPrintPreviewDialog>
+#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
 #include <QtSerialPort/QtSerialPort>
 
 #include "edytornc.h"
@@ -4001,7 +4003,11 @@ void EdytorNc::savePrinterSettings(QPrinter *printer)
 
     settings.setValue("PrinterName", printer->printerName());
     settings.setValue("CollateCopies", printer->collateCopies());
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
     settings.setValue("Orientation", printer->orientation());
+#else
+    settings.setValue("Orientation", printer->pageLayout().orientation());
+#endif
     settings.setValue("ColorMode", printer->colorMode());
     QPageLayout layout = printer->pageLayout();
     settings.setValue("PageSize", layout.pageSize().id());
@@ -4023,7 +4029,12 @@ void EdytorNc::loadPrinterSettings(QPrinter *printer)
 
     printer->setPrinterName(settings.value("PrinterName").toString());
     printer->setCollateCopies(settings.value("CollateCopies").toBool());
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
     printer->setOrientation((QPrinter::Orientation)settings.value("Orientation").toInt());
+#else
+    printer->pageLayout().setOrientation((QPageLayout::Orientation)
+                                         settings.value("Orientation").toInt());
+#endif
     printer->setColorMode((QPrinter::ColorMode)settings.value("ColorMode").toInt());
 
     QPageLayout layout = printer->pageLayout();
