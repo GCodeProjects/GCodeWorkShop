@@ -45,6 +45,7 @@
 #include <QLatin1Char>
 #include <QLatin1String>
 #include <QLineEdit>
+#include <QLocale>
 #include <QMenu>
 #include <QMessageBox>
 #include <QMarginsF>
@@ -347,7 +348,7 @@ void MdiChild::changeDateInComment()
     }
 
     QRegExp exp;
-    QDate dat = QDate::currentDate();
+    QString strDate = QLocale().toString(QDate::currentDate(), QLocale::ShortFormat);
     exp.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
     QTextCursor cursor = textEdit->textCursor();
     cursor.setPosition(0);
@@ -358,7 +359,7 @@ void MdiChild::changeDateInComment()
         textEdit->setUpdatesEnabled(false);
         cursor.beginEditBlock();
         cursor.removeSelectedText();
-        cursor.insertText(tr("DATE") + ": " + dat.toString(Qt::DefaultLocaleShortDate));
+        cursor.insertText(tr("DATE") + ": " + strDate);
         cursor.endEditBlock();
 
         textEdit->setUpdatesEnabled(true);
@@ -383,9 +384,9 @@ void MdiChild::changeDateInComment()
             cursor.removeSelectedText();
 
             if (text.contains('(')) {
-                text = "(" + dat.toString(Qt::DefaultLocaleShortDate) + ")";
+                text = "(" + strDate + ")";
             } else {
-                text = ";" + dat.toString(Qt::DefaultLocaleShortDate);
+                text = ";" + strDate;
             }
 
             cursor.insertText(text);

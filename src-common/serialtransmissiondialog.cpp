@@ -172,8 +172,11 @@ bool SerialTransmissionDialog::wasCanceled()
 
 void SerialTransmissionDialog::setLabelText(const QString text, bool multiline, bool writeToLog)
 {
-    QString timeStamp = QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " +
-                        QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
+    QLocale appLocale = QLocale();
+    QString timeStamp = appLocale.toString(QDate::currentDate(), QLocale::ShortFormat) +
+                        " " +
+                        appLocale.toString(QTime::currentTime(), QLocale::LongFormat)
+                        .remove(QRegularExpression(" \\w+"));
 
     if (multiline && serverMode) {
         if (plainTextEdit) {
@@ -1392,8 +1395,11 @@ void SerialTransmissionDialog::writeLog(QString msg, QString timeStamp)
             }
 
             if (timeStamp.isEmpty()) {
-                timeStamp = QDate::currentDate().toString(Qt::DefaultLocaleShortDate) + " " +
-                            QTime::currentTime().toString(Qt::DefaultLocaleLongDate).remove(QRegularExpression(" \\w+"));
+                QLocale appLocale = QLocale();
+                timeStamp = appLocale.toString(QDate::currentDate(), QLocale::ShortFormat) +
+                            " " +
+                            appLocale.toString(QTime::currentTime(), QLocale::LongFormat)
+                            .remove(QRegularExpression(" \\w+"));
             }
 
             text = timeStamp.append("  ").toUtf8();
