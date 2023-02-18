@@ -365,21 +365,6 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
         stop = true;
         break;
 
-    case QSerialPort::ParityError:
-        text = tr("Parity error detected by the hardware while reading data");
-        stop = true;
-        break;
-
-    case QSerialPort::FramingError:
-        text = tr("Framing error detected by the hardware while reading data");
-        stop = true;
-        break;
-
-    case QSerialPort::BreakConditionError:
-        text = tr("Break condition detected by the hardware on the input line");
-        stop = true;
-        break;
-
     case QSerialPort::WriteError:
         text = tr("An I/O error occurred while writing the data");
         break;

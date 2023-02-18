@@ -438,18 +438,6 @@ void TransmissionDialog::showError(int error)
         errorLabel->setText("Attempting to open an already opened device in this object");
         break;
 
-    case QSerialPort::ParityError:
-        errorLabel->setText("Parity error detected by the hardware while reading data");
-        break;
-
-    case QSerialPort::FramingError:
-        errorLabel->setText("Framing error detected by the hardware while reading data");
-        break;
-
-    case QSerialPort::BreakConditionError:
-        errorLabel->setText("Break condition detected by the hardware on the input line");
-        break;
-
     case QSerialPort::WriteError:
         errorLabel->setText("An I/O error occurred while writing the data");
         break;
