@@ -2062,7 +2062,7 @@ void MergeResultWindow::mousePressEvent(QMouseEvent *e)
     convertToLinePos(e->x(), e->y(), line, pos);
 
     bool bLMB = e->button() == Qt::LeftButton;
-    bool bMMB = e->button() == Qt::MidButton;
+    bool bMMB = e->button() == Qt::MiddleButton;
     bool bRMB = e->button() == Qt::RightButton;
 
     if ((bLMB && pos < m_firstColumn) || bRMB) {       // Fast range selection
