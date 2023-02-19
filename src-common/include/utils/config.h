@@ -220,8 +220,6 @@ _item_type(QPointF);
 _item_type(qreal);
 _item_type(QRect);
 _item_type(QRectF);
-_item_type(QRegExp);
-_item_type(QRegularExpression);
 _item_type(QSize);
 _item_type(QSizeF);
 _item_type(QString);
