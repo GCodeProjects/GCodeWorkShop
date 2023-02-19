@@ -590,7 +590,7 @@ void EdytorNc::printFile()
         dialog.setWindowTitle(tr("Print Document"));
 
         if (child->hasSelection()) {
-            dialog.addEnabledOption(QAbstractPrintDialog::PrintSelection);
+            dialog.setOption(QAbstractPrintDialog::PrintSelection);
             printer.setPrintRange(QPrinter::Selection);
         }
 
