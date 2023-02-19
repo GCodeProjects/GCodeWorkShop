@@ -77,7 +77,7 @@ public:
     void doInsertDot();
     void doI2M();
     int compileMacro();
-    void highlightFindText(QString searchString,
+    void highlightFindText(const QString& searchString,
                            QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                            bool ignoreComments = true);
     void doUndo();
@@ -90,7 +90,7 @@ public:
     QString currentFileInfo(); // Text from first comment in CNC program
     QString guessFileName();
     QStringList splitFile();
-    bool foundTextMatched(QString pattern, QString text);
+    bool foundTextMatched(const QString& pattern, QString text);
     void setCurrentFile(const QString &fileName, const QString &text);
     //void blockSkip();
     void blockSkip(bool remove = false, bool inc = true);

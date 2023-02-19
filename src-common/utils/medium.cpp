@@ -25,9 +25,10 @@
 #include <QLibraryInfo>
 #include <QList>
 #include <QLocale>
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QSettings>
-#include <QtDebug>          // qDebug() <<
+#include <QtDebug>                 // qDebug() <<
 #include <QTranslator>
 
 #include "utils/medium.h"  // Medium QObject
@@ -127,12 +128,12 @@ QList<QLocale> Medium::findTranslation(bool skipQtDir)
         }
 
         foreach (QString file, fileList) {
-            QRegExp rxName("([^a-zA-Z0-9])([a-zA-Z]{2,2}(_[a-zA-Z]{2,2})?)([^a-zA-Z0-9]|$)");
-            int pos = rxName.indexIn(file);
+            QRegularExpression rxName("([^a-zA-Z0-9])([a-zA-Z]{2,2}(_[a-zA-Z]{2,2})?)([^a-zA-Z0-9]|$)");
+            auto match = rxName.match(file);
 
             // The locales name is the text of the second capturing parentheses.
-            if (pos > -1 && rxName.captureCount() > 1) {
-                QLocale locale = QLocale(rxName.cap(2));
+            if (match.lastCapturedIndex() > 1) {
+                QLocale locale = QLocale(match.captured(2));
 
                 if (!localeList.contains(locale) && locale != QLocale::c()) {
                     localeList.append(locale);

@@ -32,8 +32,8 @@
 #include <QList>
 #include <QMessageBox>
 #include <QPixmap>
-#include <QRegExp>
 #include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QSerialPort>
 #include <QSettings>
 #include <QString>
@@ -579,9 +579,10 @@ void SerialTransmissionDialog::serialPortReadyRead()
     receiveTimeoutCountner = portSettings.receiveTimeout;
 
     if (!portSettings.endOfProgChar.isEmpty()) {
-        QRegExp exp(portSettings.endOfProgChar);
+        QRegularExpression regex(portSettings.endOfProgChar);
+        regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 
-        if (QString(buff).lastIndexOf(exp, Qt::CaseInsensitive) >= 0) {
+        if (QString(buff).lastIndexOf(regex) >= 0) {
             setLabelText(tr("Program received"));
             receiveTimeoutCountner = 1;
         }
@@ -660,17 +661,16 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
     }
 
     // ensure that data contains only CRLF line endings
-    QRegExp exp;
-    exp.setPattern("[\\n\\r]{1,}");
-    int i = data->indexOf(exp); // detecting EOB combination used
+    QRegularExpression regex("[\\n\\r]{1,}");
+    auto match = regex.match(*data);
 
-    if (i >= 0) {
-        if (exp.matchedLength() > 5) { // too long EOB, try to find next one
-            i = data->indexOf(exp, i + exp.matchedLength());
-        }
+    while (match.hasMatch() && match.capturedLength() > 5) {
+        // too long EOB, try to find next one
+        match = regex.match(*data, match.capturedEnd());
+    }
 
-        QString tx = data->mid(i, exp.matchedLength());
-        data->replace(tx, "\r\n");
+    if (match.hasMatch()) {
+        data->replace(match.captured(), "\r\n");
     }
 
     if (!portSettings.sendAtBegining.isEmpty()) {
@@ -698,7 +698,6 @@ void SerialTransmissionDialog::procesSpecialCharacters(QString *text, QString *f
         return;
     }
 
-    bool ok;
     QString fileExt = "";
     QString fileExtA = "";
     QString fileName = "";
@@ -723,20 +722,21 @@ void SerialTransmissionDialog::procesSpecialCharacters(QString *text, QString *f
     }
 
     // HEX codes
-    QRegExp exp("0x[0-9a-fA-F]{1,2}");
-    int pos = 0;
+    QRegularExpression regex("0x[0-9a-fA-F]{1,2}");
+    auto match = regex.match(*text);
 
-    while ((pos = text->indexOf(exp, pos)) >= 0) {
-        QString fTx = text->mid(pos, exp.matchedLength());
-        char chr = fTx.toInt(&ok, 16);
+    while (match.hasMatch()) {
+        bool ok;
+        char chr = match.captured().toInt(&ok, 16);
 
         if (ok) {
-            text->replace(pos, exp.matchedLength(), QString(chr));
+            text->replace(match.capturedStart(), match.capturedLength(), QString(chr));
         }
+
+        match = regex.match(*text, match.capturedEnd());
     }
 
     text->remove(" ");
-
 
     if (text->contains("LF")) {
         text->replace("LF", "\r\n");
@@ -905,7 +905,7 @@ QStringList SerialTransmissionDialog::processReceivedData()
     QStringList outputList;
     qint64 j;
     qint64 i;
-    QRegExp exp;
+    QRegularExpression regex;
 
     outputList.clear();
 
@@ -927,19 +927,18 @@ QStringList SerialTransmissionDialog::processReceivedData()
         readData.append(serialPortReadBuffer.at(j));
     }
 
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 
     if (!portSettings.removeFromRecieved.isEmpty()) {
-        exp.setPattern(portSettings.removeFromRecieved);
-        readData.remove(exp);
+        regex.setPattern(portSettings.removeFromRecieved);
+        readData.remove(regex);
     }
 
-    exp.setPattern("[\\n\\r]{1,}");
-    i = readData.indexOf(exp); // detecting what EOB combination is used
+    regex.setPattern("[\\n\\r]{1,}");
+    auto match = regex.match(readData);
 
-    if (i >= 0) {
-        QString tx = readData.mid(i, exp.matchedLength());
-        readData.replace(tx, "\r\n");
+    if (match.hasMatch()) {
+        readData.replace(match.captured(), "\r\n");
     }
 
     if (portSettings.removeSpaceEOB) { //removes white space at end of line added by Fanuc
@@ -947,16 +946,8 @@ QStringList SerialTransmissionDialog::processReceivedData()
     }
 
     if (portSettings.removeEmptyLines) {
-        QRegExp exp("(\\r\\n){2,}");
-        int i = 0;
-
-        while (i >= 0) {
-            i = readData.indexOf(exp, 0);
-
-            if (i >= 0) {
-                readData.replace(exp, "\r\n");
-            }
-        }
+        regex.setPattern("(\\r\\n){2,}");
+        readData.replace(regex, "\r\n");
     }
 
     if (!portSettings.autoSave) {
@@ -1000,8 +991,7 @@ QStringList SerialTransmissionDialog::processReceivedData()
 QStringList SerialTransmissionDialog::guessFileName(QString *text)
 {
     QString fileName, extension, name1, ext1, name2, ext2;
-    int pos;
-    QRegExp expression;
+    QRegularExpression regex;
     QStringList list;
 
     list.clear();
@@ -1011,19 +1001,19 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
     }
 
     forever { // Detect program name like: O0032, %_N_PR25475002_MPF, $O0004.MIN%...
-        expression.setPattern(FILENAME_SINU840);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_SINU840);
+        auto match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
+        if (match.hasMatch()) {
+            name1 = match.captured();
             name1.remove("%_N_");
-            //name1.remove(QRegExp("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
+            //name1.remove(QRegularExpression("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
 
-            expression.setPattern("_(MPF|SPF|TEA|COM|PLC|DEF|INI)");
-            pos = name1.indexOf(expression);
+            regex.setPattern("_(MPF|SPF|TEA|COM|PLC|DEF|INI)");
+            match = regex.match(name1);
 
-            if (pos >= 0) {
-                ext1 = name1.mid(pos, expression.matchedLength());
+            if (match.hasMatch()) {
+                ext1 = match.captured();
                 name1.remove(ext1);
                 ext1.remove(" ");
                 ext1.replace('_', '.');;
@@ -1035,19 +1025,18 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
             break;
         }
 
-        expression.setPattern(FILENAME_OSP);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_OSP);
+        match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
+        if (match.hasMatch()) {
+            name1 = match.captured();
             name1.remove("$");
 
-            expression.setPattern("\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}");
-            pos = name1.indexOf(expression);
+            regex.setPattern("\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}");
+            match = regex.match(name1);
 
-            if (pos >= 0) {
-                ext1 = name1.mid(pos, expression.matchedLength());
-                qDebug() << "10.1" << name1 << ext1 << pos;
+            if (match.hasMatch()) {
+                ext1 = match.captured();
                 name1.remove(ext1);
                 ext1.remove(" ");
                 ext1.remove("%");
@@ -1055,24 +1044,24 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
                 ext1.clear();
             }
 
-            name1.remove(QRegExp("[%]{0,1}"));
-            //name1.remove(QRegExp(".(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
+            name1.remove(QRegularExpression("[%]{0,1}"));
+            //name1.remove(QRegularExpression(".(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
             qDebug() << "10" << name1 << ext1;
             break;
         }
 
-        expression.setPattern(FILENAME_SINU);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_SINU);
+        match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
-            //name1.remove(QRegExp("%(MPF|SPF|TEA)[\\s]{0,3}"));
+        if (match.hasMatch()) {
+            name1 = match.captured();
+            //name1.remove(QRegularExpression("%(MPF|SPF|TEA)[\\s]{0,3}"));
 
-            expression.setPattern("%(MPF|SPF|TEA)[\\s]{0,3}");
-            pos = name1.indexOf(expression);
+            regex.setPattern("%(MPF|SPF|TEA)[\\s]{0,3}");
+            match = regex.match(name1);
 
-            if (pos >= 0) {
-                ext1 = name1.mid(pos, expression.matchedLength());
+            if (match.hasMatch()) {
+                ext1 = match.captured();
                 name1.remove(ext1);
                 ext1.remove(" ");
                 ext1.remove("%");
@@ -1087,22 +1076,22 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
             break;
         }
 
-        expression.setPattern(FILENAME_PHIL);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_PHIL);
+        match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
-            name1.remove(QRegExp("%PM[\\s]{1,}[N]{1,1}"));
+        if (match.hasMatch()) {
+            name1 = match.captured();
+            name1.remove(QRegularExpression("%PM[\\s]{1,}[N]{1,1}"));
             ext1.clear();
             qDebug() << "12" << name1 << ext1;
             break;
         }
 
-        expression.setPattern(FILENAME_FANUC);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_FANUC);
+        match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
+        if (match.hasMatch()) {
+            name1 = match.captured();
             name1.replace(':', 'O');
 
             //                if(name1.at(0)!='O')
@@ -1115,35 +1104,35 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
             break;
         }
 
-        expression.setPattern(FILENAME_HEID1);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_HEID1);
+        match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
+        if (match.hasMatch()) {
+            name1 = match.captured();
             name1.remove("%");
-            name1.remove(QRegExp("\\s"));
+            name1.remove(QRegularExpression("\\s"));
             ext1.clear();
             qDebug() << "14" << name1 << ext1;
             break;
         }
 
-        expression.setPattern(FILENAME_HEID2);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_HEID2);
+        match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
-            name1.remove(QRegExp("(BEGIN)(\\sPGM\\s)"));
-            name1.remove(QRegExp("(\\sMM|\\sINCH)"));
+        if (match.hasMatch()) {
+            name1 = match.captured();
+            name1.remove(QRegularExpression("(BEGIN)(\\sPGM\\s)"));
+            name1.remove(QRegularExpression("(\\sMM|\\sINCH)"));
             ext1.clear();
 
             break;
         }
 
-        expression.setPattern(FILENAME_FADAL);
-        pos = text->indexOf(expression);
+        regex.setPattern(FILENAME_FADAL);
+        match = regex.match(*text);
 
-        if (pos >= 0) {
-            name1 = text->mid(pos, expression.matchedLength());
+        if (match.hasMatch()) {
+            name1 = match.captured();
             name1.remove("N1");
 
             ext1.clear();
@@ -1165,7 +1154,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
     if (portSettings.removeLetters) {
         QString tmpName = name1;
-        tmpName.remove(QRegExp("[a-zA-Z-.]{1,}"));
+        tmpName.remove(QRegularExpression("[a-zA-Z-.]{1,}"));
         tmpName = tmpName.simplified();
         tmpName = tmpName.trimmed();
 
@@ -1177,22 +1166,22 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
     qDebug() << "15" << name1 << ext1;
 
     forever { // detect program name by user selected expression
-        expression.setPattern(portSettings.fileNameExpAs);
-        pos = text->indexOf(expression);
+        regex.setPattern(portSettings.fileNameExpAs);
+        auto match = regex.match(*text);
 
-        if (pos >= 2) {
-            name2 = text->mid(pos, expression.matchedLength());
+        if (match.hasMatch()) {
+            name2 = match.captured();
             name2.remove(";");
             name2.remove("(");
             name2.remove(")");
             name2.remove("[");
             name2.remove("]");
 
-            pos = name2.lastIndexOf('.');
+            int pos = name2.lastIndexOf('.');
 
             if (pos >= 0) {
-                ext2 = name2.mid(pos, expression.matchedLength());
-                name2.remove(expression);
+                ext2 = name2.mid(pos);
+                name2.remove(regex);
                 ext2.remove(" ");
             } else {
                 ext2.clear();
@@ -1220,7 +1209,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
     if (portSettings.removeLetters) {
         QString tmpName = name2;
-        tmpName.remove(QRegExp("[a-zA-Z-.]{1,}"));
+        tmpName.remove(QRegularExpression("[a-zA-Z-.]{1,}"));
         tmpName = tmpName.simplified();
         tmpName = tmpName.trimmed();
 
@@ -1334,7 +1323,7 @@ QString SerialTransmissionDialog::saveDataToFile(QString *text)
 
     if (file.exists() && portSettings.renameIfExists) {
         QString oldName = fileName;
-        oldName.replace(QRegExp("\\.[a-zA-Z0-9]{1,3}"), ".bak");
+        oldName.replace(QRegularExpression("\\.[a-zA-Z0-9]{1,3}"), ".bak");
         QFile::remove(oldName);
 
         if (file.rename(fileName, oldName)) {
@@ -1422,11 +1411,11 @@ void SerialTransmissionDialog::writeLog(QString msg, QString timeStamp)
 QStringList SerialTransmissionDialog::splitFile(QString *text)
 {
     int progBegin, progEnd;
-    QStringList progs, exp;
+    QStringList progs;
+    QStringList regexPatterns;
     QList<int> progBegins;
-    int index;
     QString tx;
-    QRegExp expression;
+    QRegularExpression regex;
 
     progs.clear();
 
@@ -1434,43 +1423,35 @@ QStringList SerialTransmissionDialog::splitFile(QString *text)
         return progs;
     }
 
-    exp << FILENAME_SINU840
-        << FILENAME_OSP
-        << FILENAME_FANUC
-        << FILENAME_SINU
-        << FILENAME_HEID1
-        << FILENAME_HEID2
-        << FILENAME_PHIL
-        << FILENAME_FADAL;
+    regexPatterns << FILENAME_SINU840
+                  << FILENAME_OSP
+                  << FILENAME_FANUC
+                  << FILENAME_SINU
+                  << FILENAME_HEID1
+                  << FILENAME_HEID2
+                  << FILENAME_PHIL
+                  << FILENAME_FADAL;
 
     // detect CNC control type
-    foreach (const QString expTx, exp) {
-        expression.setPattern(expTx);
+    foreach (const QString pattern, regexPatterns) {
+        regex.setPattern(pattern);
 
-        if (text->contains(expression)) {
-            exp.clear();
-            exp.append(expTx);
+        if (text->contains(regex)) {
+            regexPatterns.clear();
+            regexPatterns.append(pattern);
             break;
         }
     }
 
-    //  prepare program list
-    index = 0;
+    // prepare program list
+    foreach (const QString pattern, regexPatterns) {
+        regex.setPattern(pattern);
+        auto match = regex.match(*text);
 
-    foreach (const QString expTx, exp) {
-        expression.setPattern(expTx);
-
-        do {
-            index = text->indexOf(expression, index);
-
-            if (index >= 0) {
-                progBegins.append(index);
-                index += expression.matchedLength();
-            } else {
-                index = 0;
-            }
-
-        } while (index > 0);
+        while (match.hasMatch()) {
+            progBegins.append(match.capturedStart());
+            match = regex.match(*text, match.capturedEnd());
+        }
     }
 
     //    if(!endOfProgChar.isEmpty())
@@ -1587,13 +1568,12 @@ void SerialTransmissionDialog::fileServerProcessData()
                     ext.clear();
                     tmpBuff.clear();
                     tmpBuff.append(buff);
-                    QRegExp exp(portSettings.fileNameExpFs);
-                    int pos = tmpBuff.indexOf(exp, Qt::CaseInsensitive);
+                    QRegularExpression regex(portSettings.fileNameExpFs);
+                    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+                    auto match = regex.match(tmpBuff);
 
-                    qDebug() << "File Server 0015" << buff << pos;
-
-                    if (pos >= 1) {
-                        fileName.append(tmpBuff.mid(pos, exp.matchedLength()));
+                    if (match.hasMatch()) {
+                        fileName.append(match.captured());
                         fileName.remove(';');
                         fileName.remove('(');
                         fileName.remove(')');

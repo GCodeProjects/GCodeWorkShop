@@ -60,8 +60,9 @@
 #include <QPixmap>
 #include <QPoint>
 #include <QRect>
-#include <QRegExp>
-#include <QRegExpValidator>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QRegularExpressionValidator>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
@@ -79,18 +80,20 @@
 
 QString removeZeros(QString str)
 {
-    QRegExp exp;
-    int pos;
+    QRegularExpression regex;
+    regex.setPattern("[\\d]{0,}[-.]{0,1}[-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$"); //[\\d]+[.][-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$"
+    auto match = regex.match(str);
 
-    pos = 1;
-    exp.setPattern("[\\d]{0,}[-.]{0,1}[-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$"); //[\\d]+[.][-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$"
+    while (match.hasMatch()) {
+        int pos = match.capturedStart();
 
-    while ((pos = str.indexOf(exp, pos)) > 0) {
-        if ((str.at(pos + exp.matchedLength() - 1) == '0')) {
-            str.remove(pos + exp.matchedLength() - 1, 1);
+        if ((str.at(match.capturedEnd() - 1) == '0')) {
+            str.remove(match.capturedEnd() - 1, 1);
         } else {
-            pos += exp.matchedLength();
+            pos = match.capturedEnd();
         }
+
+        match = regex.match(str, pos);
     }
 
     if (str == "-0.") {
@@ -2846,12 +2849,12 @@ SetupDialog::SetupDialog(QWidget *parent, const _editor_properites *prop,
     int id = highlightModeComboBox->findData(editProp.defaultHighlightMode);
     highlightModeComboBox->setCurrentIndex(id);
 
-    QRegExp rx("(\\*\\.)[A-Z0-9]{1,3}");
-    rx.setCaseSensitivity(Qt::CaseInsensitive);
-    QValidator *edtExtensionValid = new QRegExpValidator(rx, this);
+    QRegularExpression regex("(\\*\\.)[A-Z0-9]{1,3}");
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    QValidator *edtExtensionValid = new QRegularExpressionValidator(regex, this);
     edtExtension->setValidator(edtExtensionValid);
 
-    //   QRegExp ext("(\\(|;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[-./]{1,1}(M|MM|d|dd)[-./]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}");
+    //   QRegularExpression ext("(\\(|;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[-./]{1,1}(M|MM|d|dd)[-./]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}");
     //   // (\\(;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[.-/]{1,1}(M|MM|d|dd)[.-/]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}
     //   ext.setCaseSensitivity(Qt::CaseSensitive);
     //   QValidator *dateFormatValidator = new QRegExpValidator(ext, this);

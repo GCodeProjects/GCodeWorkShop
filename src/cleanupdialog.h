@@ -31,7 +31,7 @@
 
 class QMenu;
 class QPoint;
-class QRegExp;
+class QRegularExpression;
 
 namespace Ui {
 // TODO: rename with CleanUpDialog
@@ -65,7 +65,7 @@ private:
 
     QMenu *contextMenu;
 
-    void highlightFindText(QRegExp exp);
+    void highlightFindText(QRegularExpression regex);
     void newRow();
 
 private slots:

@@ -25,8 +25,8 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QPalette>
-#include <QRegExp>
-#include <QRegExpValidator>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QSettings>
@@ -143,16 +143,13 @@ SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName
 
     tabWidget->setCurrentIndex(0);
 
-    QRegExp rx("(LF|CR){1,6}");
-    rx.setCaseSensitivity(Qt::CaseInsensitive);
-    QValidator *eobInputValid = new QRegExpValidator(rx, this);
-    eobComboBox->setValidator(eobInputValid);
+    QRegularExpression rx("(LF|CR){1,6}");
+    rx.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    eobComboBox->setValidator(new QRegularExpressionValidator(rx, this));
 
-    QValidator *xonInputValid = new QIntValidator(0, 127, this);
-    xonInput->setValidator(xonInputValid);
+    xonInput->setValidator(new QIntValidator(0, 127, this));
 
-    QValidator *xoffInputtValid = new QIntValidator(0, 127, this);
-    xonInput->setValidator(xoffInputtValid);
+    xoffInput->setValidator(new QIntValidator(0, 127, this));
 
     setResult(QDialog::Rejected);
 }

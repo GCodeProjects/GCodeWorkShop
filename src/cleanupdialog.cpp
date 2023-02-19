@@ -29,7 +29,7 @@
 #include <QList>
 #include <QMenu>
 #include <QPoint>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
@@ -217,7 +217,7 @@ void cleanUpDialog::highlightText(int row, int col)
                 return;
             }
 
-            highlightFindText(QRegExp(item->text()));
+            highlightFindText(QRegularExpression(item->text()));
         }
     }
 
@@ -285,7 +285,7 @@ QStringList cleanUpDialog::getSelectedExpressions()
     return selectedExpressions;
 }
 
-void cleanUpDialog::highlightFindText(QRegExp exp)
+void cleanUpDialog::highlightFindText(QRegularExpression regex)
 {
     QTextCursor firstFoundCursor;
 
@@ -301,7 +301,7 @@ void cleanUpDialog::highlightFindText(QRegExp exp)
     firstFoundCursor = cursor;
 
     do {
-        cursor = doc->find(exp, cursor);
+        cursor = doc->find(regex, cursor);
 
         if (!cursor.isNull()) {
             if (cursor.selectedText().length() == 0) { //cursor not null but nothing found

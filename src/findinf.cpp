@@ -34,7 +34,8 @@
 #include <QLabel>
 #include <QProgressDialog>
 #include <QPushButton>
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QSettings>
 #include <QSplitter>
 #include <QString>
@@ -188,7 +189,7 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
                             const QString findText, QString fileFilter, QProgressDialog *progressDialog)
 {
     int pos;
-    QRegExp exp;
+    QRegularExpression regex;
     QString comment_tx;
     qint64 size;
     bool textFounded, word;
@@ -202,8 +203,8 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
         return notFound;
     }
 
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
-    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    regex.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
 
     pos = 0;
 
@@ -323,11 +324,10 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
                 word = false;
 
                 comment_tx.clear();
-                pos = 0;
+                auto match = regex.match(line);
 
-                while ((pos = line.indexOf(exp, pos)) >= 0) {
-                    comment_tx = line.mid(pos, exp.matchedLength());
-                    pos += exp.matchedLength();
+                while (match.hasMatch()) {
+                    comment_tx = match.captured();
 
                     if (!comment_tx.contains(";$")) {
                         comment_tx.remove('(');
@@ -335,6 +335,8 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
                         comment_tx.remove(';');
                         break;
                     }
+
+                    match = regex.match(line, match.capturedEnd());
                 }
 
                 QString subDir = startDir;

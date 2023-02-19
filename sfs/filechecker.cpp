@@ -28,7 +28,7 @@
 #include <QLabel>
 #include <QList>
 #include <QPixmap>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSettings>
 #include <Qt>               // Qt::WA_DeleteOnClose Qt::CaseInsensitive
 #include <QTableWidgetItem>
@@ -117,8 +117,7 @@ void FileChecker::findFiles()
 
 void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
 {
-    int pos;
-    QRegExp exp;
+    QRegularExpression regex;
     QString comment_tx;
     qint64 size;
     QString line;
@@ -131,11 +130,8 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
     ui->fileTableWidget->setHorizontalHeaderLabels(labels);
 
 
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
-    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
-
-    pos = 0;
-
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    regex.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*");
 
     QDir directory = QDir(startDir);
 
@@ -163,18 +159,13 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
 
         if (file.open(QIODevice::ReadOnly)) {
             QTextStream in(&file);
-
             line = in.readAll();
-
-
-
             size = file.size();
             comment_tx.clear();
-            pos = 0;
+            auto match = regex.match(line);
 
-            while ((pos = line.indexOf(exp, pos)) >= 0) {
-                comment_tx = line.mid(pos, exp.matchedLength());
-                pos += exp.matchedLength();
+            while (match.hasMatch()) {
+                comment_tx = match.captured();
 
                 if (!comment_tx.contains(";$")) {
                     comment_tx.remove('(');
@@ -182,6 +173,8 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
                     comment_tx.remove(';');
                     break;
                 }
+
+                match = regex.match(line, match.capturedEnd());
             }
 
             //qDebug() << files[i] << size;

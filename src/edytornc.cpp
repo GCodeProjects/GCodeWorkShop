@@ -46,7 +46,7 @@
 #include <QPrintPreviewDialog>
 #include <QProcess>
 #include <QResizeEvent>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QtSerialPort>
 #include <QSignalMapper>
 #include <QSize>
@@ -2754,8 +2754,9 @@ void EdytorNc::findTextChanged()
     int pos;
 
 
-    if (findEdit->text().contains(QRegExp("\\$\\$"))
-            || findEdit->text().contains(QRegExp("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"))) {
+    if (findEdit->text().contains(QRegularExpression("\\$\\$"))
+            || findEdit->text().contains(
+                QRegularExpression("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"))) {
         replaceAllAct->setEnabled(false);
     } else {
         replaceAllAct->setEnabled(true);

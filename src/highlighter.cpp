@@ -23,7 +23,8 @@
 #include <QChar>
 #include <QColor>
 #include <QFont>
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QString>
 #include <QStringList>
 #include <QTextCharFormat>
@@ -70,7 +71,7 @@ void Highlighter::loadRules()
             || highlightColors.highlightMode == MODE_OKUMA) { // variables names
         keywordFormat.setForeground(QColor(highlightColors.keyWordColor));
         keywordFormat.setFontWeight(QFont::Normal);
-        rule.pattern = QRegExp("\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_]{0,}\\b");
+        rule.pattern = QRegularExpression("\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_]{0,}\\b");
         rule.format = keywordFormat;
         highlightRules.append(rule);
     }
@@ -79,7 +80,7 @@ void Highlighter::loadRules()
         keywordFormat.setForeground(QColor(highlightColors.keyWordColor));
         keywordFormat.setFontWeight(QFont::Normal);
         rule.pattern =
-            QRegExp("[#]{1,1}[<]{1,1}\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_-]{0,}\\b[>]{1,1}");
+            QRegularExpression("[#]{1,1}[<]{1,1}\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_-]{0,}\\b[>]{1,1}");
         rule.format = keywordFormat;
         highlightRules.append(rule);
     }
@@ -87,7 +88,7 @@ void Highlighter::loadRules()
     //   if(highlightColors.highlightMode == MODE_SINUMERIK_840 || highlightColors.highlightMode == MODE_HEIDENHAIN)  // ; comment
     //   {
     //      QString pattern = ";(?!\\$).*$";
-    //      rule.pattern = QRegExp(pattern);
+    //      rule.pattern = QRegularExpression(pattern);
     //
     //      keywordFormat.setForeground(QColor(highlightColors.commentColor));
     //      keywordFormat.setFontWeight(QFont::Normal);
@@ -99,11 +100,11 @@ void Highlighter::loadRules()
             || highlightColors.highlightMode == MODE_FANUC
             || highlightColors.highlightMode == MODE_SINUMERIK
             || highlightColors.highlightMode == MODE_AUTO) { // () comment
-        commentStartExpression = QRegExp("\\s\\(|^\\(");
-        commentEndExpression = QRegExp("\\)");
+        commentStartExpression = QRegularExpression("\\s\\(|^\\(");
+        commentEndExpression = QRegularExpression("\\)");
     } else {
-        commentStartExpression = QRegExp("][");
-        commentEndExpression = QRegExp("][");
+        commentStartExpression = QRegularExpression("][");
+        commentEndExpression = QRegularExpression("][");
     }
 
     if (highlightColors.highlightMode == MODE_FANUC
@@ -115,15 +116,15 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
 
         pattern = "\\b^O[0-9]{1,}\\b"; // FANUC
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
 
         pattern = "^(:)[0-9]{1,}";  // FANUC
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
 
         pattern = "^(<)[\\w\\S]{1,}(>)";  // FANUC
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
@@ -166,15 +167,15 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
 
         pattern = "^\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}";  // OKUMA OSP
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
 
         pattern = "\\b(^O| O)[A-Z0-9]{2,}\\b";  // OKUMA
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
 
         pattern = "[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)($|\\s)";  // OKUMA
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
@@ -193,11 +194,11 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
 
         pattern = "^(%_N_)[a-zA-Z0-9]{1,1}[a-zA-Z0-9_]{0,30}_(MPF|SPF|TEA|COM|INI|PLC|DEF)$"; // SINUMERIK >=810D
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
 
         pattern = "^;\\$PATH=/[A-Z0-9_//]{1,}$";  // SINUMERIK >=810D path
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
@@ -206,7 +207,7 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
 
         pattern = "%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}$\\b";
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
@@ -215,7 +216,7 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
 
         pattern = "^%PM$";
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
@@ -224,7 +225,7 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
 
         pattern = "%F[0-9]{1,4}";
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
@@ -241,14 +242,14 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
 
         pattern = "(BEGIN|END)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)";  // HEIDENHAIN
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
 
     if (highlightColors.highlightMode == MODE_TOOLTIPS) { // EdytorNC Tooltips
         pattern = "^(\\[)(OKUMA|SINUMERIK|SINUMERIK_840|FANUC|PHILIPS|HEIDENHAIN|HEIDENHAIN_ISO|MODE_LINUXCNC)(\\])$"; //
-        pogRule.pattern = QRegExp(pattern);
+        pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
     }
 
@@ -256,7 +257,7 @@ void Highlighter::loadRules()
     keywordFormat.setFontWeight(QFont::Bold);
 
     foreach (const QString &pattern, keywordPatterns) {
-        rule.pattern = QRegExp(pattern);
+        rule.pattern = QRegularExpression(pattern);
         rule.format = keywordFormat;
         highlightRules.append(rule);
     }
@@ -303,6 +304,48 @@ void Highlighter::highlightBlock(const QString &tx)
     }
 }
 
+void Highlighter::highlightBlockCommon(const QString &tx)
+{
+    foreach (HighlightingRule rule, highlightRules) {
+        auto match = rule.pattern.match(tx);
+
+        while (match.hasMatch()) {
+            setFormat(match.capturedStart(), match.capturedLength(), rule.format);
+            match = rule.pattern.match(tx, match.capturedEnd());
+        }
+    }
+
+    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
+        auto match = progRule.pattern.match(tx);
+
+        while (match.hasMatch()) {
+            setFormat(match.capturedStart(), match.capturedLength(), progRule.format);
+            match = progRule.pattern.match(tx, match.capturedEnd());
+        }
+    }
+
+    setCurrentBlockState(0);
+    QRegularExpressionMatch matchStart;
+
+    if (previousBlockState() != 1) {
+        matchStart = commentStartExpression.match(tx);
+    }
+
+    while (matchStart.hasMatch()) {
+        int startIndex = matchStart.capturedStart();
+        auto matchEnd = commentEndExpression.match(tx, startIndex);
+
+        if (!matchEnd.hasMatch()) {
+            setCurrentBlockState(1);
+            setFormat(startIndex, tx.length() - startIndex, commentFormat);
+            return;
+        }
+
+        setFormat(startIndex, matchEnd.capturedEnd() - startIndex, commentFormat);
+        matchStart = commentStartExpression.match(tx, matchEnd.capturedEnd());
+    }
+}
+
 //**************************************************************************************************
 // FANUC
 //**************************************************************************************************
@@ -318,52 +361,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
     format.setFontWeight(QFont::Normal);
     pos = 0;
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
-    }
+    highlightBlockCommon(tx);
 
     while (pos < tx.length()) {
         ch = tx.at(pos).toUpper();
@@ -578,52 +576,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
     format.setFontWeight(QFont::Normal);
     pos = 0;
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
-    }
+    highlightBlockCommon(tx);
 
     while (pos < tx.length()) {
 
@@ -684,7 +637,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
                 adrress = adrress + val;
                 sellen = adrress.length();
 
-                if (adrress.contains(QRegExp("[A-Z_]{2,}"))) {
+                if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
                     if (ch == ':') {
                         format.setForeground(QColor(highlightColors.keyWordColor));
                         format.setFontWeight(QFont::Bold);
@@ -852,16 +805,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
     format.setFontWeight(QFont::Normal);
     pos = 0;
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
+    highlightBlockCommon(tx);
 
     while (pos < tx.length()) {
         ch = tx.at(pos).toUpper();
@@ -933,7 +877,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
                 adrress = adrress + val;
                 sellen = adrress.length();
 
-                if (adrress.contains(QRegExp("[A-Z_]{2,}"))) {
+                if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
                     pos = pos + sellen;
                     sellen = 0;
                     break;
@@ -1070,42 +1014,6 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
         format.setFontWeight(QFont::Normal);
         pos = pos + sellen;
     }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
-    }
 }
 
 //**************************************************************************************************
@@ -1123,52 +1031,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
     format.setFontWeight(QFont::Normal);
     pos = 0;
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
-    }
+    highlightBlockCommon(tx);
 
     while (pos < tx.length()) {
 
@@ -1385,52 +1248,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
     format.setFontWeight(QFont::Normal);
     pos = 0;
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
-    }
+    highlightBlockCommon(tx);
 
     while (pos < tx.length()) {
         ch = tx.at(pos).toUpper();
@@ -1489,7 +1307,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
                 adrress = adrress + val;
                 sellen = adrress.length();
 
-                if (adrress.contains(QRegExp("[A-Z_]{2,}"))) {
+                if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
                     if (ch == ':') {
                         format.setForeground(QColor(highlightColors.keyWordColor));
                         format.setFontWeight(QFont::Bold);
@@ -1657,41 +1475,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
     format.setFontWeight(QFont::Normal);
     pos = 0;
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
-    }
+    highlightBlockCommon(tx);
 
     while (pos < tx.length()) {
         ch = tx.at(pos).toUpper();
@@ -1751,7 +1535,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
                 adrress = adrress + val;
                 sellen = adrress.length();
 
-                if (adrress.contains(QRegExp("[A-Z_]{2,}"))) {
+                if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
                     if (ch == ':') {
                         format.setForeground(QColor(highlightColors.keyWordColor));
                         format.setFontWeight(QFont::Bold);
@@ -1901,17 +1685,6 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
         format.setFontWeight(QFont::Normal);
         pos = pos + sellen;
     }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
 }
 
 //**************************************************************************************************
@@ -1927,25 +1700,25 @@ void Highlighter::highlightBlockToolTipsRule(const QString &tx)
 
     keywordFormat.setForeground(QColor(highlightColors.macroColor));
     keywordFormat.setFontWeight(QFont::Bold);
-    ruleP.pattern = QRegExp("^[A-Z@]{1,1}[A-Z0-9_.]{1,30}(=)");
+    ruleP.pattern = QRegularExpression("^[A-Z@]{1,1}[A-Z0-9_.]{1,30}(=)");
     ruleP.format = keywordFormat;
     highlightRules.append(ruleP);
 
     keywordFormat.setForeground(QColor(highlightColors.mColor));
     keywordFormat.setFontWeight(QFont::Normal);
-    ruleP.pattern = QRegExp("(<br />)");
+    ruleP.pattern = QRegularExpression("(<br />)");
     ruleP.format = keywordFormat;
     highlightRules.append(ruleP);
 
     keywordFormat.setForeground(QColor(highlightColors.operatorColor));
     keywordFormat.setFontWeight(QFont::Normal);
-    ruleP.pattern = QRegExp("(=)");
+    ruleP.pattern = QRegularExpression("(=)");
     ruleP.format = keywordFormat;
     highlightRules.append(ruleP);
 
     keywordFormat.setForeground(QColor(highlightColors.gColor));
     keywordFormat.setFontWeight(QFont::Normal);
-    ruleP.pattern = QRegExp("(\\s-)[a-zA-Z0-9_.,://\\-+;\\s\\(\\)]{1,}");
+    ruleP.pattern = QRegularExpression("(\\s-)[a-zA-Z0-9_.,://\\-+;\\s\\(\\)]{1,}");
     ruleP.format = keywordFormat;
     highlightRules.append(ruleP);
 
@@ -1953,106 +1726,63 @@ void Highlighter::highlightBlockToolTipsRule(const QString &tx)
 
     keywordFormat.setForeground(QColor(highlightColors.mColor));
     keywordFormat.setFontWeight(QFont::Normal);
-    ruleP.pattern = QRegExp("(<b>|<i>)[a-zA-Z0-9_.@=\\[\\]\\s]{1,30}(</b>|</i>)");
+    ruleP.pattern = QRegularExpression("(<b>|<i>)[a-zA-Z0-9_.@=\\[\\]\\s]{1,30}(</b>|</i>)");
     ruleP.format = keywordFormat;
     highlightRules.append(ruleP);
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
-    }
+    highlightBlockCommon(tx);
 }
 
 int autoDetectHighligthMode(const QString text)
 {
     if (!text.isEmpty()) {
         if (text.contains(
-                    QRegExp("[#]{1,1}[<]{1,1}\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_-]{0,}\\b[>]{1,1}"))) {
+                    QRegularExpression("[#]{1,1}[<]{1,1}\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_-]{0,}\\b[>]{1,1}"))) {
             return MODE_LINUXCNC;
         }
 
         if (text.contains(
-                    QRegExp("^(%_N_)[a-zA-Z0-9]{1,1}[a-zA-Z0-9_]{0,30}_(MPF|SPF|TEA|COM|PLC|DEF|INI)\\n"))
-                || text.contains(QRegExp("^;\\$PATH=/[A-Z0-9_//]{1,}\\n"))) {
+                    QRegularExpression("^(%_N_)[a-zA-Z0-9]{1,1}[a-zA-Z0-9_]{0,30}_(MPF|SPF|TEA|COM|PLC|DEF|INI)\\n"))
+                || text.contains(QRegularExpression("^;\\$PATH=/[A-Z0-9_//]{1,}\\n"))) {
             return MODE_SINUMERIK_840;
         }
 
         if (text.contains(
-                    QRegExp("^\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"))
-                || text.contains(QRegExp("[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)($|\\s)"))) {
+                    QRegularExpression("^\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"))
+                || text.contains(
+                    QRegularExpression("[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)($|\\s)"))) {
             return MODE_OKUMA;
         }
 
-        if (text.contains(QRegExp(":[0-9]{1,}"))
-                || text.contains(QRegExp("\\bO[0-9]{1,}\\b"))
-                || text.contains(QRegExp("(<)[\\w\\S]{1,}(>)"))) {
+        if (text.contains(QRegularExpression(":[0-9]{1,}"))
+                || text.contains(QRegularExpression("\\bO[0-9]{1,}\\b"))
+                || text.contains(QRegularExpression("(<)[\\w\\S]{1,}(>)"))) {
             return MODE_FANUC;
         }
 
-        if (text.contains(QRegExp("^%PM"))) { // PHILIPS
+        if (text.contains(QRegularExpression("^%PM"))) { // PHILIPS
             return MODE_PHILIPS;
         }
 
-        if (text.contains(QRegExp("%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b"))) {
+        if (text.contains(QRegularExpression("%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b"))) {
             return MODE_SINUMERIK;
         }
 
-        if (text.contains(QRegExp("%[a-zA-Z0-9_]{1,30}(\\s)"))) {
+        if (text.contains(QRegularExpression("%[a-zA-Z0-9_]{1,30}(\\s)"))) {
             return MODE_HEIDENHAIN_ISO;
         }
 
-        if (text.contains(QRegExp("(BEGIN|END)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"))) {
+        if (text.contains(
+                    QRegularExpression("(BEGIN|END)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"))) {
             return MODE_HEIDENHAIN;
         }
 
         if (text.contains(
-                    QRegExp("(\\[)(OKUMA|SINUMERIK|SINUMERIK_840|FANUC|PHILIPS|HEIDENHAIN|HEIDENHAIN_ISO)(\\])"))) { // TOOLTIPS
+                    QRegularExpression("(\\[)(OKUMA|SINUMERIK|SINUMERIK_840|FANUC|PHILIPS|HEIDENHAIN|HEIDENHAIN_ISO)(\\])"))) { // TOOLTIPS
             return MODE_TOOLTIPS;
         }
 
-        if (text.contains(QRegExp("N1O[0-9]{1,}"))) {
+        if (text.contains(QRegularExpression("N1O[0-9]{1,}"))) {
             return MODE_FANUC;
         }
 
@@ -2076,16 +1806,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
     format.setFontWeight(QFont::Normal);
     pos = 0;
 
-    foreach (HighlightingRule rule, highlightRules) {
-        QRegExp expression(rule.pattern);
-        int index = tx.indexOf(expression);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = tx.indexOf(expression, index + length);
-        }
-    }
+    highlightBlockCommon(tx);
 
     while (pos < tx.length()) {
         ch = tx.at(pos).toUpper();
@@ -2171,7 +1892,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
                 adrress = adrress + val;
                 sellen = adrress.length();
 
-                if (adrress.contains(QRegExp("[A-Z_]{2,}"))) {
+                if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
                     pos = pos + sellen;
                     sellen = 0;
                     break;
@@ -2307,41 +2028,5 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
         format.setForeground(QColor(highlightColors.defaultColor));
         format.setFontWeight(QFont::Normal);
         pos = pos + sellen;
-    }
-
-    foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
-        QRegExp expression(progRule.pattern);
-        int index = expression.indexIn(tx);
-
-        while (index >= 0) {
-            int length = expression.matchedLength();
-            setFormat(index, length, progRule.format);
-            index = expression.indexIn(tx, index + length);
-        }
-    }
-
-    setCurrentBlockState(0);
-    int startIndex = 0;
-
-    if (previousBlockState() != 1) {
-        startIndex = tx.indexOf(commentStartExpression);
-    }
-
-    while (startIndex >= 0) {
-        int endIndex = tx.indexOf(commentEndExpression, startIndex);
-        int commentLength;
-
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = tx.length() - startIndex;
-            setFormat(startIndex, commentLength, commentFormat);
-            return;
-        } else {
-            commentLength = endIndex - startIndex + commentEndExpression.matchedLength();
-        }
-
-        setFormat(startIndex, commentLength, commentFormat);
-        //pos = startIndex + commentLength;
-        startIndex = tx.indexOf(commentStartExpression, startIndex + commentLength);
     }
 }

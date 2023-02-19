@@ -54,7 +54,8 @@
 #include <QPoint>
 #include <QPrinter>
 #include <QPrintPreviewDialog>
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
@@ -347,13 +348,13 @@ void MdiChild::changeDateInComment()
         return;
     }
 
-    QRegExp exp;
+    QRegularExpression regex;
     QString strDate = QLocale().toString(QDate::currentDate(), QLocale::ShortFormat);
-    exp.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
+    regex.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
     QTextCursor cursor = textEdit->textCursor();
     cursor.setPosition(0);
 
-    cursor = textEdit->document()->find(exp, cursor);
+    cursor = textEdit->document()->find(regex, cursor);
 
     if (!cursor.isNull()) {
         textEdit->setUpdatesEnabled(false);
@@ -367,14 +368,14 @@ void MdiChild::changeDateInComment()
     } else {
         cursor = textEdit->textCursor();
 
-        exp.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
+        regex.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
         cursor.setPosition(0);
-        cursor = textEdit->document()->find(exp, cursor);
+        cursor = textEdit->document()->find(regex, cursor);
 
         if (cursor.isNull()) {
-            exp.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
+            regex.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
             cursor.setPosition(0);
-            cursor = textEdit->document()->find(exp, cursor);
+            cursor = textEdit->document()->find(regex, cursor);
         }
 
         if (!cursor.isNull()) {
@@ -449,8 +450,7 @@ bool MdiChild::maybeSave()
 
 void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
 {
-    int pos;
-    QRegExp exp;
+    QRegularExpression regex;
     QString f_tx;
 
     curFile = QFileInfo(fileName).canonicalFilePath();
@@ -458,12 +458,11 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
     textEdit->document()->setModified(false);
     setWindowModified(false);
 
-    exp.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
-    pos = 0;
-    pos = text.indexOf(exp, pos);
+    regex.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
+    auto match = regex.match(text);
 
-    while (pos != -1) {
-        f_tx = text.mid(pos, exp.matchedLength());
+    while (match.hasMatch()) {
+        f_tx = match.captured();
 
         if (!(f_tx.mid(0, 2) == QLatin1String(";$"))) {
             f_tx.remove(QLatin1Char('('));
@@ -472,8 +471,7 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
             break;
         }
 
-        pos += exp.matchedLength();
-        pos = text.indexOf(exp, pos);
+        match = regex.match(text, match.capturedEnd());
     }
 
     if (f_tx.isEmpty()) {
@@ -746,15 +744,15 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc, int &to,
                          bool &renumEmpty, bool &renumComm, bool &renumMarked)
 {
-    int pos, count, lineCount, matchedLength;
+    int pos, count, lineCount;
     long int i, num, it;
     QString tx, f_tx, line, i_tx, new_tx;
-    QRegExp exp;
+    QRegularExpression regex;
     bool ok, selection, insertSpace;
     QTextCursor cursor;
 
     QApplication::setOverrideCursor(Qt::BusyCursor);
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 
     cursor = textEdit->textCursor();
     QTextCharFormat format = cursor.charFormat();
@@ -776,6 +774,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
         if (mode == 4) { //renumber lines without N
             num = startAt;
             lineCount = textEdit->document()->lineCount();
+            regex.setPattern("^[0-9]{1,9}\\s\\s");
 
             for (i = 0; i < lineCount; i++) {
                 line = tx.section(QLatin1Char('\n'), i, i);
@@ -784,11 +783,10 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                 i_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
                 i_tx += "  ";
 
-                exp.setPattern("^[0-9]{1,9}\\s\\s");
-                pos = line.indexOf(exp, 0);
+                auto match = regex.match(line);
 
-                if (pos >= 0) {
-                    line.replace(pos, exp.matchedLength(), i_tx);
+                if (match.hasMatch()) {
+                    line.replace(match.capturedStart(), match.capturedLength(), i_tx);
                     num += inc;
                     count++;
                 } else {
@@ -807,23 +805,25 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
         }
 
         if (mode == 3) { //remove all
-            pos = 0;
             num = 0;
-            exp.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+            regex.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+            auto match = regex.match(tx);
 
-            while ((pos = tx.indexOf(exp, pos)) >= 0) {
-                matchedLength = exp.matchedLength();
-                f_tx = tx.mid(pos, matchedLength);
+            while (match.hasMatch()) {
+                int pos = match.capturedStart();
+                f_tx = match.captured();
 
                 //qDebug() << f_tx;
 
-                if (((f_tx.contains(QLatin1Char('(')) == 0) && (f_tx.contains(QLatin1Char('\'')) == 0)
-                        && (f_tx.contains(QLatin1Char(';')) == 0))) {
-                    tx.remove(pos, matchedLength);
+                if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
+                        && !f_tx.contains(QLatin1Char(';'))) {
+                    tx.remove(pos, match.capturedLength());
                     num++;
                 } else {
-                    pos += matchedLength;
+                    pos = match.capturedEnd();
                 }
+
+                match = regex.match(tx, pos);
             }
 
             break;
@@ -832,17 +832,18 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
         if (mode == 1) { //renumber all with N
             pos = 0;
             num = startAt;
-            exp.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+            regex.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+            auto match = regex.match(tx);
 
-            while ((pos = tx.indexOf(exp, pos)) >= 0) {
-                matchedLength = exp.matchedLength();
-                f_tx = tx.mid(pos, matchedLength);
+            while (match.hasMatch()) {
+                pos = match.capturedStart();
+                f_tx = match.captured();
 
                 //qDebug() << f_tx;
 
                 if (pos > 0)
                     if (tx[pos - 1].isLetterOrNumber()) {
-                        pos += matchedLength;
+                        pos = match.capturedEnd();
                         continue;
                     }
 
@@ -852,14 +853,14 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                     insertSpace = false;
                 }
 
-                if ((!f_tx.contains(QLatin1Char(' '))) && (!f_tx.contains(QLatin1Char('\n')))) {
-                    i = matchedLength;
+                if (!f_tx.contains(QLatin1Char(' ')) && !f_tx.contains(QLatin1Char('\n'))) {
+                    i = match.capturedLength();
                 } else {
-                    i = matchedLength - 1;
+                    i = match.capturedLength() - 1;
                 }
 
-                if ((!(f_tx.contains(QLatin1Char('('))) && (!f_tx.contains(QLatin1Char('\'')))
-                        && (!f_tx.contains(QLatin1Char(';'))))) {
+                if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
+                        && !f_tx.contains(QLatin1Char(';'))) {
                     f_tx.remove(0, 1);
                     f_tx.remove(QLatin1Char(' '));
 
@@ -883,7 +884,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                     }
                 }
 
-                pos += matchedLength;
+                pos = match.capturedEnd();
             }
 
             break;
@@ -891,7 +892,7 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
 
         if (mode == 2) { //renumber all
             num = startAt;
-            exp.setPattern("[Nn]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
+            regex.setPattern("[Nn]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
 
             if (selection) {
                 lineCount = tx.count('\n');
@@ -922,12 +923,15 @@ int MdiChild::doRenumber(int &mode, int &startAt, int &from, int &prec, int &inc
                         break;
                     }
 
-                    if (((pos = line.indexOf(exp, pos)) >= 0) && (line.at(0) != QLatin1Char('$'))) {
-                        i_tx = line.mid(pos, exp.matchedLength());
+                    auto match = regex.match(line, pos);
+
+                    if (match.hasMatch() && (line.at(0) != QLatin1Char('$'))) {
+                        pos = match.capturedStart();
+                        i_tx = match.captured();
                         i_tx.remove('\n');
 
-                        if ((!(i_tx.contains(QLatin1Char('('))) && !(i_tx.contains(QLatin1Char('\'')))
-                                && (!i_tx.contains(QLatin1Char(';'))))) {
+                        if ((!i_tx.contains(QLatin1Char('(')) && !i_tx.contains(QLatin1Char('\''))
+                                && !i_tx.contains(QLatin1Char(';')))) {
                             f_tx = QString(QLatin1String("N%1")).arg(num, prec);
                             f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
                             num += inc;
@@ -1093,19 +1097,19 @@ void MdiChild::doRemoveEmptyLines()
 {
     int i;
     QString tx;
-    QRegExp exp;
+    QRegularExpression regex;
 
     QApplication::setOverrideCursor(Qt::BusyCursor);
     tx = textEdit->toPlainText();
 
-    exp.setPattern("[\\n]{2,}");
+    regex.setPattern("[\\n]{2,}");
     i = 0;
 
     while (i >= 0) {
-        i = tx.indexOf(exp, 0);
+        i = tx.indexOf(regex, 0);
 
         if (i >= 0) {
-            tx.replace(exp, "\r\n");
+            tx.replace(regex, "\r\n");
         }
     }
 
@@ -1136,7 +1140,7 @@ void MdiChild::doRemoveTextByRegExp(QStringList exp)
                 expTx.replace('$', "\\n");
             }
 
-        tx.remove(QRegExp(expTx));
+        tx.remove(QRegularExpression(expTx));
 
     }
 
@@ -1286,27 +1290,28 @@ void MdiChild::doInsertDot()
 {
     int pos, count;
     QString tx, f_tx;
-    QRegExp exp;
+    QRegularExpression regex;
     double it;
     bool ok;
 
     QApplication::setOverrideCursor(Qt::BusyCursor);
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 
-    exp.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(
-                       mdiWindowProperites.dotAdr));
+    regex.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(
+                         mdiWindowProperites.dotAdr));
 
     count = 0;
     tx = textEdit->toPlainText();
+    auto match = regex.match(tx);
     pos = 0;
 
-    while ((pos = tx.indexOf(exp, pos)) >= 0) {
-        f_tx = tx.mid(pos, exp.matchedLength());
-        pos++;
+    while (match.hasMatch()) {
+        f_tx = match.captured();
+        pos = match.capturedEnd();
 
-        if (((f_tx.contains(QLatin1Char('(')) == 0) && (f_tx.contains(QLatin1Char('\'')) == 0)
-                && (f_tx.contains(QLatin1Char(';')) == 0))) {
-            if (mdiWindowProperites.dotAfter && (f_tx.contains(QLatin1Char('.')) == 0)) {
+        if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
+                && !f_tx.contains(QLatin1Char(';'))) {
+            if (mdiWindowProperites.dotAfter && !f_tx.contains(QLatin1Char('.'))) {
                 f_tx.remove(0, 1);
 
                 //f_tx.remove('+');
@@ -1314,19 +1319,20 @@ void MdiChild::doInsertDot()
 
                 if (ok) {
                     it = it / mdiWindowProperites.dotAftrerCount;
-                    tx.replace(pos, exp.matchedLength() - 1, QString("%1").arg(it, 0, 'f', 3));
+                    tx.replace(match.capturedStart() + 1, match.capturedLength() - 1,
+                               QString("%1").arg(it, 0, 'f', 3));
                     count++;
                 }
             }
 
-            if ((mdiWindowProperites.atEnd && (f_tx.contains(QLatin1Char('.')) == 0))) {
-                tx.insert(pos + exp.matchedLength() - 1, QLatin1Char('.'));
+            if (mdiWindowProperites.atEnd && !f_tx.contains(QLatin1Char('.'))) {
+                tx.insert(match.capturedEnd(), QLatin1Char('.'));
                 pos++;
                 count++;
             }
-        } else {
-            pos += (exp.matchedLength());
         }
+
+        match =  regex.match(tx, pos);
     }
 
     emit message(QString(tr("Inserted : %1 dots.")).arg(count), 6000);
@@ -1341,63 +1347,64 @@ void MdiChild::doInsertDot()
 
 void MdiChild::cleanUp(QString *str)  //remove not needed zeros
 {
-    QRegExp exp;
-    int pos;
+    QRegularExpression regex;
+    regex.setPattern("([\\d]+[.][-+.0-9]+)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$");
+    auto match = regex.match(*str);
 
-    pos = 1;
-    exp.setPattern("[\\d]+[.][-+.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$");
+    // FIXME: This slow code deletes non-significant zeros one at a time.
+    while (match.hasMatch()) {
+        int pos = match.capturedEnd();
 
-    while ((pos = str->indexOf(exp, pos)) > 0) {
-        if ((str->at(pos + exp.matchedLength() - 1) == '0') && str->at(pos - 1) != QLatin1Char(';')) {
-            str->remove(pos + exp.matchedLength() - 1, 1);
-        } else {
-            pos += exp.matchedLength();
+        if (match.capturedLength(1) != 0 && str->at(match.capturedEnd() - 1) == '0') {
+            str->remove(match.capturedEnd() - 1, 1);
+            pos = match.capturedStart();
         }
+
+        match = regex.match(*str, pos);
     }
 }
 
 void MdiChild::doI2M()
 {
-    int pos, count;
+    int count;
     QString tx, f_tx;
-    QRegExp exp;
+    QRegularExpression regex;
     double it;
     bool ok;
 
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
-    exp.setPattern(QString("[%1]{1,1}[-.0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(
-                       mdiWindowProperites.i2mAdr));
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    regex.setPattern(
+        QString("[%1]{1,1}([+-]?\\d*\\.?\\d*)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(
+            mdiWindowProperites.i2mAdr));
 
     count = 0;
     tx = textEdit->toPlainText();
-    pos = 0;
+    auto match = regex.match(tx);
 
-    while ((pos = tx.indexOf(exp, pos)) >= 0) {
-        f_tx = tx.mid(pos, exp.matchedLength());
-        pos += exp.matchedLength();
+    while (match.hasMatch()) {
+        int pos = match.capturedEnd();
 
-        if (((f_tx.contains('(') == 0) && (f_tx.contains('\'') == 0) && (f_tx.contains(';') == 0))) {
-            f_tx.remove(0, 1);
-
+        if (match.capturedLength(1) > 0) {
+            f_tx = match.captured(1);
             it = f_tx.toDouble(&ok);
 
-            if (ok) {
-                if (it != 0) {
-                    if (!mdiWindowProperites.inch) {
-                        it = it / 25.4;
-                    } else {
-                        it = it * 25.4;
-                    }
-
-                    tx.replace(pos - (exp.matchedLength() - 1), exp.matchedLength() - 1, QString("%1").arg(it, 0,
-                               'f', mdiWindowProperites.i2mprec));
-                    pos++;
-                    count++;
+            if (ok && it != 0) {
+                if (!mdiWindowProperites.inch) {
+                    it /= 25.4;
+                } else {
+                    it *= 25.4;
                 }
+
+                QString conv = QString("%1").arg(it, 0, 'f', mdiWindowProperites.i2mprec);
+                tx.replace(match.capturedStart(), match.capturedLength(), conv);
+                pos += conv.length() - match.capturedLength();
+                count++;
             }
         }
+
+        match = regex.match(tx, pos);
     }
 
     emit message(QString(tr("Converted : %1 numbers.")).arg(count), 6000);
@@ -1596,7 +1603,7 @@ bool MdiChild::event(QEvent *event)
 
 int MdiChild::compute(QString *str)
 {
-    QRegExp exp;
+    QRegularExpression regex;
     QString val1, val2, partmp;
     QString oper;
     int pos, i, j, err;
@@ -1604,14 +1611,14 @@ int MdiChild::compute(QString *str)
     bool ok, ok1, dot, minus;
 
     pos = 0;
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
-    exp.setPattern("[$A-Z]+");
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    regex.setPattern("[$A-Z]+");
+    auto match = regex.match(*str);
 
-    while ((pos = str->indexOf(exp, pos)) >= 0) {
-        j = pos;
-        oper = str->mid(pos, exp.matchedLength());
-        oper = oper.toUpper();
-        pos += exp.matchedLength();
+    while (match.hasMatch()) {
+        pos = match.capturedEnd();
+        j = match.capturedStart();
+        oper = match.captured().toUpper();
         val1 = "";
         dot = false;
         minus = false;
@@ -1714,19 +1721,20 @@ int MdiChild::compute(QString *str)
 
         partmp.number(result, 'g', 3);
         str->replace(j, pos - j, QString("%1").arg(result, 0, 'f', 3));
+        match = regex.match(*str, pos);
     }
 
     pos = 0;
-    exp.setPattern("[/*]{1,1}");
+    regex.setPattern("[/*]{1,1}");
 
-    while ((pos = str->indexOf(exp, pos)) >= 0) {
+    while ((pos = str->indexOf(regex, pos)) >= 0) {
         oper = str->mid(pos, 1);
 
         val2 = "";
         dot = false;
         minus = false;
 
-        for (i = pos + 1; i <= str->length(); i++) {
+        for (i = pos + 1; i < str->length(); i++) {
             qDebug() << "456,123" << val2 << str->at(i);
 
             if ((str->at(i) == '.')) {
@@ -1835,9 +1843,9 @@ int MdiChild::compute(QString *str)
     qDebug() << "9857" << val1 << val2 << *str;
 
     pos = 1;
-    exp.setPattern("[+-]{1,1}");
+    regex.setPattern("[+-]{1,1}");
 
-    while ((pos = str->indexOf(exp, pos)) >= 0) {
+    while ((pos = str->indexOf(regex, pos)) >= 0) {
         oper = str->mid(pos, 1);
 
         qDebug() << "789,000" << oper << pos;
@@ -1966,7 +1974,7 @@ int MdiChild::compute(QString *str)
 
 int MdiChild::processBrc(QString *str)
 {
-    QRegExp exp;
+    QRegularExpression regex;
     QString par, partmp;
     int pos, err;
 
@@ -1975,13 +1983,14 @@ int MdiChild::processBrc(QString *str)
     }
 
     pos = 0;
-    exp.setPattern("\\([-+/*.0-9A-Z]*\\b[.]*\\)");
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
+    regex.setPattern("\\([-+/*.0-9A-Z]*\\b[.]*\\)");
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    auto match = regex.match(*str);
 
-    while ((pos = str->indexOf(exp, 0)) >= 0) {
-        par = str->mid(pos, exp.matchedLength());
+    while (match.hasMatch()) {
+        pos = match.capturedEnd();
+        par = match.captured();
         partmp = par;
-        pos += exp.matchedLength();
 
         par.remove(' ');
 
@@ -2000,6 +2009,8 @@ int MdiChild::processBrc(QString *str)
         if (err < 0) {
             return (err);
         }
+
+        match = regex.match(*str);
     }
 
     qDebug() << "852" << *str;
@@ -2009,25 +2020,18 @@ int MdiChild::processBrc(QString *str)
 
 int MdiChild::compileMacro()
 {
-    QRegExp exp;
-    int defBegin, defEnd, pos, i, len, error;
-    QString param, text, val, paramTmp;
+    int error;
     QTextCursor cursor;
-    QString basicCode, basicSubs;
-    BasicInterpreter basicInterpreter;
+    QString text = textEdit->toPlainText();
 
-    text = textEdit->toPlainText();
-    pos = 0;
-    exp.setCaseSensitivity(Qt::CaseInsensitive);
-    //exp.setWildcard(false);
+    QRegularExpression regexBegin("\\{BEGIN\\}");
+    regexBegin.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression regexEnd("\\{END\\}");
+    regexEnd.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    auto matchBegin = regexBegin.match(text);
+    auto matchEnd = regexEnd.match(text, matchBegin.capturedEnd());
 
-    exp.setPattern("\\{BEGIN\\}");
-    defBegin = exp.indexIn(text, pos);
-
-    exp.setPattern("\\{END\\}");
-    defEnd = exp.indexIn(text, defBegin);
-
-    if ((defBegin < 0) || (defEnd <  0)) {
+    if (!matchBegin.hasMatch() || !matchEnd.hasMatch()) {
         QMessageBox::warning(this, tr("EdytorNc - compile macro"),
                              tr("No constant definition .\n{BEGIN}\n...\n{END}\n No macro ?"));
         return -1;
@@ -2037,26 +2041,18 @@ int MdiChild::compileMacro()
 
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    pos = defBegin + 7;
+    QRegularExpression regex("\\{\\$[A-Z0-9\\s]*\\b[=\\n\\r]");
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    auto match = regex.match(text, matchBegin.capturedEnd());
 
-    while (pos < defEnd) {
-        exp.setPattern("\\{\\$[A-Z0-9\\s]*\\b[=\\n\\r]");
-        pos = text.indexOf(exp, pos);
-
-        if (pos < 0) {
-            break;
-        }
-
-        param = "";
-
-        param = text.mid(pos, exp.matchedLength());
-        pos +=  exp.matchedLength();
-
+    while (match.hasMatch() && match.capturedEnd() <= matchEnd.capturedStart()) {
+        int pos = match.capturedEnd();
+        QString param = match.captured();
         param = param.remove(' ');
         param = param.remove('{');
         param = param.remove('=');
 
-        val = "";
+        QString val = "";
 
         do {
             val = val + text.at(pos);
@@ -2075,36 +2071,28 @@ int MdiChild::compileMacro()
 
         val = val.remove(' ');
 
-        i = defEnd;
+        int i = matchEnd.capturedStart();
 
         while ((i = text.indexOf(param, i)) >= 0) {
             text.replace(i, param.length(), val);
         }
+
+        match = regex.match(text, pos);
     }
 
-    text.remove(defBegin, (defEnd + 5) - defBegin);
+    text.remove(matchBegin.capturedStart(), matchEnd.capturedEnd() - matchBegin.capturedStart());
 
-    pos = 0;
-    exp.setPattern("\\{[-+*=.,()$/0-9A-Z\\s]*\\b[-+*=.,()$/0-9A-Z\\s]*[}]");
+    regex.setPattern("\\{[-+*=.,()$/0-9A-Z\\s]*\\b[-+*=.,()$/0-9A-Z\\s]*[}]");
+    match = regex.match(text);
 
-    while ((pos = text.indexOf(exp, 0)) >= 0) {
-        i = pos;
-        param = "";
-
-        do {
-            param = param + text.at(pos);
-            pos++;
-        } while (text.at(pos) != '}');
-
-        param.insert(param.length(), '}');
-
-        len = param.length();
+    while (match.hasMatch()) {
+        QString param = match.captured();
         param = param.simplified();
         param = param.remove(QChar(' '));
         param = param.replace(',', '.');
 
         if (!param.isEmpty()) {
-            paramTmp = param;
+            QString paramTmp = param;
             error = processBrc(&param);
 
             if (error < 0) {
@@ -2132,52 +2120,52 @@ int MdiChild::compileMacro()
                 }
             }
 
-            val = param;
+            QString val = param;
             val = val.remove('{');
             val = val.remove('}');
-            text.replace(i, len, val);
+            text.replace(match.capturedStart(), match.capturedLength(), val);
         }
+
+        match = regex.match(text);
     }
 
-    defBegin = 0;
-    exp.setPattern("\\{BEGIN_SUBS\\}");
-    defBegin = exp.indexIn(text, defBegin);
-    len = exp.matchedLength();
+    regexBegin.setPattern("\\{BEGIN_SUBS\\}");
+    matchBegin = regexBegin.match(text);
+    regex.setPattern("\\{END_SUBS\\}");
+    matchEnd = regex.match(text, matchBegin.capturedEnd());
+    QString basicSubs;
 
-    exp.setPattern("\\{END_SUBS\\}");
-    defEnd = exp.indexIn(text, defBegin);
-
-    if ((defBegin >= 0) && (defEnd > defBegin)) {
-        basicSubs = text.mid(defBegin + len, defEnd - (defBegin + len));
-        text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin + 1);
+    if (matchBegin.hasMatch() && matchEnd.hasMatch()) {
+        basicSubs = text.mid(matchBegin.capturedEnd(),
+                             matchEnd.capturedStart() - matchBegin.capturedEnd());
+        text.remove(matchBegin.capturedStart(),
+                    matchEnd.capturedEnd() - matchBegin.capturedStart() + 1);
     }
 
-    defBegin = 0;
+    regexBegin.setPattern("\\{BEGIN_BASIC\\}");
+    regexEnd.setPattern("\\{END_BASIC\\}");
+    matchBegin = regexBegin.match(text);
+    matchEnd = regexEnd.match(text, matchBegin.capturedEnd());
 
-    do {
-        exp.setPattern("\\{BEGIN_BASIC\\}");
-        defBegin = exp.indexIn(text, defBegin);
-        len = exp.matchedLength();
+    while (matchBegin.hasMatch() && matchEnd.hasMatch()) {
+        QString basicCode = text.mid(matchBegin.capturedEnd(),
+                                     matchEnd.capturedStart() - matchBegin.capturedEnd());
+        text.remove(matchBegin.capturedStart(),
+                    matchEnd.capturedEnd() - matchBegin.capturedStart() + 1);
+        basicCode.append(basicSubs);
 
-        exp.setPattern("\\{END_BASIC\\}");
-        defEnd = exp.indexIn(text, defBegin);
+        error = BasicInterpreter().interpretBasic(basicCode);
 
-        if ((defBegin >= 0) && (defEnd > defBegin)) {
-            basicCode = text.mid(defBegin + len, defEnd - (defBegin + len));
-            text.remove(defBegin, (defEnd + exp.matchedLength()) - defBegin + 1);
-            basicCode.append(basicSubs);
-
-            error = basicInterpreter.interpretBasic(basicCode);
-
-            if (error > 0) {
-                macroShowBasicError(error);
-                QApplication::restoreOverrideCursor();
-                return -1;
-            }
-
-            text.insert(defBegin, basicCode);
+        if (error > 0) {
+            macroShowBasicError(error);
+            QApplication::restoreOverrideCursor();
+            return -1;
         }
-    } while ((defBegin >= 0) && (defEnd > defBegin));
+
+        text.insert(matchBegin.capturedStart(), basicCode);
+        matchBegin = regexBegin.match(text, matchBegin.capturedStart());
+        matchEnd = regexEnd.match(text, matchBegin.capturedEnd());
+    }
 
     cleanUp(&text);
     textEdit->selectAll();
@@ -2530,23 +2518,17 @@ void MdiChild::highlightCurrentLine()
     textEdit->setExtraSelections(tmpSelections);
 }
 
-void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags options,
+void MdiChild::highlightFindText(const QString &searchString, QTextDocument::FindFlags options,
                                  bool ignoreComments)
 {
     QList<QTextEdit::ExtraSelection> tmpSelections;
-    bool inComment, isRegExp, isRegExpMinMax, ok;
-    QString cur_line, exp, sval;
-    int commentPos, id, cur_line_column;
-    int pos;
-    QRegExp regExp;
-    double min, max;
+    bool inComment = false;
+    bool isRegExp = false;
+    bool isRegExpMinMax = false;
+    QRegularExpression regex;
+    double min = 0;
+    double max = 0;
     Qt::CaseSensitivity caseSensitivity;
-
-    inComment = false;
-    isRegExp = false;
-    isRegExpMinMax = false;
-    max = 0;
-    min = 0;
 
     tmpSelections.clear();
     findTextExtraSelections.clear();
@@ -2558,43 +2540,47 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
     QTextCursor cursor = textEdit->textCursor();
     cursor.setPosition(0);
 
-    exp = searchString;
+    QString addr = searchString;
 
     if (options & QTextDocument::FindCaseSensitively) {
         caseSensitivity = Qt::CaseSensitive;
     } else {
+        regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
         caseSensitivity = Qt::CaseInsensitive;
     }
 
-    if (exp.contains(QRegExp("\\$\\$"))) {
-        exp.remove("$$");
+    // TODO Dedicate the search pattern parsing into a separate method.
+    // This can also be useful in the foundTextMatched and findText methods.
+    // Try the following pattern for parsing.
+    // [A-Z]((\$\$)|(\$([-+]?\d*\.?\d+))(\$([-+]?\d*\.?\d+))?)
+    if (addr.contains(QRegularExpression("\\$\\$"))) {
+        addr.remove("$$");
         isRegExp = true;
     } else {
-        pos = 0;
-        regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
-        regExp.setCaseSensitivity(caseSensitivity);
-        pos = regExp.indexIn(exp, 0);
+        regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+        auto match = regex.match(addr);
 
-        if (pos >= 0) {
+        if (match.hasMatch()) {
             isRegExp = true;
             isRegExpMinMax = true;
-            cur_line = exp.mid(pos, regExp.matchedLength());
-            exp.remove(pos, regExp.matchedLength());
+            QString value = match.captured();
+            addr.remove(match.capturedStart(), match.capturedLength());
 
-            cur_line.remove("$");
-            max = cur_line.toDouble(&ok);
+            value.remove("$");
+            bool ok;
+            max = value.toDouble(&ok);
 
             if (!ok) {
                 max = 0;
             }
 
-            pos = regExp.indexIn(exp, 0);
+            match = regex.match(addr);
 
-            if (pos > 0) {
-                cur_line = exp.mid(pos, regExp.matchedLength());
-                exp.remove(pos, regExp.matchedLength());
-                cur_line.remove("$");
-                min = cur_line.toDouble(&ok);
+            if (match.hasMatch()) {
+                value = match.captured();
+                addr.remove(match.capturedStart(), match.capturedLength());
+                value.remove("$");
+                min = value.toDouble(&ok);
 
                 if (!ok) {
                     min = 0;
@@ -2607,24 +2593,24 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
 
     do {
         if (isRegExp) {
-            if (exp.isEmpty()) {
+            if (addr.isEmpty()) {
                 return;
             }
 
-            regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(exp));
-            regExp.setCaseSensitivity(caseSensitivity);
+            regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
 
-            cursor = doc->find(regExp, cursor, options);
+            cursor = doc->find(regex, cursor, options);
         } else {
             cursor = doc->find(searchString, cursor, options);
         }
 
         if (!cursor.isNull()) {
-            cur_line = cursor.block().text();
-            cur_line_column = cursor.columnNumber();
+            QString cur_line = cursor.block().text();
+            int cur_line_column = cursor.columnNumber();
+            int commentPos;
 
             if (ignoreComments) {
-                id = highligthMode();
+                int id = highligthMode();
 
                 if ((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN)) {
                     commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
@@ -2655,8 +2641,9 @@ void MdiChild::highlightFindText(QString searchString, QTextDocument::FindFlags 
 
             if (!inComment) {
                 if (isRegExpMinMax) {
-                    sval = cursor.selectedText();
-                    double val = QString(sval).remove(exp, caseSensitivity).toDouble(&ok);
+                    QString sval = cursor.selectedText();
+                    bool ok;
+                    double val = QString(sval).remove(addr, caseSensitivity).toDouble(&ok);
 
                     if ((val >= min) && (val <= max)) {
                         selection.cursor = cursor;
@@ -2770,49 +2757,46 @@ QString MdiChild::currentFileInfo()
     return curFileInfo;
 }
 
-bool MdiChild::foundTextMatched(QString pattern, QString text)
+bool MdiChild::foundTextMatched(const QString &pattern, QString text)
 {
-    bool matched, isRegExp, isRegExpMinMax, ok;
-    int pos;
-    QString str;
-    QRegExp regExp;
-    double min, max;
+    bool matched = false;
+    bool isRegExp = false;
+    bool isRegExpMinMax = false;
+    QRegularExpression regex;
+    double min = 0;
+    double max = 0;
 
-    matched = false;
-    isRegExp = false;
-    isRegExpMinMax = false;
-    max = 0;
-    min = 0;
+    QString addr = pattern;
 
-    if (pattern.contains(QRegExp("\\$\\$"))) {
-        pattern.remove("$$");
+    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+
+    if (addr.contains(QRegularExpression("\\$\\$"))) {
+        addr.remove("$$");
         isRegExp = true;
     } else {
-        pos = 0;
-        regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
-        regExp.setCaseSensitivity(Qt::CaseInsensitive);
-        pos = regExp.indexIn(pattern, 0);
+        regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+        auto match = regex.match(addr);
 
-        if (pos >= 0) {
+        if (match.hasMatch()) {
             isRegExp = true;
             isRegExpMinMax = true;
-            str = pattern.mid(pos, regExp.matchedLength());
-            pattern.remove(pos, regExp.matchedLength());
-
-            str.remove("$");
-            max = str.toDouble(&ok);
+            QString value = match.captured();
+            addr.remove(match.capturedStart(), match.capturedLength());
+            value.remove("$");
+            bool ok;
+            max = value.toDouble(&ok);
 
             if (!ok) {
                 max = 0;
             }
 
-            pos = regExp.indexIn(pattern, 0);
+            match = regex.match(addr);
 
-            if (pos > 0) {
-                str = pattern.mid(pos, regExp.matchedLength());
-                pattern.remove(pos, regExp.matchedLength());
-                str.remove("$");
-                min = str.toDouble(&ok);
+            if (match.hasMatch()) {
+                value = match.captured();
+                addr.remove(match.capturedStart(), match.capturedLength());
+                value.remove("$");
+                min = value.toDouble(&ok);
 
                 if (!ok) {
                     min = 0;
@@ -2822,13 +2806,14 @@ bool MdiChild::foundTextMatched(QString pattern, QString text)
     }
 
     if (isRegExp) {
-        regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(pattern));
+        regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
 
-        if (text.contains(regExp)) {
+        if (text.contains(regex)) {
             if (isRegExpMinMax) {
-                double val = QString(text).remove(pattern, Qt::CaseInsensitive).toDouble(&ok);
+                bool ok;
+                double val = QString(text).remove(addr, Qt::CaseInsensitive).toDouble(&ok);
 
-                if (((val >= min) && (val <= max))) {
+                if (ok && (val >= min) && (val <= max)) {
                     matched = true;
                 }
             } else {
@@ -2836,7 +2821,7 @@ bool MdiChild::foundTextMatched(QString pattern, QString text)
             }
         }
     } else {
-        matched = (pattern == text);
+        matched = (addr == text);
     }
 
     return matched;
@@ -2845,61 +2830,52 @@ bool MdiChild::foundTextMatched(QString pattern, QString text)
 bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
                         bool ignoreComments)
 {
-    bool found, inComment, isRegExp, isRegExpMinMax, ok;
+    bool inComment = false;
+    bool found = false;
+    bool isRegExp = false;
+    bool isRegExpMinMax = false;
     QTextCursor cursor;
-    QString cur_line, exp, sval;
-    int cur_line_column;
-    int commentPos, id;
-    int pos;
-    QRegExp regExp;
-    double min, max;
+    QRegularExpression regex;
+    double min = 0;
+    double max = 0;
     Qt::CaseSensitivity caseSensitivity;
-
-    inComment = false;
-    found = false;
-    isRegExp = false;
-    isRegExpMinMax = false;
-    max = 0;
-    min = 0;
 
     if (options & QTextDocument::FindCaseSensitively) {
         caseSensitivity = Qt::CaseSensitive;
     } else {
         caseSensitivity = Qt::CaseInsensitive;
+        regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
     }
 
-    exp = text;
+    QString addr = text;
 
-    if (exp.contains(QRegExp("\\$\\$"))) {
-        exp.remove("$$");
+    if (addr.contains(QRegularExpression("\\$\\$"))) {
+        addr.remove("$$");
         isRegExp = true;
     } else {
-        pos = 0;
-        regExp.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
-        regExp.setCaseSensitivity(caseSensitivity);
+        regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+        auto match = regex.match(addr);
 
-        pos = regExp.indexIn(exp, 0);
-
-        if (pos >= 0) {
+        if (match.hasMatch()) {
             isRegExp = true;
             isRegExpMinMax = true;
-            cur_line = exp.mid(pos, regExp.matchedLength());
-            exp.remove(pos, regExp.matchedLength());
-
-            cur_line.remove("$");
-            max = cur_line.toDouble(&ok);
+            QString value = match.captured();
+            addr.remove(match.capturedStart(), match.capturedLength());
+            value.remove("$");
+            bool ok;
+            max = value.toDouble(&ok);
 
             if (!ok) {
                 max = 0;
             }
 
-            pos = regExp.indexIn(exp, 0);
+            match = regex.match(addr);
 
-            if (pos > 0) {
-                cur_line = exp.mid(pos, regExp.matchedLength());
-                exp.remove(pos, regExp.matchedLength());
-                cur_line.remove("$");
-                min = cur_line.toDouble(&ok);
+            if (match.hasMatch()) {
+                value = match.captured();
+                addr.remove(match.capturedStart(), match.capturedLength());
+                value.remove("$");
+                min = value.toDouble(&ok);
 
                 if (!ok) {
                     min = 0;
@@ -2910,7 +2886,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
 
     textEdit->setUpdatesEnabled(false);
 
-    if (exp.isEmpty()) {
+    if (addr.isEmpty()) {
         return false;
     }
 
@@ -2918,10 +2894,9 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
 
     do {
         if (isRegExp) {
-            regExp.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(exp));
-            regExp.setCaseSensitivity(caseSensitivity);
+            regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
 
-            cursor = textEdit->document()->find(regExp, cursor, options);
+            cursor = textEdit->document()->find(regex, cursor, options);
 
             found = !cursor.isNull();
 
@@ -2933,15 +2908,16 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
                 break;
             }
         } else {
-            found = textEdit->find(exp, options);
+            found = textEdit->find(addr, options);
             cursor = textEdit->textCursor();
         }
 
-        cur_line = cursor.block().text();
-        cur_line_column = cursor.columnNumber();
+        QString cur_line = cursor.block().text();
+        int cur_line_column = cursor.columnNumber();
 
         if (found && ignoreComments) {
-            id = highligthMode();
+            int id = highligthMode();
+            int commentPos;
 
             if ((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN)) {
                 commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
@@ -2971,8 +2947,9 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
         }
 
         if ((isRegExpMinMax && found) && !inComment) {
-            sval = cursor.selectedText();
-            double val = QString(sval).remove(exp, caseSensitivity).toDouble(&ok);
+            QString sValue = cursor.selectedText();
+            bool ok;
+            double val = QString(sValue).remove(addr, caseSensitivity).toDouble(&ok);
 
             if (((val >= min) && (val <= max))) {
                 inComment = false;
@@ -2993,58 +2970,56 @@ QString MdiChild::guessFileName()
     //QTextCursor cursor;
     QString fileName;
     QString text;
-    int pos;
-    QRegExp expression;
+    QRegularExpression regex;
 
     //cursor = textEdit->textCursor();
     text = textEdit->toPlainText();
 
     if (mdiWindowProperites.guessFileNameByProgNum) {
         forever {
-            expression.setPattern(FILENAME_SINU840);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_SINU840);
+            auto match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
+            if (match.hasMatch()) {
+                fileName = match.captured();
                 fileName.remove(QLatin1String("%_N_"));
-                fileName.remove(QRegExp("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
+                fileName.remove(QRegularExpression("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
                 break;
             }
 
-            expression.setPattern(FILENAME_OSP);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_OSP);
+            match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
+            if (match.hasMatch()) {
+                fileName = match.captured();
                 fileName.remove(QLatin1String("$"));
-                fileName.remove(QRegExp("\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
+                fileName.remove(QRegularExpression("\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
                 break;
             }
 
-            expression.setPattern(FILENAME_SINU);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_SINU);
+            match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
-                fileName.remove(QRegExp("%(MPF|SPF|TEA)[\\s]{0,3}"));
+            if (match.hasMatch()) {
+                fileName = match.captured();
+                fileName.remove(QRegularExpression("%(MPF|SPF|TEA)[\\s]{0,3}"));
                 break;
             }
 
-            expression.setPattern(FILENAME_PHIL);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_PHIL);
+            match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
-                fileName.remove(QRegExp("%PM[\\s]{1,}[N]{1,1}"));
+            if (match.hasMatch()) {
+                fileName = match.captured();
+                fileName.remove(QRegularExpression("%PM[\\s]{1,}[N]{1,1}"));
                 break;
             }
 
-            expression.setPattern(FILENAME_FANUC);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_FANUC);
+            match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
-
+            if (match.hasMatch()) {
+                fileName = match.captured();
                 fileName.replace(':', 'O');
 
                 //                if(fileName.at(0)!='O')
@@ -3054,32 +3029,31 @@ QString MdiChild::guessFileName()
                 break;
             }
 
-            expression.setPattern(FILENAME_HEID1);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_HEID1);
+            match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
+            if (match.hasMatch()) {
+                fileName = match.captured();
                 fileName.remove(QLatin1String("%"));
-                fileName.remove(QRegExp("\\s"));
+                fileName.remove(QRegularExpression("\\s"));
                 break;
             }
 
-            expression.setPattern(FILENAME_HEID2);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_HEID2);
+            match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
-                fileName.remove(QRegExp("(BEGIN)(\\sPGM\\s)"));
-                fileName.remove(QRegExp("(\\sMM|\\sINCH)"));
+            if (match.hasMatch()) {
+                fileName = match.captured();
+                fileName.remove(QRegularExpression("(BEGIN)(\\sPGM\\s)"));
+                fileName.remove(QRegularExpression("(\\sMM|\\sINCH)"));
                 break;
             }
 
-            expression.setPattern(FILENAME_FADAL);
-            pos = text.indexOf(expression);
+            regex.setPattern(FILENAME_FADAL);
+            match = regex.match(text);
 
-            if (pos >= 0) {
-                fileName = text.mid(pos, expression.matchedLength());
-
+            if (match.hasMatch()) {
+                fileName = match.captured();
                 fileName.remove("N1");
                 break;
             }
@@ -3089,20 +3063,20 @@ QString MdiChild::guessFileName()
         }
     } else {
         forever {
-            expression.setPattern("(;)[\\w:*=+ -]{4,64}");
-            pos = text.indexOf(expression);
+            regex.setPattern("(;)[\\w:*=+ -]{4,64}");
+            auto match = regex.match(text);
 
-            if (pos >= 2) {
-                fileName = text.mid(pos, expression.matchedLength());
+            if (match.capturedStart() >= 2) {
+                fileName = match.captured();
                 fileName.remove(";");
                 break;
             }
 
-            expression.setPattern("(\\()[\\w:*=+ -]{4,64}(\\))");
-            pos = text.indexOf(expression);
+            regex.setPattern("(\\()[\\w:*=+ -]{4,64}(\\))");
+            match = regex.match(text);
 
-            if (pos >= 2) {
-                fileName = text.mid(pos, expression.matchedLength());
+            if (match.capturedStart() >= 2) {
+                fileName = match.captured();
                 fileName.remove("(");
                 fileName.remove(")");
                 break;
@@ -3133,50 +3107,42 @@ QString MdiChild::guessFileName()
 QStringList MdiChild::splitFile()
 {
     int progBegin, progEnd;
-    QStringList progs, exp;
+    QStringList progs;
+    QStringList pattenList;
     QList<int> progBegins;
-    int index;
     QString tx;
 
     QString text = textEdit->toPlainText();
 
-    exp << FILENAME_SINU840
-        << FILENAME_OSP
-        << FILENAME_FANUC
-        << FILENAME_SINU
-        << FILENAME_HEID1
-        << FILENAME_HEID2
-        << FILENAME_PHIL
-        << FILENAME_FADAL;
+    pattenList << FILENAME_SINU840
+               << FILENAME_OSP
+               << FILENAME_FANUC
+               << FILENAME_SINU
+               << FILENAME_HEID1
+               << FILENAME_HEID2
+               << FILENAME_PHIL
+               << FILENAME_FADAL;
 
 
     // detect CNC control type
-    foreach (const QString expTx, exp) {
-        QRegExp expression(expTx);
+    foreach (const QString pattern, pattenList) {
+        QRegularExpression regex(pattern);
 
-        if (text.contains(expression)) {
-            exp.clear();
-            exp.append(expTx);
+        if (text.contains(regex)) {
+            pattenList.clear();
+            pattenList.append(pattern);
             break;
         }
     }
 
-    index = 0;
+    foreach (const QString pattern, pattenList) {
+        QRegularExpression regex(pattern);
+        auto match = regex.match(text);
 
-    foreach (const QString expTx, exp) {
-        QRegExp expression(expTx);
-
-        do {
-            index = text.indexOf(expression, index);
-
-            if (index >= 0) {
-                progBegins.append(index);
-                index += expression.matchedLength();
-            } else {
-                index = 0;
-            }
-
-        } while (index > 0);
+        while (match.hasMatch()) {
+            progBegins.append(match.capturedStart());
+            match = regex.match(text, match.capturedEnd());
+        }
     }
 
     std::sort(progBegins.begin(), progBegins.end());
@@ -3209,9 +3175,8 @@ QStringList MdiChild::splitFile()
 
 void MdiChild::blockSkip(bool remove, bool inc)
 {
-    int idx, num;
-    QRegExp regExp;
-    bool ok;
+    int num;
+    QRegularExpression regex;
     int start, end;
     QTextCursor cursor;
 
@@ -3230,19 +3195,18 @@ void MdiChild::blockSkip(bool remove, bool inc)
         textEdit->setTextCursor(cursor);
         QString selText = cursor.selectedText();
 
-        regExp.setPattern(QString("/[0-9]{0,1}"));
-        regExp.setMinimal(false);
+        regex.setPattern(QString("/[0-9]{0,1}"));
         num = 0;
 
         if (!remove) {
-            idx = regExp.indexIn(selText, 0);
+            auto match = regex.match(selText);
 
-            if (idx >= 0) {
-                QString tx = regExp.cap(0);
-                selText.remove(regExp);
+            if (match.hasMatch()) {
+                QString tx = match.captured();
+                selText.remove(regex);
                 tx.remove('/');
                 tx.remove(' ');
-
+                bool ok;
                 num = tx.toInt(&ok);
 
                 if (!ok) {
@@ -3276,12 +3240,12 @@ void MdiChild::blockSkip(bool remove, bool inc)
         foreach (QString txLine, list) {
             if (remove) {
                 if (txLine.length() > 0) {
-                    txLine.remove(regExp);
+                    txLine.remove(regex);
                 }
             } else {
-                idx = txLine.indexOf(QRegExp("[;/(]{1,1}"));
+                int i = txLine.indexOf(QRegularExpression("[;/(]{1,1}"));
 
-                if ((idx > 1) || (idx < 0)) {
+                if ((i > 1) || (i < 0)) {
                     if (num == 0) {
                         txLine.prepend("/");
                     } else {
@@ -3454,7 +3418,7 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText,
     QString foundText;
     double val, val1;
     bool ok;
-    QRegExp regExp;
+    QRegularExpression regExp;
     QChar op;
 
     if (textEdit->isReadOnly()) {
@@ -3495,7 +3459,7 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText,
             val = replacedText.toDouble(&ok);
 
             foundText = cr.selectedText();
-            foundText.remove(QRegExp("[A-Za-z#]{1,}"));
+            foundText.remove(QRegularExpression("[A-Za-z#]{1,}"));
             val1 = foundText.toDouble(&ok);
             replacedText = cr.selectedText();
             replacedText.remove(foundText);
@@ -3585,7 +3549,7 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
                         int oper, double modifier, QTextDocument::FindFlags options, bool ignoreComments, int prec)
 {
     double val, val1;
-    QRegExp regExp;
+    QRegularExpression regex;
     bool found = false;
     bool ok, inSelection;
     QString newText, foundText;
@@ -3605,10 +3569,8 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
         return false;
     }
 
-    if (options & QTextDocument::FindCaseSensitively) {
-        regExp.setCaseSensitivity(Qt::CaseSensitive);
-    } else {
-        regExp.setCaseSensitivity(Qt::CaseInsensitive);
+    if (!(options & QTextDocument::FindCaseSensitively)) {
+        regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
     }
 
     textEdit->blockSignals(true);
@@ -3628,13 +3590,13 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
 
     do {
         if ((oper == -1) && (min == -999999)) {
-            regExp.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(
-                                  textToFind));
+            regex.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(
+                                 textToFind));
         } else {
-            regExp.setPattern(QString("(%1)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
+            regex.setPattern(QString("(%1)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
         }
 
-        cursor = document->find(regExp, cursor, options);
+        cursor = document->find(regex, cursor, options);
         found = !cursor.isNull();
 
         if (found && ignoreComments) {

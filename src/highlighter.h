@@ -25,7 +25,7 @@
 
 #include <QFont>
 #include <QObject>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSyntaxHighlighter>
 #include <QTextCharFormat>
 #include <QVector>
@@ -49,6 +49,7 @@ public:
 
 protected:
     void highlightBlock(const QString &text);
+    void highlightBlockCommon(const QString &tx);
 
 private:
     void highlightInside(const QString &tx, int pos, int maxlen);
@@ -66,7 +67,7 @@ private:
     int mode;
 
     struct HighlightingRule {
-        QRegExp pattern;
+        QRegularExpression pattern;
         QTextCharFormat format;
     };
 
@@ -74,15 +75,15 @@ private:
     QVector<HighlightingRule> commentHighlightRules;
 
     struct ProgNameHighlightingRule {
-        QRegExp pattern;
+        QRegularExpression pattern;
         QTextCharFormat format;
         int mode;
     };
 
     QVector<ProgNameHighlightingRule> progNameHighlightRules;
 
-    QRegExp commentStartExpression;
-    QRegExp commentEndExpression;
+    QRegularExpression commentStartExpression;
+    QRegularExpression commentEndExpression;
 
     QTextCharFormat keywordFormat;
 
