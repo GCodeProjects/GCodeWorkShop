@@ -2586,7 +2586,12 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
 void EdytorNc::messReceived(const QString &text)
 {
     QString str = text;
-    QStringList list1 = str.split(";", QString::SkipEmptyParts);
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    auto behavior = QString::SkipEmptyParts;
+#else
+    auto behavior = Qt::SkipEmptyParts;
+#endif
+    QStringList list1 = str.split(";", behavior);
 
     for (int i = 0; i < list1.size(); ++i) {
         openFile(list1.at(i));

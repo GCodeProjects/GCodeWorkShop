@@ -683,10 +683,15 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
         data->append(portSettings.sendAtEnd);
     }
 
-    serialPortWriteBuffer = data->split("\n",
-                                        QString::SkipEmptyParts); // \n is not appended to a string only \r are left
-    serialPortWriteBuffer.replaceInStrings("\r",
-                                           portSettings.eobChar); // insert line endings. \r is replaced with choosen line ending
+    // \n is not appended to a string only \r are left
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    auto behavior = QString::SkipEmptyParts;
+#else
+    auto behavior = Qt::SkipEmptyParts;
+#endif
+    serialPortWriteBuffer = data->split("\n", behavior);
+    // insert line endings. \r is replaced with choosen line ending
+    serialPortWriteBuffer.replaceInStrings("\r", portSettings.eobChar);
 
     noOfBytes = serialPortWriteBuffer.join("").length();  // get new size
     setRange(0, noOfBytes);
