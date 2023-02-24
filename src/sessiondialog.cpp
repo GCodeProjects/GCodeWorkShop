@@ -210,8 +210,8 @@ void sessionDialog::clearChecked()
 
 void sessionDialog::copySession(QString oldName, QString newName, bool deleteOld)
 {
-    QString cursorPos;
-    QString readOnly;
+    int cursorPos;
+    bool readOnly;
     QByteArray geometry;
     QString fileName;
     int highlightMode;
