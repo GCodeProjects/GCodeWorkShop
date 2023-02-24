@@ -569,18 +569,7 @@ QString FileAccess::tempFileName()
 #endif
 
     for (int i = 0; ; ++i) {
-        // short filenames for WIN98 because for system() the command must not exceed 120 characters.
-#ifdef _WIN32
-        if (QSysInfo::WindowsVersion & QSysInfo::WV_DOS_based) { // Win95, 98, ME
-            fileName = tmpDir + "\\" + QString::number(i);
-        } else {
-            fileName = tmpDir + "/kdiff3_" + QString::number(_getpid()) + "_" + QString::number(
-                           i) + ".tmp";
-        }
-
-#else
         fileName = tmpDir + "/kdiff3_" + QString::number(getpid()) + "_" + QString::number(i) + ".tmp";
-#endif
 
         if (! FileAccess::exists(fileName) &&
                 QFile(fileName).open(
