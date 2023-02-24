@@ -1008,7 +1008,7 @@ void MdiChild::doRemoveSpace()
     bool skipChar;
     bool openAddress = false;
     bool hasChanged = false;
-    QChar currentChar = 0;
+    QChar currentChar = QChar();
 
     m_Helper->begin(tx.length(), tr("Remove space", "Slow operation title in MDIChild"));
 
@@ -1187,8 +1187,8 @@ void MdiChild::doInsertSpace()
     } state = NORMAL_FLOW;
 
     int pos = 0;
-    QChar currentChar = 0;
-    QChar previosChar = 0;
+    QChar currentChar = QChar();
+    QChar previosChar = QChar();
     bool hasChanged = false;
 
     QString *updatedText = new QString();
