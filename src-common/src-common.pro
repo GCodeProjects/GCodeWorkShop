@@ -50,9 +50,6 @@ SOURCES += ui/longjobhelper.cpp \
     utils/configpage.cpp \
     utils/configdialog.cpp
 
-unix:SOURCES += utils/medium_linux.cpp
-win32:SOURCES += utils/medium_win.cpp
-
 FORMS += utils/configdialog.ui
 
 
