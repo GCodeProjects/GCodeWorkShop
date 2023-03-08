@@ -16,21 +16,23 @@ SOURCES += edytornc.cpp \
     main.cpp \
     highlighter.cpp \
     mdichild.cpp \
-    dialogs.cpp \
+    setupdialog.cpp \
     findinf.cpp \
     basic_interpreter.cpp \
     newfiledialog.cpp \
-    sessiondialog.cpp
+    sessiondialog.cpp \
+    src/utils/removezeros.cpp
 
 HEADERS += include/edytornc.h \
     highlighter.h \
     mdichild.h \
-    dialogs.h \
+    setupdialog.h \
     findinf.h \
     basic_interpreter.h \
     tooltips.h \
     newfiledialog.h \
-    sessiondialog.h
+    sessiondialog.h \
+    include/utils/removezeros.h
 
 FORMS += mdichildform.ui \
     findinfilesdialog.ui \

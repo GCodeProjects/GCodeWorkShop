@@ -72,9 +72,9 @@
 
 #include <commoninc.h>         // _editor_properites
 #include <ui/longjobhelper.h>  // LongJobHelper
+#include <utils/removezeros.h> // removeZeros()
 
 #include "basic_interpreter.h" // BasicInterpreter
-#include "dialogs.h"           // removeZeros()
 #include "highlighter.h"       // Highlighter
 #include "mdichild.h"          // MdiChild QObject QWidget
 
