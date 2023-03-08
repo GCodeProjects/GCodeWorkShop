@@ -19,8 +19,6 @@ SOURCES += edytornc.cpp \
     dialogs.cpp \
     findinf.cpp \
     basic_interpreter.cpp \
-    cleanupdialog.cpp \
-    swapaxesdialog.cpp \
     newfiledialog.cpp \
     sessiondialog.cpp
 
@@ -30,27 +28,14 @@ HEADERS += include/edytornc.h \
     dialogs.h \
     findinf.h \
     basic_interpreter.h \
-    cleanupdialog.h \
     tooltips.h \
-    swapaxesdialog.h \
     newfiledialog.h \
     sessiondialog.h
 
-FORMS += i2mdialog.ui \
-    feedsdialog.ui \
-    renumberdialog.ui \
-    dotdialog.ui \
-    triangledialog.ui \
-    bhctabform.ui \
-    bhcdialog.ui \
-    mdichildform.ui \
+FORMS += mdichildform.ui \
     findinfilesdialog.ui \
-    chamferdialog.ui \
-    i2mprogdialog.ui \
     setupdialog.ui \
     edytornc.ui \
-    cleanupdialog.ui \
-    swapaxesdialog.ui \
     newfiledialog.ui \
     sessiondialog.ui \
     newsessiondialog.ui
