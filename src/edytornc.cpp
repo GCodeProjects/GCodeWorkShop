@@ -2190,7 +2190,6 @@ void EdytorNc::readSettings()
 
     setGeometry(QRect(mMWConfig.pos(), mMWConfig.size()));
     setWindowState(mMWConfig.maximized() ? Qt::WindowMaximized : Qt::WindowNoState);
-    restoreState(mMWConfig.state());
 
     if (settings.value("SerialToolbarShown", false).toBool()) {
         createSerialToolBar();
@@ -2200,6 +2199,8 @@ void EdytorNc::readSettings()
     if (settings.value("FindToolBarShown", false).toBool()) {
         createFindToolBar();
     }
+
+    restoreState(mMWConfig.state());
 
     defaultMdiWindowProperites.extensions = settings.value("Extensions",
                                             (QStringList() << "*.nc" <<  "*.cnc")).toStringList();
