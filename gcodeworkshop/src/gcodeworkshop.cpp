@@ -36,6 +36,8 @@
 #include <QDesktopServices>     // for QDesktopServices
 #include <QDialog>              // for QDialog, QDialog::Accepted
 #include <QDir>                 // for QDir, operator|, QDir::Files, QDir::Hidden, QDir::Name, QDir::NoSymLinks
+#include <QDragEnterEvent>      // for QDragEnterEvent
+#include <QDropEvent>           // for QDropEvent
 #include <QEvent>               // for QEvent, QEvent::ToolTip
 #include <QFile>                // for QFile
 #include <QFileDialog>          // for QFileDialog, QFileDialog::DontConfirmOverwrite
@@ -60,6 +62,7 @@
 #include <QMenu>                // for QMenu
 #include <QMenuBar>             // for QMenuBar
 #include <QMessageBox>          // for QMessageBox, operator|, QMessageBox::Save, QMessageBox::Discard, QMess...
+#include <QMimeData>            // for QMimeData
 #include <QModelIndex>          // for QModelIndex
 #include <QModelIndexList>      // for QModelIndexList
 #include <QObject>              // for SIGNAL, SLOT, qobject_cast, emit
@@ -158,6 +161,7 @@ GCodeWorkShop::GCodeWorkShop(Medium* medium)
 
 	ui = new Ui::GCodeWorkShop();
 	ui->setupUi(this);
+	setAcceptDrops(true);
 
 	findToolBar = nullptr;
 	serialToolBar = nullptr;
@@ -286,6 +290,30 @@ void GCodeWorkShop::moveEvent(QMoveEvent* event)
 	}
 
 	QMainWindow::moveEvent(event);
+}
+
+void GCodeWorkShop::dragEnterEvent(QDragEnterEvent* event)
+{
+	if (!event->mimeData()->hasUrls()) {
+		QMainWindow::dragEnterEvent(event);
+		return;
+	}
+
+	event->acceptProposedAction();
+}
+
+void GCodeWorkShop::dropEvent(QDropEvent* event)
+{
+	if (!event->mimeData()->hasUrls()) {
+		QMainWindow::dropEvent(event);
+		return;
+	}
+
+	for (QUrl url : event->mimeData()->urls()) {
+		openFile(url.toString(QUrl::PreferLocalFile));
+	}
+
+	event->acceptProposedAction();
 }
 
 Addons::Actions* GCodeWorkShop::addonsActions()

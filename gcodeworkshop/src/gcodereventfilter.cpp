@@ -19,11 +19,14 @@
  */
 
 #include <QChar>                    // for QChar, operator==, operator!=
+#include <QDragEnterEvent>          // for QDragEnterEvent
+#include <QDropEvent>               // for QDropEvent
 #include <QEvent>                   // for QEvent, QEvent::KeyPress, QEvent::MouseButtonDblClick, QEvent::ToolTip
 #include <QHelpEvent>               // for QHelpEvent
 #include <QKeyEvent>                // for QKeyEvent
 #include <QLatin1Char>              // for QLatin1Char
 #include <QLatin1String>            // for QLatin1String
+#include <QMimeData>                // for QMimeData
 #include <QMouseEvent>              // for QMouseEvent
 #include <QPlainTextEdit>           // for QPlainTextEdit
 #include <QRect>                    // for QRect
@@ -86,6 +89,16 @@ bool GCoderEventFilter::eventFilter(QObject* obj, QEvent* event)
 	if (obj == m_textEdit && event->type() == QEvent::KeyPress) {
 		QKeyEvent* ke = dynamic_cast<QKeyEvent*>(event);
 		return keyEvent(ke);
+	}
+
+	if (event->type() == QEvent::DragEnter) {
+		QDragEnterEvent* dee = dynamic_cast<QDragEnterEvent*>(event);
+		return dragEnterEvent(dee);
+	}
+
+	if (event->type() == QEvent::Drop) {
+		QDropEvent* de = dynamic_cast<QDropEvent*>(event);
+		return dropEvent(de);
 	}
 
 	return false;
@@ -250,4 +263,14 @@ bool GCoderEventFilter::keyEvent(QKeyEvent* event)
 	}
 
 	return false;
+}
+
+bool GCoderEventFilter::dragEnterEvent(QDragEnterEvent* event)
+{
+	return event->mimeData()->hasUrls();
+}
+
+bool GCoderEventFilter::dropEvent(QDropEvent* event)
+{
+	return event->mimeData()->hasUrls();
 }

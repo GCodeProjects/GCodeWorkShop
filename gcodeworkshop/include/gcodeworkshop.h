@@ -38,6 +38,8 @@ class QClipboard;
 class QCloseEvent;
 class QComboBox;
 class QDir;
+class QDragEnterEvent;
+class QDropEvent;
 class QEvent;
 class QFileSystemModel;
 class QFileSystemWatcher;
@@ -95,6 +97,13 @@ public:
 	Document* activeDocument() const;
 	QString currentPath() const;
 	QString lastOpenedPath() const;
+	/*
+	 * To implement the opening of dragged files, we override the event handlers.
+	 * see textedit.h and textedit.cpp
+	 * see https://doc.qt.io/qt-5/dnd.html#dropping
+	 */
+	void dragEnterEvent(QDragEnterEvent* event) override;
+	void dropEvent(QDropEvent* event) override;
 
 protected:
 	Ui::GCodeWorkShop* ui;

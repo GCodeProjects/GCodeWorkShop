@@ -25,6 +25,8 @@
 #include <QRegularExpression>   // for QRegularExpression
 #include <QString>              // for QString
 
+class QDragEnterEvent;
+class QDropEvent;
 class QEvent;
 class QHelpEvent;
 class QKeyEvent;
@@ -60,6 +62,16 @@ protected:
 	bool toolTipEvent(QWidget* widget, QHelpEvent* event);
 	bool mouseButtonDblClickEvent(QMouseEvent* event);
 	bool keyEvent(QKeyEvent* event);
+
+	/*
+	 * The QPlainTextEdit class already has a drag-n-drop mechanism, but in
+	 * the case of files, QPlainTextEdit inserts a text representation of url
+	 * into the edited document. So we add event handlers to filter such events
+	 * and handle those events in the main window.
+	 * see https://doc.qt.io/qt-5/dnd.html#dropping
+	 */
+	bool dragEnterEvent(QDragEnterEvent* event);
+	bool dropEvent(QDropEvent* event);
 
 protected:
 	QPlainTextEdit* m_textEdit;
