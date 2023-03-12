@@ -243,28 +243,28 @@ void TransmissionDialog::connectButtonToggled(bool tg)
 
 void TransmissionDialog::setXonButtonClicked()
 {
-    if (comPort->isOpen()) {
+    if (comPort != nullptr && comPort->isOpen()) {
         comPort->putChar(portSettings.Xon);
     }
 }
 
 void TransmissionDialog::setXoffButtonClicked()
 {
-    if (comPort->isOpen()) {
+    if (comPort != nullptr && comPort->isOpen()) {
         comPort->putChar(portSettings.Xoff);
     }
 }
 
 void TransmissionDialog::setDtrButtonClicked()
 {
-    if (comPort->isOpen()) {
+    if (comPort != nullptr && comPort->isOpen()) {
         comPort->setDataTerminalReady(setDtrButton->isChecked());
     }
 }
 
 void TransmissionDialog::setRtsButtonClicked()
 {
-    if (comPort->isOpen()) {
+    if (comPort != nullptr && comPort->isOpen()) {
         comPort->setRequestToSend(setRtsButton->isChecked());
     }
 }
@@ -281,11 +281,7 @@ void TransmissionDialog::updateLeds()
 
     timer->stop();
 
-    if (comPort == nullptr) {
-        return;
-    }
-
-    if (!comPort->isOpen()) {
+    if (comPort == nullptr || !comPort->isOpen()) {
         return;
     }
 
