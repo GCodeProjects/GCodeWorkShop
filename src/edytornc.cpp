@@ -3323,7 +3323,7 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex &index)
 
     QStandardItem *item = model->itemFromIndex(index);
 
-    if (item == nullptr) {
+    if (item == nullptr || item->parent() == nullptr) {
         return;
     }
 
