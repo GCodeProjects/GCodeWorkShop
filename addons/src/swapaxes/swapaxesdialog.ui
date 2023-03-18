@@ -20,7 +20,7 @@
    <string>Swap/modify axes</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="application.qrc">
+   <iconset resource="../../../src-common/application.qrc">
     <normaloff>:/images/swapaxes.png</normaloff>:/images/swapaxes.png</iconset>
   </property>
   <property name="sizeGripEnabled">
@@ -468,7 +468,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../src-common/application.qrc"/>
+  <include location="../../../src-common/application.qrc"/>
  </resources>
  <connections>
   <connection>

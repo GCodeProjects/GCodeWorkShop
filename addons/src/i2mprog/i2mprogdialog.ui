@@ -137,7 +137,7 @@
         <string>&amp;Start</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../../src-common/application.qrc">
          <normaloff>:/images/start.png</normaloff>:/images/start.png</iconset>
        </property>
       </widget>
@@ -161,7 +161,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../../src-common/application.qrc">
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
        </property>
       </widget>
@@ -184,7 +184,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../src-common/application.qrc"/>
+  <include location="../../../src-common/application.qrc"/>
  </resources>
  <connections/>
 </ui>

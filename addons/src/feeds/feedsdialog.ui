@@ -292,7 +292,7 @@
         <string>&amp;S, F</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../../src-common/application.qrc">
          <normaloff>:/images/funct.png</normaloff>:/images/funct.png</iconset>
        </property>
        <property name="autoDefault">
@@ -319,7 +319,7 @@
         <string>Cl&amp;ose</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../../src-common/application.qrc">
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
        </property>
        <property name="autoDefault">
@@ -352,7 +352,7 @@
         <string>&amp;Vc, Fz</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../../src-common/application.qrc">
          <normaloff>:/images/funct.png</normaloff>:/images/funct.png</iconset>
        </property>
        <property name="autoDefault">
@@ -378,7 +378,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../src-common/application.qrc"/>
+  <include location="../../../src-common/application.qrc"/>
  </resources>
  <connections/>
 </ui>
