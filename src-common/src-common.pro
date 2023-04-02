@@ -25,8 +25,7 @@ HEADERS += \
     serialtransmissiondialog.h \
     serialportconfigdialog.h \
     serialportcfghelpdialog.h \
-    serialportsettings.h \
-    include/generalconfig.h
+    serialportsettings.h
 
 FORMS += \
     transmissiondialog.ui \
@@ -39,13 +38,11 @@ FORMS += \
 #######################################
 
 HEADERS += include/ui/longjobhelper.h \
-    include/utils/config.h \
     include/utils/medium.h \
     include/utils/configpage.h \
     include/utils/configdialog.h
 
 SOURCES += ui/longjobhelper.cpp \
-    utils/config.cpp \
     utils/medium.cpp \
     utils/configpage.cpp \
     utils/configdialog.cpp

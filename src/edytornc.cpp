@@ -59,7 +59,6 @@
 #include <QToolTip>
 #include <QWidget>
 
-#include <generalconfig.h>            // GeneralConfig
 #include <kdiff3/kdiff3.h>            // KDiff3App
 #include <kdiff3/common.h>            // getFilters()
 #include <serialportconfigdialog.h>   // SerialPortConfigDialog
@@ -94,9 +93,7 @@ EdytorNc *EdytorNc::instance()
 }
 
 EdytorNc::EdytorNc(Medium *medium)
-    : QMainWindow(nullptr),
-      mGeneralConfig(*medium->generalConfig()),
-      mMWConfig(medium->generalConfig())
+    : QMainWindow(nullptr)
 {
     mMedium = medium;
 
@@ -155,14 +152,6 @@ EdytorNc::EdytorNc(Medium *medium)
     updateMenus();
 
     readSettings();
-
-    if (mGeneralConfig.disableFileChangeMonitor()) {
-        fileChangeMonitor.clear();
-    } else {
-        fileChangeMonitor = new QFileSystemWatcher(this);
-        connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this,
-                SLOT(fileChanged(const QString)));
-    }
 
     createFileBrowseTabs();
 
@@ -317,7 +306,7 @@ MdiChild *EdytorNc::newFileFromTemplate()
             child->newFile();
         }
 
-        defaultMdiWindowProperites.lastDir = mGeneralConfig.lastDir();
+        defaultMdiWindowProperites.lastDir = QDir::currentPath();
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = false;
         //defaultMdiWindowProperites.maximized = false;
@@ -347,7 +336,7 @@ MdiChild *EdytorNc::newFile()
     MdiChild *child = createMdiChild();
     child->newFile();
 
-    defaultMdiWindowProperites.lastDir = mGeneralConfig.lastDir();
+    defaultMdiWindowProperites.lastDir = QDir::currentPath();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.readOnly = false;
     //defaultMdiWindowProperites.maximized = false;
@@ -380,7 +369,7 @@ void EdytorNc::open()
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Select one or more files to open"),
-                            mGeneralConfig.lastDir(),
+                            QDir::currentPath(),
                             *filters, 0);
 
     delete filters;
@@ -393,7 +382,7 @@ void EdytorNc::open()
         existing = findMdiChild(*it);
 
         if ((file.exists()) && (file.isReadable()) && !existing) {
-            mGeneralConfig.lastDir = file.absolutePath();
+            QDir::setCurrent(file.absolutePath());
             fileTreeViewChangeRootDir();
             MdiChild *child = createMdiChild();
 
@@ -461,7 +450,7 @@ void EdytorNc::openExample()
         existing = findMdiChild(*it);
 
         if ((file.exists()) && (file.isReadable()) && !existing) {
-            mGeneralConfig.lastDir = file.absolutePath();
+            QDir::setCurrent(file.absolutePath());
             fileTreeViewChangeRootDir();
             MdiChild *child = createMdiChild();
 
@@ -505,7 +494,7 @@ void EdytorNc::openFile(const QString fileName)
     QMdiSubWindow *existing = findMdiChild(fileName);
 
     if ((file.exists()) && (file.isReadable()) && !existing) {
-        mGeneralConfig.lastDir = file.absolutePath();
+        QDir::setCurrent(file.absolutePath());
         fileTreeViewChangeRootDir();
         MdiChild *child = createMdiChild();
 
@@ -998,7 +987,7 @@ void EdytorNc::doDiffL()
         }
 
         if (fileName.isEmpty()) {
-            fileName = mGeneralConfig.lastDir();
+            fileName = QDir::currentPath();
         }
 
         //        diffApp->close();
@@ -1028,7 +1017,7 @@ void EdytorNc::doDiffR()
         }
 
         if (fileName.isEmpty()) {
-            fileName = mGeneralConfig.lastDir();
+            fileName = QDir::currentPath();
         }
 
         //        diffApp->close();
@@ -1127,7 +1116,7 @@ void EdytorNc::doDiff()
         }
 
         if (fileName.isEmpty()) {
-            fileName = mGeneralConfig.lastDir();
+            fileName = QDir::currentPath();
         }
 
         //        diffApp->close();
@@ -2188,8 +2177,15 @@ void EdytorNc::readSettings()
 {
     QSettings &settings = *Medium::instance().settings();
 
-    setGeometry(QRect(mMWConfig.pos(), mMWConfig.size()));
-    setWindowState(mMWConfig.maximized() ? Qt::WindowMaximized : Qt::WindowNoState);
+    settings.beginGroup("mainwindow");
+    mMWConfig.pos = settings.value("pos", QPoint(0, 0)).toPoint();
+    mMWConfig.size = settings.value("size", QSize(400, 240)).toSize();
+    bool maximized = settings.value("maximized", false).toBool();
+    QByteArray state = settings.value("state", QByteArray()).toByteArray();
+    settings.endGroup();
+
+    setGeometry(QRect(mMWConfig.pos, mMWConfig.size));
+    setWindowState(maximized ? Qt::WindowMaximized : Qt::WindowNoState);
 
     if (settings.value("SerialToolbarShown", false).toBool()) {
         createSerialToolBar();
@@ -2200,14 +2196,27 @@ void EdytorNc::readSettings()
         createFindToolBar();
     }
 
-    restoreState(mMWConfig.state());
+    restoreState(state);
+
+    defaultMdiWindowProperites.disableFileChangeMonitor = settings.value("DisableFileChangeMonitor",
+            false).toBool();
+
+    if (defaultMdiWindowProperites.disableFileChangeMonitor) {
+        fileChangeMonitor.clear();
+    } else {
+        fileChangeMonitor = new QFileSystemWatcher(this);
+        connect(fileChangeMonitor, SIGNAL(fileChanged(const QString)), this,
+                SLOT(fileChanged(const QString)));
+    }
+
+    QDir::setCurrent(settings.value("LastDir",  QDir::homePath()).toString());
 
     defaultMdiWindowProperites.extensions = settings.value("Extensions",
                                             (QStringList() << "*.nc" <<  "*.cnc")).toStringList();
     defaultMdiWindowProperites.saveExtension = settings.value("DefaultSaveExtension",
             "*.nc").toString();
     defaultMdiWindowProperites.saveDirectory = settings.value("DefaultSaveDirectory",
-            "").toString();
+            QDir::homePath()).toString();
 
     defaultMdiWindowProperites.dotAdr = settings.value("DotAddress", "XYZB").toString();
     defaultMdiWindowProperites.dotAftrerCount = settings.value("DotAfterCount", 1000).toInt();
@@ -2339,8 +2348,14 @@ void EdytorNc::writeSettings()
 {
     QSettings &settings = *Medium::instance().settings();
 
-    mMWConfig.maximized = isMaximized();
-    mMWConfig.state = saveState();
+    settings.beginGroup("mainwindow");
+    settings.setValue("pos", mMWConfig.pos);
+    settings.setValue("size", mMWConfig.size);
+    settings.setValue("maximized", isMaximized());
+    settings.setValue("state", saveState());
+    settings.endGroup();
+
+    settings.setValue("LastDir", QDir::currentPath());
 
     settings.setValue("Extensions", defaultMdiWindowProperites.extensions);
     settings.setValue("DefaultSaveExtension", defaultMdiWindowProperites.saveExtension);
@@ -2369,6 +2384,8 @@ void EdytorNc::writeSettings()
     settings.setValue("ViewerMode", defaultMdiWindowProperites.defaultReadOnly);
     settings.setValue("DefaultHighlightMode", defaultMdiWindowProperites.defaultHighlightMode);
     settings.setValue("StartEmpty", defaultMdiWindowProperites.startEmpty);
+    settings.setValue("DisableFileChangeMonitor",
+                      defaultMdiWindowProperites.disableFileChangeMonitor);
 
     settings.setValue("GuessFileNameByProgNum", defaultMdiWindowProperites.guessFileNameByProgNum);
     settings.setValue("ChangeDateInComment", defaultMdiWindowProperites.changeDateInComment);
@@ -3165,7 +3182,7 @@ void EdytorNc::projectAdd()
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Add files to project"),
-                            mGeneralConfig.lastDir(),
+                            QDir::currentPath(),
                             filters, 0);
 
     QStringList list = files;
@@ -3708,7 +3725,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
             path = path.remove(QFileInfo(path).fileName());
         }
     } else {
-        path = mGeneralConfig.lastDir();
+        path = QDir::currentPath();
     }
 
     if (path.isEmpty()) {
@@ -3973,7 +3990,7 @@ void EdytorNc::loadSession(QString name)
 
     for (int i = 0; i < max; ++i) {
         settings.setArrayIndex(i);
-        defaultMdiWindowProperites.lastDir = mGeneralConfig.lastDir();
+        defaultMdiWindowProperites.lastDir = QDir::currentPath();
 
         defaultMdiWindowProperites.fileName = settings.value("OpenedFile").toString();
 

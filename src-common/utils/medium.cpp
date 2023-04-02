@@ -36,7 +36,6 @@
 #include <QTranslator>
 
 #include "utils/medium.h"  // Medium QObject
-#include "generalconfig.h" // GeneralConfig
 
 
 const QString Medium::SLASH = QLatin1String("/");
@@ -71,8 +70,6 @@ Medium::Medium(QObject *parent) :
     QString settingFile = mSettingsDir;
     settingFile.append(SLASH).append(APP_NAME).append(".ini");
     mSettings = new QSettings(settingFile, QSettings::IniFormat);
-    mGeneralConfig = new GeneralConfig(mSettings);
-    mGeneralConfig->sync();
 
     updateTranslation();
 }
@@ -237,20 +234,10 @@ QList<QLocale> Medium::findTranslation(bool skipQtDir)
     return localeList;
 }
 
-QLocale Medium::uiLocale()
-{
-    return mGeneralConfig->localeUI();
-}
-
-void Medium::setUiLocale(const QLocale &locale)
-{
-    mGeneralConfig->localeUI = locale;
-}
-
 void Medium::updateTranslation()
 {
     QCoreApplication *app = QCoreApplication::instance();
-    QLocale locale = uiLocale();
+    QLocale locale= QLocale();
 
     foreach (QTranslator *trans, mTranslators) {
         app->removeTranslator(trans);

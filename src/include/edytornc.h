@@ -34,7 +34,6 @@
 
 #include <commapp.h>      // CommApp
 #include <commoninc.h>
-#include <utils/config.h> // Config
 
 #include "ui_edytornc.h"
 
@@ -63,7 +62,6 @@ class QToolButton;
 class QWidget;
 
 class FindInFiles;
-class GeneralConfig;
 class KDiff3App;
 class MdiChild;
 class Medium;
@@ -88,15 +86,9 @@ protected:
 
     Medium *mMedium;
 
-    GeneralConfig &mGeneralConfig;
-
-    struct MWConfig : Config {
-        MWConfig(Config *config) : Config(config, "mainwindow") {}
-
-        CfgQPoint       pos {this, "pos", QPoint(0, 0), false};
-        CfgQSize        size {this, "size", QSize(400, 240), false};
-        Cfgbool         maximized {this, "maximized", false, false};
-        CfgQByteArray   state {this, "state", QByteArray(), false};
+    struct MWConfig {
+        QPoint pos;
+        QSize size;
     } mMWConfig;
 
 public:

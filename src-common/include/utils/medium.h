@@ -32,8 +32,6 @@ class QLocale;
 class QTranslator;
 class QSettings;
 
-class GeneralConfig;
-
 
 /**
  * @brief The Medium class provides various information about application environment.
@@ -83,8 +81,6 @@ public:
     void removeTranslationUnit(const QString &unit);
 
     QList<QLocale> findTranslation(bool skipQtDir = true);
-    QLocale uiLocale();
-    void setUiLocale(const QLocale &locale);
 
     void updateTranslation();
 
@@ -96,11 +92,6 @@ public:
     QSettings *settings()
     {
         return mSettings;
-    }
-
-    GeneralConfig *generalConfig()
-    {
-        return mGeneralConfig;
     }
 
 signals:
@@ -117,7 +108,6 @@ protected:
     QString mSettingsDir;
 
     QSettings *mSettings;
-    GeneralConfig *mGeneralConfig;
 
 private:
     int checkLaunch();
