@@ -1114,14 +1114,6 @@ void EdytorNc::doDiff()
     }
 }
 
-void EdytorNc::doRemoveByRegExp()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->doRemoveTextByRegExp(QStringList() <<
-                                               "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\)\\n)");
-    }
-}
-
 void EdytorNc::doCalc()
 {
     if (!QFile::exists(defaultMdiWindowProperites.calcBinary)) {

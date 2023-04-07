@@ -152,7 +152,6 @@ private slots:
     void replaceAll();
     void selAll();
     void config();
-    void doRemoveByRegExp();
     void readOnly();
     void doCalc();
     void loadFoundedFile(const QString &fileName);
