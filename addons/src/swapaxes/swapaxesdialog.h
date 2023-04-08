@@ -28,19 +28,17 @@
 class QWidget;
 
 namespace Ui {
-// TODO: rename with SwapAxesDialog
-class swapAxesDialog;
+class SwapAxesDialog;
 }
 
 
-// TODO: rename with SwapAxesDialog
-class swapAxesDialog : public QDialog
+class SwapAxesDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit swapAxesDialog(QWidget *parent = 0);
-    ~swapAxesDialog();
+    explicit SwapAxesDialog(QWidget *parent = 0);
+    ~SwapAxesDialog();
 
     double getMinValue();
     double getMaxValue();
@@ -52,7 +50,7 @@ public:
     int exec();
 
 private:
-    Ui::swapAxesDialog *ui;
+    Ui::SwapAxesDialog *ui;
 
 private slots:
     void saveSettings();

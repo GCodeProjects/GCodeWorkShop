@@ -53,9 +53,9 @@
 
 #define EXAMPLE_EXP_COMM   "Lines with: '(comment)" << "Any: (comment)" << "Empty lines:"
 
-cleanUpDialog::cleanUpDialog(QWidget *parent) :
+CleanUpDialog::CleanUpDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::cleanUpDialog)
+    ui(new Ui::CleanUpDialog)
 {
     ui->setupUi(this);
 
@@ -154,24 +154,24 @@ cleanUpDialog::cleanUpDialog(QWidget *parent) :
     ui->tableWidget->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
-cleanUpDialog::~cleanUpDialog()
+CleanUpDialog::~CleanUpDialog()
 {
     delete ui;
 }
 
-void cleanUpDialog::setText(QString text)
+void CleanUpDialog::setText(QString text)
 {
     ui->textEdit->setPlainText(text);
 }
 
-void cleanUpDialog::cellChangedSlot(int row, int col)
+void CleanUpDialog::cellChangedSlot(int row, int col)
 {
     if (col == 1) {
         highlightText(row, col);
     }
 }
 
-void cleanUpDialog::newRow()
+void CleanUpDialog::newRow()
 {
     int row = ui->tableWidget->rowCount();
 
@@ -210,7 +210,7 @@ void cleanUpDialog::newRow()
     ui->tableWidget->setItem(row, 2, enableItem);
 }
 
-void cleanUpDialog::highlightText(int row, int col)
+void CleanUpDialog::highlightText(int row, int col)
 {
     Q_UNUSED(col);
     QTableWidgetItem *item = ui->tableWidget->item(row, 1);
@@ -228,12 +228,12 @@ void cleanUpDialog::highlightText(int row, int col)
     newRow();
 }
 
-void cleanUpDialog::closeButtonClicked()
+void CleanUpDialog::closeButtonClicked()
 {
     reject();
 }
 
-int cleanUpDialog::exec(QStringList selList, QString text)
+int CleanUpDialog::exec(QStringList selList, QString text)
 {
     ui->textEdit->setPlainText(text);
 
@@ -252,7 +252,7 @@ int cleanUpDialog::exec(QStringList selList, QString text)
     return QDialog::exec();
 }
 
-void cleanUpDialog::okButtonClicked()
+void CleanUpDialog::okButtonClicked()
 {
     expressions.clear();
     expressionsComment.clear();
@@ -276,7 +276,7 @@ void cleanUpDialog::okButtonClicked()
     accept();
 }
 
-QStringList cleanUpDialog::getSelectedExpressions()
+QStringList CleanUpDialog::getSelectedExpressions()
 {
     selectedExpressions.clear();
 
@@ -289,7 +289,7 @@ QStringList cleanUpDialog::getSelectedExpressions()
     return selectedExpressions;
 }
 
-void cleanUpDialog::highlightFindText(QRegularExpression regex)
+void CleanUpDialog::highlightFindText(QRegularExpression regex)
 {
     QTextCursor firstFoundCursor;
 
@@ -330,13 +330,13 @@ void cleanUpDialog::highlightFindText(QRegularExpression regex)
     ui->textEdit->centerCursor();
 }
 
-void cleanUpDialog::contextMenuReq(const QPoint &pos)
+void CleanUpDialog::contextMenuReq(const QPoint &pos)
 {
     Q_UNUSED(pos);
     contextMenu->popup(QCursor::pos());
 }
 
-void cleanUpDialog::removeRow()
+void CleanUpDialog::removeRow()
 {
     int row = ui->tableWidget->currentRow();
     ui->tableWidget->removeRow(row);

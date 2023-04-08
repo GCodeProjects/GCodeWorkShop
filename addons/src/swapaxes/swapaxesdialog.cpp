@@ -37,9 +37,9 @@
 #include "ui_swapaxesdialog.h"  // for Ui::SwapAxesDialog
 
 
-swapAxesDialog::swapAxesDialog(QWidget *parent) :
+SwapAxesDialog::SwapAxesDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::swapAxesDialog)
+    ui(new Ui::SwapAxesDialog)
 {
     ui->setupUi(this);
 
@@ -92,12 +92,12 @@ swapAxesDialog::swapAxesDialog(QWidget *parent) :
     connect(this, SIGNAL(accepted()), this, SLOT(saveSettings()));
 }
 
-swapAxesDialog::~swapAxesDialog()
+SwapAxesDialog::~SwapAxesDialog()
 {
     delete ui;
 }
 
-void swapAxesDialog::saveSettings()
+void SwapAxesDialog::saveSettings()
 {
 
     QSettings &settings = *Medium::instance().settings();
@@ -148,24 +148,24 @@ void swapAxesDialog::saveSettings()
     settings.endGroup();
 }
 
-void swapAxesDialog::betweenCheckBoxClicked(bool checked)
+void SwapAxesDialog::betweenCheckBoxClicked(bool checked)
 {
     ui->minDoubleSpinBox->setEnabled(checked);
     ui->maxDoubleSpinBox->setEnabled(checked);
 }
 
-void swapAxesDialog::precisionSpinBoxChanded(int val)
+void SwapAxesDialog::precisionSpinBoxChanded(int val)
 {
     Q_UNUSED(val);
 }
 
-void swapAxesDialog::modifyCheckBoxClicked(bool checked)
+void SwapAxesDialog::modifyCheckBoxClicked(bool checked)
 {
     ui->operatorComboBox->setEnabled(checked);
     ui->modiferDoubleSpinBox->setEnabled(checked);
 }
 
-double swapAxesDialog::getMinValue()
+double SwapAxesDialog::getMinValue()
 {
     double val = -999999;
 
@@ -176,7 +176,7 @@ double swapAxesDialog::getMinValue()
     return val;
 }
 
-double swapAxesDialog::getMaxValue()
+double SwapAxesDialog::getMaxValue()
 {
     double val = -999999;
 
@@ -187,7 +187,7 @@ double swapAxesDialog::getMaxValue()
     return val;
 }
 
-double swapAxesDialog::getModiferValue()
+double SwapAxesDialog::getModiferValue()
 {
     double val = 0;
 
@@ -198,7 +198,7 @@ double swapAxesDialog::getModiferValue()
     return val;
 }
 
-int swapAxesDialog::getPrecision()
+int SwapAxesDialog::getPrecision()
 {
     int val = 0;
 
@@ -207,7 +207,7 @@ int swapAxesDialog::getPrecision()
     return val;
 }
 
-int swapAxesDialog::getOperator()
+int SwapAxesDialog::getOperator()
 {
     int val = -1;
 
@@ -218,17 +218,17 @@ int swapAxesDialog::getOperator()
     return val;
 }
 
-QString swapAxesDialog::getFirstAxis()
+QString SwapAxesDialog::getFirstAxis()
 {
     return ui->fromComboBox->currentText();
 }
 
-QString swapAxesDialog::getSecondAxis()
+QString SwapAxesDialog::getSecondAxis()
 {
     return ui->toComboBox->currentText();
 }
 
-int swapAxesDialog::exec()
+int SwapAxesDialog::exec()
 {
     return QDialog::exec();
 }

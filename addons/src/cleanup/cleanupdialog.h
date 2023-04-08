@@ -34,26 +34,24 @@ class QRegularExpression;
 class QWidget;
 
 namespace Ui {
-// TODO: rename with CleanUpDialog
-class cleanUpDialog;
+class CleanUpDialog;
 }
 
 
-// TODO: rename with CleanUpDialog
-class cleanUpDialog : public QDialog
+class CleanUpDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit cleanUpDialog(QWidget *parent = 0);
-    ~cleanUpDialog();
+    explicit CleanUpDialog(QWidget *parent = 0);
+    ~CleanUpDialog();
 
     void setText(QString text);
     QStringList getSelectedExpressions();
     int exec(QStringList selList, QString text);
 
 private:
-    Ui::cleanUpDialog *ui;
+    Ui::CleanUpDialog *ui;
 
     QList<QTextEdit::ExtraSelection> extraSelections;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
