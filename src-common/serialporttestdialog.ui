@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TransmissionDialog</class>
- <widget class="QDialog" name="TransmissionDialog">
+ <class>SerialPortTestDialog</class>
+ <widget class="QDialog" name="SerialPortTestDialog">
   <property name="geometry">
    <rect>
     <x>0</x>

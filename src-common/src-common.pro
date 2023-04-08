@@ -13,20 +13,20 @@ INCLUDEPATH += include
 #EdytorNC common
 
 SOURCES += \
-    serialtransmission.cpp \
+    serialporttestdialog.cpp \
     serialtransmissiondialog.cpp \
     serialportconfigdialog.cpp
 
 HEADERS += \
     commoninc.h \
     serialportsettings.h \
-    serialtransmission.h \
+    serialporttestdialog.h \
     serialtransmissiondialog.h \
     serialportconfigdialog.h \
     serialportsettings.h
 
 FORMS += \
-    transmissiondialog.ui \
+    serialporttestdialog.ui \
     serialtransmissiondialog.ui \
     serialportconfigdialog.ui
 

@@ -62,7 +62,7 @@
 #include <kdiff3/kdiff3.h>            // KDiff3App
 #include <kdiff3/common.h>            // getFilters()
 #include <serialportconfigdialog.h>   // SerialPortConfigDialog
-#include <serialtransmission.h>       // TransmissionDialog
+#include <serialporttestdialog.h>     // SerialPortTestDialog
 #include <serialtransmissiondialog.h> // SerialTransmissionDialog
 #include <utils/medium.h>             // Medium
 
@@ -4158,7 +4158,7 @@ void EdytorNc::loadSerialConfignames()
 
 void EdytorNc::serialConfigTest()
 {
-    TransmissionDialog *trDialog = new TransmissionDialog(this);
+    SerialPortTestDialog *trDialog = new SerialPortTestDialog(this);
 
     trDialog->show();
 }

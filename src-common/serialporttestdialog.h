@@ -29,20 +29,20 @@
 #include <Qt>      // Qt::WindowFlags
 #include <QWidget>
 
-#include "serialportsettings.h"    // SerialPortSettings
-#include "ui_transmissiondialog.h"
+#include "serialportsettings.h"      // SerialPortSettings
+#include "ui_serialporttestdialog.h"
 
 class QSerialPort;
 class QTimer;
 
 
-class TransmissionDialog : public QDialog, private Ui::TransmissionDialog
+class SerialPortTestDialog : public QDialog, private Ui::SerialPortTestDialog
 {
     Q_OBJECT
 
 public:
-    TransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-    ~TransmissionDialog();
+    SerialPortTestDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ~SerialPortTestDialog();
 
 private slots:
     void closeButtonClicked();

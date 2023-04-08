@@ -36,11 +36,11 @@
 
 #include <utils/medium.h> // Medium
 
-#include "serialtransmission.h"     // SerialPortSettings QDialog QObject
+#include "serialporttestdialog.h"   // SerialPortTestDialog QDialog QObject
 #include "serialportconfigdialog.h" // SerialPortConfigDialog
 
 
-TransmissionDialog::TransmissionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SerialPortTestDialog::SerialPortTestDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
     setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
@@ -76,25 +76,25 @@ TransmissionDialog::TransmissionDialog(QWidget *parent, Qt::WindowFlags f) : QDi
             SLOT(hexTextEditScroll(int)));
 }
 
-TransmissionDialog::~TransmissionDialog()
+SerialPortTestDialog::~SerialPortTestDialog()
 {
 }
 
-void TransmissionDialog::textEditScroll(int pos)
+void SerialPortTestDialog::textEditScroll(int pos)
 {
     Q_UNUSED(pos);
     hexTextEdit->verticalScrollBar()->setSliderPosition(
         textEdit->verticalScrollBar()->sliderPosition());
 }
 
-void TransmissionDialog::hexTextEditScroll(int pos)
+void SerialPortTestDialog::hexTextEditScroll(int pos)
 {
     Q_UNUSED(pos);
     textEdit->verticalScrollBar()->setSliderPosition(
         hexTextEdit->verticalScrollBar()->sliderPosition());
 }
 
-void TransmissionDialog::sendTextEditChanged()
+void SerialPortTestDialog::sendTextEditChanged()
 {
     QString tx, ty;
     int i;
@@ -131,7 +131,7 @@ void TransmissionDialog::sendTextEditChanged()
     hexTextEdit->ensureCursorVisible();
 }
 
-void TransmissionDialog::closeButtonClicked()
+void SerialPortTestDialog::closeButtonClicked()
 {
     stop = true;
     qApp->processEvents();
@@ -144,14 +144,14 @@ void TransmissionDialog::closeButtonClicked()
     close();
 }
 
-void TransmissionDialog::clearButtonClicked()
+void SerialPortTestDialog::clearButtonClicked()
 {
     textEdit->clear();
     hexTextEdit->clear();
     sendLineEdit->clear();
 }
 
-void TransmissionDialog::connectButtonToggled(bool tg)
+void SerialPortTestDialog::connectButtonToggled(bool tg)
 {
     if (tg) {
 
@@ -241,35 +241,35 @@ void TransmissionDialog::connectButtonToggled(bool tg)
     }
 }
 
-void TransmissionDialog::setXonButtonClicked()
+void SerialPortTestDialog::setXonButtonClicked()
 {
     if (comPort != nullptr && comPort->isOpen()) {
         comPort->putChar(portSettings.Xon);
     }
 }
 
-void TransmissionDialog::setXoffButtonClicked()
+void SerialPortTestDialog::setXoffButtonClicked()
 {
     if (comPort != nullptr && comPort->isOpen()) {
         comPort->putChar(portSettings.Xoff);
     }
 }
 
-void TransmissionDialog::setDtrButtonClicked()
+void SerialPortTestDialog::setDtrButtonClicked()
 {
     if (comPort != nullptr && comPort->isOpen()) {
         comPort->setDataTerminalReady(setDtrButton->isChecked());
     }
 }
 
-void TransmissionDialog::setRtsButtonClicked()
+void SerialPortTestDialog::setRtsButtonClicked()
 {
     if (comPort != nullptr && comPort->isOpen()) {
         comPort->setRequestToSend(setRtsButton->isChecked());
     }
 }
 
-void TransmissionDialog::updateLeds()
+void SerialPortTestDialog::updateLeds()
 {
     QSerialPort::PinoutSignals status;
     bool ok;
@@ -345,7 +345,7 @@ void TransmissionDialog::updateLeds()
     comPort->close();
 }
 
-void TransmissionDialog::configButtonClicked()
+void SerialPortTestDialog::configButtonClicked()
 {
     SerialPortConfigDialog *serialConfigDialog = new SerialPortConfigDialog(this,
             configBox->currentText());
@@ -355,7 +355,7 @@ void TransmissionDialog::configButtonClicked()
     }
 }
 
-void TransmissionDialog::changeSettings()
+void SerialPortTestDialog::changeSettings()
 {
     QString port;
     bool ok;
@@ -395,7 +395,7 @@ void TransmissionDialog::changeSettings()
     settings.endGroup();
 }
 
-void TransmissionDialog::loadSerialConfignames()
+void SerialPortTestDialog::loadSerialConfignames()
 {
     int id;
     QStringList list;
@@ -415,7 +415,7 @@ void TransmissionDialog::loadSerialConfignames()
     settings.endGroup();
 }
 
-void TransmissionDialog::showError(int error)
+void SerialPortTestDialog::showError(int error)
 {
     switch (error) {
     case QSerialPort::NoError:
@@ -467,7 +467,7 @@ void TransmissionDialog::showError(int error)
     }
 }
 
-void TransmissionDialog::sendText(QString tx)
+void SerialPortTestDialog::sendText(QString tx)
 {
     int i;
     bool xoffReceived;
@@ -551,7 +551,7 @@ void TransmissionDialog::sendText(QString tx)
     }
 }
 
-void TransmissionDialog::lineDelaySlot()
+void SerialPortTestDialog::lineDelaySlot()
 {
     readyCont = true;
 }
