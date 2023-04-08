@@ -33,12 +33,10 @@ class QPoint;
 class QRegularExpression;
 class QWidget;
 
-namespace Ui {
-class CleanUpDialog;
-}
+#include "ui_cleanupdialog.h"   // for Ui::CleanUpDialog
 
 
-class CleanUpDialog : public QDialog
+class CleanUpDialog : public QDialog, private Ui::CleanUpDialog
 {
     Q_OBJECT
 
@@ -51,8 +49,6 @@ public:
     int exec(QStringList selList, QString text);
 
 private:
-    Ui::CleanUpDialog *ui;
-
     QList<QTextEdit::ExtraSelection> extraSelections;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;

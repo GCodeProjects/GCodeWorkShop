@@ -46,8 +46,6 @@
 
 #include "cleanupdialog.h"
 
-#include "ui_cleanupdialog.h"   // for Ui::CleanUpDialog
-
 
 #define EXAMPLE_EXP        "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))$" << "(\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))" << "[\n]{2,}"
 
@@ -55,36 +53,36 @@
 
 CleanUpDialog::CleanUpDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::CleanUpDialog)
+    Ui::CleanUpDialog()
 {
-    ui->setupUi(this);
+    setupUi(this);
 
     //    QAction *copyAct = new QAction(QIcon(":/images/editcopy.png"), tr("&Copy row"), this);
     //    copyAct->setShortcut(QKeySequence::Copy);
     //    copyAct->setStatusTip(tr("Copy the current selection's contents to the "
     //                              "clipboard"));
     //    connect(copyAct, SIGNAL(triggered()), this, SLOT(copySelection()));
-    //    ui->tableWidget->addAction(copyAct);
+    //    tableWidget->addAction(copyAct);
 
     //    QAction *pasteAct = new QAction(QIcon(":/images/editpaste.png"), tr("&Paste row"), this);
     //    pasteAct->setShortcut(QKeySequence::Paste);
     //    pasteAct->setStatusTip(tr("Paste the clipboard contents"));
     //    connect(pasteAct, SIGNAL(triggered()), this, SLOT(copySelection()));
-    //    ui->tableWidget->addAction(pasteAct);
+    //    tableWidget->addAction(pasteAct);
 
     //    QAction *cutAct = new QAction(QIcon(":/images/editcut.png"), tr("&Cut row"), this);
     //    cutAct->setShortcut(QKeySequence::Cut);
     //    cutAct->setStatusTip(tr("Cut's the current selection's contents to the "
     //                              "clipboard"));
     //    connect(cutAct, SIGNAL(triggered()), this, SLOT(copySelection()));
-    //    ui->tableWidget->addAction(cutAct);
+    //    tableWidget->addAction(cutAct);
 
     QAction *deleteRowAct = new QAction(QIcon(":/images/removeemptylines.png"), tr("Delete &row"),
                                         this);
     deleteRowAct->setShortcut(QKeySequence::Delete);
     deleteRowAct->setStatusTip(tr("Delete current row"));
     connect(deleteRowAct, SIGNAL(triggered()), this, SLOT(removeRow()));
-    ui->tableWidget->addAction(deleteRowAct);
+    tableWidget->addAction(deleteRowAct);
 
     contextMenu = new QMenu(this);
 
@@ -94,7 +92,7 @@ CleanUpDialog::CleanUpDialog(QWidget *parent) :
     //    contextMenu->addSeparator();
     contextMenu->addAction(deleteRowAct);
 
-    ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     expressions.clear();
     expressionsComment.clear();
@@ -131,37 +129,36 @@ CleanUpDialog::CleanUpDialog(QWidget *parent) :
         enableItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
         enableItem->setCheckState(Qt::Unchecked);
 
-        int row = ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(row);
-        ui->tableWidget->setItem(row, 0, commentItem);
-        ui->tableWidget->setItem(row, 1, valueItem);
-        ui->tableWidget->setItem(row, 2, enableItem);
+        int row = tableWidget->rowCount();
+        tableWidget->insertRow(row);
+        tableWidget->setItem(row, 0, commentItem);
+        tableWidget->setItem(row, 1, valueItem);
+        tableWidget->setItem(row, 2, enableItem);
 
         i++;
     }
 
     newRow();
 
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->resizeColumnsToContents();
+    tableWidget->resizeRowsToContents();
+    tableWidget->resizeColumnsToContents();
 
-    connect(ui->tableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(highlightText(int, int)));
-    connect(ui->tableWidget, SIGNAL(cellChanged(int, int)), this, SLOT(cellChangedSlot(int, int)));
-    connect(ui->cancelPushButton, SIGNAL(clicked()), this, SLOT(closeButtonClicked()));
-    connect(ui->okPushButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
-    connect(ui->tableWidget, SIGNAL(customContextMenuRequested(const QPoint &)), this,
+    connect(tableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(highlightText(int, int)));
+    connect(tableWidget, SIGNAL(cellChanged(int, int)), this, SLOT(cellChangedSlot(int, int)));
+    connect(cancelPushButton, SIGNAL(clicked()), this, SLOT(closeButtonClicked()));
+    connect(okPushButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
+    connect(tableWidget, SIGNAL(customContextMenuRequested(const QPoint &)), this,
             SLOT(contextMenuReq(const QPoint &)));
-    ui->tableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    tableWidget->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
 CleanUpDialog::~CleanUpDialog()
 {
-    delete ui;
 }
 
 void CleanUpDialog::setText(QString text)
 {
-    ui->textEdit->setPlainText(text);
+    textEdit->setPlainText(text);
 }
 
 void CleanUpDialog::cellChangedSlot(int row, int col)
@@ -173,20 +170,20 @@ void CleanUpDialog::cellChangedSlot(int row, int col)
 
 void CleanUpDialog::newRow()
 {
-    int row = ui->tableWidget->rowCount();
+    int row = tableWidget->rowCount();
 
     if (row > 0) {
         row--;
 
-        if (ui->tableWidget->item(row, 0) != nullptr)
-            if (ui->tableWidget->item(row, 0)->text().isNull()
-                    || ui->tableWidget->item(row, 0)->text().isEmpty()) {
+        if (tableWidget->item(row, 0) != nullptr)
+            if (tableWidget->item(row, 0)->text().isNull()
+                    || tableWidget->item(row, 0)->text().isEmpty()) {
                 return;
             }
 
-        if (ui->tableWidget->item(row, 1) != nullptr)
-            if (ui->tableWidget->item(row, 1)->text().isNull()
-                    || ui->tableWidget->item(row, 1)->text().isEmpty()) {
+        if (tableWidget->item(row, 1) != nullptr)
+            if (tableWidget->item(row, 1)->text().isNull()
+                    || tableWidget->item(row, 1)->text().isEmpty()) {
                 return;
             }
     }
@@ -204,16 +201,16 @@ void CleanUpDialog::newRow()
     enableItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
     enableItem->setCheckState(Qt::Unchecked);
 
-    ui->tableWidget->insertRow(row);
-    ui->tableWidget->setItem(row, 0, commentItem);
-    ui->tableWidget->setItem(row, 1, valueItem);
-    ui->tableWidget->setItem(row, 2, enableItem);
+    tableWidget->insertRow(row);
+    tableWidget->setItem(row, 0, commentItem);
+    tableWidget->setItem(row, 1, valueItem);
+    tableWidget->setItem(row, 2, enableItem);
 }
 
 void CleanUpDialog::highlightText(int row, int col)
 {
     Q_UNUSED(col);
-    QTableWidgetItem *item = ui->tableWidget->item(row, 1);
+    QTableWidgetItem *item = tableWidget->item(row, 1);
 
     if (item != nullptr) {
         if (!item->text().isEmpty()) {
@@ -235,16 +232,16 @@ void CleanUpDialog::closeButtonClicked()
 
 int CleanUpDialog::exec(QStringList selList, QString text)
 {
-    ui->textEdit->setPlainText(text);
+    textEdit->setPlainText(text);
 
     foreach (QString exp, selList) {
-        for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
+        for (int i = 0; i < tableWidget->rowCount(); i++) {
             if (exp.isEmpty()) {
                 continue;
             }
 
-            if (ui->tableWidget->item(i, 1)->text() == exp) {
-                ui->tableWidget->item(i, 2)->setCheckState(Qt::Checked);
+            if (tableWidget->item(i, 1)->text() == exp) {
+                tableWidget->item(i, 2)->setCheckState(Qt::Checked);
             }
         }
     }
@@ -257,11 +254,11 @@ void CleanUpDialog::okButtonClicked()
     expressions.clear();
     expressionsComment.clear();
 
-    for (int i = 0; i < (ui->tableWidget->rowCount()); i++) {
-        if (!ui->tableWidget->item(i, 0)->text().isEmpty()
-                && !ui->tableWidget->item(i, 1)->text().isEmpty()) {
-            expressions.append(ui->tableWidget->item(i, 1)->text());
-            expressionsComment.append(ui->tableWidget->item(i, 0)->text());
+    for (int i = 0; i < (tableWidget->rowCount()); i++) {
+        if (!tableWidget->item(i, 0)->text().isEmpty()
+                && !tableWidget->item(i, 1)->text().isEmpty()) {
+            expressions.append(tableWidget->item(i, 1)->text());
+            expressionsComment.append(tableWidget->item(i, 0)->text());
         }
     }
 
@@ -280,9 +277,9 @@ QStringList CleanUpDialog::getSelectedExpressions()
 {
     selectedExpressions.clear();
 
-    for (int i = 0; i < ui->tableWidget->rowCount(); i++) {
-        if (ui->tableWidget->item(i, 2)->checkState() == Qt::Checked) {
-            selectedExpressions.append(ui->tableWidget->item(i, 1)->text());
+    for (int i = 0; i < tableWidget->rowCount(); i++) {
+        if (tableWidget->item(i, 2)->checkState() == Qt::Checked) {
+            selectedExpressions.append(tableWidget->item(i, 1)->text());
         }
     }
 
@@ -297,8 +294,8 @@ void CleanUpDialog::highlightFindText(QRegularExpression regex)
     QColor lineColor = QColor(Qt::red).lighter(155);
     selection.format.setBackground(lineColor);
 
-    QTextDocument *doc = ui->textEdit->document();
-    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextDocument *doc = textEdit->document();
+    QTextCursor cursor = textEdit->textCursor();
 
     cursor.setPosition(0);
 
@@ -325,9 +322,9 @@ void CleanUpDialog::highlightFindText(QRegularExpression regex)
     } while (!cursor.isNull() && !cursor.atEnd());
 
     firstFoundCursor.movePosition(QTextCursor::StartOfBlock);
-    ui->textEdit->setExtraSelections(findTextExtraSelections);
-    ui->textEdit->setTextCursor(firstFoundCursor);
-    ui->textEdit->centerCursor();
+    textEdit->setExtraSelections(findTextExtraSelections);
+    textEdit->setTextCursor(firstFoundCursor);
+    textEdit->centerCursor();
 }
 
 void CleanUpDialog::contextMenuReq(const QPoint &pos)
@@ -338,6 +335,6 @@ void CleanUpDialog::contextMenuReq(const QPoint &pos)
 
 void CleanUpDialog::removeRow()
 {
-    int row = ui->tableWidget->currentRow();
-    ui->tableWidget->removeRow(row);
+    int row = tableWidget->currentRow();
+    tableWidget->removeRow(row);
 }

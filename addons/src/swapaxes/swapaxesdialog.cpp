@@ -34,59 +34,56 @@
 
 #include "swapaxesdialog.h"
 
-#include "ui_swapaxesdialog.h"  // for Ui::SwapAxesDialog
-
-
 SwapAxesDialog::SwapAxesDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SwapAxesDialog)
+    Ui::SwapAxesDialog()
 {
-    ui->setupUi(this);
+    setupUi(this);
 
     QSettings &settings = *Medium::instance().settings();
 
     settings.beginGroup("SwapAxisDialog");
 
-    ui->saveAtCloseCheckBox->setChecked(settings.value("SaveSettings", false).toBool());
+    saveAtCloseCheckBox->setChecked(settings.value("SaveSettings", false).toBool());
 
-    if (ui->saveAtCloseCheckBox->isChecked()) {
-        ui->betweenCheckBox->setChecked(settings.value("BeetwenEnabled", false).toBool());
-        ui->modifyCheckBox->setChecked(settings.value("ModifyEnabled", false).toBool());
+    if (saveAtCloseCheckBox->isChecked()) {
+        betweenCheckBox->setChecked(settings.value("BeetwenEnabled", false).toBool());
+        modifyCheckBox->setChecked(settings.value("ModifyEnabled", false).toBool());
 
         bool ok;
         QStringList list;
 
         list = settings.value("FromComboValues", (QStringList() << "X" << "Y" << "Z")).toStringList();
-        ui->fromComboBox->clear();
-        ui->fromComboBox->addItems(list);
-        ui->fromComboBox->setCurrentIndex(ui->fromComboBox->findText(settings.value("FromComboIndex",
-                                          "X").toString()));
+        fromComboBox->clear();
+        fromComboBox->addItems(list);
+        fromComboBox->setCurrentIndex(fromComboBox->findText(settings.value("FromComboIndex",
+                                      "X").toString()));
 
         list = settings.value("ToComboValues", (QStringList() << "X" << "Y" << "Z")).toStringList();
-        ui->toComboBox->clear();
-        ui->toComboBox->addItems(list);
-        ui->toComboBox->setCurrentIndex(ui->toComboBox->findText(settings.value("ToComboIndex",
-                                        "Y").toString()));
+        toComboBox->clear();
+        toComboBox->addItems(list);
+        toComboBox->setCurrentIndex(toComboBox->findText(settings.value("ToComboIndex",
+                                    "Y").toString()));
 
-        ui->minDoubleSpinBox->setValue(settings.value("Min", 0).toDouble(&ok));
-        ui->maxDoubleSpinBox->setValue(settings.value("Max", 0).toDouble(&ok));
-        ui->modiferDoubleSpinBox->setValue(settings.value("Modifer", 0).toDouble(&ok));
+        minDoubleSpinBox->setValue(settings.value("Min", 0).toDouble(&ok));
+        maxDoubleSpinBox->setValue(settings.value("Max", 0).toDouble(&ok));
+        modiferDoubleSpinBox->setValue(settings.value("Modifer", 0).toDouble(&ok));
 
-        ui->operatorComboBox->setCurrentIndex(settings.value("OperatorComboIndex", 0).toInt(&ok));
-        ui->precisionSpinBox->setValue(settings.value("Precision", 3).toInt(&ok));
+        operatorComboBox->setCurrentIndex(settings.value("OperatorComboIndex", 0).toInt(&ok));
+        precisionSpinBox->setValue(settings.value("Precision", 3).toInt(&ok));
     }
 
     settings.endGroup();
 
-    betweenCheckBoxClicked(ui->betweenCheckBox->isChecked());
-    modifyCheckBoxClicked(ui->modifyCheckBox->isChecked());
+    betweenCheckBoxClicked(betweenCheckBox->isChecked());
+    modifyCheckBoxClicked(modifyCheckBox->isChecked());
 
-    //ui->fromComboBox->setValidator();
+    //fromComboBox->setValidator();
 
-    connect(ui->betweenCheckBox, SIGNAL(clicked(bool)), this, SLOT(betweenCheckBoxClicked(bool)));
-    connect(ui->modifyCheckBox, SIGNAL(clicked(bool)), this, SLOT(modifyCheckBoxClicked(bool)));
+    connect(betweenCheckBox, SIGNAL(clicked(bool)), this, SLOT(betweenCheckBoxClicked(bool)));
+    connect(modifyCheckBox, SIGNAL(clicked(bool)), this, SLOT(modifyCheckBoxClicked(bool)));
 
-    connect(ui->precisionSpinBox, SIGNAL(valueChanged(int)), this,
+    connect(precisionSpinBox, SIGNAL(valueChanged(int)), this,
             SLOT(precisionSpinBoxChanded(int)));
 
     connect(this, SIGNAL(accepted()), this, SLOT(saveSettings()));
@@ -94,7 +91,6 @@ SwapAxesDialog::SwapAxesDialog(QWidget *parent) :
 
 SwapAxesDialog::~SwapAxesDialog()
 {
-    delete ui;
 }
 
 void SwapAxesDialog::saveSettings()
@@ -104,45 +100,45 @@ void SwapAxesDialog::saveSettings()
 
     settings.beginGroup("SwapAxisDialog");
 
-    settings.setValue("SaveSettings", ui->saveAtCloseCheckBox->isChecked());
+    settings.setValue("SaveSettings", saveAtCloseCheckBox->isChecked());
 
-    if (ui->saveAtCloseCheckBox->isChecked()) {
-        settings.setValue("BeetwenEnabled", ui->betweenCheckBox->isChecked());
-        settings.setValue("ModifyEnabled", ui->modifyCheckBox->isChecked());
+    if (saveAtCloseCheckBox->isChecked()) {
+        settings.setValue("BeetwenEnabled", betweenCheckBox->isChecked());
+        settings.setValue("ModifyEnabled", modifyCheckBox->isChecked());
 
         QStringList list;
 
         list.clear();
-        list.append(ui->fromComboBox->currentText());
+        list.append(fromComboBox->currentText());
 
-        for (int i = 0; i < ui->fromComboBox->count(); i++) {
-            list.append(ui->fromComboBox->itemText(i));
+        for (int i = 0; i < fromComboBox->count(); i++) {
+            list.append(fromComboBox->itemText(i));
         }
 
         list.removeDuplicates();
         list.sort();
         settings.setValue("FromComboValues", list);
-        settings.setValue("FromComboIndex", ui->fromComboBox->currentText());
+        settings.setValue("FromComboIndex", fromComboBox->currentText());
 
         list.clear();
-        list.append(ui->toComboBox->currentText());
+        list.append(toComboBox->currentText());
 
-        for (int i = 0; i < ui->toComboBox->count(); i++) {
-            list.append(ui->toComboBox->itemText(i));
+        for (int i = 0; i < toComboBox->count(); i++) {
+            list.append(toComboBox->itemText(i));
         }
 
         list.removeDuplicates();
         list.sort();
         settings.setValue("ToComboValues", list);
-        settings.setValue("ToComboIndex", ui->toComboBox->currentText());
+        settings.setValue("ToComboIndex", toComboBox->currentText());
 
-        settings.setValue("Min", ui->minDoubleSpinBox->value());
-        settings.setValue("Max", ui->maxDoubleSpinBox->value());
-        settings.setValue("Modifer", ui->modiferDoubleSpinBox->value());
+        settings.setValue("Min", minDoubleSpinBox->value());
+        settings.setValue("Max", maxDoubleSpinBox->value());
+        settings.setValue("Modifer", modiferDoubleSpinBox->value());
 
-        settings.setValue("Precision", ui->precisionSpinBox->value());
+        settings.setValue("Precision", precisionSpinBox->value());
 
-        settings.setValue("OperatorComboIndex", ui->operatorComboBox->currentIndex());
+        settings.setValue("OperatorComboIndex", operatorComboBox->currentIndex());
     }
 
     settings.endGroup();
@@ -150,8 +146,8 @@ void SwapAxesDialog::saveSettings()
 
 void SwapAxesDialog::betweenCheckBoxClicked(bool checked)
 {
-    ui->minDoubleSpinBox->setEnabled(checked);
-    ui->maxDoubleSpinBox->setEnabled(checked);
+    minDoubleSpinBox->setEnabled(checked);
+    maxDoubleSpinBox->setEnabled(checked);
 }
 
 void SwapAxesDialog::precisionSpinBoxChanded(int val)
@@ -161,16 +157,16 @@ void SwapAxesDialog::precisionSpinBoxChanded(int val)
 
 void SwapAxesDialog::modifyCheckBoxClicked(bool checked)
 {
-    ui->operatorComboBox->setEnabled(checked);
-    ui->modiferDoubleSpinBox->setEnabled(checked);
+    operatorComboBox->setEnabled(checked);
+    modiferDoubleSpinBox->setEnabled(checked);
 }
 
 double SwapAxesDialog::getMinValue()
 {
     double val = -999999;
 
-    if (ui->minDoubleSpinBox->isEnabled()) {
-        val = ui->minDoubleSpinBox->value();
+    if (minDoubleSpinBox->isEnabled()) {
+        val = minDoubleSpinBox->value();
     }
 
     return val;
@@ -180,8 +176,8 @@ double SwapAxesDialog::getMaxValue()
 {
     double val = -999999;
 
-    if (ui->maxDoubleSpinBox->isEnabled()) {
-        val = ui->maxDoubleSpinBox->value();
+    if (maxDoubleSpinBox->isEnabled()) {
+        val = maxDoubleSpinBox->value();
     }
 
     return val;
@@ -191,8 +187,8 @@ double SwapAxesDialog::getModiferValue()
 {
     double val = 0;
 
-    if (ui->modiferDoubleSpinBox->isEnabled()) {
-        val = ui->modiferDoubleSpinBox->value();
+    if (modiferDoubleSpinBox->isEnabled()) {
+        val = modiferDoubleSpinBox->value();
     }
 
     return val;
@@ -202,7 +198,7 @@ int SwapAxesDialog::getPrecision()
 {
     int val = 0;
 
-    val = ui->precisionSpinBox->value();
+    val = precisionSpinBox->value();
 
     return val;
 }
@@ -211,8 +207,8 @@ int SwapAxesDialog::getOperator()
 {
     int val = -1;
 
-    if (ui->operatorComboBox->isEnabled()) {
-        val = ui->operatorComboBox->currentIndex();
+    if (operatorComboBox->isEnabled()) {
+        val = operatorComboBox->currentIndex();
     }
 
     return val;
@@ -220,12 +216,12 @@ int SwapAxesDialog::getOperator()
 
 QString SwapAxesDialog::getFirstAxis()
 {
-    return ui->fromComboBox->currentText();
+    return fromComboBox->currentText();
 }
 
 QString SwapAxesDialog::getSecondAxis()
 {
-    return ui->toComboBox->currentText();
+    return toComboBox->currentText();
 }
 
 int SwapAxesDialog::exec()

@@ -27,12 +27,10 @@
 
 class QWidget;
 
-namespace Ui {
-class SwapAxesDialog;
-}
+#include "ui_swapaxesdialog.h"  // for Ui::SwapAxesDialog
 
 
-class SwapAxesDialog : public QDialog
+class SwapAxesDialog : public QDialog, private Ui::SwapAxesDialog
 {
     Q_OBJECT
 
@@ -48,9 +46,6 @@ public:
     QString getFirstAxis();
     QString getSecondAxis();
     int exec();
-
-private:
-    Ui::SwapAxesDialog *ui;
 
 private slots:
     void saveSettings();
