@@ -15,8 +15,7 @@ INCLUDEPATH += include
 SOURCES += \
     serialtransmission.cpp \
     serialtransmissiondialog.cpp \
-    serialportconfigdialog.cpp \
-    serialportcfghelpdialog.cpp
+    serialportconfigdialog.cpp
 
 HEADERS += \
     commoninc.h \
@@ -24,14 +23,12 @@ HEADERS += \
     serialtransmission.h \
     serialtransmissiondialog.h \
     serialportconfigdialog.h \
-    serialportcfghelpdialog.h \
     serialportsettings.h
 
 FORMS += \
     transmissiondialog.ui \
     serialtransmissiondialog.ui \
-    serialportconfigdialog.ui \
-    serialportcfghelpdialog.ui
+    serialportconfigdialog.ui
 
 
 # utils
