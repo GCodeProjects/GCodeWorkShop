@@ -1,48 +1,52 @@
-/***************************************************************************
- *   Copyright (C) 2006-2018 by Artur Kozioł                               *
- *   artkoz78@gmail.com                                                    *
- *                                                                         *
- *   This file is part of EdytorNC.                                        *
- *                                                                         *
- *   EdytorNC is free software; you can redistribute it and/or modify      *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
+/*
+ *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
+ *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *
+ *  This file is part of EdytorNC.
+ *
+ *  EdytorNC is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include <QAbstractItemView>  // QAbstractItemView::NoSelection
-#include <QAction>
-#include <QApplication>
-#include <QColor>
-#include <QIcon>
-#include <QKeySequence>       // QKeySequence::Delete
-#include <QList>
-#include <QMenu>
-#include <QPoint>
-#include <QRegularExpression>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <Qt>                 // Qt::CustomContextMenu
-#include <QTableWidgetItem>
-#include <QTextCursor>
-#include <QTextDocument>
+#include <QAbstractItemView>    // for QAbstractItemView, QAbstractItemView::NoSelection
+#include <QAction>              // for QAction
+#include <QApplication>         // for QApplication
+#include <QColor>               // for QColor
+#include <QCursor>              // for QCursor
+#include <QIcon>                // for QIcon
+#include <QKeySequence>         // for QKeySequence, QKeySequence::Delete
+#include <QList>                // for QList
+#include <QMenu>                // for QMenu
+#include <QPlainTextEdit>       // for QPlainTextEdit
+#include <QPushButton>          // for QPushButton
+#include <QRegularExpression>   // for QRegularExpression
+#include <QSettings>            // for QSettings
+#include <QString>              // for QString, operator==
+#include <QStringList>          // for QStringList
+#include <QTableWidget>         // for QTableWidget
+#include <QTableWidgetItem>     // for QTableWidgetItem
+#include <QTextCharFormat>      // for QTextCharFormat
+#include <QTextCursor>          // for QTextCursor, QTextCursor::StartOfBlock
+#include <QTextDocument>        // for QTextDocument
+#include <QVariant>             // for QVariant
+#include <Qt>                   // for operator|, AlignLeft, AlignVCenter, Checked, ItemIsEnabled, ItemIsUserCheckable
+#include <QtGlobal>             // for QFlags, Q_UNUSED, foreach
 
-#include <utils/medium.h>  // Medium
+#include <utils/medium.h>   // for Medium
 
-#include "cleanupdialog.h" // cleanUpDialog QDialog QObject
+#include "cleanupdialog.h"
 
-#include "ui_cleanupdialog.h"
+#include "ui_cleanupdialog.h"   // for Ui::CleanUpDialog
 
 
 #define EXAMPLE_EXP        "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))$" << "(\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))" << "[\n]{2,}"

@@ -1,3 +1,52 @@
+/*
+ *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
+ *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *
+ *  This file is part of EdytorNC.
+ *
+ *  EdytorNC is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Enable the M_PI constant in MSVC
+// see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
+#define _USE_MATH_DEFINES
+
+#include <cmath> // for round, M_PI
+
+// IWYU pragma: no_forward_declare QValidator
+// IWYU pragma: no_forward_declare QWidget
+#include <QApplication>     // for QApplication
+#include <QChar>            // for operator==, QChar
+#include <QCheckBox>        // for QCheckBox
+#include <QDoubleValidator> // for QDoubleValidator
+#include <QEvent>           // for QEvent, QEvent::KeyPress
+#include <QIntValidator>    // for QIntValidator
+#include <QKeyEvent>        // for QKeyEvent
+#include <QLineEdit>        // for QLineEdit
+#include <QLocale>          // for QLocale
+#include <QPalette>         // for QPalette
+#include <QPushButton>      // for QPushButton
+#include <QSettings>        // for QSettings
+#include <QString>          // for QString
+#include <QValidator>       // for QValidator
+#include <QVariant>         // for QVariant
+#include <QWidget>          // for QWidget
+
+#include <utils/medium.h>   // for Medium
+
+#include "feedsdialog.h"
+
 
 FeedsDialog::FeedsDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {

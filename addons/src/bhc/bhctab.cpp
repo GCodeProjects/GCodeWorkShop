@@ -1,3 +1,55 @@
+/*
+ *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
+ *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *
+ *  This file is part of EdytorNC.
+ *
+ *  EdytorNC is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// IWYU pragma: no_forward_declare QValidator
+#include <QAbstractItemView>    // for QAbstractItemView, QAbstractItemView::NoEditTriggers, QAbstractItemView::Sele...
+#include <QAction>              // for QAction
+#include <QActionGroup>         // for QActionGroup
+#include <QApplication>         // for QApplication
+#include <QChar>                // for operator==, QChar
+#include <QCheckBox>            // for QCheckBox
+#include <QClipboard>           // for QClipboard, QClipboard::Clipboard, QClipboard::Selection
+#include <QCursor>              // for QCursor
+#include <QDoubleValidator>     // for QDoubleValidator
+#include <QEvent>               // for QEvent, QEvent::KeyPress
+#include <QIcon>                // for QIcon
+#include <QIntValidator>        // for QIntValidator
+#include <QKeyEvent>            // for QKeyEvent, QEvent, QEvent::KeyPress
+#include <QKeySequence>         // for QKeySequence, QKeySequence::Copy, QKeySequence::SelectAll
+#include <QLineEdit>            // for QLineEdit
+#include <QLocale>              // for QLocale
+#include <QMenu>                // for QMenu
+#include <QPalette>             // for QPalette
+#include <QSpinBox>             // for QSpinBox
+#include <QString>              // for QString, operator+
+#include <QStringList>          // for QStringList
+#include <QTableWidget>         // for QTableWidget
+#include <QTableWidgetItem>     // for QTableWidgetItem
+#include <QValidator>           // for QValidator
+#include <Qt>                   // for Key_Comma, Key_Period, NoModifier, CustomContextMenu, red
+#include <QtGlobal>             // for Q_UNUSED
+
+#include <utils/removezeros.h>  // Utils::removeZeros()
+
+#include "bhctab.h"
+
 
 BHCTab::BHCTab(QWidget *parent) : QWidget(parent)
 {
@@ -192,7 +244,7 @@ void BHCTab::copySelection()
     }
 
     selText.remove(selText.length() - 1, 1);
-    selText = removeZeros(selText);
+    selText = Utils::removeZeros(selText);
 
     if (addCommentsParaId->isChecked())
         selText.prepend(QString(tr("(DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3)\n"))

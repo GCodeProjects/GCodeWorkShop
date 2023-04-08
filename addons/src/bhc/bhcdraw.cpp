@@ -1,3 +1,49 @@
+/*
+ *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
+ *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *
+ *  This file is part of EdytorNC.
+ *
+ *  EdytorNC is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Enable the M_PI constant in MSVC
+// see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
+#define _USE_MATH_DEFINES
+
+#include <cmath>        // for cos, sin, M_PI
+
+#include <QBrush>       // for QBrush
+#include <QFont>        // for QFont
+#include <QFontMetrics> // for QFontMetrics
+#include <QMouseEvent>  // for QMouseEvent
+#include <QPainter>     // for QPainter
+#include <QPalette>     // for QPalette, QPalette::Shadow
+#include <QPen>         // for QPen
+#include <QPixmap>      // for QPixmap
+#include <QPointF>      // for QPointF
+#include <QRect>        // for QRect
+#include <QString>      // for QString
+#include <Qt>           // for gray, DotLine, SolidLine, DashDotLine, NoBrush
+#include <QtGlobal>     // for qMin, qreal
+
+class QFocusEvent;
+class QMouseEvent;
+class QPaintEvent;
+
+#include "bhcdraw.h"
+
 
 BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {

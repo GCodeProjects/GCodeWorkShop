@@ -20,44 +20,25 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef SETUPDIALOG_H
+#define SETUPDIALOG_H
 
+#include <QColorDialog>
 #include <QDialog>
+#include <QDir>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QFontDialog>
 #include <QObject>
 #include <Qt>      // Qt::WindowFlags
 #include <QWidget>
 
-#include "commoninc.h"
+#include "commoninc.h" // _editor_properites
 
-//TODO: split file by classes
-#include "ui_i2mdialog.h"
-#include "ui_feedsdialog.h"
-#include "ui_renumberdialog.h"
-#include "ui_dotdialog.h"
-#include "ui_triangledialog.h"
-#include "ui_bhctabform.h"
-#include "ui_bhcdialog.h"
-#include "ui_chamferdialog.h"
-#include "ui_i2mprogdialog.h"
 #include "ui_setupdialog.h"
 
 class QAbstractButton;
-class QAbstractItemModel;
-class QAction;
-class QActionGroup;
 class QButtonGroup;
-class QDoubleValidator;
-class QEvent;
-class QFocusEvent;
-class QMenu;
-class QMouseEvent;
-class QObject;
-class QPaintEvent;
-class QPixmap;
-class QPoint;
-class QString;
-class QTabWidget;
 
 
 /**
@@ -89,4 +70,4 @@ private:
     QButtonGroup *colorButtons;
 };
 
-#endif // DIALOGS_H
+#endif // SETUPDIALOG_H

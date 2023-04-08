@@ -72,7 +72,7 @@
 
 #include <commoninc.h>         // _editor_properites
 #include <ui/longjobhelper.h>  // LongJobHelper
-#include <utils/removezeros.h> // removeZeros()
+#include <utils/removezeros.h> // Utils::removeZeros()
 
 #include "basic_interpreter.h" // BasicInterpreter
 #include "highlighter.h"       // Highlighter
@@ -3486,13 +3486,13 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText,
 
             if (replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N"
                     || replacedText == "n") {
-                replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+                replacedText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', 3));
 
                 if (replacedText[replacedText.length() - 1] == '.') {
                     replacedText = replacedText.remove((replacedText.length() - 1), 1);
                 }
             } else {
-                replacedText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', 3));
+                replacedText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', 3));
             }
 
         }
@@ -3680,13 +3680,13 @@ bool MdiChild::swapAxes(QString textToFind, QString replacedText, double min, do
             if (ok) {
                 if (replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N"
                         || replacedText == "n") {
-                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
+                    newText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', prec));
 
                     if (newText[newText.length() - 1] == '.') {
                         newText = newText.remove((newText.length() - 1), 1);
                     }
                 } else {
-                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
+                    newText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', prec));
                 }
             } else {
                 newText = replacedText;
@@ -4025,7 +4025,7 @@ void MdiChild::inLineCalcReturnPressed()
         calcLineEditWordList.removeDuplicates();
 
         int result = processBrc(&text);
-        text = removeZeros(text);
+        text = Utils::removeZeros(text);
 
         if (inLineCalcChar.isLetter()) {
             text.prepend(inLineCalcChar);

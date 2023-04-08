@@ -1,3 +1,54 @@
+/*
+ *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
+ *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *
+ *  This file is part of EdytorNC.
+ *
+ *  EdytorNC is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Enable the M_PI constant in MSVC
+// see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
+#define _USE_MATH_DEFINES
+
+#include <cmath>    // for cos, sin, M_PI
+#include <cstdlib>  // for abs
+
+#include <QCheckBox>        // for QCheckBox
+#include <QColor>           // for QColor
+#include <QLineEdit>        // for QLineEdit
+#include <QLocale>          // for QLocale
+#include <QPushButton>      // for QPushButton
+#include <QSettings>        // for QSettings
+#include <QSpinBox>         // for QSpinBox
+#include <QString>          // for QString
+#include <QTabWidget>       // for QTabWidget
+#include <QTableWidget>     // for QTableWidget
+#include <QTableWidgetItem> // for QTableWidgetItem
+#include <QVBoxLayout>      // for QVBoxLayout
+#include <QVariant>         // for QVariant
+#include <QWidget>          // for QWidget
+#include <Qt>               // for operator|, AlignRight, AlignVCenter
+#include <QtGlobal>         // for qreal, qMax, QFlags
+
+#include <utils/medium.h>       // for Medium
+#include <utils/removezeros.h>  // for Utils::removeZeros
+
+#include "bhcdialog.h"
+#include "bhcdraw.h"    // for BHCDraw
+#include "bhctab.h"     // for BHCTab
+
 
 BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
@@ -309,16 +360,16 @@ void BHCDialog::computeButtonClicked()
             x = xCenter + (dia * cos((M_PI / 180) * ang));
             y = yCenter + (dia * sin((M_PI / 180) * ang));
 
-            QTableWidgetItem *xItem = new QTableWidgetItem(removeZeros(QString("%1").arg(x, 0, 'f', 3)));
+            QTableWidgetItem *xItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(x, 0, 'f', 3)));
             //xItem->setFlags(Qt::ItemIsEnabled);
             xItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-            QTableWidgetItem *yItem = new QTableWidgetItem(removeZeros(QString("%1").arg(y, 0, 'f', 3)));
+            QTableWidgetItem *yItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(y, 0, 'f', 3)));
             yItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
             //yItem->setFlags(Qt::ItemIsEnabled);
 
 
-            QTableWidgetItem *hdr = new QTableWidgetItem(removeZeros(QString("%1 - %2 ").arg(i + 1).arg(ang,
+            QTableWidgetItem *hdr = new QTableWidgetItem(Utils::removeZeros(QString("%1 - %2 ").arg(i + 1).arg(ang,
                     0, 'f', 3)));
             tab->resultTable->setVerticalHeaderItem(i, hdr);
             tab->resultTable->setItem(i, 0, xItem);
