@@ -60,6 +60,7 @@ private:
     void newRow();
 
 private slots:
+    void onCellCliced(int row, int col);
     void highlightText(int row, int col);
     void cellChangedSlot(int row, int col);
     void contextMenuReq(const QPoint &pos);

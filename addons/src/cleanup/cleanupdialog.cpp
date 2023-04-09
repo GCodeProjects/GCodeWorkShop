@@ -77,7 +77,7 @@ CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
 
     newRow();
 
-    connect(tableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(highlightText(int, int)));
+    connect(tableWidget, SIGNAL(cellClicked(int, int)), this, SLOT(onCellCliced(int, int)));
     connect(tableWidget, SIGNAL(cellChanged(int, int)), this, SLOT(cellChangedSlot(int, int)));
     connect(cancelPushButton, SIGNAL(clicked()), this, SLOT(reject()));
     connect(okPushButton, SIGNAL(clicked()), this, SLOT(accept()));
@@ -121,9 +121,9 @@ void CleanUpDialog::newRow()
                     || tableWidget->item(row, 1)->text().isEmpty()) {
                 return;
             }
-    }
 
-    row++;
+        row++;
+    }
 
     QTableWidgetItem *valueItem = new QTableWidgetItem("");
     valueItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -142,6 +142,12 @@ void CleanUpDialog::newRow()
     tableWidget->setItem(row, 2, enableItem);
 }
 
+void CleanUpDialog::onCellCliced(int row, int col)
+{
+    highlightText(row, col);
+    newRow();
+}
+
 void CleanUpDialog::highlightText(int row, int col)
 {
     Q_UNUSED(col);
@@ -156,8 +162,6 @@ void CleanUpDialog::highlightText(int row, int col)
             highlightFindText(QRegularExpression(item->text()));
         }
     }
-
-    newRow();
 }
 
 void CleanUpDialog::highlightFindText(QRegularExpression regex)
