@@ -17,38 +17,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ADDONS_ACTIONS_H
-#define ADDONS_ACTIONS_H
+#ifndef ADDONS_BHC_H
+#define ADDONS_BHC_H
 
-#include <QObject>  // for QObject, Q_OBJECT, slots
-#include <QString>  // for QString
-
-class QAction;
-
+class QSettings;
+class QWidget;
 
 namespace Addons {
-class Actions : public QObject
-{
-    Q_OBJECT
+void doBhc(QWidget *parent, QSettings *settings);
+}
 
-public:
-    explicit Actions(QObject *parent = nullptr);
-
-public slots:
-    void loadTranslations();
-    void loadIcons();
-
-public:
-    // *INDENT-OFF*
-    QAction *bhc() {return m_bhc;}
-    // *INDENT-ON*
-
-protected:
-    QAction *m_bhc;
-
-protected slots:
-    void doBhc();
-};
-} // namespace Addons
-
-#endif // ADDONS_ACTIONS_H
+#endif // ADDONS_BHC_H

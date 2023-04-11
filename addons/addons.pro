@@ -18,3 +18,5 @@ HEADERS += \
 SOURCES += \
     src/addons-actions.cpp \
     src/addons-context.cpp
+
+include(src/bhc/bhc.pri)

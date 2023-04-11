@@ -71,13 +71,12 @@
 #include <utils/medium.h>             // Medium
 #include <utils/splitfile.h>
 
-#include "cleanupdialog.h"
+#include "setupdialog.h"    // SetupDialog
 #include "edytornc.h"       // EdytorNc QObject QMainWindow
 #include "findinf.h"        // FindInFiles
 #include "newfiledialog.h"  // newFileDialog
 #include "mdichild.h"       // MdiChild
 #include "sessiondialog.h"  // sessionDialog
-#include "swapaxesdialog.h" // swapAxesDialog
 #include "tooltips.h"       // writeTooltipFile()
 #include "ui_edytornc.h"
 
@@ -149,6 +148,7 @@ EdytorNc::EdytorNc(Medium *medium)
 
     currentProjectModified = false;
 
+    m_addonsActions = new Addons::Actions(this);
     createActions();
     createMenus();
     createToolBars();
@@ -925,18 +925,6 @@ void EdytorNc::readOnly()
     }
 
     updateMenus();
-}
-
-void EdytorNc::doBhc()
-{
-    BHCDialog *bhcDialog;
-    bhcDialog = findChild<BHCDialog *>();
-
-    if (!bhcDialog) {
-        BHCDialog *bhcDialog = new BHCDialog(this);
-        bhcDialog->show();
-        bhcDialog->move((geometry().x() + width() - 10) - bhcDialog->width(), geometry().y() + 35);
-    }
 }
 
 void EdytorNc::doInsertSpaces()
@@ -1746,10 +1734,7 @@ void EdytorNc::createActions()
     inLineCalcAct->setShortcut(tr("Ctrl+0"));
     connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(doShowInLineCalc()));
 
-    bhcAct = new QAction(QIcon(":/images/bhc.png"), tr("&Bolt hole circle"), this);
-    bhcAct->setShortcut(tr("F8"));
-    bhcAct->setToolTip(tr("Calculate bolt hole's positions"));
-    connect(bhcAct, SIGNAL(triggered()), this, SLOT(doBhc()));
+    m_addonsActions->bhc()->setShortcut(tr("F8"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -2021,7 +2006,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(diffRAct);
     toolsMenu->addAction(diffEditorAct);
     toolsMenu->addSeparator();
-    toolsMenu->addAction(bhcAct);
+    toolsMenu->addAction(m_addonsActions->bhc());
     toolsMenu->addAction(speedFeedAct);
     toolsMenu->addAction(trianglesAct);
     toolsMenu->addAction(chamferAct);
@@ -2096,7 +2081,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(renumberAct);
     toolsToolBar->addAction(splittAct);
     toolsToolBar->addSeparator();
-    toolsToolBar->addAction(bhcAct);
+    toolsToolBar->addAction(m_addonsActions->bhc());
     toolsToolBar->addAction(speedFeedAct);
     toolsToolBar->addAction(trianglesAct);
     toolsToolBar->addAction(chamferAct);

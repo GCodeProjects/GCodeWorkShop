@@ -1,4 +1,5 @@
 /*
+ *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
  *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of EdytorNC.
@@ -17,38 +18,25 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ADDONS_ACTIONS_H
-#define ADDONS_ACTIONS_H
-
-#include <QObject>  // for QObject, Q_OBJECT, slots
 #include <QString>  // for QString
+#include <QWidget>  // for QWidget
 
-class QAction;
+#include "addons-bhc.h"
+#include "bhcdialog.h"  // for BHCDialog
+#include "bhcoptions.h" // for BHCOptions
 
 
-namespace Addons {
-class Actions : public QObject
+void Addons::doBhc(QWidget *parent, QSettings *settings)
 {
-    Q_OBJECT
+    QString key = "BHCDialog";
+    BHCDialog *dlg;
+    dlg = parent->findChild<BHCDialog *>(key);
 
-public:
-    explicit Actions(QObject *parent = nullptr);
+    if (!dlg) {
+        dlg = new BHCDialog(parent, settings);
+        dlg->setObjectName(key);
+        dlg->loadSettings(BHCOptions());
+    }
 
-public slots:
-    void loadTranslations();
-    void loadIcons();
-
-public:
-    // *INDENT-OFF*
-    QAction *bhc() {return m_bhc;}
-    // *INDENT-ON*
-
-protected:
-    QAction *m_bhc;
-
-protected slots:
-    void doBhc();
-};
-} // namespace Addons
-
-#endif // ADDONS_ACTIONS_H
+    dlg->show();
+}

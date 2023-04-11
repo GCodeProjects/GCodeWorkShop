@@ -151,7 +151,6 @@ private slots:
     void replaceAll();
     void selAll();
     void config();
-    void doBhc();
     void doInsertSpaces();
     void doRemoveSpaces();
     void doRemoveEmptyLines();
@@ -339,7 +338,6 @@ private:
 
     QAction *configAct;
 
-    QAction *bhcAct;
     QAction *renumberAct;
     QAction *calcAct;
     QAction *insertDotAct;
