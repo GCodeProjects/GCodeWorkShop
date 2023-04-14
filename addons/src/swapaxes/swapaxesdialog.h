@@ -45,6 +45,9 @@ public:
     void setOptions(const SwapAxesOptions &options);
     SwapAxesOptions options();
 
+    void loadSettings(const SwapAxesOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 private slots:
     void betweenCheckBoxClicked(bool checked);
     void modifyCheckBoxClicked(bool checked);

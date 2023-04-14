@@ -48,6 +48,9 @@ public:
     void setOptions(const I2MProgOptions &options);
     I2MProgOptions options();
 
+    void loadSettings(const I2MProgOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 private slots:
     void inputChanged();
 

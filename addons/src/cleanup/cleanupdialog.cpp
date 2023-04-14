@@ -28,9 +28,12 @@
 #include <QList>                // for QList
 #include <QMenu>                // for QMenu
 #include <QPlainTextEdit>       // for QPlainTextEdit
+#include <QPoint>               // for QPoint
 #include <QPushButton>          // for QPushButton
+#include <QRect>                // for QRect
 #include <QRegularExpression>   // for QRegularExpression
 #include <QSettings>            // for QSettings
+#include <QSize>                // for QSize
 #include <QString>              // for QString, operator==
 #include <QStringList>          // for QStringList
 #include <QTableWidget>         // for QTableWidget
@@ -39,11 +42,17 @@
 #include <QTextCursor>          // for QTextCursor, QTextCursor::StartOfBlock
 #include <QTextDocument>        // for QTextDocument
 #include <QTextEdit>            // for QTextEdit, QTextEdit::ExtraSelection
+#include <QVariant>             // for QVariant
 #include <Qt>                   // for operator|, AlignLeft, AlignVCenter, Checked, ItemIsEnabled, ItemIsUserCheckable
 #include <QtGlobal>             // for QFlags, Q_UNUSED
 
 #include "cleanupdialog.h"
 #include "cleanupoptions.h" // for CleanUpOptions
+
+
+#define CFG_SECTION  "CleanUpDialog"
+#define CFG_KEY_POS  "Position"
+#define CFG_KEY_SIZE "Size"
 
 
 CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
@@ -253,4 +262,42 @@ CleanUpOptions CleanUpDialog::options()
     }
 
     return options;
+}
+
+void CleanUpDialog::loadSettings(const CleanUpOptions &defaultOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+    setGeometry(QRect(pos, size));
+
+    CleanUpOptions opt;
+    opt.load(mSettings, defaultOptions);
+
+    mSettings->endGroup();
+
+    setOptions(opt);
+}
+
+void CleanUpDialog::saveSettings(bool saveOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+
+    if (saveOptions) {
+        options().save(mSettings);
+    }
+
+    mSettings->endGroup();
 }

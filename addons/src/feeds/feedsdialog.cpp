@@ -36,15 +36,24 @@
 #include <QLineEdit>        // for QLineEdit
 #include <QLocale>          // for QLocale
 #include <QPalette>         // for QPalette
+#include <QPoint>           // for QPoint
 #include <QPushButton>      // for QPushButton
+#include <QRect>            // for QRect
 #include <QSettings>        // for QSettings
+#include <QSize>            // for QSize
 #include <QString>          // for QString
 #include <QValidator>       // for QValidator
+#include <QVariant>         // for QVariant
 #include <QWidget>          // for QWidget
 #include <Qt>               // for Key_Comma, Key_Period, NoModifier, WA_DeleteOnClose, red
 
 #include "feedsdialog.h"
 #include "feedsoptions.h"   // for FeedsOptions
+
+
+#define CFG_SECTION  "FeedsDialog"
+#define CFG_KEY_POS  "Position"
+#define CFG_KEY_SIZE "Size"
 
 
 FeedsDialog::FeedsDialog(QWidget *parent, QSettings *settings) :
@@ -335,4 +344,42 @@ FeedsOptions FeedsDialog::options()
     options.feed.value = fInput->text().toDouble(&options.feed.in);
 
     return options;
+}
+
+void FeedsDialog::loadSettings(const FeedsOptions &defaultOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+    setGeometry(QRect(pos, size));
+
+    FeedsOptions opt;
+    opt.load(mSettings, defaultOptions);
+
+    mSettings->endGroup();
+
+    setOptions(opt);
+}
+
+void FeedsDialog::saveSettings(bool saveOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+
+    if (saveOptions) {
+        options().save(mSettings);
+    }
+
+    mSettings->endGroup();
 }

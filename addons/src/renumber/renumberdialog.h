@@ -48,6 +48,9 @@ public:
     void setOptions(const RenumberOptions &options);
     RenumberOptions options();
 
+    void loadSettings(const RenumberOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 private slots:
     void atEndClicked();
     void divideClicked();

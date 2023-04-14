@@ -52,6 +52,9 @@ public:
     void setOptions(const TriangleOptions &options);
     TriangleOptions options();
 
+    void loadSettings(const TriangleOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
 

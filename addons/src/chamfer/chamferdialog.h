@@ -48,6 +48,9 @@ public:
     void setOptions(const ChamferOptions &options);
     ChamferOptions options();
 
+    void loadSettings(const ChamferOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 protected slots:
     void inputChanged();
     void checkBoxToggled();

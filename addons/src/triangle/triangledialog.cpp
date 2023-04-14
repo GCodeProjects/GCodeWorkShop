@@ -37,14 +37,23 @@
 #include <QLocale>          // for QLocale
 #include <QPalette>         // for QPalette
 #include <QPixmap>          // for QPixmap
+#include <QPoint>           // for QPoint
 #include <QPushButton>      // for QPushButton
+#include <QRect>            // for QRect
 #include <QSettings>        // for QSettings
+#include <QSize>            // for QSize
 #include <QValidator>       // for QValidator
+#include <QVariant>         // for QVariant
 #include <QWidget>          // for QWidget
 #include <Qt>               // for Key_Comma, Key_Period, NoModifier, blue, WA_DeleteOnClose, black, red
 
 #include "triangledialog.h"
 #include "triangleoptions.h" // TriangleOptions
+
+
+#define CFG_SECTION  "TriangleDialog"
+#define CFG_KEY_POS  "Position"
+#define CFG_KEY_SIZE "Size"
 
 
 TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
@@ -737,4 +746,42 @@ TriangleOptions TriangleDialog::options()
     options.sideC.value = cInput->text().toDouble();
 
     return options;
+}
+
+void TriangleDialog::loadSettings(const TriangleOptions &defaultOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+    setGeometry(QRect(pos, size));
+
+    TriangleOptions opt;
+    opt.load(mSettings, defaultOptions);
+
+    mSettings->endGroup();
+
+    setOptions(opt);
+}
+
+void TriangleDialog::saveSettings(bool saveOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+
+    if (saveOptions) {
+        options().save(mSettings);
+    }
+
+    mSettings->endGroup();
 }

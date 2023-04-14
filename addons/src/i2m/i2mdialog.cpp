@@ -23,14 +23,23 @@
 #include <QCheckBox>    // for QCheckBox
 #include <QLabel>       // for QLabel
 #include <QLineEdit>    // for QLineEdit
+#include <QPoint>       // for QPoint
 #include <QPushButton>  // for QPushButton
+#include <QRect>        // for QRect
 #include <QSettings>    // for QSettings
+#include <QSize>        // for QSize
 #include <QString>      // for QString
+#include <QVariant>     // for QVariant
 #include <QWidget>      // for QWidget
 #include <Qt>           // for WA_DeleteOnClose
 
 #include "i2mdialog.h"
 #include "i2moptions.h" // for I2MOptions
+
+
+#define CFG_SECTION  "I2MDialog"
+#define CFG_KEY_POS  "Position"
+#define CFG_KEY_SIZE "Size"
 
 
 I2MDialog::I2MDialog(QWidget *parent, QSettings *settings) :
@@ -214,4 +223,42 @@ I2MOptions I2MDialog::options()
     options.inch.value = inch->text().toDouble(&options.inch.in);
 
     return options;
+}
+
+void I2MDialog::loadSettings(const I2MOptions &defaultOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+    setGeometry(QRect(pos, size));
+
+    I2MOptions opt;
+    opt.load(mSettings, defaultOptions);
+
+    mSettings->endGroup();
+
+    setOptions(opt);
+}
+
+void I2MDialog::saveSettings(bool saveOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+
+    if (saveOptions) {
+        options().save(mSettings);
+    }
+
+    mSettings->endGroup();
 }

@@ -20,14 +20,23 @@
 
 // IWYU pragma: no_forward_declare QWidget
 #include <QCheckBox>    // for QCheckBox
+#include <QPoint>       // for QPoint
 #include <QPushButton>  // for QPushButton
 #include <QRadioButton> // for QRadioButton
+#include <QRect>        // for QRect
 #include <QSettings>    // for QSettings
+#include <QSize>        // for QSize
 #include <QSpinBox>     // for QSpinBox
+#include <QVariant>     // for QVariant
 #include <QWidget>      // for QWidget
 
 #include "renumberdialog.h"
 #include "renumberoptions.h"    // for RenumberOptions
+
+
+#define CFG_SECTION  "RenumberDialog"
+#define CFG_KEY_POS  "Position"
+#define CFG_KEY_SIZE "Size"
 
 
 RenumberDialog::RenumberDialog(QWidget *parent, QSettings *settings) :
@@ -188,4 +197,42 @@ RenumberOptions RenumberDialog::options()
     }
 
     return options;
+}
+
+void RenumberDialog::loadSettings(const RenumberOptions &defaultOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+    setGeometry(QRect(pos, size));
+
+    RenumberOptions opt;
+    opt.load(mSettings, defaultOptions);
+
+    mSettings->endGroup();
+
+    setOptions(opt);
+}
+
+void RenumberDialog::saveSettings(bool saveOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+
+    if (saveOptions) {
+        options().save(mSettings);
+    }
+
+    mSettings->endGroup();
 }

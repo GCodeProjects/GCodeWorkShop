@@ -50,6 +50,9 @@ public:
     void setOptions(const CleanUpOptions &options);
     CleanUpOptions options();
 
+    void loadSettings(const CleanUpOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 private:
     QMenu *contextMenu;
 

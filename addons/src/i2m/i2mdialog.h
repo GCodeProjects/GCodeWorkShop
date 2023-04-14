@@ -48,6 +48,9 @@ public:
     void setOptions(const I2MOptions &options);
     I2MOptions options();
 
+    void loadSettings(const I2MOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 protected slots:
     void inputChanged();
     void checkBoxToggled();

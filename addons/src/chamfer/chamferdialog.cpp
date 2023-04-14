@@ -31,14 +31,23 @@
 #include <QLineEdit>        // for QLineEdit
 #include <QLocale>          // for QLocale
 #include <QPalette>         // for QPalette
+#include <QPoint>           // for QPoint
 #include <QPushButton>      // for QPushButton
+#include <QRect>            // for QRect
 #include <QSettings>        // for QSettings
+#include <QSize>            // for QSize
 #include <QValidator>       // for QValidator
+#include <QVariant>         // for QVariant
 #include <QWidget>          // for QWidget
 #include <Qt>               // for WA_DeleteOnClose, red
 
 #include "chamferdialog.h"
 #include "chamferoptions.h" // for ChamferOptions
+
+
+#define CFG_SECTION  "ChamferDialog"
+#define CFG_KEY_POS  "Position"
+#define CFG_KEY_SIZE "Size"
 
 
 ChamferDialog::ChamferDialog(QWidget *parent, QSettings *settings) :
@@ -313,4 +322,42 @@ ChamferOptions ChamferDialog::options()
     options.width.in = zlCheckBox->isChecked();
 
     return options;
+}
+
+void ChamferDialog::loadSettings(const ChamferOptions &defaultOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+    setGeometry(QRect(pos, size));
+
+    ChamferOptions opt;
+    opt.load(mSettings, defaultOptions);
+
+    mSettings->endGroup();
+
+    setOptions(opt);
+}
+
+void ChamferDialog::saveSettings(bool saveOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+
+    if (saveOptions) {
+        options().save(mSettings);
+    }
+
+    mSettings->endGroup();
 }

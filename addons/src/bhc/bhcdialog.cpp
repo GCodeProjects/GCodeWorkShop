@@ -29,14 +29,18 @@
 #include <QColor>           // for QColor
 #include <QLineEdit>        // for QLineEdit
 #include <QLocale>          // for QLocale
+#include <QPoint>           // for QPoint
 #include <QPushButton>      // for QPushButton
+#include <QRect>            // for QRect
 #include <QSettings>        // for QSettings
+#include <QSize>            // for QSize
 #include <QSpinBox>         // for QSpinBox
 #include <QString>          // for QString
 #include <QTabWidget>       // for QTabWidget
 #include <QTableWidget>     // for QTableWidget
 #include <QTableWidgetItem> // for QTableWidgetItem
 #include <QVBoxLayout>      // for QVBoxLayout
+#include <QVariant>         // for QVariant
 #include <QWidget>          // for QWidget
 #include <Qt>               // for operator|, AlignRight, AlignVCenter
 #include <QtGlobal>         // for qreal, qMax, QFlags
@@ -48,6 +52,11 @@
 #include "bhcoptions.h"     // for BHCOptions
 #include "bhctab.h"         // for BHCTab
 #include "bhctaboptions.h"  // for BHCTabOptions
+
+
+#define CFG_SECTION  "BHCDialog"
+#define CFG_KEY_POS  "Position"
+#define CFG_KEY_SIZE "Size"
 
 
 BHCDialog::BHCDialog(QWidget *parent, QSettings *settings) :
@@ -494,4 +503,42 @@ BHCOptions BHCDialog::options()
     options.yellow = tab->options();
 
     return options;
+}
+
+void BHCDialog::loadSettings(const BHCOptions &defaultOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+    setGeometry(QRect(pos, size));
+
+    BHCOptions opt;
+    opt.load(mSettings, defaultOptions);
+
+    mSettings->endGroup();
+
+    setOptions(opt);
+}
+
+void BHCDialog::saveSettings(bool saveOptions)
+{
+    if (mSettings.isNull()) {
+        return;
+    }
+
+    mSettings->beginGroup(CFG_SECTION);
+
+    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+
+    if (saveOptions) {
+        options().save(mSettings);
+    }
+
+    mSettings->endGroup();
 }

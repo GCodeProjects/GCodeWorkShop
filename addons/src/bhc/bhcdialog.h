@@ -50,6 +50,9 @@ public:
     void setOptions(const BHCOptions &options);
     BHCOptions options();
 
+    void loadSettings(const BHCOptions &defaultOptions);
+    void saveSettings(bool saveOptions = true);
+
 protected:
     //void windowActivationChange(bool oldActive);
 
