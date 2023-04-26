@@ -32,6 +32,8 @@ class QEvent;
 class QMenu;
 class QPoint;
 
+struct BHCTabOptions;
+
 #include "ui_bhctab.h"  // for Ui::BHCTab
 
 
@@ -45,6 +47,9 @@ class BHCTab : public QWidget, public Ui::BHCTab
 public:
     BHCTab(QWidget *parent = 0);
     ~BHCTab();
+
+    void setOptions(const BHCTabOptions &options);
+    BHCTabOptions options();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);

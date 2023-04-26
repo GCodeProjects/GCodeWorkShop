@@ -44,6 +44,7 @@
 #include <Qt>               // for Key_Comma, Key_Period, NoModifier, WA_DeleteOnClose, red
 
 #include "feedsdialog.h"
+#include "feedsoptions.h"   // for FeedsOptions
 
 
 FeedsDialog::FeedsDialog(QWidget *parent, QSettings *settings) :
@@ -274,4 +275,64 @@ void FeedsDialog::inputChanged()
 
     computeButton->setEnabled(ena);
     computeVcButton->setEnabled(ena1);
+}
+
+void FeedsDialog::setOptions(const FeedsOptions &options)
+{
+    inchCheckBox->setChecked(options.useInch);
+    mmCheckBox->setChecked(!options.useInch);
+
+    if (options.Vc.in) {
+        vcInput->setText(QString::number(options.Vc.value));
+    } else {
+        vcInput->clear();
+    }
+
+    if (options.z.in) {
+        zInput->setText(QString::number(options.z.value));
+    } else {
+        zInput->clear();
+    }
+
+    if (options.Fz.in) {
+        fzInput->setText(QString::number(options.Fz.value));
+    } else {
+        fzInput->clear();
+    }
+
+    if (options.diam.in) {
+        dInput->setText(QString::number(options.diam.value));
+    } else {
+        dInput->clear();
+    }
+
+    if (options.speed.in) {
+        sInput->setText(QString::number(options.speed.value));
+    } else {
+        sInput->clear();
+    }
+
+    if (options.feed.in) {
+        fInput->setText(QString::number(options.feed.value));
+    } else {
+        fInput->clear();
+    }
+
+    inputChanged();
+    checkBoxChanged();
+}
+
+FeedsOptions FeedsDialog::options()
+{
+    FeedsOptions options;
+
+    options.useInch = inchCheckBox->isChecked();
+    options.Vc.value = vcInput->text().toDouble(&options.Vc.in);
+    options.z.value = zInput->text().toDouble(&options.z.in);
+    options.Fz.value = fzInput->text().toDouble(&options.Fz.in);
+    options.diam.value = dInput->text().toDouble(&options.diam.in);
+    options.speed.value = sInput->text().toInt(&options.speed.in);
+    options.feed.value = fInput->text().toDouble(&options.feed.in);
+
+    return options;
 }

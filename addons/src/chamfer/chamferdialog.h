@@ -29,6 +29,8 @@
 class QSettings;
 class QWidget;
 
+struct ChamferOptions;
+
 #include "ui_chamferdialog.h"   // for Ui::ChamferDialog
 
 
@@ -42,6 +44,9 @@ class ChamferDialog : public QDialog, private Ui::ChamferDialog
 public:
     ChamferDialog(QWidget *parent, QSettings *settings);
     ~ChamferDialog();
+
+    void setOptions(const ChamferOptions &options);
+    ChamferOptions options();
 
 protected slots:
     void inputChanged();

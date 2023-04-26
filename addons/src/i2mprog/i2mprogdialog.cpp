@@ -19,12 +19,15 @@
  */
 
 // IWYU pragma: no_forward_declare QWidget
+#include <QCheckBox>    // for QCheckBox
 #include <QLineEdit>    // for QLineEdit
 #include <QPushButton>  // for QPushButton
 #include <QSettings>    // for QSettings
+#include <QSpinBox>     // for QSpinBox
 #include <QWidget>      // for QWidget
 
 #include "i2mprogdialog.h"
+#include "i2mprogoptions.h" // I2MProgOptions
 
 
 I2MProgDialog::I2MProgDialog(QWidget *parent, QSettings *settings) :
@@ -52,4 +55,25 @@ I2MProgDialog::~I2MProgDialog()
 void I2MProgDialog::inputChanged()
 {
     okButton->setEnabled(mInput->hasAcceptableInput());
+}
+
+void I2MProgDialog::setOptions(const I2MProgOptions &options)
+{
+    inchCheckBox->setChecked(options.toInch);
+    mmCheckBox->setChecked(!options.toInch);
+    mInput->setText(options.axes);
+    precInput->setValue(options.prec);
+
+    inputChanged();
+}
+
+I2MProgOptions I2MProgDialog::options()
+{
+    I2MProgOptions options;
+
+    options.toInch = inchCheckBox->isChecked();
+    options.axes = mInput->text();
+    options.prec = precInput->value();
+
+    return options;
 }

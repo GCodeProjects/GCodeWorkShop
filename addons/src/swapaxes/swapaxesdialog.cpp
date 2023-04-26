@@ -24,10 +24,12 @@
 #include <QDoubleSpinBox>   // for QDoubleSpinBox
 #include <QSettings>        // for QSettings
 #include <QSpinBox>         // for QSpinBox
+#include <QStringList>      // for QStringList
 #include <QWidget>          // for QWidget
 #include <QtGlobal>         // for Q_UNUSED
 
 #include "swapaxesdialog.h"
+#include "swapaxesoptions.h"    // for SwapAxesOptions
 
 
 SwapAxesDialog::SwapAxesDialog(QWidget *parent, QSettings *settings) :
@@ -64,4 +66,62 @@ void SwapAxesDialog::modifyCheckBoxClicked(bool checked)
 {
     operatorComboBox->setEnabled(checked);
     modiferDoubleSpinBox->setEnabled(checked);
+}
+
+void SwapAxesDialog::setOptions(const SwapAxesOptions &options)
+{
+    fromComboBox->clear();
+    fromComboBox->addItems(options.fromList);
+    fromComboBox->setCurrentText(options.from);
+    toComboBox->clear();
+    toComboBox->addItems(options.toList);
+    toComboBox->setCurrentText(options.to);
+
+    precisionSpinBox->setValue(options.precision);
+
+    betweenCheckBox->setChecked(options.limit.enable);
+    betweenCheckBoxClicked(options.limit.enable);
+    minDoubleSpinBox->setValue(options.limit.min);
+    maxDoubleSpinBox->setValue(options.limit.max);
+
+    modifyCheckBox->setChecked(options.convert.enable);
+    modifyCheckBoxClicked(options.convert.enable);
+    operatorComboBox->setCurrentIndex(options.convert.operation);
+    modiferDoubleSpinBox->setValue(options.convert.value);
+}
+
+SwapAxesOptions SwapAxesDialog::options()
+{
+    SwapAxesOptions options;
+
+    for (int i = 0; i < fromComboBox->count(); i++) {
+        options.fromList.append(fromComboBox->itemText(i));
+    }
+
+    options.fromList.append(fromComboBox->currentText());
+    options.fromList.removeDuplicates();
+    options.fromList.sort();
+
+    for (int i = 0; i < toComboBox->count(); i++) {
+        options.toList.append(toComboBox->itemText(i));
+    }
+
+    options.toList.append(toComboBox->currentText());
+    options.toList.removeDuplicates();
+    options.toList.sort();
+
+    options.from = fromComboBox->currentText();
+    options.to = toComboBox->currentText();
+
+    options.precision = precisionSpinBox->value();
+
+    options.limit.enable = betweenCheckBox->isChecked();
+    options.limit.min = minDoubleSpinBox->value();
+    options.limit.max = maxDoubleSpinBox->value();
+
+    options.convert.enable = modifyCheckBox->isChecked();
+    options.convert.operation = operatorComboBox->currentIndex();
+    options.convert.value = modiferDoubleSpinBox->value();
+
+    return options;
 }

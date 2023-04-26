@@ -44,6 +44,7 @@
 #include <Qt>               // for Key_Comma, Key_Period, NoModifier, blue, WA_DeleteOnClose, black, red
 
 #include "triangledialog.h"
+#include "triangleoptions.h" // TriangleOptions
 
 
 TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
@@ -695,4 +696,45 @@ void TriangleDialog::checkBoxToggled()
 
         computeButton->setEnabled(false);
     }
+}
+
+void TriangleDialog::setOptions(const TriangleOptions &options)
+{
+    rightTriangleCheckBox->setChecked(options.rightTriangle);
+    aACheckBox->setChecked(options.angleA.in);
+    aAInput->setText(QString::number(options.angleA.value));
+    aBCheckBox->setChecked(options.angleB.in);
+    aBInput->setText(QString::number(options.angleB.value));
+    aCCheckBox->setChecked(options.angleC.in);
+    aCInput->setText(QString::number(options.angleC.value));
+    aCheckBox->setChecked(options.sideA.in);
+    aInput->setText(QString::number(options.sideA.value));
+    bCheckBox->setChecked(options.sideB.in);
+    bInput->setText(QString::number(options.sideB.value));
+    cCheckBox->setChecked(options.sideC.in);
+    cInput->setText(QString::number(options.sideC.value));
+
+    rightTriangleCheckBoxToggled();
+    checkBoxToggled();
+}
+
+TriangleOptions TriangleDialog::options()
+{
+    TriangleOptions options;
+
+    options.rightTriangle = rightTriangleCheckBox->isChecked();
+    options.angleA.in = aACheckBox->isChecked();
+    options.angleA.value = aAInput->text().toDouble();
+    options.angleB.in = aBCheckBox->isChecked();
+    options.angleB.value = aBInput->text().toDouble();
+    options.angleC.in = aCCheckBox->isChecked();
+    options.angleC.value = aCInput->text().toDouble();
+    options.sideA.in = aCheckBox->isChecked();
+    options.sideA.value = aInput->text().toDouble();
+    options.sideB.in = bCheckBox->isChecked();
+    options.sideB.value = bInput->text().toDouble();
+    options.sideC.in = cCheckBox->isChecked();
+    options.sideC.value = cInput->text().toDouble();
+
+    return options;
 }

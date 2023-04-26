@@ -44,8 +44,10 @@
 #include <utils/removezeros.h>  // for Utils::removeZeros
 
 #include "bhcdialog.h"
-#include "bhcdraw.h"    // for BHCDraw
-#include "bhctab.h"     // for BHCTab
+#include "bhcdraw.h"        // for BHCDraw
+#include "bhcoptions.h"     // for BHCOptions
+#include "bhctab.h"         // for BHCTab
+#include "bhctaboptions.h"  // for BHCTabOptions
 
 
 BHCDialog::BHCDialog(QWidget *parent, QSettings *settings) :
@@ -462,4 +464,34 @@ void BHCDialog::computeButtonClicked()
 
     drawing->setUpdatesEnabled(true);
     drawing->update();
+}
+
+void BHCDialog::setOptions(const BHCOptions &options)
+{
+    BHCTab *tab;
+    tab = (BHCTab *)tabBar->widget(0); // green
+    tab->setOptions(options.green);
+    tab = (BHCTab *)tabBar->widget(1); // blue
+    tab->setOptions(options.blue);
+    tab = (BHCTab *)tabBar->widget(2); // red
+    tab->setOptions(options.red);
+    tab = (BHCTab *)tabBar->widget(3); // yellow
+    tab->setOptions(options.yellow);
+}
+
+BHCOptions BHCDialog::options()
+{
+    BHCOptions options;
+    BHCTab *tab;
+
+    tab = (BHCTab *)tabBar->widget(0); // green
+    options.green = tab->options();;
+    tab = (BHCTab *)tabBar->widget(1); // blue
+    options.blue = tab->options();;
+    tab = (BHCTab *)tabBar->widget(2); // red
+    options.red = tab->options();;
+    tab = (BHCTab *)tabBar->widget(3); // yellow
+    options.yellow = tab->options();
+
+    return options;
 }

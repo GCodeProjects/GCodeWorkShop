@@ -30,6 +30,7 @@
 #include <Qt>           // for WA_DeleteOnClose
 
 #include "i2mdialog.h"
+#include "i2moptions.h" // for I2MOptions
 
 
 I2MDialog::I2MDialog(QWidget *parent, QSettings *settings) :
@@ -160,4 +161,57 @@ void I2MDialog::checkBoxToggled()
     }
 
     inputChanged();
+}
+
+void I2MDialog::setOptions(const I2MOptions &options)
+{
+    QLineEdit *mm;
+    QLineEdit *inch;
+
+    if (options.toInch) {
+        mm = mmInput;
+        inch = inchInput;
+    } else {
+        mm = inchInput;
+        inch = mmInput;
+    }
+
+    mmCheckBox->setChecked(!options.toInch);
+    inchCheckBox->setChecked(options.toInch);
+
+    if (options.mm.in) {
+        mm->setText(QString::number(options.mm.value));
+    } else {
+        mm->clear();
+    }
+
+    if (options.inch.in) {
+        inch->setText(QString::number(options.inch.value));
+    } else {
+        inch->clear();
+    }
+
+    checkBoxToggled();
+}
+
+I2MOptions I2MDialog::options()
+{
+    I2MOptions options;
+    QLineEdit *mm;
+    QLineEdit *inch;
+
+    options.toInch = inchCheckBox->isChecked();
+
+    if (options.toInch) {
+        mm = mmInput;
+        inch = inchInput;
+    } else {
+        mm = inchInput;
+        inch = mmInput;
+    }
+
+    options.mm.value = mm->text().toDouble(&options.mm.in);
+    options.inch.value = inch->text().toDouble(&options.inch.in);
+
+    return options;
 }

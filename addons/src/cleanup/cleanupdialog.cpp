@@ -32,6 +32,7 @@
 #include <QRegularExpression>   // for QRegularExpression
 #include <QSettings>            // for QSettings
 #include <QString>              // for QString, operator==
+#include <QStringList>          // for QStringList
 #include <QTableWidget>         // for QTableWidget
 #include <QTableWidgetItem>     // for QTableWidgetItem
 #include <QTextCharFormat>      // for QTextCharFormat
@@ -42,6 +43,7 @@
 #include <QtGlobal>             // for QFlags, Q_UNUSED
 
 #include "cleanupdialog.h"
+#include "cleanupoptions.h" // for CleanUpOptions
 
 
 CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
@@ -200,4 +202,55 @@ void CleanUpDialog::removeRow()
 {
     int row = tableWidget->currentRow();
     tableWidget->removeRow(row);
+}
+
+void CleanUpDialog::setOptions(const CleanUpOptions &options)
+{
+    while (tableWidget->rowCount() > 0) {
+        tableWidget->removeRow(0);
+    }
+
+    for (int i = 0; i < options.expressions.count(); i++) {
+        QTableWidgetItem *valueItem = new QTableWidgetItem(options.expressions[i]);
+        valueItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+        QTableWidgetItem *commentItem = new QTableWidgetItem(options.comments.value(i));
+        commentItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+        QTableWidgetItem *enableItem = new QTableWidgetItem();
+        enableItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        enableItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+        bool checked = options.selected.contains(options.expressions[i]);
+        enableItem->setCheckState(checked ? Qt::Checked : Qt::Unchecked);
+
+        tableWidget->insertRow(i);
+        tableWidget->setItem(i, 0, commentItem);
+        tableWidget->setItem(i, 1, valueItem);
+        tableWidget->setItem(i, 2, enableItem);
+    }
+
+    newRow();
+
+    tableWidget->resizeRowsToContents();
+    tableWidget->resizeColumnsToContents();
+}
+
+CleanUpOptions CleanUpDialog::options()
+{
+    CleanUpOptions options;
+
+    for (int i = 0; i < tableWidget->rowCount(); i++) {
+        if (tableWidget->item(i, 1)->text().isEmpty()) {
+            continue;
+        }
+
+        options.expressions.append(tableWidget->item(i, 1)->text());
+        options.comments.append(tableWidget->item(i, 0)->text());
+
+        if (tableWidget->item(i, 2)->checkState() == Qt::Checked) {
+            options.selected.append(tableWidget->item(i, 1)->text());
+        }
+    }
+
+    return options;
 }

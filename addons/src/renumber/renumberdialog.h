@@ -29,6 +29,8 @@
 class QSettings;
 class QWidget;
 
+struct RenumberOptions;
+
 #include "ui_renumberdialog.h"  // for Ui::RenumberDialog
 
 
@@ -42,6 +44,9 @@ class RenumberDialog : public QDialog, private Ui::RenumberDialog
 public:
     RenumberDialog(QWidget *parent, QSettings *settings);
     ~RenumberDialog();
+
+    void setOptions(const RenumberOptions &options);
+    RenumberOptions options();
 
 private slots:
     void atEndClicked();

@@ -29,6 +29,8 @@
 class QSettings;
 class QWidget;
 
+struct DotOptions;
+
 #include "ui_dotdialog.h"   // for Ui::DotDialog
 
 
@@ -42,6 +44,9 @@ class DotDialog : public QDialog, private Ui::DotDialog
 public:
     DotDialog(QWidget *parent, QSettings *settings);
     ~DotDialog();
+
+    void setOptions(const DotOptions &options);
+    DotOptions options();
 
 private slots:
     void inputChanged(const QString &text);

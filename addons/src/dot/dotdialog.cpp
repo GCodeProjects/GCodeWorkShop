@@ -29,6 +29,7 @@
 #include <QtGlobal>     // for Q_UNUSED
 
 #include "dotdialog.h"
+#include "dotoptions.h" // for DotOptions
 
 
 DotDialog::DotDialog(QWidget *parent, QSettings *settings) :
@@ -91,4 +92,26 @@ void DotDialog::spinBoxVal(int val)
     } else if (val == 1001) {
         mSpinBox->setValue(10000);
     }
+}
+
+void DotDialog::setOptions(const DotOptions &options)
+{
+    mInput->setText(options.axes);
+    mCheckAtEnd->setChecked(!options.convert);
+    mCheckDivide->setChecked(options.convert);
+    mSpinBox->setValue(options.divider);
+
+    okButton->setEnabled(mInput->hasAcceptableInput());
+    divideClicked();
+}
+
+DotOptions DotDialog::options()
+{
+    DotOptions options;
+
+    options.axes = mInput->text();
+    options.convert = mCheckDivide->isChecked();
+    options.divider = mSpinBox->value();
+
+    return options;
 }

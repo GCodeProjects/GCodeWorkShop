@@ -29,6 +29,8 @@
 class QSettings;
 class QWidget;
 
+struct I2MProgOptions;
+
 #include "ui_i2mprogdialog.h"   // for Ui::I2MProgDialog
 
 
@@ -42,6 +44,9 @@ class I2MProgDialog : public QDialog, private Ui::I2MProgDialog
 public:
     I2MProgDialog(QWidget *parent, QSettings *settings);
     ~I2MProgDialog();
+
+    void setOptions(const I2MProgOptions &options);
+    I2MProgOptions options();
 
 private slots:
     void inputChanged();

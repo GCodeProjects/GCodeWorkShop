@@ -33,6 +33,8 @@ class QPixmap;
 class QSettings;
 class QWidget;
 
+struct TriangleOptions;
+
 #include "ui_triangledialog.h"  // for Ui::TriangleDialog
 
 
@@ -46,6 +48,9 @@ class TriangleDialog : public QDialog, private Ui::TriangleDialog
 public:
     TriangleDialog(QWidget *parent, QSettings *settings);
     ~TriangleDialog();
+
+    void setOptions(const TriangleOptions &options);
+    TriangleOptions options();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);

@@ -31,6 +31,7 @@ class QTabWidget;
 class QWidget;
 
 class BHCDraw;
+struct BHCOptions;
 
 #include "ui_bhcdialog.h"   // for Ui::BHCDialog
 
@@ -45,6 +46,9 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
 public:
     BHCDialog(QWidget *parent, QSettings *settings);
     ~BHCDialog();
+
+    void setOptions(const BHCOptions &options);
+    BHCOptions options();
 
 protected:
     //void windowActivationChange(bool oldActive);

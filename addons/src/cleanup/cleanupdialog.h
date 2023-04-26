@@ -32,6 +32,8 @@ class QRegularExpression;
 class QSettings;
 class QWidget;
 
+struct CleanUpOptions;
+
 #include "ui_cleanupdialog.h"   // for Ui::CleanUpDialog
 
 
@@ -44,6 +46,9 @@ public:
     ~CleanUpDialog();
 
     void setText(QString text);
+
+    void setOptions(const CleanUpOptions &options);
+    CleanUpOptions options();
 
 private:
     QMenu *contextMenu;

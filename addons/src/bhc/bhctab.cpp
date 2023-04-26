@@ -49,6 +49,7 @@
 #include <utils/removezeros.h>  // Utils::removeZeros()
 
 #include "bhctab.h"
+#include "bhctaboptions.h"  // for BHCTabOptions
 
 
 BHCTab::BHCTab(QWidget *parent) : QWidget(parent)
@@ -265,4 +266,38 @@ void BHCTab::copySelection()
 void BHCTab::inputChk()
 {
     emit commonChk();
+}
+
+void BHCTab::setOptions(const BHCTabOptions &options)
+{
+    xCenterInput->setText(QString::number(options.x));
+    yCenterInput->setText(QString::number(options.y));
+    diaInput->setText(QString::number(options.diam));
+    angleStartInput->setText(QString::number(options.start));
+    angleBeetwenInput->setText(QString::number(options.step));
+    holesInput->setText(QString::number(options.count));
+    roateInput->setValue(options.rotate);
+    mirrorX->setChecked(options.mirrorX);
+    mirrorY->setChecked(options.mirrorY);
+    all->setChecked(options.common);
+
+    inputChanged();
+}
+
+BHCTabOptions BHCTab::options()
+{
+    BHCTabOptions options;
+
+    options.x = xCenterInput->text().toDouble();
+    options.y = yCenterInput->text().toDouble();
+    options.diam = diaInput->text().toDouble();
+    options.start = angleStartInput->text().toDouble();
+    options.step = angleBeetwenInput->text().toDouble();
+    options.count = holesInput->text().toInt();
+    options.rotate = roateInput->value();
+    options.mirrorX = mirrorX->isChecked();
+    options.mirrorY = mirrorY->isChecked();
+    options.common = all->isChecked();
+
+    return options;
 }

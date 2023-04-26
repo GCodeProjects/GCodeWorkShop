@@ -27,6 +27,7 @@
 #include <QWidget>      // for QWidget
 
 #include "renumberdialog.h"
+#include "renumberoptions.h"    // for RenumberOptions
 
 
 RenumberDialog::RenumberDialog(QWidget *parent, QSettings *settings) :
@@ -118,4 +119,73 @@ void RenumberDialog::removeAllClicked()
     mRenumEmpty->setEnabled(false);
 
     mCheckDivide->setEnabled(false);
+}
+
+void RenumberDialog::setOptions(const RenumberOptions &options)
+{
+    startAtInput->setValue(options.startAt);
+    formInput->setValue(options.from);
+    incInput->setValue(options.inc);
+    mRenumEmpty->setChecked(options.renumEmpty);
+    mRenumWithComm->setChecked(options.renumComm);
+    mRenumMarked->setChecked(options.renumMarked);
+    toInput->setValue(options.to);
+    mSpinBox->setValue(options.width);
+    mCheckDivide->setChecked(options.applyWidth);
+
+    if (mCheckDivide->isChecked()) {
+        divideClicked();
+    }
+
+    switch (options.mode) {
+    case RenumberOptions::RenumberWithN:
+        mRenumLines->setChecked(true);
+        renumClicked();
+        break;
+
+    case RenumberOptions::RenumberAll:
+        mAllLines->setChecked(true);
+        allLinesClicked();
+        break;
+
+    case RenumberOptions::RemoveAll:
+        mRemoveAll->setChecked(true);
+        removeAllClicked();
+        break;
+
+    case RenumberOptions::RenumberWithoutN:
+        mRenumHe->setChecked(true);
+        mRenumHeClicked();
+        break;
+
+    default:
+        ;
+    }
+}
+
+RenumberOptions RenumberDialog::options()
+{
+    RenumberOptions options;
+
+    options.startAt = startAtInput->value();
+    options.from = formInput->value();
+    options.inc = incInput->value();
+    options.renumEmpty = mRenumEmpty->isChecked();
+    options.renumComm = !mRenumWithComm->isChecked();
+    options.renumMarked = mRenumMarked->isChecked();
+    options.to = toInput->value();
+    options.width = mSpinBox->value();
+    options.applyWidth = mCheckDivide->isChecked();
+
+    options.mode = RenumberOptions::RenumberWithN;
+
+    if (mAllLines->isChecked()) {
+        options.mode = RenumberOptions::RenumberAll;
+    } else if (mRemoveAll->isChecked()) {
+        options.mode = RenumberOptions::RemoveAll;
+    } else if (mRenumHe->isChecked()) {
+        options.mode = RenumberOptions::RenumberWithoutN;
+    }
+
+    return options;
 }

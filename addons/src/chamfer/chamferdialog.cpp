@@ -38,6 +38,7 @@
 #include <Qt>               // for WA_DeleteOnClose, red
 
 #include "chamferdialog.h"
+#include "chamferoptions.h" // for ChamferOptions
 
 
 ChamferDialog::ChamferDialog(QWidget *parent, QSettings *settings) :
@@ -278,4 +279,38 @@ void ChamferDialog::inputChanged()
         }
 
     computeButton->setEnabled(false);
+}
+
+void ChamferDialog::setOptions(const ChamferOptions &options)
+{
+    angInput->setText(QString::number(options.angle.value));
+    angCheckBox->setChecked(options.angle.in);
+    dlInput->setText(QString::number(options.hight.value));
+    dlCheckBox->setChecked(options.hight.in);
+    xdInput->setText(QString::number(options.maxDiam.value));
+    xdCheckBox->setChecked(options.maxDiam.in);
+    xoInput->setText(QString::number(options.minDiam.value));
+    xoCheckBox->setChecked(options.minDiam.in);
+    zlInput->setText(QString::number(options.width.value));
+    zlCheckBox->setChecked(options.width.in);
+
+    checkBoxToggled();
+}
+
+ChamferOptions ChamferDialog::options()
+{
+    ChamferOptions options;
+
+    options.angle.value = angInput->text().toDouble();
+    options.angle.in = angCheckBox->isChecked();
+    options.hight.value = dlInput->text().toDouble();
+    options.hight.in = dlCheckBox->isChecked();
+    options.maxDiam.value = xdInput->text().toDouble();
+    options.maxDiam.in = xdCheckBox->isChecked();
+    options.minDiam.value = xoInput->text().toDouble();
+    options.minDiam.in = xoCheckBox->isChecked();
+    options.width.value = zlInput->text().toDouble();
+    options.width.in = zlCheckBox->isChecked();
+
+    return options;
 }

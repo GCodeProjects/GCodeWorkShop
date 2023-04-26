@@ -29,6 +29,8 @@
 class QSettings;
 class QWidget;
 
+struct SwapAxesOptions;
+
 #include "ui_swapaxesdialog.h"  // for Ui::SwapAxesDialog
 
 
@@ -39,6 +41,9 @@ class SwapAxesDialog : public QDialog, private Ui::SwapAxesDialog
 public:
     explicit SwapAxesDialog(QWidget *parent, QSettings *settings);
     ~SwapAxesDialog();
+
+    void setOptions(const SwapAxesOptions &options);
+    SwapAxesOptions options();
 
 private slots:
     void betweenCheckBoxClicked(bool checked);

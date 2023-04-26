@@ -30,6 +30,8 @@ class QEvent;
 class QSettings;
 class QWidget;
 
+struct FeedsOptions;
+
 #include "ui_feedsdialog.h" // for Ui::FeedsDialog
 
 
@@ -43,6 +45,9 @@ class FeedsDialog : public QDialog, private Ui::FeedsDialog
 public:
     FeedsDialog(QWidget *parent, QSettings *settings);
     ~FeedsDialog();
+
+    void setOptions(const FeedsOptions &options);
+    FeedsOptions options();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
