@@ -37,16 +37,21 @@
 #include <QLocale>          // for QLocale
 #include <QPalette>         // for QPalette
 #include <QPushButton>      // for QPushButton
+#include <QSettings>        // for QSettings
 #include <QString>          // for QString
 #include <QValidator>       // for QValidator
 #include <QWidget>          // for QWidget
+#include <Qt>               // for Key_Comma, Key_Period, NoModifier, WA_DeleteOnClose, red
 
 #include "feedsdialog.h"
 
 
-FeedsDialog::FeedsDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+FeedsDialog::FeedsDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
 
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Cutting parameters"));

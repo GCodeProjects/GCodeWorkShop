@@ -23,8 +23,10 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for Q_OBJECT, slots
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
 
+class QSettings;
 class QWidget;
 
 #include "ui_swapaxesdialog.h"  // for Ui::SwapAxesDialog
@@ -35,13 +37,16 @@ class SwapAxesDialog : public QDialog, private Ui::SwapAxesDialog
     Q_OBJECT
 
 public:
-    explicit SwapAxesDialog(QWidget *parent = 0);
+    explicit SwapAxesDialog(QWidget *parent, QSettings *settings);
     ~SwapAxesDialog();
 
 private slots:
     void betweenCheckBoxClicked(bool checked);
     void modifyCheckBoxClicked(bool checked);
     void precisionSpinBoxChanded(int val);
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // SWAPAXESDIALOG_H

@@ -32,15 +32,21 @@
 #include <QLocale>          // for QLocale
 #include <QPalette>         // for QPalette
 #include <QPushButton>      // for QPushButton
+#include <QSettings>        // for QSettings
 #include <QValidator>       // for QValidator
 #include <QWidget>          // for QWidget
+#include <Qt>               // for WA_DeleteOnClose, red
 
 #include "chamferdialog.h"
 
 
-ChamferDialog::ChamferDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+ChamferDialog::ChamferDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
+
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Chamfer"));
 

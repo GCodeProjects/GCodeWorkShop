@@ -23,9 +23,10 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for slots, Q_OBJECT
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <Qt>       // for WindowFlags, Dialog
 
+class QSettings;
 class QWidget;
 
 #include "ui_renumberdialog.h"  // for Ui::RenumberDialog
@@ -39,7 +40,7 @@ class RenumberDialog : public QDialog, private Ui::RenumberDialog
     Q_OBJECT
 
 public:
-    RenumberDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    RenumberDialog(QWidget *parent, QSettings *settings);
     ~RenumberDialog();
 
 private slots:
@@ -49,6 +50,9 @@ private slots:
     void allLinesClicked();
     void removeAllClicked();
     void mRenumHeClicked();
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // RENUMBERDIALOG_H

@@ -19,19 +19,21 @@
  */
 
 // IWYU pragma: no_forward_declare QWidget
-#include <QCheckBox>    // for QCheckBox
 #include <QLineEdit>    // for QLineEdit
 #include <QPushButton>  // for QPushButton
-#include <QSpinBox>     // for QSpinBox
-#include <QString>      // for QString
+#include <QSettings>    // for QSettings
 #include <QWidget>      // for QWidget
 
 #include "i2mprogdialog.h"
 
 
-I2MProgDialog::I2MProgDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+I2MProgDialog::I2MProgDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
+
     setWindowTitle(tr("Convert program inch to metric"));
 
     connect(mInput, SIGNAL(textChanged(const QString &)), this, SLOT(inputChanged()));

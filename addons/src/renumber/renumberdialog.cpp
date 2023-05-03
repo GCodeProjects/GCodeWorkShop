@@ -22,15 +22,19 @@
 #include <QCheckBox>    // for QCheckBox
 #include <QPushButton>  // for QPushButton
 #include <QRadioButton> // for QRadioButton
+#include <QSettings>    // for QSettings
 #include <QSpinBox>     // for QSpinBox
 #include <QWidget>      // for QWidget
 
 #include "renumberdialog.h"
 
 
-RenumberDialog::RenumberDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+RenumberDialog::RenumberDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
 
     setWindowTitle(tr("Renumber lines"));
 

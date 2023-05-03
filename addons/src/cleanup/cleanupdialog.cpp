@@ -30,6 +30,7 @@
 #include <QPlainTextEdit>       // for QPlainTextEdit
 #include <QPushButton>          // for QPushButton
 #include <QRegularExpression>   // for QRegularExpression
+#include <QSettings>            // for QSettings
 #include <QString>              // for QString, operator==
 #include <QTableWidget>         // for QTableWidget
 #include <QTableWidgetItem>     // for QTableWidgetItem
@@ -43,11 +44,13 @@
 #include "cleanupdialog.h"
 
 
-CleanUpDialog::CleanUpDialog(QWidget *parent) :
+CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
     QDialog(parent),
     Ui::CleanUpDialog()
 {
     setupUi(this);
+
+    mSettings = settings;
 
     QAction *deleteRowAct = new QAction(QIcon(":/images/removeemptylines.png"), tr("Delete &row"),
                                         this);

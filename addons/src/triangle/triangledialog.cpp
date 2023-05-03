@@ -38,15 +38,21 @@
 #include <QPalette>         // for QPalette
 #include <QPixmap>          // for QPixmap
 #include <QPushButton>      // for QPushButton
+#include <QSettings>        // for QSettings
 #include <QValidator>       // for QValidator
 #include <QWidget>          // for QWidget
+#include <Qt>               // for Key_Comma, Key_Period, NoModifier, blue, WA_DeleteOnClose, black, red
 
 #include "triangledialog.h"
 
 
-TriangleDialog::TriangleDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
+
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Solution of triangles"));
 

@@ -23,9 +23,10 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for slots, Q_OBJECT
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <Qt>       // for Qt::WindowFlags, Qt::Dialog
 
+class QSettings;
 class QWidget;
 
 #include "ui_i2mprogdialog.h"   // for Ui::I2MProgDialog
@@ -39,11 +40,14 @@ class I2MProgDialog : public QDialog, private Ui::I2MProgDialog
     Q_OBJECT
 
 public:
-    I2MProgDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    I2MProgDialog(QWidget *parent, QSettings *settings);
     ~I2MProgDialog();
 
 private slots:
     void inputChanged();
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // I2MPROGDIALOG_H

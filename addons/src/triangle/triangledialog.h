@@ -23,13 +23,14 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for slots, Q_OBJECT
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <Qt>       // for WindowFlags, Dialog
 #include <QtGlobal> // for uint
 
 class QDoubleValidator;
 class QEvent;
 class QPixmap;
+class QSettings;
 class QWidget;
 
 #include "ui_triangledialog.h"  // for Ui::TriangleDialog
@@ -43,7 +44,7 @@ class TriangleDialog : public QDialog, private Ui::TriangleDialog
     Q_OBJECT
 
 public:
-    TriangleDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    TriangleDialog(QWidget *parent, QSettings *settings);
     ~TriangleDialog();
 
 protected:
@@ -68,6 +69,9 @@ private:
     QDoubleValidator *aAInputValid;
     QDoubleValidator *aBInputValid;
     QDoubleValidator *aCInputValid;
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // TRIANGLEDIALOG_H

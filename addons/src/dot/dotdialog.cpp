@@ -22,6 +22,7 @@
 #include <QCheckBox>    // for QCheckBox
 #include <QLineEdit>    // for QLineEdit
 #include <QPushButton>  // for QPushButton
+#include <QSettings>    // for QSettings
 #include <QSpinBox>     // for QSpinBox
 #include <QString>      // for QString
 #include <QWidget>      // for QWidget
@@ -30,9 +31,12 @@
 #include "dotdialog.h"
 
 
-DotDialog::DotDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+DotDialog::DotDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
 
     setWindowTitle(tr("Insert dots"));
 

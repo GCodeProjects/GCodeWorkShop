@@ -30,6 +30,7 @@
 #include <QLineEdit>        // for QLineEdit
 #include <QLocale>          // for QLocale
 #include <QPushButton>      // for QPushButton
+#include <QSettings>        // for QSettings
 #include <QSpinBox>         // for QSpinBox
 #include <QString>          // for QString
 #include <QTabWidget>       // for QTabWidget
@@ -47,9 +48,13 @@
 #include "bhctab.h"     // for BHCTab
 
 
-BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+BHCDialog::BHCDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
+
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Bolt circle"));
 

@@ -23,9 +23,10 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for slots, Q_OBJECT
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <Qt>       // for WindowFlags, Dialog
 
+class QSettings;
 class QWidget;
 
 #include "ui_chamferdialog.h"   // for Ui::ChamferDialog
@@ -39,7 +40,7 @@ class ChamferDialog : public QDialog, private Ui::ChamferDialog
     Q_OBJECT
 
 public:
-    ChamferDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ChamferDialog(QWidget *parent, QSettings *settings);
     ~ChamferDialog();
 
 protected slots:
@@ -48,6 +49,9 @@ protected slots:
 
 private slots:
     void computeButtonClicked();
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // CHAMFERDIALOG_H

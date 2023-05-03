@@ -23,10 +23,11 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for slots, Q_OBJECT
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <Qt>       // for WindowFlags, Dialog
 
 class QEvent;
+class QSettings;
 class QWidget;
 
 #include "ui_feedsdialog.h" // for Ui::FeedsDialog
@@ -40,7 +41,7 @@ class FeedsDialog : public QDialog, private Ui::FeedsDialog
     Q_OBJECT
 
 public:
-    FeedsDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    FeedsDialog(QWidget *parent, QSettings *settings);
     ~FeedsDialog();
 
 protected:
@@ -54,6 +55,9 @@ private slots:
     void computeVcButtonClicked();
     void setDefButton();
     void checkBoxChanged();
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // FEEDSDIALOG_H

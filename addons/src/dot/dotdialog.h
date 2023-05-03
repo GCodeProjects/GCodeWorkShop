@@ -23,9 +23,10 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for slots, Q_OBJECT
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <Qt>       // for WindowFlags, Dialog
 
+class QSettings;
 class QWidget;
 
 #include "ui_dotdialog.h"   // for Ui::DotDialog
@@ -39,7 +40,7 @@ class DotDialog : public QDialog, private Ui::DotDialog
     Q_OBJECT
 
 public:
-    DotDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    DotDialog(QWidget *parent, QSettings *settings);
     ~DotDialog();
 
 private slots:
@@ -47,6 +48,9 @@ private slots:
     void atEndClicked();
     void divideClicked();
     void spinBoxVal(int val);
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // DOTDIALOG_H

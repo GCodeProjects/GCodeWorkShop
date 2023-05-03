@@ -22,6 +22,7 @@
 #include <QCheckBox>        // for QCheckBox
 #include <QComboBox>        // for QComboBox
 #include <QDoubleSpinBox>   // for QDoubleSpinBox
+#include <QSettings>        // for QSettings
 #include <QSpinBox>         // for QSpinBox
 #include <QWidget>          // for QWidget
 #include <QtGlobal>         // for Q_UNUSED
@@ -29,11 +30,13 @@
 #include "swapaxesdialog.h"
 
 
-SwapAxesDialog::SwapAxesDialog(QWidget *parent) :
+SwapAxesDialog::SwapAxesDialog(QWidget *parent, QSettings *settings) :
     QDialog(parent),
     Ui::SwapAxesDialog()
 {
     setupUi(this);
+
+    mSettings = settings;
 
     connect(betweenCheckBox, SIGNAL(clicked(bool)), this, SLOT(betweenCheckBoxClicked(bool)));
     connect(modifyCheckBox, SIGNAL(clicked(bool)), this, SLOT(modifyCheckBoxClicked(bool)));

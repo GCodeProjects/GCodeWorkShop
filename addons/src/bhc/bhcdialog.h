@@ -23,9 +23,10 @@
 
 #include <QDialog>  // for QDialog
 #include <QObject>  // for Q_OBJECT, slots
+#include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <Qt>       // for Qt::WindowFlags, Qt::Dialog
 
+class QSettings;
 class QTabWidget;
 class QWidget;
 
@@ -42,7 +43,7 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
     Q_OBJECT
 
 public:
-    BHCDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    BHCDialog(QWidget *parent, QSettings *settings);
     ~BHCDialog();
 
 protected:
@@ -59,6 +60,9 @@ private:
 
     int parentHeight;
     int parentWidth;
+
+protected:
+    QPointer<QSettings> mSettings;
 };
 
 #endif // BHCDIALOG_H

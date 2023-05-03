@@ -24,15 +24,20 @@
 #include <QLabel>       // for QLabel
 #include <QLineEdit>    // for QLineEdit
 #include <QPushButton>  // for QPushButton
+#include <QSettings>    // for QSettings
 #include <QString>      // for QString
 #include <QWidget>      // for QWidget
+#include <Qt>           // for WA_DeleteOnClose
 
 #include "i2mdialog.h"
 
 
-I2MDialog::I2MDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+I2MDialog::I2MDialog(QWidget *parent, QSettings *settings) :
+    QDialog(parent)
 {
     setupUi(this);
+
+    mSettings = settings;
 
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Inch to metric"));
