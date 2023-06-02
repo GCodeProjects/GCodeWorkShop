@@ -17,3 +17,8 @@ lang/*.qm
 
 *object_script.*
 *.stash
+
+*.wixobj
+*.idx
+.qtc_clangd
+*.qtds

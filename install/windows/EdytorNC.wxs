@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" 
+           Name="EdytorNC"
+           Language="1033"
+           Manufacturer="digitizer0"
+           Version="0.1.0.2" 
+           UpgradeCode="d884fe2d-3c89-4228-9711-10c895694d95">
+    
+    
+
+    <Package InstallerVersion="200" 
+               Compressed="yes"
+               Platform='x64' 
+               InstallScope="perMachine" />
+
+     <!-- <UIRef Id="WixUI_Minimal" /> -->
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="EdytorNC" 
+               Title="EdytorNC" 
+               Level="1">
+      <ComponentGroupRef Id="CompEdytorNC" />
+      <ComponentGroupRef Id="CompBearer" />
+      <ComponentGroupRef Id="CompIconEngines" />
+      <ComponentGroupRef Id="CompImageFormats" />
+      <ComponentGroupRef Id="CompPlatforms" />
+      <ComponentGroupRef Id="CompPrint" />
+      <ComponentGroupRef Id="CompStyles" />
+      <ComponentGroupRef Id="CompTranslation" />
+      <ComponentRef Id="ApplicationShortcut" />
+      
+    </Feature>
+    
+  </Product>
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="EdytorNC">
+          <Directory Id="BEARERDIR" Name="bearer"/>
+          <Directory Id="ICONEDIR" Name="iconengines"/>
+          <Directory Id="IMAGEDIR" Name="imageformats"/>
+          <Directory Id="PLTFRMDIR" Name="platforms"/>
+          <Directory Id="PRINTDIR" Name="printsupport"/>
+          <Directory Id="STYLESDIR" Name="styles"/>
+          <Directory Id="TRANSLDIR" Name="translations"/>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="EdytorNC"/>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+          <ComponentGroup Id="CompEdytorNC" Directory="INSTALLFOLDER">
+            <Component Id="MainExe" Guid="{f71cc218-6fc4-4af7-8a57-5559f5134660}" Win64="yes">
+               <File Id="edytornc.exe" Name="edytornc.exe"  Source="..\..\bin\release\edytornc.exe"  ProcessorArchitecture="x64"/>
+            </Component>
+            <Component Id="SfsExe" Guid="{77c65424-9ffe-48d4-be7b-3c24096ffc88}" Win64="yes">
+               <File Name="sfs.exe" Source="..\..\bin\release\sfs.exe"  ProcessorArchitecture="x64" />
+            </Component>
+              <Component Id="Libs" Guid="{a2678fe6-745a-43ed-9543-3d53393db77a}" Win64="yes">
+               <File Name="LICENSE"  Source="..\..\LICENSE"  ProcessorArchitecture="x64"/>
+               <File Name="D3Dcompiler_47.dll"  Source="..\..\bin\release\D3Dcompiler_47.dll"  ProcessorArchitecture="x64"/>
+               <File Name="libEGL.dll"  Source="..\..\bin\release\libEGL.dll"  ProcessorArchitecture="x64"/>
+               <File Name="libgcc_s_seh-1.dll"  Source="..\..\bin\release\libgcc_s_seh-1.dll"  ProcessorArchitecture="x64"/>
+               <File Name="libGLESv2.dll"  Source="..\..\bin\release\libGLESv2.dll"  ProcessorArchitecture="x64"/>
+               <File Name="libstdc++-6.dll"  Source="..\..\bin\release\libstdc++-6.dll"  ProcessorArchitecture="x64"/>
+               <File Name="libwinpthread-1.dll"  Source="..\..\bin\release\libwinpthread-1.dll"  ProcessorArchitecture="x64"/>
+               <File Name="opengl32sw.dll"  Source="..\..\bin\release\opengl32sw.dll"  ProcessorArchitecture="x64"/>
+               <File Name="Qt5Core.dll"  Source="..\..\bin\release\Qt5Core.dll"  ProcessorArchitecture="x64"/>
+               <File Name="Qt5Gui.dll"  Source="..\..\bin\release\Qt5Gui.dll"  ProcessorArchitecture="x64"/>
+               <File Name="Qt5Network.dll"  Source="..\..\bin\release\Qt5Network.dll"  ProcessorArchitecture="x64"/>
+               <File Name="Qt5PrintSupport.dll"  Source="..\..\bin\release\Qt5PrintSupport.dll"  ProcessorArchitecture="x64"/>
+               <File Name="Qt5SerialPort.dll"  Source="..\..\bin\release\Qt5SerialPort.dll"  ProcessorArchitecture="x64"/>
+               <File Name="Qt5Svg.dll"  Source="..\..\bin\release\Qt5Svg.dll"  ProcessorArchitecture="x64"/>
+               <File Name="Qt5Widgets.dll"  Source="..\..\bin\release\Qt5Widgets.dll"  ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>
+          <ComponentGroup Id="CompBearer" Directory="BEARERDIR">
+            <Component Id="BearerFile" Guid="04e81709-9e71-42be-ace4-483a5fcb5639" Win64="yes">
+              <File Name="qgenericbearer.dll" Source="..\..\bin\release\bearer\qgenericbearer.dll" ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>
+          <ComponentGroup Id="CompIconEngines" Directory="ICONEDIR">
+            <Component Id="IconEFile" Guid="d8d354e4-7648-4fd1-a963-bbdb14ea2440" Win64="yes">
+              <File Name="qsvgicon.dll" Source="..\..\bin\release\iconengines\qsvgicon.dll" ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>
+          <ComponentGroup Id="CompImageFormats" Directory="IMAGEDIR">
+            <Component Id="ImagesFiles" Guid="fd040719-a90b-475e-b117-40b5530294ca" Win64="yes">
+              <File Name="qgif.dll" Source="..\..\bin\release\imageformats\qgif.dll" ProcessorArchitecture="x64"/>
+              <File Name="qicns.dll" Source="..\..\bin\release\imageformats\qicns.dll" ProcessorArchitecture="x64"/>
+              <File Name="qico.dll" Source="..\..\bin\release\imageformats\qico.dll" ProcessorArchitecture="x64"/>
+              <File Name="qjpeg.dll" Source="..\..\bin\release\imageformats\qjpeg.dll" ProcessorArchitecture="x64"/>
+              <File Name="qsvg.dll" Source="..\..\bin\release\imageformats\qsvg.dll" ProcessorArchitecture="x64"/>
+              <File Name="qtga.dll" Source="..\..\bin\release\imageformats\qtga.dll" ProcessorArchitecture="x64"/>
+              <File Name="qtiff.dll" Source="..\..\bin\release\imageformats\qtiff.dll" ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>
+          <ComponentGroup Id="CompPlatforms" Directory="PLTFRMDIR">
+            <Component Id="IconPltFrm" Guid="ff7f4815-dfed-4d02-9a23-0a4bbb07ac71" Win64="yes">
+              <File Name="qwindows.dll" Source="..\..\bin\release\platforms\qwindows.dll" ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>
+          <ComponentGroup Id="CompPrint" Directory="PRINTDIR">
+            <Component Id="IconPrint" Guid="eb2bb9d9-2c3c-41c3-9ca5-f61af5fb746d" Win64="yes">
+              <File Name="windowsprintersupport.dll" Source="..\..\bin\release\printsupport\windowsprintersupport.dll" ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>   
+          <ComponentGroup Id="CompStyles" Directory="STYLESDIR">
+            <Component Id="Styles" Guid="3730a7ed-de03-40a6-99dc-0657c8fdc06a" Win64="yes">
+              <File Name="qwindowsvistastyle.dll" Source="..\..\bin\release\styles\qwindowsvistastyle.dll" ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>    
+          <ComponentGroup Id="CompTranslation" Directory="TRANSLDIR">
+            <Component Id="Translation" Guid="85abfee2-5fa0-40e5-9a09-f2fbe80594da" Win64="yes">
+              <File Name="qt_ar.qm" Source="..\..\bin\release\translations\qt_ar.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_bg.qm" Source="..\..\bin\release\translations\qt_bg.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_ca.qm" Source="..\..\bin\release\translations\qt_ca.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_cs.qm" Source="..\..\bin\release\translations\qt_cs.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_da.qm" Source="..\..\bin\release\translations\qt_da.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_de.qm" Source="..\..\bin\release\translations\qt_de.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_en.qm" Source="..\..\bin\release\translations\qt_en.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_es.qm" Source="..\..\bin\release\translations\qt_es.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_fi.qm" Source="..\..\bin\release\translations\qt_fi.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_fr.qm" Source="..\..\bin\release\translations\qt_fr.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_he.qm" Source="..\..\bin\release\translations\qt_he.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_hu.qm" Source="..\..\bin\release\translations\qt_hu.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_it.qm" Source="..\..\bin\release\translations\qt_it.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_ja.qm" Source="..\..\bin\release\translations\qt_ja.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_ko.qm" Source="..\..\bin\release\translations\qt_ko.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_lv.qm" Source="..\..\bin\release\translations\qt_lv.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_pl.qm" Source="..\..\bin\release\translations\qt_pl.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_ru.qm" Source="..\..\bin\release\translations\qt_ru.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_sk.qm" Source="..\..\bin\release\translations\qt_sk.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_tr.qm" Source="..\..\bin\release\translations\qt_tr.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_uk.qm" Source="..\..\bin\release\translations\qt_uk.qm" ProcessorArchitecture="x64"/>
+              <File Name="qt_zh_TW.qm" Source="..\..\bin\release\translations\qt_zh_TW.qm" ProcessorArchitecture="x64"/>
+            </Component>
+          </ComponentGroup>    
+    </Fragment>      
+    <Fragment>
+      <DirectoryRef Id="ApplicationProgramsFolder">
+        <Component Id="ApplicationShortcut" Guid="b4a75fa1-3d08-4bea-afd6-3210781dfee5">
+          <Shortcut Id="ApplicationStartMenuShortcut" 
+                    Name="EdytorNC"
+                    Description="EdytorNC - A CNC program editor"
+                    Target="[#edytornc.exe]"
+                    WorkingDirectory="INSTALLFOLDER"/>
+          <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+          <RegistryValue Root="HKCU" Key="Software\digitizer0\EdytorNC" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        </Component>
+      </DirectoryRef>
+    </Fragment>
+</Wix>
