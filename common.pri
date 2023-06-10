@@ -11,6 +11,8 @@ CONFIG(debug, debug|release) {
     DEFINES *= QT_NO_DEBUG_OUTPUT # QT_NO_INFO_OUTPUT
 }
 
+APP_BINS = $${PROJECT_ROOT_PATH}/bin/$${BUILD_FLAG}
+
 CONFIG *= c++11
 CONFIG -= debug_and_release debug_and_release_target
 
@@ -22,7 +24,7 @@ LANG_PATH = $${PROJECT_ROOT_PATH}/lang
 LANG_LIST = pl ca de fi cs_CZ es nl ru
 
 !CONFIG(staticlib) {
-    DESTDIR = $${PROJECT_ROOT_PATH}/bin/$${BUILD_FLAG}
+    DESTDIR = $$APP_BINS
 }
 
 !defined(PREFIX, var) {

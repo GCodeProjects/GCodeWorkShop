@@ -5,6 +5,7 @@ SUBDIRS = 3rdparty gcodeshared addons gcodeworkshop gcodefileserver
 
 
 include(common.pri)
+include(install/install.pri)
 
 QMAKE_EXTRA_TARGETS += lupdate
 lupdate.depends = lupdateGCodeWorkShop lupdateKdiff3
