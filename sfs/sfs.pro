@@ -2,7 +2,6 @@
 VERSION = 0.1.0.0
 TEMPLATE = app
 TARGET = sfs
-CONFIG += qt
 
 include(../common.pri)
 

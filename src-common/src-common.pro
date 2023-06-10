@@ -2,7 +2,7 @@
 VERSION = 2018.07
 TEMPLATE = lib
 TARGET = edytornc-common
-CONFIG += qt staticlib
+CONFIG += staticlib
 
 include(../common.pri)
 

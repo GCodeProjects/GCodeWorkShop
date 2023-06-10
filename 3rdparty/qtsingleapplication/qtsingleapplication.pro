@@ -2,7 +2,7 @@
 
 TEMPLATE = lib
 TARGET = qtsingleapplication
-CONFIG += qt staticlib
+CONFIG += staticlib
 
 include(../../common.pri)
 

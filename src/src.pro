@@ -2,7 +2,6 @@
 VERSION = 2018.07
 TEMPLATE = app
 TARGET = edytornc
-CONFIG += qt
 
 include(../common.pri)
 

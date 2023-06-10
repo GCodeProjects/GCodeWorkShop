@@ -2,7 +2,7 @@
 
 TEMPLATE = lib
 TARGET = kdiff3
-CONFIG += qt staticlib
+CONFIG += staticlib
 
 include(../../common.pri)
 
