@@ -24,12 +24,8 @@
 #include <QLabel>       // for QLabel
 #include <QLineEdit>    // for QLineEdit
 #include <QPushButton>  // for QPushButton
-#include <QSettings>    // for QSettings
 #include <QString>      // for QString
-#include <QVariant>     // for QVariant
 #include <QWidget>      // for QWidget
-
-#include <utils/medium.h> // Medium
 
 #include "i2mdialog.h"
 
@@ -41,31 +37,18 @@ I2MDialog::I2MDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Inch to metric"));
 
-    QSettings &settings = *Medium::instance().settings();
-    settings.beginGroup("Inch2mm");
-    inchCheckBox->setChecked(settings.value("Inch", true).toBool());
-    mmCheckBox->setChecked(!settings.value("Inch", true).toBool());
-    settings.endGroup();
-
-    inputChanged();
     checkBoxToggled();
-
-    //setMaximumSize(width(), height());
 
     connect(inchInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
     connect(inchCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
     connect(mmCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(closePushButton, SIGNAL(clicked()), SLOT(close()));
+    connect(closePushButton, SIGNAL(clicked()), SLOT(accept()));
 
     setFocusProxy(inchInput);
 }
 
 I2MDialog::~I2MDialog()
 {
-    QSettings &settings = *Medium::instance().settings();
-    settings.beginGroup("Inch2mm");
-    settings.setValue("Inch", inchCheckBox->isChecked());
-    settings.endGroup();
 }
 
 void I2MDialog::inputChanged()

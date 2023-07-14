@@ -38,17 +38,7 @@ public:
     explicit SwapAxesDialog(QWidget *parent = 0);
     ~SwapAxesDialog();
 
-    double getMinValue();
-    double getMaxValue();
-    double getModiferValue();
-    int getPrecision();
-    int getOperator();
-    QString getFirstAxis();
-    QString getSecondAxis();
-    int exec();
-
 private slots:
-    void saveSettings();
     void betweenCheckBoxClicked(bool checked);
     void modifyCheckBoxClicked(bool checked);
     void precisionSpinBoxChanded(int val);

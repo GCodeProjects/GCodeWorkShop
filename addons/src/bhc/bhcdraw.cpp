@@ -49,7 +49,6 @@ BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
     setWindowTitle(tr("Bolt circle - preview"));
     setAttribute(Qt::WA_DeleteOnClose);
-    //sizeGripEnabled(true);
 
     setToolTip(tr("Click to close"));
 
@@ -87,7 +86,6 @@ void BHCDraw::setScale(double sc)
 
 void BHCDraw::paintEvent(QPaintEvent *)
 {
-    //bitBlt( this, 0, 0, pm );
     if (pm->isNull()) {
         return;
     }
@@ -98,7 +96,6 @@ void BHCDraw::paintEvent(QPaintEvent *)
 
 void BHCDraw::focusOutEvent(QFocusEvent *)
 {
-    //close();
 }
 
 void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool first,
@@ -112,7 +109,6 @@ void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool 
     paint->setFont(font);
     QFontMetrics fm = paint->fontMetrics();
 
-    //paint->setRenderHint(QPainter::Antialiasing);
     paint->save();
     int c = qMin(geometry().width(), geometry().height());
     c = c + (fm.lineSpacing() * 8);
@@ -178,9 +174,6 @@ void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool 
 
     paint->drawEllipse(QPointF(x, -y), d, d);
 
-    //    v = paint->viewport();
-    //    c = qMin(v.width(), v.height());
-
     paint->restore();
     paint->end();
 }
@@ -197,7 +190,6 @@ void BHCDraw::drawLines(qreal dia, qreal ang, QColor cl)
     paint->setFont(font);
     QFontMetrics fm = paint->fontMetrics();
 
-    //paint->setRenderHint(QPainter::Antialiasing);
     paint->save();
 
     int d = qMin(geometry().width(), geometry().height());
@@ -206,9 +198,7 @@ void BHCDraw::drawLines(qreal dia, qreal ang, QColor cl)
     QRect v = paint->viewport();
     d = qMin(v.width(), v.height());
     paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
-    //paint->scale(vp, vp);
 
-    //paint->setRasterOp(Qt::OrROP);
     paint->setPen(QPen(cl, 0, Qt::DotLine));
 
     x = (dia + 4) * cos((M_PI / 180) * ang);
@@ -241,7 +231,6 @@ void BHCDraw::printText(int x, int y, int line, const QString &text, QColor colo
     paint->setFont(font);
     QFontMetrics fm = paint->fontMetrics();
 
-    //paint->setRenderHint(QPainter::Antialiasing);
     paint->save();
     paint->setPen(QPen(color, 0, Qt::SolidLine));
     paint->drawText(x, y + (fm.lineSpacing() * line), text);
@@ -265,7 +254,6 @@ void BHCDraw::drawLines()
     QRect v = paint->viewport();
     d = qMin(v.width(), v.height());
     paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
-    //paint->scale(vp, vp);
 
     paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
 

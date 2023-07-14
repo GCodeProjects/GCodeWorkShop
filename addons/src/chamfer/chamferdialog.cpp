@@ -61,10 +61,7 @@ ChamferDialog::ChamferDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(paren
     xdInput->setValidator(xdInputValid);
 
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(close()));
-
-    //inputChanged();
-    //setMaximumSize(width(), height());
+    connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
 
     connect(angInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
     connect(zlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
@@ -167,9 +164,6 @@ void ChamferDialog::checkBoxToggled()
 
     ena = (angCheckBox->isChecked() && dlCheckBox->isChecked());
     zlCheckBox->setEnabled(!ena && (!xdCheckBox->isChecked() || !xoCheckBox->isChecked()));
-
-    //zlCheckBox->setEnabled(!xdCheckBox->isChecked() || !xoCheckBox->isChecked());
-    //dlCheckBox->setEnabled(!xdCheckBox->isChecked() || !xoCheckBox->isChecked());
 
     xoCheckBox->setEnabled((!xdCheckBox->isChecked()) || !zlCheckBox->isChecked());
     xdCheckBox->setEnabled((!xoCheckBox->isChecked()) || !zlCheckBox->isChecked());

@@ -64,7 +64,7 @@ TriangleDialog::TriangleDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(par
     connect(aBCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
     connect(aCCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(close()));
+    connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
 
     QValidator *aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
     aInput->setValidator(aInputValid);

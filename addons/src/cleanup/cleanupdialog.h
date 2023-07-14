@@ -21,12 +21,9 @@
 #ifndef CLEANUPDIALOG_H
 #define CLEANUPDIALOG_H
 
-#include <QDialog>      // for QDialog
-#include <QList>        // for QList
-#include <QObject>      // for Q_OBJECT, slots
-#include <QString>      // for QString
-#include <QStringList>  // for QStringList
-#include <QTextEdit>    // for QTextEdit, QTextEdit::ExtraSelection
+#include <QDialog>  // for QDialog
+#include <QObject>  // for Q_OBJECT, slots
+#include <QString>  // for QString
 
 class QMenu;
 class QPoint;
@@ -45,18 +42,8 @@ public:
     ~CleanUpDialog();
 
     void setText(QString text);
-    QStringList getSelectedExpressions();
-    int exec(QStringList selList, QString text);
 
 private:
-    QList<QTextEdit::ExtraSelection> extraSelections;
-    QList<QTextEdit::ExtraSelection> findTextExtraSelections;
-    QTextEdit::ExtraSelection selection;
-
-    QStringList expressions;
-    QStringList expressionsComment;
-    QStringList selectedExpressions;
-
     QMenu *contextMenu;
 
     void highlightFindText(QRegularExpression regex);
@@ -65,8 +52,6 @@ private:
 private slots:
     void highlightText(int row, int col);
     void cellChangedSlot(int row, int col);
-    void closeButtonClicked();
-    void okButtonClicked();
     void contextMenuReq(const QPoint &pos);
     void removeRow();
 };

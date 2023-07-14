@@ -30,19 +30,16 @@
 #include <QLineEdit>        // for QLineEdit
 #include <QLocale>          // for QLocale
 #include <QPushButton>      // for QPushButton
-#include <QSettings>        // for QSettings
 #include <QSpinBox>         // for QSpinBox
 #include <QString>          // for QString
 #include <QTabWidget>       // for QTabWidget
 #include <QTableWidget>     // for QTableWidget
 #include <QTableWidgetItem> // for QTableWidgetItem
 #include <QVBoxLayout>      // for QVBoxLayout
-#include <QVariant>         // for QVariant
 #include <QWidget>          // for QWidget
 #include <Qt>               // for operator|, AlignRight, AlignVCenter
 #include <QtGlobal>         // for qreal, qMax, QFlags
 
-#include <utils/medium.h>       // for Medium
 #include <utils/removezeros.h>  // for Utils::removeZeros
 
 #include "bhcdialog.h"
@@ -55,7 +52,6 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
     setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Bolt circle"));
-    //setFocusPolicy(QWidget::StrongFocus);
 
     drawing = nullptr;
 
@@ -75,37 +71,8 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
     tabBar->addTab(page3, tr("Circle 3 - red"));
     tabBar->addTab(page4, tr("Circle 4 - yellow"));
 
-    QSettings &settings = *Medium::instance().settings();
-    settings.beginGroup("BHC");
-
-    for (int tabId = 0; tabId < tabBar->count(); tabId++) {
-        BHCTab *tab = (BHCTab *)tabBar->widget(tabId);
-
-        if (tab == nullptr) {
-            continue;
-        }
-
-        settings.beginGroup(QString("TAB%1").arg(tabId));
-
-        tab->xCenterInput->setText(settings.value("XCenter", "0").toString());
-        tab->yCenterInput->setText(settings.value("YCenter", "0").toString());
-        tab->diaInput->setText(settings.value("Dia", "0").toString());
-        tab->angleStartInput->setText(settings.value("StartAngle", "0").toString());
-        tab->angleBeetwenInput->setText(settings.value("AngleBeetwen", "0").toString());
-        tab->holesInput->setText(settings.value("NoOfHoles", "0").toString());
-        tab->roateInput->setValue(settings.value("Rotate", 0).toInt());
-
-        tab->mirrorX->setChecked(settings.value("MirrorX", false).toBool());
-        tab->mirrorY->setChecked(settings.value("MirrorY", false).toBool());
-        tab->all->setChecked(settings.value("Common", true).toBool());
-
-        settings.endGroup();
-    }
-
-    settings.endGroup();
-
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
+    connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
     connect(clearAllButton, SIGNAL(clicked()), SLOT(clearAll()));
     connect(page1, SIGNAL(commonChk()), SLOT(comChk()));
     connect(page2, SIGNAL(commonChk()), SLOT(comChk()));
@@ -117,44 +84,7 @@ BHCDialog::BHCDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 
 BHCDialog::~BHCDialog()
 {
-    QSettings &settings = *Medium::instance().settings();
-    settings.beginGroup("BHC");
-
-    for (int tabId = 0; tabId < tabBar->count(); tabId++) {
-        BHCTab *tab = (BHCTab *)tabBar->widget(tabId);
-
-        if (tab == nullptr) {
-            continue;
-        }
-
-        settings.beginGroup(QString("TAB%1").arg(tabId));
-
-        settings.setValue("XCenter", tab->xCenterInput->text());
-        settings.setValue("YCenter", tab->yCenterInput->text());
-        settings.setValue("Dia", tab->diaInput->text());
-        settings.setValue("StartAngle", tab->angleStartInput->text());
-        settings.setValue("AngleBeetwen", tab->angleBeetwenInput->text());
-        settings.setValue("NoOfHoles", tab->holesInput->text());
-        settings.setValue("Rotate", tab->roateInput->value());
-
-        settings.setValue("MirrorX", tab->mirrorX->isChecked());
-        settings.setValue("MirrorY", tab->mirrorY->isChecked());
-        settings.setValue("Common", tab->all->isChecked());
-
-        settings.endGroup();
-    }
-
-    settings.endGroup();
 }
-
-//void BHCDialog::windowActivationChange(bool oldActive)
-//{
-//    Q_UNUSED(oldActive);
-//    drawing = (BHCDraw *) findChild<BHCDraw *>();
-//    if(drawing > 0)
-//      if(!this->isActiveWindow())
-//         drawing->close();
-//}
 
 void BHCDialog::comChk()
 {
@@ -219,11 +149,6 @@ void BHCDialog::clearAll()
     }
 }
 
-void BHCDialog::closeButtonClicked()
-{
-    close();
-}
-
 void BHCDialog::computeButtonClicked()
 {
     BHCTab *tab;
@@ -245,10 +170,8 @@ void BHCDialog::computeButtonClicked()
 
         maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(),
                                &ok) + 2 * abs(QLocale().toDouble(tab->xCenterInput->text(), &ok))));
-        //      maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(), &ok)- 2*(QLocale().toDouble(tab->xCenterInput->text(), &ok))));
         maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(),
                                &ok) + 2 * abs(QLocale().toDouble(tab->yCenterInput->text(), &ok))));
-        //      maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(), &ok)- 2*(QLocale().toDouble(tab->yCenterInput->text(), &ok))));
     }
 
     for (tabId = 0; tabId < tabBar->count(); tabId++) {
@@ -361,13 +284,10 @@ void BHCDialog::computeButtonClicked()
             y = yCenter + (dia * sin((M_PI / 180) * ang));
 
             QTableWidgetItem *xItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(x, 0, 'f', 3)));
-            //xItem->setFlags(Qt::ItemIsEnabled);
             xItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
             QTableWidgetItem *yItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(y, 0, 'f', 3)));
             yItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-            //yItem->setFlags(Qt::ItemIsEnabled);
-
 
             QTableWidgetItem *hdr = new QTableWidgetItem(Utils::removeZeros(QString("%1 - %2 ").arg(i + 1).arg(ang,
                     0, 'f', 3)));
@@ -537,7 +457,4 @@ void BHCDialog::computeButtonClicked()
 
     drawing->setUpdatesEnabled(true);
     drawing->update();
-
-    //adjustSize();
-    //setFocus();
 }

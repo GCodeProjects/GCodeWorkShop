@@ -51,7 +51,6 @@ protected:
 private slots:
     void comChk();
     void computeButtonClicked();
-    void closeButtonClicked();
     void clearAll();
 
 private:

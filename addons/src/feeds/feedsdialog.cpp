@@ -37,13 +37,9 @@
 #include <QLocale>          // for QLocale
 #include <QPalette>         // for QPalette
 #include <QPushButton>      // for QPushButton
-#include <QSettings>        // for QSettings
 #include <QString>          // for QString
 #include <QValidator>       // for QValidator
-#include <QVariant>         // for QVariant
 #include <QWidget>          // for QWidget
-
-#include <utils/medium.h>   // for Medium
 
 #include "feedsdialog.h"
 
@@ -54,12 +50,6 @@ FeedsDialog::FeedsDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f
 
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Cutting parameters"));
-
-    QSettings &settings = *Medium::instance().settings();
-    settings.beginGroup("FeedSpeedDialog");
-    mmCheckBox->setChecked(settings.value("MM", true).toBool());
-    inchCheckBox->setChecked(!settings.value("MM", true).toBool());
-    settings.endGroup();
 
     QValidator *vcInputValid = new QIntValidator(1, 9999, this);
     vcInput->setValidator(vcInputValid);
@@ -90,7 +80,7 @@ FeedsDialog::FeedsDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f
     connect(zInput, SIGNAL(editingFinished()), SLOT(setDefButton()));
 
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(close()));
+    connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
     connect(computeVcButton, SIGNAL(clicked()), SLOT(computeVcButtonClicked()));
 
     inputChanged();
@@ -111,10 +101,6 @@ FeedsDialog::FeedsDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f
 
 FeedsDialog::~FeedsDialog()
 {
-    QSettings &settings = *Medium::instance().settings();
-    settings.beginGroup("FeedSpeedDialog");
-    settings.setValue("MM", mmCheckBox->isChecked());
-    settings.endGroup();
 }
 
 bool FeedsDialog::eventFilter(QObject *obj, QEvent *ev)
