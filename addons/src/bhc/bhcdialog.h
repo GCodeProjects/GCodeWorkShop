@@ -60,6 +60,7 @@ private slots:
     void comChk();
     void computeButtonClicked();
     void clearAll();
+    void onFinished(int result);
 
 private:
     QTabWidget *tabBar;

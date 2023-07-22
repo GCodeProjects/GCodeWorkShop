@@ -58,6 +58,7 @@ private slots:
     void allLinesClicked();
     void removeAllClicked();
     void mRenumHeClicked();
+    void onFinished(int result);
 
 protected:
     QPointer<QSettings> mSettings;

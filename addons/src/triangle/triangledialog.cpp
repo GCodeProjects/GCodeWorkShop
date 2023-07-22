@@ -81,6 +81,7 @@ TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
     connect(aCCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
     connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
     QValidator *aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
     aInput->setValidator(aInputValid);
@@ -784,4 +785,9 @@ void TriangleDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void TriangleDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

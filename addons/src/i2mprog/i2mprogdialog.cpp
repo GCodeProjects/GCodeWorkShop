@@ -52,6 +52,7 @@ I2MProgDialog::I2MProgDialog(QWidget *parent, QSettings *settings) :
 
     connect(okButton, SIGNAL(clicked()), SLOT(accept()));
     connect(closeButton, SIGNAL(clicked()), SLOT(reject()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
     setFocusProxy(mInput);
     inputChanged();
@@ -123,4 +124,9 @@ void I2MProgDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void I2MProgDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

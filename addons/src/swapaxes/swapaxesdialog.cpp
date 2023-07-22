@@ -54,6 +54,8 @@ SwapAxesDialog::SwapAxesDialog(QWidget *parent, QSettings *settings) :
 
     connect(precisionSpinBox, SIGNAL(valueChanged(int)), this,
             SLOT(precisionSpinBoxChanded(int)));
+
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 }
 
 SwapAxesDialog::~SwapAxesDialog()
@@ -171,4 +173,9 @@ void SwapAxesDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void SwapAxesDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

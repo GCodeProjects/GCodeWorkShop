@@ -69,6 +69,7 @@ private slots:
     int option2();
     int option3();
     void option4();
+    void onFinished(int result);
 
 private:
     uint mode;

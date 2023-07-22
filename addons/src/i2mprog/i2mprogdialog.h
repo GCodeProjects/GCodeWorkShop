@@ -53,6 +53,7 @@ public:
 
 private slots:
     void inputChanged();
+    void onFinished(int result);
 
 protected:
     QPointer<QSettings> mSettings;

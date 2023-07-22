@@ -54,6 +54,7 @@ RenumberDialog::RenumberDialog(QWidget *parent, QSettings *settings) :
     connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
     connect(okButton, SIGNAL(clicked()), SLOT(accept()));
     connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
     connect(mRenumHe, SIGNAL(clicked()), this, SLOT(mRenumHeClicked()));
 
     setMaximumSize(width(), height());
@@ -235,4 +236,9 @@ void RenumberDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void RenumberDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

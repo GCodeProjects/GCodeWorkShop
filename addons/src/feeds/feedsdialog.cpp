@@ -96,6 +96,7 @@ FeedsDialog::FeedsDialog(QWidget *parent, QSettings *settings) :
 
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
     connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
     connect(computeVcButton, SIGNAL(clicked()), SLOT(computeVcButtonClicked()));
 
     inputChanged();
@@ -382,4 +383,9 @@ void FeedsDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void FeedsDialog::FeedsDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

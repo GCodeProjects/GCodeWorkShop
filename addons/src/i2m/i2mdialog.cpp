@@ -58,6 +58,7 @@ I2MDialog::I2MDialog(QWidget *parent, QSettings *settings) :
     connect(inchCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
     connect(mmCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
     connect(closePushButton, SIGNAL(clicked()), SLOT(accept()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
     setFocusProxy(inchInput);
 }
@@ -261,4 +262,9 @@ void I2MDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void I2MDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

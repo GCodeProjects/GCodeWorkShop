@@ -89,6 +89,7 @@ BHCDialog::BHCDialog(QWidget *parent, QSettings *settings) :
 
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
     connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
     connect(clearAllButton, SIGNAL(clicked()), SLOT(clearAll()));
     connect(page1, SIGNAL(commonChk()), SLOT(comChk()));
     connect(page2, SIGNAL(commonChk()), SLOT(comChk()));
@@ -541,4 +542,9 @@ void BHCDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void BHCDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

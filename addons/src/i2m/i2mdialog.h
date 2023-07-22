@@ -55,6 +55,9 @@ protected slots:
     void inputChanged();
     void checkBoxToggled();
 
+private slots:
+    void onFinished(int result);
+
 protected:
     QPointer<QSettings> mSettings;
 };

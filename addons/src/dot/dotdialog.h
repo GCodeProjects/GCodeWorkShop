@@ -56,6 +56,7 @@ private slots:
     void atEndClicked();
     void divideClicked();
     void spinBoxVal(int val);
+    void onFinished(int result);
 
 protected:
     QPointer<QSettings> mSettings;

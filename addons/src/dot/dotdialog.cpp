@@ -57,6 +57,8 @@ DotDialog::DotDialog(QWidget *parent, QSettings *settings) :
     connect(mSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxVal(int)));
     connect(okButton, SIGNAL(clicked()), SLOT(accept()));
     connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
+    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
     setMaximumSize(width(), height());
     okButton->setEnabled(mInput->hasAcceptableInput());
@@ -161,4 +163,9 @@ void DotDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void DotDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

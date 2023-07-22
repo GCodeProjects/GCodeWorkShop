@@ -78,6 +78,7 @@ ChamferDialog::ChamferDialog(QWidget *parent, QSettings *settings) :
 
     connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
     connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
     connect(angInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
     connect(zlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
@@ -360,4 +361,9 @@ void ChamferDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void ChamferDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

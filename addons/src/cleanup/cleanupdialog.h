@@ -64,6 +64,7 @@ private slots:
     void cellChangedSlot(int row, int col);
     void contextMenuReq(const QPoint &pos);
     void removeRow();
+    void onFinished(int result);
 
 protected:
     QPointer<QSettings> mSettings;

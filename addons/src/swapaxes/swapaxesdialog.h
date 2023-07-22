@@ -52,6 +52,7 @@ private slots:
     void betweenCheckBoxClicked(bool checked);
     void modifyCheckBoxClicked(bool checked);
     void precisionSpinBoxChanded(int val);
+    void onFinished(int result);
 
 protected:
     QPointer<QSettings> mSettings;

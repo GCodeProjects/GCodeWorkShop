@@ -63,6 +63,7 @@ private slots:
     void computeVcButtonClicked();
     void setDefButton();
     void checkBoxChanged();
+    void onFinished(int result);
 
 protected:
     QPointer<QSettings> mSettings;

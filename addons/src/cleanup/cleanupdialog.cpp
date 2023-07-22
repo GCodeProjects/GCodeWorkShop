@@ -81,6 +81,7 @@ CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
     connect(tableWidget, SIGNAL(cellChanged(int, int)), this, SLOT(cellChangedSlot(int, int)));
     connect(cancelPushButton, SIGNAL(clicked()), this, SLOT(reject()));
     connect(okPushButton, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
     connect(tableWidget, SIGNAL(customContextMenuRequested(const QPoint &)), this,
             SLOT(contextMenuReq(const QPoint &)));
     tableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -300,4 +301,9 @@ void CleanUpDialog::saveSettings(bool saveOptions)
     }
 
     mSettings->endGroup();
+}
+
+void CleanUpDialog::onFinished(int result)
+{
+    saveSettings(result == QDialog::Accepted);
 }

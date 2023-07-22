@@ -57,6 +57,7 @@ protected slots:
 
 private slots:
     void computeButtonClicked();
+    void onFinished(int result);
 
 protected:
     QPointer<QSettings> mSettings;
