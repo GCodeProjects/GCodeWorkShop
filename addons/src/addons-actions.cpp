@@ -28,18 +28,21 @@
 
 #include "bhc/addons-bhc.h"
 #include "blockskip/utils-blockskip.h"
+#include "chamfer/addons-chamfer.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_bhc(new QAction(this)),
     m_blockSkipDecrement(new QAction(this)),
     m_blockSkipIncrement(new QAction(this)),
-    m_blockSkipRemove(new QAction(this))
+    m_blockSkipRemove(new QAction(this)),
+    m_chamfer(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
     connect(m_blockSkipIncrement, SIGNAL(triggered()), this, SLOT(doBlockSkipIncrement()));
     connect(m_blockSkipRemove, SIGNAL(triggered()), this, SLOT(doBlockSkipRemove()));
+    connect(m_chamfer, SIGNAL(triggered()), this, SLOT(doChamfer()));
 
     loadIcons();
     loadTranslations();
@@ -55,6 +58,8 @@ void Addons::Actions::loadTranslations()
     m_blockSkipIncrement->setToolTip(tr("Insert/increase Block Skip /"));
     m_blockSkipRemove->setText(tr("Block Skip remove"));
     m_blockSkipRemove->setToolTip(tr("Remove Block Skip /"));
+    m_chamfer->setText(tr("Chamfer"));
+    m_chamfer->setToolTip(tr("Calculate chamfer"));
 }
 
 void Addons::Actions::loadIcons()
@@ -63,6 +68,7 @@ void Addons::Actions::loadIcons()
     m_blockSkipDecrement->setIcon(QIcon(":/images/blockskip-.png"));
     m_blockSkipIncrement->setIcon(QIcon(":/images/blockskip+.png"));
     m_blockSkipRemove->setIcon(QIcon(":/images/blockskipr.png"));
+    m_chamfer->setIcon(QIcon(":/images/chamfer.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -97,4 +103,9 @@ void Addons::Actions::doBlockSkipIncrement()
 void Addons::Actions::doBlockSkipRemove()
 {
     doBlockSkip(true, true);
+}
+
+void Addons::Actions::doChamfer()
+{
+    Addons::doChamfer(EdytorNc::instance(), Medium::instance().settings());
 }

@@ -1214,13 +1214,6 @@ void EdytorNc::doSpeedFeed()
     }
 }
 
-void EdytorNc::doChamfer()
-{
-    ChamferDialog *chamferDialog = new ChamferDialog(this);
-    chamferDialog->move((geometry().x() + width()) - chamferDialog->width(), geometry().y() + 35);
-    chamferDialog->show();
-}
-
 void EdytorNc::doTriangles()
 {
     TriangleDialog *triangleDialog;
@@ -1738,6 +1731,7 @@ void EdytorNc::createActions()
     m_addonsActions->blockSkipRemove()->setShortcut(tr("Ctrl+1"));
     m_addonsActions->blockSkipIncrement()->setShortcut(tr("Ctrl+2"));
     m_addonsActions->blockSkipDecrement()->setShortcut(tr("Ctrl+3"));
+    //m_addonsActions->chamfer()->setShortcut(tr("F9"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1780,11 +1774,6 @@ void EdytorNc::createActions()
     speedFeedAct->setShortcut(tr("F9"));
     speedFeedAct->setToolTip(tr("Calculate speed, feed, cutting speed"));
     connect(speedFeedAct, SIGNAL(triggered()), this, SLOT(doSpeedFeed()));
-
-    chamferAct = new QAction(QIcon(":/images/chamfer.png"), tr("Chamfer"), this);
-    //chamferAct->setShortcut(tr("F9"));
-    chamferAct->setToolTip(tr("Calculate chamfer"));
-    connect(chamferAct, SIGNAL(triggered()), this, SLOT(doChamfer()));
 
     trianglesAct = new QAction(QIcon(":/images/triangles.png"), tr("Solution of triangles"), this);
     //trianglesAct->setShortcut(tr("F9"));
@@ -1996,7 +1985,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(m_addonsActions->bhc());
     toolsMenu->addAction(speedFeedAct);
     toolsMenu->addAction(trianglesAct);
-    toolsMenu->addAction(chamferAct);
+    toolsMenu->addAction(m_addonsActions->chamfer());
     toolsMenu->addAction(convertAct);
     toolsMenu->addAction(convertProgAct);
     toolsMenu->addSeparator();
@@ -2071,7 +2060,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(m_addonsActions->bhc());
     toolsToolBar->addAction(speedFeedAct);
     toolsToolBar->addAction(trianglesAct);
-    toolsToolBar->addAction(chamferAct);
+    toolsToolBar->addAction(m_addonsActions->chamfer());
     toolsToolBar->addAction(convertAct);
     toolsToolBar->addAction(convertProgAct);
     toolsToolBar->addSeparator();

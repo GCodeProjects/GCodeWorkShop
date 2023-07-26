@@ -160,7 +160,6 @@ private slots:
     void doInsertDot();
     void doRenumber();
     void doSpeedFeed();
-    void doChamfer();
     void doTriangles();
     void doConvert();
     void doConvertProg();
@@ -341,7 +340,6 @@ private:
     QAction *splittAct;
     QAction *insertSpcAct;
     QAction *speedFeedAct;
-    QAction *chamferAct;
     QAction *trianglesAct;
     QAction *convertAct;
     QAction *convertProgAct;

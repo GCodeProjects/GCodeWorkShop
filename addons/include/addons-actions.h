@@ -44,18 +44,21 @@ public:
     QAction *blockSkipDecrement() {return m_blockSkipDecrement;}
     QAction *blockSkipIncrement() {return m_blockSkipIncrement;}
     QAction *blockSkipRemove() {return m_blockSkipRemove;}
+    QAction *chamfer() {return m_chamfer;}
 
 protected:
     QAction *m_bhc;
     QAction *m_blockSkipDecrement;
     QAction *m_blockSkipIncrement;
     QAction *m_blockSkipRemove;
+    QAction *m_chamfer;
 
 protected slots:
     void doBhc();
     void doBlockSkipDecrement();
     void doBlockSkipIncrement();
     void doBlockSkipRemove();
+    void doChamfer();
 
 protected:
     void doBlockSkip(bool remove, bool inc);
