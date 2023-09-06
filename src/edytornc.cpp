@@ -112,8 +112,6 @@ EdytorNc::EdytorNc(Medium *medium)
     openExampleAct = nullptr;
     commApp = nullptr;
 
-    selectedExpressions.clear();
-
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
 
@@ -1430,7 +1428,7 @@ void EdytorNc::updateMenus()
     splittAct->setEnabled(hasMdiChildNotReadOnly);
     convertProgAct->setEnabled(hasMdiChildNotReadOnly);
     cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
-    cleanUpDialogAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->cleanUp()->setEnabled(hasMdiChildNotReadOnly);
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
     semiCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     paraCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
@@ -1732,6 +1730,7 @@ void EdytorNc::createActions()
     m_addonsActions->blockSkipIncrement()->setShortcut(tr("Ctrl+2"));
     m_addonsActions->blockSkipDecrement()->setShortcut(tr("Ctrl+3"));
     //m_addonsActions->chamfer()->setShortcut(tr("F9"));
+    //m_addonsActions->cleanUp()->setShortcut(QKeySequence::Print);
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1754,11 +1753,6 @@ void EdytorNc::createActions()
     //insertEmptyLinesAct->setShortcut(tr("F5"));
     insertEmptyLinesAct->setToolTip(tr("Insert empty lines"));
     connect(insertEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
-
-    cleanUpDialogAct = new QAction(QIcon(":/images/cleanup.png"), tr("Clean &up"), this);
-    //cleanUpDialogAct->setShortcut(QKeySequence::Print);
-    cleanUpDialogAct->setToolTip(tr("Remove text using regular expressions"));
-    connect(cleanUpDialogAct, SIGNAL(triggered()), this, SLOT(displayCleanUpDialog()));
 
     insertDotAct = new QAction(QIcon(":/images/dots.png"), tr("Insert dots"), this);
     insertDotAct->setShortcut(tr("F6"));
@@ -1971,7 +1965,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(insertDotAct);
     toolsMenu->addAction(insertEmptyLinesAct);
     toolsMenu->addAction(removeEmptyLinesAct);
-    toolsMenu->addAction(cleanUpDialogAct);
+    toolsMenu->addAction(m_addonsActions->cleanUp());
     toolsMenu->addAction(swapAxesAct);
     toolsMenu->addAction(splittAct);
     toolsMenu->addAction(renumberAct);
@@ -2051,7 +2045,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(insertSpcAct);
     toolsToolBar->addAction(removeSpcAct);
-    toolsToolBar->addAction(cleanUpDialogAct);
+    toolsToolBar->addAction(m_addonsActions->cleanUp());
     toolsToolBar->addAction(insertDotAct);
     toolsToolBar->addAction(swapAxesAct);
     toolsToolBar->addAction(renumberAct);
@@ -2307,13 +2301,6 @@ void EdytorNc::readSettings()
     ui->currentPathCheckBox->setChecked(settings.value("FileBrowserShowCurrentFileDir",
                                     false).toBool());
     ui->filePreviewSpinBox->setValue(settings.value("FilePreviewNo", 10).toInt());
-
-    settings.beginGroup("CleanUpDialog");
-
-    selectedExpressions = settings.value("SelectedExpressions",
-                                         (QStringList() << "")).toStringList();
-
-    settings.endGroup();
 }
 
 void EdytorNc::writeSettings()
@@ -2420,10 +2407,6 @@ void EdytorNc::writeSettings()
     settings.beginGroup("Sessions");
     settings.setValue("SessionList", sessionList);
     settings.setValue("CurrentSession", currentSession);
-    settings.endGroup();
-
-    settings.beginGroup("CleanUpDialog");
-    settings.setValue("SelectedExpressions", selectedExpressions);
     settings.endGroup();
 
     if (!defaultMdiWindowProperites.startEmpty) {
@@ -3843,24 +3826,6 @@ void EdytorNc::doParaComment()
 {
     if (activeMdiChild()) {
         activeMdiChild()->paraComment();
-    }
-}
-
-void EdytorNc::displayCleanUpDialog()
-{
-    MdiChild *editorWindow = activeMdiChild();
-
-    if (editorWindow) {
-        cleanUpDialog *dialog = new cleanUpDialog(this);
-
-        int result = dialog->exec(selectedExpressions, editorWindow->textEdit()->toPlainText());
-
-        if (result == QDialog::Accepted) {
-            selectedExpressions = dialog->getSelectedExpressions();
-            editorWindow->doRemoveTextByRegExp(selectedExpressions);
-        }
-
-        delete (dialog);
     }
 }
 

@@ -208,7 +208,6 @@ private slots:
     void goToLine(QString fileName, int line);
     void doSemiComment();
     void doParaComment();
-    void displayCleanUpDialog();
     void doSwapAxes();
     void changeSession(QAction *action);
     void sessionMgr();
@@ -314,7 +313,6 @@ private:
     QAction *createUserToolTipsAct;
     QAction *undoAct;
     QAction *redoAct;
-    QAction *cleanUpDialogAct;
     QAction *swapAxesAct;
     QAction *inLineCalcAct;
 
@@ -386,8 +384,6 @@ private:
     QAction *serialCloseAct;
     QAction *commAppAct;
     QComboBox *configBox;
-
-    QStringList selectedExpressions;
 
     QPointer<CommApp> commApp;
 

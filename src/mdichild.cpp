@@ -1127,36 +1127,6 @@ void MdiChild::doRemoveEmptyLines()
     QApplication::restoreOverrideCursor();
 }
 
-void MdiChild::doRemoveTextByRegExp(QStringList exp)
-{
-    QString tx;
-
-    if (exp.isEmpty()) {
-        return;
-    }
-
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-    tx = ui->textEdit->toPlainText();
-
-    foreach (QString expTx, exp) {
-
-        if (expTx.contains('$'))
-            if (!expTx.contains("\\$")) {
-                expTx.replace('$', "\\n");
-            }
-
-        tx.remove(QRegularExpression(expTx));
-
-    }
-
-    ui->textEdit->selectAll();
-    ui->textEdit->insertPlainText(tx);
-    QTextCursor cursor = ui->textEdit->textCursor();
-    cursor.setPosition(0);
-    ui->textEdit->setTextCursor(cursor);
-    QApplication::restoreOverrideCursor();
-}
-
 //**************************************************************************************************
 // Add empty line after each block
 //**************************************************************************************************

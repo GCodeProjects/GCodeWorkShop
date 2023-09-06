@@ -22,3 +22,4 @@ SOURCES += \
 include(src/bhc/bhc.pri)
 include(src/blockskip/blockskip.pri)
 include(src/chamfer/chamfer.pri)
+include(src/cleanup/cleanup.pri)

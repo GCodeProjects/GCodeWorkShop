@@ -72,7 +72,6 @@ public:
                    bool &renumEmpty, bool &renumComm, bool &renumMarked);
     void doRemoveSpace();
     void doRemoveEmptyLines();
-    void doRemoveTextByRegExp(QStringList exp);
     void doInsertEmptyLines();
     void doInsertSpace();
     void doInsertDot();

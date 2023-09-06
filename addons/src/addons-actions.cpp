@@ -29,6 +29,7 @@
 #include "bhc/addons-bhc.h"
 #include "blockskip/utils-blockskip.h"
 #include "chamfer/addons-chamfer.h"
+#include "cleanup/addons-cleanup.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -36,13 +37,15 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_blockSkipDecrement(new QAction(this)),
     m_blockSkipIncrement(new QAction(this)),
     m_blockSkipRemove(new QAction(this)),
-    m_chamfer(new QAction(this))
+    m_chamfer(new QAction(this)),
+    m_cleanUp(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
     connect(m_blockSkipIncrement, SIGNAL(triggered()), this, SLOT(doBlockSkipIncrement()));
     connect(m_blockSkipRemove, SIGNAL(triggered()), this, SLOT(doBlockSkipRemove()));
     connect(m_chamfer, SIGNAL(triggered()), this, SLOT(doChamfer()));
+    connect(m_cleanUp, SIGNAL(triggered()), this, SLOT(doCleanUp()));
 
     loadIcons();
     loadTranslations();
@@ -60,6 +63,8 @@ void Addons::Actions::loadTranslations()
     m_blockSkipRemove->setToolTip(tr("Remove Block Skip /"));
     m_chamfer->setText(tr("Chamfer"));
     m_chamfer->setToolTip(tr("Calculate chamfer"));
+    m_cleanUp->setText(tr("Clean &up"));
+    m_cleanUp->setToolTip(tr("Remove text using regular expressions"));
 }
 
 void Addons::Actions::loadIcons()
@@ -69,6 +74,7 @@ void Addons::Actions::loadIcons()
     m_blockSkipIncrement->setIcon(QIcon(":/images/blockskip+.png"));
     m_blockSkipRemove->setIcon(QIcon(":/images/blockskipr.png"));
     m_chamfer->setIcon(QIcon(":/images/chamfer.png"));
+    m_cleanUp->setIcon(QIcon(":/images/cleanup.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -108,4 +114,17 @@ void Addons::Actions::doBlockSkipRemove()
 void Addons::Actions::doChamfer()
 {
     Addons::doChamfer(EdytorNc::instance(), Medium::instance().settings());
+}
+
+void Addons::Actions::doCleanUp()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    if (Addons::doCleanUp(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+        ctx.push();
+    }
 }
