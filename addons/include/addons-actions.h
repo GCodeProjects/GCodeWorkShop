@@ -55,6 +55,7 @@ public:
     QAction *feeds() {return m_feeds;}
     QAction *i2m() {return m_i2m;}
     QAction *i2mProg() {return m_i2mProg;}
+    QAction *renumber() {return m_renumber;}
 
 protected:
     QAction *m_bhc;
@@ -72,6 +73,7 @@ protected:
     QAction *m_feeds;
     QAction *m_i2m;
     QAction *m_i2mProg;
+    QAction *m_renumber;
 
 protected slots:
     void doBhc();
@@ -89,6 +91,7 @@ protected slots:
     void doFeeds();
     void doI2M();
     void doI2MProg();
+    void doRenumber();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

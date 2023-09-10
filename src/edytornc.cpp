@@ -40,6 +40,7 @@
 #include <QModelIndex>
 #include <QMoveEvent>
 #include <QPageLayout>
+#include <QPlainTextEdit>
 #include <QPoint>
 #include <QPrintDialog>
 #include <QPrinter>
@@ -54,6 +55,8 @@
 #include <QStandardItemModel>
 #include <Qt>                  // Qt::SplitBehavior
 #include <QTextBlock>
+#include <QTextCharFormat>
+#include <QTextCursor>
 #include <QtGlobal>            // QT_VERSION QT_VERSION_CHECK
 #include <QToolButton>
 #include <QToolTip>
@@ -1134,37 +1137,6 @@ void EdytorNc::doRemoveByRegExp()
     }
 }
 
-void EdytorNc::doRenumber()
-{
-
-    int startAt, inc, to, from, prec, mode;
-    bool renumEmpty, renumComm, renumMarked;
-    MdiChild *child;
-
-    child = activeMdiChild();
-
-    RenumberDialog *renumberDialog = new RenumberDialog(this);
-    //renumberDialog->setState(editorOpt.dotAdr, editorOpt.atEnd, editorOpt.dotAfter, editorOpt.dotAftrerCount);
-
-    if (renumberDialog->exec() == QDialog::Accepted) {
-        renumberDialog->getState(mode, startAt, from, prec, inc, to, renumEmpty, renumComm,
-                                 renumMarked);
-
-        if (child) {
-            inc = child->doRenumber(mode, startAt, from, prec, inc, to, renumEmpty, renumComm, renumMarked);
-
-            if (mode == 3) {
-                statusBar()->showMessage(QString(tr("Removed : %1 line numbers.")).arg(inc), 9000);
-            } else {
-                statusBar()->showMessage(QString(tr("Renumbered : %1 lines.")).arg(inc), 9000);
-            }
-        }
-
-    }
-
-    delete (renumberDialog);
-}
-
 void EdytorNc::doTriangles()
 {
     TriangleDialog *triangleDialog;
@@ -1337,7 +1309,7 @@ void EdytorNc::updateMenus()
 
     replaceAct->setEnabled(hasMdiChildNotReadOnly);
     readOnlyAct->setEnabled(hasMdiChild);
-    renumberAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->renumber()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->dot()->setEnabled(hasMdiChildNotReadOnly);
     insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
     removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
@@ -1658,6 +1630,7 @@ void EdytorNc::createActions()
     m_addonsActions->feeds()->setShortcut(tr("F9"));
     //m_addonsActions->i2m()->setShortcut(tr("F9"));
     //m_addonsActions->i2mProg()->setShortcut(tr("F9"));
+    m_addonsActions->renumber()->setShortcut(tr("F7"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1668,11 +1641,6 @@ void EdytorNc::createActions()
     removeSpcAct->setShortcut(tr("F5"));
     removeSpcAct->setToolTip(tr("Removes spaces"));
     connect(removeSpcAct, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
-
-    renumberAct = new QAction(QIcon(":/images/renumber.png"), tr("Renumber"), this);
-    renumberAct->setShortcut(tr("F7"));
-    renumberAct->setToolTip(tr("Renumber program blocks"));
-    connect(renumberAct, SIGNAL(triggered()), this, SLOT(doRenumber()));
 
     trianglesAct = new QAction(QIcon(":/images/triangles.png"), tr("Solution of triangles"), this);
     //trianglesAct->setShortcut(tr("F9"));
@@ -1846,7 +1814,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(m_addonsActions->cleanUp());
     toolsMenu->addAction(swapAxesAct);
     toolsMenu->addAction(splittAct);
-    toolsMenu->addAction(renumberAct);
+    toolsMenu->addAction(m_addonsActions->renumber());
     toolsMenu->addSeparator();
     toolsMenu->addAction(diffAct);
     toolsMenu->addSeparator();
@@ -1926,7 +1894,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(m_addonsActions->cleanUp());
     toolsToolBar->addAction(m_addonsActions->dot());
     toolsToolBar->addAction(swapAxesAct);
-    toolsToolBar->addAction(renumberAct);
+    toolsToolBar->addAction(m_addonsActions->renumber());
     toolsToolBar->addAction(splittAct);
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(m_addonsActions->bhc());

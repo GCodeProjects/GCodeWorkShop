@@ -29,7 +29,7 @@
 #include <mdichild.h>
 #include <utils/medium.h>       // for Medium
 
-#include "addons-context.h" // for Context, Context::SELECTED_BLOCKS
+#include "addons-context.h" // for Context, Context::ALL, Context::SELECTED, Context::SELECTED_BLOCKS
 
 #include "bhc/addons-bhc.h"
 #include "blockskip/utils-blockskip.h"
@@ -42,6 +42,7 @@
 #include "feeds/addons-feeds.h"
 #include "i2m/addons-i2m.h"
 #include "i2mprog/addons-i2mprog.h"
+#include "renumber/addons-renumber.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -59,7 +60,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_removeEmptyLines(new QAction(this)),
     m_feeds(new QAction(this)),
     m_i2m(new QAction(this)),
-    m_i2mProg(new QAction(this))
+    m_i2mProg(new QAction(this)),
+    m_renumber(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -76,6 +78,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_feeds, SIGNAL(triggered()), this, SLOT(doFeeds()));
     connect(m_i2m, SIGNAL(triggered()), this, SLOT(doI2M()));
     connect(m_i2mProg, SIGNAL(triggered()), this, SLOT(doI2MProg()));
+    connect(m_renumber, SIGNAL(triggered()), this, SLOT(doRenumber()));
 
     loadIcons();
     loadTranslations();
@@ -113,6 +116,8 @@ void Addons::Actions::loadTranslations()
     m_i2m->setToolTip(tr("Convert inch <-> mm"));
     m_i2mProg->setText(tr("Convert program inch <-> mm"));
     m_i2mProg->setToolTip(tr("Convert program inch <-> mm"));
+    m_renumber->setText(tr("Renumber"));
+    m_renumber->setToolTip(tr("Renumber program blocks"));
 }
 
 void Addons::Actions::loadIcons()
@@ -132,6 +137,7 @@ void Addons::Actions::loadIcons()
     m_feeds->setIcon(QIcon(":/images/vcf.png"));
     m_i2m->setIcon(QIcon(":/images/i2m.png"));
     m_i2mProg->setIcon(QIcon(":/images/i2mprog.png"));
+    m_renumber->setIcon(QIcon(":/images/renumber.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -290,6 +296,19 @@ void Addons::Actions::doI2MProg()
     }
 
     if (Addons::doI2MProg(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+        ctx.push();
+    }
+}
+
+void Addons::Actions::doRenumber()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::SELECTED_OR_ALL)) {
+        return;
+    }
+
+    if (Addons::doRenumber(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
         ctx.push();
     }
 }
