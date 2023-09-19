@@ -1122,19 +1122,6 @@ void EdytorNc::doRemoveByRegExp()
     }
 }
 
-void EdytorNc::doTriangles()
-{
-    TriangleDialog *triangleDialog;
-    triangleDialog = findChild<TriangleDialog *>();
-
-    if (!triangleDialog) {
-        TriangleDialog *triangleDialog = new TriangleDialog(this);
-        triangleDialog->move((geometry().x() + width() - 10) - triangleDialog->width(),
-                             geometry().y() + 35);
-        triangleDialog->show();
-    }
-}
-
 void EdytorNc::doCalc()
 {
     if (!QFile::exists(defaultMdiWindowProperites.calcBinary)) {
@@ -1619,11 +1606,7 @@ void EdytorNc::createActions()
     m_addonsActions->insertSpaces()->setShortcut(tr("F4"));
     m_addonsActions->removeSpaces()->setShortcut(tr("F5"));
     //m_addonsActions->swapAxes()->setShortcut(QKeySequence::Save);
-
-    trianglesAct = new QAction(QIcon(":/images/triangles.png"), tr("Solution of triangles"), this);
-    //trianglesAct->setShortcut(tr("F9"));
-    trianglesAct->setToolTip(tr("Solution of triangles"));
-    connect(trianglesAct, SIGNAL(triggered()), this, SLOT(doTriangles()));
+    //m_addonsActions->triangle()->setShortcut(tr("F9"));
 
     calcAct = new QAction(QIcon(":/images/calc.png"), tr("Calculator"), this);
     //calcAct->setShortcut(tr("F9"));
@@ -1793,7 +1776,7 @@ void EdytorNc::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction(m_addonsActions->bhc());
     toolsMenu->addAction(m_addonsActions->feeds());
-    toolsMenu->addAction(trianglesAct);
+    toolsMenu->addAction(m_addonsActions->triangle());
     toolsMenu->addAction(m_addonsActions->chamfer());
     toolsMenu->addAction(m_addonsActions->i2m());
     toolsMenu->addAction(m_addonsActions->i2mProg());
@@ -1868,7 +1851,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(m_addonsActions->bhc());
     toolsToolBar->addAction(m_addonsActions->feeds());
-    toolsToolBar->addAction(trianglesAct);
+    toolsToolBar->addAction(m_addonsActions->triangle());
     toolsToolBar->addAction(m_addonsActions->chamfer());
     toolsToolBar->addAction(m_addonsActions->i2m());
     toolsToolBar->addAction(m_addonsActions->i2mProg());

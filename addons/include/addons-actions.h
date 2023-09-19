@@ -60,6 +60,8 @@ public:
     QAction *removeSpaces() {return m_removeSpaces;}
     QAction *splitProgramms() {return m_splitProgramms;}
     QAction *swapAxes() {return m_swapAxes;}
+    QAction *triangle() {return m_triangle;}
+    // *INDENT-ON*
 
 protected:
     QAction *m_bhc;
@@ -82,6 +84,7 @@ protected:
     QAction *m_removeSpaces;
     QAction *m_splitProgramms;
     QAction *m_swapAxes;
+    QAction *m_triangle;
 
 protected slots:
     void doBhc();
@@ -104,6 +107,7 @@ protected slots:
     void doRemoveSpaces();
     void doSplitProgramms();
     void doSwapAxes();
+    void doTriangle();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

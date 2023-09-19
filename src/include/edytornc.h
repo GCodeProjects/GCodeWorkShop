@@ -153,7 +153,6 @@ private slots:
     void selAll();
     void config();
     void doRemoveByRegExp();
-    void doTriangles();
     void readOnly();
     void doCalc();
     void loadFoundedFile(const QString &fileName);
@@ -312,7 +311,6 @@ private:
     QAction *configAct;
 
     QAction *calcAct;
-    QAction *trianglesAct;
     QAction *diffLAct;
     QAction *diffRAct;
     QAction *diffAct;
