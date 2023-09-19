@@ -40,6 +40,7 @@
 #include "dot/addons-dot.h"
 #include "emptylines/utils-emptylines.h"
 #include "feeds/addons-feeds.h"
+#include "i2m/addons-i2m.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -55,7 +56,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_dot(new QAction(this)),
     m_insertEmptyLines(new QAction(this)),
     m_removeEmptyLines(new QAction(this)),
-    m_feeds(new QAction(this))
+    m_feeds(new QAction(this)),
+    m_i2m(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -70,6 +72,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_insertEmptyLines, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
     connect(m_removeEmptyLines, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
     connect(m_feeds, SIGNAL(triggered()), this, SLOT(doFeeds()));
+    connect(m_i2m, SIGNAL(triggered()), this, SLOT(doI2M()));
 
     loadIcons();
     loadTranslations();
@@ -103,6 +106,8 @@ void Addons::Actions::loadTranslations()
     m_removeEmptyLines->setToolTip(tr("Removes empty lines"));
     m_feeds->setText(tr("Feed's speed's"));
     m_feeds->setToolTip(tr("Calculate speed, feed, cutting speed"));
+    m_i2m->setText(tr("Convert inch <-> mm"));
+    m_i2m->setToolTip(tr("Convert inch <-> mm"));
 }
 
 void Addons::Actions::loadIcons()
@@ -120,6 +125,7 @@ void Addons::Actions::loadIcons()
     m_insertEmptyLines->setIcon(QIcon(":/images/insertemptylines.png"));
     m_removeEmptyLines->setIcon(QIcon(":/images/removeemptylines.png"));
     m_feeds->setIcon(QIcon(":/images/vcf.png"));
+    m_i2m->setIcon(QIcon(":/images/i2m.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -262,4 +268,9 @@ void Addons::Actions::doRemoveEmptyLines()
 void Addons::Actions::doFeeds()
 {
     Addons::doFeeds(EdytorNc::instance(), Medium::instance().settings());
+}
+
+void Addons::Actions::doI2M()
+{
+    Addons::doI2M(EdytorNc::instance(), Medium::instance().settings());
 }

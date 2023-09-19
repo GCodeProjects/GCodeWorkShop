@@ -1178,36 +1178,26 @@ void EdytorNc::doTriangles()
     }
 }
 
-void EdytorNc::doConvert()
-{
-    I2MDialog *i2MDialog;
-    i2MDialog = findChild<I2MDialog *>();
-
-    if (!i2MDialog) {
-        I2MDialog *i2MDialog = new I2MDialog(this);
-        i2MDialog->move((geometry().x() + width() - 10) - i2MDialog->width(), geometry().y() + 35);
-        i2MDialog->show();
-    }
-}
-
 void EdytorNc::doConvertProg()
 {
-    MdiChild *child;
+    MdiChild *child = activeMdiChild();
+	
+	if (!child) {
+		return;
+	}
 
-    I2MProgDialog *i2mProgDialog = new I2MProgDialog(this);
-    i2mProgDialog->setState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec,
-                            defaultMdiWindowProperites.inch);
-
-    child = activeMdiChild();
+    Dialogs::I2MProg *i2mProgDialog = Dialogs::I2MProg::create(this, Medium::instance().settings());
+    //i2mProgDialog->setState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec,
+    //                        defaultMdiWindowProperites.inch);
 
     if (i2mProgDialog->exec() == QDialog::Accepted) {
-        if (child) {
-            defaultMdiWindowProperites = child->getMdiWindowProperites();
-            i2mProgDialog->getState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec,
-                                    defaultMdiWindowProperites.inch);
-            child->setMdiWindowProperites(defaultMdiWindowProperites);
-            child->doI2M();
-        }
+		defaultMdiWindowProperites = child->getMdiWindowProperites();
+		I2MProgOptions opt = i2mProgDialog->options();
+		defaultMdiWindowProperites.i2mAdr = opt.axes;
+		defaultMdiWindowProperites.i2mprec = opt.prec;
+		defaultMdiWindowProperites.inch = opt.toInch;
+		child->setMdiWindowProperites(defaultMdiWindowProperites);
+		child->doI2M();
     }
 
     delete (i2mProgDialog);
@@ -1691,6 +1681,7 @@ void EdytorNc::createActions()
     //m_addonsActions->insertEmptyLines()->setShortcut(tr("F5"));
     //m_addonsActions->removeEmptyLines()->setShortcut(tr("F5"));
     m_addonsActions->feeds()->setShortcut(tr("F9"));
+    //m_addonsActions->i2m()->setShortcut(tr("F9"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1711,11 +1702,6 @@ void EdytorNc::createActions()
     //trianglesAct->setShortcut(tr("F9"));
     trianglesAct->setToolTip(tr("Solution of triangles"));
     connect(trianglesAct, SIGNAL(triggered()), this, SLOT(doTriangles()));
-
-    convertAct = new QAction(QIcon(":/images/i2m.png"), tr("Convert inch <-> mm"), this);
-    //convertAct->setShortcut(tr("F9"));
-    convertAct->setToolTip(tr("Convert inch <-> mm"));
-    connect(convertAct, SIGNAL(triggered()), this, SLOT(doConvert()));
 
     convertProgAct = new QAction(QIcon(":/images/i2mprog.png"), tr("Convert program inch <-> mm"),
                                  this);
@@ -1902,7 +1888,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(m_addonsActions->feeds());
     toolsMenu->addAction(trianglesAct);
     toolsMenu->addAction(m_addonsActions->chamfer());
-    toolsMenu->addAction(convertAct);
+    toolsMenu->addAction(m_addonsActions->i2m());
     toolsMenu->addAction(convertProgAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(m_addonsActions->compileMacro());
@@ -1977,7 +1963,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(m_addonsActions->feeds());
     toolsToolBar->addAction(trianglesAct);
     toolsToolBar->addAction(m_addonsActions->chamfer());
-    toolsToolBar->addAction(convertAct);
+    toolsToolBar->addAction(m_addonsActions->i2m());
     toolsToolBar->addAction(convertProgAct);
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(m_addonsActions->compileMacro());

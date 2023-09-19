@@ -157,7 +157,6 @@ private slots:
     void doRemoveByRegExp();
     void doRenumber();
     void doTriangles();
-    void doConvert();
     void doConvertProg();
     void readOnly();
     void doCalc();
@@ -325,7 +324,6 @@ private:
     QAction *splittAct;
     QAction *insertSpcAct;
     QAction *trianglesAct;
-    QAction *convertAct;
     QAction *convertProgAct;
     QAction *diffLAct;
     QAction *diffRAct;
