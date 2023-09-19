@@ -39,6 +39,7 @@
 #include "compilemacro/utils-compilemacro.h"
 #include "dot/addons-dot.h"
 #include "emptylines/utils-emptylines.h"
+#include "feeds/addons-feeds.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -53,7 +54,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_compileMacro(new QAction(this)),
     m_dot(new QAction(this)),
     m_insertEmptyLines(new QAction(this)),
-    m_removeEmptyLines(new QAction(this))
+    m_removeEmptyLines(new QAction(this)),
+    m_feeds(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -67,6 +69,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_dot, SIGNAL(triggered()), this, SLOT(doDot()));
     connect(m_insertEmptyLines, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
     connect(m_removeEmptyLines, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
+    connect(m_feeds, SIGNAL(triggered()), this, SLOT(doFeeds()));
 
     loadIcons();
     loadTranslations();
@@ -98,6 +101,8 @@ void Addons::Actions::loadTranslations()
     m_insertEmptyLines->setToolTip(tr("Inserts empty lines"));
     m_removeEmptyLines->setText(tr("Remove empty lines"));
     m_removeEmptyLines->setToolTip(tr("Removes empty lines"));
+    m_feeds->setText(tr("Feed's speed's"));
+    m_feeds->setToolTip(tr("Calculate speed, feed, cutting speed"));
 }
 
 void Addons::Actions::loadIcons()
@@ -114,6 +119,7 @@ void Addons::Actions::loadIcons()
     m_dot->setIcon(QIcon(":/images/dots.png"));
     m_insertEmptyLines->setIcon(QIcon(":/images/insertemptylines.png"));
     m_removeEmptyLines->setIcon(QIcon(":/images/removeemptylines.png"));
+    m_feeds->setIcon(QIcon(":/images/vcf.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -251,4 +257,9 @@ void Addons::Actions::doRemoveEmptyLines()
     Utils::removeEmptyLines(ctx.text());
     ctx.push();
     QApplication::restoreOverrideCursor();
+}
+
+void Addons::Actions::doFeeds()
+{
+    Addons::doFeeds(EdytorNc::instance(), Medium::instance().settings());
 }

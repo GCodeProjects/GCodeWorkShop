@@ -1165,18 +1165,6 @@ void EdytorNc::doRenumber()
     delete (renumberDialog);
 }
 
-void EdytorNc::doSpeedFeed()
-{
-    FeedsDialog *feedsDialog;
-    feedsDialog = findChild<FeedsDialog *>();
-
-    if (!feedsDialog) {
-        FeedsDialog *feedsDialog = new FeedsDialog(this);
-        feedsDialog->move((geometry().x() + width() - 10) - feedsDialog->width(), geometry().y() + 35);
-        feedsDialog->show();
-    }
-}
-
 void EdytorNc::doTriangles()
 {
     TriangleDialog *triangleDialog;
@@ -1702,6 +1690,7 @@ void EdytorNc::createActions()
     m_addonsActions->dot()->setShortcut(tr("F6"));
     //m_addonsActions->insertEmptyLines()->setShortcut(tr("F5"));
     //m_addonsActions->removeEmptyLines()->setShortcut(tr("F5"));
+    m_addonsActions->feeds()->setShortcut(tr("F9"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1717,11 +1706,6 @@ void EdytorNc::createActions()
     renumberAct->setShortcut(tr("F7"));
     renumberAct->setToolTip(tr("Renumber program blocks"));
     connect(renumberAct, SIGNAL(triggered()), this, SLOT(doRenumber()));
-
-    speedFeedAct = new QAction(QIcon(":/images/vcf.png"), tr("Feed's speed's"), this);
-    speedFeedAct->setShortcut(tr("F9"));
-    speedFeedAct->setToolTip(tr("Calculate speed, feed, cutting speed"));
-    connect(speedFeedAct, SIGNAL(triggered()), this, SLOT(doSpeedFeed()));
 
     trianglesAct = new QAction(QIcon(":/images/triangles.png"), tr("Solution of triangles"), this);
     //trianglesAct->setShortcut(tr("F9"));
@@ -1915,7 +1899,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(diffEditorAct);
     toolsMenu->addSeparator();
     toolsMenu->addAction(m_addonsActions->bhc());
-    toolsMenu->addAction(speedFeedAct);
+    toolsMenu->addAction(m_addonsActions->feeds());
     toolsMenu->addAction(trianglesAct);
     toolsMenu->addAction(m_addonsActions->chamfer());
     toolsMenu->addAction(convertAct);
@@ -1990,7 +1974,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(splittAct);
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(m_addonsActions->bhc());
-    toolsToolBar->addAction(speedFeedAct);
+    toolsToolBar->addAction(m_addonsActions->feeds());
     toolsToolBar->addAction(trianglesAct);
     toolsToolBar->addAction(m_addonsActions->chamfer());
     toolsToolBar->addAction(convertAct);

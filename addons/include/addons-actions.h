@@ -52,6 +52,7 @@ public:
     QAction *dot() {return m_dot;}
     QAction *insertEmptyLines() {return m_insertEmptyLines;}
     QAction *removeEmptyLines() {return m_removeEmptyLines;}
+    QAction *feeds() {return m_feeds;}
 
 protected:
     QAction *m_bhc;
@@ -66,6 +67,7 @@ protected:
     QAction *m_dot;
     QAction *m_insertEmptyLines;
     QAction *m_removeEmptyLines;
+    QAction *m_feeds;
 
 protected slots:
     void doBhc();
@@ -80,6 +82,7 @@ protected slots:
     void doDot();
     void doInsertEmptyLines();
     void doRemoveEmptyLines();
+    void doFeeds();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

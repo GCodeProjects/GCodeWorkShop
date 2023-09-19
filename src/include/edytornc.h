@@ -156,7 +156,6 @@ private slots:
     void doRemoveSpaces();
     void doRemoveByRegExp();
     void doRenumber();
-    void doSpeedFeed();
     void doTriangles();
     void doConvert();
     void doConvertProg();
@@ -325,7 +324,6 @@ private:
     QAction *removeSpcAct;
     QAction *splittAct;
     QAction *insertSpcAct;
-    QAction *speedFeedAct;
     QAction *trianglesAct;
     QAction *convertAct;
     QAction *convertProgAct;
