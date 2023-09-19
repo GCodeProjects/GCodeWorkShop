@@ -1206,59 +1206,6 @@ void MdiChild::doInsertSpace()
     delete updatedText;
 }
 
-void MdiChild::doI2M()
-{
-    int count;
-    QString tx, f_tx;
-    QRegularExpression regex;
-    double it;
-    bool ok;
-
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-
-    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-    regex.setPattern(
-        QString("[%1]{1,1}([+-]?\\d*\\.?\\d*)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(
-            mdiWindowProperites.i2mAdr));
-
-    count = 0;
-    tx = ui->textEdit->toPlainText();
-    auto match = regex.match(tx);
-
-    while (match.hasMatch()) {
-        int pos = match.capturedEnd();
-
-        if (match.capturedLength(1) > 0) {
-            f_tx = match.captured(1);
-            it = f_tx.toDouble(&ok);
-
-            if (ok && it != 0) {
-                if (!mdiWindowProperites.inch) {
-                    it /= 25.4;
-                } else {
-                    it *= 25.4;
-                }
-
-                QString conv = QString("%1").arg(it, 0, 'f', mdiWindowProperites.i2mprec);
-                tx.replace(match.capturedStart(), match.capturedLength(), conv);
-                pos += conv.length() - match.capturedLength();
-                count++;
-            }
-        }
-
-        match = regex.match(tx, pos);
-    }
-
-    emit message(QString(tr("Converted : %1 numbers.")).arg(count), 6000);
-    cleanUp(&tx);
-    ui->textEdit->selectAll();
-    ui->textEdit->insertPlainText(tx);
-    QTextCursor cursor = ui->textEdit->textCursor();
-    cursor.setPosition(0);
-    ui->textEdit->setTextCursor(cursor);
-    QApplication::restoreOverrideCursor();
-}
-
 bool MdiChild::event(QEvent *event)
 {
     QString group, key, text;

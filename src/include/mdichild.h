@@ -72,7 +72,6 @@ public:
                    bool &renumEmpty, bool &renumComm, bool &renumMarked);
     void doRemoveSpace();
     void doInsertSpace();
-    void doI2M();
     void highlightFindText(const QString& searchString,
                            QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                            bool ignoreComments = true);

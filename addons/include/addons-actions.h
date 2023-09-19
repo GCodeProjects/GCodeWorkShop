@@ -54,6 +54,7 @@ public:
     QAction *removeEmptyLines() {return m_removeEmptyLines;}
     QAction *feeds() {return m_feeds;}
     QAction *i2m() {return m_i2m;}
+    QAction *i2mProg() {return m_i2mProg;}
 
 protected:
     QAction *m_bhc;
@@ -70,6 +71,7 @@ protected:
     QAction *m_removeEmptyLines;
     QAction *m_feeds;
     QAction *m_i2m;
+    QAction *m_i2mProg;
 
 protected slots:
     void doBhc();
@@ -86,6 +88,7 @@ protected slots:
     void doRemoveEmptyLines();
     void doFeeds();
     void doI2M();
+    void doI2MProg();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

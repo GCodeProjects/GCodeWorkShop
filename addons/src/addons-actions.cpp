@@ -41,6 +41,7 @@
 #include "emptylines/utils-emptylines.h"
 #include "feeds/addons-feeds.h"
 #include "i2m/addons-i2m.h"
+#include "i2mprog/addons-i2mprog.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -57,7 +58,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_insertEmptyLines(new QAction(this)),
     m_removeEmptyLines(new QAction(this)),
     m_feeds(new QAction(this)),
-    m_i2m(new QAction(this))
+    m_i2m(new QAction(this)),
+    m_i2mProg(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -73,6 +75,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_removeEmptyLines, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
     connect(m_feeds, SIGNAL(triggered()), this, SLOT(doFeeds()));
     connect(m_i2m, SIGNAL(triggered()), this, SLOT(doI2M()));
+    connect(m_i2mProg, SIGNAL(triggered()), this, SLOT(doI2MProg()));
 
     loadIcons();
     loadTranslations();
@@ -108,6 +111,8 @@ void Addons::Actions::loadTranslations()
     m_feeds->setToolTip(tr("Calculate speed, feed, cutting speed"));
     m_i2m->setText(tr("Convert inch <-> mm"));
     m_i2m->setToolTip(tr("Convert inch <-> mm"));
+    m_i2mProg->setText(tr("Convert program inch <-> mm"));
+    m_i2mProg->setToolTip(tr("Convert program inch <-> mm"));
 }
 
 void Addons::Actions::loadIcons()
@@ -126,6 +131,7 @@ void Addons::Actions::loadIcons()
     m_removeEmptyLines->setIcon(QIcon(":/images/removeemptylines.png"));
     m_feeds->setIcon(QIcon(":/images/vcf.png"));
     m_i2m->setIcon(QIcon(":/images/i2m.png"));
+    m_i2mProg->setIcon(QIcon(":/images/i2mprog.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -273,4 +279,17 @@ void Addons::Actions::doFeeds()
 void Addons::Actions::doI2M()
 {
     Addons::doI2M(EdytorNc::instance(), Medium::instance().settings());
+}
+
+void Addons::Actions::doI2MProg()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    if (Addons::doI2MProg(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+        ctx.push();
+    }
 }

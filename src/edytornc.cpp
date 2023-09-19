@@ -1178,31 +1178,6 @@ void EdytorNc::doTriangles()
     }
 }
 
-void EdytorNc::doConvertProg()
-{
-    MdiChild *child = activeMdiChild();
-	
-	if (!child) {
-		return;
-	}
-
-    Dialogs::I2MProg *i2mProgDialog = Dialogs::I2MProg::create(this, Medium::instance().settings());
-    //i2mProgDialog->setState(defaultMdiWindowProperites.i2mAdr, defaultMdiWindowProperites.i2mprec,
-    //                        defaultMdiWindowProperites.inch);
-
-    if (i2mProgDialog->exec() == QDialog::Accepted) {
-		defaultMdiWindowProperites = child->getMdiWindowProperites();
-		I2MProgOptions opt = i2mProgDialog->options();
-		defaultMdiWindowProperites.i2mAdr = opt.axes;
-		defaultMdiWindowProperites.i2mprec = opt.prec;
-		defaultMdiWindowProperites.inch = opt.toInch;
-		child->setMdiWindowProperites(defaultMdiWindowProperites);
-		child->doI2M();
-    }
-
-    delete (i2mProgDialog);
-}
-
 void EdytorNc::doCalc()
 {
     if (!QFile::exists(defaultMdiWindowProperites.calcBinary)) {
@@ -1369,7 +1344,7 @@ void EdytorNc::updateMenus()
     m_addonsActions->removeEmptyLines()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->insertEmptyLines()->setEnabled(hasMdiChildNotReadOnly);
     splittAct->setEnabled(hasMdiChildNotReadOnly);
-    convertProgAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->i2mProg()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->compileMacro()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->cleanUp()->setEnabled(hasMdiChildNotReadOnly);
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
@@ -1682,6 +1657,7 @@ void EdytorNc::createActions()
     //m_addonsActions->removeEmptyLines()->setShortcut(tr("F5"));
     m_addonsActions->feeds()->setShortcut(tr("F9"));
     //m_addonsActions->i2m()->setShortcut(tr("F9"));
+    //m_addonsActions->i2mProg()->setShortcut(tr("F9"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1702,12 +1678,6 @@ void EdytorNc::createActions()
     //trianglesAct->setShortcut(tr("F9"));
     trianglesAct->setToolTip(tr("Solution of triangles"));
     connect(trianglesAct, SIGNAL(triggered()), this, SLOT(doTriangles()));
-
-    convertProgAct = new QAction(QIcon(":/images/i2mprog.png"), tr("Convert program inch <-> mm"),
-                                 this);
-    //convertProgAct->setShortcut(tr("F9"));
-    convertProgAct->setToolTip(tr("Convert program inch <-> mm"));
-    connect(convertProgAct, SIGNAL(triggered()), this, SLOT(doConvertProg()));
 
     calcAct = new QAction(QIcon(":/images/calc.png"), tr("Calculator"), this);
     //calcAct->setShortcut(tr("F9"));
@@ -1889,7 +1859,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(trianglesAct);
     toolsMenu->addAction(m_addonsActions->chamfer());
     toolsMenu->addAction(m_addonsActions->i2m());
-    toolsMenu->addAction(convertProgAct);
+    toolsMenu->addAction(m_addonsActions->i2mProg());
     toolsMenu->addSeparator();
     toolsMenu->addAction(m_addonsActions->compileMacro());
     toolsMenu->addSeparator();
@@ -1964,7 +1934,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(trianglesAct);
     toolsToolBar->addAction(m_addonsActions->chamfer());
     toolsToolBar->addAction(m_addonsActions->i2m());
-    toolsToolBar->addAction(convertProgAct);
+    toolsToolBar->addAction(m_addonsActions->i2mProg());
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(m_addonsActions->compileMacro());
     toolsToolBar->addSeparator();
@@ -2092,10 +2062,6 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.saveDirectory = settings.value("DefaultSaveDirectory",
             QDir::homePath()).toString();
 
-    defaultMdiWindowProperites.i2mAdr = settings.value("I2MAddress", "XYZ").toString();
-    defaultMdiWindowProperites.i2mprec = settings.value("I2MPrec", 3).toInt();
-    defaultMdiWindowProperites.inch = settings.value("I2M", true).toBool();
-
     defaultMdiWindowProperites.fontName = settings.value("FontName", "Courier").toString();
     defaultMdiWindowProperites.fontSize = settings.value("FontSize", 12).toInt();
     defaultMdiWindowProperites.intCapsLock = settings.value("IntCapsLock", true).toBool();
@@ -2222,10 +2188,6 @@ void EdytorNc::writeSettings()
     settings.setValue("Extensions", defaultMdiWindowProperites.extensions);
     settings.setValue("DefaultSaveExtension", defaultMdiWindowProperites.saveExtension);
     settings.setValue("DefaultSaveDirectory", defaultMdiWindowProperites.saveDirectory);
-
-    settings.setValue("I2MAddress", defaultMdiWindowProperites.i2mAdr);
-    settings.setValue("I2MPrec", defaultMdiWindowProperites.i2mprec);
-    settings.setValue("I2M", defaultMdiWindowProperites.inch);
 
     settings.setValue("FontName", defaultMdiWindowProperites.fontName);
     settings.setValue("FontSize", defaultMdiWindowProperites.fontSize);

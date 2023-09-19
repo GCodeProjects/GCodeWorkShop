@@ -93,10 +93,8 @@ struct _editor_properites {
     bool ins;
     bool modified;
     int cursorPos;
-    QString lastDir, i2mAdr;
+    QString lastDir;
     QString fileName;
-    int i2mprec;
-    bool inch;
     QString fontName;
     int fontSize;
     bool intCapsLock;
