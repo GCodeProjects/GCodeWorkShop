@@ -86,10 +86,6 @@ public:
                      bool ignoreComments);
     bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options,
                     bool ignoreComments);
-    bool swapAxes(QString textToFind, QString replacedText, double min, double max, int oper,
-                  double modifier, QTextDocument::FindFlags options, bool ignoreComments, int prec);
-    void doSwapAxes(QString textToFind, QString replacedText, double min, double max, int oper,
-                    double modifier, QTextDocument::FindFlags options, bool ignoreComments, int precision);
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
     void filePrintPreview();
     bool isModified();

@@ -47,6 +47,7 @@
 #include "i2mprog/addons-i2mprog.h"
 #include "renumber/addons-renumber.h"
 #include "spaces/utils-spaces.h"
+#include "swapaxes/addons-swapaxes.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -68,7 +69,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_renumber(new QAction(this)),
     m_insertSpaces(new QAction(this)),
     m_removeSpaces(new QAction(this)),
-    m_splitProgramms(new QAction(this))
+    m_splitProgramms(new QAction(this)),
+    m_swapAxes(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -89,6 +91,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_insertSpaces, SIGNAL(triggered()), this, SLOT(doInsertSpaces()));
     connect(m_removeSpaces, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
     connect(m_splitProgramms, SIGNAL(triggered()), this, SLOT(doSplitProgramms()));
+    connect(m_swapAxes, SIGNAL(triggered()), this, SLOT(doSwapAxes()));
 
     loadIcons();
     loadTranslations();
@@ -134,6 +137,8 @@ void Addons::Actions::loadTranslations()
     m_removeSpaces->setToolTip(tr("Removes spaces"));
     m_splitProgramms->setText(tr("Split file"));
     m_splitProgramms->setToolTip(tr("Split file"));
+    m_swapAxes->setText(tr("Swap axes"));
+    m_swapAxes->setToolTip(tr("Swap/modify axes, selected text or entire program"));
 }
 
 void Addons::Actions::loadIcons()
@@ -157,6 +162,7 @@ void Addons::Actions::loadIcons()
     m_insertSpaces->setIcon(QIcon(":/images/insertspc.png"));
     m_removeSpaces->setIcon(QIcon(":/images/removespc.png"));
     m_splitProgramms->setIcon(QIcon(":/images/split_prog.png"));
+    m_swapAxes->setIcon(QIcon(":/images/swapaxes.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -407,4 +413,15 @@ void Addons::Actions::doSplitProgramms()
     }
 
     QApplication::restoreOverrideCursor();
+}
+
+void Addons::Actions::doSwapAxes()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    Addons::doSwapAxes(EdytorNc::instance(), Medium::instance().settings(), ctx.textEdit());
 }

@@ -1304,7 +1304,7 @@ void EdytorNc::updateMenus()
     m_addonsActions->i2mProg()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->compileMacro()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->cleanUp()->setEnabled(hasMdiChildNotReadOnly);
-    swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->swapAxes()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->paraComment()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     m_addonsActions->semiComment()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     m_addonsActions->blockSkipDecrement()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
@@ -1618,6 +1618,7 @@ void EdytorNc::createActions()
     m_addonsActions->renumber()->setShortcut(tr("F7"));
     m_addonsActions->insertSpaces()->setShortcut(tr("F4"));
     m_addonsActions->removeSpaces()->setShortcut(tr("F5"));
+    //m_addonsActions->swapAxes()->setShortcut(QKeySequence::Save);
 
     trianglesAct = new QAction(QIcon(":/images/triangles.png"), tr("Solution of triangles"), this);
     //trianglesAct->setShortcut(tr("F9"));
@@ -1655,11 +1656,6 @@ void EdytorNc::createActions()
                                 this);
     diffEditorAct->setToolTip(tr("Show diff of currently edited file and file on disk"));
     connect(diffEditorAct, SIGNAL(triggered()), this, SLOT(diffEditorFile()));
-
-    swapAxesAct = new QAction(QIcon(":/images/swapaxes.png"), tr("Swap axes"), this);
-    //swapAxesAct->setShortcut(QKeySequence::Save);
-    swapAxesAct->setToolTip(tr("Swap/modify axes, selected text or entire program"));
-    connect(swapAxesAct, SIGNAL(triggered()), this, SLOT(doSwapAxes()));
 
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose \"%1\"").arg(""), this);
     //closeAct->setShortcut(QKeySequence::Close);
@@ -1785,7 +1781,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(m_addonsActions->insertEmptyLines());
     toolsMenu->addAction(m_addonsActions->removeEmptyLines());
     toolsMenu->addAction(m_addonsActions->cleanUp());
-    toolsMenu->addAction(swapAxesAct);
+    toolsMenu->addAction(m_addonsActions->swapAxes());
     toolsMenu->addAction(m_addonsActions->splitProgramms());
     toolsMenu->addAction(m_addonsActions->renumber());
     toolsMenu->addSeparator();
@@ -1866,7 +1862,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(m_addonsActions->removeSpaces());
     toolsToolBar->addAction(m_addonsActions->cleanUp());
     toolsToolBar->addAction(m_addonsActions->dot());
-    toolsToolBar->addAction(swapAxesAct);
+    toolsToolBar->addAction(m_addonsActions->swapAxes());
     toolsToolBar->addAction(m_addonsActions->renumber());
     toolsToolBar->addAction(m_addonsActions->splitProgramms());
     toolsToolBar->addSeparator();
@@ -3529,39 +3525,6 @@ bool EdytorNc::event(QEvent *event)
     }
 
     return QWidget::event(event);
-}
-
-void EdytorNc::doSwapAxes()
-{
-    QString first, second;
-    double min, max, modi;
-    int oper, prec;
-    bool ignoreComments = true;
-    QTextDocument::FindFlags findOptions =
-        QTextDocument::FindFlags(); //QTextDocument::FindWholeWords;
-
-    MdiChild *editorWindow = activeMdiChild();
-
-    if (editorWindow) {
-        swapAxesDialog *swapDialog = new swapAxesDialog(this);
-
-        int result = swapDialog->exec();
-
-        if (result == QDialog::Accepted) {
-            first = swapDialog->getFirstAxis();
-            second = swapDialog->getSecondAxis();
-            min = swapDialog->getMinValue();
-            max = swapDialog->getMaxValue();
-            oper = swapDialog->getOperator();
-            modi = swapDialog->getModiferValue();
-            prec = swapDialog->getPrecision();
-
-            editorWindow->doSwapAxes(first, second, min, max, oper, modi, findOptions, ignoreComments,
-                                     prec);
-        }
-
-        delete (swapDialog);
-    }
 }
 
 void EdytorNc::updateSessionMenus()

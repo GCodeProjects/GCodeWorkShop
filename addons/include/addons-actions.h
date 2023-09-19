@@ -59,6 +59,7 @@ public:
     QAction *insertSpaces() {return m_insertSpaces;}
     QAction *removeSpaces() {return m_removeSpaces;}
     QAction *splitProgramms() {return m_splitProgramms;}
+    QAction *swapAxes() {return m_swapAxes;}
 
 protected:
     QAction *m_bhc;
@@ -80,6 +81,7 @@ protected:
     QAction *m_insertSpaces;
     QAction *m_removeSpaces;
     QAction *m_splitProgramms;
+    QAction *m_swapAxes;
 
 protected slots:
     void doBhc();
@@ -101,6 +103,7 @@ protected slots:
     void doInsertSpaces();
     void doRemoveSpaces();
     void doSplitProgramms();
+    void doSwapAxes();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

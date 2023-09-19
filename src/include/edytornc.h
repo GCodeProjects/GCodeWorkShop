@@ -195,7 +195,6 @@ private slots:
     void closeCurrentWindow();
     void closeAllMdiWindows();
     void goToLine(QString fileName, int line);
-    void doSwapAxes();
     void changeSession(QAction *action);
     void sessionMgr();
     void fileChanged(const QString fileName);
@@ -300,7 +299,6 @@ private:
     QAction *createUserToolTipsAct;
     QAction *undoAct;
     QAction *redoAct;
-    QAction *swapAxesAct;
     QAction *inLineCalcAct;
 
     QAction *sessionMgrAct;
