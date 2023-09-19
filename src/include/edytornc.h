@@ -157,7 +157,6 @@ private slots:
     void doRemoveEmptyLines();
     void doRemoveByRegExp();
     void doInsertEmptyLines();
-    void doInsertDot();
     void doRenumber();
     void doSpeedFeed();
     void doTriangles();
@@ -325,7 +324,6 @@ private:
 
     QAction *renumberAct;
     QAction *calcAct;
-    QAction *insertDotAct;
     QAction *removeSpcAct;
     QAction *removeEmptyLinesAct;
     QAction *insertEmptyLinesAct;

@@ -1260,65 +1260,6 @@ void MdiChild::doInsertSpace()
     delete updatedText;
 }
 
-void MdiChild::doInsertDot()
-{
-    int pos, count;
-    QString tx, f_tx;
-    QRegularExpression regex;
-    double it;
-    bool ok;
-
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-
-    regex.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(
-                         mdiWindowProperites.dotAdr));
-
-    count = 0;
-    tx = ui->textEdit->toPlainText();
-    auto match = regex.match(tx);
-    pos = 0;
-
-    while (match.hasMatch()) {
-        f_tx = match.captured();
-        pos = match.capturedEnd();
-
-        if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
-                && !f_tx.contains(QLatin1Char(';'))) {
-            if (mdiWindowProperites.dotAfter && !f_tx.contains(QLatin1Char('.'))) {
-                f_tx.remove(0, 1);
-
-                //f_tx.remove('+');
-                it = f_tx.toDouble(&ok);
-
-                if (ok) {
-                    it = it / mdiWindowProperites.dotAftrerCount;
-                    tx.replace(match.capturedStart() + 1, match.capturedLength() - 1,
-                               QString("%1").arg(it, 0, 'f', 3));
-                    count++;
-                }
-            }
-
-            if (mdiWindowProperites.atEnd && !f_tx.contains(QLatin1Char('.'))) {
-                tx.insert(match.capturedEnd(), QLatin1Char('.'));
-                pos++;
-                count++;
-            }
-        }
-
-        match =  regex.match(tx, pos);
-    }
-
-    emit message(QString(tr("Inserted : %1 dots.")).arg(count), 6000);
-    cleanUp(&tx);
-    ui->textEdit->selectAll();
-    ui->textEdit->insertPlainText(tx);
-    QTextCursor cursor = ui->textEdit->textCursor();
-    cursor.setPosition(0);
-    ui->textEdit->setTextCursor(cursor);
-    QApplication::restoreOverrideCursor();
-}
-
 void MdiChild::doI2M()
 {
     int count;

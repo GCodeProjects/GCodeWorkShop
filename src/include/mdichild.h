@@ -74,7 +74,6 @@ public:
     void doRemoveEmptyLines();
     void doInsertEmptyLines();
     void doInsertSpace();
-    void doInsertDot();
     void doI2M();
     void highlightFindText(const QString& searchString,
                            QTextDocument::FindFlags options = QTextDocument::FindFlags(),

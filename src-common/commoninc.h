@@ -93,10 +93,8 @@ struct _editor_properites {
     bool ins;
     bool modified;
     int cursorPos;
-    QString lastDir, dotAdr, i2mAdr;
+    QString lastDir, i2mAdr;
     QString fileName;
-    bool atEnd, dotAfter;
-    int dotAftrerCount;
     int i2mprec;
     bool inch;
     QString fontName;

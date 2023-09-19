@@ -1148,27 +1148,6 @@ void EdytorNc::doInsertEmptyLines()
     }
 }
 
-void EdytorNc::doInsertDot()
-{
-    MdiChild *child;
-
-    DotDialog *dotDialog = new DotDialog(this);
-    dotDialog->setState(defaultMdiWindowProperites.dotAdr, defaultMdiWindowProperites.atEnd,
-                        defaultMdiWindowProperites.dotAfter, defaultMdiWindowProperites.dotAftrerCount);
-
-    child = activeMdiChild();
-
-    if (dotDialog->exec() == QDialog::Accepted) {
-        if (child) {
-            defaultMdiWindowProperites = child->getMdiWindowProperites();
-            dotDialog->getState(defaultMdiWindowProperites.dotAdr, defaultMdiWindowProperites.atEnd,
-                                defaultMdiWindowProperites.dotAfter, defaultMdiWindowProperites.dotAftrerCount);
-            child->setMdiWindowProperites(defaultMdiWindowProperites);
-            child->doInsertDot();
-        }
-    }
-}
-
 void EdytorNc::doRenumber()
 {
 
@@ -1420,7 +1399,7 @@ void EdytorNc::updateMenus()
     replaceAct->setEnabled(hasMdiChildNotReadOnly);
     readOnlyAct->setEnabled(hasMdiChild);
     renumberAct->setEnabled(hasMdiChildNotReadOnly);
-    insertDotAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->dot()->setEnabled(hasMdiChildNotReadOnly);
     insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
     removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
     removeEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
@@ -1734,6 +1713,7 @@ void EdytorNc::createActions()
     m_addonsActions->paraComment()->setShortcut(tr("Ctrl+9"));
     m_addonsActions->semiComment()->setShortcut(tr("Ctrl+;"));
     //m_addonsActions->compileMacro()->setShortcut(tr("F9"));
+    m_addonsActions->dot()->setShortcut(tr("F6"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1756,11 +1736,6 @@ void EdytorNc::createActions()
     //insertEmptyLinesAct->setShortcut(tr("F5"));
     insertEmptyLinesAct->setToolTip(tr("Insert empty lines"));
     connect(insertEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
-
-    insertDotAct = new QAction(QIcon(":/images/dots.png"), tr("Insert dots"), this);
-    insertDotAct->setShortcut(tr("F6"));
-    insertDotAct->setToolTip(tr("Inserts decimal dot"));
-    connect(insertDotAct, SIGNAL(triggered()), this, SLOT(doInsertDot()));
 
     renumberAct = new QAction(QIcon(":/images/renumber.png"), tr("Renumber"), this);
     renumberAct->setShortcut(tr("F7"));
@@ -1949,7 +1924,7 @@ void EdytorNc::createMenus()
     toolsMenu->addSeparator();
     toolsMenu->addAction(insertSpcAct);
     toolsMenu->addAction(removeSpcAct);
-    toolsMenu->addAction(insertDotAct);
+    toolsMenu->addAction(m_addonsActions->dot());
     toolsMenu->addAction(insertEmptyLinesAct);
     toolsMenu->addAction(removeEmptyLinesAct);
     toolsMenu->addAction(m_addonsActions->cleanUp());
@@ -2033,7 +2008,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(insertSpcAct);
     toolsToolBar->addAction(removeSpcAct);
     toolsToolBar->addAction(m_addonsActions->cleanUp());
-    toolsToolBar->addAction(insertDotAct);
+    toolsToolBar->addAction(m_addonsActions->dot());
     toolsToolBar->addAction(swapAxesAct);
     toolsToolBar->addAction(renumberAct);
     toolsToolBar->addAction(splittAct);
@@ -2171,11 +2146,6 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.saveDirectory = settings.value("DefaultSaveDirectory",
             QDir::homePath()).toString();
 
-    defaultMdiWindowProperites.dotAdr = settings.value("DotAddress", "XYZB").toString();
-    defaultMdiWindowProperites.dotAftrerCount = settings.value("DotAfterCount", 1000).toInt();
-    defaultMdiWindowProperites.atEnd = settings.value("DotAtEnd", true).toBool();
-    defaultMdiWindowProperites.dotAfter = settings.value("DotAfter", false).toBool();
-
     defaultMdiWindowProperites.i2mAdr = settings.value("I2MAddress", "XYZ").toString();
     defaultMdiWindowProperites.i2mprec = settings.value("I2MPrec", 3).toInt();
     defaultMdiWindowProperites.inch = settings.value("I2M", true).toBool();
@@ -2306,11 +2276,6 @@ void EdytorNc::writeSettings()
     settings.setValue("Extensions", defaultMdiWindowProperites.extensions);
     settings.setValue("DefaultSaveExtension", defaultMdiWindowProperites.saveExtension);
     settings.setValue("DefaultSaveDirectory", defaultMdiWindowProperites.saveDirectory);
-
-    settings.setValue("DotAddress", defaultMdiWindowProperites.dotAdr);
-    settings.setValue("DotAfterCount", defaultMdiWindowProperites.dotAftrerCount);
-    settings.setValue("DotAtEnd", defaultMdiWindowProperites.atEnd);
-    settings.setValue("DotAfter", defaultMdiWindowProperites.dotAfter);
 
     settings.setValue("I2MAddress", defaultMdiWindowProperites.i2mAdr);
     settings.setValue("I2MPrec", defaultMdiWindowProperites.i2mprec);

@@ -35,6 +35,7 @@
 #include "cleanup/addons-cleanup.h"
 #include "comment/utils-comment.h"
 #include "compilemacro/utils-compilemacro.h"
+#include "dot/addons-dot.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -46,7 +47,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_cleanUp(new QAction(this)),
     m_paraComment(new QAction(this)),
     m_semiComment(new QAction(this)),
-    m_compileMacro(new QAction(this))
+    m_compileMacro(new QAction(this)),
+    m_dot(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -57,6 +59,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_paraComment, SIGNAL(triggered()), this, SLOT(doParaComment()));
     connect(m_semiComment, SIGNAL(triggered()), this, SLOT(doSemiComment()));
     connect(m_compileMacro, SIGNAL(triggered()), this, SLOT(doCompileMacro()));
+    connect(m_dot, SIGNAL(triggered()), this, SLOT(doDot()));
 
     loadIcons();
     loadTranslations();
@@ -82,6 +85,8 @@ void Addons::Actions::loadTranslations()
     m_semiComment->setToolTip(tr("Comment/uncomment selected text using semicolon"));
     m_compileMacro->setText(tr("Compile macro - experimental"));
     m_compileMacro->setToolTip(tr("Translate EdytorNC macro into CNC program"));
+    m_dot->setText(tr("Insert dots"));
+    m_dot->setToolTip(tr("Inserts decimal dot"));
 }
 
 void Addons::Actions::loadIcons()
@@ -95,6 +100,7 @@ void Addons::Actions::loadIcons()
     m_paraComment->setIcon(QIcon(":/images/paracomment.pn"));
     m_semiComment->setIcon(QIcon(":/images/semicomment.png"));
     m_compileMacro->setIcon(QIcon(":/images/compfile.png"));
+    m_dot->setIcon(QIcon(":/images/dots.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -191,4 +197,17 @@ void Addons::Actions::doCompileMacro()
 
     MdiChild *child = enc->newFile();
     child->textEdit()->insertPlainText(compiler.result());
+}
+
+void Addons::Actions::doDot()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    if (Addons::doDot(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+        ctx.push();
+    }
 }

@@ -49,6 +49,7 @@ public:
     QAction *paraComment() {return m_paraComment;}
     QAction *semiComment() {return m_semiComment;}
     QAction *compileMacro() {return m_compileMacro;}
+    QAction *dot() {return m_dot;}
 
 protected:
     QAction *m_bhc;
@@ -60,6 +61,7 @@ protected:
     QAction *m_paraComment;
     QAction *m_semiComment;
     QAction *m_compileMacro;
+    QAction *m_dot;
 
 protected slots:
     void doBhc();
@@ -71,6 +73,7 @@ protected slots:
     void doParaComment();
     void doSemiComment();
     void doCompileMacro();
+    void doDot();
 
 protected:
     void doBlockSkip(bool remove, bool inc);
