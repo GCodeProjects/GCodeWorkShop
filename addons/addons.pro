@@ -20,3 +20,4 @@ SOURCES += \
     src/addons-context.cpp
 
 include(src/bhc/bhc.pri)
+include(src/blockskip/blockskip.pri)

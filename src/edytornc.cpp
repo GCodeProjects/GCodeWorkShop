@@ -1441,9 +1441,9 @@ void EdytorNc::updateMenus()
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
     semiCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     paraCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
-    insertBlockSkipAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
-    insertBlockSkip1Act->setEnabled(hasMdiChildNotReadOnly && hasSelection);
-    insertBlockSkip2Act->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    m_addonsActions->blockSkipDecrement()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    m_addonsActions->blockSkipIncrement()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    m_addonsActions->blockSkipRemove()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     inLineCalcAct->setEnabled(hasMdiChild);
 
     if (!hasMdiChildNotReadOnly) {
@@ -1735,6 +1735,9 @@ void EdytorNc::createActions()
     connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(doShowInLineCalc()));
 
     m_addonsActions->bhc()->setShortcut(tr("F8"));
+    m_addonsActions->blockSkipRemove()->setShortcut(tr("Ctrl+1"));
+    m_addonsActions->blockSkipIncrement()->setShortcut(tr("Ctrl+2"));
+    m_addonsActions->blockSkipDecrement()->setShortcut(tr("Ctrl+3"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1856,22 +1859,6 @@ void EdytorNc::createActions()
     swapAxesAct->setToolTip(tr("Swap/modify axes, selected text or entire program"));
     connect(swapAxesAct, SIGNAL(triggered()), this, SLOT(doSwapAxes()));
 
-    insertBlockSkipAct = new QAction(QIcon(":/images/blockskipr.png"), tr("Block Skip remove"),
-                                     this);
-    insertBlockSkipAct->setShortcut(tr("Ctrl+1"));
-    insertBlockSkipAct->setToolTip(tr("Remove Block Skip /"));
-    connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(doBlockSkip()));
-
-    insertBlockSkip1Act = new QAction(QIcon(":/images/blockskip+.png"), tr("Block Skip +"), this);
-    insertBlockSkip1Act->setShortcut(tr("Ctrl+2"));
-    insertBlockSkip1Act->setToolTip(tr("Insert/increase Block Skip /"));
-    connect(insertBlockSkip1Act, SIGNAL(triggered()), this, SLOT(doBlockSkip1()));
-
-    insertBlockSkip2Act = new QAction(QIcon(":/images/blockskip-.png"), tr("Block Skip -"), this);
-    insertBlockSkip2Act->setShortcut(tr("Ctrl+3"));
-    insertBlockSkip2Act->setToolTip(tr("Insert/decrease Block Skip /"));
-    connect(insertBlockSkip2Act, SIGNAL(triggered()), this, SLOT(doBlockSkip2()));
-
     closeAct = new QAction(QIcon(":/images/fileclose.png"), tr("Cl&ose \"%1\"").arg(""), this);
     //closeAct->setShortcut(QKeySequence::Close);
     closeAct->setToolTip(tr("Close the active window"));
@@ -1979,9 +1966,9 @@ void EdytorNc::createMenus()
     editMenu->addAction(paraCommAct);
     blockSkipMenu = editMenu->addMenu(tr("&Block Skip"));
     blockSkipMenu->setIcon(QIcon(":/images/blockskip.png"));
-    blockSkipMenu->addAction(insertBlockSkip1Act);
-    blockSkipMenu->addAction(insertBlockSkip2Act);
-    blockSkipMenu->addAction(insertBlockSkipAct);
+    blockSkipMenu->addAction(m_addonsActions->blockSkipIncrement());
+    blockSkipMenu->addAction(m_addonsActions->blockSkipDecrement());
+    blockSkipMenu->addAction(m_addonsActions->blockSkipRemove());
     editMenu->addSeparator();
     editMenu->addAction(readOnlyAct);
     editMenu->addSeparator();
@@ -3854,27 +3841,6 @@ void EdytorNc::doSplitPrograms()
     }
 
     QApplication::restoreOverrideCursor();
-}
-
-void EdytorNc::doBlockSkip()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->blockSkip(true);
-    }
-}
-
-void EdytorNc::doBlockSkip1()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->blockSkip(false, true);
-    }
-}
-
-void EdytorNc::doBlockSkip2()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->blockSkip(false, false);
-    }
 }
 
 void EdytorNc::doSemiComment()

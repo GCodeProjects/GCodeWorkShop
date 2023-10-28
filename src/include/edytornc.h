@@ -86,6 +86,7 @@ public:
     void moveEvent(QMoveEvent *event);
 
     Addons::Actions *addonsActions();
+    MdiChild *activeMdiChild();
 
 protected:
     Ui::EdytorNc *ui;
@@ -210,9 +211,6 @@ private slots:
     void doParaComment();
     void displayCleanUpDialog();
     void doSwapAxes();
-    void doBlockSkip();
-    void doBlockSkip1();
-    void doBlockSkip2();
     void changeSession(QAction *action);
     void sessionMgr();
     void fileChanged(const QString fileName);
@@ -242,7 +240,6 @@ private:
     void createFileBrowseTabs();
     void fileTreeViewChangeRootDir();
     void fileTreeViewChangeRootDir(QString path);
-    MdiChild *activeMdiChild();
     QMdiSubWindow *findMdiChild(const QString &fileName);
     void createDiffApp();
     void updateSessionMenus();
@@ -320,9 +317,6 @@ private:
     QAction *redoAct;
     QAction *cleanUpDialogAct;
     QAction *swapAxesAct;
-    QAction *insertBlockSkipAct;
-    QAction *insertBlockSkip1Act;
-    QAction *insertBlockSkip2Act;
     QAction *inLineCalcAct;
 
     QAction *sessionMgrAct;

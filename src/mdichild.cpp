@@ -65,8 +65,10 @@
 #include <QtGlobal>            // QT_VERSION QT_VERSION_CHECK
 #include <QToolTip>
 
-#include <commoninc.h>              // _editor_properites
-#include <ui/longjobhelper.h>       // LongJobHelper
+#include <addons-actions.h>
+#include <commoninc.h>         // _editor_properites
+#include <edytornc.h>
+#include <ui/longjobhelper.h>  // LongJobHelper
 #include <utils/expressionparser.h>
 #include <utils/removezeros.h>      // Utils::removeZeros()
 
@@ -2691,113 +2693,6 @@ QString MdiChild::guessFileName()
 }
 
 //**************************************************************************************************
-//  insert/remove block skip /
-//**************************************************************************************************
-
-void MdiChild::blockSkip(bool remove, bool inc)
-{
-    int num;
-    QRegularExpression regex;
-    int start, end;
-    QTextCursor cursor;
-
-    if (ui->textEdit->textCursor().hasSelection()) {
-        cursor = ui->textEdit->textCursor();
-
-        start = ui->textEdit->textCursor().selectionStart();
-        end = ui->textEdit->textCursor().selectionEnd();
-
-        if (start < end) { // selection always in same direction
-            cursor.setPosition(end, QTextCursor::MoveAnchor);
-            cursor.setPosition(start, QTextCursor::KeepAnchor);
-        }
-
-        cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
-        ui->textEdit->setTextCursor(cursor);
-        QString selText = cursor.selectedText();
-
-        regex.setPattern(QString("/[0-9]{0,1}"));
-        num = 0;
-
-        if (!remove) {
-            auto match = regex.match(selText);
-
-            if (match.hasMatch()) {
-                QString tx = match.captured();
-                selText.remove(regex);
-                tx.remove('/');
-                tx.remove(' ');
-                bool ok;
-                num = tx.toInt(&ok);
-
-                if (!ok) {
-                    num = 0;
-                }
-
-                if (inc) {
-                    num++;
-
-                    if (num > 9) {
-                        num = 9;
-                    }
-                } else {
-                    num--;
-
-                    if (num < 0) {
-                        num = 0;
-                    }
-                }
-            }
-        }
-
-        QStringList list = selText.split(QChar::ParagraphSeparator);
-
-        if (list.isEmpty()) {
-            list.append(selText);
-        }
-
-        selText.clear();
-
-        foreach (QString txLine, list) {
-            if (remove) {
-                if (txLine.length() > 0) {
-                    txLine.remove(regex);
-                }
-            } else {
-                int i = txLine.indexOf(QRegularExpression("[;/(]{1,1}"));
-
-                if ((i > 1) || (i < 0)) {
-                    if (num == 0) {
-                        txLine.prepend("/");
-                    } else {
-                        txLine.prepend(QString("/%1").arg(num));
-                    }
-                }
-            }
-
-            txLine.append("\n");
-            selText.append(txLine);
-        }
-
-        selText.remove(selText.length() - 1, 1);
-
-        start = ui->textEdit->textCursor().selectionStart();
-        end = ui->textEdit->textCursor().selectionEnd();
-
-        ui->textEdit->insertPlainText(selText);
-        end = start + selText.length(); //keep selection
-
-        if (start < end) { // selection always in same direction
-            cursor.setPosition(end, QTextCursor::MoveAnchor);
-            cursor.setPosition(start, QTextCursor::KeepAnchor);
-        }
-
-        cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
-        ui->textEdit->setTextCursor(cursor);
-    }
-}
-
-//**************************************************************************************************
 //  comments/uncomments selected text using ;
 //**************************************************************************************************
 
@@ -3358,21 +3253,6 @@ void MdiChild::paraCommentSlot()
     paraComment();
 }
 
-void MdiChild::blockSkipRemSlot()
-{
-    blockSkip(true);
-}
-
-void MdiChild::blockSkipIncSlot()
-{
-    blockSkip(false, true);
-}
-
-void MdiChild::blockSkipDecSlot()
-{
-    blockSkip(false, false);
-}
-
 void MdiChild::showContextMenu(const QPoint &pt)
 {
     QMenu *menu = ui->textEdit->createStandardContextMenu();
@@ -3393,29 +3273,10 @@ void MdiChild::showContextMenu(const QPoint &pt)
     menu->addAction(paraCommAct);
     menu->addSeparator();
 
-    QAction *insertBlockSkip1Act = new QAction(QIcon(":/images/blockskip+.png"), tr("Block Skip +"),
-            this);
-    insertBlockSkip1Act->setShortcut(tr("Ctrl+2"));
-    insertBlockSkip1Act->setToolTip(tr("Insert/increase Block Skip /"));
-    connect(insertBlockSkip1Act, SIGNAL(triggered()), this, SLOT(blockSkipIncSlot()));
-    insertBlockSkip1Act->setEnabled(hasSelection());
-    menu->addAction(insertBlockSkip1Act);
-
-    QAction *insertBlockSkip2Act = new QAction(QIcon(":/images/blockskip-.png"), tr("Block Skip -"),
-            this);
-    insertBlockSkip2Act->setShortcut(tr("Ctrl+3"));
-    insertBlockSkip2Act->setToolTip(tr("Insert/decrease Block Skip /"));
-    connect(insertBlockSkip2Act, SIGNAL(triggered()), this, SLOT(blockSkipDecSlot()));
-    insertBlockSkip2Act->setEnabled(hasSelection());
-    menu->addAction(insertBlockSkip2Act);
-
-    QAction *insertBlockSkipAct = new QAction(QIcon(":/images/blockskipr.png"),
-            tr("Block Skip remove"), this);
-    insertBlockSkipAct->setShortcut(tr("Ctrl+1"));
-    insertBlockSkipAct->setToolTip(tr("Remove Block Skip /"));
-    connect(insertBlockSkipAct, SIGNAL(triggered()), this, SLOT(blockSkipRemSlot()));
-    insertBlockSkipAct->setEnabled(hasSelection());
-    menu->addAction(insertBlockSkipAct);
+    Addons::Actions *addonsActions = EdytorNc::instance()->addonsActions();
+    menu->addAction(addonsActions->blockSkipIncrement());
+    menu->addAction(addonsActions->blockSkipDecrement());
+    menu->addAction(addonsActions->blockSkipRemove());
     menu->addSeparator();
 
     QAction *inLineCalcAct = new QAction(QIcon(":/images/inlinecalc.png"), tr("Inline calculator"),
@@ -3426,9 +3287,6 @@ void MdiChild::showContextMenu(const QPoint &pt)
 
     menu->exec(ui->textEdit->mapToGlobal(pt));
 
-    delete insertBlockSkipAct;
-    delete insertBlockSkip1Act;
-    delete insertBlockSkip2Act;
     delete semiCommAct;
     delete paraCommAct;
     delete inLineCalcAct;

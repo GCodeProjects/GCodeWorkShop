@@ -41,13 +41,24 @@ public slots:
 public:
     // *INDENT-OFF*
     QAction *bhc() {return m_bhc;}
-    // *INDENT-ON*
+    QAction *blockSkipDecrement() {return m_blockSkipDecrement;}
+    QAction *blockSkipIncrement() {return m_blockSkipIncrement;}
+    QAction *blockSkipRemove() {return m_blockSkipRemove;}
 
 protected:
     QAction *m_bhc;
+    QAction *m_blockSkipDecrement;
+    QAction *m_blockSkipIncrement;
+    QAction *m_blockSkipRemove;
 
 protected slots:
     void doBhc();
+    void doBlockSkipDecrement();
+    void doBlockSkipIncrement();
+    void doBlockSkipRemove();
+
+protected:
+    void doBlockSkip(bool remove, bool inc);
 };
 } // namespace Addons
 
