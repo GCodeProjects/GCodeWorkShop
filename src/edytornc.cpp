@@ -928,20 +928,6 @@ void EdytorNc::readOnly()
     updateMenus();
 }
 
-void EdytorNc::doInsertSpaces()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->doInsertSpace();
-    }
-}
-
-void EdytorNc::doRemoveSpaces()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->doRemoveSpace();
-    }
-}
-
 void EdytorNc::goToLine(QString fileName, int line)
 {
     if (activeMdiChild()) {
@@ -1311,10 +1297,10 @@ void EdytorNc::updateMenus()
     readOnlyAct->setEnabled(hasMdiChild);
     m_addonsActions->renumber()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->dot()->setEnabled(hasMdiChildNotReadOnly);
-    insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
-    removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->removeEmptyLines()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->insertEmptyLines()->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->insertSpaces()->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->removeSpaces()->setEnabled(hasMdiChildNotReadOnly);
     splittAct->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->i2mProg()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->compileMacro()->setEnabled(hasMdiChildNotReadOnly);
@@ -1631,16 +1617,8 @@ void EdytorNc::createActions()
     //m_addonsActions->i2m()->setShortcut(tr("F9"));
     //m_addonsActions->i2mProg()->setShortcut(tr("F9"));
     m_addonsActions->renumber()->setShortcut(tr("F7"));
-
-    insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
-    insertSpcAct->setShortcut(tr("F4"));
-    insertSpcAct->setToolTip(tr("Inserts spaces"));
-    connect(insertSpcAct, SIGNAL(triggered()), this, SLOT(doInsertSpaces()));
-
-    removeSpcAct = new QAction(QIcon(":/images/removespc.png"), tr("Remove spaces"), this);
-    removeSpcAct->setShortcut(tr("F5"));
-    removeSpcAct->setToolTip(tr("Removes spaces"));
-    connect(removeSpcAct, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
+    m_addonsActions->insertSpaces()->setShortcut(tr("F4"));
+    m_addonsActions->removeSpaces()->setShortcut(tr("F5"));
 
     trianglesAct = new QAction(QIcon(":/images/triangles.png"), tr("Solution of triangles"), this);
     //trianglesAct->setShortcut(tr("F9"));
@@ -1806,8 +1784,8 @@ void EdytorNc::createMenus()
     toolsMenu = menuBar()->addMenu(tr("&Tools"));
     toolsMenu->addAction(showSerialToolBarAct);
     toolsMenu->addSeparator();
-    toolsMenu->addAction(insertSpcAct);
-    toolsMenu->addAction(removeSpcAct);
+    toolsMenu->addAction(m_addonsActions->insertSpaces());
+    toolsMenu->addAction(m_addonsActions->removeSpaces());
     toolsMenu->addAction(m_addonsActions->dot());
     toolsMenu->addAction(m_addonsActions->insertEmptyLines());
     toolsMenu->addAction(m_addonsActions->removeEmptyLines());
@@ -1889,8 +1867,8 @@ void EdytorNc::createToolBars()
     toolsToolBar->setObjectName("Tools");
     toolsToolBar->addAction(showSerialToolBarAct);
     toolsToolBar->addSeparator();
-    toolsToolBar->addAction(insertSpcAct);
-    toolsToolBar->addAction(removeSpcAct);
+    toolsToolBar->addAction(m_addonsActions->insertSpaces());
+    toolsToolBar->addAction(m_addonsActions->removeSpaces());
     toolsToolBar->addAction(m_addonsActions->cleanUp());
     toolsToolBar->addAction(m_addonsActions->dot());
     toolsToolBar->addAction(swapAxesAct);

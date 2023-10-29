@@ -27,6 +27,7 @@
 #include <addons-actions.h>
 #include <edytornc.h>           // for EdytorNc
 #include <mdichild.h>
+#include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 #include <utils/medium.h>       // for Medium
 
 #include "addons-context.h" // for Context, Context::ALL, Context::SELECTED, Context::SELECTED_BLOCKS
@@ -43,6 +44,7 @@
 #include "i2m/addons-i2m.h"
 #include "i2mprog/addons-i2mprog.h"
 #include "renumber/addons-renumber.h"
+#include "spaces/utils-spaces.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -61,7 +63,9 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_feeds(new QAction(this)),
     m_i2m(new QAction(this)),
     m_i2mProg(new QAction(this)),
-    m_renumber(new QAction(this))
+    m_renumber(new QAction(this)),
+    m_insertSpaces(new QAction(this)),
+    m_removeSpaces(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -79,6 +83,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_i2m, SIGNAL(triggered()), this, SLOT(doI2M()));
     connect(m_i2mProg, SIGNAL(triggered()), this, SLOT(doI2MProg()));
     connect(m_renumber, SIGNAL(triggered()), this, SLOT(doRenumber()));
+    connect(m_insertSpaces, SIGNAL(triggered()), this, SLOT(doInsertSpaces()));
+    connect(m_removeSpaces, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
 
     loadIcons();
     loadTranslations();
@@ -118,6 +124,10 @@ void Addons::Actions::loadTranslations()
     m_i2mProg->setToolTip(tr("Convert program inch <-> mm"));
     m_renumber->setText(tr("Renumber"));
     m_renumber->setToolTip(tr("Renumber program blocks"));
+    m_insertSpaces->setText(tr("&Insert spaces"));
+    m_insertSpaces->setToolTip(tr("Inserts spaces"));
+    m_removeSpaces->setText(tr("Remove spaces"));
+    m_removeSpaces->setToolTip(tr("Removes spaces"));
 }
 
 void Addons::Actions::loadIcons()
@@ -138,6 +148,8 @@ void Addons::Actions::loadIcons()
     m_i2m->setIcon(QIcon(":/images/i2m.png"));
     m_i2mProg->setIcon(QIcon(":/images/i2mprog.png"));
     m_renumber->setIcon(QIcon(":/images/renumber.png"));
+    m_insertSpaces->setIcon(QIcon(":/images/insertspc.png"));
+    m_removeSpaces->setIcon(QIcon(":/images/removespc.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -309,6 +321,50 @@ void Addons::Actions::doRenumber()
     }
 
     if (Addons::doRenumber(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+        ctx.push();
+    }
+}
+
+void Addons::Actions::doInsertSpaces()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    LongJobHelper helper{EdytorNc::instance()};
+    helper.begin(ctx.text().length(), tr("Insert space", "Slow operation title in MDIChild"));
+
+    int changed = Utils::insertSpaces(ctx.text(), [&helper](int pos) -> bool{
+        return helper.check(pos) == LongJobHelper::CANCEL;
+    });
+
+    helper.end();
+
+    if (changed) {
+        ctx.push();
+    }
+}
+
+void Addons::Actions::doRemoveSpaces()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    LongJobHelper helper{EdytorNc::instance()};
+    helper.begin(ctx.text().length(), tr("Remove space", "Slow operation title in MDIChild"));
+
+    int changed = Utils::removeSpaces(ctx.text(), [&helper](int pos) -> bool{
+        return helper.check(pos) == LongJobHelper::CANCEL;
+    });
+
+    helper.end();
+
+    if (changed) {
         ctx.push();
     }
 }

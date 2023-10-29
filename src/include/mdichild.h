@@ -40,7 +40,6 @@ class QPlainTextEdit;
 class QPrinter;
 
 class Highlighter;
-class LongJobHelper;
 
 namespace Ui {
 class MdiChild;
@@ -68,8 +67,6 @@ public:
     QString currentFile();  //filename with full path
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
-    void doRemoveSpace();
-    void doInsertSpace();
     void highlightFindText(const QString& searchString,
                            QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                            bool ignoreComments = true);
@@ -140,7 +137,6 @@ private:
     QPointer<QLineEdit> calcLineEdit;
     QStringList calcLineEditWordList;
     QChar inLineCalcChar;
-    LongJobHelper *m_Helper;
 
 private slots :
     void highlightCurrentLine();

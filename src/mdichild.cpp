@@ -68,7 +68,6 @@
 #include <addons-actions.h>
 #include <commoninc.h>         // _editor_properites
 #include <edytornc.h>
-#include <ui/longjobhelper.h>  // LongJobHelper
 #include <utils/expressionparser.h>
 #include <utils/removezeros.h>      // Utils::removeZeros()
 
@@ -103,7 +102,6 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     ui->textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->textEdit, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(showContextMenu(const QPoint &)));
-    m_Helper = new LongJobHelper(parent);
 }
 
 MdiChild::~MdiChild()
@@ -111,8 +109,6 @@ MdiChild::~MdiChild()
     if (highlighter != nullptr) {
         delete highlighter;
     }
-
-    delete m_Helper;
 }
 
 QPlainTextEdit *MdiChild::textEdit()
@@ -743,216 +739,6 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
         //return ui->textEdit->eventFilter(obj, ev);
         return false;
     }
-}
-
-void MdiChild::doRemoveSpace()
-{
-    enum {
-        NORMAL_FLOW,
-        AFTER_APOSTROPHE,
-        AFTER_PARETHESIS,
-        AFTER_SEMICOLON
-    } state = NORMAL_FLOW;
-
-    QString *updatedText = new QString();
-    QString tx = ui->textEdit->toPlainText();
-    int pos = 0;
-    bool wasLetter = false;
-    bool skipChar;
-    bool openAddress = false;
-    bool hasChanged = false;
-    QChar currentChar = QChar();
-
-    m_Helper->begin(tx.length(), tr("Remove space", "Slow operation title in MDIChild"));
-
-    while (pos < tx.length()) {
-        if (m_Helper->check(pos) == LongJobHelper::CANCEL) {
-            return;
-        }
-
-        currentChar = tx.at(pos++);
-        skipChar = false;
-
-        switch (state) {
-        case AFTER_APOSTROPHE:
-            if (currentChar == '\'' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
-
-            break;
-
-        case AFTER_PARETHESIS:
-            if (currentChar == ')' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
-
-            break;
-
-        case AFTER_SEMICOLON:
-            if (currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
-
-            break;
-
-        default:
-            if (currentChar == '\'') {
-                state = AFTER_APOSTROPHE;
-            } else if (currentChar == '(') {
-                state = AFTER_PARETHESIS;
-            } else if (currentChar == ';') {
-                state = AFTER_SEMICOLON;
-            } else {
-                // Some spaces are not removed to avoid merging words.
-                // If there are letters before and after spaces, then one space is left.
-                if (currentChar == ' ' || currentChar == '\t') {
-                    skipChar = true;
-                    hasChanged = true;
-
-                    if (wasLetter) {
-                        openAddress = true;
-                    }
-                } else if ((currentChar >= 'A' && currentChar <= 'Z') ||
-                           (currentChar >= 'a' && currentChar <= 'z') ||
-                           currentChar == '#') {
-                    if (openAddress) {
-                        updatedText->append(' ');
-                    }
-
-                    wasLetter = true;
-                    openAddress = false;
-                } else {
-                    wasLetter = false;
-                    openAddress = false;
-                }
-            }
-        }
-
-        if (!skipChar) {
-            updatedText->append(currentChar);
-        }
-    }
-
-    m_Helper->end();
-
-    if (hasChanged) {
-        ui->textEdit->selectAll();
-        ui->textEdit->insertPlainText(*updatedText);
-        QTextCursor cursor = ui->textEdit->textCursor();
-        cursor.setPosition(0);
-        ui->textEdit->setTextCursor(cursor);
-    }
-
-    delete updatedText;
-}
-
-void MdiChild::doInsertSpace()
-{
-    enum {
-        NORMAL_FLOW,
-        AFTER_APOSTROPHE,
-        AFTER_PARETHESIS,
-        AFTER_SEMICOLON
-    } state = NORMAL_FLOW;
-
-    int pos = 0;
-    QChar currentChar = QChar();
-    QChar previosChar = QChar();
-    bool hasChanged = false;
-
-    QString *updatedText = new QString();
-    QString tx = ui->textEdit->toPlainText();
-
-    m_Helper->begin(tx.length(), tr("Insert space", "Slow operation title in MDIChild"));
-
-    while (pos < tx.length()) {
-        if (m_Helper->check(pos) == LongJobHelper::CANCEL) {
-            return;
-        }
-
-        previosChar = currentChar;
-        currentChar = tx.at(pos++);
-        bool insert = false;
-
-        switch (state) {
-        case AFTER_APOSTROPHE:
-            if (currentChar == '\'' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
-
-            break;
-
-        case AFTER_PARETHESIS:
-            if (currentChar == ')' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
-
-            break;
-
-        case AFTER_SEMICOLON:
-            if (currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
-
-            break;
-
-        default:
-            if (currentChar == '\'') {
-                state = AFTER_APOSTROPHE;
-
-                if (previosChar != ' ' && previosChar != '\n') {
-                    insert = true;
-                }
-            } else if (currentChar == '(') {
-                state = AFTER_PARETHESIS;
-
-                if (previosChar != ' ' && previosChar != '\n') {
-                    insert = true;
-                }
-            } else if (currentChar == ';') {
-                state = AFTER_SEMICOLON;
-
-                if (previosChar != ' ' && previosChar != '\n') {
-                    insert = true;
-                }
-            } else if (previosChar == ' ' || currentChar == ' ') {
-                // do nothing
-            } else if (previosChar == '\n') {
-                // do nothing
-            } else if (currentChar == '#' && previosChar != '#' && previosChar != '['
-                       && previosChar != '-' && previosChar != '+' && previosChar != '*'
-                       && previosChar != '/' && previosChar != '=') {
-                insert = true;
-            } else if ((previosChar >= 'A' && previosChar <= 'Z') ||
-                       (previosChar >= 'a' && previosChar <= 'z') ||
-                       previosChar == ',') {
-                // do nothing
-            } else if ((currentChar >= 'A' && currentChar <= 'Z') ||
-                       (currentChar >= 'A' && currentChar <= 'Z') ||
-                       currentChar == ',') {
-                insert = true;
-            }
-        }
-
-        if (insert) {
-            hasChanged = true;
-            updatedText->append(' ');
-        }
-
-        updatedText->append(currentChar);
-    }
-
-    m_Helper->end();
-
-    if (hasChanged) {
-        ui->textEdit->selectAll();
-        ui->textEdit->insertPlainText(*updatedText);
-        QTextCursor cursor = ui->textEdit->textCursor();
-        cursor.setPosition(0);
-        ui->textEdit->setTextCursor(cursor);
-    }
-
-    delete updatedText;
 }
 
 bool MdiChild::event(QEvent *event)

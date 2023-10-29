@@ -56,6 +56,8 @@ public:
     QAction *i2m() {return m_i2m;}
     QAction *i2mProg() {return m_i2mProg;}
     QAction *renumber() {return m_renumber;}
+    QAction *insertSpaces() {return m_insertSpaces;}
+    QAction *removeSpaces() {return m_removeSpaces;}
 
 protected:
     QAction *m_bhc;
@@ -74,6 +76,8 @@ protected:
     QAction *m_i2m;
     QAction *m_i2mProg;
     QAction *m_renumber;
+    QAction *m_insertSpaces;
+    QAction *m_removeSpaces;
 
 protected slots:
     void doBhc();
@@ -92,6 +96,8 @@ protected slots:
     void doI2M();
     void doI2MProg();
     void doRenumber();
+    void doInsertSpaces();
+    void doRemoveSpaces();
 
 protected:
     void doBlockSkip(bool remove, bool inc);
