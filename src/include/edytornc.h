@@ -64,6 +64,10 @@ class KDiff3App;
 class MdiChild;
 class Medium;
 
+namespace Addons {
+class Actions;
+}
+
 namespace Ui {
 class EdytorNc;
 }
@@ -81,6 +85,8 @@ public:
     void resizeEvent(QResizeEvent *event);
     void moveEvent(QMoveEvent *event);
 
+    Addons::Actions *addonsActions();
+
 protected:
     Ui::EdytorNc *ui;
     static EdytorNc *SINGLETON;
@@ -93,6 +99,8 @@ protected:
         QPoint pos;
         QSize size;
     } mMWConfig;
+
+    Addons::Actions *m_addonsActions;
 
 public:
     void openFile(const QString fileName);

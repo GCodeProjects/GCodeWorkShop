@@ -59,6 +59,9 @@
 #include <QToolTip>
 #include <QWidget>
 
+// Addons:
+// BHC Chamfer CleanUp Feeds Dot I2M I2MProg Renumber SwapAxes Triangle
+#include <addons-actions.h>
 #include <commapp.h>                  // CommApp
 #include <kdiff3/kdiff3.h>            // KDiff3App
 #include <kdiff3/common.h>            // getFilters()
@@ -68,10 +71,7 @@
 #include <utils/medium.h>             // Medium
 #include <utils/splitfile.h>
 
-#include "cleanupdialog.h"  // cleanUpDialog
-// BHCDialog ChamferDialog FeedsDialog SetupDialog DotDialog
-// I2MDialog I2MProgDialog RenumberDialog TriangleDialog
-#include "dialogs.h"
+#include "cleanupdialog.h"
 #include "edytornc.h"       // EdytorNc QObject QMainWindow
 #include "findinf.h"        // FindInFiles
 #include "newfiledialog.h"  // newFileDialog
@@ -212,6 +212,11 @@ void EdytorNc::moveEvent(QMoveEvent *event)
     }
 
     QMainWindow::moveEvent(event);
+}
+
+Addons::Actions *EdytorNc::addonsActions()
+{
+    return m_addonsActions;
 }
 
 void EdytorNc::closeTab(int i)

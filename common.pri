@@ -47,6 +47,13 @@ contains(MODULES, qtsingleapplication) {
     LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/3rdparty/qtsingleapplication)
     LIBS += -lqtsingleapplication
 }
+ 
+contains(MODULES, addons) {
+    MODULES *= basic
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/addons/include
+    LIBS += -laddons
+    LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/addons)
+}
 
 contains(MODULES, edytornc-common) {
     INCLUDEPATH += $${PROJECT_ROOT_PATH}/src-common \
