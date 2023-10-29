@@ -32,7 +32,6 @@
 #include <QToolBar>
 #include <QMainWindow>
 
-#include <commapp.h>      // CommApp
 #include <commoninc.h>
 
 class QAction;
@@ -59,6 +58,7 @@ class QStandardItemModel;
 class QToolButton;
 class QWidget;
 
+class CommApp;
 class FindInFiles;
 class KDiff3App;
 class MdiChild;
@@ -102,6 +102,7 @@ public:
 
 public slots:
     void messReceived(const QString &text = "");
+    MdiChild *newFile();
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -109,7 +110,6 @@ protected:
     bool event(QEvent *event);
 
 private slots:
-    MdiChild *newFile();
     MdiChild *newFileFromTemplate();
     void open();
     void openExample();

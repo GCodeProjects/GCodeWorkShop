@@ -59,6 +59,7 @@
 #include <QToolTip>
 #include <QWidget>
 
+#include <commapp.h>                  // CommApp
 #include <kdiff3/kdiff3.h>            // KDiff3App
 #include <kdiff3/common.h>            // getFilters()
 #include <serialportconfigdialog.h>   // SerialPortConfigDialog

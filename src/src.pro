@@ -25,7 +25,7 @@ SOURCES += edytornc.cpp \
 
 HEADERS += include/edytornc.h \
     highlighter.h \
-    mdichild.h \
+    include/mdichild.h \
     setupdialog.h \
     findinf.h \
     tooltips.h \
