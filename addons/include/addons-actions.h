@@ -46,6 +46,8 @@ public:
     QAction *blockSkipRemove() {return m_blockSkipRemove;}
     QAction *chamfer() {return m_chamfer;}
     QAction *cleanUp() {return m_cleanUp;}
+    QAction *paraComment() {return m_paraComment;}
+    QAction *semiComment() {return m_semiComment;}
 
 protected:
     QAction *m_bhc;
@@ -54,6 +56,8 @@ protected:
     QAction *m_blockSkipRemove;
     QAction *m_chamfer;
     QAction *m_cleanUp;
+    QAction *m_paraComment;
+    QAction *m_semiComment;
 
 protected slots:
     void doBhc();
@@ -62,6 +66,8 @@ protected slots:
     void doBlockSkipRemove();
     void doChamfer();
     void doCleanUp();
+    void doParaComment();
+    void doSemiComment();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

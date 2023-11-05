@@ -91,8 +91,6 @@ public:
     QString guessFileName();
     bool foundTextMatched(const QString& pattern, QString text);
     void setCurrentFile(const QString &fileName, const QString &text);
-    void semiComment();
-    void paraComment();
     bool findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments);
     bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options,
                      bool ignoreComments);
@@ -160,8 +158,6 @@ private slots :
     void showContextMenu(const QPoint &pt);
     void documentWasModified();
     void cleanUp(QString *str);
-    void semiCommentSlot();
-    void paraCommentSlot();
     void inLineCalcEditingFinished();
     void inLineCalcReturnPressed();
 

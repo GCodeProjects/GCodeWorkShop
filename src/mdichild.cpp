@@ -2662,102 +2662,6 @@ QString MdiChild::guessFileName()
     return fileName;
 }
 
-//**************************************************************************************************
-//  comments/uncomments selected text using ;
-//**************************************************************************************************
-
-void MdiChild::semiComment()
-{
-    int idx;
-
-    if (ui->textEdit->textCursor().hasSelection()) {
-        QTextCursor cursor = ui->textEdit->textCursor();
-        QString selText = cursor.selectedText();
-
-        QStringList list = selText.split(QChar::ParagraphSeparator);
-        bool remove = false;
-
-        if (selText[0] == ';') {
-            remove = true;
-        }
-
-        selText.clear();
-
-        foreach (QString txLine, list) {
-            if (remove) {
-                if (txLine.length() > 0) {
-                    idx = txLine.indexOf(";");
-
-                    if (idx >= 0) {
-                        txLine.remove(idx, 1);
-                    }
-                }
-            } else {
-                txLine.prepend(";");
-            }
-
-            txLine.append("\n");
-            selText.append(txLine);
-        }
-
-        selText.remove(selText.length() - 1, 1);
-
-        ui->textEdit->insertPlainText(selText);
-        ui->textEdit->setTextCursor(cursor);
-    }
-}
-
-//**************************************************************************************************
-//  comments/uncomments selected text using ()
-//**************************************************************************************************
-
-void MdiChild::paraComment()
-{
-    if (ui->textEdit->textCursor().hasSelection()) {
-        int idx;
-        QTextCursor cursor = ui->textEdit->textCursor();
-        QString selText = cursor.selectedText();
-
-        QStringList list = selText.split(QChar::ParagraphSeparator);
-        bool remove = false;
-
-        if (selText[0] == '(') {
-            remove = true;
-        }
-
-        selText.clear();
-
-        foreach (QString txLine, list) {
-            if (remove) {
-                if (txLine.length() > 0) {
-                    idx = txLine.indexOf("(");
-
-                    if (idx >= 0) {
-                        txLine.remove(idx, 1);
-                    }
-
-                    idx = txLine.indexOf(")");
-
-                    if (idx >= 0) {
-                        txLine.remove(idx, 1);
-                    }
-                }
-            } else {
-                txLine.prepend("(");
-                txLine.append(")");
-            }
-
-            txLine.append("\n");
-            selText.append(txLine);
-        }
-
-        selText.remove(selText.length() - 1, 1);
-
-        ui->textEdit->insertPlainText(selText);
-        ui->textEdit->setTextCursor(cursor);
-    }
-}
-
 bool MdiChild::findNext(QString textToFind, QTextDocument::FindFlags options,
                         bool ignoreComments)
 {
@@ -3213,37 +3117,15 @@ QTextCursor MdiChild::textCursor()
 //{
 //}
 
-void MdiChild::semiCommentSlot()
-{
-    semiComment();
-}
-
-void MdiChild::paraCommentSlot()
-{
-    paraComment();
-}
-
 void MdiChild::showContextMenu(const QPoint &pt)
 {
     QMenu *menu = ui->textEdit->createStandardContextMenu();
     menu->addSeparator();
 
-    QAction *semiCommAct = new QAction(QIcon(":/images/semicomment.png"), tr("Comment ;"), this);
-    semiCommAct->setShortcut(tr("Ctrl+;"));
-    semiCommAct->setToolTip(tr("Comment/uncomment selected text using semicolon"));
-    connect(semiCommAct, SIGNAL(triggered()), this, SLOT(semiCommentSlot()));
-    semiCommAct->setEnabled(hasSelection());
-    menu->addAction(semiCommAct);
-
-    QAction *paraCommAct = new QAction(QIcon(":/images/paracomment.png"), tr("Comment ()"), this);
-    paraCommAct->setShortcut(tr("Ctrl+9"));
-    paraCommAct->setToolTip(tr("Comment/uncomment selected text using parentheses"));
-    connect(paraCommAct, SIGNAL(triggered()), this, SLOT(paraCommentSlot()));
-    paraCommAct->setEnabled(hasSelection());
-    menu->addAction(paraCommAct);
-    menu->addSeparator();
-
     Addons::Actions *addonsActions = EdytorNc::instance()->addonsActions();
+    menu->addAction(addonsActions->semiComment());
+    menu->addAction(addonsActions->paraComment());
+    menu->addSeparator();
     menu->addAction(addonsActions->blockSkipIncrement());
     menu->addAction(addonsActions->blockSkipDecrement());
     menu->addAction(addonsActions->blockSkipRemove());
@@ -3257,8 +3139,6 @@ void MdiChild::showContextMenu(const QPoint &pt)
 
     menu->exec(ui->textEdit->mapToGlobal(pt));
 
-    delete semiCommAct;
-    delete paraCommAct;
     delete inLineCalcAct;
     delete menu;
 }

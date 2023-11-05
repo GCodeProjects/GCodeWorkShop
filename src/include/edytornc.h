@@ -206,8 +206,6 @@ private slots:
     void closeCurrentWindow();
     void closeAllMdiWindows();
     void goToLine(QString fileName, int line);
-    void doSemiComment();
-    void doParaComment();
     void doSwapAxes();
     void changeSession(QAction *action);
     void sessionMgr();
@@ -317,9 +315,6 @@ private:
     QAction *inLineCalcAct;
 
     QAction *sessionMgrAct;
-
-    QAction *semiCommAct;
-    QAction *paraCommAct;
 
     QAction *findAct;
     QAction *replaceAct;

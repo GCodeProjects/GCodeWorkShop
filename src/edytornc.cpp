@@ -1430,8 +1430,8 @@ void EdytorNc::updateMenus()
     cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->cleanUp()->setEnabled(hasMdiChildNotReadOnly);
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
-    semiCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
-    paraCommAct->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    m_addonsActions->paraComment()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
+    m_addonsActions->semiComment()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     m_addonsActions->blockSkipDecrement()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     m_addonsActions->blockSkipIncrement()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
     m_addonsActions->blockSkipRemove()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
@@ -1731,6 +1731,8 @@ void EdytorNc::createActions()
     m_addonsActions->blockSkipDecrement()->setShortcut(tr("Ctrl+3"));
     //m_addonsActions->chamfer()->setShortcut(tr("F9"));
     //m_addonsActions->cleanUp()->setShortcut(QKeySequence::Print);
+    m_addonsActions->paraComment()->setShortcut(tr("Ctrl+9"));
+    m_addonsActions->semiComment()->setShortcut(tr("Ctrl+;"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1826,16 +1828,6 @@ void EdytorNc::createActions()
     splittAct = new QAction(QIcon(":/images/split_prog.png"), tr("Split file"), this);
     splittAct->setToolTip(tr("Split file"));
     connect(splittAct, SIGNAL(triggered()), this, SLOT(doSplitPrograms()));
-
-    semiCommAct = new QAction(QIcon(":/images/semicomment.png"), tr("Comment ;"), this);
-    semiCommAct->setShortcut(tr("Ctrl+;"));
-    semiCommAct->setToolTip(tr("Comment/uncomment selected text using semicolon"));
-    connect(semiCommAct, SIGNAL(triggered()), this, SLOT(doSemiComment()));
-
-    paraCommAct = new QAction(QIcon(":/images/paracomment.png"), tr("Comment ()"), this);
-    paraCommAct->setShortcut(tr("Ctrl+9"));
-    paraCommAct->setToolTip(tr("Comment/uncomment selected text using parentheses"));
-    connect(paraCommAct, SIGNAL(triggered()), this, SLOT(doParaComment()));
 
     swapAxesAct = new QAction(QIcon(":/images/swapaxes.png"), tr("Swap axes"), this);
     //swapAxesAct->setShortcut(QKeySequence::Save);
@@ -1945,8 +1937,8 @@ void EdytorNc::createMenus()
     editMenu->addAction(replaceAct);
 
     editMenu->addSeparator();
-    editMenu->addAction(semiCommAct);
-    editMenu->addAction(paraCommAct);
+    editMenu->addAction(m_addonsActions->semiComment());
+    editMenu->addAction(m_addonsActions->paraComment());
     blockSkipMenu = editMenu->addMenu(tr("&Block Skip"));
     blockSkipMenu->setIcon(QIcon(":/images/blockskip.png"));
     blockSkipMenu->addAction(m_addonsActions->blockSkipIncrement());
@@ -3813,20 +3805,6 @@ void EdytorNc::doSplitPrograms()
     }
 
     QApplication::restoreOverrideCursor();
-}
-
-void EdytorNc::doSemiComment()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->semiComment();
-    }
-}
-
-void EdytorNc::doParaComment()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->paraComment();
-    }
 }
 
 void EdytorNc::doSwapAxes()

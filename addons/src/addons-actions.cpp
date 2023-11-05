@@ -30,6 +30,7 @@
 #include "blockskip/utils-blockskip.h"
 #include "chamfer/addons-chamfer.h"
 #include "cleanup/addons-cleanup.h"
+#include "comment/utils-comment.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -38,7 +39,9 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_blockSkipIncrement(new QAction(this)),
     m_blockSkipRemove(new QAction(this)),
     m_chamfer(new QAction(this)),
-    m_cleanUp(new QAction(this))
+    m_cleanUp(new QAction(this)),
+    m_paraComment(new QAction(this)),
+    m_semiComment(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -46,6 +49,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_blockSkipRemove, SIGNAL(triggered()), this, SLOT(doBlockSkipRemove()));
     connect(m_chamfer, SIGNAL(triggered()), this, SLOT(doChamfer()));
     connect(m_cleanUp, SIGNAL(triggered()), this, SLOT(doCleanUp()));
+    connect(m_paraComment, SIGNAL(triggered()), this, SLOT(doParaComment()));
+    connect(m_semiComment, SIGNAL(triggered()), this, SLOT(doSemiComment()));
 
     loadIcons();
     loadTranslations();
@@ -65,6 +70,10 @@ void Addons::Actions::loadTranslations()
     m_chamfer->setToolTip(tr("Calculate chamfer"));
     m_cleanUp->setText(tr("Clean &up"));
     m_cleanUp->setToolTip(tr("Remove text using regular expressions"));
+    m_paraComment->setText(tr("Comment ()"));
+    m_paraComment->setToolTip(tr("Comment/uncomment selected text using parentheses"));
+    m_semiComment->setText(tr("Comment ;"));
+    m_semiComment->setToolTip(tr("Comment/uncomment selected text using semicolon"));
 }
 
 void Addons::Actions::loadIcons()
@@ -75,6 +84,8 @@ void Addons::Actions::loadIcons()
     m_blockSkipRemove->setIcon(QIcon(":/images/blockskipr.png"));
     m_chamfer->setIcon(QIcon(":/images/chamfer.png"));
     m_cleanUp->setIcon(QIcon(":/images/cleanup.png"));
+    m_paraComment->setIcon(QIcon(":/images/paracomment.pn"));
+    m_semiComment->setIcon(QIcon(":/images/semicomment.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -127,4 +138,28 @@ void Addons::Actions::doCleanUp()
     if (Addons::doCleanUp(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
         ctx.push();
     }
+}
+
+void Addons::Actions::doParaComment()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::SELECTED)) {
+        return;
+    }
+
+    Utils::paraComment(ctx.text());
+    ctx.push();
+}
+
+void Addons::Actions::doSemiComment()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::SELECTED)) {
+        return;
+    }
+
+    Utils::semiComment(ctx.text());
+    ctx.push();
 }
