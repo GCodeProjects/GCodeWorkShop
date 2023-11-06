@@ -35,8 +35,6 @@
 #include <commapp.h>      // CommApp
 #include <commoninc.h>
 
-#include "ui_edytornc.h"
-
 class QAction;
 class QCheckBox;
 class QClipboard;
@@ -66,8 +64,12 @@ class KDiff3App;
 class MdiChild;
 class Medium;
 
+namespace Ui {
+class EdytorNc;
+}
 
-class EdytorNc : public QMainWindow, public Ui::EdytorNc
+
+class EdytorNc : public QMainWindow
 {
     Q_OBJECT
 
@@ -80,6 +82,7 @@ public:
     void moveEvent(QMoveEvent *event);
 
 protected:
+    Ui::EdytorNc *ui;
     static EdytorNc *SINGLETON;
 
     EdytorNc(Medium *medium);
