@@ -1126,25 +1126,11 @@ void EdytorNc::doDiff()
     }
 }
 
-void EdytorNc::doRemoveEmptyLines()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->doRemoveEmptyLines();
-    }
-}
-
 void EdytorNc::doRemoveByRegExp()
 {
     if (activeMdiChild()) {
         activeMdiChild()->doRemoveTextByRegExp(QStringList() <<
                                                "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\)\\n)");
-    }
-}
-
-void EdytorNc::doInsertEmptyLines()
-{
-    if (activeMdiChild()) {
-        activeMdiChild()->doInsertEmptyLines();
     }
 }
 
@@ -1402,8 +1388,8 @@ void EdytorNc::updateMenus()
     m_addonsActions->dot()->setEnabled(hasMdiChildNotReadOnly);
     insertSpcAct->setEnabled(hasMdiChildNotReadOnly);
     removeSpcAct->setEnabled(hasMdiChildNotReadOnly);
-    removeEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
-    insertEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->removeEmptyLines()->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->insertEmptyLines()->setEnabled(hasMdiChildNotReadOnly);
     splittAct->setEnabled(hasMdiChildNotReadOnly);
     convertProgAct->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->compileMacro()->setEnabled(hasMdiChildNotReadOnly);
@@ -1714,6 +1700,8 @@ void EdytorNc::createActions()
     m_addonsActions->semiComment()->setShortcut(tr("Ctrl+;"));
     //m_addonsActions->compileMacro()->setShortcut(tr("F9"));
     m_addonsActions->dot()->setShortcut(tr("F6"));
+    //m_addonsActions->insertEmptyLines()->setShortcut(tr("F5"));
+    //m_addonsActions->removeEmptyLines()->setShortcut(tr("F5"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1724,18 +1712,6 @@ void EdytorNc::createActions()
     removeSpcAct->setShortcut(tr("F5"));
     removeSpcAct->setToolTip(tr("Removes spaces"));
     connect(removeSpcAct, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
-
-    removeEmptyLinesAct = new QAction(QIcon(":/images/removeemptylines.png"),
-                                      tr("Remove empty lines"), this);
-    //removeEmptyLinesAct->setShortcut(tr("F5"));
-    removeEmptyLinesAct->setToolTip(tr("Removes empty lines"));
-    connect(removeEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
-
-    insertEmptyLinesAct = new QAction(QIcon(":/images/insertemptylines.png"),
-                                      tr("Insert empty lines"), this);
-    //insertEmptyLinesAct->setShortcut(tr("F5"));
-    insertEmptyLinesAct->setToolTip(tr("Insert empty lines"));
-    connect(insertEmptyLinesAct, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
 
     renumberAct = new QAction(QIcon(":/images/renumber.png"), tr("Renumber"), this);
     renumberAct->setShortcut(tr("F7"));
@@ -1925,8 +1901,8 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(insertSpcAct);
     toolsMenu->addAction(removeSpcAct);
     toolsMenu->addAction(m_addonsActions->dot());
-    toolsMenu->addAction(insertEmptyLinesAct);
-    toolsMenu->addAction(removeEmptyLinesAct);
+    toolsMenu->addAction(m_addonsActions->insertEmptyLines());
+    toolsMenu->addAction(m_addonsActions->removeEmptyLines());
     toolsMenu->addAction(m_addonsActions->cleanUp());
     toolsMenu->addAction(swapAxesAct);
     toolsMenu->addAction(splittAct);

@@ -1097,60 +1097,6 @@ void MdiChild::doRemoveSpace()
     delete updatedText;
 }
 
-void MdiChild::doRemoveEmptyLines()
-{
-    int i;
-    QString tx;
-    QRegularExpression regex;
-
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-    tx = ui->textEdit->toPlainText();
-
-    regex.setPattern("[\\n]{2,}");
-    i = 0;
-
-    while (i >= 0) {
-        i = tx.indexOf(regex, 0);
-
-        if (i >= 0) {
-            tx.replace(regex, "\r\n");
-        }
-    }
-
-    ui->textEdit->selectAll();
-    ui->textEdit->insertPlainText(tx);
-
-    QTextCursor cursor = ui->textEdit->textCursor();
-    cursor.setPosition(0);
-    ui->textEdit->setTextCursor(cursor);
-    QApplication::restoreOverrideCursor();
-}
-
-//**************************************************************************************************
-// Add empty line after each block
-//**************************************************************************************************
-
-void MdiChild::doInsertEmptyLines()
-{
-    QString tx;
-
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-    tx = ui->textEdit->toPlainText();
-
-    if (tx.contains(QLatin1String("\r\n"))) {
-        tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
-    } else {
-        tx.replace(QLatin1String("\n"), QLatin1String("\n\n"));
-    }
-
-    ui->textEdit->selectAll();
-    ui->textEdit->insertPlainText(tx);
-    QTextCursor cursor = ui->textEdit->textCursor();
-    cursor.setPosition(0);
-    ui->textEdit->setTextCursor(cursor);
-    QApplication::restoreOverrideCursor();
-}
-
 void MdiChild::doInsertSpace()
 {
     enum {

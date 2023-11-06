@@ -50,6 +50,8 @@ public:
     QAction *semiComment() {return m_semiComment;}
     QAction *compileMacro() {return m_compileMacro;}
     QAction *dot() {return m_dot;}
+    QAction *insertEmptyLines() {return m_insertEmptyLines;}
+    QAction *removeEmptyLines() {return m_removeEmptyLines;}
 
 protected:
     QAction *m_bhc;
@@ -62,6 +64,8 @@ protected:
     QAction *m_semiComment;
     QAction *m_compileMacro;
     QAction *m_dot;
+    QAction *m_insertEmptyLines;
+    QAction *m_removeEmptyLines;
 
 protected slots:
     void doBhc();
@@ -74,6 +78,8 @@ protected slots:
     void doSemiComment();
     void doCompileMacro();
     void doDot();
+    void doInsertEmptyLines();
+    void doRemoveEmptyLines();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

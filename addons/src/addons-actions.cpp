@@ -18,9 +18,11 @@
  */
 
 #include <QAction>          // for QAction
+#include <QApplication>     // for QApplication
 #include <QIcon>            // for QIcon
 #include <QMessageBox>      // for QMessageBox
 #include <QPlainTextEdit>   // for QPlainTextEdit
+#include <Qt>               // for BusyCursor
 
 #include <addons-actions.h>
 #include <edytornc.h>           // for EdytorNc
@@ -36,6 +38,7 @@
 #include "comment/utils-comment.h"
 #include "compilemacro/utils-compilemacro.h"
 #include "dot/addons-dot.h"
+#include "emptylines/utils-emptylines.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -48,7 +51,9 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_paraComment(new QAction(this)),
     m_semiComment(new QAction(this)),
     m_compileMacro(new QAction(this)),
-    m_dot(new QAction(this))
+    m_dot(new QAction(this)),
+    m_insertEmptyLines(new QAction(this)),
+    m_removeEmptyLines(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -60,6 +65,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_semiComment, SIGNAL(triggered()), this, SLOT(doSemiComment()));
     connect(m_compileMacro, SIGNAL(triggered()), this, SLOT(doCompileMacro()));
     connect(m_dot, SIGNAL(triggered()), this, SLOT(doDot()));
+    connect(m_insertEmptyLines, SIGNAL(triggered()), this, SLOT(doInsertEmptyLines()));
+    connect(m_removeEmptyLines, SIGNAL(triggered()), this, SLOT(doRemoveEmptyLines()));
 
     loadIcons();
     loadTranslations();
@@ -87,6 +94,10 @@ void Addons::Actions::loadTranslations()
     m_compileMacro->setToolTip(tr("Translate EdytorNC macro into CNC program"));
     m_dot->setText(tr("Insert dots"));
     m_dot->setToolTip(tr("Inserts decimal dot"));
+    m_insertEmptyLines->setText(tr("Insert empty lines"));
+    m_insertEmptyLines->setToolTip(tr("Inserts empty lines"));
+    m_removeEmptyLines->setText(tr("Remove empty lines"));
+    m_removeEmptyLines->setToolTip(tr("Removes empty lines"));
 }
 
 void Addons::Actions::loadIcons()
@@ -101,6 +112,8 @@ void Addons::Actions::loadIcons()
     m_semiComment->setIcon(QIcon(":/images/semicomment.png"));
     m_compileMacro->setIcon(QIcon(":/images/compfile.png"));
     m_dot->setIcon(QIcon(":/images/dots.png"));
+    m_insertEmptyLines->setIcon(QIcon(":/images/insertemptylines.png"));
+    m_removeEmptyLines->setIcon(QIcon(":/images/removeemptylines.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -210,4 +223,32 @@ void Addons::Actions::doDot()
     if (Addons::doDot(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
         ctx.push();
     }
+}
+
+void Addons::Actions::doInsertEmptyLines()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+    Utils::insertEmptyLines(ctx.text());
+    ctx.push();
+    QApplication::restoreOverrideCursor();
+}
+
+void Addons::Actions::doRemoveEmptyLines()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+    Utils::removeEmptyLines(ctx.text());
+    ctx.push();
+    QApplication::restoreOverrideCursor();
 }
