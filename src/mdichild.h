@@ -35,23 +35,30 @@
 
 #include "commoninc.h" // _editor_properites
 
-#include "ui_mdichildform.h"
-
 class QLineEdit;
+class QPlainTextEdit;
 class QPrinter;
 
 class Highlighter;
 class LongJobHelper;
 
+namespace Ui {
+class MdiChild;
+}
 
-class MdiChild : public QWidget, public Ui::MdiChild
+
+class MdiChild : public QWidget
 {
     Q_OBJECT
+
+protected:
+    Ui::MdiChild *ui;
 
 public:
     MdiChild(QWidget *parent = 0, Qt::WindowFlags f = Qt::SubWindow);
     ~MdiChild();
 
+    QPlainTextEdit *textEdit();
     void newFile();
     void newFile(const QString &fileName);
     bool loadFile(const QString &fileName);

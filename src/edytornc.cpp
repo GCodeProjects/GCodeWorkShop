@@ -590,7 +590,7 @@ void EdytorNc::printFile()
 
         if (dialog.exec() == QDialog::Accepted) {
             printer.setDocName(child->fileName());
-            child->textEdit->print(&printer);
+            child->textEdit()->print(&printer);
             statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(
                                          printer.printerName()), 5000);
             savePrinterSettings(&printer);
@@ -634,7 +634,7 @@ void EdytorNc::printPreview(QPrinter *printer)
 
     if (child) {
         printer->setDocName(child->fileName());
-        child->textEdit->print(printer);
+        child->textEdit()->print(printer);
         statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(
                                      printer->printerName()), 5000);
     }
@@ -645,14 +645,14 @@ void EdytorNc::printPreview(QPrinter *printer)
 void EdytorNc::cut()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit->cut();
+        activeMdiChild()->textEdit()->cut();
     }
 }
 
 void EdytorNc::copy()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit->copy();
+        activeMdiChild()->textEdit()->copy();
     }
 }
 
@@ -848,7 +848,7 @@ void EdytorNc::replaceAll()
 void EdytorNc::selAll()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit->selectAll();
+        activeMdiChild()->textEdit()->selectAll();
     }
 }
 
@@ -915,7 +915,7 @@ void EdytorNc::config()
 void EdytorNc::readOnly()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit->setReadOnly(readOnlyAct->isChecked());
+        activeMdiChild()->textEdit()->setReadOnly(readOnlyAct->isChecked());
     }
 
     updateMenus();
@@ -957,10 +957,10 @@ void EdytorNc::goToLine(QString fileName, int line)
             return;
         }
 
-        QTextBlock block = activeMdiChild()->textEdit->document()->findBlockByNumber(line);
+        QTextBlock block = activeMdiChild()->textEdit()->document()->findBlockByNumber(line);
         QTextCursor cursor = QTextCursor(block);
-        activeMdiChild()->textEdit->setTextCursor(cursor);
-        activeMdiChild()->textEdit->centerCursor();
+        activeMdiChild()->textEdit()->setTextCursor(cursor);
+        activeMdiChild()->textEdit()->centerCursor();
         activeMdiChild()->setFocus();
     }
 }
@@ -1084,7 +1084,7 @@ void EdytorNc::diffEditorFile()
 
         QTextStream out(&file);
 
-        QString tex = child->textEdit->toPlainText();
+        QString tex = child->textEdit()->toPlainText();
 
         if (!tex.contains(QLatin1String("\r\n"))) {
             tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
@@ -1305,7 +1305,7 @@ void EdytorNc::doCalc()
 void EdytorNc::deleteText()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit->textCursor().removeSelectedText();
+        activeMdiChild()->textEdit()->textCursor().removeSelectedText();
     }
 }
 
@@ -1313,13 +1313,13 @@ void EdytorNc::paste()
 {
     if (activeMdiChild()) {
         if (defaultMdiWindowProperites.underlineChanges) {
-            QTextCharFormat format = activeMdiChild()->textEdit->currentCharFormat();
+            QTextCharFormat format = activeMdiChild()->textEdit()->currentCharFormat();
             format.setUnderlineStyle(QTextCharFormat::DotLine);
             format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
-            activeMdiChild()->textEdit->setCurrentCharFormat(format);
+            activeMdiChild()->textEdit()->setCurrentCharFormat(format);
         }
 
-        activeMdiChild()->textEdit->paste();
+        activeMdiChild()->textEdit()->paste();
     }
 }
 
@@ -1587,26 +1587,26 @@ MdiChild *EdytorNc::createMdiChild()
     ui->mdiArea->addSubWindow(child);
     //    child->setFileChangeMonitor(fileChangeMonitor);
 
-    connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
-    connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
-    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
-    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
+    connect(child->textEdit(), SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
+    connect(child->textEdit(), SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
+    connect(child->textEdit(), SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
+    connect(child->textEdit(), SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
+    connect(child->textEdit(), SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
     connect(child, SIGNAL(message(const QString &, int)), statusBar(),
             SLOT(showMessage(const QString &, int)));
     connect(child, SIGNAL(addRemoveFileWatch(const QString &, bool)), this,
             SLOT(watchFile(const QString &, bool)));
 
-    //    connect(child->textEdit, SIGNAL(copyAvailable(bool)), this, SLOT(updateMenus()));
-    //    connect(child->textEdit, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
-    //    connect(child->textEdit, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-    //    //connect(child->textEdit, SIGNAL(textChanged()), this, SLOT(updateMenus()));
-    //    connect(child->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
-    //    connect(child->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(updateStatusBar()));
+    //    connect(child->textEdit(), SIGNAL(copyAvailable(bool)), this, SLOT(updateMenus()));
+    //    connect(child->textEdit(), SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
+    //    connect(child->textEdit(), SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
+    //    //connect(child->textEdit(), SIGNAL(textChanged()), this, SLOT(updateMenus()));
+    //    connect(child->textEdit(), SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
+    //    connect(child->textEdit(), SIGNAL(modificationChanged(bool)), this, SLOT(updateStatusBar()));
     //    connect(child, SIGNAL(message(const QString&, int)), statusBar(), SLOT(showMessage(const QString&, int)));
 
-    //connect(child->textEdit, SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
-    //connect(child->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
+    //connect(child->textEdit(), SIGNAL(copyAvailable(bool)), cutAct, SLOT(setEnabled(bool)));
+    //connect(child->textEdit(), SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
 
     return child;
 }
@@ -2728,7 +2728,7 @@ void EdytorNc::createFindToolBar()
                 cursor.clearSelection();
             }
 
-            activeMdiChild()->textEdit->setTextCursor(cursor);
+            activeMdiChild()->textEdit()->setTextCursor(cursor);
         }
 
         cursor = activeMdiChild()->textCursor();
@@ -2740,7 +2740,7 @@ void EdytorNc::createFindToolBar()
                 findEdit->setText(selText);
             } else {
                 cursor.clearSelection();
-                activeMdiChild()->textEdit->setTextCursor(cursor);
+                activeMdiChild()->textEdit()->setTextCursor(cursor);
             }
         }
 
@@ -2763,7 +2763,7 @@ void EdytorNc::closeFindToolBar()
     if (activeMdiChild()) {
         activeMdiChild()->setFocus(Qt::MouseFocusReason);
         activeMdiChild()->highlightFindText("");
-        activeMdiChild()->textEdit->centerCursor();
+        activeMdiChild()->textEdit()->centerCursor();
     }
 
     QSettings &settings = *Medium::instance().settings();
@@ -2805,13 +2805,13 @@ void EdytorNc::findTextChanged()
                 cursor.movePosition(QTextCursor::Left);  //cursor.movePosition(QTextCursor::StartOfWord)
             } while ((pos <= cursor.position()) && (cursor.position() > 0));
 
-            activeMdiChild()->textEdit->setTextCursor(cursor);
+            activeMdiChild()->textEdit()->setTextCursor(cursor);
 
             findNext();
         } else {
             findEdit->setPalette(QPalette());
             cursor.clearSelection();
-            activeMdiChild()->textEdit->setTextCursor(cursor);
+            activeMdiChild()->textEdit()->setTextCursor(cursor);
         }
     }
 }
@@ -2994,7 +2994,7 @@ void EdytorNc::doCmpMacro()
         //      fileName = fileName + QDate::currentDate().toString(Qt::ISODate) + ".nc";
         //      fileName = fileName + QTime::currentTime().toString(Qt::ISODate);
 
-        text = activeMdiChild()->textEdit->toPlainText();
+        text = activeMdiChild()->textEdit()->toPlainText();
     } else {
         return;
     }
@@ -3003,7 +3003,7 @@ void EdytorNc::doCmpMacro()
 
     child->newFile();
 
-    child->textEdit->insertPlainText(text);
+    child->textEdit()->insertPlainText(text);
 
     if ((child->compileMacro() == -1)) {
         child->setModified(false);
@@ -3020,7 +3020,7 @@ void EdytorNc::doCmpMacro()
     //defaultMdiWindowProperites.fileName = fileName;
     child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-    //child->setCurrentFile(fileName, child->textEdit->toPlainText());
+    //child->setCurrentFile(fileName, child->textEdit()->toPlainText());
 
     //qDebug() << tmpFileName << fileName;
 
@@ -3856,9 +3856,9 @@ void EdytorNc::doSplitPrograms()
             return;
         }
 
-        activeWindow->textEdit->setUndoRedoEnabled(false);  //clear undo/redo history
-        activeWindow->textEdit->setPlainText(*it);
-        activeWindow->textEdit->setUndoRedoEnabled(true);
+        activeWindow->textEdit()->setUndoRedoEnabled(false);  //clear undo/redo history
+        activeWindow->textEdit()->setPlainText(*it);
+        activeWindow->textEdit()->setUndoRedoEnabled(true);
         it++;
     }
 
@@ -3907,7 +3907,7 @@ void EdytorNc::displayCleanUpDialog()
     if (editorWindow) {
         cleanUpDialog *dialog = new cleanUpDialog(this);
 
-        int result = dialog->exec(selectedExpressions, editorWindow->textEdit->toPlainText());
+        int result = dialog->exec(selectedExpressions, editorWindow->textEdit()->toPlainText());
 
         if (result == QDialog::Accepted) {
             selectedExpressions = dialog->getSelectedExpressions();
@@ -4184,7 +4184,7 @@ void EdytorNc::sendButtonClicked()
     commAppAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    tx.append(activeWindow->textEdit->toPlainText());
+    tx.append(activeWindow->textEdit()->toPlainText());
 
     SerialTransmissionDialog transmissionDialog(this);
     transmissionDialog.sendData(tx, configBox->currentText());
@@ -4228,16 +4228,16 @@ void EdytorNc::receiveButtonClicked()
                 }
 
                 if (activeWindow) {
-                    activeWindow->textEdit->clear();
-                    activeWindow->textEdit->insertPlainText(*it);
+                    activeWindow->textEdit()->clear();
+                    activeWindow->textEdit()->insertPlainText(*it);
 
                     activeWindow->setHighligthMode(MODE_AUTO);
 
                     if (defaultMdiWindowProperites.defaultReadOnly) {
-                        activeWindow->textEdit->isReadOnly();
+                        activeWindow->textEdit()->isReadOnly();
                     }
 
-                    activeWindow->textEdit->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
+                    activeWindow->textEdit()->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
                 }
             }
         }
