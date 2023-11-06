@@ -20,6 +20,7 @@ SOURCES += edytornc.cpp \
     findinf.cpp \
     newfiledialog.cpp \
     sessiondialog.cpp \
+    src/utils/expressionparser.cpp \
     src/utils/removezeros.cpp
 
 HEADERS += include/edytornc.h \
@@ -30,6 +31,7 @@ HEADERS += include/edytornc.h \
     tooltips.h \
     newfiledialog.h \
     sessiondialog.h \
+    include/utils/expressionparser.h \
     include/utils/removezeros.h
 
 FORMS += mdichildform.ui \

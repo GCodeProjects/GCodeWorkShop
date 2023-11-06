@@ -44,12 +44,6 @@ class Highlighter;
 class LongJobHelper;
 
 
-#define ERR_NO_BRAC       -1
-#define ERR_NO_PARAM      -2
-#define ERR_CONVERT       -3
-#define ERR_UNKNOWN_FUNC  -4
-#define ERR_DOUBLE_DOT    -5
-
 class MdiChild : public QWidget, public Ui::MdiChild
 {
     Q_OBJECT
@@ -129,8 +123,6 @@ protected:
 private:
     bool maybeSave();
     //QString strippedName(const QString &fullFileName);
-    int processBrc(QString *str);
-    int compute(QString *str);
     void macroShowError(int error, QString tx);
     void macroShowBasicError(int error);
     void detectHighligthMode();

@@ -20,12 +20,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-// Enable the M_PI constant in MSVC
-// see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
-#define _USE_MATH_DEFINES
-
 #include <algorithm> // std::sort()
-#include <cmath>     // cos() pow() sin() sqrt() tan() trunc() M_PI
 
 #include <QAction>
 #include <QApplication>
@@ -70,9 +65,10 @@
 #include <QtGlobal>            // QT_VERSION QT_VERSION_CHECK
 #include <QToolTip>
 
-#include <commoninc.h>         // _editor_properites
-#include <ui/longjobhelper.h>  // LongJobHelper
-#include <utils/removezeros.h> // Utils::removeZeros()
+#include <commoninc.h>              // _editor_properites
+#include <ui/longjobhelper.h>       // LongJobHelper
+#include <utils/expressionparser.h>
+#include <utils/removezeros.h>      // Utils::removeZeros()
 
 #include "basic_interpreter.h" // BasicInterpreter
 #include "highlighter.h"       // Highlighter
@@ -1601,423 +1597,6 @@ bool MdiChild::event(QEvent *event)
     return QWidget::event(event);
 }
 
-int MdiChild::compute(QString *str)
-{
-    QRegularExpression regex;
-    QString val1, val2, partmp;
-    QString oper;
-    int pos, i, j, err;
-    double result = 0;
-    bool ok, ok1, dot, minus;
-
-    pos = 0;
-    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-    regex.setPattern("[$A-Z]+");
-    auto match = regex.match(*str);
-
-    while (match.hasMatch()) {
-        pos = match.capturedEnd();
-        j = match.capturedStart();
-        oper = match.captured().toUpper();
-        val1 = "";
-        dot = false;
-        minus = false;
-
-        while ((str->at(pos) == '-') || (str->at(pos) == '.') || (str->at(pos).isDigit())) {
-            if (str->at(pos) == '.') {
-                if ((dot)) {
-                    return (ERR_DOUBLE_DOT);
-                }
-
-                dot = true;
-            }
-
-            if (str->at(pos) == '-') {
-                if (minus || dot) {
-                    break;
-                }
-
-                if (pos == 0) {
-                    minus = true;
-                } else if ((str->at(pos - 1) == '*') || (str->at(pos - 1) == '/') || (str->at(pos - 1) == '+')
-                           || (str->at(pos - 1) == '-') || (str->at(pos - 1) == '(')) {
-                    minus = true;
-                }
-            }
-
-            val1 += str->at(pos);
-            pos++;
-        }
-
-        qDebug() << "123" << val1 << oper << oper << *str;
-
-        if (val1.isEmpty()) {
-            if (oper == "PI") {
-                val1 = "(1)";
-            } else {
-                return (ERR_NO_PARAM);
-            }
-        }
-
-        err = processBrc(&val1);
-
-        if (err < 0) {
-            return (err);
-        }
-
-        if (val1.isEmpty()) {
-            val1 = "0";
-        }
-
-        result = val1.toDouble(&ok);
-
-        if (!ok) {
-            return (ERR_CONVERT);
-        }
-
-        while (1) {
-            if (oper == "SIN") {
-                result = sin((M_PI / 180) * result);
-                break;
-            }
-
-            if (oper == "COS") {
-                result = cos((M_PI / 180) * result);
-                break;
-            }
-
-            if (oper == "TAN") {
-                result = tan((M_PI / 180) * result);
-                break;
-            }
-
-            if (oper == "SQRT") {
-                result = sqrt(result);
-                break;
-            }
-
-            if (oper == "SQR") {
-                result = pow(result, 2);
-                break;
-            }
-
-            if (oper == "ABS") {
-                result = abs(result);
-                break;
-            }
-
-            if (oper == "TRUNC") {
-                result = trunc(result);
-                break;
-            }
-
-            if (oper == "PI") {
-                result = M_PI;
-                break;
-            }
-
-            return (ERR_UNKNOWN_FUNC);
-        }
-
-        partmp.number(result, 'g', 3);
-        str->replace(j, pos - j, QString("%1").arg(result, 0, 'f', 3));
-        match = regex.match(*str, pos);
-    }
-
-    pos = 0;
-    regex.setPattern("[/*]{1,1}");
-
-    while ((pos = str->indexOf(regex, pos)) >= 0) {
-        oper = str->mid(pos, 1);
-
-        val2 = "";
-        dot = false;
-        minus = false;
-
-        for (i = pos + 1; i < str->length(); i++) {
-            qDebug() << "456,123" << val2 << str->at(i);
-
-            if ((str->at(i) == '.')) {
-                if ((dot)) {
-                    return (ERR_DOUBLE_DOT);
-                }
-
-                dot = true;
-            }
-
-            if ((str->at(i) == '-')) {
-                if (minus || dot) {
-                    break;
-                }
-
-                if (i == 0) {
-                    minus = true;
-                } else if ((str->at(i - 1) == '*') || (str->at(i - 1) == '/') || (str->at(i - 1) == '+')
-                           || (str->at(i - 1) == '-') || (str->at(i - 1) == '(')) {
-                    minus = true;
-                }
-
-                //            if(minus && val2.length() > 0)
-                //                break;
-            }
-
-            if (!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-')))) {
-                break;
-            }
-
-            val2 += str->at(i);
-        }
-
-        i--;
-
-        val1 = "";
-
-        dot = false;
-        minus = false;
-
-        for (j = pos - 1; j >= 0; j--) {
-            if ((str->at(j) == '.')) {
-                if ((dot)) {
-                    return (ERR_DOUBLE_DOT);
-                }
-
-                dot = true;
-            }
-
-            if ((str->at(j) == '-')) {
-                if ((minus)) {
-                    break;
-                }
-
-                if (j == 0) {
-                    minus = true;
-                } else if ((str->at(j - 1) == '*') || (str->at(j - 1) == '/') || (str->at(j - 1) == '+')
-                           || (str->at(j - 1) == '-') || (str->at(j - 1) == '(')) {
-                    minus = true;
-                }
-            }
-
-            if (!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-')))) {
-                break;
-            }
-
-            val1.prepend(str->at(j));
-        }
-
-        j++;
-
-        qDebug() << "456" << val1 << oper << val2 << *str;
-
-        if (val1.isEmpty()) {
-            return (ERR_NO_PARAM);    // val1 = "0";
-        }
-
-        if (val2.isEmpty()) {
-            return (ERR_NO_PARAM);    // val2 = "0";
-        }
-
-        while (1) {
-            if (oper.at(0) == '*') {
-                result = val1.toDouble(&ok) * val2.toDouble(&ok1);
-                break;
-            }
-
-            if (oper.at(0) == '/') {
-                result = val1.toDouble(&ok) / val2.toDouble(&ok1);
-                break;
-            }
-
-            break;
-        }
-
-        if (!ok || !ok1) {
-            return (ERR_CONVERT);
-        }
-
-        pos++;
-
-        partmp.number(result, 'g', 3);
-        str->replace(j, (i - j) + 1, QString("%1").arg(result, 3, 'f', 3));
-    }
-
-    qDebug() << "9857" << val1 << val2 << *str;
-
-    pos = 1;
-    regex.setPattern("[+-]{1,1}");
-
-    while ((pos = str->indexOf(regex, pos)) >= 0) {
-        oper = str->mid(pos, 1);
-
-        qDebug() << "789,000" << oper << pos;
-
-        val2 = "";
-        dot = false;
-        minus = false;
-
-        for (i = pos + 1; i <= str->length(); i++) {
-            qDebug() << "789,123" << val2 << str->at(i);
-
-            if ((str->at(i) == '.')) {
-                if ((dot)) {
-                    return (ERR_DOUBLE_DOT);
-                }
-
-                dot = true;
-            }
-
-            if ((str->at(i) == '-')) {
-                if (minus || dot) {
-                    break;
-                }
-
-                if (i == 0) {
-                    minus = true;
-                } else {
-                    if ((str->at(i - 1) == '*') || (str->at(i - 1) == '/') || (str->at(i - 1) == '+')
-                            || (str->at(i - 1) == '-') || (str->at(i - 1) == '(')) {
-                        minus = true;
-                    } else {
-                        break;
-                    }
-                }
-
-                //            if(minus && val2.length() > 0)
-                //                break;
-            }
-
-            if (!((str->at(i).isDigit() || (str->at(i) == '.') || (str->at(i) == '-')))) {
-                break;
-            }
-
-            val2 += str->at(i);
-        }
-
-        i--;
-
-        val1 = "";
-
-        dot = false;
-        minus = false;
-
-        for (j = pos - 1; j >= 0; j--) {
-            qDebug() << "789,456" << val1 << str->at(j);
-
-            if ((str->at(j) == '.')) {
-                if ((dot)) {
-                    return (ERR_DOUBLE_DOT);
-                }
-
-                dot = true;
-            }
-
-            if ((str->at(j) == '-')) {
-                if ((minus)) {
-                    break;
-                }
-
-                if (j == 0) {
-                    minus = true;
-                } else if ((str->at(j - 1) == '*') || (str->at(j - 1) == '/') || (str->at(j - 1) == '+')
-                           || (str->at(j - 1) == '-') || (str->at(j - 1) == '(')) {
-                    minus = true;
-                }
-            }
-
-            if (!((str->at(j).isDigit() || (str->at(j) == '.') || (str->at(j) == '-')))) {
-                break;
-            }
-
-            val1.prepend(str->at(j));
-        }
-
-        j++;
-
-        if ((val1 == "-") && (oper == "-")) {
-            val1 = "0";
-            oper = "+";
-        }
-
-        qDebug() << "789" << val1 << oper << val2 << *str;
-
-        if (val1.isEmpty()) {
-            val1 = "0";    //return(ERR_NO_PARAM);
-        }
-
-        if (val2.isEmpty()) {
-            return (ERR_NO_PARAM);    //val2 = "0";
-        }
-
-        while (1) {
-            if (oper.at(0) == '-') {
-                result = val1.toDouble(&ok) - val2.toDouble(&ok1);
-                break;
-            }
-
-            result = val1.toDouble(&ok) + val2.toDouble(&ok1);
-            break;
-        }
-
-        if (!ok || !ok1) {
-            return (ERR_CONVERT);
-        }
-
-        pos++;
-
-        partmp.number(result, 'g', 3);
-        str->replace(j, (i - j) + 1, QString("%1").arg(result, 0, 'f', 3));
-    }
-
-    str->remove('(');
-    str->remove(')');
-    return (0);
-}
-
-int MdiChild::processBrc(QString *str)
-{
-    QRegularExpression regex;
-    QString par, partmp;
-    int pos, err;
-
-    if (str->contains(')') != str->contains('(')) {
-        return (ERR_NO_BRAC);
-    }
-
-    pos = 0;
-    regex.setPattern("\\([-+/*.0-9A-Z]*\\b[.]*\\)");
-    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-    auto match = regex.match(*str);
-
-    while (match.hasMatch()) {
-        pos = match.capturedEnd();
-        par = match.captured();
-        partmp = par;
-
-        par.remove(' ');
-
-        qDebug() << "147" << par << pos;
-
-        err = compute(&par);
-
-        if (err < 0) {
-            return (err);
-        }
-
-        str->replace(partmp, par, Qt::CaseInsensitive);
-        par.remove(' ');
-        err = processBrc(str);
-
-        if (err < 0) {
-            return (err);
-        }
-
-        match = regex.match(*str);
-    }
-
-    qDebug() << "852" << *str;
-    err = compute(str);
-    return (err);
-}
-
 int MdiChild::compileMacro()
 {
     int error;
@@ -2093,7 +1672,7 @@ int MdiChild::compileMacro()
 
         if (!param.isEmpty()) {
             QString paramTmp = param;
-            error = processBrc(&param);
+            error = Utils::processBrc(&param);
 
             if (error < 0) {
                 cursor = textEdit->textCursor();
@@ -2107,7 +1686,7 @@ int MdiChild::compileMacro()
 
             if (!param.isEmpty()) {
                 paramTmp = param;
-                error = processBrc(&param);
+                error = Utils::processBrc(&param);
 
                 if (error < 0) {
                     cursor = textEdit->textCursor();
@@ -4024,7 +3603,7 @@ void MdiChild::inLineCalcReturnPressed()
         calcLineEditWordList.append(text);
         calcLineEditWordList.removeDuplicates();
 
-        int result = processBrc(&text);
+        int result = Utils::processBrc(&text);
         text = Utils::removeZeros(text);
 
         if (inLineCalcChar.isLetter()) {
