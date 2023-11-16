@@ -90,7 +90,6 @@ private:
     QStringList guessFileName(QString *text);
     QString saveDataToFile(QString *text);
     void writeLog(QString msg, QString timeStamp = "");
-    QStringList splitFile(QString *text);
     QStringList processReceivedData();
     void prepareDataBeforeSending(QString *data);
     void procesSpecialCharacters(QString *text, QString *fileData);

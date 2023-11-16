@@ -65,6 +65,7 @@
 #include <serialporttestdialog.h>     // SerialPortTestDialog
 #include <serialtransmissiondialog.h> // SerialTransmissionDialog
 #include <utils/medium.h>             // Medium
+#include <utils/splitfile.h>
 
 #include "cleanupdialog.h"  // cleanUpDialog
 // BHCDialog ChamferDialog FeedsDialog SetupDialog DotDialog
@@ -3834,7 +3835,7 @@ void EdytorNc::doSplitPrograms()
 
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    QStringList list = activeWindow->splitFile();
+    QStringList list = Utils::splitFile(activeWindow->textEdit()->toPlainText());
 
     if (list.size() <= 1) {
         QApplication::restoreOverrideCursor();

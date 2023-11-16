@@ -45,7 +45,8 @@
 #include <QTimer>
 #include <QWidget>
 
-#include <utils/medium.h> // Medium
+#include <utils/medium.h>       // Medium
+#include <utils/splitfile.h>    // splitFile
 
 #include "commoninc.h"                // FILENAME_* macroses
 #include "serialtransmissiondialog.h" // SerialPortSettings QDialog QObject
@@ -963,7 +964,7 @@ QStringList SerialTransmissionDialog::processReceivedData()
     }
 
     if (portSettings.splitPrograms) { // check for more than one program in received data
-        QStringList progList = splitFile(&readData);
+        QStringList progList = Utils::splitFile(readData);
 
         if (progList.size() > 1) {
             QString tmpData;
@@ -1407,99 +1408,6 @@ void SerialTransmissionDialog::writeLog(QString msg, QString timeStamp)
             qDebug() << "Cannot open log file";
         }
     }
-}
-
-//**************************************************************************************************
-// Split file
-//**************************************************************************************************
-
-QStringList SerialTransmissionDialog::splitFile(QString *text)
-{
-    int progBegin, progEnd;
-    QStringList progs;
-    QStringList regexPatterns;
-    QList<int> progBegins;
-    QString tx;
-    QRegularExpression regex;
-
-    progs.clear();
-
-    if (text->isNull() || text->isEmpty()) {
-        return progs;
-    }
-
-    regexPatterns << FILENAME_SINU840
-                  << FILENAME_OSP
-                  << FILENAME_FANUC
-                  << FILENAME_SINU
-                  << FILENAME_HEID1
-                  << FILENAME_HEID2
-                  << FILENAME_PHIL
-                  << FILENAME_FADAL;
-
-    // detect CNC control type
-    foreach (const QString pattern, regexPatterns) {
-        regex.setPattern(pattern);
-
-        if (text->contains(regex)) {
-            regexPatterns.clear();
-            regexPatterns.append(pattern);
-            break;
-        }
-    }
-
-    // prepare program list
-    foreach (const QString pattern, regexPatterns) {
-        regex.setPattern(pattern);
-        auto match = regex.match(*text);
-
-        while (match.hasMatch()) {
-            progBegins.append(match.capturedStart());
-            match = regex.match(*text, match.capturedEnd());
-        }
-    }
-
-    //    if(!endOfProgChar.isEmpty())
-    //    {
-    //        index = 0;
-    //        expression.setPattern(endOfProgChar);
-    //        do
-    //        {
-    //            index = text->indexOf(expression, index);
-    //            if(index >= 0)
-    //            {
-    //                index += expression.matchedLength();
-    //                progBegins.append(index);
-    //            }
-    //            else
-    //                index = 0;
-
-    //        }while(index > 0);
-    //    }
-
-    std::sort(progBegins.begin(), progBegins.end());
-
-    // split file  TODO: data can be lost if filename detection fails also some garbage are left
-    QList<int>::const_iterator it = progBegins.constBegin();
-
-    while (it != progBegins.constEnd()) {
-        progBegin = *it;
-        it++;
-
-        if (it != progBegins.constEnd()) {
-            progEnd = *it;
-        } else {
-            progEnd = text->size();
-        }
-
-        tx = text->mid(progBegin, progEnd - progBegin);
-
-        if (!tx.isEmpty()) {
-            progs.append(tx);
-        }
-    }
-
-    return progs;
 }
 
 void SerialTransmissionDialog::startFileServer(QString configName)

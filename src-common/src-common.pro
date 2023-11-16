@@ -37,12 +37,14 @@ FORMS += \
 HEADERS += include/ui/longjobhelper.h \
     include/utils/medium.h \
     include/utils/configpage.h \
-    include/utils/configdialog.h
+    include/utils/configdialog.h \
+    include/utils/splitfile.h
 
 SOURCES += ui/longjobhelper.cpp \
     utils/medium.cpp \
     utils/configpage.cpp \
-    utils/configdialog.cpp
+    utils/configdialog.cpp \
+    utils/splitfile.cpp
 
 FORMS += utils/configdialog.ui
 

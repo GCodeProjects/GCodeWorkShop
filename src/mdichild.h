@@ -83,7 +83,6 @@ public:
     void doDiff();
     QString currentFileInfo(); // Text from first comment in CNC program
     QString guessFileName();
-    QStringList splitFile();
     bool foundTextMatched(const QString& pattern, QString text);
     void setCurrentFile(const QString &fileName, const QString &text);
     //void blockSkip();
