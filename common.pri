@@ -1,7 +1,6 @@
 
 
 PROJECT_ROOT_PATH = $${PWD}
-PROJECT_BUILD_PATH = $$shadowed($$PROJECT_ROOT_PATH)
 
 CONFIG(debug, debug|release) {
     BUILD_FLAG = debug
@@ -22,22 +21,51 @@ LANG_PATH = $${PROJECT_ROOT_PATH}/lang
 # define locales for translation
 LANG_LIST = pl ca de fi cs_CZ es nl ru
 
-LIBS_PATH = $${PROJECT_BUILD_PATH}/libs
-BIN_PATH = $${PROJECT_ROOT_PATH}/bin/$${BUILD_FLAG}
-
-DESTDIR = $${BIN_PATH}
-CONFIG(staticlib) {
-    DESTDIR = $$LIBS_PATH
+!CONFIG(staticlib) {
+    DESTDIR = $${PROJECT_ROOT_PATH}/bin/$${BUILD_FLAG}
 }
-
-LIBS += -L$${LIBS_PATH} -L$${BIN_PATH}
-INCLUDEPATH += $${PROJECT_ROOT_PATH}/include
-INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty
-INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty/include
 
 !defined(PREFIX, var) {
     unix:PREFIX = /usr/local/
     win32:PREFIX = $$(programfiles)
+}
+
+#------------------#
+# Link modules     #
+#------------------#
+
+contains(MODULES, kdiff3) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty
+    LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/3rdparty/kdiff3)
+    LIBS += -lkdiff3
+    # QTextCodec in Qt6
+    greaterThan(QT_MAJOR_VERSION, 5): QT *= core5compat
+}
+
+contains(MODULES, qtsingleapplication) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty/include
+    LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/3rdparty/qtsingleapplication)
+    LIBS += -lqtsingleapplication
+}
+
+contains(MODULES, edytornc-common) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/src-common \
+                   $${PROJECT_ROOT_PATH}/src-common/include \
+                   $$shadowed($${PROJECT_ROOT_PATH}/src-common)
+    LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/src-common)
+    LIBS += -ledytornc-common
+}
+
+contains(MODULES, edytornc) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/src/include
+#   LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/src)
+#   LIBS += -ledytornc
+}
+
+contains(MODULES, sfs) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/sfs
+#   LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/sfs)
+#   LIBS += -lsfs
 }
 
 

@@ -4,9 +4,9 @@ TEMPLATE = lib
 TARGET = edytornc-common
 CONFIG += staticlib
 
-include(../common.pri)
-
 QT *= widgets serialport network
+
+include(../common.pri)
 
 INCLUDEPATH += include
 
