@@ -12,7 +12,9 @@ include(../common.pri)
 INCLUDEPATH += include
 
 HEADERS += \
-    include/addons-actions.h
+    include/addons-actions.h \
+    src/addons-context.h
 
 SOURCES += \
-    src/addons-actions.cpp
+    src/addons-actions.cpp \
+    src/addons-context.cpp
