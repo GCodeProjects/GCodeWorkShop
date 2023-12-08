@@ -68,6 +68,12 @@ contains(MODULES, sfs) {
 #   LIBS += -lsfs
 }
 
+contains(MODULES, basic) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty/basic
+    LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/3rdparty/basic)
+    LIBS += -lbasic
+}
+
 
 #
 # function findFiles(dir, basename)

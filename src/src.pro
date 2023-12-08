@@ -4,7 +4,7 @@ TEMPLATE = app
 TARGET = edytornc
 
 QT *= widgets printsupport serialport network
-MODULES *= kdiff3 qtsingleapplication edytornc-common sfs
+MODULES *= kdiff3 qtsingleapplication edytornc-common sfs basic
 
 include(../common.pri)
 
@@ -18,7 +18,6 @@ SOURCES += edytornc.cpp \
     mdichild.cpp \
     setupdialog.cpp \
     findinf.cpp \
-    basic_interpreter.cpp \
     newfiledialog.cpp \
     sessiondialog.cpp \
     src/utils/removezeros.cpp
@@ -28,7 +27,6 @@ HEADERS += include/edytornc.h \
     mdichild.h \
     setupdialog.h \
     findinf.h \
-    basic_interpreter.h \
     tooltips.h \
     newfiledialog.h \
     sessiondialog.h \
