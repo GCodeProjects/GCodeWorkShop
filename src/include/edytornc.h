@@ -190,7 +190,6 @@ private slots:
     void projectOpen();
     void updateOpenFileList();
     void openFileTableWidgetClicked(int x, int y);
-    void doSplitPrograms();
     void diffEditorFile();
     void closeTab(int i);
     void closeCurrentWindow();
@@ -315,7 +314,6 @@ private:
     QAction *configAct;
 
     QAction *calcAct;
-    QAction *splittAct;
     QAction *trianglesAct;
     QAction *diffLAct;
     QAction *diffRAct;

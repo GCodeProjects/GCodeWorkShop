@@ -72,7 +72,6 @@
 #include <serialporttestdialog.h>     // SerialPortTestDialog
 #include <serialtransmissiondialog.h> // SerialTransmissionDialog
 #include <utils/medium.h>             // Medium
-#include <utils/splitfile.h>
 
 #include "setupdialog.h"    // SetupDialog
 #include "edytornc.h"       // EdytorNc QObject QMainWindow
@@ -1301,7 +1300,7 @@ void EdytorNc::updateMenus()
     m_addonsActions->insertEmptyLines()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->insertSpaces()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->removeSpaces()->setEnabled(hasMdiChildNotReadOnly);
-    splittAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->splitProgramms()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->i2mProg()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->compileMacro()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->cleanUp()->setEnabled(hasMdiChildNotReadOnly);
@@ -1657,10 +1656,6 @@ void EdytorNc::createActions()
     diffEditorAct->setToolTip(tr("Show diff of currently edited file and file on disk"));
     connect(diffEditorAct, SIGNAL(triggered()), this, SLOT(diffEditorFile()));
 
-    splittAct = new QAction(QIcon(":/images/split_prog.png"), tr("Split file"), this);
-    splittAct->setToolTip(tr("Split file"));
-    connect(splittAct, SIGNAL(triggered()), this, SLOT(doSplitPrograms()));
-
     swapAxesAct = new QAction(QIcon(":/images/swapaxes.png"), tr("Swap axes"), this);
     //swapAxesAct->setShortcut(QKeySequence::Save);
     swapAxesAct->setToolTip(tr("Swap/modify axes, selected text or entire program"));
@@ -1791,7 +1786,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(m_addonsActions->removeEmptyLines());
     toolsMenu->addAction(m_addonsActions->cleanUp());
     toolsMenu->addAction(swapAxesAct);
-    toolsMenu->addAction(splittAct);
+    toolsMenu->addAction(m_addonsActions->splitProgramms());
     toolsMenu->addAction(m_addonsActions->renumber());
     toolsMenu->addSeparator();
     toolsMenu->addAction(diffAct);
@@ -1873,7 +1868,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(m_addonsActions->dot());
     toolsToolBar->addAction(swapAxesAct);
     toolsToolBar->addAction(m_addonsActions->renumber());
-    toolsToolBar->addAction(splittAct);
+    toolsToolBar->addAction(m_addonsActions->splitProgramms());
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(m_addonsActions->bhc());
     toolsToolBar->addAction(m_addonsActions->feeds());
@@ -3534,42 +3529,6 @@ bool EdytorNc::event(QEvent *event)
     }
 
     return QWidget::event(event);
-}
-
-void EdytorNc::doSplitPrograms()
-{
-    MdiChild *activeWindow = activeMdiChild();
-
-    if (activeWindow == nullptr) {
-        return;
-    }
-
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-
-    QStringList list = Utils::splitFile(activeWindow->textEdit()->toPlainText());
-
-    if (list.size() <= 1) {
-        QApplication::restoreOverrideCursor();
-        return;
-    }
-
-    QStringList::const_iterator it = list.constBegin();
-
-    while (it != list.constEnd()) {
-        activeWindow = newFile();
-
-        if (activeWindow == nullptr) {
-            QApplication::restoreOverrideCursor();
-            return;
-        }
-
-        activeWindow->textEdit()->setUndoRedoEnabled(false);  //clear undo/redo history
-        activeWindow->textEdit()->setPlainText(*it);
-        activeWindow->textEdit()->setUndoRedoEnabled(true);
-        it++;
-    }
-
-    QApplication::restoreOverrideCursor();
 }
 
 void EdytorNc::doSwapAxes()

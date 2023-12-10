@@ -58,6 +58,7 @@ public:
     QAction *renumber() {return m_renumber;}
     QAction *insertSpaces() {return m_insertSpaces;}
     QAction *removeSpaces() {return m_removeSpaces;}
+    QAction *splitProgramms() {return m_splitProgramms;}
 
 protected:
     QAction *m_bhc;
@@ -78,6 +79,7 @@ protected:
     QAction *m_renumber;
     QAction *m_insertSpaces;
     QAction *m_removeSpaces;
+    QAction *m_splitProgramms;
 
 protected slots:
     void doBhc();
@@ -98,6 +100,7 @@ protected slots:
     void doRenumber();
     void doInsertSpaces();
     void doRemoveSpaces();
+    void doSplitProgramms();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

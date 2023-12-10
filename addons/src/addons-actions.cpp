@@ -22,6 +22,7 @@
 #include <QIcon>            // for QIcon
 #include <QMessageBox>      // for QMessageBox
 #include <QPlainTextEdit>   // for QPlainTextEdit
+#include <QStringList>      // for QStringList
 #include <Qt>               // for BusyCursor
 
 #include <addons-actions.h>
@@ -29,6 +30,7 @@
 #include <mdichild.h>
 #include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 #include <utils/medium.h>       // for Medium
+#include <utils/splitfile.h>    // for splitFile
 
 #include "addons-context.h" // for Context, Context::ALL, Context::SELECTED, Context::SELECTED_BLOCKS
 
@@ -65,7 +67,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_i2mProg(new QAction(this)),
     m_renumber(new QAction(this)),
     m_insertSpaces(new QAction(this)),
-    m_removeSpaces(new QAction(this))
+    m_removeSpaces(new QAction(this)),
+    m_splitProgramms(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -85,6 +88,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_renumber, SIGNAL(triggered()), this, SLOT(doRenumber()));
     connect(m_insertSpaces, SIGNAL(triggered()), this, SLOT(doInsertSpaces()));
     connect(m_removeSpaces, SIGNAL(triggered()), this, SLOT(doRemoveSpaces()));
+    connect(m_splitProgramms, SIGNAL(triggered()), this, SLOT(doSplitProgramms()));
 
     loadIcons();
     loadTranslations();
@@ -128,6 +132,8 @@ void Addons::Actions::loadTranslations()
     m_insertSpaces->setToolTip(tr("Inserts spaces"));
     m_removeSpaces->setText(tr("Remove spaces"));
     m_removeSpaces->setToolTip(tr("Removes spaces"));
+    m_splitProgramms->setText(tr("Split file"));
+    m_splitProgramms->setToolTip(tr("Split file"));
 }
 
 void Addons::Actions::loadIcons()
@@ -150,6 +156,7 @@ void Addons::Actions::loadIcons()
     m_renumber->setIcon(QIcon(":/images/renumber.png"));
     m_insertSpaces->setIcon(QIcon(":/images/insertspc.png"));
     m_removeSpaces->setIcon(QIcon(":/images/removespc.png"));
+    m_splitProgramms->setIcon(QIcon(":/images/split_prog.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -367,4 +374,37 @@ void Addons::Actions::doRemoveSpaces()
     if (changed) {
         ctx.push();
     }
+}
+
+void Addons::Actions::doSplitProgramms()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+
+    QStringList list = Utils::splitFile(ctx.text());
+
+    if (list.size() <= 1) {
+        QApplication::restoreOverrideCursor();
+        return;
+    }
+
+    for (QString it : list) {
+        MdiChild *activeWindow = EdytorNc::instance()->newFile();
+
+        if (activeWindow == nullptr) {
+            QApplication::restoreOverrideCursor();
+            return;
+        }
+
+        activeWindow->textEdit()->setUndoRedoEnabled(false);  //clear undo/redo history
+        activeWindow->textEdit()->setPlainText(it);
+        activeWindow->textEdit()->setUndoRedoEnabled(true);
+    }
+
+    QApplication::restoreOverrideCursor();
 }
