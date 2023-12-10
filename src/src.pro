@@ -4,7 +4,7 @@ TEMPLATE = app
 TARGET = edytornc
 
 QT *= widgets printsupport serialport network
-MODULES *= kdiff3 qtsingleapplication edytornc-common sfs addons basic
+MODULES *= kdiff3 qtsingleapplication edytornc-common sfs addons
 
 include(../common.pri)
 

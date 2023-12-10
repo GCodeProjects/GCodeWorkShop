@@ -76,7 +76,6 @@ public:
     void doInsertSpace();
     void doInsertDot();
     void doI2M();
-    int compileMacro();
     void highlightFindText(const QString& searchString,
                            QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                            bool ignoreComments = true);
@@ -124,8 +123,6 @@ protected:
 private:
     bool maybeSave();
     //QString strippedName(const QString &fullFileName);
-    void macroShowError(int error, QString tx);
-    void macroShowBasicError(int error);
     void detectHighligthMode();
     bool findText(const QString &text,
                   QTextDocument::FindFlags options = QTextDocument::FindFlags(),
@@ -157,7 +154,6 @@ private slots :
     //void createContextMenuActions();
     void showContextMenu(const QPoint &pt);
     void documentWasModified();
-    void cleanUp(QString *str);
     void inLineCalcEditingFinished();
     void inLineCalcReturnPressed();
 

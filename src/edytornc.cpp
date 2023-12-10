@@ -1427,7 +1427,7 @@ void EdytorNc::updateMenus()
     insertEmptyLinesAct->setEnabled(hasMdiChildNotReadOnly);
     splittAct->setEnabled(hasMdiChildNotReadOnly);
     convertProgAct->setEnabled(hasMdiChildNotReadOnly);
-    cmpMacroAct->setEnabled(hasMdiChildNotReadOnly);
+    m_addonsActions->compileMacro()->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->cleanUp()->setEnabled(hasMdiChildNotReadOnly);
     swapAxesAct->setEnabled(hasMdiChildNotReadOnly);
     m_addonsActions->paraComment()->setEnabled(hasMdiChildNotReadOnly && hasSelection);
@@ -1733,6 +1733,7 @@ void EdytorNc::createActions()
     //m_addonsActions->cleanUp()->setShortcut(QKeySequence::Print);
     m_addonsActions->paraComment()->setShortcut(tr("Ctrl+9"));
     m_addonsActions->semiComment()->setShortcut(tr("Ctrl+;"));
+    //m_addonsActions->compileMacro()->setShortcut(tr("F9"));
 
     insertSpcAct = new QAction(QIcon(":/images/insertspc.png"), tr("&Insert spaces"), this);
     insertSpcAct->setShortcut(tr("F4"));
@@ -1798,12 +1799,6 @@ void EdytorNc::createActions()
     showSerialToolBarAct->setCheckable(true);
     showSerialToolBarAct->setToolTip(tr("Serial port send/receive"));
     connect(showSerialToolBarAct, SIGNAL(triggered()), this, SLOT(createSerialToolBar()));
-
-    cmpMacroAct = new QAction(QIcon(":/images/compfile.png"), tr("Compile macro - experimental"),
-                              this);
-    //cmpMacroAct->setShortcut(tr("F9"));
-    cmpMacroAct->setToolTip(tr("Translate EdytorNC macro into CNC program"));
-    connect(cmpMacroAct, SIGNAL(triggered()), this, SLOT(doCmpMacro()));
 
     diffRAct = new QAction(QIcon(":/images/diffr.png"),
                            tr("Show diff - open current file in right diff window"), this);
@@ -1975,7 +1970,7 @@ void EdytorNc::createMenus()
     toolsMenu->addAction(convertAct);
     toolsMenu->addAction(convertProgAct);
     toolsMenu->addSeparator();
-    toolsMenu->addAction(cmpMacroAct);
+    toolsMenu->addAction(m_addonsActions->compileMacro());
     toolsMenu->addSeparator();
     toolsMenu->addAction(inLineCalcAct);
     toolsMenu->addAction(calcAct);
@@ -2050,7 +2045,7 @@ void EdytorNc::createToolBars()
     toolsToolBar->addAction(convertAct);
     toolsToolBar->addAction(convertProgAct);
     toolsToolBar->addSeparator();
-    toolsToolBar->addAction(cmpMacroAct);
+    toolsToolBar->addAction(m_addonsActions->compileMacro());
     toolsToolBar->addSeparator();
     toolsToolBar->addAction(calcAct);
     toolsToolBar->addSeparator();
@@ -2922,55 +2917,6 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 void EdytorNc::deAttachToDirButtonClicked()
 {
     attachToDirButtonClicked(false);
-}
-
-void EdytorNc::doCmpMacro()
-{
-    QString fileName, filePath, text;
-
-
-    if (activeMdiChild()) {
-        //      fileName = activeMdiChild()->filePath() + "/";
-        //      fileName = fileName + activeMdiChild()->fileName().remove(".nc");
-        //      fileName = fileName + tr("_compiled_");
-        //      fileName = fileName + QDate::currentDate().toString(Qt::ISODate) + ".nc";
-        //      fileName = fileName + QTime::currentTime().toString(Qt::ISODate);
-
-        text = activeMdiChild()->textEdit()->toPlainText();
-    } else {
-        return;
-    }
-
-    MdiChild *child = createMdiChild();
-
-    child->newFile();
-
-    child->textEdit()->insertPlainText(text);
-
-    if ((child->compileMacro() == -1)) {
-        child->setModified(false);
-        //child->close();
-        return;
-    }
-
-    defaultMdiWindowProperites.cursorPos = 0;
-    defaultMdiWindowProperites.readOnly = false;
-    //defaultMdiWindowProperites.maximized = false;
-    defaultMdiWindowProperites.geometry = QByteArray();
-    defaultMdiWindowProperites.editorToolTips = true;
-    defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
-    //defaultMdiWindowProperites.fileName = fileName;
-    child->setMdiWindowProperites(defaultMdiWindowProperites);
-
-    //child->setCurrentFile(fileName, child->textEdit()->toPlainText());
-
-    //qDebug() << tmpFileName << fileName;
-
-    if (defaultMdiWindowProperites.maximized) {
-        child->showMaximized();
-    } else {
-        child->showNormal();
-    }
 }
 
 void EdytorNc::createUserToolTipsFile()

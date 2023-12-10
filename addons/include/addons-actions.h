@@ -48,6 +48,7 @@ public:
     QAction *cleanUp() {return m_cleanUp;}
     QAction *paraComment() {return m_paraComment;}
     QAction *semiComment() {return m_semiComment;}
+    QAction *compileMacro() {return m_compileMacro;}
 
 protected:
     QAction *m_bhc;
@@ -58,6 +59,7 @@ protected:
     QAction *m_cleanUp;
     QAction *m_paraComment;
     QAction *m_semiComment;
+    QAction *m_compileMacro;
 
 protected slots:
     void doBhc();
@@ -68,6 +70,7 @@ protected slots:
     void doCleanUp();
     void doParaComment();
     void doSemiComment();
+    void doCompileMacro();
 
 protected:
     void doBlockSkip(bool remove, bool inc);

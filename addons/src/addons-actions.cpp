@@ -19,9 +19,12 @@
 
 #include <QAction>          // for QAction
 #include <QIcon>            // for QIcon
+#include <QMessageBox>      // for QMessageBox
+#include <QPlainTextEdit>   // for QPlainTextEdit
 
 #include <addons-actions.h>
 #include <edytornc.h>           // for EdytorNc
+#include <mdichild.h>
 #include <utils/medium.h>       // for Medium
 
 #include "addons-context.h" // for Context, Context::SELECTED_BLOCKS
@@ -31,6 +34,7 @@
 #include "chamfer/addons-chamfer.h"
 #include "cleanup/addons-cleanup.h"
 #include "comment/utils-comment.h"
+#include "compilemacro/utils-compilemacro.h"
 
 
 Addons::Actions::Actions(QObject *parent) : QObject(parent),
@@ -41,7 +45,8 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     m_chamfer(new QAction(this)),
     m_cleanUp(new QAction(this)),
     m_paraComment(new QAction(this)),
-    m_semiComment(new QAction(this))
+    m_semiComment(new QAction(this)),
+    m_compileMacro(new QAction(this))
 {
     connect(m_bhc, SIGNAL(triggered()), this, SLOT(doBhc()));
     connect(m_blockSkipDecrement, SIGNAL(triggered()), this, SLOT(doBlockSkipDecrement()));
@@ -51,6 +56,7 @@ Addons::Actions::Actions(QObject *parent) : QObject(parent),
     connect(m_cleanUp, SIGNAL(triggered()), this, SLOT(doCleanUp()));
     connect(m_paraComment, SIGNAL(triggered()), this, SLOT(doParaComment()));
     connect(m_semiComment, SIGNAL(triggered()), this, SLOT(doSemiComment()));
+    connect(m_compileMacro, SIGNAL(triggered()), this, SLOT(doCompileMacro()));
 
     loadIcons();
     loadTranslations();
@@ -74,6 +80,8 @@ void Addons::Actions::loadTranslations()
     m_paraComment->setToolTip(tr("Comment/uncomment selected text using parentheses"));
     m_semiComment->setText(tr("Comment ;"));
     m_semiComment->setToolTip(tr("Comment/uncomment selected text using semicolon"));
+    m_compileMacro->setText(tr("Compile macro - experimental"));
+    m_compileMacro->setToolTip(tr("Translate EdytorNC macro into CNC program"));
 }
 
 void Addons::Actions::loadIcons()
@@ -86,6 +94,7 @@ void Addons::Actions::loadIcons()
     m_cleanUp->setIcon(QIcon(":/images/cleanup.png"));
     m_paraComment->setIcon(QIcon(":/images/paracomment.pn"));
     m_semiComment->setIcon(QIcon(":/images/semicomment.png"));
+    m_compileMacro->setIcon(QIcon(":/images/compfile.png"));
 }
 
 void Addons::Actions::doBhc()
@@ -162,4 +171,24 @@ void Addons::Actions::doSemiComment()
 
     Utils::semiComment(ctx.text());
     ctx.push();
+}
+
+void Addons::Actions::doCompileMacro()
+{
+    Addons::Context ctx;
+
+    if (!ctx.pull(Addons::Context::ALL)) {
+        return;
+    }
+
+    Utils::CompileMacro compiler;
+    EdytorNc *enc = EdytorNc::instance();
+
+    if (compiler.compile(ctx.text()) == -1) {
+        QMessageBox::warning(enc, tr("EdytorNc - compile macro"), compiler.status());
+        //return;
+    }
+
+    MdiChild *child = enc->newFile();
+    child->textEdit()->insertPlainText(compiler.result());
 }

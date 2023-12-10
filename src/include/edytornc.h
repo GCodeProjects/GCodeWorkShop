@@ -177,7 +177,6 @@ private slots:
     void sendButtonClicked();
     void receiveButtonClicked();
     void startSerialPortServer();
-    void doCmpMacro();
     void attachToDirButtonClicked(bool attach = true);
     void deAttachToDirButtonClicked();
     void setHighLightMode(int mode);
@@ -336,7 +335,6 @@ private:
     QAction *trianglesAct;
     QAction *convertAct;
     QAction *convertProgAct;
-    QAction *cmpMacroAct;
     QAction *diffLAct;
     QAction *diffRAct;
     QAction *diffAct;
