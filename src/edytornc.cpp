@@ -2137,9 +2137,14 @@ void EdytorNc::loadFile(const DocumentInfo::Ptr &info, bool checkAlreadyLoaded)
 
     if ((file.exists()) && (file.isReadable())) {
         MdiChild *child = createMdiChild();
-        child->loadFile(info->filePath);
-        child->setDocumentInfo(info);
-        updateStatusBar();
+
+        if (child->loadFile(info->filePath)) {
+            child->setDocumentInfo(info);
+            updateStatusBar();
+            m_recentFiles->add(info->filePath);
+        } else {
+            child->parentWidget()->close();
+        }
     }
 }
 
