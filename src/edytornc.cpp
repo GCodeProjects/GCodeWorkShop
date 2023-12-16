@@ -492,7 +492,7 @@ void EdytorNc::openExample()
     statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
-void EdytorNc::openFile(const QString fileName)
+void EdytorNc::openFile(const QString &fileName)
 {
     QFileInfo file;
 
@@ -923,7 +923,7 @@ void EdytorNc::readOnly()
     updateMenus();
 }
 
-void EdytorNc::goToLine(QString fileName, int line)
+void EdytorNc::goToLine(const QString &fileName, int line)
 {
     if (activeMdiChild()) {
         QString childFileName = activeMdiChild()->filePath() + "/" + activeMdiChild()->fileName();
@@ -1010,7 +1010,7 @@ void EdytorNc::doDiffR()
     }
 }
 
-void EdytorNc::diffTwoFiles(const QString filename1, const QString filename2)
+void EdytorNc::diffTwoFiles(const QString &filename1, const QString &filename2)
 {
     createDiffApp();
 
@@ -2219,7 +2219,7 @@ void EdytorNc::setActiveSubWindow(QWidget *window)
     ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
 }
 
-void EdytorNc::loadFile(_editor_properites options, bool checkAlreadyLoaded)
+void EdytorNc::loadFile(const _editor_properites &options, bool checkAlreadyLoaded)
 {
     QFileInfo file;
 
@@ -2809,7 +2809,7 @@ void EdytorNc::deAttachHighlightToDirActClicked()
     attachHighlighterToDirButtonClicked(false);
 }
 
-int EdytorNc::defaultHighlightMode(QString filePath)
+int EdytorNc::defaultHighlightMode(const QString &filePath)
 {
     int id;
     QDir dir;
@@ -3164,7 +3164,7 @@ void EdytorNc::projectTreeRemoveItem()
     }
 }
 
-void EdytorNc::projectLoad(QString projectName)
+void EdytorNc::projectLoad(const QString &projectName)
 {
     QFileInfo file;
     QIcon icon;
@@ -3413,7 +3413,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
     fileTreeViewChangeRootDir(path);
 }
 
-void EdytorNc::fileTreeViewChangeRootDir(QString path)
+void EdytorNc::fileTreeViewChangeRootDir(const QString &path)
 {
     ui->fileTreeView->setRootIndex(dirModel->index(path));
     dirModel->setRootPath(path);
@@ -3533,7 +3533,7 @@ void EdytorNc::changeSession(QAction *action)
     loadSession(name);
 }
 
-void EdytorNc::loadSession(QString name)
+void EdytorNc::loadSession(const QString &name)
 {
     QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("Sessions");
@@ -3564,7 +3564,7 @@ void EdytorNc::loadSession(QString name)
     statusBar()->showMessage(tr("Session %1 loaded").arg(name), 5000);
 }
 
-void EdytorNc::saveSession(QString name)
+void EdytorNc::saveSession(const QString &name)
 {
     QSettings &settings = *Medium::instance().settings();
     settings.beginGroup("Sessions");
@@ -3798,7 +3798,7 @@ void EdytorNc::receiveButtonClicked()
     QApplication::restoreOverrideCursor();
 }
 
-void EdytorNc::fileChanged(const QString fileName)
+void EdytorNc::fileChanged(const QString &fileName)
 {
     QMdiSubWindow *existing;
     MdiChild *mdiChild = nullptr;

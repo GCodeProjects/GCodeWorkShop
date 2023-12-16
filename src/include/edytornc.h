@@ -104,8 +104,8 @@ protected:
     Addons::Actions *m_addonsActions;
 
 public:
-    void openFile(const QString fileName);
-    void diffTwoFiles(const QString filename1, const QString filename2);
+    void openFile(const QString &fileName);
+    void diffTwoFiles(const QString &filename1, const QString &filename2);
 
     enum { MAX_RECENTFILES = 16 };
 
@@ -138,7 +138,7 @@ private slots:
     void updateWindowMenu();
     MdiChild *createMdiChild();
     void setActiveSubWindow(QWidget *window);
-    void loadFile(_editor_properites options, bool checkAlreadyLoaded = true);
+    void loadFile(const _editor_properites &options, bool checkAlreadyLoaded = true);
     void updateRecentFiles(const QString &filename);
     void fileOpenRecent(QAction *act);
     void updateRecentFilesMenu();
@@ -184,7 +184,7 @@ private slots:
     void fileTreeViewDoubleClicked(const QModelIndex &index);
     void hidePanel();
     void projectTreeRemoveItem();
-    void projectLoad(QString projectName);
+    void projectLoad(const QString &projectName);
     void projectOpen();
     void updateOpenFileList();
     void openFileTableWidgetClicked(int x, int y);
@@ -192,10 +192,10 @@ private slots:
     void closeTab(int i);
     void closeCurrentWindow();
     void closeAllMdiWindows();
-    void goToLine(QString fileName, int line);
+    void goToLine(const QString &fileName, int line);
     void changeSession(QAction *action);
     void sessionMgr();
-    void fileChanged(const QString fileName);
+    void fileChanged(const QString &fileName);
     void tileSubWindowsVertycally();
     void clipboardChanged();
     void deleteFromClipboardButtonClicked();
@@ -216,17 +216,17 @@ private:
     void loadSerialConfignames();
     void updateCurrentSerialConfig();
     void attachHighlighterToDirButtonClicked(bool attach);
-    int defaultHighlightMode(QString filePath);
+    int defaultHighlightMode(const QString &filePath);
     QString projectSelectName();
     bool maybeSaveProject();
     void createFileBrowseTabs();
     void fileTreeViewChangeRootDir();
-    void fileTreeViewChangeRootDir(QString path);
+    void fileTreeViewChangeRootDir(const QString &path);
     QMdiSubWindow *findMdiChild(const QString &fileName);
     void createDiffApp();
     void updateSessionMenus();
-    void loadSession(QString name);
-    void saveSession(QString name);
+    void loadSession(const QString &name);
+    void saveSession(const QString &name);
     void savePrinterSettings(QPrinter *printer);
     void loadPrinterSettings(QPrinter *printer);
     void clipboardSave();
