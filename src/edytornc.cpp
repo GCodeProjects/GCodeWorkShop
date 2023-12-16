@@ -299,16 +299,13 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 
 MdiChild *EdytorNc::newFileFromTemplate()
 {
-    QString fileName = "";
-
     MdiChild *child = 0;
 
     newFileDialog *newFileDlg = new newFileDialog(this);
     int result = newFileDlg->exec();
 
     if (result == QDialog::Accepted) {
-        fileName = newFileDlg->getChosenFile();
-
+        const QString &fileName = newFileDlg->getChosenFile();
         child = createMdiChild();
 
         if (!fileName.isEmpty() && !(fileName == tr("EMPTY FILE"))) {
@@ -748,15 +745,13 @@ void EdytorNc::replaceNext()
 {
     QPalette palette;
     bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
-    bool found = false;
 
     replaceNextAct->setEnabled(false);
     replacePreviousAct->setEnabled(false);
     replaceAllAct->setEnabled(false);
 
     if (hasMdiChildNotReadOnly) {
-
-        found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
+        bool found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
                                               ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
                                                 QTextDocument::FindFlags()) |
                                                (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
@@ -781,15 +776,13 @@ void EdytorNc::replacePrevious()
 {
     QPalette palette;
     bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
-    bool found = false;
 
     replaceNextAct->setEnabled(false);
     replacePreviousAct->setEnabled(false);
     replaceAllAct->setEnabled(false);
 
     if (hasMdiChildNotReadOnly) {
-
-        found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
+        bool found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
                                               QTextDocument::FindBackward |
                                               ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
                                                 QTextDocument::FindFlags()) |
@@ -814,7 +807,6 @@ void EdytorNc::replacePrevious()
 void EdytorNc::replaceAll()
 {
     QPalette palette;
-    bool found = false;
     bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
 
     replaceNextAct->setEnabled(false);
@@ -823,8 +815,7 @@ void EdytorNc::replaceAll()
 
     if (hasMdiChildNotReadOnly) {
         QApplication::setOverrideCursor(Qt::BusyCursor);
-
-        found = activeMdiChild()->replaceAll(findEdit->text(), replaceEdit->text(),
+        bool found = activeMdiChild()->replaceAll(findEdit->text(), replaceEdit->text(),
                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
                                                QTextDocument::FindFlags()) |
                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
@@ -1322,12 +1313,10 @@ void EdytorNc::updateMenus()
 
 void EdytorNc::updateCurrentSerialConfig()
 {
-    int id;
-    QDir dir;
-
     bool hasMdiChild = (activeMdiChild() != nullptr);
 
     if (hasMdiChild && (serialToolBar != nullptr)) {
+        QDir dir;
         dir.setPath(activeMdiChild()->filePath());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
@@ -1337,7 +1326,7 @@ void EdytorNc::updateCurrentSerialConfig()
 
         if (!list.isEmpty()) {
             QFileInfo name = list.at(0);
-            id = configBox->findText(name.baseName());
+            int id = configBox->findText(name.baseName());
 
             if (id >= 0) {
                 configBox->setCurrentIndex(id);
@@ -1349,22 +1338,18 @@ void EdytorNc::updateCurrentSerialConfig()
 void EdytorNc::updateStatusBar()
 {
     QTextBlock b;
-    int column = 1;
-    int line = 1;
-    int id;
-
     bool hasMdiChild = (activeMdiChild() != nullptr);
     bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
 
     if (hasMdiChild) {
-        id = highlightTypeCombo->findData(activeMdiChild()->highligthMode());
+        int id = highlightTypeCombo->findData(activeMdiChild()->highligthMode());
         highlightTypeCombo->blockSignals(true);
         highlightTypeCombo->setCurrentIndex(id);
         highlightTypeCombo->blockSignals(false);
 
         b = activeMdiChild()->textCursor().block();
-        line = b.firstLineNumber() + 1;
-        column = activeMdiChild()->textCursor().position() - b.position();
+        int line = b.firstLineNumber() + 1;
+        int column = activeMdiChild()->textCursor().position() - b.position();
 
         labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
                             tr("  Line: ") + QString::number(line) +
@@ -2497,8 +2482,6 @@ void EdytorNc::findTextChanged()
 {
     bool hasMdiChild = (activeMdiChild() != 0);
     QTextCursor cursor;
-    int pos;
-
 
     if (findEdit->text().contains(QRegularExpression("\\$\\$"))
             || findEdit->text().contains(
@@ -2513,7 +2496,7 @@ void EdytorNc::findTextChanged()
         cursor = activeMdiChild()->textCursor();
 
         if (!findEdit->text().isEmpty()) {
-            pos = cursor.position() - findEdit->text().size();
+            int pos = cursor.position() - findEdit->text().size();
 
             if (pos < 0) {
                 pos = 0;
@@ -2664,9 +2647,7 @@ void EdytorNc::closeSerialToolbar()
 
 void EdytorNc::attachToDirButtonClicked(bool attach)
 {
-    QFileInfo fileInfo;
     QFile file;
-    int i;
 
     bool hasMdiChild = (activeMdiChild() != 0);
 
@@ -2679,12 +2660,9 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 
         QFileInfoList list = dir.entryInfoList();
 
-        if (!list.isEmpty()) {
-            for (i = 0; i < list.count(); i++) {
-                fileInfo = (QFileInfo)list.at(i);
-                file.setFileName(fileInfo.absoluteFilePath());
-                file.remove();
-            }
+        for (const QFileInfo &fileInfo : list) {
+            file.setFileName(fileInfo.absoluteFilePath());
+            file.remove();
         }
 
         if (attach) {
@@ -2767,9 +2745,7 @@ void EdytorNc::createGlobalToolTipsFile()
 
 void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 {
-    QFileInfo fileInfo;
     QFile file;
-    int i;
 
     bool hasMdiChild = (activeMdiChild() != 0);
 
@@ -2782,12 +2758,9 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 
         QFileInfoList list = dir.entryInfoList();
 
-        if (!list.isEmpty()) {
-            for (i = 0; i < list.count(); i++) {
-                fileInfo = (QFileInfo)list.at(i);
-                file.setFileName(fileInfo.absoluteFilePath());
-                file.remove();
-            }
+        for (const QFileInfo &fileInfo : list) {
+            file.setFileName(fileInfo.absoluteFilePath());
+            file.remove();
         }
 
         if (attach) {
@@ -2811,7 +2784,6 @@ void EdytorNc::deAttachHighlightToDirActClicked()
 
 int EdytorNc::defaultHighlightMode(const QString &filePath)
 {
-    int id;
     QDir dir;
     bool ok;
 
@@ -2824,7 +2796,7 @@ int EdytorNc::defaultHighlightMode(const QString &filePath)
 
     if (!list.isEmpty()) {
         QFileInfo name = list.at(0);
-        id = highlightTypeCombo->findText(name.baseName());
+        int id = highlightTypeCombo->findText(name.baseName());
 
         if (id >= 0) {
             //highlightTypeCombo->setCurrentIndex(id);
@@ -3143,14 +3115,10 @@ void EdytorNc::hidePanel()
 
 void EdytorNc::projectTreeRemoveItem()
 {
-    QStandardItem *item;
-
     QModelIndexList list = ui->projectTreeView->selectionModel()->selectedIndexes();
-    QModelIndexList::Iterator it = list.begin();
 
-
-    while (it != list.end()) {
-        item = model->itemFromIndex(*it);
+    for (QModelIndex it : list) {
+        QStandardItem *item = model->itemFromIndex(it);
 
         if (item == nullptr) {
             return;
@@ -3159,8 +3127,6 @@ void EdytorNc::projectTreeRemoveItem()
         if (!item->hasChildren()) {
             currentProjectModified = model->removeRow(item->row(), model->indexFromItem(item->parent()));
         }
-
-        ++it;
     }
 }
 
@@ -3180,15 +3146,13 @@ void EdytorNc::projectLoad(const QString &projectName)
 
     QSettings settings(currentProjectName, QSettings::IniFormat);
 
-    QStandardItem *parentItem = model->invisibleRootItem();
     QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"),
                                             QFileInfo(currentProjectName).fileName());
     item->setToolTip(QDir::toNativeSeparators(currentProjectName));
 
-    parentItem->appendRow(item);
+    model->invisibleRootItem()->appendRow(item);
 
     currentProject = item;
-    parentItem = item;
 
     QFileSystemModel *fModel = new QFileSystemModel;
 
@@ -3216,8 +3180,6 @@ void EdytorNc::projectLoad(const QString &projectName)
                 currentProject->appendRow(item);
             }
 
-            parentItem = item;
-
             if ((file.exists()) && (file.isReadable())) {
                 icon = fModel->iconProvider()->icon(file);
 
@@ -3225,9 +3187,9 @@ void EdytorNc::projectLoad(const QString &projectName)
                     icon = QIcon(":/images/ncfile.png");
                 }
 
-                item = new QStandardItem(icon, file.fileName());
-                item->setToolTip(file.fileName());
-                parentItem->appendRow(item);
+                QStandardItem *childItem = new QStandardItem(icon, file.fileName());
+                childItem->setToolTip(file.fileName());
+                item->appendRow(childItem);
             }
         }
     }
@@ -3298,7 +3260,6 @@ void EdytorNc::createFileBrowseTabs()
 
 void EdytorNc::updateOpenFileList()
 {
-    QTableWidgetItem *newItem;
     QFileInfo file;
     QStringList labels;
 
@@ -3319,7 +3280,7 @@ void EdytorNc::updateOpenFileList()
 
         file.setFile(child->currentFile());
 
-        newItem = new QTableWidgetItem(file.fileName() + (child->isModified() ? "*" : ""));
+        QTableWidgetItem *newItem = new QTableWidgetItem(file.fileName() + (child->isModified() ? "*" : ""));
 
         if (file.canonicalFilePath().isEmpty()) {
             newItem->setToolTip(child->currentFile());
@@ -3432,8 +3393,6 @@ bool EdytorNc::event(QEvent *event)
     QModelIndex index;
     QFile file;
     QString fileName;
-    char buf[1024];
-    qint64 lineLength;
 
     if ((event->type() == QEvent::ToolTip)) {
         if (panelHidden) {
@@ -3464,7 +3423,8 @@ bool EdytorNc::event(QEvent *event)
 
             if (file.open(QIODevice::ReadOnly)) {
                 for (int i = 0; i < ui->filePreviewSpinBox->value(); i++) {
-                    lineLength = file.readLine(buf, sizeof(buf));
+                    char buf[1024];
+                    qint64 lineLength = file.readLine(buf, sizeof(buf));
 
                     if (lineLength != -1) {
                         text.append(buf);
@@ -3744,8 +3704,6 @@ void EdytorNc::sendButtonClicked()
 
 void EdytorNc::receiveButtonClicked()
 {
-    MdiChild *activeWindow;
-
     receiveAct->setEnabled(false);
     sendAct->setEnabled(false);
     commAppAct->setEnabled(false);
@@ -3768,7 +3726,7 @@ void EdytorNc::receiveButtonClicked()
             }
         } else {
             if (!(*it).isEmpty() && !(*it).isNull()) {
-                activeWindow = newFile();
+                MdiChild *activeWindow = newFile();
 
                 if (activeWindow == nullptr) {
                     return;
@@ -3972,13 +3930,10 @@ void EdytorNc::clipboardTreeViewContextMenu(const QPoint &point)
 
 void EdytorNc::deleteFromClipboardButtonClicked()
 {
-    QStandardItem *item;
-
     QModelIndexList list = ui->clipboardTreeView->selectionModel()->selectedIndexes();
-    QModelIndexList::Iterator it = list.begin();
 
-    while (it != list.end()) {
-        item = clipboardModel->itemFromIndex(*it);
+    for (QModelIndex it : list) {
+        QStandardItem *item = clipboardModel->itemFromIndex(it);
 
         if (item == nullptr) {
             return;
@@ -3987,15 +3942,11 @@ void EdytorNc::deleteFromClipboardButtonClicked()
         ui->clipboardTreeView->setSortingEnabled(false);
         clipboardModel->removeRow(item->row(), clipboardModel->invisibleRootItem()->index());
         ui->clipboardTreeView->setSortingEnabled(true);
-
-        ++it;
     }
 }
 
 void EdytorNc::clipboardSave()
 {
-    QStandardItem *item;
-
     QSettings settings(Medium::instance().settingsDir() + "/clipboard", QSettings::IniFormat);
 
     settings.remove("ClipboardItems");
@@ -4004,7 +3955,7 @@ void EdytorNc::clipboardSave()
     QStandardItem *parentItem = clipboardModel->invisibleRootItem();
 
     for (int i = 0; i < parentItem->rowCount(); i++) {
-        item = parentItem->child(i, 0);
+        QStandardItem *item = parentItem->child(i, 0);
 
         settings.setArrayIndex(i);
         settings.setValue("Title", item->text());
@@ -4018,7 +3969,6 @@ void EdytorNc::clipboardLoad()
 {
     QString itemText;
     QStandardItem *item;
-    QStandardItem *parentItem;
     QFont font;
 
     ui->clipboardTreeView->setSortingEnabled(false);
@@ -4034,7 +3984,7 @@ void EdytorNc::clipboardLoad()
         settings.setArrayIndex(i);
         itemText = settings.value("Title", "").toString();
 
-        parentItem = clipboardModel->invisibleRootItem();
+        QStandardItem *parentItem = clipboardModel->invisibleRootItem();
         item = new QStandardItem(QIcon(":/images/editpaste.png"), itemText);
         item->setEditable(true);
         font = item->font();
