@@ -1976,15 +1976,13 @@ void DiffTextWindowFrame::slotReturnPressed()
 
 void DiffTextWindowFrame::slotBrowseButtonClicked()
 {
-    QString current = d->m_pFileSelection->text();
-    QString *filters = getFilters(m_extensions);
+    const QString &current = d->m_pFileSelection->text();
+    const QString &filters = getFilters(m_extensions);
 
-    QString directory = QFileDialog::getOpenFileName(this, tr("Open file..."), current, *filters);
+    QString directory = QFileDialog::getOpenFileName(this, tr("Open file..."), current, filters);
 
     if (!directory.isEmpty()) {
         DiffTextWindow *pDTW = d->m_pDiffTextWindow;
         emit fileNameChanged(directory, pDTW->d->m_winIdx);
     }
-
-    delete filters;
 }

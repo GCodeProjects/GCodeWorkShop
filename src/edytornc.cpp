@@ -375,15 +375,13 @@ void EdytorNc::open()
     QMdiSubWindow *existing;
 
     existing = 0;
-    QString *filters = getFilters(defaultMdiWindowProperites.extensions);
+    const QString &filters = getFilters(defaultMdiWindowProperites.extensions);
 
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Select one or more files to open"),
                             QDir::currentPath(),
-                            *filters, 0);
-
-    delete filters;
+                            filters, 0);
 
     QStringList list = files;
     QStringList::Iterator it = list.begin();
@@ -443,15 +441,13 @@ void EdytorNc::openExample()
         dir = QApplication::applicationDirPath() + "/" + "EXAMPLES";
     }
 
-    QString *filters = getFilters(defaultMdiWindowProperites.extensions);
+    const QString &filters = getFilters(defaultMdiWindowProperites.extensions);
 
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Select one or more files to open"),
                             dir,
-                            *filters, 0);
-
-    delete filters;
+                            filters, 0);
 
     QStringList list = files;
     QStringList::Iterator it = list.begin();

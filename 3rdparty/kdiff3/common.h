@@ -138,6 +138,6 @@ public:
 
 QStringList safeStringSplit(const QString &s, char sepChar = ',', char metaChar = '\\');
 QString safeStringJoin(const QStringList &sl, char sepChar = ',', char metaChar = '\\');
-QString *getFilters(QStringList extensions);
+QString getFilters(const QStringList& extensions);
 
 #endif // COMMON_H

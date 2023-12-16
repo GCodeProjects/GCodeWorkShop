@@ -205,17 +205,15 @@ static int num(QString &s, int idx)
     return subSection(s, idx, ',').toInt();
 }
 
-QString *getFilters(QStringList extensions)
+QString getFilters(const QStringList &extensions)
 {
-    QString *filters = new (QString);
-
-    *filters = QObject::tr("CNC programs files (");
+    QString filters = QObject::tr("CNC programs files (");
 
     foreach (QString str, extensions) {
-        *filters += str += " ";
+        filters += str += " ";
     }
 
-    *filters += QObject::tr(");;"
+    filters += QObject::tr(");;"
                             "Text files (*.txt);; All files (*.* *)");
 
     return filters;
