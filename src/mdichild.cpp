@@ -167,6 +167,7 @@ bool MdiChild::loadFile(const QString &fileName)
         QString tex = in.readAll();
         ui->textEdit->setPlainText(tex);
         file.close();
+        detectHighligthMode();
         QApplication::restoreOverrideCursor();
 
         setCurrentFile(fileName, tex);
@@ -584,10 +585,6 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
     if (mdiWindowProperites.syntaxH) {
         if (highlighter == nullptr) {
             highlighter = new Highlighter(ui->textEdit->document());
-        }
-
-        if (highlighter != nullptr) {
-            detectHighligthMode();
         }
     } else {
         if (highlighter != nullptr) {

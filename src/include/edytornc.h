@@ -32,6 +32,7 @@
 #include <QToolBar>
 #include <QMainWindow>
 
+#include <documentinfo.h>
 #include <commoninc.h>
 
 class QAction;
@@ -137,7 +138,7 @@ private slots:
     void updateWindowMenu();
     MdiChild *createMdiChild();
     void setActiveSubWindow(QWidget *window);
-    void loadFile(const _editor_properites &options, bool checkAlreadyLoaded = true);
+    void loadFile(const DocumentInfo::Ptr &options, bool checkAlreadyLoaded = true);
     void recentFilesChanged();
     void fileOpenRecent(QAction *act);
     void updateRecentFilesMenu(const QStringList &fileList);
