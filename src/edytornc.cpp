@@ -78,6 +78,7 @@
 #include "findinf.h"        // FindInFiles
 #include "newfiledialog.h"  // newFileDialog
 #include "mdichild.h"       // MdiChild
+#include "recentfiles.h"    // RecentFiles
 #include "sessiondialog.h"  // sessionDialog
 #include "tooltips.h"       // writeTooltipFile()
 #include "ui_edytornc.h"
@@ -147,6 +148,10 @@ EdytorNc::EdytorNc(Medium *medium)
     connect(ui->hideButton, SIGNAL(clicked()), this, SLOT(hidePanel()));
 
     currentProjectModified = false;
+
+    m_recentFiles = new RecentFiles(this);
+    connect(m_recentFiles, SIGNAL(fileListChanged(QStringList)), this, SLOT(updateRecentFilesMenu(QStringList)));
+    connect(m_recentFiles, SIGNAL(saveRequest()), this, SLOT(recentFilesChanged()));
 
     m_addonsActions = new Addons::Actions(this);
     createActions();
@@ -407,7 +412,7 @@ void EdytorNc::open()
                     child->showNormal();
                 }
 
-                updateRecentFiles(*it);
+                m_recentFiles->add(*it);
             } else {
                 child->parentWidget()->close();
             }
@@ -473,7 +478,7 @@ void EdytorNc::openExample()
                     child->showNormal();
                 }
 
-                updateRecentFiles(*it);
+                m_recentFiles->add(*it);
             } else {
                 child->parentWidget()->close();
             }
@@ -1680,6 +1685,7 @@ void EdytorNc::createMenus()
     fileMenu->addSeparator();
     recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
     recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
+    connect(recentFileMenu, SIGNAL(triggered(QAction *)), this, SLOT(fileOpenRecent(QAction *)));
     fileMenu->addSeparator();
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
@@ -1991,8 +1997,7 @@ void EdytorNc::readSettings()
     defaultMdiWindowProperites.calcBinary = settings.value("CalcBinary",
                                             defaultMdiWindowProperites.calcBinary).toString();
 
-    m_recentFiles = settings.value("RecentFiles").toStringList();
-    updateRecentFilesMenu();
+    m_recentFiles->load(&settings);
 
     //defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
 
@@ -2103,7 +2108,6 @@ void EdytorNc::writeSettings()
     settings.setValue("ChangeDateInComment", defaultMdiWindowProperites.changeDateInComment);
 
     settings.setValue("FileDialogState", fileDialogState);
-    settings.setValue("RecentFiles", m_recentFiles);
 
     settings.setValue("SerialToolbarShown", (!serialToolBar.isNull()));
 
@@ -2234,17 +2238,9 @@ void EdytorNc::loadFile(const _editor_properites &options, bool checkAlreadyLoad
     }
 }
 
-void EdytorNc::updateRecentFiles(const QString &filename)
+void EdytorNc::recentFilesChanged()
 {
-    m_recentFiles.prepend(filename);
-
-    if (m_recentFiles.size() > MAX_RECENTFILES) {
-        m_recentFiles.removeLast();
-    }
-
-    m_recentFiles.removeDuplicates();
-
-    updateRecentFilesMenu();
+    m_recentFiles->save(Medium::instance().settings());
 }
 
 void EdytorNc::fileOpenRecent(QAction *act)
@@ -2253,25 +2249,19 @@ void EdytorNc::fileOpenRecent(QAction *act)
     defaultMdiWindowProperites.geometry = QByteArray();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.editorToolTips = true;
-    defaultMdiWindowProperites.fileName = m_recentFiles[act->data().toInt()];
+    defaultMdiWindowProperites.fileName = act->data().toString();
     defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(
                 defaultMdiWindowProperites.fileName).canonicalPath());
     loadFile(defaultMdiWindowProperites);
 }
 
-void EdytorNc::updateRecentFilesMenu()
+void EdytorNc::updateRecentFilesMenu(const QStringList &fileList)
 {
-    QAction *newAc;
-
     recentFileMenu->clear();
 
-    for (int i = 0; i < MAX_RECENTFILES; ++i) {
-        if (i < int(m_recentFiles.size())) {
-            newAc = recentFileMenu->addAction(QIcon(":/images/document-open-recent.png"),
-                                              QString("&%1 - %2").arg(i + 1).arg(QDir::toNativeSeparators(m_recentFiles[i])));
-            connect(recentFileMenu, SIGNAL(triggered(QAction *)), this, SLOT(fileOpenRecent(QAction *)));
-            newAc->setData(i);
-        }
+    for (const QString &file : fileList) {
+        QAction *newAc = recentFileMenu->addAction(QIcon(":/images/document-open-recent.png"), file);
+        newAc->setData(file);
     }
 }
 
@@ -2292,7 +2282,7 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
         MdiChild *child = createMdiChild();
         child->newFile();
         child->loadFile(fileName);
-        updateRecentFiles(fileName);
+        m_recentFiles->add(fileName);
         //defaultMdiWindowProperites.maximized = false;
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;

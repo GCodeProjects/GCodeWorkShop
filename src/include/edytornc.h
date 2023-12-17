@@ -63,6 +63,7 @@ class FindInFiles;
 class KDiff3App;
 class MdiChild;
 class Medium;
+class RecentFiles;
 
 namespace Addons {
 class Actions;
@@ -107,8 +108,6 @@ public:
     void openFile(const QString &fileName);
     void diffTwoFiles(const QString &filename1, const QString &filename2);
 
-    enum { MAX_RECENTFILES = 16 };
-
 public slots:
     void messReceived(const QString &text = "");
     MdiChild *newFile();
@@ -139,9 +138,9 @@ private slots:
     MdiChild *createMdiChild();
     void setActiveSubWindow(QWidget *window);
     void loadFile(const _editor_properites &options, bool checkAlreadyLoaded = true);
-    void updateRecentFiles(const QString &filename);
+    void recentFilesChanged();
     void fileOpenRecent(QAction *act);
-    void updateRecentFilesMenu();
+    void updateRecentFilesMenu(const QStringList &fileList);
     void activeWindowChanged(QMdiSubWindow *window);
     void deleteText();
     void findInFl();
@@ -254,7 +253,7 @@ private:
     QString currentProjectName;
 
     QSignalMapper *windowMapper;
-    QStringList m_recentFiles;
+    RecentFiles *m_recentFiles;
 
     QMenu *fileMenu;
     QMenu *recentFileMenu;

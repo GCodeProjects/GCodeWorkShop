@@ -28,6 +28,7 @@ HEADERS += \
     findinf.h \
     highlighter.h \
     newfiledialog.h \
+    recentfiles.h \
     sessiondialog.h \
     setupdialog.h \
     tooltips.h
@@ -39,6 +40,7 @@ SOURCES += \
     main.cpp \
     mdichild.cpp \
     newfiledialog.cpp \
+    recentfiles.cpp \
     sessiondialog.cpp \
     setupdialog.cpp \
     src/utils/expressionparser.cpp \
