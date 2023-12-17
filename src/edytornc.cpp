@@ -347,57 +347,30 @@ MdiChild *EdytorNc::newFile()
 //
 //**************************************************************************************************
 
-void EdytorNc::open()
+void EdytorNc::open(const QDir &dir)
 {
-    QFileInfo file;
-    QMdiSubWindow *existing;
-
-    existing = 0;
     const QString &filters = getFilters(defaultMdiWindowProperites.extensions);
 
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Select one or more files to open"),
-                            QDir::currentPath(),
+                            dir.canonicalPath(),
                             filters, 0);
 
-    QStringList list = files;
-    QStringList::Iterator it = list.begin();
-
-    while (it != list.end()) {
-        file.setFile(*it);
-        existing = findMdiChild(*it);
-
-        if ((file.exists()) && (file.isReadable()) && !existing) {
-            QDir::setCurrent(file.absolutePath());
-            fileTreeViewChangeRootDir();
-            MdiChild *child = createMdiChild();
-
-            if (child->loadFile(*it)) {
-                child->setHighligthMode(defaultHighlightMode(*it));
-                m_recentFiles->add(*it);
-            } else {
-                child->parentWidget()->close();
-            }
-        }
-
-        ++it;
+    for (const QString &fileName : files) {
+        openFile(fileName);
     }
+}
 
-    if (existing) {
-        ui->mdiArea->setActiveSubWindow(existing);
-    }
-
+void EdytorNc::open()
+{
+    open(QDir::currentPath());
     statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
 void EdytorNc::openExample()
 {
-    QFileInfo file;
-    QMdiSubWindow *existing;
     QString dir;
-
-    existing = 0;
 
     // TODO: change a path to the files
     if (QDir(EXAMPLES_PATH).exists()) {
@@ -406,63 +379,17 @@ void EdytorNc::openExample()
         dir = QApplication::applicationDirPath() + "/" + "EXAMPLES";
     }
 
-    const QString &filters = getFilters(defaultMdiWindowProperites.extensions);
-
-    QStringList files = QFileDialog::getOpenFileNames(
-                            this,
-                            tr("Select one or more files to open"),
-                            dir,
-                            filters, 0);
-
-    QStringList list = files;
-    QStringList::Iterator it = list.begin();
-
-    while (it != list.end()) {
-        file.setFile(*it);
-        existing = findMdiChild(*it);
-
-        if ((file.exists()) && (file.isReadable()) && !existing) {
-            QDir::setCurrent(file.absolutePath());
-            fileTreeViewChangeRootDir();
-            MdiChild *child = createMdiChild();
-
-            if (child->loadFile(*it)) {
-                child->setHighligthMode(defaultHighlightMode(*it));
-                m_recentFiles->add(*it);
-            } else {
-                child->parentWidget()->close();
-            }
-        }
-
-        ++it;
-    }
-
-    if (existing) {
-        ui->mdiArea->setActiveSubWindow(existing);
-    }
-
+    open(dir);
     statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
 void EdytorNc::openFile(const QString &fileName)
 {
-    QFileInfo file;
-
-    file.setFile(fileName);
-
-    QMdiSubWindow *existing = findMdiChild(fileName);
-
-    if ((file.exists()) && (file.isReadable()) && !existing) {
-        QDir::setCurrent(file.absolutePath());
-        fileTreeViewChangeRootDir();
-        MdiChild *child = createMdiChild();
-
-        if (child->loadFile(fileName)) {
-            child->setHighligthMode(defaultHighlightMode(child->filePath()));
-        } else {
-            child->parentWidget()->close();
-        }
-    }
+    GCoderInfo *info = new GCoderInfo();
+    info->filePath = fileName;
+    info->readOnly = defaultMdiWindowProperites.defaultReadOnly;
+    info->highlightMode = defaultHighlightMode(QFileInfo(fileName).absolutePath());
+    loadFile(DocumentInfo::Ptr(info), true);
 }
 
 void EdytorNc::save()
@@ -2155,11 +2082,7 @@ void EdytorNc::recentFilesChanged()
 
 void EdytorNc::fileOpenRecent(QAction *act)
 {
-    GCoderInfo *info = new GCoderInfo();
-    info->filePath = act->data().toString();
-    info->highlightMode = defaultHighlightMode(QFileInfo(info->filePath).canonicalPath());
-    info->readOnly = defaultMdiWindowProperites.defaultReadOnly;
-    loadFile(DocumentInfo::Ptr(info));
+    openFile(act->data().toString());
 }
 
 void EdytorNc::updateRecentFilesMenu(const QStringList &fileList)
@@ -2174,24 +2097,7 @@ void EdytorNc::updateRecentFilesMenu(const QStringList &fileList)
 
 void EdytorNc::loadFoundedFile(const QString &fileName)
 {
-    QFileInfo file;
-
-    QMdiSubWindow *existing = findMdiChild(fileName);
-
-    if (existing) {
-        ui->mdiArea->setActiveSubWindow(existing);
-        return;
-    }
-
-    file.setFile(fileName);
-
-    if ((file.exists()) && (file.isReadable())) {
-        MdiChild *child = createMdiChild();
-        child->newFile();
-        child->loadFile(fileName);
-        m_recentFiles->add(fileName);
-        child->setHighligthMode(defaultHighlightMode(child->filePath()));
-    }
+    openFile(fileName);
 }
 
 void EdytorNc::messReceived(const QString &text)
@@ -2883,14 +2789,7 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex &index)
 
     if ((file.exists()) && (file.isReadable())) {
         if (defaultMdiWindowProperites.extensions.contains("*." + file.suffix())) {
-            GCoderInfo *info = new GCoderInfo();
-            info->filePath = file.canonicalFilePath();
-            info->readOnly = defaultMdiWindowProperites.defaultReadOnly;
-            info->geometry = QByteArray();
-            info->cursorPos = 0;
-            info->highlightMode =  defaultHighlightMode(QFileInfo(info->filePath).canonicalPath());
-            defaultMdiWindowProperites.editorToolTips = true;
-            loadFile(DocumentInfo::Ptr(info));
+            openFile(file.canonicalFilePath());
         } else {
             QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
         }
@@ -2925,14 +2824,7 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex &index)
 
             fileTreeViewChangeRootDir(path);
         } else if (defaultMdiWindowProperites.extensions.contains("*." + file.suffix())) {
-            GCoderInfo *info = new GCoderInfo();
-            info->filePath = file.absoluteFilePath();
-            info->readOnly = defaultMdiWindowProperites.defaultReadOnly;
-            info->geometry = QByteArray();
-            info->cursorPos = 0;
-            defaultMdiWindowProperites.editorToolTips = true;
-            info->highlightMode =  defaultHighlightMode(QFileInfo(info->filePath).canonicalPath());
-            loadFile(DocumentInfo::Ptr(info));
+            openFile(file.canonicalFilePath());
         } else {
             QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
         }

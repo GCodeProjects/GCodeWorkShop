@@ -40,6 +40,7 @@ class QCheckBox;
 class QClipboard;
 class QCloseEvent;
 class QComboBox;
+class QDir;
 class QEvent;
 class QFileSystemModel;
 class QLabel;
@@ -120,6 +121,7 @@ protected:
 
 private slots:
     MdiChild *newFileFromTemplate();
+    void open(const QDir &dir);
     void open();
     void openExample();
     void save();
