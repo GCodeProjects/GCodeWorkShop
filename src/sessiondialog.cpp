@@ -20,33 +20,27 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QByteArray>
-#include <QSettings>
-#include <QList>
-#include <QListWidgetItem>
-#include <QString>
-#include <QStringList>
-#include <Qt>              // Qt::WindowFlags
-#include <QWidget>
+#include <QCheckBox>        // for QCheckBox
+#include <QList>            // for QList
+#include <QListWidget>      // for QListWidget
+#include <QListWidgetItem>  // for QListWidgetItem
+#include <QPushButton>      // for QPushButton
+#include <QString>          // for QString
+#include <QStringList>      // for QStringList
+#include <Qt>               // for Dialog, WindowFlags
+class QWidget;
 
 #include "sessiondialog.h"
-#include "sessionnamedialog.h"
+#include "sessionmanager.h"     // for SessionManager
+#include "sessionnamedialog.h"  // for SessionNameDialog
 
 
-SessionDialog::SessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SessionDialog::SessionDialog(QWidget *parent, SessionManager *sessions) : QDialog(parent, Qt::Dialog)
 {
+    m_sessions = sessions;
     setupUi(this);
     setWindowTitle(tr("Session manager"));
     setModal(true);
-
-    //clonePushButton->setVisible(false);
-    //restoreCheckBox->setVisible(false);
-
-    QSettings settings("EdytorNC", "EdytorNC");
-    settings.beginGroup("Sessions");
-
-    restoreCheckBox->setChecked(settings.value("RestoreLastSession", false).toBool());
-    settings.endGroup();
 
     connect(newPushButton, SIGNAL(clicked()), this, SLOT(newButtonClicked()));
     connect(renamePushButton, SIGNAL(clicked()), this, SLOT(renameButtonClicked()));
@@ -54,18 +48,15 @@ SessionDialog::SessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(paren
     connect(deletePushButton, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
     connect(switchPushButton, SIGNAL(clicked()), this, SLOT(switchButtonClicked()));
 
-    connect(sessionListWidget, SIGNAL(itemActivated(QListWidgetItem *)), this,
-            SLOT(sessionListItemitemActivated(QListWidgetItem *)));
+    connect(sessionListWidget, SIGNAL(itemSelectionChanged()), this,
+            SLOT(sessionListItemSelectionChanged()));
 
+    connect(m_sessions, SIGNAL(sessionListChanged(QStringList)), this, SLOT(updateSessionList(QStringList)));
+    updateSessionList(m_sessions->sessionList());
 }
 
 SessionDialog::~SessionDialog()
 {
-    QSettings settings("EdytorNC", "EdytorNC");
-    settings.beginGroup("Sessions");
-
-    settings.setValue("RestoreLastSession", restoreCheckBox->isChecked());
-    settings.endGroup();
 }
 
 void SessionDialog::newButtonClicked()
@@ -78,8 +69,7 @@ void SessionDialog::newButtonClicked()
         QString tx = newSesDialog->getName().simplified();
 
         if (!tx.isEmpty()) {
-            sessionListWidget->insertItem(sessionListWidget->count(), tx);
-            sessionListWidget->item(sessionListWidget->count() - 1)->setCheckState(Qt::Unchecked);
+            m_sessions->addSession(tx);
         }
     }
 
@@ -89,11 +79,6 @@ void SessionDialog::newButtonClicked()
 void SessionDialog::renameButtonClicked()
 {
     QString currName = sessionListWidget->currentItem()->text();
-
-    if (currName == tr("default")) {
-        return;
-    }
-
     SessionNameDialog *newSesDialog = new SessionNameDialog(this);
     newSesDialog->setName(currName);
     int result = newSesDialog->exec();
@@ -102,8 +87,7 @@ void SessionDialog::renameButtonClicked()
         QString newName = newSesDialog->getName().simplified();
 
         if (!newName.isEmpty()) {
-            sessionListWidget->currentItem()->setText(newName);
-            copySession(currName, newName, true);
+            m_sessions->renameSession(currName, newName);
         }
     }
 
@@ -121,9 +105,7 @@ void SessionDialog::cloneButtonClicked()
         QString newName = newSesDialog->getName().simplified();
 
         if (!newName.isEmpty()) {
-            sessionListWidget->insertItem(sessionListWidget->count(), newName);
-            sessionListWidget->item(sessionListWidget->count() - 1)->setCheckState(Qt::Unchecked);
-            copySession(currName, newName, false);
+            m_sessions->copySession(currName, newName);
         }
     }
 
@@ -132,24 +114,21 @@ void SessionDialog::cloneButtonClicked()
 
 void SessionDialog::deleteButtonClicked()
 {
-    if (sessionListWidget->currentItem()->text() != tr("default")) {
-        deleteSession(sessionListWidget->selectedItems().at(0)->text());
-        qDeleteAll(sessionListWidget->selectedItems());
-        switchButtonClicked();
+    const QList<QListWidgetItem *> &selected = sessionListWidget->selectedItems();
+
+    if (!selected.isEmpty()) {
+        m_sessions->removeSession(selected.at(0)->text());
     }
 }
 
 void SessionDialog::switchButtonClicked()
 {
-    clearChecked();
-    sessionListWidget->currentItem()->setCheckState(Qt::Checked);
+    m_sessions->setCurrentSession(sessionListWidget->currentItem()->text());
     accept();
 }
 
-void SessionDialog::sessionListItemitemActivated(QListWidgetItem *item)
+void SessionDialog::sessionListItemSelectionChanged()
 {
-    Q_UNUSED(item);
-
     bool hasSelection = sessionListWidget->selectedItems().size() == 1;
     deletePushButton->setEnabled(hasSelection);
     renamePushButton->setEnabled(hasSelection);
@@ -157,108 +136,8 @@ void SessionDialog::sessionListItemitemActivated(QListWidgetItem *item)
     switchPushButton->setEnabled(hasSelection);
 }
 
-void SessionDialog::setSessionList(QStringList list)
+void SessionDialog::updateSessionList(const QStringList &list)
 {
-    list.removeDuplicates();
-    list.sort();
+    sessionListWidget->clear();
     sessionListWidget->addItems(list);
-    clearChecked();
-}
-
-QStringList SessionDialog::sessionList()
-{
-    QStringList sessionList;
-
-    for (int i = 0; i < sessionListWidget->count(); i++) {
-        sessionList.append(sessionListWidget->item(i)->text());
-        sessionList.removeDuplicates();
-        sessionList.sort();
-    }
-
-    return sessionList;
-}
-
-void SessionDialog::setSelectedSession(QString name)
-{
-    QList<QListWidgetItem *> items = sessionListWidget->findItems(name, Qt::MatchExactly);
-
-    if (items.size() > 0) {
-        items.at(0)->setCheckState(Qt::Checked);
-        sessionListWidget->setCurrentItem(items.at(0));
-    }
-}
-
-QString SessionDialog::selectedSession()
-{
-    QString name;
-
-    for (int i = 0; i < sessionListWidget->count(); i++) {
-        if (sessionListWidget->item(i)->checkState() == Qt::Checked) {
-            name = sessionListWidget->item(i)->text();
-            break;
-        }
-    }
-
-    return name;
-}
-
-void SessionDialog::clearChecked()
-{
-    for (int i = 0; i < sessionListWidget->count(); i++) {
-        sessionListWidget->item(i)->setCheckState(Qt::Unchecked);
-    }
-}
-
-void SessionDialog::copySession(QString oldName, QString newName, bool deleteOld)
-{
-    int cursorPos;
-    bool readOnly;
-    QByteArray geometry;
-    QString fileName;
-    int highlightMode;
-    bool maximized;
-
-    QSettings settings("EdytorNC", "EdytorNC");
-    settings.beginGroup("Sessions");
-
-    int max = settings.beginReadArray(oldName);
-    settings.endArray();
-
-    for (int i = 0; i < max; ++i) {
-        // read
-        settings.beginReadArray(oldName);
-        settings.setArrayIndex(i);
-        fileName = settings.value("OpenedFile").toString();
-        cursorPos = settings.value("Cursor", 1).toInt();
-        readOnly = settings.value("ReadOnly", false).toBool();
-        geometry = settings.value("Geometry", QByteArray()).toByteArray();
-        highlightMode = settings.value("HighlightMode", 0).toInt();
-        maximized = settings.value("MaximizedMdi", true).toBool();
-        settings.endArray();
-
-        // write new
-        settings.beginWriteArray(newName);
-        settings.setArrayIndex(i);
-        settings.setValue("OpenedFile", fileName);
-        settings.setValue("Cursor", cursorPos);
-        settings.setValue("ReadOnly", readOnly);
-        settings.setValue("Geometry", geometry);
-        settings.setValue("HighlightMode", highlightMode);
-        settings.setValue("MaximizedMdi", maximized);
-        settings.endArray();
-    }
-
-    if (deleteOld) {
-        settings.remove(oldName);
-    }
-
-    settings.endGroup();
-}
-
-void SessionDialog::deleteSession(QString name)
-{
-    QSettings settings("EdytorNC", "EdytorNC");
-    settings.beginGroup("Sessions");
-    settings.remove(name);
-    settings.endGroup();
 }

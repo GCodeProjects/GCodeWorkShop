@@ -117,13 +117,6 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="restoreCheckBox">
-     <property name="text">
-      <string>Restore last session on startup</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

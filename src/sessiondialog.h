@@ -23,21 +23,15 @@
 #ifndef SESSIONDIALOG_H
 #define SESSIONDIALOG_H
 
-#include <QDialog>
-#include <QObject>  // Q_OBJECT
-#include <QString>
-#include <Qt>       // Qt::WindowFlags
-#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
-#include <QWidget>
+#include <QDialog>      // for QDialog
+#include <QObject>      // for Q_OBJECT, slots
+#include <QString>      // for QString
+#include <QStringList>  // for QStringList
+class QWidget;
 
-#include "ui_sessiondialog.h"
+class SessionManager;
 
-class QListWidgetItem;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    class QStringList;
-#else
-    using QStringList = QList<QString>;
-#endif
+#include "ui_sessiondialog.h"  // for SessionDialog
 
 
 class SessionDialog: public QDialog, private Ui::SessionDialog
@@ -45,26 +39,20 @@ class SessionDialog: public QDialog, private Ui::SessionDialog
     Q_OBJECT
 
 public:
-    SessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    explicit SessionDialog(QWidget *parent, SessionManager *sessions);
     ~SessionDialog();
 
-    void setSelectedSession(QString name);
-    QString selectedSession();
-    QStringList sessionList();
-    void setSessionList(QStringList list);
-
 private slots:
+    void updateSessionList(const QStringList &list);
     void newButtonClicked();
     void renameButtonClicked();
     void deleteButtonClicked();
     void cloneButtonClicked();
     void switchButtonClicked();
-    void sessionListItemitemActivated(QListWidgetItem *item);
+    void sessionListItemSelectionChanged();
 
 private:
-    void clearChecked();
-    void copySession(QString oldName, QString newName, bool deleteOld = false);
-    void deleteSession(QString name);
+    SessionManager *m_sessions;
 };
 
 #endif // SESSIONDIALOG_H

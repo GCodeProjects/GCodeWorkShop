@@ -33,6 +33,7 @@ HEADERS += \
     newfiledialog.h \
     recentfiles.h \
     sessiondialog.h \
+    sessionmanager.h \
     sessionnamedialog.h \
     setupdialog.h \
     tooltips.h
@@ -48,6 +49,7 @@ SOURCES += \
     newfiledialog.cpp \
     recentfiles.cpp \
     sessiondialog.cpp \
+    sessionmanager.cpp \
     sessionnamedialog.cpp \
     setupdialog.cpp \
     src/utils/expressionparser.cpp \

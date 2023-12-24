@@ -66,6 +66,7 @@ class KDiff3App;
 class MdiChild;
 class Medium;
 class RecentFiles;
+class SessionManager;
 
 namespace Addons {
 class Actions;
@@ -197,8 +198,12 @@ private slots:
     void closeCurrentWindow();
     void closeAllMdiWindows();
     void goToLine(const QString &fileName, int line);
+    void updateSessionMenus(const QStringList &sessionList);
+    void sessionsChanged();
     void changeSession(QAction *action);
-    void sessionMgr();
+    void beforeCurrentSessionChanged();
+    void currentSessionChanged();
+    void showSessionDialog();
     void fileChanged(const QString &fileName);
     void tileSubWindowsVertycally();
     void clipboardChanged();
@@ -228,16 +233,14 @@ private:
     void fileTreeViewChangeRootDir(const QString &path);
     QMdiSubWindow *findMdiChild(const QString &fileName);
     void createDiffApp();
-    void updateSessionMenus();
-    void loadSession(const QString &name);
-    void saveSession(const QString &name);
+    void openFilesFromSession();
+    void storeFileInfoInSession();
     void savePrinterSettings(QPrinter *printer);
     void loadPrinterSettings(QPrinter *printer);
     void clipboardSave();
     void clipboardLoad();
 
-    QStringList sessionList;
-    QString currentSession;
+    SessionManager *m_sessionManager;
 
     bool m_MdiWidgetsMaximized;
     _editor_properites defaultMdiWindowProperites;
