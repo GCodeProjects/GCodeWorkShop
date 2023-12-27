@@ -15,6 +15,7 @@ INCLUDEPATH += include
 #######################################
 
 HEADERS += \
+    include/documentinfo.h \
     include/edytornc.h \
     include/mdichild.h \
     include/utils/expressionparser.h \
@@ -26,6 +27,8 @@ HEADERS += \
 
 HEADERS += \
     findinf.h \
+    gcoder.h \
+    gcoderinfo.h \
     highlighter.h \
     newfiledialog.h \
     recentfiles.h \
@@ -34,8 +37,10 @@ HEADERS += \
     tooltips.h
 
 SOURCES += \
+    documentinfo.cpp \
     edytornc.cpp \
     findinf.cpp \
+    gcoderinfo.cpp \
     highlighter.cpp \
     main.cpp \
     mdichild.cpp \
