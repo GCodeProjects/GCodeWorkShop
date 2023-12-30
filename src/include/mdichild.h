@@ -33,6 +33,8 @@
 #include <QTextEdit> // QTextEdit::ExtraSelection
 #include <QWidget>
 
+#include <documentinfo.h>
+
 #include "commoninc.h" // _editor_properites
 
 class QLineEdit;
@@ -65,6 +67,8 @@ public:
     bool saveAs();
     bool saveFile(const QString &fileName);
     QString currentFile();  //filename with full path
+    DocumentInfo::Ptr documentInfo() const;
+    void setDocumentInfo(const DocumentInfo::Ptr &info);
     _editor_properites getMdiWindowProperites();
     void setMdiWindowProperites(_editor_properites opt);
     void highlightFindText(const QString& searchString,
@@ -75,7 +79,7 @@ public:
     QString filePath();
     QString fileName();
     void setHighligthMode(int mod);
-    int highligthMode();
+    int highligthMode() const;
     void doDiff();
     QString currentFileInfo(); // Text from first comment in CNC program
     QString guessFileName();
@@ -90,7 +94,8 @@ public:
     void filePrintPreview();
     bool isModified();
     void setModified(bool mod = false);
-    bool isReadOnly();
+    bool isReadOnly() const;
+    void setReadOnly(bool ro);
     bool hasSelection();
     bool isUndoAvailable();
     bool isRedoAvailable();

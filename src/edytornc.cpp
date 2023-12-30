@@ -20,6 +20,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <typeinfo> // for bad_cast
+
 #include <QAction>
 #include <QActionGroup>
 #include <QCheckBox>
@@ -75,6 +77,7 @@
 
 #include "setupdialog.h"    // SetupDialog
 #include "edytornc.h"       // EdytorNc QObject QMainWindow
+#include "gcoderinfo.h"     // GCoderInfo
 #include "findinf.h"        // FindInFiles
 #include "newfiledialog.h"  // newFileDialog
 #include "mdichild.h"       // MdiChild
@@ -853,9 +856,6 @@ void EdytorNc::selAll()
 
 void EdytorNc::config()
 {
-    _editor_properites opt;
-    MdiChild *mdiChild;
-
     SetupDialog *setUpDialog = new SetupDialog(this, &defaultMdiWindowProperites);
 
     if (setUpDialog->exec() == QDialog::Accepted) {
@@ -876,33 +876,14 @@ void EdytorNc::config()
         }
 
         foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
-            mdiChild = qobject_cast<MdiChild *>(window->widget());
-            opt = mdiChild->getMdiWindowProperites();
-
-            opt.fontName = defaultMdiWindowProperites.fontName;
-            opt.fontSize = defaultMdiWindowProperites.fontSize;
-            opt.syntaxH = defaultMdiWindowProperites.syntaxH;
-            opt.hColors = defaultMdiWindowProperites.hColors;
-            opt.intCapsLock = defaultMdiWindowProperites.intCapsLock;
-            opt.lineColor = defaultMdiWindowProperites.lineColor;
-            opt.underlineColor = defaultMdiWindowProperites.underlineColor;
-            opt.underlineChanges = defaultMdiWindowProperites.underlineChanges;
-            opt.clearUnderlineHistory = defaultMdiWindowProperites.clearUnderlineHistory;
-            opt.clearUndoHistory = defaultMdiWindowProperites.clearUndoHistory;
-            opt.editorToolTips = defaultMdiWindowProperites.editorToolTips;
-            opt.windowMode = defaultMdiWindowProperites.windowMode;
-            opt.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-            opt.changeDateInComment = defaultMdiWindowProperites.changeDateInComment;
-
-            opt.saveExtension = defaultMdiWindowProperites.saveExtension;
-            opt.saveDirectory = defaultMdiWindowProperites.saveDirectory;
-            opt.extensions = defaultMdiWindowProperites.extensions;
+            MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
 
             if (dirModel != nullptr) {
                 dirModel->setNameFilters(defaultMdiWindowProperites.extensions);
             }
 
-            mdiChild->setMdiWindowProperites(opt);
+            mdiChild->setReadOnly(defaultMdiWindowProperites.defaultReadOnly);
+            mdiChild->setMdiWindowProperites(defaultMdiWindowProperites);
         }
     }
 
@@ -3525,17 +3506,20 @@ void EdytorNc::saveSession(const QString &name)
 
     foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
         MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-        _editor_properites Opt = mdiChild->getMdiWindowProperites();
 
-        settings.setArrayIndex(i);
-        settings.setValue("OpenedFile", Opt.fileName);
-        settings.setValue("Cursor", Opt.cursorPos);
-        settings.setValue("ReadOnly", Opt.readOnly);
-        settings.setValue("Geometry", mdiChild->parentWidget()->saveGeometry());
-//        settings.setValue("HighlightMode", m_highlightMode);
-        settings.setValue("MaximizedMdi", m_MdiWidgetsMaximized);
+        try {
+            const GCoderInfo &info = dynamic_cast<const GCoderInfo &>(*mdiChild->documentInfo());
+            settings.setArrayIndex(i);
+            settings.setValue("OpenedFile", info.filePath);
+            settings.setValue("Cursor", info.cursorPos);
+            settings.setValue("ReadOnly", info.readOnly);
+            settings.setValue("Geometry", info.geometry);
+            settings.setValue("HighlightMode", info.highlightMode);
+            settings.setValue("MaximizedMdi", m_MdiWidgetsMaximized);
 
-        i++;
+            i++;
+        }  catch (std::bad_cast &e) {
+        }
     }
 
     settings.endArray();
