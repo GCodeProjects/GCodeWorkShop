@@ -20,51 +20,35 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef SESSIONDIALOG_H
-#define SESSIONDIALOG_H
+#include <QDialogButtonBox> // for QDialogButtonBox
+#include <QLineEdit>        // for QLineEdit
+#include <QString>          // for QString
+#include <Qt>               // for WindowFlags
+class QWidget;
 
-#include <QDialog>
-#include <QObject>  // Q_OBJECT
-#include <QString>
-#include <Qt>       // Qt::WindowFlags
-#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
-#include <QWidget>
-
-#include "ui_sessiondialog.h"
-
-class QListWidgetItem;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    class QStringList;
-#else
-    using QStringList = QList<QString>;
-#endif
+#include "sessionnamedialog.h"
 
 
-class SessionDialog: public QDialog, private Ui::SessionDialog
+SessionNameDialog::SessionNameDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
-    Q_OBJECT
+    setupUi(this);
+    setWindowTitle(tr("New session..."));
+    setModal(true);
 
-public:
-    SessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-    ~SessionDialog();
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+}
 
-    void setSelectedSession(QString name);
-    QString selectedSession();
-    QStringList sessionList();
-    void setSessionList(QStringList list);
+SessionNameDialog::~SessionNameDialog()
+{
+}
 
-private slots:
-    void newButtonClicked();
-    void renameButtonClicked();
-    void deleteButtonClicked();
-    void cloneButtonClicked();
-    void switchButtonClicked();
-    void sessionListItemitemActivated(QListWidgetItem *item);
+QString SessionNameDialog::getName()
+{
+    return lineEdit->text();
+}
 
-private:
-    void clearChecked();
-    void copySession(QString oldName, QString newName, bool deleteOld = false);
-    void deleteSession(QString name);
-};
-
-#endif // SESSIONDIALOG_H
+void SessionNameDialog::setName(QString name)
+{
+    lineEdit->setText(name);
+}

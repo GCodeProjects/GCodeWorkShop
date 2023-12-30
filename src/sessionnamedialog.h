@@ -20,51 +20,30 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef SESSIONDIALOG_H
-#define SESSIONDIALOG_H
+#ifndef SESSIONNAMEDIALOG_H
+#define SESSIONNAMEDIALOG_H
 
-#include <QDialog>
-#include <QObject>  // Q_OBJECT
-#include <QString>
-#include <Qt>       // Qt::WindowFlags
-#include <QtGlobal> // QT_VERSION QT_VERSION_CHECK
-#include <QWidget>
+#include <QDialog>  // for QDialog
+#include <QObject>  // for Q_OBJECT, slots
+#include <QString>  // for QString
+#include <Qt>       // for WindowFlags, Dialog
 
-#include "ui_sessiondialog.h"
+#include "ui_sessionnamedialog.h"  // for Ui::SessionNameDialog
 
-class QListWidgetItem;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    class QStringList;
-#else
-    using QStringList = QList<QString>;
-#endif
+class QWidget;
 
 
-class SessionDialog: public QDialog, private Ui::SessionDialog
+class SessionNameDialog: public QDialog, private Ui::SessionNameDialog
 {
     Q_OBJECT
 
 public:
-    SessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-    ~SessionDialog();
+    SessionNameDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ~SessionNameDialog();
 
-    void setSelectedSession(QString name);
-    QString selectedSession();
-    QStringList sessionList();
-    void setSessionList(QStringList list);
-
-private slots:
-    void newButtonClicked();
-    void renameButtonClicked();
-    void deleteButtonClicked();
-    void cloneButtonClicked();
-    void switchButtonClicked();
-    void sessionListItemitemActivated(QListWidgetItem *item);
-
-private:
-    void clearChecked();
-    void copySession(QString oldName, QString newName, bool deleteOld = false);
-    void deleteSession(QString name);
+public slots:
+    QString getName();
+    void setName(QString name);
 };
 
-#endif // SESSIONDIALOG_H
+#endif // SESSIONNAMEDIALOG_H

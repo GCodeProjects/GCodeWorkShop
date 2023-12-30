@@ -29,7 +29,8 @@
 #include <Qt>              // Qt::WindowFlags
 #include <QWidget>
 
-#include "sessiondialog.h" // newSessionDialog sessionDialog QObject QDialog
+#include "sessiondialog.h"
+#include "sessionnamedialog.h"
 
 
 SessionDialog::SessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
@@ -260,29 +261,4 @@ void SessionDialog::deleteSession(QString name)
     settings.beginGroup("Sessions");
     settings.remove(name);
     settings.endGroup();
-}
-
-SessionNameDialog::SessionNameDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
-{
-    setupUi(this);
-    //setAttribute(Qt::WA_DeleteOnClose);
-    setWindowTitle(tr("New session..."));
-    setModal(true);
-
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-}
-
-SessionNameDialog::~SessionNameDialog()
-{
-}
-
-QString SessionNameDialog::getName()
-{
-    return lineEdit->text();
-}
-
-void SessionNameDialog::setName(QString name)
-{
-    lineEdit->setText(name);
 }
