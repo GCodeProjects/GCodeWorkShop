@@ -32,7 +32,7 @@
 #include "sessiondialog.h" // newSessionDialog sessionDialog QObject QDialog
 
 
-sessionDialog::sessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SessionDialog::SessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
     setupUi(this);
     setWindowTitle(tr("Session manager"));
@@ -58,7 +58,7 @@ sessionDialog::sessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(paren
 
 }
 
-sessionDialog::~sessionDialog()
+SessionDialog::~SessionDialog()
 {
     QSettings settings("EdytorNC", "EdytorNC");
     settings.beginGroup("Sessions");
@@ -67,9 +67,9 @@ sessionDialog::~sessionDialog()
     settings.endGroup();
 }
 
-void sessionDialog::newButtonClicked()
+void SessionDialog::newButtonClicked()
 {
-    newSessionDialog *newSesDialog = new newSessionDialog(this);
+    SessionNameDialog *newSesDialog = new SessionNameDialog(this);
     newSesDialog->setName("");
     int result = newSesDialog->exec();
 
@@ -85,7 +85,7 @@ void sessionDialog::newButtonClicked()
     delete newSesDialog;
 }
 
-void sessionDialog::renameButtonClicked()
+void SessionDialog::renameButtonClicked()
 {
     QString currName = sessionListWidget->currentItem()->text();
 
@@ -93,7 +93,7 @@ void sessionDialog::renameButtonClicked()
         return;
     }
 
-    newSessionDialog *newSesDialog = new newSessionDialog(this);
+    SessionNameDialog *newSesDialog = new SessionNameDialog(this);
     newSesDialog->setName(currName);
     int result = newSesDialog->exec();
 
@@ -109,10 +109,10 @@ void sessionDialog::renameButtonClicked()
     delete newSesDialog;
 }
 
-void sessionDialog::cloneButtonClicked()
+void SessionDialog::cloneButtonClicked()
 {
     QString currName = sessionListWidget->currentItem()->text();
-    newSessionDialog *newSesDialog = new newSessionDialog(this);
+    SessionNameDialog *newSesDialog = new SessionNameDialog(this);
     newSesDialog->setName(currName);
     int result = newSesDialog->exec();
 
@@ -129,7 +129,7 @@ void sessionDialog::cloneButtonClicked()
     delete newSesDialog;
 }
 
-void sessionDialog::deleteButtonClicked()
+void SessionDialog::deleteButtonClicked()
 {
     if (sessionListWidget->currentItem()->text() != tr("default")) {
         deleteSession(sessionListWidget->selectedItems().at(0)->text());
@@ -138,14 +138,14 @@ void sessionDialog::deleteButtonClicked()
     }
 }
 
-void sessionDialog::switchButtonClicked()
+void SessionDialog::switchButtonClicked()
 {
     clearChecked();
     sessionListWidget->currentItem()->setCheckState(Qt::Checked);
     accept();
 }
 
-void sessionDialog::sessionListItemitemActivated(QListWidgetItem *item)
+void SessionDialog::sessionListItemitemActivated(QListWidgetItem *item)
 {
     Q_UNUSED(item);
 
@@ -156,7 +156,7 @@ void sessionDialog::sessionListItemitemActivated(QListWidgetItem *item)
     switchPushButton->setEnabled(hasSelection);
 }
 
-void sessionDialog::setSessionList(QStringList list)
+void SessionDialog::setSessionList(QStringList list)
 {
     list.removeDuplicates();
     list.sort();
@@ -164,7 +164,7 @@ void sessionDialog::setSessionList(QStringList list)
     clearChecked();
 }
 
-QStringList sessionDialog::sessionList()
+QStringList SessionDialog::sessionList()
 {
     QStringList sessionList;
 
@@ -177,7 +177,7 @@ QStringList sessionDialog::sessionList()
     return sessionList;
 }
 
-void sessionDialog::setSelectedSession(QString name)
+void SessionDialog::setSelectedSession(QString name)
 {
     QList<QListWidgetItem *> items = sessionListWidget->findItems(name, Qt::MatchExactly);
 
@@ -187,7 +187,7 @@ void sessionDialog::setSelectedSession(QString name)
     }
 }
 
-QString sessionDialog::selectedSession()
+QString SessionDialog::selectedSession()
 {
     QString name;
 
@@ -201,14 +201,14 @@ QString sessionDialog::selectedSession()
     return name;
 }
 
-void sessionDialog::clearChecked()
+void SessionDialog::clearChecked()
 {
     for (int i = 0; i < sessionListWidget->count(); i++) {
         sessionListWidget->item(i)->setCheckState(Qt::Unchecked);
     }
 }
 
-void sessionDialog::copySession(QString oldName, QString newName, bool deleteOld)
+void SessionDialog::copySession(QString oldName, QString newName, bool deleteOld)
 {
     int cursorPos;
     bool readOnly;
@@ -254,7 +254,7 @@ void sessionDialog::copySession(QString oldName, QString newName, bool deleteOld
     settings.endGroup();
 }
 
-void sessionDialog::deleteSession(QString name)
+void SessionDialog::deleteSession(QString name)
 {
     QSettings settings("EdytorNC", "EdytorNC");
     settings.beginGroup("Sessions");
@@ -262,7 +262,7 @@ void sessionDialog::deleteSession(QString name)
     settings.endGroup();
 }
 
-newSessionDialog::newSessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SessionNameDialog::SessionNameDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
     setupUi(this);
     //setAttribute(Qt::WA_DeleteOnClose);
@@ -273,16 +273,16 @@ newSessionDialog::newSessionDialog(QWidget *parent, Qt::WindowFlags f) : QDialog
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
-newSessionDialog::~newSessionDialog()
+SessionNameDialog::~SessionNameDialog()
 {
 }
 
-QString newSessionDialog::getName()
+QString SessionNameDialog::getName()
 {
     return lineEdit->text();
 }
 
-void newSessionDialog::setName(QString name)
+void SessionNameDialog::setName(QString name)
 {
     lineEdit->setText(name);
 }

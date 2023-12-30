@@ -3391,7 +3391,7 @@ void EdytorNc::saveSession(const QString &name)
 
 void EdytorNc::sessionMgr()
 {
-    sessionDialog *sesDialog = new sessionDialog(this);
+    SessionDialog *sesDialog = new SessionDialog(this);
     sesDialog->setSessionList(sessionList);
     sesDialog->setSelectedSession(currentSession);
 

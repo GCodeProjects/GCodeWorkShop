@@ -31,7 +31,7 @@
 #include <QWidget>
 
 #include "ui_sessiondialog.h"
-#include "ui_newsessiondialog.h"
+#include "ui_sessionnamedialog.h"
 
 class QListWidgetItem;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -41,17 +41,13 @@ class QListWidgetItem;
 #endif
 
 
-/**
- * @brief The sessionDialog class
- */
-// TODO: rename with SessionDialog
-class sessionDialog: public QDialog, private Ui::sessionDialog
+class SessionDialog: public QDialog, private Ui::SessionDialog
 {
     Q_OBJECT
 
 public:
-    sessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-    ~sessionDialog();
+    SessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ~SessionDialog();
 
     void setSelectedSession(QString name);
     QString selectedSession();
@@ -72,17 +68,14 @@ private:
     void deleteSession(QString name);
 };
 
-/**
- * @brief The newSessionDialog class
- */
-// TODO: rename with NewSessionDialog
-class newSessionDialog: public QDialog, private Ui::newSessionDialog
+
+class SessionNameDialog: public QDialog, private Ui::SessionNameDialog
 {
     Q_OBJECT
 
 public:
-    newSessionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-    ~newSessionDialog();
+    SessionNameDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+    ~SessionNameDialog();
 
 public slots:
     QString getName();
