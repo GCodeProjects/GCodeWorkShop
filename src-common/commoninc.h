@@ -78,7 +78,6 @@ struct _h_colors {
     int bColor;
     int defaultColor;
     int backgroundColor;
-    int highlightMode;
 };
 
 //**************************************************************************************************

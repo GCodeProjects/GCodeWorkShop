@@ -564,7 +564,8 @@ void FindInFiles::filePreview(int x, int y)
             }
 
             if (highlighter != nullptr) {
-                highlighterColors.highlightMode = autoDetectHighligthMode(preview->toPlainText().toUpper());
+                int mode = autoDetectHighligthMode(preview->toPlainText().toUpper());
+                highlighter->setHighlightMode(mode);
                 highlighter->setHColors(highlighterColors, preview->font());
                 highlighter->rehighlight();
             }

@@ -46,6 +46,7 @@ public:
     Highlighter(QTextDocument *parent);
 
     void setHColors(const _h_colors hColors, const QFont fnt);
+    void setHighlightMode(int mode);
 
 protected:
     void highlightBlock(const QString &text);
@@ -64,7 +65,7 @@ private:
     void highlightBlockLinuxCNCRule(const QString &text);
     _h_colors highlightColors;
     QFont font;
-    int mode;
+    int m_highlightMode;
 
     struct HighlightingRule {
         QRegularExpression pattern;

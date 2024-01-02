@@ -124,6 +124,7 @@ private:
     void updateWindowTitle();
     bool isUntitled;
     Highlighter *highlighter;
+    int m_highlightMode;
     _editor_properites mdiWindowProperites;
     QList<QTextEdit::ExtraSelection> extraSelections;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;

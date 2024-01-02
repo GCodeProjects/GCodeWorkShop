@@ -85,6 +85,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     ui->textEdit->setWordWrapMode(QTextOption::NoWrap);
     ui->textEdit->document()->setDocumentMargin(8);
     highlighter = nullptr;
+    m_highlightMode = MODE_AUTO;
     setFocusProxy(ui->textEdit);
 
     ui->marginWidget->setAutoFillBackground(true);
@@ -749,7 +750,7 @@ bool MdiChild::event(QEvent *event)
 
     if ((event->type() == QEvent::ToolTip) && mdiWindowProperites.editorToolTips) {
 
-        switch (mdiWindowProperites.hColors.highlightMode) {
+        switch (m_highlightMode) {
         case MODE_OKUMA:
             group = QLatin1String("OKUMA");
             break;
@@ -796,7 +797,7 @@ bool MdiChild::event(QEvent *event)
         cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor,
                             2);  //fix cursor position
 
-        if (mdiWindowProperites.hColors.highlightMode == MODE_FANUC) {
+        if (m_highlightMode == MODE_FANUC) {
             do {
                 cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
                 key = cursor.selectedText();
@@ -983,7 +984,7 @@ void MdiChild::highlightCurrentLine()
         } else {
             proceed = false;
 
-            if (mdiWindowProperites.hColors.highlightMode == MODE_LINUXCNC) {
+            if (m_highlightMode == MODE_LINUXCNC) {
                 cursor = ui->textEdit->textCursor();
 
                 cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
@@ -1021,7 +1022,7 @@ void MdiChild::highlightCurrentLine()
             }
 
 
-            if (mdiWindowProperites.hColors.highlightMode == MODE_SINUMERIK_840) {
+            if (m_highlightMode == MODE_SINUMERIK_840) {
                 cursor = ui->textEdit->textCursor();
 
                 cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
@@ -1078,7 +1079,7 @@ void MdiChild::highlightCurrentLine()
         closeBrace = QLatin1String(")");
     }
 
-    if (mdiWindowProperites.hColors.highlightMode == MODE_LINUXCNC) {
+    if (m_highlightMode == MODE_LINUXCNC) {
         if ((brace == QLatin1String("<")) || (brace == QLatin1String(">"))) {
             openBrace = QLatin1String("<");
             closeBrace = QLatin1String(">");
@@ -1336,15 +1337,16 @@ void MdiChild::detectHighligthMode()
     bool mod =
         ui->textEdit->document()->isModified();  // something below clears document modified state
 
-    if (mdiWindowProperites.hColors.highlightMode == MODE_AUTO) {
+    if (m_highlightMode == MODE_AUTO) {
         text = ui->textEdit->toPlainText();
-        mdiWindowProperites.hColors.highlightMode = autoDetectHighligthMode(text.toUpper());
+        m_highlightMode = autoDetectHighligthMode(text.toUpper());
 
-        if (mdiWindowProperites.hColors.highlightMode == MODE_AUTO) {
-            mdiWindowProperites.hColors.highlightMode = mdiWindowProperites.defaultHighlightMode;
+        if (m_highlightMode == MODE_AUTO) {
+            m_highlightMode = mdiWindowProperites.defaultHighlightMode;
         }
     }
 
+    highlighter->setHighlightMode(m_highlightMode);
     highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName,
                             mdiWindowProperites.fontSize, QFont::Normal));
     highlighter->rehighlight();
@@ -1354,13 +1356,13 @@ void MdiChild::detectHighligthMode()
 
 void MdiChild::setHighligthMode(int mod)
 {
-    mdiWindowProperites.hColors.highlightMode = mod;
+    m_highlightMode = mod;
     detectHighligthMode();
 }
 
 int MdiChild::highligthMode()
 {
-    return mdiWindowProperites.hColors.highlightMode;
+    return m_highlightMode;
 }
 
 void MdiChild::doDiff()

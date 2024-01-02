@@ -37,6 +37,7 @@
 
 Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 {
+    m_highlightMode = MODE_AUTO;
 }
 
 void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
@@ -45,6 +46,11 @@ void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
     highlightColors = hColors;
 
     loadRules();
+}
+
+void Highlighter::setHighlightMode(int mode)
+{
+    m_highlightMode = mode;
 }
 
 void Highlighter::loadRules()
@@ -67,8 +73,8 @@ void Highlighter::loadRules()
     commentFormat.setForeground(QColor(highlightColors.commentColor));
     commentFormat.setFontWeight(QFont::Normal);
 
-    if (highlightColors.highlightMode == MODE_SINUMERIK_840
-            || highlightColors.highlightMode == MODE_OKUMA) { // variables names
+    if (m_highlightMode == MODE_SINUMERIK_840
+            || m_highlightMode == MODE_OKUMA) { // variables names
         keywordFormat.setForeground(QColor(highlightColors.keyWordColor));
         keywordFormat.setFontWeight(QFont::Normal);
         rule.pattern = QRegularExpression("\\b[A-Z_]{1,1}[A-Z0-9_]{1,}[A-Z_]{0,1}[A-Z0-9_]{0,}\\b");
@@ -76,7 +82,7 @@ void Highlighter::loadRules()
         highlightRules.append(rule);
     }
 
-    if (highlightColors.highlightMode == MODE_LINUXCNC) { // variables names
+    if (m_highlightMode == MODE_LINUXCNC) { // variables names
         keywordFormat.setForeground(QColor(highlightColors.keyWordColor));
         keywordFormat.setFontWeight(QFont::Normal);
         rule.pattern =
@@ -85,7 +91,7 @@ void Highlighter::loadRules()
         highlightRules.append(rule);
     }
 
-    //   if(highlightColors.highlightMode == MODE_SINUMERIK_840 || highlightColors.highlightMode == MODE_HEIDENHAIN)  // ; comment
+    //   if(m_highlightMode == MODE_SINUMERIK_840 || m_highlightMode == MODE_HEIDENHAIN)  // ; comment
     //   {
     //      QString pattern = ";(?!\\$).*$";
     //      rule.pattern = QRegularExpression(pattern);
@@ -96,10 +102,10 @@ void Highlighter::loadRules()
     //      commentHighlightRules.append(rule);
     //   }
 
-    if (highlightColors.highlightMode == MODE_OKUMA || highlightColors.highlightMode == MODE_PHILIPS
-            || highlightColors.highlightMode == MODE_FANUC
-            || highlightColors.highlightMode == MODE_SINUMERIK
-            || highlightColors.highlightMode == MODE_AUTO) { // () comment
+    if (m_highlightMode == MODE_OKUMA || m_highlightMode == MODE_PHILIPS
+            || m_highlightMode == MODE_FANUC
+            || m_highlightMode == MODE_SINUMERIK
+            || m_highlightMode == MODE_AUTO) { // () comment
         commentStartExpression = QRegularExpression("\\s\\(|^\\(");
         commentEndExpression = QRegularExpression("\\)");
     } else {
@@ -107,8 +113,8 @@ void Highlighter::loadRules()
         commentEndExpression = QRegularExpression("][");
     }
 
-    if (highlightColors.highlightMode == MODE_FANUC
-            || highlightColors.highlightMode == MODE_AUTO) { //FANUC
+    if (m_highlightMode == MODE_FANUC
+            || m_highlightMode == MODE_AUTO) { //FANUC
         keywords << "(OR|XOR|AND|NOT|EOR|EQ|NE|GT|LT|GE|LE|IF|THEN|ELSE)"
                  << "(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)"
                  << "(GOTO|END|DO)[0-9]{1,5}"
@@ -128,7 +134,7 @@ void Highlighter::loadRules()
         progNameHighlightRules.append(pogRule);
     }
 
-    if (highlightColors.highlightMode == MODE_LINUXCNC) { //LinuxCNC
+    if (m_highlightMode == MODE_LINUXCNC) { //LinuxCNC
         keywords << "\\b(OR|XOR|AND|NOT|EQ|NE|GT|LT|GE|LE)\\b"
                  << "\\b(SIN|ASIN|COS|ACOS|TAN|ATAN|LN|FIX|ROUND|FUP|EXISTS|EXP|ABS|SQRT)\\b"
                  << "\\b(IF|ELSE|ENDIF|WHILE|ENDWHILE|DO|CONTINUE|RETURN)\\b"
@@ -136,7 +142,7 @@ void Highlighter::loadRules()
         keywordPatterns.append(keywords);
     }
 
-    if (highlightColors.highlightMode == MODE_OKUMA) { //OKUMA
+    if (m_highlightMode == MODE_OKUMA) { //OKUMA
         keywords << "\\b(ABS|DGRDX|GRDY|NOT|RTMDI)\\b"
                  << "\\b(AND|DGRDY|GRER|OR|RTI)\\b"
                  << "\\b(AG|DIN|GROF|PCIR|RTS)\\b"
@@ -179,7 +185,7 @@ void Highlighter::loadRules()
         progNameHighlightRules.append(pogRule);
     }
 
-    if (highlightColors.highlightMode == MODE_SINUMERIK_840) { //SINUMERIK 840D
+    if (m_highlightMode == MODE_SINUMERIK_840) { //SINUMERIK 840D
         keywords << "\\b(OR|XOR|AND|NOT|EOR|IF|THEN|ELSE|ENDIF|END|BEGIN|DEFINE|AS)\\b"
                  << "\\b(SIN|COS|ATAN|TAN|TRUNC|ROUND|ABS|FIX|SQRT|SQR|BCD|BIN|ROUND|FUP|MOD|DROUND|DFIX|DFUP|DIV)\\b"
                  << "\\b(DO|WHILE|ENDWHILE|FOR|TO|NEXT|REPEAT|UNTIL|WHEN|ENDFOR|LOOP|ENDLOOP)\\b"
@@ -202,7 +208,7 @@ void Highlighter::loadRules()
         progNameHighlightRules.append(pogRule);
     }
 
-    if (highlightColors.highlightMode == MODE_SINUMERIK) { //SINUMERIK OLD 810-880
+    if (m_highlightMode == MODE_SINUMERIK) { //SINUMERIK OLD 810-880
         keywords << "@[0-9]{3,3}";
         keywordPatterns.append(keywords);
 
@@ -211,7 +217,7 @@ void Highlighter::loadRules()
         progNameHighlightRules.append(pogRule);
     }
 
-    if (highlightColors.highlightMode == MODE_PHILIPS) { // PHILIPS
+    if (m_highlightMode == MODE_PHILIPS) { // PHILIPS
         keywords << "\\b(@714)\\b";
         keywordPatterns.append(keywords);
 
@@ -220,7 +226,7 @@ void Highlighter::loadRules()
         progNameHighlightRules.append(pogRule);
     }
 
-    if (highlightColors.highlightMode == MODE_HEIDENHAIN_ISO) { //HEIDENHAIN ISO
+    if (m_highlightMode == MODE_HEIDENHAIN_ISO) { //HEIDENHAIN ISO
         keywords << "\\b(@714)\\b";
         keywordPatterns.append(keywords);
 
@@ -229,7 +235,7 @@ void Highlighter::loadRules()
         progNameHighlightRules.append(pogRule);
     }
 
-    if (highlightColors.highlightMode == MODE_HEIDENHAIN) { //HEIDENHAIN DIALOG
+    if (m_highlightMode == MODE_HEIDENHAIN) { //HEIDENHAIN DIALOG
         keywords << "\\b(CALL PGM |CALL LBL |TOOL CALL |BLK FORM |LBL )\\b"
                  << "\\b(CYCL DEF|SET UP|DEPTH|PECKG|RADIUS|DWELL|PECKING|CIRCULAR|POCKET|POS.-CYCLE CIRCLE)\\b"
                  << "\\b(CONTOUR|GEOM|MILLG|LABEL|SLOT|ROUGH-OUT|ALLOW|ANGLE|ROTATION|IROT|REP|TRAIN|IMAGE)\\b"
@@ -247,7 +253,7 @@ void Highlighter::loadRules()
     }
 
 
-    if (highlightColors.highlightMode == MODE_TOOLTIPS) { // EdytorNC Tooltips
+    if (m_highlightMode == MODE_TOOLTIPS) { // EdytorNC Tooltips
         pattern = "^(\\[)(OKUMA|SINUMERIK|SINUMERIK_840|FANUC|PHILIPS|HEIDENHAIN|HEIDENHAIN_ISO|MODE_LINUXCNC)(\\])$"; //
         pogRule.pattern = QRegularExpression(pattern);
         progNameHighlightRules.append(pogRule);
@@ -265,7 +271,7 @@ void Highlighter::loadRules()
 
 void Highlighter::highlightBlock(const QString &tx)
 {
-    switch (highlightColors.highlightMode) {
+    switch (m_highlightMode) {
     case MODE_OKUMA:
         highlightBlockOkumaRule(tx);
         break;

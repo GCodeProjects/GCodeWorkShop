@@ -325,7 +325,7 @@ MdiChild *EdytorNc::newFileFromTemplate()
         //defaultMdiWindowProperites.maximized = false;
         defaultMdiWindowProperites.geometry = QByteArray();
         defaultMdiWindowProperites.editorToolTips = true;
-        defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+        child->setHighligthMode(MODE_AUTO);
         child->setMdiWindowProperites(defaultMdiWindowProperites);
 
         if (defaultMdiWindowProperites.maximized) {
@@ -355,7 +355,7 @@ MdiChild *EdytorNc::newFile()
     //defaultMdiWindowProperites.maximized = false;
     defaultMdiWindowProperites.geometry = QByteArray();
     defaultMdiWindowProperites.editorToolTips = true;
-    defaultMdiWindowProperites.hColors.highlightMode = MODE_AUTO;
+    child->setHighligthMode(MODE_AUTO);
     child->setMdiWindowProperites(defaultMdiWindowProperites);
 
     if (defaultMdiWindowProperites.maximized) {
@@ -401,8 +401,8 @@ void EdytorNc::open()
                 defaultMdiWindowProperites.cursorPos = 0;
                 defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
                 defaultMdiWindowProperites.geometry = QByteArray();
-                defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(
-                            *it).absolutePath());
+                int highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
+                child->setHighligthMode(highlightMode);
                 defaultMdiWindowProperites.editorToolTips = true;
                 child->setMdiWindowProperites(defaultMdiWindowProperites);
 
@@ -467,8 +467,8 @@ void EdytorNc::openExample()
                 defaultMdiWindowProperites.cursorPos = 0;
                 defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
                 defaultMdiWindowProperites.geometry = QByteArray();
-                defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(QFileInfo(
-                            *it).absolutePath());
+                int highlightMode = defaultHighlightMode(QFileInfo(*it).absolutePath());
+                child->setHighligthMode(highlightMode);
                 defaultMdiWindowProperites.editorToolTips = true;
                 child->setMdiWindowProperites(defaultMdiWindowProperites);
 
@@ -512,7 +512,8 @@ void EdytorNc::openFile(const QString &fileName)
             defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
             //defaultMdiWindowProperites.maximized = false;
             defaultMdiWindowProperites.geometry = QByteArray();
-            defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
+            int highlightMode = defaultHighlightMode(child->filePath());
+            child->setHighligthMode(highlightMode);
             defaultMdiWindowProperites.editorToolTips = true;
             child->setMdiWindowProperites(defaultMdiWindowProperites);
 
@@ -877,8 +878,6 @@ void EdytorNc::config()
         foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
             mdiChild = qobject_cast<MdiChild *>(window->widget());
             opt = mdiChild->getMdiWindowProperites();
-
-            defaultMdiWindowProperites.hColors.highlightMode = opt.hColors.highlightMode;
 
             opt.fontName = defaultMdiWindowProperites.fontName;
             opt.fontSize = defaultMdiWindowProperites.fontSize;
@@ -2250,8 +2249,7 @@ void EdytorNc::fileOpenRecent(QAction *act)
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.editorToolTips = true;
     defaultMdiWindowProperites.fileName = act->data().toString();
-    defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(
-                defaultMdiWindowProperites.fileName).canonicalPath());
+//    m_highlightMode =  defaultHighlightMode(QFileInfo(defaultMdiWindowProperites.fileName).canonicalPath());
     loadFile(defaultMdiWindowProperites);
 }
 
@@ -2287,7 +2285,8 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
         defaultMdiWindowProperites.geometry = QByteArray();
-        defaultMdiWindowProperites.hColors.highlightMode = defaultHighlightMode(child->filePath());
+        int highlightMode = defaultHighlightMode(child->filePath());
+        child->setHighligthMode(highlightMode);
         defaultMdiWindowProperites.editorToolTips = true;
         child->setMdiWindowProperites(defaultMdiWindowProperites);
 
@@ -2993,8 +2992,8 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex &index)
             defaultMdiWindowProperites.geometry = QByteArray();
             defaultMdiWindowProperites.cursorPos = 0;
             defaultMdiWindowProperites.editorToolTips = true;
-            defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(
-                        defaultMdiWindowProperites.fileName).canonicalPath());
+            //m_highlightMode =  defaultHighlightMode(QFileInfo(
+            //            defaultMdiWindowProperites.fileName).canonicalPath());
             loadFile(defaultMdiWindowProperites);
         } else {
             QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
@@ -3035,8 +3034,8 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex &index)
             defaultMdiWindowProperites.geometry = QByteArray();
             defaultMdiWindowProperites.cursorPos = 0;
             defaultMdiWindowProperites.editorToolTips = true;
-            defaultMdiWindowProperites.hColors.highlightMode =  defaultHighlightMode(QFileInfo(
-                        defaultMdiWindowProperites.fileName).canonicalPath());
+            //m_highlightMode =  defaultHighlightMode(QFileInfo(
+            //            defaultMdiWindowProperites.fileName).canonicalPath());
             loadFile(defaultMdiWindowProperites);
         } else {
             QDesktopServices::openUrl(QUrl("file:///" + file.absoluteFilePath(), QUrl::TolerantMode));
@@ -3500,8 +3499,8 @@ void EdytorNc::loadSession(const QString &name)
             defaultMdiWindowProperites.cursorPos = settings.value("Cursor", 1).toInt();
             defaultMdiWindowProperites.readOnly = settings.value("ReadOnly", false).toBool();
             defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
-            defaultMdiWindowProperites.hColors.highlightMode = settings.value("HighlightMode",
-                    MODE_AUTO).toInt();
+//            m_highlightMode = settings.value("HighlightMode",
+//                    MODE_AUTO).toInt();
             defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
             loadFile(defaultMdiWindowProperites, false);
         }
@@ -3533,7 +3532,7 @@ void EdytorNc::saveSession(const QString &name)
         settings.setValue("Cursor", Opt.cursorPos);
         settings.setValue("ReadOnly", Opt.readOnly);
         settings.setValue("Geometry", mdiChild->parentWidget()->saveGeometry());
-        settings.setValue("HighlightMode", Opt.hColors.highlightMode);
+//        settings.setValue("HighlightMode", m_highlightMode);
         bool maximized = mdiChild->parentWidget()->isMaximized();
         settings.setValue("MaximizedMdi", maximized);
 
