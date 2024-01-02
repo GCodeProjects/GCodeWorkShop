@@ -30,7 +30,7 @@
 #include <QTextCharFormat>
 #include <QVector>
 
-#include <commoninc.h>
+#include "gcoderstyle.h"
 
 class QString;
 class QTextDocument;
@@ -45,7 +45,7 @@ class Highlighter : public QSyntaxHighlighter
 public:
     Highlighter(QTextDocument *parent);
 
-    void setHColors(const _h_colors hColors, const QFont fnt);
+    void setHColors(const HighlightColors hColors, const QFont fnt);
     void setHighlightMode(int mode);
 
 protected:
@@ -63,7 +63,7 @@ private:
     void highlightBlockHeidIsoRule(const QString &text);
     void highlightBlockToolTipsRule(const QString &text);
     void highlightBlockLinuxCNCRule(const QString &text);
-    _h_colors highlightColors;
+    HighlightColors highlightColors;
     QFont font;
     int m_highlightMode;
 

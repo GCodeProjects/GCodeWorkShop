@@ -67,13 +67,14 @@
 #include <QToolTip>
 
 #include <addons-actions.h>
-#include <commoninc.h>         // _editor_properites
+#include <commoninc.h>
 #include <edytornc.h>
 #include <utils/expressionparser.h>
 #include <utils/removezeros.h>      // Utils::removeZeros()
 
 #include "gcoderinfo.h"        // GCoderInfo
 #include "highlighter.h"       // Highlighter
+#include "highlightmode.h"
 #include "mdichild.h"          // MdiChild QObject QWidget
 #include "ui_mdichildform.h"
 
@@ -169,17 +170,17 @@ bool MdiChild::save()
     updateBrief();
     updateWindowTitle();
 
-    if (mdiWindowProperites.clearUndoHistory) {
+    if (m_widgetProperties.clearUndoHistory) {
         document()->clearUndoRedoStacks();
     }
 
-    if (mdiWindowProperites.clearUnderlineHistory) {
+    if (m_widgetProperties.clearUnderlineHistory) {
 
         QTextCursor cursorPos = textCursor();
         textEdit()->blockSignals(true);
         selectAll();
 
-        if (mdiWindowProperites.underlineChanges) {
+        if (m_widgetProperties.underlineChanges) {
             QTextCursor cr = textCursor(); // Clear underline
             QTextCharFormat format = cr.charFormat();
             format.setUnderlineStyle(QTextCharFormat::NoUnderline);
@@ -249,7 +250,7 @@ void MdiChild::setRawData(const QByteArray &data)
 
 void MdiChild::changeDateInComment()
 {
-    if (!mdiWindowProperites.changeDateInComment) {
+    if (!m_widgetProperties.changeDateInComment) {
         return;
     }
 
@@ -386,20 +387,20 @@ void MdiChild::updateWindowTitle()
 {
     QString title = "";
 
-    if ((mdiWindowProperites.windowMode & SHOW_PROGTITLE)) {
+    if ((m_widgetProperties.windowMode & SHOW_PROGTITLE)) {
         title = m_brief;
     }
 
-    if (!title.isEmpty() && ((mdiWindowProperites.windowMode & SHOW_FILEPATH)
-                             || (mdiWindowProperites.windowMode & SHOW_FILENAME))) {
+    if (!title.isEmpty() && ((m_widgetProperties.windowMode & SHOW_FILEPATH)
+                             || (m_widgetProperties.windowMode & SHOW_FILENAME))) {
         title += " ---> ";
     }
 
-    if ((mdiWindowProperites.windowMode & SHOW_FILEPATH)) {
+    if ((m_widgetProperties.windowMode & SHOW_FILEPATH)) {
         title += m_dir.path() + "/";
     }
 
-    if ((mdiWindowProperites.windowMode & SHOW_FILENAME) || title.isEmpty()) {
+    if ((m_widgetProperties.windowMode & SHOW_FILENAME) || title.isEmpty()) {
         title += m_fileName;
     }
 
@@ -471,27 +472,48 @@ void MdiChild::setDocumentInfo(const DocumentInfo::Ptr &info)
     }
 }
 
-_editor_properites MdiChild::getMdiWindowProperites()
+DocumentStyle::Ptr MdiChild::codeStyle() const
 {
-    return (mdiWindowProperites);
+    return DocumentStyle::Ptr(new GCoderStyle(m_codeStyle));
 }
 
-void MdiChild::setMdiWindowProperites(_editor_properites opt)
+void MdiChild::setCodeStyle(const DocumentStyle::Ptr &style)
 {
-    mdiWindowProperites = opt;
-    setFont(QFont(mdiWindowProperites.fontName, mdiWindowProperites.fontSize, QFont::Normal));
+    try {
+        m_codeStyle = dynamic_cast<const GCoderStyle &>(*style);
+    }  catch (std::bad_cast &e) {
+        return;
+    }
+
+    QFont font = QFont(m_codeStyle.fontName, m_codeStyle.fontSize, QFont::Normal);
+    document()->setDefaultFont(font);
 
     QPalette pal;
 
-    if (mdiWindowProperites.hColors.backgroundColor != 0xFFFFFF) {
-        pal.setColor(QPalette::Base, QColor(mdiWindowProperites.hColors.backgroundColor));
+    if (m_codeStyle.hColors.backgroundColor != 0xFFFFFF) {
+        pal.setColor(QPalette::Base, QColor(m_codeStyle.hColors.backgroundColor));
     }
 
-    pal.setColor(QPalette::Text, QColor(mdiWindowProperites.hColors.defaultColor));
-
+    pal.setColor(QPalette::Text, QColor(m_codeStyle.hColors.defaultColor));
     setPalette(pal);
+    detectHighligthMode();
+    highlightCurrentLine();
+}
 
-    if (mdiWindowProperites.syntaxH) {
+DocumentWidgetProperties::Ptr MdiChild::widgetProperties() const
+{
+    return DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(m_widgetProperties));
+}
+
+void MdiChild::setWidgetProperties(const DocumentWidgetProperties::Ptr &properties)
+{
+    try {
+        m_widgetProperties = dynamic_cast<const GCoderWidgetProperties &>(*properties);
+    }  catch (std::bad_cast &e) {
+        return;
+    }
+
+    if (m_widgetProperties.syntaxH) {
         if (highlighter == nullptr) {
             highlighter = new Highlighter(document());
         }
@@ -616,12 +638,12 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
                 ui->textEdit->setOverwriteMode(!ui->textEdit->overwriteMode());
             }
 
-            if (mdiWindowProperites.underlineChanges) {
+            if (m_widgetProperties.underlineChanges) {
                 if ((k->text()[0].isPrint()) && !(k->text()[0].isSpace())) {
                     QTextCursor cr = ui->textEdit->textCursor(); //Underline changes
                     QTextCharFormat format = cr.charFormat();
                     format.setUnderlineStyle(QTextCharFormat::DotLine);
-                    format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+                    format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
                     cr.setCharFormat(format);
                     ui->textEdit->setTextCursor(cr);
                 }
@@ -637,7 +659,7 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
 
             }
 
-            if (mdiWindowProperites.intCapsLock) {
+            if (m_widgetProperties.intCapsLock) {
                 if (k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier)) {
                     QApplication::sendEvent(ui->textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier,
                                             k->text().toUpper(), false, 1));
@@ -666,7 +688,7 @@ bool MdiChild::event(QEvent *event)
     QTextCursor cursor;
     QString fileName;
 
-    if ((event->type() == QEvent::ToolTip) && mdiWindowProperites.editorToolTips) {
+    if ((event->type() == QEvent::ToolTip) && m_widgetProperties.editorToolTips) {
 
         switch (m_highlightMode) {
         case MODE_OKUMA:
@@ -859,14 +881,14 @@ void MdiChild::highlightCurrentLine()
     textEdit()->setExtraSelections(tmpSelections);
 
     if (!isReadOnly()) {
-        selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
+        selection.format.setBackground(QColor(m_codeStyle.lineColor));
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor = textCursor();
         selection.cursor.clearSelection();
         extraSelections.append(selection);
     }
 
-    QColor lineColor = QColor(mdiWindowProperites.lineColor).darker(108);
+    QColor lineColor = QColor(m_codeStyle.lineColor).darker(108);
     selection.format.setBackground(lineColor);
 
     QTextDocument *doc = document();
@@ -1242,7 +1264,7 @@ void MdiChild::redo()
 
 void MdiChild::detectHighligthMode()
 {
-    if (!mdiWindowProperites.syntaxH) {
+    if (!m_widgetProperties.syntaxH) {
         return;
     }
 
@@ -1256,13 +1278,12 @@ void MdiChild::detectHighligthMode()
         m_highlightMode = autoDetectHighligthMode(text().toUpper());
 
         if (m_highlightMode == MODE_AUTO) {
-            m_highlightMode = mdiWindowProperites.defaultHighlightMode;
+            m_highlightMode = m_widgetProperties.defaultHighlightMode;
         }
     }
 
     highlighter->setHighlightMode(m_highlightMode);
-    highlighter->setHColors(mdiWindowProperites.hColors, QFont(mdiWindowProperites.fontName,
-                            mdiWindowProperites.fontSize, QFont::Normal));
+    highlighter->setHColors(m_codeStyle.hColors, QFont(m_codeStyle.fontName, m_codeStyle.fontSize, QFont::Normal));
     highlighter->rehighlight();
 
     document()->setModified(mod);
@@ -1502,7 +1523,7 @@ QString MdiChild::guessFileName()
     //cursor = ui->textEdit->textCursor();
     text = this->text();
 
-    if (mdiWindowProperites.guessFileNameByProgNum) {
+    if (m_widgetProperties.guessFileNameByProgNum) {
         forever {
             regex.setPattern(FILENAME_SINU840);
             auto match = regex.match(text);
@@ -1688,10 +1709,10 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText,
         QTextCursor cr = textCursor();
         cr.beginEditBlock();
 
-        if (mdiWindowProperites.underlineChanges) {
+        if (m_widgetProperties.underlineChanges) {
             QTextCharFormat format = cr.charFormat();
             format.setUnderlineStyle(QTextCharFormat::DotLine);
-            format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+            format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
             cr.setCharFormat(format);
         }
 
@@ -1912,10 +1933,10 @@ void MdiChild::cut()
 
 void MdiChild::paste()
 {
-    if (mdiWindowProperites.underlineChanges) {
+    if (m_widgetProperties.underlineChanges) {
         QTextCharFormat format = textEdit()->currentCharFormat();
         format.setUnderlineStyle(QTextCharFormat::DotLine);
-        format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+        format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
         textEdit()->setCurrentCharFormat(format);
     }
 

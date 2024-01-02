@@ -647,7 +647,7 @@ bool FindInFiles::findText(const QString &exp, QTextDocument::FindFlags options,
     return found;
 }
 
-void FindInFiles::setHighlightColors(const _h_colors colors)
+void FindInFiles::setHighlightColors(const HighlightColors colors)
 {
     highligh = true;
     highlighterColors = colors;

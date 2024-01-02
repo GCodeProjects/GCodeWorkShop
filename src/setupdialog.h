@@ -33,12 +33,26 @@
 #include <Qt>      // Qt::WindowFlags
 #include <QWidget>
 
-#include "commoninc.h" // _editor_properites
+#include "gcoderstyle.h"
+#include "gcoderwidgetproperties.h"
 
 #include "ui_setupdialog.h"
 
 class QAbstractButton;
 class QButtonGroup;
+
+
+struct AppConfig  {
+    GCoderWidgetProperties editorProperties;
+    GCoderStyle codeStyle;
+    QString calcBinary;
+    QStringList extensions;
+    QString saveExtension;
+    QString saveDirectory;
+    bool defaultReadOnly;
+    bool startEmpty;
+    bool disableFileChangeMonitor;
+};
 
 
 /**
@@ -49,12 +63,12 @@ class SetupDialog : public QDialog, private Ui::SetupDialog
     Q_OBJECT
 
 public:
-    SetupDialog(QWidget *parent = 0, const _editor_properites *prop = 0,
+    SetupDialog(QWidget *parent = 0, const AppConfig *prop = 0,
                 Qt::WindowFlags f = Qt::Dialog);
     ~SetupDialog();
 
 public slots:
-    _editor_properites getSettings();
+    AppConfig getSettings();
 
 private slots:
     void on_btnBrowseDirectory_clicked();
@@ -66,7 +80,7 @@ private slots:
     void browseButtonClicked();
 
 private:
-    _editor_properites editProp;
+    AppConfig editProp;
     QButtonGroup *colorButtons;
 };
 

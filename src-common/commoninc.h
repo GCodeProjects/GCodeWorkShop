@@ -23,30 +23,6 @@
 #ifndef COMMONINC_H
 #define COMMONINC_H
 
-#include<QByteArray>
-#include<QString>
-#include<QStringList>
-
-
-// Uses in dialogs.cpp and mdichild.cpp
-#define TABBED_MODE              0x01
-#define SHOW_FILENAME            0x02
-#define SHOW_FILEPATH            0x04
-#define SHOW_PROGTITLE           0x08
-
-// Uses in dialogs.cpp, edytornc.cpp, mdichild.cpp and highlighter.cpp
-#define MODE_AUTO                0x00
-#define MODE_OKUMA               0x02
-#define MODE_FANUC               0x03
-#define MODE_HEIDENHAIN          0x04
-#define MODE_SINUMERIK           0x05
-#define MODE_SINUMERIK_840       0x06
-#define MODE_PHILIPS             0x07
-#define MODE_HEIDENHAIN_ISO      0x08
-#define MODE_TOOLTIPS            0x09
-#define MODE_LINUXCNC            0x0A
-//#define MODE_FADAL               0x0B
-
 // Uses in serialtransmissiondialog.cpp and mdichild.cpp
 // TODO: move to CNC-specific class.
 #define FILENAME_SINU840     "%_N_[a-zA-Z0-9_]{1,31}_(MPF|SPF|TEA|COM|PLC|DEF|INI)"
@@ -57,69 +33,5 @@
 #define FILENAME_HEID2       "(BEGIN)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"
 #define FILENAME_PHIL        "%PM[\\s]{1,}N[0-9]{4,4}"
 #define FILENAME_FADAL       "(N1)(O|:)[0-9]{1,}"
-
-// Uses in findinf.cpp and highlighter.cpp
-// TODO: rename
-struct _h_colors {
-    int commentColor;
-    int gColor;
-    int mColor;
-    int nColor;
-    int lColor;
-    int fsColor;
-    int dhtColor;
-    int rColor;
-    int macroColor;
-    int keyWordColor;
-    int progNameColor;
-    int operatorColor;
-    int zColor;
-    int aColor;
-    int bColor;
-    int defaultColor;
-    int backgroundColor;
-};
-
-//**************************************************************************************************
-//
-//**************************************************************************************************
-
-// Uses in mdichild.cpp, edytornc.cpp and dialogs.cpp
-// TODO: rename
-struct _editor_properites {
-    bool isRedo, isUndo, isSel;
-    bool readOnly;
-    bool ins;
-    bool modified;
-    int cursorPos;
-    QString lastDir;
-    QString fileName;
-    QString fontName;
-    int fontSize;
-    bool intCapsLock;
-    bool syntaxH;
-    _h_colors hColors;
-    QByteArray geometry;
-    bool maximized;
-    bool underlineChanges;
-    int lineColor;
-    int underlineColor;
-    int windowMode;
-    QString calcBinary;
-    bool clearUndoHistory;
-    bool clearUnderlineHistory;
-    bool editorToolTips;
-    bool defaultReadOnly;
-    QStringList extensions;
-    QString saveExtension;
-    QString saveDirectory;
-    int defaultHighlightMode;
-    bool startEmpty;
-    QString curFile;  // replace by filename
-    QString curFileInfo;
-    bool guessFileNameByProgNum;
-    bool disableFileChangeMonitor;
-    bool changeDateInComment;
-};
 
 #endif // COMMONINC_H

@@ -30,9 +30,8 @@
 #include <QTextCharFormat>
 #include <QTextDocument>
 
-#include <commoninc.h> // _h_colors MODE_*
-
-#include "highlighter.h" // Highlighter QObject QSyntaxHighlighter
+#include "highlighter.h"
+#include "highlightmode.h"
 
 
 Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
@@ -40,7 +39,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     m_highlightMode = MODE_AUTO;
 }
 
-void Highlighter::setHColors(const _h_colors hColors, const QFont fnt)
+void Highlighter::setHColors(const HighlightColors hColors, const QFont fnt)
 {
     font = fnt;
     highlightColors = hColors;

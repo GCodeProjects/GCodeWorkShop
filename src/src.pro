@@ -16,7 +16,11 @@ INCLUDEPATH += include
 
 HEADERS += \
     include/documentinfo.h \
+    include/documentstyle.h \
+    include/documentwidgetproperties.h \
     include/edytornc.h \
+    include/gcoderstyle.h \
+    include/gcoderwidgetproperties.h \
     include/mdichild.h \
     include/utils/expressionparser.h \
     include/utils/removezeros.h
@@ -30,6 +34,7 @@ HEADERS += \
     gcoder.h \
     gcoderinfo.h \
     highlighter.h \
+    highlightmode.h \
     newfiledialog.h \
     recentfiles.h \
     sessiondialog.h \
@@ -40,9 +45,13 @@ HEADERS += \
 
 SOURCES += \
     documentinfo.cpp \
+    documentstyle.cpp \
+    documentwidgetproperties.cpp \
     edytornc.cpp \
     findinf.cpp \
     gcoderinfo.cpp \
+    gcoderstyle.cpp \
+    gcoderwidgetproperties.cpp \
     highlighter.cpp \
     main.cpp \
     mdichild.cpp \

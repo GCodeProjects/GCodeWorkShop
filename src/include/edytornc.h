@@ -33,7 +33,8 @@
 #include <QMainWindow>
 
 #include <documentinfo.h>
-#include <commoninc.h>
+#include <gcoderstyle.h>
+#include <gcoderwidgetproperties.h>
 
 class QAction;
 class QCheckBox;
@@ -243,7 +244,15 @@ private:
     SessionManager *m_sessionManager;
 
     bool m_MdiWidgetsMaximized;
-    _editor_properites defaultMdiWindowProperites;
+    GCoderWidgetProperties defaultMdiWindowProperites;
+    GCoderStyle m_codeStyle;
+    QString m_calcBinary;
+    QStringList m_extensions;
+    QString m_saveExtension;
+    QString m_saveDirectory;
+    bool m_defaultReadOnly;
+    bool m_startEmpty;
+    bool m_disableFileChangeMonitor;
     FindInFiles *findFiles;
 
     bool panelHidden;

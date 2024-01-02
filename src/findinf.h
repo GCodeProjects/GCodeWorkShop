@@ -30,8 +30,7 @@
 #include <QtGlobal>  // QT_VERSION QT_VERSION_CHECK
 #include <QWidget>
 
-#include <commoninc.h>
-
+#include "gcoderstyle.h"
 #include "ui_findinfilesdialog.h"
 
 class QCloseEvent;
@@ -60,7 +59,7 @@ public:
     FindInFiles(QSplitter *parent = 0);
 
 public slots:
-    void setHighlightColors(const _h_colors colors);
+    void setHighlightColors(const HighlightColors colors);
     void setDir(const QString dir);
 
 private slots:
@@ -89,7 +88,7 @@ private:
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
     bool intCapsLock;
-    _h_colors highlighterColors;
+    HighlightColors highlighterColors;
     bool highligh;
     QList<int> currentHeight;
     QSplitter *f_parent;

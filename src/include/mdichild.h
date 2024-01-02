@@ -35,8 +35,10 @@
 #include <QWidget>
 
 #include <documentinfo.h>
-
-#include "commoninc.h" // _editor_properites
+#include <documentstyle.h>
+#include <documentwidgetproperties.h>
+#include <gcoderstyle.h>
+#include <gcoderwidgetproperties.h>
 
 class QLineEdit;
 class QPlainTextEdit;
@@ -75,8 +77,10 @@ public:
     void setFilePath(const QString &filePath);
     DocumentInfo::Ptr documentInfo() const;
     void setDocumentInfo(const DocumentInfo::Ptr &info);
-    _editor_properites getMdiWindowProperites();
-    void setMdiWindowProperites(_editor_properites opt);
+    DocumentStyle::Ptr codeStyle() const;
+    void setCodeStyle(const DocumentStyle::Ptr &style);
+    DocumentWidgetProperties::Ptr widgetProperties() const;
+    void setWidgetProperties(const DocumentWidgetProperties::Ptr &properties);
     void highlightFindText(const QString& searchString,
                            QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                            bool ignoreComments = true);
@@ -167,7 +171,8 @@ private:
     bool m_isUntitled;
     Highlighter *highlighter;
     int m_highlightMode;
-    _editor_properites mdiWindowProperites;
+    GCoderStyle m_codeStyle;
+    GCoderWidgetProperties m_widgetProperties;
     QList<QTextEdit::ExtraSelection> extraSelections;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;
