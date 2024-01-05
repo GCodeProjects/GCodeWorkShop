@@ -91,7 +91,9 @@ public:
     void moveEvent(QMoveEvent *event);
 
     Addons::Actions *addonsActions();
-    MdiChild *activeMdiChild();
+    MdiChild *activeMdiChild() const;
+    QString currentPath() const;
+    QString lastOpenedPath() const;
 
 protected:
     Ui::EdytorNc *ui;
@@ -120,6 +122,7 @@ protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
     bool event(QEvent *event);
+    void setLastOpenedPath(const QString &path);
 
     bool save(MdiChild *child, bool forceSaveAs);
 
@@ -250,6 +253,7 @@ private:
     QStringList m_extensions;
     QString m_saveExtension;
     QString m_saveDirectory;
+    QString m_lastOpenedPath;
     bool m_defaultReadOnly;
     bool m_startEmpty;
     bool m_disableFileChangeMonitor;

@@ -381,7 +381,7 @@ void EdytorNc::open(const QDir &dir)
 
 void EdytorNc::open()
 {
-    open(QDir::currentPath());
+    open(currentPath());
     statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
@@ -938,7 +938,7 @@ void EdytorNc::doDiffL()
         }
 
         if (fileName.isEmpty()) {
-            fileName = QDir::currentPath();
+            fileName = lastOpenedPath();
         }
 
         //        diffApp->close();
@@ -968,7 +968,7 @@ void EdytorNc::doDiffR()
         }
 
         if (fileName.isEmpty()) {
-            fileName = QDir::currentPath();
+            fileName = lastOpenedPath();
         }
 
         //        diffApp->close();
@@ -1059,7 +1059,7 @@ void EdytorNc::doDiff()
         }
 
         if (fileName.isEmpty()) {
-            fileName = QDir::currentPath();
+            fileName = lastOpenedPath();
         }
 
         //        diffApp->close();
@@ -1376,7 +1376,7 @@ MdiChild *EdytorNc::createMdiChild()
     connect(child, SIGNAL(addRemoveFileWatch(const QString &, bool)), this, SLOT(watchFile(const QString &, bool)));
 
     if (m_saveDirectory.isEmpty()) {
-        child->setPath(QDir::currentPath());
+        child->setPath(lastOpenedPath());
     } else {
         child->setPath(m_saveDirectory);
     }
@@ -1910,8 +1910,7 @@ void EdytorNc::readSettings()
                 SLOT(fileChanged(const QString)));
     }
 
-    QDir::setCurrent(settings.value("LastDir",  QDir::homePath()).toString());
-
+    m_lastOpenedPath = settings.value("LastDir",  m_lastOpenedPath).toString();
     m_extensions = settings.value("Extensions", m_extensions).toStringList();
     m_saveExtension = settings.value("DefaultSaveExtension", m_saveExtension).toString();
     m_saveDirectory = settings.value("DefaultSaveDirectory", m_saveDirectory).toString();
@@ -1974,7 +1973,7 @@ void EdytorNc::writeSettings()
     settings.setValue("state", saveState());
     settings.endGroup();
 
-    settings.setValue("LastDir", QDir::currentPath());
+    settings.setValue("LastDir", m_lastOpenedPath);
     settings.setValue("Extensions", m_extensions);
     settings.setValue("DefaultSaveExtension", m_saveExtension);
     settings.setValue("DefaultSaveDirectory", m_saveDirectory);
@@ -2018,7 +2017,7 @@ void EdytorNc::writeSettings()
     }
 }
 
-MdiChild *EdytorNc::activeMdiChild()
+MdiChild *EdytorNc::activeMdiChild() const
 {
     if (QMdiSubWindow *activeSubWindow = ui->mdiArea->activeSubWindow()) {
         return qobject_cast<MdiChild *>(activeSubWindow->widget());
@@ -2055,6 +2054,27 @@ void EdytorNc::setActiveSubWindow(QWidget *window)
     ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
 }
 
+QString EdytorNc::currentPath() const
+{
+    MdiChild *child = activeMdiChild();
+
+    if (child) {
+        return child->filePath();
+    }
+
+    return QDir::homePath();
+}
+
+QString EdytorNc::lastOpenedPath() const
+{
+    return m_lastOpenedPath;
+}
+
+void EdytorNc::setLastOpenedPath(const QString &path)
+{
+    m_lastOpenedPath = path;
+}
+
 void EdytorNc::loadFile(const DocumentInfo::Ptr &info, bool checkAlreadyLoaded)
 {
     QFileInfo file;
@@ -2080,6 +2100,7 @@ void EdytorNc::loadFile(const DocumentInfo::Ptr &info, bool checkAlreadyLoaded)
 
         if (status) {
             child->setDocumentInfo(info);
+            setLastOpenedPath(info->filePath);
             updateStatusBar();
             m_recentFiles->add(info->filePath);
         } else {
@@ -2604,7 +2625,7 @@ void EdytorNc::projectAdd()
     QStringList files = QFileDialog::getOpenFileNames(
                             this,
                             tr("Add files to project"),
-                            QDir::currentPath(),
+                            lastOpenedPath(),
                             filters, 0);
 
     QStringList list = files;
@@ -3123,7 +3144,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
             path = path.remove(QFileInfo(path).fileName());
         }
     } else {
-        path = QDir::currentPath();
+        path = lastOpenedPath();
     }
 
     if (path.isEmpty()) {
