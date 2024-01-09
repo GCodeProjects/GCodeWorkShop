@@ -22,6 +22,7 @@ HEADERS += \
     include/documentproducer.h \
     include/documentwidgetproperties.h \
     include/edytornc.h \
+    include/gcoderdocument.h \
     include/gcoderstyle.h \
     include/gcoderwidgetproperties.h \
     include/mdichild.h \
@@ -39,6 +40,7 @@ HEADERS += \
     gcoder.h \
     gcodereventfilter.h \
     gcoderinfo.h \
+    gcoderproducer.h \
     highlighter.h \
     highlightmode.h \
     inlinecalc.h \
@@ -61,8 +63,10 @@ SOURCES += \
     documentwidgetproperties.cpp \
     edytornc.cpp \
     findinf.cpp \
+    gcoderdocument.cpp \
     gcodereventfilter.cpp \
     gcoderinfo.cpp \
+    gcoderproducer.cpp \
     gcoderstyle.cpp \
     gcoderwidgetproperties.cpp \
     highlighter.cpp \
