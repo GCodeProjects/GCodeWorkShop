@@ -29,10 +29,9 @@ class QSettings;
 
 
 enum WindowModeFlags {
-    TABBED_MODE = 0x01,
-    SHOW_FILENAME = 0x02,
-    SHOW_FILEPATH = 0x04,
-    SHOW_PROGTITLE = 0x08
+    SHOW_FILENAME = 0x01,
+    SHOW_FILEPATH = 0x02,
+    SHOW_PROGTITLE = 0x04
 };
 
 

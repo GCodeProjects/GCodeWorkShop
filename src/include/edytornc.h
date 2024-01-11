@@ -126,6 +126,8 @@ protected:
 
     bool save(MdiChild *child, bool forceSaveAs);
 
+    void setMdiTabbedMode(bool tabbed);
+
 private slots:
     MdiChild *newFileFromTemplate();
     void open(const QDir &dir);
@@ -198,7 +200,6 @@ private slots:
     void updateOpenFileList();
     void openFileTableWidgetClicked(int x, int y);
     void diffEditorFile();
-    void closeTab(int i);
     void closeCurrentWindow();
     void closeAllMdiWindows();
     void goToLine(const QString &fileName, int line);
@@ -254,6 +255,7 @@ private:
     QString m_saveExtension;
     QString m_saveDirectory;
     QString m_lastOpenedPath;
+    bool m_MdiTabbedMode;
     bool m_defaultReadOnly;
     bool m_startEmpty;
     bool m_disableFileChangeMonitor;

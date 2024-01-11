@@ -124,6 +124,7 @@ EdytorNc::EdytorNc(Medium *medium)
     m_defaultReadOnly = false;
     m_startEmpty = false;
     m_disableFileChangeMonitor = false;
+    m_MdiTabbedMode = false;
 
     m_extensions << "*.nc" <<  "*.cnc";
     m_saveExtension = "*.nc";
@@ -189,20 +190,6 @@ EdytorNc::EdytorNc(Medium *medium)
 
     readSettings();
     clipboardLoad();
-
-    if (defaultMdiWindowProperites.windowMode & TABBED_MODE) {
-        ui->mdiArea->setViewMode(QMdiArea::TabbedView);
-        QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
-
-        if (tab) {
-            connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-            tab->setTabsClosable(true);
-            // The tabs might be very wide
-            tab->setExpanding(false);
-        }
-    } else {
-        ui->mdiArea->setViewMode(QMdiArea::SubWindowView);
-    }
 }
 
 EdytorNc::~EdytorNc()
@@ -244,12 +231,21 @@ Addons::Actions *EdytorNc::addonsActions()
     return m_addonsActions;
 }
 
-void EdytorNc::closeTab(int i)
+void EdytorNc::setMdiTabbedMode(bool tabbed)
 {
-    QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
+    m_MdiTabbedMode = tabbed;
 
-    if (tab != nullptr) {
-        tab->removeTab(i);
+    if (m_MdiTabbedMode) {
+        ui->mdiArea->setViewMode(QMdiArea::TabbedView);
+        QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
+
+        if (tab) {
+            tab->setTabsClosable(true);
+            // The tabs might be very wide
+            tab->setExpanding(false);
+        }
+    } else {
+        ui->mdiArea->setViewMode(QMdiArea::SubWindowView);
     }
 }
 
@@ -838,6 +834,7 @@ void EdytorNc::config()
     config.extensions = m_extensions;
     config.saveExtension = m_saveExtension;
     config.saveDirectory = m_saveDirectory;
+    config.mdiTabbedMode = m_MdiTabbedMode;
     config.defaultReadOnly = m_defaultReadOnly;
     config.disableFileChangeMonitor = m_disableFileChangeMonitor;
     config.startEmpty = m_startEmpty;
@@ -854,23 +851,10 @@ void EdytorNc::config()
         m_extensions = config.extensions;
         m_saveExtension = config.saveExtension;
         m_saveDirectory =config.saveDirectory;
+        setMdiTabbedMode(config.mdiTabbedMode);
         m_defaultReadOnly = config.defaultReadOnly;
         m_disableFileChangeMonitor = config.disableFileChangeMonitor;
         m_startEmpty = config.startEmpty;
-
-        if (defaultMdiWindowProperites.windowMode & TABBED_MODE) {
-            ui->mdiArea->setViewMode(QMdiArea::TabbedView);
-            QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
-
-            if (tab) {
-                connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
-                tab->setTabsClosable(true);
-                // The tabs might be very wide
-                tab->setExpanding(false);
-            }
-        } else {
-            ui->mdiArea->setViewMode(QMdiArea::SubWindowView);
-        }
 
         foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
             MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
@@ -1916,6 +1900,7 @@ void EdytorNc::readSettings()
     m_saveDirectory = settings.value("DefaultSaveDirectory", m_saveDirectory).toString();
     m_startEmpty = settings.value("StartEmpty", false).toBool();
     m_defaultReadOnly = settings.value("ViewerMode", false).toBool();
+    setMdiTabbedMode(settings.value("TabbetMode", false).toBool());
 
     fileDialogState = settings.value("FileDialogState", QByteArray()).toByteArray();
 
@@ -1978,6 +1963,7 @@ void EdytorNc::writeSettings()
     settings.setValue("DefaultSaveExtension", m_saveExtension);
     settings.setValue("DefaultSaveDirectory", m_saveDirectory);
     settings.setValue("CalcBinary", m_calcBinary);
+    settings.setValue("TabbetMode", m_MdiTabbedMode);
     settings.setValue("ViewerMode", m_defaultReadOnly);
     settings.setValue("StartEmpty", m_startEmpty);
     settings.setValue("DisableFileChangeMonitor", m_disableFileChangeMonitor);

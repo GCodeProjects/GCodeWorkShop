@@ -180,7 +180,7 @@ SetupDialog::SetupDialog(QWidget *parent, const AppConfig *prop,
     syntaxHCheckBox->setChecked(editProp.editorProperties.syntaxH);
     underlineCheckBox->setChecked(editProp.editorProperties.underlineChanges);
 
-    tabbedModecheckBox->setChecked(editProp.editorProperties.windowMode & TABBED_MODE);
+    tabbedModecheckBox->setChecked(editProp.mdiTabbedMode);
     fileNameCheckBox->setChecked(editProp.editorProperties.windowMode & SHOW_FILENAME);
     filePathCheckBox->setChecked(editProp.editorProperties.windowMode & SHOW_FILEPATH);
     titleCheckBox->setChecked(editProp.editorProperties.windowMode & SHOW_PROGTITLE);
@@ -285,10 +285,6 @@ AppConfig SetupDialog::getSettings()
 
     r = 0;
 
-    if (tabbedModecheckBox->isChecked()) {
-        r |= TABBED_MODE;
-    }
-
     if (fileNameCheckBox->isChecked()) {
         r |= SHOW_FILENAME;
     }
@@ -301,6 +297,7 @@ AppConfig SetupDialog::getSettings()
         r |= SHOW_PROGTITLE;
     }
 
+    editProp.mdiTabbedMode = tabbedModecheckBox->isChecked();
     editProp.editorProperties.windowMode = r;
     editProp.editorProperties.intCapsLock = capsLockCheckBox->isChecked();
     editProp.editorProperties.syntaxH = syntaxHCheckBox->isChecked();

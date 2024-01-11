@@ -49,6 +49,7 @@ struct AppConfig  {
     QStringList extensions;
     QString saveExtension;
     QString saveDirectory;
+    bool mdiTabbedMode;
     bool defaultReadOnly;
     bool startEmpty;
     bool disableFileChangeMonitor;
