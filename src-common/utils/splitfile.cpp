@@ -29,7 +29,7 @@
 
 #include <utils/splitfile.h>    // IWYU pragma: associated
 
-#include "commoninc.h"  // for FILENAME_FADAL, FILENAME_FANUC, FILENAME_HEID1, FILENAME_HEID2, FILENAME_OSP
+#include "filepatterns.h"  // for FILENAME_FADAL, FILENAME_FANUC, FILENAME_HEID1, FILENAME_HEID2, FILENAME_OSP
 
 
 QStringList Utils::splitFile(const QString &text)

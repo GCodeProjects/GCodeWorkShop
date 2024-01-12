@@ -18,7 +18,6 @@ SOURCES += \
     serialportconfigdialog.cpp
 
 HEADERS += \
-    commoninc.h \
     serialportsettings.h \
     serialporttestdialog.h \
     serialtransmissiondialog.h \
@@ -38,12 +37,15 @@ HEADERS += include/ui/longjobhelper.h \
     include/utils/medium.h \
     include/utils/configpage.h \
     include/utils/configdialog.h \
-    include/utils/splitfile.h
+    include/utils/guessfilename.h \
+    include/utils/splitfile.h \
+    utils/filepatterns.h
 
 SOURCES += ui/longjobhelper.cpp \
     utils/medium.cpp \
     utils/configpage.cpp \
     utils/configdialog.cpp \
+    utils/guessfilename.cpp \
     utils/splitfile.cpp
 
 FORMS += utils/configdialog.ui

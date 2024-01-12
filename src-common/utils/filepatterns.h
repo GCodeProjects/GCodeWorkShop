@@ -20,11 +20,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef COMMONINC_H
-#define COMMONINC_H
+#ifndef FILEPATTERNS_H
+#define FILEPATTERNS_H
 
-// Uses in serialtransmissiondialog.cpp and mdichild.cpp
-// TODO: move to CNC-specific class.
 #define FILENAME_SINU840     "%_N_[a-zA-Z0-9_]{1,31}_(MPF|SPF|TEA|COM|PLC|DEF|INI)"
 #define FILENAME_OSP         "\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"
 #define FILENAME_FANUC       "(?:\\n|\\r)(O|:)[0-9]{1,}"
@@ -34,4 +32,4 @@
 #define FILENAME_PHIL        "%PM[\\s]{1,}N[0-9]{4,4}"
 #define FILENAME_FADAL       "(N1)(O|:)[0-9]{1,}"
 
-#endif // COMMONINC_H
+#endif // FILEPATTERNS_H

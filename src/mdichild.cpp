@@ -67,9 +67,9 @@
 #include <QToolTip>
 
 #include <addons-actions.h>
-#include <commoninc.h>
 #include <edytornc.h>
 #include <utils/expressionparser.h>
+#include <utils/guessfilename.h>    // Utils::guessFileName()
 #include <utils/removezeros.h>      // Utils::removeZeros()
 
 #include "gcoderinfo.h"        // GCoderInfo
@@ -1515,124 +1515,12 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
 
 QString MdiChild::guessFileName()
 {
-    //QTextCursor cursor;
     QString fileName;
-    QString text;
-    QRegularExpression regex;
-
-    //cursor = ui->textEdit->textCursor();
-    text = this->text();
 
     if (m_widgetProperties.guessFileNameByProgNum) {
-        forever {
-            regex.setPattern(FILENAME_SINU840);
-            auto match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.remove(QLatin1String("%_N_"));
-                fileName.remove(QRegularExpression("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
-                break;
-            }
-
-            regex.setPattern(FILENAME_OSP);
-            match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.remove(QLatin1String("$"));
-                fileName.remove(QRegularExpression("\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
-                break;
-            }
-
-            regex.setPattern(FILENAME_SINU);
-            match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.remove(QRegularExpression("%(MPF|SPF|TEA)[\\s]{0,3}"));
-                break;
-            }
-
-            regex.setPattern(FILENAME_PHIL);
-            match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.remove(QRegularExpression("%PM[\\s]{1,}[N]{1,1}"));
-                break;
-            }
-
-            regex.setPattern(FILENAME_FANUC);
-            match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.replace(':', 'O');
-
-                //                if(fileName.at(0)!='O')
-                //                    fileName[0]='O';
-                //                if(fileName.at(0)=='O' && fileName.at(1)=='O')
-                //                    fileName.remove(0,1);
-                break;
-            }
-
-            regex.setPattern(FILENAME_HEID1);
-            match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.remove(QLatin1String("%"));
-                fileName.remove(QRegularExpression("\\s"));
-                break;
-            }
-
-            regex.setPattern(FILENAME_HEID2);
-            match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.remove(QRegularExpression("(BEGIN)(\\sPGM\\s)"));
-                fileName.remove(QRegularExpression("(\\sMM|\\sINCH)"));
-                break;
-            }
-
-            regex.setPattern(FILENAME_FADAL);
-            match = regex.match(text);
-
-            if (match.hasMatch()) {
-                fileName = match.captured();
-                fileName.remove("N1");
-                break;
-            }
-
-            fileName = "";
-            break;
-        }
+        fileName = Utils::guessFileNameByProgNum(text()).name;
     } else {
-        forever {
-            regex.setPattern("(;)[\\w:*=+ -]{4,64}");
-            auto match = regex.match(text);
-
-            if (match.capturedStart() >= 2) {
-                fileName = match.captured();
-                fileName.remove(";");
-                break;
-            }
-
-            regex.setPattern("(\\()[\\w:*=+ -]{4,64}(\\))");
-            match = regex.match(text);
-
-            if (match.capturedStart() >= 2) {
-                fileName = match.captured();
-                fileName.remove("(");
-                fileName.remove(")");
-                break;
-            }
-
-            fileName = "";
-            break;
-        }
+        fileName = Utils::guessFileNameByComments(text());
     }
 
     return fileName.simplified();

@@ -46,9 +46,9 @@
 #include <QWidget>
 
 #include <utils/medium.h>       // Medium
+#include <utils/guessfilename.h>
 #include <utils/splitfile.h>    // splitFile
 
-#include "commoninc.h"                // FILENAME_* macroses
 #include "serialtransmissiondialog.h" // SerialPortSettings QDialog QObject
 
 
@@ -1006,157 +1006,10 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
         return list;
     }
 
-    forever { // Detect program name like: O0032, %_N_PR25475002_MPF, $O0004.MIN%...
-        regex.setPattern(FILENAME_SINU840);
-        auto match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            name1.remove("%_N_");
-            //name1.remove(QRegularExpression("_(MPF|SPF|TEA|COM|PLC|DEF|INI)"));
-
-            regex.setPattern("_(MPF|SPF|TEA|COM|PLC|DEF|INI)");
-            match = regex.match(name1);
-
-            if (match.hasMatch()) {
-                ext1 = match.captured();
-                name1.remove(ext1);
-                ext1.remove(" ");
-                ext1.replace('_', '.');;
-            } else {
-                ext1.clear();
-            }
-
-            qDebug() << "3" << name1 << ext1;
-            break;
-        }
-
-        regex.setPattern(FILENAME_OSP);
-        match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            name1.remove("$");
-
-            regex.setPattern("\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}");
-            match = regex.match(name1);
-
-            if (match.hasMatch()) {
-                ext1 = match.captured();
-                name1.remove(ext1);
-                ext1.remove(" ");
-                ext1.remove("%");
-            } else {
-                ext1.clear();
-            }
-
-            name1.remove(QRegularExpression("[%]{0,1}"));
-            //name1.remove(QRegularExpression(".(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"));
-            qDebug() << "10" << name1 << ext1;
-            break;
-        }
-
-        regex.setPattern(FILENAME_SINU);
-        match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            //name1.remove(QRegularExpression("%(MPF|SPF|TEA)[\\s]{0,3}"));
-
-            regex.setPattern("%(MPF|SPF|TEA)[\\s]{0,3}");
-            match = regex.match(name1);
-
-            if (match.hasMatch()) {
-                ext1 = match.captured();
-                name1.remove(ext1);
-                ext1.remove(" ");
-                ext1.remove("%");
-                ext1.prepend('.');
-            } else {
-                ext1.clear();
-            }
-
-
-            //name1.append(ext);
-            qDebug() << "11" << name1 << ext1;
-            break;
-        }
-
-        regex.setPattern(FILENAME_PHIL);
-        match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            name1.remove(QRegularExpression("%PM[\\s]{1,}[N]{1,1}"));
-            ext1.clear();
-            qDebug() << "12" << name1 << ext1;
-            break;
-        }
-
-        regex.setPattern(FILENAME_FANUC);
-        match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            name1.replace(':', 'O');
-
-            //                if(name1.at(0)!='O')
-            //                    name1[0]='O';
-            //                if(name1.at(0)=='O' && name1.at(1)=='O')
-            //                    name1.remove(0,1);
-
-            ext1.clear();
-            qDebug() << "13" << name1 << ext1;
-            break;
-        }
-
-        regex.setPattern(FILENAME_HEID1);
-        match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            name1.remove("%");
-            name1.remove(QRegularExpression("\\s"));
-            ext1.clear();
-            qDebug() << "14" << name1 << ext1;
-            break;
-        }
-
-        regex.setPattern(FILENAME_HEID2);
-        match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            name1.remove(QRegularExpression("(BEGIN)(\\sPGM\\s)"));
-            name1.remove(QRegularExpression("(\\sMM|\\sINCH)"));
-            ext1.clear();
-
-            break;
-        }
-
-        regex.setPattern(FILENAME_FADAL);
-        match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name1 = match.captured();
-            name1.remove("N1");
-
-            ext1.clear();
-            qDebug() << "13" << name1 << ext1;
-            break;
-        }
-
-        name1 = "";
-        ext1 = "";
-        break;
-    }
-
-    name1.remove(".");
-    name1.remove(",");
-    name1 = name1.simplified();
-    name1 = name1.trimmed();
-    ext1 = ext1.simplified();
-    ext1 = ext1.trimmed();
+    // Detect program name like: O0032, %_N_PR25475002_MPF, $O0004.MIN%...
+    Utils::FileExt file1 = Utils::guessFileNameByProgNum(*text);
+    name1 = file1.name;
+    ext1 = file1.ext;
 
     if (portSettings.removeLetters) {
         QString tmpName = name1;
@@ -1171,46 +1024,10 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 
     qDebug() << "15" << name1 << ext1;
 
-    forever { // detect program name by user selected expression
-        regex.setPattern(portSettings.fileNameExpAs);
-        auto match = regex.match(*text);
-
-        if (match.hasMatch()) {
-            name2 = match.captured();
-            name2.remove(";");
-            name2.remove("(");
-            name2.remove(")");
-            name2.remove("[");
-            name2.remove("]");
-
-            int pos = name2.lastIndexOf('.');
-
-            if (pos >= 0) {
-                ext2 = name2.mid(pos);
-                name2.remove(regex);
-                ext2.remove(" ");
-            } else {
-                ext2.clear();
-            }
-
-            break;
-        }
-
-        name2 = "";
-        ext2 = "";
-        break;
-    }
-
-    name2.remove("*");
-    name2.remove(",");
-    name2 = name2.simplified();
-    name2 = name2.trimmed();
-    ext2 = ext2.simplified();
-    ext2 = ext2.trimmed();
-
-    if (!ext2.isEmpty()) {
-        name2.remove(ext2);
-    }
+    // detect program name by user selected expression
+    Utils::FileExt file2 = Utils::guessFileNameByRegExp(*text, portSettings.fileNameExpAs);
+    name2 = file2.name;
+    ext2 = file2.ext;
 
 
     if (portSettings.removeLetters) {
