@@ -30,7 +30,10 @@
 #include <QObject>
 #include <QPointer>
 #include <QString>
+#include <QStringList>
 #include <Qt>        // Qt::WindowFlags
+#include <QTextCursor>
+#include <QTextDocument>
 #include <QTextEdit> // QTextEdit::ExtraSelection
 #include <QWidget>
 
@@ -40,12 +43,17 @@
 #include <gcoderstyle.h>
 #include <gcoderwidgetproperties.h>
 
+class QCloseEvent;
+class QEvent;
 template <class Key, class T> class QHash;
 class QLineEdit;
 class QPlainTextEdit;
+class QPoint;
 class QPrinter;
 
+class CapsLockEventFilter;
 class Highlighter;
+class GCoderEventFilter;
 
 namespace Ui {
 class MdiChild;
@@ -148,8 +156,6 @@ protected:
     void setTextCursor(const QTextCursor &cursor);
     void changeDateInComment();
     void closeEvent(QCloseEvent *event);
-    bool eventFilter(QObject *obj, QEvent *ev);
-    bool event(QEvent *event);
     bool loadFile(const QString &fileName);
     bool saveFile(const QString &fileName);
     void updateBrief();
@@ -176,6 +182,8 @@ private:
     int m_highlightMode;
     GCoderStyle m_codeStyle;
     GCoderWidgetProperties m_widgetProperties;
+    CapsLockEventFilter *m_capsLockEventFilter;
+    GCoderEventFilter *m_gCoderEventFilter;
     QList<QTextEdit::ExtraSelection> extraSelections;
     QList<QTextEdit::ExtraSelection> findTextExtraSelections;
     QTextEdit::ExtraSelection selection;

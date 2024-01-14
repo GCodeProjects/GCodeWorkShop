@@ -75,6 +75,7 @@
 #include <serialtransmissiondialog.h> // SerialTransmissionDialog
 #include <utils/medium.h>             // Medium
 
+#include "capslockeventfilter.h"
 #include "setupdialog.h"    // SetupDialog
 #include "edytornc.h"       // EdytorNc QObject QMainWindow
 #include "gcoderinfo.h"     // GCoderInfo
@@ -845,6 +846,7 @@ void EdytorNc::config()
         QSettings *cfg = Medium::instance().settings();
         defaultMdiWindowProperites = config.editorProperties;
         defaultMdiWindowProperites.save(cfg);
+        emit intCapsLockChanged(defaultMdiWindowProperites.intCapsLock);
         m_codeStyle = config.codeStyle;
         m_codeStyle.save(cfg);
         m_calcBinary = config.calcBinary;
@@ -2191,7 +2193,10 @@ void EdytorNc::createFindToolBar()
                \
                "<p><b>$min</b> can be ommited, then equal 0</p>" \
                "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
-        findEdit->installEventFilter(this);
+        CapsLockEventFilter *findEditEventFilter = new CapsLockEventFilter(findEdit);
+        connect(this, SIGNAL(intCapsLockChanged(bool)), findEditEventFilter, SLOT(setCapsLockEnable(bool)));
+        findEditEventFilter->setCapsLockEnable(defaultMdiWindowProperites.intCapsLock);
+        findEdit->installEventFilter(findEditEventFilter);
         connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
         findToolBar->addWidget(findEdit);
         findToolBar->addAction(findPreviousAct);
@@ -2205,7 +2210,10 @@ void EdytorNc::createFindToolBar()
         replaceEdit->setToolTip(
             tr("<b>$$OperatorNumber</b> - do some math on replaced numbers. Operator +-*/" \
                "<p>$$+1 - will add 1 to replaced numbers</p>"));
-        replaceEdit->installEventFilter(this);
+        CapsLockEventFilter *replaceEditEventFilter = new CapsLockEventFilter(replaceEdit);
+        connect(this, SIGNAL(intCapsLockChanged(bool)), replaceEditEventFilter, SLOT(setCapsLockEnable(bool)));
+        replaceEditEventFilter->setCapsLockEnable(defaultMdiWindowProperites.intCapsLock);
+        replaceEdit->installEventFilter(replaceEditEventFilter);
         findToolBar->addWidget(replaceEdit);
         findToolBar->addAction(replacePreviousAct);
         findToolBar->addAction(replaceNextAct);
@@ -2297,43 +2305,6 @@ void EdytorNc::findTextChanged()
         } else {
             findEdit->setPalette(QPalette());
         }
-    }
-}
-
-bool EdytorNc::eventFilter(QObject *obj, QEvent *ev)
-{
-    if ((obj == findEdit) || (obj == replaceEdit)) {
-        if (ev->type() == QEvent::KeyPress) {
-            QKeyEvent *k = (QKeyEvent *) ev;
-
-            if (k->key() == Qt::Key_Comma) { //Keypad comma should always prints period
-                if ((k->modifiers() == Qt::KeypadModifier)
-                        || (k->nativeScanCode() == 0x53)) { // !!! Qt::KeypadModifier - Not working for keypad comma !!!
-                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier,
-                                            ".", false, 1));
-                    return true;
-                }
-            }
-
-            if (defaultMdiWindowProperites.intCapsLock) {
-                if (k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier)) {
-                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier,
-                                            k->text().toUpper(), false, 1));
-                    return true;
-                }
-
-                if (k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier)) {
-                    QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier,
-                                            k->text().toLower(), false, 1));
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    } else {
-        // pass the event on to the parent class
-        return QMainWindow::eventFilter(obj, ev);
     }
 }
 

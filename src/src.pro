@@ -30,8 +30,10 @@ HEADERS += \
 #######################################
 
 HEADERS += \
+    capslockeventfilter.h \
     findinf.h \
     gcoder.h \
+    gcodereventfilter.h \
     gcoderinfo.h \
     highlighter.h \
     highlightmode.h \
@@ -44,11 +46,13 @@ HEADERS += \
     tooltips.h
 
 SOURCES += \
+    capslockeventfilter.cpp \
     documentinfo.cpp \
     documentstyle.cpp \
     documentwidgetproperties.cpp \
     edytornc.cpp \
     findinf.cpp \
+    gcodereventfilter.cpp \
     gcoderinfo.cpp \
     gcoderstyle.cpp \
     gcoderwidgetproperties.cpp \

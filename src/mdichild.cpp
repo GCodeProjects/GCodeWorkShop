@@ -20,39 +20,40 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <algorithm> // std::sort()
-
 #include <QAction>
 #include <QApplication>
 #include <QChar>
 #include <QCloseEvent>
 #include <QColor>
 #include <QCompleter>
-#include <QDate>
+#include <QDateTime>
 #include <QDir>
 #include <QEvent>              // QEvent::KeyPress
 #include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QIcon>
+#include <QFont>
 #include <QHash>
 #include <QIODevice>
+#include <QIcon>
 #include <QKeyEvent>
 #include <QLatin1Char>
 #include <QLatin1String>
 #include <QLineEdit>
 #include <QLocale>
+#include <QMarginsF>
 #include <QMenu>
 #include <QMessageBox>
-#include <QMarginsF>
 #include <QPageLayout>
 #include <QPalette>
-#include <QPoint>
-#include <QPrinter>
+#include <QPlainTextEdit>
 #include <QPrintPreviewDialog>
+#include <QPrinter>
+#include <QRect>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QSettings>
+#include <QSplitter>
 #include <QString>
 #include <QStringList>
 #include <Qt>                  // Qt::WindowFlags
@@ -61,23 +62,29 @@
 #include <QTextCharFormat>
 #include <QTextCursor>
 #include <QTextDocument>
-#include <QTextDocumentFragment>
+#include <QTextFormat>
 #include <QTextOption>
 #include <QTextStream>
 #include <QtGlobal>            // QT_VERSION QT_VERSION_CHECK
-#include <QToolTip>
+#include <QVariant>
 
 #include <addons-actions.h>
 #include <edytornc.h>
+#include <mdichild.h>               // IWYU pragma: associated
 #include <utils/expressionparser.h>
 #include <utils/guessfilename.h>    // Utils::guessFileName()
 #include <utils/removezeros.h>      // Utils::removeZeros()
 
+#include "capslockeventfilter.h"
+#include "gcodereventfilter.h"
 #include "gcoderinfo.h"        // GCoderInfo
+#include "gcoderstyle.h"
+#include "gcoderwidgetproperties.h"
 #include "highlighter.h"       // Highlighter
 #include "highlightmode.h"
-#include "mdichild.h"          // MdiChild QObject QWidget
 #include "ui_mdichildform.h"
+
+class QPoint;
 
 
 MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
@@ -94,8 +101,15 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 
     ui->marginWidget->setAutoFillBackground(true);
 
-    ui->textEdit->installEventFilter(this);
-    ui->textEdit->viewport()->installEventFilter(this);
+    m_capsLockEventFilter = new CapsLockEventFilter(ui->textEdit);
+    m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
+    ui->textEdit->installEventFilter(m_capsLockEventFilter);
+    m_gCoderEventFilter = new GCoderEventFilter(ui->textEdit, this);
+    ui->textEdit->installEventFilter(m_gCoderEventFilter);
+    ui->textEdit->viewport()->installEventFilter(m_gCoderEventFilter);
+    connect(m_gCoderEventFilter, SIGNAL(requestInLineCalc()), this, SLOT(showInLineCalc()));
+    connect(m_gCoderEventFilter, SIGNAL(requestUnderLine()), this, SLOT(underLine()));
+
     setWindowIcon(QIcon(":/images/ncfile.png"));
 
     //fileChangeMonitor.clear();
@@ -514,6 +528,8 @@ void MdiChild::setWidgetProperties(const DocumentWidgetProperties::Ptr &properti
         return;
     }
 
+    m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
+
     if (m_widgetProperties.syntaxH) {
         if (highlighter == nullptr) {
             highlighter = new Highlighter(document());
@@ -527,339 +543,6 @@ void MdiChild::setWidgetProperties(const DocumentWidgetProperties::Ptr &properti
     }
 
     updateToolTips();
-}
-
-bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
-{
-    //qDebug() << "E" << ev->type() << obj->objectName();
-
-    //better word selection
-    if ((obj == ui->textEdit->viewport()) && (ev->type() == QEvent::MouseButtonDblClick)) {
-        QString key = "";
-        QString wordDelimiters = "()[]=,;:/ ";
-        bool wasLetter = false;
-        int posStart, posEnd;
-        QTextCursor cursor = ui->textEdit->textCursor();
-
-        while (true) {
-            if (cursor.atBlockStart() || cursor.atStart()) {
-                break;
-            }
-
-            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-            key = cursor.selectedText();
-
-            if (cursor.atBlockStart() || cursor.atStart()) {
-                break;
-            }
-
-            if (key.isEmpty()) {
-                break;
-            }
-
-            if (key.at(0).isSpace()) {
-                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-                break;
-            }
-
-            if (key.at(0).isLetter()) {
-                wasLetter = true;
-            }
-
-            if ((key.at(0).isDigit() || (key.at(0) == '.')) && wasLetter) {
-                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-                break;
-            }
-
-            if (wordDelimiters.contains(key.at(0))) {
-                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-                break;
-            }
-        }
-
-        posStart = cursor.position();
-
-        if (!cursor.atEnd() && !cursor.atBlockEnd()) {
-            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
-        }
-
-        wasLetter = true;
-
-        while (true) {
-            if (cursor.atEnd() || cursor.atBlockEnd()) {
-                break;
-            }
-
-            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-            key = cursor.selectedText();
-
-            if (cursor.atEnd()) {
-                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-                break;
-            }
-
-            if (key.at(key.length() - 1).isSpace()) {
-                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-                break;
-            }
-
-            if (key.at(key.length() - 1).isDigit()) {
-                wasLetter = false;
-            }
-
-            if (key.at(key.length() - 1).isLetter() && !wasLetter) {
-                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-                break;
-            }
-
-            if (wordDelimiters.contains(key.at(key.length() - 1))) {
-                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-                break;
-            }
-        }
-
-        posEnd = cursor.position();
-
-        cursor.setPosition(posStart, QTextCursor::MoveAnchor);
-        cursor.setPosition(posEnd, QTextCursor::KeepAnchor);
-        ui->textEdit->setTextCursor(cursor);
-
-        QKeyEvent *k = (QKeyEvent *) ev;
-
-        if (k->modifiers() == Qt::ControlModifier) {
-            showInLineCalc();
-        }
-
-        return true;
-    }
-
-    if ((obj == ui->textEdit) && !(ui->textEdit->isReadOnly())) {
-        if (ev->type() == QEvent::KeyPress) {
-            QKeyEvent *k = (QKeyEvent *) ev;
-
-            if (k->key() == Qt::Key_Insert) {
-                ui->textEdit->setOverwriteMode(!ui->textEdit->overwriteMode());
-            }
-
-            if ((k->text()[0].isPrint()) && !(k->text()[0].isSpace())) {
-                underLine();
-            }
-
-            if (k->key() == Qt::Key_Comma) { //Keypad comma should always prints period
-                if ((k->modifiers() == Qt::KeypadModifier)
-                        || (k->nativeScanCode() == 0x53)) { // !!! Qt::KeypadModifier - Not working for keypad comma !!!
-                    QApplication::sendEvent(ui->textEdit, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period,
-                                            Qt::NoModifier, ".", false, 1));
-                    return true;
-                }
-
-            }
-
-            if (m_widgetProperties.intCapsLock) {
-                if (k->text()[0].isLower() && (k->modifiers() == Qt::NoModifier)) {
-                    QApplication::sendEvent(ui->textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::NoModifier,
-                                            k->text().toUpper(), false, 1));
-                    return true;
-
-                }
-
-                if (k->text()[0].isUpper() && (k->modifiers() == Qt::ShiftModifier)) {
-                    QApplication::sendEvent(ui->textEdit, new QKeyEvent(QEvent::KeyPress, k->key(), Qt::ShiftModifier,
-                                            k->text().toLower(), false, 1));
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    } else {
-        //return ui->textEdit->eventFilter(obj, ev);
-        return false;
-    }
-}
-
-bool MdiChild::event(QEvent *event)
-{
-    QString group, key, text;
-    QTextCursor cursor;
-    QString fileName;
-
-    if ((event->type() == QEvent::ToolTip) && m_widgetProperties.editorToolTips) {
-
-        switch (m_highlightMode) {
-        case MODE_OKUMA:
-            group = QLatin1String("OKUMA");
-            break;
-
-        case MODE_FANUC:
-            group = QLatin1String("FANUC");
-            break;
-
-        case MODE_SINUMERIK_840:
-            group = QLatin1String("SINUMERIK_840");
-            break;
-
-        case MODE_PHILIPS:
-        case MODE_SINUMERIK:
-            group = QLatin1String("SINUMERIK");
-            break;
-
-        case MODE_HEIDENHAIN:
-            group = QLatin1String("HEIDENHAIN");
-            break;
-
-        case MODE_HEIDENHAIN_ISO:
-            group = QLatin1String("HEIDENHAIN_ISO");
-            break;
-
-        case MODE_LINUXCNC:
-            group = QLatin1String("LinuxCNC");
-            break;
-
-        case MODE_TOOLTIPS:
-            group = QLatin1String("TOOLTIP");
-            break;
-
-        default:
-            event->accept();
-            return true;
-        }
-
-        key = "";
-
-        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
-
-        cursor = ui->textEdit->cursorForPosition(helpEvent->pos());
-        cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor,
-                            2);  //fix cursor position
-
-        if (m_highlightMode == MODE_FANUC) {
-            do {
-                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-                key = cursor.selectedText();
-
-            } while (key.at(0).isLetter() && !key.isEmpty() && !cursor.atStart());
-
-            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
-
-            do {
-                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-                key = cursor.selectedText();
-
-            } while ((key.length() > 0 ? ((key.at(key.length() - 1).isLetter())
-
-                                          || (key.at(key.length() - 1) == QLatin1Char('.'))) : false) && !key.isEmpty()
-                     && !cursor.atBlockEnd());
-
-            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-
-            if (key.length() < 3) {
-                cursor = ui->textEdit->cursorForPosition(helpEvent->pos());
-                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor,
-                                    2);  //fix cursor position
-
-                do {
-                    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-                    key = cursor.selectedText();
-
-                } while (!((key.at(0) == QLatin1Char('#')) || key.at(0).isLetter()) && !key.isEmpty()
-
-                         && !cursor.atStart());
-
-                cursor.clearSelection();
-                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-
-                do {
-                    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-                    key = cursor.selectedText();
-                } while ((key.at(key.length() - 1).isDigit()
-
-                          || (key.at(key.length() - 1) ==  QLatin1Char('.'))) && !key.isEmpty() && !cursor.atEnd());
-
-                cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-
-            }
-
-            key = cursor.selectedText();
-
-        } else {
-            if (cursor.atEnd()) {
-                return true;
-            }
-
-            cursor.movePosition(QTextCursor::PreviousWord, QTextCursor::MoveAnchor);
-
-            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-            key = cursor.selectedText();
-
-            if (key.at(0) != QLatin1Char('@')) {
-                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
-                key = "";
-            } else {
-                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-            }
-
-            cursor.movePosition(QTextCursor::EndOfWord,  QTextCursor::KeepAnchor);
-
-            key = key + cursor.selectedText();
-        }
-
-        key = key.simplified();
-
-        if (key.length() == 2) {
-            if ((key.at(0) == QLatin1Char('G')) || (key.at(0) == QLatin1Char('M')))
-                if (!key.at(1).isLetter()) {
-                    key.insert(1, "0");
-                }
-        }
-
-        if (key.isEmpty()) {
-            text = "";
-        } else {
-            fileName = path() + "/" + "cnc_tips.txt";
-
-            if (QFile::exists(fileName)) {
-                QSettings settings(fileName, QSettings::IniFormat);
-                settings.beginGroup(group);
-                text = settings.value(key, "").toString();
-                settings.endGroup();
-            }
-
-            if (text.isEmpty() || text.isNull()) {
-                QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-                QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
-
-                fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
-
-                if (QFile::exists(fileName)) {
-                    QSettings settings(fileName, QSettings::IniFormat);
-                    settings.beginGroup(group);
-                    text = settings.value(key, "").toString();
-                    settings.endGroup();
-                } else {
-                    event->accept();
-                    return true;
-                }
-            }
-        }
-
-        if (!text.isEmpty()) {
-            key = QLatin1String("<p style='white-space:pre'>");
-
-            if (text.length() > 128) {
-                key = QLatin1String("<p style='white-space:normal'>");
-            }
-
-            QToolTip::showText(helpEvent->globalPos(), key + text, this, QRect());
-        } else {
-            QToolTip::hideText();
-            event->ignore();
-        }
-
-        return true;
-    }
-
-    return QWidget::event(event);
 }
 
 void MdiChild::updateToolTips()
@@ -901,23 +584,23 @@ void MdiChild::updateToolTips()
         break;
 
     default:
-//        m_gCoderEventFilter->setToolTipEnable(false);
+        m_gCoderEventFilter->setToolTipEnable(false);
         return;
     }
 
-//    m_gCoderEventFilter->setToolTipEnable(m_widgetProperties.editorToolTips);
+    m_gCoderEventFilter->setToolTipEnable(m_widgetProperties.editorToolTips);
 
     QHash<QString, QString> tips;
 
     QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
     QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
-    QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+    QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";    
     loadToolTips(tips, fileName, group);
 
     fileName = path() + "/" + "cnc_tips.txt";
     loadToolTips(tips, fileName, group);
 
-//    m_gCoderEventFilter->setTips(tips);
+    m_gCoderEventFilter->setTips(tips);
 }
 
 void MdiChild::loadToolTips(QHash<QString, QString> &tips, const QString &fileName, const QString &group)

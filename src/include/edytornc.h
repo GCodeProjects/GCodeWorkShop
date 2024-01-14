@@ -120,7 +120,6 @@ public slots:
 
 protected:
     void closeEvent(QCloseEvent *event);
-    bool eventFilter(QObject *obj, QEvent *ev);
     bool event(QEvent *event);
     void setLastOpenedPath(const QString &path);
 
@@ -219,6 +218,7 @@ private slots:
 
 signals:
     void needToShow();
+    void intCapsLockChanged(bool enable);
 
 private:
     void createActions();
