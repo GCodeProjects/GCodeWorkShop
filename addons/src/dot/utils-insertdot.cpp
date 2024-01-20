@@ -26,7 +26,7 @@
 #include "utils-insertdot.h"
 
 
-int Utils::insertDot(QString tx, const QString& addr, bool convert, int divider)
+int Utils::insertDot(QString& tx, const QString& addr, bool convert, int divider)
 {
 	int count = 0;
 	int pos = 0;
