@@ -26,15 +26,14 @@
 #include <QSettings>
 #include <QObject>
 
+#include <utils/medium.h>
+
 // _TR(s) QT_TRANSLATE_NOOP(s)
 #define _TR(s) s
 
 QString writeTooltipFile()
 {
-    QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-    QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
-
-    QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+    QString fileName = Medium::instance().settingsDir() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
 
     QSettings settings(fileName, QSettings::IniFormat);
 

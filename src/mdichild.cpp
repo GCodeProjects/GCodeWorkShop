@@ -73,6 +73,7 @@
 #include <mdichild.h>               // IWYU pragma: associated
 #include <utils/expressionparser.h>
 #include <utils/guessfilename.h>    // Utils::guessFileName()
+#include <utils/medium.h>
 #include <utils/removezeros.h>      // Utils::removeZeros()
 
 #include "capslockeventfilter.h"
@@ -592,9 +593,7 @@ void MdiChild::updateToolTips()
 
     QHash<QString, QString> tips;
 
-    QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
-    QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
-    QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";    
+    QString fileName = Medium::instance().settingsDir() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
     loadToolTips(tips, fileName, group);
 
     fileName = path() + "/" + "cnc_tips.txt";
