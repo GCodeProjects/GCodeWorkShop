@@ -10,37 +10,48 @@ include(../common.pri)
 
 INCLUDEPATH += include
 
-#EdytorNC
 
-SOURCES += edytornc.cpp \
-    main.cpp \
-    highlighter.cpp \
-    mdichild.cpp \
-    setupdialog.cpp \
-    findinf.cpp \
-    newfiledialog.cpp \
-    sessiondialog.cpp \
-    src/utils/expressionparser.cpp \
-    src/utils/removezeros.cpp
+# EdytorNC : public API
+#######################################
 
-HEADERS += include/edytornc.h \
-    highlighter.h \
+HEADERS += \
+    include/edytornc.h \
     include/mdichild.h \
-    setupdialog.h \
-    findinf.h \
-    tooltips.h \
-    newfiledialog.h \
-    sessiondialog.h \
     include/utils/expressionparser.h \
     include/utils/removezeros.h
 
-FORMS += mdichildform.ui \
-    findinfilesdialog.ui \
-    setupdialog.ui \
+
+# Private headers
+#######################################
+
+HEADERS += \
+    findinf.h \
+    highlighter.h \
+    newfiledialog.h \
+    sessiondialog.h \
+    setupdialog.h \
+    tooltips.h
+
+SOURCES += \
+    edytornc.cpp \
+    findinf.cpp \
+    highlighter.cpp \
+    main.cpp \
+    mdichild.cpp \
+    newfiledialog.cpp \
+    sessiondialog.cpp \
+    setupdialog.cpp \
+    src/utils/expressionparser.cpp \
+    src/utils/removezeros.cpp
+
+FORMS += \
     edytornc.ui \
+    findinfilesdialog.ui \
+    mdichildform.ui \
     newfiledialog.ui \
+    newsessiondialog.ui \
     sessiondialog.ui \
-    newsessiondialog.ui
+    setupdialog.ui
 
 
 # target platforms dependencies
