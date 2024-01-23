@@ -82,7 +82,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     ui = new Ui::MdiChild();
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
-    isUntitled = true;
+    m_isUntitled = true;
     ui->textEdit->setWordWrapMode(QTextOption::NoWrap);
     document()->setDocumentMargin(8);
     highlighter = nullptr;
@@ -119,237 +119,119 @@ QPlainTextEdit *MdiChild::textEdit()
     return ui->textEdit;
 }
 
-void MdiChild::newFile()
+void MdiChild::newFile(const QString &fileName)
 {
     static int sequenceNumber = 1;
 
-    isUntitled = true;
+    if (!fileName.isEmpty()) {
+        loadFile(fileName);
+    }
+
+    m_isUntitled = true;
     m_fileName = tr("program%1.nc").arg(sequenceNumber++);
+    document()->setModified(false);
     setWindowTitle(m_fileName + "[*]");
     m_brief = m_fileName;
-    document()->setModified(false);
-
+    updateWindowTitle();
     connect(document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 }
 
-void MdiChild::newFile(const QString &fileName)
-{
-    QFile file(fileName);
-
-    if (file.open(QIODevice::ReadOnly)) {
-        QTextStream in(&file);
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-
-        QString tex = in.readAll();
-        ui->textEdit->setPlainText(tex);
-        file.close();
-        QApplication::restoreOverrideCursor();
-        fileChangeMonitorAddPath(file.fileName());
-
-    } else {
-        QMessageBox::warning(this, tr("EdytorNC"),
-                             tr("Cannot read file \"%1\".\n %2")
-                             .arg(fileName)
-                             .arg(file.errorString()));
+bool MdiChild::load() {
+    if (!loadFile(filePath())) {
+        return false;
     }
 
-    newFile();
+    m_isUntitled = false;
+    document()->setModified(false);
+    setWindowModified(false);
+    updateBrief();
+    updateWindowTitle();
+    detectHighligthMode();
+
+    connect(document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+    fileChangeMonitorAddPath(filePath());
+    return true;
+}
+
+bool MdiChild::save()
+{
+    if (!saveFile(filePath())) {
+        return false;
+    }
+
+    m_isUntitled = false;
+    document()->setModified(false);
+    setWindowModified(false);
+    updateBrief();
+    updateWindowTitle();
+
+    if (mdiWindowProperites.clearUndoHistory) {
+        document()->clearUndoRedoStacks();
+    }
+
+    if (mdiWindowProperites.clearUnderlineHistory) {
+
+        QTextCursor cursorPos = ui->textEdit->textCursor();
+        ui->textEdit->blockSignals(true);
+        ui->textEdit->selectAll();
+
+        if (mdiWindowProperites.underlineChanges) {
+            QTextCursor cr = ui->textEdit->textCursor(); // Clear underline
+            QTextCharFormat format = cr.charFormat();
+            format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+            cr.setCharFormat(format);
+
+            ui->textEdit->setTextCursor(cr);
+        }
+
+        ui->textEdit->setTextCursor(cursorPos);
+
+        document()->setModified(false);
+        documentWasModified();
+        ui->textEdit->blockSignals(false);
+    }
+
+    detectHighligthMode();
+    return true;
 }
 
 bool MdiChild::loadFile(const QString &fileName)
 {
     QFile file(fileName);
 
-    if (file.open(QIODevice::ReadOnly)) {
-        QTextStream in(&file);
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-
-        QString tex = in.readAll();
-        ui->textEdit->setPlainText(tex);
-        file.close();
-        detectHighligthMode();
-        QApplication::restoreOverrideCursor();
-
-        setFilePath(fileName);
-        isUntitled = false;
-        document()->setModified(false);
-        setWindowModified(false);
-        updateBrief();
-        updateWindowTitle();
-        connect(document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
-        fileChangeMonitorAddPath(fileName);
-        return true;
-    } else {
-        QMessageBox::warning(this, tr("EdytorNC"),
-                             tr("Cannot read file \"%1\".\n %2")
-                             .arg(fileName)
-                             .arg(file.errorString()));
-        return false;
-    }
-}
-
-bool MdiChild::save()
-{
-    bool result = false;
-
-    setFocus();
-
-    if (isUntitled) {
-        result = saveAs();
-    } else {
-        result = saveFile(filePath());
-    }
-
-    if (result) {
-        if (mdiWindowProperites.clearUndoHistory) {
-            ui->textEdit->setUndoRedoEnabled(false);  //clear undo/redo history
-            ui->textEdit->setUndoRedoEnabled(true);
-        }
-
-        if (mdiWindowProperites.clearUnderlineHistory) {
-
-            QTextCursor cursorPos = ui->textEdit->textCursor();
-            ui->textEdit->blockSignals(true);
-            ui->textEdit->selectAll();
-
-            if (mdiWindowProperites.underlineChanges) {
-                QTextCursor cr = ui->textEdit->textCursor(); // Clear underline
-                QTextCharFormat format = cr.charFormat();
-                format.setUnderlineStyle(QTextCharFormat::NoUnderline);
-                cr.setCharFormat(format);
-
-                ui->textEdit->setTextCursor(cr);
-            }
-
-            ui->textEdit->setTextCursor(cursorPos);
-
-            document()->setModified(false);
-            documentWasModified();
-            ui->textEdit->blockSignals(false);
-        }
-    }
-
-    detectHighligthMode();
-    return result;
-}
-
-bool MdiChild::saveAs()
-{
-    QString fileName, filters, saveExt;
-
-#ifdef Q_OS_LINUX
-    QString extText = tr("CNC programs files %1 (%1);;");
-#elif defined Q_OS_WIN32
-    QString extText = tr("CNC programs files (%1);;");
-#elif defined Q_OS_MACX
-    QString extText = tr("CNC programs files %1 (%1);;");
-#endif
-
-    filters = extText.arg(mdiWindowProperites.saveExtension);
-
-    foreach (const QString ext, mdiWindowProperites.extensions) {
-        saveExt = extText.arg(ext);
-
-        if (ext != mdiWindowProperites.saveExtension) {
-            filters.append(saveExt);
-        }
-    }
-
-    filters.append(tr("Text files (*.txt);;"
-                      "All files (*.* *)"));
-
-    fileName = filePath();
-
-    if (QFileInfo(fileName).suffix() ==
-            "") { // sometimes when file has no extension QFileDialog::getSaveFileName will no apply choosen filter (extension)
-        fileName.append(".nc");
-    }
-
-    QString file = QFileDialog::getSaveFileName(
-                       this,
-                       tr("Save file as..."),
-                       fileName,
-                       filters, &saveFileFilter, QFileDialog::DontConfirmOverwrite);
-
-    if (file.isEmpty() || file.isNull()) {
+    if (!file.open(QIODevice::ReadOnly)) {
+        m_ioErrorString = file.errorString();
         return false;
     }
 
-    if (QFileInfo(file).suffix() == "") {
-    }
-
-    if ((QFile(file).exists())) {
-        QMessageBox msgBox;
-        msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(file));
-        msgBox.setInformativeText(tr("Do you want overwrite it ?"));
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
-        msgBox.setDefaultButton(QMessageBox::Discard);
-        msgBox.setIcon(QMessageBox::Warning);
-        int ret = msgBox.exec();
-
-        switch (ret) {
-        case QMessageBox::Save:
-            break;
-
-        case QMessageBox::Discard:
-            return false;
-            break;
-
-        default:
-            return false;
-            break;
-        }
-    }
-
-    fileChangeMonitorRemovePath(fileName);
-    return saveFile(file);
+    m_ioErrorString.clear();
+    setRawData(file.readAll());
+    file.close();
+    return true;
 }
 
 bool MdiChild::saveFile(const QString &fileName)
 {
-    int curPos;
-    QTextCursor cursor;
     QFile file(fileName);
-    fileChangeMonitorRemovePath(file.fileName());
-    curPos = ui->textEdit->textCursor().position();
 
-    if (file.open(QIODevice::WriteOnly)) {
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-
-        changeDateInComment();
-
-        QTextStream out(&file);
-
-        QString tex = ui->textEdit->toPlainText();
-
-        if (!tex.contains(QLatin1String("\r\n"))) {
-            tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
-        }
-
-        out << tex;
-        file.close();
-        QApplication::restoreOverrideCursor();
-
-        cursor = ui->textEdit->textCursor();
-        cursor.setPosition(curPos);
-        ui->textEdit->setTextCursor(cursor);
-
-        setFilePath(fileName);
-        isUntitled = false;
-        document()->setModified(false);
-        setWindowModified(false);
-        updateBrief();
-        updateWindowTitle();
-        fileChangeMonitorAddPath(file.fileName());
-        return true;
-    } else {
-        QMessageBox::warning(this, tr("EdytorNC"),
-                             tr("Cannot write file \"%1\".\n %2")
-                             .arg(fileName)
-                             .arg(file.errorString()));
+    if (!file.open(QIODevice::WriteOnly)) {
+        m_ioErrorString = file.errorString();
+        return false;
     }
 
-    return false;
+    m_ioErrorString.clear();
+
+    changeDateInComment();
+    fileChangeMonitorRemovePath(file.fileName());
+    file.write(rawData());
+    file.close();
+    fileChangeMonitorAddPath(fileName);
+    return true;
+}
+
+QString MdiChild::ioErrorString() const
+{
+    return m_ioErrorString;
 }
 
 QByteArray MdiChild::rawData() const
@@ -471,7 +353,7 @@ bool MdiChild::maybeSave()
 void MdiChild::updateBrief()
 {
     QRegularExpression regex;
-    QString text = ui->textEdit->toPlainText();
+    QString text = this->text();
     QString f_tx;
 
     regex.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
@@ -1656,7 +1538,7 @@ QString MdiChild::guessFileName()
     QRegularExpression regex;
 
     //cursor = ui->textEdit->textCursor();
-    text = ui->textEdit->toPlainText();
+    text = this->text();
 
     if (mdiWindowProperites.guessFileNameByProgNum) {
         forever {
@@ -2008,6 +1890,11 @@ bool MdiChild::isReadOnly() const
 void MdiChild::setReadOnly(bool ro)
 {
     ui->textEdit->setReadOnly(ro);
+}
+
+bool MdiChild::isUntitled() const
+{
+    return m_isUntitled;
 }
 
 bool MdiChild::hasSelection()

@@ -392,17 +392,98 @@ void EdytorNc::openFile(const QString &fileName)
     loadFile(DocumentInfo::Ptr(info), true);
 }
 
-void EdytorNc::save()
+bool EdytorNc::save(MdiChild *child, bool forceSaveAs)
 {
-    if (activeMdiChild()) {
-        if (activeMdiChild()->save()) {
-            statusBar()->showMessage(tr("File saved"), 5000);
+    if (child->isUntitled() || forceSaveAs) {
+        QString oldFileName;
+
+    #ifdef Q_OS_LINUX
+        QString extText = tr("CNC programs files %1 (%1);;");
+    #elif defined Q_OS_WIN32
+        QString extText = tr("CNC programs files (%1);;");
+    #elif defined Q_OS_MACX
+        QString extText = tr("CNC programs files %1 (%1);;");
+    #endif
+
+        QString filters = extText.arg(defaultMdiWindowProperites.saveExtension);
+
+        for (const QString &ext : defaultMdiWindowProperites.extensions) {
+            QString saveExt = extText.arg(ext);
+
+            if (ext != defaultMdiWindowProperites.saveExtension) {
+                filters.append(saveExt);
+            }
         }
+
+        filters.append(tr("Text files (*.txt);;" "All files (*.* *)"));
+
+        if (child->isUntitled()) {
+            oldFileName = child->guessFileName();
+        } else {
+            oldFileName = child->fileName();
+        }
+
+        if (QFileInfo(oldFileName).suffix() == "") {
+            // sometimes when file has no extension QFileDialog::getSaveFileName will no apply choosen filter (extension)
+            oldFileName.append(".nc");
+        }
+
+        QString newFileName = QFileDialog::getSaveFileName(
+                           this,
+                           tr("Save file as..."),
+                           QDir(child->path()).filePath(oldFileName),
+                           filters, nullptr, QFileDialog::DontConfirmOverwrite);
+
+        if (newFileName.isEmpty() || newFileName.isNull()) {
+            return false;
+        }
+
+        if (QFile::exists(newFileName)) {
+            QMessageBox msgBox;
+            msgBox.setParent(this, Qt::Dialog);
+            msgBox.setText(tr("<b>File \"%1\" exists.</b>").arg(newFileName));
+            msgBox.setInformativeText(tr("Do you want overwrite it ?"));
+            msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard);
+            msgBox.setDefaultButton(QMessageBox::Discard);
+            msgBox.setIcon(QMessageBox::Warning);
+
+            if (msgBox.exec() != QMessageBox::Save) {
+                return false;
+            }
+        }
+
+        child->setFilePath(newFileName);
     }
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    bool status = child->save();
+    QApplication::restoreOverrideCursor();
+    return status;
 }
 
-void EdytorNc::saveAll()
+bool EdytorNc::save()
 {
+    MdiChild *child = activeMdiChild();
+
+    if (!child) {
+        return true;
+    }
+
+    bool saved = save(activeMdiChild(), false);
+
+    if (saved) {
+        statusBar()->showMessage(tr("File saved"), 5000);
+    } else {
+        QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
+                             .arg(child->filePath()).arg(child->ioErrorString()));
+    }
+
+    return saved;
+}
+
+bool EdytorNc::saveAll()
+{
+    bool saved = true;
     int i = 0;
 
     MdiChild *currentMdiChild = activeMdiChild();
@@ -411,14 +492,16 @@ void EdytorNc::saveAll()
 
     foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
         MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-        mdiChild->blockSignals(true);
 
         if (mdiChild->isModified()) {
-            mdiChild->save();
-            i++;
+            if (save(mdiChild, false)) {
+                i++;
+            } else {
+                saved = false;
+                QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
+                                     .arg(mdiChild->filePath()).arg(mdiChild->ioErrorString()));
+            }
         }
-
-        mdiChild->blockSignals(false);
     }
 
     if (currentMdiChild != nullptr) {
@@ -428,13 +511,27 @@ void EdytorNc::saveAll()
     setUpdatesEnabled(true);
 
     statusBar()->showMessage(tr("Saved %1 files").arg(i), 5000);
+    return saved;
 }
 
-void EdytorNc::saveAs()
+bool EdytorNc::saveAs()
 {
-    if (activeMdiChild() && activeMdiChild()->saveAs()) {
-        statusBar()->showMessage(tr("File saved"), 5000);
+    MdiChild *child = activeMdiChild();
+
+    if (!child) {
+        return true;
     }
+
+    bool saved = save(activeMdiChild(), true);
+
+    if (saved) {
+        statusBar()->showMessage(tr("File saved"), 5000);
+    } else {
+        QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
+                             .arg(child->filePath()).arg(child->ioErrorString()));
+    }
+
+    return saved;
 }
 
 void EdytorNc::printFile()
@@ -2062,11 +2159,18 @@ void EdytorNc::loadFile(const DocumentInfo::Ptr &info, bool checkAlreadyLoaded)
     if ((file.exists()) && (file.isReadable())) {
         MdiChild *child = createMdiChild();
 
-        if (child->loadFile(info->filePath)) {
+        child->setFilePath(info->filePath);
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        bool status = child->load();
+        QApplication::restoreOverrideCursor();
+
+        if (status) {
             child->setDocumentInfo(info);
             updateStatusBar();
             m_recentFiles->add(info->filePath);
         } else {
+            QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot read file \"%1\".\n %2")
+                                 .arg(child->filePath()).arg(child->ioErrorString()));
             child->parentWidget()->close();
         }
     }
@@ -2979,6 +3083,7 @@ bool EdytorNc::maybeSaveProject()
 {
     if (currentProjectModified) {
         QMessageBox msgBox;
+        msgBox.setParent(this, Qt::Dialog);
         msgBox.setText(tr("<b>Project: \"%1\"\n has been modified.</b>").arg(currentProjectName));
         msgBox.setInformativeText(tr("Do you want to save your changes ?"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -3563,7 +3668,9 @@ void EdytorNc::fileChanged(const QString &fileName)
 
     switch (ret) {
     case QMessageBox::Yes:
-        mdiChild->loadFile(fileName);
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        mdiChild->load();
+        QApplication::restoreOverrideCursor();
         break;
 
     case QMessageBox::No:

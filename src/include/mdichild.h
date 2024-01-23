@@ -61,12 +61,10 @@ public:
     ~MdiChild();
 
     QPlainTextEdit *textEdit();
-    void newFile();
-    void newFile(const QString &fileName);
-    bool loadFile(const QString &fileName);
+    void newFile(const QString &fileName = QString());
+    bool load();
     bool save();
-    bool saveAs();
-    bool saveFile(const QString &fileName);
+    QString ioErrorString() const;
     QByteArray rawData() const;
     void setRawData(const QByteArray &data);
     QString path() const;
@@ -104,6 +102,7 @@ public:
     void setModified(bool mod = false);
     bool isReadOnly() const;
     void setReadOnly(bool ro);
+    bool isUntitled() const;
     bool hasSelection();
     bool isUndoAvailable();
     bool isRedoAvailable();
@@ -120,7 +119,10 @@ protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
     bool event(QEvent *event);
+    bool loadFile(const QString &fileName);
+    bool saveFile(const QString &fileName);
     void updateBrief();
+    void updateWindowTitle();
 
 private:
     bool maybeSave();
@@ -135,10 +137,8 @@ private:
     QString m_brief;
     QDir m_dir;
     QString m_fileName;
-    QString saveFileFilter;
-    QByteArray saveDialogState;
-    void updateWindowTitle();
-    bool isUntitled;
+    QString m_ioErrorString;
+    bool m_isUntitled;
     Highlighter *highlighter;
     int m_highlightMode;
     _editor_properites mdiWindowProperites;
