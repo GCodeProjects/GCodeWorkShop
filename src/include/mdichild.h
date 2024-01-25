@@ -25,6 +25,7 @@
 
 #include <QByteArray>
 #include <QChar>
+#include <QDir>
 #include <QList>
 #include <QObject>
 #include <QPointer>
@@ -66,7 +67,12 @@ public:
     bool save();
     bool saveAs();
     bool saveFile(const QString &fileName);
-    QString currentFile();  //filename with full path
+    QString path() const;
+    void setPath(const QString &path);
+    QString fileName() const;
+    void setFileName(const QString &fileName);
+    QString filePath() const;  //filename with full path
+    void setFilePath(const QString &filePath);
     DocumentInfo::Ptr documentInfo() const;
     void setDocumentInfo(const DocumentInfo::Ptr &info);
     _editor_properites getMdiWindowProperites();
@@ -76,8 +82,6 @@ public:
                            bool ignoreComments = true);
     void doUndo();
     void doRedo();
-    QString filePath();
-    QString fileName();
     void setHighligthMode(int mod);
     int highligthMode() const;
     void doDiff();
@@ -123,7 +127,8 @@ private:
     void fileChangeMonitorRemovePath(QString fileName);
 
     QString m_brief;
-    QString curFile;
+    QDir m_dir;
+    QString m_fileName;
     QString saveFileFilter;
     QByteArray saveDialogState;
     void updateWindowTitle();

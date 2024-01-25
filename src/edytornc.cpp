@@ -535,7 +535,7 @@ void EdytorNc::findInFl()
         }
 
         if (activeMdiChild()) {
-            findFiles->setDir(QFileInfo(activeMdiChild()->currentFile()).canonicalPath());
+            findFiles->setDir(activeMdiChild()->path());
         }
 
         connect(findFiles, SIGNAL(fileClicked(QString)), this, SLOT(loadFoundedFile(QString)));
@@ -763,7 +763,7 @@ void EdytorNc::readOnly()
 void EdytorNc::goToLine(const QString &fileName, int line)
 {
     if (activeMdiChild()) {
-        QString childFileName = activeMdiChild()->filePath() + "/" + activeMdiChild()->fileName();
+        QString childFileName = activeMdiChild()->filePath();
         childFileName =  QDir().toNativeSeparators(childFileName);
 
         if (QDir().toNativeSeparators(fileName) != childFileName) {
@@ -801,7 +801,7 @@ void EdytorNc::doDiffL()
         diffAct->setChecked(true);
 
         if (activeMdiChild()) {
-            fileName = activeMdiChild()->currentFile();
+            fileName = activeMdiChild()->filePath();
         }
 
         if (fileName.isEmpty()) {
@@ -831,7 +831,7 @@ void EdytorNc::doDiffR()
         diffAct->setChecked(true);
 
         if (activeMdiChild()) {
-            fileName = activeMdiChild()->currentFile();
+            fileName = activeMdiChild()->filePath();
         }
 
         if (fileName.isEmpty()) {
@@ -875,7 +875,7 @@ void EdytorNc::diffEditorFile()
     createDiffApp();
 
     if (diffApp != nullptr) {
-        QString fileName = child->currentFile();
+        QString fileName = child->filePath();
 
         if (fileName.isEmpty()) {
             return;
@@ -930,7 +930,7 @@ void EdytorNc::doDiff()
         createDiffApp();
 
         if (activeMdiChild()) {
-            fileName = activeMdiChild()->currentFile();
+            fileName = activeMdiChild()->filePath();
         }
 
         if (fileName.isEmpty()) {
@@ -1022,7 +1022,7 @@ void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
 
     if (mdiChild) {
         m_MdiWidgetsMaximized = mdiChild->parentWidget()->isMaximized();
-        statusBar()->showMessage(mdiChild->currentFile(), 9000);
+        statusBar()->showMessage(mdiChild->filePath(), 9000);
     }
 
     updateCurrentSerialConfig();
@@ -1163,7 +1163,7 @@ void EdytorNc::updateCurrentSerialConfig()
 
     if (hasMdiChild && (serialToolBar != nullptr)) {
         QDir dir;
-        dir.setPath(activeMdiChild()->filePath());
+        dir.setPath(activeMdiChild()->path());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
         dir.setNameFilters(QStringList("*.ini"));
@@ -1232,10 +1232,10 @@ void EdytorNc::updateWindowMenu()
 
         if (i < 9) {
             text = tr("&%1 %2").arg(i + 1)
-                   .arg(child->currentFile());
+                   .arg(child->filePath());
         } else {
             text = tr("%1 %2").arg(i + 1)
-                   .arg(child->currentFile());
+                   .arg(child->filePath());
         }
 
         QAction *action = windowMenu->addAction(text);
@@ -1262,7 +1262,12 @@ MdiChild *EdytorNc::createMdiChild()
     connect(child, SIGNAL(addRemoveFileWatch(const QString &, bool)), this,
             SLOT(watchFile(const QString &, bool)));
 
-    defaultMdiWindowProperites.lastDir = QDir::currentPath();
+    if (defaultMdiWindowProperites.saveDirectory.isEmpty()) {
+        child->setPath(QDir::currentPath());
+    } else {
+        child->setPath(defaultMdiWindowProperites.saveDirectory);
+    }
+
     child->setMdiWindowProperites(defaultMdiWindowProperites);
     child->setHighligthMode(defaultMdiWindowProperites.defaultHighlightMode);
 
@@ -2030,7 +2035,7 @@ QMdiSubWindow *EdytorNc::findMdiChild(const QString &fileName)
     foreach (QMdiSubWindow *window, ui->mdiArea->subWindowList()) {
         MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
 
-        if (mdiChild->currentFile() == QDir::toNativeSeparators(canonicalFilePath)) {
+        if (mdiChild->filePath() == QDir::toNativeSeparators(canonicalFilePath)) {
             return window;
         }
     }
@@ -2444,7 +2449,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 
     if (hasMdiChild && (serialToolBar != nullptr)) {
         QDir dir;
-        dir.setPath(activeMdiChild()->filePath());
+        dir.setPath(activeMdiChild()->path());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
         dir.setNameFilters(QStringList("*.ini"));
@@ -2457,7 +2462,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
         }
 
         if (attach) {
-            file.setFileName(activeMdiChild()->filePath() + "/" + configBox->currentText() + ".ini");
+            file.setFileName(activeMdiChild()->path() + "/" + configBox->currentText() + ".ini");
             file.open(QIODevice::ReadWrite);
             file.close();;
         }
@@ -2474,7 +2479,7 @@ void EdytorNc::createUserToolTipsFile()
     QString fileName;
 
     if (activeMdiChild()) {
-        fileName = QFileInfo(activeMdiChild()->currentFile()).canonicalPath();
+        fileName = activeMdiChild()->path();
     } else {
         return;
     }
@@ -2542,7 +2547,7 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 
     if (hasMdiChild) {
         QDir dir;
-        dir.setPath(activeMdiChild()->filePath());
+        dir.setPath(activeMdiChild()->path());
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
         dir.setNameFilters(QStringList("*.cfg"));
@@ -2555,7 +2560,7 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
         }
 
         if (attach) {
-            file.setFileName(activeMdiChild()->filePath() + "/" + highlightTypeCombo->currentText() +
+            file.setFileName(activeMdiChild()->path() + "/" + highlightTypeCombo->currentText() +
                              ".cfg");
             file.open(QIODevice::ReadWrite);
             file.close();;
@@ -3055,12 +3060,12 @@ void EdytorNc::updateOpenFileList()
     for (int i = 0; i < windows.size(); ++i) {
         MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
 
-        file.setFile(child->currentFile());
+        file.setFile(child->filePath());
 
         QTableWidgetItem *newItem = new QTableWidgetItem(file.fileName() + (child->isModified() ? "*" : ""));
 
         if (file.canonicalFilePath().isEmpty()) {
-            newItem->setToolTip(child->currentFile());
+            newItem->setToolTip(child->filePath());
         } else {
             newItem->setToolTip(QDir::toNativeSeparators(file.canonicalFilePath()));
         }
@@ -3129,7 +3134,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
     }
 
     if (ui->currentPathCheckBox->isChecked() && (activeMdiChild() != nullptr)) {
-        path = activeMdiChild()->currentFile();
+        path = activeMdiChild()->filePath();
 
         if (QFileInfo(path).exists()) {
             path = QFileInfo(path).canonicalPath();

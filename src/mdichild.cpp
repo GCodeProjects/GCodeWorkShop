@@ -124,9 +124,9 @@ void MdiChild::newFile()
     static int sequenceNumber = 1;
 
     isUntitled = true;
-    curFile = tr("program%1.nc").arg(sequenceNumber++);
-    setWindowTitle(curFile + "[*]");
-    m_brief = curFile;
+    m_fileName = tr("program%1.nc").arg(sequenceNumber++);
+    setWindowTitle(m_fileName + "[*]");
+    m_brief = m_fileName;
     ui->textEdit->document()->setModified(false);
 
     connect(ui->textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
@@ -170,7 +170,7 @@ bool MdiChild::loadFile(const QString &fileName)
         detectHighligthMode();
         QApplication::restoreOverrideCursor();
 
-        curFile = QFileInfo(fileName).canonicalFilePath();
+        setFilePath(fileName);
         isUntitled = false;
         ui->textEdit->document()->setModified(false);
         setWindowModified(false);
@@ -197,7 +197,7 @@ bool MdiChild::save()
     if (isUntitled) {
         result = saveAs();
     } else {
-        result = saveFile(curFile);
+        result = saveFile(filePath());
     }
 
     if (result) {
@@ -258,11 +258,7 @@ bool MdiChild::saveAs()
     filters.append(tr("Text files (*.txt);;"
                       "All files (*.* *)"));
 
-    if (isUntitled) {
-        fileName = guessFileName();
-    } else {
-        fileName = curFile;
-    }
+    fileName = filePath();
 
     if (QFileInfo(fileName).suffix() ==
             "") { // sometimes when file has no extension QFileDialog::getSaveFileName will no apply choosen filter (extension)
@@ -338,7 +334,7 @@ bool MdiChild::saveFile(const QString &fileName)
         cursor.setPosition(curPos);
         ui->textEdit->setTextCursor(cursor);
 
-        curFile = QFileInfo(fileName).canonicalFilePath();
+        setFilePath(fileName);
         isUntitled = false;
         ui->textEdit->document()->setModified(false);
         setWindowModified(false);
@@ -416,7 +412,7 @@ void MdiChild::changeDateInComment()
 void MdiChild::closeEvent(QCloseEvent *event)
 {
     if (maybeSave()) {
-        fileChangeMonitorRemovePath(currentFile());
+        fileChangeMonitorRemovePath(filePath());
         event->accept();
     } else {
         event->ignore();
@@ -432,7 +428,7 @@ bool MdiChild::maybeSave()
 {
     if (ui->textEdit->document()->isModified()) {
         QMessageBox msgBox;
-        msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(curFile));
+        msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(filePath()));
         msgBox.setInformativeText(tr("Do you want to save your changes ?"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Save);
@@ -485,7 +481,7 @@ void MdiChild::updateBrief()
     }
 
     if (f_tx.isEmpty()) {
-        m_brief = QFileInfo(curFile).fileName();
+        m_brief = fileName();
     } else {
         m_brief = f_tx.simplified();
     }
@@ -505,16 +501,11 @@ void MdiChild::updateWindowTitle()
     }
 
     if ((mdiWindowProperites.windowMode & SHOW_FILEPATH)) {
-        title += (QFileInfo(curFile).canonicalPath().isEmpty() ? "" : (QDir::toNativeSeparators(
-                      QFileInfo(curFile).canonicalPath() + "/")));
+        title += m_dir.path() + "/";
     }
 
-    if ((mdiWindowProperites.windowMode & SHOW_FILENAME)) {
-        title += QFileInfo(curFile).fileName();
-    }
-
-    if (title.isEmpty()) {
-        title += QFileInfo(curFile).fileName();
+    if ((mdiWindowProperites.windowMode & SHOW_FILENAME) || title.isEmpty()) {
+        title += m_fileName;
     }
 
     title += "[*]";
@@ -526,21 +517,43 @@ void MdiChild::updateWindowTitle()
 //   return QFileInfo(fullFileName).fileName();
 //}
 
-QString MdiChild::filePath()
+QString MdiChild::path() const
 {
-    return QFileInfo(curFile).absolutePath();
+    return m_dir.path();
 }
 
-QString MdiChild::fileName()
+void MdiChild::setPath(const QString &path)
 {
-    return QFileInfo(curFile).fileName();
+    m_dir.setPath(path);
+}
+
+QString MdiChild::fileName() const
+{
+    return  m_fileName;
+}
+
+void MdiChild::setFileName(const QString &fileName)
+{
+    m_fileName = fileName;
+}
+
+QString MdiChild::filePath() const
+{
+    return m_dir.filePath(m_fileName);
+}
+
+void MdiChild::setFilePath(const QString &filePath)
+{
+    QFileInfo fi(filePath);
+    m_fileName = fi.fileName();
+    m_dir = fi.dir();
 }
 
 DocumentInfo::Ptr MdiChild::documentInfo() const
 {
     GCoderInfo *info = new GCoderInfo();
     info->cursorPos = ui->textEdit->textCursor().position();
-    info->filePath = curFile;
+    info->filePath = filePath();
     info->geometry = parentWidget()->saveGeometry();
     info->highlightMode = highligthMode();
     info->readOnly = isReadOnly();
@@ -893,7 +906,7 @@ bool MdiChild::event(QEvent *event)
         if (key.isEmpty()) {
             text = "";
         } else {
-            fileName = QFileInfo(curFile).canonicalPath() + "/" + "cnc_tips.txt";
+            fileName = path() + "/" + "cnc_tips.txt";
 
             if (QFile::exists(fileName)) {
                 QSettings settings(fileName, QSettings::IniFormat);
@@ -1748,21 +1761,7 @@ QString MdiChild::guessFileName()
         }
     }
 
-    fileName = fileName.simplified();
-    fileName = fileName.trimmed();
-
-    //fileName.append(mdiWindowProperites.saveExtension);
-    if (mdiWindowProperites.saveDirectory.isEmpty()) {
-        fileName.prepend(mdiWindowProperites.lastDir + "/");
-    } else {
-        fileName.prepend(mdiWindowProperites.saveDirectory + "/");
-    }
-
-    fileName = QDir::cleanPath(fileName);
-
-    //ui->textEdit->setTextCursor(cursor);
-
-    return fileName;
+    return fileName.simplified();
 }
 
 bool MdiChild::findNext(QString textToFind, QTextDocument::FindFlags options,
@@ -2034,23 +2033,6 @@ void MdiChild::showContextMenu(const QPoint &pt)
 
     delete inLineCalcAct;
     delete menu;
-}
-
-//**************************************************************************************************
-//  Returns filename with full path
-//**************************************************************************************************
-
-QString MdiChild::currentFile()
-{
-    QString path = curFile;
-
-    if (isUntitled) {
-        path = mdiWindowProperites.lastDir + "/" + path;
-    }
-
-    path = QDir::cleanPath(path);
-
-    return QDir::toNativeSeparators(path);
 }
 
 //void MdiChild::setFileChangeMonitor(QFileSystemWatcher *monitor)
