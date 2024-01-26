@@ -81,10 +81,9 @@ public:
     void setHighligthMode(int mod);
     int highligthMode() const;
     void doDiff();
-    QString currentFileInfo(); // Text from first comment in CNC program
+    QString brief(); // Text from first comment in CNC program
     QString guessFileName();
     bool foundTextMatched(const QString& pattern, QString text);
-    void setCurrentFile(const QString &fileName, const QString &text);
     bool findNext(QString textToFind, QTextDocument::FindFlags options, bool ignoreComments);
     bool replaceNext(QString textToFind, QString replacedText, QTextDocument::FindFlags options,
                      bool ignoreComments);
@@ -111,6 +110,7 @@ protected:
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
     bool event(QEvent *event);
+    void updateBrief();
 
 private:
     bool maybeSave();
@@ -122,7 +122,7 @@ private:
     void fileChangeMonitorAddPath(QString fileName);
     void fileChangeMonitorRemovePath(QString fileName);
 
-    QString curFileInfo;
+    QString m_brief;
     QString curFile;
     QString saveFileFilter;
     QByteArray saveDialogState;

@@ -126,7 +126,7 @@ void MdiChild::newFile()
     isUntitled = true;
     curFile = tr("program%1.nc").arg(sequenceNumber++);
     setWindowTitle(curFile + "[*]");
-    curFileInfo = curFile;
+    m_brief = curFile;
     ui->textEdit->document()->setModified(false);
 
     connect(ui->textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
@@ -170,7 +170,12 @@ bool MdiChild::loadFile(const QString &fileName)
         detectHighligthMode();
         QApplication::restoreOverrideCursor();
 
-        setCurrentFile(fileName, tex);
+        curFile = QFileInfo(fileName).canonicalFilePath();
+        isUntitled = false;
+        ui->textEdit->document()->setModified(false);
+        setWindowModified(false);
+        updateBrief();
+        updateWindowTitle();
         connect(ui->textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
         fileChangeMonitorAddPath(fileName);
         return true;
@@ -333,7 +338,12 @@ bool MdiChild::saveFile(const QString &fileName)
         cursor.setPosition(curPos);
         ui->textEdit->setTextCursor(cursor);
 
-        setCurrentFile(fileName, tex);
+        curFile = QFileInfo(fileName).canonicalFilePath();
+        isUntitled = false;
+        ui->textEdit->document()->setModified(false);
+        setWindowModified(false);
+        updateBrief();
+        updateWindowTitle();
         fileChangeMonitorAddPath(file.fileName());
         return true;
     } else {
@@ -452,15 +462,11 @@ bool MdiChild::maybeSave()
     return true;
 }
 
-void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
+void MdiChild::updateBrief()
 {
     QRegularExpression regex;
+    QString text = ui->textEdit->toPlainText();
     QString f_tx;
-
-    curFile = QFileInfo(fileName).canonicalFilePath();
-    isUntitled = false;
-    ui->textEdit->document()->setModified(false);
-    setWindowModified(false);
 
     regex.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
     auto match = regex.match(text);
@@ -479,12 +485,10 @@ void MdiChild::setCurrentFile(const QString &fileName, const QString &text)
     }
 
     if (f_tx.isEmpty()) {
-        curFileInfo = QFileInfo(curFile).fileName();
+        m_brief = QFileInfo(curFile).fileName();
     } else {
-        curFileInfo = f_tx.simplified();
+        m_brief = f_tx.simplified();
     }
-
-    updateWindowTitle();
 }
 
 void MdiChild::updateWindowTitle()
@@ -492,7 +496,7 @@ void MdiChild::updateWindowTitle()
     QString title = "";
 
     if ((mdiWindowProperites.windowMode & SHOW_PROGTITLE)) {
-        title = curFileInfo;
+        title = m_brief;
     }
 
     if (!title.isEmpty() && ((mdiWindowProperites.windowMode & SHOW_FILEPATH)
@@ -1409,9 +1413,9 @@ void MdiChild::doDiff()
     //   setUpdatesEnabled(true);
 }
 
-QString MdiChild::currentFileInfo()
+QString MdiChild::brief()
 {
-    return curFileInfo;
+    return m_brief;
 }
 
 bool MdiChild::foundTextMatched(const QString &pattern, QString text)

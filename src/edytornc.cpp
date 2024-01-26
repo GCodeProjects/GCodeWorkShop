@@ -1241,7 +1241,7 @@ void EdytorNc::updateWindowMenu()
         QAction *action = windowMenu->addAction(text);
         action->setCheckable(true);
         action->setChecked(child == activeMdiChild());
-        action->setToolTip(child->currentFileInfo());
+        action->setToolTip(child->brief());
         connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
         windowMapper->setMapping(action, windows.at(i));
     }
@@ -3067,8 +3067,8 @@ void EdytorNc::updateOpenFileList()
 
         ui->openFileTableWidget->setItem(i, 1, newItem);
 
-        newItem = new QTableWidgetItem(child->currentFileInfo());
-        newItem->setToolTip(child->currentFileInfo() + " --> " + QDir::toNativeSeparators(
+        newItem = new QTableWidgetItem(child->brief());
+        newItem->setToolTip(child->brief() + " --> " + QDir::toNativeSeparators(
                                 file.canonicalFilePath()));
         ui->openFileTableWidget->setItem(i, 0, newItem);
 
