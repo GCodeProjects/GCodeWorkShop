@@ -47,7 +47,7 @@ contains(MODULES, qtsingleapplication) {
     LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/3rdparty/qtsingleapplication)
     LIBS += -lqtsingleapplication
 }
- 
+
 contains(MODULES, addons) {
     MODULES *= basic
     INCLUDEPATH += $${PROJECT_ROOT_PATH}/addons/include
@@ -79,6 +79,29 @@ contains(MODULES, basic) {
     INCLUDEPATH += $${PROJECT_ROOT_PATH}/3rdparty/basic
     LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/3rdparty/basic)
     LIBS += -lbasic
+}
+
+
+#------------------#
+# iwyu support     #
+#------------------#
+
+contains(USE, check_iwyu) {
+    linux*:IWYU_FLAGS += -fPIE
+
+    IWYU_FLAGS += $(DEFINES) -w $(INCPATH)
+
+    for(include, IWYU_INCLUDES) {
+        IWYU_FLAGS += -I$$include
+    }
+
+    IWYU_EXTRA_FLAGS += -Xiwyu --max_line_length=120 -Xiwyu --mapping_file=$${PROJECT_ROOT_PATH}/tools/iwyu.imp
+
+    iwyu.output  = ${QMAKE_FILE_BASE}.cpp.log
+    iwyu.commands = $${PROJECT_ROOT_PATH}/tools/iwyu_comp.sh $${IWYU_EXTRA_FLAGS} $${IWYU_FLAGS} ${QMAKE_FILE_NAME}
+    iwyu.input = SOURCES
+    iwyu.CONFIG += no_link target_predeps
+    QMAKE_EXTRA_COMPILERS += iwyu
 }
 
 

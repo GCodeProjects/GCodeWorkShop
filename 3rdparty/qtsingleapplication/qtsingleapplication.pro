@@ -4,6 +4,8 @@ TEMPLATE = lib
 TARGET = qtsingleapplication
 CONFIG += staticlib
 
+USE -= check_iwyu
+
 include(../../common.pri)
 
 QT *= widgets network
