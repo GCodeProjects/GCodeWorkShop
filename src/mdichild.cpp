@@ -84,7 +84,7 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     setAttribute(Qt::WA_DeleteOnClose);
     isUntitled = true;
     ui->textEdit->setWordWrapMode(QTextOption::NoWrap);
-    ui->textEdit->document()->setDocumentMargin(8);
+    document()->setDocumentMargin(8);
     highlighter = nullptr;
     m_highlightMode = MODE_AUTO;
     setFocusProxy(ui->textEdit);
@@ -127,9 +127,9 @@ void MdiChild::newFile()
     m_fileName = tr("program%1.nc").arg(sequenceNumber++);
     setWindowTitle(m_fileName + "[*]");
     m_brief = m_fileName;
-    ui->textEdit->document()->setModified(false);
+    document()->setModified(false);
 
-    connect(ui->textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+    connect(document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
 }
 
 void MdiChild::newFile(const QString &fileName)
@@ -172,11 +172,11 @@ bool MdiChild::loadFile(const QString &fileName)
 
         setFilePath(fileName);
         isUntitled = false;
-        ui->textEdit->document()->setModified(false);
+        document()->setModified(false);
         setWindowModified(false);
         updateBrief();
         updateWindowTitle();
-        connect(ui->textEdit->document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
+        connect(document(), SIGNAL(contentsChanged()), this, SLOT(documentWasModified()));
         fileChangeMonitorAddPath(fileName);
         return true;
     } else {
@@ -223,7 +223,7 @@ bool MdiChild::save()
 
             ui->textEdit->setTextCursor(cursorPos);
 
-            ui->textEdit->document()->setModified(false);
+            document()->setModified(false);
             documentWasModified();
             ui->textEdit->blockSignals(false);
         }
@@ -336,7 +336,7 @@ bool MdiChild::saveFile(const QString &fileName)
 
         setFilePath(fileName);
         isUntitled = false;
-        ui->textEdit->document()->setModified(false);
+        document()->setModified(false);
         setWindowModified(false);
         updateBrief();
         updateWindowTitle();
@@ -364,7 +364,7 @@ void MdiChild::changeDateInComment()
     QTextCursor cursor = ui->textEdit->textCursor();
     cursor.setPosition(0);
 
-    cursor = ui->textEdit->document()->find(regex, cursor);
+    cursor = document()->find(regex, cursor);
 
     if (!cursor.isNull()) {
         ui->textEdit->setUpdatesEnabled(false);
@@ -380,12 +380,12 @@ void MdiChild::changeDateInComment()
 
         regex.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
         cursor.setPosition(0);
-        cursor = ui->textEdit->document()->find(regex, cursor);
+        cursor = document()->find(regex, cursor);
 
         if (cursor.isNull()) {
             regex.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
             cursor.setPosition(0);
-            cursor = ui->textEdit->document()->find(regex, cursor);
+            cursor = document()->find(regex, cursor);
         }
 
         if (!cursor.isNull()) {
@@ -421,12 +421,12 @@ void MdiChild::closeEvent(QCloseEvent *event)
 
 void MdiChild::documentWasModified()
 {
-    setWindowModified(ui->textEdit->document()->isModified());
+    setWindowModified(document()->isModified());
 }
 
 bool MdiChild::maybeSave()
 {
-    if (ui->textEdit->document()->isModified()) {
+    if (document()->isModified()) {
         QMessageBox msgBox;
         msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(filePath()));
         msgBox.setInformativeText(tr("Do you want to save your changes ?"));
@@ -441,7 +441,7 @@ bool MdiChild::maybeSave()
             break;
 
         case QMessageBox::Discard:
-            ui->textEdit->document()->setModified(false);
+            document()->setModified(false);
             return true;
             break;
 
@@ -601,7 +601,7 @@ void MdiChild::setMdiWindowProperites(_editor_properites opt)
 
     if (mdiWindowProperites.syntaxH) {
         if (highlighter == nullptr) {
-            highlighter = new Highlighter(ui->textEdit->document());
+            highlighter = new Highlighter(document());
         }
     } else {
         if (highlighter != nullptr) {
@@ -977,7 +977,7 @@ void MdiChild::highlightCurrentLine()
     QColor lineColor = QColor(mdiWindowProperites.lineColor).darker(108);
     selection.format.setBackground(lineColor);
 
-    QTextDocument *doc = ui->textEdit->document();
+    QTextDocument *doc = document();
     QTextCursor cursor = ui->textEdit->textCursor();
     QTextCursor beforeCursor = cursor;
 
@@ -1209,7 +1209,7 @@ void MdiChild::highlightFindText(const QString &searchString, QTextDocument::Fin
     QColor lineColor = QColor(Qt::yellow).lighter(155);
     selection.format.setBackground(lineColor);
 
-    QTextDocument *doc = ui->textEdit->document();
+    QTextDocument *doc = document();
     QTextCursor cursor = ui->textEdit->textCursor();
     cursor.setPosition(0);
 
@@ -1360,8 +1360,7 @@ void MdiChild::detectHighligthMode()
         return;
     }
 
-    bool mod =
-        ui->textEdit->document()->isModified();  // something below clears document modified state
+    bool mod = document()->isModified();  // something below clears document modified state
 
     if (m_highlightMode == MODE_AUTO) {
         text = ui->textEdit->toPlainText();
@@ -1377,7 +1376,7 @@ void MdiChild::detectHighligthMode()
                             mdiWindowProperites.fontSize, QFont::Normal));
     highlighter->rehighlight();
 
-    ui->textEdit->document()->setModified(mod);
+    document()->setModified(mod);
 }
 
 void MdiChild::setHighligthMode(int mod)
@@ -1570,7 +1569,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
         if (isRegExp) {
             regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
 
-            cursor = ui->textEdit->document()->find(regex, cursor, options);
+            cursor = document()->find(regex, cursor, options);
 
             found = !cursor.isNull();
 
@@ -1962,12 +1961,12 @@ void MdiChild::printPreview(QPrinter *printer)
 
 bool MdiChild::isModified()
 {
-    return ui->textEdit->document()->isModified();
+    return document()->isModified();
 }
 
 void MdiChild::setModified(bool mod)
 {
-    ui->textEdit->document()->setModified(mod);
+    document()->setModified(mod);
 }
 
 bool MdiChild::isReadOnly() const
@@ -1987,12 +1986,12 @@ bool MdiChild::hasSelection()
 
 bool MdiChild::isUndoAvailable()
 {
-    return ui->textEdit->document()->isUndoAvailable();
+    return document()->isUndoAvailable();
 }
 
 bool MdiChild::isRedoAvailable()
 {
-    return ui->textEdit->document()->isRedoAvailable();
+    return document()->isRedoAvailable();
 }
 
 bool MdiChild::overwriteMode()
@@ -2003,6 +2002,11 @@ bool MdiChild::overwriteMode()
 QTextCursor MdiChild::textCursor()
 {
     return ui->textEdit->textCursor();
+}
+
+QTextDocument *MdiChild::document() const
+{
+    return ui->textEdit->document();
 }
 
 //void MdiChild::createContextMenuActions()

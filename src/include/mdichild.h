@@ -110,6 +110,7 @@ public slots :
     void showInLineCalc();
 
 protected:
+    QTextDocument *document() const;
     void changeDateInComment();
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
