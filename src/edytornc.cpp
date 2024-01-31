@@ -895,15 +895,7 @@ void EdytorNc::diffEditorFile()
             return;
         }
 
-        QTextStream out(&file);
-
-        QString tex = child->textEdit()->toPlainText();
-
-        if (!tex.contains(QLatin1String("\r\n"))) {
-            tex.replace(QLatin1String("\n"), QLatin1String("\r\n"));
-        }
-
-        out << tex;
+        file.write(child->rawData());
         file.close();
 
         diffAct->setChecked(true);
@@ -3475,7 +3467,7 @@ void EdytorNc::sendButtonClicked()
     commAppAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    tx.append(activeWindow->textEdit()->toPlainText());
+    tx.append(activeWindow->text());
 
     SerialTransmissionDialog transmissionDialog(this);
     transmissionDialog.sendData(tx, configBox->currentText());

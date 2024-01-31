@@ -352,6 +352,16 @@ bool MdiChild::saveFile(const QString &fileName)
     return false;
 }
 
+QByteArray MdiChild::rawData() const
+{
+    return text(true).toLocal8Bit();
+}
+
+void MdiChild::setRawData(const QByteArray &data)
+{
+    setText(QString::fromLocal8Bit(data));
+}
+
 void MdiChild::changeDateInComment()
 {
     if (!mdiWindowProperites.changeDateInComment) {
@@ -1957,6 +1967,27 @@ void MdiChild::printPreview(QPrinter *printer)
 #ifndef QT_NO_PRINTER
     ui->textEdit->print(printer);
 #endif
+}
+
+QString MdiChild::text(bool addCR) const
+{
+    QString text = document()->toPlainText();
+
+    if (addCR && !text.contains(QLatin1String("\r\n"))) {
+        text.replace(QLatin1String("\n"), QLatin1String("\r\n"));
+    }
+
+    return text;
+}
+
+void MdiChild::setText(const QString &text)
+{
+    document()->setPlainText(text);
+}
+
+void MdiChild::insertText(const QString& text)
+{
+    ui->textEdit->insertPlainText(text);
 }
 
 bool MdiChild::isModified()

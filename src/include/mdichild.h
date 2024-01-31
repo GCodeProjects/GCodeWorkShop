@@ -67,6 +67,8 @@ public:
     bool save();
     bool saveAs();
     bool saveFile(const QString &fileName);
+    QByteArray rawData() const;
+    void setRawData(const QByteArray &data);
     QString path() const;
     void setPath(const QString &path);
     QString fileName() const;
@@ -95,6 +97,9 @@ public:
                     bool ignoreComments);
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
     void filePrintPreview();
+    QString text(bool addCR = false) const;
+    void setText(const QString &text);
+    void insertText(const QString &text);
     bool isModified();
     void setModified(bool mod = false);
     bool isReadOnly() const;

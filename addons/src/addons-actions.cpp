@@ -264,7 +264,7 @@ void Addons::Actions::doCompileMacro()
     }
 
     MdiChild *child = enc->newFile();
-    child->textEdit()->insertPlainText(compiler.result());
+    child->insertText(compiler.result());
 }
 
 void Addons::Actions::doDot()
@@ -414,7 +414,7 @@ void Addons::Actions::doSplitProgramms()
         }
 
         activeWindow->textEdit()->setUndoRedoEnabled(false);  //clear undo/redo history
-        activeWindow->textEdit()->setPlainText(it);
+        activeWindow->setText(it);
         activeWindow->textEdit()->setUndoRedoEnabled(true);
     }
 
