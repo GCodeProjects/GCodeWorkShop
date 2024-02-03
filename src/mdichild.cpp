@@ -56,6 +56,7 @@
 #include <QStringList>
 #include <Qt>                  // Qt::WindowFlags
 #include <QtDebug>             // qDebug()
+#include <QTextBlock>
 #include <QTextCharFormat>
 #include <QTextCursor>
 #include <QTextDocument>
@@ -100,11 +101,14 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     ui->splitterH->setBackgroundRole(QPalette::Base);
     ui->marginWidget->setBackgroundRole(QPalette::Base);
 
-
     ui->textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->textEdit, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(showContextMenu(const QPoint &)));
     connect(ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+    connect(ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(textEditCursorPositionChanged()));
+    connect(ui->textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(textEditModificationChanged(bool)));
+    connect(ui->textEdit, SIGNAL(redoAvailable(bool)), this, SLOT(textEditRedoAvailable(bool)));
+    connect(ui->textEdit, SIGNAL(undoAvailable(bool)), this, SLOT(textEditUndoAvailable(bool)));
 }
 
 MdiChild::~MdiChild()
@@ -114,7 +118,7 @@ MdiChild::~MdiChild()
     }
 }
 
-QPlainTextEdit *MdiChild::textEdit()
+QPlainTextEdit *MdiChild::textEdit() const
 {
     return ui->textEdit;
 }
@@ -171,24 +175,23 @@ bool MdiChild::save()
 
     if (mdiWindowProperites.clearUnderlineHistory) {
 
-        QTextCursor cursorPos = ui->textEdit->textCursor();
-        ui->textEdit->blockSignals(true);
-        ui->textEdit->selectAll();
+        QTextCursor cursorPos = textCursor();
+        textEdit()->blockSignals(true);
+        selectAll();
 
         if (mdiWindowProperites.underlineChanges) {
-            QTextCursor cr = ui->textEdit->textCursor(); // Clear underline
+            QTextCursor cr = textCursor(); // Clear underline
             QTextCharFormat format = cr.charFormat();
             format.setUnderlineStyle(QTextCharFormat::NoUnderline);
             cr.setCharFormat(format);
-
-            ui->textEdit->setTextCursor(cr);
+            setTextCursor(cr);
         }
 
-        ui->textEdit->setTextCursor(cursorPos);
+        setTextCursor(cursorPos);
 
         document()->setModified(false);
         documentWasModified();
-        ui->textEdit->blockSignals(false);
+        textEdit()->blockSignals(false);
     }
 
     detectHighligthMode();
@@ -253,22 +256,22 @@ void MdiChild::changeDateInComment()
     QRegularExpression regex;
     QString strDate = QLocale().toString(QDate::currentDate(), QLocale::ShortFormat);
     regex.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
-    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextCursor cursor = textCursor();
     cursor.setPosition(0);
 
     cursor = document()->find(regex, cursor);
 
     if (!cursor.isNull()) {
-        ui->textEdit->setUpdatesEnabled(false);
+        textEdit()->setUpdatesEnabled(false);
         cursor.beginEditBlock();
         cursor.removeSelectedText();
         cursor.insertText(tr("DATE") + ": " + strDate);
         cursor.endEditBlock();
 
-        ui->textEdit->setUpdatesEnabled(true);
-        ui->textEdit->repaint();
+        textEdit()->setUpdatesEnabled(true);
+        textEdit()->repaint();
     } else {
-        cursor = ui->textEdit->textCursor();
+        cursor = textCursor();
 
         regex.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
         cursor.setPosition(0);
@@ -281,7 +284,7 @@ void MdiChild::changeDateInComment()
         }
 
         if (!cursor.isNull()) {
-            ui->textEdit->setUpdatesEnabled(false);
+            textEdit()->setUpdatesEnabled(false);
             cursor.beginEditBlock();
             QString text = cursor.selectedText();
             cursor.removeSelectedText();
@@ -295,8 +298,8 @@ void MdiChild::changeDateInComment()
             cursor.insertText(text);
             cursor.endEditBlock();
 
-            ui->textEdit->setUpdatesEnabled(true);
-            ui->textEdit->repaint();
+            textEdit()->setUpdatesEnabled(true);
+            textEdit()->repaint();
         }
     }
 }
@@ -444,7 +447,7 @@ void MdiChild::setFilePath(const QString &filePath)
 DocumentInfo::Ptr MdiChild::documentInfo() const
 {
     GCoderInfo *info = new GCoderInfo();
-    info->cursorPos = ui->textEdit->textCursor().position();
+    info->cursorPos = textCursor().position();
     info->filePath = filePath();
     info->geometry = parentWidget()->saveGeometry();
     info->highlightMode = highligthMode();
@@ -454,9 +457,6 @@ DocumentInfo::Ptr MdiChild::documentInfo() const
 
 void MdiChild::setDocumentInfo(const DocumentInfo::Ptr &info)
 {
-    //curFile = info->filePath;
-    setReadOnly(info->readOnly);
-
     if (!info->geometry.isEmpty()) {
         parentWidget()->restoreGeometry(info->geometry);
     }
@@ -464,9 +464,9 @@ void MdiChild::setDocumentInfo(const DocumentInfo::Ptr &info)
     GCoderInfo *gci = dynamic_cast<GCoderInfo *>(info.get());
 
     if (gci) {
-        QTextCursor cursor = ui->textEdit->textCursor();
+        QTextCursor cursor = textCursor();
         cursor.setPosition(gci->cursorPos);
-        ui->textEdit->setTextCursor(cursor);
+        setTextCursor(cursor);
         setHighligthMode(gci->highlightMode);
     }
 }
@@ -856,12 +856,12 @@ void MdiChild::highlightCurrentLine()
     extraSelections.clear();
     tmpSelections.append(blockExtraSelections);
     tmpSelections.append(findTextExtraSelections);
-    ui->textEdit->setExtraSelections(tmpSelections);
+    textEdit()->setExtraSelections(tmpSelections);
 
-    if (!ui->textEdit->isReadOnly()) {
+    if (!isReadOnly()) {
         selection.format.setBackground(QColor(mdiWindowProperites.lineColor));
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-        selection.cursor = ui->textEdit->textCursor();
+        selection.cursor = textCursor();
         selection.cursor.clearSelection();
         extraSelections.append(selection);
     }
@@ -870,7 +870,7 @@ void MdiChild::highlightCurrentLine()
     selection.format.setBackground(lineColor);
 
     QTextDocument *doc = document();
-    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextCursor cursor = textCursor();
     QTextCursor beforeCursor = cursor;
 
     cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
@@ -903,7 +903,7 @@ void MdiChild::highlightCurrentLine()
             proceed = false;
 
             if (m_highlightMode == MODE_LINUXCNC) {
-                cursor = ui->textEdit->textCursor();
+                cursor = textCursor();
 
                 cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
                 cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
@@ -941,7 +941,7 @@ void MdiChild::highlightCurrentLine()
 
 
             if (m_highlightMode == MODE_SINUMERIK_840) {
-                cursor = ui->textEdit->textCursor();
+                cursor = textCursor();
 
                 cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
                 cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
@@ -974,7 +974,7 @@ void MdiChild::highlightCurrentLine()
 
     if (!proceed) {
         tmpSelections.append(extraSelections);
-        ui->textEdit->setExtraSelections(tmpSelections);
+        textEdit()->setExtraSelections(tmpSelections);
         return;
     }
 
@@ -1022,7 +1022,7 @@ void MdiChild::highlightCurrentLine()
         }
 
         tmpSelections.append(extraSelections);
-        ui->textEdit->setExtraSelections(tmpSelections);
+        textEdit()->setExtraSelections(tmpSelections);
         return;
     }
 
@@ -1080,7 +1080,7 @@ void MdiChild::highlightCurrentLine()
     }
 
     tmpSelections.append(extraSelections);
-    ui->textEdit->setExtraSelections(tmpSelections);
+    textEdit()->setExtraSelections(tmpSelections);
 }
 
 void MdiChild::highlightFindText(const QString &searchString, QTextDocument::FindFlags options,
@@ -1102,7 +1102,7 @@ void MdiChild::highlightFindText(const QString &searchString, QTextDocument::Fin
     selection.format.setBackground(lineColor);
 
     QTextDocument *doc = document();
-    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextCursor cursor = textCursor();
     cursor.setPosition(0);
 
     QString addr = searchString;
@@ -1223,27 +1223,25 @@ void MdiChild::highlightFindText(const QString &searchString, QTextDocument::Fin
     } while (!cursor.isNull());
 
     tmpSelections.append(findTextExtraSelections);
-    ui->textEdit->setExtraSelections(tmpSelections);
+    textEdit()->setExtraSelections(tmpSelections);
 }
 
-void MdiChild::doUndo()
+void MdiChild::undo()
 {
-    ui->textEdit->undo();
-    ui->textEdit->ensureCursorVisible();
+    textEdit()->undo();
+    textEdit()->ensureCursorVisible();
     highlightCurrentLine();
 }
 
-void MdiChild::doRedo()
+void MdiChild::redo()
 {
-    ui->textEdit->redo();
-    ui->textEdit->ensureCursorVisible();
+    textEdit()->redo();
+    textEdit()->ensureCursorVisible();
     highlightCurrentLine();
 }
 
 void MdiChild::detectHighligthMode()
 {
-    QString text;
-
     if (!mdiWindowProperites.syntaxH) {
         return;
     }
@@ -1255,8 +1253,7 @@ void MdiChild::detectHighligthMode()
     bool mod = document()->isModified();  // something below clears document modified state
 
     if (m_highlightMode == MODE_AUTO) {
-        text = ui->textEdit->toPlainText();
-        m_highlightMode = autoDetectHighligthMode(text.toUpper());
+        m_highlightMode = autoDetectHighligthMode(text().toUpper());
 
         if (m_highlightMode == MODE_AUTO) {
             m_highlightMode = mdiWindowProperites.defaultHighlightMode;
@@ -1280,41 +1277,6 @@ void MdiChild::setHighligthMode(int mod)
 int MdiChild::highligthMode() const
 {
     return m_highlightMode;
-}
-
-void MdiChild::doDiff()
-{
-    //   setUpdatesEnabled(false);
-    //
-    ////   if(diffSplitter > 0)
-    ////      return;
-    ////
-    ////   diffSplitter = new QSplitter(Qt::Horizontal, this);
-    ////   diffSplitter->setBackgroundRole(QPalette::Base);
-    //
-    //   //splitterV->setEnabled(true);
-    //
-    //   diffApp = new KDiff3App(splitterV, "DiffApp");
-    //
-    //   diffApp->completeInit(curFile, QFileInfo(curFile).canonicalPath());
-    //
-    ////   QList<int> list;
-    ////   list << 200 << 200;
-    ////   splitterV->setSizes(list);
-    ////   splitterV->adjustSize();
-    //
-    //   //diffSplitter->addWidget(splitter);
-    //
-    //   //diffSplitter->show();
-    //
-    //
-    //   //diffApp->resize(width()/2, height());
-    //   //diffApp->show();
-    //   //diffApp->adjustSize();
-    //   //diffApp->resize(800,600);
-    //   //splitter->adjustSize();
-    //
-    //   setUpdatesEnabled(true);
 }
 
 QString MdiChild::brief()
@@ -1449,13 +1411,13 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
         }
     }
 
-    ui->textEdit->setUpdatesEnabled(false);
+    textEdit()->setUpdatesEnabled(false);
 
     if (addr.isEmpty()) {
         return false;
     }
 
-    cursor = ui->textEdit->textCursor();
+    cursor = textCursor();
 
     do {
         if (isRegExp) {
@@ -1467,14 +1429,14 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
 
             if (found) {
                 if (!isRegExpMinMax) {
-                    ui->textEdit->setTextCursor(cursor);
+                    setTextCursor(cursor);
                 }
             } else {
                 break;
             }
         } else {
-            found = ui->textEdit->find(addr, options);
-            cursor = ui->textEdit->textCursor();
+            found = textEdit()->find(addr, options);
+            cursor = textCursor();
         }
 
         QString cur_line = cursor.block().text();
@@ -1518,7 +1480,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
 
             if (((val >= min) && (val <= max))) {
                 inComment = false;
-                ui->textEdit->setTextCursor(cursor);
+                setTextCursor(cursor);
             } else {
                 inComment = true;
             }
@@ -1526,7 +1488,7 @@ bool MdiChild::findText(const QString &text, QTextDocument::FindFlags options,
 
     } while (inComment);
 
-    ui->textEdit->setUpdatesEnabled(true);
+    textEdit()->setUpdatesEnabled(true);
     return found;
 }
 
@@ -1665,12 +1627,12 @@ bool MdiChild::findNext(QString textToFind, QTextDocument::FindFlags options,
         return false;
     }
 
-    ui->textEdit->blockSignals(true);
+    textEdit()->blockSignals(true);
 
     found = findText(textToFind, options, ignoreComments);
 
     if (!found) {
-        cursor = ui->textEdit->textCursor();
+        cursor = textCursor();
         cursorOld = cursor;
 
         if (options & QTextDocument::FindBackward) {
@@ -1679,17 +1641,17 @@ bool MdiChild::findNext(QString textToFind, QTextDocument::FindFlags options,
             cursor.movePosition(QTextCursor::Start);
         }
 
-        ui->textEdit->setTextCursor(cursor);
+        setTextCursor(cursor);
 
         found = findText(textToFind, options, ignoreComments);
 
         if (!found) {
             cursorOld.clearSelection();
-            ui->textEdit->setTextCursor(cursorOld);
+            setTextCursor(cursorOld);
         }
     }
 
-    ui->textEdit->blockSignals(false);
+    textEdit()->blockSignals(false);
     highlightCurrentLine();
 
     return found;
@@ -1704,7 +1666,7 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText,
     QRegularExpression regExp;
     QChar op;
 
-    if (ui->textEdit->isReadOnly()) {
+    if (isReadOnly()) {
         return false;
     }
 
@@ -1714,16 +1676,16 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText,
 
     bool found = false;
 
-    ui->textEdit->blockSignals(true);
+    textEdit()->blockSignals(true);
 
-    if (foundTextMatched(textToFind, ui->textEdit->textCursor().selectedText())) {
+    if (foundTextMatched(textToFind, selectedText())) {
         found = true;
     } else {
         found = findNext(textToFind, options, ignoreComments);
     }
 
     if (found) {
-        QTextCursor cr = ui->textEdit->textCursor();
+        QTextCursor cr = textCursor();
         cr.beginEditBlock();
 
         if (mdiWindowProperites.underlineChanges) {
@@ -1782,12 +1744,12 @@ bool MdiChild::replaceNext(QString textToFind, QString replacedText,
 
         cr.insertText(replacedText);
         cr.endEditBlock();
-        ui->textEdit->setTextCursor(cr);
+        setTextCursor(cr);
 
         found = findNext(textToFind, options, ignoreComments);
     }
 
-    ui->textEdit->blockSignals(false);
+    textEdit()->blockSignals(false);
     highlightCurrentLine();
     highlightFindText(textToFind, options, ignoreComments);
 
@@ -1799,7 +1761,7 @@ bool MdiChild::replaceAll(QString textToFind, QString replacedText,
 {
     bool found = false;
 
-    if (ui->textEdit->isReadOnly()) {
+    if (isReadOnly()) {
         return false;
     }
 
@@ -1807,18 +1769,18 @@ bool MdiChild::replaceAll(QString textToFind, QString replacedText,
         return false;
     }
 
-    if (ui->textEdit->textCursor().selectedText() == textToFind) {
+    if (selectedText() == textToFind) {
         found = true;
     } else {
         found = findNext(textToFind, options, ignoreComments);
     }
 
-    QTextCursor startCursor = ui->textEdit->textCursor();
+    QTextCursor startCursor = textCursor();
 
     while (found) {
         found = replaceNext(textToFind, replacedText, options, ignoreComments);
 
-        if (startCursor.blockNumber() == ui->textEdit->textCursor().blockNumber()) {
+        if (startCursor.blockNumber() == textCursor().blockNumber()) {
             break;
         }
 
@@ -1826,29 +1788,6 @@ bool MdiChild::replaceAll(QString textToFind, QString replacedText,
     }
 
     return found;
-}
-
-void MdiChild::filePrintPreview()
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer(QPrinter::HighResolution);
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-    printer.setPageMargins(15, 10, 10, 10, QPrinter::Millimeter);
-#else
-    printer.setPageMargins(QMarginsF(15, 10, 10, 10), QPageLayout::Millimeter);
-#endif
-    QPrintPreviewDialog preview(&printer, this);
-    preview.setWindowFlags(Qt::Window);
-    connect(&preview, SIGNAL(paintRequested(QPrinter *)), SLOT(printPreview(QPrinter *)));
-    preview.exec();
-#endif
-}
-
-void MdiChild::printPreview(QPrinter *printer)
-{
-#ifndef QT_NO_PRINTER
-    ui->textEdit->print(printer);
-#endif
 }
 
 QString MdiChild::text(bool addCR) const
@@ -1869,10 +1808,10 @@ void MdiChild::setText(const QString &text)
 
 void MdiChild::insertText(const QString& text)
 {
-    ui->textEdit->insertPlainText(text);
+    textEdit()->insertPlainText(text);
 }
 
-bool MdiChild::isModified()
+bool MdiChild::isModified() const
 {
     return document()->isModified();
 }
@@ -1884,12 +1823,12 @@ void MdiChild::setModified(bool mod)
 
 bool MdiChild::isReadOnly() const
 {
-    return ui->textEdit->isReadOnly();
+    return textEdit()->isReadOnly();
 }
 
 void MdiChild::setReadOnly(bool ro)
 {
-    ui->textEdit->setReadOnly(ro);
+    textEdit()->setReadOnly(ro);
 }
 
 bool MdiChild::isUntitled() const
@@ -1897,34 +1836,151 @@ bool MdiChild::isUntitled() const
     return m_isUntitled;
 }
 
-bool MdiChild::hasSelection()
+bool MdiChild::hasSelection() const
 {
-    return ui->textEdit->textCursor().hasSelection();
+    return textCursor().hasSelection();
 }
 
-bool MdiChild::isUndoAvailable()
+bool MdiChild::isUndoAvailable() const
 {
     return document()->isUndoAvailable();
 }
 
-bool MdiChild::isRedoAvailable()
+bool MdiChild::isRedoAvailable() const
 {
     return document()->isRedoAvailable();
 }
 
-bool MdiChild::overwriteMode()
+void MdiChild::clearUndoRedoStacks()
 {
-    return ui->textEdit->overwriteMode();
+    document()->clearUndoRedoStacks();
 }
 
-QTextCursor MdiChild::textCursor()
+bool MdiChild::overwriteMode()
 {
-    return ui->textEdit->textCursor();
+    return textEdit()->overwriteMode();
+}
+
+void MdiChild::centerCursor()
+{
+    textEdit()->centerCursor();
+}
+
+QString MdiChild::wordUnderCursor() const
+{
+    QTextCursor cursor = textEdit()->textCursor();
+    cursor.select(QTextCursor::WordUnderCursor);
+    return cursor.selectedText();
+}
+
+void MdiChild::selectAll()
+{
+    textEdit()->selectAll();
+}
+
+void MdiChild::clearSelection(bool toAnchor)
+{
+    QTextCursor cursor = textEdit()->textCursor();
+    cursor.setPosition(toAnchor ? cursor.anchor() : cursor.position());
+    setTextCursor(cursor);
+}
+
+QString MdiChild::selectedText() const
+{
+    return textEdit()->textCursor().selectedText();
+}
+
+void MdiChild::removeSelectedText()
+{
+    textEdit()->textCursor().removeSelectedText();
+}
+
+void MdiChild::clear()
+{
+    textEdit()->clear();
+}
+
+void MdiChild::copy()
+{
+    textEdit()->copy();
+}
+
+void MdiChild::cut()
+{
+    textEdit()->cut();
+}
+
+void MdiChild::paste()
+{
+    if (mdiWindowProperites.underlineChanges) {
+        QTextCharFormat format = textEdit()->currentCharFormat();
+        format.setUnderlineStyle(QTextCharFormat::DotLine);
+        format.setUnderlineColor(QColor(mdiWindowProperites.underlineColor));
+        textEdit()->setCurrentCharFormat(format);
+    }
+
+    textEdit()->paste();
+}
+
+void MdiChild::print(QPrinter *printer)
+{
+#ifndef QT_NO_PRINTER
+    document()->print(printer);
+#endif
+}
+
+int MdiChild::currentLine() const
+{
+    return textCursor().block().firstLineNumber() + 1;
+}
+
+int MdiChild::currentColumn() const
+{
+    QTextCursor cursor = textCursor();
+    return cursor.position() - cursor.block().position();
+}
+
+void MdiChild::goToLine(int line)
+{
+    QTextBlock block = document()->findBlockByNumber(line);
+    setTextCursor(QTextCursor(block));
+    centerCursor();
+    setFocus();
 }
 
 QTextDocument *MdiChild::document() const
 {
-    return ui->textEdit->document();
+    return textEdit()->document();
+}
+
+QTextCursor MdiChild::textCursor() const
+{
+    return textEdit()->textCursor();
+}
+
+void MdiChild::setTextCursor(const QTextCursor& cursor)
+{
+    textEdit()->setTextCursor(cursor);
+}
+
+void MdiChild::textEditRedoAvailable(bool available)
+{
+    emit redoAvailable(available);
+}
+
+void MdiChild::textEditUndoAvailable(bool available)
+{
+    emit undoAvailable(available);
+}
+
+void MdiChild::textEditCursorPositionChanged()
+{
+    emit cursorPositionChanged();
+}
+
+void MdiChild::textEditModificationChanged(bool ch)
+{
+    emit modificationChanged(ch);
 }
 
 //void MdiChild::createContextMenuActions()
@@ -1933,7 +1989,7 @@ QTextDocument *MdiChild::document() const
 
 void MdiChild::showContextMenu(const QPoint &pt)
 {
-    QMenu *menu = ui->textEdit->createStandardContextMenu();
+    QMenu *menu = textEdit()->createStandardContextMenu();
     menu->addSeparator();
 
     Addons::Actions *addonsActions = EdytorNc::instance()->addonsActions();
@@ -1951,7 +2007,7 @@ void MdiChild::showContextMenu(const QPoint &pt)
     connect(inLineCalcAct, SIGNAL(triggered()), this, SLOT(showInLineCalc()));
     menu->addAction(inLineCalcAct);
 
-    menu->exec(ui->textEdit->mapToGlobal(pt));
+    menu->exec(textEdit()->mapToGlobal(pt));
 
     delete inLineCalcAct;
     delete menu;
@@ -2011,8 +2067,8 @@ void MdiChild::showInLineCalc()
     if (calcLineEdit) {
         inLineCalcChar = '0';
 
-        if (ui->textEdit->textCursor().hasSelection()) {
-            QString selText = ui->textEdit->textCursor().selectedText();
+        if (hasSelection()) {
+            QString selText = selectedText();
 
             if (selText.length() > 1)
                 if (selText.at(0).isLetter()) {
@@ -2026,7 +2082,7 @@ void MdiChild::showInLineCalc()
             }
         }
 
-        QRect rect = ui->textEdit->cursorRect();
+        QRect rect = textEdit()->cursorRect();
         int h = (calcLineEdit->height() - rect.height()) / 2;
         calcLineEdit->move(rect.x() + rect.height(), rect.top() - h);
         calcLineEdit->setFocus();
@@ -2060,7 +2116,7 @@ void MdiChild::inLineCalcReturnPressed()
         qDebug() << "Text" << text << result;
 
         if (result >= 0) {
-            ui->textEdit->insertPlainText(text);
+            insertText(text);
         }
 
         calcLineEdit->close();

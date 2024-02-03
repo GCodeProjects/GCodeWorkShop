@@ -413,9 +413,8 @@ void Addons::Actions::doSplitProgramms()
             return;
         }
 
-        activeWindow->textEdit()->setUndoRedoEnabled(false);  //clear undo/redo history
         activeWindow->setText(it);
-        activeWindow->textEdit()->setUndoRedoEnabled(true);
+        activeWindow->clearUndoRedoStacks();
     }
 
     QApplication::restoreOverrideCursor();

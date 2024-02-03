@@ -556,7 +556,7 @@ void EdytorNc::printFile()
 
         if (dialog.exec() == QDialog::Accepted) {
             printer.setDocName(child->fileName());
-            child->textEdit()->print(&printer);
+            child->print(&printer);
             statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(
                                          printer.printerName()), 5000);
             savePrinterSettings(&printer);
@@ -600,7 +600,7 @@ void EdytorNc::printPreview(QPrinter *printer)
 
     if (child) {
         printer->setDocName(child->fileName());
-        child->textEdit()->print(printer);
+        child->print(printer);
         statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(
                                      printer->printerName()), 5000);
     }
@@ -611,14 +611,14 @@ void EdytorNc::printPreview(QPrinter *printer)
 void EdytorNc::cut()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit()->cut();
+        activeMdiChild()->cut();
     }
 }
 
 void EdytorNc::copy()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit()->copy();
+        activeMdiChild()->copy();
     }
 }
 
@@ -808,7 +808,7 @@ void EdytorNc::replaceAll()
 void EdytorNc::selAll()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit()->selectAll();
+        activeMdiChild()->selectAll();
     }
 }
 
@@ -851,7 +851,7 @@ void EdytorNc::config()
 void EdytorNc::readOnly()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit()->setReadOnly(readOnlyAct->isChecked());
+        activeMdiChild()->setReadOnly(readOnlyAct->isChecked());
     }
 
     updateMenus();
@@ -867,11 +867,7 @@ void EdytorNc::goToLine(const QString &fileName, int line)
             return;
         }
 
-        QTextBlock block = activeMdiChild()->textEdit()->document()->findBlockByNumber(line);
-        QTextCursor cursor = QTextCursor(block);
-        activeMdiChild()->textEdit()->setTextCursor(cursor);
-        activeMdiChild()->textEdit()->centerCursor();
-        activeMdiChild()->setFocus();
+        activeMdiChild()->goToLine(line);
     }
 }
 
@@ -1066,35 +1062,28 @@ void EdytorNc::doCalc()
 void EdytorNc::deleteText()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->textEdit()->textCursor().removeSelectedText();
+        activeMdiChild()->removeSelectedText();
     }
 }
 
 void EdytorNc::paste()
 {
     if (activeMdiChild()) {
-        if (defaultMdiWindowProperites.underlineChanges) {
-            QTextCharFormat format = activeMdiChild()->textEdit()->currentCharFormat();
-            format.setUnderlineStyle(QTextCharFormat::DotLine);
-            format.setUnderlineColor(QColor(defaultMdiWindowProperites.underlineColor));
-            activeMdiChild()->textEdit()->setCurrentCharFormat(format);
-        }
-
-        activeMdiChild()->textEdit()->paste();
+        activeMdiChild()->paste();
     }
 }
 
 void EdytorNc::undo()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->doUndo();
+        activeMdiChild()->undo();
     }
 }
 
 void EdytorNc::redo()
 {
     if (activeMdiChild()) {
-        activeMdiChild()->doRedo();
+        activeMdiChild()->redo();
     }
 }
 
@@ -1272,25 +1261,22 @@ void EdytorNc::updateCurrentSerialConfig()
 
 void EdytorNc::updateStatusBar()
 {
-    QTextBlock b;
-    bool hasMdiChild = (activeMdiChild() != nullptr);
-    bool hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
+    MdiChild *child = activeMdiChild();
 
-    if (hasMdiChild) {
-        int id = highlightTypeCombo->findData(activeMdiChild()->highligthMode());
+    if (child) {
+        int id = highlightTypeCombo->findData(child->highligthMode());
         highlightTypeCombo->blockSignals(true);
         highlightTypeCombo->setCurrentIndex(id);
         highlightTypeCombo->blockSignals(false);
 
-        b = activeMdiChild()->textCursor().block();
-        int line = b.firstLineNumber() + 1;
-        int column = activeMdiChild()->textCursor().position() - b.position();
+        int line = child->currentLine();
+        int column = child->currentColumn();
 
         labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
                             tr("  Line: ") + QString::number(line) +
-                            (activeMdiChild()->isModified() ? tr("  <b>Modified</b>  ") : " ") +
-                            (!hasMdiChildNotReadOnly ? tr(" Read only  ") : " ") +
-                            (activeMdiChild()->overwriteMode() ? tr(" Overwrite  ") : tr(" Insert ")));
+                            (child->isModified() ? tr("  <b>Modified</b>  ") : " ") +
+                            (child->isReadOnly() ? tr(" Read only  ") : " ") +
+                            (child->overwriteMode() ? tr(" Overwrite  ") : tr(" Insert ")));
 
     }
 }
@@ -1341,15 +1327,13 @@ MdiChild *EdytorNc::createMdiChild()
     MdiChild *child = new MdiChild(this);
     ui->mdiArea->addSubWindow(child);
 
-    connect(child->textEdit(), SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
-    connect(child->textEdit(), SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-    connect(child->textEdit(), SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
-    connect(child->textEdit(), SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
-    connect(child->textEdit(), SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
-    connect(child, SIGNAL(message(const QString &, int)), statusBar(),
-            SLOT(showMessage(const QString &, int)));
-    connect(child, SIGNAL(addRemoveFileWatch(const QString &, bool)), this,
-            SLOT(watchFile(const QString &, bool)));
+    connect(child, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
+    connect(child, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
+    connect(child, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
+    connect(child, SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
+    connect(child, SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
+    connect(child, SIGNAL(message(const QString &, int)), statusBar(), SLOT(showMessage(const QString &, int)));
+    connect(child, SIGNAL(addRemoveFileWatch(const QString &, bool)), this, SLOT(watchFile(const QString &, bool)));
 
     if (defaultMdiWindowProperites.saveDirectory.isEmpty()) {
         child->setPath(QDir::currentPath());
@@ -2271,6 +2255,7 @@ void EdytorNc::createFindToolBar()
                "<p><b>$min</b> can be ommited, then equal 0</p>" \
                "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
         findEdit->installEventFilter(this);
+        connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
         findToolBar->addWidget(findEdit);
         findToolBar->addAction(findPreviousAct);
         findToolBar->addAction(findNextAct);
@@ -2314,29 +2299,14 @@ void EdytorNc::createFindToolBar()
     if (activeMdiChild()) {
         disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
 
-        if (!activeMdiChild()->hasSelection()) {
-            cursor = activeMdiChild()->textCursor();
-            cursor.select(QTextCursor::WordUnderCursor);
-            selText = cursor.selectedText();
-
-            if ((selText.size() > 32) || (selText.size() < 2)) {
-                cursor.clearSelection();
-            }
-
-            activeMdiChild()->textEdit()->setTextCursor(cursor);
+        if (activeMdiChild()->hasSelection()) {
+            selText = activeMdiChild()->selectedText();
+        } else {
+            selText = activeMdiChild()->wordUnderCursor();
         }
 
-        cursor = activeMdiChild()->textCursor();
-
-        if (cursor.hasSelection()) {
-            selText = cursor.selectedText();
-
-            if ((selText.size() < 32)) {
-                findEdit->setText(selText);
-            } else {
-                cursor.clearSelection();
-                activeMdiChild()->textEdit()->setTextCursor(cursor);
-            }
+        if (selText.size() < 32) {
+            findEdit->setText(selText);
         }
 
         findEdit->setPalette(QPalette());
@@ -2358,7 +2328,7 @@ void EdytorNc::closeFindToolBar()
     if (activeMdiChild()) {
         activeMdiChild()->setFocus(Qt::MouseFocusReason);
         activeMdiChild()->highlightFindText("");
-        activeMdiChild()->textEdit()->centerCursor();
+        activeMdiChild()->centerCursor();
     }
 
     QSettings &settings = *Medium::instance().settings();
@@ -2372,9 +2342,6 @@ void EdytorNc::closeFindToolBar()
 
 void EdytorNc::findTextChanged()
 {
-    bool hasMdiChild = (activeMdiChild() != 0);
-    QTextCursor cursor;
-
     if (findEdit->text().contains(QRegularExpression("\\$\\$"))
             || findEdit->text().contains(
                 QRegularExpression("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"))) {
@@ -2383,28 +2350,15 @@ void EdytorNc::findTextChanged()
         replaceAllAct->setEnabled(true);
     }
 
+    MdiChild *child = activeMdiChild();
 
-    if (hasMdiChild) {
-        cursor = activeMdiChild()->textCursor();
+    if (child) {
+        child->clearSelection(true);
 
         if (!findEdit->text().isEmpty()) {
-            int pos = cursor.position() - findEdit->text().size();
-
-            if (pos < 0) {
-                pos = 0;
-            }
-
-            do {
-                cursor.movePosition(QTextCursor::Left);  //cursor.movePosition(QTextCursor::StartOfWord)
-            } while ((pos <= cursor.position()) && (cursor.position() > 0));
-
-            activeMdiChild()->textEdit()->setTextCursor(cursor);
-
             findNext();
         } else {
             findEdit->setPalette(QPalette());
-            cursor.clearSelection();
-            activeMdiChild()->textEdit()->setTextCursor(cursor);
         }
     }
 }
@@ -3614,16 +3568,11 @@ void EdytorNc::receiveButtonClicked()
                 }
 
                 if (activeWindow) {
-                    activeWindow->textEdit()->clear();
-                    activeWindow->textEdit()->insertPlainText(*it);
-
+                    activeWindow->clear();
+                    activeWindow->insertText(*it);
                     activeWindow->setHighligthMode(MODE_AUTO);
-
-                    if (defaultMdiWindowProperites.defaultReadOnly) {
-                        activeWindow->textEdit()->isReadOnly();
-                    }
-
-                    activeWindow->textEdit()->document()->clearUndoRedoStacks(QTextDocument::UndoAndRedoStacks);
+                    //activeWindow->setReadOnly(defaultMdiWindowProperites.defaultReadOnly);
+                    activeWindow->clearUndoRedoStacks();
                 }
             }
         }

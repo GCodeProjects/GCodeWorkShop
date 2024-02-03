@@ -60,7 +60,7 @@ public:
     MdiChild(QWidget *parent = 0, Qt::WindowFlags f = Qt::SubWindow);
     ~MdiChild();
 
-    QPlainTextEdit *textEdit();
+    QPlainTextEdit *textEdit() const;
     void newFile(const QString &fileName = QString());
     bool load();
     bool save();
@@ -80,11 +80,10 @@ public:
     void highlightFindText(const QString& searchString,
                            QTextDocument::FindFlags options = QTextDocument::FindFlags(),
                            bool ignoreComments = true);
-    void doUndo();
-    void doRedo();
+    void undo();
+    void redo();
     void setHighligthMode(int mod);
     int highligthMode() const;
-    void doDiff();
     QString brief(); // Text from first comment in CNC program
     QString guessFileName();
     bool foundTextMatched(const QString& pattern, QString text);
@@ -94,27 +93,54 @@ public:
     bool replaceAll(QString textToFind, QString replacedText, QTextDocument::FindFlags options,
                     bool ignoreComments);
     void highlightCodeBlock(QString searchString, int rMin, int rMax);
-    void filePrintPreview();
     QString text(bool addCR = false) const;
     void setText(const QString &text);
     void insertText(const QString &text);
-    bool isModified();
+    bool isModified() const;
     void setModified(bool mod = false);
     bool isReadOnly() const;
     void setReadOnly(bool ro);
     bool isUntitled() const;
-    bool hasSelection();
-    bool isUndoAvailable();
-    bool isRedoAvailable();
+    bool hasSelection() const;
+    bool isUndoAvailable() const;
+    bool isRedoAvailable() const;
+    void clearUndoRedoStacks();
     bool overwriteMode();
-    QTextCursor textCursor();
+    void centerCursor();
+    QString wordUnderCursor() const;
+    void selectAll();
+    void clearSelection(bool toAnchor = false);
+    QString selectedText() const;
+    void removeSelectedText();
+    void clear();
+    void copy();
+    void cut();
+    void paste();
+    void print(QPrinter *printer);
+    int currentLine() const;
+    int currentColumn() const;
+    void goToLine(int line);
     //    void setFileChangeMonitor(QFileSystemWatcher *monitor);
 
 public slots :
     void showInLineCalc();
 
+protected slots:
+    void textEditRedoAvailable(bool available);
+    void textEditUndoAvailable(bool available);
+    void textEditCursorPositionChanged();
+    void textEditModificationChanged(bool ch);
+
+signals:
+    void redoAvailable(bool available);
+    void undoAvailable(bool available);
+    void cursorPositionChanged();
+    void modificationChanged(bool);
+
 protected:
     QTextDocument *document() const;
+    QTextCursor textCursor() const;
+    void setTextCursor(const QTextCursor &cursor);
     void changeDateInComment();
     void closeEvent(QCloseEvent *event);
     bool eventFilter(QObject *obj, QEvent *ev);
@@ -153,7 +179,6 @@ private:
 
 private slots :
     void highlightCurrentLine();
-    void printPreview(QPrinter *printer);
     //void createContextMenuActions();
     void showContextMenu(const QPoint &pt);
     void documentWasModified();
