@@ -15,6 +15,7 @@ INCLUDEPATH += include
 #######################################
 
 HEADERS += \
+    include/document.h \
     include/documentinfo.h \
     include/documentstyle.h \
     include/documentwidgetproperties.h \
@@ -31,6 +32,7 @@ HEADERS += \
 
 HEADERS += \
     capslockeventfilter.h \
+    documentwidgetcloseeventfilter.h \
     findinf.h \
     gcoder.h \
     gcodereventfilter.h \
@@ -48,8 +50,10 @@ HEADERS += \
 
 SOURCES += \
     capslockeventfilter.cpp \
+    document.cpp \
     documentinfo.cpp \
     documentstyle.cpp \
+    documentwidgetcloseeventfilter.cpp \
     documentwidgetproperties.cpp \
     edytornc.cpp \
     findinf.cpp \
