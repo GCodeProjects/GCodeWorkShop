@@ -17,7 +17,9 @@ INCLUDEPATH += include
 HEADERS += \
     include/document.h \
     include/documentinfo.h \
+    include/documentmanager.h \
     include/documentstyle.h \
+    include/documentproducer.h \
     include/documentwidgetproperties.h \
     include/edytornc.h \
     include/gcoderstyle.h \
@@ -52,6 +54,8 @@ SOURCES += \
     capslockeventfilter.cpp \
     document.cpp \
     documentinfo.cpp \
+    documentmanager.cpp \
+    documentproducer.cpp \
     documentstyle.cpp \
     documentwidgetcloseeventfilter.cpp \
     documentwidgetproperties.cpp \
