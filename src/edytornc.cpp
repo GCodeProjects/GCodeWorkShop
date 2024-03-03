@@ -274,44 +274,14 @@ void EdytorNc::closeEvent(QCloseEvent *event)
         }
     }
 
-    setUpdatesEnabled(false);
-    writeSettings();
-    clipboardSave();
-
-    if (!maybeSaveProject()) {
+    if (!maybeSaveProject() || !maybeSaveAll()) {
         event->ignore();
         return;
     }
 
-    foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
-        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-
-        mdiChild->blockSignals(true);
-
-        if (mdiChild->isModified()) {
-            setUpdatesEnabled(true);
-            mdiChild->activateWindow();
-            mdiChild->raise();
-
-            if (!mdiChild->parentWidget()->close()) {
-                mdiChild->blockSignals(false);
-                event->ignore();
-                return;
-            }
-
-            setUpdatesEnabled(false);
-        }
-    }
-
-    ui->mdiArea->closeAllSubWindows();
-
-    if (activeMdiChild()) {
-        event->ignore();
-    } else {
-        event->accept();
-    }
-
-    setUpdatesEnabled(true);
+    writeSettings();
+    clipboardSave();
+    closeAllMdiWindows();
 
     if (findFiles != nullptr) {
         findFiles->close();
@@ -546,6 +516,56 @@ bool EdytorNc::saveAs()
     }
 
     return saved;
+}
+
+bool EdytorNc::maybeSaveAll()
+{
+    bool saved = true;
+
+    for (QMdiSubWindow *window : ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
+        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+
+        if (!maybeSave(mdiChild)) {
+            saved = false;
+        }
+    }
+
+    return saved;
+}
+
+bool EdytorNc::maybeSave(MdiChild *child)
+{
+    if (child->isModified()) {
+        QMessageBox msgBox;
+        msgBox.setParent(this, Qt::Dialog);
+        msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(child->filePath()));
+        msgBox.setInformativeText(tr("Do you want to save your changes ?"));
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        msgBox.setIcon(QMessageBox::Warning);
+        int ret = msgBox.exec();
+
+        switch (ret) {
+        case QMessageBox::Save:
+            return save(child, false);
+            break;
+
+        case QMessageBox::Discard:
+            child->setModified(false);
+            return true;
+            break;
+
+        case QMessageBox::Cancel:
+            return false;
+            break;
+
+        default:
+            return true;
+            break;
+        }
+    }
+
+    return true;
 }
 
 void EdytorNc::printFile()
@@ -1353,6 +1373,7 @@ MdiChild *EdytorNc::createMdiChild()
     MdiChild *child = new MdiChild(this);
     ui->mdiArea->addSubWindow(child);
 
+    connect(child, SIGNAL(closeRequest(MdiChild *)), this, SLOT(maybeSave(MdiChild *)));
     connect(child, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
     connect(child, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
     connect(child, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));

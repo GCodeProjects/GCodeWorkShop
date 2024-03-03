@@ -145,6 +145,7 @@ protected slots:
     void textEditModificationChanged(bool ch);
 
 signals:
+    bool closeRequest(MdiChild *child);
     void redoAvailable(bool available);
     void undoAvailable(bool available);
     void cursorPositionChanged();
@@ -164,7 +165,6 @@ protected:
     void loadToolTips(QHash<QString, QString> &tips, const QString &fileName, const QString &group);
 
 private:
-    bool maybeSave();
     //QString strippedName(const QString &fullFileName);
     void detectHighligthMode();
     bool findText(const QString &text,

@@ -117,6 +117,8 @@ public:
 public slots:
     void messReceived(const QString &text = "");
     MdiChild *newFile();
+    bool maybeSave(MdiChild *child);
+    bool maybeSaveAll();
 
 protected:
     void closeEvent(QCloseEvent *event);

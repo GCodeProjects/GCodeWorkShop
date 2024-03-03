@@ -323,7 +323,7 @@ void MdiChild::changeDateInComment()
 
 void MdiChild::closeEvent(QCloseEvent *event)
 {
-    if (maybeSave()) {
+    if (closeRequest(this)) {
         fileChangeMonitorRemovePath(filePath());
         event->accept();
     } else {
@@ -334,40 +334,6 @@ void MdiChild::closeEvent(QCloseEvent *event)
 void MdiChild::documentWasModified()
 {
     setWindowModified(document()->isModified());
-}
-
-bool MdiChild::maybeSave()
-{
-    if (document()->isModified()) {
-        QMessageBox msgBox;
-        msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(filePath()));
-        msgBox.setInformativeText(tr("Do you want to save your changes ?"));
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        msgBox.setIcon(QMessageBox::Warning);
-        int ret = msgBox.exec();
-
-        switch (ret) {
-        case QMessageBox::Save:
-            return save();
-            break;
-
-        case QMessageBox::Discard:
-            document()->setModified(false);
-            return true;
-            break;
-
-        case QMessageBox::Cancel:
-            return false;
-            break;
-
-        default:
-            return true;
-            break;
-        } ;
-    }
-
-    return true;
 }
 
 void MdiChild::updateBrief()
