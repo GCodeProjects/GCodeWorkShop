@@ -68,6 +68,9 @@
 // BHC Chamfer CleanUp Feeds Dot I2M I2MProg Renumber SwapAxes Triangle
 #include <addons-actions.h>
 #include <commapp.h>                  // CommApp
+#include <document.h>
+#include <gcoderstyle.h>
+#include <gcoderwidgetproperties.h>
 #include <kdiff3/kdiff3.h>            // KDiff3App
 #include <kdiff3/common.h>            // getFilters()
 #include <serialportconfigdialog.h>   // SerialPortConfigDialog
@@ -77,12 +80,15 @@
 
 #include "capslockeventfilter.h"
 #include "setupdialog.h"    // SetupDialog
+#include "documentmanager.h"
 #include "edytornc.h"       // EdytorNc QObject QMainWindow
+#include "gcoder.h"
+#include "gcoderdocument.h"
 #include "gcoderinfo.h"     // GCoderInfo
+#include "gcoderproducer.h"
 #include "findinf.h"        // FindInFiles
 #include "highlightmode.h"
 #include "newfiledialog.h"  // newFileDialog
-#include "mdichild.h"       // MdiChild
 #include "recentfiles.h"    // RecentFiles
 #include "sessionmanager.h" // SessionManager
 #include "sessiondialog.h"  // sessionDialog
@@ -126,6 +132,7 @@ EdytorNc::EdytorNc(Medium *medium)
     m_startEmpty = false;
     m_disableFileChangeMonitor = false;
     m_MdiTabbedMode = false;
+    m_findInFilesHighlightEnable = true;
 
     m_extensions << "*.nc" <<  "*.cnc";
     m_saveExtension = "*.nc";
@@ -133,8 +140,6 @@ EdytorNc::EdytorNc(Medium *medium)
 
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
-
-    connect(ui->mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateMenus()));
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
 
@@ -169,15 +174,29 @@ EdytorNc::EdytorNc(Medium *medium)
     connect(m_recentFiles, SIGNAL(fileListChanged(QStringList)), this, SLOT(updateRecentFilesMenu(QStringList)));
     connect(m_recentFiles, SIGNAL(saveRequest()), this, SLOT(recentFilesChanged()));
 
-    defaultMdiWindowProperites = GCoderWidgetProperties();
-    m_codeStyle = GCoderStyle();
     m_addonsActions = new Addons::Actions(this);
     createActions();
     createToolBars();
     createStatusBar();
     createFileBrowseTabs();
 
-    m_sessionManager = new SessionManager(this);
+    m_documentManager = new DocumentManager(this);
+    m_documentManager->setMdiArea(ui->mdiArea);
+    m_documentManager->registerDocumentProducer(new GCoderProducer());
+    connect(m_documentManager, SIGNAL(activeDocumentChanged(Document *)), this, SLOT(updateMenus()));
+    connect(m_documentManager, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
+    connect(m_documentManager, SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
+    connect(m_documentManager, SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
+    connect(m_documentManager, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
+    connect(m_documentManager, SIGNAL(briefChanged(Document *)), this, SLOT(updateOpenFileList()));
+    connect(m_documentManager, SIGNAL(documentListChanged()), this, SLOT(updateOpenFileList()));
+    connect(m_documentManager, SIGNAL(closeRequested(Document *)), this, SLOT(maybeSave(Document *)), Qt::ConnectionType::DirectConnection);
+    connect(m_documentManager, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
+    connect(m_documentManager, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
+    connect(m_documentManager, SIGNAL(customContextMenuRequested(Document *, const QPoint &)), this,  SLOT(customContextMenuRequest(Document *, const QPoint &)));
+    connect(m_documentManager, SIGNAL(fileWatchRequest(const QString &, bool)), this, SLOT(watchFile(const QString &, bool)));
+
+    m_sessionManager = new SessionManager(m_documentManager, this);
     connect(m_sessionManager, SIGNAL(sessionListChanged(QStringList)), this, SLOT(updateSessionMenus(QStringList)));
     connect(m_sessionManager, SIGNAL(beforeCurrentSessionChanged()), this, SLOT(beforeCurrentSessionChanged()));
     connect(m_sessionManager, SIGNAL(currentSessionChanged()), this, SLOT(currentSessionChanged()));
@@ -230,6 +249,11 @@ void EdytorNc::moveEvent(QMoveEvent *event)
 Addons::Actions *EdytorNc::addonsActions()
 {
     return m_addonsActions;
+}
+
+DocumentManager *EdytorNc::documentManager() const
+{
+    return m_documentManager;
 }
 
 void EdytorNc::setMdiTabbedMode(bool tabbed)
@@ -289,42 +313,51 @@ void EdytorNc::closeEvent(QCloseEvent *event)
     }
 }
 
-MdiChild *EdytorNc::newFileFromTemplate()
+Document *EdytorNc::newFileFromTemplate()
 {
-    MdiChild *child = 0;
+    Document *doc = 0;
 
     newFileDialog *newFileDlg = new newFileDialog(this);
     int result = newFileDlg->exec();
 
     if (result == QDialog::Accepted) {
         const QString &fileName = newFileDlg->getChosenFile();
-        child = createMdiChild();
+        doc = createDocument(GCoder::DOCUMENT_TYPE);
+
+        if (!doc) {
+            return nullptr;
+        }
 
         if (!fileName.isEmpty() && !(fileName == tr("EMPTY FILE"))) {
-            child->newFile(fileName);
+            doc->loadTemplate(fileName);
         } else {
-            child->newFile();
+            doc->loadTemplate();
         }
 
         // TODO replace with DocumentProducer::createDocumentInfo
         DocumentInfo::Ptr info = DocumentInfo::Ptr(new GCoderInfo());
-        child->setDocumentInfo(info);
+        doc->setDocumentInfo(info);
     }
 
     delete (newFileDlg);
 
-    return child;
+    return doc;
 }
 
 //**************************************************************************************************
 //
 //**************************************************************************************************
 
-MdiChild *EdytorNc::newFile()
+Document *EdytorNc::newFile()
 {
-    MdiChild *child = createMdiChild();
-    child->newFile();
-    return child;
+    Document *doc = createDocument(GCoder::DOCUMENT_TYPE);
+
+    if (!doc) {
+        return nullptr;
+    }
+
+    doc->loadTemplate();
+    return doc;
 }
 
 //**************************************************************************************************
@@ -376,9 +409,9 @@ void EdytorNc::openFile(const QString &fileName)
     loadFile(DocumentInfo::Ptr(info), true);
 }
 
-bool EdytorNc::save(MdiChild *child, bool forceSaveAs)
+bool EdytorNc::save(Document *doc, bool forceSaveAs)
 {
-    if (child->isUntitled() || forceSaveAs) {
+    if (doc->isUntitled() || forceSaveAs) {
         QString oldFileName;
 
     #ifdef Q_OS_LINUX
@@ -401,10 +434,10 @@ bool EdytorNc::save(MdiChild *child, bool forceSaveAs)
 
         filters.append(tr("Text files (*.txt);;" "All files (*.* *)"));
 
-        if (child->isUntitled()) {
-            oldFileName = child->guessFileName();
+        if (doc->isUntitled()) {
+            oldFileName = doc->guessFileName();
         } else {
-            oldFileName = child->fileName();
+            oldFileName = doc->fileName();
         }
 
         if (QFileInfo(oldFileName).suffix() == "") {
@@ -415,7 +448,7 @@ bool EdytorNc::save(MdiChild *child, bool forceSaveAs)
         QString newFileName = QFileDialog::getSaveFileName(
                            this,
                            tr("Save file as..."),
-                           QDir(child->path()).filePath(oldFileName),
+                           doc->dir().filePath(oldFileName),
                            filters, nullptr, QFileDialog::DontConfirmOverwrite);
 
         if (newFileName.isEmpty() || newFileName.isNull()) {
@@ -436,30 +469,30 @@ bool EdytorNc::save(MdiChild *child, bool forceSaveAs)
             }
         }
 
-        child->setFilePath(newFileName);
+        doc->setFilePath(newFileName);
     }
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    bool status = child->save();
+    bool status = doc->save();
     QApplication::restoreOverrideCursor();
     return status;
 }
 
 bool EdytorNc::save()
 {
-    MdiChild *child = activeMdiChild();
+    Document *doc = activeDocument();
 
-    if (!child) {
+    if (!doc) {
         return true;
     }
 
-    bool saved = save(activeMdiChild(), false);
+    bool saved = save(doc, false);
 
     if (saved) {
         statusBar()->showMessage(tr("File saved"), 5000);
     } else {
         QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
-                             .arg(child->filePath()).arg(child->ioErrorString()));
+                             .arg(doc->filePath()).arg(doc->ioErrorString()));
     }
 
     return saved;
@@ -470,29 +503,17 @@ bool EdytorNc::saveAll()
     bool saved = true;
     int i = 0;
 
-    MdiChild *currentMdiChild = activeMdiChild();
-
-    setUpdatesEnabled(false);
-
-    foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
-        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-
-        if (mdiChild->isModified()) {
-            if (save(mdiChild, false)) {
+    for (Document *doc : m_documentManager->documentList()) {
+        if (doc->isModified()) {
+            if (save(doc, false)) {
                 i++;
             } else {
                 saved = false;
                 QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
-                                     .arg(mdiChild->filePath()).arg(mdiChild->ioErrorString()));
+                                     .arg(doc->filePath()).arg(doc->ioErrorString()));
             }
         }
     }
-
-    if (currentMdiChild != nullptr) {
-        currentMdiChild->setFocus();
-    }
-
-    setUpdatesEnabled(true);
 
     statusBar()->showMessage(tr("Saved %1 files").arg(i), 5000);
     return saved;
@@ -500,19 +521,19 @@ bool EdytorNc::saveAll()
 
 bool EdytorNc::saveAs()
 {
-    MdiChild *child = activeMdiChild();
+    Document *doc = activeDocument();
 
-    if (!child) {
+    if (!doc) {
         return true;
     }
 
-    bool saved = save(activeMdiChild(), true);
+    bool saved = save(doc, true);
 
     if (saved) {
         statusBar()->showMessage(tr("File saved"), 5000);
     } else {
         QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
-                             .arg(child->filePath()).arg(child->ioErrorString()));
+                             .arg(doc->filePath()).arg(doc->ioErrorString()));
     }
 
     return saved;
@@ -522,10 +543,8 @@ bool EdytorNc::maybeSaveAll()
 {
     bool saved = true;
 
-    for (QMdiSubWindow *window : ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
-        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-
-        if (!maybeSave(mdiChild)) {
+    for (Document *doc : m_documentManager->documentList()) {
+        if (!maybeSave(doc)) {
             saved = false;
         }
     }
@@ -533,12 +552,12 @@ bool EdytorNc::maybeSaveAll()
     return saved;
 }
 
-bool EdytorNc::maybeSave(MdiChild *child)
+bool EdytorNc::maybeSave(Document *doc)
 {
-    if (child->isModified()) {
+    if (doc->isModified()) {
         QMessageBox msgBox;
         msgBox.setParent(this, Qt::Dialog);
-        msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(child->filePath()));
+        msgBox.setText(tr("<b>File: \"%1\"\n has been modified.</b>").arg(doc->filePath()));
         msgBox.setInformativeText(tr("Do you want to save your changes ?"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Save);
@@ -547,11 +566,11 @@ bool EdytorNc::maybeSave(MdiChild *child)
 
         switch (ret) {
         case QMessageBox::Save:
-            return save(child, false);
+            return save(doc, false);
             break;
 
         case QMessageBox::Discard:
-            child->setModified(false);
+            doc->setModified(false);
             return true;
             break;
 
@@ -572,9 +591,9 @@ void EdytorNc::printFile()
 {
 #ifndef QT_NO_PRINTER
 
-    MdiChild *child = activeMdiChild();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
 
-    if (child) {
+    if (gdoc) {
         QPrinter printer(QPrinter::HighResolution);
         loadPrinterSettings(&printer);
 
@@ -583,14 +602,14 @@ void EdytorNc::printFile()
         QPrintDialog dialog(&printer, this);
         dialog.setWindowTitle(tr("Print Document"));
 
-        if (child->hasSelection()) {
+        if (gdoc->hasSelection()) {
             dialog.setOption(QAbstractPrintDialog::PrintSelection);
             printer.setPrintRange(QPrinter::Selection);
         }
 
         if (dialog.exec() == QDialog::Accepted) {
-            printer.setDocName(child->fileName());
-            child->print(&printer);
+            printer.setDocName(gdoc->fileName());
+            gdoc->print(&printer);
             statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(
                                          printer.printerName()), 5000);
             savePrinterSettings(&printer);
@@ -604,15 +623,15 @@ void EdytorNc::filePrintPreview()
 {
 #ifndef QT_NO_PRINTER
 
-    MdiChild *child = activeMdiChild();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
 
-    if (child) {
+    if (gdoc) {
         QPrinter printer(QPrinter::HighResolution);
         loadPrinterSettings(&printer);
 
         printer.setOutputFormat(QPrinter::NativeFormat);
 
-        if (child->hasSelection()) {
+        if (gdoc->hasSelection()) {
             printer.setPrintRange(QPrinter::Selection);
         }
 
@@ -630,11 +649,11 @@ void EdytorNc::printPreview(QPrinter *printer)
 {
 #ifndef QT_NO_PRINTER
 
-    MdiChild *child = activeMdiChild();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
 
-    if (child) {
-        printer->setDocName(child->fileName());
-        child->print(printer);
+    if (gdoc) {
+        printer->setDocName(gdoc->fileName());
+        gdoc->print(printer);
         statusBar()->showMessage(tr("The document was sent to a printer %1...").arg(
                                      printer->printerName()), 5000);
     }
@@ -644,15 +663,19 @@ void EdytorNc::printPreview(QPrinter *printer)
 
 void EdytorNc::cut()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->cut();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        gdoc->cut();
     }
 }
 
 void EdytorNc::copy()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->copy();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        gdoc->copy();
     }
 }
 
@@ -661,12 +684,16 @@ void EdytorNc::findInFl()
     if (findFiles == nullptr) {
         findFiles = new FindInFiles(ui->splitter);
 
-        if (defaultMdiWindowProperites.syntaxH) {
-            findFiles->setHighlightColors(m_codeStyle.hColors);
+        if (m_findInFilesHighlightEnable) {
+            GCoderStyle *style = dynamic_cast<GCoderStyle *>(m_documentManager->documentStyle(GCoder::DOCUMENT_TYPE).get());
+
+            if (style) {
+                findFiles->setHighlightColors(style->hColors);
+            }
         }
 
-        if (activeMdiChild()) {
-            findFiles->setDir(activeMdiChild()->path());
+        if (activeDocument()) {
+            findFiles->setDir(activeDocument()->path());
         }
 
         connect(findFiles, SIGNAL(fileClicked(QString)), this, SLOT(loadFoundedFile(QString)));
@@ -681,7 +708,8 @@ void EdytorNc::findInFl()
 
 bool EdytorNc::findNext()
 {
-    bool hasMdiChild = (activeMdiChild() != 0);
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+    bool hasMdiChild = (gdoc != 0);
     bool found = false;
     QPalette palette;
 
@@ -689,12 +717,10 @@ bool EdytorNc::findNext()
     findPreviousAct->setEnabled(false);
 
     if (!findEdit->text().isEmpty() && hasMdiChild) {
-        found = activeMdiChild()->findNext(findEdit->text(),
-                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
-                                             QTextDocument::FindFlags()) |
-                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
-                                             QTextDocument::FindFlags())),
-                                           mCheckIgnoreComments->isChecked());
+        found = gdoc->findNext(findEdit->text(),
+                               mCheckFindWholeWords->isChecked(),
+                               !mCheckIgnoreCase->isChecked(),
+                               mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
@@ -712,7 +738,8 @@ bool EdytorNc::findNext()
 
 bool EdytorNc::findPrevious()
 {
-    bool hasMdiChild = (activeMdiChild() != 0);
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+    bool hasMdiChild = (gdoc != 0);
     bool found = false;
     QPalette palette;
 
@@ -720,12 +747,11 @@ bool EdytorNc::findPrevious()
     findPreviousAct->setEnabled(false);
 
     if (!findEdit->text().isEmpty() && hasMdiChild) {
-        found = activeMdiChild()->findNext(findEdit->text(), QTextDocument::FindBackward |
-                                           ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
-                                             QTextDocument::FindFlags()) |
-                                            (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
-                                             QTextDocument::FindFlags())),
-                                           mCheckIgnoreComments->isChecked());
+        found = gdoc->findNext(findEdit->text(),
+                               mCheckFindWholeWords->isChecked(),
+                               !mCheckIgnoreCase->isChecked(),
+                               mCheckIgnoreComments->isChecked(),
+                               true);
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
@@ -745,19 +771,18 @@ bool EdytorNc::findPrevious()
 void EdytorNc::replaceNext()
 {
     QPalette palette;
-    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+    bool hasMdiChildNotReadOnly = ((gdoc != 0) && !activeDocument()->isReadOnly());
 
     replaceNextAct->setEnabled(false);
     replacePreviousAct->setEnabled(false);
     replaceAllAct->setEnabled(false);
 
     if (hasMdiChildNotReadOnly) {
-        bool found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
-                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
-                                                QTextDocument::FindFlags()) |
-                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
-                                                QTextDocument::FindFlags())),
-                                              mCheckIgnoreComments->isChecked());
+        bool found = gdoc->replaceNext(findEdit->text(), replaceEdit->text(),
+                                       mCheckFindWholeWords->isChecked(),
+                                       !mCheckIgnoreCase->isChecked(),
+                                       mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
@@ -776,20 +801,19 @@ void EdytorNc::replaceNext()
 void EdytorNc::replacePrevious()
 {
     QPalette palette;
-    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+    bool hasMdiChildNotReadOnly = ((gdoc != 0) && !activeDocument()->isReadOnly());
 
     replaceNextAct->setEnabled(false);
     replacePreviousAct->setEnabled(false);
     replaceAllAct->setEnabled(false);
 
     if (hasMdiChildNotReadOnly) {
-        bool found = activeMdiChild()->replaceNext(findEdit->text(), replaceEdit->text(),
-                                              QTextDocument::FindBackward |
-                                              ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
-                                                QTextDocument::FindFlags()) |
-                                               (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
-                                                QTextDocument::FindFlags())),
-                                              mCheckIgnoreComments->isChecked());
+        bool found = gdoc->replaceNext(findEdit->text(), replaceEdit->text(),
+                                       mCheckFindWholeWords->isChecked(),
+                                       !mCheckIgnoreCase->isChecked(),
+                                       mCheckIgnoreComments->isChecked(),
+                                       true);
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
@@ -808,7 +832,8 @@ void EdytorNc::replacePrevious()
 void EdytorNc::replaceAll()
 {
     QPalette palette;
-    bool hasMdiChildNotReadOnly = ((activeMdiChild() != 0) && !activeMdiChild()->isReadOnly());
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+    bool hasMdiChildNotReadOnly = ((gdoc != 0) && !activeDocument()->isReadOnly());
 
     replaceNextAct->setEnabled(false);
     replacePreviousAct->setEnabled(false);
@@ -816,12 +841,10 @@ void EdytorNc::replaceAll()
 
     if (hasMdiChildNotReadOnly) {
         QApplication::setOverrideCursor(Qt::BusyCursor);
-        bool found = activeMdiChild()->replaceAll(findEdit->text(), replaceEdit->text(),
-                                             ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
-                                               QTextDocument::FindFlags()) |
-                                              (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
-                                               QTextDocument::FindFlags())),
-                                             mCheckIgnoreComments->isChecked());
+        bool found = gdoc->replaceAll(findEdit->text(), replaceEdit->text(),
+                                      mCheckFindWholeWords->isChecked(),
+                                      !mCheckIgnoreCase->isChecked(),
+                                      mCheckIgnoreComments->isChecked());
 
         palette.setColor(QPalette::Base, QColor(Qt::red).lighter(160));
 
@@ -841,16 +864,18 @@ void EdytorNc::replaceAll()
 
 void EdytorNc::selAll()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->selectAll();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        gdoc->selectAll();
     }
 }
 
 void EdytorNc::config()
 {
     AppConfig config;
-    config.editorProperties = defaultMdiWindowProperites;
-    config.codeStyle = m_codeStyle;
+    config.editorProperties = *m_documentManager->documentWidgetProperties(GCoder::DOCUMENT_TYPE);
+    config.codeStyle = *m_documentManager->documentStyle(GCoder::DOCUMENT_TYPE);
     config.calcBinary = m_calcBinary;
     config.extensions = m_extensions;
     config.saveExtension = m_saveExtension;
@@ -864,11 +889,11 @@ void EdytorNc::config()
     if (setUpDialog->exec() == QDialog::Accepted) {
         config = setUpDialog->getSettings();
         QSettings *cfg = Medium::instance().settings();
-        defaultMdiWindowProperites = config.editorProperties;
-        defaultMdiWindowProperites.save(cfg);
-        emit intCapsLockChanged(defaultMdiWindowProperites.intCapsLock);
-        m_codeStyle = config.codeStyle;
-        m_codeStyle.save(cfg);
+        m_documentManager->setDocumentWidgetProperties(DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(config.editorProperties)));
+        config.editorProperties.save(cfg);
+        emit intCapsLockChanged(config.editorProperties.intCapsLock);
+        m_documentManager->setDocumentStyle(DocumentStyle::Ptr(new GCoderStyle(config.codeStyle)));
+        config.codeStyle.save(cfg);
         m_calcBinary = config.calcBinary;
         m_extensions = config.extensions;
         m_saveExtension = config.saveExtension;
@@ -878,16 +903,14 @@ void EdytorNc::config()
         m_disableFileChangeMonitor = config.disableFileChangeMonitor;
         m_startEmpty = config.startEmpty;
 
-        foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
-            MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
+        if (dirModel != nullptr) {
+            dirModel->setNameFilters(m_extensions);
+        }
 
-            if (dirModel != nullptr) {
-                dirModel->setNameFilters(m_extensions);
-            }
+        m_documentManager->updateDocuments(GCoder::DOCUMENT_TYPE);
 
-            mdiChild->setReadOnly(m_defaultReadOnly);
-            mdiChild->setWidgetProperties(DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(defaultMdiWindowProperites)));
-            mdiChild->setCodeStyle(DocumentStyle::Ptr(new GCoderStyle(m_codeStyle)));
+        for (Document *doc : m_documentManager->documentList()) {
+            doc->setReadOnly(m_defaultReadOnly);
         }
     }
 
@@ -896,8 +919,8 @@ void EdytorNc::config()
 
 void EdytorNc::readOnly()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->setReadOnly(readOnlyAct->isChecked());
+    if (activeDocument()) {
+        activeDocument()->setReadOnly(readOnlyAct->isChecked());
     }
 
     updateMenus();
@@ -905,15 +928,17 @@ void EdytorNc::readOnly()
 
 void EdytorNc::goToLine(const QString &fileName, int line)
 {
-    if (activeMdiChild()) {
-        QString childFileName = activeMdiChild()->filePath();
-        childFileName =  QDir().toNativeSeparators(childFileName);
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        QString childFileName = gdoc->filePath();
+        childFileName = QDir().toNativeSeparators(childFileName);
 
         if (QDir().toNativeSeparators(fileName) != childFileName) {
             return;
         }
 
-        activeMdiChild()->goToLine(line);
+        gdoc->goToLine(line);
     }
 }
 
@@ -939,8 +964,8 @@ void EdytorNc::doDiffL()
 
         diffAct->setChecked(true);
 
-        if (activeMdiChild()) {
-            fileName = activeMdiChild()->filePath();
+        if (activeDocument()) {
+            fileName = activeDocument()->filePath();
         }
 
         if (fileName.isEmpty()) {
@@ -969,8 +994,8 @@ void EdytorNc::doDiffR()
 
         diffAct->setChecked(true);
 
-        if (activeMdiChild()) {
-            fileName = activeMdiChild()->filePath();
+        if (activeDocument()) {
+            fileName = activeDocument()->filePath();
         }
 
         if (fileName.isEmpty()) {
@@ -1005,16 +1030,16 @@ void EdytorNc::diffTwoFiles(const QString &filename1, const QString &filename2)
 
 void EdytorNc::diffEditorFile()
 {
-    MdiChild *child = activeMdiChild();
+    Document *doc = activeDocument();
 
-    if (!child) {
+    if (!doc) {
         return;
     }
 
     createDiffApp();
 
     if (diffApp != nullptr) {
-        QString fileName = child->filePath();
+        QString fileName = doc->filePath();
 
         if (fileName.isEmpty()) {
             return;
@@ -1034,7 +1059,7 @@ void EdytorNc::diffEditorFile()
             return;
         }
 
-        file.write(child->rawData());
+        file.write(doc->rawData());
         file.close();
 
         diffAct->setChecked(true);
@@ -1060,8 +1085,8 @@ void EdytorNc::doDiff()
     if (diffApp == nullptr) {
         createDiffApp();
 
-        if (activeMdiChild()) {
-            fileName = activeMdiChild()->filePath();
+        if (activeDocument()) {
+            fileName = activeDocument()->filePath();
         }
 
         if (fileName.isEmpty()) {
@@ -1107,46 +1132,50 @@ void EdytorNc::doCalc()
 
 void EdytorNc::deleteText()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->removeSelectedText();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        gdoc->removeSelectedText();
     }
 }
 
 void EdytorNc::paste()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->paste();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        gdoc->paste();
     }
 }
 
 void EdytorNc::undo()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->undo();
+    if (activeDocument()) {
+        activeDocument()->undo();
     }
 }
 
 void EdytorNc::redo()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->redo();
+    if (activeDocument()) {
+        activeDocument()->redo();
     }
 }
 
 void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
 {
     Q_UNUSED(window);
-    MdiChild *mdiChild;
+    Document *doc;
 
     if (ui->mdiArea->subWindowList().count() <= 1) {
         m_MdiWidgetsMaximized = true;
     }
 
-    mdiChild = activeMdiChild();
+    doc = activeDocument();
 
-    if (mdiChild) {
-        m_MdiWidgetsMaximized = mdiChild->parentWidget()->isMaximized();
-        statusBar()->showMessage(mdiChild->filePath(), 9000);
+    if (doc) {
+        m_MdiWidgetsMaximized = doc->widget()->parentWidget()->isMaximized();
+        statusBar()->showMessage(doc->filePath(), 9000);
     }
 
     updateCurrentSerialConfig();
@@ -1186,18 +1215,20 @@ void EdytorNc::about()
 
 void EdytorNc::updateMenus()
 {
+    Document *doc = activeDocument();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(doc);
     bool hasMdiChildNotReadOnly;
     bool hasSelection;
     bool hasModifiedMdiChild;
-    bool hasMdiChild = (activeMdiChild() != nullptr);
+    bool hasMdiChild = doc != nullptr;
 
     if (hasMdiChild) {
-        hasMdiChildNotReadOnly = (hasMdiChild && !activeMdiChild()->isReadOnly());
-        hasSelection = (hasMdiChild && activeMdiChild()->hasSelection());
-        hasModifiedMdiChild = hasMdiChild && activeMdiChild()->isModified();
+        hasMdiChildNotReadOnly = !doc->isReadOnly();
+        hasSelection = gdoc ? gdoc->hasSelection() : false;
+        hasModifiedMdiChild = doc->isModified();
 
-        redoAct->setEnabled(hasMdiChild && activeMdiChild()->isRedoAvailable());
-        undoAct->setEnabled(hasMdiChild && activeMdiChild()->isUndoAvailable());
+        redoAct->setEnabled(hasMdiChild && doc->isRedoAvailable());
+        undoAct->setEnabled(hasMdiChild && doc->isUndoAvailable());
     } else {
         hasMdiChildNotReadOnly = false;
         hasSelection = false;
@@ -1262,20 +1293,21 @@ void EdytorNc::updateMenus()
 
     pasteAct->setEnabled((!clipboard->text().isEmpty()) && hasMdiChildNotReadOnly);
 
-    if (hasMdiChild) {
+    if (gdoc) {
         if (findToolBar)
-            activeMdiChild()->highlightFindText(findEdit->text(),
-                                                ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
-                                                  QTextDocument::FindFlags()) |
-                                                 (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
-                                                  QTextDocument::FindFlags())), mCheckIgnoreComments->isChecked());
+            gdoc->highlightFindText(findEdit->text(),
+                                    mCheckFindWholeWords->isChecked(),
+                                    !mCheckIgnoreCase->isChecked(),
+                                    mCheckIgnoreComments->isChecked());
         else {
-            activeMdiChild()->highlightFindText("");
+            gdoc->highlightFindText("");
         }
+    }
 
-        saveAct->setText(tr("&Save \"%1\"").arg(activeMdiChild()->fileName()));
-        saveAsAct->setText(tr("Save \"%1\" &As...").arg(activeMdiChild()->fileName()));
-        closeAct->setText(tr("Cl&ose \"%1\"").arg(activeMdiChild()->fileName()));
+    if (doc) {
+        saveAct->setText(tr("&Save \"%1\"").arg(doc->fileName()));
+        saveAsAct->setText(tr("Save \"%1\" &As...").arg(doc->fileName()));
+        closeAct->setText(tr("Cl&ose \"%1\"").arg(doc->fileName()));
     }
 
     updateStatusBar();
@@ -1283,11 +1315,10 @@ void EdytorNc::updateMenus()
 
 void EdytorNc::updateCurrentSerialConfig()
 {
-    bool hasMdiChild = (activeMdiChild() != nullptr);
+    bool hasMdiChild = (activeDocument() != nullptr);
 
     if (hasMdiChild && (serialToolBar != nullptr)) {
-        QDir dir;
-        dir.setPath(activeMdiChild()->path());
+        QDir dir = activeDocument()->dir();
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
         dir.setNameFilters(QStringList("*.ini"));
@@ -1307,22 +1338,22 @@ void EdytorNc::updateCurrentSerialConfig()
 
 void EdytorNc::updateStatusBar()
 {
-    MdiChild *child = activeMdiChild();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
 
-    if (child) {
-        int id = highlightTypeCombo->findData(child->highligthMode());
+    if (gdoc) {
+        int id = highlightTypeCombo->findData(gdoc->highlightMode());
         highlightTypeCombo->blockSignals(true);
         highlightTypeCombo->setCurrentIndex(id);
         highlightTypeCombo->blockSignals(false);
 
-        int line = child->currentLine();
-        int column = child->currentColumn();
+        int line = gdoc->currentLine();
+        int column = gdoc->currentColumn();
 
         labelStat1->setText(tr(" Col: ") + QString::number(column + 1) +
                             tr("  Line: ") + QString::number(line) +
-                            (child->isModified() ? tr("  <b>Modified</b>  ") : " ") +
-                            (child->isReadOnly() ? tr(" Read only  ") : " ") +
-                            (child->overwriteMode() ? tr(" Overwrite  ") : tr(" Insert ")));
+                            (gdoc->isModified() ? tr("  <b>Modified</b>  ") : " ") +
+                            (gdoc->isReadOnly() ? tr(" Read only  ") : " ") +
+                            (gdoc->overwriteMode() ? tr(" Overwrite  ") : tr(" Insert ")));
 
     }
 }
@@ -1345,60 +1376,48 @@ void EdytorNc::updateWindowMenu()
 
     windowMenu->setAttribute(Qt::WA_AlwaysShowToolTips, true);
 
-    QList<QMdiSubWindow *> windows = ui->mdiArea->subWindowList();
-    separatorAct->setVisible(!windows.isEmpty());
+    QList<Document *> docList = m_documentManager->documentList();
+    separatorAct->setVisible(!docList.isEmpty());
 
-    for (int i = 0; i < windows.size(); ++i) {
-        MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
+    for (int i = 0; i < docList.size(); ++i) {
+        Document *doc = docList.at(i);
 
         if (i < 9) {
-            text = tr("&%1 %2").arg(i + 1)
-                   .arg(child->filePath());
+            text = tr("&%1 %2").arg(i + 1).arg(doc->filePath());
         } else {
-            text = tr("%1 %2").arg(i + 1)
-                   .arg(child->filePath());
+            text = tr("%1 %2").arg(i + 1).arg(doc->filePath());
         }
 
         QAction *action = windowMenu->addAction(text);
         action->setCheckable(true);
-        action->setChecked(child == activeMdiChild());
-        action->setToolTip(child->brief());
+        action->setChecked(doc == activeDocument());
+        action->setToolTip(doc->brief());
         connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
-        windowMapper->setMapping(action, windows.at(i));
+        windowMapper->setMapping(action, docList.at(i));
     }
 }
 
-MdiChild *EdytorNc::createMdiChild()
+Document *EdytorNc::createDocument(const QString &type)
 {
-    MdiChild *child = new MdiChild(this);
-    ui->mdiArea->addSubWindow(child);
+    Document *doc = m_documentManager->createDocument(type, "");
 
-    connect(child, SIGNAL(closeRequest(MdiChild *)), this, SLOT(maybeSave(MdiChild *)));
-    connect(child, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
-    connect(child, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-    connect(child, SIGNAL(cursorPositionChanged()), this, SLOT(updateMenus()));
-    connect(child, SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
-    connect(child, SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
-    connect(child, SIGNAL(message(const QString &, int)), statusBar(), SLOT(showMessage(const QString &, int)));
-    connect(child, SIGNAL(addRemoveFileWatch(const QString &, bool)), this, SLOT(watchFile(const QString &, bool)));
+    if (!doc) {
+        return nullptr;
+    }
 
     if (m_saveDirectory.isEmpty()) {
-        child->setPath(lastOpenedPath());
+        doc->setPath(lastOpenedPath());
     } else {
-        child->setPath(m_saveDirectory);
+        doc->setPath(m_saveDirectory);
     }
-
-    child->setWidgetProperties(DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(defaultMdiWindowProperites)));
-    child->setCodeStyle(DocumentStyle::Ptr(new GCoderStyle(m_codeStyle)));
-    child->setHighligthMode(defaultMdiWindowProperites.defaultHighlightMode);
 
     if (m_MdiWidgetsMaximized) {
-        child->showMaximized();
+        doc->widget()->parentWidget()->showMaximized();
     } else {
-        child->showNormal();
+        doc->widget()->parentWidget()->showNormal();
     }
 
-    return child;
+    return doc;
 }
 
 void EdytorNc::createActions()
@@ -1871,13 +1890,12 @@ void EdytorNc::createStatusBar()
 void EdytorNc::setHighLightMode(int mode)
 {
     bool ok;
-    bool hasMdiChild = (activeMdiChild() != 0);
-
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
     int id = highlightTypeCombo->itemData(mode).toInt(&ok);
 
-    if (hasMdiChild) {
-        activeMdiChild()->setHighligthMode(id);
-        activeMdiChild()->setFocus(Qt::MouseFocusReason);
+    if (gdoc && ok) {
+        gdoc->setHighlightMode(id);
+        gdoc->widget()->setFocus(Qt::MouseFocusReason);
     }
 }
 
@@ -1938,8 +1956,20 @@ void EdytorNc::readSettings()
     m_calcBinary = settings.value("CalcBinary", m_calcBinary).toString();
 
     m_recentFiles->load(&settings);
-    defaultMdiWindowProperites.load(&settings);
-    m_codeStyle.load(&settings);
+    GCoderWidgetProperties::Ptr prop = m_documentManager->documentWidgetProperties(GCoder::DOCUMENT_TYPE);
+
+    if (prop) {
+        prop->load(&settings);
+        m_documentManager->setDocumentWidgetProperties(prop);
+    }
+
+    GCoderStyle::Ptr style = m_documentManager->documentStyle(GCoder::DOCUMENT_TYPE);
+
+    if (style) {
+        style->load(&settings);
+        m_documentManager->setDocumentStyle(style);
+    }
+
     m_sessionManager->load(&settings);
 
     if (!m_startEmpty) {
@@ -2026,16 +2056,12 @@ void EdytorNc::writeSettings()
     }
 }
 
-MdiChild *EdytorNc::activeMdiChild() const
+Document *EdytorNc::activeDocument() const
 {
-    if (QMdiSubWindow *activeSubWindow = ui->mdiArea->activeSubWindow()) {
-        return qobject_cast<MdiChild *>(activeSubWindow->widget());
-    }
-
-    return 0;
+    return m_documentManager->activeDocument();
 }
 
-QMdiSubWindow *EdytorNc::findMdiChild(const QString &fileName)
+Document *EdytorNc::findDocument(const QString &fileName)
 {
     QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
 
@@ -2043,15 +2069,7 @@ QMdiSubWindow *EdytorNc::findMdiChild(const QString &fileName)
         canonicalFilePath = fileName;
     }
 
-    foreach (QMdiSubWindow *window, ui->mdiArea->subWindowList()) {
-        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-
-        if (mdiChild->filePath() == QDir::toNativeSeparators(canonicalFilePath)) {
-            return window;
-        }
-    }
-
-    return 0;
+    return m_documentManager->findDocumentByFilePath(canonicalFilePath);
 }
 
 void EdytorNc::setActiveSubWindow(QWidget *window)
@@ -2065,7 +2083,7 @@ void EdytorNc::setActiveSubWindow(QWidget *window)
 
 QString EdytorNc::currentPath() const
 {
-    MdiChild *child = activeMdiChild();
+    Document *child = activeDocument();
 
     if (child) {
         return child->filePath();
@@ -2088,34 +2106,32 @@ void EdytorNc::loadFile(const DocumentInfo::Ptr &info, bool checkAlreadyLoaded)
 {
     QFileInfo file;
 
-    if (checkAlreadyLoaded) {
-        QMdiSubWindow *existing = findMdiChild(info->filePath);
-
-        if (existing) {
-            ui->mdiArea->setActiveSubWindow(existing);
-            return;
-        }
+    if (checkAlreadyLoaded && m_documentManager->setActiveDocument(info->filePath)) {
+        return;
     }
 
     file.setFile(info->filePath);
 
     if ((file.exists()) && (file.isReadable())) {
-        MdiChild *child = createMdiChild();
+        Document *doc = createDocument(info->documentType());
 
-        child->setFilePath(info->filePath);
+        if (!doc) {
+            return;
+        }
+
+        doc->setDocumentInfo(info);
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        bool status = child->load();
+        bool status = doc->load();
         QApplication::restoreOverrideCursor();
 
         if (status) {
-            child->setDocumentInfo(info);
             setLastOpenedPath(info->filePath);
             updateStatusBar();
             m_recentFiles->add(info->filePath);
         } else {
             QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot read file \"%1\".\n %2")
-                                 .arg(child->filePath()).arg(child->ioErrorString()));
-            child->parentWidget()->close();
+                                 .arg(doc->filePath()).arg(doc->ioErrorString()));
+            doc->close();
         }
     }
 }
@@ -2216,7 +2232,14 @@ void EdytorNc::createFindToolBar()
                "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
         CapsLockEventFilter *findEditEventFilter = new CapsLockEventFilter(findEdit);
         connect(this, SIGNAL(intCapsLockChanged(bool)), findEditEventFilter, SLOT(setCapsLockEnable(bool)));
-        findEditEventFilter->setCapsLockEnable(defaultMdiWindowProperites.intCapsLock);
+        bool intCapsLock = false;
+        GCoderWidgetProperties *prop = dynamic_cast<GCoderWidgetProperties *>(m_documentManager->documentWidgetProperties(GCoder::DOCUMENT_TYPE).get());
+
+        if (prop) {
+            intCapsLock = prop->intCapsLock;
+        }
+
+        findEditEventFilter->setCapsLockEnable(intCapsLock);
         findEdit->installEventFilter(findEditEventFilter);
         connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
         findToolBar->addWidget(findEdit);
@@ -2233,7 +2256,7 @@ void EdytorNc::createFindToolBar()
                "<p>$$+1 - will add 1 to replaced numbers</p>"));
         CapsLockEventFilter *replaceEditEventFilter = new CapsLockEventFilter(replaceEdit);
         connect(this, SIGNAL(intCapsLockChanged(bool)), replaceEditEventFilter, SLOT(setCapsLockEnable(bool)));
-        replaceEditEventFilter->setCapsLockEnable(defaultMdiWindowProperites.intCapsLock);
+        replaceEditEventFilter->setCapsLockEnable(intCapsLock);
         replaceEdit->installEventFilter(replaceEditEventFilter);
         findToolBar->addWidget(replaceEdit);
         findToolBar->addAction(replacePreviousAct);
@@ -2262,13 +2285,15 @@ void EdytorNc::createFindToolBar()
         findToolBar->show();
     }
 
-    if (activeMdiChild()) {
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
         disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
 
-        if (activeMdiChild()->hasSelection()) {
-            selText = activeMdiChild()->selectedText();
+        if (gdoc->hasSelection()) {
+            selText = gdoc->selectedText();
         } else {
-            selText = activeMdiChild()->wordUnderCursor();
+            selText = gdoc->wordUnderCursor();
         }
 
         if (selText.size() < 32) {
@@ -2279,7 +2304,7 @@ void EdytorNc::createFindToolBar()
         connect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
         findEdit->setFocus(Qt::MouseFocusReason);
 
-        activeMdiChild()->highlightFindText(findEdit->text(),
+        gdoc->highlightFindText(findEdit->text(),
                                             ((mCheckFindWholeWords->isChecked() ? QTextDocument::FindWholeWords :
                                               QTextDocument::FindFlags()) |
                                              (!mCheckIgnoreCase->isChecked() ? QTextDocument::FindCaseSensitively :
@@ -2291,10 +2316,12 @@ void EdytorNc::createFindToolBar()
 
 void EdytorNc::closeFindToolBar()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->setFocus(Qt::MouseFocusReason);
-        activeMdiChild()->highlightFindText("");
-        activeMdiChild()->centerCursor();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        gdoc->widget()->setFocus(Qt::MouseFocusReason);
+        gdoc->highlightFindText("");
+        gdoc->centerCursor();
     }
 
     QSettings &settings = *Medium::instance().settings();
@@ -2316,10 +2343,10 @@ void EdytorNc::findTextChanged()
         replaceAllAct->setEnabled(true);
     }
 
-    MdiChild *child = activeMdiChild();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
 
-    if (child) {
-        child->clearSelection(true);
+    if (gdoc) {
+        gdoc->clearSelection(true);
 
         if (!findEdit->text().isEmpty()) {
             findNext();
@@ -2424,11 +2451,10 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 {
     QFile file;
 
-    bool hasMdiChild = (activeMdiChild() != 0);
+    bool hasMdiChild = (activeDocument() != 0);
 
     if (hasMdiChild && (serialToolBar != nullptr)) {
-        QDir dir;
-        dir.setPath(activeMdiChild()->path());
+        QDir dir = activeDocument()->dir();
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
         dir.setNameFilters(QStringList("*.ini"));
@@ -2441,7 +2467,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
         }
 
         if (attach) {
-            file.setFileName(activeMdiChild()->path() + "/" + configBox->currentText() + ".ini");
+            file.setFileName(activeDocument()->path() + "/" + configBox->currentText() + ".ini");
             file.open(QIODevice::ReadWrite);
             file.close();;
         }
@@ -2457,8 +2483,8 @@ void EdytorNc::createUserToolTipsFile()
 {
     QString fileName;
 
-    if (activeMdiChild()) {
-        fileName = activeMdiChild()->path();
+    if (activeDocument()) {
+        fileName = activeDocument()->path();
     } else {
         return;
     }
@@ -2495,11 +2521,7 @@ void EdytorNc::createUserToolTipsFile()
         openFile(fileName);
     }
 
-    QMdiSubWindow *existing = findMdiChild(fileName);
-
-    if (existing) {
-        ui->mdiArea->setActiveSubWindow(existing);
-    }
+    m_documentManager->setActiveDocument(fileName);
 }
 
 void EdytorNc::createGlobalToolTipsFile()
@@ -2511,22 +2533,17 @@ void EdytorNc::createGlobalToolTipsFile()
         openFile(fileName);
     }
 
-    QMdiSubWindow *existing = findMdiChild(fileName);
-
-    if (existing) {
-        ui->mdiArea->setActiveSubWindow(existing);
-    }
+    m_documentManager->setActiveDocument(fileName);
 }
 
 void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 {
     QFile file;
 
-    bool hasMdiChild = (activeMdiChild() != 0);
+    bool hasMdiChild = (activeDocument() != 0);
 
     if (hasMdiChild) {
-        QDir dir;
-        dir.setPath(activeMdiChild()->path());
+        QDir dir = activeDocument()->dir();
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         dir.setSorting(QDir::Name);
         dir.setNameFilters(QStringList("*.cfg"));
@@ -2539,7 +2556,7 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
         }
 
         if (attach) {
-            file.setFileName(activeMdiChild()->path() + "/" + highlightTypeCombo->currentText() +
+            file.setFileName(activeDocument()->path() + "/" + highlightTypeCombo->currentText() +
                              ".cfg");
             file.open(QIODevice::ReadWrite);
             file.close();;
@@ -3032,28 +3049,28 @@ void EdytorNc::updateOpenFileList()
     ui->openFileTableWidget->setHorizontalHeaderLabels(labels);
     ui->openFileTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
-    QList<QMdiSubWindow *> windows = ui->mdiArea->subWindowList();
+    QList<Document *> docList = m_documentManager->documentList();
 
     ui->openFileTableWidget->setSortingEnabled(false);
-    ui->openFileTableWidget->setRowCount(windows.size());
+    ui->openFileTableWidget->setRowCount(docList.size());
 
-    for (int i = 0; i < windows.size(); ++i) {
-        MdiChild *child = qobject_cast<MdiChild *>(windows.at(i)->widget());
+    for (int i = 0; i < docList.size(); ++i) {
+        Document *doc = docList.at(i);
 
-        file.setFile(child->filePath());
+        file.setFile(doc->filePath());
 
-        QTableWidgetItem *newItem = new QTableWidgetItem(file.fileName() + (child->isModified() ? "*" : ""));
+        QTableWidgetItem *newItem = new QTableWidgetItem(file.fileName() + (doc->isModified() ? "*" : ""));
 
         if (file.canonicalFilePath().isEmpty()) {
-            newItem->setToolTip(child->filePath());
+            newItem->setToolTip(doc->filePath());
         } else {
             newItem->setToolTip(QDir::toNativeSeparators(file.canonicalFilePath()));
         }
 
         ui->openFileTableWidget->setItem(i, 1, newItem);
 
-        newItem = new QTableWidgetItem(child->brief());
-        newItem->setToolTip(child->brief() + " --> " + QDir::toNativeSeparators(
+        newItem = new QTableWidgetItem(doc->brief());
+        newItem->setToolTip(doc->brief() + " --> " + QDir::toNativeSeparators(
                                 file.canonicalFilePath()));
         ui->openFileTableWidget->setItem(i, 0, newItem);
 
@@ -3062,7 +3079,7 @@ void EdytorNc::updateOpenFileList()
         newItem->setToolTip(tr("Close"));
         ui->openFileTableWidget->setItem(i, 2, newItem);
 
-        if (child == activeMdiChild()) {
+        if (doc == activeDocument()) {
             ui->openFileTableWidget->selectRow(i);
         }
     }
@@ -3085,14 +3102,14 @@ void EdytorNc::openFileTableWidgetClicked(int x, int y)
 {
     QTableWidgetItem *item = ui->openFileTableWidget->item(x, 1);
 
-    QMdiSubWindow *existing = findMdiChild(item->toolTip());
+    Document *existing = findDocument(item->toolTip());
 
     if (existing) {
         if (y == 2) {
             existing->close();
             updateOpenFileList();
         } else {
-            ui->mdiArea->setActiveSubWindow(existing);
+            m_documentManager->setActiveDocument(existing);
         }
     }
 }
@@ -3113,8 +3130,8 @@ void EdytorNc::fileTreeViewChangeRootDir()
         return;
     }
 
-    if (ui->currentPathCheckBox->isChecked() && (activeMdiChild() != nullptr)) {
-        path = activeMdiChild()->filePath();
+    if (ui->currentPathCheckBox->isChecked() && (activeDocument() != nullptr)) {
+        path = activeDocument()->filePath();
 
         if (QFileInfo(path).exists()) {
             path = QFileInfo(path).canonicalPath();
@@ -3257,7 +3274,7 @@ void EdytorNc::beforeCurrentSessionChanged()
 
 void EdytorNc::currentSessionChanged()
 {
-    ui->mdiArea->closeAllSubWindows();
+    closeAllMdiWindows();
     openFilesFromSession();
     statusBar()->showMessage(tr("Session %1 loaded").arg(m_sessionManager->currentSession()), 5000);
 }
@@ -3274,9 +3291,8 @@ void EdytorNc::storeFileInfoInSession()
 {
     QList<DocumentInfo::Ptr> infoList;
 
-    for (const QMdiSubWindow *window : ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
-        MdiChild *mdiChild = qobject_cast<MdiChild *>(window->widget());
-        DocumentInfo::Ptr info = mdiChild->documentInfo();
+    for (const Document *doc : m_documentManager->documentList()) {
+        DocumentInfo::Ptr info = doc->documentInfo();
         infoList.append(info);
     }
 
@@ -3390,11 +3406,9 @@ void EdytorNc::serialConfigTest()
 void EdytorNc::sendButtonClicked()
 {
     QString tx;
-    MdiChild *activeWindow;
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
 
-    activeWindow = activeMdiChild();
-
-    if (activeWindow == nullptr) {
+    if (!gdoc) {
         return;
     }
 
@@ -3403,7 +3417,7 @@ void EdytorNc::sendButtonClicked()
     commAppAct->setEnabled(false);
     QApplication::setOverrideCursor(Qt::BusyCursor);
 
-    tx.append(activeWindow->text());
+    tx.append(gdoc->text());
 
     SerialTransmissionDialog transmissionDialog(this);
     transmissionDialog.sendData(tx, configBox->currentText());
@@ -3438,18 +3452,14 @@ void EdytorNc::receiveButtonClicked()
             }
         } else {
             if (!(*it).isEmpty() && !(*it).isNull()) {
-                MdiChild *activeWindow = newFile();
+                GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(newFile());
 
-                if (activeWindow == nullptr) {
-                    return;
-                }
-
-                if (activeWindow) {
-                    activeWindow->clear();
-                    activeWindow->insertText(*it);
-                    activeWindow->setHighligthMode(MODE_AUTO);
+                if (gdoc) {
+                    gdoc->clear();
+                    gdoc->insertText(*it);
+                    gdoc->setHighlightMode(MODE_AUTO);
                     //activeWindow->setReadOnly(defaultMdiWindowProperites.defaultReadOnly);
-                    activeWindow->clearUndoRedoStacks();
+                    gdoc->clearUndoRedoStacks();
                 }
             }
         }
@@ -3465,16 +3475,12 @@ void EdytorNc::receiveButtonClicked()
 
 void EdytorNc::fileChanged(const QString &fileName)
 {
-    QMdiSubWindow *existing;
-    MdiChild *mdiChild = nullptr;
+    Document *doc = findDocument(fileName);
     bool modified = false;
 
-    existing = findMdiChild(fileName);
-
-    if (existing) {
-        mdiChild = qobject_cast<MdiChild *>(existing->widget());
-        modified = mdiChild->isModified();
-        ui->mdiArea->setActiveSubWindow(existing);
+    if (doc) {
+        modified = doc->isModified();
+        m_documentManager->setActiveDocument(doc);
     } else {
         fileChangeMonitor->removePath(fileName);
         return;
@@ -3495,7 +3501,7 @@ void EdytorNc::fileChanged(const QString &fileName)
     switch (ret) {
     case QMessageBox::Yes:
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        mdiChild->load();
+        doc->load();
         QApplication::restoreOverrideCursor();
         break;
 
@@ -3637,6 +3643,45 @@ void EdytorNc::clipboardTreeViewContextMenu(const QPoint &point)
     }
 }
 
+void EdytorNc::customContextMenuRequest(Document *doc, const QPoint &pos)
+{
+    QMenu *menu = nullptr;
+
+    if (!menu) {
+        GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(doc);
+
+        if (gdoc) {
+            menu = doContextMenuGCoder(gdoc, pos);
+        }
+    }
+
+    if (menu) {
+        menu->exec(doc->widget()->mapToGlobal(pos));
+        menu->deleteLater();
+    }
+}
+
+QMenu *EdytorNc::doContextMenuGCoder(GCoderDocument *doc, const QPoint &pos)
+{
+    QMenu *menu = doc->createStandardContextMenu(pos);
+    menu->addSeparator();
+
+    menu->addAction(addonsActions()->semiComment());
+    menu->addAction(addonsActions()->paraComment());
+    menu->addSeparator();
+    menu->addAction(addonsActions()->blockSkipIncrement());
+    menu->addAction(addonsActions()->blockSkipDecrement());
+    menu->addAction(addonsActions()->blockSkipRemove());
+    menu->addSeparator();
+
+    QAction *inLineCalcAct = new QAction(QIcon(":/images/inlinecalc.png"), tr("Inline calculator"), menu);
+    inLineCalcAct->setShortcut(tr("Ctrl+0"));
+    connect(inLineCalcAct, SIGNAL(triggered()), doc, SLOT(showInLineCalc()));
+    menu->addAction(inLineCalcAct);
+
+    return menu;
+}
+
 void EdytorNc::deleteFromClipboardButtonClicked()
 {
     QModelIndexList list = ui->clipboardTreeView->selectionModel()->selectedIndexes();
@@ -3723,8 +3768,10 @@ void EdytorNc::clipboardLoad()
 
 void EdytorNc::doShowInLineCalc()
 {
-    if (activeMdiChild()) {
-        activeMdiChild()->showInLineCalc();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+
+    if (gdoc) {
+        gdoc->showInLineCalc();
     }
 }
 

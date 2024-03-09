@@ -22,8 +22,9 @@
 #include <QSettings>    // for QSettings
 #include <QVariant>     // for QVariant
 
-#include "documentinfo.h"   // for DocumentInfo, DOCUMENTINFO_CFG_KEY_TYPE
-#include "gcoderinfo.h"     // for GCoderInfo
+#include <documentinfo.h>       // for DocumentInfo, DOCUMENTINFO_CFG_KEY_TYPE
+#include <documentmanager.h>    // for DocumentManager
+
 #include "sessionmanager.h"
 
 
@@ -33,7 +34,9 @@
 #define CFG_SECTION                 "SessionManager"
 
 
-SessionManager::SessionManager(QObject *parent) : QObject(parent)
+SessionManager::SessionManager(DocumentManager *documentManager, QObject *parent) :
+    QObject(parent),
+    m_documentManager(documentManager)
 {
     m_sessionsLimit = SESSIONS_DEFAULT_LIMIT;
     m_filesLimit = FILES_DEFAULT_LIMIT;
@@ -384,7 +387,8 @@ void SessionManager::load(QSettings *cfg)
                 break;
             }
 
-            DocumentInfo::Ptr info = DocumentInfo::Ptr(new GCoderInfo());
+            const QString &type = cfg->value(DOCUMENTINFO_CFG_KEY_TYPE).toString();
+            DocumentInfo::Ptr info = m_documentManager->createDocumentInfo(type);
             info->load(cfg);
             item.files.append(info);
             cfg->endGroup();

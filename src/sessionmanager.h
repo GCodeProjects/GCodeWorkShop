@@ -30,6 +30,8 @@
 
 class QSettings;
 
+class DocumentManager;
+
 
 class SessionManager : public QObject
 {
@@ -43,7 +45,7 @@ public:
         SESSIONS_MAX = 32
     };
 
-    explicit SessionManager(QObject *parent = nullptr);
+    explicit SessionManager(DocumentManager *documentManager, QObject *parent = nullptr);
 
     bool addSession(const QString &name);
     bool removeSession(const QString &name);
@@ -95,6 +97,7 @@ protected:
     };
 
     QList<SessionItem> m_sessions;
+    DocumentManager *m_documentManager;
 };
 
 #endif // SESSIONMANAGER_H

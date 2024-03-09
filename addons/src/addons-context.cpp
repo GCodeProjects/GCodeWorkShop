@@ -22,22 +22,22 @@
 #include <QPlainTextEdit>   // for QPlainTextEdit
 #include <QTextCursor>      // for QTextCursor, QTextCursor::KeepAnchor, QTextCursor::MoveAnchor, QTextCursor::End
 
-#include <edytornc.h>   // for EdytorNc
-#include <mdichild.h>   // for MdiChild
+#include <edytornc.h>       // for EdytorNc
+#include <gcoderdocument.h> //
 
 #include "addons-context.h"
 
 
 bool Addons::Context::pull(int mode)
 {
-    MdiChild *child = EdytorNc::instance()->activeMdiChild();
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(EdytorNc::instance()->activeDocument());
 
-    if (!child) {
+    if (!gdoc) {
         return false;
     }
 
     m_mode = mode;
-    m_edit = child->textEdit();
+    m_edit = gdoc->textEdit();
     QTextCursor cursor(m_edit->document());
     m_selectionStart = m_edit->textCursor().selectionStart();
     m_selectionEnd = m_edit->textCursor().selectionEnd();

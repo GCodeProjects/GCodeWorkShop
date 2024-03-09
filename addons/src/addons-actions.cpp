@@ -27,7 +27,7 @@
 
 #include <addons-actions.h>
 #include <edytornc.h>           // for EdytorNc
-#include <mdichild.h>
+#include <gcoderdocument.h>
 #include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 #include <utils/medium.h>       // for Medium
 #include <utils/splitfile.h>    // for splitFile
@@ -263,8 +263,11 @@ void Addons::Actions::doCompileMacro()
         //return;
     }
 
-    MdiChild *child = enc->newFile();
-    child->insertText(compiler.result());
+    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(enc->newFile());
+
+    if (gdoc) {
+        gdoc->insertText(compiler.result());
+    }
 }
 
 void Addons::Actions::doDot()
@@ -406,15 +409,14 @@ void Addons::Actions::doSplitProgramms()
     }
 
     for (QString it : list) {
-        MdiChild *activeWindow = EdytorNc::instance()->newFile();
+        GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(EdytorNc::instance()->newFile());
 
-        if (activeWindow == nullptr) {
-            QApplication::restoreOverrideCursor();
-            return;
+        if (gdoc == nullptr) {
+            continue;
         }
 
-        activeWindow->setText(it);
-        activeWindow->clearUndoRedoStacks();
+        gdoc->setText(it);
+        gdoc->clearUndoRedoStacks();
     }
 
     QApplication::restoreOverrideCursor();

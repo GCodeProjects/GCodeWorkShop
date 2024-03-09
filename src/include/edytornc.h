@@ -33,8 +33,6 @@
 #include <QMainWindow>
 
 #include <documentinfo.h>
-#include <gcoderstyle.h>
-#include <gcoderwidgetproperties.h>
 
 class QAction;
 class QCheckBox;
@@ -62,9 +60,11 @@ class QToolButton;
 class QWidget;
 
 class CommApp;
+class Document;
+class DocumentManager;
 class FindInFiles;
+class GCoderDocument;
 class KDiff3App;
-class MdiChild;
 class Medium;
 class RecentFiles;
 class SessionManager;
@@ -91,7 +91,8 @@ public:
     void moveEvent(QMoveEvent *event);
 
     Addons::Actions *addonsActions();
-    MdiChild *activeMdiChild() const;
+    DocumentManager *documentManager() const;
+    Document *activeDocument() const;
     QString currentPath() const;
     QString lastOpenedPath() const;
 
@@ -116,8 +117,8 @@ public:
 
 public slots:
     void messReceived(const QString &text = "");
-    MdiChild *newFile();
-    bool maybeSave(MdiChild *child);
+    Document *newFile();
+    bool maybeSave(Document *doc);
     bool maybeSaveAll();
 
 protected:
@@ -125,12 +126,12 @@ protected:
     bool event(QEvent *event);
     void setLastOpenedPath(const QString &path);
 
-    bool save(MdiChild *child, bool forceSaveAs);
+    bool save(Document *doc, bool forceSaveAs);
 
     void setMdiTabbedMode(bool tabbed);
 
 private slots:
-    MdiChild *newFileFromTemplate();
+    Document *newFileFromTemplate();
     void open(const QDir &dir);
     void open();
     void openExample();
@@ -148,7 +149,7 @@ private slots:
     void about();
     void updateMenus();
     void updateWindowMenu();
-    MdiChild *createMdiChild();
+    Document *createDocument(const QString &type);
     void setActiveSubWindow(QWidget *window);
     void loadFile(const DocumentInfo::Ptr &options, bool checkAlreadyLoaded = true);
     void recentFilesChanged();
@@ -215,6 +216,8 @@ private slots:
     void clipboardChanged();
     void deleteFromClipboardButtonClicked();
     void clipboardTreeViewContextMenu(const QPoint &point);
+    void customContextMenuRequest(Document *doc, const QPoint &pos);
+    QMenu *doContextMenuGCoder(GCoderDocument *doc, const QPoint &pos);
     void doShowInLineCalc();
     void watchFile(const QString &fileName, bool add);
 
@@ -238,7 +241,7 @@ private:
     void createFileBrowseTabs();
     void fileTreeViewChangeRootDir();
     void fileTreeViewChangeRootDir(const QString &path);
-    QMdiSubWindow *findMdiChild(const QString &fileName);
+    Document *findDocument(const QString &fileName);
     void createDiffApp();
     void openFilesFromSession();
     void storeFileInfoInSession();
@@ -250,8 +253,7 @@ private:
     SessionManager *m_sessionManager;
 
     bool m_MdiWidgetsMaximized;
-    GCoderWidgetProperties defaultMdiWindowProperites;
-    GCoderStyle m_codeStyle;
+    DocumentManager *m_documentManager;
     QString m_calcBinary;
     QStringList m_extensions;
     QString m_saveExtension;
@@ -261,6 +263,7 @@ private:
     bool m_defaultReadOnly;
     bool m_startEmpty;
     bool m_disableFileChangeMonitor;
+    bool m_findInFilesHighlightEnable;
     FindInFiles *findFiles;
 
     bool panelHidden;
