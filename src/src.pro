@@ -25,7 +25,6 @@ HEADERS += \
     include/gcoderdocument.h \
     include/gcoderstyle.h \
     include/gcoderwidgetproperties.h \
-    include/mdichild.h \
     include/utils/expressionparser.h \
     include/utils/removezeros.h
 
@@ -72,7 +71,6 @@ SOURCES += \
     highlighter.cpp \
     inlinecalc.cpp \
     main.cpp \
-    mdichild.cpp \
     newfiledialog.cpp \
     recentfiles.cpp \
     sessiondialog.cpp \
@@ -85,7 +83,6 @@ SOURCES += \
 FORMS += \
     edytornc.ui \
     findinfilesdialog.ui \
-    mdichildform.ui \
     newfiledialog.ui \
     sessiondialog.ui \
     sessionnamedialog.ui \
