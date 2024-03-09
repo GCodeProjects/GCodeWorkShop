@@ -18,7 +18,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QChar>        // for operator==, QChar, QChar::ParagraphSeparator
+#include <QChar>        // for operator==, QChar, QChar::LineFeed
 #include <QString>      // for QString, QCharRef
 #include <QStringList>  // for QStringList
 #include <QtGlobal>     // for QForeachContainer, qMakeForeachContainer, foreach
@@ -28,7 +28,7 @@
 
 void Utils::paraComment(QString& tx)
 {
-	QStringList list = tx.split(QChar::ParagraphSeparator);
+	QStringList list = tx.split(QChar::LineFeed);
 	bool remove = false;
 
 	if (tx[0] == '(') {
@@ -66,7 +66,7 @@ void Utils::paraComment(QString& tx)
 
 void Utils::semiComment(QString& tx)
 {
-	QStringList list = tx.split(QChar::ParagraphSeparator);
+	QStringList list = tx.split(QChar::LineFeed);
 	bool remove = false;
 
 	if (tx[0] == ';') {

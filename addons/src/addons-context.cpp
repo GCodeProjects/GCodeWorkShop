@@ -19,7 +19,7 @@
 
 #include <algorithm>    // for max, min
 
-#include <QChar>            // for QChar
+#include <QChar>            // for QChar::LineFeed, QChar::ParagraphSeparator
 #include <QPlainTextEdit>   // for QPlainTextEdit
 #include <QTextCursor>      // for QTextCursor, QTextCursor::KeepAnchor, QTextCursor::MoveAnchor, QTextCursor::End
 
@@ -87,7 +87,7 @@ bool Addons::Context::pull(int mode)
 	m_fragmentStart = cursor.position();
 	m_fragmentEnd = cursor.anchor();
 	m_text = cursor.selectedText();
-	m_text.replace(QChar(0x2029), '\n');
+	m_text.replace(QChar::ParagraphSeparator, QChar::LineFeed);
 
 	return true;
 }

@@ -18,7 +18,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QChar>                    // for QChar, QChar::ParagraphSeparator
+#include <QChar>                    // for QChar, QChar::LineFeed
 #include <QRegularExpression>       // for QRegularExpression
 #include <QRegularExpressionMatch>  // for QRegularExpressionMatch
 #include <QString>                  // for QString
@@ -66,7 +66,7 @@ void Utils::blockSkip(QString& tx, bool remove, bool inc)
 		}
 	}
 
-	QStringList list = tx.split(QChar::ParagraphSeparator);
+	QStringList list = tx.split(QChar::LineFeed);
 
 	if (list.isEmpty()) {
 		list.append(tx);
