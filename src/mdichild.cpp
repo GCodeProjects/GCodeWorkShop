@@ -35,6 +35,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QIcon>
+#include <QHash>
 #include <QIODevice>
 #include <QKeyEvent>
 #include <QLatin1Char>
@@ -524,6 +525,8 @@ void MdiChild::setWidgetProperties(const DocumentWidgetProperties::Ptr &properti
 
         highlighter = nullptr;
     }
+
+    updateToolTips();
 }
 
 bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
@@ -857,6 +860,83 @@ bool MdiChild::event(QEvent *event)
     }
 
     return QWidget::event(event);
+}
+
+void MdiChild::updateToolTips()
+{
+    QString group;
+
+    switch (m_highlightMode) {
+    case MODE_OKUMA:
+        group = QLatin1String("OKUMA");
+        break;
+
+    case MODE_FANUC:
+        group = QLatin1String("FANUC");
+        break;
+
+    case MODE_SINUMERIK_840:
+        group = QLatin1String("SINUMERIK_840");
+        break;
+
+    case MODE_PHILIPS:
+    case MODE_SINUMERIK:
+        group = QLatin1String("SINUMERIK");
+        break;
+
+    case MODE_HEIDENHAIN:
+        group = QLatin1String("HEIDENHAIN");
+        break;
+
+    case MODE_HEIDENHAIN_ISO:
+        group = QLatin1String("HEIDENHAIN_ISO");
+        break;
+
+    case MODE_LINUXCNC:
+        group = QLatin1String("LinuxCNC");
+        break;
+
+    case MODE_TOOLTIPS:
+        group = QLatin1String("TOOLTIP");
+        break;
+
+    default:
+//        m_gCoderEventFilter->setToolTipEnable(false);
+        return;
+    }
+
+//    m_gCoderEventFilter->setToolTipEnable(m_widgetProperties.editorToolTips);
+
+    QHash<QString, QString> tips;
+
+    QSettings cfg(QSettings::IniFormat, QSettings::UserScope, "EdytorNC", "EdytorNC");
+    QString config_dir = QFileInfo(cfg.fileName()).absolutePath() + "/";
+    QString fileName = config_dir + "cnc_tips_" + QLocale::system().name() + ".txt";
+    loadToolTips(tips, fileName, group);
+
+    fileName = path() + "/" + "cnc_tips.txt";
+    loadToolTips(tips, fileName, group);
+
+//    m_gCoderEventFilter->setTips(tips);
+}
+
+void MdiChild::loadToolTips(QHash<QString, QString> &tips, const QString &fileName, const QString &group)
+{
+    if (QFile::exists(fileName)) {
+        QSettings settings(fileName, QSettings::IniFormat);
+        settings.beginGroup(group);
+        const QStringList &keys = settings.childKeys();
+
+        for (const QString &k : keys) {
+            QString text = settings.value(k, "").toString();
+
+            if (!text.isEmpty()) {
+                tips.insert(k, text);
+            } else {
+                tips.remove(k);
+            }
+        }
+    }
 }
 
 void MdiChild::underLine()
@@ -1285,6 +1365,8 @@ void MdiChild::detectHighligthMode()
         if (m_highlightMode == MODE_AUTO) {
             m_highlightMode = m_widgetProperties.defaultHighlightMode;
         }
+
+        updateToolTips();
     }
 
     highlighter->setHighlightMode(m_highlightMode);
@@ -1297,6 +1379,7 @@ void MdiChild::detectHighligthMode()
 void MdiChild::setHighligthMode(int mod)
 {
     m_highlightMode = mod;
+    updateToolTips();
     detectHighligthMode();
 }
 

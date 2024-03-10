@@ -40,6 +40,7 @@
 #include <gcoderstyle.h>
 #include <gcoderwidgetproperties.h>
 
+template <class Key, class T> class QHash;
 class QLineEdit;
 class QPlainTextEdit;
 class QPrinter;
@@ -153,6 +154,8 @@ protected:
     bool saveFile(const QString &fileName);
     void updateBrief();
     void updateWindowTitle();
+    void updateToolTips();
+    void loadToolTips(QHash<QString, QString> &tips, const QString &fileName, const QString &group);
 
 private:
     bool maybeSave();
