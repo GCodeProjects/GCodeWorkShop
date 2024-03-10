@@ -115,8 +115,6 @@ bool Utils::swapAxes(QPlainTextEdit* textEdit,
 		regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 	}
 
-	textEdit->blockSignals(true);
-
 	inSelection = textEdit->textCursor().hasSelection();
 
 	if (inSelection) {
@@ -261,8 +259,6 @@ bool Utils::swapAxes(QPlainTextEdit* textEdit,
 		cursor.setPosition(cursorEnd, QTextCursor::KeepAnchor);
 		textEdit->setTextCursor(cursor);
 	}
-
-	textEdit->blockSignals(false);
 
 	return found;
 }
