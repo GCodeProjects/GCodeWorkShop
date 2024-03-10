@@ -638,15 +638,8 @@ bool MdiChild::eventFilter(QObject *obj, QEvent *ev)
                 ui->textEdit->setOverwriteMode(!ui->textEdit->overwriteMode());
             }
 
-            if (m_widgetProperties.underlineChanges) {
-                if ((k->text()[0].isPrint()) && !(k->text()[0].isSpace())) {
-                    QTextCursor cr = ui->textEdit->textCursor(); //Underline changes
-                    QTextCharFormat format = cr.charFormat();
-                    format.setUnderlineStyle(QTextCharFormat::DotLine);
-                    format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
-                    cr.setCharFormat(format);
-                    ui->textEdit->setTextCursor(cr);
-                }
+            if ((k->text()[0].isPrint()) && !(k->text()[0].isSpace())) {
+                underLine();
             }
 
             if (k->key() == Qt::Key_Comma) { //Keypad comma should always prints period
@@ -864,6 +857,18 @@ bool MdiChild::event(QEvent *event)
     }
 
     return QWidget::event(event);
+}
+
+void MdiChild::underLine()
+{
+    if (m_widgetProperties.underlineChanges) {
+         QTextCursor cr = textCursor();
+         QTextCharFormat format = cr.charFormat();
+         format.setUnderlineStyle(QTextCharFormat::DotLine);
+         format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
+         cr.setCharFormat(format);
+         setTextCursor(cr);
+    }
 }
 
 void MdiChild::highlightCurrentLine()

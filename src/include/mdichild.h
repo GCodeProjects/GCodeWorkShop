@@ -183,6 +183,7 @@ private:
     QChar inLineCalcChar;
 
 private slots :
+    void underLine();
     void highlightCurrentLine();
     //void createContextMenuActions();
     void showContextMenu(const QPoint &pt);
