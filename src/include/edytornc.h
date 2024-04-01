@@ -234,6 +234,7 @@ private:
     QStringList sessionList;
     QString currentSession;
 
+    bool m_MdiWidgetsMaximized;
     _editor_properites defaultMdiWindowProperites;
     FindInFiles *findFiles;
 

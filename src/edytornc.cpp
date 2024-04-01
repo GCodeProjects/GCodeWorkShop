@@ -115,6 +115,8 @@ EdytorNc::EdytorNc(Medium *medium)
     openExampleAct = nullptr;
     commApp = nullptr;
 
+    m_MdiWidgetsMaximized = true;
+
     clipboard = QApplication::clipboard();
     connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
 
@@ -322,13 +324,13 @@ MdiChild *EdytorNc::newFileFromTemplate()
         defaultMdiWindowProperites.lastDir = QDir::currentPath();
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = false;
-        //defaultMdiWindowProperites.maximized = false;
+        //m_MdiWidgetsMaximized = false;
         defaultMdiWindowProperites.geometry = QByteArray();
         defaultMdiWindowProperites.editorToolTips = true;
         child->setHighligthMode(MODE_AUTO);
         child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-        if (defaultMdiWindowProperites.maximized) {
+        if (m_MdiWidgetsMaximized) {
             child->showMaximized();
         } else {
             child->showNormal();
@@ -352,13 +354,13 @@ MdiChild *EdytorNc::newFile()
     defaultMdiWindowProperites.lastDir = QDir::currentPath();
     defaultMdiWindowProperites.cursorPos = 0;
     defaultMdiWindowProperites.readOnly = false;
-    //defaultMdiWindowProperites.maximized = false;
+    //m_MdiWidgetsMaximized = false;
     defaultMdiWindowProperites.geometry = QByteArray();
     defaultMdiWindowProperites.editorToolTips = true;
     child->setHighligthMode(MODE_AUTO);
     child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-    if (defaultMdiWindowProperites.maximized) {
+    if (m_MdiWidgetsMaximized) {
         child->showMaximized();
     } else {
         child->showNormal();
@@ -406,7 +408,7 @@ void EdytorNc::open()
                 defaultMdiWindowProperites.editorToolTips = true;
                 child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-                if (defaultMdiWindowProperites.maximized) {
+                if (m_MdiWidgetsMaximized) {
                     child->showMaximized();
                 } else {
                     child->showNormal();
@@ -472,7 +474,7 @@ void EdytorNc::openExample()
                 defaultMdiWindowProperites.editorToolTips = true;
                 child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-                if (defaultMdiWindowProperites.maximized) {
+                if (m_MdiWidgetsMaximized) {
                     child->showMaximized();
                 } else {
                     child->showNormal();
@@ -510,14 +512,14 @@ void EdytorNc::openFile(const QString &fileName)
         if (child->loadFile(fileName)) {
             defaultMdiWindowProperites.cursorPos = 0;
             defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
-            //defaultMdiWindowProperites.maximized = false;
+            //m_MdiWidgetsMaximized = false;
             defaultMdiWindowProperites.geometry = QByteArray();
             int highlightMode = defaultHighlightMode(child->filePath());
             child->setHighligthMode(highlightMode);
             defaultMdiWindowProperites.editorToolTips = true;
             child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-            if (defaultMdiWindowProperites.maximized) {
+            if (m_MdiWidgetsMaximized) {
                 child->showMaximized();
             } else {
                 child->showNormal();
@@ -1173,13 +1175,13 @@ void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
     MdiChild *mdiChild;
 
     if (ui->mdiArea->subWindowList().count() <= 1) {
-        defaultMdiWindowProperites.maximized = true;
+        m_MdiWidgetsMaximized = true;
     }
 
     mdiChild = activeMdiChild();
 
     if (mdiChild) {
-        defaultMdiWindowProperites.maximized = mdiChild->parentWidget()->isMaximized();
+        m_MdiWidgetsMaximized = mdiChild->parentWidget()->isMaximized();
         statusBar()->showMessage(mdiChild->currentFile(), 9000);
     }
 
@@ -1998,7 +2000,7 @@ void EdytorNc::readSettings()
 
     m_recentFiles->load(&settings);
 
-    //defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
+    //m_MdiWidgetsMaximized = settings.value("MaximizedMdi", true).toBool();
 
     settings.beginGroup("Highlight");
     defaultMdiWindowProperites.syntaxH = settings.value("HighlightOn", true).toBool();
@@ -2229,7 +2231,7 @@ void EdytorNc::loadFile(const _editor_properites &options, bool checkAlreadyLoad
         child->setMdiWindowProperites(options);
         child->parentWidget()->restoreGeometry(options.geometry);
 
-        if (options.maximized) {
+        if (m_MdiWidgetsMaximized) {
             child->showMaximized();
         } else {
             child->showNormal();
@@ -2281,7 +2283,7 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
         child->newFile();
         child->loadFile(fileName);
         m_recentFiles->add(fileName);
-        //defaultMdiWindowProperites.maximized = false;
+        //m_MdiWidgetsMaximized = false;
         defaultMdiWindowProperites.cursorPos = 0;
         defaultMdiWindowProperites.readOnly = defaultMdiWindowProperites.defaultReadOnly;
         defaultMdiWindowProperites.geometry = QByteArray();
@@ -2290,7 +2292,7 @@ void EdytorNc::loadFoundedFile(const QString &fileName)
         defaultMdiWindowProperites.editorToolTips = true;
         child->setMdiWindowProperites(defaultMdiWindowProperites);
 
-        if (defaultMdiWindowProperites.maximized) {
+        if (m_MdiWidgetsMaximized) {
             child->showMaximized();
         } else {
             child->showNormal();
@@ -3501,7 +3503,7 @@ void EdytorNc::loadSession(const QString &name)
             defaultMdiWindowProperites.geometry = settings.value("Geometry", QByteArray()).toByteArray();
 //            m_highlightMode = settings.value("HighlightMode",
 //                    MODE_AUTO).toInt();
-            defaultMdiWindowProperites.maximized = settings.value("MaximizedMdi", true).toBool();
+            m_MdiWidgetsMaximized = settings.value("MaximizedMdi", true).toBool();
             loadFile(defaultMdiWindowProperites, false);
         }
     }
@@ -3533,8 +3535,7 @@ void EdytorNc::saveSession(const QString &name)
         settings.setValue("ReadOnly", Opt.readOnly);
         settings.setValue("Geometry", mdiChild->parentWidget()->saveGeometry());
 //        settings.setValue("HighlightMode", m_highlightMode);
-        bool maximized = mdiChild->parentWidget()->isMaximized();
-        settings.setValue("MaximizedMdi", maximized);
+        settings.setValue("MaximizedMdi", m_MdiWidgetsMaximized);
 
         i++;
     }
