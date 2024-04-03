@@ -157,19 +157,17 @@ EdytorNc::EdytorNc(Medium *medium)
 
     m_addonsActions = new Addons::Actions(this);
     createActions();
-    createMenus();
     createToolBars();
-
-    updateMenus();
-
-    readSettings();
-
+    createStatusBar();
     createFileBrowseTabs();
+
+    createMenus();
+    updateMenus();
 
     setWindowTitle(tr("EdytorNC"));
     setWindowIcon(QIcon(":/images/edytornc.png"));
-    createStatusBar();
 
+    readSettings();
     clipboardLoad();
 
     if (defaultMdiWindowProperites.windowMode & TABBED_MODE) {
