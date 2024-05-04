@@ -37,6 +37,7 @@ HEADERS += \
     gcoderinfo.h \
     highlighter.h \
     highlightmode.h \
+    inlinecalc.h \
     newfiledialog.h \
     recentfiles.h \
     sessiondialog.h \
@@ -57,6 +58,7 @@ SOURCES += \
     gcoderstyle.cpp \
     gcoderwidgetproperties.cpp \
     highlighter.cpp \
+    inlinecalc.cpp \
     main.cpp \
     mdichild.cpp \
     newfiledialog.cpp \

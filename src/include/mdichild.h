@@ -46,7 +46,7 @@
 class QCloseEvent;
 class QEvent;
 template <class Key, class T> class QHash;
-class QLineEdit;
+class InLineCalc;
 class QPlainTextEdit;
 class QPoint;
 class QPrinter;
@@ -189,9 +189,7 @@ private:
     QTextEdit::ExtraSelection selection;
     QList<QTextEdit::ExtraSelection> blockExtraSelections;
     //QPointer<QFileSystemWatcher> fileChangeMonitor; //QFileSystemWatcher *fileChangeMonitor;
-    QPointer<QLineEdit> calcLineEdit;
-    QStringList calcLineEditWordList;
-    QChar inLineCalcChar;
+    InLineCalc *calcLineEdit;
 
 private slots :
     void underLine();
@@ -199,8 +197,7 @@ private slots :
     //void createContextMenuActions();
     void showContextMenu(const QPoint &pt);
     void documentWasModified();
-    void inLineCalcEditingFinished();
-    void inLineCalcReturnPressed();
+    void inLineCalcComplete(const QString &text);
 
 signals:
     void message(const QString &, int);

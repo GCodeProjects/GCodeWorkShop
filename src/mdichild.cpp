@@ -39,7 +39,6 @@
 #include <QKeyEvent>
 #include <QLatin1Char>
 #include <QLatin1String>
-#include <QLineEdit>
 #include <QLocale>
 #include <QMarginsF>
 #include <QMenu>
@@ -83,6 +82,7 @@
 #include "gcoderwidgetproperties.h"
 #include "highlighter.h"       // Highlighter
 #include "highlightmode.h"
+#include "inlinecalc.h"
 #include "ui_mdichildform.h"
 
 class QPoint;
@@ -101,6 +101,9 @@ MdiChild::MdiChild(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
     setFocusProxy(ui->textEdit);
 
     ui->marginWidget->setAutoFillBackground(true);
+
+    calcLineEdit = new InLineCalc(this);
+    connect(calcLineEdit, SIGNAL(complete(const QString &)), this, SLOT(inLineCalcComplete(const QString &)));
 
     m_capsLockEventFilter = new CapsLockEventFilter(ui->textEdit);
     m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
@@ -1681,89 +1684,21 @@ void MdiChild::fileChangeMonitorRemovePath(QString fileName)
 
 void MdiChild::showInLineCalc()
 {
-    if (!calcLineEdit) {
-        calcLineEdit = new QLineEdit(this);
-        calcLineEdit->setClearButtonEnabled(true);
-        calcLineEdit->setMinimumWidth(100);
-        calcLineEdit->adjustSize();
-        calcLineEdit->setAttribute(Qt::WA_DeleteOnClose);
-        calcLineEdit->setToolTip(tr("You can use:\n") +
-                                 "+ - * / ()\n" +
-                                 "SIN(x)\n" +
-                                 "COS(x)\n" +
-                                 "TAN(x)\n" +
-                                 "SQRT(x)\n" +
-                                 "SQR(x)\n" +
-                                 "ABS(x)\n" +
-                                 "TRUNC(x)\n" +
-                                 "PI\n" +
-                                 tr("Press Enter to accept or click anywere to canacel"));
+    QString value = selectedText();
+    QString address;
 
-        connect(calcLineEdit, SIGNAL(editingFinished()), this, SLOT(inLineCalcEditingFinished()));
-        connect(calcLineEdit, SIGNAL(returnPressed()), this, SLOT(inLineCalcReturnPressed()));
-
-        //calcLineEditWordList << "COS(" << "PI";
-        QCompleter *completer = new QCompleter(calcLineEditWordList, this);
-        completer->setCaseSensitivity(Qt::CaseInsensitive);
-        completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-        calcLineEdit->setCompleter(completer);
+    if (!value.isEmpty() && value.at(0).isLetter()) {
+        address = value.at(0);
+        value.remove(address);
+        value.remove(" ");
+    } else {
+        value.clear();
     }
 
-    if (calcLineEdit) {
-        inLineCalcChar = '0';
-
-        if (hasSelection()) {
-            QString selText = selectedText();
-
-            if (selText.length() > 1)
-                if (selText.at(0).isLetter()) {
-                    inLineCalcChar = selText.at(0);
-                }
-
-            if (inLineCalcChar.isLetter()) {
-                selText.remove(inLineCalcChar);
-                selText.remove(" ");
-                calcLineEdit->setText(selText);
-            }
-        }
-
-        QRect rect = textEdit()->cursorRect();
-        int h = (calcLineEdit->height() - rect.height()) / 2;
-        calcLineEdit->move(rect.x() + rect.height(), rect.top() - h);
-        calcLineEdit->setFocus();
-        calcLineEdit->show();
-    }
+    calcLineEdit->showCalc(address, value, textEdit()->cursorRect());
 }
 
-void MdiChild::inLineCalcEditingFinished()
+void MdiChild::inLineCalcComplete(const QString &text)
 {
-    if (calcLineEdit) {
-        calcLineEdit->close();
-    }
-}
-
-void MdiChild::inLineCalcReturnPressed()
-{
-    if (calcLineEdit) {
-        QString text = calcLineEdit->text();
-        text.replace(',', '.');
-
-        calcLineEditWordList.append(text);
-        calcLineEditWordList.removeDuplicates();
-
-        int result = Utils::processBrc(&text);
-        text = Utils::removeZeros(text);
-
-        if (inLineCalcChar.isLetter()) {
-            text.prepend(inLineCalcChar);
-        }
-
-        qDebug() << "Text" << text << result;
-
-        if (result >= 0) {
-            insertText(text);
-        }
-
-        calcLineEdit->close();
-    }
+    insertText(text);
 }
