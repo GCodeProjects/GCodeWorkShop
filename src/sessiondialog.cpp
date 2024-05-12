@@ -35,7 +35,7 @@ class QWidget;
 #include "sessionnamedialog.h"  // for SessionNameDialog
 
 
-SessionDialog::SessionDialog(QWidget *parent, SessionManager *sessions) : QDialog(parent, Qt::Dialog)
+SessionDialog::SessionDialog(QWidget* parent, SessionManager* sessions) : QDialog(parent, Qt::Dialog)
 {
 	m_sessions = sessions;
 	setupUi(this);
@@ -61,7 +61,7 @@ SessionDialog::~SessionDialog()
 
 void SessionDialog::newButtonClicked()
 {
-	SessionNameDialog *newSesDialog = new SessionNameDialog(this);
+	SessionNameDialog* newSesDialog = new SessionNameDialog(this);
 	newSesDialog->setName("");
 	int result = newSesDialog->exec();
 
@@ -79,7 +79,7 @@ void SessionDialog::newButtonClicked()
 void SessionDialog::renameButtonClicked()
 {
 	QString currName = sessionListWidget->currentItem()->text();
-	SessionNameDialog *newSesDialog = new SessionNameDialog(this);
+	SessionNameDialog* newSesDialog = new SessionNameDialog(this);
 	newSesDialog->setName(currName);
 	int result = newSesDialog->exec();
 
@@ -97,7 +97,7 @@ void SessionDialog::renameButtonClicked()
 void SessionDialog::cloneButtonClicked()
 {
 	QString currName = sessionListWidget->currentItem()->text();
-	SessionNameDialog *newSesDialog = new SessionNameDialog(this);
+	SessionNameDialog* newSesDialog = new SessionNameDialog(this);
 	newSesDialog->setName(currName);
 	int result = newSesDialog->exec();
 
@@ -114,7 +114,7 @@ void SessionDialog::cloneButtonClicked()
 
 void SessionDialog::deleteButtonClicked()
 {
-	const QList<QListWidgetItem *> &selected = sessionListWidget->selectedItems();
+	const QList<QListWidgetItem*>& selected = sessionListWidget->selectedItems();
 
 	if (!selected.isEmpty()) {
 		m_sessions->removeSession(selected.at(0)->text());
@@ -136,7 +136,7 @@ void SessionDialog::sessionListItemSelectionChanged()
 	switchPushButton->setEnabled(hasSelection);
 }
 
-void SessionDialog::updateSessionList(const QStringList &list)
+void SessionDialog::updateSessionList(const QStringList& list)
 {
 	sessionListWidget->clear();
 	sessionListWidget->addItems(list);

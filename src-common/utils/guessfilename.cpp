@@ -28,7 +28,7 @@
 #include "filepatterns.h"
 
 
-Utils::FileExt Utils::guessFileNameByProgNum(const QString &text)
+Utils::FileExt Utils::guessFileNameByProgNum(const QString& text)
 {
 	FileExt file;
 	QRegularExpression regex;
@@ -189,7 +189,7 @@ Utils::FileExt Utils::guessFileNameByProgNum(const QString &text)
 	return file;
 }
 
-QString Utils::guessFileNameByComments(const QString &text)
+QString Utils::guessFileNameByComments(const QString& text)
 {
 	QString fileName;
 
@@ -220,7 +220,7 @@ QString Utils::guessFileNameByComments(const QString &text)
 	return fileName.simplified();
 }
 
-Utils::FileExt Utils::guessFileNameByRegExp(const QString &text, const QString &expression)
+Utils::FileExt Utils::guessFileNameByRegExp(const QString& text, const QString& expression)
 {
 	FileExt file;
 	QRegularExpression regex;

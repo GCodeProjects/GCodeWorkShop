@@ -42,13 +42,13 @@ class ChamferDialog : public QDialog, private Ui::ChamferDialog
 	Q_OBJECT
 
 public:
-	ChamferDialog(QWidget *parent, QSettings *settings);
+	ChamferDialog(QWidget* parent, QSettings* settings);
 	~ChamferDialog();
 
-	void setOptions(const ChamferOptions &options);
+	void setOptions(const ChamferOptions& options);
 	ChamferOptions options();
 
-	void loadSettings(const ChamferOptions &defaultOptions);
+	void loadSettings(const ChamferOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 protected slots:

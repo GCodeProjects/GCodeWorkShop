@@ -52,7 +52,7 @@
 #include "serialtransmissiondialog.h" // SerialPortSettings QDialog QObject
 
 
-SerialTransmissionDialog::SerialTransmissionDialog(QWidget *parent, Qt::WindowFlags f,
+SerialTransmissionDialog::SerialTransmissionDialog(QWidget* parent, Qt::WindowFlags f,
         bool mode) : QDialog(parent, f)
 {
 	setupUi(this);
@@ -121,7 +121,7 @@ SerialTransmissionDialog::~SerialTransmissionDialog()
 {
 }
 
-void SerialTransmissionDialog::closeEvent(QCloseEvent *event)
+void SerialTransmissionDialog::closeEvent(QCloseEvent* event)
 {
 	updateStatusTimer->stop();
 	autoCloseTimer->stop();
@@ -650,7 +650,7 @@ void SerialTransmissionDialog::sendData(QString dataToSend, QString configName)
 	sending = false;
 }
 
-void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
+void SerialTransmissionDialog::prepareDataBeforeSending(QString* data)
 {
 	if (data->isEmpty()) {
 		return;
@@ -698,7 +698,7 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString *data)
 	setRange(0, noOfBytes);
 }
 
-void SerialTransmissionDialog::procesSpecialCharacters(QString *text, QString *fileData)
+void SerialTransmissionDialog::procesSpecialCharacters(QString* text, QString* fileData)
 {
 	if (text->isEmpty()) {
 		return;
@@ -781,7 +781,7 @@ void SerialTransmissionDialog::loadConfig(QString configName)
 	portSettings.configName = configName;
 	setObjectName(portSettings.configName);
 	stop = true;
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("SerialPortConfigs");
 
 #ifdef Q_OS_WIN32
@@ -994,7 +994,7 @@ QStringList SerialTransmissionDialog::processReceivedData()
 // Detect program name
 //**************************************************************************************************
 
-QStringList SerialTransmissionDialog::guessFileName(QString *text)
+QStringList SerialTransmissionDialog::guessFileName(QString* text)
 {
 	QString fileName, extension, name1, ext1, name2, ext2;
 	QRegularExpression regex;
@@ -1115,7 +1115,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString *text)
 //  Save received program to a file. Return filename and empty program text if succes or leave program text unchanged
 //**************************************************************************************************
 
-QString SerialTransmissionDialog::saveDataToFile(QString *text)
+QString SerialTransmissionDialog::saveDataToFile(QString* text)
 {
 	QFile file;
 	QString fileName;

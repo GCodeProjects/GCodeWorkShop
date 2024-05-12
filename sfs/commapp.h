@@ -48,19 +48,19 @@ class CommApp : public QMainWindow
 	Q_OBJECT
 
 public:
-	explicit CommApp(QWidget *parent = 0);
+	explicit CommApp(QWidget* parent = 0);
 	~CommApp();
 
 protected:
-	void closeEvent(QCloseEvent *event);
+	void closeEvent(QCloseEvent* event);
 
 private slots:
 	void serialConfig();
 	void tileSubWindowsVertycally();
-	void setActiveSubWindow(QWidget *window);
+	void setActiveSubWindow(QWidget* window);
 	void startSerialPortServer();
 	void stopSerialPortServer();
-	void activeWindowChanged(QMdiSubWindow *window);
+	void activeWindowChanged(QMdiSubWindow* window);
 	void changeActiveWindow();
 	void closeTab(int i);
 	void doPortReset();
@@ -71,32 +71,32 @@ private slots:
 	void about();
 
 private:
-	Ui::CommApp *ui;
-	QSignalMapper *windowMapper;
+	Ui::CommApp* ui;
+	QSignalMapper* windowMapper;
 
-	QAction *configPortAct;
-	QAction *startServerAct;
-	QAction *stopServerAct;
-	QAction *resetServerAct;
-	QAction *closeServerAct;
-	QAction *browseSaveFolderAct;
-	QAction *showNewFilesAct;
-	QComboBox *configBox;
-	QToolBar *fileToolBar;
-	QAction *minimizeAction;
-	QAction *maximizeAction;
-	QAction *restoreAction;
-	QAction *quitAction;
-	QAction *aboutAction;
-	QAction *startMinimizedAction;
+	QAction* configPortAct;
+	QAction* startServerAct;
+	QAction* stopServerAct;
+	QAction* resetServerAct;
+	QAction* closeServerAct;
+	QAction* browseSaveFolderAct;
+	QAction* showNewFilesAct;
+	QComboBox* configBox;
+	QToolBar* fileToolBar;
+	QAction* minimizeAction;
+	QAction* maximizeAction;
+	QAction* restoreAction;
+	QAction* quitAction;
+	QAction* aboutAction;
+	QAction* startMinimizedAction;
 
-	QSystemTrayIcon *trayIcon;
-	QMenu *trayIconMenu;
+	QSystemTrayIcon* trayIcon;
+	QMenu* trayIconMenu;
 	bool closable;
 
-	SerialTransmissionDialog *findMdiChild(const QString __config);
-	SerialTransmissionDialog *createSerialPortServer(QString __config);
-	SerialTransmissionDialog *activeMdiChild();
+	SerialTransmissionDialog* findMdiChild(const QString __config);
+	SerialTransmissionDialog* createSerialPortServer(QString __config);
+	SerialTransmissionDialog* activeMdiChild();
 
 	void saveSettings();
 	void loadSettings();

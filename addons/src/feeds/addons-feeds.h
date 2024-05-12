@@ -25,7 +25,7 @@ class QWidget;
 
 
 namespace Addons {
-void doFeeds(QWidget *parent, QSettings *settings);
+void doFeeds(QWidget* parent, QSettings* settings);
 }
 
 #endif // ADDONS_FEEDS_H

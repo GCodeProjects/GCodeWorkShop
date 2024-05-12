@@ -26,7 +26,7 @@ class QString;
 
 
 namespace Utils {
-bool removeTextByRegExp(QString &tx, QStringList expList, bool replaceDollar = true);
+bool removeTextByRegExp(QString& tx, QStringList expList, bool replaceDollar = true);
 }
 
 #endif // UTILSREMOVEBY_REGEX_H

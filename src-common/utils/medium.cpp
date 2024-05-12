@@ -50,7 +50,7 @@ const QString Medium::SANDBOX_SHARE = QLatin1String("/install/share");
 const QString Medium::SHARE = QLatin1String("share");
 const QString Medium::SLASH_SHARE = SLASH + QLatin1String("share");
 
-Medium::Medium(QObject *parent) :
+Medium::Medium(QObject* parent) :
 	QObject(parent),
 	lauchType(checkLaunch())
 {
@@ -86,7 +86,7 @@ int Medium::checkLaunch()
 
 #ifdef Q_OS_WIN
 
-	char *sysProgFile;
+	char* sysProgFile;
 
 	sysProgFile = getenv("ProgramFiles");
 
@@ -166,20 +166,20 @@ void Medium::setupDirs()
 	mShareDirs.append(shareDir);
 }
 
-Medium &Medium::instance()
+Medium& Medium::instance()
 {
 	static Medium enc;
 	return enc;
 }
 
-void Medium::addTranslationDir(const QString &dir)
+void Medium::addTranslationDir(const QString& dir)
 {
 	if (!mTranslationDirs.contains(dir)) {
 		mTranslationDirs.append(dir);
 	}
 }
 
-void Medium::removeTranslationDir(const QString &dir)
+void Medium::removeTranslationDir(const QString& dir)
 {
 	int i = mTranslationDirs.indexOf(dir);
 
@@ -188,14 +188,14 @@ void Medium::removeTranslationDir(const QString &dir)
 	}
 }
 
-void Medium::addTranslationUnit(const QString &unit)
+void Medium::addTranslationUnit(const QString& unit)
 {
 	if (!mTranslationUnits.contains(unit)) {
 		mTranslationUnits.append(unit);
 	}
 }
 
-void Medium::removeTranslationUnit(const QString &unit)
+void Medium::removeTranslationUnit(const QString& unit)
 {
 	int i = mTranslationUnits.indexOf(unit);
 
@@ -236,10 +236,10 @@ QList<QLocale> Medium::findTranslation(bool skipQtDir)
 
 void Medium::updateTranslation()
 {
-	QCoreApplication *app = QCoreApplication::instance();
+	QCoreApplication* app = QCoreApplication::instance();
 	QLocale locale = QLocale();
 
-	foreach (QTranslator *trans, mTranslators) {
+	foreach (QTranslator* trans, mTranslators) {
 		app->removeTranslator(trans);
 		trans->deleteLater();
 	}
@@ -250,7 +250,7 @@ void Medium::updateTranslation()
 		file.append("_").append(locale.name());
 
 		foreach (QString dir, mTranslationDirs) {
-			QTranslator *qtTranslator = new QTranslator();
+			QTranslator* qtTranslator = new QTranslator();
 			qDebug() << "loading translation " << file << " from " << dir;
 
 			if (qtTranslator->load(file, dir)) {
@@ -265,7 +265,7 @@ void Medium::updateTranslation()
 		}
 	}
 
-	foreach (QTranslator *trans, mTranslators) {
+	foreach (QTranslator* trans, mTranslators) {
 		app->installTranslator(trans);
 	}
 

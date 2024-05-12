@@ -24,8 +24,8 @@ class QString;
 
 
 namespace Utils {
-void paraComment(QString &tx);
-void semiComment(QString &tx);
+void paraComment(QString& tx);
+void semiComment(QString& tx);
 }
 
 #endif // UTILS_COMMENT_H

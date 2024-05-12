@@ -25,7 +25,7 @@ class QWidget;
 
 
 namespace Addons {
-void doTriangle(QWidget *parent, QSettings *settings);
+void doTriangle(QWidget* parent, QSettings* settings);
 }
 
 #endif // ADDONS_TRIANGLE_H

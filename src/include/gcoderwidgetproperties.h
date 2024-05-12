@@ -39,14 +39,14 @@ class GCoderWidgetProperties: public DocumentWidgetProperties
 {
 public:
 	GCoderWidgetProperties();
-	GCoderWidgetProperties(const GCoderWidgetProperties &that);
+	GCoderWidgetProperties(const GCoderWidgetProperties& that);
 
 	virtual QString documentType() const override;
 
-	DocumentWidgetProperties *clone() const override;
+	DocumentWidgetProperties* clone() const override;
 
-	DocumentWidgetProperties &operator=(const DocumentWidgetProperties &that) override;
-	virtual GCoderWidgetProperties &operator=(const GCoderWidgetProperties &that);
+	DocumentWidgetProperties& operator=(const DocumentWidgetProperties& that) override;
+	virtual GCoderWidgetProperties& operator=(const GCoderWidgetProperties& that);
 
 	bool intCapsLock;
 	bool syntaxH;
@@ -60,8 +60,8 @@ public:
 	bool changeDateInComment;
 
 protected:
-	void loadChild(QSettings *cfg) override;
-	void saveChild(QSettings *cfg) const override;
+	void loadChild(QSettings* cfg) override;
+	void saveChild(QSettings* cfg) const override;
 };
 
 #endif // GCODERWIDGETPROPERTIES_H

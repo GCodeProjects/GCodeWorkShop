@@ -32,7 +32,7 @@
 #define tr(s) (QCoreApplication::translate("CompileMacro", s))
 
 
-int Utils::CompileMacro::compile(const QString &tx)
+int Utils::CompileMacro::compile(const QString& tx)
 {
 	int error;
 	m_result = tx;
@@ -163,17 +163,17 @@ int Utils::CompileMacro::compile(const QString &tx)
 	return 1;
 }
 
-const QString &Utils::CompileMacro::result()
+const QString& Utils::CompileMacro::result()
 {
 	return m_result;
 }
 
-const QString &Utils::CompileMacro::status()
+const QString& Utils::CompileMacro::status()
 {
 	return m_status;
 }
 
-void Utils::CompileMacro::setError(int error, const QString &tx)
+void Utils::CompileMacro::setError(int error, const QString& tx)
 {
 	if (error < 0) {
 		switch (error) {
@@ -271,7 +271,7 @@ void Utils::CompileMacro::setBasicError(int error)
 	m_status = tr("Basic interpreter error:\n%1\nCode=%2").arg(m_status).arg(error);
 }
 
-void Utils::CompileMacro::cleanUp(QString &str)  //remove not needed zeros
+void Utils::CompileMacro::cleanUp(QString& str)  //remove not needed zeros
 {
 	QRegularExpression regex;
 	regex.setPattern("([\\d]+[.][-+.0-9]+)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$");

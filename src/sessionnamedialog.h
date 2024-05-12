@@ -38,7 +38,7 @@ class SessionNameDialog: public QDialog, private Ui::SessionNameDialog
 	Q_OBJECT
 
 public:
-	SessionNameDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+	SessionNameDialog(QWidget* parent = 0, Qt::WindowFlags f = Qt::Dialog);
 	~SessionNameDialog();
 
 public slots:

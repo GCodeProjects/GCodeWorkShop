@@ -39,11 +39,11 @@ class SessionDialog: public QDialog, private Ui::SessionDialog
 	Q_OBJECT
 
 public:
-	explicit SessionDialog(QWidget *parent, SessionManager *sessions);
+	explicit SessionDialog(QWidget* parent, SessionManager* sessions);
 	~SessionDialog();
 
 private slots:
-	void updateSessionList(const QStringList &list);
+	void updateSessionList(const QStringList& list);
 	void newButtonClicked();
 	void renameButtonClicked();
 	void deleteButtonClicked();
@@ -52,7 +52,7 @@ private slots:
 	void sessionListItemSelectionChanged();
 
 private:
-	SessionManager *m_sessions;
+	SessionManager* m_sessions;
 };
 
 #endif // SESSIONDIALOG_H

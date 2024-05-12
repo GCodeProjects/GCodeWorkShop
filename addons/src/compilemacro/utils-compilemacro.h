@@ -28,17 +28,17 @@ namespace Utils {
 class CompileMacro
 {
 public:
-	int compile(const QString &text);
-	const QString &result();
-	const QString &status();
+	int compile(const QString& text);
+	const QString& result();
+	const QString& status();
 
 protected:
 	QString m_status;
 	QString m_result;
 
-	void setError(int error, const QString &tx);
+	void setError(int error, const QString& tx);
 	void setBasicError(int error);
-	void cleanUp(QString &str) ;
+	void cleanUp(QString& str) ;
 };
 }
 

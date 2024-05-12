@@ -59,7 +59,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-BHCDialog::BHCDialog(QWidget *parent, QSettings *settings) :
+BHCDialog::BHCDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -77,10 +77,10 @@ BHCDialog::BHCDialog(QWidget *parent, QSettings *settings) :
 	tabBar = new QTabWidget(this);
 	pageLayout->addWidget(tabBar);
 
-	BHCTab *page1 = new BHCTab(this);
-	BHCTab *page2 = new BHCTab(this);
-	BHCTab *page3 = new BHCTab(this);
-	BHCTab *page4 = new BHCTab(this);
+	BHCTab* page1 = new BHCTab(this);
+	BHCTab* page2 = new BHCTab(this);
+	BHCTab* page3 = new BHCTab(this);
+	BHCTab* page4 = new BHCTab(this);
 
 	tabBar->addTab(page1, tr("Circle 1 - green"));
 	tabBar->addTab(page2, tr("Circle 2 - blue"));
@@ -105,11 +105,11 @@ BHCDialog::~BHCDialog()
 
 void BHCDialog::comChk()
 {
-	BHCTab *tab;
+	BHCTab* tab;
 	int tabId, roat, activTab;
 	bool mirX, mirY;
 
-	tab = (BHCTab *)tabBar->currentWidget();
+	tab = (BHCTab*)tabBar->currentWidget();
 	activTab = tabBar->currentIndex();
 
 	if (tab->all->isChecked()) {
@@ -118,7 +118,7 @@ void BHCDialog::comChk()
 		mirY = tab->mirrorY->isChecked();
 
 		for (tabId = 0; tabId < tabBar->count(); tabId++) {
-			tab = (BHCTab *)tabBar->widget(tabId);
+			tab = (BHCTab*)tabBar->widget(tabId);
 
 			if (tab == nullptr) {
 				continue;
@@ -142,7 +142,7 @@ void BHCDialog::comChk()
 void BHCDialog::clearAll()
 {
 	for (int tabId = 0; tabId < tabBar->count(); tabId++) {
-		BHCTab *tab = (BHCTab *)tabBar->widget(tabId);
+		BHCTab* tab = (BHCTab*)tabBar->widget(tabId);
 
 		if (tab == nullptr) {
 			continue;
@@ -168,7 +168,7 @@ void BHCDialog::clearAll()
 
 void BHCDialog::computeButtonClicked()
 {
-	BHCTab *tab;
+	BHCTab* tab;
 	QColor col;
 	int tabId, i, textPosY, textPosX, dir;
 	bool ok;
@@ -179,7 +179,7 @@ void BHCDialog::computeButtonClicked()
 	maxDia = 0;
 
 	for (tabId = 0; tabId <= tabBar->count(); tabId++) {
-		tab = (BHCTab *)tabBar->widget(tabId);
+		tab = (BHCTab*)tabBar->widget(tabId);
 
 		if (tab == nullptr) {
 			continue;
@@ -192,7 +192,7 @@ void BHCDialog::computeButtonClicked()
 	}
 
 	for (tabId = 0; tabId < tabBar->count(); tabId++) {
-		tab = (BHCTab *)tabBar->widget(tabId);
+		tab = (BHCTab*)tabBar->widget(tabId);
 
 		if (tab == nullptr) {
 			continue;
@@ -300,10 +300,10 @@ void BHCDialog::computeButtonClicked()
 			x = xCenter + (dia * cos((M_PI / 180) * ang));
 			y = yCenter + (dia * sin((M_PI / 180) * ang));
 
-			QTableWidgetItem *xItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(x, 0, 'f', 3)));
+			QTableWidgetItem* xItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(x, 0, 'f', 3)));
 			xItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-			QTableWidgetItem *yItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(y, 0, 'f', 3)));
+			QTableWidgetItem* yItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(y, 0, 'f', 3)));
 			yItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
 			QTableWidgetItem* hdr = new QTableWidgetItem(Utils::removeZeros(QString("%1 - %2 ").arg(i + 1).arg(ang,
@@ -314,7 +314,7 @@ void BHCDialog::computeButtonClicked()
 		}
 	}
 
-	drawing = (BHCDraw *) findChild<BHCDraw *>();
+	drawing = (BHCDraw*) findChild<BHCDraw*>();
 
 	if (!drawing) {
 		drawing = new BHCDraw(this);
@@ -329,7 +329,7 @@ void BHCDialog::computeButtonClicked()
 	drawing->clear();
 
 	for (tabId = 0; tabId <= tabBar->count(); tabId++) {
-		tab = (BHCTab *)tabBar->widget(tabId);
+		tab = (BHCTab*)tabBar->widget(tabId);
 
 		if (tab == 0) {
 			continue;
@@ -476,37 +476,37 @@ void BHCDialog::computeButtonClicked()
 	drawing->update();
 }
 
-void BHCDialog::setOptions(const BHCOptions &options)
+void BHCDialog::setOptions(const BHCOptions& options)
 {
-	BHCTab *tab;
-	tab = (BHCTab *)tabBar->widget(0); // green
+	BHCTab* tab;
+	tab = (BHCTab*)tabBar->widget(0);  // green
 	tab->setOptions(options.green);
-	tab = (BHCTab *)tabBar->widget(1); // blue
+	tab = (BHCTab*)tabBar->widget(1);  // blue
 	tab->setOptions(options.blue);
-	tab = (BHCTab *)tabBar->widget(2); // red
+	tab = (BHCTab*)tabBar->widget(2);  // red
 	tab->setOptions(options.red);
-	tab = (BHCTab *)tabBar->widget(3); // yellow
+	tab = (BHCTab*)tabBar->widget(3);  // yellow
 	tab->setOptions(options.yellow);
 }
 
 BHCOptions BHCDialog::options()
 {
 	BHCOptions options;
-	BHCTab *tab;
+	BHCTab* tab;
 
-	tab = (BHCTab *)tabBar->widget(0); // green
+	tab = (BHCTab*)tabBar->widget(0);  // green
 	options.green = tab->options();;
-	tab = (BHCTab *)tabBar->widget(1); // blue
+	tab = (BHCTab*)tabBar->widget(1);  // blue
 	options.blue = tab->options();;
-	tab = (BHCTab *)tabBar->widget(2); // red
+	tab = (BHCTab*)tabBar->widget(2);  // red
 	options.red = tab->options();;
-	tab = (BHCTab *)tabBar->widget(3); // yellow
+	tab = (BHCTab*)tabBar->widget(3);  // yellow
 	options.yellow = tab->options();
 
 	return options;
 }
 
-void BHCDialog::loadSettings(const BHCOptions &defaultOptions)
+void BHCDialog::loadSettings(const BHCOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

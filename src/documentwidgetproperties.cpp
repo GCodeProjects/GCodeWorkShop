@@ -26,7 +26,7 @@ DocumentWidgetProperties::DocumentWidgetProperties()
 {
 }
 
-DocumentWidgetProperties::DocumentWidgetProperties(const DocumentWidgetProperties &that)
+DocumentWidgetProperties::DocumentWidgetProperties(const DocumentWidgetProperties& that)
 {
 	DocumentWidgetProperties::operator=(that);
 }
@@ -40,35 +40,35 @@ QString DocumentWidgetProperties::documentType() const
 	return "Document";
 }
 
-DocumentWidgetProperties *DocumentWidgetProperties::clone() const
+DocumentWidgetProperties* DocumentWidgetProperties::clone() const
 {
-	DocumentWidgetProperties *prop = new DocumentWidgetProperties();
+	DocumentWidgetProperties* prop = new DocumentWidgetProperties();
 	prop->operator=(*this);
 	return prop;
 }
 
-DocumentWidgetProperties &DocumentWidgetProperties::operator =(const DocumentWidgetProperties &that)
+DocumentWidgetProperties& DocumentWidgetProperties::operator =(const DocumentWidgetProperties& that)
 {
 	Q_UNUSED(that);
 	return *this;
 }
 
-void DocumentWidgetProperties::load(QSettings *cfg)
+void DocumentWidgetProperties::load(QSettings* cfg)
 {
 	loadChild(cfg);
 }
 
-void DocumentWidgetProperties::save(QSettings *cfg) const
+void DocumentWidgetProperties::save(QSettings* cfg) const
 {
 	saveChild(cfg);
 }
 
-void DocumentWidgetProperties::loadChild(QSettings *cfg)
+void DocumentWidgetProperties::loadChild(QSettings* cfg)
 {
 	Q_UNUSED(cfg);
 }
 
-void DocumentWidgetProperties::saveChild(QSettings *cfg) const
+void DocumentWidgetProperties::saveChild(QSettings* cfg) const
 {
 	Q_UNUSED(cfg);
 }

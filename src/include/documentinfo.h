@@ -39,20 +39,20 @@ public:
 
 	virtual QString documentType() const;
 
-	virtual DocumentInfo *clone() const;
+	virtual DocumentInfo* clone() const;
 
-	virtual DocumentInfo &operator=(const DocumentInfo &that);
+	virtual DocumentInfo& operator=(const DocumentInfo& that);
 
-	void load(QSettings *cfg);
-	void save(QSettings *cfg) const;
+	void load(QSettings* cfg);
+	void save(QSettings* cfg) const;
 
 	QString filePath;
 	bool readOnly = false;
 	QByteArray geometry = QByteArray();
 
 protected:
-	virtual void loadChild(QSettings *cfg);
-	virtual void saveChild(QSettings *cfg) const;
+	virtual void loadChild(QSettings* cfg);
+	virtual void saveChild(QSettings* cfg) const;
 };
 
 #endif // DOCUMENTINFO_H

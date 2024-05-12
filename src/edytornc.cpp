@@ -98,9 +98,9 @@
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
 
-EdytorNc *EdytorNc::SINGLETON;
+EdytorNc* EdytorNc::SINGLETON;
 
-EdytorNc *EdytorNc::instance()
+EdytorNc* EdytorNc::instance()
 {
 	if (SINGLETON == 0) {
 		SINGLETON = new EdytorNc(&Medium::instance());
@@ -109,7 +109,7 @@ EdytorNc *EdytorNc::instance()
 	return SINGLETON;
 }
 
-EdytorNc::EdytorNc(Medium *medium)
+EdytorNc::EdytorNc(Medium* medium)
 	: QMainWindow(nullptr)
 {
 	mMedium = medium;
@@ -141,7 +141,7 @@ EdytorNc::EdytorNc(Medium *medium)
 	clipboard = QApplication::clipboard();
 	connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
 	windowMapper = new QSignalMapper(this);
-	connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
+	connect(windowMapper, SIGNAL(mapped(QWidget*)), this, SLOT(setActiveSubWindow(QWidget*)));
 
 	model = new QStandardItemModel();
 	ui->projectTreeView->setModel(model);
@@ -163,8 +163,8 @@ EdytorNc::EdytorNc(Medium *medium)
 
 	connect(ui->deleteFromClipboardButton, SIGNAL(clicked()), this,
 	        SLOT(deleteFromClipboardButtonClicked()));
-	connect(ui->clipboardTreeView, SIGNAL(customContextMenuRequested(const QPoint &)), this,
-	        SLOT(clipboardTreeViewContextMenu(const QPoint &)));
+	connect(ui->clipboardTreeView, SIGNAL(customContextMenuRequested(const QPoint&)), this,
+	        SLOT(clipboardTreeViewContextMenu(const QPoint&)));
 
 	connect(ui->hideButton, SIGNAL(clicked()), this, SLOT(hidePanel()));
 
@@ -183,18 +183,18 @@ EdytorNc::EdytorNc(Medium *medium)
 	m_documentManager = new DocumentManager(this);
 	m_documentManager->setMdiArea(ui->mdiArea);
 	m_documentManager->registerDocumentProducer(new GCoderProducer());
-	connect(m_documentManager, SIGNAL(activeDocumentChanged(Document *)), this, SLOT(updateMenus()));
+	connect(m_documentManager, SIGNAL(activeDocumentChanged(Document*)), this, SLOT(updateMenus()));
 	connect(m_documentManager, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
 	connect(m_documentManager, SIGNAL(modificationChanged(bool)), this, SLOT(updateMenus()));
 	connect(m_documentManager, SIGNAL(modificationChanged(bool)), this, SLOT(updateOpenFileList()));
 	connect(m_documentManager, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
-	connect(m_documentManager, SIGNAL(briefChanged(Document *)), this, SLOT(updateOpenFileList()));
+	connect(m_documentManager, SIGNAL(briefChanged(Document*)), this, SLOT(updateOpenFileList()));
 	connect(m_documentManager, SIGNAL(documentListChanged()), this, SLOT(updateOpenFileList()));
-	connect(m_documentManager, SIGNAL(closeRequested(Document *)), this, SLOT(maybeSave(Document *)), Qt::ConnectionType::DirectConnection);
+	connect(m_documentManager, SIGNAL(closeRequested(Document*)), this, SLOT(maybeSave(Document*)), Qt::ConnectionType::DirectConnection);
 	connect(m_documentManager, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
 	connect(m_documentManager, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-	connect(m_documentManager, SIGNAL(customContextMenuRequested(Document *, const QPoint &)), this,  SLOT(customContextMenuRequest(Document *, const QPoint &)));
-	connect(m_documentManager, SIGNAL(fileWatchRequest(const QString &, bool)), this, SLOT(watchFile(const QString &, bool)));
+	connect(m_documentManager, SIGNAL(customContextMenuRequested(Document*, const QPoint&)), this,  SLOT(customContextMenuRequest(Document*, const QPoint&)));
+	connect(m_documentManager, SIGNAL(fileWatchRequest(const QString&, bool)), this, SLOT(watchFile(const QString&, bool)));
 
 	m_sessionManager = new SessionManager(m_documentManager, this);
 	connect(m_sessionManager, SIGNAL(sessionListChanged(QStringList)), this, SLOT(updateSessionMenus(QStringList)));
@@ -214,7 +214,7 @@ EdytorNc::EdytorNc(Medium *medium)
 
 EdytorNc::~EdytorNc()
 {
-	proc = findChild<QProcess *>();
+	proc = findChild<QProcess*>();
 
 	if (proc) {
 		proc->close();
@@ -228,7 +228,7 @@ EdytorNc::~EdytorNc()
 	delete ui;
 }
 
-void EdytorNc::resizeEvent(QResizeEvent *event)
+void EdytorNc::resizeEvent(QResizeEvent* event)
 {
 	if (windowState() == Qt::WindowNoState && event->oldSize().isValid()) {
 		mMWConfig.size = event->size();
@@ -237,7 +237,7 @@ void EdytorNc::resizeEvent(QResizeEvent *event)
 	QMainWindow::resizeEvent(event);
 }
 
-void EdytorNc::moveEvent(QMoveEvent *event)
+void EdytorNc::moveEvent(QMoveEvent* event)
 {
 	if (windowState() == Qt::WindowNoState) {
 		mMWConfig.pos = geometry().topLeft();
@@ -246,12 +246,12 @@ void EdytorNc::moveEvent(QMoveEvent *event)
 	QMainWindow::moveEvent(event);
 }
 
-Addons::Actions *EdytorNc::addonsActions()
+Addons::Actions* EdytorNc::addonsActions()
 {
 	return m_addonsActions;
 }
 
-DocumentManager *EdytorNc::documentManager() const
+DocumentManager* EdytorNc::documentManager() const
 {
 	return m_documentManager;
 }
@@ -262,7 +262,7 @@ void EdytorNc::setMdiTabbedMode(bool tabbed)
 
 	if (m_MdiTabbedMode) {
 		ui->mdiArea->setViewMode(QMdiArea::TabbedView);
-		QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
+		QTabBar* tab = ui->mdiArea->findChild<QTabBar*>();
 
 		if (tab) {
 			tab->setTabsClosable(true);
@@ -284,7 +284,7 @@ void EdytorNc::closeAllMdiWindows()
 	ui->mdiArea->closeAllSubWindows();
 }
 
-void EdytorNc::closeEvent(QCloseEvent *event)
+void EdytorNc::closeEvent(QCloseEvent* event)
 {
 	if (commApp) {
 		QMessageBox::StandardButton result = QMessageBox::warning(this,
@@ -313,15 +313,15 @@ void EdytorNc::closeEvent(QCloseEvent *event)
 	}
 }
 
-Document *EdytorNc::newFileFromTemplate()
+Document* EdytorNc::newFileFromTemplate()
 {
-	Document *doc = 0;
+	Document* doc = 0;
 
-	newFileDialog *newFileDlg = new newFileDialog(this);
+	newFileDialog* newFileDlg = new newFileDialog(this);
 	int result = newFileDlg->exec();
 
 	if (result == QDialog::Accepted) {
-		const QString &fileName = newFileDlg->getChosenFile();
+		const QString& fileName = newFileDlg->getChosenFile();
 		doc = createDocument(GCoder::DOCUMENT_TYPE);
 
 		if (!doc) {
@@ -348,9 +348,9 @@ Document *EdytorNc::newFileFromTemplate()
 //
 //**************************************************************************************************
 
-Document *EdytorNc::newFile()
+Document* EdytorNc::newFile()
 {
-	Document *doc = createDocument(GCoder::DOCUMENT_TYPE);
+	Document* doc = createDocument(GCoder::DOCUMENT_TYPE);
 
 	if (!doc) {
 		return nullptr;
@@ -364,9 +364,9 @@ Document *EdytorNc::newFile()
 //
 //**************************************************************************************************
 
-void EdytorNc::open(const QDir &dir)
+void EdytorNc::open(const QDir& dir)
 {
-	const QString &filters = getFilters(m_extensions);
+	const QString& filters = getFilters(m_extensions);
 
 	QStringList files = QFileDialog::getOpenFileNames(
 	                        this,
@@ -374,7 +374,7 @@ void EdytorNc::open(const QDir &dir)
 	                        dir.canonicalPath(),
 	                        filters, 0);
 
-	for (const QString &fileName : files) {
+	for (const QString& fileName : files) {
 		openFile(fileName);
 	}
 }
@@ -400,16 +400,16 @@ void EdytorNc::openExample()
 	statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
-void EdytorNc::openFile(const QString &fileName)
+void EdytorNc::openFile(const QString& fileName)
 {
-	GCoderInfo *info = new GCoderInfo();
+	GCoderInfo* info = new GCoderInfo();
 	info->filePath = fileName;
 	info->readOnly = m_defaultReadOnly;
 	info->highlightMode = defaultHighlightMode(QFileInfo(fileName).absolutePath());
 	loadFile(DocumentInfo::Ptr(info), true);
 }
 
-bool EdytorNc::save(Document *doc, bool forceSaveAs)
+bool EdytorNc::save(Document* doc, bool forceSaveAs)
 {
 	if (doc->isUntitled() || forceSaveAs) {
 		QString oldFileName;
@@ -424,7 +424,7 @@ bool EdytorNc::save(Document *doc, bool forceSaveAs)
 
 		QString filters = extText.arg(m_saveExtension);
 
-		for (const QString &ext : m_extensions) {
+		for (const QString& ext : m_extensions) {
 			QString saveExt = extText.arg(ext);
 
 			if (ext != m_saveExtension) {
@@ -480,7 +480,7 @@ bool EdytorNc::save(Document *doc, bool forceSaveAs)
 
 bool EdytorNc::save()
 {
-	Document *doc = activeDocument();
+	Document* doc = activeDocument();
 
 	if (!doc) {
 		return true;
@@ -503,7 +503,7 @@ bool EdytorNc::saveAll()
 	bool saved = true;
 	int i = 0;
 
-	for (Document *doc : m_documentManager->documentList()) {
+	for (Document* doc : m_documentManager->documentList()) {
 		if (doc->isModified()) {
 			if (save(doc, false)) {
 				i++;
@@ -521,7 +521,7 @@ bool EdytorNc::saveAll()
 
 bool EdytorNc::saveAs()
 {
-	Document *doc = activeDocument();
+	Document* doc = activeDocument();
 
 	if (!doc) {
 		return true;
@@ -543,7 +543,7 @@ bool EdytorNc::maybeSaveAll()
 {
 	bool saved = true;
 
-	for (Document *doc : m_documentManager->documentList()) {
+	for (Document* doc : m_documentManager->documentList()) {
 		if (!maybeSave(doc)) {
 			saved = false;
 		}
@@ -552,7 +552,7 @@ bool EdytorNc::maybeSaveAll()
 	return saved;
 }
 
-bool EdytorNc::maybeSave(Document *doc)
+bool EdytorNc::maybeSave(Document* doc)
 {
 	if (doc->isModified()) {
 		QMessageBox msgBox;
@@ -591,7 +591,7 @@ void EdytorNc::printFile()
 {
 #ifndef QT_NO_PRINTER
 
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		QPrinter printer(QPrinter::HighResolution);
@@ -623,7 +623,7 @@ void EdytorNc::filePrintPreview()
 {
 #ifndef QT_NO_PRINTER
 
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		QPrinter printer(QPrinter::HighResolution);
@@ -637,7 +637,7 @@ void EdytorNc::filePrintPreview()
 
 		QPrintPreviewDialog preview(&printer, this);
 		preview.setWindowFlags(Qt::Window);
-		connect(&preview, SIGNAL(paintRequested(QPrinter *)), SLOT(printPreview(QPrinter *)));
+		connect(&preview, SIGNAL(paintRequested(QPrinter*)), SLOT(printPreview(QPrinter*)));
 		preview.exec();
 		savePrinterSettings(&printer);
 	}
@@ -645,11 +645,11 @@ void EdytorNc::filePrintPreview()
 #endif
 }
 
-void EdytorNc::printPreview(QPrinter *printer)
+void EdytorNc::printPreview(QPrinter* printer)
 {
 #ifndef QT_NO_PRINTER
 
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		printer->setDocName(gdoc->fileName());
@@ -663,7 +663,7 @@ void EdytorNc::printPreview(QPrinter *printer)
 
 void EdytorNc::cut()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->cut();
@@ -672,7 +672,7 @@ void EdytorNc::cut()
 
 void EdytorNc::copy()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->copy();
@@ -685,7 +685,7 @@ void EdytorNc::findInFl()
 		findFiles = new FindInFiles(ui->splitter);
 
 		if (m_findInFilesHighlightEnable) {
-			GCoderStyle *style = dynamic_cast<GCoderStyle *>(m_documentManager->documentStyle(GCoder::DOCUMENT_TYPE).get());
+			GCoderStyle* style = dynamic_cast<GCoderStyle*>(m_documentManager->documentStyle(GCoder::DOCUMENT_TYPE).get());
 
 			if (style) {
 				findFiles->setHighlightColors(style->hColors);
@@ -708,7 +708,7 @@ void EdytorNc::findInFl()
 
 bool EdytorNc::findNext()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	bool hasMdiChild = (gdoc != 0);
 	bool found = false;
 	QPalette palette;
@@ -738,7 +738,7 @@ bool EdytorNc::findNext()
 
 bool EdytorNc::findPrevious()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	bool hasMdiChild = (gdoc != 0);
 	bool found = false;
 	QPalette palette;
@@ -771,7 +771,7 @@ bool EdytorNc::findPrevious()
 void EdytorNc::replaceNext()
 {
 	QPalette palette;
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	bool hasMdiChildNotReadOnly = ((gdoc != 0) && !activeDocument()->isReadOnly());
 
 	replaceNextAct->setEnabled(false);
@@ -801,7 +801,7 @@ void EdytorNc::replaceNext()
 void EdytorNc::replacePrevious()
 {
 	QPalette palette;
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	bool hasMdiChildNotReadOnly = ((gdoc != 0) && !activeDocument()->isReadOnly());
 
 	replaceNextAct->setEnabled(false);
@@ -832,7 +832,7 @@ void EdytorNc::replacePrevious()
 void EdytorNc::replaceAll()
 {
 	QPalette palette;
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	bool hasMdiChildNotReadOnly = ((gdoc != 0) && !activeDocument()->isReadOnly());
 
 	replaceNextAct->setEnabled(false);
@@ -864,7 +864,7 @@ void EdytorNc::replaceAll()
 
 void EdytorNc::selAll()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->selectAll();
@@ -884,11 +884,11 @@ void EdytorNc::config()
 	config.defaultReadOnly = m_defaultReadOnly;
 	config.disableFileChangeMonitor = m_disableFileChangeMonitor;
 	config.startEmpty = m_startEmpty;
-	SetupDialog *setUpDialog = new SetupDialog(this, &config);
+	SetupDialog* setUpDialog = new SetupDialog(this, &config);
 
 	if (setUpDialog->exec() == QDialog::Accepted) {
 		config = setUpDialog->getSettings();
-		QSettings *cfg = Medium::instance().settings();
+		QSettings* cfg = Medium::instance().settings();
 		m_documentManager->setDocumentWidgetProperties(DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(config.editorProperties)));
 		config.editorProperties.save(cfg);
 		emit intCapsLockChanged(config.editorProperties.intCapsLock);
@@ -909,7 +909,7 @@ void EdytorNc::config()
 
 		m_documentManager->updateDocuments(GCoder::DOCUMENT_TYPE);
 
-		for (Document *doc : m_documentManager->documentList()) {
+		for (Document* doc : m_documentManager->documentList()) {
 			doc->setReadOnly(m_defaultReadOnly);
 		}
 	}
@@ -926,9 +926,9 @@ void EdytorNc::readOnly()
 	updateMenus();
 }
 
-void EdytorNc::goToLine(const QString &fileName, int line)
+void EdytorNc::goToLine(const QString& fileName, int line)
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		QString childFileName = gdoc->filePath();
@@ -1011,7 +1011,7 @@ void EdytorNc::doDiffR()
 	}
 }
 
-void EdytorNc::diffTwoFiles(const QString &filename1, const QString &filename2)
+void EdytorNc::diffTwoFiles(const QString& filename1, const QString& filename2)
 {
 	createDiffApp();
 
@@ -1030,7 +1030,7 @@ void EdytorNc::diffTwoFiles(const QString &filename1, const QString &filename2)
 
 void EdytorNc::diffEditorFile()
 {
-	Document *doc = activeDocument();
+	Document* doc = activeDocument();
 
 	if (!doc) {
 		return;
@@ -1111,7 +1111,7 @@ void EdytorNc::doCalc()
 		return;
 	}
 
-	proc = findChild<QProcess *>("Calc569");
+	proc = findChild<QProcess*>("Calc569");
 
 	if (!proc) {
 		proc = new QProcess(this);
@@ -1132,7 +1132,7 @@ void EdytorNc::doCalc()
 
 void EdytorNc::deleteText()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->removeSelectedText();
@@ -1141,7 +1141,7 @@ void EdytorNc::deleteText()
 
 void EdytorNc::paste()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->paste();
@@ -1162,10 +1162,10 @@ void EdytorNc::redo()
 	}
 }
 
-void EdytorNc::activeWindowChanged(QMdiSubWindow *window)
+void EdytorNc::activeWindowChanged(QMdiSubWindow* window)
 {
 	Q_UNUSED(window);
-	Document *doc;
+	Document* doc;
 
 	if (ui->mdiArea->subWindowList().count() <= 1) {
 		m_MdiWidgetsMaximized = true;
@@ -1215,8 +1215,8 @@ void EdytorNc::about()
 
 void EdytorNc::updateMenus()
 {
-	Document *doc = activeDocument();
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(doc);
+	Document* doc = activeDocument();
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(doc);
 	bool hasMdiChildNotReadOnly;
 	bool hasSelection;
 	bool hasModifiedMdiChild;
@@ -1338,7 +1338,7 @@ void EdytorNc::updateCurrentSerialConfig()
 
 void EdytorNc::updateStatusBar()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		int id = highlightTypeCombo->findData(gdoc->highlightMode());
@@ -1376,11 +1376,11 @@ void EdytorNc::updateWindowMenu()
 
 	windowMenu->setAttribute(Qt::WA_AlwaysShowToolTips, true);
 
-	QList<Document *> docList = m_documentManager->documentList();
+	QList<Document*> docList = m_documentManager->documentList();
 	separatorAct->setVisible(!docList.isEmpty());
 
 	for (int i = 0; i < docList.size(); ++i) {
-		Document *doc = docList.at(i);
+		Document* doc = docList.at(i);
 
 		if (i < 9) {
 			text = tr("&%1 %2").arg(i + 1).arg(doc->filePath());
@@ -1388,7 +1388,7 @@ void EdytorNc::updateWindowMenu()
 			text = tr("%1 %2").arg(i + 1).arg(doc->filePath());
 		}
 
-		QAction *action = windowMenu->addAction(text);
+		QAction* action = windowMenu->addAction(text);
 		action->setCheckable(true);
 		action->setChecked(doc == activeDocument());
 		action->setToolTip(doc->brief());
@@ -1397,9 +1397,9 @@ void EdytorNc::updateWindowMenu()
 	}
 }
 
-Document *EdytorNc::createDocument(const QString &type)
+Document* EdytorNc::createDocument(const QString& type)
 {
-	Document *doc = m_documentManager->createDocument(type, "");
+	Document* doc = m_documentManager->createDocument(type, "");
 
 	if (!doc) {
 		return nullptr;
@@ -1633,8 +1633,8 @@ void EdytorNc::createActions()
 	previousAct->setToolTip(tr("Move the focus to the previous window"));
 	connect(previousAct, SIGNAL(triggered()), ui->mdiArea, SLOT(activatePreviousSubWindow()));
 
-	connect(ui->mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this,
-	        SLOT(activeWindowChanged(QMdiSubWindow *)));
+	connect(ui->mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow*)), this,
+	        SLOT(activeWindowChanged(QMdiSubWindow*)));
 
 	separatorAct = new QAction(this);
 	separatorAct->setSeparator(true);
@@ -1669,7 +1669,7 @@ void EdytorNc::createMenus()
 	fileMenu->addSeparator();
 	recentFileMenu = fileMenu->addMenu(tr("&Recent files"));
 	recentFileMenu->setIcon(QIcon(":/images/document-open-recent.png"));
-	connect(recentFileMenu, SIGNAL(triggered(QAction *)), this, SLOT(fileOpenRecent(QAction *)));
+	connect(recentFileMenu, SIGNAL(triggered(QAction*)), this, SLOT(fileOpenRecent(QAction*)));
 	fileMenu->addSeparator();
 	fileMenu->addAction(saveAct);
 	fileMenu->addAction(saveAsAct);
@@ -1679,7 +1679,7 @@ void EdytorNc::createMenus()
 	fileMenu->addSeparator();
 
 	sessionsMenu = fileMenu->addMenu(tr("Sessions"));
-	connect(sessionsMenu, SIGNAL(triggered(QAction *)), this, SLOT(changeSession(QAction *)));
+	connect(sessionsMenu, SIGNAL(triggered(QAction*)), this, SLOT(changeSession(QAction*)));
 	fileMenu->addAction(sessionMgrAct);
 
 	fileMenu->addSeparator();
@@ -1890,7 +1890,7 @@ void EdytorNc::createStatusBar()
 void EdytorNc::setHighLightMode(int mode)
 {
 	bool ok;
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	int id = highlightTypeCombo->itemData(mode).toInt(&ok);
 
 	if (gdoc && ok) {
@@ -1901,7 +1901,7 @@ void EdytorNc::setHighLightMode(int mode)
 
 void EdytorNc::readSettings()
 {
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("mainwindow");
 	mMWConfig.pos = settings.value("pos", QPoint(0, 0)).toPoint();
@@ -2002,7 +2002,7 @@ void EdytorNc::readSettings()
 
 void EdytorNc::writeSettings()
 {
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("mainwindow");
 	settings.setValue("pos", mMWConfig.pos);
@@ -2056,12 +2056,12 @@ void EdytorNc::writeSettings()
 	}
 }
 
-Document *EdytorNc::activeDocument() const
+Document* EdytorNc::activeDocument() const
 {
 	return m_documentManager->activeDocument();
 }
 
-Document *EdytorNc::findDocument(const QString &fileName)
+Document* EdytorNc::findDocument(const QString& fileName)
 {
 	QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
 
@@ -2072,18 +2072,18 @@ Document *EdytorNc::findDocument(const QString &fileName)
 	return m_documentManager->findDocumentByFilePath(canonicalFilePath);
 }
 
-void EdytorNc::setActiveSubWindow(QWidget *window)
+void EdytorNc::setActiveSubWindow(QWidget* window)
 {
 	if (!window) {
 		return;
 	}
 
-	ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
+	ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow*>(window));
 }
 
 QString EdytorNc::currentPath() const
 {
-	Document *child = activeDocument();
+	Document* child = activeDocument();
 
 	if (child) {
 		return child->filePath();
@@ -2097,12 +2097,12 @@ QString EdytorNc::lastOpenedPath() const
 	return m_lastOpenedPath;
 }
 
-void EdytorNc::setLastOpenedPath(const QString &path)
+void EdytorNc::setLastOpenedPath(const QString& path)
 {
 	m_lastOpenedPath = path;
 }
 
-void EdytorNc::loadFile(const DocumentInfo::Ptr &info, bool checkAlreadyLoaded)
+void EdytorNc::loadFile(const DocumentInfo::Ptr& info, bool checkAlreadyLoaded)
 {
 	QFileInfo file;
 
@@ -2113,7 +2113,7 @@ void EdytorNc::loadFile(const DocumentInfo::Ptr &info, bool checkAlreadyLoaded)
 	file.setFile(info->filePath);
 
 	if ((file.exists()) && (file.isReadable())) {
-		Document *doc = createDocument(info->documentType());
+		Document* doc = createDocument(info->documentType());
 
 		if (!doc) {
 			return;
@@ -2141,27 +2141,27 @@ void EdytorNc::recentFilesChanged()
 	m_recentFiles->save(Medium::instance().settings());
 }
 
-void EdytorNc::fileOpenRecent(QAction *act)
+void EdytorNc::fileOpenRecent(QAction* act)
 {
 	openFile(act->data().toString());
 }
 
-void EdytorNc::updateRecentFilesMenu(const QStringList &fileList)
+void EdytorNc::updateRecentFilesMenu(const QStringList& fileList)
 {
 	recentFileMenu->clear();
 
-	for (const QString &file : fileList) {
-		QAction *newAc = recentFileMenu->addAction(QIcon(":/images/document-open-recent.png"), file);
+	for (const QString& file : fileList) {
+		QAction* newAc = recentFileMenu->addAction(QIcon(":/images/document-open-recent.png"), file);
 		newAc->setData(file);
 	}
 }
 
-void EdytorNc::loadFoundedFile(const QString &fileName)
+void EdytorNc::loadFoundedFile(const QString& fileName)
 {
 	openFile(fileName);
 }
 
-void EdytorNc::messReceived(const QString &text)
+void EdytorNc::messReceived(const QString& text)
 {
 	QString str = text;
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
@@ -2230,10 +2230,10 @@ void EdytorNc::createFindToolBar()
 		       \
 		       "<p><b>$min</b> can be ommited, then equal 0</p>" \
 		       "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
-		CapsLockEventFilter *findEditEventFilter = new CapsLockEventFilter(findEdit);
+		CapsLockEventFilter* findEditEventFilter = new CapsLockEventFilter(findEdit);
 		connect(this, SIGNAL(intCapsLockChanged(bool)), findEditEventFilter, SLOT(setCapsLockEnable(bool)));
 		bool intCapsLock = false;
-		GCoderWidgetProperties *prop = dynamic_cast<GCoderWidgetProperties *>(m_documentManager->documentWidgetProperties(GCoder::DOCUMENT_TYPE).get());
+		GCoderWidgetProperties* prop = dynamic_cast<GCoderWidgetProperties*>(m_documentManager->documentWidgetProperties(GCoder::DOCUMENT_TYPE).get());
 
 		if (prop) {
 			intCapsLock = prop->intCapsLock;
@@ -2254,7 +2254,7 @@ void EdytorNc::createFindToolBar()
 		replaceEdit->setToolTip(
 		    tr("<b>$$OperatorNumber</b> - do some math on replaced numbers. Operator +-*/" \
 		       "<p>$$+1 - will add 1 to replaced numbers</p>"));
-		CapsLockEventFilter *replaceEditEventFilter = new CapsLockEventFilter(replaceEdit);
+		CapsLockEventFilter* replaceEditEventFilter = new CapsLockEventFilter(replaceEdit);
 		connect(this, SIGNAL(intCapsLockChanged(bool)), replaceEditEventFilter, SLOT(setCapsLockEnable(bool)));
 		replaceEditEventFilter->setCapsLockEnable(intCapsLock);
 		replaceEdit->installEventFilter(replaceEditEventFilter);
@@ -2277,7 +2277,7 @@ void EdytorNc::createFindToolBar()
 		findToolBar->addSeparator();
 		findToolBar->addAction(findCloseAct);
 
-		QSettings &settings = *Medium::instance().settings();
+		QSettings& settings = *Medium::instance().settings();
 		mCheckIgnoreComments->setChecked(settings.value("FindIgnoreComments", true).toBool());
 		mCheckFindWholeWords->setChecked(settings.value("FindWholeWords", false).toBool());
 		mCheckIgnoreCase->setChecked(settings.value("FindIgnoreCase", true).toBool());
@@ -2285,7 +2285,7 @@ void EdytorNc::createFindToolBar()
 		findToolBar->show();
 	}
 
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		disconnect(findEdit, SIGNAL(textChanged(QString)), this, SLOT(findTextChanged()));
@@ -2316,7 +2316,7 @@ void EdytorNc::createFindToolBar()
 
 void EdytorNc::closeFindToolBar()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->widget()->setFocus(Qt::MouseFocusReason);
@@ -2324,7 +2324,7 @@ void EdytorNc::closeFindToolBar()
 		gdoc->centerCursor();
 	}
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.setValue("FindIgnoreComments", mCheckIgnoreComments->isChecked());
 	settings.setValue("FindWholeWords", mCheckFindWholeWords->isChecked());
 	settings.setValue("FindIgnoreCase", mCheckIgnoreCase->isChecked());
@@ -2343,7 +2343,7 @@ void EdytorNc::findTextChanged()
 		replaceAllAct->setEnabled(true);
 	}
 
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->clearSelection(true);
@@ -2461,7 +2461,7 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 
 		QFileInfoList list = dir.entryInfoList();
 
-		for (const QFileInfo &fileInfo : list) {
+		for (const QFileInfo& fileInfo : list) {
 			file.setFileName(fileInfo.absoluteFilePath());
 			file.remove();
 		}
@@ -2550,7 +2550,7 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 
 		QFileInfoList list = dir.entryInfoList();
 
-		for (const QFileInfo &fileInfo : list) {
+		for (const QFileInfo& fileInfo : list) {
 			file.setFileName(fileInfo.absoluteFilePath());
 			file.remove();
 		}
@@ -2574,7 +2574,7 @@ void EdytorNc::deAttachHighlightToDirActClicked()
 	attachHighlighterToDirButtonClicked(false);
 }
 
-int EdytorNc::defaultHighlightMode(const QString &filePath)
+int EdytorNc::defaultHighlightMode(const QString& filePath)
 {
 	QDir dir;
 	bool ok;
@@ -2602,7 +2602,7 @@ int EdytorNc::defaultHighlightMode(const QString &filePath)
 void EdytorNc::projectAdd()
 {
 	QFileInfo file;
-	QStandardItem *item;
+	QStandardItem* item;
 	QIcon icon;
 
 	if (currentProject == nullptr) {
@@ -2631,16 +2631,16 @@ void EdytorNc::projectAdd()
 
 	QStringList::Iterator it = list.begin();
 
-	QStandardItem *parentItem = currentProject;
+	QStandardItem* parentItem = currentProject;
 
 	if (it != list.end()) {
 		file.setFile(*it);
 
 		if ((file.absoluteDir().exists()) && (file.absoluteDir().isReadable())) {
 
-			QList<QStandardItem *> items = model->findItems(QDir::toNativeSeparators(
-			                                   file.absoluteDir().canonicalPath()),
-			                               Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
+			QList<QStandardItem*> items = model->findItems(QDir::toNativeSeparators(
+			                                  file.absoluteDir().canonicalPath()),
+			                              Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
 
 			if (!items.isEmpty()) {
 				item = items.at(0);
@@ -2662,7 +2662,7 @@ void EdytorNc::projectAdd()
 		}
 	}
 
-	QFileSystemModel *fModel = new QFileSystemModel;
+	QFileSystemModel* fModel = new QFileSystemModel;
 
 	while (it != list.end()) {
 		file.setFile(*it);
@@ -2691,7 +2691,7 @@ void EdytorNc::projectSave()
 {
 	QString path, fileName;
 	int fileCount;
-	QStandardItem *item;
+	QStandardItem* item;
 
 
 	if (currentProjectName.isEmpty() || currentProject == nullptr) {
@@ -2737,7 +2737,7 @@ void EdytorNc::projectSaveAs()
 	}
 
 	currentProjectName = fileName;
-	QStandardItem *parentItem = model->invisibleRootItem();
+	QStandardItem* parentItem = model->invisibleRootItem();
 	parentItem->child(0, 0)->setText(QFileInfo(currentProjectName).fileName());
 	parentItem->child(0, 0)->setToolTip(QDir::toNativeSeparators(QFileInfo(
 	                                        currentProjectName).absoluteFilePath()));
@@ -2758,8 +2758,8 @@ void EdytorNc::projectNew()
 
 	currentProjectName = fileName;
 
-	QStandardItem *parentItem = model->invisibleRootItem();
-	QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"),
+	QStandardItem* parentItem = model->invisibleRootItem();
+	QStandardItem* item = new QStandardItem(QIcon(":/images/edytornc.png"),
 	                                        QFileInfo(currentProjectName).fileName());
 
 	parentItem->appendRow(item);
@@ -2768,7 +2768,7 @@ void EdytorNc::projectNew()
 	currentProjectModified = true;
 }
 
-void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex &index)
+void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex& index)
 {
 	QFileInfo file;
 
@@ -2776,7 +2776,7 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex &index)
 		return;
 	}
 
-	QStandardItem *item = model->itemFromIndex(index);
+	QStandardItem* item = model->itemFromIndex(index);
 
 	if (item == nullptr || item->parent() == nullptr) {
 		return;
@@ -2797,7 +2797,7 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex &index)
 	}
 }
 
-void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex &index)
+void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex& index)
 {
 	QFileInfo file;
 
@@ -2896,7 +2896,7 @@ void EdytorNc::projectTreeRemoveItem()
 	QModelIndexList list = ui->projectTreeView->selectionModel()->selectedIndexes();
 
 	for (QModelIndex it : list) {
-		QStandardItem *item = model->itemFromIndex(it);
+		QStandardItem* item = model->itemFromIndex(it);
 
 		if (item == nullptr) {
 			return;
@@ -2908,7 +2908,7 @@ void EdytorNc::projectTreeRemoveItem()
 	}
 }
 
-void EdytorNc::projectLoad(const QString &projectName)
+void EdytorNc::projectLoad(const QString& projectName)
 {
 	QFileInfo file;
 	QIcon icon;
@@ -2924,7 +2924,7 @@ void EdytorNc::projectLoad(const QString &projectName)
 
 	QSettings settings(currentProjectName, QSettings::IniFormat);
 
-	QStandardItem *item = new QStandardItem(QIcon(":/images/edytornc.png"),
+	QStandardItem* item = new QStandardItem(QIcon(":/images/edytornc.png"),
 	                                        QFileInfo(currentProjectName).fileName());
 	item->setToolTip(QDir::toNativeSeparators(currentProjectName));
 
@@ -2932,7 +2932,7 @@ void EdytorNc::projectLoad(const QString &projectName)
 
 	currentProject = item;
 
-	QFileSystemModel *fModel = new QFileSystemModel;
+	QFileSystemModel* fModel = new QFileSystemModel;
 
 	int max = settings.beginReadArray("ProjectFiles");
 
@@ -2941,8 +2941,8 @@ void EdytorNc::projectLoad(const QString &projectName)
 		file.setFile(settings.value("File", "").toString());
 
 		if ((file.absoluteDir().exists()) && (file.absoluteDir().isReadable())) {
-			QList<QStandardItem *> items = model->findItems(file.absoluteDir().canonicalPath(),
-			                               Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
+			QList<QStandardItem*> items = model->findItems(file.absoluteDir().canonicalPath(),
+			                              Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive, 0);
 
 			if (!items.isEmpty()) {
 				item = items.at(0);
@@ -2965,7 +2965,7 @@ void EdytorNc::projectLoad(const QString &projectName)
 					icon = QIcon(":/images/ncfile.png");
 				}
 
-				QStandardItem *childItem = new QStandardItem(icon, file.fileName());
+				QStandardItem* childItem = new QStandardItem(icon, file.fileName());
 				childItem->setToolTip(file.fileName());
 				item->appendRow(childItem);
 			}
@@ -3049,17 +3049,17 @@ void EdytorNc::updateOpenFileList()
 	ui->openFileTableWidget->setHorizontalHeaderLabels(labels);
 	ui->openFileTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
-	QList<Document *> docList = m_documentManager->documentList();
+	QList<Document*> docList = m_documentManager->documentList();
 
 	ui->openFileTableWidget->setSortingEnabled(false);
 	ui->openFileTableWidget->setRowCount(docList.size());
 
 	for (int i = 0; i < docList.size(); ++i) {
-		Document *doc = docList.at(i);
+		Document* doc = docList.at(i);
 
 		file.setFile(doc->filePath());
 
-		QTableWidgetItem *newItem = new QTableWidgetItem(file.fileName() + (doc->isModified() ? "*" : ""));
+		QTableWidgetItem* newItem = new QTableWidgetItem(file.fileName() + (doc->isModified() ? "*" : ""));
 
 		if (file.canonicalFilePath().isEmpty()) {
 			newItem->setToolTip(doc->filePath());
@@ -3100,9 +3100,9 @@ void EdytorNc::updateOpenFileList()
 
 void EdytorNc::openFileTableWidgetClicked(int x, int y)
 {
-	QTableWidgetItem *item = ui->openFileTableWidget->item(x, 1);
+	QTableWidgetItem* item = ui->openFileTableWidget->item(x, 1);
 
-	Document *existing = findDocument(item->toolTip());
+	Document* existing = findDocument(item->toolTip());
 
 	if (existing) {
 		if (y == 2) {
@@ -3153,7 +3153,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
 	fileTreeViewChangeRootDir(path);
 }
 
-void EdytorNc::fileTreeViewChangeRootDir(const QString &path)
+void EdytorNc::fileTreeViewChangeRootDir(const QString& path)
 {
 	ui->fileTreeView->setRootIndex(dirModel->index(path));
 	dirModel->setRootPath(path);
@@ -3166,7 +3166,7 @@ void EdytorNc::fileTreeViewChangeRootDir(const QString &path)
 	ui->fileTreeView->resizeColumnToContents(3);
 }
 
-bool EdytorNc::event(QEvent *event)
+bool EdytorNc::event(QEvent* event)
 {
 	QString key, text;
 	QModelIndex index;
@@ -3178,7 +3178,7 @@ bool EdytorNc::event(QEvent *event)
 			return true;
 		}
 
-		QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+		QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
 		QPoint pos = ui->fileTreeView->viewport()->mapFromGlobal(helpEvent->globalPos());
 
@@ -3237,18 +3237,18 @@ bool EdytorNc::event(QEvent *event)
 	return QWidget::event(event);
 }
 
-void EdytorNc::updateSessionMenus(const QStringList &sessionList)
+void EdytorNc::updateSessionMenus(const QStringList& sessionList)
 {
 	sessionsMenu->clear();
 
 	// TODO memory leack?
-	QActionGroup *actionGroup = new QActionGroup(sessionsMenu);
+	QActionGroup* actionGroup = new QActionGroup(sessionsMenu);
 	actionGroup->setExclusive(true);
 
 	bool checked = true;
 
-	for (const QString &name : sessionList) {
-		QAction *action = actionGroup->addAction(name);
+	for (const QString& name : sessionList) {
+		QAction* action = actionGroup->addAction(name);
 		action->setCheckable(true);
 		action->setChecked(checked);
 		checked = false;
@@ -3262,7 +3262,7 @@ void EdytorNc::sessionsChanged()
 	m_sessionManager->save(Medium::instance().settings());
 }
 
-void EdytorNc::changeSession(QAction *action)
+void EdytorNc::changeSession(QAction* action)
 {
 	m_sessionManager->setCurrentSession(action->text());
 }
@@ -3281,7 +3281,7 @@ void EdytorNc::currentSessionChanged()
 
 void EdytorNc::openFilesFromSession()
 {
-	for (const DocumentInfo::Ptr &info : m_sessionManager->documentInfoList()) {
+	for (const DocumentInfo::Ptr& info : m_sessionManager->documentInfoList()) {
 		m_MdiWidgetsMaximized = false;
 		loadFile(info, false);
 	}
@@ -3291,7 +3291,7 @@ void EdytorNc::storeFileInfoInSession()
 {
 	QList<DocumentInfo::Ptr> infoList;
 
-	for (const Document *doc : m_documentManager->documentList()) {
+	for (const Document* doc : m_documentManager->documentList()) {
 		DocumentInfo::Ptr info = doc->documentInfo();
 		infoList.append(info);
 	}
@@ -3305,11 +3305,11 @@ void EdytorNc::showSessionDialog()
 	sesDialog.exec();
 }
 
-void EdytorNc::savePrinterSettings(QPrinter *printer)
+void EdytorNc::savePrinterSettings(QPrinter* printer)
 {
 #ifndef QT_NO_PRINTER
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("PrinterSettings");
 
@@ -3331,11 +3331,11 @@ void EdytorNc::savePrinterSettings(QPrinter *printer)
 #endif
 }
 
-void EdytorNc::loadPrinterSettings(QPrinter *printer)
+void EdytorNc::loadPrinterSettings(QPrinter* printer)
 {
 #ifndef QT_NO_PRINTER
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("PrinterSettings");
 
@@ -3365,7 +3365,7 @@ void EdytorNc::loadPrinterSettings(QPrinter *printer)
 
 void EdytorNc::serialConfig()
 {
-	SerialPortConfigDialog *serialConfigDialog = new SerialPortConfigDialog(this,
+	SerialPortConfigDialog* serialConfigDialog = new SerialPortConfigDialog(this,
 	    configBox->currentText());
 
 	if (serialConfigDialog->exec() == QDialog::Accepted) {
@@ -3379,7 +3379,7 @@ void EdytorNc::loadSerialConfignames()
 	QStringList list;
 	QString item;
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("SerialPortConfigs");
 
 	configBox->clear();
@@ -3398,7 +3398,7 @@ void EdytorNc::loadSerialConfignames()
 
 void EdytorNc::serialConfigTest()
 {
-	SerialPortTestDialog *trDialog = new SerialPortTestDialog(this);
+	SerialPortTestDialog* trDialog = new SerialPortTestDialog(this);
 
 	trDialog->show();
 }
@@ -3406,7 +3406,7 @@ void EdytorNc::serialConfigTest()
 void EdytorNc::sendButtonClicked()
 {
 	QString tx;
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (!gdoc) {
 		return;
@@ -3452,7 +3452,7 @@ void EdytorNc::receiveButtonClicked()
 			}
 		} else {
 			if (!(*it).isEmpty() && !(*it).isNull()) {
-				GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(newFile());
+				GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(newFile());
 
 				if (gdoc) {
 					gdoc->clear();
@@ -3473,9 +3473,9 @@ void EdytorNc::receiveButtonClicked()
 	QApplication::restoreOverrideCursor();
 }
 
-void EdytorNc::fileChanged(const QString &fileName)
+void EdytorNc::fileChanged(const QString& fileName)
 {
-	Document *doc = findDocument(fileName);
+	Document* doc = findDocument(fileName);
 	bool modified = false;
 
 	if (doc) {
@@ -3535,7 +3535,7 @@ void EdytorNc::tileSubWindowsVertycally()
 
 	QPoint position(0, 0);
 
-	foreach (QMdiSubWindow *window, ui->mdiArea->subWindowList()) {
+	foreach (QMdiSubWindow* window, ui->mdiArea->subWindowList()) {
 		QRect rect(0, 0, ui->mdiArea->width(),
 		           ui->mdiArea->height() / ui->mdiArea->subWindowList().count());
 		window->setGeometry(rect);
@@ -3546,7 +3546,7 @@ void EdytorNc::tileSubWindowsVertycally()
 
 void EdytorNc::clipboardChanged()
 {
-	QStandardItem *item;
+	QStandardItem* item;
 	QFont font;
 	bool notFound = true;
 
@@ -3558,7 +3558,7 @@ void EdytorNc::clipboardChanged()
 		return;
 	}
 
-	QStandardItem *parentItem = clipboardModel->invisibleRootItem();
+	QStandardItem* parentItem = clipboardModel->invisibleRootItem();
 
 	for (int i = 0; i < parentItem->rowCount(); i++) { // check that text is already in clipboard
 		item = parentItem->child(i, 0);
@@ -3606,11 +3606,11 @@ void EdytorNc::clipboardChanged()
 	ui->clipboardTreeView->expandAll();
 }
 
-void EdytorNc::clipboardTreeViewContextMenu(const QPoint &point)
+void EdytorNc::clipboardTreeViewContextMenu(const QPoint& point)
 {
 	Q_UNUSED(point);
 
-	QStandardItem *item;
+	QStandardItem* item;
 	QString text;
 
 	QModelIndexList list = ui->clipboardTreeView->selectionModel()->selectedIndexes();
@@ -3643,12 +3643,12 @@ void EdytorNc::clipboardTreeViewContextMenu(const QPoint &point)
 	}
 }
 
-void EdytorNc::customContextMenuRequest(Document *doc, const QPoint &pos)
+void EdytorNc::customContextMenuRequest(Document* doc, const QPoint& pos)
 {
-	QMenu *menu = nullptr;
+	QMenu* menu = nullptr;
 
 	if (!menu) {
-		GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(doc);
+		GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(doc);
 
 		if (gdoc) {
 			menu = doContextMenuGCoder(gdoc, pos);
@@ -3661,9 +3661,9 @@ void EdytorNc::customContextMenuRequest(Document *doc, const QPoint &pos)
 	}
 }
 
-QMenu *EdytorNc::doContextMenuGCoder(GCoderDocument *doc, const QPoint &pos)
+QMenu* EdytorNc::doContextMenuGCoder(GCoderDocument* doc, const QPoint& pos)
 {
-	QMenu *menu = doc->createStandardContextMenu(pos);
+	QMenu* menu = doc->createStandardContextMenu(pos);
 	menu->addSeparator();
 
 	menu->addAction(addonsActions()->semiComment());
@@ -3674,7 +3674,7 @@ QMenu *EdytorNc::doContextMenuGCoder(GCoderDocument *doc, const QPoint &pos)
 	menu->addAction(addonsActions()->blockSkipRemove());
 	menu->addSeparator();
 
-	QAction *inLineCalcAct = new QAction(QIcon(":/images/inlinecalc.png"), tr("Inline calculator"), menu);
+	QAction* inLineCalcAct = new QAction(QIcon(":/images/inlinecalc.png"), tr("Inline calculator"), menu);
 	inLineCalcAct->setShortcut(tr("Ctrl+0"));
 	connect(inLineCalcAct, SIGNAL(triggered()), doc, SLOT(showInLineCalc()));
 	menu->addAction(inLineCalcAct);
@@ -3687,7 +3687,7 @@ void EdytorNc::deleteFromClipboardButtonClicked()
 	QModelIndexList list = ui->clipboardTreeView->selectionModel()->selectedIndexes();
 
 	for (QModelIndex it : list) {
-		QStandardItem *item = clipboardModel->itemFromIndex(it);
+		QStandardItem* item = clipboardModel->itemFromIndex(it);
 
 		if (item == nullptr) {
 			return;
@@ -3706,10 +3706,10 @@ void EdytorNc::clipboardSave()
 	settings.remove("ClipboardItems");
 	settings.beginWriteArray("ClipboardItems");
 
-	QStandardItem *parentItem = clipboardModel->invisibleRootItem();
+	QStandardItem* parentItem = clipboardModel->invisibleRootItem();
 
 	for (int i = 0; i < parentItem->rowCount(); i++) {
-		QStandardItem *item = parentItem->child(i, 0);
+		QStandardItem* item = parentItem->child(i, 0);
 
 		settings.setArrayIndex(i);
 		settings.setValue("Title", item->text());
@@ -3722,7 +3722,7 @@ void EdytorNc::clipboardSave()
 void EdytorNc::clipboardLoad()
 {
 	QString itemText;
-	QStandardItem *item;
+	QStandardItem* item;
 	QFont font;
 
 	ui->clipboardTreeView->setSortingEnabled(false);
@@ -3738,7 +3738,7 @@ void EdytorNc::clipboardLoad()
 		settings.setArrayIndex(i);
 		itemText = settings.value("Title", "").toString();
 
-		QStandardItem *parentItem = clipboardModel->invisibleRootItem();
+		QStandardItem* parentItem = clipboardModel->invisibleRootItem();
 		item = new QStandardItem(QIcon(":/images/editpaste.png"), itemText);
 		item->setEditable(true);
 		font = item->font();
@@ -3768,14 +3768,14 @@ void EdytorNc::clipboardLoad()
 
 void EdytorNc::doShowInLineCalc()
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
 	if (gdoc) {
 		gdoc->showInLineCalc();
 	}
 }
 
-void EdytorNc::watchFile(const QString &fileName, bool add)
+void EdytorNc::watchFile(const QString& fileName, bool add)
 {
 	if (fileChangeMonitor) {
 		bool exists = fileChangeMonitor->files().contains(fileName);

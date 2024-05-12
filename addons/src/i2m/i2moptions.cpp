@@ -30,7 +30,7 @@
 #define CFG_KEY_TO_INCH     "ToInch"
 
 
-void I2MOptions::load(QSettings *settings, const I2MOptions &defaultOptions)
+void I2MOptions::load(QSettings* settings, const I2MOptions& defaultOptions)
 {
 	inch.value = settings->value(CFG_KEY_INCH_VALUE, defaultOptions.inch.value).toDouble();
 	inch.in = settings->value(CFG_KEY_INCH_IN, defaultOptions.inch.in).toBool();
@@ -39,7 +39,7 @@ void I2MOptions::load(QSettings *settings, const I2MOptions &defaultOptions)
 	toInch = settings->value(CFG_KEY_TO_INCH, defaultOptions.toInch).toBool();
 }
 
-void I2MOptions::save(QSettings *settings)
+void I2MOptions::save(QSettings* settings)
 {
 	settings->setValue(CFG_KEY_INCH_VALUE, inch.value);
 	settings->setValue(CFG_KEY_INCH_IN, inch.in);

@@ -26,7 +26,7 @@ class QWidget;
 
 
 namespace Addons {
-int doI2MProg(QWidget *parent, QSettings *settings,  QString &tx);
+int doI2MProg(QWidget* parent, QSettings* settings,  QString& tx);
 }
 
 #endif // ADDONS_I2MPROG_H

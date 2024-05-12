@@ -30,7 +30,7 @@
 #include "edytornc.h" // EdytorNc
 
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	bool argProccesed;
 
@@ -51,10 +51,10 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	Medium &medium = Medium::instance();
+	Medium& medium = Medium::instance();
 	medium.addTranslationUnit("kdiff3");
 	medium.updateTranslation();
-	EdytorNc *mw = EdytorNc::instance();
+	EdytorNc* mw = EdytorNc::instance();
 
 	argProccesed = false;
 
@@ -76,8 +76,8 @@ int main(int argc, char *argv[])
 
 	app.setActivationWindow(mw, false);
 
-	QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
-	                 mw, SLOT(messReceived(const QString &)));
+	QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
+	                 mw, SLOT(messReceived(const QString&)));
 	QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
 
 	return app.exec();

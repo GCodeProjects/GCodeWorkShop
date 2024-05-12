@@ -55,7 +55,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
+CleanUpDialog::CleanUpDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent),
 	Ui::CleanUpDialog()
 {
@@ -63,7 +63,7 @@ CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
 
 	mSettings = settings;
 
-	QAction *deleteRowAct = new QAction(QIcon(":/images/removeemptylines.png"), tr("Delete &row"),
+	QAction* deleteRowAct = new QAction(QIcon(":/images/removeemptylines.png"), tr("Delete &row"),
 	                                    this);
 	deleteRowAct->setShortcut(QKeySequence::Delete);
 	deleteRowAct->setStatusTip(tr("Delete current row"));
@@ -82,8 +82,8 @@ CleanUpDialog::CleanUpDialog(QWidget *parent, QSettings *settings) :
 	connect(cancelPushButton, SIGNAL(clicked()), this, SLOT(reject()));
 	connect(okPushButton, SIGNAL(clicked()), this, SLOT(accept()));
 	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
-	connect(tableWidget, SIGNAL(customContextMenuRequested(const QPoint &)), this,
-	        SLOT(contextMenuReq(const QPoint &)));
+	connect(tableWidget, SIGNAL(customContextMenuRequested(const QPoint&)), this,
+	        SLOT(contextMenuReq(const QPoint&)));
 	tableWidget->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
@@ -125,13 +125,13 @@ void CleanUpDialog::newRow()
 		row++;
 	}
 
-	QTableWidgetItem *valueItem = new QTableWidgetItem("");
+	QTableWidgetItem* valueItem = new QTableWidgetItem("");
 	valueItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-	QTableWidgetItem *commentItem = new QTableWidgetItem("");
+	QTableWidgetItem* commentItem = new QTableWidgetItem("");
 	commentItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-	QTableWidgetItem *enableItem = new QTableWidgetItem("");
+	QTableWidgetItem* enableItem = new QTableWidgetItem("");
 	enableItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 	enableItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 	enableItem->setCheckState(Qt::Unchecked);
@@ -151,7 +151,7 @@ void CleanUpDialog::onCellCliced(int row, int col)
 void CleanUpDialog::highlightText(int row, int col)
 {
 	Q_UNUSED(col);
-	QTableWidgetItem *item = tableWidget->item(row, 1);
+	QTableWidgetItem* item = tableWidget->item(row, 1);
 
 	if (item != nullptr) {
 		if (!item->text().isEmpty()) {
@@ -173,7 +173,7 @@ void CleanUpDialog::highlightFindText(QRegularExpression regex)
 	QColor lineColor = QColor(Qt::red).lighter(155);
 	selection.format.setBackground(lineColor);
 
-	QTextDocument *doc = textEdit->document();
+	QTextDocument* doc = textEdit->document();
 	QTextCursor cursor = textEdit->textCursor();
 
 	cursor.setPosition(0);
@@ -206,7 +206,7 @@ void CleanUpDialog::highlightFindText(QRegularExpression regex)
 	textEdit->centerCursor();
 }
 
-void CleanUpDialog::contextMenuReq(const QPoint &pos)
+void CleanUpDialog::contextMenuReq(const QPoint& pos)
 {
 	Q_UNUSED(pos);
 	contextMenu->popup(QCursor::pos());
@@ -218,20 +218,20 @@ void CleanUpDialog::removeRow()
 	tableWidget->removeRow(row);
 }
 
-void CleanUpDialog::setOptions(const CleanUpOptions &options)
+void CleanUpDialog::setOptions(const CleanUpOptions& options)
 {
 	while (tableWidget->rowCount() > 0) {
 		tableWidget->removeRow(0);
 	}
 
 	for (int i = 0; i < options.expressions.count(); i++) {
-		QTableWidgetItem *valueItem = new QTableWidgetItem(options.expressions[i]);
+		QTableWidgetItem* valueItem = new QTableWidgetItem(options.expressions[i]);
 		valueItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-		QTableWidgetItem *commentItem = new QTableWidgetItem(options.comments.value(i));
+		QTableWidgetItem* commentItem = new QTableWidgetItem(options.comments.value(i));
 		commentItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-		QTableWidgetItem *enableItem = new QTableWidgetItem();
+		QTableWidgetItem* enableItem = new QTableWidgetItem();
 		enableItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 		enableItem->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 		bool checked = options.selected.contains(options.expressions[i]);
@@ -269,7 +269,7 @@ CleanUpOptions CleanUpDialog::options()
 	return options;
 }
 
-void CleanUpDialog::loadSettings(const CleanUpOptions &defaultOptions)
+void CleanUpDialog::loadSettings(const CleanUpOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

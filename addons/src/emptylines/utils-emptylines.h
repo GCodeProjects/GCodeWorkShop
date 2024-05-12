@@ -24,8 +24,8 @@ class QString;
 
 
 namespace Utils {
-void insertEmptyLines(QString &tx);
-void removeEmptyLines(QString &tx);
+void insertEmptyLines(QString& tx);
+void removeEmptyLines(QString& tx);
 }
 
 #endif // UTILS_EMPTYLINES_H

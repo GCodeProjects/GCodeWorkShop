@@ -38,8 +38,8 @@ struct TriangleOptions {
 	InOut   sideB;
 	InOut   sideC;
 
-	void load(QSettings *settings, const TriangleOptions &defaultOptions);
-	void save(QSettings *settings);
+	void load(QSettings* settings, const TriangleOptions& defaultOptions);
+	void save(QSettings* settings);
 };
 
 #endif // TRIANGLEOPTIONS_H

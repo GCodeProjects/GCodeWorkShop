@@ -21,8 +21,8 @@
 #include "ui/longjobhelper.h"
 
 
-LongJobHelper::LongJobHelper(QWidget *parent,
-                             const QString &title,
+LongJobHelper::LongJobHelper(QWidget* parent,
+                             const QString& title,
                              int deadLine):
 	mProgressDialog(parent, Qt::Dialog)
 {
@@ -32,7 +32,7 @@ LongJobHelper::LongJobHelper(QWidget *parent,
 	mProgressDialog.cancel();
 }
 
-void LongJobHelper::begin(int maximum, const QString &message, int lazyCheck)
+void LongJobHelper::begin(int maximum, const QString& message, int lazyCheck)
 {
 	mMaximum = maximum;
 	mMessage = message;

@@ -23,15 +23,15 @@
 
 #include "documentwidgetcloseeventfilter.h"
 
-DocumentWidgetCloseEventFilter::DocumentWidgetCloseEventFilter(QObject *parent)
+DocumentWidgetCloseEventFilter::DocumentWidgetCloseEventFilter(QObject* parent)
 	: QObject{parent}
 {
 }
 
-bool DocumentWidgetCloseEventFilter::eventFilter(QObject *obj, QEvent *event)
+bool DocumentWidgetCloseEventFilter::eventFilter(QObject* obj, QEvent* event)
 {
 	Q_UNUSED(obj);
-	QCloseEvent *ce = dynamic_cast<QCloseEvent *>(event);
+	QCloseEvent* ce = dynamic_cast<QCloseEvent*>(event);
 
 	if (ce) {
 		emit closeRequested(ce);

@@ -102,7 +102,7 @@ class Document : public QObject
 	Q_OBJECT
 
 protected:
-	explicit Document(QObject *parent = nullptr);
+	explicit Document(QObject* parent = nullptr);
 	~Document();
 
 public:
@@ -126,7 +126,7 @@ public:
 	 *
 	 * @see dir()
 	 */
-	void setDir(const QDir &dir);
+	void setDir(const QDir& dir);
 
 	/**
 	 * @brief Returns the path to a file without a filename.
@@ -144,7 +144,7 @@ public:
 	 *
 	 * @see path()
 	 */
-	void setPath(const QString &path);
+	void setPath(const QString& path);
 
 	/**
 	 * @brief Returns the file name.
@@ -163,7 +163,7 @@ public:
 	 *
 	 * @see fileName()
 	 */
-	void setFileName(const QString &fileName);
+	void setFileName(const QString& fileName);
 
 	/**
 	 * @brief Returns the full file name, including the path.
@@ -181,7 +181,7 @@ public:
 	 *
 	 * @see filePath()
 	 */
-	void setFilePath(const QString &filePath);
+	void setFilePath(const QString& filePath);
 
 	/**
 	 * @brief Returns the document information.
@@ -207,7 +207,7 @@ public:
 	 *
 	 * @see documentInfo()
 	 */
-	virtual void setDocumentInfo(const DocumentInfo::Ptr &info);
+	virtual void setDocumentInfo(const DocumentInfo::Ptr& info);
 
 	/**
 	 * @brief Returns the document style.
@@ -219,7 +219,7 @@ public:
 	 *
 	 * @param style The document style.
 	 */
-	virtual void setDocumentStyle(const DocumentStyle::Ptr &style) = 0;
+	virtual void setDocumentStyle(const DocumentStyle::Ptr& style) = 0;
 
 	/**
 	 * @brief Returns the document widget properties.
@@ -231,7 +231,7 @@ public:
 	 *
 	 * @param properties Document widget properties.
 	 */
-	virtual void setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &properties) = 0;
+	virtual void setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr& properties) = 0;
 
 	/**
 	 * @brief Guesses the file name from the contents of the document.
@@ -258,7 +258,7 @@ protected:
 	 *
 	 * @see brief()
 	 */
-	void setBrief(const QString &brief);
+	void setBrief(const QString& brief);
 
 signals:
 	/**
@@ -269,7 +269,7 @@ signals:
 	 * @see setBrief()
 	 * @see brief()
 	 */
-	void briefChanged(Document *doc);
+	void briefChanged(Document* doc);
 
 public:
 	/**
@@ -281,7 +281,7 @@ public:
 	 *
 	 * @see setWidget()
 	 */
-	QWidget *widget() const;
+	QWidget* widget() const;
 
 protected:
 	/**
@@ -294,14 +294,14 @@ protected:
 	 *
 	 * @see closeEvent()
 	 */
-	void setWidget(QWidget *widget);
+	void setWidget(QWidget* widget);
 
 	/**
 	 * @brief Sets the widget title.
 	 *
 	 * @param title The widget title.
 	 */
-	void setWidgetTitle(const QString &title);
+	void setWidgetTitle(const QString& title);
 
 public:
 	/**
@@ -329,7 +329,7 @@ protected slots:
 	 *
 	 * @see close()
 	 */
-	void closeEvent(QCloseEvent *event);
+	void closeEvent(QCloseEvent* event);
 
 signals:
 	/**
@@ -345,7 +345,7 @@ signals:
 	 * @see close()
 	 * @see closeEvent()
 	 */
-	bool closeRequested(Document *doc);
+	bool closeRequested(Document* doc);
 
 	/**
 	 * @brief Emitted before the document is closed.
@@ -354,7 +354,7 @@ signals:
 	 *
 	 * @see close()
 	 */
-	void closed(Document *doc);
+	void closed(Document* doc);
 
 public:
 	/**
@@ -366,7 +366,7 @@ public:
 	 *
 	 * @see isUntitled()
 	 */
-	virtual void loadTemplate(const QString &fileName = QString()) = 0;
+	virtual void loadTemplate(const QString& fileName = QString()) = 0;
 
 	/**
 	 * @brief Loads a document from a file.
@@ -423,7 +423,7 @@ protected:
 	 *
 	 * @return Returns true on success.
 	 */
-	bool loadFile(const QString &filePath, bool watch = true);
+	bool loadFile(const QString& filePath, bool watch = true);
 
 	/**
 	 * @brief Saves the document to the specified file.
@@ -438,7 +438,7 @@ protected:
 	 *
 	 * @return Returns true on success.
 	 */
-	bool saveFile(const QString &filePath);
+	bool saveFile(const QString& filePath);
 
 public:
 	/**
@@ -455,7 +455,7 @@ public:
 	 *
 	 * @param data The raw data.
 	 */
-	virtual void setRawData(const QByteArray &data) = 0;
+	virtual void setRawData(const QByteArray& data) = 0;
 
 	/**
 	 * @brief Creates the standard context menu.
@@ -463,7 +463,7 @@ public:
 	 * The function should create a standard context menu which is shown when the right
 	 * mouse button is clicked.
 	 */
-	virtual QMenu *createStandardContextMenu(const QPoint &pos) = 0;
+	virtual QMenu* createStandardContextMenu(const QPoint& pos) = 0;
 
 protected slots:
 	/**
@@ -474,7 +474,7 @@ protected slots:
 	 *
 	 * @see  QWidget::mapToGlobal()
 	 */
-	void customContextMenuRequest(const QPoint &pos);
+	void customContextMenuRequest(const QPoint& pos);
 
 signals:
 	/**
@@ -483,7 +483,7 @@ signals:
 	 * @param doc This document.
 	 * @param pos The position of the mouse pointer relative to the document widget.
 	 */
-	void customContextMenuRequested(Document *doc, const QPoint &pos);
+	void customContextMenuRequested(Document* doc, const QPoint& pos);
 
 public:
 	/**
@@ -560,7 +560,7 @@ signals:
 	 * @see setModified()
 	 * @see isModified()
 	 */
-	void modificationChanged(Document *doc, bool mod);
+	void modificationChanged(Document* doc, bool mod);
 
 public:
 	/**
@@ -627,7 +627,7 @@ signals:
 	 *
 	 * @see setRedoAvailable()
 	 */
-	void redoAvailable(Document *doc, bool available);
+	void redoAvailable(Document* doc, bool available);
 
 	/**
 	 * @brief The undo availability has changed.
@@ -637,7 +637,7 @@ signals:
 	 *
 	 * @see setUndoAvailable()
 	 */
-	void undoAvailable(Document *doc, bool available);
+	void undoAvailable(Document* doc, bool available);
 
 protected slots:
 	/**
@@ -651,7 +651,7 @@ signals:
 	 *
 	 * @param doc This document.
 	 */
-	void cursorPositionChanged(Document *doc);
+	void cursorPositionChanged(Document* doc);
 
 protected slots:
 	/**
@@ -665,7 +665,7 @@ signals:
 	 *
 	 * @param doc This document.
 	 */
-	void selectionChanged(Document *doc);
+	void selectionChanged(Document* doc);
 
 public:
 	/**
@@ -685,7 +685,7 @@ protected:
 	 *
 	 * @see fileWatchRequested()
 	 */
-	void fileWatchStart(const QString &watchedFile);
+	void fileWatchStart(const QString& watchedFile);
 
 	/**
 	 * @brief Stops watching the file.
@@ -705,11 +705,11 @@ signals:
 	 * @see fileWatchStart()
 	 * @see fileWatchStop()
 	 */
-	void fileWatchRequested(const QString &filePath, bool watch);
+	void fileWatchRequested(const QString& filePath, bool watch);
 
 private:
 	QString m_brief;
-	QWidget *m_widget;
+	QWidget* m_widget;
 	QDir m_dir;
 	QString m_fileName;
 	QString m_ioErrorString;

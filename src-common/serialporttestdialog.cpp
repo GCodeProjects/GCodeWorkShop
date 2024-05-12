@@ -40,7 +40,7 @@
 #include "serialportconfigdialog.h" // SerialPortConfigDialog
 
 
-SerialPortTestDialog::SerialPortTestDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SerialPortTestDialog::SerialPortTestDialog(QWidget* parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 	setupUi(this);
 	setAttribute(Qt::WA_DeleteOnClose);
@@ -360,7 +360,7 @@ void SerialPortTestDialog::changeSettings()
 	QString port;
 	bool ok;
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("SerialPortConfigs");
 
@@ -401,7 +401,7 @@ void SerialPortTestDialog::loadSerialConfignames()
 	QStringList list;
 	QString item;
 
-	QSettings &settings =  *Medium::instance().settings();
+	QSettings& settings =  *Medium::instance().settings();
 
 	settings.beginGroup("SerialPortConfigs");
 

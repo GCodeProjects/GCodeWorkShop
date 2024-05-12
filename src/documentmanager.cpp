@@ -41,7 +41,7 @@
 #include <documentmanager.h>            // IWYU pragma: associated
 
 
-DocumentManager::DocumentManager(QObject *parent) :
+DocumentManager::DocumentManager(QObject* parent) :
 	QObject(parent),
 	m_producers(),
 	m_docList(),
@@ -51,12 +51,12 @@ DocumentManager::DocumentManager(QObject *parent) :
 
 DocumentManager::~DocumentManager()
 {
-	for (DocumentProducer *prod : qAsConst(m_producers)) {
+	for (DocumentProducer* prod : qAsConst(m_producers)) {
 		delete prod;
 	}
 }
 
-Document *DocumentManager::activeDocument() const
+Document* DocumentManager::activeDocument() const
 {
 	if (m_area.isNull() || m_area->subWindowList().isEmpty()) {
 		return nullptr;
@@ -66,9 +66,9 @@ Document *DocumentManager::activeDocument() const
 	// causes the activeSubWindow function to return nullptr. This is probably caused by the fact
 	// that the main window is not yet visible when the document is opened.
 
-	QMdiSubWindow *subWindow = m_area->subWindowList(QMdiArea::StackingOrder).last();
+	QMdiSubWindow* subWindow = m_area->subWindowList(QMdiArea::StackingOrder).last();
 
-	for (const DocumentListItem &item : qAsConst(m_docList)) {
+	for (const DocumentListItem& item : qAsConst(m_docList)) {
 		if (item.subWindow == subWindow) {
 			return item.document;
 		}
@@ -77,18 +77,18 @@ Document *DocumentManager::activeDocument() const
 	return nullptr;
 }
 
-bool DocumentManager::isActiveDocument(Document *document)
+bool DocumentManager::isActiveDocument(Document* document)
 {
 	return activeDocument() == document;
 }
 
-bool DocumentManager::setActiveDocument(Document *doc)
+bool DocumentManager::setActiveDocument(Document* doc)
 {
 	if (m_area.isNull()) {
 		return false;
 	}
 
-	for (const DocumentListItem &item : qAsConst(m_docList)) {
+	for (const DocumentListItem& item : qAsConst(m_docList)) {
 		if (item.document == doc) {
 			m_area->setActiveSubWindow(item.subWindow);
 			return true;
@@ -98,14 +98,14 @@ bool DocumentManager::setActiveDocument(Document *doc)
 	return false;
 }
 
-bool DocumentManager::setActiveDocument(const QString &filePath)
+bool DocumentManager::setActiveDocument(const QString& filePath)
 {
 	return setActiveDocument(findDocumentByFilePath(filePath));
 }
 
-Document *DocumentManager::findDocumentById(const QString &id) const
+Document* DocumentManager::findDocumentById(const QString& id) const
 {
-	for (const DocumentListItem &item : qAsConst(m_docList)) {
+	for (const DocumentListItem& item : qAsConst(m_docList)) {
 		if (item.id == id) {
 			return item.document;
 		}
@@ -114,9 +114,9 @@ Document *DocumentManager::findDocumentById(const QString &id) const
 	return nullptr;
 }
 
-Document *DocumentManager::findDocumentByFilePath(const QString &filePath) const
+Document* DocumentManager::findDocumentByFilePath(const QString& filePath) const
 {
-	for (const DocumentListItem &item : qAsConst(m_docList)) {
+	for (const DocumentListItem& item : qAsConst(m_docList)) {
 		if (item.document->filePath() == filePath) {
 			return item.document;
 		}
@@ -125,9 +125,9 @@ Document *DocumentManager::findDocumentByFilePath(const QString &filePath) const
 	return nullptr;
 }
 
-QList<Document *> DocumentManager::documentList() const
+QList<Document*> DocumentManager::documentList() const
 {
-	QList<Document *> list;
+	QList<Document*> list;
 
 	for (auto doc : m_docList) {
 		list.append(doc.document);
@@ -136,9 +136,9 @@ QList<Document *> DocumentManager::documentList() const
 	return list;
 }
 
-DocumentStyle::Ptr DocumentManager::documentStyle(const QString &type) const
+DocumentStyle::Ptr DocumentManager::documentStyle(const QString& type) const
 {
-	DocumentProducer *producer = documentProducer(type);
+	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
 		qWarning() << "DocumentManager::documentStyle() : The" << type << "type is not registred." ;
@@ -148,15 +148,15 @@ DocumentStyle::Ptr DocumentManager::documentStyle(const QString &type) const
 	return producer->documentStyle();
 }
 
-void DocumentManager::setDocumentStyle(const DocumentStyle::Ptr &style)
+void DocumentManager::setDocumentStyle(const DocumentStyle::Ptr& style)
 {
 	if (!style) {
 		qWarning() << "DocumentManager::setDocumentWidgetProperties() : The style is nullptr." ;
 		return;
 	}
 
-	const QString &type = style->documentType();
-	DocumentProducer *producer = documentProducer(type);
+	const QString& type = style->documentType();
+	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
 		qWarning() << "DocumentManager::setDocumentStyle() : The" << type << "type is not registred." ;
@@ -166,9 +166,9 @@ void DocumentManager::setDocumentStyle(const DocumentStyle::Ptr &style)
 	producer->setDocumentStyle(style);
 }
 
-DocumentWidgetProperties::Ptr DocumentManager::documentWidgetProperties(const QString &type) const
+DocumentWidgetProperties::Ptr DocumentManager::documentWidgetProperties(const QString& type) const
 {
-	DocumentProducer *producer = documentProducer(type);
+	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
 		qWarning() << "DocumentManager::documentWidgetProperties() : The" << type << "type is not registred." ;
@@ -178,15 +178,15 @@ DocumentWidgetProperties::Ptr DocumentManager::documentWidgetProperties(const QS
 	return producer->documentWidgetProperties();
 }
 
-void DocumentManager::setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &property)
+void DocumentManager::setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr& property)
 {
 	if (!property) {
 		qWarning() << "DocumentManager::setDocumentWidgetProperties() : The property is nullptr." ;
 		return;
 	}
 
-	const QString &type = property->documentType();
-	DocumentProducer *producer = documentProducer(type);
+	const QString& type = property->documentType();
+	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
 		qWarning() << "DocumentManager::setDocumentWidgetProperties() : The" << type << "type is not registred." ;
@@ -196,32 +196,32 @@ void DocumentManager::setDocumentWidgetProperties(const DocumentWidgetProperties
 	producer->setDocumentWidgetProperties(property);
 }
 
-void DocumentManager::updateDocuments(const QString &type)
+void DocumentManager::updateDocuments(const QString& type)
 {
-	DocumentProducer *producer = documentProducer(type);
+	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
 		qWarning() << "DocumentManager::updateDocuments() : The" << type << "type is not registred." ;
 		return;
 	}
 
-	for (const DocumentListItem &item : qAsConst(m_docList)) {
+	for (const DocumentListItem& item : qAsConst(m_docList)) {
 		if (item.document->type() == type) {
 			producer->updateDocument(item.document);
 		}
 	}
 }
 
-Document *DocumentManager::createDocument(const QString &type, const QString &id)
+Document* DocumentManager::createDocument(const QString& type, const QString& id)
 {
-	DocumentProducer *producer = documentProducer(type);
+	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
 		qWarning() << "DocumentManager::createDocument() : The" << type << "type is not registred." ;
 		return nullptr;
 	}
 
-	Document *doc = producer->createDocument();
+	Document* doc = producer->createDocument();
 
 	if (!doc) {
 		return nullptr;
@@ -231,10 +231,10 @@ Document *DocumentManager::createDocument(const QString &type, const QString &id
 	return doc;
 }
 
-DocumentInfo::Ptr DocumentManager::createDocumentInfo(const QString &type)
+DocumentInfo::Ptr DocumentManager::createDocumentInfo(const QString& type)
 {
-	DocumentProducer *producer = documentProducer(type);
-	DocumentInfo *info = nullptr;
+	DocumentProducer* producer = documentProducer(type);
+	DocumentInfo* info = nullptr;
 
 	if (producer) {
 		info = producer->createDocumentInfo();
@@ -245,10 +245,10 @@ DocumentInfo::Ptr DocumentManager::createDocumentInfo(const QString &type)
 	return DocumentInfo::Ptr(info);
 }
 
-DocumentStyle::Ptr DocumentManager::createDocumentStyle(const QString &type)
+DocumentStyle::Ptr DocumentManager::createDocumentStyle(const QString& type)
 {
-	DocumentProducer *producer = documentProducer(type);
-	DocumentStyle *style = nullptr;
+	DocumentProducer* producer = documentProducer(type);
+	DocumentStyle* style = nullptr;
 
 	if (producer) {
 		style = producer->createDocumentStyle();
@@ -259,10 +259,10 @@ DocumentStyle::Ptr DocumentManager::createDocumentStyle(const QString &type)
 	return DocumentStyle::Ptr(style);
 }
 
-DocumentWidgetProperties::Ptr DocumentManager::createDocumentWidgetProperties(const QString &type)
+DocumentWidgetProperties::Ptr DocumentManager::createDocumentWidgetProperties(const QString& type)
 {
-	DocumentProducer *producer = documentProducer(type);
-	DocumentWidgetProperties *properties = nullptr;
+	DocumentProducer* producer = documentProducer(type);
+	DocumentWidgetProperties* properties = nullptr;
 
 	if (producer) {
 		properties = producer->createDocumentWidgetProperties();
@@ -273,20 +273,20 @@ DocumentWidgetProperties::Ptr DocumentManager::createDocumentWidgetProperties(co
 	return DocumentWidgetProperties::Ptr(properties);
 }
 
-void DocumentManager::addDocument(Document *document, const QString &id)
+void DocumentManager::addDocument(Document* document, const QString& id)
 {
 	document->setParent(this);
-	connect(document, SIGNAL(closeRequested(Document *)), this, SLOT(documentCloseRequest(Document *)), Qt::ConnectionType::DirectConnection);
-	connect(document, SIGNAL(closed(Document *)), this, SLOT(removeDocument(Document *)));
-	connect(document, SIGNAL(closed(Document *)), this, SLOT(documentClosed(Document *)));
-	connect(document, SIGNAL(modificationChanged(Document *, bool)), this, SLOT(documentModificationChanged(Document *, bool)));
-	connect(document, SIGNAL(cursorPositionChanged(Document *)), this, SLOT(documentCursorPositionChanged(Document *)));
-	connect(document, SIGNAL(selectionChanged(Document *)), this, SLOT(documentSelectionChanged(Document *)));
-	connect(document, SIGNAL(briefChanged(Document *)), this, SLOT(documentBriefChanged(Document *)));
-	connect(document, SIGNAL(redoAvailable(Document *, bool)), this, SLOT(documentRedoAvailable(Document *, bool)));
-	connect(document, SIGNAL(undoAvailable(Document *, bool)), this, SLOT(documentUndoAvailable(Document *, bool)));
-	connect(document, SIGNAL(customContextMenuRequested(Document *, const QPoint &)), this, SLOT(customContextMenuRequest(Document *, const QPoint &)));
-	connect(document, SIGNAL(fileWatchRequested(const QString &, bool)), this, SLOT(documentFileWatchRequest(const QString &, bool)));
+	connect(document, SIGNAL(closeRequested(Document*)), this, SLOT(documentCloseRequest(Document*)), Qt::ConnectionType::DirectConnection);
+	connect(document, SIGNAL(closed(Document*)), this, SLOT(removeDocument(Document*)));
+	connect(document, SIGNAL(closed(Document*)), this, SLOT(documentClosed(Document*)));
+	connect(document, SIGNAL(modificationChanged(Document*, bool)), this, SLOT(documentModificationChanged(Document*, bool)));
+	connect(document, SIGNAL(cursorPositionChanged(Document*)), this, SLOT(documentCursorPositionChanged(Document*)));
+	connect(document, SIGNAL(selectionChanged(Document*)), this, SLOT(documentSelectionChanged(Document*)));
+	connect(document, SIGNAL(briefChanged(Document*)), this, SLOT(documentBriefChanged(Document*)));
+	connect(document, SIGNAL(redoAvailable(Document*, bool)), this, SLOT(documentRedoAvailable(Document*, bool)));
+	connect(document, SIGNAL(undoAvailable(Document*, bool)), this, SLOT(documentUndoAvailable(Document*, bool)));
+	connect(document, SIGNAL(customContextMenuRequested(Document*, const QPoint&)), this, SLOT(customContextMenuRequest(Document*, const QPoint&)));
+	connect(document, SIGNAL(fileWatchRequested(const QString&, bool)), this, SLOT(documentFileWatchRequest(const QString&, bool)));
 
 	DocumentListItem item;
 	item.document = document;
@@ -296,10 +296,10 @@ void DocumentManager::addDocument(Document *document, const QString &id)
 	emit documentListChanged();
 }
 
-void DocumentManager::removeDocument(Document *document)
+void DocumentManager::removeDocument(Document* document)
 {
 	for (int i = 0; i < m_docList.size(); i++) {
-		const DocumentListItem &item = m_docList.at(i);
+		const DocumentListItem& item = m_docList.at(i);
 
 		if (item.document == document) {
 			m_docList.removeAt(i);
@@ -314,14 +314,14 @@ void DocumentManager::removeDocument(Document *document)
 	}
 }
 
-DocumentProducer *DocumentManager::documentProducer(const QString &type) const
+DocumentProducer* DocumentManager::documentProducer(const QString& type) const
 {
 	return m_producers.value(type, nullptr);
 }
 
-void DocumentManager::registerDocumentProducer(DocumentProducer *producer)
+void DocumentManager::registerDocumentProducer(DocumentProducer* producer)
 {
-	const QString &type = producer->documentType();
+	const QString& type = producer->documentType();
 
 	if (m_producers.contains(type)) {
 		qWarning() << "DocumentManager::registerProducer() : The" << type << "type always registred." ;
@@ -331,77 +331,77 @@ void DocumentManager::registerDocumentProducer(DocumentProducer *producer)
 	m_producers.insert(type, producer);
 }
 
-void DocumentManager::setMdiArea(QMdiArea *mdi)
+void DocumentManager::setMdiArea(QMdiArea* mdi)
 {
 	m_area = mdi;
-	connect(m_area, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(activeWindowChanged(QMdiSubWindow *)));
+	connect(m_area, SIGNAL(subWindowActivated(QMdiSubWindow*)), this, SLOT(activeWindowChanged(QMdiSubWindow*)));
 }
 
-void DocumentManager::activeWindowChanged(QMdiSubWindow *window)
+void DocumentManager::activeWindowChanged(QMdiSubWindow* window)
 {
-	for (const DocumentListItem &item : qAsConst(m_docList)) {
+	for (const DocumentListItem& item : qAsConst(m_docList)) {
 		if (item.subWindow == window) {
 			emit activeDocumentChanged(item.document);
 		}
 	}
 }
 
-void DocumentManager::documentModificationChanged(Document *doc, bool mod)
+void DocumentManager::documentModificationChanged(Document* doc, bool mod)
 {
 	if (isActiveDocument(doc)) {
 		emit modificationChanged(mod);
 	}
 }
 
-void DocumentManager::documentCursorPositionChanged(Document *doc)
+void DocumentManager::documentCursorPositionChanged(Document* doc)
 {
 	if (isActiveDocument(doc)) {
 		emit cursorPositionChanged();
 	}
 }
 
-void DocumentManager::documentSelectionChanged(Document *doc)
+void DocumentManager::documentSelectionChanged(Document* doc)
 {
 	if (isActiveDocument(doc)) {
 		emit selectionChanged();
 	}
 }
 
-void DocumentManager::documentBriefChanged(Document *doc)
+void DocumentManager::documentBriefChanged(Document* doc)
 {
 	emit briefChanged(doc);
 }
 
-void DocumentManager::documentRedoAvailable(Document *doc, bool available)
+void DocumentManager::documentRedoAvailable(Document* doc, bool available)
 {
 	if (isActiveDocument(doc)) {
 		emit redoAvailable(available);
 	}
 }
 
-void DocumentManager::documentUndoAvailable(Document *doc, bool available)
+void DocumentManager::documentUndoAvailable(Document* doc, bool available)
 {
 	if (isActiveDocument(doc)) {
 		emit undoAvailable(available);
 	}
 }
 
-bool DocumentManager::documentCloseRequest(Document *doc)
+bool DocumentManager::documentCloseRequest(Document* doc)
 {
 	return emit closeRequested(doc);
 }
 
-void DocumentManager::documentClosed(Document *doc)
+void DocumentManager::documentClosed(Document* doc)
 {
 	emit closed(doc);
 }
 
-void DocumentManager::customContextMenuRequest(Document *doc, const QPoint &point)
+void DocumentManager::customContextMenuRequest(Document* doc, const QPoint& point)
 {
 	emit customContextMenuRequested(doc, point);
 }
 
-void DocumentManager::documentFileWatchRequest(const QString &filePath, bool watch)
+void DocumentManager::documentFileWatchRequest(const QString& filePath, bool watch)
 {
 	emit fileWatchRequest(filePath, watch);
 }

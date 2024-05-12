@@ -42,7 +42,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-I2MDialog::I2MDialog(QWidget *parent, QSettings *settings) :
+I2MDialog::I2MDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -54,7 +54,7 @@ I2MDialog::I2MDialog(QWidget *parent, QSettings *settings) :
 
 	checkBoxToggled();
 
-	connect(inchInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(inchInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
 	connect(inchCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
 	connect(mmCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
 	connect(closePushButton, SIGNAL(clicked()), SLOT(accept()));
@@ -173,10 +173,10 @@ void I2MDialog::checkBoxToggled()
 	inputChanged();
 }
 
-void I2MDialog::setOptions(const I2MOptions &options)
+void I2MDialog::setOptions(const I2MOptions& options)
 {
-	QLineEdit *mm;
-	QLineEdit *inch;
+	QLineEdit* mm;
+	QLineEdit* inch;
 
 	if (options.toInch) {
 		mm = mmInput;
@@ -207,8 +207,8 @@ void I2MDialog::setOptions(const I2MOptions &options)
 I2MOptions I2MDialog::options()
 {
 	I2MOptions options;
-	QLineEdit *mm;
-	QLineEdit *inch;
+	QLineEdit* mm;
+	QLineEdit* inch;
 
 	options.toInch = inchCheckBox->isChecked();
 
@@ -226,7 +226,7 @@ I2MOptions I2MDialog::options()
 	return options;
 }
 
-void I2MDialog::loadSettings(const I2MOptions &defaultOptions)
+void I2MDialog::loadSettings(const I2MOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

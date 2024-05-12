@@ -41,7 +41,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-SwapAxesDialog::SwapAxesDialog(QWidget *parent, QSettings *settings) :
+SwapAxesDialog::SwapAxesDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent),
 	Ui::SwapAxesDialog()
 {
@@ -79,7 +79,7 @@ void SwapAxesDialog::modifyCheckBoxClicked(bool checked)
 	modiferDoubleSpinBox->setEnabled(checked);
 }
 
-void SwapAxesDialog::setOptions(const SwapAxesOptions &options)
+void SwapAxesDialog::setOptions(const SwapAxesOptions& options)
 {
 	fromComboBox->clear();
 	fromComboBox->addItems(options.fromList);
@@ -137,7 +137,7 @@ SwapAxesOptions SwapAxesDialog::options()
 	return options;
 }
 
-void SwapAxesDialog::loadSettings(const SwapAxesOptions &defaultOptions)
+void SwapAxesDialog::loadSettings(const SwapAxesOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

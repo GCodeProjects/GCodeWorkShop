@@ -29,9 +29,9 @@ struct FileExt {
 	QString ext;
 };
 
-FileExt guessFileNameByProgNum(const QString &text);
-QString guessFileNameByComments(const QString &text);
-FileExt guessFileNameByRegExp(const QString &text, const QString &expression);
+FileExt guessFileNameByProgNum(const QString& text);
+QString guessFileNameByComments(const QString& text);
+FileExt guessFileNameByRegExp(const QString& text, const QString& expression);
 }
 
 #endif // UTILS_GUESSFILENAME_H

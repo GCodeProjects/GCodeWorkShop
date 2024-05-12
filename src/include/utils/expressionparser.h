@@ -31,8 +31,8 @@ class QString;
 
 
 namespace Utils {
-int processBrc(QString *str);
-int compute(QString *str);
+int processBrc(QString* str);
+int compute(QString* str);
 }
 
 #endif // UTILS_EXPRESSIONPARSER_H

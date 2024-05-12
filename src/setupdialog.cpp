@@ -31,7 +31,7 @@
 #include "setupdialog.h" // SetupDialog QDialog QObject
 
 
-SetupDialog::SetupDialog(QWidget *parent, const AppConfig *prop,
+SetupDialog::SetupDialog(QWidget* parent, const AppConfig* prop,
                          Qt::WindowFlags f) : QDialog(parent, f)
 {
 	QPalette palette;
@@ -51,8 +51,8 @@ SetupDialog::SetupDialog(QWidget *parent, const AppConfig *prop,
 	connect(browseButton, SIGNAL(clicked()), SLOT(browseButtonClicked()));
 
 	colorButtons = new QButtonGroup(this);
-	connect(colorButtons, SIGNAL(buttonClicked(QAbstractButton *)),
-	        SLOT(changeColor(QAbstractButton *)));
+	connect(colorButtons, SIGNAL(buttonClicked(QAbstractButton*)),
+	        SLOT(changeColor(QAbstractButton*)));
 
 	palette.setColor(backgroundColorButton->foregroundRole(), editProp.codeStyle.hColors.backgroundColor);
 	backgroundColorButton->setPalette(palette);
@@ -224,7 +224,7 @@ SetupDialog::SetupDialog(QWidget *parent, const AppConfig *prop,
 
 	QRegularExpression regex("(\\*\\.)[A-Z0-9]{1,3}");
 	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-	QValidator *edtExtensionValid = new QRegularExpressionValidator(regex, this);
+	QValidator* edtExtensionValid = new QRegularExpressionValidator(regex, this);
 	edtExtension->setValidator(edtExtensionValid);
 
 	//   QRegularExpression ext("(\\(|;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[-./]{1,1}(M|MM|d|dd)[-./]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}");
@@ -396,7 +396,7 @@ AppConfig SetupDialog::getSettings()
 	editProp.extensions.clear();
 
 	for (int row = 0; row < lstExtensions->count(); row++) {
-		QListWidgetItem *item = lstExtensions->item(row);
+		QListWidgetItem* item = lstExtensions->item(row);
 		editProp.extensions.append(item->text());
 	}
 
@@ -408,7 +408,7 @@ AppConfig SetupDialog::getSettings()
 	return (editProp);
 }
 
-void SetupDialog::changeColor(QAbstractButton *button)
+void SetupDialog::changeColor(QAbstractButton* button)
 {
 	QPalette palette;
 

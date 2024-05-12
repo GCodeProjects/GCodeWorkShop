@@ -37,24 +37,24 @@ public:
 		MAX_SIZE = 32
 	};
 
-	explicit RecentFiles(QObject *parent = nullptr);
+	explicit RecentFiles(QObject* parent = nullptr);
 
 	QString file(int id);
 	QStringList fileList();
 
-	void add(const QString &file);
-	void remove(const QString &file);
+	void add(const QString& file);
+	void remove(const QString& file);
 	void clear();
 
 	int max();
 	void setMax(int max);
 
-	void load(QSettings *cfg);
-	void save(QSettings *cfg);
+	void load(QSettings* cfg);
+	void save(QSettings* cfg);
 
 signals:
 	void saveRequest();
-	void fileListChanged(const QStringList &files);
+	void fileListChanged(const QStringList& files);
 
 protected:
 	void trim();

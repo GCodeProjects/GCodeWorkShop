@@ -45,7 +45,7 @@ class QPaintEvent;
 #include "bhcdraw.h"
 
 
-BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
+BHCDraw::BHCDraw(QWidget* parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
 	setWindowTitle(tr("Bolt circle - preview"));
 	setAttribute(Qt::WA_DeleteOnClose);
@@ -59,7 +59,7 @@ BHCDraw::~BHCDraw()
 {
 }
 
-void BHCDraw::mousePressEvent(QMouseEvent *event)
+void BHCDraw::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton) {
 		close();
@@ -84,7 +84,7 @@ void BHCDraw::setScale(double sc)
 	scale = sc;
 }
 
-void BHCDraw::paintEvent(QPaintEvent *)
+void BHCDraw::paintEvent(QPaintEvent*)
 {
 	if (pm->isNull()) {
 		return;
@@ -94,7 +94,7 @@ void BHCDraw::paintEvent(QPaintEvent *)
 	painter.drawPixmap(0, 0, *pm);
 }
 
-void BHCDraw::focusOutEvent(QFocusEvent *)
+void BHCDraw::focusOutEvent(QFocusEvent*)
 {
 }
 
@@ -103,7 +103,7 @@ void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool 
 {
 	qreal x, y, x1, y1, sca, d;
 
-	QPainter *paint = new QPainter(pm);
+	QPainter* paint = new QPainter(pm);
 	QFont font = paint->font();
 	font.setPointSize(10);
 	paint->setFont(font);
@@ -184,7 +184,7 @@ void BHCDraw::drawLines(qreal dia, qreal ang, QColor cl)
 
 	dia = dia / 2;
 
-	QPainter *paint = new QPainter(pm);
+	QPainter* paint = new QPainter(pm);
 	QFont font = paint->font();
 	font.setPointSize(10);
 	paint->setFont(font);
@@ -223,9 +223,9 @@ void BHCDraw::clear()
 	drawLines();
 }
 
-void BHCDraw::printText(int x, int y, int line, const QString &text, QColor color)
+void BHCDraw::printText(int x, int y, int line, const QString& text, QColor color)
 {
-	QPainter *paint = new QPainter(pm);
+	QPainter* paint = new QPainter(pm);
 	QFont font = paint->font();
 	font.setPointSize(10);
 	paint->setFont(font);
@@ -240,7 +240,7 @@ void BHCDraw::printText(int x, int y, int line, const QString &text, QColor colo
 
 void BHCDraw::drawLines()
 {
-	QPainter *paint = new QPainter(pm);
+	QPainter* paint = new QPainter(pm);
 	QFont font = paint->font();
 	font.setPointSize(10);
 	paint->setFont(font);

@@ -39,7 +39,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-I2MProgDialog::I2MProgDialog(QWidget *parent, QSettings *settings) :
+I2MProgDialog::I2MProgDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -48,7 +48,7 @@ I2MProgDialog::I2MProgDialog(QWidget *parent, QSettings *settings) :
 
 	setWindowTitle(tr("Convert program inch to metric"));
 
-	connect(mInput, SIGNAL(textChanged(const QString &)), this, SLOT(inputChanged()));
+	connect(mInput, SIGNAL(textChanged(const QString&)), this, SLOT(inputChanged()));
 
 	connect(okButton, SIGNAL(clicked()), SLOT(accept()));
 	connect(closeButton, SIGNAL(clicked()), SLOT(reject()));
@@ -67,7 +67,7 @@ void I2MProgDialog::inputChanged()
 	okButton->setEnabled(mInput->hasAcceptableInput());
 }
 
-void I2MProgDialog::setOptions(const I2MProgOptions &options)
+void I2MProgDialog::setOptions(const I2MProgOptions& options)
 {
 	inchCheckBox->setChecked(options.toInch);
 	mmCheckBox->setChecked(!options.toInch);
@@ -88,7 +88,7 @@ I2MProgOptions I2MProgDialog::options()
 	return options;
 }
 
-void I2MProgDialog::loadSettings(const I2MProgOptions &defaultOptions)
+void I2MProgDialog::loadSettings(const I2MProgOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

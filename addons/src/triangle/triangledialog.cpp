@@ -56,7 +56,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
+TriangleDialog::TriangleDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -83,15 +83,15 @@ TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
 	connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
 	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
-	QValidator *aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
+	QValidator* aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
 	aInput->setValidator(aInputValid);
 	aInput->installEventFilter(this);
 
-	QValidator *bInputValid = new QDoubleValidator(0.001, 9999, 3, this);
+	QValidator* bInputValid = new QDoubleValidator(0.001, 9999, 3, this);
 	bInput->setValidator(bInputValid);
 	bInput->installEventFilter(this);
 
-	QValidator *cInputValid = new QDoubleValidator(0.001, 9999, 3, this);
+	QValidator* cInputValid = new QDoubleValidator(0.001, 9999, 3, this);
 	cInput->setValidator(cInputValid);
 	cInput->installEventFilter(this);
 
@@ -109,12 +109,12 @@ TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
 
 	setMaximumSize(width(), height());
 
-	connect(aInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(bInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(cInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(aAInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(aBInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(aCInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(aInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(bInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(cInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(aAInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(aBInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(aCInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
 
 	rightTriangleCheckBoxToggled();
 	checkBoxToggled();
@@ -124,9 +124,9 @@ TriangleDialog::~TriangleDialog()
 {
 }
 
-bool TriangleDialog::eventFilter(QObject *obj, QEvent *ev)
+bool TriangleDialog::eventFilter(QObject* obj, QEvent* ev)
 {
-	if (!qobject_cast<QLineEdit *>(obj)) {
+	if (!qobject_cast<QLineEdit*>(obj)) {
 		// pass the event on to the parent class
 		return QDialog::eventFilter(obj, ev);
 	}
@@ -135,7 +135,7 @@ bool TriangleDialog::eventFilter(QObject *obj, QEvent *ev)
 		return false;
 	}
 
-	QKeyEvent *k = (QKeyEvent *) ev;
+	QKeyEvent* k = (QKeyEvent*) ev;
 
 	if (QLocale().decimalPoint() == '.' && k->key() == Qt::Key_Comma) {
 		QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier,
@@ -708,7 +708,7 @@ void TriangleDialog::checkBoxToggled()
 	}
 }
 
-void TriangleDialog::setOptions(const TriangleOptions &options)
+void TriangleDialog::setOptions(const TriangleOptions& options)
 {
 	rightTriangleCheckBox->setChecked(options.rightTriangle);
 	aACheckBox->setChecked(options.angleA.in);
@@ -749,7 +749,7 @@ TriangleOptions TriangleDialog::options()
 	return options;
 }
 
-void TriangleDialog::loadSettings(const TriangleOptions &defaultOptions)
+void TriangleDialog::loadSettings(const TriangleOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

@@ -45,7 +45,7 @@ class FileChecker : public QDialog
 	Q_OBJECT
 
 public:
-	explicit FileChecker(QWidget *parent = 0);
+	explicit FileChecker(QWidget* parent = 0);
 	~FileChecker();
 
 	void setData(const QString startDir, QStringList readPaths, QStringList fileFilter);
@@ -59,7 +59,7 @@ private slots:
 	void filesTableCurrentCellChanged(int row, int col, int pRow, int pCol);
 
 private:
-	Ui::FileChecker *ui;
+	Ui::FileChecker* ui;
 	QPointer<KDiff3App> diffApp;
 	QStringList extensions;
 	QPointer<QToolButton> okBtn;

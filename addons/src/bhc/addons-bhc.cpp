@@ -26,11 +26,11 @@
 #include "bhcoptions.h" // for BHCOptions
 
 
-void Addons::doBhc(QWidget *parent, QSettings *settings)
+void Addons::doBhc(QWidget* parent, QSettings* settings)
 {
 	QString key = "BHCDialog";
-	BHCDialog *dlg;
-	dlg = parent->findChild<BHCDialog *>(key);
+	BHCDialog* dlg;
+	dlg = parent->findChild<BHCDialog*>(key);
 
 	if (!dlg) {
 		dlg = new BHCDialog(parent, settings);

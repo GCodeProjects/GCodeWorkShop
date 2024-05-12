@@ -38,8 +38,8 @@ struct FeedsOptions {
 	InOut   speed;
 	InOut   feed;
 
-	void load(QSettings *settings, const FeedsOptions &defaultOptions);
-	void save(QSettings *settings);
+	void load(QSettings* settings, const FeedsOptions& defaultOptions);
+	void save(QSettings* settings);
 };
 
 #endif // FEEDSOPTIONS_H

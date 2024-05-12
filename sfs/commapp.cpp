@@ -49,7 +49,7 @@
 #include "ui_commapp.h"
 
 
-CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
+CommApp::CommApp(QWidget* parent) : QMainWindow(parent), ui(new Ui::CommApp)
 {
 	setAttribute(Qt::WA_DeleteOnClose);
 	ui->setupUi(this);
@@ -59,13 +59,13 @@ CommApp::CommApp(QWidget *parent) : QMainWindow(parent), ui(new Ui::CommApp)
 	setWindowTitle(tr("EdytorNC - Serial port file server"));
 
 	windowMapper = new QSignalMapper(this);
-	connect(windowMapper, SIGNAL(mapped(QWidget *)), this, SLOT(setActiveSubWindow(QWidget *)));
-	connect(ui->mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow *)), this,
-	        SLOT(activeWindowChanged(QMdiSubWindow *)));
+	connect(windowMapper, SIGNAL(mapped(QWidget*)), this, SLOT(setActiveSubWindow(QWidget*)));
+	connect(ui->mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow*)), this,
+	        SLOT(activeWindowChanged(QMdiSubWindow*)));
 
 	closable = false;
 	ui->mdiArea->setViewMode(QMdiArea::TabbedView);
-	QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
+	QTabBar* tab = ui->mdiArea->findChild<QTabBar*>();
 
 	if (tab) {
 		//connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
@@ -92,7 +92,7 @@ CommApp::~CommApp()
 	delete ui;
 }
 
-void CommApp::closeEvent(QCloseEvent *event)
+void CommApp::closeEvent(QCloseEvent* event)
 {
 	//    QMessageBox::StandardButton result = QMessageBox::warning(this, tr("EdytorNC - Serial port file server"),
 	//                                                              tr("You are trying to close a file server.\nAre you shure?"),
@@ -134,15 +134,15 @@ void CommApp::saveSettings()
 {
 	QStringList activeConfigs;
 
-	foreach (QMdiSubWindow *window, ui->mdiArea->subWindowList()) {
-		SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
+	foreach (QMdiSubWindow* window, ui->mdiArea->subWindowList()) {
+		SerialTransmissionDialog* mdiChild = qobject_cast<SerialTransmissionDialog*>(window->widget());
 
 		if (mdiChild != nullptr) {
 			activeConfigs.append(mdiChild->configName());
 		}
 	}
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("CommApp");
 	settings.setValue("StartMinimized", startMinimizedAction->isChecked());
 	settings.remove("ActiveConfigs");
@@ -154,7 +154,7 @@ void CommApp::saveSettings()
 
 void CommApp::loadSettings()
 {
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("CommApp");
 
 	startMinimizedAction->setChecked(settings.value("StartMinimized", false).toBool());
@@ -169,13 +169,13 @@ void CommApp::loadSettings()
 	QStringList::Iterator it = list.begin();
 
 	while (it != list.end()) {
-		SerialTransmissionDialog *spServer = createSerialPortServer(*it);
+		SerialTransmissionDialog* spServer = createSerialPortServer(*it);
 		spServer->show();
 		++it;
 	}
 }
 
-SerialTransmissionDialog *CommApp::createSerialPortServer(QString __config)
+SerialTransmissionDialog* CommApp::createSerialPortServer(QString __config)
 {
 	SerialTransmissionDialog* spServer = new SerialTransmissionDialog(this, Qt::SubWindow,
 	    true);  // Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint
@@ -191,12 +191,12 @@ void CommApp::startSerialPortServer()
 {
 	QString _config = configBox->currentText();
 
-	SerialTransmissionDialog *_existing = findMdiChild(_config);
+	SerialTransmissionDialog* _existing = findMdiChild(_config);
 
 	if (_existing) {
 		_existing->setFocus();
 	} else {
-		SerialTransmissionDialog *spServer = createSerialPortServer(_config);
+		SerialTransmissionDialog* spServer = createSerialPortServer(_config);
 		//spServer->startFileServer(_config, true);
 		spServer->show();
 	}
@@ -206,7 +206,7 @@ void CommApp::stopSerialPortServer()
 {
 	QString _config = configBox->currentText();
 
-	SerialTransmissionDialog *_existing = findMdiChild(_config);
+	SerialTransmissionDialog* _existing = findMdiChild(_config);
 
 	if (_existing != nullptr) {
 		_existing->close();
@@ -332,7 +332,7 @@ void CommApp::loadSerialConfignames()
 	QStringList list;
 	QString item;
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("SerialPortConfigs");
 
 	configBox->clear();
@@ -390,10 +390,10 @@ void CommApp::tileSubWindowsVertycally()
 	//    }
 }
 
-SerialTransmissionDialog *CommApp::findMdiChild(const QString __config)
+SerialTransmissionDialog* CommApp::findMdiChild(const QString __config)
 {
-	foreach (QMdiSubWindow *window, ui->mdiArea->subWindowList()) {
-		SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
+	foreach (QMdiSubWindow* window, ui->mdiArea->subWindowList()) {
+		SerialTransmissionDialog* mdiChild = qobject_cast<SerialTransmissionDialog*>(window->widget());
 
 		if (mdiChild != nullptr)
 			if (mdiChild->configName() == __config) {
@@ -404,31 +404,31 @@ SerialTransmissionDialog *CommApp::findMdiChild(const QString __config)
 	return nullptr;
 }
 
-void CommApp::setActiveSubWindow(QWidget *window)
+void CommApp::setActiveSubWindow(QWidget* window)
 {
 	if (!window) {
 		return;
 	}
 
-	ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(window));
+	ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow*>(window));
 }
 
-SerialTransmissionDialog *CommApp::activeMdiChild()
+SerialTransmissionDialog* CommApp::activeMdiChild()
 {
-	if (QMdiSubWindow *activeSubWindow = ui->mdiArea->activeSubWindow()) {
-		return qobject_cast<SerialTransmissionDialog *>(activeSubWindow->widget());
+	if (QMdiSubWindow* activeSubWindow = ui->mdiArea->activeSubWindow()) {
+		return qobject_cast<SerialTransmissionDialog*>(activeSubWindow->widget());
 	}
 
 	return nullptr;
 }
 
-void CommApp::activeWindowChanged(QMdiSubWindow *window)
+void CommApp::activeWindowChanged(QMdiSubWindow* window)
 {
 	if (!window) {
 		return;
 	}
 
-	SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>
+	SerialTransmissionDialog* mdiChild = qobject_cast<SerialTransmissionDialog*>
 	                                     (window->widget()); //activeMdiChild();
 
 	if (mdiChild != nullptr) {
@@ -456,7 +456,7 @@ void CommApp::activeWindowChanged(QMdiSubWindow *window)
 
 void CommApp::changeActiveWindow()
 {
-	SerialTransmissionDialog *mdiChild = findMdiChild(configBox->currentText());
+	SerialTransmissionDialog* mdiChild = findMdiChild(configBox->currentText());
 
 	if (mdiChild != nullptr) {
 		mdiChild->setFocus();
@@ -474,7 +474,7 @@ void CommApp::changeActiveWindow()
 
 void CommApp::closeTab(int i)
 {
-	QTabBar *tab = ui->mdiArea->findChild<QTabBar *>();
+	QTabBar* tab = ui->mdiArea->findChild<QTabBar*>();
 
 	if (tab != nullptr) {
 		tab->removeTab(i);
@@ -483,7 +483,7 @@ void CommApp::closeTab(int i)
 
 void CommApp::doPortReset()
 {
-	SerialTransmissionDialog *mdiChild = activeMdiChild();
+	SerialTransmissionDialog* mdiChild = activeMdiChild();
 
 	if (mdiChild != nullptr) {
 		mdiChild->portReset();
@@ -492,15 +492,15 @@ void CommApp::doPortReset()
 
 void CommApp::showNewFiles()
 {
-	SerialTransmissionDialog *mdiChild = activeMdiChild();
+	SerialTransmissionDialog* mdiChild = activeMdiChild();
 
 	if (mdiChild != nullptr) {
-		QSettings &settings = *Medium::instance().settings();
+		QSettings& settings = *Medium::instance().settings();
 		QStringList extensions = settings.value("Extensions", "").toStringList();
 		extensions.removeDuplicates();
 		extensions.sort();
 
-		FileChecker *fileCheck = new FileChecker(this);
+		FileChecker* fileCheck = new FileChecker(this);
 		fileCheck->setData(mdiChild->savePath(), mdiChild->readPaths(), extensions);
 		fileCheck->findFiles();
 		fileCheck->exec();
@@ -509,7 +509,7 @@ void CommApp::showNewFiles()
 
 void CommApp::browseSaveFolder()
 {
-	SerialTransmissionDialog *mdiChild = activeMdiChild();
+	SerialTransmissionDialog* mdiChild = activeMdiChild();
 
 	if (mdiChild != nullptr) {
 		QDesktopServices::openUrl(QUrl(QString("file:///%1").arg(mdiChild->savePath()),
@@ -564,8 +564,8 @@ void CommApp::quitApp()
 {
 	saveSettings();
 
-	foreach (const QMdiSubWindow *window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
-		SerialTransmissionDialog *mdiChild = qobject_cast<SerialTransmissionDialog *>(window->widget());
+	foreach (const QMdiSubWindow* window, ui->mdiArea->subWindowList(QMdiArea::StackingOrder)) {
+		SerialTransmissionDialog* mdiChild = qobject_cast<SerialTransmissionDialog*>(window->widget());
 		mdiChild->close();
 		mdiChild->parentWidget()->close();
 	}

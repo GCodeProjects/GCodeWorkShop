@@ -36,7 +36,7 @@
 #define CFG_KEY_PRECISION           "Precision"
 
 
-void SwapAxesOptions::load(QSettings *settings, const SwapAxesOptions &defaultOptions)
+void SwapAxesOptions::load(QSettings* settings, const SwapAxesOptions& defaultOptions)
 {
 	convert.enable = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.enable).toBool();
 	convert.operation = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.operation).toInt();
@@ -51,7 +51,7 @@ void SwapAxesOptions::load(QSettings *settings, const SwapAxesOptions &defaultOp
 	precision = settings->value(CFG_KEY_PRECISION, defaultOptions.precision).toInt();
 }
 
-void SwapAxesOptions::save(QSettings *settings)
+void SwapAxesOptions::save(QSettings* settings)
 {
 	settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.enable);
 	settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.operation);

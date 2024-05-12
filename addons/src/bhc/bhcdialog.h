@@ -44,13 +44,13 @@ class BHCDialog : public QDialog, private Ui::BHCDialog
 	Q_OBJECT
 
 public:
-	BHCDialog(QWidget *parent, QSettings *settings);
+	BHCDialog(QWidget* parent, QSettings* settings);
 	~BHCDialog();
 
-	void setOptions(const BHCOptions &options);
+	void setOptions(const BHCOptions& options);
 	BHCOptions options();
 
-	void loadSettings(const BHCOptions &defaultOptions);
+	void loadSettings(const BHCOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 protected:
@@ -63,8 +63,8 @@ private slots:
 	void onFinished(int result);
 
 private:
-	QTabWidget *tabBar;
-	BHCDraw *drawing;
+	QTabWidget* tabBar;
+	BHCDraw* drawing;
 
 	int parentHeight;
 	int parentWidth;

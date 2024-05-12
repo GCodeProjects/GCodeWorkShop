@@ -26,11 +26,11 @@
 #include "feedsoptions.h"   // for FeedsOptions
 
 
-void Addons::doFeeds(QWidget *parent, QSettings *settings)
+void Addons::doFeeds(QWidget* parent, QSettings* settings)
 {
 	QString key = "FeedsDialog";
-	FeedsDialog *dlg;
-	dlg = parent->findChild<FeedsDialog *>(key);
+	FeedsDialog* dlg;
+	dlg = parent->findChild<FeedsDialog*>(key);
 
 	if (!dlg) {
 		dlg = new FeedsDialog(parent, settings);

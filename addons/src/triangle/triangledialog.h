@@ -46,17 +46,17 @@ class TriangleDialog : public QDialog, private Ui::TriangleDialog
 	Q_OBJECT
 
 public:
-	TriangleDialog(QWidget *parent, QSettings *settings);
+	TriangleDialog(QWidget* parent, QSettings* settings);
 	~TriangleDialog();
 
-	void setOptions(const TriangleOptions &options);
+	void setOptions(const TriangleOptions& options);
 	TriangleOptions options();
 
-	void loadSettings(const TriangleOptions &defaultOptions);
+	void loadSettings(const TriangleOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 protected:
-	bool eventFilter(QObject *obj, QEvent *ev);
+	bool eventFilter(QObject* obj, QEvent* ev);
 
 protected slots:
 	void inputChanged();
@@ -73,11 +73,11 @@ private slots:
 
 private:
 	uint mode;
-	QPixmap *pic1;
-	QPixmap *pic2;
-	QDoubleValidator *aAInputValid;
-	QDoubleValidator *aBInputValid;
-	QDoubleValidator *aCInputValid;
+	QPixmap* pic1;
+	QPixmap* pic2;
+	QDoubleValidator* aAInputValid;
+	QDoubleValidator* aBInputValid;
+	QDoubleValidator* aCInputValid;
 
 protected:
 	QPointer<QSettings> mSettings;

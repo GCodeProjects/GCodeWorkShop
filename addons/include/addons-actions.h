@@ -32,7 +32,7 @@ class Actions : public QObject
 	Q_OBJECT
 
 public:
-	explicit Actions(QObject *parent = nullptr);
+	explicit Actions(QObject* parent = nullptr);
 
 public slots:
 	void loadTranslations();
@@ -64,27 +64,27 @@ public:
     // *INDENT-ON*
 
 protected:
-	QAction *m_bhc;
-	QAction *m_blockSkipDecrement;
-	QAction *m_blockSkipIncrement;
-	QAction *m_blockSkipRemove;
-	QAction *m_chamfer;
-	QAction *m_cleanUp;
-	QAction *m_paraComment;
-	QAction *m_semiComment;
-	QAction *m_compileMacro;
-	QAction *m_dot;
-	QAction *m_insertEmptyLines;
-	QAction *m_removeEmptyLines;
-	QAction *m_feeds;
-	QAction *m_i2m;
-	QAction *m_i2mProg;
-	QAction *m_renumber;
-	QAction *m_insertSpaces;
-	QAction *m_removeSpaces;
-	QAction *m_splitProgramms;
-	QAction *m_swapAxes;
-	QAction *m_triangle;
+	QAction* m_bhc;
+	QAction* m_blockSkipDecrement;
+	QAction* m_blockSkipIncrement;
+	QAction* m_blockSkipRemove;
+	QAction* m_chamfer;
+	QAction* m_cleanUp;
+	QAction* m_paraComment;
+	QAction* m_semiComment;
+	QAction* m_compileMacro;
+	QAction* m_dot;
+	QAction* m_insertEmptyLines;
+	QAction* m_removeEmptyLines;
+	QAction* m_feeds;
+	QAction* m_i2m;
+	QAction* m_i2mProg;
+	QAction* m_renumber;
+	QAction* m_insertSpaces;
+	QAction* m_removeSpaces;
+	QAction* m_splitProgramms;
+	QAction* m_swapAxes;
+	QAction* m_triangle;
 
 protected slots:
 	void doBhc();

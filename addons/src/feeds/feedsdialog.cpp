@@ -56,7 +56,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-FeedsDialog::FeedsDialog(QWidget *parent, QSettings *settings) :
+FeedsDialog::FeedsDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -66,24 +66,24 @@ FeedsDialog::FeedsDialog(QWidget *parent, QSettings *settings) :
 	setAttribute(Qt::WA_DeleteOnClose);
 	setWindowTitle(tr("Cutting parameters"));
 
-	QValidator *vcInputValid = new QIntValidator(1, 9999, this);
+	QValidator* vcInputValid = new QIntValidator(1, 9999, this);
 	vcInput->setValidator(vcInputValid);
 
-	QValidator *fzInputValid = new QDoubleValidator(0.0001, 999, 4, this);
+	QValidator* fzInputValid = new QDoubleValidator(0.0001, 999, 4, this);
 	fzInput->setValidator(fzInputValid);
 	fzInput->installEventFilter(this);
 
-	QValidator *dInputValid = new QDoubleValidator(0.01, 9000, 4, this);
+	QValidator* dInputValid = new QDoubleValidator(0.01, 9000, 4, this);
 	dInput->setValidator(dInputValid);
 	dInput->installEventFilter(this);
 
-	QValidator *zInputValid = new QIntValidator(1, 500, this);
+	QValidator* zInputValid = new QIntValidator(1, 500, this);
 	zInput->setValidator(zInputValid);
 
-	QValidator *sInputValid = new QIntValidator(1, 99999, this);
+	QValidator* sInputValid = new QIntValidator(1, 99999, this);
 	sInput->setValidator(sInputValid);
 
-	QValidator *fInputValid = new QDoubleValidator(0.01, 99999, 4, this);
+	QValidator* fInputValid = new QDoubleValidator(0.01, 99999, 4, this);
 	fInput->setValidator(fInputValid);
 	fInput->installEventFilter(this);
 
@@ -104,12 +104,12 @@ FeedsDialog::FeedsDialog(QWidget *parent, QSettings *settings) :
 
 	setMaximumSize(width(), height());
 
-	connect(vcInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(fzInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(dInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(zInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(sInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(fInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(vcInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(fzInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(dInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(zInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(sInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(fInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
 
 	connect(mmCheckBox, SIGNAL(stateChanged(int)), SLOT(checkBoxChanged()));
 	connect(inchCheckBox, SIGNAL(stateChanged(int)), SLOT(checkBoxChanged()));
@@ -119,9 +119,9 @@ FeedsDialog::~FeedsDialog()
 {
 }
 
-bool FeedsDialog::eventFilter(QObject *obj, QEvent *ev)
+bool FeedsDialog::eventFilter(QObject* obj, QEvent* ev)
 {
-	if (!qobject_cast<QLineEdit *>(obj)) {
+	if (!qobject_cast<QLineEdit*>(obj)) {
 		// pass the event on to the parent class
 		return QDialog::eventFilter(obj, ev);
 	}
@@ -130,7 +130,7 @@ bool FeedsDialog::eventFilter(QObject *obj, QEvent *ev)
 		return false;
 	}
 
-	QKeyEvent *k = (QKeyEvent *) ev;
+	QKeyEvent* k = (QKeyEvent*) ev;
 
 	if (QLocale().decimalPoint() == '.' && k->key() == Qt::Key_Comma) {
 		QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier,
@@ -287,7 +287,7 @@ void FeedsDialog::inputChanged()
 	computeVcButton->setEnabled(ena1);
 }
 
-void FeedsDialog::setOptions(const FeedsOptions &options)
+void FeedsDialog::setOptions(const FeedsOptions& options)
 {
 	inchCheckBox->setChecked(options.useInch);
 	mmCheckBox->setChecked(!options.useInch);
@@ -347,7 +347,7 @@ FeedsOptions FeedsDialog::options()
 	return options;
 }
 
-void FeedsDialog::loadSettings(const FeedsOptions &defaultOptions)
+void FeedsDialog::loadSettings(const FeedsOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

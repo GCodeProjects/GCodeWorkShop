@@ -50,11 +50,11 @@ class ConfigDialog : public QDialog
 	Q_OBJECT
 
 public:
-	explicit ConfigDialog(QWidget *parent = 0);
+	explicit ConfigDialog(QWidget* parent = 0);
 
-	explicit ConfigDialog(QSharedPointer<ConfigPage> page, QWidget *parent = 0);
+	explicit ConfigDialog(QSharedPointer<ConfigPage> page, QWidget* parent = 0);
 
-	explicit ConfigDialog(QList<QSharedPointer<ConfigPage>> pages, QWidget *parent = 0);
+	explicit ConfigDialog(QList<QSharedPointer<ConfigPage>> pages, QWidget* parent = 0);
 
 	~ConfigDialog();
 
@@ -100,15 +100,15 @@ signals:
 	void onRetranslateUI();
 
 protected:
-	Ui::ConfigDialog *mForm;
+	Ui::ConfigDialog* mForm;
 	QList<QSharedPointer<ConfigPage>> mPages;
-	QStackedLayout *mStackedLayout;
-	QHash<QTreeWidgetItem *, QSharedPointer<ConfigPage>> mItemPageMap;
+	QStackedLayout* mStackedLayout;
+	QHash<QTreeWidgetItem*, QSharedPointer<ConfigPage>> mItemPageMap;
 
-	QTreeWidgetItem *doItem(QSharedPointer<ConfigPage> pagePtr);
+	QTreeWidgetItem* doItem(QSharedPointer<ConfigPage> pagePtr);
 
 protected slots:
-	void selectedItemChange(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+	void selectedItemChange(QTreeWidgetItem* current, QTreeWidgetItem* previous);
 };
 
 #endif // CONFIGDIALOG_H

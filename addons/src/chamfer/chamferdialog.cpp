@@ -50,7 +50,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-ChamferDialog::ChamferDialog(QWidget *parent, QSettings *settings) :
+ChamferDialog::ChamferDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -61,30 +61,30 @@ ChamferDialog::ChamferDialog(QWidget *parent, QSettings *settings) :
 	setWindowTitle(tr("Chamfer"));
 
 	connect(angCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-	QValidator *angInputValid = new QDoubleValidator(0.1, 90, 3, this);
+	QValidator* angInputValid = new QDoubleValidator(0.1, 90, 3, this);
 	angInput->setValidator(angInputValid);
 	connect(zlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-	QValidator *zlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
+	QValidator* zlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
 	zlInput->setValidator(zlInputValid);
 	connect(dlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-	QValidator *dlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
+	QValidator* dlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
 	dlInput->setValidator(dlInputValid);
 	connect(xoCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-	QValidator *xoInputValid = new QDoubleValidator(0, 2000, 3, this);
+	QValidator* xoInputValid = new QDoubleValidator(0, 2000, 3, this);
 	xoInput->setValidator(xoInputValid);
 	connect(xdCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-	QValidator *xdInputValid = new QDoubleValidator(0.001, 2000, 3, this);
+	QValidator* xdInputValid = new QDoubleValidator(0.001, 2000, 3, this);
 	xdInput->setValidator(xdInputValid);
 
 	connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
 	connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
 	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
-	connect(angInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(zlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(dlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(xdInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-	connect(xoInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(angInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(zlInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(dlInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(xdInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
+	connect(xoInput, SIGNAL(textChanged(const QString&)), SLOT(inputChanged()));
 
 	checkBoxToggled();
 }
@@ -291,7 +291,7 @@ void ChamferDialog::inputChanged()
 	computeButton->setEnabled(false);
 }
 
-void ChamferDialog::setOptions(const ChamferOptions &options)
+void ChamferDialog::setOptions(const ChamferOptions& options)
 {
 	angInput->setText(QString::number(options.angle.value));
 	angCheckBox->setChecked(options.angle.in);
@@ -325,7 +325,7 @@ ChamferOptions ChamferDialog::options()
 	return options;
 }
 
-void ChamferDialog::loadSettings(const ChamferOptions &defaultOptions)
+void ChamferDialog::loadSettings(const ChamferOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

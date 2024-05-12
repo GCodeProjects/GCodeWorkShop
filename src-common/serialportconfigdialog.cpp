@@ -42,7 +42,7 @@
 // TODO: move into class SerialPortConfigDialog
 static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
 
-SerialPortConfigDialog::SerialPortConfigDialog(QWidget *parent, QString confName,
+SerialPortConfigDialog::SerialPortConfigDialog(QWidget* parent, QString confName,
         Qt::WindowFlags f) : QDialog(parent, f)
 {
 	setupUi(this);
@@ -183,7 +183,7 @@ void SerialPortConfigDialog::saveButtonClicked()
 	QStringList list;
 	QString item, curItem;
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("SerialPortConfigs");
 
@@ -363,7 +363,7 @@ void SerialPortConfigDialog::changeSettings()
 	QString item, port;
 	QStringList list;
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	QStringList extensions = settings.value("Extensions",
 	                                        (QStringList() << "*.nc" << "*.cnc")).toStringList();
@@ -625,11 +625,11 @@ void SerialPortConfigDialog::loadSettings()
 	int id;
 	QStringList list;
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("SerialPortConfigs");
 
-	foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+	foreach (const QSerialPortInfo& info, QSerialPortInfo::availablePorts()) {
 		list.append(info.portName());
 	}
 
@@ -656,7 +656,7 @@ void SerialPortConfigDialog::portNameComboBoxIndexChanged(QString name)
 	QString manufacturer;
 	QString serialNumber;
 
-	QSerialPortInfo *info = new QSerialPortInfo(name);
+	QSerialPortInfo* info = new QSerialPortInfo(name);
 
 	description = info->description();
 	manufacturer = info->manufacturer();
@@ -679,7 +679,7 @@ void SerialPortConfigDialog::portNameComboBoxIndexChanged(QString name)
 
 void SerialPortConfigDialog::deleteButtonClicked()
 {
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.beginGroup("SerialPortConfigs");
 	settings.remove(configNameBox->currentText());
@@ -691,7 +691,7 @@ void SerialPortConfigDialog::deleteButtonClicked()
 
 void SerialPortConfigDialog::closeButtonClicked()
 {
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("SerialPortConfigs");
 	settings.setValue("CurrentSerialPortSettings", configNameBox->currentText());
 	settings.endGroup();

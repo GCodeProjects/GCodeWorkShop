@@ -46,7 +46,7 @@ class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionD
 	Q_OBJECT
 
 public:
-	SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog,
+	SerialTransmissionDialog(QWidget* parent = 0, Qt::WindowFlags f = Qt::Dialog,
 	                         bool mode = false);
 	~SerialTransmissionDialog();
 
@@ -62,7 +62,7 @@ public slots:
 	void portReset();
 
 protected:
-	void closeEvent(QCloseEvent *event);
+	void closeEvent(QCloseEvent* event);
 
 private slots:
 	void cancelButtonClicked();
@@ -87,12 +87,12 @@ private:
 	void setValue(int val);
 	void setLabelText(const QString text, bool multiline = false, bool writeToLog = false);
 	void loadConfig(QString configName);
-	QStringList guessFileName(QString *text);
-	QString saveDataToFile(QString *text);
+	QStringList guessFileName(QString* text);
+	QString saveDataToFile(QString* text);
 	void writeLog(QString msg, QString timeStamp = "");
 	QStringList processReceivedData();
-	void prepareDataBeforeSending(QString *data);
-	void procesSpecialCharacters(QString *text, QString *fileData);
+	void prepareDataBeforeSending(QString* data);
+	void procesSpecialCharacters(QString* text, QString* fileData);
 	void resetTransmission(bool portRestart = false);
 
 	QSerialPort serialPort;
@@ -118,13 +118,13 @@ private:
 	bool stop;
 	bool serverMode;
 	bool sending;
-	QTimer *sendStartDelayTimer;
-	QTimer *updateStatusTimer;
-	QTimer *autoCloseTimer;
+	QTimer* sendStartDelayTimer;
+	QTimer* updateStatusTimer;
+	QTimer* autoCloseTimer;
 	//QTimer *fileServerDataTimeoutTimer;
-	QTimer *sendTimeoutTimer;
-	QTimer *receiveTimeoutTimer;
-	QTimer *reconnectTimer;
+	QTimer* sendTimeoutTimer;
+	QTimer* receiveTimeoutTimer;
+	QTimer* reconnectTimer;
 };
 
 #endif // SERIALTRANSMISSIONDIALOG_H

@@ -45,59 +45,59 @@ public:
 		SESSIONS_MAX = 32
 	};
 
-	explicit SessionManager(DocumentManager *documentManager, QObject *parent = nullptr);
+	explicit SessionManager(DocumentManager* documentManager, QObject* parent = nullptr);
 
-	bool addSession(const QString &name);
-	bool removeSession(const QString &name);
-	bool renameSession(const QString &oldName, const QString &newName);
-	bool copySession(const QString &from, const QString &to);
+	bool addSession(const QString& name);
+	bool removeSession(const QString& name);
+	bool renameSession(const QString& oldName, const QString& newName);
+	bool copySession(const QString& from, const QString& to);
 	void clearSessions();
 	QString currentSession() const;
-	bool setCurrentSession(const QString &name);
+	bool setCurrentSession(const QString& name);
 	QStringList sessionList() const;
-	void setSessionList(const QStringList &list);
+	void setSessionList(const QStringList& list);
 
 	int sessionsLimit() const;
 	void setSessionsLimit(int lim);
 
-	bool addFile(const DocumentInfo::Ptr &fileInfo);
-	void removeFile(const QString &filePath);
+	bool addFile(const DocumentInfo::Ptr& fileInfo);
+	void removeFile(const QString& filePath);
 	void clearFiles();
-	bool documentInfo(DocumentInfo::Ptr &info) const;
-	bool setDocumentInfo(const DocumentInfo::Ptr &info);
+	bool documentInfo(DocumentInfo::Ptr& info) const;
+	bool setDocumentInfo(const DocumentInfo::Ptr& info);
 	QList<DocumentInfo::Ptr> documentInfoList() const;
-	void setDocumentInfoList(const QList<DocumentInfo::Ptr> &infoList);
+	void setDocumentInfoList(const QList<DocumentInfo::Ptr>& infoList);
 
 	int filesLimit() const;
 	void setFilesLimit(int lim);
 
-	void load(QSettings *cfg);
-	void save(QSettings *cfg) const;
+	void load(QSettings* cfg);
+	void save(QSettings* cfg) const;
 
 signals:
 	void saveRequest();
 	void beforeCurrentSessionChanged();
 	void currentSessionChanged();
-	void sessionListChanged(const QStringList &sessionList);
+	void sessionListChanged(const QStringList& sessionList);
 
 protected:
-	int index(const QString &name) const;
+	int index(const QString& name) const;
 	bool trim(int lim);
 
 	int m_sessionsLimit;
 	int m_filesLimit;
 
 	struct SessionItem {
-		int index(const QString &filePath) const;
+		int index(const QString& filePath) const;
 		bool trim(int lim);
-		int add(const DocumentInfo::Ptr &fileInfo, int lim);
+		int add(const DocumentInfo::Ptr& fileInfo, int lim);
 
 		QString name;
 		QList<DocumentInfo::Ptr> files;
 	};
 
 	QList<SessionItem> m_sessions;
-	DocumentManager *m_documentManager;
+	DocumentManager* m_documentManager;
 };
 
 #endif // SESSIONMANAGER_H

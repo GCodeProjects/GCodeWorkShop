@@ -26,7 +26,7 @@ class QWidget;
 
 
 namespace Addons {
-int doSwapAxes(QWidget *parent, QSettings *settings,  QPlainTextEdit *textEdit);
+int doSwapAxes(QWidget* parent, QSettings* settings,  QPlainTextEdit* textEdit);
 }
 
 #endif // ADDONS_SWAPAXES_H

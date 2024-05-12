@@ -34,7 +34,7 @@
 class TreeItem: public QTreeWidgetItem
 {
 public:
-	explicit TreeItem(ConfigPage *page):
+	explicit TreeItem(ConfigPage* page):
 		QTreeWidgetItem()
 	{
 		setText(0, page->text());
@@ -42,7 +42,7 @@ public:
 	}
 };
 
-ConfigDialog::ConfigDialog(QWidget *parent) :
+ConfigDialog::ConfigDialog(QWidget* parent) :
 	QDialog(parent),
 	mForm(new Ui::ConfigDialog)
 {
@@ -51,20 +51,20 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 	mForm->stackWidget->setLayout(mStackedLayout);
 
 	mForm->treeView->setHeaderHidden(true);
-	connect(mForm->treeView, SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
-	        SLOT(selectedItemChange(QTreeWidgetItem *, QTreeWidgetItem *)));
+	connect(mForm->treeView, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
+	        SLOT(selectedItemChange(QTreeWidgetItem*, QTreeWidgetItem*)));
 	connect(mForm->okButton, SIGNAL(clicked()), SLOT(accept()));
 	connect(mForm->cancelButton, SIGNAL(clicked()), SLOT(reject()));
 	connect(mForm->defaultButton, SIGNAL(clicked()), SLOT(reset()));
 }
 
-ConfigDialog::ConfigDialog(QSharedPointer<ConfigPage> page, QWidget *parent) :
+ConfigDialog::ConfigDialog(QSharedPointer<ConfigPage> page, QWidget* parent) :
 	ConfigDialog(parent)
 {
 	addPage(page);
 }
 
-ConfigDialog::ConfigDialog(QList<QSharedPointer<ConfigPage>> pages, QWidget *parent) :
+ConfigDialog::ConfigDialog(QList<QSharedPointer<ConfigPage>> pages, QWidget* parent) :
 	ConfigDialog(parent)
 {
 	addPages(pages);
@@ -101,9 +101,9 @@ int ConfigDialog::exec()
 	return QDialog::exec();
 }
 
-QTreeWidgetItem *ConfigDialog::doItem(QSharedPointer<ConfigPage> pagePtr)
+QTreeWidgetItem* ConfigDialog::doItem(QSharedPointer<ConfigPage> pagePtr)
 {
-	TreeItem *item = new TreeItem(pagePtr.data());
+	TreeItem* item = new TreeItem(pagePtr.data());
 	mItemPageMap.insert(item, pagePtr);
 	mStackedLayout->addWidget(pagePtr->widget());
 	connect(this, SIGNAL(onStart()), pagePtr.data(), SLOT(start()));
@@ -111,7 +111,7 @@ QTreeWidgetItem *ConfigDialog::doItem(QSharedPointer<ConfigPage> pagePtr)
 	connect(this, SIGNAL(rejected()), pagePtr.data(), SLOT(reject()));
 	connect(this, SIGNAL(onRetranslateUI()), pagePtr.data(), SLOT(retranslateUI()));
 
-	QList<QTreeWidgetItem *> subItems;
+	QList<QTreeWidgetItem*> subItems;
 
 	foreach (QSharedPointer<ConfigPage> subPage, pagePtr->pages()) {
 		subItems.append(doItem(subPage));
@@ -127,7 +127,7 @@ void ConfigDialog::reset()
 	emit onReset();
 }
 
-void ConfigDialog::selectedItemChange(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+void ConfigDialog::selectedItemChange(QTreeWidgetItem* current, QTreeWidgetItem* previous)
 {
 	QSharedPointer<ConfigPage> pagePtr;
 
@@ -154,7 +154,7 @@ void ConfigDialog::retranslateUI()
 	mForm->retranslateUi(this);
 
 	foreach (QSharedPointer<ConfigPage> page, mItemPageMap) {
-		QTreeWidgetItem *item = mItemPageMap.key(page);
+		QTreeWidgetItem* item = mItemPageMap.key(page);
 		item->setText(0, page->text());
 		item->setToolTip(0, page->toolTip());
 	}

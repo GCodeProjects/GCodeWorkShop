@@ -53,8 +53,8 @@ struct SwapAxesOptions {
 		double  value;
 	} convert;
 
-	void load(QSettings *settings, const SwapAxesOptions &defaultOptions);
-	void save(QSettings *settings);
+	void load(QSettings* settings, const SwapAxesOptions& defaultOptions);
+	void save(QSettings* settings);
 };
 
 #endif // SWAPAXESOPTIONS_H

@@ -42,13 +42,13 @@ class I2MDialog : public QDialog, private Ui::I2MDialog
 	Q_OBJECT
 
 public:
-	I2MDialog(QWidget *parent, QSettings *settings);
+	I2MDialog(QWidget* parent, QSettings* settings);
 	~I2MDialog();
 
-	void setOptions(const I2MOptions &options);
+	void setOptions(const I2MOptions& options);
 	I2MOptions options();
 
-	void loadSettings(const I2MOptions &defaultOptions);
+	void loadSettings(const I2MOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 protected slots:

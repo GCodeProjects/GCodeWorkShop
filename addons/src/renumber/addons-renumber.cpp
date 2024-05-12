@@ -30,11 +30,11 @@
 #include "utils-renumber.h"     // for renumber
 
 
-bool Addons::doRenumber(QWidget *parent, QSettings *settings, QString &tx)
+bool Addons::doRenumber(QWidget* parent, QSettings* settings, QString& tx)
 {
 	QString key = "RenumberDialog";
-	RenumberDialog *dlg;
-	dlg = parent->findChild<RenumberDialog *>(key);
+	RenumberDialog* dlg;
+	dlg = parent->findChild<RenumberDialog*>(key);
 
 	if (!dlg) {
 		dlg = new RenumberDialog(parent, settings);
@@ -46,7 +46,7 @@ bool Addons::doRenumber(QWidget *parent, QSettings *settings, QString &tx)
 		return false;
 	}
 
-	const RenumberOptions &opt = dlg->options();
+	const RenumberOptions& opt = dlg->options();
 	QApplication::setOverrideCursor(Qt::BusyCursor);
 	Utils::renumber(opt, tx);
 	QApplication::restoreOverrideCursor();

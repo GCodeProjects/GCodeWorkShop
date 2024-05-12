@@ -26,7 +26,7 @@ class QWidget;
 
 
 namespace Addons {
-bool doCleanUp(QWidget *parent, QSettings *settings,  QString &tx);
+bool doCleanUp(QWidget* parent, QSettings* settings,  QString& tx);
 }
 
 #endif // ADDONS_CLEANUP_H

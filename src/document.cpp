@@ -35,7 +35,7 @@
 #include "documentwidgetcloseeventfilter.h" // for DocumentWidgetCloseEventFilter
 
 
-Document::Document(QObject *parent) :
+Document::Document(QObject* parent) :
 	QObject(parent),
 	m_widget(nullptr),
 	m_dir(QDir::current())
@@ -56,7 +56,7 @@ QDir Document::dir() const
 	return m_dir;
 }
 
-void Document::setDir(const QDir &dir)
+void Document::setDir(const QDir& dir)
 {
 	m_dir = dir;
 }
@@ -66,7 +66,7 @@ QString Document::path() const
 	return m_dir.path();
 }
 
-void Document::setPath(const QString &path)
+void Document::setPath(const QString& path)
 {
 	m_dir.setPath(path);
 }
@@ -76,7 +76,7 @@ QString Document::fileName() const
 	return  m_fileName;
 }
 
-void Document::setFileName(const QString &fileName)
+void Document::setFileName(const QString& fileName)
 {
 	m_fileName = fileName;
 }
@@ -86,7 +86,7 @@ QString Document::filePath() const
 	return m_dir.filePath(m_fileName);
 }
 
-void Document::setFilePath(const QString &filePath)
+void Document::setFilePath(const QString& filePath)
 {
 	QFileInfo fi(filePath);
 	m_fileName = fi.fileName();
@@ -95,14 +95,14 @@ void Document::setFilePath(const QString &filePath)
 
 DocumentInfo::Ptr Document::documentInfo() const
 {
-	DocumentInfo *info = new DocumentInfo();
+	DocumentInfo* info = new DocumentInfo();
 	info->filePath = filePath();
 	info->geometry = widget()->parentWidget()->saveGeometry();
 	info->readOnly = isReadOnly();
 	return DocumentInfo::Ptr(info);
 }
 
-void Document::setDocumentInfo(const DocumentInfo::Ptr &info)
+void Document::setDocumentInfo(const DocumentInfo::Ptr& info)
 {
 	if (!info->geometry.isEmpty()) {
 		widget()->parentWidget()->restoreGeometry(info->geometry);
@@ -125,7 +125,7 @@ QString Document::brief() const
 	return m_brief;
 }
 
-void Document::setBrief(const QString &brief)
+void Document::setBrief(const QString& brief)
 {
 	if (m_brief != brief) {
 		m_brief = brief;
@@ -133,12 +133,12 @@ void Document::setBrief(const QString &brief)
 	}
 }
 
-QWidget *Document::widget() const
+QWidget* Document::widget() const
 {
 	return m_widget;
 }
 
-void Document::setWidget(QWidget *widget)
+void Document::setWidget(QWidget* widget)
 {
 	m_widget = widget;
 	m_widget->setAttribute(Qt::WA_DeleteOnClose);
@@ -152,12 +152,12 @@ void Document::setWidget(QWidget *widget)
 	m_widget->setFocusPolicy(Qt::WheelFocus);
 	m_widget->setAutoFillBackground(true);
 
-	DocumentWidgetCloseEventFilter *filter = new DocumentWidgetCloseEventFilter(m_widget);
-	connect(filter, SIGNAL(closeRequested(QCloseEvent *)), this, SLOT(closeEvent(QCloseEvent *)), Qt::ConnectionType::DirectConnection);
+	DocumentWidgetCloseEventFilter* filter = new DocumentWidgetCloseEventFilter(m_widget);
+	connect(filter, SIGNAL(closeRequested(QCloseEvent*)), this, SLOT(closeEvent(QCloseEvent*)), Qt::ConnectionType::DirectConnection);
 	m_widget->installEventFilter(filter);
 }
 
-void Document::setWidgetTitle(const QString &title)
+void Document::setWidgetTitle(const QString& title)
 {
 	widget()->setWindowTitle(title + "[*]");
 }
@@ -167,7 +167,7 @@ bool Document::close()
 	return widget()->parentWidget()->close();
 }
 
-void Document::closeEvent(QCloseEvent *event)
+void Document::closeEvent(QCloseEvent* event)
 {
 	event->setAccepted(closeRequested(this));
 
@@ -182,7 +182,7 @@ QString Document::ioErrorString() const
 	return m_ioErrorString;
 }
 
-bool Document::loadFile(const QString &filePath, bool watch)
+bool Document::loadFile(const QString& filePath, bool watch)
 {
 	QFile file(filePath);
 	m_ioErrorString.clear();
@@ -202,7 +202,7 @@ bool Document::loadFile(const QString &filePath, bool watch)
 	return true;
 }
 
-bool Document::saveFile(const QString &filePath)
+bool Document::saveFile(const QString& filePath)
 {
 	QFile file(filePath);
 	m_ioErrorString.clear();
@@ -221,7 +221,7 @@ bool Document::saveFile(const QString &filePath)
 	return true;
 }
 
-void Document::customContextMenuRequest(const QPoint &pos)
+void Document::customContextMenuRequest(const QPoint& pos)
 {
 	emit customContextMenuRequested(this, pos);
 }
@@ -319,7 +319,7 @@ QString Document::watchedFile() const
 	return m_watchedFile;
 }
 
-void Document::fileWatchStart(const QString &watchedFile)
+void Document::fileWatchStart(const QString& watchedFile)
 {
 	if (m_watchedFile != watchedFile) {
 		fileWatchStop();

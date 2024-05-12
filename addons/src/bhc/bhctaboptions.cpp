@@ -35,7 +35,7 @@
 #define CFG_KEY_Y       "YCenter"
 
 
-void BHCTabOptions::load(QSettings *settings, const BHCTabOptions &defaultOptions)
+void BHCTabOptions::load(QSettings* settings, const BHCTabOptions& defaultOptions)
 {
 	x = settings->value(CFG_KEY_X, defaultOptions.x).toDouble();
 	y = settings->value(CFG_KEY_Y, defaultOptions.y).toDouble();
@@ -49,7 +49,7 @@ void BHCTabOptions::load(QSettings *settings, const BHCTabOptions &defaultOption
 	common = settings->value(CFG_KEY_COMMON, defaultOptions.common).toBool();
 }
 
-void BHCTabOptions::save(QSettings *settings)
+void BHCTabOptions::save(QSettings* settings)
 {
 	settings->setValue(CFG_KEY_X, x);
 	settings->setValue(CFG_KEY_Y, y);

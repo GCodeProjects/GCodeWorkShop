@@ -35,8 +35,8 @@ struct ChamferOptions {
 	InOut   minDiam;
 	InOut   maxDiam;
 
-	void load(QSettings *settings, const ChamferOptions &defaultOptions);
-	void save(QSettings *settings);
+	void load(QSettings* settings, const ChamferOptions& defaultOptions);
+	void save(QSettings* settings);
 };
 
 #endif // CHAMFEROPTIONS_H

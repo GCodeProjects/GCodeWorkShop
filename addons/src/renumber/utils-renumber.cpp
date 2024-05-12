@@ -28,7 +28,7 @@
 #include "utils-renumber.h"
 
 
-void Utils::renumber(const RenumberOptions &opt, QString &tx)
+void Utils::renumber(const RenumberOptions& opt, QString& tx)
 {
 	int lineCount = tx.count("\n");
 
@@ -55,7 +55,7 @@ void Utils::renumber(const RenumberOptions &opt, QString &tx)
 }
 
 
-void Utils::renumberWithoutN(const RenumberOptions &opt, QString &tx, int lineCount)
+void Utils::renumberWithoutN(const RenumberOptions& opt, QString& tx, int lineCount)
 {
 	QString line, i_tx, new_tx;
 	QRegularExpression regex;
@@ -89,7 +89,7 @@ void Utils::renumberWithoutN(const RenumberOptions &opt, QString &tx, int lineCo
 	tx = new_tx;
 }
 
-void Utils::renumberWithN(const RenumberOptions &opt, QString &tx)
+void Utils::renumberWithN(const RenumberOptions& opt, QString& tx)
 {
 	int pos;
 	long int i, num, it;
@@ -155,7 +155,7 @@ void Utils::renumberWithN(const RenumberOptions &opt, QString &tx)
 	}
 }
 
-void Utils::renumberAll(const RenumberOptions &opt, QString &tx, int lineCount)
+void Utils::renumberAll(const RenumberOptions& opt, QString& tx, int lineCount)
 {
 	int pos;
 	long int num;
@@ -234,7 +234,7 @@ void Utils::renumberAll(const RenumberOptions &opt, QString &tx, int lineCount)
 	tx = new_tx;
 }
 
-void Utils::removeAll(QString &tx)
+void Utils::removeAll(QString& tx)
 {
 	long int num;
 	QString f_tx;

@@ -32,14 +32,14 @@ class CapsLockEventFilter : public QObject
 	Q_OBJECT
 
 public:
-	explicit CapsLockEventFilter(QObject *parent = nullptr);
+	explicit CapsLockEventFilter(QObject* parent = nullptr);
 
 public slots:
 	void setCapsLockEnable(bool enable);
 
 protected:
-	bool eventFilter(QObject *obj, QEvent *event) override;
-	bool keyEvent(QKeyEvent *event);
+	bool eventFilter(QObject* obj, QEvent* event) override;
+	bool keyEvent(QKeyEvent* event);
 
 protected:
 	bool m_capsLockEnable;

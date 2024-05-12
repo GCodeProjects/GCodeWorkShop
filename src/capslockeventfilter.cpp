@@ -28,7 +28,7 @@
 #include "capslockeventfilter.h"
 
 
-CapsLockEventFilter::CapsLockEventFilter(QObject *parent)
+CapsLockEventFilter::CapsLockEventFilter(QObject* parent)
 	: QObject{parent}
 {
 	m_capsLockEnable = false;
@@ -39,19 +39,19 @@ void CapsLockEventFilter::setCapsLockEnable(bool enable)
 	m_capsLockEnable = enable;
 }
 
-bool CapsLockEventFilter::eventFilter(QObject *obj, QEvent *event)
+bool CapsLockEventFilter::eventFilter(QObject* obj, QEvent* event)
 {
 	Q_UNUSED(obj);
 
 	if (event->type() == QEvent::KeyPress) {
-		QKeyEvent *ke = dynamic_cast<QKeyEvent *>(event);
+		QKeyEvent* ke = dynamic_cast<QKeyEvent*>(event);
 		return keyEvent(ke);
 	}
 
 	return false;
 }
 
-bool CapsLockEventFilter::keyEvent(QKeyEvent *event)
+bool CapsLockEventFilter::keyEvent(QKeyEvent* event)
 {
 	//Keypad comma should always prints period
 	if (event->key() == Qt::Key_Comma) {

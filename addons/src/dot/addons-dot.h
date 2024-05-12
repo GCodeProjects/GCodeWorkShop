@@ -26,7 +26,7 @@ class QWidget;
 
 
 namespace Addons {
-int doDot(QWidget *parent, QSettings *settings,  QString &tx);
+int doDot(QWidget* parent, QSettings* settings,  QString& tx);
 }
 
 #endif // ADDONS_DOT_H

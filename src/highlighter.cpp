@@ -34,7 +34,7 @@
 #include "highlightmode.h"
 
 
-Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
+Highlighter::Highlighter(QTextDocument* parent) : QSyntaxHighlighter(parent)
 {
 	m_highlightMode = MODE_AUTO;
 }
@@ -261,14 +261,14 @@ void Highlighter::loadRules()
 	keywordFormat.setForeground(QColor(highlightColors.macroColor));
 	keywordFormat.setFontWeight(QFont::Bold);
 
-	foreach (const QString &pattern, keywordPatterns) {
+	foreach (const QString& pattern, keywordPatterns) {
 		rule.pattern = QRegularExpression(pattern);
 		rule.format = keywordFormat;
 		highlightRules.append(rule);
 	}
 }
 
-void Highlighter::highlightBlock(const QString &tx)
+void Highlighter::highlightBlock(const QString& tx)
 {
 	switch (m_highlightMode) {
 	case MODE_OKUMA:
@@ -309,7 +309,7 @@ void Highlighter::highlightBlock(const QString &tx)
 	}
 }
 
-void Highlighter::highlightBlockCommon(const QString &tx)
+void Highlighter::highlightBlockCommon(const QString& tx)
 {
 	foreach (HighlightingRule rule, highlightRules) {
 		auto match = rule.pattern.match(tx);
@@ -320,7 +320,7 @@ void Highlighter::highlightBlockCommon(const QString &tx)
 		}
 	}
 
-	foreach (const ProgNameHighlightingRule &progRule, progNameHighlightRules) {
+	foreach (const ProgNameHighlightingRule& progRule, progNameHighlightRules) {
 		auto match = progRule.pattern.match(tx);
 
 		while (match.hasMatch()) {
@@ -355,7 +355,7 @@ void Highlighter::highlightBlockCommon(const QString &tx)
 // FANUC
 //**************************************************************************************************
 
-void Highlighter::highlightBlockFanucRule(const QString &tx)
+void Highlighter::highlightBlockFanucRule(const QString& tx)
 {
 	int pos, count;
 	int sellen;
@@ -570,7 +570,7 @@ void Highlighter::highlightBlockFanucRule(const QString &tx)
 // SINUMERIK 810D-840D
 //**************************************************************************************************
 
-void Highlighter::highlightBlockSinuRule(const QString &tx)
+void Highlighter::highlightBlockSinuRule(const QString& tx)
 {
 	int pos;
 	int sellen;
@@ -799,7 +799,7 @@ void Highlighter::highlightBlockSinuRule(const QString &tx)
 // OKUMA OSP
 //**************************************************************************************************
 
-void Highlighter::highlightBlockOkumaRule(const QString &tx)
+void Highlighter::highlightBlockOkumaRule(const QString& tx)
 {
 	int pos, count;
 	int sellen;
@@ -1025,7 +1025,7 @@ void Highlighter::highlightBlockOkumaRule(const QString &tx)
 // SINUMERIK OLD 810-880
 //**************************************************************************************************
 
-void Highlighter::highlightBlockSinuOldRule(const QString &tx)
+void Highlighter::highlightBlockSinuOldRule(const QString& tx)
 {
 	int pos, count;
 	int sellen;
@@ -1242,7 +1242,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString &tx)
 // HEIDENHAIN DIALOG
 //**************************************************************************************************
 
-void Highlighter::highlightBlockHeidRule(const QString &tx)
+void Highlighter::highlightBlockHeidRule(const QString& tx)
 {
 	int pos;
 	int sellen;
@@ -1469,7 +1469,7 @@ void Highlighter::highlightBlockHeidRule(const QString &tx)
 // HEIDENHAIN ISO
 //**************************************************************************************************
 
-void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
+void Highlighter::highlightBlockHeidIsoRule(const QString& tx)
 {
 	int pos;
 	int sellen;
@@ -1696,7 +1696,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString &tx)
 // TOOLTIPS
 //**************************************************************************************************
 
-void Highlighter::highlightBlockToolTipsRule(const QString &tx)
+void Highlighter::highlightBlockToolTipsRule(const QString& tx)
 {
 	QTextCharFormat format;
 	HighlightingRule ruleP;
@@ -1800,7 +1800,7 @@ int autoDetectHighligthMode(const QString text)
 // LinuxCNC
 //**************************************************************************************************
 
-void Highlighter::highlightBlockLinuxCNCRule(const QString &tx)
+void Highlighter::highlightBlockLinuxCNCRule(const QString& tx)
 {
 	int pos, count;
 	int sellen;

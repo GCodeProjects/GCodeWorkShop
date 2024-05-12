@@ -29,14 +29,14 @@
 #define CFG_KEY_SELECTED    "Selected"
 
 
-void CleanUpOptions::load(QSettings *settings, const CleanUpOptions &defaultOptions)
+void CleanUpOptions::load(QSettings* settings, const CleanUpOptions& defaultOptions)
 {
 	comments = settings->value(CFG_KEY_COMMENTS, defaultOptions.comments).toStringList();
 	expressions = settings->value(CFG_KEY_EXPRESSIONS, defaultOptions.expressions).toStringList();
 	selected = settings->value(CFG_KEY_SELECTED, defaultOptions.selected).toStringList();
 }
 
-void CleanUpOptions::save(QSettings *settings)
+void CleanUpOptions::save(QSettings* settings)
 {
 	if (expressions.isEmpty()) {
 		settings->remove(CFG_KEY_COMMENTS);

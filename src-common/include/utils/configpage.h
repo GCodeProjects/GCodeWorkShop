@@ -62,21 +62,21 @@ class ConfigPage: public QObject
 public:
 	virtual ~ConfigPage() {}
 
-	QWidget *widget();
+	QWidget* widget();
 
 	/**
 	 * @brief Displayed page name.
 	 *
 	 * @return The string can be localized.
 	 */
-	virtual const QString &text() = 0;
+	virtual const QString& text() = 0;
 
 	/**
 	 * @brief Additional page tooltip.
 	 *
 	 * @return The string can be localized.
 	 */
-	virtual const QString &toolTip();
+	virtual const QString& toolTip();
 
 	/**
 	 * @brief Returns list of childs pages.
@@ -94,7 +94,7 @@ protected:
 	/**
 	 * @brief Add child page.
 	 */
-	void add(ConfigPage *child);
+	void add(ConfigPage* child);
 
 public slots:
 	/**
@@ -145,18 +145,18 @@ public:
 	}
 
 protected:
-	ConfigPage(QObject *parent = 0): QObject(parent) {}
+	ConfigPage(QObject* parent = 0): QObject(parent) {}
 
 	/**
 	 * @brief Make widget for this page.
 	 */
-	virtual QWidget *doWidget();
+	virtual QWidget* doWidget();
 
-	QWidget *mWidget = 0;
+	QWidget* mWidget = 0;
 	QList<QSharedPointer<ConfigPage>> mChild;
 
 private slots:
-	void widgetDestroed(QObject *object);
+	void widgetDestroed(QObject* object);
 };
 
 #endif // CONFIGPAGE_H

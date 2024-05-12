@@ -24,7 +24,7 @@
 #include "utils-removebyregex.h"
 
 
-bool Utils::removeTextByRegExp(QString &tx, QStringList expList, bool replaceDollar)
+bool Utils::removeTextByRegExp(QString& tx, QStringList expList, bool replaceDollar)
 {
 	if (expList.isEmpty()) {
 		return false;

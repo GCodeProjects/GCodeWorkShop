@@ -29,7 +29,7 @@
 #include "commapp.h"      // CommApp
 
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	Q_INIT_RESOURCE(application);
 	QtSingleApplication app("CommApp", argc, argv);
@@ -48,14 +48,14 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	Medium &medium = Medium::instance();
+	Medium& medium = Medium::instance();
 	medium.updateTranslation();
-	CommApp *mw = new CommApp();
+	CommApp* mw = new CommApp();
 	mw->show();
 
 	app.setActivationWindow(mw, false);
-	QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
-	                 mw, SLOT(messReceived(const QString &)));
+	QObject::connect(&app, SIGNAL(messageReceived(const QString&)),
+	                 mw, SLOT(messReceived(const QString&)));
 
 	QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
 	return app.exec();

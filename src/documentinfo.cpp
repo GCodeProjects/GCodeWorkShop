@@ -42,14 +42,14 @@ QString DocumentInfo::documentType() const
 	return "Document";
 }
 
-DocumentInfo *DocumentInfo::clone() const
+DocumentInfo* DocumentInfo::clone() const
 {
-	DocumentInfo *info = new DocumentInfo();
+	DocumentInfo* info = new DocumentInfo();
 	info->operator=(*this);
 	return info;
 }
 
-DocumentInfo &DocumentInfo::operator =(const DocumentInfo &that)
+DocumentInfo& DocumentInfo::operator =(const DocumentInfo& that)
 {
 	filePath = that.filePath;
 	geometry = that.geometry;
@@ -57,7 +57,7 @@ DocumentInfo &DocumentInfo::operator =(const DocumentInfo &that)
 	return *this;
 }
 
-void DocumentInfo::load(QSettings *cfg)
+void DocumentInfo::load(QSettings* cfg)
 {
 	filePath = cfg->value(CFG_KEY_INFO_FILE_PATH, filePath).toString();
 	geometry = cfg->value(CFG_KEY_INFO_GEOMETRY, geometry).toByteArray();
@@ -65,7 +65,7 @@ void DocumentInfo::load(QSettings *cfg)
 	loadChild(cfg);
 }
 
-void DocumentInfo::save(QSettings *cfg) const
+void DocumentInfo::save(QSettings* cfg) const
 {
 	cfg->setValue(DOCUMENTINFO_CFG_KEY_TYPE, documentType());
 	cfg->setValue(CFG_KEY_INFO_FILE_PATH, filePath);
@@ -74,12 +74,12 @@ void DocumentInfo::save(QSettings *cfg) const
 	saveChild(cfg);
 }
 
-void DocumentInfo::loadChild(QSettings *cfg)
+void DocumentInfo::loadChild(QSettings* cfg)
 {
 	Q_UNUSED(cfg);
 }
 
-void DocumentInfo::saveChild(QSettings *cfg) const
+void DocumentInfo::saveChild(QSettings* cfg) const
 {
 	Q_UNUSED(cfg);
 }

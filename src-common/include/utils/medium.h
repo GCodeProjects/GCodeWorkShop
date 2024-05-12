@@ -53,32 +53,32 @@ public:
 
 	const int lauchType;
 
-	static Medium &instance();
+	static Medium& instance();
 	~Medium();
 
 	/**
 	 * @brief
 	 * @param dir
 	 */
-	void addTranslationDir(const QString &dir);
+	void addTranslationDir(const QString& dir);
 
 	/**
 	 * @brief
 	 * @param dir
 	 */
-	void removeTranslationDir(const QString &dir);
+	void removeTranslationDir(const QString& dir);
 
 	/**
 	 * @brief
 	 * @param unit
 	 */
-	void addTranslationUnit(const QString &unit);
+	void addTranslationUnit(const QString& unit);
 
 	/**
 	 * @brief
 	 * @param unit
 	 */
-	void removeTranslationUnit(const QString &unit);
+	void removeTranslationUnit(const QString& unit);
 
 	QList<QLocale> findTranslation(bool skipQtDir = true);
 
@@ -89,7 +89,7 @@ public:
 		return mSettingsDir;
 	}
 
-	QSettings *settings()
+	QSettings* settings()
 	{
 		return mSettings;
 	}
@@ -98,16 +98,16 @@ signals:
 	void onRetranslateUI();
 
 protected:
-	explicit Medium(QObject *parent = 0);
+	explicit Medium(QObject* parent = 0);
 
 	QStringList mTranslationDirs;
 	QStringList mTranslationUnits;
-	QList<QTranslator *> mTranslators;
+	QList<QTranslator*> mTranslators;
 
 	QStringList mShareDirs;
 	QString mSettingsDir;
 
-	QSettings *mSettings;
+	QSettings* mSettings;
 
 private:
 	int checkLaunch();

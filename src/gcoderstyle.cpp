@@ -85,7 +85,7 @@ GCoderStyle::GCoderStyle()
 	hColors.backgroundColor = 0xFFFFFF;
 }
 
-GCoderStyle::GCoderStyle(const GCoderStyle &that) : DocumentStyle()
+GCoderStyle::GCoderStyle(const GCoderStyle& that) : DocumentStyle()
 {
 	GCoderStyle::operator=(that);
 }
@@ -95,25 +95,25 @@ QString GCoderStyle::documentType() const
 	return GCoder::DOCUMENT_TYPE;
 }
 
-DocumentStyle *GCoderStyle::clone() const
+DocumentStyle* GCoderStyle::clone() const
 {
-	GCoderStyle *info = new GCoderStyle();
+	GCoderStyle* info = new GCoderStyle();
 	info->operator=(*this);
 	return info;
 }
 
-DocumentStyle &GCoderStyle::operator=(const DocumentStyle &that)
+DocumentStyle& GCoderStyle::operator=(const DocumentStyle& that)
 {
 	try {
-		const GCoderStyle &style = dynamic_cast<const GCoderStyle &>(that);
+		const GCoderStyle& style = dynamic_cast<const GCoderStyle&>(that);
 		return GCoderStyle::operator=(style);
-	}  catch (std::bad_cast &e) {
+	}  catch (std::bad_cast& e) {
 	}
 
 	return DocumentStyle::operator=(that);
 }
 
-GCoderStyle &GCoderStyle::operator=(const GCoderStyle &that)
+GCoderStyle& GCoderStyle::operator=(const GCoderStyle& that)
 {
 	DocumentStyle::operator=(that);
 
@@ -144,7 +144,7 @@ GCoderStyle &GCoderStyle::operator=(const GCoderStyle &that)
 	return *this;
 }
 
-void GCoderStyle::loadChild(QSettings *cfg)
+void GCoderStyle::loadChild(QSettings* cfg)
 {
 	cfg->beginGroup(CFG_SECTION_GCODESTYLE);
 	fontName = cfg->value(CFG_KEY_FONT_NAME, fontName).toString();
@@ -175,7 +175,7 @@ void GCoderStyle::loadChild(QSettings *cfg)
 	cfg->endGroup();
 }
 
-void GCoderStyle::saveChild(QSettings *cfg) const
+void GCoderStyle::saveChild(QSettings* cfg) const
 {
 	cfg->beginGroup(CFG_SECTION_GCODESTYLE);
 	cfg->setValue(CFG_KEY_FONT_NAME, fontName);
@@ -206,7 +206,7 @@ void GCoderStyle::saveChild(QSettings *cfg) const
 	cfg->endGroup();
 }
 
-void GCoderStyle::importFromV0(QSettings *cfg)
+void GCoderStyle::importFromV0(QSettings* cfg)
 {
 	fontName = cfg->value("FontName", fontName).toString();
 	fontSize = cfg->value("FontSize", fontSize).toInt();

@@ -84,12 +84,12 @@ GCoderDocument::GCoderDocument() : Document(nullptr)
 	m_textEdit->setWordWrapMode(QTextOption::NoWrap);
 
 	m_inLineCalc = new InLineCalc(m_textEdit);
-	connect(m_inLineCalc, SIGNAL(complete(const QString &)), this, SLOT(inLineCalcComplete(const QString &)));
+	connect(m_inLineCalc, SIGNAL(complete(const QString&)), this, SLOT(inLineCalcComplete(const QString&)));
 
 
 	m_textEdit->setWindowIcon(QIcon(":/images/ncfile.png"));
 	m_textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(m_textEdit, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(customContextMenuRequest(const QPoint &)));
+	connect(m_textEdit, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(customContextMenuRequest(const QPoint&)));
 	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorMoved()));
 	connect(m_textEdit, SIGNAL(selectionChanged()), this, SLOT(selectionUpdated()));
@@ -127,7 +127,7 @@ QString GCoderDocument::guessFileName() const
 	return fileName.simplified();
 }
 
-void GCoderDocument::loadTemplate(const QString &fileName)
+void GCoderDocument::loadTemplate(const QString& fileName)
 {
 	static int sequenceNumber = 1;
 
@@ -209,30 +209,30 @@ QByteArray GCoderDocument::rawData() const
 	return text(true).toLocal8Bit();
 }
 
-void GCoderDocument::setRawData(const QByteArray &data)
+void GCoderDocument::setRawData(const QByteArray& data)
 {
 	setText(QString::fromLocal8Bit(data));
 }
 
-QMenu *GCoderDocument::createStandardContextMenu(const QPoint &pos)
+QMenu* GCoderDocument::createStandardContextMenu(const QPoint& pos)
 {
 	return textEdit()->createStandardContextMenu(pos);
 }
 
 DocumentInfo::Ptr GCoderDocument::documentInfo() const
 {
-	GCoderInfo *info = new GCoderInfo();
+	GCoderInfo* info = new GCoderInfo();
 	*info = *Document::documentInfo();
 	info->cursorPos = textCursor().position();
 	info->highlightMode = highlightMode();
 	return DocumentInfo::Ptr(info);
 }
 
-void GCoderDocument::setDocumentInfo(const DocumentInfo::Ptr &info)
+void GCoderDocument::setDocumentInfo(const DocumentInfo::Ptr& info)
 {
 	Document::setDocumentInfo(info);
 
-	GCoderInfo *gci = dynamic_cast<GCoderInfo *>(info.get());
+	GCoderInfo* gci = dynamic_cast<GCoderInfo*>(info.get());
 
 	if (gci) {
 		setHighlightMode(gci->highlightMode);
@@ -252,11 +252,11 @@ DocumentStyle::Ptr GCoderDocument::documentStyle() const
 	return DocumentStyle::Ptr(new GCoderStyle(m_codeStyle));
 }
 
-void GCoderDocument::setDocumentStyle(const DocumentStyle::Ptr &style)
+void GCoderDocument::setDocumentStyle(const DocumentStyle::Ptr& style)
 {
 	try {
-		m_codeStyle = dynamic_cast<const GCoderStyle &>(*style);
-	}  catch (std::bad_cast &e) {
+		m_codeStyle = dynamic_cast<const GCoderStyle&>(*style);
+	}  catch (std::bad_cast& e) {
 		return;
 	}
 
@@ -280,11 +280,11 @@ DocumentWidgetProperties::Ptr GCoderDocument::documentWidgetProperties() const
 	return DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(m_widgetProperties));
 }
 
-void GCoderDocument::setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &properties)
+void GCoderDocument::setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr& properties)
 {
 	try {
-		m_widgetProperties = dynamic_cast<const GCoderWidgetProperties &>(*properties);
-	}  catch (std::bad_cast &e) {
+		m_widgetProperties = dynamic_cast<const GCoderWidgetProperties&>(*properties);
+	}  catch (std::bad_cast& e) {
 		return;
 	}
 
@@ -315,12 +315,12 @@ QString GCoderDocument::text(bool addCR) const
 	return text;
 }
 
-void GCoderDocument::setText(const QString &text)
+void GCoderDocument::setText(const QString& text)
 {
 	document()->setPlainText(text);
 }
 
-void GCoderDocument::insertText(const QString &text)
+void GCoderDocument::insertText(const QString& text)
 {
 	textEdit()->insertPlainText(text);
 }
@@ -421,7 +421,7 @@ void GCoderDocument::paste()
 	textEdit()->paste();
 }
 
-void GCoderDocument::print(QPrinter *printer)
+void GCoderDocument::print(QPrinter* printer)
 {
 #ifndef QT_NO_PRINTER
 	document()->print(printer);
@@ -447,12 +447,12 @@ void GCoderDocument::goToLine(int line)
 	widget()->setFocus();
 }
 
-QPlainTextEdit *GCoderDocument::textEdit() const
+QPlainTextEdit* GCoderDocument::textEdit() const
 {
 	return m_textEdit;
 }
 
-QTextDocument *GCoderDocument::document() const
+QTextDocument* GCoderDocument::document() const
 {
 	return textEdit()->document();
 }
@@ -462,7 +462,7 @@ QTextCursor GCoderDocument::textCursor() const
 	return textEdit()->textCursor();
 }
 
-void GCoderDocument::setTextCursor(const QTextCursor &cursor)
+void GCoderDocument::setTextCursor(const QTextCursor& cursor)
 {
 	textEdit()->setTextCursor(cursor);
 }
@@ -633,14 +633,14 @@ void GCoderDocument::updateToolTips()
 	m_gCoderEventFilter->setTips(tips);
 }
 
-void GCoderDocument::loadToolTips(QHash<QString, QString> &tips, const QString &fileName, const QString &group)
+void GCoderDocument::loadToolTips(QHash<QString, QString>& tips, const QString& fileName, const QString& group)
 {
 	if (QFile::exists(fileName)) {
 		QSettings settings(fileName, QSettings::IniFormat);
 		settings.beginGroup(group);
-		const QStringList &keys = settings.childKeys();
+		const QStringList& keys = settings.childKeys();
 
-		for (const QString &k : keys) {
+		for (const QString& k : keys) {
 			QString text = settings.value(k, "").toString();
 
 			if (!text.isEmpty()) {
@@ -694,7 +694,7 @@ void GCoderDocument::detectHighlightMode()
 	document()->setModified(mod);
 }
 
-bool GCoderDocument::foundTextMatched(const QString &pattern, QString text)
+bool GCoderDocument::foundTextMatched(const QString& pattern, QString text)
 {
 	bool matched = false;
 	bool isRegExp = false;
@@ -947,7 +947,7 @@ bool GCoderDocument::replaceAll(QString textToFind,
 	return found;
 }
 
-bool GCoderDocument::findText(const QString &text, bool findBackward, bool wholeWords, bool ignoreCase, bool ignoreComments)
+bool GCoderDocument::findText(const QString& text, bool findBackward, bool wholeWords, bool ignoreCase, bool ignoreComments)
 {
 	bool inComment = false;
 	bool found = false;
@@ -1101,7 +1101,7 @@ void GCoderDocument::underLine()
 	}
 }
 
-void GCoderDocument::highlightFindText(const QString &searchString,
+void GCoderDocument::highlightFindText(const QString& searchString,
                                        bool wholeWords,
                                        bool ignoreCase,
                                        bool ignoreComments,
@@ -1122,7 +1122,7 @@ void GCoderDocument::highlightFindText(const QString &searchString,
 	QColor lineColor = QColor(Qt::yellow).lighter(155);
 	m_selection.format.setBackground(lineColor);
 
-	QTextDocument *doc = document();
+	QTextDocument* doc = document();
 	QTextCursor cursor = textCursor();
 	cursor.setPosition(0);
 
@@ -1277,7 +1277,7 @@ void GCoderDocument::highlightCurrentLine()
 	QColor lineColor = QColor(m_codeStyle.lineColor).darker(108);
 	m_selection.format.setBackground(lineColor);
 
-	QTextDocument *doc = document();
+	QTextDocument* doc = document();
 	QTextCursor cursor = textCursor();
 	QTextCursor beforeCursor = cursor;
 
@@ -1507,7 +1507,7 @@ void GCoderDocument::showInLineCalc()
 	m_inLineCalc->showCalc(address, value, textEdit()->cursorRect());
 }
 
-void GCoderDocument::inLineCalcComplete(const QString &text)
+void GCoderDocument::inLineCalcComplete(const QString& text)
 {
 	insertText(text);
 }

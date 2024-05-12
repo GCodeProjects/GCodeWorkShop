@@ -38,10 +38,10 @@ public:
 	QString documentType() const;
 	QString brief() const;
 
-	Document *createDocument() const;
-	DocumentInfo *createDocumentInfo();
-	DocumentStyle *createDocumentStyle();
-	DocumentWidgetProperties *createDocumentWidgetProperties();
+	Document* createDocument() const;
+	DocumentInfo* createDocumentInfo();
+	DocumentStyle* createDocumentStyle();
+	DocumentWidgetProperties* createDocumentWidgetProperties();
 };
 
 #endif // GCODERPRODUCER_H

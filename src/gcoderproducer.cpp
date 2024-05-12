@@ -48,25 +48,25 @@ QString GCoderProducer::brief() const
 	return "Text edit for g-codes.";
 }
 
-Document *GCoderProducer::createDocument() const
+Document* GCoderProducer::createDocument() const
 {
-	GCoderDocument *gdoc = new GCoderDocument();
+	GCoderDocument* gdoc = new GCoderDocument();
 	gdoc->setDocumentStyle(documentStyle());
 	gdoc->setDocumentWidgetProperties(documentWidgetProperties());
 	return gdoc;
 }
 
-DocumentInfo *GCoderProducer::createDocumentInfo()
+DocumentInfo* GCoderProducer::createDocumentInfo()
 {
 	return new GCoderInfo();
 }
 
-DocumentStyle *GCoderProducer::createDocumentStyle()
+DocumentStyle* GCoderProducer::createDocumentStyle()
 {
 	return new GCoderStyle();
 }
 
-DocumentWidgetProperties *GCoderProducer::createDocumentWidgetProperties()
+DocumentWidgetProperties* GCoderProducer::createDocumentWidgetProperties()
 {
 	return new GCoderWidgetProperties();
 }

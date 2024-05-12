@@ -39,7 +39,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-RenumberDialog::RenumberDialog(QWidget *parent, QSettings *settings) :
+RenumberDialog::RenumberDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -131,7 +131,7 @@ void RenumberDialog::removeAllClicked()
 	mCheckDivide->setEnabled(false);
 }
 
-void RenumberDialog::setOptions(const RenumberOptions &options)
+void RenumberDialog::setOptions(const RenumberOptions& options)
 {
 	startAtInput->setValue(options.startAt);
 	formInput->setValue(options.from);
@@ -200,7 +200,7 @@ RenumberOptions RenumberDialog::options()
 	return options;
 }
 
-void RenumberDialog::loadSettings(const RenumberOptions &defaultOptions)
+void RenumberDialog::loadSettings(const RenumberOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

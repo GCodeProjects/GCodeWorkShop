@@ -26,11 +26,11 @@
 #include "chamferoptions.h" // for ChamferOptions
 
 
-void Addons::doChamfer(QWidget *parent, QSettings *settings)
+void Addons::doChamfer(QWidget* parent, QSettings* settings)
 {
 	QString key = "ChamferDialog";
-	ChamferDialog *dlg;
-	dlg = parent->findChild<ChamferDialog *>(key);
+	ChamferDialog* dlg;
+	dlg = parent->findChild<ChamferDialog*>(key);
 
 	if (!dlg) {
 		dlg = new ChamferDialog(parent, settings);

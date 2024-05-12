@@ -45,7 +45,7 @@ class DocumentManager : public QObject
 	Q_OBJECT
 
 public:
-	explicit DocumentManager(QObject *parent = nullptr);
+	explicit DocumentManager(QObject* parent = nullptr);
 	~DocumentManager();
 
 	/**
@@ -57,16 +57,16 @@ public:
 	 * @see setActiveDocument(Document *)
 	 * @see setActiveDocument(const QString &)
 	 */
-	Document *activeDocument() const;
+	Document* activeDocument() const;
 
-	bool isActiveDocument(Document *document);
+	bool isActiveDocument(Document* document);
 
-	bool setActiveDocument(Document *doc);
+	bool setActiveDocument(Document* doc);
 
-	bool setActiveDocument(const QString &filePath);
+	bool setActiveDocument(const QString& filePath);
 
 signals:
-	void activeDocumentChanged(Document *document);
+	void activeDocumentChanged(Document* document);
 
 public:
 	/**
@@ -76,11 +76,11 @@ public:
 	 *
 	 * @return Pointer to the document or \c nullptr if there is no document with the specified identifier.
 	 */
-	Document *findDocumentById(const QString &id) const;
+	Document* findDocumentById(const QString& id) const;
 
-	Document *findDocumentByFilePath(const QString &filePath) const;
+	Document* findDocumentByFilePath(const QString& filePath) const;
 
-	QList<Document *> documentList() const;
+	QList<Document*> documentList() const;
 
 	/**
 	 * @brief Returns the DocumentStyle for the specified document type.
@@ -90,14 +90,14 @@ public:
 	 * @return Returns an instance of a descendant of the DocumentStyle class for the specified document type,
 	 * or an instance of the DocumentStyle class if an unknown type is specified.
 	 */
-	DocumentStyle::Ptr documentStyle(const QString &type) const;
+	DocumentStyle::Ptr documentStyle(const QString& type) const;
 
 	/**
 	 * @brief Sets the DocumentStyle for the specified document type.
 	 *
 	 * @param style A descendant of the DocumentStyle class for the specified document type.
 	 */
-	void setDocumentStyle(const DocumentStyle::Ptr &style);
+	void setDocumentStyle(const DocumentStyle::Ptr& style);
 
 	/**
 	 * @brief  Returns the DocumentWidgetProperties for the specified document type.
@@ -107,14 +107,14 @@ public:
 	 * @return Returns an instance of a descendant of the DocumentWidgetProperties class for the specified
 	 * document type, or an instance of the DocumentWidgetProperties class if an unknown type is specified.
 	 */
-	DocumentWidgetProperties::Ptr documentWidgetProperties(const QString &type) const;
+	DocumentWidgetProperties::Ptr documentWidgetProperties(const QString& type) const;
 
 	/**
 	 * @brief Sets the DocumentWidgetProperties for the specified document type.
 	 *
 	 * @param property A descendant of the DocumentWidgetProperties class for the specified document type.
 	 */
-	void setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &property);
+	void setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr& property);
 
 	/**
 	 * @brief Applies the new \c documentStyle and \c DocumentWidgetProperties to documents of the specified type.
@@ -124,7 +124,7 @@ public:
 	 *
 	 * @param type Document type.
 	 */
-	void updateDocuments(const QString &type);
+	void updateDocuments(const QString& type);
 
 	/**
 	 * @brief Creates an instance of a document of the specified type.
@@ -137,11 +137,11 @@ public:
 	 *
 	 * @return Document or nullptr if the specified type is not registered.
 	 */
-	Document *createDocument(const QString &type, const QString &id);
+	Document* createDocument(const QString& type, const QString& id);
 
-	DocumentInfo::Ptr createDocumentInfo(const QString &type);
-	DocumentStyle::Ptr createDocumentStyle(const QString &type);
-	DocumentWidgetProperties::Ptr createDocumentWidgetProperties(const QString &type);
+	DocumentInfo::Ptr createDocumentInfo(const QString& type);
+	DocumentStyle::Ptr createDocumentStyle(const QString& type);
+	DocumentWidgetProperties::Ptr createDocumentWidgetProperties(const QString& type);
 
 	/**
 	 * @brief Returns the DocumentProducer for the specified document type.
@@ -152,7 +152,7 @@ public:
 	 *
 	 * @return DocumentProducer or nullptr if the specified type is not registered.
 	 */
-	DocumentProducer *documentProducer(const QString &type) const;
+	DocumentProducer* documentProducer(const QString& type) const;
 
 	/**
 	 * @brief Registers a DocumentProducer for the some document type.
@@ -161,49 +161,49 @@ public:
 	 *
 	 * @param producer Registered DocumentProducer.
 	 */
-	void registerDocumentProducer(DocumentProducer *producer);
+	void registerDocumentProducer(DocumentProducer* producer);
 
-	void setMdiArea(QMdiArea *mdi);
+	void setMdiArea(QMdiArea* mdi);
 
 signals:
 	void documentListChanged();
 	void modificationChanged(bool mod);
 	void cursorPositionChanged();
 	void selectionChanged();
-	void briefChanged(Document *doc);
+	void briefChanged(Document* doc);
 	void redoAvailable(bool available);
 	void undoAvailable(bool available);
-	bool closeRequested(Document *doc);
-	void closed(Document *doc);
-	void customContextMenuRequested(Document *doc, const QPoint &point);
-	void fileWatchRequest(const QString &filePath, bool watch);
+	bool closeRequested(Document* doc);
+	void closed(Document* doc);
+	void customContextMenuRequested(Document* doc, const QPoint& point);
+	void fileWatchRequest(const QString& filePath, bool watch);
 
 protected slots:
-	void activeWindowChanged(QMdiSubWindow *window);
-	void removeDocument(Document *document);
-	void documentModificationChanged(Document *doc, bool mod);
-	void documentCursorPositionChanged(Document *doc);
-	void documentSelectionChanged(Document *doc);
-	void documentBriefChanged(Document *doc);
-	void documentRedoAvailable(Document *doc, bool available);
-	void documentUndoAvailable(Document *doc, bool available);
-	bool documentCloseRequest(Document *doc);
-	void documentClosed(Document *doc);
-	void customContextMenuRequest(Document *doc, const QPoint &point);
-	void documentFileWatchRequest(const QString &filePath, bool watch);
+	void activeWindowChanged(QMdiSubWindow* window);
+	void removeDocument(Document* document);
+	void documentModificationChanged(Document* doc, bool mod);
+	void documentCursorPositionChanged(Document* doc);
+	void documentSelectionChanged(Document* doc);
+	void documentBriefChanged(Document* doc);
+	void documentRedoAvailable(Document* doc, bool available);
+	void documentUndoAvailable(Document* doc, bool available);
+	bool documentCloseRequest(Document* doc);
+	void documentClosed(Document* doc);
+	void customContextMenuRequest(Document* doc, const QPoint& point);
+	void documentFileWatchRequest(const QString& filePath, bool watch);
 
 protected:
-	void addDocument(Document *document, const QString &id);
+	void addDocument(Document* document, const QString& id);
 
 	class  DocumentListItem
 	{
 	public:
 		QString id;
-		Document *document;
-		QMdiSubWindow *subWindow;
+		Document* document;
+		QMdiSubWindow* subWindow;
 	};
 
-	QMap<QString, DocumentProducer *> m_producers;
+	QMap<QString, DocumentProducer*> m_producers;
 	QList<DocumentListItem> m_docList;
 	QPointer<QMdiArea> m_area;
 };

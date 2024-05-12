@@ -24,7 +24,7 @@ class QString;
 
 
 namespace Utils {
-void blockSkip(QString &tx, bool remove, bool inc);
+void blockSkip(QString& tx, bool remove, bool inc);
 }
 
 #endif // UTILS_BLOCKSKIP_H

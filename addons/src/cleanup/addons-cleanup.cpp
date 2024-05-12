@@ -30,12 +30,12 @@
 #include "utils-removebyregex.h"    // for removeTextByRegExp
 
 
-bool Addons::doCleanUp(QWidget *parent, QSettings *settings,  QString &tx)
+bool Addons::doCleanUp(QWidget* parent, QSettings* settings,  QString& tx)
 {
 	bool result = false;
 	QString key = "CleanUpDialog";
-	CleanUpDialog *dlg;
-	dlg = parent->findChild<CleanUpDialog *>(key);
+	CleanUpDialog* dlg;
+	dlg = parent->findChild<CleanUpDialog*>(key);
 
 	if (!dlg) {
 		dlg = new CleanUpDialog(parent, settings);

@@ -38,7 +38,7 @@
 #define CFG_KEY_RIGHT_TRIANGLE  "RightTriangle"
 
 
-void TriangleOptions::load(QSettings *settings, const TriangleOptions &defaultOptions)
+void TriangleOptions::load(QSettings* settings, const TriangleOptions& defaultOptions)
 {
 	angleA.in = settings->value(CFG_KEY_ANGLE_A_IN, defaultOptions.angleA.in).toBool();
 	angleA.value = settings->value(CFG_KEY_ANGLE_A_VALUE, defaultOptions.angleA.value).toDouble();
@@ -55,7 +55,7 @@ void TriangleOptions::load(QSettings *settings, const TriangleOptions &defaultOp
 	rightTriangle = settings->value(CFG_KEY_RIGHT_TRIANGLE, defaultOptions.rightTriangle).toBool();
 }
 
-void TriangleOptions::save(QSettings *settings)
+void TriangleOptions::save(QSettings* settings)
 {
 	settings->setValue(CFG_KEY_ANGLE_A_IN, angleA.in);
 	settings->setValue(CFG_KEY_ANGLE_A_VALUE, angleA.value);

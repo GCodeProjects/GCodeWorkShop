@@ -30,8 +30,8 @@ struct DotOptions {
 	bool    convert;
 	int     divider;
 
-	void load(QSettings *settings, const DotOptions &defaultOptions);
-	void save(QSettings *settings);
+	void load(QSettings* settings, const DotOptions& defaultOptions);
+	void save(QSettings* settings);
 };
 
 #endif // DOTOPTIONS_H

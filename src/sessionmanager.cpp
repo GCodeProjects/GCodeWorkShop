@@ -34,7 +34,7 @@
 #define CFG_SECTION                 "SessionManager"
 
 
-SessionManager::SessionManager(DocumentManager *documentManager, QObject *parent) :
+SessionManager::SessionManager(DocumentManager* documentManager, QObject* parent) :
 	QObject(parent),
 	m_documentManager(documentManager)
 {
@@ -45,9 +45,9 @@ SessionManager::SessionManager(DocumentManager *documentManager, QObject *parent
 	m_sessions.append(item);
 }
 
-bool SessionManager::addSession(const QString &name)
+bool SessionManager::addSession(const QString& name)
 {
-	const QString &sessionName = name.simplified();
+	const QString& sessionName = name.simplified();
 
 	if (sessionName.isEmpty()) {
 		return false;
@@ -70,7 +70,7 @@ bool SessionManager::addSession(const QString &name)
 	return true;
 }
 
-bool SessionManager::removeSession(const QString &name)
+bool SessionManager::removeSession(const QString& name)
 {
 	int ind = index(name);
 
@@ -85,7 +85,7 @@ bool SessionManager::removeSession(const QString &name)
 	return true;
 }
 
-bool SessionManager::renameSession(const QString &oldName, const QString &newName)
+bool SessionManager::renameSession(const QString& oldName, const QString& newName)
 {
 	if (newName.isEmpty()) {
 		return false;
@@ -108,7 +108,7 @@ bool SessionManager::renameSession(const QString &oldName, const QString &newNam
 	return true;
 }
 
-bool SessionManager::copySession(const QString &from, const QString &to)
+bool SessionManager::copySession(const QString& from, const QString& to)
 {
 	if (to.isEmpty()) {
 		return false;
@@ -146,7 +146,7 @@ QString SessionManager::currentSession() const
 	return m_sessions.at(0).name;
 }
 
-bool SessionManager::setCurrentSession(const QString &name)
+bool SessionManager::setCurrentSession(const QString& name)
 {
 	int ind = index(name);
 
@@ -170,18 +170,18 @@ QStringList SessionManager::sessionList() const
 {
 	QStringList list;
 
-	for (const SessionItem &item : m_sessions) {
+	for (const SessionItem& item : m_sessions) {
 		list.append(item.name);
 	}
 
 	return list;
 }
 
-void SessionManager::setSessionList(const QStringList &list)
+void SessionManager::setSessionList(const QStringList& list)
 {
 	QList<SessionItem> newList;
 
-	for (const QString &name : list) {
+	for (const QString& name : list) {
 		SessionItem item;
 		int ind = index(name);
 
@@ -228,9 +228,9 @@ void SessionManager::setSessionsLimit(int lim)
 	emit saveRequest();
 }
 
-bool SessionManager::addFile(const DocumentInfo::Ptr &fileInfo)
+bool SessionManager::addFile(const DocumentInfo::Ptr& fileInfo)
 {
-	SessionItem &item = m_sessions[0];
+	SessionItem& item = m_sessions[0];
 
 	if (item.index(fileInfo->filePath) >= 0) {
 		// A file with the same name already exists.
@@ -247,9 +247,9 @@ bool SessionManager::addFile(const DocumentInfo::Ptr &fileInfo)
 	return true;
 }
 
-void SessionManager::removeFile(const QString &filePath)
+void SessionManager::removeFile(const QString& filePath)
 {
-	SessionItem &item = m_sessions[0];
+	SessionItem& item = m_sessions[0];
 	int index = item.index(filePath);
 
 	if (index < 0) {
@@ -264,7 +264,7 @@ void SessionManager::removeFile(const QString &filePath)
 
 void SessionManager::clearFiles()
 {
-	SessionItem &item = m_sessions[0];
+	SessionItem& item = m_sessions[0];
 
 	if (item.files.size()) {
 		item.files.clear();
@@ -273,9 +273,9 @@ void SessionManager::clearFiles()
 	}
 }
 
-bool SessionManager::documentInfo(DocumentInfo::Ptr &info) const
+bool SessionManager::documentInfo(DocumentInfo::Ptr& info) const
 {
-	const SessionItem &item = m_sessions.at(0);
+	const SessionItem& item = m_sessions.at(0);
 	int index = item.index(info->filePath);
 
 	if (index < 0) {
@@ -287,9 +287,9 @@ bool SessionManager::documentInfo(DocumentInfo::Ptr &info) const
 	return true;
 }
 
-bool SessionManager::setDocumentInfo(const DocumentInfo::Ptr &info)
+bool SessionManager::setDocumentInfo(const DocumentInfo::Ptr& info)
 {
-	SessionItem &item = m_sessions[0];
+	SessionItem& item = m_sessions[0];
 	int index = item.index(info->filePath);
 
 	if (index < 0) {
@@ -308,9 +308,9 @@ QList<DocumentInfo::Ptr> SessionManager::documentInfoList() const
 	return m_sessions.at(0).files;
 }
 
-void SessionManager::setDocumentInfoList(const QList<DocumentInfo::Ptr> &infoList)
+void SessionManager::setDocumentInfoList(const QList<DocumentInfo::Ptr>& infoList)
 {
-	SessionItem &item = m_sessions[0];
+	SessionItem& item = m_sessions[0];
 	item.files = infoList;
 	item.trim(m_filesLimit);
 	emit sessionListChanged(sessionList());
@@ -337,7 +337,7 @@ void SessionManager::setFilesLimit(int lim)
 	m_filesLimit = lim;
 	bool changed = false;
 
-	for (SessionItem &item : m_sessions) {
+	for (SessionItem& item : m_sessions) {
 		if (item.trim(m_filesLimit)) {
 			changed = true;
 		}
@@ -350,7 +350,7 @@ void SessionManager::setFilesLimit(int lim)
 	emit saveRequest();
 }
 
-void SessionManager::load(QSettings *cfg)
+void SessionManager::load(QSettings* cfg)
 {
 	cfg->beginGroup(CFG_SECTION);
 	m_sessionsLimit = cfg->value(CFG_KEY_SESSIONS_LIMIT, m_sessionsLimit).toInt();
@@ -387,7 +387,7 @@ void SessionManager::load(QSettings *cfg)
 				break;
 			}
 
-			const QString &type = cfg->value(DOCUMENTINFO_CFG_KEY_TYPE).toString();
+			const QString& type = cfg->value(DOCUMENTINFO_CFG_KEY_TYPE).toString();
 			DocumentInfo::Ptr info = m_documentManager->createDocumentInfo(type);
 			info->load(cfg);
 			item.files.append(info);
@@ -407,19 +407,19 @@ void SessionManager::load(QSettings *cfg)
 	emit sessionListChanged(sessionList());
 }
 
-void SessionManager::save(QSettings *cfg) const
+void SessionManager::save(QSettings* cfg) const
 {
 	cfg->beginGroup(CFG_SECTION);
 	cfg->remove("");
 	int sessionCount = 0;
 
-	for (const SessionItem &item : m_sessions) {
+	for (const SessionItem& item : m_sessions) {
 		cfg->beginGroup(QString::number(++sessionCount));
 		cfg->setValue(CFG_KEY_SESSION_NAME, item.name);
 
 		int infoCount = 0;
 
-		for (const DocumentInfo::Ptr &info : item.files) {
+		for (const DocumentInfo::Ptr& info : item.files) {
 			cfg->beginGroup(QString::number(++infoCount));
 			info->save(cfg);
 			cfg->endGroup();
@@ -433,7 +433,7 @@ void SessionManager::save(QSettings *cfg) const
 	cfg->endGroup();
 }
 
-int SessionManager::index(const QString &name) const
+int SessionManager::index(const QString& name) const
 {
 	for (int i = 0; i < m_sessions.size(); i++) {
 		if (name == m_sessions.at(i).name) {
@@ -456,7 +456,7 @@ bool SessionManager::trim(int lim)
 	return changed;
 }
 
-int SessionManager::SessionItem::index(const QString &filePath) const
+int SessionManager::SessionItem::index(const QString& filePath) const
 {
 	for (int i = 0; i < files.size(); i++) {
 		if (filePath == files.at(i)->filePath) {
@@ -479,7 +479,7 @@ bool SessionManager::SessionItem::trim(int lim)
 	return changed;
 }
 
-int SessionManager::SessionItem::add(const DocumentInfo::Ptr &fileInfo, int lim)
+int SessionManager::SessionItem::add(const DocumentInfo::Ptr& fileInfo, int lim)
 {
 	int ind = index(fileInfo->filePath);
 

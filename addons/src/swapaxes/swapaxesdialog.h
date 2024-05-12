@@ -39,13 +39,13 @@ class SwapAxesDialog : public QDialog, private Ui::SwapAxesDialog
 	Q_OBJECT
 
 public:
-	explicit SwapAxesDialog(QWidget *parent, QSettings *settings);
+	explicit SwapAxesDialog(QWidget* parent, QSettings* settings);
 	~SwapAxesDialog();
 
-	void setOptions(const SwapAxesOptions &options);
+	void setOptions(const SwapAxesOptions& options);
 	SwapAxesOptions options();
 
-	void loadSettings(const SwapAxesOptions &defaultOptions);
+	void loadSettings(const SwapAxesOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 private slots:

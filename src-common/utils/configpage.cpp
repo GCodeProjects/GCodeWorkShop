@@ -27,7 +27,7 @@
 #include "utils/configpage.h"
 
 
-const QString &ConfigPage::toolTip()
+const QString& ConfigPage::toolTip()
 {
 	static QString tooltip = ("");
 	return tooltip;
@@ -42,7 +42,7 @@ void ConfigPage::add(QSharedPointer<ConfigPage> child)
 	mChild.append(child);
 }
 
-void ConfigPage::add(ConfigPage *child)
+void ConfigPage::add(ConfigPage* child)
 {
 	add(QSharedPointer<ConfigPage>(child));
 }
@@ -52,22 +52,22 @@ QList<QSharedPointer<ConfigPage> > ConfigPage::pages()
 	return mChild;
 }
 
-QWidget *ConfigPage::widget()
+QWidget* ConfigPage::widget()
 {
 	if (mWidget == nullptr) {
 		mWidget = doWidget();
-		connect(mWidget, SIGNAL(destroyed(QObject *)), SLOT(widgetDestroed(QObject *)));
+		connect(mWidget, SIGNAL(destroyed(QObject*)), SLOT(widgetDestroed(QObject*)));
 	}
 
 	return mWidget;
 }
 
-QWidget *ConfigPage::doWidget()
+QWidget* ConfigPage::doWidget()
 {
 	return new QFrame();
 }
 
-void ConfigPage::widgetDestroed(QObject *object)
+void ConfigPage::widgetDestroed(QObject* object)
 {
 	if (object == mWidget) {
 		mWidget = 0;

@@ -33,7 +33,7 @@
 // TODO: change a path to the file
 #define TEMPLATE_PATH             "/usr/share/edytornc/TEMPLATE"
 
-newFileDialog::newFileDialog(QWidget *parent) :
+newFileDialog::newFileDialog(QWidget* parent) :
 	QDialog(parent),
 	ui(new Ui::newFileDialog)
 {
@@ -49,7 +49,7 @@ newFileDialog::newFileDialog(QWidget *parent) :
 		path.setPath(QDir::homePath());
 	}
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	QDir savedPath(settings.value("TemplatePath", path.canonicalPath()).toString());
 
@@ -95,7 +95,7 @@ void newFileDialog::fillFileCombo()
 
 void newFileDialog::saveSettings()
 {
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	settings.setValue("TemplatePath", path.canonicalPath());
 }

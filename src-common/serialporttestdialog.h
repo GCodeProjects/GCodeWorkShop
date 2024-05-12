@@ -41,7 +41,7 @@ class SerialPortTestDialog : public QDialog, private Ui::SerialPortTestDialog
 	Q_OBJECT
 
 public:
-	SerialPortTestDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+	SerialPortTestDialog(QWidget* parent = 0, Qt::WindowFlags f = Qt::Dialog);
 	~SerialPortTestDialog();
 
 private slots:
@@ -70,8 +70,8 @@ private:
 	QString sendAtEnd;
 	QString sendAtBegining;
 
-	QSerialPort *comPort;
-	QTimer *timer;
+	QSerialPort* comPort;
+	QTimer* timer;
 	long int count;
 	double lineDelay;
 	bool readyCont;

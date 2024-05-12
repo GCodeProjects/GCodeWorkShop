@@ -37,11 +37,11 @@
 #include "utils-swapaxes.h"
 
 
-void Utils::swapAxes(QPlainTextEdit *textEdit,
+void Utils::swapAxes(QPlainTextEdit* textEdit,
                      bool highlightChanges,
                      int highlightColor,
                      int commentId,
-                     const SwapAxesOptions &opt)
+                     const SwapAxesOptions& opt)
 {
 	QString textToFind = opt.from;
 	QString replacedText = opt.to;
@@ -76,12 +76,12 @@ void Utils::swapAxes(QPlainTextEdit *textEdit,
 	textEdit->setTextCursor(startCursor);
 }
 
-bool Utils::swapAxes(QPlainTextEdit *textEdit,
+bool Utils::swapAxes(QPlainTextEdit* textEdit,
                      bool underlineChanges,
                      int underlineColor,
                      int commentId,
-                     const QString &textToFind,
-                     const QString &replacedText,
+                     const QString& textToFind,
+                     const QString& replacedText,
                      double min,
                      double max,
                      int oper,
@@ -97,7 +97,7 @@ bool Utils::swapAxes(QPlainTextEdit *textEdit,
 	QString newText, foundText;
 	bool inComment;
 	int commentPos;
-	QTextDocument *document;
+	QTextDocument* document;
 	int cursorStart, cursorEnd;
 
 	cursorStart = 0;

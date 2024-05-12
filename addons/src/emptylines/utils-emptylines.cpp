@@ -25,7 +25,7 @@
 #include "utils-emptylines.h"
 
 
-void Utils::insertEmptyLines(QString &tx)
+void Utils::insertEmptyLines(QString& tx)
 {
 	if (tx.contains(QLatin1String("\r\n"))) {
 		tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
@@ -34,7 +34,7 @@ void Utils::insertEmptyLines(QString &tx)
 	}
 }
 
-void Utils::removeEmptyLines(QString &tx)
+void Utils::removeEmptyLines(QString& tx)
 {
 	int i;
 	QRegularExpression regex;

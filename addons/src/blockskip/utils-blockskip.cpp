@@ -28,7 +28,7 @@
 #include "utils-blockskip.h"
 
 
-void Utils::blockSkip(QString &tx, bool remove, bool inc)
+void Utils::blockSkip(QString& tx, bool remove, bool inc)
 {
 	int num = 0;
 	QRegularExpression regex;

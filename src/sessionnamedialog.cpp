@@ -29,7 +29,7 @@ class QWidget;
 #include "sessionnamedialog.h"
 
 
-SessionNameDialog::SessionNameDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
+SessionNameDialog::SessionNameDialog(QWidget* parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
 	setupUi(this);
 	setWindowTitle(tr("New session..."));

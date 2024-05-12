@@ -55,7 +55,7 @@ public:
 
 protected:
 	int m_mode;
-	QPlainTextEdit *m_edit;
+	QPlainTextEdit* m_edit;
 	int m_selectionStart;   // QPlainTextEdit::selectionStart()
 	int m_selectionEnd;     // QPlainTextEdit::selectionEnd()
 	int m_fragmentStart;

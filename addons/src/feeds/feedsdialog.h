@@ -43,17 +43,17 @@ class FeedsDialog : public QDialog, private Ui::FeedsDialog
 	Q_OBJECT
 
 public:
-	FeedsDialog(QWidget *parent, QSettings *settings);
+	FeedsDialog(QWidget* parent, QSettings* settings);
 	~FeedsDialog();
 
-	void setOptions(const FeedsOptions &options);
+	void setOptions(const FeedsOptions& options);
 	FeedsOptions options();
 
-	void loadSettings(const FeedsOptions &defaultOptions);
+	void loadSettings(const FeedsOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 protected:
-	bool eventFilter(QObject *obj, QEvent *ev);
+	bool eventFilter(QObject* obj, QEvent* ev);
 
 protected slots:
 	void inputChanged();

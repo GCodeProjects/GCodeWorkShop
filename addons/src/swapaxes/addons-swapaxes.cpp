@@ -28,12 +28,12 @@
 #include "utils-swapaxes.h"     // for swapAxes, COMMENT_ID_UNKNOWN
 
 
-int Addons::doSwapAxes(QWidget *parent, QSettings *settings, QPlainTextEdit *textEdit)
+int Addons::doSwapAxes(QWidget* parent, QSettings* settings, QPlainTextEdit* textEdit)
 {
 	int result = 0;
 	QString key = "SwapAxesDialog";
-	SwapAxesDialog *dlg;
-	dlg = parent->findChild<SwapAxesDialog *>(key);
+	SwapAxesDialog* dlg;
+	dlg = parent->findChild<SwapAxesDialog*>(key);
 
 	if (!dlg) {
 		dlg = new SwapAxesDialog(parent, settings);

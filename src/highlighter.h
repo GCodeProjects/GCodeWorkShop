@@ -43,26 +43,26 @@ class Highlighter : public QSyntaxHighlighter
 	Q_OBJECT
 
 public:
-	Highlighter(QTextDocument *parent);
+	Highlighter(QTextDocument* parent);
 
 	void setHColors(const HighlightColors hColors, const QFont fnt);
 	void setHighlightMode(int mode);
 
 protected:
-	void highlightBlock(const QString &text);
-	void highlightBlockCommon(const QString &tx);
+	void highlightBlock(const QString& text);
+	void highlightBlockCommon(const QString& tx);
 
 private:
-	void highlightInside(const QString &tx, int pos, int maxlen);
+	void highlightInside(const QString& tx, int pos, int maxlen);
 	void loadRules();
-	void highlightBlockSinuRule(const QString &text);
-	void highlightBlockFanucRule(const QString &text);
-	void highlightBlockOkumaRule(const QString &text);
-	void highlightBlockSinuOldRule(const QString &text);
-	void highlightBlockHeidRule(const QString &text);
-	void highlightBlockHeidIsoRule(const QString &text);
-	void highlightBlockToolTipsRule(const QString &text);
-	void highlightBlockLinuxCNCRule(const QString &text);
+	void highlightBlockSinuRule(const QString& text);
+	void highlightBlockFanucRule(const QString& text);
+	void highlightBlockOkumaRule(const QString& text);
+	void highlightBlockSinuOldRule(const QString& text);
+	void highlightBlockHeidRule(const QString& text);
+	void highlightBlockHeidIsoRule(const QString& text);
+	void highlightBlockToolTipsRule(const QString& text);
+	void highlightBlockLinuxCNCRule(const QString& text);
 	HighlightColors highlightColors;
 	QFont font;
 	int m_highlightMode;

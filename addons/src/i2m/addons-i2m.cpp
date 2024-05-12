@@ -26,11 +26,11 @@
 #include "i2moptions.h" // for I2MOptions
 
 
-void Addons::doI2M(QWidget *parent, QSettings *settings)
+void Addons::doI2M(QWidget* parent, QSettings* settings)
 {
 	QString key = "DI2MDialog";
-	I2MDialog *dlg;
-	dlg = parent->findChild<I2MDialog *>(key);
+	I2MDialog* dlg;
+	dlg = parent->findChild<I2MDialog*>(key);
 
 	if (!dlg) {
 		dlg = new I2MDialog(parent, settings);

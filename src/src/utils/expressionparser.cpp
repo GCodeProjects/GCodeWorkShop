@@ -31,7 +31,7 @@
 #include <utils/expressionparser.h>
 
 
-int Utils::processBrc(QString *str)
+int Utils::processBrc(QString* str)
 {
 	QRegularExpression regex;
 	QString par, partmp;
@@ -77,7 +77,7 @@ int Utils::processBrc(QString *str)
 	return (err);
 }
 
-int Utils::compute(QString *str)
+int Utils::compute(QString* str)
 {
 	QRegularExpression regex;
 	QString val1, val2, partmp;

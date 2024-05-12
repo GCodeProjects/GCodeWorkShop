@@ -28,12 +28,12 @@
 #include "utils-i2mprog.h"  // for i2mprog
 
 
-int Addons::doI2MProg(QWidget *parent, QSettings *settings,  QString &tx)
+int Addons::doI2MProg(QWidget* parent, QSettings* settings,  QString& tx)
 {
 	int result = 0;
 	QString key = "I2MProgDialog";
-	I2MProgDialog *dlg;
-	dlg = parent->findChild<I2MProgDialog *>(key);
+	I2MProgDialog* dlg;
+	dlg = parent->findChild<I2MProgDialog*>(key);
 
 	if (!dlg) {
 		dlg = new I2MProgDialog(parent, settings);

@@ -42,13 +42,13 @@ class I2MProgDialog : public QDialog, private Ui::I2MProgDialog
 	Q_OBJECT
 
 public:
-	I2MProgDialog(QWidget *parent, QSettings *settings);
+	I2MProgDialog(QWidget* parent, QSettings* settings);
 	~I2MProgDialog();
 
-	void setOptions(const I2MProgOptions &options);
+	void setOptions(const I2MProgOptions& options);
 	I2MProgOptions options();
 
-	void loadSettings(const I2MProgOptions &defaultOptions);
+	void loadSettings(const I2MProgOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 private slots:

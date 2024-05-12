@@ -39,7 +39,7 @@ class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialo
 	Q_OBJECT
 
 public:
-	SerialPortConfigDialog(QWidget *parent = 0, QString confName = "",
+	SerialPortConfigDialog(QWidget* parent = 0, QString confName = "",
 	                       Qt::WindowFlags f = Qt::Dialog);
 	~SerialPortConfigDialog();
 
@@ -78,11 +78,11 @@ private slots:
 private:
 	QString browseForDir(const QString dir, QString windowTitle);
 
-	QButtonGroup *baudGroup;
-	QButtonGroup *dataBitsGroup;
-	QButtonGroup *stopBitsGroup;
-	QButtonGroup *parityGroup;
-	QButtonGroup *flowCtlGroup;
+	QButtonGroup* baudGroup;
+	QButtonGroup* dataBitsGroup;
+	QButtonGroup* stopBitsGroup;
+	QButtonGroup* parityGroup;
+	QButtonGroup* flowCtlGroup;
 	QString configName;
 };
 

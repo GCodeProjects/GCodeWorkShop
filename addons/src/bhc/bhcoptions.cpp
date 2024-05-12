@@ -29,7 +29,7 @@
 #define CFG_SECTION_YELLOW  "YellowTab"
 
 
-void BHCOptions::load(QSettings *settings, const BHCOptions &defaultOptions)
+void BHCOptions::load(QSettings* settings, const BHCOptions& defaultOptions)
 {
 	settings->beginGroup(CFG_SECTION_GREEN);
 	green.load(settings, defaultOptions.green);
@@ -48,7 +48,7 @@ void BHCOptions::load(QSettings *settings, const BHCOptions &defaultOptions)
 	settings->endGroup();
 }
 
-void BHCOptions::save(QSettings *settings)
+void BHCOptions::save(QSettings* settings)
 {
 	settings->beginGroup(CFG_SECTION_GREEN);
 	green.save(settings);

@@ -38,7 +38,7 @@
 #define CFG_KEY_Z_IN        "zIn"
 
 
-void FeedsOptions::load(QSettings *settings, const FeedsOptions &defaultOptions)
+void FeedsOptions::load(QSettings* settings, const FeedsOptions& defaultOptions)
 {
 	diam.value = settings->value(CFG_KEY_DIAM_VALUE, defaultOptions.diam.value).toDouble();
 	diam.in = settings->value(CFG_KEY_DIAM_IN, defaultOptions.diam.in).toBool();
@@ -55,7 +55,7 @@ void FeedsOptions::load(QSettings *settings, const FeedsOptions &defaultOptions)
 	z.in = settings->value(CFG_KEY_Z_IN, defaultOptions.z.in).toBool();
 }
 
-void FeedsOptions::save(QSettings *settings)
+void FeedsOptions::save(QSettings* settings)
 {
 	settings->setValue(CFG_KEY_DIAM_VALUE, diam.value);
 	settings->setValue(CFG_KEY_DIAM_IN, diam.in);

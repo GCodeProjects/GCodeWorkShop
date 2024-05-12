@@ -67,8 +67,8 @@ public:
 	 * @param deadLine Allowable time to execute operation without show
 	 *        QProgressDialog, in msec.
 	 */
-	LongJobHelper(QWidget *parent = 0,
-	              const QString &title = "Slow operation",
+	LongJobHelper(QWidget* parent = 0,
+	              const QString& title = "Slow operation",
 	              int deadLine = DEFAULT_DEADLINE);
 	~LongJobHelper() {;}
 
@@ -80,7 +80,7 @@ public:
 	 * @param message
 	 * @param lazyCheck The function check() does the real check once from lazyCheck.
 	 */
-	void begin(int maximum, const QString &message, int lazyCheck = DEFAULT_LAZY_CHECK);
+	void begin(int maximum, const QString& message, int lazyCheck = DEFAULT_LAZY_CHECK);
 
 	/**
 	 * @brief End of checks.

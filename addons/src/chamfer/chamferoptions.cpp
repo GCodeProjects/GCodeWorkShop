@@ -34,7 +34,7 @@
 #define CFG_KEY_WIDTH_IN        "WidthIn"
 
 
-void ChamferOptions::load(QSettings *settings, const ChamferOptions &defaultOptions)
+void ChamferOptions::load(QSettings* settings, const ChamferOptions& defaultOptions)
 {
 	angle.value = settings->value(CFG_KEY_ANGLE_VALUE, defaultOptions.angle.value).toDouble();
 	angle.in = settings->value(CFG_KEY_ANGLE_IN, defaultOptions.angle.in).toBool();
@@ -48,7 +48,7 @@ void ChamferOptions::load(QSettings *settings, const ChamferOptions &defaultOpti
 	width.in = settings->value(CFG_KEY_WIDTH_IN, defaultOptions.width.in).toBool();
 }
 
-void ChamferOptions::save(QSettings *settings)
+void ChamferOptions::save(QSettings* settings)
 {
 	settings->setValue(CFG_KEY_ANGLE_VALUE, angle.value);
 	settings->setValue(CFG_KEY_ANGLE_IN, angle.in);

@@ -25,7 +25,7 @@ class QWidget;
 
 
 namespace Addons {
-void doChamfer(QWidget *parent, QSettings *settings);
+void doChamfer(QWidget* parent, QSettings* settings);
 }
 
 #endif // ADDONS_CHAMFER_H

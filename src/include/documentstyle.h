@@ -33,21 +33,21 @@ public:
 	typedef std::shared_ptr<DocumentStyle> Ptr;
 
 	DocumentStyle();
-	DocumentStyle(const DocumentStyle &that);
+	DocumentStyle(const DocumentStyle& that);
 	virtual ~DocumentStyle();
 
 	virtual QString documentType() const;
 
-	virtual DocumentStyle *clone() const;
+	virtual DocumentStyle* clone() const;
 
-	virtual DocumentStyle &operator=(const DocumentStyle &that);
+	virtual DocumentStyle& operator=(const DocumentStyle& that);
 
-	void load(QSettings *cfg);
-	void save(QSettings *cfg) const;
+	void load(QSettings* cfg);
+	void save(QSettings* cfg) const;
 
 protected:
-	virtual void loadChild(QSettings *cfg);
-	virtual void saveChild(QSettings *cfg) const;
+	virtual void loadChild(QSettings* cfg);
+	virtual void saveChild(QSettings* cfg) const;
 };
 
 #endif // DOCUMENTSTYLE_H

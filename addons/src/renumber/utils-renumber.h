@@ -26,11 +26,11 @@ struct RenumberOptions;
 
 
 namespace Utils {
-void renumber(const RenumberOptions &opt, QString &tx);
-void renumberWithoutN(const RenumberOptions &opt, QString &tx, int lineCount);
-void renumberWithN(const RenumberOptions &opt, QString &tx);
-void renumberAll(const RenumberOptions &opt, QString &tx, int lineCount);
-void removeAll(QString &tx);
+void renumber(const RenumberOptions& opt, QString& tx);
+void renumberWithoutN(const RenumberOptions& opt, QString& tx, int lineCount);
+void renumberWithN(const RenumberOptions& opt, QString& tx);
+void renumberAll(const RenumberOptions& opt, QString& tx, int lineCount);
+void removeAll(QString& tx);
 }
 
 #endif // UTILSREMOVEBY_REGEX_H

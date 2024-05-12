@@ -42,19 +42,19 @@ class CleanUpDialog : public QDialog, private Ui::CleanUpDialog
 	Q_OBJECT
 
 public:
-	explicit CleanUpDialog(QWidget *parent, QSettings *settings);
+	explicit CleanUpDialog(QWidget* parent, QSettings* settings);
 	~CleanUpDialog();
 
 	void setText(QString text);
 
-	void setOptions(const CleanUpOptions &options);
+	void setOptions(const CleanUpOptions& options);
 	CleanUpOptions options();
 
-	void loadSettings(const CleanUpOptions &defaultOptions);
+	void loadSettings(const CleanUpOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 private:
-	QMenu *contextMenu;
+	QMenu* contextMenu;
 
 	void highlightFindText(QRegularExpression regex);
 	void newRow();
@@ -63,7 +63,7 @@ private slots:
 	void onCellCliced(int row, int col);
 	void highlightText(int row, int col);
 	void cellChangedSlot(int row, int col);
-	void contextMenuReq(const QPoint &pos);
+	void contextMenuReq(const QPoint& pos);
 	void removeRow();
 	void onFinished(int result);
 

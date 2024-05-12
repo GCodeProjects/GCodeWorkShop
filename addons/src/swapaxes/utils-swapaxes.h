@@ -37,18 +37,18 @@ enum {
 
 
 namespace Utils {
-void swapAxes(QPlainTextEdit *textEdit,
+void swapAxes(QPlainTextEdit* textEdit,
               bool highlightChanges,
               int highlightColor,
               int commentId,
-              const SwapAxesOptions &opt);
+              const SwapAxesOptions& opt);
 
-bool swapAxes(QPlainTextEdit *textEdit,
+bool swapAxes(QPlainTextEdit* textEdit,
               bool underlineChanges,
               int underlineColor,
               int commentId,
-              const QString &textToFind,
-              const QString &replacedText,
+              const QString& textToFind,
+              const QString& replacedText,
               double min,
               double max,
               int oper,

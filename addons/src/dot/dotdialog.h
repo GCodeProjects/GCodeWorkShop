@@ -42,17 +42,17 @@ class DotDialog : public QDialog, private Ui::DotDialog
 	Q_OBJECT
 
 public:
-	DotDialog(QWidget *parent, QSettings *settings);
+	DotDialog(QWidget* parent, QSettings* settings);
 	~DotDialog();
 
-	void setOptions(const DotOptions &options);
+	void setOptions(const DotOptions& options);
 	DotOptions options();
 
-	void loadSettings(const DotOptions &defaultOptions);
+	void loadSettings(const DotOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 private slots:
-	void inputChanged(const QString &text);
+	void inputChanged(const QString& text);
 	void atEndClicked();
 	void divideClicked();
 	void spinBoxVal(int val);

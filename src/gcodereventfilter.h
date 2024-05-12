@@ -39,30 +39,30 @@ class GCoderEventFilter : public QObject
 	Q_OBJECT
 
 public:
-	explicit GCoderEventFilter(QPlainTextEdit *textEdit, QObject *parent = nullptr);
+	explicit GCoderEventFilter(QPlainTextEdit* textEdit, QObject* parent = nullptr);
 
 	bool isToolTipEnable() const;
 	void setToolTipEnable(bool enable);
 
-	void setToolTipRegExp(const QRegularExpression &regexp);
+	void setToolTipRegExp(const QRegularExpression& regexp);
 
 	QHash<QString, QString> tips() const;
-	void setTips(const QHash<QString, QString> &tips);
+	void setTips(const QHash<QString, QString>& tips);
 
-	QString wordForPosition(const QPoint &pos) const;
+	QString wordForPosition(const QPoint& pos) const;
 
 signals:
 	void requestInLineCalc();
 	void requestUnderLine();
 
 protected:
-	bool eventFilter(QObject *obj, QEvent *event) override;
-	bool toolTipEvent(QWidget *widget, QHelpEvent *event);
-	bool mouseButtonDblClickEvent(QMouseEvent *event);
-	bool keyEvent(QKeyEvent *event);
+	bool eventFilter(QObject* obj, QEvent* event) override;
+	bool toolTipEvent(QWidget* widget, QHelpEvent* event);
+	bool mouseButtonDblClickEvent(QMouseEvent* event);
+	bool keyEvent(QKeyEvent* event);
 
 protected:
-	QPlainTextEdit *m_textEdit;
+	QPlainTextEdit* m_textEdit;
 	QHash<QString, QString> m_tips;
 	bool m_toolTipEnable;
 	QRegularExpression m_toolTipRegex;

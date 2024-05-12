@@ -26,11 +26,11 @@
 #include "triangleoptions.h"    // for TriangleOptions
 
 
-void Addons::doTriangle(QWidget *parent, QSettings *settings)
+void Addons::doTriangle(QWidget* parent, QSettings* settings)
 {
 	QString key = "TriangleDialog";
-	TriangleDialog *dlg;
-	dlg = parent->findChild<TriangleDialog *>(key);
+	TriangleDialog* dlg;
+	dlg = parent->findChild<TriangleDialog*>(key);
 
 	if (!dlg) {
 		dlg = new TriangleDialog(parent, settings);

@@ -57,7 +57,7 @@
 
 #define MAXLISTS        20
 
-FindInFiles::FindInFiles(QSplitter *parent): QWidget(parent)
+FindInFiles::FindInFiles(QSplitter* parent): QWidget(parent)
 {
 	f_parent = parent;
 	setupUi(this);
@@ -154,7 +154,7 @@ void FindInFiles::find()
 		fileName = "*";
 	}
 
-	QProgressDialog *progressDialog = new QProgressDialog(this);
+	QProgressDialog* progressDialog = new QProgressDialog(this);
 	progressDialog->setCancelButtonText(tr("&Cancel"));
 	progressDialog->setRange(0, 100);
 	progressDialog->setWindowTitle(tr("Find Files"));
@@ -166,11 +166,11 @@ void FindInFiles::find()
 	progressDialog->close();
 
 	if (notFound) {
-		QTableWidgetItem *fileNameItem = new QTableWidgetItem(tr("No"));
+		QTableWidgetItem* fileNameItem = new QTableWidgetItem(tr("No"));
 		fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-		QTableWidgetItem *infoNameItem = new QTableWidgetItem(tr("files"));
+		QTableWidgetItem* infoNameItem = new QTableWidgetItem(tr("files"));
 		infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-		QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("found."));
+		QTableWidgetItem* sizeItem = new QTableWidgetItem(tr("found."));
 		sizeItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 		filesTable->insertRow(0);
 		filesTable->setItem(0, 0, fileNameItem);
@@ -186,7 +186,7 @@ void FindInFiles::find()
 }
 
 bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFound,
-                            const QString findText, QString fileFilter, QProgressDialog *progressDialog)
+                            const QString findText, QString fileFilter, QProgressDialog* progressDialog)
 {
 	int pos;
 	QRegularExpression regex;
@@ -218,7 +218,7 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
 		                                QDir::AllDirs | QDir::NoSymLinks | QDir::Readable | QDir::NoDotAndDotDot));
 	}
 
-	foreach (const QString &dirName, dirs) {
+	foreach (const QString& dirName, dirs) {
 		notFound = findFiles(directory.absolutePath() + "/" + dirName, mainDir, notFound, findText,
 		                     fileFilter, progressDialog);
 	}
@@ -346,19 +346,19 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
 					subDir += "/";
 				}
 
-				QTableWidgetItem *fileNameItem = new QTableWidgetItem(QDir::toNativeSeparators(
+				QTableWidgetItem* fileNameItem = new QTableWidgetItem(QDir::toNativeSeparators(
 				        subDir) + files[i]);
 				fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-				QTableWidgetItem *infoNameItem = new QTableWidgetItem(comment_tx);
+				QTableWidgetItem* infoNameItem = new QTableWidgetItem(comment_tx);
 				infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-				QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
+				QTableWidgetItem* sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
 				sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
 				//QTableWidgetItem *dateItem = new QTableWidgetItem(QFileInfo(file).lastModified().toString(Qt::SystemLocaleShortDate));
 				//dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-				QTableWidgetItem *dateItem = new QTableWidgetItem();
+				QTableWidgetItem* dateItem = new QTableWidgetItem();
 				dateItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 				dateItem->setData(Qt::DisplayRole, QFileInfo(file).lastModified());
 
@@ -388,12 +388,12 @@ void FindInFiles::createFilesTable()
 	connect(filesTable, SIGNAL(cellClicked(int, int)), this, SLOT(filePreview(int, int)));
 }
 
-void FindInFiles::closeEvent(QCloseEvent *event)
+void FindInFiles::closeEvent(QCloseEvent* event)
 {
 	QStringList list;
 	QString item;
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("FindFileDialog");
 
 	settings.setValue("WholeWords", wholeWordsCheckBox->isChecked());
@@ -473,7 +473,7 @@ void FindInFiles::readSettings()
 	directoryComboBox->clear();
 	fileComboBox->clear();
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 
 	intCapsLock = settings.value("IntCapsLock", true).toBool();
 
@@ -517,7 +517,7 @@ void FindInFiles::filesTableClicked(int x, int y)
 {
 	Q_UNUSED(y);
 
-	QTableWidgetItem *item = filesTable->item(x, 0);
+	QTableWidgetItem* item = filesTable->item(x, 0);
 
 	QString dir = directoryComboBox->currentText();
 
@@ -532,7 +532,7 @@ void FindInFiles::filePreview(int x, int y)
 {
 	Q_UNUSED(y);
 
-	QTableWidgetItem *item = filesTable->item(x, 0);
+	QTableWidgetItem* item = filesTable->item(x, 0);
 
 	QApplication::setOverrideCursor(Qt::BusyCursor);
 
@@ -588,7 +588,7 @@ void FindInFiles::filePreview(int x, int y)
 	QApplication::restoreOverrideCursor();
 }
 
-bool FindInFiles::findText(const QString &exp, QTextDocument::FindFlags options,
+bool FindInFiles::findText(const QString& exp, QTextDocument::FindFlags options,
                            bool ignoreComments)
 {
 	bool found = false;
@@ -665,7 +665,7 @@ void FindInFiles::highlightFindText(QString searchString, QTextDocument::FindFla
 	QColor lineColor = QColor(Qt::yellow).lighter(155);
 	selection.format.setBackground(lineColor);
 
-	QTextDocument *doc = preview->document();
+	QTextDocument* doc = preview->document();
 	QTextCursor cursor = preview->textCursor();
 	cursor.setPosition(0);
 
@@ -688,11 +688,11 @@ void FindInFiles::highlightFindText(QString searchString, QTextDocument::FindFla
 	preview->setExtraSelections(findTextExtraSelections);
 }
 
-bool FindInFiles::eventFilter(QObject *obj, QEvent *ev)
+bool FindInFiles::eventFilter(QObject* obj, QEvent* ev)
 {
 	if (obj == textComboBox) {
 		if (ev->type() == QEvent::KeyPress) {
-			QKeyEvent *k = (QKeyEvent *) ev;
+			QKeyEvent* k = (QKeyEvent*) ev;
 
 			if ((k->key() == Qt::Key_Return) || (k->key() == Qt::Key_Enter)) {
 				find();

@@ -25,7 +25,7 @@
 #include "utils-i2mprog.h"
 
 
-int Utils::i2mprog(QString tx, const QString &addr, bool toInch, int prec)
+int Utils::i2mprog(QString tx, const QString& addr, bool toInch, int prec)
 {
 	int count = 0;
 	QRegularExpression regex;

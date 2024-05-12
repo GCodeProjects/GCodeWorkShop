@@ -59,7 +59,7 @@ GCoderWidgetProperties::GCoderWidgetProperties()
 	syntaxH = true;
 }
 
-GCoderWidgetProperties::GCoderWidgetProperties(const GCoderWidgetProperties &that) : DocumentWidgetProperties()
+GCoderWidgetProperties::GCoderWidgetProperties(const GCoderWidgetProperties& that) : DocumentWidgetProperties()
 {
 	GCoderWidgetProperties::operator=(that);
 }
@@ -69,25 +69,25 @@ QString GCoderWidgetProperties::documentType() const
 	return GCoder::DOCUMENT_TYPE;
 }
 
-DocumentWidgetProperties *GCoderWidgetProperties::clone() const
+DocumentWidgetProperties* GCoderWidgetProperties::clone() const
 {
-	GCoderWidgetProperties *prop = new GCoderWidgetProperties();
+	GCoderWidgetProperties* prop = new GCoderWidgetProperties();
 	prop->operator=(*this);
 	return prop;
 }
 
-DocumentWidgetProperties &GCoderWidgetProperties::operator=(const DocumentWidgetProperties &that)
+DocumentWidgetProperties& GCoderWidgetProperties::operator=(const DocumentWidgetProperties& that)
 {
 	try {
-		const GCoderWidgetProperties &style = dynamic_cast<const GCoderWidgetProperties &>(that);
+		const GCoderWidgetProperties& style = dynamic_cast<const GCoderWidgetProperties&>(that);
 		return GCoderWidgetProperties::operator=(style);
-	}  catch (std::bad_cast &e) {
+	}  catch (std::bad_cast& e) {
 	}
 
 	return DocumentWidgetProperties::operator=(that);
 }
 
-GCoderWidgetProperties &GCoderWidgetProperties::operator=(const GCoderWidgetProperties &that)
+GCoderWidgetProperties& GCoderWidgetProperties::operator=(const GCoderWidgetProperties& that)
 {
 	DocumentWidgetProperties::operator=(that);
 
@@ -105,7 +105,7 @@ GCoderWidgetProperties &GCoderWidgetProperties::operator=(const GCoderWidgetProp
 	return *this;
 }
 
-void GCoderWidgetProperties::loadChild(QSettings *cfg)
+void GCoderWidgetProperties::loadChild(QSettings* cfg)
 {
 	cfg->beginGroup(CFG_SECTION);
 	intCapsLock = cfg->value(CFG_KEY_INTCAPSLOCK, intCapsLock).toBool();
@@ -121,7 +121,7 @@ void GCoderWidgetProperties::loadChild(QSettings *cfg)
 	cfg->endGroup();
 }
 
-void GCoderWidgetProperties::saveChild(QSettings *cfg) const
+void GCoderWidgetProperties::saveChild(QSettings* cfg) const
 {
 	cfg->beginGroup(CFG_SECTION);
 	cfg->setValue(CFG_KEY_INTCAPSLOCK, intCapsLock);

@@ -26,8 +26,8 @@ class QString;
 
 
 namespace Utils {
-int removeSpaces(QString &tx, std::function<bool(int)> interrupt);
-int insertSpaces(QString &tx, std::function<bool(int)> interrupt);
+int removeSpaces(QString& tx, std::function<bool(int)> interrupt);
+int insertSpaces(QString& tx, std::function<bool(int)> interrupt);
 }
 
 #endif // UTILS_SPACES_H

@@ -30,7 +30,7 @@
 #include "inlinecalc.h"
 
 
-InLineCalc::InLineCalc(QWidget *parent) : QLineEdit(parent)
+InLineCalc::InLineCalc(QWidget* parent) : QLineEdit(parent)
 {
 	setHidden(true);
 	setClearButtonEnabled(true);
@@ -50,13 +50,13 @@ InLineCalc::InLineCalc(QWidget *parent) : QLineEdit(parent)
 
 	connect(this, SIGNAL(editingFinished()), this, SLOT(done()));
 
-	QCompleter *completer = new QCompleter(m_wordList, this);
+	QCompleter* completer = new QCompleter(m_wordList, this);
 	completer->setCaseSensitivity(Qt::CaseInsensitive);
 	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
 	setCompleter(completer);
 }
 
-void InLineCalc::showCalc(const QString &address, const QString &value, const QRect &cursorRect)
+void InLineCalc::showCalc(const QString& address, const QString& value, const QRect& cursorRect)
 {
 	m_address = address;
 	setText(value);
@@ -67,7 +67,7 @@ void InLineCalc::showCalc(const QString &address, const QString &value, const QR
 	setFocus();
 }
 
-void InLineCalc::keyPressEvent(QKeyEvent *event)
+void InLineCalc::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() != Qt::Key_Return) {
 		QLineEdit::keyPressEvent(event);

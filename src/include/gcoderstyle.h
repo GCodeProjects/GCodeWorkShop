@@ -55,17 +55,17 @@ class GCoderStyle: public DocumentStyle
 {
 public:
 	GCoderStyle();
-	GCoderStyle(const GCoderStyle &that);
+	GCoderStyle(const GCoderStyle& that);
 
 	virtual QString documentType() const override;
 
-	DocumentStyle *clone() const override;
+	DocumentStyle* clone() const override;
 
-	DocumentStyle &operator=(const DocumentStyle &that) override;
-	virtual GCoderStyle &operator=(const GCoderStyle &that);
+	DocumentStyle& operator=(const DocumentStyle& that) override;
+	virtual GCoderStyle& operator=(const GCoderStyle& that);
 
 	// Import from old settings
-	void importFromV0(QSettings *cfg);
+	void importFromV0(QSettings* cfg);
 
 	QString fontName;
 	int fontSize;
@@ -74,8 +74,8 @@ public:
 	HighlightColors hColors;
 
 protected:
-	void loadChild(QSettings *cfg) override;
-	void saveChild(QSettings *cfg) const override;
+	void loadChild(QSettings* cfg) override;
+	void saveChild(QSettings* cfg) const override;
 };
 
 #endif // GCODERSTYLE_H

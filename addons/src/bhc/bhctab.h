@@ -45,17 +45,17 @@ class BHCTab : public QWidget, public Ui::BHCTab
 	Q_OBJECT
 
 public:
-	BHCTab(QWidget *parent = 0);
+	BHCTab(QWidget* parent = 0);
 	~BHCTab();
 
-	void setOptions(const BHCTabOptions &options);
+	void setOptions(const BHCTabOptions& options);
 	BHCTabOptions options();
 
 protected:
-	bool eventFilter(QObject *obj, QEvent *ev);
+	bool eventFilter(QObject* obj, QEvent* ev);
 
 protected slots:
-	void contextMenuReq(const QPoint &pos);
+	void contextMenuReq(const QPoint& pos);
 	void inputChk();
 
 signals:
@@ -67,11 +67,11 @@ private slots:
 	void inputChanged();
 
 private:
-	QMenu *contextMenu;
-	QAbstractItemModel *model;
-	QAction *addCommentsId;
-	QAction *addCommentsParaId;
-	QActionGroup *commentActGroup;
+	QMenu* contextMenu;
+	QAbstractItemModel* model;
+	QAction* addCommentsId;
+	QAction* addCommentsParaId;
+	QActionGroup* commentActGroup;
 };
 
 #endif // BHCDTAB_H

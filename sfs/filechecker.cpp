@@ -45,7 +45,7 @@
 #include "ui_filechecker.h"
 
 
-FileChecker::FileChecker(QWidget *parent) :
+FileChecker::FileChecker(QWidget* parent) :
 	QDialog(parent),
 	ui(new Ui::FileChecker)
 {
@@ -67,7 +67,7 @@ FileChecker::FileChecker(QWidget *parent) :
 
 	createDiff();
 
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("FileCheck");
 	splitterState = settings.value("VSplitterState", QByteArray()).toByteArray();
 	ui->vSplitter->restoreState(splitterState);
@@ -78,7 +78,7 @@ FileChecker::FileChecker(QWidget *parent) :
 
 FileChecker::~FileChecker()
 {
-	QSettings &settings = *Medium::instance().settings();
+	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("FileCheck");
 	settings.setValue("VSplitterState", ui->vSplitter->saveState());
 	settings.endGroup();
@@ -179,16 +179,16 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
 
 			//qDebug() << files[i] << size;
 
-			QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
+			QTableWidgetItem* fileNameItem = new QTableWidgetItem(files[i]);
 			fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-			QTableWidgetItem *infoNameItem = new QTableWidgetItem(comment_tx);
+			QTableWidgetItem* infoNameItem = new QTableWidgetItem(comment_tx);
 			infoNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-			QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
+			QTableWidgetItem* sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
 			sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-			QTableWidgetItem *dateItem = new QTableWidgetItem();
+			QTableWidgetItem* dateItem = new QTableWidgetItem();
 			dateItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 			dateItem->setData(Qt::DisplayRole, QFileInfo(file).lastModified());
 
@@ -223,7 +223,7 @@ void FileChecker::findFiles(const QString startDir, QStringList fileFilter)
 				comment_tx = tr("New");
 			}
 
-			QTableWidgetItem *statusItem = new QTableWidgetItem(comment_tx);
+			QTableWidgetItem* statusItem = new QTableWidgetItem(comment_tx);
 			statusItem->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 			statusItem->setToolTip(tr("Status of received file:\n"
 			                          "New - file does not exists in Search path.\n"
@@ -268,7 +268,7 @@ void FileChecker::acceptFile()
 {
 	int row = ui->fileTableWidget->currentRow();
 
-	QTableWidgetItem *item = ui->fileTableWidget->item(row, 0);
+	QTableWidgetItem* item = ui->fileTableWidget->item(row, 0);
 
 	if (item) {
 		QString dir = ui->savePathLabel->text();
@@ -294,7 +294,7 @@ void FileChecker::acceptFile()
 		if (QFile::rename(path1, path2)) {
 			QPixmap pix(":/images/ok.png");
 			QPixmap resPix = pix.scaled(17, 17, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-			QLabel *lbl = new QLabel;
+			QLabel* lbl = new QLabel;
 			lbl->setPixmap(resPix);
 			lbl->setAlignment(Qt::AlignCenter);
 			ui->fileTableWidget->setCellWidget(row, 2, lbl);
@@ -309,7 +309,7 @@ void FileChecker::deleteFile()
 {
 	int row = ui->fileTableWidget->currentRow();
 
-	QTableWidgetItem *item = ui->fileTableWidget->item(row, 0);
+	QTableWidgetItem* item = ui->fileTableWidget->item(row, 0);
 
 	if (item) {
 		QString dir = ui->savePathLabel->text();
@@ -323,7 +323,7 @@ void FileChecker::deleteFile()
 		if (QFile::exists(path1) && QFile::remove(path1)) {
 			QPixmap pix(":/images/cancel.png");
 			QPixmap resPix = pix.scaled(17, 17, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-			QLabel *lbl = new QLabel;
+			QLabel* lbl = new QLabel;
 			lbl->setPixmap(resPix);
 			lbl->setAlignment(Qt::AlignCenter);
 			ui->fileTableWidget->setCellWidget(row, 2, new QLabel);
@@ -429,13 +429,13 @@ void FileChecker::filesTableCurrentCellChanged(int row, int col, int pRow, int p
 		return;
 	}
 
-	QTableWidgetItem *item = ui->fileTableWidget->item(row, 0);
+	QTableWidgetItem* item = ui->fileTableWidget->item(row, 0);
 
 	if (item) {
 		setUpdatesEnabled(false);
 
 		if ((pRow >= 0) && (pRow < ui->fileTableWidget->rowCount())) {
-			QTableWidgetItem *pItem = ui->fileTableWidget->item(pRow, 0);
+			QTableWidgetItem* pItem = ui->fileTableWidget->item(pRow, 0);
 
 			if (pItem) {
 				if (QFile::exists(path1 + pItem->text())) {

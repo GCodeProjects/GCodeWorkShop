@@ -26,7 +26,7 @@ class QWidget;
 
 
 namespace Addons {
-bool doRenumber(QWidget *parent, QSettings *settings, QString &tx);
+bool doRenumber(QWidget* parent, QSettings* settings, QString& tx);
 }
 
 #endif // ADDONS_RENUMBER_H

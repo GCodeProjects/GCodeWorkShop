@@ -51,7 +51,7 @@
 #include "triangle/addons-triangle.h"
 
 
-Addons::Actions::Actions(QObject *parent) : QObject(parent),
+Addons::Actions::Actions(QObject* parent) : QObject(parent),
 	m_bhc(new QAction(this)),
 	m_blockSkipDecrement(new QAction(this)),
 	m_blockSkipIncrement(new QAction(this)),
@@ -256,14 +256,14 @@ void Addons::Actions::doCompileMacro()
 	}
 
 	Utils::CompileMacro compiler;
-	EdytorNc *enc = EdytorNc::instance();
+	EdytorNc* enc = EdytorNc::instance();
 
 	if (compiler.compile(ctx.text()) == -1) {
 		QMessageBox::warning(enc, tr("EdytorNc - compile macro"), compiler.status());
 		//return;
 	}
 
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(enc->newFile());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(enc->newFile());
 
 	if (gdoc) {
 		gdoc->insertText(compiler.result());
@@ -409,7 +409,7 @@ void Addons::Actions::doSplitProgramms()
 	}
 
 	for (QString it : list) {
-		GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(EdytorNc::instance()->newFile());
+		GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(EdytorNc::instance()->newFile());
 
 		if (gdoc == nullptr) {
 			continue;

@@ -32,7 +32,7 @@ class QString;
 
 
 namespace Utils {
-QStringList splitFile(const QString &text);
+QStringList splitFile(const QString& text);
 }
 
 #endif // SPLITFILE_H

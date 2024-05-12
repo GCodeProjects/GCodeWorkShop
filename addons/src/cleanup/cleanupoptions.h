@@ -30,8 +30,8 @@ struct CleanUpOptions {
 	QStringList comments;
 	QStringList selected;
 
-	void load(QSettings *settings, const CleanUpOptions &defaultOptions);
-	void save(QSettings *settings);
+	void load(QSettings* settings, const CleanUpOptions& defaultOptions);
+	void save(QSettings* settings);
 };
 
 #endif // CLEANUPOPTIONS_H

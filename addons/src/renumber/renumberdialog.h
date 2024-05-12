@@ -42,13 +42,13 @@ class RenumberDialog : public QDialog, private Ui::RenumberDialog
 	Q_OBJECT
 
 public:
-	RenumberDialog(QWidget *parent, QSettings *settings);
+	RenumberDialog(QWidget* parent, QSettings* settings);
 	~RenumberDialog();
 
-	void setOptions(const RenumberOptions &options);
+	void setOptions(const RenumberOptions& options);
 	RenumberOptions options();
 
-	void loadSettings(const RenumberOptions &defaultOptions);
+	void loadSettings(const RenumberOptions& defaultOptions);
 	void saveSettings(bool saveOptions = true);
 
 private slots:

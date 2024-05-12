@@ -35,8 +35,8 @@ struct BHCTabOptions {
 	bool    mirrorY;
 	bool    common;
 
-	void load(QSettings *settings, const BHCTabOptions &defaultOptions);
-	void save(QSettings *settings);
+	void load(QSettings* settings, const BHCTabOptions& defaultOptions);
+	void save(QSettings* settings);
 };
 
 #endif // BHCTABOPTIONS_H

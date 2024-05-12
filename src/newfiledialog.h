@@ -42,14 +42,14 @@ class newFileDialog : public QDialog
 	Q_OBJECT
 
 public:
-	explicit newFileDialog(QWidget *parent = 0);
+	explicit newFileDialog(QWidget* parent = 0);
 	~newFileDialog();
 
 	int exec();
 	QString getChosenFile();
 
 private:
-	Ui::newFileDialog *ui;
+	Ui::newFileDialog* ui;
 
 	QDir path;
 

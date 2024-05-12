@@ -41,7 +41,7 @@
 #define CFG_KEY_SIZE "Size"
 
 
-DotDialog::DotDialog(QWidget *parent, QSettings *settings) :
+DotDialog::DotDialog(QWidget* parent, QSettings* settings) :
 	QDialog(parent)
 {
 	setupUi(this);
@@ -50,8 +50,8 @@ DotDialog::DotDialog(QWidget *parent, QSettings *settings) :
 
 	setWindowTitle(tr("Insert dots"));
 
-	connect(mInput, SIGNAL(textChanged(const QString &)), this,
-	        SLOT(inputChanged(const QString &)));
+	connect(mInput, SIGNAL(textChanged(const QString&)), this,
+	        SLOT(inputChanged(const QString&)));
 	connect(mCheckAtEnd, SIGNAL(clicked()), this, SLOT(atEndClicked()));
 	connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
 	connect(mSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxVal(int)));
@@ -68,7 +68,7 @@ DotDialog::~DotDialog()
 {
 }
 
-void DotDialog::inputChanged(const QString &text)
+void DotDialog::inputChanged(const QString& text)
 {
 	Q_UNUSED(text);
 	okButton->setEnabled(mInput->hasAcceptableInput());
@@ -105,7 +105,7 @@ void DotDialog::spinBoxVal(int val)
 	}
 }
 
-void DotDialog::setOptions(const DotOptions &options)
+void DotDialog::setOptions(const DotOptions& options)
 {
 	mInput->setText(options.axes);
 	mCheckAtEnd->setChecked(!options.convert);
@@ -127,7 +127,7 @@ DotOptions DotDialog::options()
 	return options;
 }
 
-void DotDialog::loadSettings(const DotOptions &defaultOptions)
+void DotDialog::loadSettings(const DotOptions& defaultOptions)
 {
 	if (mSettings.isNull()) {
 		return;

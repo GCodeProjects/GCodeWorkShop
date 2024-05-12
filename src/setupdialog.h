@@ -64,7 +64,7 @@ class SetupDialog : public QDialog, private Ui::SetupDialog
 	Q_OBJECT
 
 public:
-	SetupDialog(QWidget *parent = 0, const AppConfig *prop = 0,
+	SetupDialog(QWidget* parent = 0, const AppConfig* prop = 0,
 	            Qt::WindowFlags f = Qt::Dialog);
 	~SetupDialog();
 
@@ -76,13 +76,13 @@ private slots:
 	void on_btnDeleteExtension_clicked();
 	void on_btnAddExtension_clicked();
 	void changeFont();
-	void changeColor(QAbstractButton *button);
+	void changeColor(QAbstractButton* button);
 	void setDefaultProp();
 	void browseButtonClicked();
 
 private:
 	AppConfig editProp;
-	QButtonGroup *colorButtons;
+	QButtonGroup* colorButtons;
 };
 
 #endif // SETUPDIALOG_H

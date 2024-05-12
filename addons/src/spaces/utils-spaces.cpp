@@ -23,7 +23,7 @@
 #include "utils-spaces.h"
 
 
-int Utils::removeSpaces(QString &tx, std::function<bool(int)> interrupt)
+int Utils::removeSpaces(QString& tx, std::function<bool(int)> interrupt)
 {
 	enum {
 		NORMAL_FLOW,
@@ -115,7 +115,7 @@ int Utils::removeSpaces(QString &tx, std::function<bool(int)> interrupt)
 	return replaced;
 }
 
-int Utils::insertSpaces(QString &tx, std::function<bool(int)> interrupt)
+int Utils::insertSpaces(QString& tx, std::function<bool(int)> interrupt)
 {
 	enum {
 		NORMAL_FLOW,

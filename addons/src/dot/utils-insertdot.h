@@ -25,7 +25,7 @@ class QString;
 
 
 namespace Utils {
-int insertDot(QString tx, const QString &addr, bool convert, int divider);
+int insertDot(QString tx, const QString& addr, bool convert, int divider);
 }
 
 #endif // UTILS_INSERTDOT_H

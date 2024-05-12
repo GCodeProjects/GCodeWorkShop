@@ -26,7 +26,7 @@
 #include "utils-comment.h"
 
 
-void Utils::paraComment(QString &tx)
+void Utils::paraComment(QString& tx)
 {
 	QStringList list = tx.split(QChar::ParagraphSeparator);
 	bool remove = false;
@@ -64,7 +64,7 @@ void Utils::paraComment(QString &tx)
 	tx.remove(tx.length() - 1, 1);
 }
 
-void Utils::semiComment(QString &tx)
+void Utils::semiComment(QString& tx)
 {
 	QStringList list = tx.split(QChar::ParagraphSeparator);
 	bool remove = false;

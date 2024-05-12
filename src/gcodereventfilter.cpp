@@ -37,7 +37,7 @@
 #include "gcodereventfilter.h"
 
 
-GCoderEventFilter::GCoderEventFilter(QPlainTextEdit *textEdit, QObject *parent) : QObject(parent),
+GCoderEventFilter::GCoderEventFilter(QPlainTextEdit* textEdit, QObject* parent) : QObject(parent),
 	m_toolTipRegex("(,[a-zA-Z]|#|@|[a-zA-Z]+(\\d+=)?)([-+]?\\d*(\\.\\d*)?)")
 {
 	m_textEdit = textEdit;
@@ -55,7 +55,7 @@ void GCoderEventFilter::setToolTipEnable(bool enable)
 	m_toolTipEnable = enable;
 }
 
-void GCoderEventFilter::setToolTipRegExp(const QRegularExpression &regexp)
+void GCoderEventFilter::setToolTipRegExp(const QRegularExpression& regexp)
 {
 	m_toolTipRegex = regexp;
 }
@@ -65,33 +65,33 @@ QHash<QString, QString> GCoderEventFilter::tips() const
 	return m_tips;
 }
 
-void GCoderEventFilter::setTips(const QHash<QString, QString> &tips)
+void GCoderEventFilter::setTips(const QHash<QString, QString>& tips)
 {
 	m_tips = tips;
 }
 
-bool GCoderEventFilter::eventFilter(QObject *obj, QEvent *event)
+bool GCoderEventFilter::eventFilter(QObject* obj, QEvent* event)
 {
 	if (obj == m_textEdit && event->type() == QEvent::ToolTip && m_toolTipEnable) {
-		QHelpEvent *he = dynamic_cast<QHelpEvent *>(event);
-		QWidget *widget = dynamic_cast<QWidget *>(obj);
+		QHelpEvent* he = dynamic_cast<QHelpEvent*>(event);
+		QWidget* widget = dynamic_cast<QWidget*>(obj);
 		return toolTipEvent(widget, he);
 	}
 
 	if (obj == m_textEdit->viewport() && event->type() == QEvent::MouseButtonDblClick) {
-		QMouseEvent *me = dynamic_cast<QMouseEvent *>(event);
+		QMouseEvent* me = dynamic_cast<QMouseEvent*>(event);
 		return mouseButtonDblClickEvent(me);
 	}
 
 	if (obj == m_textEdit && event->type() == QEvent::KeyPress) {
-		QKeyEvent *ke = dynamic_cast<QKeyEvent *>(event);
+		QKeyEvent* ke = dynamic_cast<QKeyEvent*>(event);
 		return keyEvent(ke);
 	}
 
 	return false;
 }
 
-bool GCoderEventFilter::toolTipEvent(QWidget *widget, QHelpEvent *event)
+bool GCoderEventFilter::toolTipEvent(QWidget* widget, QHelpEvent* event)
 {
 	QString word = wordForPosition(event->pos());
 
@@ -120,7 +120,7 @@ bool GCoderEventFilter::toolTipEvent(QWidget *widget, QHelpEvent *event)
 	return true;
 }
 
-QString GCoderEventFilter::wordForPosition(const QPoint &pos) const
+QString GCoderEventFilter::wordForPosition(const QPoint& pos) const
 {
 	QTextCursor cursor = m_textEdit->cursorForPosition(pos);
 	int positionInBlock = cursor.positionInBlock();
@@ -141,7 +141,7 @@ QString GCoderEventFilter::wordForPosition(const QPoint &pos) const
 }
 
 // Better word selection
-bool GCoderEventFilter::mouseButtonDblClickEvent(QMouseEvent *event)
+bool GCoderEventFilter::mouseButtonDblClickEvent(QMouseEvent* event)
 {
 	QString key;
 	QString wordDelimiters = "()[]=,;:/ ";
@@ -239,7 +239,7 @@ bool GCoderEventFilter::mouseButtonDblClickEvent(QMouseEvent *event)
 	return true;
 }
 
-bool GCoderEventFilter::keyEvent(QKeyEvent *event)
+bool GCoderEventFilter::keyEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key_Insert) {
 		m_textEdit->setOverwriteMode(!m_textEdit->overwriteMode());

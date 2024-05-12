@@ -28,12 +28,12 @@
 #include "utils-insertdot.h"    // for insertDot
 
 
-int Addons::doDot(QWidget *parent, QSettings *settings,  QString &tx)
+int Addons::doDot(QWidget* parent, QSettings* settings,  QString& tx)
 {
 	int result = 0;
 	QString key = "DotDialog";
-	DotDialog *dlg;
-	dlg = parent->findChild<DotDialog *>(key);
+	DotDialog* dlg;
+	dlg = parent->findChild<DotDialog*>(key);
 
 	if (!dlg) {
 		dlg = new DotDialog(parent, settings);

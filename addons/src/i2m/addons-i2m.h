@@ -25,7 +25,7 @@ class QWidget;
 
 
 namespace Addons {
-void doI2M(QWidget *parent, QSettings *settings);
+void doI2M(QWidget* parent, QSettings* settings);
 }
 
 #endif // ADDONS_I2M_H

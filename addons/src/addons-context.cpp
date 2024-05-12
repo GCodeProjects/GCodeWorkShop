@@ -30,7 +30,7 @@
 
 bool Addons::Context::pull(int mode)
 {
-	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(EdytorNc::instance()->activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(EdytorNc::instance()->activeDocument());
 
 	if (!gdoc) {
 		return false;
@@ -90,7 +90,7 @@ bool Addons::Context::pull(int mode)
 	return true;
 }
 
-void Addons::Context::push(const QString &text)
+void Addons::Context::push(const QString& text)
 {
 	QTextCursor cursor(m_edit->document());
 	cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
