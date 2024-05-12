@@ -39,28 +39,28 @@ struct ChamferOptions;
  */
 class ChamferDialog : public QDialog, private Ui::ChamferDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    ChamferDialog(QWidget *parent, QSettings *settings);
-    ~ChamferDialog();
+	ChamferDialog(QWidget *parent, QSettings *settings);
+	~ChamferDialog();
 
-    void setOptions(const ChamferOptions &options);
-    ChamferOptions options();
+	void setOptions(const ChamferOptions &options);
+	ChamferOptions options();
 
-    void loadSettings(const ChamferOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const ChamferOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 protected slots:
-    void inputChanged();
-    void checkBoxToggled();
+	void inputChanged();
+	void checkBoxToggled();
 
 private slots:
-    void computeButtonClicked();
-    void onFinished(int result);
+	void computeButtonClicked();
+	void onFinished(int result);
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // CHAMFERDIALOG_H

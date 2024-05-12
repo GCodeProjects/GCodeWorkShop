@@ -36,26 +36,26 @@ struct SwapAxesOptions;
 
 class SwapAxesDialog : public QDialog, private Ui::SwapAxesDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit SwapAxesDialog(QWidget *parent, QSettings *settings);
-    ~SwapAxesDialog();
+	explicit SwapAxesDialog(QWidget *parent, QSettings *settings);
+	~SwapAxesDialog();
 
-    void setOptions(const SwapAxesOptions &options);
-    SwapAxesOptions options();
+	void setOptions(const SwapAxesOptions &options);
+	SwapAxesOptions options();
 
-    void loadSettings(const SwapAxesOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const SwapAxesOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 private slots:
-    void betweenCheckBoxClicked(bool checked);
-    void modifyCheckBoxClicked(bool checked);
-    void precisionSpinBoxChanded(int val);
-    void onFinished(int result);
+	void betweenCheckBoxClicked(bool checked);
+	void modifyCheckBoxClicked(bool checked);
+	void precisionSpinBoxChanded(int val);
+	void onFinished(int result);
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // SWAPAXESDIALOG_H

@@ -32,32 +32,32 @@
 
 bool Addons::doCleanUp(QWidget *parent, QSettings *settings,  QString &tx)
 {
-    bool result = false;
-    QString key = "CleanUpDialog";
-    CleanUpDialog *dlg;
-    dlg = parent->findChild<CleanUpDialog *>(key);
+	bool result = false;
+	QString key = "CleanUpDialog";
+	CleanUpDialog *dlg;
+	dlg = parent->findChild<CleanUpDialog *>(key);
 
-    if (!dlg) {
-        dlg = new CleanUpDialog(parent, settings);
-        dlg->setObjectName(key);
-        CleanUpOptions opt;
-        opt.expressions
-                << "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))$"
-                << "(\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))"
-                << "[\n]{2,}";
-        opt.comments
-                << QObject::tr("Lines with: '(comment)")
-                << QObject::tr("Any: (comment)")
-                << QObject::tr("Empty lines:");
-        dlg->loadSettings(opt);
-    }
+	if (!dlg) {
+		dlg = new CleanUpDialog(parent, settings);
+		dlg->setObjectName(key);
+		CleanUpOptions opt;
+		opt.expressions
+		        << "('\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))$"
+		        << "(\\()[\\w,.;:/*+\\\\! $%^&-]{0,}(\\))"
+		        << "[\n]{2,}";
+		opt.comments
+		        << QObject::tr("Lines with: '(comment)")
+		        << QObject::tr("Any: (comment)")
+		        << QObject::tr("Empty lines:");
+		dlg->loadSettings(opt);
+	}
 
-    dlg->setText(tx);
+	dlg->setText(tx);
 
-    if (dlg->exec() == QDialog::Accepted) {
-        result = Utils::removeTextByRegExp(tx, dlg->options().selected);
-    }
+	if (dlg->exec() == QDialog::Accepted) {
+		result = Utils::removeTextByRegExp(tx, dlg->options().selected);
+	}
 
-    dlg->deleteLater();
-    return result;
+	dlg->deleteLater();
+	return result;
 }

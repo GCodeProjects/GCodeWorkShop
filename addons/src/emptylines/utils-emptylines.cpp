@@ -27,26 +27,26 @@
 
 void Utils::insertEmptyLines(QString &tx)
 {
-    if (tx.contains(QLatin1String("\r\n"))) {
-        tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
-    } else {
-        tx.replace(QLatin1String("\n"), QLatin1String("\n\n"));
-    }
+	if (tx.contains(QLatin1String("\r\n"))) {
+		tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
+	} else {
+		tx.replace(QLatin1String("\n"), QLatin1String("\n\n"));
+	}
 }
 
 void Utils::removeEmptyLines(QString &tx)
 {
-    int i;
-    QRegularExpression regex;
+	int i;
+	QRegularExpression regex;
 
-    regex.setPattern("[\\n]{2,}");
-    i = 0;
+	regex.setPattern("[\\n]{2,}");
+	i = 0;
 
-    while (i >= 0) {
-        i = tx.indexOf(regex, 0);
+	while (i >= 0) {
+		i = tx.indexOf(regex, 0);
 
-        if (i >= 0) {
-            tx.replace(regex, "\r\n");
-        }
-    }
+		if (i >= 0) {
+			tx.replace(regex, "\r\n");
+		}
+	}
 }

@@ -57,67 +57,67 @@
 
 
 TriangleDialog::TriangleDialog(QWidget *parent, QSettings *settings) :
-    QDialog(parent)
+	QDialog(parent)
 {
-    setupUi(this);
+	setupUi(this);
 
-    mSettings = settings;
+	mSettings = settings;
 
-    setAttribute(Qt::WA_DeleteOnClose);
-    setWindowTitle(tr("Solution of triangles"));
+	setAttribute(Qt::WA_DeleteOnClose);
+	setWindowTitle(tr("Solution of triangles"));
 
-    pic1 = new QPixmap(":/images/trig.png");
-    pic2 = new QPixmap(":/images/trig1.png");
+	pic1 = new QPixmap(":/images/trig.png");
+	pic2 = new QPixmap(":/images/trig1.png");
 
-    picLabel->setPixmap(*pic1);
-    picLabel->adjustSize();
+	picLabel->setPixmap(*pic1);
+	picLabel->adjustSize();
 
-    connect(rightTriangleCheckBox, SIGNAL(toggled(bool)), SLOT(rightTriangleCheckBoxToggled()));
-    connect(aCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(bCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(cCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(aACheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(aBCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(aCCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
-    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
+	connect(rightTriangleCheckBox, SIGNAL(toggled(bool)), SLOT(rightTriangleCheckBoxToggled()));
+	connect(aCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(bCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(cCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(aACheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(aBCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(aCCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
+	connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
+	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
-    QValidator *aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
-    aInput->setValidator(aInputValid);
-    aInput->installEventFilter(this);
+	QValidator *aInputValid = new QDoubleValidator(0.001, 9999, 3, this);
+	aInput->setValidator(aInputValid);
+	aInput->installEventFilter(this);
 
-    QValidator *bInputValid = new QDoubleValidator(0.001, 9999, 3, this);
-    bInput->setValidator(bInputValid);
-    bInput->installEventFilter(this);
+	QValidator *bInputValid = new QDoubleValidator(0.001, 9999, 3, this);
+	bInput->setValidator(bInputValid);
+	bInput->installEventFilter(this);
 
-    QValidator *cInputValid = new QDoubleValidator(0.001, 9999, 3, this);
-    cInput->setValidator(cInputValid);
-    cInput->installEventFilter(this);
+	QValidator *cInputValid = new QDoubleValidator(0.001, 9999, 3, this);
+	cInput->setValidator(cInputValid);
+	cInput->installEventFilter(this);
 
-    aAInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
-    aAInput->setValidator(aAInputValid);
-    aAInput->installEventFilter(this);
+	aAInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
+	aAInput->setValidator(aAInputValid);
+	aAInput->installEventFilter(this);
 
-    aBInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
-    aBInput->setValidator(aBInputValid);
-    aBInput->installEventFilter(this);
+	aBInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
+	aBInput->setValidator(aBInputValid);
+	aBInput->installEventFilter(this);
 
-    aCInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
-    aCInput->setValidator(aCInputValid);
-    aCInput->installEventFilter(this);
+	aCInputValid = new QDoubleValidator(0.001, 179.999, 3, this);
+	aCInput->setValidator(aCInputValid);
+	aCInput->installEventFilter(this);
 
-    setMaximumSize(width(), height());
+	setMaximumSize(width(), height());
 
-    connect(aInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(bInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(cInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(aAInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(aBInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(aCInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(aInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(bInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(cInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(aAInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(aBInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(aCInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
 
-    rightTriangleCheckBoxToggled();
-    checkBoxToggled();
+	rightTriangleCheckBoxToggled();
+	checkBoxToggled();
 }
 
 TriangleDialog::~TriangleDialog()
@@ -126,668 +126,668 @@ TriangleDialog::~TriangleDialog()
 
 bool TriangleDialog::eventFilter(QObject *obj, QEvent *ev)
 {
-    if (!qobject_cast<QLineEdit *>(obj)) {
-        // pass the event on to the parent class
-        return QDialog::eventFilter(obj, ev);
-    }
+	if (!qobject_cast<QLineEdit *>(obj)) {
+		// pass the event on to the parent class
+		return QDialog::eventFilter(obj, ev);
+	}
 
-    if (ev->type() == QEvent::KeyPress) {
-        return false;
-    }
+	if (ev->type() == QEvent::KeyPress) {
+		return false;
+	}
 
-    QKeyEvent *k = (QKeyEvent *) ev;
+	QKeyEvent *k = (QKeyEvent *) ev;
 
-    if (QLocale().decimalPoint() == '.' && k->key() == Qt::Key_Comma) {
-        QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier,
-                                ".", false, 1));
-        return true;
-    }
+	if (QLocale().decimalPoint() == '.' && k->key() == Qt::Key_Comma) {
+		QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier,
+		                        ".", false, 1));
+		return true;
+	}
 
-    if (QLocale().decimalPoint() == ',' && k->key() == Qt::Key_Period) {
-        QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Comma, Qt::NoModifier, ",",
-                                false, 1));
-        return true;
-    }
+	if (QLocale().decimalPoint() == ',' && k->key() == Qt::Key_Period) {
+		QApplication::sendEvent(obj, new QKeyEvent(QEvent::KeyPress, Qt::Key_Comma, Qt::NoModifier, ",",
+		                        false, 1));
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 void TriangleDialog::inputChanged()
 {
-    QPalette paletteRed, paletteBlue;
+	QPalette paletteRed, paletteBlue;
 
-    paletteRed.setColor(aInput->foregroundRole(), Qt::red);
-    paletteBlue.setColor(aInput->foregroundRole(), Qt::blue);
+	paletteRed.setColor(aInput->foregroundRole(), Qt::red);
+	paletteBlue.setColor(aInput->foregroundRole(), Qt::blue);
 
-    if (aInput->hasAcceptableInput()) {
-        if (aInput->isReadOnly()) {
-            aInput->setPalette(paletteBlue);
-        } else {
-            aInput->setPalette(QPalette());
-        }
-    } else {
-        aInput->setPalette(paletteRed);
-    }
+	if (aInput->hasAcceptableInput()) {
+		if (aInput->isReadOnly()) {
+			aInput->setPalette(paletteBlue);
+		} else {
+			aInput->setPalette(QPalette());
+		}
+	} else {
+		aInput->setPalette(paletteRed);
+	}
 
-    if (bInput->hasAcceptableInput()) {
-        if (bInput->isReadOnly()) {
-            bInput->setPalette(paletteBlue);
-        } else {
-            bInput->setPalette(QPalette());
-        }
-    } else {
-        bInput->setPalette(paletteRed);
-    }
+	if (bInput->hasAcceptableInput()) {
+		if (bInput->isReadOnly()) {
+			bInput->setPalette(paletteBlue);
+		} else {
+			bInput->setPalette(QPalette());
+		}
+	} else {
+		bInput->setPalette(paletteRed);
+	}
 
-    if (cInput->hasAcceptableInput()) {
-        if (cInput->isReadOnly()) {
-            cInput->setPalette(paletteBlue);
-        } else {
-            cInput->setPalette(QPalette());
-        }
-    } else {
-        cInput->setPalette(paletteRed);
-    }
+	if (cInput->hasAcceptableInput()) {
+		if (cInput->isReadOnly()) {
+			cInput->setPalette(paletteBlue);
+		} else {
+			cInput->setPalette(QPalette());
+		}
+	} else {
+		cInput->setPalette(paletteRed);
+	}
 
-    if (aAInput->hasAcceptableInput()) {
-        if (aAInput->isReadOnly()) {
-            aAInput->setPalette(paletteBlue);
-        } else {
-            aAInput->setPalette(QPalette());
-        }
-    } else {
-        aAInput->setPalette(paletteRed);
-    }
+	if (aAInput->hasAcceptableInput()) {
+		if (aAInput->isReadOnly()) {
+			aAInput->setPalette(paletteBlue);
+		} else {
+			aAInput->setPalette(QPalette());
+		}
+	} else {
+		aAInput->setPalette(paletteRed);
+	}
 
-    if (aBInput->hasAcceptableInput()) {
-        if (aBInput->isReadOnly()) {
-            aBInput->setPalette(paletteBlue);
-        } else {
-            aBInput->setPalette(QPalette());
-        }
-    } else {
-        aBInput->setPalette(paletteRed);
-    }
+	if (aBInput->hasAcceptableInput()) {
+		if (aBInput->isReadOnly()) {
+			aBInput->setPalette(paletteBlue);
+		} else {
+			aBInput->setPalette(QPalette());
+		}
+	} else {
+		aBInput->setPalette(paletteRed);
+	}
 
-    if (aCInput->hasAcceptableInput()) {
-        if (aCInput->isReadOnly()) {
-            aCInput->setPalette(paletteBlue);
-        } else {
-            aCInput->setPalette(QPalette());
-        }
-    } else {
-        aCInput->setPalette(paletteRed);
-    }
+	if (aCInput->hasAcceptableInput()) {
+		if (aCInput->isReadOnly()) {
+			aCInput->setPalette(paletteBlue);
+		} else {
+			aCInput->setPalette(QPalette());
+		}
+	} else {
+		aCInput->setPalette(paletteRed);
+	}
 }
 
 void TriangleDialog::computeButtonClicked()
 {
-    double angle1, angle2, angle3;
-    bool ok;
+	double angle1, angle2, angle3;
+	bool ok;
 
-    angle1 = QLocale().toDouble(aAInput->text(), &ok);
-    angle2 = QLocale().toDouble(aBInput->text(), &ok);
-    angle3 = QLocale().toDouble(aCInput->text(), &ok);
+	angle1 = QLocale().toDouble(aAInput->text(), &ok);
+	angle2 = QLocale().toDouble(aBInput->text(), &ok);
+	angle3 = QLocale().toDouble(aCInput->text(), &ok);
 
-    if (!aCheckBox->isChecked()) {
-        aInput->setText("--");
-    }
+	if (!aCheckBox->isChecked()) {
+		aInput->setText("--");
+	}
 
-    if (!bCheckBox->isChecked()) {
-        bInput->setText("--");
-    }
+	if (!bCheckBox->isChecked()) {
+		bInput->setText("--");
+	}
 
-    if (!cCheckBox->isChecked()) {
-        cInput->setText("--");
-    }
+	if (!cCheckBox->isChecked()) {
+		cInput->setText("--");
+	}
 
-    if (!aACheckBox->isChecked()) {
-        aAInput->setText("--");
-    }
+	if (!aACheckBox->isChecked()) {
+		aAInput->setText("--");
+	}
 
-    if (!aBCheckBox->isChecked()) {
-        aBInput->setText("--");
-    }
+	if (!aBCheckBox->isChecked()) {
+		aBInput->setText("--");
+	}
 
-    if (!aCCheckBox->isChecked()) {
-        aCInput->setText("--");
-    }
+	if (!aCCheckBox->isChecked()) {
+		aCInput->setText("--");
+	}
 
-    if ((angle1 + angle2 + angle3) > 180) {
-        return;
-    }
+	if ((angle1 + angle2 + angle3) > 180) {
+		return;
+	}
 
-    if (option1() == 0) {
-        return;
-    }
+	if (option1() == 0) {
+		return;
+	}
 
-    if (option2() == 0) {
-        return;
-    }
+	if (option2() == 0) {
+		return;
+	}
 
-    if (option3() == 0) {
-        return;
-    }
+	if (option3() == 0) {
+		return;
+	}
 
-    option4();
+	option4();
 }
 
 int TriangleDialog::option1()  //any one side and two angles known
 {
-    double side1, side2, side3, angle1, angle2, angle3;
-    bool ok;
+	double side1, side2, side3, angle1, angle2, angle3;
+	bool ok;
 
-    switch (mode) {
-    case 0x31:
-        side1 = QLocale().toDouble(aInput->text(), &ok);
-        angle1 = QLocale().toDouble(aAInput->text(), &ok);
-        angle2 = QLocale().toDouble(aBInput->text(), &ok);
-        angle3 = 180 - (angle1 + angle2);
-        break;
+	switch (mode) {
+	case 0x31:
+		side1 = QLocale().toDouble(aInput->text(), &ok);
+		angle1 = QLocale().toDouble(aAInput->text(), &ok);
+		angle2 = QLocale().toDouble(aBInput->text(), &ok);
+		angle3 = 180 - (angle1 + angle2);
+		break;
 
-    case 0x51:
-        side1 = QLocale().toDouble(aInput->text(), &ok);
-        angle1 = QLocale().toDouble(aAInput->text(), &ok);
-        angle2 = QLocale().toDouble(aCInput->text(), &ok);
-        angle3 = 180 - (angle1 + angle2);
-        break;
+	case 0x51:
+		side1 = QLocale().toDouble(aInput->text(), &ok);
+		angle1 = QLocale().toDouble(aAInput->text(), &ok);
+		angle2 = QLocale().toDouble(aCInput->text(), &ok);
+		angle3 = 180 - (angle1 + angle2);
+		break;
 
-    case 0x61:
-        side1 = QLocale().toDouble(aInput->text(), &ok);
-        angle3 = QLocale().toDouble(aBInput->text(), &ok);
-        angle2 = QLocale().toDouble(aCInput->text(), &ok);
-        angle1 = 180 - (angle2 + angle3);
-        break;
+	case 0x61:
+		side1 = QLocale().toDouble(aInput->text(), &ok);
+		angle3 = QLocale().toDouble(aBInput->text(), &ok);
+		angle2 = QLocale().toDouble(aCInput->text(), &ok);
+		angle1 = 180 - (angle2 + angle3);
+		break;
 
-    case 0x32:
-        side1 = QLocale().toDouble(bInput->text(), &ok);
-        angle1 = QLocale().toDouble(aBInput->text(), &ok);
-        angle2 = QLocale().toDouble(aAInput->text(), &ok);
-        angle3 = 180 - (angle1 + angle2);
-        break;
+	case 0x32:
+		side1 = QLocale().toDouble(bInput->text(), &ok);
+		angle1 = QLocale().toDouble(aBInput->text(), &ok);
+		angle2 = QLocale().toDouble(aAInput->text(), &ok);
+		angle3 = 180 - (angle1 + angle2);
+		break;
 
-    case 0x52:
-        side1 = QLocale().toDouble(bInput->text(), &ok);
-        angle3 = QLocale().toDouble(aAInput->text(), &ok);
-        angle2 = QLocale().toDouble(aCInput->text(), &ok);
-        angle1 = 180 - (angle2 + angle3);
-        break;
+	case 0x52:
+		side1 = QLocale().toDouble(bInput->text(), &ok);
+		angle3 = QLocale().toDouble(aAInput->text(), &ok);
+		angle2 = QLocale().toDouble(aCInput->text(), &ok);
+		angle1 = 180 - (angle2 + angle3);
+		break;
 
-    case 0x62:
-        side1 = QLocale().toDouble(bInput->text(), &ok);
-        angle1 = QLocale().toDouble(aBInput->text(), &ok);
-        angle2 = QLocale().toDouble(aCInput->text(), &ok);
-        angle3 = 180 - (angle1 + angle2);
-        break;
+	case 0x62:
+		side1 = QLocale().toDouble(bInput->text(), &ok);
+		angle1 = QLocale().toDouble(aBInput->text(), &ok);
+		angle2 = QLocale().toDouble(aCInput->text(), &ok);
+		angle3 = 180 - (angle1 + angle2);
+		break;
 
 
-    case 0x34:
-        side1 = QLocale().toDouble(cInput->text(), &ok);
-        angle3 = QLocale().toDouble(aAInput->text(), &ok);
-        angle2 = QLocale().toDouble(aBInput->text(), &ok);
-        angle1 = 180 - (angle2 + angle3);
-        break;
+	case 0x34:
+		side1 = QLocale().toDouble(cInput->text(), &ok);
+		angle3 = QLocale().toDouble(aAInput->text(), &ok);
+		angle2 = QLocale().toDouble(aBInput->text(), &ok);
+		angle1 = 180 - (angle2 + angle3);
+		break;
 
-    case 0x54:
-        side1 = QLocale().toDouble(cInput->text(), &ok);
-        angle1 = QLocale().toDouble(aCInput->text(), &ok);
-        angle2 = QLocale().toDouble(aAInput->text(), &ok);
-        angle3 = 180 - (angle1 + angle2);
-        break;
+	case 0x54:
+		side1 = QLocale().toDouble(cInput->text(), &ok);
+		angle1 = QLocale().toDouble(aCInput->text(), &ok);
+		angle2 = QLocale().toDouble(aAInput->text(), &ok);
+		angle3 = 180 - (angle1 + angle2);
+		break;
 
-    case 0x64:
-        side1 = QLocale().toDouble(cInput->text(), &ok);
-        angle1 = QLocale().toDouble(aCInput->text(), &ok);
-        angle2 = QLocale().toDouble(aBInput->text(), &ok);
-        angle3 = 180 - (angle1 + angle2);
-        break;
+	case 0x64:
+		side1 = QLocale().toDouble(cInput->text(), &ok);
+		angle1 = QLocale().toDouble(aCInput->text(), &ok);
+		angle2 = QLocale().toDouble(aBInput->text(), &ok);
+		angle3 = 180 - (angle1 + angle2);
+		break;
 
-    default:
-        return (-1);
-    }
+	default:
+		return (-1);
+	}
 
-    side2 = (side1 * sin((M_PI / 180) * angle2)) / sin((M_PI / 180) * angle1);
-    side3 = (side1 * sin((M_PI / 180) * angle3)) / sin((M_PI / 180) * angle1);
+	side2 = (side1 * sin((M_PI / 180) * angle2)) / sin((M_PI / 180) * angle1);
+	side3 = (side1 * sin((M_PI / 180) * angle3)) / sin((M_PI / 180) * angle1);
 
-    switch (mode) {
-    case 0x31:
-        bInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	switch (mode) {
+	case 0x31:
+		bInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x51:
-        bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	case 0x51:
+		bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x61:
-        bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
-        break;
+	case 0x61:
+		bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
+		break;
 
-    case 0x32:
-        aInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	case 0x32:
+		aInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x52:
-        aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
-        break;
+	case 0x52:
+		aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
+		break;
 
-    case 0x62:
-        aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	case 0x62:
+		aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		cInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x34:
-        bInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
-        break;
+	case 0x34:
+		bInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
+		break;
 
-    case 0x54 :
-        bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	case 0x54 :
+		bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x64:
-        bInput->setText(QString("%1").arg(side2, 0, 'f', 3));
-        aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
-    }
+	case 0x64:
+		bInput->setText(QString("%1").arg(side2, 0, 'f', 3));
+		aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
+	}
 
-    return (0);
+	return (0);
 }
 
 int TriangleDialog::option2()  // two sides and the included angle
 {
-    double side1, side2, side3, angle1, angle2, angle3;
-    bool ok;
+	double side1, side2, side3, angle1, angle2, angle3;
+	bool ok;
 
-    switch (mode) {
-    case 0x43:
-        side1 = QLocale().toDouble(aInput->text(), &ok);
-        side2 = QLocale().toDouble(bInput->text(), &ok);
-        angle1 = QLocale().toDouble(aCInput->text(), &ok);
-        break;
+	switch (mode) {
+	case 0x43:
+		side1 = QLocale().toDouble(aInput->text(), &ok);
+		side2 = QLocale().toDouble(bInput->text(), &ok);
+		angle1 = QLocale().toDouble(aCInput->text(), &ok);
+		break;
 
-    case 0x25:
-        side2 = QLocale().toDouble(aInput->text(), &ok);
-        side1 = QLocale().toDouble(cInput->text(), &ok);
-        angle1 = QLocale().toDouble(aBInput->text(), &ok);
-        break;
+	case 0x25:
+		side2 = QLocale().toDouble(aInput->text(), &ok);
+		side1 = QLocale().toDouble(cInput->text(), &ok);
+		angle1 = QLocale().toDouble(aBInput->text(), &ok);
+		break;
 
-    case 0x16:
-        side1 = QLocale().toDouble(bInput->text(), &ok);
-        side2 = QLocale().toDouble(cInput->text(), &ok);
-        angle1 = QLocale().toDouble(aAInput->text(), &ok);
-        break;
+	case 0x16:
+		side1 = QLocale().toDouble(bInput->text(), &ok);
+		side2 = QLocale().toDouble(cInput->text(), &ok);
+		angle1 = QLocale().toDouble(aAInput->text(), &ok);
+		break;
 
-    default:
-        return (-1);
-    }
+	default:
+		return (-1);
+	}
 
-    angle2 = (side1 * sin((M_PI / 180) * angle1)) / (side2 - side1 * cos((M_PI / 180) * angle1));
-    angle2 = atan(angle2) / (M_PI / 180);
-    side3 = (side1 * sin((M_PI / 180) * angle1)) / sin((M_PI / 180) * angle2);
-    angle3 = 180 - (angle1 + angle2);
+	angle2 = (side1 * sin((M_PI / 180) * angle1)) / (side2 - side1 * cos((M_PI / 180) * angle1));
+	angle2 = atan(angle2) / (M_PI / 180);
+	side3 = (side1 * sin((M_PI / 180) * angle1)) / sin((M_PI / 180) * angle2);
+	angle3 = 180 - (angle1 + angle2);
 
-    switch (mode) {
-    case 0x43:
-        cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	switch (mode) {
+	case 0x43:
+		cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x25:
-        bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        break;
+	case 0x25:
+		bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		break;
 
-    case 0x16:
-        aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
-    }
+	case 0x16:
+		aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
+	}
 
-    return (0);
+	return (0);
 }
 
 int TriangleDialog::option3()  // two sides and the opposite angle
 {
-    double side1, side2, side3, angle1, angle2, angle3;
-    bool ok;
+	double side1, side2, side3, angle1, angle2, angle3;
+	bool ok;
 
-    switch (mode) {
-    case 0x13:
-        side1 = QLocale().toDouble(aInput->text(), &ok);
-        side2 = QLocale().toDouble(bInput->text(), &ok);
-        angle1 = QLocale().toDouble(aAInput->text(), &ok);
-        break;
+	switch (mode) {
+	case 0x13:
+		side1 = QLocale().toDouble(aInput->text(), &ok);
+		side2 = QLocale().toDouble(bInput->text(), &ok);
+		angle1 = QLocale().toDouble(aAInput->text(), &ok);
+		break;
 
-    case 0x15:
-        side1 = QLocale().toDouble(aInput->text(), &ok);
-        side2 = QLocale().toDouble(cInput->text(), &ok);
-        angle1 = QLocale().toDouble(aAInput->text(), &ok);
-        break;
+	case 0x15:
+		side1 = QLocale().toDouble(aInput->text(), &ok);
+		side2 = QLocale().toDouble(cInput->text(), &ok);
+		angle1 = QLocale().toDouble(aAInput->text(), &ok);
+		break;
 
-    case 0x46:
-        side1 = QLocale().toDouble(cInput->text(), &ok);
-        side2 = QLocale().toDouble(bInput->text(), &ok);
-        angle1 = QLocale().toDouble(aCInput->text(), &ok);
-        break;
+	case 0x46:
+		side1 = QLocale().toDouble(cInput->text(), &ok);
+		side2 = QLocale().toDouble(bInput->text(), &ok);
+		angle1 = QLocale().toDouble(aCInput->text(), &ok);
+		break;
 
-    case 0x45:
-        side1 = QLocale().toDouble(cInput->text(), &ok);
-        side2 = QLocale().toDouble(aInput->text(), &ok);
-        angle1 = QLocale().toDouble(aCInput->text(), &ok);
-        break;
+	case 0x45:
+		side1 = QLocale().toDouble(cInput->text(), &ok);
+		side2 = QLocale().toDouble(aInput->text(), &ok);
+		angle1 = QLocale().toDouble(aCInput->text(), &ok);
+		break;
 
-    case 0x23:
-        side1 = QLocale().toDouble(bInput->text(), &ok);
-        side2 = QLocale().toDouble(aInput->text(), &ok);
-        angle1 = QLocale().toDouble(aBInput->text(), &ok);
-        break;
+	case 0x23:
+		side1 = QLocale().toDouble(bInput->text(), &ok);
+		side2 = QLocale().toDouble(aInput->text(), &ok);
+		angle1 = QLocale().toDouble(aBInput->text(), &ok);
+		break;
 
-    case 0x26:
-        side1 = QLocale().toDouble(bInput->text(), &ok);
-        side2 = QLocale().toDouble(cInput->text(), &ok);
-        angle1 = QLocale().toDouble(aBInput->text(), &ok);
-        break;
+	case 0x26:
+		side1 = QLocale().toDouble(bInput->text(), &ok);
+		side2 = QLocale().toDouble(cInput->text(), &ok);
+		angle1 = QLocale().toDouble(aBInput->text(), &ok);
+		break;
 
-    default:
-        return (-1);
-    }
+	default:
+		return (-1);
+	}
 
-    angle2 = (side2 * sin((M_PI / 180) * angle1)) / side1;
-    angle2 = asin(angle2) / (M_PI / 180);
-    angle3 = 180 - (angle1 + angle2);
-    side3 = (side1 * sin((M_PI / 180) * angle3)) / sin((M_PI / 180) * angle1);
+	angle2 = (side2 * sin((M_PI / 180) * angle1)) / side1;
+	angle2 = asin(angle2) / (M_PI / 180);
+	angle3 = 180 - (angle1 + angle2);
+	side3 = (side1 * sin((M_PI / 180) * angle3)) / sin((M_PI / 180) * angle1);
 
-    switch (mode) {
-    case 0x13:
-        cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	switch (mode) {
+	case 0x13:
+		cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x15:
-        bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        break;
+	case 0x15:
+		bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		break;
 
-    case 0x46:
-        aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
+	case 0x46:
+		aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
 
-    case 0x45:
-        bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        break;
+	case 0x45:
+		bInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aBInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		break;
 
-    case 0x23:
-        cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        break;
+	case 0x23:
+		cInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		break;
 
-    case 0x26:
-        aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
-        aCInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-        aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
-        break;
-    }
+	case 0x26:
+		aInput->setText(QString("%1").arg(side3, 0, 'f', 3));
+		aCInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+		aAInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+		break;
+	}
 
-    return (0);
+	return (0);
 }
 
 void TriangleDialog::option4()  // all sides given
 {
-    double side1, side2, side3, angle1, angle2, angle3;
-    bool ok;
+	double side1, side2, side3, angle1, angle2, angle3;
+	bool ok;
 
-    if (mode != 0x07) {
-        return;
-    }
+	if (mode != 0x07) {
+		return;
+	}
 
-    side1 = QLocale().toDouble(aInput->text(), &ok);
-    side2 = QLocale().toDouble(bInput->text(), &ok);
-    side3 = QLocale().toDouble(cInput->text(), &ok);
+	side1 = QLocale().toDouble(aInput->text(), &ok);
+	side2 = QLocale().toDouble(bInput->text(), &ok);
+	side3 = QLocale().toDouble(cInput->text(), &ok);
 
-    angle1 = ((side2 * side2) + (side3 * side3) - (side1 * side1)) / (2 * side2 * side3);
-    angle1 = acos(angle1) / (M_PI / 180);
+	angle1 = ((side2 * side2) + (side3 * side3) - (side1 * side1)) / (2 * side2 * side3);
+	angle1 = acos(angle1) / (M_PI / 180);
 
-    angle2 = (side2 * sin((M_PI / 180) * angle1)) / side1;
+	angle2 = (side2 * sin((M_PI / 180) * angle1)) / side1;
 
-    angle2 = asin(angle2) / (M_PI / 180);
-    angle3 = 180 - (angle1 + angle2);
+	angle2 = asin(angle2) / (M_PI / 180);
+	angle3 = 180 - (angle1 + angle2);
 
-    aAInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
-    aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
-    aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
+	aAInput->setText(QString("%1").arg(angle1, 0, 'f', 3));
+	aBInput->setText(QString("%1").arg(angle2, 0, 'f', 3));
+	aCInput->setText(QString("%1").arg(angle3, 0, 'f', 3));
 }
 
 void TriangleDialog::rightTriangleCheckBoxToggled()
 {
-    if (rightTriangleCheckBox->isChecked()) {
-        aACheckBox->setChecked(true);
-        aAInput->setText("90");
-        aACheckBox->setEnabled(false);
-        picLabel->setPixmap(*pic2);
-    } else {
-        aACheckBox->setChecked(false);
-        aACheckBox->setEnabled(true);
-        picLabel->setPixmap(*pic1);
-    }
+	if (rightTriangleCheckBox->isChecked()) {
+		aACheckBox->setChecked(true);
+		aAInput->setText("90");
+		aACheckBox->setEnabled(false);
+		picLabel->setPixmap(*pic2);
+	} else {
+		aACheckBox->setChecked(false);
+		aACheckBox->setEnabled(true);
+		picLabel->setPixmap(*pic1);
+	}
 }
 
 void TriangleDialog::checkBoxToggled()
 {
-    QPalette palette;
+	QPalette palette;
 
-    mode = 0;
+	mode = 0;
 
-    if (aCheckBox->isChecked()) {
-        mode |= 0x01;
-    }
+	if (aCheckBox->isChecked()) {
+		mode |= 0x01;
+	}
 
-    if (bCheckBox->isChecked()) {
-        mode |= 0x02;
-    }
+	if (bCheckBox->isChecked()) {
+		mode |= 0x02;
+	}
 
-    if (cCheckBox->isChecked()) {
-        mode |= 0x04;
-    }
+	if (cCheckBox->isChecked()) {
+		mode |= 0x04;
+	}
 
-    if (aACheckBox->isChecked()) {
-        mode |= 0x10;
-    }
+	if (aACheckBox->isChecked()) {
+		mode |= 0x10;
+	}
 
-    if (aBCheckBox->isChecked()) {
-        mode |= 0x20;
-    }
+	if (aBCheckBox->isChecked()) {
+		mode |= 0x20;
+	}
 
-    if (aCCheckBox->isChecked()) {
-        mode |= 0x40;
-    }
+	if (aCCheckBox->isChecked()) {
+		mode |= 0x40;
+	}
 
-    palette.setColor(aInput->foregroundRole(), Qt::black);
+	palette.setColor(aInput->foregroundRole(), Qt::black);
 
-    if ((mode == 0x31) || (mode == 0x32) || (mode == 0x34) || (mode == 0x51) || (mode == 0x52) ||
-            (mode == 0x54) || (mode == 0x61) || (mode == 0x62) || (mode == 0x64) || (mode == 0x07) ||
-            (mode == 0x43) || (mode == 0x25) || (mode == 0x16) || (mode == 0x13) || (mode == 0x15) ||
-            (mode == 0x23) || (mode == 0x26) || (mode == 0x45) || (mode == 0x46)) {
+	if ((mode == 0x31) || (mode == 0x32) || (mode == 0x34) || (mode == 0x51) || (mode == 0x52) ||
+	        (mode == 0x54) || (mode == 0x61) || (mode == 0x62) || (mode == 0x64) || (mode == 0x07) ||
+	        (mode == 0x43) || (mode == 0x25) || (mode == 0x16) || (mode == 0x13) || (mode == 0x15) ||
+	        (mode == 0x23) || (mode == 0x26) || (mode == 0x45) || (mode == 0x46)) {
 
-        computeButton->setEnabled(true);
+		computeButton->setEnabled(true);
 
-        if (!(mode & 0x01)) {
-            aCheckBox->setEnabled(false);
-        } else {
-            aInput->setReadOnly(false);
-            aInput->setPalette(palette);
-        }
+		if (!(mode & 0x01)) {
+			aCheckBox->setEnabled(false);
+		} else {
+			aInput->setReadOnly(false);
+			aInput->setPalette(palette);
+		}
 
-        if (!(mode & 0x02)) {
-            bCheckBox->setEnabled(false);
-        } else {
-            bInput->setReadOnly(false);
-            bInput->setPalette(palette);
-        }
+		if (!(mode & 0x02)) {
+			bCheckBox->setEnabled(false);
+		} else {
+			bInput->setReadOnly(false);
+			bInput->setPalette(palette);
+		}
 
-        if (!(mode & 0x04)) {
-            cCheckBox->setEnabled(false);
-        } else {
-            cInput->setReadOnly(false);
-            cInput->setPalette(palette);
-        }
+		if (!(mode & 0x04)) {
+			cCheckBox->setEnabled(false);
+		} else {
+			cInput->setReadOnly(false);
+			cInput->setPalette(palette);
+		}
 
-        if (!(mode & 0x10)) {
-            aACheckBox->setEnabled(false);
-        } else {
-            if (!rightTriangleCheckBox->isChecked()) {
-                aAInput->setReadOnly(false);
-                aAInput->setPalette(palette);
-            }
-        }
+		if (!(mode & 0x10)) {
+			aACheckBox->setEnabled(false);
+		} else {
+			if (!rightTriangleCheckBox->isChecked()) {
+				aAInput->setReadOnly(false);
+				aAInput->setPalette(palette);
+			}
+		}
 
-        if (!(mode & 0x20)) {
-            aBCheckBox->setEnabled(false);
-        } else {
-            aBInput->setReadOnly(false);
-            aBInput->setPalette(palette);
-        }
+		if (!(mode & 0x20)) {
+			aBCheckBox->setEnabled(false);
+		} else {
+			aBInput->setReadOnly(false);
+			aBInput->setPalette(palette);
+		}
 
-        if (!(mode & 0x40)) {
-            aCCheckBox->setEnabled(false);
-        } else {
-            aCInput->setReadOnly(false);
-            aCInput->setPalette(palette);
-        }
-    } else {
-        aCheckBox->setEnabled(true);
-        aInput->setReadOnly(true);
-        bCheckBox->setEnabled(true);
-        bInput->setReadOnly(true);
-        cCheckBox->setEnabled(true);
-        cInput->setReadOnly(true);
+		if (!(mode & 0x40)) {
+			aCCheckBox->setEnabled(false);
+		} else {
+			aCInput->setReadOnly(false);
+			aCInput->setPalette(palette);
+		}
+	} else {
+		aCheckBox->setEnabled(true);
+		aInput->setReadOnly(true);
+		bCheckBox->setEnabled(true);
+		bInput->setReadOnly(true);
+		cCheckBox->setEnabled(true);
+		cInput->setReadOnly(true);
 
-        if (!rightTriangleCheckBox->isChecked()) {
-            aACheckBox->setEnabled(true);
-            aAInput->setReadOnly(true);
-        }
+		if (!rightTriangleCheckBox->isChecked()) {
+			aACheckBox->setEnabled(true);
+			aAInput->setReadOnly(true);
+		}
 
-        aBCheckBox->setEnabled(true);
-        aBInput->setReadOnly(true);
-        aCCheckBox->setEnabled(true);
-        aCInput->setReadOnly(true);
+		aBCheckBox->setEnabled(true);
+		aBInput->setReadOnly(true);
+		aCCheckBox->setEnabled(true);
+		aCInput->setReadOnly(true);
 
-        palette.setColor(aInput->foregroundRole(), Qt::blue);
-        aInput->setPalette(palette);
-        bInput->setPalette(palette);
-        cInput->setPalette(palette);
-        aAInput->setPalette(palette);
-        aBInput->setPalette(palette);
-        aCInput->setPalette(palette);
+		palette.setColor(aInput->foregroundRole(), Qt::blue);
+		aInput->setPalette(palette);
+		bInput->setPalette(palette);
+		cInput->setPalette(palette);
+		aAInput->setPalette(palette);
+		aBInput->setPalette(palette);
+		aCInput->setPalette(palette);
 
-        computeButton->setEnabled(false);
-    }
+		computeButton->setEnabled(false);
+	}
 }
 
 void TriangleDialog::setOptions(const TriangleOptions &options)
 {
-    rightTriangleCheckBox->setChecked(options.rightTriangle);
-    aACheckBox->setChecked(options.angleA.in);
-    aAInput->setText(QString::number(options.angleA.value));
-    aBCheckBox->setChecked(options.angleB.in);
-    aBInput->setText(QString::number(options.angleB.value));
-    aCCheckBox->setChecked(options.angleC.in);
-    aCInput->setText(QString::number(options.angleC.value));
-    aCheckBox->setChecked(options.sideA.in);
-    aInput->setText(QString::number(options.sideA.value));
-    bCheckBox->setChecked(options.sideB.in);
-    bInput->setText(QString::number(options.sideB.value));
-    cCheckBox->setChecked(options.sideC.in);
-    cInput->setText(QString::number(options.sideC.value));
+	rightTriangleCheckBox->setChecked(options.rightTriangle);
+	aACheckBox->setChecked(options.angleA.in);
+	aAInput->setText(QString::number(options.angleA.value));
+	aBCheckBox->setChecked(options.angleB.in);
+	aBInput->setText(QString::number(options.angleB.value));
+	aCCheckBox->setChecked(options.angleC.in);
+	aCInput->setText(QString::number(options.angleC.value));
+	aCheckBox->setChecked(options.sideA.in);
+	aInput->setText(QString::number(options.sideA.value));
+	bCheckBox->setChecked(options.sideB.in);
+	bInput->setText(QString::number(options.sideB.value));
+	cCheckBox->setChecked(options.sideC.in);
+	cInput->setText(QString::number(options.sideC.value));
 
-    rightTriangleCheckBoxToggled();
-    checkBoxToggled();
+	rightTriangleCheckBoxToggled();
+	checkBoxToggled();
 }
 
 TriangleOptions TriangleDialog::options()
 {
-    TriangleOptions options;
+	TriangleOptions options;
 
-    options.rightTriangle = rightTriangleCheckBox->isChecked();
-    options.angleA.in = aACheckBox->isChecked();
-    options.angleA.value = aAInput->text().toDouble();
-    options.angleB.in = aBCheckBox->isChecked();
-    options.angleB.value = aBInput->text().toDouble();
-    options.angleC.in = aCCheckBox->isChecked();
-    options.angleC.value = aCInput->text().toDouble();
-    options.sideA.in = aCheckBox->isChecked();
-    options.sideA.value = aInput->text().toDouble();
-    options.sideB.in = bCheckBox->isChecked();
-    options.sideB.value = bInput->text().toDouble();
-    options.sideC.in = cCheckBox->isChecked();
-    options.sideC.value = cInput->text().toDouble();
+	options.rightTriangle = rightTriangleCheckBox->isChecked();
+	options.angleA.in = aACheckBox->isChecked();
+	options.angleA.value = aAInput->text().toDouble();
+	options.angleB.in = aBCheckBox->isChecked();
+	options.angleB.value = aBInput->text().toDouble();
+	options.angleC.in = aCCheckBox->isChecked();
+	options.angleC.value = aCInput->text().toDouble();
+	options.sideA.in = aCheckBox->isChecked();
+	options.sideA.value = aInput->text().toDouble();
+	options.sideB.in = bCheckBox->isChecked();
+	options.sideB.value = bInput->text().toDouble();
+	options.sideC.in = cCheckBox->isChecked();
+	options.sideC.value = cInput->text().toDouble();
 
-    return options;
+	return options;
 }
 
 void TriangleDialog::loadSettings(const TriangleOptions &defaultOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-    setGeometry(QRect(pos, size));
+	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+	setGeometry(QRect(pos, size));
 
-    TriangleOptions opt;
-    opt.load(mSettings, defaultOptions);
+	TriangleOptions opt;
+	opt.load(mSettings, defaultOptions);
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 
-    setOptions(opt);
+	setOptions(opt);
 }
 
 void TriangleDialog::saveSettings(bool saveOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
-    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+	mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+	mSettings->setValue(CFG_KEY_SIZE, geometry().size());
 
-    if (saveOptions) {
-        options().save(mSettings);
-    }
+	if (saveOptions) {
+		options().save(mSettings);
+	}
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 }
 
 void TriangleDialog::onFinished(int result)
 {
-    saveSettings(result == QDialog::Accepted);
+	saveSettings(result == QDialog::Accepted);
 }

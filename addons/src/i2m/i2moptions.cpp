@@ -32,18 +32,18 @@
 
 void I2MOptions::load(QSettings *settings, const I2MOptions &defaultOptions)
 {
-    inch.value = settings->value(CFG_KEY_INCH_VALUE, defaultOptions.inch.value).toDouble();
-    inch.in = settings->value(CFG_KEY_INCH_IN, defaultOptions.inch.in).toBool();
-    mm.value = settings->value(CFG_KEY_MM_VALUE, defaultOptions.mm.value).toDouble();
-    mm.in = settings->value(CFG_KEY_MM_IN, defaultOptions.mm.in).toBool();
-    toInch = settings->value(CFG_KEY_TO_INCH, defaultOptions.toInch).toBool();
+	inch.value = settings->value(CFG_KEY_INCH_VALUE, defaultOptions.inch.value).toDouble();
+	inch.in = settings->value(CFG_KEY_INCH_IN, defaultOptions.inch.in).toBool();
+	mm.value = settings->value(CFG_KEY_MM_VALUE, defaultOptions.mm.value).toDouble();
+	mm.in = settings->value(CFG_KEY_MM_IN, defaultOptions.mm.in).toBool();
+	toInch = settings->value(CFG_KEY_TO_INCH, defaultOptions.toInch).toBool();
 }
 
 void I2MOptions::save(QSettings *settings)
 {
-    settings->setValue(CFG_KEY_INCH_VALUE, inch.value);
-    settings->setValue(CFG_KEY_INCH_IN, inch.in);
-    settings->setValue(CFG_KEY_MM_VALUE, mm.value);
-    settings->setValue(CFG_KEY_MM_IN, mm.in);
-    settings->setValue(CFG_KEY_TO_INCH, toInch);
+	settings->setValue(CFG_KEY_INCH_VALUE, inch.value);
+	settings->setValue(CFG_KEY_INCH_IN, inch.in);
+	settings->setValue(CFG_KEY_MM_VALUE, mm.value);
+	settings->setValue(CFG_KEY_MM_IN, mm.in);
+	settings->setValue(CFG_KEY_TO_INCH, toInch);
 }

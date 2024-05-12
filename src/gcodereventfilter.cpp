@@ -38,216 +38,216 @@
 
 
 GCoderEventFilter::GCoderEventFilter(QPlainTextEdit *textEdit, QObject *parent) : QObject(parent),
-    m_toolTipRegex("(,[a-zA-Z]|#|@|[a-zA-Z]+(\\d+=)?)([-+]?\\d*(\\.\\d*)?)")
+	m_toolTipRegex("(,[a-zA-Z]|#|@|[a-zA-Z]+(\\d+=)?)([-+]?\\d*(\\.\\d*)?)")
 {
-    m_textEdit = textEdit;
-    m_toolTipEnable = true;
-    m_toolTipRegex = QRegularExpression("(,[a-zA-Z]|#|@|[a-zA-Z]+(\\d+=)?)([-+]?\\d*(\\.\\d*)?)");
+	m_textEdit = textEdit;
+	m_toolTipEnable = true;
+	m_toolTipRegex = QRegularExpression("(,[a-zA-Z]|#|@|[a-zA-Z]+(\\d+=)?)([-+]?\\d*(\\.\\d*)?)");
 }
 
 bool GCoderEventFilter::isToolTipEnable() const
 {
-    return m_toolTipEnable;
+	return m_toolTipEnable;
 }
 
 void GCoderEventFilter::setToolTipEnable(bool enable)
 {
-    m_toolTipEnable = enable;
+	m_toolTipEnable = enable;
 }
 
 void GCoderEventFilter::setToolTipRegExp(const QRegularExpression &regexp)
 {
-    m_toolTipRegex = regexp;
+	m_toolTipRegex = regexp;
 }
 
 QHash<QString, QString> GCoderEventFilter::tips() const
 {
-    return m_tips;
+	return m_tips;
 }
 
 void GCoderEventFilter::setTips(const QHash<QString, QString> &tips)
 {
-    m_tips = tips;
+	m_tips = tips;
 }
 
 bool GCoderEventFilter::eventFilter(QObject *obj, QEvent *event)
 {
-    if (obj == m_textEdit && event->type() == QEvent::ToolTip && m_toolTipEnable) {
-        QHelpEvent *he = dynamic_cast<QHelpEvent *>(event);
-        QWidget *widget = dynamic_cast<QWidget *>(obj);
-        return toolTipEvent(widget, he);
-    }
+	if (obj == m_textEdit && event->type() == QEvent::ToolTip && m_toolTipEnable) {
+		QHelpEvent *he = dynamic_cast<QHelpEvent *>(event);
+		QWidget *widget = dynamic_cast<QWidget *>(obj);
+		return toolTipEvent(widget, he);
+	}
 
-    if (obj == m_textEdit->viewport() && event->type() == QEvent::MouseButtonDblClick) {
-        QMouseEvent *me = dynamic_cast<QMouseEvent *>(event);
-        return mouseButtonDblClickEvent(me);
-    }
+	if (obj == m_textEdit->viewport() && event->type() == QEvent::MouseButtonDblClick) {
+		QMouseEvent *me = dynamic_cast<QMouseEvent *>(event);
+		return mouseButtonDblClickEvent(me);
+	}
 
-    if (obj == m_textEdit && event->type() == QEvent::KeyPress) {
-        QKeyEvent *ke = dynamic_cast<QKeyEvent *>(event);
-        return keyEvent(ke);
-    }
+	if (obj == m_textEdit && event->type() == QEvent::KeyPress) {
+		QKeyEvent *ke = dynamic_cast<QKeyEvent *>(event);
+		return keyEvent(ke);
+	}
 
-    return false;
+	return false;
 }
 
 bool GCoderEventFilter::toolTipEvent(QWidget *widget, QHelpEvent *event)
 {
-    QString word = wordForPosition(event->pos());
+	QString word = wordForPosition(event->pos());
 
-    if (word.length() == 2) {
-        if ((word.at(0) == QLatin1Char('G')) || (word.at(0) == QLatin1Char('M')))
-            if (!word.at(1).isLetter()) {
-                word.insert(1, "0");
-            }
-    }
+	if (word.length() == 2) {
+		if ((word.at(0) == QLatin1Char('G')) || (word.at(0) == QLatin1Char('M')))
+			if (!word.at(1).isLetter()) {
+				word.insert(1, "0");
+			}
+	}
 
-    QString text = m_tips.value(word, QString());
+	QString text = m_tips.value(word, QString());
 
-    if (!text.isEmpty()) {
-        QString header = QLatin1String("<p style='white-space:pre'>");
+	if (!text.isEmpty()) {
+		QString header = QLatin1String("<p style='white-space:pre'>");
 
-        if (text.length() > 128) {
-            header = QLatin1String("<p style='white-space:normal'>");
-        }
+		if (text.length() > 128) {
+			header = QLatin1String("<p style='white-space:normal'>");
+		}
 
-        QToolTip::showText(event->globalPos(), header + text, widget, QRect());
-    } else {
-        QToolTip::hideText();
-        event->ignore();
-    }
+		QToolTip::showText(event->globalPos(), header + text, widget, QRect());
+	} else {
+		QToolTip::hideText();
+		event->ignore();
+	}
 
-    return true;
+	return true;
 }
 
 QString GCoderEventFilter::wordForPosition(const QPoint &pos) const
 {
-    QTextCursor cursor = m_textEdit->cursorForPosition(pos);
-    int positionInBlock = cursor.positionInBlock();
-    cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::MoveAnchor);
-    cursor.movePosition(QTextCursor::StartOfBlock, QTextCursor::KeepAnchor);
-    QString text = cursor.selectedText();
-    QRegularExpressionMatch match = m_toolTipRegex.match(text);
+	QTextCursor cursor = m_textEdit->cursorForPosition(pos);
+	int positionInBlock = cursor.positionInBlock();
+	cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::MoveAnchor);
+	cursor.movePosition(QTextCursor::StartOfBlock, QTextCursor::KeepAnchor);
+	QString text = cursor.selectedText();
+	QRegularExpressionMatch match = m_toolTipRegex.match(text);
 
-    while (match.hasMatch()) {
-        if (match.capturedStart() < positionInBlock && match.capturedEnd() > positionInBlock) {
-            return match.captured().simplified();
-        }
+	while (match.hasMatch()) {
+		if (match.capturedStart() < positionInBlock && match.capturedEnd() > positionInBlock) {
+			return match.captured().simplified();
+		}
 
-        match = m_toolTipRegex.match(text, match.capturedEnd());
-    }
+		match = m_toolTipRegex.match(text, match.capturedEnd());
+	}
 
-    return QString();
+	return QString();
 }
 
 // Better word selection
 bool GCoderEventFilter::mouseButtonDblClickEvent(QMouseEvent *event)
 {
-    QString key;
-    QString wordDelimiters = "()[]=,;:/ ";
-    bool wasLetter = false;
-    int posStart, posEnd;
-    QTextCursor cursor = m_textEdit->textCursor();
+	QString key;
+	QString wordDelimiters = "()[]=,;:/ ";
+	bool wasLetter = false;
+	int posStart, posEnd;
+	QTextCursor cursor = m_textEdit->textCursor();
 
-    while (true) {
-        if (cursor.atBlockStart() || cursor.atStart()) {
-            break;
-        }
+	while (true) {
+		if (cursor.atBlockStart() || cursor.atStart()) {
+			break;
+		}
 
-        cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-        key = cursor.selectedText();
+		cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+		key = cursor.selectedText();
 
-        if (cursor.atBlockStart() || cursor.atStart()) {
-            break;
-        }
+		if (cursor.atBlockStart() || cursor.atStart()) {
+			break;
+		}
 
-        if (key.isEmpty()) {
-            break;
-        }
+		if (key.isEmpty()) {
+			break;
+		}
 
-        if (key.at(0).isSpace()) {
-            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-            break;
-        }
+		if (key.at(0).isSpace()) {
+			cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+			break;
+		}
 
-        if (key.at(0).isLetter()) {
-            wasLetter = true;
-        }
+		if (key.at(0).isLetter()) {
+			wasLetter = true;
+		}
 
-        if ((key.at(0).isDigit() || (key.at(0) == '.')) && wasLetter) {
-            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-            break;
-        }
+		if ((key.at(0).isDigit() || (key.at(0) == '.')) && wasLetter) {
+			cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+			break;
+		}
 
-        if (wordDelimiters.contains(key.at(0))) {
-            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-            break;
-        }
-    }
+		if (wordDelimiters.contains(key.at(0))) {
+			cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+			break;
+		}
+	}
 
-    posStart = cursor.position();
+	posStart = cursor.position();
 
-    if (!cursor.atEnd() && !cursor.atBlockEnd()) {
-        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
-    }
+	if (!cursor.atEnd() && !cursor.atBlockEnd()) {
+		cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::MoveAnchor);
+	}
 
-    wasLetter = true;
+	wasLetter = true;
 
-    while (true) {
-        if (cursor.atEnd() || cursor.atBlockEnd()) {
-            break;
-        }
+	while (true) {
+		if (cursor.atEnd() || cursor.atBlockEnd()) {
+			break;
+		}
 
-        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-        key = cursor.selectedText();
+		cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+		key = cursor.selectedText();
 
-        if (cursor.atEnd()) {
-            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-            break;
-        }
+		if (cursor.atEnd()) {
+			cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+			break;
+		}
 
-        if (key.at(key.length() - 1).isSpace()) {
-            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-            break;
-        }
+		if (key.at(key.length() - 1).isSpace()) {
+			cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+			break;
+		}
 
-        if (key.at(key.length() - 1).isDigit()) {
-            wasLetter = false;
-        }
+		if (key.at(key.length() - 1).isDigit()) {
+			wasLetter = false;
+		}
 
-        if (key.at(key.length() - 1).isLetter() && !wasLetter) {
-            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-            break;
-        }
+		if (key.at(key.length() - 1).isLetter() && !wasLetter) {
+			cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+			break;
+		}
 
-        if (wordDelimiters.contains(key.at(key.length() - 1))) {
-            cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-            break;
-        }
-    }
+		if (wordDelimiters.contains(key.at(key.length() - 1))) {
+			cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+			break;
+		}
+	}
 
-    posEnd = cursor.position();
+	posEnd = cursor.position();
 
-    cursor.setPosition(posStart, QTextCursor::MoveAnchor);
-    cursor.setPosition(posEnd, QTextCursor::KeepAnchor);
-    m_textEdit->setTextCursor(cursor);
+	cursor.setPosition(posStart, QTextCursor::MoveAnchor);
+	cursor.setPosition(posEnd, QTextCursor::KeepAnchor);
+	m_textEdit->setTextCursor(cursor);
 
-    if (event->modifiers() == Qt::ControlModifier) {
-        emit requestInLineCalc();
-    }
+	if (event->modifiers() == Qt::ControlModifier) {
+		emit requestInLineCalc();
+	}
 
-    return true;
+	return true;
 }
 
 bool GCoderEventFilter::keyEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Insert) {
-        m_textEdit->setOverwriteMode(!m_textEdit->overwriteMode());
-    }
+	if (event->key() == Qt::Key_Insert) {
+		m_textEdit->setOverwriteMode(!m_textEdit->overwriteMode());
+	}
 
-    if (!event->text().isEmpty() && event->text()[0].isPrint() && !event->text()[0].isSpace()) {
-        emit requestUnderLine();
-    }
+	if (!event->text().isEmpty() && event->text()[0].isPrint() && !event->text()[0].isSpace()) {
+		emit requestUnderLine();
+	}
 
-    return false;
+	return false;
 }

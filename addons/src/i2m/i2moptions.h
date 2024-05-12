@@ -24,18 +24,18 @@ class QSettings;
 
 
 struct I2MOptions {
-    bool    toInch;
+	bool    toInch;
 
-    struct InOut {
-        bool    in;
-        double  value;
-    };
+	struct InOut {
+		bool    in;
+		double  value;
+	};
 
-    InOut   mm;
-    InOut   inch;
+	InOut   mm;
+	InOut   inch;
 
-    void load(QSettings *settings, const I2MOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const I2MOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // I2MOPTIONS_H

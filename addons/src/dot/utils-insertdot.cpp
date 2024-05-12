@@ -28,45 +28,45 @@
 
 int Utils::insertDot(QString tx, const QString &addr, bool convert, int divider)
 {
-    int count = 0;
-    int pos = 0;
-    QString f_tx;
-    QRegularExpression regex;
+	int count = 0;
+	int pos = 0;
+	QString f_tx;
+	QRegularExpression regex;
 
-    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-    regex.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
-    auto match = regex.match(tx);
+	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+	regex.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
+	auto match = regex.match(tx);
 
-    while (match.hasMatch()) {
-        f_tx = match.captured();
-        pos = match.capturedEnd();
+	while (match.hasMatch()) {
+		f_tx = match.captured();
+		pos = match.capturedEnd();
 
-        if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
-                && !f_tx.contains(QLatin1Char(';'))) {
-            if (convert && !f_tx.contains(QLatin1Char('.'))) {
-                f_tx.remove(0, 1);
+		if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
+		        && !f_tx.contains(QLatin1Char(';'))) {
+			if (convert && !f_tx.contains(QLatin1Char('.'))) {
+				f_tx.remove(0, 1);
 
-                //f_tx.remove('+');
-                bool ok;
-                double it = f_tx.toDouble(&ok);
+				//f_tx.remove('+');
+				bool ok;
+				double it = f_tx.toDouble(&ok);
 
-                if (ok) {
-                    it = it / divider;
-                    tx.replace(match.capturedStart() + 1, match.capturedLength() - 1,
-                               QString("%1").arg(it, 0, 'f', 3));
-                    count++;
-                }
-            }
+				if (ok) {
+					it = it / divider;
+					tx.replace(match.capturedStart() + 1, match.capturedLength() - 1,
+					           QString("%1").arg(it, 0, 'f', 3));
+					count++;
+				}
+			}
 
-            if (!convert && !f_tx.contains(QLatin1Char('.'))) {
-                tx.insert(match.capturedEnd(), QLatin1Char('.'));
-                pos++;
-                count++;
-            }
-        }
+			if (!convert && !f_tx.contains(QLatin1Char('.'))) {
+				tx.insert(match.capturedEnd(), QLatin1Char('.'));
+				pos++;
+				count++;
+			}
+		}
 
-        match =  regex.match(tx, pos);
-    }
+		match =  regex.match(tx, pos);
+	}
 
-    return count;
+	return count;
 }

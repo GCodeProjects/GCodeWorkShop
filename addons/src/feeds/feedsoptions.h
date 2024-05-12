@@ -24,22 +24,22 @@ class QSettings;
 
 
 struct FeedsOptions {
-    bool    useInch;
+	bool    useInch;
 
-    struct InOut {
-        bool    in;
-        double  value;
-    };
+	struct InOut {
+		bool    in;
+		double  value;
+	};
 
-    InOut   Vc;     // cutting velosity
-    InOut   z;      // number of tooth
-    InOut   Fz;     // feed per tooth
-    InOut   diam;
-    InOut   speed;
-    InOut   feed;
+	InOut   Vc;     // cutting velosity
+	InOut   z;      // number of tooth
+	InOut   Fz;     // feed per tooth
+	InOut   diam;
+	InOut   speed;
+	InOut   feed;
 
-    void load(QSettings *settings, const FeedsOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const FeedsOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // FEEDSOPTIONS_H

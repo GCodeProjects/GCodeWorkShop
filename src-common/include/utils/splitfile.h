@@ -24,10 +24,10 @@
 class QString;
 
 #if QT_VERSION_MAJOR <= 5
-    class QStringList;
+	class QStringList;
 #else
-    #include <QList>
-    using QStringList = QList<QString>;
+	#include <QList>
+	using QStringList = QList<QString>;
 #endif
 
 

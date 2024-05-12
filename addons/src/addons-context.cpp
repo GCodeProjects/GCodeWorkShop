@@ -30,79 +30,79 @@
 
 bool Addons::Context::pull(int mode)
 {
-    GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(EdytorNc::instance()->activeDocument());
+	GCoderDocument *gdoc = dynamic_cast<GCoderDocument *>(EdytorNc::instance()->activeDocument());
 
-    if (!gdoc) {
-        return false;
-    }
+	if (!gdoc) {
+		return false;
+	}
 
-    m_mode = mode;
-    m_edit = gdoc->textEdit();
-    QTextCursor cursor(m_edit->document());
-    m_selectionStart = m_edit->textCursor().selectionStart();
-    m_selectionEnd = m_edit->textCursor().selectionEnd();
-    m_fragmentStart = std::min(m_selectionStart, m_selectionEnd);
-    m_fragmentEnd = std::max(m_selectionStart, m_selectionEnd);
+	m_mode = mode;
+	m_edit = gdoc->textEdit();
+	QTextCursor cursor(m_edit->document());
+	m_selectionStart = m_edit->textCursor().selectionStart();
+	m_selectionEnd = m_edit->textCursor().selectionEnd();
+	m_fragmentStart = std::min(m_selectionStart, m_selectionEnd);
+	m_fragmentEnd = std::max(m_selectionStart, m_selectionEnd);
 
-    switch (m_mode) {
-    case Addons::Context::SELECTED:
-        if (m_fragmentStart == m_fragmentEnd) {
-            return false;
-        }
+	switch (m_mode) {
+	case Addons::Context::SELECTED:
+		if (m_fragmentStart == m_fragmentEnd) {
+			return false;
+		}
 
-        cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
-        cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
-        break;
+		cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
+		cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
+		break;
 
-    case Addons::Context::SELECTED_OR_ALL:
-        if (m_fragmentStart == m_fragmentEnd) {
-            cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
-        } else {
-            cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
-            cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
-        }
+	case Addons::Context::SELECTED_OR_ALL:
+		if (m_fragmentStart == m_fragmentEnd) {
+			cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+			cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+		} else {
+			cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
+			cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
+		}
 
-        break;
+		break;
 
-    case Addons::Context::SELECTED_BLOCKS:
-        cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
-        cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::MoveAnchor);
-        cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
-        cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+	case Addons::Context::SELECTED_BLOCKS:
+		cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
+		cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::MoveAnchor);
+		cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
+		cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
 
-        break;
+		break;
 
-    case Addons::Context::ALL:
-        cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-        cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
-        break;
+	case Addons::Context::ALL:
+		cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+		cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+		break;
 
-    default:
-        return false;
-    }
+	default:
+		return false;
+	}
 
-    m_fragmentStart = cursor.position();
-    m_fragmentEnd = cursor.anchor();
-    m_text = cursor.selectedText();
-    m_text.replace(QChar(0x2029), '\n');
+	m_fragmentStart = cursor.position();
+	m_fragmentEnd = cursor.anchor();
+	m_text = cursor.selectedText();
+	m_text.replace(QChar(0x2029), '\n');
 
-    return true;
+	return true;
 }
 
 void Addons::Context::push(const QString &text)
 {
-    QTextCursor cursor(m_edit->document());
-    cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
-    cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
-    cursor.insertText(text);
-    cursor.setPosition(m_selectionEnd, QTextCursor::MoveAnchor);
-    cursor.setPosition(m_selectionStart, QTextCursor::KeepAnchor);
-    m_edit->setTextCursor(cursor);
+	QTextCursor cursor(m_edit->document());
+	cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
+	cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
+	cursor.insertText(text);
+	cursor.setPosition(m_selectionEnd, QTextCursor::MoveAnchor);
+	cursor.setPosition(m_selectionStart, QTextCursor::KeepAnchor);
+	m_edit->setTextCursor(cursor);
 }
 
 void Addons::Context::push()
 {
-    push(m_text);
+	push(m_text);
 }
 

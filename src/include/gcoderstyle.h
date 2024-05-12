@@ -31,51 +31,51 @@ class QSettings;
 class HighlightColors
 {
 public:
-    int commentColor;
-    int gColor;
-    int mColor;
-    int nColor;
-    int lColor;
-    int fsColor;
-    int dhtColor;
-    int rColor;
-    int macroColor;
-    int keyWordColor;
-    int progNameColor;
-    int operatorColor;
-    int zColor;
-    int aColor;
-    int bColor;
-    int defaultColor;
-    int backgroundColor;
+	int commentColor;
+	int gColor;
+	int mColor;
+	int nColor;
+	int lColor;
+	int fsColor;
+	int dhtColor;
+	int rColor;
+	int macroColor;
+	int keyWordColor;
+	int progNameColor;
+	int operatorColor;
+	int zColor;
+	int aColor;
+	int bColor;
+	int defaultColor;
+	int backgroundColor;
 };
 
 
 class GCoderStyle: public DocumentStyle
 {
 public:
-    GCoderStyle();
-    GCoderStyle(const GCoderStyle &that);
+	GCoderStyle();
+	GCoderStyle(const GCoderStyle &that);
 
-    virtual QString documentType() const override;
+	virtual QString documentType() const override;
 
-    DocumentStyle *clone() const override;
+	DocumentStyle *clone() const override;
 
-    DocumentStyle &operator=(const DocumentStyle &that) override;
-    virtual GCoderStyle &operator=(const GCoderStyle &that);
+	DocumentStyle &operator=(const DocumentStyle &that) override;
+	virtual GCoderStyle &operator=(const GCoderStyle &that);
 
-    // Import from old settings
-    void importFromV0(QSettings *cfg);
+	// Import from old settings
+	void importFromV0(QSettings *cfg);
 
-    QString fontName;
-    int fontSize;
-    int lineColor;
-    int underlineColor;
-    HighlightColors hColors;
+	QString fontName;
+	int fontSize;
+	int lineColor;
+	int underlineColor;
+	HighlightColors hColors;
 
 protected:
-    void loadChild(QSettings *cfg) override;
-    void saveChild(QSettings *cfg) const override;
+	void loadChild(QSettings *cfg) override;
+	void saveChild(QSettings *cfg) const override;
 };
 
 #endif // GCODERSTYLE_H

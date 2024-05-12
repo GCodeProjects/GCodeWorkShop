@@ -40,59 +40,59 @@ int autoDetectHighligthMode(const QString text);
 
 class Highlighter : public QSyntaxHighlighter
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    Highlighter(QTextDocument *parent);
+	Highlighter(QTextDocument *parent);
 
-    void setHColors(const HighlightColors hColors, const QFont fnt);
-    void setHighlightMode(int mode);
+	void setHColors(const HighlightColors hColors, const QFont fnt);
+	void setHighlightMode(int mode);
 
 protected:
-    void highlightBlock(const QString &text);
-    void highlightBlockCommon(const QString &tx);
+	void highlightBlock(const QString &text);
+	void highlightBlockCommon(const QString &tx);
 
 private:
-    void highlightInside(const QString &tx, int pos, int maxlen);
-    void loadRules();
-    void highlightBlockSinuRule(const QString &text);
-    void highlightBlockFanucRule(const QString &text);
-    void highlightBlockOkumaRule(const QString &text);
-    void highlightBlockSinuOldRule(const QString &text);
-    void highlightBlockHeidRule(const QString &text);
-    void highlightBlockHeidIsoRule(const QString &text);
-    void highlightBlockToolTipsRule(const QString &text);
-    void highlightBlockLinuxCNCRule(const QString &text);
-    HighlightColors highlightColors;
-    QFont font;
-    int m_highlightMode;
+	void highlightInside(const QString &tx, int pos, int maxlen);
+	void loadRules();
+	void highlightBlockSinuRule(const QString &text);
+	void highlightBlockFanucRule(const QString &text);
+	void highlightBlockOkumaRule(const QString &text);
+	void highlightBlockSinuOldRule(const QString &text);
+	void highlightBlockHeidRule(const QString &text);
+	void highlightBlockHeidIsoRule(const QString &text);
+	void highlightBlockToolTipsRule(const QString &text);
+	void highlightBlockLinuxCNCRule(const QString &text);
+	HighlightColors highlightColors;
+	QFont font;
+	int m_highlightMode;
 
-    struct HighlightingRule {
-        QRegularExpression pattern;
-        QTextCharFormat format;
-    };
+	struct HighlightingRule {
+		QRegularExpression pattern;
+		QTextCharFormat format;
+	};
 
-    QVector<HighlightingRule> highlightRules;
-    QVector<HighlightingRule> commentHighlightRules;
+	QVector<HighlightingRule> highlightRules;
+	QVector<HighlightingRule> commentHighlightRules;
 
-    struct ProgNameHighlightingRule {
-        QRegularExpression pattern;
-        QTextCharFormat format;
-        int mode;
-    };
+	struct ProgNameHighlightingRule {
+		QRegularExpression pattern;
+		QTextCharFormat format;
+		int mode;
+	};
 
-    QVector<ProgNameHighlightingRule> progNameHighlightRules;
+	QVector<ProgNameHighlightingRule> progNameHighlightRules;
 
-    QRegularExpression commentStartExpression;
-    QRegularExpression commentEndExpression;
+	QRegularExpression commentStartExpression;
+	QRegularExpression commentEndExpression;
 
-    QTextCharFormat keywordFormat;
+	QTextCharFormat keywordFormat;
 
-    QTextCharFormat commentFormat;
+	QTextCharFormat commentFormat;
 
-    QTextCharFormat operatorFormat;
-    QTextCharFormat progNameFormat;
-    //QTextCharFormat adressFormat;
+	QTextCharFormat operatorFormat;
+	QTextCharFormat progNameFormat;
+	//QTextCharFormat adressFormat;
 };
 
 #endif // HIGHLIGHTER_H

@@ -38,44 +38,44 @@ class QTimer;
 
 class SerialPortTestDialog : public QDialog, private Ui::SerialPortTestDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    SerialPortTestDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-    ~SerialPortTestDialog();
+	SerialPortTestDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+	~SerialPortTestDialog();
 
 private slots:
-    void closeButtonClicked();
-    void clearButtonClicked();
-    void connectButtonToggled(bool tg);
-    void configButtonClicked();
-    void changeSettings();
-    void updateLeds();
-    void setRtsButtonClicked();
-    void setDtrButtonClicked();
-    void sendTextEditChanged();
-    void lineDelaySlot();
-    void setXonButtonClicked();
-    void setXoffButtonClicked();
-    void textEditScroll(int pos);
-    void hexTextEditScroll(int pos);
+	void closeButtonClicked();
+	void clearButtonClicked();
+	void connectButtonToggled(bool tg);
+	void configButtonClicked();
+	void changeSettings();
+	void updateLeds();
+	void setRtsButtonClicked();
+	void setDtrButtonClicked();
+	void sendTextEditChanged();
+	void lineDelaySlot();
+	void setXonButtonClicked();
+	void setXoffButtonClicked();
+	void textEditScroll(int pos);
+	void hexTextEditScroll(int pos);
 
 private:
-    void loadSerialConfignames();
-    void showError(int error);
-    void sendText(QString tx);
+	void loadSerialConfignames();
+	void showError(int error);
+	void sendText(QString tx);
 
-    bool stop;
-    QString portName;
-    QString sendAtEnd;
-    QString sendAtBegining;
+	bool stop;
+	QString portName;
+	QString sendAtEnd;
+	QString sendAtBegining;
 
-    QSerialPort *comPort;
-    QTimer *timer;
-    long int count;
-    double lineDelay;
-    bool readyCont;
-    SerialPortSettings portSettings;
+	QSerialPort *comPort;
+	QTimer *timer;
+	long int count;
+	double lineDelay;
+	bool readyCont;
+	SerialPortSettings portSettings;
 };
 
 //class TransProgressDialog : public QDialog, private Ui::TransProgressDialog

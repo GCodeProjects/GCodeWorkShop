@@ -30,14 +30,14 @@
 
 void I2MProgOptions::load(QSettings *settings, const I2MProgOptions &defaultOptions)
 {
-    axes = settings->value(CFG_KEY_AXES, defaultOptions.axes).toString();
-    prec = settings->value(CFG_KEY_PRECISION, defaultOptions.prec).toInt();
-    toInch = settings->value(CFG_KEY_TO_INCH, defaultOptions.toInch).toBool();
+	axes = settings->value(CFG_KEY_AXES, defaultOptions.axes).toString();
+	prec = settings->value(CFG_KEY_PRECISION, defaultOptions.prec).toInt();
+	toInch = settings->value(CFG_KEY_TO_INCH, defaultOptions.toInch).toBool();
 }
 
 void I2MProgOptions::save(QSettings *settings)
 {
-    settings->setValue(CFG_KEY_AXES, axes);
-    settings->setValue(CFG_KEY_PRECISION, prec);
-    settings->setValue(CFG_KEY_TO_INCH, toInch);
+	settings->setValue(CFG_KEY_AXES, axes);
+	settings->setValue(CFG_KEY_PRECISION, prec);
+	settings->setValue(CFG_KEY_TO_INCH, toInch);
 }

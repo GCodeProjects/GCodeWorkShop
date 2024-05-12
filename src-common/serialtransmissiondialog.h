@@ -43,88 +43,88 @@ class QTimer;
 
 class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog,
-                             bool mode = false);
-    ~SerialTransmissionDialog();
+	SerialTransmissionDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog,
+	                         bool mode = false);
+	~SerialTransmissionDialog();
 
-    QStringList receiveData(QString configName);
-    void sendData(QString dataToSend, QString configName);
-    void startFileServer(QString configName);
-    QString configName();
-    QString savePath();
-    QStringList readPaths();
+	QStringList receiveData(QString configName);
+	void sendData(QString dataToSend, QString configName);
+	void startFileServer(QString configName);
+	QString configName();
+	QString savePath();
+	QStringList readPaths();
 
 public slots:
-    bool wasCanceled();
-    void portReset();
+	bool wasCanceled();
+	void portReset();
 
 protected:
-    void closeEvent(QCloseEvent *event);
+	void closeEvent(QCloseEvent *event);
 
 private slots:
-    void cancelButtonClicked();
-    void updateStatus();
-    void sendStartDelayTimeout();
-    void stopButtonClicked();
-    void autoCloseTimerTimeout();
-    void showSerialPortError(QSerialPort::SerialPortError error);
-    void serialPortBytesWritten(qint64 bytes);
-    void serialPortReadyRead();
-    void serialPortRequestToSend(bool set);
-    void lineDelaySlot();
-    void fileServerProcessData();
-    void fileServerBytesWritten(qint64 bytes);
-    void sendTimeoutTimerTimeout();
-    void receiveTimeoutTimerTimeout();
-    void reset(bool re);
-    void reconnectTimerTimeout();
+	void cancelButtonClicked();
+	void updateStatus();
+	void sendStartDelayTimeout();
+	void stopButtonClicked();
+	void autoCloseTimerTimeout();
+	void showSerialPortError(QSerialPort::SerialPortError error);
+	void serialPortBytesWritten(qint64 bytes);
+	void serialPortReadyRead();
+	void serialPortRequestToSend(bool set);
+	void lineDelaySlot();
+	void fileServerProcessData();
+	void fileServerBytesWritten(qint64 bytes);
+	void sendTimeoutTimerTimeout();
+	void receiveTimeoutTimerTimeout();
+	void reset(bool re);
+	void reconnectTimerTimeout();
 
 private:
-    void setRange(int min, int max);
-    void setValue(int val);
-    void setLabelText(const QString text, bool multiline = false, bool writeToLog = false);
-    void loadConfig(QString configName);
-    QStringList guessFileName(QString *text);
-    QString saveDataToFile(QString *text);
-    void writeLog(QString msg, QString timeStamp = "");
-    QStringList processReceivedData();
-    void prepareDataBeforeSending(QString *data);
-    void procesSpecialCharacters(QString *text, QString *fileData);
-    void resetTransmission(bool portRestart = false);
+	void setRange(int min, int max);
+	void setValue(int val);
+	void setLabelText(const QString text, bool multiline = false, bool writeToLog = false);
+	void loadConfig(QString configName);
+	QStringList guessFileName(QString *text);
+	QString saveDataToFile(QString *text);
+	void writeLog(QString msg, QString timeStamp = "");
+	QStringList processReceivedData();
+	void prepareDataBeforeSending(QString *data);
+	void procesSpecialCharacters(QString *text, QString *fileData);
+	void resetTransmission(bool portRestart = false);
 
-    QSerialPort serialPort;
-    bool canceled;
-    SerialPortSettings portSettings;
-    QByteArray serialPortReadBuffer;
-    // FIXME: serialPortWriteBuffer must be QList<QBiteArray>
-    QStringList serialPortWriteBuffer;
-    qint64 bytesWritten;
-    qint64 noOfBytes;
-    QStringList::iterator writeBufferIterator;
-    bool xoffReceived;
-    bool prevXoffReceived;
-    unsigned int autoCloseCountner;
-    unsigned int sendStartDelayCountner;
-    //int autoCloseCountnerReloadValue;
-    //    int fileServerDataTimeoutCountner;
-    //    int fileServerDataTimeoutCountnerReloadValue;
-    unsigned int sendTimeoutCountner;
-    //int sendTimeoutCountnerReloadValue;
-    unsigned int receiveTimeoutCountner;
-    //int receiveTimeoutCountnerReloadValue;
-    bool stop;
-    bool serverMode;
-    bool sending;
-    QTimer *sendStartDelayTimer;
-    QTimer *updateStatusTimer;
-    QTimer *autoCloseTimer;
-    //QTimer *fileServerDataTimeoutTimer;
-    QTimer *sendTimeoutTimer;
-    QTimer *receiveTimeoutTimer;
-    QTimer *reconnectTimer;
+	QSerialPort serialPort;
+	bool canceled;
+	SerialPortSettings portSettings;
+	QByteArray serialPortReadBuffer;
+	// FIXME: serialPortWriteBuffer must be QList<QBiteArray>
+	QStringList serialPortWriteBuffer;
+	qint64 bytesWritten;
+	qint64 noOfBytes;
+	QStringList::iterator writeBufferIterator;
+	bool xoffReceived;
+	bool prevXoffReceived;
+	unsigned int autoCloseCountner;
+	unsigned int sendStartDelayCountner;
+	//int autoCloseCountnerReloadValue;
+	//    int fileServerDataTimeoutCountner;
+	//    int fileServerDataTimeoutCountnerReloadValue;
+	unsigned int sendTimeoutCountner;
+	//int sendTimeoutCountnerReloadValue;
+	unsigned int receiveTimeoutCountner;
+	//int receiveTimeoutCountnerReloadValue;
+	bool stop;
+	bool serverMode;
+	bool sending;
+	QTimer *sendStartDelayTimer;
+	QTimer *updateStatusTimer;
+	QTimer *autoCloseTimer;
+	//QTimer *fileServerDataTimeoutTimer;
+	QTimer *sendTimeoutTimer;
+	QTimer *receiveTimeoutTimer;
+	QTimer *reconnectTimer;
 };
 
 #endif // SERIALTRANSMISSIONDIALOG_H

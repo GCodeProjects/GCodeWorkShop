@@ -24,19 +24,19 @@ class QSettings;
 
 
 struct BHCTabOptions {
-    double  x;
-    double  y;
-    double  diam;
-    double  start;
-    double  step;
-    int     count;
-    int     rotate;
-    bool    mirrorX;
-    bool    mirrorY;
-    bool    common;
+	double  x;
+	double  y;
+	double  diam;
+	double  start;
+	double  step;
+	int     count;
+	int     rotate;
+	bool    mirrorX;
+	bool    mirrorY;
+	bool    common;
 
-    void load(QSettings *settings, const BHCTabOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const BHCTabOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // BHCTABOPTIONS_H

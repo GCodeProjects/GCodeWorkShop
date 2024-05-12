@@ -31,38 +31,38 @@
 
 void BHCOptions::load(QSettings *settings, const BHCOptions &defaultOptions)
 {
-    settings->beginGroup(CFG_SECTION_GREEN);
-    green.load(settings, defaultOptions.green);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_GREEN);
+	green.load(settings, defaultOptions.green);
+	settings->endGroup();
 
-    settings->beginGroup(CFG_SECTION_BLUE);
-    blue.load(settings, defaultOptions.blue);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_BLUE);
+	blue.load(settings, defaultOptions.blue);
+	settings->endGroup();
 
-    settings->beginGroup(CFG_SECTION_RED);
-    red.load(settings, defaultOptions.red);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_RED);
+	red.load(settings, defaultOptions.red);
+	settings->endGroup();
 
-    settings->beginGroup(CFG_SECTION_YELLOW);
-    yellow.load(settings, defaultOptions.yellow);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_YELLOW);
+	yellow.load(settings, defaultOptions.yellow);
+	settings->endGroup();
 }
 
 void BHCOptions::save(QSettings *settings)
 {
-    settings->beginGroup(CFG_SECTION_GREEN);
-    green.save(settings);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_GREEN);
+	green.save(settings);
+	settings->endGroup();
 
-    settings->beginGroup(CFG_SECTION_BLUE);
-    blue.save(settings);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_BLUE);
+	blue.save(settings);
+	settings->endGroup();
 
-    settings->beginGroup(CFG_SECTION_RED);
-    red.save(settings);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_RED);
+	red.save(settings);
+	settings->endGroup();
 
-    settings->beginGroup(CFG_SECTION_YELLOW);
-    yellow.save(settings);
-    settings->endGroup();
+	settings->beginGroup(CFG_SECTION_YELLOW);
+	yellow.save(settings);
+	settings->endGroup();
 }

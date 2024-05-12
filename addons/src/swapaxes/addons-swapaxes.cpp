@@ -30,21 +30,21 @@
 
 int Addons::doSwapAxes(QWidget *parent, QSettings *settings, QPlainTextEdit *textEdit)
 {
-    int result = 0;
-    QString key = "SwapAxesDialog";
-    SwapAxesDialog *dlg;
-    dlg = parent->findChild<SwapAxesDialog *>(key);
+	int result = 0;
+	QString key = "SwapAxesDialog";
+	SwapAxesDialog *dlg;
+	dlg = parent->findChild<SwapAxesDialog *>(key);
 
-    if (!dlg) {
-        dlg = new SwapAxesDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(SwapAxesOptions());
-    }
+	if (!dlg) {
+		dlg = new SwapAxesDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(SwapAxesOptions());
+	}
 
-    if (dlg->exec() == QDialog::Accepted) {
-        Utils::swapAxes(textEdit, false, 40000, COMMENT_ID_UNKNOWN, dlg->options());
-    }
+	if (dlg->exec() == QDialog::Accepted) {
+		Utils::swapAxes(textEdit, false, 40000, COMMENT_ID_UNKNOWN, dlg->options());
+	}
 
-    dlg->deleteLater();
-    return result;
+	dlg->deleteLater();
+	return result;
 }

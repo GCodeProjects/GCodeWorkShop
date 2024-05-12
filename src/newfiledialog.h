@@ -39,24 +39,24 @@ class newFileDialog;
 // TODO: rename with NewFileDialog
 class newFileDialog : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit newFileDialog(QWidget *parent = 0);
-    ~newFileDialog();
+	explicit newFileDialog(QWidget *parent = 0);
+	~newFileDialog();
 
-    int exec();
-    QString getChosenFile();
+	int exec();
+	QString getChosenFile();
 
 private:
-    Ui::newFileDialog *ui;
+	Ui::newFileDialog *ui;
 
-    QDir path;
+	QDir path;
 
 private slots:
-    void fillFileCombo();
-    void saveSettings();
-    void browseButtonClicked();
+	void fillFileCombo();
+	void saveSettings();
+	void browseButtonClicked();
 };
 
 #endif // NEWFILEDIALOG_H

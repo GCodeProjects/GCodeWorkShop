@@ -29,17 +29,17 @@ namespace Addons {
 class Context
 {
 public:
-    enum Mode {
-        // Only selected text.
-        SELECTED,
-        // From the start of the first selected block to the end of the last
-        // selected block; or the block in which the cursor is placed.
-        SELECTED_BLOCKS,
-        // Selected or whole text.
-        SELECTED_OR_ALL,
-        // Whole text.
-        ALL
-    };
+	enum Mode {
+		// Only selected text.
+		SELECTED,
+		// From the start of the first selected block to the end of the last
+		// selected block; or the block in which the cursor is placed.
+		SELECTED_BLOCKS,
+		// Selected or whole text.
+		SELECTED_OR_ALL,
+		// Whole text.
+		ALL
+	};
 
     // *INDENT-OFF*
     bool pull(int mode);
@@ -54,13 +54,13 @@ public:
     // *INDENT-ON*
 
 protected:
-    int m_mode;
-    QPlainTextEdit *m_edit;
-    int m_selectionStart;   // QPlainTextEdit::selectionStart()
-    int m_selectionEnd;     // QPlainTextEdit::selectionEnd()
-    int m_fragmentStart;
-    int m_fragmentEnd;
-    QString m_text;
+	int m_mode;
+	QPlainTextEdit *m_edit;
+	int m_selectionStart;   // QPlainTextEdit::selectionStart()
+	int m_selectionEnd;     // QPlainTextEdit::selectionEnd()
+	int m_fragmentStart;
+	int m_fragmentEnd;
+	QString m_text;
 };
 } // namespace Addons
 

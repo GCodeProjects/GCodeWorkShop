@@ -29,39 +29,39 @@ class QSettings;
 
 
 enum WindowModeFlags {
-    SHOW_FILENAME = 0x01,
-    SHOW_FILEPATH = 0x02,
-    SHOW_PROGTITLE = 0x04
+	SHOW_FILENAME = 0x01,
+	SHOW_FILEPATH = 0x02,
+	SHOW_PROGTITLE = 0x04
 };
 
 
 class GCoderWidgetProperties: public DocumentWidgetProperties
 {
 public:
-    GCoderWidgetProperties();
-    GCoderWidgetProperties(const GCoderWidgetProperties &that);
+	GCoderWidgetProperties();
+	GCoderWidgetProperties(const GCoderWidgetProperties &that);
 
-    virtual QString documentType() const override;
+	virtual QString documentType() const override;
 
-    DocumentWidgetProperties *clone() const override;
+	DocumentWidgetProperties *clone() const override;
 
-    DocumentWidgetProperties &operator=(const DocumentWidgetProperties &that) override;
-    virtual GCoderWidgetProperties &operator=(const GCoderWidgetProperties &that);
+	DocumentWidgetProperties &operator=(const DocumentWidgetProperties &that) override;
+	virtual GCoderWidgetProperties &operator=(const GCoderWidgetProperties &that);
 
-    bool intCapsLock;
-    bool syntaxH;
-    bool underlineChanges;
-    int windowMode;
-    bool clearUndoHistory;
-    bool clearUnderlineHistory;
-    bool editorToolTips;
-    int defaultHighlightMode;
-    bool guessFileNameByProgNum;
-    bool changeDateInComment;
+	bool intCapsLock;
+	bool syntaxH;
+	bool underlineChanges;
+	int windowMode;
+	bool clearUndoHistory;
+	bool clearUnderlineHistory;
+	bool editorToolTips;
+	int defaultHighlightMode;
+	bool guessFileNameByProgNum;
+	bool changeDateInComment;
 
 protected:
-    void loadChild(QSettings *cfg) override;
-    void saveChild(QSettings *cfg) const override;
+	void loadChild(QSettings *cfg) override;
+	void saveChild(QSettings *cfg) const override;
 };
 
 #endif // GCODERWIDGETPROPERTIES_H

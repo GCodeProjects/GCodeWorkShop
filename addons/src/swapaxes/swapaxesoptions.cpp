@@ -38,30 +38,30 @@
 
 void SwapAxesOptions::load(QSettings *settings, const SwapAxesOptions &defaultOptions)
 {
-    convert.enable = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.enable).toBool();
-    convert.operation = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.operation).toInt();
-    convert.value = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.value).toDouble();
-    from = settings->value(CFG_KEY_FROM, defaultOptions.from).toString();
-    fromList = settings->value(CFG_KEY_FROM_LIST, defaultOptions.fromList).toStringList();
-    limit.enable = settings->value(CFG_KEY_LIMIT_ENABLE, defaultOptions.limit.enable).toBool();
-    limit.max = settings->value(CFG_KEY_LIMIT_MAX, defaultOptions.limit.max).toDouble();
-    limit.min = settings->value(CFG_KEY_LIMIT_MIN, defaultOptions.limit.min).toDouble();
-    to = settings->value(CFG_KEY_TO, defaultOptions.to).toString();
-    toList = settings->value(CFG_KEY_TO_LIST, defaultOptions.toList).toStringList();
-    precision = settings->value(CFG_KEY_PRECISION, defaultOptions.precision).toInt();
+	convert.enable = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.enable).toBool();
+	convert.operation = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.operation).toInt();
+	convert.value = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.value).toDouble();
+	from = settings->value(CFG_KEY_FROM, defaultOptions.from).toString();
+	fromList = settings->value(CFG_KEY_FROM_LIST, defaultOptions.fromList).toStringList();
+	limit.enable = settings->value(CFG_KEY_LIMIT_ENABLE, defaultOptions.limit.enable).toBool();
+	limit.max = settings->value(CFG_KEY_LIMIT_MAX, defaultOptions.limit.max).toDouble();
+	limit.min = settings->value(CFG_KEY_LIMIT_MIN, defaultOptions.limit.min).toDouble();
+	to = settings->value(CFG_KEY_TO, defaultOptions.to).toString();
+	toList = settings->value(CFG_KEY_TO_LIST, defaultOptions.toList).toStringList();
+	precision = settings->value(CFG_KEY_PRECISION, defaultOptions.precision).toInt();
 }
 
 void SwapAxesOptions::save(QSettings *settings)
 {
-    settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.enable);
-    settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.operation);
-    settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.value);
-    settings->setValue(CFG_KEY_FROM, from);
-    settings->setValue(CFG_KEY_FROM_LIST, fromList);
-    settings->setValue(CFG_KEY_LIMIT_ENABLE, limit.enable);
-    settings->setValue(CFG_KEY_LIMIT_MAX, limit.max);
-    settings->setValue(CFG_KEY_LIMIT_MIN, limit.min);
-    settings->setValue(CFG_KEY_TO, to);
-    settings->setValue(CFG_KEY_TO_LIST, toList);
-    settings->setValue(CFG_KEY_PRECISION, precision);
+	settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.enable);
+	settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.operation);
+	settings->setValue(CFG_KEY_CONVERT_ENABLE, convert.value);
+	settings->setValue(CFG_KEY_FROM, from);
+	settings->setValue(CFG_KEY_FROM_LIST, fromList);
+	settings->setValue(CFG_KEY_LIMIT_ENABLE, limit.enable);
+	settings->setValue(CFG_KEY_LIMIT_MAX, limit.max);
+	settings->setValue(CFG_KEY_LIMIT_MIN, limit.min);
+	settings->setValue(CFG_KEY_TO, to);
+	settings->setValue(CFG_KEY_TO_LIST, toList);
+	settings->setValue(CFG_KEY_PRECISION, precision);
 }

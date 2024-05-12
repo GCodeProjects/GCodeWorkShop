@@ -37,28 +37,28 @@
 
 void BHCTabOptions::load(QSettings *settings, const BHCTabOptions &defaultOptions)
 {
-    x = settings->value(CFG_KEY_X, defaultOptions.x).toDouble();
-    y = settings->value(CFG_KEY_Y, defaultOptions.y).toDouble();
-    diam = settings->value(CFG_KEY_DIAM, defaultOptions.diam).toDouble();
-    start = settings->value(CFG_KEY_START, defaultOptions.start).toDouble();
-    step = settings->value(CFG_KEY_STEP, defaultOptions.step).toDouble();
-    count = settings->value(CFG_KEY_COUNT, defaultOptions.count).toInt();
-    rotate = settings->value(CFG_KEY_ROTATE, defaultOptions.rotate).toInt();
-    mirrorX = settings->value(CFG_KEY_MIRRORX, defaultOptions.mirrorX).toBool();
-    mirrorY = settings->value(CFG_KEY_MIRRORY, defaultOptions.mirrorY).toBool();
-    common = settings->value(CFG_KEY_COMMON, defaultOptions.common).toBool();
+	x = settings->value(CFG_KEY_X, defaultOptions.x).toDouble();
+	y = settings->value(CFG_KEY_Y, defaultOptions.y).toDouble();
+	diam = settings->value(CFG_KEY_DIAM, defaultOptions.diam).toDouble();
+	start = settings->value(CFG_KEY_START, defaultOptions.start).toDouble();
+	step = settings->value(CFG_KEY_STEP, defaultOptions.step).toDouble();
+	count = settings->value(CFG_KEY_COUNT, defaultOptions.count).toInt();
+	rotate = settings->value(CFG_KEY_ROTATE, defaultOptions.rotate).toInt();
+	mirrorX = settings->value(CFG_KEY_MIRRORX, defaultOptions.mirrorX).toBool();
+	mirrorY = settings->value(CFG_KEY_MIRRORY, defaultOptions.mirrorY).toBool();
+	common = settings->value(CFG_KEY_COMMON, defaultOptions.common).toBool();
 }
 
 void BHCTabOptions::save(QSettings *settings)
 {
-    settings->setValue(CFG_KEY_X, x);
-    settings->setValue(CFG_KEY_Y, y);
-    settings->setValue(CFG_KEY_DIAM, diam);
-    settings->setValue(CFG_KEY_START, start);
-    settings->setValue(CFG_KEY_STEP, step);
-    settings->setValue(CFG_KEY_COUNT, count);
-    settings->setValue(CFG_KEY_ROTATE, rotate);
-    settings->setValue(CFG_KEY_MIRRORX, mirrorX);
-    settings->setValue(CFG_KEY_MIRRORY, mirrorY);
-    settings->setValue(CFG_KEY_COMMON, common);
+	settings->setValue(CFG_KEY_X, x);
+	settings->setValue(CFG_KEY_Y, y);
+	settings->setValue(CFG_KEY_DIAM, diam);
+	settings->setValue(CFG_KEY_START, start);
+	settings->setValue(CFG_KEY_STEP, step);
+	settings->setValue(CFG_KEY_COUNT, count);
+	settings->setValue(CFG_KEY_ROTATE, rotate);
+	settings->setValue(CFG_KEY_MIRRORX, mirrorX);
+	settings->setValue(CFG_KEY_MIRRORY, mirrorY);
+	settings->setValue(CFG_KEY_COMMON, common);
 }

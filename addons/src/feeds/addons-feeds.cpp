@@ -28,15 +28,15 @@
 
 void Addons::doFeeds(QWidget *parent, QSettings *settings)
 {
-    QString key = "FeedsDialog";
-    FeedsDialog *dlg;
-    dlg = parent->findChild<FeedsDialog *>(key);
+	QString key = "FeedsDialog";
+	FeedsDialog *dlg;
+	dlg = parent->findChild<FeedsDialog *>(key);
 
-    if (!dlg) {
-        dlg = new FeedsDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(FeedsOptions());
-    }
+	if (!dlg) {
+		dlg = new FeedsDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(FeedsOptions());
+	}
 
-    dlg->show();
+	dlg->show();
 }

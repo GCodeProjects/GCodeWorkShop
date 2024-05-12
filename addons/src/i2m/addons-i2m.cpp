@@ -28,15 +28,15 @@
 
 void Addons::doI2M(QWidget *parent, QSettings *settings)
 {
-    QString key = "DI2MDialog";
-    I2MDialog *dlg;
-    dlg = parent->findChild<I2MDialog *>(key);
+	QString key = "DI2MDialog";
+	I2MDialog *dlg;
+	dlg = parent->findChild<I2MDialog *>(key);
 
-    if (!dlg) {
-        dlg = new I2MDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(I2MOptions());
-    }
+	if (!dlg) {
+		dlg = new I2MDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(I2MOptions());
+	}
 
-    dlg->show();
+	dlg->show();
 }

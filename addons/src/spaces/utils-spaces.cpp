@@ -25,192 +25,192 @@
 
 int Utils::removeSpaces(QString &tx, std::function<bool(int)> interrupt)
 {
-    enum {
-        NORMAL_FLOW,
-        AFTER_APOSTROPHE,
-        AFTER_PARETHESIS,
-        AFTER_SEMICOLON
-    } state = NORMAL_FLOW;
+	enum {
+		NORMAL_FLOW,
+		AFTER_APOSTROPHE,
+		AFTER_PARETHESIS,
+		AFTER_SEMICOLON
+	} state = NORMAL_FLOW;
 
-    QString updatedText;
-    int pos = 0;
-    bool wasLetter = false;
-    bool skipChar;
-    bool openAddress = false;
-    int replaced = 0;
-    QChar currentChar = QChar();
+	QString updatedText;
+	int pos = 0;
+	bool wasLetter = false;
+	bool skipChar;
+	bool openAddress = false;
+	int replaced = 0;
+	QChar currentChar = QChar();
 
-    while (pos < tx.length()) {
-        if (interrupt(pos)) {
-            return 0;
-        }
+	while (pos < tx.length()) {
+		if (interrupt(pos)) {
+			return 0;
+		}
 
-        currentChar = tx.at(pos++);
-        skipChar = false;
+		currentChar = tx.at(pos++);
+		skipChar = false;
 
-        switch (state) {
-        case AFTER_APOSTROPHE:
-            if (currentChar == '\'' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
+		switch (state) {
+		case AFTER_APOSTROPHE:
+			if (currentChar == '\'' || currentChar == '\n') {
+				state = NORMAL_FLOW;
+			}
 
-            break;
+			break;
 
-        case AFTER_PARETHESIS:
-            if (currentChar == ')' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
+		case AFTER_PARETHESIS:
+			if (currentChar == ')' || currentChar == '\n') {
+				state = NORMAL_FLOW;
+			}
 
-            break;
+			break;
 
-        case AFTER_SEMICOLON:
-            if (currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
+		case AFTER_SEMICOLON:
+			if (currentChar == '\n') {
+				state = NORMAL_FLOW;
+			}
 
-            break;
+			break;
 
-        default:
-            if (currentChar == '\'') {
-                state = AFTER_APOSTROPHE;
-            } else if (currentChar == '(') {
-                state = AFTER_PARETHESIS;
-            } else if (currentChar == ';') {
-                state = AFTER_SEMICOLON;
-            } else {
-                // Some spaces are not removed to avoid merging words.
-                // If there are letters before and after spaces, then one space is left.
-                if (currentChar == ' ' || currentChar == '\t') {
-                    skipChar = true;
-                    replaced ++;
+		default:
+			if (currentChar == '\'') {
+				state = AFTER_APOSTROPHE;
+			} else if (currentChar == '(') {
+				state = AFTER_PARETHESIS;
+			} else if (currentChar == ';') {
+				state = AFTER_SEMICOLON;
+			} else {
+				// Some spaces are not removed to avoid merging words.
+				// If there are letters before and after spaces, then one space is left.
+				if (currentChar == ' ' || currentChar == '\t') {
+					skipChar = true;
+					replaced ++;
 
-                    if (wasLetter) {
-                        openAddress = true;
-                    }
-                } else if ((currentChar >= 'A' && currentChar <= 'Z') ||
-                           (currentChar >= 'a' && currentChar <= 'z') ||
-                           currentChar == '#') {
-                    if (openAddress) {
-                        updatedText.append(' ');
-                    }
+					if (wasLetter) {
+						openAddress = true;
+					}
+				} else if ((currentChar >= 'A' && currentChar <= 'Z') ||
+				           (currentChar >= 'a' && currentChar <= 'z') ||
+				           currentChar == '#') {
+					if (openAddress) {
+						updatedText.append(' ');
+					}
 
-                    wasLetter = true;
-                    openAddress = false;
-                } else {
-                    wasLetter = false;
-                    openAddress = false;
-                }
-            }
-        }
+					wasLetter = true;
+					openAddress = false;
+				} else {
+					wasLetter = false;
+					openAddress = false;
+				}
+			}
+		}
 
-        if (!skipChar) {
-            updatedText.append(currentChar);
-        }
-    }
+		if (!skipChar) {
+			updatedText.append(currentChar);
+		}
+	}
 
-    if (replaced) {
-        tx = updatedText;
-    }
+	if (replaced) {
+		tx = updatedText;
+	}
 
-    return replaced;
+	return replaced;
 }
 
 int Utils::insertSpaces(QString &tx, std::function<bool(int)> interrupt)
 {
-    enum {
-        NORMAL_FLOW,
-        AFTER_APOSTROPHE,
-        AFTER_PARETHESIS,
-        AFTER_SEMICOLON
-    } state = NORMAL_FLOW;
+	enum {
+		NORMAL_FLOW,
+		AFTER_APOSTROPHE,
+		AFTER_PARETHESIS,
+		AFTER_SEMICOLON
+	} state = NORMAL_FLOW;
 
-    int pos = 0;
-    QChar currentChar = QChar();
-    QChar previosChar = QChar();
-    int replaced = 0;
+	int pos = 0;
+	QChar currentChar = QChar();
+	QChar previosChar = QChar();
+	int replaced = 0;
 
-    QString updatedText;
+	QString updatedText;
 
-    while (pos < tx.length()) {
-        if (interrupt(pos)) {
-            return 0;
-        }
+	while (pos < tx.length()) {
+		if (interrupt(pos)) {
+			return 0;
+		}
 
-        previosChar = currentChar;
-        currentChar = tx.at(pos++);
-        bool insert = false;
+		previosChar = currentChar;
+		currentChar = tx.at(pos++);
+		bool insert = false;
 
-        switch (state) {
-        case AFTER_APOSTROPHE:
-            if (currentChar == '\'' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
+		switch (state) {
+		case AFTER_APOSTROPHE:
+			if (currentChar == '\'' || currentChar == '\n') {
+				state = NORMAL_FLOW;
+			}
 
-            break;
+			break;
 
-        case AFTER_PARETHESIS:
-            if (currentChar == ')' || currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
+		case AFTER_PARETHESIS:
+			if (currentChar == ')' || currentChar == '\n') {
+				state = NORMAL_FLOW;
+			}
 
-            break;
+			break;
 
-        case AFTER_SEMICOLON:
-            if (currentChar == '\n') {
-                state = NORMAL_FLOW;
-            }
+		case AFTER_SEMICOLON:
+			if (currentChar == '\n') {
+				state = NORMAL_FLOW;
+			}
 
-            break;
+			break;
 
-        default:
-            if (currentChar == '\'') {
-                state = AFTER_APOSTROPHE;
+		default:
+			if (currentChar == '\'') {
+				state = AFTER_APOSTROPHE;
 
-                if (previosChar != ' ' && previosChar != '\n') {
-                    insert = true;
-                }
-            } else if (currentChar == '(') {
-                state = AFTER_PARETHESIS;
+				if (previosChar != ' ' && previosChar != '\n') {
+					insert = true;
+				}
+			} else if (currentChar == '(') {
+				state = AFTER_PARETHESIS;
 
-                if (previosChar != ' ' && previosChar != '\n') {
-                    insert = true;
-                }
-            } else if (currentChar == ';') {
-                state = AFTER_SEMICOLON;
+				if (previosChar != ' ' && previosChar != '\n') {
+					insert = true;
+				}
+			} else if (currentChar == ';') {
+				state = AFTER_SEMICOLON;
 
-                if (previosChar != ' ' && previosChar != '\n') {
-                    insert = true;
-                }
-            } else if (previosChar == ' ' || currentChar == ' ') {
-                // do nothing
-            } else if (previosChar == '\n') {
-                // do nothing
-            } else if (currentChar == '#' && previosChar != '#' && previosChar != '['
-                       && previosChar != '-' && previosChar != '+' && previosChar != '*'
-                       && previosChar != '/' && previosChar != '=') {
-                insert = true;
-            } else if ((previosChar >= 'A' && previosChar <= 'Z') ||
-                       (previosChar >= 'a' && previosChar <= 'z') ||
-                       previosChar == ',') {
-                // do nothing
-            } else if ((currentChar >= 'A' && currentChar <= 'Z') ||
-                       (currentChar >= 'A' && currentChar <= 'Z') ||
-                       currentChar == ',') {
-                insert = true;
-            }
-        }
+				if (previosChar != ' ' && previosChar != '\n') {
+					insert = true;
+				}
+			} else if (previosChar == ' ' || currentChar == ' ') {
+				// do nothing
+			} else if (previosChar == '\n') {
+				// do nothing
+			} else if (currentChar == '#' && previosChar != '#' && previosChar != '['
+			           && previosChar != '-' && previosChar != '+' && previosChar != '*'
+			           && previosChar != '/' && previosChar != '=') {
+				insert = true;
+			} else if ((previosChar >= 'A' && previosChar <= 'Z') ||
+			           (previosChar >= 'a' && previosChar <= 'z') ||
+			           previosChar == ',') {
+				// do nothing
+			} else if ((currentChar >= 'A' && currentChar <= 'Z') ||
+			           (currentChar >= 'A' && currentChar <= 'Z') ||
+			           currentChar == ',') {
+				insert = true;
+			}
+		}
 
-        if (insert) {
-            replaced++;
-            updatedText.append(' ');
-        }
+		if (insert) {
+			replaced++;
+			updatedText.append(' ');
+		}
 
-        updatedText.append(currentChar);
-    }
+		updatedText.append(currentChar);
+	}
 
-    if (replaced) {
-        tx = updatedText;
-    }
+	if (replaced) {
+		tx = updatedText;
+	}
 
-    return replaced;
+	return replaced;
 }

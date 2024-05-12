@@ -27,34 +27,34 @@ class QSettings;
 
 
 struct SwapAxesOptions {
-    QString     from;
-    QString     to;
-    int         precision;
+	QString     from;
+	QString     to;
+	int         precision;
 
-    QStringList fromList;
-    QStringList toList;
+	QStringList fromList;
+	QStringList toList;
 
-    struct Limit {
-        bool    enable;
-        double  min;
-        double  max;
-    } limit;
+	struct Limit {
+		bool    enable;
+		double  min;
+		double  max;
+	} limit;
 
-    enum Operation {
-        Add,
-        Subtract,
-        Multiply,
-        Divide
-    };
+	enum Operation {
+		Add,
+		Subtract,
+		Multiply,
+		Divide
+	};
 
-    struct Convert {
-        bool    enable;
-        int     operation;
-        double  value;
-    } convert;
+	struct Convert {
+		bool    enable;
+		int     operation;
+		double  value;
+	} convert;
 
-    void load(QSettings *settings, const SwapAxesOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const SwapAxesOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // SWAPAXESOPTIONS_H

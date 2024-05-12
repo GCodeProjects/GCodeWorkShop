@@ -25,8 +25,8 @@
 
 namespace Utils {
 struct FileExt {
-    QString name;
-    QString ext;
+	QString name;
+	QString ext;
 };
 
 FileExt guessFileNameByProgNum(const QString &text);

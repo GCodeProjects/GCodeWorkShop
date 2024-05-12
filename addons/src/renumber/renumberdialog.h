@@ -39,29 +39,29 @@ struct RenumberOptions;
  */
 class RenumberDialog : public QDialog, private Ui::RenumberDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    RenumberDialog(QWidget *parent, QSettings *settings);
-    ~RenumberDialog();
+	RenumberDialog(QWidget *parent, QSettings *settings);
+	~RenumberDialog();
 
-    void setOptions(const RenumberOptions &options);
-    RenumberOptions options();
+	void setOptions(const RenumberOptions &options);
+	RenumberOptions options();
 
-    void loadSettings(const RenumberOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const RenumberOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 private slots:
-    void atEndClicked();
-    void divideClicked();
-    void renumClicked();
-    void allLinesClicked();
-    void removeAllClicked();
-    void mRenumHeClicked();
-    void onFinished(int result);
+	void atEndClicked();
+	void divideClicked();
+	void renumClicked();
+	void allLinesClicked();
+	void removeAllClicked();
+	void mRenumHeClicked();
+	void onFinished(int result);
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // RENUMBERDIALOG_H

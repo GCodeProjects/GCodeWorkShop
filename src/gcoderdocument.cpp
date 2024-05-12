@@ -35,7 +35,7 @@
 #include <QPalette>                 // for QPalette, QPalette::Base, QPalette::Text
 #include <QPlainTextEdit>           // for QPlainTextEdit
 #ifndef QT_NO_PRINTER
-#include <QPrinter>             // for QPrinter
+	#include <QPrinter>             // for QPrinter
 #endif
 #include <QRegularExpression>       // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
 #include <QRegularExpressionMatch>  // for QRegularExpressionMatch
@@ -75,693 +75,693 @@ class QMenu;
 
 GCoderDocument::GCoderDocument() : Document(nullptr)
 {
-    m_highlighter = nullptr;
-    m_highlightMode = MODE_AUTO;
-    m_preLoadCursorPosition = 0;
+	m_highlighter = nullptr;
+	m_highlightMode = MODE_AUTO;
+	m_preLoadCursorPosition = 0;
 
-    m_textEdit = new QPlainTextEdit();
-    setWidget(m_textEdit);
-    m_textEdit->setWordWrapMode(QTextOption::NoWrap);
+	m_textEdit = new QPlainTextEdit();
+	setWidget(m_textEdit);
+	m_textEdit->setWordWrapMode(QTextOption::NoWrap);
 
-    m_inLineCalc = new InLineCalc(m_textEdit);
-    connect(m_inLineCalc, SIGNAL(complete(const QString &)), this, SLOT(inLineCalcComplete(const QString &)));
+	m_inLineCalc = new InLineCalc(m_textEdit);
+	connect(m_inLineCalc, SIGNAL(complete(const QString &)), this, SLOT(inLineCalcComplete(const QString &)));
 
 
-    m_textEdit->setWindowIcon(QIcon(":/images/ncfile.png"));
-    m_textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(m_textEdit, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(customContextMenuRequest(const QPoint &)));
-    connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-    connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorMoved()));
-    connect(m_textEdit, SIGNAL(selectionChanged()), this, SLOT(selectionUpdated()));
-    connect(m_textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(setModified(bool)));
-    connect(m_textEdit, SIGNAL(redoAvailable(bool)), this, SLOT(setRedoAvailable(bool)));
-    connect(m_textEdit, SIGNAL(undoAvailable(bool)), this, SLOT(setUndoAvailable(bool)));
+	m_textEdit->setWindowIcon(QIcon(":/images/ncfile.png"));
+	m_textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(m_textEdit, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(customContextMenuRequest(const QPoint &)));
+	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorMoved()));
+	connect(m_textEdit, SIGNAL(selectionChanged()), this, SLOT(selectionUpdated()));
+	connect(m_textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(setModified(bool)));
+	connect(m_textEdit, SIGNAL(redoAvailable(bool)), this, SLOT(setRedoAvailable(bool)));
+	connect(m_textEdit, SIGNAL(undoAvailable(bool)), this, SLOT(setUndoAvailable(bool)));
 
-    m_capsLockEventFilter = new CapsLockEventFilter(m_textEdit);
-    m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
-    m_textEdit->installEventFilter(m_capsLockEventFilter);
-    m_gCoderEventFilter = new GCoderEventFilter(m_textEdit, this);
-    m_textEdit->installEventFilter(m_gCoderEventFilter);
-    m_textEdit->viewport()->installEventFilter(m_gCoderEventFilter);
-    connect(m_gCoderEventFilter, SIGNAL(requestInLineCalc()), this, SLOT(showInLineCalc()));
-    connect(m_gCoderEventFilter, SIGNAL(requestUnderLine()), this, SLOT(underLine()));
+	m_capsLockEventFilter = new CapsLockEventFilter(m_textEdit);
+	m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
+	m_textEdit->installEventFilter(m_capsLockEventFilter);
+	m_gCoderEventFilter = new GCoderEventFilter(m_textEdit, this);
+	m_textEdit->installEventFilter(m_gCoderEventFilter);
+	m_textEdit->viewport()->installEventFilter(m_gCoderEventFilter);
+	connect(m_gCoderEventFilter, SIGNAL(requestInLineCalc()), this, SLOT(showInLineCalc()));
+	connect(m_gCoderEventFilter, SIGNAL(requestUnderLine()), this, SLOT(underLine()));
 
-    document()->setDocumentMargin(8);
+	document()->setDocumentMargin(8);
 }
 
 QString GCoderDocument::type() const
 {
-    return GCoder::DOCUMENT_TYPE;
+	return GCoder::DOCUMENT_TYPE;
 }
 
 QString GCoderDocument::guessFileName() const
 {
-    QString fileName;
+	QString fileName;
 
-    if (m_widgetProperties.guessFileNameByProgNum) {
-        fileName = Utils::guessFileNameByProgNum(text()).name;
-    } else {
-        fileName = Utils::guessFileNameByComments(text());
-    }
+	if (m_widgetProperties.guessFileNameByProgNum) {
+		fileName = Utils::guessFileNameByProgNum(text()).name;
+	} else {
+		fileName = Utils::guessFileNameByComments(text());
+	}
 
-    return fileName.simplified();
+	return fileName.simplified();
 }
 
 void GCoderDocument::loadTemplate(const QString &fileName)
 {
-    static int sequenceNumber = 1;
+	static int sequenceNumber = 1;
 
-    if (!fileName.isEmpty()) {
-        loadFile(fileName, false);
-    }
+	if (!fileName.isEmpty()) {
+		loadFile(fileName, false);
+	}
 
-    setUntitled(true);
-    setFileName(tr("program%1.nc").arg(sequenceNumber++));
-    document()->setModified(false);
-    setBrief(this->fileName());
-    updateWindowTitle();
+	setUntitled(true);
+	setFileName(tr("program%1.nc").arg(sequenceNumber++));
+	document()->setModified(false);
+	setBrief(this->fileName());
+	updateWindowTitle();
 }
 
 bool GCoderDocument::load()
 {
-    if (!loadFile(filePath())) {
-        return false;
-    }
+	if (!loadFile(filePath())) {
+		return false;
+	}
 
-    if (isUntitled()) {
-        QTextCursor cursor = textCursor();
-        cursor.setPosition(m_preLoadCursorPosition);
-        setTextCursor(cursor);
-    }
+	if (isUntitled()) {
+		QTextCursor cursor = textCursor();
+		cursor.setPosition(m_preLoadCursorPosition);
+		setTextCursor(cursor);
+	}
 
-    setUntitled(false);
-    document()->setModified(false);
-    updateBrief();
-    updateWindowTitle();
-    detectHighlightMode();
+	setUntitled(false);
+	document()->setModified(false);
+	updateBrief();
+	updateWindowTitle();
+	detectHighlightMode();
 
-    return true;
+	return true;
 }
 
 bool GCoderDocument::save()
 {
-    changeDateInComment();
+	changeDateInComment();
 
-    if (!saveFile(filePath())) {
-        return false;
-    }
+	if (!saveFile(filePath())) {
+		return false;
+	}
 
-    setUntitled(false);
-    document()->setModified(false);
-    updateBrief();
-    updateWindowTitle();
+	setUntitled(false);
+	document()->setModified(false);
+	updateBrief();
+	updateWindowTitle();
 
-    if (m_widgetProperties.clearUndoHistory) {
-        clearUndoRedoStacks();
-    }
+	if (m_widgetProperties.clearUndoHistory) {
+		clearUndoRedoStacks();
+	}
 
-    if (m_widgetProperties.clearUnderlineHistory) {
+	if (m_widgetProperties.clearUnderlineHistory) {
 
-        QTextCursor cursorPos = textCursor();
-        textEdit()->blockSignals(true);
-        selectAll();
+		QTextCursor cursorPos = textCursor();
+		textEdit()->blockSignals(true);
+		selectAll();
 
-        if (m_widgetProperties.underlineChanges) {
-            QTextCursor cr = textCursor(); // Clear underline
-            QTextCharFormat format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::NoUnderline);
-            cr.setCharFormat(format);
-            setTextCursor(cr);
-        }
+		if (m_widgetProperties.underlineChanges) {
+			QTextCursor cr = textCursor(); // Clear underline
+			QTextCharFormat format = cr.charFormat();
+			format.setUnderlineStyle(QTextCharFormat::NoUnderline);
+			cr.setCharFormat(format);
+			setTextCursor(cr);
+		}
 
-        setTextCursor(cursorPos);
+		setTextCursor(cursorPos);
 
-        document()->setModified(false);
-        textEdit()->blockSignals(false);
-    }
+		document()->setModified(false);
+		textEdit()->blockSignals(false);
+	}
 
-    detectHighlightMode();
-    return true;
+	detectHighlightMode();
+	return true;
 }
 
 QByteArray GCoderDocument::rawData() const
 {
-    return text(true).toLocal8Bit();
+	return text(true).toLocal8Bit();
 }
 
 void GCoderDocument::setRawData(const QByteArray &data)
 {
-    setText(QString::fromLocal8Bit(data));
+	setText(QString::fromLocal8Bit(data));
 }
 
 QMenu *GCoderDocument::createStandardContextMenu(const QPoint &pos)
 {
-    return textEdit()->createStandardContextMenu(pos);
+	return textEdit()->createStandardContextMenu(pos);
 }
 
 DocumentInfo::Ptr GCoderDocument::documentInfo() const
 {
-    GCoderInfo *info = new GCoderInfo();
-    *info = *Document::documentInfo();
-    info->cursorPos = textCursor().position();
-    info->highlightMode = highlightMode();
-    return DocumentInfo::Ptr(info);
+	GCoderInfo *info = new GCoderInfo();
+	*info = *Document::documentInfo();
+	info->cursorPos = textCursor().position();
+	info->highlightMode = highlightMode();
+	return DocumentInfo::Ptr(info);
 }
 
 void GCoderDocument::setDocumentInfo(const DocumentInfo::Ptr &info)
 {
-    Document::setDocumentInfo(info);
+	Document::setDocumentInfo(info);
 
-    GCoderInfo *gci = dynamic_cast<GCoderInfo *>(info.get());
+	GCoderInfo *gci = dynamic_cast<GCoderInfo *>(info.get());
 
-    if (gci) {
-        setHighlightMode(gci->highlightMode);
+	if (gci) {
+		setHighlightMode(gci->highlightMode);
 
-        if (isUntitled()) {
-            m_preLoadCursorPosition = gci->cursorPos;
-        } else {
-            QTextCursor cursor = textCursor();
-            cursor.setPosition(gci->cursorPos);
-            setTextCursor(cursor);
-        }
-    }
+		if (isUntitled()) {
+			m_preLoadCursorPosition = gci->cursorPos;
+		} else {
+			QTextCursor cursor = textCursor();
+			cursor.setPosition(gci->cursorPos);
+			setTextCursor(cursor);
+		}
+	}
 }
 
 DocumentStyle::Ptr GCoderDocument::documentStyle() const
 {
-    return DocumentStyle::Ptr(new GCoderStyle(m_codeStyle));
+	return DocumentStyle::Ptr(new GCoderStyle(m_codeStyle));
 }
 
 void GCoderDocument::setDocumentStyle(const DocumentStyle::Ptr &style)
 {
-    try {
-        m_codeStyle = dynamic_cast<const GCoderStyle &>(*style);
-    }  catch (std::bad_cast &e) {
-        return;
-    }
+	try {
+		m_codeStyle = dynamic_cast<const GCoderStyle &>(*style);
+	}  catch (std::bad_cast &e) {
+		return;
+	}
 
-    QFont font = QFont(m_codeStyle.fontName, m_codeStyle.fontSize, QFont::Normal);
-    document()->setDefaultFont(font);
+	QFont font = QFont(m_codeStyle.fontName, m_codeStyle.fontSize, QFont::Normal);
+	document()->setDefaultFont(font);
 
-    QPalette pal;
+	QPalette pal;
 
-    if (m_codeStyle.hColors.backgroundColor != 0xFFFFFF) {
-        pal.setColor(QPalette::Base, QColor(m_codeStyle.hColors.backgroundColor));
-    }
+	if (m_codeStyle.hColors.backgroundColor != 0xFFFFFF) {
+		pal.setColor(QPalette::Base, QColor(m_codeStyle.hColors.backgroundColor));
+	}
 
-    pal.setColor(QPalette::Text, QColor(m_codeStyle.hColors.defaultColor));
-    widget()->setPalette(pal);
-    rehighlight();
-    highlightCurrentLine();
+	pal.setColor(QPalette::Text, QColor(m_codeStyle.hColors.defaultColor));
+	widget()->setPalette(pal);
+	rehighlight();
+	highlightCurrentLine();
 }
 
 DocumentWidgetProperties::Ptr GCoderDocument::documentWidgetProperties() const
 {
-    return DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(m_widgetProperties));
+	return DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(m_widgetProperties));
 }
 
 void GCoderDocument::setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &properties)
 {
-    try {
-        m_widgetProperties = dynamic_cast<const GCoderWidgetProperties &>(*properties);
-    }  catch (std::bad_cast &e) {
-        return;
-    }
+	try {
+		m_widgetProperties = dynamic_cast<const GCoderWidgetProperties &>(*properties);
+	}  catch (std::bad_cast &e) {
+		return;
+	}
 
-    m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
+	m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
 
-    if (m_widgetProperties.syntaxH) {
-        if (m_highlighter == nullptr) {
-            m_highlighter = new Highlighter(document());
-            rehighlight();
-        }
-    } else {
-        if (m_highlighter != nullptr) {
-            delete (m_highlighter);
-        }
+	if (m_widgetProperties.syntaxH) {
+		if (m_highlighter == nullptr) {
+			m_highlighter = new Highlighter(document());
+			rehighlight();
+		}
+	} else {
+		if (m_highlighter != nullptr) {
+			delete (m_highlighter);
+		}
 
-        m_highlighter = nullptr;
-    }
+		m_highlighter = nullptr;
+	}
 }
 
 QString GCoderDocument::text(bool addCR) const
 {
-    QString text = document()->toPlainText();
+	QString text = document()->toPlainText();
 
-    if (addCR && !text.contains(QLatin1String("\r\n"))) {
-        text.replace(QLatin1String("\n"), QLatin1String("\r\n"));
-    }
+	if (addCR && !text.contains(QLatin1String("\r\n"))) {
+		text.replace(QLatin1String("\n"), QLatin1String("\r\n"));
+	}
 
-    return text;
+	return text;
 }
 
 void GCoderDocument::setText(const QString &text)
 {
-    document()->setPlainText(text);
+	document()->setPlainText(text);
 }
 
 void GCoderDocument::insertText(const QString &text)
 {
-    textEdit()->insertPlainText(text);
+	textEdit()->insertPlainText(text);
 }
 
 bool GCoderDocument::isReadOnly() const
 {
-    return textEdit()->isReadOnly();
+	return textEdit()->isReadOnly();
 }
 
 void GCoderDocument::setReadOnly(bool ro)
 {
-    textEdit()->setReadOnly(ro);
+	textEdit()->setReadOnly(ro);
 }
 
 void GCoderDocument::redo()
 {
-    document()->redo();
+	document()->redo();
 }
 
 void GCoderDocument::undo()
 {
-    document()->undo();
+	document()->undo();
 }
 
 void GCoderDocument::clearUndoRedoStacks()
 {
-    document()->clearUndoRedoStacks();
+	document()->clearUndoRedoStacks();
 }
 
 bool GCoderDocument::overwriteMode()
 {
-    return textEdit()->overwriteMode();
+	return textEdit()->overwriteMode();
 }
 
 void GCoderDocument::centerCursor()
 {
-    textEdit()->centerCursor();
+	textEdit()->centerCursor();
 }
 
 QString GCoderDocument::wordUnderCursor() const
 {
-    QTextCursor cursor = textEdit()->textCursor();
-    cursor.select(QTextCursor::WordUnderCursor);
-    return cursor.selectedText();
+	QTextCursor cursor = textEdit()->textCursor();
+	cursor.select(QTextCursor::WordUnderCursor);
+	return cursor.selectedText();
 }
 
 bool GCoderDocument::hasSelection() const
 {
-    return textCursor().hasSelection();
+	return textCursor().hasSelection();
 }
 
 void GCoderDocument::selectAll()
 {
-    textEdit()->selectAll();
+	textEdit()->selectAll();
 }
 
 void GCoderDocument::clearSelection(bool toAnchor)
 {
-    QTextCursor cursor = textEdit()->textCursor();
-    cursor.setPosition(toAnchor ? cursor.anchor() : cursor.position());
-    setTextCursor(cursor);
+	QTextCursor cursor = textEdit()->textCursor();
+	cursor.setPosition(toAnchor ? cursor.anchor() : cursor.position());
+	setTextCursor(cursor);
 }
 
 QString GCoderDocument::selectedText() const
 {
-    return textEdit()->textCursor().selectedText();
+	return textEdit()->textCursor().selectedText();
 }
 
 void GCoderDocument::removeSelectedText()
 {
-    textEdit()->textCursor().removeSelectedText();
+	textEdit()->textCursor().removeSelectedText();
 }
 
 void GCoderDocument::clear()
 {
-    textEdit()->clear();
+	textEdit()->clear();
 }
 
 void GCoderDocument::copy()
 {
-    textEdit()->copy();
+	textEdit()->copy();
 }
 
 void GCoderDocument::cut()
 {
-    textEdit()->cut();
+	textEdit()->cut();
 }
 
 void GCoderDocument::paste()
 {
-    if (m_widgetProperties.underlineChanges) {
-        QTextCharFormat format = textEdit()->currentCharFormat();
-        format.setUnderlineStyle(QTextCharFormat::DotLine);
-        format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
-        textEdit()->setCurrentCharFormat(format);
-    }
+	if (m_widgetProperties.underlineChanges) {
+		QTextCharFormat format = textEdit()->currentCharFormat();
+		format.setUnderlineStyle(QTextCharFormat::DotLine);
+		format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
+		textEdit()->setCurrentCharFormat(format);
+	}
 
-    textEdit()->paste();
+	textEdit()->paste();
 }
 
 void GCoderDocument::print(QPrinter *printer)
 {
 #ifndef QT_NO_PRINTER
-    document()->print(printer);
+	document()->print(printer);
 #endif
 }
 
 int GCoderDocument::currentLine() const
 {
-    return textCursor().block().firstLineNumber() + 1;
+	return textCursor().block().firstLineNumber() + 1;
 }
 
 int GCoderDocument::currentColumn() const
 {
-    QTextCursor cursor = textCursor();
-    return cursor.position() - cursor.block().position();
+	QTextCursor cursor = textCursor();
+	return cursor.position() - cursor.block().position();
 }
 
 void GCoderDocument::goToLine(int line)
 {
-    QTextBlock block = document()->findBlockByNumber(line);
-    setTextCursor(QTextCursor(block));
-    centerCursor();
-    widget()->setFocus();
+	QTextBlock block = document()->findBlockByNumber(line);
+	setTextCursor(QTextCursor(block));
+	centerCursor();
+	widget()->setFocus();
 }
 
 QPlainTextEdit *GCoderDocument::textEdit() const
 {
-    return m_textEdit;
+	return m_textEdit;
 }
 
 QTextDocument *GCoderDocument::document() const
 {
-    return textEdit()->document();
+	return textEdit()->document();
 }
 
 QTextCursor GCoderDocument::textCursor() const
 {
-    return textEdit()->textCursor();
+	return textEdit()->textCursor();
 }
 
 void GCoderDocument::setTextCursor(const QTextCursor &cursor)
 {
-    textEdit()->setTextCursor(cursor);
+	textEdit()->setTextCursor(cursor);
 }
 
 void GCoderDocument::changeDateInComment()
 {
-    if (!m_widgetProperties.changeDateInComment) {
-        return;
-    }
+	if (!m_widgetProperties.changeDateInComment) {
+		return;
+	}
 
-    QRegularExpression regex;
-    QString strDate = QLocale().toString(QDate::currentDate(), QLocale::ShortFormat);
-    regex.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
-    QTextCursor cursor = textCursor();
-    cursor.setPosition(0);
+	QRegularExpression regex;
+	QString strDate = QLocale().toString(QDate::currentDate(), QLocale::ShortFormat);
+	regex.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
+	QTextCursor cursor = textCursor();
+	cursor.setPosition(0);
 
-    cursor = document()->find(regex, cursor);
+	cursor = document()->find(regex, cursor);
 
-    if (!cursor.isNull()) {
-        textEdit()->setUpdatesEnabled(false);
-        cursor.beginEditBlock();
-        cursor.removeSelectedText();
-        cursor.insertText(tr("DATE") + ": " + strDate);
-        cursor.endEditBlock();
+	if (!cursor.isNull()) {
+		textEdit()->setUpdatesEnabled(false);
+		cursor.beginEditBlock();
+		cursor.removeSelectedText();
+		cursor.insertText(tr("DATE") + ": " + strDate);
+		cursor.endEditBlock();
 
-        textEdit()->setUpdatesEnabled(true);
-        textEdit()->repaint();
-    } else {
-        cursor = textCursor();
+		textEdit()->setUpdatesEnabled(true);
+		textEdit()->repaint();
+	} else {
+		cursor = textCursor();
 
-        regex.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
-        cursor.setPosition(0);
-        cursor = document()->find(regex, cursor);
+		regex.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
+		cursor.setPosition(0);
+		cursor = document()->find(regex, cursor);
 
-        if (cursor.isNull()) {
-            regex.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
-            cursor.setPosition(0);
-            cursor = document()->find(regex, cursor);
-        }
+		if (cursor.isNull()) {
+			regex.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
+			cursor.setPosition(0);
+			cursor = document()->find(regex, cursor);
+		}
 
-        if (!cursor.isNull()) {
-            textEdit()->setUpdatesEnabled(false);
-            cursor.beginEditBlock();
-            QString text = cursor.selectedText();
-            cursor.removeSelectedText();
+		if (!cursor.isNull()) {
+			textEdit()->setUpdatesEnabled(false);
+			cursor.beginEditBlock();
+			QString text = cursor.selectedText();
+			cursor.removeSelectedText();
 
-            if (text.contains('(')) {
-                text = "(" + strDate + ")";
-            } else {
-                text = ";" + strDate;
-            }
+			if (text.contains('(')) {
+				text = "(" + strDate + ")";
+			} else {
+				text = ";" + strDate;
+			}
 
-            cursor.insertText(text);
-            cursor.endEditBlock();
+			cursor.insertText(text);
+			cursor.endEditBlock();
 
-            textEdit()->setUpdatesEnabled(true);
-            textEdit()->repaint();
-        }
-    }
+			textEdit()->setUpdatesEnabled(true);
+			textEdit()->repaint();
+		}
+	}
 }
 
 void GCoderDocument::updateBrief()
 {
-    QRegularExpression regex;
-    QString text = this->text();
-    QString f_tx;
+	QRegularExpression regex;
+	QString text = this->text();
+	QString f_tx;
 
-    regex.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
-    auto match = regex.match(text);
+	regex.setPattern("\\([^\\n\\r]*\\)|;[^\\n\\r]*"); //find first comment and set it in window tilte
+	auto match = regex.match(text);
 
-    while (match.hasMatch()) {
-        f_tx = match.captured();
+	while (match.hasMatch()) {
+		f_tx = match.captured();
 
-        if (!(f_tx.mid(0, 2) == QLatin1String(";$"))) {
-            f_tx.remove(QLatin1Char('('));
-            f_tx.remove(QLatin1Char(')'));
-            f_tx.remove(QLatin1Char(';'));
-            break;
-        }
+		if (!(f_tx.mid(0, 2) == QLatin1String(";$"))) {
+			f_tx.remove(QLatin1Char('('));
+			f_tx.remove(QLatin1Char(')'));
+			f_tx.remove(QLatin1Char(';'));
+			break;
+		}
 
-        match = regex.match(text, match.capturedEnd());
-    }
+		match = regex.match(text, match.capturedEnd());
+	}
 
-    if (f_tx.isEmpty()) {
-        setBrief(fileName());
-    } else {
-        setBrief(f_tx.simplified());
-    }
+	if (f_tx.isEmpty()) {
+		setBrief(fileName());
+	} else {
+		setBrief(f_tx.simplified());
+	}
 }
 
 void GCoderDocument::updateWindowTitle()
 {
-    QString title = "";
+	QString title = "";
 
-    if ((m_widgetProperties.windowMode & SHOW_PROGTITLE)) {
-        title = brief();
-    }
+	if ((m_widgetProperties.windowMode & SHOW_PROGTITLE)) {
+		title = brief();
+	}
 
-    if (!title.isEmpty() && ((m_widgetProperties.windowMode & SHOW_FILEPATH)
-                             || (m_widgetProperties.windowMode & SHOW_FILENAME))) {
-        title += " ---> ";
-    }
+	if (!title.isEmpty() && ((m_widgetProperties.windowMode & SHOW_FILEPATH)
+	                         || (m_widgetProperties.windowMode & SHOW_FILENAME))) {
+		title += " ---> ";
+	}
 
-    if ((m_widgetProperties.windowMode & SHOW_FILEPATH)) {
-        title += path() + "/";
-    }
+	if ((m_widgetProperties.windowMode & SHOW_FILEPATH)) {
+		title += path() + "/";
+	}
 
-    if ((m_widgetProperties.windowMode & SHOW_FILENAME) || title.isEmpty()) {
-        title += fileName();
-    }
+	if ((m_widgetProperties.windowMode & SHOW_FILENAME) || title.isEmpty()) {
+		title += fileName();
+	}
 
-    setWidgetTitle(title);
+	setWidgetTitle(title);
 }
 
 void GCoderDocument::updateToolTips()
 {
-    QString group;
+	QString group;
 
-    switch (m_highlightMode) {
-    case MODE_OKUMA:
-        group = QLatin1String("OKUMA");
-        break;
+	switch (m_highlightMode) {
+	case MODE_OKUMA:
+		group = QLatin1String("OKUMA");
+		break;
 
-    case MODE_FANUC:
-        group = QLatin1String("FANUC");
-        break;
+	case MODE_FANUC:
+		group = QLatin1String("FANUC");
+		break;
 
-    case MODE_SINUMERIK_840:
-        group = QLatin1String("SINUMERIK_840");
-        break;
+	case MODE_SINUMERIK_840:
+		group = QLatin1String("SINUMERIK_840");
+		break;
 
-    case MODE_PHILIPS:
-    case MODE_SINUMERIK:
-        group = QLatin1String("SINUMERIK");
-        break;
+	case MODE_PHILIPS:
+	case MODE_SINUMERIK:
+		group = QLatin1String("SINUMERIK");
+		break;
 
-    case MODE_HEIDENHAIN:
-        group = QLatin1String("HEIDENHAIN");
-        break;
+	case MODE_HEIDENHAIN:
+		group = QLatin1String("HEIDENHAIN");
+		break;
 
-    case MODE_HEIDENHAIN_ISO:
-        group = QLatin1String("HEIDENHAIN_ISO");
-        break;
+	case MODE_HEIDENHAIN_ISO:
+		group = QLatin1String("HEIDENHAIN_ISO");
+		break;
 
-    case MODE_LINUXCNC:
-        group = QLatin1String("LinuxCNC");
-        break;
+	case MODE_LINUXCNC:
+		group = QLatin1String("LinuxCNC");
+		break;
 
-    case MODE_TOOLTIPS:
-        group = QLatin1String("TOOLTIP");
-        break;
+	case MODE_TOOLTIPS:
+		group = QLatin1String("TOOLTIP");
+		break;
 
-    default:
-        m_gCoderEventFilter->setToolTipEnable(false);
-        return;
-    }
+	default:
+		m_gCoderEventFilter->setToolTipEnable(false);
+		return;
+	}
 
-    m_gCoderEventFilter->setToolTipEnable(m_widgetProperties.editorToolTips);
+	m_gCoderEventFilter->setToolTipEnable(m_widgetProperties.editorToolTips);
 
-    QHash<QString, QString> tips;
+	QHash<QString, QString> tips;
 
-    QString fileName = Medium::instance().settingsDir() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
-    loadToolTips(tips, fileName, group);
+	QString fileName = Medium::instance().settingsDir() + "/" + "cnc_tips_" + QLocale::system().name() + ".txt";
+	loadToolTips(tips, fileName, group);
 
-    fileName = path() + "/" + "cnc_tips.txt";
-    loadToolTips(tips, fileName, group);
+	fileName = path() + "/" + "cnc_tips.txt";
+	loadToolTips(tips, fileName, group);
 
-    m_gCoderEventFilter->setTips(tips);
+	m_gCoderEventFilter->setTips(tips);
 }
 
 void GCoderDocument::loadToolTips(QHash<QString, QString> &tips, const QString &fileName, const QString &group)
 {
-    if (QFile::exists(fileName)) {
-        QSettings settings(fileName, QSettings::IniFormat);
-        settings.beginGroup(group);
-        const QStringList &keys = settings.childKeys();
+	if (QFile::exists(fileName)) {
+		QSettings settings(fileName, QSettings::IniFormat);
+		settings.beginGroup(group);
+		const QStringList &keys = settings.childKeys();
 
-        for (const QString &k : keys) {
-            QString text = settings.value(k, "").toString();
+		for (const QString &k : keys) {
+			QString text = settings.value(k, "").toString();
 
-            if (!text.isEmpty()) {
-                tips.insert(k, text);
-            } else {
-                tips.remove(k);
-            }
-        }
-    }
+			if (!text.isEmpty()) {
+				tips.insert(k, text);
+			} else {
+				tips.remove(k);
+			}
+		}
+	}
 }
 
 void GCoderDocument::setHighlightMode(int mod)
 {
-    if (m_highlightMode != mod) {
-        m_highlightMode = mod;
-        rehighlight();
-        updateToolTips();
-    }
+	if (m_highlightMode != mod) {
+		m_highlightMode = mod;
+		rehighlight();
+		updateToolTips();
+	}
 }
 
 int GCoderDocument::highlightMode() const
 {
-    return m_highlightMode;
+	return m_highlightMode;
 }
 
 void GCoderDocument::rehighlight()
 {
-    if (m_widgetProperties.syntaxH && m_highlighter) {
-        m_highlighter->setHighlightMode(highlightMode());
-        m_highlighter->setHColors(m_codeStyle.hColors, QFont(m_codeStyle.fontName, m_codeStyle.fontSize, QFont::Normal));
-        m_highlighter->rehighlight();
-    }
+	if (m_widgetProperties.syntaxH && m_highlighter) {
+		m_highlighter->setHighlightMode(highlightMode());
+		m_highlighter->setHColors(m_codeStyle.hColors, QFont(m_codeStyle.fontName, m_codeStyle.fontSize, QFont::Normal));
+		m_highlighter->rehighlight();
+	}
 }
 
 void GCoderDocument::detectHighlightMode()
 {
-    if (!m_widgetProperties.syntaxH || !m_highlighter) {
-        return;
-    }
+	if (!m_widgetProperties.syntaxH || !m_highlighter) {
+		return;
+	}
 
-    bool mod = document()->isModified();  // something below clears document modified state
+	bool mod = document()->isModified();  // something below clears document modified state
 
-    if (highlightMode() == MODE_AUTO) {
-        setHighlightMode(autoDetectHighligthMode(text().toUpper()));
-    }
+	if (highlightMode() == MODE_AUTO) {
+		setHighlightMode(autoDetectHighligthMode(text().toUpper()));
+	}
 
-    if (highlightMode() == MODE_AUTO) {
-        setHighlightMode(m_widgetProperties.defaultHighlightMode);
-    }
+	if (highlightMode() == MODE_AUTO) {
+		setHighlightMode(m_widgetProperties.defaultHighlightMode);
+	}
 
-    document()->setModified(mod);
+	document()->setModified(mod);
 }
 
 bool GCoderDocument::foundTextMatched(const QString &pattern, QString text)
 {
-    bool matched = false;
-    bool isRegExp = false;
-    bool isRegExpMinMax = false;
-    QRegularExpression regex;
-    double min = 0;
-    double max = 0;
+	bool matched = false;
+	bool isRegExp = false;
+	bool isRegExpMinMax = false;
+	QRegularExpression regex;
+	double min = 0;
+	double max = 0;
 
-    QString addr = pattern;
+	QString addr = pattern;
 
-    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 
-    if (addr.contains(QRegularExpression("\\$\\$"))) {
-        addr.remove("$$");
-        isRegExp = true;
-    } else {
-        regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
-        auto match = regex.match(addr);
+	if (addr.contains(QRegularExpression("\\$\\$"))) {
+		addr.remove("$$");
+		isRegExp = true;
+	} else {
+		regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+		auto match = regex.match(addr);
 
-        if (match.hasMatch()) {
-            isRegExp = true;
-            isRegExpMinMax = true;
-            QString value = match.captured();
-            addr.remove(match.capturedStart(), match.capturedLength());
-            value.remove("$");
-            bool ok;
-            max = value.toDouble(&ok);
+		if (match.hasMatch()) {
+			isRegExp = true;
+			isRegExpMinMax = true;
+			QString value = match.captured();
+			addr.remove(match.capturedStart(), match.capturedLength());
+			value.remove("$");
+			bool ok;
+			max = value.toDouble(&ok);
 
-            if (!ok) {
-                max = 0;
-            }
+			if (!ok) {
+				max = 0;
+			}
 
-            match = regex.match(addr);
+			match = regex.match(addr);
 
-            if (match.hasMatch()) {
-                value = match.captured();
-                addr.remove(match.capturedStart(), match.capturedLength());
-                value.remove("$");
-                min = value.toDouble(&ok);
+			if (match.hasMatch()) {
+				value = match.captured();
+				addr.remove(match.capturedStart(), match.capturedLength());
+				value.remove("$");
+				min = value.toDouble(&ok);
 
-                if (!ok) {
-                    min = 0;
-                }
-            }
-        }
-    }
+				if (!ok) {
+					min = 0;
+				}
+			}
+		}
+	}
 
-    if (isRegExp) {
-        regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
+	if (isRegExp) {
+		regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
 
-        if (text.contains(regex)) {
-            if (isRegExpMinMax) {
-                bool ok;
-                double val = QString(text).remove(addr, Qt::CaseInsensitive).toDouble(&ok);
+		if (text.contains(regex)) {
+			if (isRegExpMinMax) {
+				bool ok;
+				double val = QString(text).remove(addr, Qt::CaseInsensitive).toDouble(&ok);
 
-                if (ok && (val >= min) && (val <= max)) {
-                    matched = true;
-                }
-            } else {
-                matched = true;
-            }
-        }
-    } else {
-        matched = (addr == text);
-    }
+				if (ok && (val >= min) && (val <= max)) {
+					matched = true;
+				}
+			} else {
+				matched = true;
+			}
+		}
+	} else {
+		matched = (addr == text);
+	}
 
-    return matched;
+	return matched;
 }
 
 bool GCoderDocument::findNext(QString textToFind,
@@ -770,41 +770,41 @@ bool GCoderDocument::findNext(QString textToFind,
                               bool ignoreComments,
                               bool backward)
 {
-    bool found = false;
-    QTextCursor cursor, cursorOld;
+	bool found = false;
+	QTextCursor cursor, cursorOld;
 
-    if (textToFind.isEmpty()) {
-        return false;
-    }
+	if (textToFind.isEmpty()) {
+		return false;
+	}
 
-    textEdit()->blockSignals(true);
+	textEdit()->blockSignals(true);
 
-    found = findText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+	found = findText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
 
-    if (!found) {
-        cursor = textCursor();
-        cursorOld = cursor;
+	if (!found) {
+		cursor = textCursor();
+		cursorOld = cursor;
 
-        if (backward) {
-            cursor.movePosition(QTextCursor::End);
-        } else {
-            cursor.movePosition(QTextCursor::Start);
-        }
+		if (backward) {
+			cursor.movePosition(QTextCursor::End);
+		} else {
+			cursor.movePosition(QTextCursor::Start);
+		}
 
-        setTextCursor(cursor);
+		setTextCursor(cursor);
 
-        found = findText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+		found = findText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
 
-        if (!found) {
-            cursorOld.clearSelection();
-            setTextCursor(cursorOld);
-        }
-    }
+		if (!found) {
+			cursorOld.clearSelection();
+			setTextCursor(cursorOld);
+		}
+	}
 
-    textEdit()->blockSignals(false);
-    highlightCurrentLine();
+	textEdit()->blockSignals(false);
+	highlightCurrentLine();
 
-    return found;
+	return found;
 }
 
 bool GCoderDocument::replaceNext(QString textToFind,
@@ -814,99 +814,99 @@ bool GCoderDocument::replaceNext(QString textToFind,
                                  bool ignoreComments,
                                  bool backward)
 {
-    QString foundText;
-    bool ok;
-    QRegularExpression regExp;
-    QChar op;
+	QString foundText;
+	bool ok;
+	QRegularExpression regExp;
+	QChar op;
 
-    if (isReadOnly()) {
-        return false;
-    }
+	if (isReadOnly()) {
+		return false;
+	}
 
-    if (textToFind.isEmpty()) {
-        return false;
-    }
+	if (textToFind.isEmpty()) {
+		return false;
+	}
 
-    bool found = false;
+	bool found = false;
 
-    textEdit()->blockSignals(true);
+	textEdit()->blockSignals(true);
 
-    if (foundTextMatched(textToFind, selectedText())) {
-        found = true;
-    } else {
-        found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
-    }
+	if (foundTextMatched(textToFind, selectedText())) {
+		found = true;
+	} else {
+		found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+	}
 
-    if (found) {
-        QTextCursor cr = textCursor();
-        cr.beginEditBlock();
+	if (found) {
+		QTextCursor cr = textCursor();
+		cr.beginEditBlock();
 
-        if (m_widgetProperties.underlineChanges) {
-            QTextCharFormat format = cr.charFormat();
-            format.setUnderlineStyle(QTextCharFormat::DotLine);
-            format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
-            cr.setCharFormat(format);
-        }
+		if (m_widgetProperties.underlineChanges) {
+			QTextCharFormat format = cr.charFormat();
+			format.setUnderlineStyle(QTextCharFormat::DotLine);
+			format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
+			cr.setCharFormat(format);
+		}
 
-        regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[-]{0,1}[0-9.]{1,}"));
+		regExp.setPattern(QString("\\$\\$[\\/*+\\-]{1,1}[-]{0,1}[0-9.]{1,}"));
 
-        if (replacedText.contains(regExp)) {
-            replacedText.remove("$$");
-            op = replacedText.at(0);
-            replacedText.remove(0, 1);
-            double val = replacedText.toDouble(&ok);
+		if (replacedText.contains(regExp)) {
+			replacedText.remove("$$");
+			op = replacedText.at(0);
+			replacedText.remove(0, 1);
+			double val = replacedText.toDouble(&ok);
 
-            foundText = cr.selectedText();
-            foundText.remove(QRegularExpression("[A-Za-z#]{1,}"));
-            double val1 = foundText.toDouble(&ok);
-            replacedText = cr.selectedText();
-            replacedText.remove(foundText);
+			foundText = cr.selectedText();
+			foundText.remove(QRegularExpression("[A-Za-z#]{1,}"));
+			double val1 = foundText.toDouble(&ok);
+			replacedText = cr.selectedText();
+			replacedText.remove(foundText);
 
-            if ((val == 0) && (op == '/')) { //divide by 0
-                val = 1;
-            }
+			if ((val == 0) && (op == '/')) { //divide by 0
+				val = 1;
+			}
 
-            if (op == '+') {
-                val = val1 + val;
-            }
+			if (op == '+') {
+				val = val1 + val;
+			}
 
-            if (op == '-') {
-                val = val1 - val;
-            }
+			if (op == '-') {
+				val = val1 - val;
+			}
 
-            if (op == '*') {
-                val = val1 * val;
-            }
+			if (op == '*') {
+				val = val1 * val;
+			}
 
-            if (op == '/') {
-                val = val1 / val;
-            }
+			if (op == '/') {
+				val = val1 / val;
+			}
 
-            if (replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N"
-                    || replacedText == "n") {
-                replacedText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', 3));
+			if (replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N"
+			        || replacedText == "n") {
+				replacedText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', 3));
 
-                if (replacedText[replacedText.length() - 1] == '.') {
-                    replacedText = replacedText.remove((replacedText.length() - 1), 1);
-                }
-            } else {
-                replacedText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', 3));
-            }
+				if (replacedText[replacedText.length() - 1] == '.') {
+					replacedText = replacedText.remove((replacedText.length() - 1), 1);
+				}
+			} else {
+				replacedText = replacedText + Utils::removeZeros(QString("%1").arg(val, 0, 'f', 3));
+			}
 
-        }
+		}
 
-        cr.insertText(replacedText);
-        cr.endEditBlock();
-        setTextCursor(cr);
+		cr.insertText(replacedText);
+		cr.endEditBlock();
+		setTextCursor(cr);
 
-        found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
-    }
+		found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+	}
 
-    textEdit()->blockSignals(false);
-    highlightCurrentLine();
-    highlightFindText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+	textEdit()->blockSignals(false);
+	highlightCurrentLine();
+	highlightFindText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
 
-    return found;
+	return found;
 }
 
 bool GCoderDocument::replaceAll(QString textToFind,
@@ -916,189 +916,189 @@ bool GCoderDocument::replaceAll(QString textToFind,
                                 bool ignoreComments,
                                 bool backward)
 {
-    bool found = false;
+	bool found = false;
 
-    if (isReadOnly()) {
-        return false;
-    }
+	if (isReadOnly()) {
+		return false;
+	}
 
-    if (textToFind.isEmpty()) {
-        return false;
-    }
+	if (textToFind.isEmpty()) {
+		return false;
+	}
 
-    if (selectedText() == textToFind) {
-        found = true;
-    } else {
-        found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
-    }
+	if (selectedText() == textToFind) {
+		found = true;
+	} else {
+		found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+	}
 
-    QTextCursor startCursor = textCursor();
+	QTextCursor startCursor = textCursor();
 
-    while (found) {
-        found = replaceNext(textToFind, replacedText, backward, wholeWords, ignoreCase, ignoreComments);
+	while (found) {
+		found = replaceNext(textToFind, replacedText, backward, wholeWords, ignoreCase, ignoreComments);
 
-        if (startCursor.blockNumber() == textCursor().blockNumber()) {
-            break;
-        }
+		if (startCursor.blockNumber() == textCursor().blockNumber()) {
+			break;
+		}
 
-        qApp->processEvents();
-    }
+		qApp->processEvents();
+	}
 
-    return found;
+	return found;
 }
 
 bool GCoderDocument::findText(const QString &text, bool findBackward, bool wholeWords, bool ignoreCase, bool ignoreComments)
 {
-    bool inComment = false;
-    bool found = false;
-    bool isRegExp = false;
-    bool isRegExpMinMax = false;
-    QTextCursor cursor;
-    QRegularExpression regex;
-    double min = 0;
-    double max = 0;
-    Qt::CaseSensitivity caseSensitivity;
+	bool inComment = false;
+	bool found = false;
+	bool isRegExp = false;
+	bool isRegExpMinMax = false;
+	QTextCursor cursor;
+	QRegularExpression regex;
+	double min = 0;
+	double max = 0;
+	Qt::CaseSensitivity caseSensitivity;
 
-    if (!ignoreCase) {
-        caseSensitivity = Qt::CaseSensitive;
-    } else {
-        caseSensitivity = Qt::CaseInsensitive;
-        regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-    }
+	if (!ignoreCase) {
+		caseSensitivity = Qt::CaseSensitive;
+	} else {
+		caseSensitivity = Qt::CaseInsensitive;
+		regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+	}
 
-    QString addr = text;
+	QString addr = text;
 
-    if (addr.contains(QRegularExpression("\\$\\$"))) {
-        addr.remove("$$");
-        isRegExp = true;
-    } else {
-        regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
-        auto match = regex.match(addr);
+	if (addr.contains(QRegularExpression("\\$\\$"))) {
+		addr.remove("$$");
+		isRegExp = true;
+	} else {
+		regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+		auto match = regex.match(addr);
 
-        if (match.hasMatch()) {
-            isRegExp = true;
-            isRegExpMinMax = true;
-            QString value = match.captured();
-            addr.remove(match.capturedStart(), match.capturedLength());
-            value.remove("$");
-            bool ok;
-            max = value.toDouble(&ok);
+		if (match.hasMatch()) {
+			isRegExp = true;
+			isRegExpMinMax = true;
+			QString value = match.captured();
+			addr.remove(match.capturedStart(), match.capturedLength());
+			value.remove("$");
+			bool ok;
+			max = value.toDouble(&ok);
 
-            if (!ok) {
-                max = 0;
-            }
+			if (!ok) {
+				max = 0;
+			}
 
-            match = regex.match(addr);
+			match = regex.match(addr);
 
-            if (match.hasMatch()) {
-                value = match.captured();
-                addr.remove(match.capturedStart(), match.capturedLength());
-                value.remove("$");
-                min = value.toDouble(&ok);
+			if (match.hasMatch()) {
+				value = match.captured();
+				addr.remove(match.capturedStart(), match.capturedLength());
+				value.remove("$");
+				min = value.toDouble(&ok);
 
-                if (!ok) {
-                    min = 0;
-                }
-            }
-        }
-    }
+				if (!ok) {
+					min = 0;
+				}
+			}
+		}
+	}
 
-    textEdit()->setUpdatesEnabled(false);
+	textEdit()->setUpdatesEnabled(false);
 
-    if (addr.isEmpty()) {
-        return false;
-    }
+	if (addr.isEmpty()) {
+		return false;
+	}
 
-    cursor = textCursor();
+	cursor = textCursor();
 
-    do {
-        QTextDocument::FindFlags options{};
-        options = (findBackward ? QTextDocument::FindBackward : options) |
-                  (wholeWords ? QTextDocument::FindWholeWords : options) |
-                  (!ignoreCase ? QTextDocument::FindCaseSensitively : options);
+	do {
+		QTextDocument::FindFlags options{};
+		options = (findBackward ? QTextDocument::FindBackward : options) |
+		          (wholeWords ? QTextDocument::FindWholeWords : options) |
+		          (!ignoreCase ? QTextDocument::FindCaseSensitively : options);
 
-        if (isRegExp) {
-            regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
+		if (isRegExp) {
+			regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
 
-            cursor = document()->find(regex, cursor, options);
+			cursor = document()->find(regex, cursor, options);
 
-            found = !cursor.isNull();
+			found = !cursor.isNull();
 
-            if (found) {
-                if (!isRegExpMinMax) {
-                    setTextCursor(cursor);
-                }
-            } else {
-                break;
-            }
-        } else {
-            found = textEdit()->find(addr, options);
-            cursor = textCursor();
-        }
+			if (found) {
+				if (!isRegExpMinMax) {
+					setTextCursor(cursor);
+				}
+			} else {
+				break;
+			}
+		} else {
+			found = textEdit()->find(addr, options);
+			cursor = textCursor();
+		}
 
-        QString cur_line = cursor.block().text();
-        int cur_line_column = cursor.columnNumber();
+		QString cur_line = cursor.block().text();
+		int cur_line_column = cursor.columnNumber();
 
-        if (found && ignoreComments) {
-            int id = highlightMode();
-            int commentPos;
+		if (found && ignoreComments) {
+			int id = highlightMode();
+			int commentPos;
 
-            if ((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN)) {
-                commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-            } else {
-                if ((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS)) {
-                    commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
-                } else {
-                    commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+			if ((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN)) {
+				commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+			} else {
+				if ((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS)) {
+					commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+				} else {
+					commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
 
-                    if (commentPos > cur_line_column) {
-                        commentPos = -1;
-                    }
+					if (commentPos > cur_line_column) {
+						commentPos = -1;
+					}
 
-                    if (commentPos < 0) {
-                        commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-                    }
-                }
-            }
+					if (commentPos < 0) {
+						commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+					}
+				}
+			}
 
-            if (commentPos < 0) {
-                commentPos = cur_line_column + 1;
-            }
+			if (commentPos < 0) {
+				commentPos = cur_line_column + 1;
+			}
 
-            inComment = (commentPos < cur_line_column);
-        } else {
-            inComment = false;
-        }
+			inComment = (commentPos < cur_line_column);
+		} else {
+			inComment = false;
+		}
 
-        if ((isRegExpMinMax && found) && !inComment) {
-            QString sValue = cursor.selectedText();
-            bool ok;
-            double val = QString(sValue).remove(addr, caseSensitivity).toDouble(&ok);
+		if ((isRegExpMinMax && found) && !inComment) {
+			QString sValue = cursor.selectedText();
+			bool ok;
+			double val = QString(sValue).remove(addr, caseSensitivity).toDouble(&ok);
 
-            if (((val >= min) && (val <= max))) {
-                inComment = false;
-                setTextCursor(cursor);
-            } else {
-                inComment = true;
-            }
-        }
+			if (((val >= min) && (val <= max))) {
+				inComment = false;
+				setTextCursor(cursor);
+			} else {
+				inComment = true;
+			}
+		}
 
-    } while (inComment);
+	} while (inComment);
 
-    textEdit()->setUpdatesEnabled(true);
-    return found;
+	textEdit()->setUpdatesEnabled(true);
+	return found;
 }
 
 void GCoderDocument::underLine()
 {
-    if (m_widgetProperties.underlineChanges) {
-        QTextCursor cr = textCursor();
-        QTextCharFormat format = cr.charFormat();
-        format.setUnderlineStyle(QTextCharFormat::DotLine);
-        format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
-        cr.setCharFormat(format);
-        setTextCursor(cr);
-    }
+	if (m_widgetProperties.underlineChanges) {
+		QTextCursor cr = textCursor();
+		QTextCharFormat format = cr.charFormat();
+		format.setUnderlineStyle(QTextCharFormat::DotLine);
+		format.setUnderlineColor(QColor(m_codeStyle.underlineColor));
+		cr.setCharFormat(format);
+		setTextCursor(cr);
+	}
 }
 
 void GCoderDocument::highlightFindText(const QString &searchString,
@@ -1107,407 +1107,407 @@ void GCoderDocument::highlightFindText(const QString &searchString,
                                        bool ignoreComments,
                                        bool backward)
 {
-    QList<QTextEdit::ExtraSelection> tmpSelections;
-    bool inComment;
-    bool isRegExp = false;
-    bool isRegExpMinMax = false;
-    QRegularExpression regex;
-    double min = 0;
-    double max = 0;
-    Qt::CaseSensitivity caseSensitivity;
+	QList<QTextEdit::ExtraSelection> tmpSelections;
+	bool inComment;
+	bool isRegExp = false;
+	bool isRegExpMinMax = false;
+	QRegularExpression regex;
+	double min = 0;
+	double max = 0;
+	Qt::CaseSensitivity caseSensitivity;
 
-    tmpSelections.clear();
-    m_findTextExtraSelections.clear();
-    tmpSelections.append(m_extraSelections);
-    QColor lineColor = QColor(Qt::yellow).lighter(155);
-    m_selection.format.setBackground(lineColor);
+	tmpSelections.clear();
+	m_findTextExtraSelections.clear();
+	tmpSelections.append(m_extraSelections);
+	QColor lineColor = QColor(Qt::yellow).lighter(155);
+	m_selection.format.setBackground(lineColor);
 
-    QTextDocument *doc = document();
-    QTextCursor cursor = textCursor();
-    cursor.setPosition(0);
+	QTextDocument *doc = document();
+	QTextCursor cursor = textCursor();
+	cursor.setPosition(0);
 
-    QString addr = searchString;
+	QString addr = searchString;
 
-    if (!ignoreCase) {
-        caseSensitivity = Qt::CaseSensitive;
-    } else {
-        regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-        caseSensitivity = Qt::CaseInsensitive;
-    }
+	if (!ignoreCase) {
+		caseSensitivity = Qt::CaseSensitive;
+	} else {
+		regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+		caseSensitivity = Qt::CaseInsensitive;
+	}
 
-    // TODO Dedicate the search pattern parsing into a separate method.
-    // This can also be useful in the foundTextMatched and findText methods.
-    // Try the following pattern for parsing.
-    // [A-Z]((\$\$)|(\$([-+]?\d*\.?\d+))(\$([-+]?\d*\.?\d+))?)
-    if (addr.contains(QRegularExpression("\\$\\$"))) {
-        addr.remove("$$");
-        isRegExp = true;
-    } else {
-        regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
-        auto match = regex.match(addr);
+	// TODO Dedicate the search pattern parsing into a separate method.
+	// This can also be useful in the foundTextMatched and findText methods.
+	// Try the following pattern for parsing.
+	// [A-Z]((\$\$)|(\$([-+]?\d*\.?\d+))(\$([-+]?\d*\.?\d+))?)
+	if (addr.contains(QRegularExpression("\\$\\$"))) {
+		addr.remove("$$");
+		isRegExp = true;
+	} else {
+		regex.setPattern(QString("(\\$)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}"));
+		auto match = regex.match(addr);
 
-        if (match.hasMatch()) {
-            isRegExp = true;
-            isRegExpMinMax = true;
-            QString value = match.captured();
-            addr.remove(match.capturedStart(), match.capturedLength());
+		if (match.hasMatch()) {
+			isRegExp = true;
+			isRegExpMinMax = true;
+			QString value = match.captured();
+			addr.remove(match.capturedStart(), match.capturedLength());
 
-            value.remove("$");
-            bool ok;
-            max = value.toDouble(&ok);
+			value.remove("$");
+			bool ok;
+			max = value.toDouble(&ok);
 
-            if (!ok) {
-                max = 0;
-            }
+			if (!ok) {
+				max = 0;
+			}
 
-            match = regex.match(addr);
+			match = regex.match(addr);
 
-            if (match.hasMatch()) {
-                value = match.captured();
-                addr.remove(match.capturedStart(), match.capturedLength());
-                value.remove("$");
-                min = value.toDouble(&ok);
+			if (match.hasMatch()) {
+				value = match.captured();
+				addr.remove(match.capturedStart(), match.capturedLength());
+				value.remove("$");
+				min = value.toDouble(&ok);
 
-                if (!ok) {
-                    min = 0;
-                }
-            }
-        }
-    }
+				if (!ok) {
+					min = 0;
+				}
+			}
+		}
+	}
 
-    cursor.setPosition(0);
+	cursor.setPosition(0);
 
-    do {
-        QTextDocument::FindFlags options{};
-        options = (backward ? QTextDocument::FindBackward : options) |
-                  (wholeWords ? QTextDocument::FindWholeWords : options) |
-                  (!ignoreCase ? QTextDocument::FindCaseSensitively : options);
+	do {
+		QTextDocument::FindFlags options{};
+		options = (backward ? QTextDocument::FindBackward : options) |
+		          (wholeWords ? QTextDocument::FindWholeWords : options) |
+		          (!ignoreCase ? QTextDocument::FindCaseSensitively : options);
 
-        if (isRegExp) {
-            if (addr.isEmpty()) {
-                return;
-            }
+		if (isRegExp) {
+			if (addr.isEmpty()) {
+				return;
+			}
 
-            regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
+			regex.setPattern(QString("%1[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(addr));
 
-            cursor = doc->find(regex, cursor, options);
-        } else {
-            cursor = doc->find(searchString, cursor, options);
-        }
+			cursor = doc->find(regex, cursor, options);
+		} else {
+			cursor = doc->find(searchString, cursor, options);
+		}
 
-        if (!cursor.isNull()) {
-            QString cur_line = cursor.block().text();
-            int cur_line_column = cursor.columnNumber();
+		if (!cursor.isNull()) {
+			QString cur_line = cursor.block().text();
+			int cur_line_column = cursor.columnNumber();
 
-            if (ignoreComments) {
-                int id = highlightMode();
-                int commentPos;
+			if (ignoreComments) {
+				int id = highlightMode();
+				int commentPos;
 
-                if ((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN)) {
-                    commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-                } else {
-                    if ((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS)) {
-                        commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
-                    } else {
-                        commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+				if ((id == MODE_SINUMERIK_840) || (id == MODE_HEIDENHAIN_ISO) || (id == MODE_HEIDENHAIN)) {
+					commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+				} else {
+					if ((id == MODE_AUTO) || (id == MODE_OKUMA) || (id == MODE_SINUMERIK) || (id == MODE_PHILIPS)) {
+						commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+					} else {
+						commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
 
-                        if (commentPos > cur_line_column) {
-                            commentPos = -1;
-                        }
+						if (commentPos > cur_line_column) {
+							commentPos = -1;
+						}
 
-                        if (commentPos < 0) {
-                            commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-                        }
-                    }
-                }
+						if (commentPos < 0) {
+							commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+						}
+					}
+				}
 
-                if (commentPos < 0) {
-                    commentPos = cur_line_column + 1;
-                }
+				if (commentPos < 0) {
+					commentPos = cur_line_column + 1;
+				}
 
-                inComment = (commentPos < cur_line_column);
-            } else {
-                inComment = false;
-            }
+				inComment = (commentPos < cur_line_column);
+			} else {
+				inComment = false;
+			}
 
-            if (!inComment) {
-                if (isRegExpMinMax) {
-                    QString sval = cursor.selectedText();
-                    bool ok;
-                    double val = QString(sval).remove(addr, caseSensitivity).toDouble(&ok);
+			if (!inComment) {
+				if (isRegExpMinMax) {
+					QString sval = cursor.selectedText();
+					bool ok;
+					double val = QString(sval).remove(addr, caseSensitivity).toDouble(&ok);
 
-                    if ((val >= min) && (val <= max)) {
-                        m_selection.cursor = cursor;
-                        m_findTextExtraSelections.append(m_selection);
-                    }
-                } else {
-                    m_selection.cursor = cursor;
-                    m_findTextExtraSelections.append(m_selection);
-                }
-            }
-        }
-    } while (!cursor.isNull());
+					if ((val >= min) && (val <= max)) {
+						m_selection.cursor = cursor;
+						m_findTextExtraSelections.append(m_selection);
+					}
+				} else {
+					m_selection.cursor = cursor;
+					m_findTextExtraSelections.append(m_selection);
+				}
+			}
+		}
+	} while (!cursor.isNull());
 
-    tmpSelections.append(m_findTextExtraSelections);
-    textEdit()->setExtraSelections(tmpSelections);
+	tmpSelections.append(m_findTextExtraSelections);
+	textEdit()->setExtraSelections(tmpSelections);
 }
 
 void GCoderDocument::highlightCurrentLine()
 {
-    QString openBrace;
-    QString closeBrace;
-    bool proceed;
-    QList<QTextEdit::ExtraSelection> tmpSelections;
-    QTextDocument::FindFlags findOptions;
+	QString openBrace;
+	QString closeBrace;
+	bool proceed;
+	QList<QTextEdit::ExtraSelection> tmpSelections;
+	QTextDocument::FindFlags findOptions;
 
-    tmpSelections.clear();
-    m_extraSelections.clear();
-    tmpSelections.append(m_blockExtraSelections);
-    tmpSelections.append(m_findTextExtraSelections);
-    textEdit()->setExtraSelections(tmpSelections);
+	tmpSelections.clear();
+	m_extraSelections.clear();
+	tmpSelections.append(m_blockExtraSelections);
+	tmpSelections.append(m_findTextExtraSelections);
+	textEdit()->setExtraSelections(tmpSelections);
 
-    if (!isReadOnly()) {
-        m_selection.format.setBackground(QColor(m_codeStyle.lineColor));
-        m_selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-        m_selection.cursor = textCursor();
-        m_selection.cursor.clearSelection();
-        m_extraSelections.append(m_selection);
-    }
+	if (!isReadOnly()) {
+		m_selection.format.setBackground(QColor(m_codeStyle.lineColor));
+		m_selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+		m_selection.cursor = textCursor();
+		m_selection.cursor.clearSelection();
+		m_extraSelections.append(m_selection);
+	}
 
-    QColor lineColor = QColor(m_codeStyle.lineColor).darker(108);
-    m_selection.format.setBackground(lineColor);
+	QColor lineColor = QColor(m_codeStyle.lineColor).darker(108);
+	m_selection.format.setBackground(lineColor);
 
-    QTextDocument *doc = document();
-    QTextCursor cursor = textCursor();
-    QTextCursor beforeCursor = cursor;
+	QTextDocument *doc = document();
+	QTextCursor cursor = textCursor();
+	QTextCursor beforeCursor = cursor;
 
-    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
-    QString brace = cursor.selectedText();
+	cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+	QString brace = cursor.selectedText();
 
-    beforeCursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
-    QString beforeBrace = beforeCursor.selectedText();
+	beforeCursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+	QString beforeBrace = beforeCursor.selectedText();
 
-    proceed = true;
-    findOptions = QTextDocument::FindFlags();
+	proceed = true;
+	findOptions = QTextDocument::FindFlags();
 
-    if ((brace != QLatin1String("{")) && (brace != QLatin1String("}"))
-            && (brace != QLatin1String("[")) && (brace != QLatin1String("]"))
-            && (brace != QLatin1String("("))
-            && (brace != QLatin1String(")")) && (brace != QLatin1String("\""))
-            && (((brace != QLatin1String("<")) && (brace != QLatin1String(">"))))) {
-        if ((beforeBrace == QLatin1String("{")) || (beforeBrace == QLatin1String("}"))
-                || (beforeBrace == QLatin1String("["))
-                || (beforeBrace == QLatin1String("]"))
-                || (beforeBrace == QLatin1String("("))
-                || (beforeBrace == QLatin1String(")"))
-                || (beforeBrace == QLatin1String("\""))
-                || (((beforeBrace == QLatin1String("<"))
-                     || (beforeBrace == QLatin1String(">"))))) {
+	if ((brace != QLatin1String("{")) && (brace != QLatin1String("}"))
+	        && (brace != QLatin1String("[")) && (brace != QLatin1String("]"))
+	        && (brace != QLatin1String("("))
+	        && (brace != QLatin1String(")")) && (brace != QLatin1String("\""))
+	        && (((brace != QLatin1String("<")) && (brace != QLatin1String(">"))))) {
+		if ((beforeBrace == QLatin1String("{")) || (beforeBrace == QLatin1String("}"))
+		        || (beforeBrace == QLatin1String("["))
+		        || (beforeBrace == QLatin1String("]"))
+		        || (beforeBrace == QLatin1String("("))
+		        || (beforeBrace == QLatin1String(")"))
+		        || (beforeBrace == QLatin1String("\""))
+		        || (((beforeBrace == QLatin1String("<"))
+		             || (beforeBrace == QLatin1String(">"))))) {
 
-            cursor = beforeCursor;
-            brace = cursor.selectedText();
-            proceed = true;
-        } else {
-            proceed = false;
+			cursor = beforeCursor;
+			brace = cursor.selectedText();
+			proceed = true;
+		} else {
+			proceed = false;
 
-            if (m_highlightMode == MODE_LINUXCNC) {
-                cursor = textCursor();
+			if (m_highlightMode == MODE_LINUXCNC) {
+				cursor = textCursor();
 
-                cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
-                cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
-                brace = cursor.selectedText().toUpper();
+				cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
+				cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
+				brace = cursor.selectedText().toUpper();
 
-                findOptions = QTextDocument::FindWholeWords;
+				findOptions = QTextDocument::FindWholeWords;
 
-                if (brace.length() > 1) {
-                    if (brace[0] == QLatin1Char('O')) {
-                        beforeCursor = cursor;
-                        openBrace = brace;
-                        closeBrace = brace;
-                        proceed = true;
-                    }
+				if (brace.length() > 1) {
+					if (brace[0] == QLatin1Char('O')) {
+						beforeCursor = cursor;
+						openBrace = brace;
+						closeBrace = brace;
+						proceed = true;
+					}
 
-                    if ((brace == QLatin1String("IF")) || (brace == QLatin1String("ENDIF"))) {
-                        openBrace = QLatin1String("IF");
-                        closeBrace = QLatin1String("ENDIF");
-                        proceed = true;
-                    }
+					if ((brace == QLatin1String("IF")) || (brace == QLatin1String("ENDIF"))) {
+						openBrace = QLatin1String("IF");
+						closeBrace = QLatin1String("ENDIF");
+						proceed = true;
+					}
 
-                    if ((brace == QLatin1String("SUB")) || (brace == QLatin1String("ENDSUB"))) {
-                        openBrace = QLatin1String("SUB");
-                        closeBrace = QLatin1String("ENDSUB");
-                        proceed = true;
-                    }
+					if ((brace == QLatin1String("SUB")) || (brace == QLatin1String("ENDSUB"))) {
+						openBrace = QLatin1String("SUB");
+						closeBrace = QLatin1String("ENDSUB");
+						proceed = true;
+					}
 
-                    if (brace == QLatin1String("WHILE") || (brace == QLatin1String("ENDWHILE"))) {
-                        openBrace = QLatin1String("WHILE");
-                        closeBrace = QLatin1String("ENDWHILE");
-                        proceed = true;
-                    }
-                }
-            }
+					if (brace == QLatin1String("WHILE") || (brace == QLatin1String("ENDWHILE"))) {
+						openBrace = QLatin1String("WHILE");
+						closeBrace = QLatin1String("ENDWHILE");
+						proceed = true;
+					}
+				}
+			}
 
 
-            if (m_highlightMode == MODE_SINUMERIK_840) {
-                cursor = textCursor();
+			if (m_highlightMode == MODE_SINUMERIK_840) {
+				cursor = textCursor();
 
-                cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
-                cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
-                brace = cursor.selectedText().toUpper();
+				cursor.movePosition(QTextCursor::StartOfWord, QTextCursor::MoveAnchor);
+				cursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
+				brace = cursor.selectedText().toUpper();
 
-                findOptions = QTextDocument::FindWholeWords;
+				findOptions = QTextDocument::FindWholeWords;
 
-                if (brace.length() > 1) {
-                    if ((brace == QLatin1String("IF")) || (brace == QLatin1String("ENDIF"))) {
-                        openBrace = QLatin1String("IF");
-                        closeBrace = QLatin1String("ENDIF");
-                        proceed = true;
-                    }
+				if (brace.length() > 1) {
+					if ((brace == QLatin1String("IF")) || (brace == QLatin1String("ENDIF"))) {
+						openBrace = QLatin1String("IF");
+						closeBrace = QLatin1String("ENDIF");
+						proceed = true;
+					}
 
-                    if ((brace == QLatin1String("REPEAT")) || (brace == QLatin1String("UNTIL"))) {
-                        openBrace = QLatin1String("REPEAT");
-                        closeBrace = QLatin1String("UNTIL");
-                        proceed = true;
-                    }
+					if ((brace == QLatin1String("REPEAT")) || (brace == QLatin1String("UNTIL"))) {
+						openBrace = QLatin1String("REPEAT");
+						closeBrace = QLatin1String("UNTIL");
+						proceed = true;
+					}
 
-                    if (brace == QLatin1String("WHILE") || (brace == QLatin1String("ENDWHILE"))) {
-                        openBrace = QLatin1String("WHILE");
-                        closeBrace = QLatin1String("ENDWHILE");
-                        proceed = true;
-                    }
-                }
-            }
-        }
-    }
+					if (brace == QLatin1String("WHILE") || (brace == QLatin1String("ENDWHILE"))) {
+						openBrace = QLatin1String("WHILE");
+						closeBrace = QLatin1String("ENDWHILE");
+						proceed = true;
+					}
+				}
+			}
+		}
+	}
 
-    if (!proceed) {
-        tmpSelections.append(m_extraSelections);
-        textEdit()->setExtraSelections(tmpSelections);
-        return;
-    }
+	if (!proceed) {
+		tmpSelections.append(m_extraSelections);
+		textEdit()->setExtraSelections(tmpSelections);
+		return;
+	}
 
-    QTextCharFormat format;
-    format.setForeground(Qt::red);
-    format.setFontWeight(QFont::Bold);
+	QTextCharFormat format;
+	format.setForeground(Qt::red);
+	format.setFontWeight(QFont::Bold);
 
-    if ((brace == QLatin1String("{")) || (brace == QLatin1String("}"))) {
-        openBrace = QLatin1String("{");
-        closeBrace = QLatin1String("}");
-    }
+	if ((brace == QLatin1String("{")) || (brace == QLatin1String("}"))) {
+		openBrace = QLatin1String("{");
+		closeBrace = QLatin1String("}");
+	}
 
-    if ((brace == QLatin1String("[")) || (brace == QLatin1String("]"))) {
-        openBrace = QLatin1String("[");
-        closeBrace = QLatin1String("]");
-    }
+	if ((brace == QLatin1String("[")) || (brace == QLatin1String("]"))) {
+		openBrace = QLatin1String("[");
+		closeBrace = QLatin1String("]");
+	}
 
-    if ((brace == QLatin1String("(")) || (brace == QLatin1String(")"))) {
-        openBrace = QLatin1String("(");
-        closeBrace = QLatin1String(")");
-    }
+	if ((brace == QLatin1String("(")) || (brace == QLatin1String(")"))) {
+		openBrace = QLatin1String("(");
+		closeBrace = QLatin1String(")");
+	}
 
-    if (m_highlightMode == MODE_LINUXCNC) {
-        if ((brace == QLatin1String("<")) || (brace == QLatin1String(">"))) {
-            openBrace = QLatin1String("<");
-            closeBrace = QLatin1String(">");
-        }
-    }
+	if (m_highlightMode == MODE_LINUXCNC) {
+		if ((brace == QLatin1String("<")) || (brace == QLatin1String(">"))) {
+			openBrace = QLatin1String("<");
+			closeBrace = QLatin1String(">");
+		}
+	}
 
-    if ((brace == QLatin1String("\""))) {
-        m_selection.cursor = cursor;
-        m_extraSelections.append(m_selection);
-        QTextCursor cursor1 = doc->find(QLatin1String("\""), cursor);
+	if ((brace == QLatin1String("\""))) {
+		m_selection.cursor = cursor;
+		m_extraSelections.append(m_selection);
+		QTextCursor cursor1 = doc->find(QLatin1String("\""), cursor);
 
-        if (!cursor1.isNull() && (cursor1 != cursor)) {
-            m_selection.cursor = cursor1;
-            m_extraSelections.append(m_selection);
-        } else {
-            QTextCursor cursor2 = doc->find(QLatin1String("\""), cursor, QTextDocument::FindBackward);
+		if (!cursor1.isNull() && (cursor1 != cursor)) {
+			m_selection.cursor = cursor1;
+			m_extraSelections.append(m_selection);
+		} else {
+			QTextCursor cursor2 = doc->find(QLatin1String("\""), cursor, QTextDocument::FindBackward);
 
-            if (!cursor2.isNull()) {
-                m_selection.cursor = cursor2;
-                m_extraSelections.append(m_selection);
-            }
-        }
+			if (!cursor2.isNull()) {
+				m_selection.cursor = cursor2;
+				m_extraSelections.append(m_selection);
+			}
+		}
 
-        tmpSelections.append(m_extraSelections);
-        textEdit()->setExtraSelections(tmpSelections);
-        return;
-    }
+		tmpSelections.append(m_extraSelections);
+		textEdit()->setExtraSelections(tmpSelections);
+		return;
+	}
 
-    if (brace == openBrace) {
-        QTextCursor cursor1 = doc->find(closeBrace, cursor, findOptions);
-        QTextCursor cursor2 = doc->find(openBrace, cursor, findOptions);
+	if (brace == openBrace) {
+		QTextCursor cursor1 = doc->find(closeBrace, cursor, findOptions);
+		QTextCursor cursor2 = doc->find(openBrace, cursor, findOptions);
 
-        if (cursor2.isNull()) {
-            m_selection.cursor = cursor;
-            m_extraSelections.append(m_selection);
-            m_selection.cursor = cursor1;
-            m_extraSelections.append(m_selection);
-        } else {
+		if (cursor2.isNull()) {
+			m_selection.cursor = cursor;
+			m_extraSelections.append(m_selection);
+			m_selection.cursor = cursor1;
+			m_extraSelections.append(m_selection);
+		} else {
 
-            while (cursor1.position() > cursor2.position()) {
-                cursor1 = doc->find(closeBrace, cursor1, findOptions);
-                cursor2 = doc->find(openBrace, cursor2, findOptions);
+			while (cursor1.position() > cursor2.position()) {
+				cursor1 = doc->find(closeBrace, cursor1, findOptions);
+				cursor2 = doc->find(openBrace, cursor2, findOptions);
 
-                if (cursor2.isNull()) {
-                    break;
-                }
-            }
+				if (cursor2.isNull()) {
+					break;
+				}
+			}
 
-            m_selection.cursor = cursor;
-            m_extraSelections.append(m_selection);
-            m_selection.cursor = cursor1;
-            m_extraSelections.append(m_selection);
-        }
-    } else {
-        if (brace == closeBrace) {
-            QTextCursor cursor1 = doc->find(openBrace, cursor, QTextDocument::FindBackward | findOptions);
-            QTextCursor cursor2 = doc->find(closeBrace, cursor, QTextDocument::FindBackward | findOptions);
+			m_selection.cursor = cursor;
+			m_extraSelections.append(m_selection);
+			m_selection.cursor = cursor1;
+			m_extraSelections.append(m_selection);
+		}
+	} else {
+		if (brace == closeBrace) {
+			QTextCursor cursor1 = doc->find(openBrace, cursor, QTextDocument::FindBackward | findOptions);
+			QTextCursor cursor2 = doc->find(closeBrace, cursor, QTextDocument::FindBackward | findOptions);
 
-            if (cursor2.isNull()) {
-                m_selection.cursor = cursor;
-                m_extraSelections.append(m_selection);
-                m_selection.cursor = cursor1;
-                m_extraSelections.append(m_selection);
-            } else {
-                while (cursor1.position() < cursor2.position()) {
-                    cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward | findOptions);
-                    cursor2 = doc->find(closeBrace, cursor2, QTextDocument::FindBackward | findOptions);
+			if (cursor2.isNull()) {
+				m_selection.cursor = cursor;
+				m_extraSelections.append(m_selection);
+				m_selection.cursor = cursor1;
+				m_extraSelections.append(m_selection);
+			} else {
+				while (cursor1.position() < cursor2.position()) {
+					cursor1 = doc->find(openBrace, cursor1, QTextDocument::FindBackward | findOptions);
+					cursor2 = doc->find(closeBrace, cursor2, QTextDocument::FindBackward | findOptions);
 
-                    if (cursor2.isNull()) {
-                        break;
-                    }
-                }
+					if (cursor2.isNull()) {
+						break;
+					}
+				}
 
-                m_selection.cursor = cursor;
-                m_extraSelections.append(m_selection);
-                m_selection.cursor = cursor1;
-                m_extraSelections.append(m_selection);
-            }
-        }
-    }
+				m_selection.cursor = cursor;
+				m_extraSelections.append(m_selection);
+				m_selection.cursor = cursor1;
+				m_extraSelections.append(m_selection);
+			}
+		}
+	}
 
-    tmpSelections.append(m_extraSelections);
-    textEdit()->setExtraSelections(tmpSelections);
+	tmpSelections.append(m_extraSelections);
+	textEdit()->setExtraSelections(tmpSelections);
 }
 
 void GCoderDocument::showInLineCalc()
 {
-    QString value = selectedText();
-    QString address;
+	QString value = selectedText();
+	QString address;
 
-    if (!value.isEmpty() && value.at(0).isLetter()) {
-        address = value.at(0);
-        value.remove(address);
-        value.remove(" ");
-    } else {
-        value.clear();
-    }
+	if (!value.isEmpty() && value.at(0).isLetter()) {
+		address = value.at(0);
+		value.remove(address);
+		value.remove(" ");
+	} else {
+		value.clear();
+	}
 
-    m_inLineCalc->showCalc(address, value, textEdit()->cursorRect());
+	m_inLineCalc->showCalc(address, value, textEdit()->cursorRect());
 }
 
 void GCoderDocument::inLineCalcComplete(const QString &text)
 {
-    insertText(text);
+	insertText(text);
 }

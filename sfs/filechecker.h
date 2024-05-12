@@ -42,37 +42,37 @@ class FileChecker;
 
 class FileChecker : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit FileChecker(QWidget *parent = 0);
-    ~FileChecker();
+	explicit FileChecker(QWidget *parent = 0);
+	~FileChecker();
 
-    void setData(const QString startDir, QStringList readPaths, QStringList fileFilter);
-    void findFiles();
+	void setData(const QString startDir, QStringList readPaths, QStringList fileFilter);
+	void findFiles();
 
 private slots:
-    void filesTableClicked(int row, int col);
-    void acceptFile();
-    void deleteFile();
-    void readPathComboBoxChanged(QString text);
-    void filesTableCurrentCellChanged(int row, int col, int pRow, int pCol);
+	void filesTableClicked(int row, int col);
+	void acceptFile();
+	void deleteFile();
+	void readPathComboBoxChanged(QString text);
+	void filesTableCurrentCellChanged(int row, int col, int pRow, int pCol);
 
 private:
-    Ui::FileChecker *ui;
-    QPointer<KDiff3App> diffApp;
-    QStringList extensions;
-    QPointer<QToolButton> okBtn;
-    QPointer<QToolButton> noBtn;
-    int prevRow;
-    QStringList readPathList;
-    QString savePath;
-    QByteArray splitterState;
+	Ui::FileChecker *ui;
+	QPointer<KDiff3App> diffApp;
+	QStringList extensions;
+	QPointer<QToolButton> okBtn;
+	QPointer<QToolButton> noBtn;
+	int prevRow;
+	QStringList readPathList;
+	QString savePath;
+	QByteArray splitterState;
 
-    void createDiff();
-    void findFiles(const QString startDir, QStringList fileFilter);
+	void createDiff();
+	void findFiles(const QString startDir, QStringList fileFilter);
 
-    void preliminaryDiff(QString file1, QString file2);
+	void preliminaryDiff(QString file1, QString file2);
 };
 
 #endif // FILECHECKER_H

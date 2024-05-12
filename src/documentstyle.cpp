@@ -28,7 +28,7 @@ DocumentStyle::DocumentStyle()
 
 DocumentStyle::DocumentStyle(const DocumentStyle &that)
 {
-    DocumentStyle::operator=(that);
+	DocumentStyle::operator=(that);
 }
 
 DocumentStyle::~DocumentStyle()
@@ -37,38 +37,38 @@ DocumentStyle::~DocumentStyle()
 
 QString DocumentStyle::documentType() const
 {
-    return "Document";
+	return "Document";
 }
 
 DocumentStyle *DocumentStyle::clone() const
 {
-    DocumentStyle *style = new DocumentStyle();
-    style->operator=(*this);
-    return style;
+	DocumentStyle *style = new DocumentStyle();
+	style->operator=(*this);
+	return style;
 }
 
 DocumentStyle &DocumentStyle::operator =(const DocumentStyle &that)
 {
-    Q_UNUSED(that);
-    return *this;
+	Q_UNUSED(that);
+	return *this;
 }
 
 void DocumentStyle::load(QSettings *cfg)
 {
-    loadChild(cfg);
+	loadChild(cfg);
 }
 
 void DocumentStyle::save(QSettings *cfg) const
 {
-    saveChild(cfg);
+	saveChild(cfg);
 }
 
 void DocumentStyle::loadChild(QSettings *cfg)
 {
-    Q_UNUSED(cfg);
+	Q_UNUSED(cfg);
 }
 
 void DocumentStyle::saveChild(QSettings *cfg) const
 {
-    Q_UNUSED(cfg);
+	Q_UNUSED(cfg);
 }

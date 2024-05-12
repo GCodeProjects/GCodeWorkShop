@@ -32,28 +32,28 @@ class DocumentInfo;
 class DocumentProducer
 {
 public:
-    DocumentProducer(DocumentStyle *style, DocumentWidgetProperties *properties);
-    virtual ~DocumentProducer();
+	DocumentProducer(DocumentStyle *style, DocumentWidgetProperties *properties);
+	virtual ~DocumentProducer();
 
-    virtual QString documentType() const = 0;
-    virtual QString brief() const = 0;
+	virtual QString documentType() const = 0;
+	virtual QString brief() const = 0;
 
-    virtual DocumentStyle::Ptr documentStyle() const;
-    virtual bool setDocumentStyle(const DocumentStyle::Ptr &style);
+	virtual DocumentStyle::Ptr documentStyle() const;
+	virtual bool setDocumentStyle(const DocumentStyle::Ptr &style);
 
-    virtual DocumentWidgetProperties::Ptr documentWidgetProperties() const;
-    virtual bool setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &properties);
+	virtual DocumentWidgetProperties::Ptr documentWidgetProperties() const;
+	virtual bool setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &properties);
 
-    virtual void updateDocument(Document *document);
+	virtual void updateDocument(Document *document);
 
-    virtual Document *createDocument() const = 0;
-    virtual DocumentInfo *createDocumentInfo() = 0;
-    virtual DocumentStyle *createDocumentStyle() = 0;
-    virtual DocumentWidgetProperties *createDocumentWidgetProperties() = 0;
+	virtual Document *createDocument() const = 0;
+	virtual DocumentInfo *createDocumentInfo() = 0;
+	virtual DocumentStyle *createDocumentStyle() = 0;
+	virtual DocumentWidgetProperties *createDocumentWidgetProperties() = 0;
 
 protected:
-    DocumentStyle::Ptr m_documentStyle;
-    DocumentWidgetProperties::Ptr m_documentWidgetProperties;
+	DocumentStyle::Ptr m_documentStyle;
+	DocumentWidgetProperties::Ptr m_documentWidgetProperties;
 };
 
 #endif // DOCUMENTPRODUCER_H

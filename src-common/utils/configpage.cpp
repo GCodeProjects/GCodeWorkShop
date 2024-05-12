@@ -29,47 +29,47 @@
 
 const QString &ConfigPage::toolTip()
 {
-    static QString tooltip = ("");
-    return tooltip;
+	static QString tooltip = ("");
+	return tooltip;
 }
 
 void ConfigPage::add(QSharedPointer<ConfigPage> child)
 {
-    if (mChild.indexOf(child) >= 0) {
-        return;
-    }
+	if (mChild.indexOf(child) >= 0) {
+		return;
+	}
 
-    mChild.append(child);
+	mChild.append(child);
 }
 
 void ConfigPage::add(ConfigPage *child)
 {
-    add(QSharedPointer<ConfigPage>(child));
+	add(QSharedPointer<ConfigPage>(child));
 }
 
 QList<QSharedPointer<ConfigPage> > ConfigPage::pages()
 {
-    return mChild;
+	return mChild;
 }
 
 QWidget *ConfigPage::widget()
 {
-    if (mWidget == nullptr) {
-        mWidget = doWidget();
-        connect(mWidget, SIGNAL(destroyed(QObject *)), SLOT(widgetDestroed(QObject *)));
-    }
+	if (mWidget == nullptr) {
+		mWidget = doWidget();
+		connect(mWidget, SIGNAL(destroyed(QObject *)), SLOT(widgetDestroed(QObject *)));
+	}
 
-    return mWidget;
+	return mWidget;
 }
 
 QWidget *ConfigPage::doWidget()
 {
-    return new QFrame();
+	return new QFrame();
 }
 
 void ConfigPage::widgetDestroed(QObject *object)
 {
-    if (object == mWidget) {
-        mWidget = 0;
-    }
+	if (object == mWidget) {
+		mWidget = 0;
+	}
 }

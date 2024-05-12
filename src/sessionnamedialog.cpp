@@ -31,12 +31,12 @@ class QWidget;
 
 SessionNameDialog::SessionNameDialog(QWidget *parent, Qt::WindowFlags f) : QDialog(parent, f)
 {
-    setupUi(this);
-    setWindowTitle(tr("New session..."));
-    setModal(true);
+	setupUi(this);
+	setWindowTitle(tr("New session..."));
+	setModal(true);
 
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+	connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
 SessionNameDialog::~SessionNameDialog()
@@ -45,10 +45,10 @@ SessionNameDialog::~SessionNameDialog()
 
 QString SessionNameDialog::getName()
 {
-    return lineEdit->text();
+	return lineEdit->text();
 }
 
 void SessionNameDialog::setName(QString name)
 {
-    lineEdit->setText(name);
+	lineEdit->setText(name);
 }

@@ -33,25 +33,25 @@ class QWidget;
 
 class InLineCalc : public QLineEdit
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    explicit InLineCalc(QWidget *parent);
+	explicit InLineCalc(QWidget *parent);
 
-    void showCalc(const QString &address, const QString &selectedText, const QRect &cursorRect);
+	void showCalc(const QString &address, const QString &selectedText, const QRect &cursorRect);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *event) override ;
-    void evalute();
+	virtual void keyPressEvent(QKeyEvent *event) override ;
+	void evalute();
 
 protected slots :
-    void done();
+	void done();
 
 signals:
-    void complete(const QString &text);
+	void complete(const QString &text);
 
 protected:
-    QStringList m_wordList;
-    QString m_address;
+	QStringList m_wordList;
+	QString m_address;
 };
 
 #endif // INLINECALC_H

@@ -30,22 +30,22 @@ class QSettings;
 class GCoderInfo: public DocumentInfo
 {
 public:
-    GCoderInfo();
-    GCoderInfo(const GCoderInfo &that);
+	GCoderInfo();
+	GCoderInfo(const GCoderInfo &that);
 
-    QString documentType() const override;
+	QString documentType() const override;
 
-    DocumentInfo *clone() const override;
+	DocumentInfo *clone() const override;
 
-    DocumentInfo &operator=(const DocumentInfo &that) override;
-    virtual GCoderInfo &operator=(const GCoderInfo &that);
+	DocumentInfo &operator=(const DocumentInfo &that) override;
+	virtual GCoderInfo &operator=(const GCoderInfo &that);
 
-    int cursorPos = 0;
-    int highlightMode = 0;
+	int cursorPos = 0;
+	int highlightMode = 0;
 
 protected:
-    void loadChild(QSettings *cfg) override;
-    void saveChild(QSettings *cfg) const override;
+	void loadChild(QSettings *cfg) override;
+	void saveChild(QSettings *cfg) const override;
 };
 
 #endif // GCODERINFO_H

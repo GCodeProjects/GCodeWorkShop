@@ -40,34 +40,34 @@
 
 void TriangleOptions::load(QSettings *settings, const TriangleOptions &defaultOptions)
 {
-    angleA.in = settings->value(CFG_KEY_ANGLE_A_IN, defaultOptions.angleA.in).toBool();
-    angleA.value = settings->value(CFG_KEY_ANGLE_A_VALUE, defaultOptions.angleA.value).toDouble();
-    angleB.in = settings->value(CFG_KEY_ANGLE_B_IN, defaultOptions.angleB.in).toBool();
-    angleB.value = settings->value(CFG_KEY_ANGLE_B_VALUE, defaultOptions.angleB.value).toDouble();
-    angleC.in = settings->value(CFG_KEY_ANGLE_C_IN, defaultOptions.angleC.in).toBool();
-    angleC.value = settings->value(CFG_KEY_ANGLE_C_VALUE, defaultOptions.angleC.value).toDouble();
-    sideA.in = settings->value(CFG_KEY_SIDE_A_IN, defaultOptions.sideA.in).toBool();
-    sideA.value = settings->value(CFG_KEY_SIDE_A_VALUE, defaultOptions.sideA.value).toDouble();
-    sideB.in = settings->value(CFG_KEY_SIDE_B_IN, defaultOptions.sideB.in).toBool();
-    sideB.value = settings->value(CFG_KEY_SIDE_B_VALUE, defaultOptions.sideB.value).toDouble();
-    sideC.in = settings->value(CFG_KEY_SIDE_B_IN, defaultOptions.sideC.in).toBool();
-    sideC.value = settings->value(CFG_KEY_SIDE_B_VALUE, defaultOptions.sideC.value).toDouble();
-    rightTriangle = settings->value(CFG_KEY_RIGHT_TRIANGLE, defaultOptions.rightTriangle).toBool();
+	angleA.in = settings->value(CFG_KEY_ANGLE_A_IN, defaultOptions.angleA.in).toBool();
+	angleA.value = settings->value(CFG_KEY_ANGLE_A_VALUE, defaultOptions.angleA.value).toDouble();
+	angleB.in = settings->value(CFG_KEY_ANGLE_B_IN, defaultOptions.angleB.in).toBool();
+	angleB.value = settings->value(CFG_KEY_ANGLE_B_VALUE, defaultOptions.angleB.value).toDouble();
+	angleC.in = settings->value(CFG_KEY_ANGLE_C_IN, defaultOptions.angleC.in).toBool();
+	angleC.value = settings->value(CFG_KEY_ANGLE_C_VALUE, defaultOptions.angleC.value).toDouble();
+	sideA.in = settings->value(CFG_KEY_SIDE_A_IN, defaultOptions.sideA.in).toBool();
+	sideA.value = settings->value(CFG_KEY_SIDE_A_VALUE, defaultOptions.sideA.value).toDouble();
+	sideB.in = settings->value(CFG_KEY_SIDE_B_IN, defaultOptions.sideB.in).toBool();
+	sideB.value = settings->value(CFG_KEY_SIDE_B_VALUE, defaultOptions.sideB.value).toDouble();
+	sideC.in = settings->value(CFG_KEY_SIDE_B_IN, defaultOptions.sideC.in).toBool();
+	sideC.value = settings->value(CFG_KEY_SIDE_B_VALUE, defaultOptions.sideC.value).toDouble();
+	rightTriangle = settings->value(CFG_KEY_RIGHT_TRIANGLE, defaultOptions.rightTriangle).toBool();
 }
 
 void TriangleOptions::save(QSettings *settings)
 {
-    settings->setValue(CFG_KEY_ANGLE_A_IN, angleA.in);
-    settings->setValue(CFG_KEY_ANGLE_A_VALUE, angleA.value);
-    settings->setValue(CFG_KEY_ANGLE_B_IN, angleB.in);
-    settings->setValue(CFG_KEY_ANGLE_B_VALUE, angleB.value);
-    settings->setValue(CFG_KEY_ANGLE_C_IN, angleC.in);
-    settings->setValue(CFG_KEY_ANGLE_C_VALUE, angleC.value);
-    settings->setValue(CFG_KEY_SIDE_A_IN, sideA.in);
-    settings->setValue(CFG_KEY_SIDE_A_VALUE, sideA.value);
-    settings->setValue(CFG_KEY_SIDE_B_IN, sideB.in);
-    settings->setValue(CFG_KEY_SIDE_B_VALUE, sideB.value);
-    settings->setValue(CFG_KEY_SIDE_B_IN, sideC.in);
-    settings->setValue(CFG_KEY_SIDE_B_VALUE, sideC.value);
-    settings->setValue(CFG_KEY_RIGHT_TRIANGLE, rightTriangle);
+	settings->setValue(CFG_KEY_ANGLE_A_IN, angleA.in);
+	settings->setValue(CFG_KEY_ANGLE_A_VALUE, angleA.value);
+	settings->setValue(CFG_KEY_ANGLE_B_IN, angleB.in);
+	settings->setValue(CFG_KEY_ANGLE_B_VALUE, angleB.value);
+	settings->setValue(CFG_KEY_ANGLE_C_IN, angleC.in);
+	settings->setValue(CFG_KEY_ANGLE_C_VALUE, angleC.value);
+	settings->setValue(CFG_KEY_SIDE_A_IN, sideA.in);
+	settings->setValue(CFG_KEY_SIDE_A_VALUE, sideA.value);
+	settings->setValue(CFG_KEY_SIDE_B_IN, sideB.in);
+	settings->setValue(CFG_KEY_SIDE_B_VALUE, sideB.value);
+	settings->setValue(CFG_KEY_SIDE_B_IN, sideC.in);
+	settings->setValue(CFG_KEY_SIDE_B_VALUE, sideC.value);
+	settings->setValue(CFG_KEY_RIGHT_TRIANGLE, rightTriangle);
 }

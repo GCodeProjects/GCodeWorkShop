@@ -39,47 +39,47 @@ DocumentInfo::~DocumentInfo()
 
 QString DocumentInfo::documentType() const
 {
-    return "Document";
+	return "Document";
 }
 
 DocumentInfo *DocumentInfo::clone() const
 {
-    DocumentInfo *info = new DocumentInfo();
-    info->operator=(*this);
-    return info;
+	DocumentInfo *info = new DocumentInfo();
+	info->operator=(*this);
+	return info;
 }
 
 DocumentInfo &DocumentInfo::operator =(const DocumentInfo &that)
 {
-    filePath = that.filePath;
-    geometry = that.geometry;
-    readOnly = that.readOnly;
-    return *this;
+	filePath = that.filePath;
+	geometry = that.geometry;
+	readOnly = that.readOnly;
+	return *this;
 }
 
 void DocumentInfo::load(QSettings *cfg)
 {
-    filePath = cfg->value(CFG_KEY_INFO_FILE_PATH, filePath).toString();
-    geometry = cfg->value(CFG_KEY_INFO_GEOMETRY, geometry).toByteArray();
-    readOnly = cfg->value(CFG_KEY_INFO_READ_ONLY, readOnly).toBool();
-    loadChild(cfg);
+	filePath = cfg->value(CFG_KEY_INFO_FILE_PATH, filePath).toString();
+	geometry = cfg->value(CFG_KEY_INFO_GEOMETRY, geometry).toByteArray();
+	readOnly = cfg->value(CFG_KEY_INFO_READ_ONLY, readOnly).toBool();
+	loadChild(cfg);
 }
 
 void DocumentInfo::save(QSettings *cfg) const
 {
-    cfg->setValue(DOCUMENTINFO_CFG_KEY_TYPE, documentType());
-    cfg->setValue(CFG_KEY_INFO_FILE_PATH, filePath);
-    cfg->setValue(CFG_KEY_INFO_GEOMETRY, geometry);
-    cfg->setValue(CFG_KEY_INFO_READ_ONLY, readOnly);
-    saveChild(cfg);
+	cfg->setValue(DOCUMENTINFO_CFG_KEY_TYPE, documentType());
+	cfg->setValue(CFG_KEY_INFO_FILE_PATH, filePath);
+	cfg->setValue(CFG_KEY_INFO_GEOMETRY, geometry);
+	cfg->setValue(CFG_KEY_INFO_READ_ONLY, readOnly);
+	saveChild(cfg);
 }
 
 void DocumentInfo::loadChild(QSettings *cfg)
 {
-    Q_UNUSED(cfg);
+	Q_UNUSED(cfg);
 }
 
 void DocumentInfo::saveChild(QSettings *cfg) const
 {
-    Q_UNUSED(cfg);
+	Q_UNUSED(cfg);
 }

@@ -32,53 +32,53 @@
 
 int main(int argc, char *argv[])
 {
-    bool argProccesed;
+	bool argProccesed;
 
-    Q_INIT_RESOURCE(application);
-    QtSingleApplication app("EdytorNC", argc, argv);
+	Q_INIT_RESOURCE(application);
+	QtSingleApplication app("EdytorNC", argc, argv);
 
-    QString txMessage;
+	QString txMessage;
 
-    for (int i = 1; i < argc; ++i) {
-        txMessage += argv[i];
+	for (int i = 1; i < argc; ++i) {
+		txMessage += argv[i];
 
-        if (i < argc - 1) {
-            txMessage += ";";
-        }
-    }
+		if (i < argc - 1) {
+			txMessage += ";";
+		}
+	}
 
-    if (app.sendMessage(txMessage)) {
-        return 0;
-    }
+	if (app.sendMessage(txMessage)) {
+		return 0;
+	}
 
-    Medium &medium = Medium::instance();
-    medium.addTranslationUnit("kdiff3");
-    medium.updateTranslation();
-    EdytorNc *mw = EdytorNc::instance();
+	Medium &medium = Medium::instance();
+	medium.addTranslationUnit("kdiff3");
+	medium.updateTranslation();
+	EdytorNc *mw = EdytorNc::instance();
 
-    argProccesed = false;
+	argProccesed = false;
 
-    if (argc >= 3) {
-        if (QString(argv[1]).trimmed() == "-diff") {
-            mw->diffTwoFiles(QString(argv[2]).trimmed(), QString(argv[3]).trimmed());
-            argProccesed = true;
-        }
-    }
+	if (argc >= 3) {
+		if (QString(argv[1]).trimmed() == "-diff") {
+			mw->diffTwoFiles(QString(argv[2]).trimmed(), QString(argv[3]).trimmed());
+			argProccesed = true;
+		}
+	}
 
-    if (!argProccesed) {
-        for (int i = 1; i < argc; ++i) {
-            //qDebug() << argc << argv[i] << i;
-            mw->openFile(argv[i]);
-        }
-    }
+	if (!argProccesed) {
+		for (int i = 1; i < argc; ++i) {
+			//qDebug() << argc << argv[i] << i;
+			mw->openFile(argv[i]);
+		}
+	}
 
-    mw->show();
+	mw->show();
 
-    app.setActivationWindow(mw, false);
+	app.setActivationWindow(mw, false);
 
-    QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
-                     mw, SLOT(messReceived(const QString &)));
-    QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
+	QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
+	                 mw, SLOT(messReceived(const QString &)));
+	QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
 
-    return app.exec();
+	return app.exec();
 }

@@ -47,68 +47,68 @@ class ConfigDialog;
  */
 class ConfigDialog : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit ConfigDialog(QWidget *parent = 0);
+	explicit ConfigDialog(QWidget *parent = 0);
 
-    explicit ConfigDialog(QSharedPointer<ConfigPage> page, QWidget *parent = 0);
+	explicit ConfigDialog(QSharedPointer<ConfigPage> page, QWidget *parent = 0);
 
-    explicit ConfigDialog(QList<QSharedPointer<ConfigPage>> pages, QWidget *parent = 0);
+	explicit ConfigDialog(QList<QSharedPointer<ConfigPage>> pages, QWidget *parent = 0);
 
-    ~ConfigDialog();
+	~ConfigDialog();
 
-    void addPage(QSharedPointer<ConfigPage> page);
+	void addPage(QSharedPointer<ConfigPage> page);
 
-    void addPages(QList<QSharedPointer<ConfigPage>> pages);
+	void addPages(QList<QSharedPointer<ConfigPage>> pages);
 
-    /* wrap to emit signal "started" */
-    void open();
-    /* wrap to emit signal "started" */
-    int  exec();
+	/* wrap to emit signal "started" */
+	void open();
+	/* wrap to emit signal "started" */
+	int  exec();
 
 protected slots:
-    /**
-     * @brief Sends onReset() signal to active page.
-     *
-     * Typically this slot activated from the “default” button.
-     */
-    virtual void reset();
+	/**
+	 * @brief Sends onReset() signal to active page.
+	 *
+	 * Typically this slot activated from the “default” button.
+	 */
+	virtual void reset();
 
 public slots:
-    /**
-     * @brief Update translation of UI.
-     *
-     * Also, sends onRetranslateUI() to all pages.
-     */
-    void retranslateUI();
+	/**
+	 * @brief Update translation of UI.
+	 *
+	 * Also, sends onRetranslateUI() to all pages.
+	 */
+	void retranslateUI();
 
 signals:
-    /**
-     * @brief Sended before displaying dialog.
-     */
-    void onStart();
+	/**
+	 * @brief Sended before displaying dialog.
+	 */
+	void onStart();
 
-    /**
-     * @brief Sended while reset() function called.
-     */
-    void onReset();
+	/**
+	 * @brief Sended while reset() function called.
+	 */
+	void onReset();
 
-    /**
-     * @brief Sended while retranslateUI() function called.
-     */
-    void onRetranslateUI();
+	/**
+	 * @brief Sended while retranslateUI() function called.
+	 */
+	void onRetranslateUI();
 
 protected:
-    Ui::ConfigDialog *mForm;
-    QList<QSharedPointer<ConfigPage>> mPages;
-    QStackedLayout *mStackedLayout;
-    QHash<QTreeWidgetItem *, QSharedPointer<ConfigPage>> mItemPageMap;
+	Ui::ConfigDialog *mForm;
+	QList<QSharedPointer<ConfigPage>> mPages;
+	QStackedLayout *mStackedLayout;
+	QHash<QTreeWidgetItem *, QSharedPointer<ConfigPage>> mItemPageMap;
 
-    QTreeWidgetItem *doItem(QSharedPointer<ConfigPage> pagePtr);
+	QTreeWidgetItem *doItem(QSharedPointer<ConfigPage> pagePtr);
 
 protected slots:
-    void selectedItemChange(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+	void selectedItemChange(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 };
 
 #endif // CONFIGDIALOG_H

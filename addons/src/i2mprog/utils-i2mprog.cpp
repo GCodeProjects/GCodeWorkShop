@@ -27,38 +27,38 @@
 
 int Utils::i2mprog(QString tx, const QString &addr, bool toInch, int prec)
 {
-    int count = 0;
-    QRegularExpression regex;
+	int count = 0;
+	QRegularExpression regex;
 
-    regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-    regex.setPattern(
-        QString("[%1]{1,1}([+-]?\\d*\\.?\\d*)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
-    auto match = regex.match(tx);
+	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+	regex.setPattern(
+	         QString("[%1]{1,1}([+-]?\\d*\\.?\\d*)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
+	auto match = regex.match(tx);
 
-    while (match.hasMatch()) {
-        int pos = match.capturedEnd();
+	while (match.hasMatch()) {
+		int pos = match.capturedEnd();
 
-        if (match.capturedLength(1) > 0) {
-            QString f_tx = match.captured(1);
-            bool ok;
-            double it = f_tx.toDouble(&ok);
+		if (match.capturedLength(1) > 0) {
+			QString f_tx = match.captured(1);
+			bool ok;
+			double it = f_tx.toDouble(&ok);
 
-            if (ok && it != 0) {
-                if (toInch) {
-                    it /= 25.4;
-                } else {
-                    it *= 25.4;
-                }
+			if (ok && it != 0) {
+				if (toInch) {
+					it /= 25.4;
+				} else {
+					it *= 25.4;
+				}
 
-                QString conv = QString("%1").arg(it, 0, 'f', prec);
-                tx.replace(match.capturedStart(), match.capturedLength(), conv);
-                pos += conv.length() - match.capturedLength();
-                count++;
-            }
-        }
+				QString conv = QString("%1").arg(it, 0, 'f', prec);
+				tx.replace(match.capturedStart(), match.capturedLength(), conv);
+				pos += conv.length() - match.capturedLength();
+				count++;
+			}
+		}
 
-        match = regex.match(tx, pos);
-    }
+		match = regex.match(tx, pos);
+	}
 
-    return count;
+	return count;
 }

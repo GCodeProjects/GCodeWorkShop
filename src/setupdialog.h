@@ -43,16 +43,16 @@ class QButtonGroup;
 
 
 struct AppConfig  {
-    GCoderWidgetProperties editorProperties;
-    GCoderStyle codeStyle;
-    QString calcBinary;
-    QStringList extensions;
-    QString saveExtension;
-    QString saveDirectory;
-    bool mdiTabbedMode;
-    bool defaultReadOnly;
-    bool startEmpty;
-    bool disableFileChangeMonitor;
+	GCoderWidgetProperties editorProperties;
+	GCoderStyle codeStyle;
+	QString calcBinary;
+	QStringList extensions;
+	QString saveExtension;
+	QString saveDirectory;
+	bool mdiTabbedMode;
+	bool defaultReadOnly;
+	bool startEmpty;
+	bool disableFileChangeMonitor;
 };
 
 
@@ -61,28 +61,28 @@ struct AppConfig  {
  */
 class SetupDialog : public QDialog, private Ui::SetupDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    SetupDialog(QWidget *parent = 0, const AppConfig *prop = 0,
-                Qt::WindowFlags f = Qt::Dialog);
-    ~SetupDialog();
+	SetupDialog(QWidget *parent = 0, const AppConfig *prop = 0,
+	            Qt::WindowFlags f = Qt::Dialog);
+	~SetupDialog();
 
 public slots:
-    AppConfig getSettings();
+	AppConfig getSettings();
 
 private slots:
-    void on_btnBrowseDirectory_clicked();
-    void on_btnDeleteExtension_clicked();
-    void on_btnAddExtension_clicked();
-    void changeFont();
-    void changeColor(QAbstractButton *button);
-    void setDefaultProp();
-    void browseButtonClicked();
+	void on_btnBrowseDirectory_clicked();
+	void on_btnDeleteExtension_clicked();
+	void on_btnAddExtension_clicked();
+	void changeFont();
+	void changeColor(QAbstractButton *button);
+	void setDefaultProp();
+	void browseButtonClicked();
 
 private:
-    AppConfig editProp;
-    QButtonGroup *colorButtons;
+	AppConfig editProp;
+	QButtonGroup *colorButtons;
 };
 
 #endif // SETUPDIALOG_H

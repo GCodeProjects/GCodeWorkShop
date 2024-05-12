@@ -43,44 +43,44 @@ struct TriangleOptions;
  */
 class TriangleDialog : public QDialog, private Ui::TriangleDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    TriangleDialog(QWidget *parent, QSettings *settings);
-    ~TriangleDialog();
+	TriangleDialog(QWidget *parent, QSettings *settings);
+	~TriangleDialog();
 
-    void setOptions(const TriangleOptions &options);
-    TriangleOptions options();
+	void setOptions(const TriangleOptions &options);
+	TriangleOptions options();
 
-    void loadSettings(const TriangleOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const TriangleOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *ev);
+	bool eventFilter(QObject *obj, QEvent *ev);
 
 protected slots:
-    void inputChanged();
-    void checkBoxToggled();
-    void rightTriangleCheckBoxToggled();
+	void inputChanged();
+	void checkBoxToggled();
+	void rightTriangleCheckBoxToggled();
 
 private slots:
-    void computeButtonClicked();
-    int option1();
-    int option2();
-    int option3();
-    void option4();
-    void onFinished(int result);
+	void computeButtonClicked();
+	int option1();
+	int option2();
+	int option3();
+	void option4();
+	void onFinished(int result);
 
 private:
-    uint mode;
-    QPixmap *pic1;
-    QPixmap *pic2;
-    QDoubleValidator *aAInputValid;
-    QDoubleValidator *aBInputValid;
-    QDoubleValidator *aCInputValid;
+	uint mode;
+	QPixmap *pic1;
+	QPixmap *pic2;
+	QDoubleValidator *aAInputValid;
+	QDoubleValidator *aBInputValid;
+	QDoubleValidator *aCInputValid;
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // TRIANGLEDIALOG_H

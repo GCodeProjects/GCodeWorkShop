@@ -29,16 +29,16 @@ class QEvent;
 
 class DocumentWidgetCloseEventFilter : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit DocumentWidgetCloseEventFilter(QObject *parent = nullptr);
+	explicit DocumentWidgetCloseEventFilter(QObject *parent = nullptr);
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
+	bool eventFilter(QObject *obj, QEvent *event) override;
 
 signals:
-    void closeRequested(QCloseEvent *event);
+	void closeRequested(QCloseEvent *event);
 };
 
 #endif // DOCUMENTWIDGETCLOSEEVENTFILTER_H

@@ -51,42 +51,42 @@
 
 
 ChamferDialog::ChamferDialog(QWidget *parent, QSettings *settings) :
-    QDialog(parent)
+	QDialog(parent)
 {
-    setupUi(this);
+	setupUi(this);
 
-    mSettings = settings;
+	mSettings = settings;
 
-    setAttribute(Qt::WA_DeleteOnClose);
-    setWindowTitle(tr("Chamfer"));
+	setAttribute(Qt::WA_DeleteOnClose);
+	setWindowTitle(tr("Chamfer"));
 
-    connect(angCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    QValidator *angInputValid = new QDoubleValidator(0.1, 90, 3, this);
-    angInput->setValidator(angInputValid);
-    connect(zlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    QValidator *zlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
-    zlInput->setValidator(zlInputValid);
-    connect(dlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    QValidator *dlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
-    dlInput->setValidator(dlInputValid);
-    connect(xoCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    QValidator *xoInputValid = new QDoubleValidator(0, 2000, 3, this);
-    xoInput->setValidator(xoInputValid);
-    connect(xdCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    QValidator *xdInputValid = new QDoubleValidator(0.001, 2000, 3, this);
-    xdInput->setValidator(xdInputValid);
+	connect(angCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	QValidator *angInputValid = new QDoubleValidator(0.1, 90, 3, this);
+	angInput->setValidator(angInputValid);
+	connect(zlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	QValidator *zlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
+	zlInput->setValidator(zlInputValid);
+	connect(dlCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	QValidator *dlInputValid = new QDoubleValidator(0.1, 1000, 3, this);
+	dlInput->setValidator(dlInputValid);
+	connect(xoCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	QValidator *xoInputValid = new QDoubleValidator(0, 2000, 3, this);
+	xoInput->setValidator(xoInputValid);
+	connect(xdCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	QValidator *xdInputValid = new QDoubleValidator(0.001, 2000, 3, this);
+	xdInput->setValidator(xdInputValid);
 
-    connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
-    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
+	connect(computeButton, SIGNAL(clicked()), SLOT(computeButtonClicked()));
+	connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
+	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
-    connect(angInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(zlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(dlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(xdInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(xoInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(angInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(zlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(dlInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(xdInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(xoInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
 
-    checkBoxToggled();
+	checkBoxToggled();
 }
 
 ChamferDialog::~ChamferDialog()
@@ -95,275 +95,275 @@ ChamferDialog::~ChamferDialog()
 
 void ChamferDialog::computeButtonClicked()
 {
-    double ZL, XL, X1, X2, ang;
-    bool ok;
+	double ZL, XL, X1, X2, ang;
+	bool ok;
 
-    if (angCheckBox->isChecked() && zlCheckBox->isChecked()) {
-        if (!zlInput->hasAcceptableInput() || !angInput->hasAcceptableInput()) {
-            return;
-        }
+	if (angCheckBox->isChecked() && zlCheckBox->isChecked()) {
+		if (!zlInput->hasAcceptableInput() || !angInput->hasAcceptableInput()) {
+			return;
+		}
 
-        ang = QLocale().toDouble(angInput->text(), &ok);
-        ZL = QLocale().toDouble(zlInput->text(), &ok);
+		ang = QLocale().toDouble(angInput->text(), &ok);
+		ZL = QLocale().toDouble(zlInput->text(), &ok);
 
-        XL = tan((M_PI / 180) * ang) * (ZL * 2);
-        dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
+		XL = tan((M_PI / 180) * ang) * (ZL * 2);
+		dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
 
-        if (xoCheckBox->isChecked() && xoInput->hasAcceptableInput()) {
-            X1 = QLocale().toDouble(xoInput->text(), &ok);
-            X2 = X1 + XL;
-            xdInput->setText(QString("%1").arg(X2, 0, 'f', 3));
+		if (xoCheckBox->isChecked() && xoInput->hasAcceptableInput()) {
+			X1 = QLocale().toDouble(xoInput->text(), &ok);
+			X2 = X1 + XL;
+			xdInput->setText(QString("%1").arg(X2, 0, 'f', 3));
 
-        }
+		}
 
-        if (xdCheckBox->isChecked() && xdInput->hasAcceptableInput()) {
-            X2 = QLocale().toDouble(xdInput->text(), &ok);
-            X1 = X2 - XL;
-            xoInput->setText(QString("%1").arg(X1, 0, 'f', 3));
+		if (xdCheckBox->isChecked() && xdInput->hasAcceptableInput()) {
+			X2 = QLocale().toDouble(xdInput->text(), &ok);
+			X1 = X2 - XL;
+			xoInput->setText(QString("%1").arg(X1, 0, 'f', 3));
 
-        }
+		}
 
-        return;
-    }
+		return;
+	}
 
-    if (angCheckBox->isChecked() && dlCheckBox->isChecked()) {
-        if (!dlInput->hasAcceptableInput() || !angInput->hasAcceptableInput()) {
-            return;
-        }
+	if (angCheckBox->isChecked() && dlCheckBox->isChecked()) {
+		if (!dlInput->hasAcceptableInput() || !angInput->hasAcceptableInput()) {
+			return;
+		}
 
-        ang = QLocale().toDouble(angInput->text(), &ok);
-        XL = QLocale().toDouble(dlInput->text(), &ok);
+		ang = QLocale().toDouble(angInput->text(), &ok);
+		XL = QLocale().toDouble(dlInput->text(), &ok);
 
-        ZL = (XL / 2) / tan((M_PI / 180) * ang) ;
-        zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
+		ZL = (XL / 2) / tan((M_PI / 180) * ang) ;
+		zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
 
-        return;
-    }
+		return;
+	}
 
-    if (angCheckBox->isChecked() && xoCheckBox->isChecked() && xdCheckBox->isChecked()) {
-        if (!xdInput->hasAcceptableInput() || !xoInput->hasAcceptableInput()
-                || !angInput->hasAcceptableInput()) {
-            return;
-        }
+	if (angCheckBox->isChecked() && xoCheckBox->isChecked() && xdCheckBox->isChecked()) {
+		if (!xdInput->hasAcceptableInput() || !xoInput->hasAcceptableInput()
+		        || !angInput->hasAcceptableInput()) {
+			return;
+		}
 
-        ang = QLocale().toDouble(angInput->text(), &ok);
-        X1 = QLocale().toDouble(xoInput->text(), &ok);
-        X2 = QLocale().toDouble(xdInput->text(), &ok);
-        XL = X2 - X1;
-        dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
-        ZL = (XL / 2) / tan((M_PI / 180) * ang) ;
-        zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
+		ang = QLocale().toDouble(angInput->text(), &ok);
+		X1 = QLocale().toDouble(xoInput->text(), &ok);
+		X2 = QLocale().toDouble(xdInput->text(), &ok);
+		XL = X2 - X1;
+		dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
+		ZL = (XL / 2) / tan((M_PI / 180) * ang) ;
+		zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
 
-        return;
-    }
+		return;
+	}
 
-    if (zlCheckBox->isChecked() && dlCheckBox->isChecked()) {
-        if (!zlInput->hasAcceptableInput() || !dlInput->hasAcceptableInput()) {
-            return;
-        }
+	if (zlCheckBox->isChecked() && dlCheckBox->isChecked()) {
+		if (!zlInput->hasAcceptableInput() || !dlInput->hasAcceptableInput()) {
+			return;
+		}
 
-        XL = QLocale().toDouble(dlInput->text(), &ok);
-        ZL = QLocale().toDouble(zlInput->text(), &ok);
-        ang = (atan((XL / 2) / ZL)) / (M_PI / 180);
+		XL = QLocale().toDouble(dlInput->text(), &ok);
+		ZL = QLocale().toDouble(zlInput->text(), &ok);
+		ang = (atan((XL / 2) / ZL)) / (M_PI / 180);
 
-        angInput->setText(QString("%1").arg(ang, 0, 'f', 3));
+		angInput->setText(QString("%1").arg(ang, 0, 'f', 3));
 
-        return;
-    }
+		return;
+	}
 }
 
 void ChamferDialog::checkBoxToggled()
 {
-    bool ena;
+	bool ena;
 
-    ena = (angCheckBox->isChecked() && zlCheckBox->isChecked());
-    dlCheckBox->setEnabled(!ena && (!xdCheckBox->isChecked() || !xoCheckBox->isChecked()));
+	ena = (angCheckBox->isChecked() && zlCheckBox->isChecked());
+	dlCheckBox->setEnabled(!ena && (!xdCheckBox->isChecked() || !xoCheckBox->isChecked()));
 
-    ena = (angCheckBox->isChecked() && dlCheckBox->isChecked());
-    zlCheckBox->setEnabled(!ena && (!xdCheckBox->isChecked() || !xoCheckBox->isChecked()));
+	ena = (angCheckBox->isChecked() && dlCheckBox->isChecked());
+	zlCheckBox->setEnabled(!ena && (!xdCheckBox->isChecked() || !xoCheckBox->isChecked()));
 
-    xoCheckBox->setEnabled((!xdCheckBox->isChecked()) || !zlCheckBox->isChecked());
-    xdCheckBox->setEnabled((!xoCheckBox->isChecked()) || !zlCheckBox->isChecked());
+	xoCheckBox->setEnabled((!xdCheckBox->isChecked()) || !zlCheckBox->isChecked());
+	xdCheckBox->setEnabled((!xoCheckBox->isChecked()) || !zlCheckBox->isChecked());
 
-    if (dlCheckBox->isChecked()) {
-        xoCheckBox->setEnabled(false);
-        xdCheckBox->setEnabled(false);
-    }
+	if (dlCheckBox->isChecked()) {
+		xoCheckBox->setEnabled(false);
+		xdCheckBox->setEnabled(false);
+	}
 
-    angCheckBox->setEnabled(!zlCheckBox->isChecked() || !dlCheckBox->isChecked());
+	angCheckBox->setEnabled(!zlCheckBox->isChecked() || !dlCheckBox->isChecked());
 
-    if (!angCheckBox->isEnabled()) {
-        angCheckBox->setChecked(false);
-        angInput->setText("0");
-    }
+	if (!angCheckBox->isEnabled()) {
+		angCheckBox->setChecked(false);
+		angInput->setText("0");
+	}
 
-    if (!zlCheckBox->isEnabled()) {
-        zlCheckBox->setChecked(false);
-        zlInput->setText("0");
-    }
+	if (!zlCheckBox->isEnabled()) {
+		zlCheckBox->setChecked(false);
+		zlInput->setText("0");
+	}
 
-    if (!dlCheckBox->isEnabled()) {
-        dlCheckBox->setChecked(false);
-        dlInput->setText("0");
-    }
+	if (!dlCheckBox->isEnabled()) {
+		dlCheckBox->setChecked(false);
+		dlInput->setText("0");
+	}
 
-    if (!xdCheckBox->isEnabled()) {
-        xdCheckBox->setChecked(false);
-        xdInput->setText("0");
-    }
+	if (!xdCheckBox->isEnabled()) {
+		xdCheckBox->setChecked(false);
+		xdInput->setText("0");
+	}
 
-    if (!xoCheckBox->isEnabled()) {
-        xoCheckBox->setChecked(false);
-        xoInput->setText("0");
-    }
+	if (!xoCheckBox->isEnabled()) {
+		xoCheckBox->setChecked(false);
+		xoInput->setText("0");
+	}
 
-    angInput->setReadOnly(!angCheckBox->isChecked());
-    zlInput->setReadOnly(!zlCheckBox->isChecked());
-    dlInput->setReadOnly(!dlCheckBox->isChecked());
-    xdInput->setReadOnly(!xdCheckBox->isChecked());
-    xoInput->setReadOnly(!xoCheckBox->isChecked());
+	angInput->setReadOnly(!angCheckBox->isChecked());
+	zlInput->setReadOnly(!zlCheckBox->isChecked());
+	dlInput->setReadOnly(!dlCheckBox->isChecked());
+	xdInput->setReadOnly(!xdCheckBox->isChecked());
+	xoInput->setReadOnly(!xoCheckBox->isChecked());
 
-    computeButton->setEnabled(false);
+	computeButton->setEnabled(false);
 
-    inputChanged();
+	inputChanged();
 }
 
 void ChamferDialog::inputChanged()
 {
-    QPalette palette;
-    palette.setColor(angInput->foregroundRole(), Qt::red);
+	QPalette palette;
+	palette.setColor(angInput->foregroundRole(), Qt::red);
 
-    if (angInput->hasAcceptableInput()) {
-        angInput->setPalette(QPalette());
-    } else {
-        angInput->setPalette(palette);
-    }
+	if (angInput->hasAcceptableInput()) {
+		angInput->setPalette(QPalette());
+	} else {
+		angInput->setPalette(palette);
+	}
 
-    if (zlInput->hasAcceptableInput()) {
-        zlInput->setPalette(QPalette());
-    } else {
-        zlInput->setPalette(palette);
-    }
+	if (zlInput->hasAcceptableInput()) {
+		zlInput->setPalette(QPalette());
+	} else {
+		zlInput->setPalette(palette);
+	}
 
-    if (dlInput->hasAcceptableInput()) {
-        dlInput->setPalette(QPalette());
-    } else {
-        dlInput->setPalette(palette);
-    }
+	if (dlInput->hasAcceptableInput()) {
+		dlInput->setPalette(QPalette());
+	} else {
+		dlInput->setPalette(palette);
+	}
 
-    if (xdInput->hasAcceptableInput()) {
-        xdInput->setPalette(QPalette());
-    } else {
-        xdInput->setPalette(palette);
-    }
+	if (xdInput->hasAcceptableInput()) {
+		xdInput->setPalette(QPalette());
+	} else {
+		xdInput->setPalette(palette);
+	}
 
-    if (xoInput->hasAcceptableInput()) {
-        xoInput->setPalette(QPalette());
-    } else {
-        xoInput->setPalette(palette);
-    }
+	if (xoInput->hasAcceptableInput()) {
+		xoInput->setPalette(QPalette());
+	} else {
+		xoInput->setPalette(palette);
+	}
 
-    if (angCheckBox->isChecked() && zlCheckBox->isChecked())
-        if (zlInput->hasAcceptableInput() && angInput->hasAcceptableInput()) {
-            computeButton->setEnabled(true);
-            return;
-        }
+	if (angCheckBox->isChecked() && zlCheckBox->isChecked())
+		if (zlInput->hasAcceptableInput() && angInput->hasAcceptableInput()) {
+			computeButton->setEnabled(true);
+			return;
+		}
 
-    if (angCheckBox->isChecked() && dlCheckBox->isChecked())
-        if (dlInput->hasAcceptableInput() && angInput->hasAcceptableInput()) {
-            computeButton->setEnabled(true);
-            return;
-        }
+	if (angCheckBox->isChecked() && dlCheckBox->isChecked())
+		if (dlInput->hasAcceptableInput() && angInput->hasAcceptableInput()) {
+			computeButton->setEnabled(true);
+			return;
+		}
 
-    if (angCheckBox->isChecked() && xoCheckBox->isChecked() && xdCheckBox->isChecked())
-        if (xdInput->hasAcceptableInput() && xoInput->hasAcceptableInput()
-                && angInput->hasAcceptableInput()) {
-            computeButton->setEnabled(true);
-            return;
-        }
+	if (angCheckBox->isChecked() && xoCheckBox->isChecked() && xdCheckBox->isChecked())
+		if (xdInput->hasAcceptableInput() && xoInput->hasAcceptableInput()
+		        && angInput->hasAcceptableInput()) {
+			computeButton->setEnabled(true);
+			return;
+		}
 
-    if (zlCheckBox->isChecked() && dlCheckBox->isChecked())
-        if (zlInput->hasAcceptableInput() && dlInput->hasAcceptableInput()) {
-            computeButton->setEnabled(true);
-            return;
-        }
+	if (zlCheckBox->isChecked() && dlCheckBox->isChecked())
+		if (zlInput->hasAcceptableInput() && dlInput->hasAcceptableInput()) {
+			computeButton->setEnabled(true);
+			return;
+		}
 
-    computeButton->setEnabled(false);
+	computeButton->setEnabled(false);
 }
 
 void ChamferDialog::setOptions(const ChamferOptions &options)
 {
-    angInput->setText(QString::number(options.angle.value));
-    angCheckBox->setChecked(options.angle.in);
-    dlInput->setText(QString::number(options.hight.value));
-    dlCheckBox->setChecked(options.hight.in);
-    xdInput->setText(QString::number(options.maxDiam.value));
-    xdCheckBox->setChecked(options.maxDiam.in);
-    xoInput->setText(QString::number(options.minDiam.value));
-    xoCheckBox->setChecked(options.minDiam.in);
-    zlInput->setText(QString::number(options.width.value));
-    zlCheckBox->setChecked(options.width.in);
+	angInput->setText(QString::number(options.angle.value));
+	angCheckBox->setChecked(options.angle.in);
+	dlInput->setText(QString::number(options.hight.value));
+	dlCheckBox->setChecked(options.hight.in);
+	xdInput->setText(QString::number(options.maxDiam.value));
+	xdCheckBox->setChecked(options.maxDiam.in);
+	xoInput->setText(QString::number(options.minDiam.value));
+	xoCheckBox->setChecked(options.minDiam.in);
+	zlInput->setText(QString::number(options.width.value));
+	zlCheckBox->setChecked(options.width.in);
 
-    checkBoxToggled();
+	checkBoxToggled();
 }
 
 ChamferOptions ChamferDialog::options()
 {
-    ChamferOptions options;
+	ChamferOptions options;
 
-    options.angle.value = angInput->text().toDouble();
-    options.angle.in = angCheckBox->isChecked();
-    options.hight.value = dlInput->text().toDouble();
-    options.hight.in = dlCheckBox->isChecked();
-    options.maxDiam.value = xdInput->text().toDouble();
-    options.maxDiam.in = xdCheckBox->isChecked();
-    options.minDiam.value = xoInput->text().toDouble();
-    options.minDiam.in = xoCheckBox->isChecked();
-    options.width.value = zlInput->text().toDouble();
-    options.width.in = zlCheckBox->isChecked();
+	options.angle.value = angInput->text().toDouble();
+	options.angle.in = angCheckBox->isChecked();
+	options.hight.value = dlInput->text().toDouble();
+	options.hight.in = dlCheckBox->isChecked();
+	options.maxDiam.value = xdInput->text().toDouble();
+	options.maxDiam.in = xdCheckBox->isChecked();
+	options.minDiam.value = xoInput->text().toDouble();
+	options.minDiam.in = xoCheckBox->isChecked();
+	options.width.value = zlInput->text().toDouble();
+	options.width.in = zlCheckBox->isChecked();
 
-    return options;
+	return options;
 }
 
 void ChamferDialog::loadSettings(const ChamferOptions &defaultOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-    setGeometry(QRect(pos, size));
+	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+	setGeometry(QRect(pos, size));
 
-    ChamferOptions opt;
-    opt.load(mSettings, defaultOptions);
+	ChamferOptions opt;
+	opt.load(mSettings, defaultOptions);
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 
-    setOptions(opt);
+	setOptions(opt);
 }
 
 void ChamferDialog::saveSettings(bool saveOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
-    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+	mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+	mSettings->setValue(CFG_KEY_SIZE, geometry().size());
 
-    if (saveOptions) {
-        options().save(mSettings);
-    }
+	if (saveOptions) {
+		options().save(mSettings);
+	}
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 }
 
 void ChamferDialog::onFinished(int result)
 {
-    saveSettings(result == QDialog::Accepted);
+	saveSettings(result == QDialog::Accepted);
 }

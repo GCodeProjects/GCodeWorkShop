@@ -57,106 +57,106 @@ class QWidget;
  */
 class ConfigPage: public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    virtual ~ConfigPage() {}
+	virtual ~ConfigPage() {}
 
-    QWidget *widget();
+	QWidget *widget();
 
-    /**
-     * @brief Displayed page name.
-     *
-     * @return The string can be localized.
-     */
-    virtual const QString &text() = 0;
+	/**
+	 * @brief Displayed page name.
+	 *
+	 * @return The string can be localized.
+	 */
+	virtual const QString &text() = 0;
 
-    /**
-     * @brief Additional page tooltip.
-     *
-     * @return The string can be localized.
-     */
-    virtual const QString &toolTip();
+	/**
+	 * @brief Additional page tooltip.
+	 *
+	 * @return The string can be localized.
+	 */
+	virtual const QString &toolTip();
 
-    /**
-     * @brief Returns list of childs pages.
-     *
-     * @see add(QSharedPointer<ConfigPage>) add(ConfigPage *)
-     */
-    QList<QSharedPointer<ConfigPage>> pages();
+	/**
+	 * @brief Returns list of childs pages.
+	 *
+	 * @see add(QSharedPointer<ConfigPage>) add(ConfigPage *)
+	 */
+	QList<QSharedPointer<ConfigPage>> pages();
 
-    /**
-     * @brief Add child page.
-     */
-    void add(QSharedPointer<ConfigPage> child);
+	/**
+	 * @brief Add child page.
+	 */
+	void add(QSharedPointer<ConfigPage> child);
 
 protected:
-    /**
-     * @brief Add child page.
-     */
-    void add(ConfigPage *child);
+	/**
+	 * @brief Add child page.
+	 */
+	void add(ConfigPage *child);
 
 public slots:
-    /**
-     * @brief Update translation of UI.
-     */
-    virtual void retranslateUI() {}
+	/**
+	 * @brief Update translation of UI.
+	 */
+	virtual void retranslateUI() {}
 
-    /**
-     * @brief Actions when starting the settings dialog.
-     *
-     * For example, you can load the current settings into a widget. Also, you can make
-     * a copy of the settings to @link reject() roll back@endlink changes made by the user.
-     */
-    virtual void start() {}
+	/**
+	 * @brief Actions when starting the settings dialog.
+	 *
+	 * For example, you can load the current settings into a widget. Also, you can make
+	 * a copy of the settings to @link reject() roll back@endlink changes made by the user.
+	 */
+	virtual void start() {}
 
-    /**
-     * @brief Actions when confirm the changes made.
-     *
-     * This is happend by pressing the "OK" button.
-     */
-    virtual void accept() {}
+	/**
+	 * @brief Actions when confirm the changes made.
+	 *
+	 * This is happend by pressing the "OK" button.
+	 */
+	virtual void accept() {}
 
-    /**
-     * @brief Actions when rejecting the changes made.
-     *
-     * This is happend by pressing the "Cancel" button. If you have @link start() backup@endlink
-     * your settings, it's time to apply them.
-     */
-    virtual void reject() {}
+	/**
+	 * @brief Actions when rejecting the changes made.
+	 *
+	 * This is happend by pressing the "Cancel" button. If you have @link start() backup@endlink
+	 * your settings, it's time to apply them.
+	 */
+	virtual void reject() {}
 
-    /**
-     * @brief Actions when requesting default settings.
-     *
-     * This is happend by pressing the "Default" button. If you implement this feature,
-     * override the hasReset() function so that it returns @c true.
-     */
-    virtual void reset() {}
+	/**
+	 * @brief Actions when requesting default settings.
+	 *
+	 * This is happend by pressing the "Default" button. If you implement this feature,
+	 * override the hasReset() function so that it returns @c true.
+	 */
+	virtual void reset() {}
 
 public:
-    /**
-     * @brief Indicates whether the page has a reset() function.
-     *
-     * @return By default, it returns @c false.
-     */
-    virtual bool hasReset()
-    {
-        return false;
-    }
+	/**
+	 * @brief Indicates whether the page has a reset() function.
+	 *
+	 * @return By default, it returns @c false.
+	 */
+	virtual bool hasReset()
+	{
+		return false;
+	}
 
 protected:
-    ConfigPage(QObject *parent = 0): QObject(parent) {}
+	ConfigPage(QObject *parent = 0): QObject(parent) {}
 
-    /**
-     * @brief Make widget for this page.
-     */
-    virtual QWidget *doWidget();
+	/**
+	 * @brief Make widget for this page.
+	 */
+	virtual QWidget *doWidget();
 
-    QWidget *mWidget = 0;
-    QList<QSharedPointer<ConfigPage>> mChild;
+	QWidget *mWidget = 0;
+	QList<QSharedPointer<ConfigPage>> mChild;
 
 private slots:
-    void widgetDestroed(QObject *object);
+	void widgetDestroed(QObject *object);
 };
 
 #endif // CONFIGPAGE_H

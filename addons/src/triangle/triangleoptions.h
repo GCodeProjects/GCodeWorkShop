@@ -24,22 +24,22 @@ class QSettings;
 
 
 struct TriangleOptions {
-    bool rightTriangle;
+	bool rightTriangle;
 
-    struct InOut {
-        bool    in;
-        double  value;
-    };
+	struct InOut {
+		bool    in;
+		double  value;
+	};
 
-    InOut   angleA;
-    InOut   angleB;
-    InOut   angleC;
-    InOut   sideA;
-    InOut   sideB;
-    InOut   sideC;
+	InOut   angleA;
+	InOut   angleB;
+	InOut   angleC;
+	InOut   sideA;
+	InOut   sideB;
+	InOut   sideC;
 
-    void load(QSettings *settings, const TriangleOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const TriangleOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // TRIANGLEOPTIONS_H

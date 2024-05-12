@@ -40,33 +40,33 @@ struct FeedsOptions;
  */
 class FeedsDialog : public QDialog, private Ui::FeedsDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    FeedsDialog(QWidget *parent, QSettings *settings);
-    ~FeedsDialog();
+	FeedsDialog(QWidget *parent, QSettings *settings);
+	~FeedsDialog();
 
-    void setOptions(const FeedsOptions &options);
-    FeedsOptions options();
+	void setOptions(const FeedsOptions &options);
+	FeedsOptions options();
 
-    void loadSettings(const FeedsOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const FeedsOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *ev);
+	bool eventFilter(QObject *obj, QEvent *ev);
 
 protected slots:
-    void inputChanged();
+	void inputChanged();
 
 private slots:
-    void computeButtonClicked();
-    void computeVcButtonClicked();
-    void setDefButton();
-    void checkBoxChanged();
-    void onFinished(int result);
+	void computeButtonClicked();
+	void computeVcButtonClicked();
+	void setDefButton();
+	void checkBoxChanged();
+	void onFinished(int result);
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // FEEDSDIALOG_H

@@ -32,69 +32,69 @@
 
 InLineCalc::InLineCalc(QWidget *parent) : QLineEdit(parent)
 {
-    setHidden(true);
-    setClearButtonEnabled(true);
-    setMinimumWidth(100);
-    adjustSize();
-    setToolTip(tr("You can use:\n") +
-               "+ - * / ()\n" +
-               "SIN(x)\n" +
-               "COS(x)\n" +
-               "TAN(x)\n" +
-               "SQRT(x)\n" +
-               "SQR(x)\n" +
-               "ABS(x)\n" +
-               "TRUNC(x)\n" +
-               "PI\n" +
-               tr("Press Enter to accept or click anywere to canacel"));
+	setHidden(true);
+	setClearButtonEnabled(true);
+	setMinimumWidth(100);
+	adjustSize();
+	setToolTip(tr("You can use:\n") +
+	           "+ - * / ()\n" +
+	           "SIN(x)\n" +
+	           "COS(x)\n" +
+	           "TAN(x)\n" +
+	           "SQRT(x)\n" +
+	           "SQR(x)\n" +
+	           "ABS(x)\n" +
+	           "TRUNC(x)\n" +
+	           "PI\n" +
+	           tr("Press Enter to accept or click anywere to canacel"));
 
-    connect(this, SIGNAL(editingFinished()), this, SLOT(done()));
+	connect(this, SIGNAL(editingFinished()), this, SLOT(done()));
 
-    QCompleter *completer = new QCompleter(m_wordList, this);
-    completer->setCaseSensitivity(Qt::CaseInsensitive);
-    completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-    setCompleter(completer);
+	QCompleter *completer = new QCompleter(m_wordList, this);
+	completer->setCaseSensitivity(Qt::CaseInsensitive);
+	completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+	setCompleter(completer);
 }
 
 void InLineCalc::showCalc(const QString &address, const QString &value, const QRect &cursorRect)
 {
-    m_address = address;
-    setText(value);
+	m_address = address;
+	setText(value);
 
-    int h = (height() - cursorRect.height()) / 2;
-    move(cursorRect.x() + cursorRect.height(), cursorRect.top() - h);
-    show();
-    setFocus();
+	int h = (height() - cursorRect.height()) / 2;
+	move(cursorRect.x() + cursorRect.height(), cursorRect.top() - h);
+	show();
+	setFocus();
 }
 
 void InLineCalc::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() != Qt::Key_Return) {
-        QLineEdit::keyPressEvent(event);
-    } else {
-        event->accept();
-        evalute();
-        done();
-    }
+	if (event->key() != Qt::Key_Return) {
+		QLineEdit::keyPressEvent(event);
+	} else {
+		event->accept();
+		evalute();
+		done();
+	}
 }
 
 void InLineCalc::evalute()
 {
-    QString result = text();
-    result.replace(',', '.');
+	QString result = text();
+	result.replace(',', '.');
 
-    m_wordList.append(result);
-    m_wordList.removeDuplicates();
+	m_wordList.append(result);
+	m_wordList.removeDuplicates();
 
-    int status = Utils::processBrc(&result);
+	int status = Utils::processBrc(&result);
 
-    if (status >= 0) {
-        emit complete(Utils::removeZeros(result).prepend(m_address));
-    }
+	if (status >= 0) {
+		emit complete(Utils::removeZeros(result).prepend(m_address));
+	}
 }
 
 void InLineCalc::done()
 {
-    close();
-    parentWidget()->setFocus();
+	close();
+	parentWidget()->setFocus();
 }

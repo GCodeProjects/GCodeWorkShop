@@ -28,15 +28,15 @@
 
 void Addons::doChamfer(QWidget *parent, QSettings *settings)
 {
-    QString key = "ChamferDialog";
-    ChamferDialog *dlg;
-    dlg = parent->findChild<ChamferDialog *>(key);
+	QString key = "ChamferDialog";
+	ChamferDialog *dlg;
+	dlg = parent->findChild<ChamferDialog *>(key);
 
-    if (!dlg) {
-        dlg = new ChamferDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(ChamferOptions());
-    }
+	if (!dlg) {
+		dlg = new ChamferDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(ChamferOptions());
+	}
 
-    dlg->show();
+	dlg->show();
 }

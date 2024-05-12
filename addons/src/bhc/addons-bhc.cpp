@@ -28,15 +28,15 @@
 
 void Addons::doBhc(QWidget *parent, QSettings *settings)
 {
-    QString key = "BHCDialog";
-    BHCDialog *dlg;
-    dlg = parent->findChild<BHCDialog *>(key);
+	QString key = "BHCDialog";
+	BHCDialog *dlg;
+	dlg = parent->findChild<BHCDialog *>(key);
 
-    if (!dlg) {
-        dlg = new BHCDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(BHCOptions());
-    }
+	if (!dlg) {
+		dlg = new BHCDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(BHCOptions());
+	}
 
-    dlg->show();
+	dlg->show();
 }

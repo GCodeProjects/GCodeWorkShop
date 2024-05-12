@@ -26,12 +26,12 @@ class QSettings;
 
 
 struct CleanUpOptions {
-    QStringList expressions;
-    QStringList comments;
-    QStringList selected;
+	QStringList expressions;
+	QStringList comments;
+	QStringList selected;
 
-    void load(QSettings *settings, const CleanUpOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const CleanUpOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // CLEANUPOPTIONS_H

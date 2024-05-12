@@ -33,15 +33,15 @@ class DocumentWidgetProperties;
 class GCoderProducer : public DocumentProducer
 {
 public:
-    GCoderProducer();
+	GCoderProducer();
 
-    QString documentType() const;
-    QString brief() const;
+	QString documentType() const;
+	QString brief() const;
 
-    Document *createDocument() const;
-    DocumentInfo *createDocumentInfo();
-    DocumentStyle *createDocumentStyle();
-    DocumentWidgetProperties *createDocumentWidgetProperties();
+	Document *createDocument() const;
+	DocumentInfo *createDocumentInfo();
+	DocumentStyle *createDocumentStyle();
+	DocumentWidgetProperties *createDocumentWidgetProperties();
 };
 
 #endif // GCODERPRODUCER_H

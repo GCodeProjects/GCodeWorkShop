@@ -51,223 +51,223 @@ const QString Medium::SHARE = QLatin1String("share");
 const QString Medium::SLASH_SHARE = SLASH + QLatin1String("share");
 
 Medium::Medium(QObject *parent) :
-    QObject(parent),
-    lauchType(checkLaunch())
+	QObject(parent),
+	lauchType(checkLaunch())
 {
-    addTranslationDir(QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    addTranslationDir(COLON + SLASH_LANG);
-    addTranslationUnit("qtbase"); // For Qt base module;
-    addTranslationUnit(APP_NAME);
+	addTranslationDir(QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+	addTranslationDir(COLON + SLASH_LANG);
+	addTranslationUnit("qtbase"); // For Qt base module;
+	addTranslationUnit(APP_NAME);
 
-    setupDirs();
-    mShareDirs.append(COLON);
+	setupDirs();
+	mShareDirs.append(COLON);
 
-    qDebug() << "Seting directoryes:";
-    qDebug() << "  translation   " << mTranslationDirs;
-    qDebug() << "  config        " << mSettingsDir;
-    qDebug() << "  programm data " << mShareDirs;
+	qDebug() << "Seting directoryes:";
+	qDebug() << "  translation   " << mTranslationDirs;
+	qDebug() << "  config        " << mSettingsDir;
+	qDebug() << "  programm data " << mShareDirs;
 
-    QString settingFile = mSettingsDir;
-    settingFile.append(SLASH).append(APP_NAME).append(".ini");
-    mSettings = new QSettings(settingFile, QSettings::IniFormat);
+	QString settingFile = mSettingsDir;
+	settingFile.append(SLASH).append(APP_NAME).append(".ini");
+	mSettings = new QSettings(settingFile, QSettings::IniFormat);
 
-    updateTranslation();
+	updateTranslation();
 }
 
 Medium::~Medium()
 {
-    mSettings->sync();
-    delete mSettings;
+	mSettings->sync();
+	delete mSettings;
 }
 
 int Medium::checkLaunch()
 {
-    QString dir = QDir::fromNativeSeparators(QApplication::applicationDirPath());
+	QString dir = QDir::fromNativeSeparators(QApplication::applicationDirPath());
 
 #ifdef Q_OS_WIN
 
-    char *sysProgFile;
+	char *sysProgFile;
 
-    sysProgFile = getenv("ProgramFiles");
+	sysProgFile = getenv("ProgramFiles");
 
-    if (sysProgFile != nullptr &&
-            dir.startsWith(QDir::fromNativeSeparators(QString::fromLocal8Bit(sysProgFile)))) {
-        return LAUNCH_SYSTEM;
-    }
+	if (sysProgFile != nullptr &&
+	        dir.startsWith(QDir::fromNativeSeparators(QString::fromLocal8Bit(sysProgFile)))) {
+		return LAUNCH_SYSTEM;
+	}
 
 #else // Not Q_OS_WIN
 
-    if (dir.startsWith(QLatin1String("/usr/"))
-            && dir.endsWith(QLatin1String("/bin"))) {
-        return LAUNCH_SYSTEM;
-    }
+	if (dir.startsWith(QLatin1String("/usr/"))
+	        && dir.endsWith(QLatin1String("/bin"))) {
+		return LAUNCH_SYSTEM;
+	}
 
-    if (dir.endsWith(QLatin1String(".local/bin"))) {
-        return LAUNCH_USER;
-    }
+	if (dir.endsWith(QLatin1String(".local/bin"))) {
+		return LAUNCH_USER;
+	}
 
 #endif // Q_OS_WIN
 
-    dir = dir.section(SLASH, -2, -1);
+	dir = dir.section(SLASH, -2, -1);
 
-    if (dir.startsWith(BIN) && (dir.endsWith(DEBUG) || dir.endsWith(RELEASE))) {
-        return LAUNCH_SANDBOX;
-    }
+	if (dir.startsWith(BIN) && (dir.endsWith(DEBUG) || dir.endsWith(RELEASE))) {
+		return LAUNCH_SANDBOX;
+	}
 
-    return LAUNCH_PORTABLE;
+	return LAUNCH_PORTABLE;
 }
 
 void Medium::setupDirs()
 {
-    QString rootDir;
-    QString shareDir;
-    QString langDir;
+	QString rootDir;
+	QString shareDir;
+	QString langDir;
 
-    rootDir = QDir::fromNativeSeparators(QApplication::applicationDirPath());
+	rootDir = QDir::fromNativeSeparators(QApplication::applicationDirPath());
 
-    switch (lauchType) {
-    case LAUNCH_SYSTEM:
-    case LAUNCH_USER:
-        if (rootDir.endsWith(SLASH_BIN)) {
-            rootDir.remove(SLASH_BIN);
-        }
+	switch (lauchType) {
+	case LAUNCH_SYSTEM:
+	case LAUNCH_USER:
+		if (rootDir.endsWith(SLASH_BIN)) {
+			rootDir.remove(SLASH_BIN);
+		}
 
-        shareDir = rootDir;
+		shareDir = rootDir;
 #ifndef Q_OS_WIN
-        shareDir.append(SLASH_SHARE).append(SLASH).append(APP_NAME);
+		shareDir.append(SLASH_SHARE).append(SLASH).append(APP_NAME);
 #endif
-        langDir = shareDir;
-        mSettingsDir = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
-        mSettingsDir.append(SLASH).append(APP_NAME);
-        break;
+		langDir = shareDir;
+		mSettingsDir = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
+		mSettingsDir.append(SLASH).append(APP_NAME);
+		break;
 
-    case LAUNCH_SANDBOX:
-        shareDir = rootDir.section(SLASH, 0, -3);
-        langDir = shareDir;
-        mSettingsDir = shareDir;
-        mSettingsDir.append(SLASH_BIN);
-        shareDir.append(SANDBOX_SHARE);
-        break;
+	case LAUNCH_SANDBOX:
+		shareDir = rootDir.section(SLASH, 0, -3);
+		langDir = shareDir;
+		mSettingsDir = shareDir;
+		mSettingsDir.append(SLASH_BIN);
+		shareDir.append(SANDBOX_SHARE);
+		break;
 
-    case LAUNCH_PORTABLE:
-    default:
-        if (rootDir.endsWith(SLASH_BIN)) {
-            rootDir.remove(SLASH_BIN);
-        }
+	case LAUNCH_PORTABLE:
+	default:
+		if (rootDir.endsWith(SLASH_BIN)) {
+			rootDir.remove(SLASH_BIN);
+		}
 
-        shareDir = rootDir;
-        langDir = shareDir;
-        mSettingsDir = shareDir;
-    }
+		shareDir = rootDir;
+		langDir = shareDir;
+		mSettingsDir = shareDir;
+	}
 
-    langDir.append(SLASH_LANG);
-    addTranslationDir(langDir);
+	langDir.append(SLASH_LANG);
+	addTranslationDir(langDir);
 
-    mShareDirs.append(shareDir);
+	mShareDirs.append(shareDir);
 }
 
 Medium &Medium::instance()
 {
-    static Medium enc;
-    return enc;
+	static Medium enc;
+	return enc;
 }
 
 void Medium::addTranslationDir(const QString &dir)
 {
-    if (!mTranslationDirs.contains(dir)) {
-        mTranslationDirs.append(dir);
-    }
+	if (!mTranslationDirs.contains(dir)) {
+		mTranslationDirs.append(dir);
+	}
 }
 
 void Medium::removeTranslationDir(const QString &dir)
 {
-    int i = mTranslationDirs.indexOf(dir);
+	int i = mTranslationDirs.indexOf(dir);
 
-    if (i >= 0) {
-        mTranslationDirs.removeAt(i);
-    }
+	if (i >= 0) {
+		mTranslationDirs.removeAt(i);
+	}
 }
 
 void Medium::addTranslationUnit(const QString &unit)
 {
-    if (!mTranslationUnits.contains(unit)) {
-        mTranslationUnits.append(unit);
-    }
+	if (!mTranslationUnits.contains(unit)) {
+		mTranslationUnits.append(unit);
+	}
 }
 
 void Medium::removeTranslationUnit(const QString &unit)
 {
-    int i = mTranslationUnits.indexOf(unit);
+	int i = mTranslationUnits.indexOf(unit);
 
-    if (i >= 0) {
-        mTranslationUnits.removeAt(i);
-    }
+	if (i >= 0) {
+		mTranslationUnits.removeAt(i);
+	}
 }
 
 QList<QLocale> Medium::findTranslation(bool skipQtDir)
 {
-    QList<QLocale> localeList;
+	QList<QLocale> localeList;
 
-    foreach (QString dir, mTranslationDirs) {
-        QStringList fileList = QDir(dir).entryList(QDir::Files);
+	foreach (QString dir, mTranslationDirs) {
+		QStringList fileList = QDir(dir).entryList(QDir::Files);
 
-        // Skip Qt translation directory.
-        if (dir == QLibraryInfo::location(QLibraryInfo::TranslationsPath) && skipQtDir) {
-            continue;
-        }
+		// Skip Qt translation directory.
+		if (dir == QLibraryInfo::location(QLibraryInfo::TranslationsPath) && skipQtDir) {
+			continue;
+		}
 
-        foreach (QString file, fileList) {
-            QRegularExpression rxName("([^a-zA-Z0-9])([a-zA-Z]{2,2}(_[a-zA-Z]{2,2})?)([^a-zA-Z0-9]|$)");
-            auto match = rxName.match(file);
+		foreach (QString file, fileList) {
+			QRegularExpression rxName("([^a-zA-Z0-9])([a-zA-Z]{2,2}(_[a-zA-Z]{2,2})?)([^a-zA-Z0-9]|$)");
+			auto match = rxName.match(file);
 
-            // The locales name is the text of the second capturing parentheses.
-            if (match.lastCapturedIndex() > 1) {
-                QLocale locale = QLocale(match.captured(2));
+			// The locales name is the text of the second capturing parentheses.
+			if (match.lastCapturedIndex() > 1) {
+				QLocale locale = QLocale(match.captured(2));
 
-                if (!localeList.contains(locale) && locale != QLocale::c()) {
-                    localeList.append(locale);
-                }
-            }
-        }
-    }
+				if (!localeList.contains(locale) && locale != QLocale::c()) {
+					localeList.append(locale);
+				}
+			}
+		}
+	}
 
-    return localeList;
+	return localeList;
 }
 
 void Medium::updateTranslation()
 {
-    QCoreApplication *app = QCoreApplication::instance();
-    QLocale locale= QLocale();
+	QCoreApplication *app = QCoreApplication::instance();
+	QLocale locale = QLocale();
 
-    foreach (QTranslator *trans, mTranslators) {
-        app->removeTranslator(trans);
-        trans->deleteLater();
-    }
+	foreach (QTranslator *trans, mTranslators) {
+		app->removeTranslator(trans);
+		trans->deleteLater();
+	}
 
-    mTranslators.clear();
+	mTranslators.clear();
 
-    foreach (QString file, mTranslationUnits) {
-        file.append("_").append(locale.name());
+	foreach (QString file, mTranslationUnits) {
+		file.append("_").append(locale.name());
 
-        foreach (QString dir, mTranslationDirs) {
-            QTranslator *qtTranslator = new QTranslator();
-            qDebug() << "loading translation " << file << " from " << dir;
+		foreach (QString dir, mTranslationDirs) {
+			QTranslator *qtTranslator = new QTranslator();
+			qDebug() << "loading translation " << file << " from " << dir;
 
-            if (qtTranslator->load(file, dir)) {
-                mTranslators.append(qtTranslator);
-                qtTranslator = 0;
-                qDebug() << "  OK";
-                break;
-            } else {
-                qDebug() << "  fail";
-                delete qtTranslator;
-            }
-        }
-    }
+			if (qtTranslator->load(file, dir)) {
+				mTranslators.append(qtTranslator);
+				qtTranslator = 0;
+				qDebug() << "  OK";
+				break;
+			} else {
+				qDebug() << "  fail";
+				delete qtTranslator;
+			}
+		}
+	}
 
-    foreach (QTranslator *trans, mTranslators) {
-        app->installTranslator(trans);
-    }
+	foreach (QTranslator *trans, mTranslators) {
+		app->installTranslator(trans);
+	}
 
-    emit onRetranslateUI();
+	emit onRetranslateUI();
 }

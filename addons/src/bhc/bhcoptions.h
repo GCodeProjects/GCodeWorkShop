@@ -26,13 +26,13 @@ class QSettings;
 
 
 struct BHCOptions {
-    BHCTabOptions   green;
-    BHCTabOptions   blue;
-    BHCTabOptions   red;
-    BHCTabOptions   yellow;
+	BHCTabOptions   green;
+	BHCTabOptions   blue;
+	BHCTabOptions   red;
+	BHCTabOptions   yellow;
 
-    void load(QSettings *settings, const BHCOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const BHCOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // BHCOPTIONS_H

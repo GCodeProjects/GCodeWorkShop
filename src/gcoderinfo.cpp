@@ -39,50 +39,50 @@ GCoderInfo::GCoderInfo()
 
 GCoderInfo::GCoderInfo(const GCoderInfo &that)
 {
-    GCoderInfo::operator=(that);
+	GCoderInfo::operator=(that);
 }
 
 QString GCoderInfo::documentType() const
 {
-    return GCoder::DOCUMENT_TYPE;
+	return GCoder::DOCUMENT_TYPE;
 }
 
 DocumentInfo *GCoderInfo::clone() const
 {
-    GCoderInfo *info = new GCoderInfo();
-    info->operator=(*this);
-    return info;
+	GCoderInfo *info = new GCoderInfo();
+	info->operator=(*this);
+	return info;
 }
 
 DocumentInfo &GCoderInfo::operator=(const DocumentInfo &that)
 {
-    try {
-        const GCoderInfo &gcoderInfo = dynamic_cast<const GCoderInfo &>(that);
-        return GCoderInfo::operator=(gcoderInfo);
-    }  catch (std::bad_cast &e) {
-    }
+	try {
+		const GCoderInfo &gcoderInfo = dynamic_cast<const GCoderInfo &>(that);
+		return GCoderInfo::operator=(gcoderInfo);
+	}  catch (std::bad_cast &e) {
+	}
 
-    return DocumentInfo::operator=(that);
+	return DocumentInfo::operator=(that);
 }
 
 GCoderInfo &GCoderInfo::operator=(const GCoderInfo &that)
 {
-    DocumentInfo::operator=(that);
-    cursorPos = that.cursorPos;
-    highlightMode = that.highlightMode;
-    return *this;
+	DocumentInfo::operator=(that);
+	cursorPos = that.cursorPos;
+	highlightMode = that.highlightMode;
+	return *this;
 }
 
 void GCoderInfo::loadChild(QSettings *cfg)
 {
-    if (cfg->value(DOCUMENTINFO_CFG_KEY_TYPE).toString() == documentType()) {
-        cursorPos = cfg->value(CFG_KEY_INFO_CURSOR_POS, cursorPos).toInt();
-        highlightMode = cfg->value(CFG_KEY_INFO_HIGHLIGHT_MODE, highlightMode).toInt();
-    }
+	if (cfg->value(DOCUMENTINFO_CFG_KEY_TYPE).toString() == documentType()) {
+		cursorPos = cfg->value(CFG_KEY_INFO_CURSOR_POS, cursorPos).toInt();
+		highlightMode = cfg->value(CFG_KEY_INFO_HIGHLIGHT_MODE, highlightMode).toInt();
+	}
 }
 
 void GCoderInfo::saveChild(QSettings *cfg) const
 {
-    cfg->setValue(CFG_KEY_INFO_CURSOR_POS, cursorPos);
-    cfg->setValue(CFG_KEY_INFO_HIGHLIGHT_MODE, highlightMode);
+	cfg->setValue(CFG_KEY_INFO_CURSOR_POS, cursorPos);
+	cfg->setValue(CFG_KEY_INFO_HIGHLIGHT_MODE, highlightMode);
 }

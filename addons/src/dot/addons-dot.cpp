@@ -30,22 +30,22 @@
 
 int Addons::doDot(QWidget *parent, QSettings *settings,  QString &tx)
 {
-    int result = 0;
-    QString key = "DotDialog";
-    DotDialog *dlg;
-    dlg = parent->findChild<DotDialog *>(key);
+	int result = 0;
+	QString key = "DotDialog";
+	DotDialog *dlg;
+	dlg = parent->findChild<DotDialog *>(key);
 
-    if (!dlg) {
-        dlg = new DotDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(DotOptions());
-    }
+	if (!dlg) {
+		dlg = new DotDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(DotOptions());
+	}
 
-    if (dlg->exec() == QDialog::Accepted) {
-        DotOptions opt = dlg->options();
-        result = Utils::insertDot(tx, opt.axes, opt.convert, opt.divider);
-    }
+	if (dlg->exec() == QDialog::Accepted) {
+		DotOptions opt = dlg->options();
+		result = Utils::insertDot(tx, opt.axes, opt.convert, opt.divider);
+	}
 
-    dlg->deleteLater();
-    return result;
+	dlg->deleteLater();
+	return result;
 }

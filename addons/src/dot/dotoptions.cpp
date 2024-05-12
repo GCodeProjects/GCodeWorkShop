@@ -30,14 +30,14 @@
 
 void DotOptions::load(QSettings *settings, const DotOptions &defaultOptions)
 {
-    axes = settings->value(CFG_KEY_AXES, defaultOptions.axes).toString();
-    convert = settings->value(CFG_KEY_CONVERT, defaultOptions.convert).toBool();
-    divider = settings->value(CFG_KEY_DIVIDER, defaultOptions.divider).toInt();
+	axes = settings->value(CFG_KEY_AXES, defaultOptions.axes).toString();
+	convert = settings->value(CFG_KEY_CONVERT, defaultOptions.convert).toBool();
+	divider = settings->value(CFG_KEY_DIVIDER, defaultOptions.divider).toInt();
 }
 
 void DotOptions::save(QSettings *settings)
 {
-    settings->setValue(CFG_KEY_AXES, axes);
-    settings->setValue(CFG_KEY_CONVERT, convert);
-    settings->setValue(CFG_KEY_DIVIDER, divider);
+	settings->setValue(CFG_KEY_AXES, axes);
+	settings->setValue(CFG_KEY_CONVERT, convert);
+	settings->setValue(CFG_KEY_DIVIDER, divider);
 }

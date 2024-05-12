@@ -34,70 +34,70 @@
 
 QStringList Utils::splitFile(const QString &text)
 {
-    QStringList progs;
-    QStringList regexPatterns;
-    QList<int> progBegins;
-    QRegularExpression regex;
+	QStringList progs;
+	QStringList regexPatterns;
+	QList<int> progBegins;
+	QRegularExpression regex;
 
-    progs.clear();
+	progs.clear();
 
-    if (text.isNull() || text.isEmpty()) {
-        return progs;
-    }
+	if (text.isNull() || text.isEmpty()) {
+		return progs;
+	}
 
-    regexPatterns << FILENAME_SINU840
-                  << FILENAME_OSP
-                  << FILENAME_FANUC
-                  << FILENAME_SINU
-                  << FILENAME_HEID1
-                  << FILENAME_HEID2
-                  << FILENAME_PHIL
-                  << FILENAME_FADAL;
+	regexPatterns << FILENAME_SINU840
+	              << FILENAME_OSP
+	              << FILENAME_FANUC
+	              << FILENAME_SINU
+	              << FILENAME_HEID1
+	              << FILENAME_HEID2
+	              << FILENAME_PHIL
+	              << FILENAME_FADAL;
 
-    // detect CNC control type
-    foreach (const QString pattern, regexPatterns) {
-        regex.setPattern(pattern);
+	// detect CNC control type
+	foreach (const QString pattern, regexPatterns) {
+		regex.setPattern(pattern);
 
-        if (text.contains(regex)) {
-            regexPatterns.clear();
-            regexPatterns.append(pattern);
-            break;
-        }
-    }
+		if (text.contains(regex)) {
+			regexPatterns.clear();
+			regexPatterns.append(pattern);
+			break;
+		}
+	}
 
-    // prepare program list
-    foreach (const QString pattern, regexPatterns) {
-        regex.setPattern(pattern);
-        auto match = regex.match(text);
+	// prepare program list
+	foreach (const QString pattern, regexPatterns) {
+		regex.setPattern(pattern);
+		auto match = regex.match(text);
 
-        while (match.hasMatch()) {
-            progBegins.append(match.capturedStart());
-            match = regex.match(text, match.capturedEnd());
-        }
-    }
+		while (match.hasMatch()) {
+			progBegins.append(match.capturedStart());
+			match = regex.match(text, match.capturedEnd());
+		}
+	}
 
-    std::sort(progBegins.begin(), progBegins.end());
+	std::sort(progBegins.begin(), progBegins.end());
 
-    // split file  TODO: data can be lost if filename detection fails also some garbage are left
-    QList<int>::const_iterator it = progBegins.constBegin();
+	// split file  TODO: data can be lost if filename detection fails also some garbage are left
+	QList<int>::const_iterator it = progBegins.constBegin();
 
-    while (it != progBegins.constEnd()) {
-        int progEnd;
-        int progBegin = *it;
-        ++it;
+	while (it != progBegins.constEnd()) {
+		int progEnd;
+		int progBegin = *it;
+		++it;
 
-        if (it != progBegins.constEnd()) {
-            progEnd = *it;
-        } else {
-            progEnd = text.size();
-        }
+		if (it != progBegins.constEnd()) {
+			progEnd = *it;
+		} else {
+			progEnd = text.size();
+		}
 
-        QString tx = text.mid(progBegin, progEnd - progBegin);
+		QString tx = text.mid(progBegin, progEnd - progBegin);
 
-        if (!tx.isEmpty()) {
-            progs.append(tx);
-        }
-    }
+		if (!tx.isEmpty()) {
+			progs.append(tx);
+		}
+	}
 
-    return progs;
+	return progs;
 }

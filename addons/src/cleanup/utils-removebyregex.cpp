@@ -26,17 +26,17 @@
 
 bool Utils::removeTextByRegExp(QString &tx, QStringList expList, bool replaceDollar)
 {
-    if (expList.isEmpty()) {
-        return false;
-    }
+	if (expList.isEmpty()) {
+		return false;
+	}
 
-    for (QString regexp : expList) {
-        if (replaceDollar && regexp.contains('$') && !regexp.contains("\\$")) {
-            regexp.replace('$', "\\n");
-        }
+	for (QString regexp : expList) {
+		if (replaceDollar && regexp.contains('$') && !regexp.contains("\\$")) {
+			regexp.replace('$', "\\n");
+		}
 
-        tx.remove(QRegularExpression(regexp));
-    }
+		tx.remove(QRegularExpression(regexp));
+	}
 
-    return true;
+	return true;
 }

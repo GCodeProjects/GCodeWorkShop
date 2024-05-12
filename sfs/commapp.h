@@ -45,64 +45,64 @@ class CommApp;
 
 class CommApp : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit CommApp(QWidget *parent = 0);
-    ~CommApp();
+	explicit CommApp(QWidget *parent = 0);
+	~CommApp();
 
 protected:
-    void closeEvent(QCloseEvent *event);
+	void closeEvent(QCloseEvent *event);
 
 private slots:
-    void serialConfig();
-    void tileSubWindowsVertycally();
-    void setActiveSubWindow(QWidget *window);
-    void startSerialPortServer();
-    void stopSerialPortServer();
-    void activeWindowChanged(QMdiSubWindow *window);
-    void changeActiveWindow();
-    void closeTab(int i);
-    void doPortReset();
-    void showNewFiles();
-    void browseSaveFolder();
-    void iconActivated(QSystemTrayIcon::ActivationReason reason);
-    void quitApp();
-    void about();
+	void serialConfig();
+	void tileSubWindowsVertycally();
+	void setActiveSubWindow(QWidget *window);
+	void startSerialPortServer();
+	void stopSerialPortServer();
+	void activeWindowChanged(QMdiSubWindow *window);
+	void changeActiveWindow();
+	void closeTab(int i);
+	void doPortReset();
+	void showNewFiles();
+	void browseSaveFolder();
+	void iconActivated(QSystemTrayIcon::ActivationReason reason);
+	void quitApp();
+	void about();
 
 private:
-    Ui::CommApp *ui;
-    QSignalMapper *windowMapper;
+	Ui::CommApp *ui;
+	QSignalMapper *windowMapper;
 
-    QAction *configPortAct;
-    QAction *startServerAct;
-    QAction *stopServerAct;
-    QAction *resetServerAct;
-    QAction *closeServerAct;
-    QAction *browseSaveFolderAct;
-    QAction *showNewFilesAct;
-    QComboBox *configBox;
-    QToolBar *fileToolBar;
-    QAction *minimizeAction;
-    QAction *maximizeAction;
-    QAction *restoreAction;
-    QAction *quitAction;
-    QAction *aboutAction;
-    QAction *startMinimizedAction;
+	QAction *configPortAct;
+	QAction *startServerAct;
+	QAction *stopServerAct;
+	QAction *resetServerAct;
+	QAction *closeServerAct;
+	QAction *browseSaveFolderAct;
+	QAction *showNewFilesAct;
+	QComboBox *configBox;
+	QToolBar *fileToolBar;
+	QAction *minimizeAction;
+	QAction *maximizeAction;
+	QAction *restoreAction;
+	QAction *quitAction;
+	QAction *aboutAction;
+	QAction *startMinimizedAction;
 
-    QSystemTrayIcon *trayIcon;
-    QMenu *trayIconMenu;
-    bool closable;
+	QSystemTrayIcon *trayIcon;
+	QMenu *trayIconMenu;
+	bool closable;
 
-    SerialTransmissionDialog *findMdiChild(const QString __config);
-    SerialTransmissionDialog *createSerialPortServer(QString __config);
-    SerialTransmissionDialog *activeMdiChild();
+	SerialTransmissionDialog *findMdiChild(const QString __config);
+	SerialTransmissionDialog *createSerialPortServer(QString __config);
+	SerialTransmissionDialog *activeMdiChild();
 
-    void saveSettings();
-    void loadSettings();
-    void loadSerialConfignames();
-    void createActions();
-    void createTrayIcon();
+	void saveSettings();
+	void loadSettings();
+	void loadSerialConfignames();
+	void createActions();
+	void createTrayIcon();
 };
 
 #endif // COMMAPP_H

@@ -30,22 +30,22 @@
 
 int Addons::doI2MProg(QWidget *parent, QSettings *settings,  QString &tx)
 {
-    int result = 0;
-    QString key = "I2MProgDialog";
-    I2MProgDialog *dlg;
-    dlg = parent->findChild<I2MProgDialog *>(key);
+	int result = 0;
+	QString key = "I2MProgDialog";
+	I2MProgDialog *dlg;
+	dlg = parent->findChild<I2MProgDialog *>(key);
 
-    if (!dlg) {
-        dlg = new I2MProgDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(I2MProgOptions());
-    }
+	if (!dlg) {
+		dlg = new I2MProgDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(I2MProgOptions());
+	}
 
-    if (dlg->exec() == QDialog::Accepted) {
-        I2MProgOptions opt = dlg->options();
-        result = Utils::i2mprog(tx, opt.axes, opt.toInch, opt.prec);
-    }
+	if (dlg->exec() == QDialog::Accepted) {
+		I2MProgOptions opt = dlg->options();
+		result = Utils::i2mprog(tx, opt.axes, opt.toInch, opt.prec);
+	}
 
-    dlg->deleteLater();
-    return result;
+	dlg->deleteLater();
+	return result;
 }

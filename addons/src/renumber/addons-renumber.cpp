@@ -32,24 +32,24 @@
 
 bool Addons::doRenumber(QWidget *parent, QSettings *settings, QString &tx)
 {
-    QString key = "RenumberDialog";
-    RenumberDialog *dlg;
-    dlg = parent->findChild<RenumberDialog *>(key);
+	QString key = "RenumberDialog";
+	RenumberDialog *dlg;
+	dlg = parent->findChild<RenumberDialog *>(key);
 
-    if (!dlg) {
-        dlg = new RenumberDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(RenumberOptions());
-    }
+	if (!dlg) {
+		dlg = new RenumberDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(RenumberOptions());
+	}
 
-    if (dlg->exec() != QDialog::Accepted) {
-        return false;
-    }
+	if (dlg->exec() != QDialog::Accepted) {
+		return false;
+	}
 
-    const RenumberOptions &opt = dlg->options();
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-    Utils::renumber(opt, tx);
-    QApplication::restoreOverrideCursor();
-    return true;
+	const RenumberOptions &opt = dlg->options();
+	QApplication::setOverrideCursor(Qt::BusyCursor);
+	Utils::renumber(opt, tx);
+	QApplication::restoreOverrideCursor();
+	return true;
 }
 

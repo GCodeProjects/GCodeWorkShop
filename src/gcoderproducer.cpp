@@ -40,33 +40,33 @@ GCoderProducer::GCoderProducer() : DocumentProducer(new GCoderStyle(), new GCode
 
 QString GCoderProducer::documentType() const
 {
-    return GCoder::DOCUMENT_TYPE;
+	return GCoder::DOCUMENT_TYPE;
 }
 
 QString GCoderProducer::brief() const
 {
-    return "Text edit for g-codes.";
+	return "Text edit for g-codes.";
 }
 
 Document *GCoderProducer::createDocument() const
 {
-    GCoderDocument *gdoc = new GCoderDocument();
-    gdoc->setDocumentStyle(documentStyle());
-    gdoc->setDocumentWidgetProperties(documentWidgetProperties());
-    return gdoc;
+	GCoderDocument *gdoc = new GCoderDocument();
+	gdoc->setDocumentStyle(documentStyle());
+	gdoc->setDocumentWidgetProperties(documentWidgetProperties());
+	return gdoc;
 }
 
 DocumentInfo *GCoderProducer::createDocumentInfo()
 {
-    return new GCoderInfo();
+	return new GCoderInfo();
 }
 
 DocumentStyle *GCoderProducer::createDocumentStyle()
 {
-    return new GCoderStyle();
+	return new GCoderStyle();
 }
 
 DocumentWidgetProperties *GCoderProducer::createDocumentWidgetProperties()
 {
-    return new GCoderWidgetProperties();
+	return new GCoderWidgetProperties();
 }

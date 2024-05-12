@@ -35,15 +35,15 @@ class QWidget;
 
 class SessionNameDialog: public QDialog, private Ui::SessionNameDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    SessionNameDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
-    ~SessionNameDialog();
+	SessionNameDialog(QWidget *parent = 0, Qt::WindowFlags f = Qt::Dialog);
+	~SessionNameDialog();
 
 public slots:
-    QString getName();
-    void setName(QString name);
+	QString getName();
+	void setName(QString name);
 };
 
 #endif // SESSIONNAMEDIALOG_H

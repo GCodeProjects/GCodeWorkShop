@@ -38,93 +38,93 @@ class QSettings;
  */
 class Medium : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    const QString APP_NAME = "edytornc";
+	const QString APP_NAME = "edytornc";
 
-    enum {
-        LAUNCH_SANDBOX, /**< The application has been run in project directory. */
-        LAUNCH_SYSTEM,  /**< The application has been installed for all users. */
-        LAUNCH_USER,    /**< The application has been installed for current user. */
-        LAUNCH_PORTABLE /**< The application has been launched nor in the system directory
+	enum {
+		LAUNCH_SANDBOX, /**< The application has been run in project directory. */
+		LAUNCH_SYSTEM,  /**< The application has been installed for all users. */
+		LAUNCH_USER,    /**< The application has been installed for current user. */
+		LAUNCH_PORTABLE /**< The application has been launched nor in the system directory
                              of the installation, not in the project directory. */
-    };
+	};
 
-    const int lauchType;
+	const int lauchType;
 
-    static Medium &instance();
-    ~Medium();
+	static Medium &instance();
+	~Medium();
 
-    /**
-     * @brief
-     * @param dir
-     */
-    void addTranslationDir(const QString &dir);
+	/**
+	 * @brief
+	 * @param dir
+	 */
+	void addTranslationDir(const QString &dir);
 
-    /**
-     * @brief
-     * @param dir
-     */
-    void removeTranslationDir(const QString &dir);
+	/**
+	 * @brief
+	 * @param dir
+	 */
+	void removeTranslationDir(const QString &dir);
 
-    /**
-     * @brief
-     * @param unit
-     */
-    void addTranslationUnit(const QString &unit);
+	/**
+	 * @brief
+	 * @param unit
+	 */
+	void addTranslationUnit(const QString &unit);
 
-    /**
-     * @brief
-     * @param unit
-     */
-    void removeTranslationUnit(const QString &unit);
+	/**
+	 * @brief
+	 * @param unit
+	 */
+	void removeTranslationUnit(const QString &unit);
 
-    QList<QLocale> findTranslation(bool skipQtDir = true);
+	QList<QLocale> findTranslation(bool skipQtDir = true);
 
-    void updateTranslation();
+	void updateTranslation();
 
-    QString settingsDir()
-    {
-        return mSettingsDir;
-    }
+	QString settingsDir()
+	{
+		return mSettingsDir;
+	}
 
-    QSettings *settings()
-    {
-        return mSettings;
-    }
+	QSettings *settings()
+	{
+		return mSettings;
+	}
 
 signals:
-    void onRetranslateUI();
+	void onRetranslateUI();
 
 protected:
-    explicit Medium(QObject *parent = 0);
+	explicit Medium(QObject *parent = 0);
 
-    QStringList mTranslationDirs;
-    QStringList mTranslationUnits;
-    QList<QTranslator *> mTranslators;
+	QStringList mTranslationDirs;
+	QStringList mTranslationUnits;
+	QList<QTranslator *> mTranslators;
 
-    QStringList mShareDirs;
-    QString mSettingsDir;
+	QStringList mShareDirs;
+	QString mSettingsDir;
 
-    QSettings *mSettings;
+	QSettings *mSettings;
 
 private:
-    int checkLaunch();
-    void setupDirs();
+	int checkLaunch();
+	void setupDirs();
 
 protected:
-    static const QString SLASH;
-    static const QString COLON;
-    static const QString BIN;
-    static const QString SLASH_BIN;
-    static const QString LANG;
-    static const QString SLASH_LANG;
-    static const QString DEBUG;
-    static const QString RELEASE;
-    static const QString SANDBOX_SHARE;
-    static const QString SHARE;
-    static const QString SLASH_SHARE;
+	static const QString SLASH;
+	static const QString COLON;
+	static const QString BIN;
+	static const QString SLASH_BIN;
+	static const QString LANG;
+	static const QString SLASH_LANG;
+	static const QString DEBUG;
+	static const QString RELEASE;
+	static const QString SANDBOX_SHARE;
+	static const QString SHARE;
+	static const QString SLASH_SHARE;
 };
 
 #endif // MEDIUM_H

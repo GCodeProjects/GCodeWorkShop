@@ -30,70 +30,70 @@
 
 void Utils::blockSkip(QString &tx, bool remove, bool inc)
 {
-    int num = 0;
-    QRegularExpression regex;
+	int num = 0;
+	QRegularExpression regex;
 
-    regex.setPattern(QString("/[0-9]{0,1}"));
+	regex.setPattern(QString("/[0-9]{0,1}"));
 
-    if (!remove) {
-        auto match = regex.match(tx);
+	if (!remove) {
+		auto match = regex.match(tx);
 
-        if (match.hasMatch()) {
-            QString captured = match.captured();
-            tx.remove(regex);
-            captured.remove('/');
-            captured.remove(' ');
-            bool ok;
-            num = captured.toInt(&ok);
+		if (match.hasMatch()) {
+			QString captured = match.captured();
+			tx.remove(regex);
+			captured.remove('/');
+			captured.remove(' ');
+			bool ok;
+			num = captured.toInt(&ok);
 
-            if (!ok) {
-                num = 0;
-            }
+			if (!ok) {
+				num = 0;
+			}
 
-            if (inc) {
-                num++;
+			if (inc) {
+				num++;
 
-                if (num > 9) {
-                    num = 9;
-                }
-            } else {
-                num--;
+				if (num > 9) {
+					num = 9;
+				}
+			} else {
+				num--;
 
-                if (num < 0) {
-                    num = 0;
-                }
-            }
-        }
-    }
+				if (num < 0) {
+					num = 0;
+				}
+			}
+		}
+	}
 
-    QStringList list = tx.split(QChar::ParagraphSeparator);
+	QStringList list = tx.split(QChar::ParagraphSeparator);
 
-    if (list.isEmpty()) {
-        list.append(tx);
-    }
+	if (list.isEmpty()) {
+		list.append(tx);
+	}
 
-    tx.clear();
+	tx.clear();
 
-    foreach (QString txLine, list) {
-        if (remove) {
-            if (txLine.length() > 0) {
-                txLine.remove(regex);
-            }
-        } else {
-            int i = txLine.indexOf(QRegularExpression("[;/(]{1,1}"));
+	foreach (QString txLine, list) {
+		if (remove) {
+			if (txLine.length() > 0) {
+				txLine.remove(regex);
+			}
+		} else {
+			int i = txLine.indexOf(QRegularExpression("[;/(]{1,1}"));
 
-            if ((i > 1) || (i < 0)) {
-                if (num == 0) {
-                    txLine.prepend("/");
-                } else {
-                    txLine.prepend(QString("/%1").arg(num));
-                }
-            }
-        }
+			if ((i > 1) || (i < 0)) {
+				if (num == 0) {
+					txLine.prepend("/");
+				} else {
+					txLine.prepend(QString("/%1").arg(num));
+				}
+			}
+		}
 
-        txLine.append("\n");
-        tx.append(txLine);
-    }
+		txLine.append("\n");
+		tx.append(txLine);
+	}
 
-    tx.remove(tx.length() - 1, 1);
+	tx.remove(tx.length() - 1, 1);
 }

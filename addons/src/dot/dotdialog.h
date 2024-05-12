@@ -39,27 +39,27 @@ struct DotOptions;
  */
 class DotDialog : public QDialog, private Ui::DotDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    DotDialog(QWidget *parent, QSettings *settings);
-    ~DotDialog();
+	DotDialog(QWidget *parent, QSettings *settings);
+	~DotDialog();
 
-    void setOptions(const DotOptions &options);
-    DotOptions options();
+	void setOptions(const DotOptions &options);
+	DotOptions options();
 
-    void loadSettings(const DotOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const DotOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 private slots:
-    void inputChanged(const QString &text);
-    void atEndClicked();
-    void divideClicked();
-    void spinBoxVal(int val);
-    void onFinished(int result);
+	void inputChanged(const QString &text);
+	void atEndClicked();
+	void divideClicked();
+	void spinBoxVal(int val);
+	void onFinished(int result);
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // DOTDIALOG_H

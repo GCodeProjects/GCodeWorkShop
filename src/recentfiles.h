@@ -29,38 +29,38 @@ class QSettings;
 
 class RecentFiles : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    enum {
-        DEFAULT_SIZE = 16,
-        MAX_SIZE = 32
-    };
+	enum {
+		DEFAULT_SIZE = 16,
+		MAX_SIZE = 32
+	};
 
-    explicit RecentFiles(QObject *parent = nullptr);
+	explicit RecentFiles(QObject *parent = nullptr);
 
-    QString file(int id);
-    QStringList fileList();
+	QString file(int id);
+	QStringList fileList();
 
-    void add(const QString &file);
-    void remove(const QString &file);
-    void clear();
+	void add(const QString &file);
+	void remove(const QString &file);
+	void clear();
 
-    int max();
-    void setMax(int max);
+	int max();
+	void setMax(int max);
 
-    void load(QSettings *cfg);
-    void save(QSettings *cfg);
+	void load(QSettings *cfg);
+	void save(QSettings *cfg);
 
 signals:
-    void saveRequest();
-    void fileListChanged(const QStringList &files);
+	void saveRequest();
+	void fileListChanged(const QStringList &files);
 
 protected:
-    void trim();
+	void trim();
 
-    int m_max;
-    QStringList m_files;
+	int m_max;
+	QStringList m_files;
 };
 
 #endif // RECENTFILES_H

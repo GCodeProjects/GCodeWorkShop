@@ -31,8 +31,8 @@
 
 
 DocumentProducer::DocumentProducer(DocumentStyle *style, DocumentWidgetProperties *properties) :
-    m_documentStyle(style),
-    m_documentWidgetProperties(properties)
+	m_documentStyle(style),
+	m_documentWidgetProperties(properties)
 {
 }
 
@@ -42,48 +42,48 @@ DocumentProducer::~DocumentProducer()
 
 DocumentStyle::Ptr DocumentProducer::documentStyle() const
 {
-    return m_documentStyle;
+	return m_documentStyle;
 }
 
 bool DocumentProducer::setDocumentStyle(const DocumentStyle::Ptr &style)
 {
-    if (!style) {
-        qWarning() << "DocumentProducer::setDocumentStyle() : The \"style\" object stores a null pointer.";
-        return false;
-    }
+	if (!style) {
+		qWarning() << "DocumentProducer::setDocumentStyle() : The \"style\" object stores a null pointer.";
+		return false;
+	}
 
-    if (style->documentType() != documentType()) {
-        qWarning() << "DocumentProducer::setDocumentStyle() : The object \"style\" has the inappropriate type" << style->documentType();
-        return false;
-    }
+	if (style->documentType() != documentType()) {
+		qWarning() << "DocumentProducer::setDocumentStyle() : The object \"style\" has the inappropriate type" << style->documentType();
+		return false;
+	}
 
-    m_documentStyle = style;
-    return true;
+	m_documentStyle = style;
+	return true;
 }
 
 DocumentWidgetProperties::Ptr DocumentProducer::documentWidgetProperties() const
 {
-    return m_documentWidgetProperties;
+	return m_documentWidgetProperties;
 }
 
 bool DocumentProducer::setDocumentWidgetProperties(const DocumentWidgetProperties::Ptr &properties)
 {
-    if (!properties) {
-        qWarning() << "DocumentProducer::setDocumentWidgetProperties() : The \"properties\" object stores a null pointer.";
-        return false;
-    }
+	if (!properties) {
+		qWarning() << "DocumentProducer::setDocumentWidgetProperties() : The \"properties\" object stores a null pointer.";
+		return false;
+	}
 
-    if (properties->documentType() != documentType()) {
-        qWarning() << "DocumentProducer::setDocumentWidgetProperties() : The object \"properties\" has the inappropriate type" << properties->documentType();
-        return false;
-    }
+	if (properties->documentType() != documentType()) {
+		qWarning() << "DocumentProducer::setDocumentWidgetProperties() : The object \"properties\" has the inappropriate type" << properties->documentType();
+		return false;
+	}
 
-    m_documentWidgetProperties = properties;
-    return true;
+	m_documentWidgetProperties = properties;
+	return true;
 }
 
 void DocumentProducer::updateDocument(Document *document)
 {
-    document->setDocumentWidgetProperties(documentWidgetProperties());
-    document->setDocumentStyle(documentStyle());
+	document->setDocumentWidgetProperties(documentWidgetProperties());
+	document->setDocumentStyle(documentStyle());
 }

@@ -42,26 +42,26 @@
 
 
 DotDialog::DotDialog(QWidget *parent, QSettings *settings) :
-    QDialog(parent)
+	QDialog(parent)
 {
-    setupUi(this);
+	setupUi(this);
 
-    mSettings = settings;
+	mSettings = settings;
 
-    setWindowTitle(tr("Insert dots"));
+	setWindowTitle(tr("Insert dots"));
 
-    connect(mInput, SIGNAL(textChanged(const QString &)), this,
-            SLOT(inputChanged(const QString &)));
-    connect(mCheckAtEnd, SIGNAL(clicked()), this, SLOT(atEndClicked()));
-    connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
-    connect(mSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxVal(int)));
-    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
-    connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
-    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
-    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
+	connect(mInput, SIGNAL(textChanged(const QString &)), this,
+	        SLOT(inputChanged(const QString &)));
+	connect(mCheckAtEnd, SIGNAL(clicked()), this, SLOT(atEndClicked()));
+	connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
+	connect(mSpinBox, SIGNAL(valueChanged(int)), this, SLOT(spinBoxVal(int)));
+	connect(okButton, SIGNAL(clicked()), SLOT(accept()));
+	connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
+	connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
+	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
-    setMaximumSize(width(), height());
-    okButton->setEnabled(mInput->hasAcceptableInput());
+	setMaximumSize(width(), height());
+	okButton->setEnabled(mInput->hasAcceptableInput());
 }
 
 DotDialog::~DotDialog()
@@ -70,102 +70,102 @@ DotDialog::~DotDialog()
 
 void DotDialog::inputChanged(const QString &text)
 {
-    Q_UNUSED(text);
-    okButton->setEnabled(mInput->hasAcceptableInput());
+	Q_UNUSED(text);
+	okButton->setEnabled(mInput->hasAcceptableInput());
 }
 
 void DotDialog::atEndClicked()
 {
-    mCheckDivide->setChecked(!mCheckAtEnd->isChecked());
-    mSpinBox->setEnabled(mCheckDivide->isChecked());
+	mCheckDivide->setChecked(!mCheckAtEnd->isChecked());
+	mSpinBox->setEnabled(mCheckDivide->isChecked());
 }
 
 void DotDialog::divideClicked()
 {
-    mCheckAtEnd->setChecked(!mCheckDivide->isChecked());
-    mSpinBox->setEnabled(mCheckDivide->isChecked());
+	mCheckAtEnd->setChecked(!mCheckDivide->isChecked());
+	mSpinBox->setEnabled(mCheckDivide->isChecked());
 }
 
 void DotDialog::spinBoxVal(int val)
 {
-    if (val == 99) {
-        mSpinBox->setValue(10);
-    } else if (val == 999) {
-        mSpinBox->setValue(10);
-    } else if (val == 9999) {
-        mSpinBox->setValue(100);
-    }
+	if (val == 99) {
+		mSpinBox->setValue(10);
+	} else if (val == 999) {
+		mSpinBox->setValue(10);
+	} else if (val == 9999) {
+		mSpinBox->setValue(100);
+	}
 
-    if (val == 11) {
-        mSpinBox->setValue(100);
-    } else if (val == 101) {
-        mSpinBox->setValue(1000);
-    } else if (val == 1001) {
-        mSpinBox->setValue(10000);
-    }
+	if (val == 11) {
+		mSpinBox->setValue(100);
+	} else if (val == 101) {
+		mSpinBox->setValue(1000);
+	} else if (val == 1001) {
+		mSpinBox->setValue(10000);
+	}
 }
 
 void DotDialog::setOptions(const DotOptions &options)
 {
-    mInput->setText(options.axes);
-    mCheckAtEnd->setChecked(!options.convert);
-    mCheckDivide->setChecked(options.convert);
-    mSpinBox->setValue(options.divider);
+	mInput->setText(options.axes);
+	mCheckAtEnd->setChecked(!options.convert);
+	mCheckDivide->setChecked(options.convert);
+	mSpinBox->setValue(options.divider);
 
-    okButton->setEnabled(mInput->hasAcceptableInput());
-    divideClicked();
+	okButton->setEnabled(mInput->hasAcceptableInput());
+	divideClicked();
 }
 
 DotOptions DotDialog::options()
 {
-    DotOptions options;
+	DotOptions options;
 
-    options.axes = mInput->text();
-    options.convert = mCheckDivide->isChecked();
-    options.divider = mSpinBox->value();
+	options.axes = mInput->text();
+	options.convert = mCheckDivide->isChecked();
+	options.divider = mSpinBox->value();
 
-    return options;
+	return options;
 }
 
 void DotDialog::loadSettings(const DotOptions &defaultOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-    setGeometry(QRect(pos, size));
+	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+	setGeometry(QRect(pos, size));
 
-    DotOptions opt;
-    opt.load(mSettings, defaultOptions);
+	DotOptions opt;
+	opt.load(mSettings, defaultOptions);
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 
-    setOptions(opt);
+	setOptions(opt);
 }
 
 void DotDialog::saveSettings(bool saveOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
-    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+	mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+	mSettings->setValue(CFG_KEY_SIZE, geometry().size());
 
-    if (saveOptions) {
-        options().save(mSettings);
-    }
+	if (saveOptions) {
+		options().save(mSettings);
+	}
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 }
 
 void DotDialog::onFinished(int result)
 {
-    saveSettings(result == QDialog::Accepted);
+	saveSettings(result == QDialog::Accepted);
 }

@@ -41,36 +41,36 @@ struct BHCOptions;
  */
 class BHCDialog : public QDialog, private Ui::BHCDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    BHCDialog(QWidget *parent, QSettings *settings);
-    ~BHCDialog();
+	BHCDialog(QWidget *parent, QSettings *settings);
+	~BHCDialog();
 
-    void setOptions(const BHCOptions &options);
-    BHCOptions options();
+	void setOptions(const BHCOptions &options);
+	BHCOptions options();
 
-    void loadSettings(const BHCOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const BHCOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 protected:
-    //void windowActivationChange(bool oldActive);
+	//void windowActivationChange(bool oldActive);
 
 private slots:
-    void comChk();
-    void computeButtonClicked();
-    void clearAll();
-    void onFinished(int result);
+	void comChk();
+	void computeButtonClicked();
+	void clearAll();
+	void onFinished(int result);
 
 private:
-    QTabWidget *tabBar;
-    BHCDraw *drawing;
+	QTabWidget *tabBar;
+	BHCDraw *drawing;
 
-    int parentHeight;
-    int parentWidth;
+	int parentHeight;
+	int parentWidth;
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // BHCDIALOG_H

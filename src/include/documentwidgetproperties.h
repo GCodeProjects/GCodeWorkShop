@@ -30,24 +30,24 @@ class QSettings;
 class DocumentWidgetProperties
 {
 public:
-    typedef std::shared_ptr<DocumentWidgetProperties> Ptr;
+	typedef std::shared_ptr<DocumentWidgetProperties> Ptr;
 
-    DocumentWidgetProperties();
-    DocumentWidgetProperties(const DocumentWidgetProperties &that);
-    virtual ~DocumentWidgetProperties();
+	DocumentWidgetProperties();
+	DocumentWidgetProperties(const DocumentWidgetProperties &that);
+	virtual ~DocumentWidgetProperties();
 
-    virtual QString documentType() const;
+	virtual QString documentType() const;
 
-    virtual DocumentWidgetProperties *clone() const;
+	virtual DocumentWidgetProperties *clone() const;
 
-    virtual DocumentWidgetProperties &operator=(const DocumentWidgetProperties &that);
+	virtual DocumentWidgetProperties &operator=(const DocumentWidgetProperties &that);
 
-    void load(QSettings *cfg);
-    void save(QSettings *cfg) const;
+	void load(QSettings *cfg);
+	void save(QSettings *cfg) const;
 
 protected:
-    virtual void loadChild(QSettings *cfg);
-    virtual void saveChild(QSettings *cfg) const;
+	virtual void loadChild(QSettings *cfg);
+	virtual void saveChild(QSettings *cfg) const;
 };
 
 #endif // DOCUMENTWIDGETPROPERTIES_H

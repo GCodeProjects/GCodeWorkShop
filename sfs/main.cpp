@@ -31,32 +31,32 @@
 
 int main(int argc, char *argv[])
 {
-    Q_INIT_RESOURCE(application);
-    QtSingleApplication app("CommApp", argc, argv);
+	Q_INIT_RESOURCE(application);
+	QtSingleApplication app("CommApp", argc, argv);
 
-    QString txMessage;
+	QString txMessage;
 
-    for (int i = 1; i < argc; ++i) {
-        txMessage += argv[i];
+	for (int i = 1; i < argc; ++i) {
+		txMessage += argv[i];
 
-        if (i < argc - 1) {
-            txMessage += ";";
-        }
-    };
+		if (i < argc - 1) {
+			txMessage += ";";
+		}
+	};
 
-    if (app.sendMessage(txMessage)) {
-        return 0;
-    }
+	if (app.sendMessage(txMessage)) {
+		return 0;
+	}
 
-    Medium &medium = Medium::instance();
-    medium.updateTranslation();
-    CommApp *mw = new CommApp();
-    mw->show();
+	Medium &medium = Medium::instance();
+	medium.updateTranslation();
+	CommApp *mw = new CommApp();
+	mw->show();
 
-    app.setActivationWindow(mw, false);
-    QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
-                     mw, SLOT(messReceived(const QString &)));
+	app.setActivationWindow(mw, false);
+	QObject::connect(&app, SIGNAL(messageReceived(const QString &)),
+	                 mw, SLOT(messReceived(const QString &)));
 
-    QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
-    return app.exec();
+	QObject::connect(mw, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
+	return app.exec();
 }

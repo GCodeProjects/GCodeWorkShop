@@ -43,24 +43,24 @@
 
 
 I2MDialog::I2MDialog(QWidget *parent, QSettings *settings) :
-    QDialog(parent)
+	QDialog(parent)
 {
-    setupUi(this);
+	setupUi(this);
 
-    mSettings = settings;
+	mSettings = settings;
 
-    setAttribute(Qt::WA_DeleteOnClose);
-    setWindowTitle(tr("Inch to metric"));
+	setAttribute(Qt::WA_DeleteOnClose);
+	setWindowTitle(tr("Inch to metric"));
 
-    checkBoxToggled();
+	checkBoxToggled();
 
-    connect(inchInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
-    connect(inchCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(mmCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
-    connect(closePushButton, SIGNAL(clicked()), SLOT(accept()));
-    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
+	connect(inchInput, SIGNAL(textChanged(const QString &)), SLOT(inputChanged()));
+	connect(inchCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(mmCheckBox, SIGNAL(toggled(bool)), SLOT(checkBoxToggled()));
+	connect(closePushButton, SIGNAL(clicked()), SLOT(accept()));
+	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
-    setFocusProxy(inchInput);
+	setFocusProxy(inchInput);
 }
 
 I2MDialog::~I2MDialog()
@@ -69,202 +69,202 @@ I2MDialog::~I2MDialog()
 
 void I2MDialog::inputChanged()
 {
-    double a, b, c;
-    bool ok, dot, sl;
-    int i;
-    QString tx, rs, ls, ms;
+	double a, b, c;
+	bool ok, dot, sl;
+	int i;
+	QString tx, rs, ls, ms;
 
-    tx = inchInput->text();
+	tx = inchInput->text();
 
-    if (tx.isNull() || tx.isEmpty()) {
-        return;
-    }
+	if (tx.isNull() || tx.isEmpty()) {
+		return;
+	}
 
-    tx.replace(',', '.');
-    dot = sl = false;
+	tx.replace(',', '.');
+	dot = sl = false;
 
-    for (i = 0; i <= (tx.length() - 1); i++) {
-        if ((tx.at(i) == '.')) {
-            if (dot || sl) {
-                tx.remove(i, 1);
-            }
+	for (i = 0; i <= (tx.length() - 1); i++) {
+		if ((tx.at(i) == '.')) {
+			if (dot || sl) {
+				tx.remove(i, 1);
+			}
 
-            dot = true;
-        }
+			dot = true;
+		}
 
-        if ((tx.at(i) == '/')) {
-            if (sl) {
-                tx.remove(i, 1);
-            }
+		if ((tx.at(i) == '/')) {
+			if (sl) {
+				tx.remove(i, 1);
+			}
 
-            sl = true;
-        }
+			sl = true;
+		}
 
-        if (!(tx.at(i).isDigit()) && !(tx.at(i) == '.') && !(tx.at(i) == '/')) {
-            tx.remove(i, 1);
-        }
-    }
+		if (!(tx.at(i).isDigit()) && !(tx.at(i) == '.') && !(tx.at(i) == '/')) {
+			tx.remove(i, 1);
+		}
+	}
 
-    if (tx.at(0) == '.') {
-        tx.insert(0, '0');
-    }
+	if (tx.at(0) == '.') {
+		tx.insert(0, '0');
+	}
 
-    inchInput->setText(tx);
+	inchInput->setText(tx);
 
-    i = tx.indexOf('/');
+	i = tx.indexOf('/');
 
-    if (i > 0) {
-        rs = tx.mid(i + 1, tx.length() - i);
-        ls = tx.left(i);
-        i = tx.indexOf('.');
+	if (i > 0) {
+		rs = tx.mid(i + 1, tx.length() - i);
+		ls = tx.left(i);
+		i = tx.indexOf('.');
 
-        if (i > 0) {
-            ms = ls.left(i);
-            ls.remove(0, i + 1);
-        } else {
-            ms = "0";
-        }
+		if (i > 0) {
+			ms = ls.left(i);
+			ls.remove(0, i + 1);
+		} else {
+			ms = "0";
+		}
 
-        a = rs.toDouble(&ok);
-        b = ls.toDouble(&ok);
-        c = ms.toDouble(&ok);
+		a = rs.toDouble(&ok);
+		b = ls.toDouble(&ok);
+		c = ms.toDouble(&ok);
 
-        c = c + (b / a);
-        tx = QString("%1").arg(c, 0, 'f', 3);
-    }
+		c = c + (b / a);
+		tx = QString("%1").arg(c, 0, 'f', 3);
+	}
 
-    a = tx.toDouble(&ok);
+	a = tx.toDouble(&ok);
 
-    if (!ok) {
-        mmInput->setText("----");
-        return;
-    }
+	if (!ok) {
+		mmInput->setText("----");
+		return;
+	}
 
-    if (inchCheckBox->isChecked()) {
-        if (a > 1000) {
-            mmInput->setText("----");
-            return;
-        }
+	if (inchCheckBox->isChecked()) {
+		if (a > 1000) {
+			mmInput->setText("----");
+			return;
+		}
 
-        b = a * 25.4;
-        mmInput->setText(QString("%1").arg(b, 0, 'f', 4));
+		b = a * 25.4;
+		mmInput->setText(QString("%1").arg(b, 0, 'f', 4));
 
-    } else {
-        if (a > 25000) {
-            mmInput->setText("----");
-            return;
-        }
+	} else {
+		if (a > 25000) {
+			mmInput->setText("----");
+			return;
+		}
 
-        b = a / 25.4;
-        mmInput->setText(QString("%1").arg(b, 0, 'f', 4));
-    }
+		b = a / 25.4;
+		mmInput->setText(QString("%1").arg(b, 0, 'f', 4));
+	}
 }
 
 void I2MDialog::checkBoxToggled()
 {
-    if (inchCheckBox->isChecked()) {
-        inchLabel->setText(tr("Inch"));
-        mmLabel->setText(tr("mm"));
-    } else {
-        inchLabel->setText(tr("mm"));
-        mmLabel->setText(tr("Inch"));
-    }
+	if (inchCheckBox->isChecked()) {
+		inchLabel->setText(tr("Inch"));
+		mmLabel->setText(tr("mm"));
+	} else {
+		inchLabel->setText(tr("mm"));
+		mmLabel->setText(tr("Inch"));
+	}
 
-    inputChanged();
+	inputChanged();
 }
 
 void I2MDialog::setOptions(const I2MOptions &options)
 {
-    QLineEdit *mm;
-    QLineEdit *inch;
+	QLineEdit *mm;
+	QLineEdit *inch;
 
-    if (options.toInch) {
-        mm = mmInput;
-        inch = inchInput;
-    } else {
-        mm = inchInput;
-        inch = mmInput;
-    }
+	if (options.toInch) {
+		mm = mmInput;
+		inch = inchInput;
+	} else {
+		mm = inchInput;
+		inch = mmInput;
+	}
 
-    mmCheckBox->setChecked(!options.toInch);
-    inchCheckBox->setChecked(options.toInch);
+	mmCheckBox->setChecked(!options.toInch);
+	inchCheckBox->setChecked(options.toInch);
 
-    if (options.mm.in) {
-        mm->setText(QString::number(options.mm.value));
-    } else {
-        mm->clear();
-    }
+	if (options.mm.in) {
+		mm->setText(QString::number(options.mm.value));
+	} else {
+		mm->clear();
+	}
 
-    if (options.inch.in) {
-        inch->setText(QString::number(options.inch.value));
-    } else {
-        inch->clear();
-    }
+	if (options.inch.in) {
+		inch->setText(QString::number(options.inch.value));
+	} else {
+		inch->clear();
+	}
 
-    checkBoxToggled();
+	checkBoxToggled();
 }
 
 I2MOptions I2MDialog::options()
 {
-    I2MOptions options;
-    QLineEdit *mm;
-    QLineEdit *inch;
+	I2MOptions options;
+	QLineEdit *mm;
+	QLineEdit *inch;
 
-    options.toInch = inchCheckBox->isChecked();
+	options.toInch = inchCheckBox->isChecked();
 
-    if (options.toInch) {
-        mm = mmInput;
-        inch = inchInput;
-    } else {
-        mm = inchInput;
-        inch = mmInput;
-    }
+	if (options.toInch) {
+		mm = mmInput;
+		inch = inchInput;
+	} else {
+		mm = inchInput;
+		inch = mmInput;
+	}
 
-    options.mm.value = mm->text().toDouble(&options.mm.in);
-    options.inch.value = inch->text().toDouble(&options.inch.in);
+	options.mm.value = mm->text().toDouble(&options.mm.in);
+	options.inch.value = inch->text().toDouble(&options.inch.in);
 
-    return options;
+	return options;
 }
 
 void I2MDialog::loadSettings(const I2MOptions &defaultOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-    setGeometry(QRect(pos, size));
+	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+	setGeometry(QRect(pos, size));
 
-    I2MOptions opt;
-    opt.load(mSettings, defaultOptions);
+	I2MOptions opt;
+	opt.load(mSettings, defaultOptions);
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 
-    setOptions(opt);
+	setOptions(opt);
 }
 
 void I2MDialog::saveSettings(bool saveOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
-    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+	mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+	mSettings->setValue(CFG_KEY_SIZE, geometry().size());
 
-    if (saveOptions) {
-        options().save(mSettings);
-    }
+	if (saveOptions) {
+		options().save(mSettings);
+	}
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 }
 
 void I2MDialog::onFinished(int result)
 {
-    saveSettings(result == QDialog::Accepted);
+	saveSettings(result == QDialog::Accepted);
 }

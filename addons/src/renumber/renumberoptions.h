@@ -24,26 +24,26 @@ class QSettings;
 
 
 struct RenumberOptions {
-    enum RenumberMode {
-        RenumberWithN,
-        RenumberAll,
-        RemoveAll,
-        RenumberWithoutN
-    };
+	enum RenumberMode {
+		RenumberWithN,
+		RenumberAll,
+		RemoveAll,
+		RenumberWithoutN
+	};
 
-    int     mode;
-    int     from;
-    int     to;
-    int     startAt;
-    int     inc;
-    int     width;
-    bool    applyWidth;
-    bool    renumEmpty;
-    bool    renumComm;
-    bool    renumMarked;
+	int     mode;
+	int     from;
+	int     to;
+	int     startAt;
+	int     inc;
+	int     width;
+	bool    applyWidth;
+	bool    renumEmpty;
+	bool    renumComm;
+	bool    renumMarked;
 
-    void load(QSettings *settings, const RenumberOptions &defaultOptions);
-    void save(QSettings *settings);
+	void load(QSettings *settings, const RenumberOptions &defaultOptions);
+	void save(QSettings *settings);
 };
 
 #endif // RENUMBEROPTIONS_H

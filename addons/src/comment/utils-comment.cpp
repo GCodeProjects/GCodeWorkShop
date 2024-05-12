@@ -28,69 +28,69 @@
 
 void Utils::paraComment(QString &tx)
 {
-    QStringList list = tx.split(QChar::ParagraphSeparator);
-    bool remove = false;
+	QStringList list = tx.split(QChar::ParagraphSeparator);
+	bool remove = false;
 
-    if (tx[0] == '(') {
-        remove = true;
-    }
+	if (tx[0] == '(') {
+		remove = true;
+	}
 
-    tx.clear();
+	tx.clear();
 
-    foreach (QString txLine, list) {
-        if (remove) {
-            if (txLine.length() > 0) {
-                int idx = txLine.indexOf("(");
+	foreach (QString txLine, list) {
+		if (remove) {
+			if (txLine.length() > 0) {
+				int idx = txLine.indexOf("(");
 
-                if (idx >= 0) {
-                    txLine.remove(idx, 1);
-                }
+				if (idx >= 0) {
+					txLine.remove(idx, 1);
+				}
 
-                idx = txLine.indexOf(")");
+				idx = txLine.indexOf(")");
 
-                if (idx >= 0) {
-                    txLine.remove(idx, 1);
-                }
-            }
-        } else {
-            txLine.prepend("(");
-            txLine.append(")");
-        }
+				if (idx >= 0) {
+					txLine.remove(idx, 1);
+				}
+			}
+		} else {
+			txLine.prepend("(");
+			txLine.append(")");
+		}
 
-        txLine.append("\n");
-        tx.append(txLine);
-    }
+		txLine.append("\n");
+		tx.append(txLine);
+	}
 
-    tx.remove(tx.length() - 1, 1);
+	tx.remove(tx.length() - 1, 1);
 }
 
 void Utils::semiComment(QString &tx)
 {
-    QStringList list = tx.split(QChar::ParagraphSeparator);
-    bool remove = false;
+	QStringList list = tx.split(QChar::ParagraphSeparator);
+	bool remove = false;
 
-    if (tx[0] == ';') {
-        remove = true;
-    }
+	if (tx[0] == ';') {
+		remove = true;
+	}
 
-    tx.clear();
+	tx.clear();
 
-    foreach (QString txLine, list) {
-        if (remove) {
-            if (txLine.length() > 0) {
-                int idx = txLine.indexOf(";");
+	foreach (QString txLine, list) {
+		if (remove) {
+			if (txLine.length() > 0) {
+				int idx = txLine.indexOf(";");
 
-                if (idx >= 0) {
-                    txLine.remove(idx, 1);
-                }
-            }
-        } else {
-            txLine.prepend(";");
-        }
+				if (idx >= 0) {
+					txLine.remove(idx, 1);
+				}
+			}
+		} else {
+			txLine.prepend(";");
+		}
 
-        txLine.append("\n");
-        tx.append(txLine);
-    }
+		txLine.append("\n");
+		tx.append(txLine);
+	}
 
-    tx.remove(tx.length() - 1, 1);
+	tx.remove(tx.length() - 1, 1);
 }

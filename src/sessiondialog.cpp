@@ -37,22 +37,22 @@ class QWidget;
 
 SessionDialog::SessionDialog(QWidget *parent, SessionManager *sessions) : QDialog(parent, Qt::Dialog)
 {
-    m_sessions = sessions;
-    setupUi(this);
-    setWindowTitle(tr("Session manager"));
-    setModal(true);
+	m_sessions = sessions;
+	setupUi(this);
+	setWindowTitle(tr("Session manager"));
+	setModal(true);
 
-    connect(newPushButton, SIGNAL(clicked()), this, SLOT(newButtonClicked()));
-    connect(renamePushButton, SIGNAL(clicked()), this, SLOT(renameButtonClicked()));
-    connect(clonePushButton, SIGNAL(clicked()), this, SLOT(cloneButtonClicked()));
-    connect(deletePushButton, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
-    connect(switchPushButton, SIGNAL(clicked()), this, SLOT(switchButtonClicked()));
+	connect(newPushButton, SIGNAL(clicked()), this, SLOT(newButtonClicked()));
+	connect(renamePushButton, SIGNAL(clicked()), this, SLOT(renameButtonClicked()));
+	connect(clonePushButton, SIGNAL(clicked()), this, SLOT(cloneButtonClicked()));
+	connect(deletePushButton, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
+	connect(switchPushButton, SIGNAL(clicked()), this, SLOT(switchButtonClicked()));
 
-    connect(sessionListWidget, SIGNAL(itemSelectionChanged()), this,
-            SLOT(sessionListItemSelectionChanged()));
+	connect(sessionListWidget, SIGNAL(itemSelectionChanged()), this,
+	        SLOT(sessionListItemSelectionChanged()));
 
-    connect(m_sessions, SIGNAL(sessionListChanged(QStringList)), this, SLOT(updateSessionList(QStringList)));
-    updateSessionList(m_sessions->sessionList());
+	connect(m_sessions, SIGNAL(sessionListChanged(QStringList)), this, SLOT(updateSessionList(QStringList)));
+	updateSessionList(m_sessions->sessionList());
 }
 
 SessionDialog::~SessionDialog()
@@ -61,83 +61,83 @@ SessionDialog::~SessionDialog()
 
 void SessionDialog::newButtonClicked()
 {
-    SessionNameDialog *newSesDialog = new SessionNameDialog(this);
-    newSesDialog->setName("");
-    int result = newSesDialog->exec();
+	SessionNameDialog *newSesDialog = new SessionNameDialog(this);
+	newSesDialog->setName("");
+	int result = newSesDialog->exec();
 
-    if (result == QDialog::Accepted) {
-        QString tx = newSesDialog->getName().simplified();
+	if (result == QDialog::Accepted) {
+		QString tx = newSesDialog->getName().simplified();
 
-        if (!tx.isEmpty()) {
-            m_sessions->addSession(tx);
-        }
-    }
+		if (!tx.isEmpty()) {
+			m_sessions->addSession(tx);
+		}
+	}
 
-    delete newSesDialog;
+	delete newSesDialog;
 }
 
 void SessionDialog::renameButtonClicked()
 {
-    QString currName = sessionListWidget->currentItem()->text();
-    SessionNameDialog *newSesDialog = new SessionNameDialog(this);
-    newSesDialog->setName(currName);
-    int result = newSesDialog->exec();
+	QString currName = sessionListWidget->currentItem()->text();
+	SessionNameDialog *newSesDialog = new SessionNameDialog(this);
+	newSesDialog->setName(currName);
+	int result = newSesDialog->exec();
 
-    if (result == QDialog::Accepted) {
-        QString newName = newSesDialog->getName().simplified();
+	if (result == QDialog::Accepted) {
+		QString newName = newSesDialog->getName().simplified();
 
-        if (!newName.isEmpty()) {
-            m_sessions->renameSession(currName, newName);
-        }
-    }
+		if (!newName.isEmpty()) {
+			m_sessions->renameSession(currName, newName);
+		}
+	}
 
-    delete newSesDialog;
+	delete newSesDialog;
 }
 
 void SessionDialog::cloneButtonClicked()
 {
-    QString currName = sessionListWidget->currentItem()->text();
-    SessionNameDialog *newSesDialog = new SessionNameDialog(this);
-    newSesDialog->setName(currName);
-    int result = newSesDialog->exec();
+	QString currName = sessionListWidget->currentItem()->text();
+	SessionNameDialog *newSesDialog = new SessionNameDialog(this);
+	newSesDialog->setName(currName);
+	int result = newSesDialog->exec();
 
-    if (result == QDialog::Accepted) {
-        QString newName = newSesDialog->getName().simplified();
+	if (result == QDialog::Accepted) {
+		QString newName = newSesDialog->getName().simplified();
 
-        if (!newName.isEmpty()) {
-            m_sessions->copySession(currName, newName);
-        }
-    }
+		if (!newName.isEmpty()) {
+			m_sessions->copySession(currName, newName);
+		}
+	}
 
-    delete newSesDialog;
+	delete newSesDialog;
 }
 
 void SessionDialog::deleteButtonClicked()
 {
-    const QList<QListWidgetItem *> &selected = sessionListWidget->selectedItems();
+	const QList<QListWidgetItem *> &selected = sessionListWidget->selectedItems();
 
-    if (!selected.isEmpty()) {
-        m_sessions->removeSession(selected.at(0)->text());
-    }
+	if (!selected.isEmpty()) {
+		m_sessions->removeSession(selected.at(0)->text());
+	}
 }
 
 void SessionDialog::switchButtonClicked()
 {
-    m_sessions->setCurrentSession(sessionListWidget->currentItem()->text());
-    accept();
+	m_sessions->setCurrentSession(sessionListWidget->currentItem()->text());
+	accept();
 }
 
 void SessionDialog::sessionListItemSelectionChanged()
 {
-    bool hasSelection = sessionListWidget->selectedItems().size() == 1;
-    deletePushButton->setEnabled(hasSelection);
-    renamePushButton->setEnabled(hasSelection);
-    clonePushButton->setEnabled(hasSelection);
-    switchPushButton->setEnabled(hasSelection);
+	bool hasSelection = sessionListWidget->selectedItems().size() == 1;
+	deletePushButton->setEnabled(hasSelection);
+	renamePushButton->setEnabled(hasSelection);
+	clonePushButton->setEnabled(hasSelection);
+	switchPushButton->setEnabled(hasSelection);
 }
 
 void SessionDialog::updateSessionList(const QStringList &list)
 {
-    sessionListWidget->clear();
-    sessionListWidget->addItems(list);
+	sessionListWidget->clear();
+	sessionListWidget->addItems(list);
 }

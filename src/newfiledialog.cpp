@@ -34,84 +34,84 @@
 #define TEMPLATE_PATH             "/usr/share/edytornc/TEMPLATE"
 
 newFileDialog::newFileDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::newFileDialog)
+	QDialog(parent),
+	ui(new Ui::newFileDialog)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 
-    path.setPath(TEMPLATE_PATH);
+	path.setPath(TEMPLATE_PATH);
 
-    if (!path.exists()) {
-        path.setPath(QApplication::applicationDirPath() + "/" + "TEMPLATE");
-    }
+	if (!path.exists()) {
+		path.setPath(QApplication::applicationDirPath() + "/" + "TEMPLATE");
+	}
 
-    if (!path.exists()) {
-        path.setPath(QDir::homePath());
-    }
+	if (!path.exists()) {
+		path.setPath(QDir::homePath());
+	}
 
-    QSettings &settings = *Medium::instance().settings();
+	QSettings &settings = *Medium::instance().settings();
 
-    QDir savedPath(settings.value("TemplatePath", path.canonicalPath()).toString());
+	QDir savedPath(settings.value("TemplatePath", path.canonicalPath()).toString());
 
-    if (savedPath.exists()) {
-        path = savedPath;
-    }
+	if (savedPath.exists()) {
+		path = savedPath;
+	}
 
-    ui->pathLineEdit->setText(path.canonicalPath());
+	ui->pathLineEdit->setText(path.canonicalPath());
 
-    fillFileCombo();
+	fillFileCombo();
 
-    connect(ui->browsePushButton, SIGNAL(clicked()), this, SLOT(browseButtonClicked()));
+	connect(ui->browsePushButton, SIGNAL(clicked()), this, SLOT(browseButtonClicked()));
 
-    connect(this, SIGNAL(accepted()), this, SLOT(saveSettings()));
+	connect(this, SIGNAL(accepted()), this, SLOT(saveSettings()));
 }
 
 newFileDialog::~newFileDialog()
 {
-    delete ui;
+	delete ui;
 }
 
 void newFileDialog::browseButtonClicked()
 {
-    QString directory = QFileDialog::getExistingDirectory(this, tr("Choose template path"),
-                        path.canonicalPath());
+	QString directory = QFileDialog::getExistingDirectory(this, tr("Choose template path"),
+	                    path.canonicalPath());
 
-    if (!directory.isEmpty()) {
-        path.setPath(directory);
-        ui->pathLineEdit->setText(path.canonicalPath());
-        fillFileCombo();
-    }
+	if (!directory.isEmpty()) {
+		path.setPath(directory);
+		ui->pathLineEdit->setText(path.canonicalPath());
+		fillFileCombo();
+	}
 }
 
 void newFileDialog::fillFileCombo()
 {
-    QStringList files = path.entryList((QStringList() << "*.nc"),
-                                       QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
-                                       QDir::Name | QDir::IgnoreCase);
-    ui->fileComboBox->clear();
-    ui->fileComboBox->addItem(tr("EMPTY FILE"));
-    ui->fileComboBox->addItems(files);
+	QStringList files = path.entryList((QStringList() << "*.nc"),
+	                                   QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
+	                                   QDir::Name | QDir::IgnoreCase);
+	ui->fileComboBox->clear();
+	ui->fileComboBox->addItem(tr("EMPTY FILE"));
+	ui->fileComboBox->addItems(files);
 }
 
 void newFileDialog::saveSettings()
 {
-    QSettings &settings = *Medium::instance().settings();
+	QSettings &settings = *Medium::instance().settings();
 
-    settings.setValue("TemplatePath", path.canonicalPath());
+	settings.setValue("TemplatePath", path.canonicalPath());
 }
 
 QString newFileDialog::getChosenFile()
 {
-    QFile file(path.canonicalPath() + "/" + ui->fileComboBox->currentText());
+	QFile file(path.canonicalPath() + "/" + ui->fileComboBox->currentText());
 
-    if (file.exists()) {
-        return file.fileName();
-    } else {
-        return tr("EMPTY FILE");
-    }
+	if (file.exists()) {
+		return file.fileName();
+	} else {
+		return tr("EMPTY FILE");
+	}
 }
 
 int newFileDialog::exec()
 {
-    return QDialog::exec();
+	return QDialog::exec();
 }

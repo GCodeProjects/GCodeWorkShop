@@ -43,37 +43,37 @@ void Utils::swapAxes(QPlainTextEdit *textEdit,
                      int commentId,
                      const SwapAxesOptions &opt)
 {
-    QString textToFind = opt.from;
-    QString replacedText = opt.to;
-    double min = opt.limit.enable ? opt.limit.min : -999999;
-    double max = opt.limit.enable ? opt.limit.max : 999999;
-    int oper = opt.convert.enable ? opt.convert.operation : -1;
-    double modifier = opt.convert.enable ? opt.convert.value : 0;
-    int precision = opt.precision;
-    bool ignoreComments = true;
-    QTextDocument::FindFlags findOptions = QTextDocument::FindFlags();
+	QString textToFind = opt.from;
+	QString replacedText = opt.to;
+	double min = opt.limit.enable ? opt.limit.min : -999999;
+	double max = opt.limit.enable ? opt.limit.max : 999999;
+	int oper = opt.convert.enable ? opt.convert.operation : -1;
+	double modifier = opt.convert.enable ? opt.convert.value : 0;
+	int precision = opt.precision;
+	bool ignoreComments = true;
+	QTextDocument::FindFlags findOptions = QTextDocument::FindFlags();
 
-    // Original code from MdiChild::doSwapAxes()
-    QTextCursor startCursor = textEdit->textCursor();
-    startCursor.beginEditBlock();
+	// Original code from MdiChild::doSwapAxes()
+	QTextCursor startCursor = textEdit->textCursor();
+	startCursor.beginEditBlock();
 
-    if (textToFind != replacedText) {
-        Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-                        replacedText, QString("~%1").arg(replacedText), min, max, -1, modifier, findOptions,
-                        ignoreComments, precision);
-        Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-                        textToFind, replacedText, min, max, oper, modifier, findOptions, ignoreComments, precision);
-        Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-                        QString("~%1").arg(replacedText), textToFind, -999999, 0, -1, 0, findOptions, ignoreComments,
-                        precision);
-    } else {
-        Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-                        textToFind, replacedText, min, max, oper, modifier, findOptions, ignoreComments, precision);
-    }
+	if (textToFind != replacedText) {
+		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
+		                replacedText, QString("~%1").arg(replacedText), min, max, -1, modifier, findOptions,
+		                ignoreComments, precision);
+		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
+		                textToFind, replacedText, min, max, oper, modifier, findOptions, ignoreComments, precision);
+		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
+		                QString("~%1").arg(replacedText), textToFind, -999999, 0, -1, 0, findOptions, ignoreComments,
+		                precision);
+	} else {
+		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
+		                textToFind, replacedText, min, max, oper, modifier, findOptions, ignoreComments, precision);
+	}
 
-    startCursor.movePosition(QTextCursor::StartOfLine);
-    startCursor.endEditBlock();
-    textEdit->setTextCursor(startCursor);
+	startCursor.movePosition(QTextCursor::StartOfLine);
+	startCursor.endEditBlock();
+	textEdit->setTextCursor(startCursor);
 }
 
 bool Utils::swapAxes(QPlainTextEdit *textEdit,
@@ -90,179 +90,179 @@ bool Utils::swapAxes(QPlainTextEdit *textEdit,
                      bool ignoreComments,
                      int prec)
 {
-    double val, val1;
-    QRegularExpression regex;
-    bool found = false;
-    bool ok, inSelection;
-    QString newText, foundText;
-    bool inComment;
-    int commentPos;
-    QTextDocument *document;
-    int cursorStart, cursorEnd;
+	double val, val1;
+	QRegularExpression regex;
+	bool found = false;
+	bool ok, inSelection;
+	QString newText, foundText;
+	bool inComment;
+	int commentPos;
+	QTextDocument *document;
+	int cursorStart, cursorEnd;
 
-    cursorStart = 0;
-    cursorEnd = 0;
+	cursorStart = 0;
+	cursorEnd = 0;
 
-    if (textEdit->isReadOnly()) {
-        return false;
-    }
+	if (textEdit->isReadOnly()) {
+		return false;
+	}
 
-    if (textToFind.isEmpty()) {
-        return false;
-    }
+	if (textToFind.isEmpty()) {
+		return false;
+	}
 
-    if (!(options & QTextDocument::FindCaseSensitively)) {
-        regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-    }
+	if (!(options & QTextDocument::FindCaseSensitively)) {
+		regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+	}
 
-    textEdit->blockSignals(true);
+	textEdit->blockSignals(true);
 
-    inSelection = textEdit->textCursor().hasSelection();
+	inSelection = textEdit->textCursor().hasSelection();
 
-    if (inSelection) {
-        cursorStart = textEdit->textCursor().selectionStart();
-        cursorEnd = textEdit->textCursor().selectionEnd();
-        document = new QTextDocument(textEdit->textCursor().selectedText(), textEdit);
-    } else {
-        document = textEdit->document();
-    }
+	if (inSelection) {
+		cursorStart = textEdit->textCursor().selectionStart();
+		cursorEnd = textEdit->textCursor().selectionEnd();
+		document = new QTextDocument(textEdit->textCursor().selectedText(), textEdit);
+	} else {
+		document = textEdit->document();
+	}
 
-    QTextCursor cursor(document);
-    cursor.setPosition(0);
+	QTextCursor cursor(document);
+	cursor.setPosition(0);
 
-    do {
-        if ((oper == -1) && (min == -999999)) {
-            regex.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(
-                                 textToFind));
-        } else {
-            regex.setPattern(QString("(%1)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
-        }
+	do {
+		if ((oper == -1) && (min == -999999)) {
+			regex.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(
+			                     textToFind));
+		} else {
+			regex.setPattern(QString("(%1)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
+		}
 
-        cursor = document->find(regex, cursor, options);
-        found = !cursor.isNull();
+		cursor = document->find(regex, cursor, options);
+		found = !cursor.isNull();
 
-        if (found && ignoreComments) {
-            QString cur_line = cursor.block().text();
-            int cur_line_column = cursor.columnNumber();
+		if (found && ignoreComments) {
+			QString cur_line = cursor.block().text();
+			int cur_line_column = cursor.columnNumber();
 
-            if (commentId == COMMENT_ID_SEMYCOLON) {
-                commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-            } else if (commentId == COMMENT_ID_BRACES) {
-                commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
-            } else {
-                commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+			if (commentId == COMMENT_ID_SEMYCOLON) {
+				commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+			} else if (commentId == COMMENT_ID_BRACES) {
+				commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
+			} else {
+				commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
 
-                if (commentPos > cur_line_column) {
-                    commentPos = -1;
-                }
+				if (commentPos > cur_line_column) {
+					commentPos = -1;
+				}
 
-                if (commentPos < 0) {
-                    commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-                }
-            }
+				if (commentPos < 0) {
+					commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
+				}
+			}
 
-            if (commentPos < 0) {
-                commentPos = cur_line_column + 1;
-            }
+			if (commentPos < 0) {
+				commentPos = cur_line_column + 1;
+			}
 
-            inComment = (commentPos < cur_line_column);
-        } else {
-            inComment = false;
-        }
+			inComment = (commentPos < cur_line_column);
+		} else {
+			inComment = false;
+		}
 
-        if (found && !inComment) {
-            foundText = cursor.selectedText();
-            foundText.remove(textToFind);
+		if (found && !inComment) {
+			foundText = cursor.selectedText();
+			foundText.remove(textToFind);
 
-            val = 0;
-            ok = false;
+			val = 0;
+			ok = false;
 
-            val1 = foundText.toDouble(&ok);
+			val1 = foundText.toDouble(&ok);
 
-            if (min > -999999) {
-                if (!ok) {
-                    continue;
-                }
+			if (min > -999999) {
+				if (!ok) {
+					continue;
+				}
 
-                if (!((val1 >= min) && (val1 <= max))) {
-                    continue;
-                }
-            }
+				if (!((val1 >= min) && (val1 <= max))) {
+					continue;
+				}
+			}
 
-            if ((modifier == 0) && (oper == 3)) { //divide by 0
-                modifier = 1;
-            }
+			if ((modifier == 0) && (oper == 3)) { //divide by 0
+				modifier = 1;
+			}
 
-            switch (oper) {
-            case 0:
-                val = val1 + modifier;
-                break;
+			switch (oper) {
+			case 0:
+				val = val1 + modifier;
+				break;
 
-            case 1:
-                val = val1 - modifier;
-                break;
+			case 1:
+				val = val1 - modifier;
+				break;
 
-            case 2:
-                val = val1 * modifier;
-                break;
+			case 2:
+				val = val1 * modifier;
+				break;
 
-            case 3:
-                val = val1 / modifier;
-                break;
+			case 3:
+				val = val1 / modifier;
+				break;
 
-            default:
-                val = val1;
-                break;
-            }
+			default:
+				val = val1;
+				break;
+			}
 
-            if (ok) {
-                if (replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N"
-                        || replacedText == "n") {
-                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
+			if (ok) {
+				if (replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N"
+				        || replacedText == "n") {
+					newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
 
-                    if (newText[newText.length() - 1] == '.') {
-                        newText = newText.remove((newText.length() - 1), 1);
-                    }
-                } else {
-                    newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
-                }
-            } else {
-                newText = replacedText;
-            }
-
-
-            if (underlineChanges) {
-                QTextCharFormat format = cursor.charFormat();
-                format.setUnderlineStyle(QTextCharFormat::DotLine);
-                format.setUnderlineColor(QColor(underlineColor));
-                cursor.mergeCharFormat(format);
-            }
-
-            cursor.insertText(newText);
-        }
-
-    } while (found);
+					if (newText[newText.length() - 1] == '.') {
+						newText = newText.remove((newText.length() - 1), 1);
+					}
+				} else {
+					newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
+				}
+			} else {
+				newText = replacedText;
+			}
 
 
-    if (inSelection) {
-        cursor = QTextCursor(document);
-        cursor.select(QTextCursor::Document);
+			if (underlineChanges) {
+				QTextCharFormat format = cursor.charFormat();
+				format.setUnderlineStyle(QTextCharFormat::DotLine);
+				format.setUnderlineColor(QColor(underlineColor));
+				cursor.mergeCharFormat(format);
+			}
 
-        if (cursorStart > cursorEnd) {
-            cursorStart = cursorEnd;
-        }
+			cursor.insertText(newText);
+		}
 
-        cursorEnd = cursorStart + cursor.selectedText().length();
-        textEdit->textCursor().insertFragment(cursor.selection());
-        delete (document);
+	} while (found);
 
-        cursor = textEdit->textCursor();  //restore selection
-        cursor.setPosition(cursorStart, QTextCursor::MoveAnchor);
-        cursor.setPosition(cursorEnd, QTextCursor::KeepAnchor);
-        textEdit->setTextCursor(cursor);
-    }
 
-    textEdit->blockSignals(false);
+	if (inSelection) {
+		cursor = QTextCursor(document);
+		cursor.select(QTextCursor::Document);
 
-    return found;
+		if (cursorStart > cursorEnd) {
+			cursorStart = cursorEnd;
+		}
+
+		cursorEnd = cursorStart + cursor.selectedText().length();
+		textEdit->textCursor().insertFragment(cursor.selection());
+		delete (document);
+
+		cursor = textEdit->textCursor();  //restore selection
+		cursor.setPosition(cursorStart, QTextCursor::MoveAnchor);
+		cursor.setPosition(cursorEnd, QTextCursor::KeepAnchor);
+		textEdit->setTextCursor(cursor);
+	}
+
+	textEdit->blockSignals(false);
+
+	return found;
 }

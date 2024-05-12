@@ -40,24 +40,24 @@
 
 
 RenumberDialog::RenumberDialog(QWidget *parent, QSettings *settings) :
-    QDialog(parent)
+	QDialog(parent)
 {
-    setupUi(this);
+	setupUi(this);
 
-    mSettings = settings;
+	mSettings = settings;
 
-    setWindowTitle(tr("Renumber lines"));
+	setWindowTitle(tr("Renumber lines"));
 
-    connect(mRenumLines, SIGNAL(clicked()), this, SLOT(renumClicked()));
-    connect(mAllLines, SIGNAL(clicked()), this, SLOT(allLinesClicked()));
-    connect(mRemoveAll, SIGNAL(clicked()), this, SLOT(removeAllClicked()));
-    connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
-    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
-    connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
-    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
-    connect(mRenumHe, SIGNAL(clicked()), this, SLOT(mRenumHeClicked()));
+	connect(mRenumLines, SIGNAL(clicked()), this, SLOT(renumClicked()));
+	connect(mAllLines, SIGNAL(clicked()), this, SLOT(allLinesClicked()));
+	connect(mRemoveAll, SIGNAL(clicked()), this, SLOT(removeAllClicked()));
+	connect(mCheckDivide, SIGNAL(clicked()), this, SLOT(divideClicked()));
+	connect(okButton, SIGNAL(clicked()), SLOT(accept()));
+	connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
+	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
+	connect(mRenumHe, SIGNAL(clicked()), this, SLOT(mRenumHeClicked()));
 
-    setMaximumSize(width(), height());
+	setMaximumSize(width(), height());
 }
 
 RenumberDialog::~RenumberDialog()
@@ -66,179 +66,179 @@ RenumberDialog::~RenumberDialog()
 
 void RenumberDialog::atEndClicked()
 {
-    mCheckDivide->setChecked(!mRemoveAll->isChecked());
-    mSpinBox->setEnabled(mCheckDivide->isChecked());
+	mCheckDivide->setChecked(!mRemoveAll->isChecked());
+	mSpinBox->setEnabled(mCheckDivide->isChecked());
 }
 
 void RenumberDialog::divideClicked()
 {
-    mSpinBox->setEnabled(mCheckDivide->isChecked());
+	mSpinBox->setEnabled(mCheckDivide->isChecked());
 }
 
 void RenumberDialog::renumClicked()
 {
-    formInput->setEnabled(true);
-    startAtInput->setEnabled(true);
-    incInput->setEnabled(true);
-    toInput->setEnabled(true);
+	formInput->setEnabled(true);
+	startAtInput->setEnabled(true);
+	incInput->setEnabled(true);
+	toInput->setEnabled(true);
 
-    mRenumLines->setChecked(true);
-    mAllLines->setChecked(false);
-    mRemoveAll->setChecked(false);
+	mRenumLines->setChecked(true);
+	mAllLines->setChecked(false);
+	mRemoveAll->setChecked(false);
 
-    mRenumWithComm->setEnabled(false);
-    mRenumEmpty->setEnabled(false);
+	mRenumWithComm->setEnabled(false);
+	mRenumEmpty->setEnabled(false);
 
-    mCheckDivide->setEnabled(true);
+	mCheckDivide->setEnabled(true);
 }
 
 void RenumberDialog::mRenumHeClicked()
 {
-    formInput->setEnabled(false);
-    startAtInput->setEnabled(true);
-    incInput->setEnabled(true);
-    toInput->setEnabled(false);
+	formInput->setEnabled(false);
+	startAtInput->setEnabled(true);
+	incInput->setEnabled(true);
+	toInput->setEnabled(false);
 
-    mRenumWithComm->setEnabled(false);
-    mRenumEmpty->setEnabled(true);
+	mRenumWithComm->setEnabled(false);
+	mRenumEmpty->setEnabled(true);
 
-    mCheckDivide->setEnabled(false);
+	mCheckDivide->setEnabled(false);
 }
 
 void RenumberDialog::allLinesClicked()
 {
-    formInput->setEnabled(false);
-    startAtInput->setEnabled(true);
-    incInput->setEnabled(true);
-    toInput->setEnabled(false);
+	formInput->setEnabled(false);
+	startAtInput->setEnabled(true);
+	incInput->setEnabled(true);
+	toInput->setEnabled(false);
 
-    mRenumWithComm->setEnabled(true);
-    mRenumEmpty->setEnabled(true);
+	mRenumWithComm->setEnabled(true);
+	mRenumEmpty->setEnabled(true);
 
-    mCheckDivide->setEnabled(true);
+	mCheckDivide->setEnabled(true);
 }
 
 void RenumberDialog::removeAllClicked()
 {
-    formInput->setEnabled(false);
-    startAtInput->setEnabled(false);
-    incInput->setEnabled(false);
-    toInput->setEnabled(false);
+	formInput->setEnabled(false);
+	startAtInput->setEnabled(false);
+	incInput->setEnabled(false);
+	toInput->setEnabled(false);
 
-    mRenumWithComm->setEnabled(false);
-    mRenumEmpty->setEnabled(false);
+	mRenumWithComm->setEnabled(false);
+	mRenumEmpty->setEnabled(false);
 
-    mCheckDivide->setEnabled(false);
+	mCheckDivide->setEnabled(false);
 }
 
 void RenumberDialog::setOptions(const RenumberOptions &options)
 {
-    startAtInput->setValue(options.startAt);
-    formInput->setValue(options.from);
-    incInput->setValue(options.inc);
-    mRenumEmpty->setChecked(options.renumEmpty);
-    mRenumWithComm->setChecked(options.renumComm);
-    mRenumMarked->setChecked(options.renumMarked);
-    toInput->setValue(options.to);
-    mSpinBox->setValue(options.width);
-    mCheckDivide->setChecked(options.applyWidth);
+	startAtInput->setValue(options.startAt);
+	formInput->setValue(options.from);
+	incInput->setValue(options.inc);
+	mRenumEmpty->setChecked(options.renumEmpty);
+	mRenumWithComm->setChecked(options.renumComm);
+	mRenumMarked->setChecked(options.renumMarked);
+	toInput->setValue(options.to);
+	mSpinBox->setValue(options.width);
+	mCheckDivide->setChecked(options.applyWidth);
 
-    if (mCheckDivide->isChecked()) {
-        divideClicked();
-    }
+	if (mCheckDivide->isChecked()) {
+		divideClicked();
+	}
 
-    switch (options.mode) {
-    case RenumberOptions::RenumberWithN:
-        mRenumLines->setChecked(true);
-        renumClicked();
-        break;
+	switch (options.mode) {
+	case RenumberOptions::RenumberWithN:
+		mRenumLines->setChecked(true);
+		renumClicked();
+		break;
 
-    case RenumberOptions::RenumberAll:
-        mAllLines->setChecked(true);
-        allLinesClicked();
-        break;
+	case RenumberOptions::RenumberAll:
+		mAllLines->setChecked(true);
+		allLinesClicked();
+		break;
 
-    case RenumberOptions::RemoveAll:
-        mRemoveAll->setChecked(true);
-        removeAllClicked();
-        break;
+	case RenumberOptions::RemoveAll:
+		mRemoveAll->setChecked(true);
+		removeAllClicked();
+		break;
 
-    case RenumberOptions::RenumberWithoutN:
-        mRenumHe->setChecked(true);
-        mRenumHeClicked();
-        break;
+	case RenumberOptions::RenumberWithoutN:
+		mRenumHe->setChecked(true);
+		mRenumHeClicked();
+		break;
 
-    default:
-        ;
-    }
+	default:
+		;
+	}
 }
 
 RenumberOptions RenumberDialog::options()
 {
-    RenumberOptions options;
+	RenumberOptions options;
 
-    options.startAt = startAtInput->value();
-    options.from = formInput->value();
-    options.inc = incInput->value();
-    options.renumEmpty = mRenumEmpty->isChecked();
-    options.renumComm = !mRenumWithComm->isChecked();
-    options.renumMarked = mRenumMarked->isChecked();
-    options.to = toInput->value();
-    options.width = mSpinBox->value();
-    options.applyWidth = mCheckDivide->isChecked();
+	options.startAt = startAtInput->value();
+	options.from = formInput->value();
+	options.inc = incInput->value();
+	options.renumEmpty = mRenumEmpty->isChecked();
+	options.renumComm = !mRenumWithComm->isChecked();
+	options.renumMarked = mRenumMarked->isChecked();
+	options.to = toInput->value();
+	options.width = mSpinBox->value();
+	options.applyWidth = mCheckDivide->isChecked();
 
-    options.mode = RenumberOptions::RenumberWithN;
+	options.mode = RenumberOptions::RenumberWithN;
 
-    if (mAllLines->isChecked()) {
-        options.mode = RenumberOptions::RenumberAll;
-    } else if (mRemoveAll->isChecked()) {
-        options.mode = RenumberOptions::RemoveAll;
-    } else if (mRenumHe->isChecked()) {
-        options.mode = RenumberOptions::RenumberWithoutN;
-    }
+	if (mAllLines->isChecked()) {
+		options.mode = RenumberOptions::RenumberAll;
+	} else if (mRemoveAll->isChecked()) {
+		options.mode = RenumberOptions::RemoveAll;
+	} else if (mRenumHe->isChecked()) {
+		options.mode = RenumberOptions::RenumberWithoutN;
+	}
 
-    return options;
+	return options;
 }
 
 void RenumberDialog::loadSettings(const RenumberOptions &defaultOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-    setGeometry(QRect(pos, size));
+	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+	setGeometry(QRect(pos, size));
 
-    RenumberOptions opt;
-    opt.load(mSettings, defaultOptions);
+	RenumberOptions opt;
+	opt.load(mSettings, defaultOptions);
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 
-    setOptions(opt);
+	setOptions(opt);
 }
 
 void RenumberDialog::saveSettings(bool saveOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
-    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+	mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+	mSettings->setValue(CFG_KEY_SIZE, geometry().size());
 
-    if (saveOptions) {
-        options().save(mSettings);
-    }
+	if (saveOptions) {
+		options().save(mSettings);
+	}
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 }
 
 void RenumberDialog::onFinished(int result)
 {
-    saveSettings(result == QDialog::Accepted);
+	saveSettings(result == QDialog::Accepted);
 }

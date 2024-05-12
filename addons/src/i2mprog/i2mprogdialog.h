@@ -39,24 +39,24 @@ struct I2MProgOptions;
  */
 class I2MProgDialog : public QDialog, private Ui::I2MProgDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    I2MProgDialog(QWidget *parent, QSettings *settings);
-    ~I2MProgDialog();
+	I2MProgDialog(QWidget *parent, QSettings *settings);
+	~I2MProgDialog();
 
-    void setOptions(const I2MProgOptions &options);
-    I2MProgOptions options();
+	void setOptions(const I2MProgOptions &options);
+	I2MProgOptions options();
 
-    void loadSettings(const I2MProgOptions &defaultOptions);
-    void saveSettings(bool saveOptions = true);
+	void loadSettings(const I2MProgOptions &defaultOptions);
+	void saveSettings(bool saveOptions = true);
 
 private slots:
-    void inputChanged();
-    void onFinished(int result);
+	void inputChanged();
+	void onFinished(int result);
 
 protected:
-    QPointer<QSettings> mSettings;
+	QPointer<QSettings> mSettings;
 };
 
 #endif // I2MPROGDIALOG_H

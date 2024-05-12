@@ -40,22 +40,22 @@
 
 
 I2MProgDialog::I2MProgDialog(QWidget *parent, QSettings *settings) :
-    QDialog(parent)
+	QDialog(parent)
 {
-    setupUi(this);
+	setupUi(this);
 
-    mSettings = settings;
+	mSettings = settings;
 
-    setWindowTitle(tr("Convert program inch to metric"));
+	setWindowTitle(tr("Convert program inch to metric"));
 
-    connect(mInput, SIGNAL(textChanged(const QString &)), this, SLOT(inputChanged()));
+	connect(mInput, SIGNAL(textChanged(const QString &)), this, SLOT(inputChanged()));
 
-    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
-    connect(closeButton, SIGNAL(clicked()), SLOT(reject()));
-    connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
+	connect(okButton, SIGNAL(clicked()), SLOT(accept()));
+	connect(closeButton, SIGNAL(clicked()), SLOT(reject()));
+	connect(this, SIGNAL(finished(int)), SLOT(onFinished(int)));
 
-    setFocusProxy(mInput);
-    inputChanged();
+	setFocusProxy(mInput);
+	inputChanged();
 }
 
 I2MProgDialog::~I2MProgDialog()
@@ -64,69 +64,69 @@ I2MProgDialog::~I2MProgDialog()
 
 void I2MProgDialog::inputChanged()
 {
-    okButton->setEnabled(mInput->hasAcceptableInput());
+	okButton->setEnabled(mInput->hasAcceptableInput());
 }
 
 void I2MProgDialog::setOptions(const I2MProgOptions &options)
 {
-    inchCheckBox->setChecked(options.toInch);
-    mmCheckBox->setChecked(!options.toInch);
-    mInput->setText(options.axes);
-    precInput->setValue(options.prec);
+	inchCheckBox->setChecked(options.toInch);
+	mmCheckBox->setChecked(!options.toInch);
+	mInput->setText(options.axes);
+	precInput->setValue(options.prec);
 
-    inputChanged();
+	inputChanged();
 }
 
 I2MProgOptions I2MProgDialog::options()
 {
-    I2MProgOptions options;
+	I2MProgOptions options;
 
-    options.toInch = inchCheckBox->isChecked();
-    options.axes = mInput->text();
-    options.prec = precInput->value();
+	options.toInch = inchCheckBox->isChecked();
+	options.axes = mInput->text();
+	options.prec = precInput->value();
 
-    return options;
+	return options;
 }
 
 void I2MProgDialog::loadSettings(const I2MProgOptions &defaultOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-    QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-    setGeometry(QRect(pos, size));
+	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+	setGeometry(QRect(pos, size));
 
-    I2MProgOptions opt;
-    opt.load(mSettings, defaultOptions);
+	I2MProgOptions opt;
+	opt.load(mSettings, defaultOptions);
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 
-    setOptions(opt);
+	setOptions(opt);
 }
 
 void I2MProgDialog::saveSettings(bool saveOptions)
 {
-    if (mSettings.isNull()) {
-        return;
-    }
+	if (mSettings.isNull()) {
+		return;
+	}
 
-    mSettings->beginGroup(CFG_SECTION);
+	mSettings->beginGroup(CFG_SECTION);
 
-    mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
-    mSettings->setValue(CFG_KEY_SIZE, geometry().size());
+	mSettings->setValue(CFG_KEY_POS, geometry().topLeft());
+	mSettings->setValue(CFG_KEY_SIZE, geometry().size());
 
-    if (saveOptions) {
-        options().save(mSettings);
-    }
+	if (saveOptions) {
+		options().save(mSettings);
+	}
 
-    mSettings->endGroup();
+	mSettings->endGroup();
 }
 
 void I2MProgDialog::onFinished(int result)
 {
-    saveSettings(result == QDialog::Accepted);
+	saveSettings(result == QDialog::Accepted);
 }

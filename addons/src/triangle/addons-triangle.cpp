@@ -28,15 +28,15 @@
 
 void Addons::doTriangle(QWidget *parent, QSettings *settings)
 {
-    QString key = "TriangleDialog";
-    TriangleDialog *dlg;
-    dlg = parent->findChild<TriangleDialog *>(key);
+	QString key = "TriangleDialog";
+	TriangleDialog *dlg;
+	dlg = parent->findChild<TriangleDialog *>(key);
 
-    if (!dlg) {
-        dlg = new TriangleDialog(parent, settings);
-        dlg->setObjectName(key);
-        dlg->loadSettings(TriangleOptions());
-    }
+	if (!dlg) {
+		dlg = new TriangleDialog(parent, settings);
+		dlg->setObjectName(key);
+		dlg->loadSettings(TriangleOptions());
+	}
 
-    dlg->show();
+	dlg->show();
 }

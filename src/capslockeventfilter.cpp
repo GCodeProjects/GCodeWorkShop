@@ -29,50 +29,50 @@
 
 
 CapsLockEventFilter::CapsLockEventFilter(QObject *parent)
-    : QObject{parent}
+	: QObject{parent}
 {
-    m_capsLockEnable = false;
+	m_capsLockEnable = false;
 }
 
 void CapsLockEventFilter::setCapsLockEnable(bool enable)
 {
-    m_capsLockEnable = enable;
+	m_capsLockEnable = enable;
 }
 
 bool CapsLockEventFilter::eventFilter(QObject *obj, QEvent *event)
 {
-    Q_UNUSED(obj);
+	Q_UNUSED(obj);
 
-    if (event->type() == QEvent::KeyPress) {
-        QKeyEvent *ke = dynamic_cast<QKeyEvent *>(event);
-        return keyEvent(ke);
-    }
+	if (event->type() == QEvent::KeyPress) {
+		QKeyEvent *ke = dynamic_cast<QKeyEvent *>(event);
+		return keyEvent(ke);
+	}
 
-    return false;
+	return false;
 }
 
 bool CapsLockEventFilter::keyEvent(QKeyEvent *event)
 {
-    //Keypad comma should always prints period
-    if (event->key() == Qt::Key_Comma) {
-        // !!! Qt::KeypadModifier - Not working for keypad comma !!!
-        if ((event->modifiers() == Qt::KeypadModifier) || (event->nativeScanCode() == 0x53)) {
-            QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
-            return true;
-        }
-    }
+	//Keypad comma should always prints period
+	if (event->key() == Qt::Key_Comma) {
+		// !!! Qt::KeypadModifier - Not working for keypad comma !!!
+		if ((event->modifiers() == Qt::KeypadModifier) || (event->nativeScanCode() == 0x53)) {
+			QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, Qt::Key_Period, Qt::NoModifier, ".", false, 1));
+			return true;
+		}
+	}
 
-    if (m_capsLockEnable && !event->text().isEmpty()) {
-        if (event->text().at(0).isLower() && (event->modifiers() == Qt::NoModifier)) {
-            QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::NoModifier, event->text().toUpper(), false, 1));
-            return true;
-        }
+	if (m_capsLockEnable && !event->text().isEmpty()) {
+		if (event->text().at(0).isLower() && (event->modifiers() == Qt::NoModifier)) {
+			QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::NoModifier, event->text().toUpper(), false, 1));
+			return true;
+		}
 
-        if (event->text().at(0).isUpper() && (event->modifiers() == Qt::ShiftModifier)) {
-            QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::ShiftModifier, event->text().toLower(), false, 1));
-            return true;
-        }
-    }
+		if (event->text().at(0).isUpper() && (event->modifiers() == Qt::ShiftModifier)) {
+			QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::ShiftModifier, event->text().toLower(), false, 1));
+			return true;
+		}
+	}
 
-    return false;
+	return false;
 }

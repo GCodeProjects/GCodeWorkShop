@@ -47,12 +47,12 @@ class QPaintEvent;
 
 BHCDraw::BHCDraw(QWidget *parent, Qt::WindowFlags f) : QWidget(parent, f)
 {
-    setWindowTitle(tr("Bolt circle - preview"));
-    setAttribute(Qt::WA_DeleteOnClose);
+	setWindowTitle(tr("Bolt circle - preview"));
+	setAttribute(Qt::WA_DeleteOnClose);
 
-    setToolTip(tr("Click to close"));
+	setToolTip(tr("Click to close"));
 
-    setBackgroundRole(QPalette::Shadow);
+	setBackgroundRole(QPalette::Shadow);
 }
 
 BHCDraw::~BHCDraw()
@@ -61,37 +61,37 @@ BHCDraw::~BHCDraw()
 
 void BHCDraw::mousePressEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton) {
-        close();
-    }
+	if (event->button() == Qt::LeftButton) {
+		close();
+	}
 }
 
 void BHCDraw::init(int w, int h)
 {
-    scale = 1;
+	scale = 1;
 
-    resize(w, h);
-    setMaximumSize(width(), height());
-    setMinimumSize(width(), height());
+	resize(w, h);
+	setMaximumSize(width(), height());
+	setMinimumSize(width(), height());
 
-    pm = new QPixmap(width(), height());
-    pm->fill(Qt::black);
-    drawLines();
+	pm = new QPixmap(width(), height());
+	pm->fill(Qt::black);
+	drawLines();
 }
 
 void BHCDraw::setScale(double sc)
 {
-    scale = sc;
+	scale = sc;
 }
 
 void BHCDraw::paintEvent(QPaintEvent *)
 {
-    if (pm->isNull()) {
-        return;
-    }
+	if (pm->isNull()) {
+		return;
+	}
 
-    QPainter painter(this);
-    painter.drawPixmap(0, 0, *pm);
+	QPainter painter(this);
+	painter.drawPixmap(0, 0, *pm);
 }
 
 void BHCDraw::focusOutEvent(QFocusEvent *)
@@ -101,166 +101,166 @@ void BHCDraw::focusOutEvent(QFocusEvent *)
 void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool first,
                        bool last, QColor color)
 {
-    qreal x, y, x1, y1, sca, d;
+	qreal x, y, x1, y1, sca, d;
 
-    QPainter *paint = new QPainter(pm);
-    QFont font = paint->font();
-    font.setPointSize(10);
-    paint->setFont(font);
-    QFontMetrics fm = paint->fontMetrics();
+	QPainter *paint = new QPainter(pm);
+	QFont font = paint->font();
+	font.setPointSize(10);
+	paint->setFont(font);
+	QFontMetrics fm = paint->fontMetrics();
 
-    paint->save();
-    int c = qMin(geometry().width(), geometry().height());
-    c = c + (fm.lineSpacing() * 8);
+	paint->save();
+	int c = qMin(geometry().width(), geometry().height());
+	c = c + (fm.lineSpacing() * 8);
 
-    paint->setWindow(-(c / 2), -(c / 2), c, c);
-    QRect v = paint->viewport();
-    c = qMin(v.width(), v.height());
+	paint->setWindow(-(c / 2), -(c / 2), c, c);
+	QRect v = paint->viewport();
+	c = qMin(v.width(), v.height());
 
-    paint->setViewport(v.left() + (v.width() - c) / 2, v.top() + (v.height() - c) / 2, c, c);
+	paint->setViewport(v.left() + (v.width() - c) / 2, v.top() + (v.height() - c) / 2, c, c);
 
-    sca = ((c - 20) / 2) / (scale / 2);
+	sca = ((c - 20) / 2) / (scale / 2);
 
-    paint->scale(sca, sca);
+	paint->scale(sca, sca);
 
-    d = 12 / sca;
-    x = xcenter + (dia + (d)) * cos((M_PI / 180) * ang);
-    y = ycenter + (dia + (d)) * sin((M_PI / 180) * ang);
+	d = 12 / sca;
+	x = xcenter + (dia + (d)) * cos((M_PI / 180) * ang);
+	y = ycenter + (dia + (d)) * sin((M_PI / 180) * ang);
 
-    x1 = xcenter + (dia - (d)) * cos((M_PI / 180) * ang);
-    y1 = ycenter + (dia - (d)) * sin((M_PI / 180) * ang);
+	x1 = xcenter + (dia - (d)) * cos((M_PI / 180) * ang);
+	y1 = ycenter + (dia - (d)) * sin((M_PI / 180) * ang);
 
 
-    paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
-    paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
+	paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
+	paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
-    if (last) {
-        QBrush brush(Qt::green, Qt::SolidPattern);
-        brush.setColor(color);
-        paint->setBrush(brush);
-    } else {
-        paint->setBrush(Qt::NoBrush);
-    }
+	if (last) {
+		QBrush brush(Qt::green, Qt::SolidPattern);
+		brush.setColor(color);
+		paint->setBrush(brush);
+	} else {
+		paint->setBrush(Qt::NoBrush);
+	}
 
-    if (first) {
-        // circle center point
-        paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
-        paint->drawLine(QPointF(xcenter + v.x() / 2, -(ycenter - d)), QPointF(xcenter + v.x() / 2,
-                        -(ycenter + d)));
-        paint->drawLine(QPointF(xcenter - d, -(ycenter + v.y() / 2)), QPointF(xcenter + d,
-                        -(ycenter + v.y() / 2)));
+	if (first) {
+		// circle center point
+		paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
+		paint->drawLine(QPointF(xcenter + v.x() / 2, -(ycenter - d)), QPointF(xcenter + v.x() / 2,
+		                -(ycenter + d)));
+		paint->drawLine(QPointF(xcenter - d, -(ycenter + v.y() / 2)), QPointF(xcenter + d,
+		                -(ycenter + v.y() / 2)));
 
-        //circle radius line
-        x = xcenter + 0 * cos((M_PI / 180) * ang);
-        y = ycenter + (0) * sin((M_PI / 180) * ang);
-        x1 = xcenter + (dia - (d)) * cos((M_PI / 180) * ang);
-        y1 = ycenter + (dia - (d)) * sin((M_PI / 180) * ang);
-        paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
+		//circle radius line
+		x = xcenter + 0 * cos((M_PI / 180) * ang);
+		y = ycenter + (0) * sin((M_PI / 180) * ang);
+		x1 = xcenter + (dia - (d)) * cos((M_PI / 180) * ang);
+		y1 = ycenter + (dia - (d)) * sin((M_PI / 180) * ang);
+		paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
-        //diameter circle
-        paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
-        paint->setBrush(Qt::NoBrush);
-        paint->drawEllipse(QPointF(xcenter + v.x() / 2, - ycenter - v.y() / 2), dia, dia);
+		//diameter circle
+		paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
+		paint->setBrush(Qt::NoBrush);
+		paint->drawEllipse(QPointF(xcenter + v.x() / 2, - ycenter - v.y() / 2), dia, dia);
 
-        paint->setPen(QPen(color.darker(65), 0, Qt::SolidLine));
-    } else {
-        paint->setPen(QPen(color, 0, Qt::SolidLine));
-    }
+		paint->setPen(QPen(color.darker(65), 0, Qt::SolidLine));
+	} else {
+		paint->setPen(QPen(color, 0, Qt::SolidLine));
+	}
 
-    x = xcenter + dia * cos((M_PI / 180) * ang);
-    y = ycenter + dia * sin((M_PI / 180) * ang);
+	x = xcenter + dia * cos((M_PI / 180) * ang);
+	y = ycenter + dia * sin((M_PI / 180) * ang);
 
-    d = 8 / sca;
+	d = 8 / sca;
 
-    paint->drawEllipse(QPointF(x, -y), d, d);
+	paint->drawEllipse(QPointF(x, -y), d, d);
 
-    paint->restore();
-    paint->end();
+	paint->restore();
+	paint->end();
 }
 
 void BHCDraw::drawLines(qreal dia, qreal ang, QColor cl)
 {
-    qreal x, y, x1, y1;
+	qreal x, y, x1, y1;
 
-    dia = dia / 2;
+	dia = dia / 2;
 
-    QPainter *paint = new QPainter(pm);
-    QFont font = paint->font();
-    font.setPointSize(10);
-    paint->setFont(font);
-    QFontMetrics fm = paint->fontMetrics();
+	QPainter *paint = new QPainter(pm);
+	QFont font = paint->font();
+	font.setPointSize(10);
+	paint->setFont(font);
+	QFontMetrics fm = paint->fontMetrics();
 
-    paint->save();
+	paint->save();
 
-    int d = qMin(geometry().width(), geometry().height());
-    d = d + (fm.lineSpacing() * 6);
-    paint->setWindow(-(d / 2), -(d / 2), d, d);
-    QRect v = paint->viewport();
-    d = qMin(v.width(), v.height());
-    paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
+	int d = qMin(geometry().width(), geometry().height());
+	d = d + (fm.lineSpacing() * 6);
+	paint->setWindow(-(d / 2), -(d / 2), d, d);
+	QRect v = paint->viewport();
+	d = qMin(v.width(), v.height());
+	paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
 
-    paint->setPen(QPen(cl, 0, Qt::DotLine));
+	paint->setPen(QPen(cl, 0, Qt::DotLine));
 
-    x = (dia + 4) * cos((M_PI / 180) * ang);
-    y = (dia + 4) * sin((M_PI / 180) * ang);
-    x1 = (dia + 4) * cos((M_PI / 180) * (ang + 180));
-    y1 = (dia + 4) * sin((M_PI / 180) * (ang + 180));
-    paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
+	x = (dia + 4) * cos((M_PI / 180) * ang);
+	y = (dia + 4) * sin((M_PI / 180) * ang);
+	x1 = (dia + 4) * cos((M_PI / 180) * (ang + 180));
+	y1 = (dia + 4) * sin((M_PI / 180) * (ang + 180));
+	paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
-    x = (dia + 4) * cos((M_PI / 180) * (ang + 90));
-    y = (dia + 4) * sin((M_PI / 180) * (ang + 90));
-    x1 = (dia + 4) * cos((M_PI / 180) * (ang + 270));
-    y1 = (dia + 4) * sin((M_PI / 180) * (ang + 270));
-    paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
+	x = (dia + 4) * cos((M_PI / 180) * (ang + 90));
+	y = (dia + 4) * sin((M_PI / 180) * (ang + 90));
+	x1 = (dia + 4) * cos((M_PI / 180) * (ang + 270));
+	y1 = (dia + 4) * sin((M_PI / 180) * (ang + 270));
+	paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
-    paint->restore();
-    paint->end();
+	paint->restore();
+	paint->end();
 }
 
 void BHCDraw::clear()
 {
-    pm->fill(Qt::black);
-    drawLines();
+	pm->fill(Qt::black);
+	drawLines();
 }
 
 void BHCDraw::printText(int x, int y, int line, const QString &text, QColor color)
 {
-    QPainter *paint = new QPainter(pm);
-    QFont font = paint->font();
-    font.setPointSize(10);
-    paint->setFont(font);
-    QFontMetrics fm = paint->fontMetrics();
+	QPainter *paint = new QPainter(pm);
+	QFont font = paint->font();
+	font.setPointSize(10);
+	paint->setFont(font);
+	QFontMetrics fm = paint->fontMetrics();
 
-    paint->save();
-    paint->setPen(QPen(color, 0, Qt::SolidLine));
-    paint->drawText(x, y + (fm.lineSpacing() * line), text);
-    paint->restore();
-    paint->end();
+	paint->save();
+	paint->setPen(QPen(color, 0, Qt::SolidLine));
+	paint->drawText(x, y + (fm.lineSpacing() * line), text);
+	paint->restore();
+	paint->end();
 }
 
 void BHCDraw::drawLines()
 {
-    QPainter *paint = new QPainter(pm);
-    QFont font = paint->font();
-    font.setPointSize(10);
-    paint->setFont(font);
-    QFontMetrics fm = paint->fontMetrics();
+	QPainter *paint = new QPainter(pm);
+	QFont font = paint->font();
+	font.setPointSize(10);
+	paint->setFont(font);
+	QFontMetrics fm = paint->fontMetrics();
 
-    paint->save();
+	paint->save();
 
-    int d = qMin(geometry().width(), geometry().height());
-    d = d + (fm.lineSpacing() * 6);
-    paint->setWindow(-(d / 2), -(d / 2), d, d);
-    QRect v = paint->viewport();
-    d = qMin(v.width(), v.height());
-    paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
+	int d = qMin(geometry().width(), geometry().height());
+	d = d + (fm.lineSpacing() * 6);
+	paint->setWindow(-(d / 2), -(d / 2), d, d);
+	QRect v = paint->viewport();
+	d = qMin(v.width(), v.height());
+	paint->setViewport(v.left() + (v.width() - d) / 2, v.top() + (v.height() - d) / 2, d, d);
 
-    paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
+	paint->setPen(QPen(Qt::gray, 0, Qt::DashDotLine));
 
-    v = paint->viewport();
-    paint->drawLine(QPointF(0, (v.height() / 2) - 5), QPointF(0, 5 - (v.height() / 2)));
-    paint->drawLine(QPointF((v.width() / 2) - 5, 0), QPointF(5 - (v.width() / 2), 0));
+	v = paint->viewport();
+	paint->drawLine(QPointF(0, (v.height() / 2) - 5), QPointF(0, 5 - (v.height() / 2)));
+	paint->drawLine(QPointF((v.width() / 2) - 5, 0), QPointF(5 - (v.width() / 2), 0));
 
-    paint->restore();
-    paint->end();
+	paint->restore();
+	paint->end();
 }

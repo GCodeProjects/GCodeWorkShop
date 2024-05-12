@@ -30,112 +30,112 @@
 
 RecentFiles::RecentFiles(QObject *parent) : QObject(parent)
 {
-    m_max = DEFAULT_SIZE;
+	m_max = DEFAULT_SIZE;
 }
 
 QString RecentFiles::file(int id)
 {
-    return m_files.at(id);
+	return m_files.at(id);
 }
 
 QStringList RecentFiles::fileList()
 {
-    return m_files;
+	return m_files;
 }
 
 void RecentFiles::add(const QString &file)
 {
-    m_files.prepend(file);
-    m_files.removeDuplicates();
-    trim();
-    emit saveRequest();
-    emit fileListChanged(m_files);
+	m_files.prepend(file);
+	m_files.removeDuplicates();
+	trim();
+	emit saveRequest();
+	emit fileListChanged(m_files);
 }
 
 void RecentFiles::remove(const QString &file)
 {
-    if (m_files.removeAll(file)) {
-        emit saveRequest();
-        emit fileListChanged(m_files);
-    }
+	if (m_files.removeAll(file)) {
+		emit saveRequest();
+		emit fileListChanged(m_files);
+	}
 }
 
 void RecentFiles::clear()
 {
-    if (!m_files.isEmpty()) {
-        m_files.clear();
-        emit saveRequest();
-        emit fileListChanged(m_files);
-    }
+	if (!m_files.isEmpty()) {
+		m_files.clear();
+		emit saveRequest();
+		emit fileListChanged(m_files);
+	}
 }
 
 int RecentFiles::max()
 {
-    return m_max;
+	return m_max;
 }
 
 void RecentFiles::setMax(int max)
 {
-    if (max != m_max && max > 0 && max <= MAX_SIZE) {
-        m_max = max;
-        trim();
-        emit saveRequest();
-        emit fileListChanged(m_files);
-    }
+	if (max != m_max && max > 0 && max <= MAX_SIZE) {
+		m_max = max;
+		trim();
+		emit saveRequest();
+		emit fileListChanged(m_files);
+	}
 }
 
 void RecentFiles::load(QSettings *cfg)
 {
-    cfg->beginGroup(CFG_SECTION);
-    m_max = cfg->value(CFG_KEY_MAX, DEFAULT_SIZE).toInt();
+	cfg->beginGroup(CFG_SECTION);
+	m_max = cfg->value(CFG_KEY_MAX, DEFAULT_SIZE).toInt();
 
-    if (m_max <= 0 || m_max > MAX_SIZE) {
-        m_max = DEFAULT_SIZE;
-    }
+	if (m_max <= 0 || m_max > MAX_SIZE) {
+		m_max = DEFAULT_SIZE;
+	}
 
-    cfg->beginGroup(CFG_KEY_FILES);
+	cfg->beginGroup(CFG_KEY_FILES);
 
-    for (int i = 1; i <= m_max; i++) {
-        const QString &key = QString::number(i);
+	for (int i = 1; i <= m_max; i++) {
+		const QString &key = QString::number(i);
 
-        if (!cfg->contains(key)) {
-            break;
-        }
+		if (!cfg->contains(key)) {
+			break;
+		}
 
-        const QString &file = cfg->value(key).toString();
+		const QString &file = cfg->value(key).toString();
 
-        if (!file.isEmpty()) {
-            m_files.append(file);
-        }
-    }
+		if (!file.isEmpty()) {
+			m_files.append(file);
+		}
+	}
 
-    cfg->endGroup();
-    cfg->endGroup();
-    emit fileListChanged(m_files);
+	cfg->endGroup();
+	cfg->endGroup();
+	emit fileListChanged(m_files);
 }
 
 void RecentFiles::save(QSettings *cfg)
 {
-    cfg->beginGroup(CFG_SECTION);
-    cfg->remove("");
+	cfg->beginGroup(CFG_SECTION);
+	cfg->remove("");
 
-    cfg->beginGroup(CFG_KEY_FILES);
-    int count = 0;
+	cfg->beginGroup(CFG_KEY_FILES);
+	int count = 0;
 
-    for (const QString &file : m_files) {
-        if (!file.isEmpty()) {
-            cfg->setValue(QString::number(++count), file);
-        }
-    }
+	for (const QString &file : m_files) {
+		if (!file.isEmpty()) {
+			cfg->setValue(QString::number(++count), file);
+		}
+	}
 
-    cfg->endGroup();
-    cfg->setValue(CFG_KEY_MAX, m_max);
-    cfg->endGroup();
+	cfg->endGroup();
+	cfg->setValue(CFG_KEY_MAX, m_max);
+	cfg->endGroup();
 }
 
 void RecentFiles::trim()
 {
-    while (m_files.size() > m_max) {
-        m_files.removeLast();
-    }
+	while (m_files.size() > m_max) {
+		m_files.removeLast();
+	}
 }
