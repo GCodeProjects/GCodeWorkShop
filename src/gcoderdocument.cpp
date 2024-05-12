@@ -89,7 +89,8 @@ GCoderDocument::GCoderDocument() : Document(nullptr)
 
 	m_textEdit->setWindowIcon(QIcon(":/images/ncfile.png"));
 	m_textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(m_textEdit, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(customContextMenuRequest(const QPoint&)));
+	connect(m_textEdit, SIGNAL(customContextMenuRequested(const QPoint&)), this,
+	        SLOT(customContextMenuRequest(const QPoint&)));
 	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorMoved()));
 	connect(m_textEdit, SIGNAL(selectionChanged()), this, SLOT(selectionUpdated()));
@@ -947,7 +948,8 @@ bool GCoderDocument::replaceAll(QString textToFind,
 	return found;
 }
 
-bool GCoderDocument::findText(const QString& text, bool findBackward, bool wholeWords, bool ignoreCase, bool ignoreComments)
+bool GCoderDocument::findText(const QString& text, bool findBackward, bool wholeWords, bool ignoreCase,
+                              bool ignoreComments)
 {
 	bool inComment = false;
 	bool found = false;

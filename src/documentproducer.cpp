@@ -53,7 +53,8 @@ bool DocumentProducer::setDocumentStyle(const DocumentStyle::Ptr& style)
 	}
 
 	if (style->documentType() != documentType()) {
-		qWarning() << "DocumentProducer::setDocumentStyle() : The object \"style\" has the inappropriate type" << style->documentType();
+		qWarning() << "DocumentProducer::setDocumentStyle() : The object \"style\" has the inappropriate type" <<
+		           style->documentType();
 		return false;
 	}
 
@@ -74,7 +75,8 @@ bool DocumentProducer::setDocumentWidgetProperties(const DocumentWidgetPropertie
 	}
 
 	if (properties->documentType() != documentType()) {
-		qWarning() << "DocumentProducer::setDocumentWidgetProperties() : The object \"properties\" has the inappropriate type" << properties->documentType();
+		qWarning() << "DocumentProducer::setDocumentWidgetProperties() : The object \"properties\" has the inappropriate type"
+		           << properties->documentType();
 		return false;
 	}
 

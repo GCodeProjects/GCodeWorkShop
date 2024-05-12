@@ -190,10 +190,12 @@ EdytorNc::EdytorNc(Medium* medium)
 	connect(m_documentManager, SIGNAL(selectionChanged()), this, SLOT(updateMenus()));
 	connect(m_documentManager, SIGNAL(briefChanged(Document*)), this, SLOT(updateOpenFileList()));
 	connect(m_documentManager, SIGNAL(documentListChanged()), this, SLOT(updateOpenFileList()));
-	connect(m_documentManager, SIGNAL(closeRequested(Document*)), this, SLOT(maybeSave(Document*)), Qt::ConnectionType::DirectConnection);
+	connect(m_documentManager, SIGNAL(closeRequested(Document*)), this, SLOT(maybeSave(Document*)),
+	        Qt::ConnectionType::DirectConnection);
 	connect(m_documentManager, SIGNAL(redoAvailable(bool)), redoAct, SLOT(setEnabled(bool)));
 	connect(m_documentManager, SIGNAL(undoAvailable(bool)), undoAct, SLOT(setEnabled(bool)));
-	connect(m_documentManager, SIGNAL(customContextMenuRequested(Document*, const QPoint&)), this,  SLOT(customContextMenuRequest(Document*, const QPoint&)));
+	connect(m_documentManager, SIGNAL(customContextMenuRequested(Document*, const QPoint&)), this,
+	        SLOT(customContextMenuRequest(Document*, const QPoint&)));
 	connect(m_documentManager, SIGNAL(fileWatchRequest(const QString&, bool)), this, SLOT(watchFile(const QString&, bool)));
 
 	m_sessionManager = new SessionManager(m_documentManager, this);
@@ -889,7 +891,8 @@ void EdytorNc::config()
 	if (setUpDialog->exec() == QDialog::Accepted) {
 		config = setUpDialog->getSettings();
 		QSettings* cfg = Medium::instance().settings();
-		m_documentManager->setDocumentWidgetProperties(DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(config.editorProperties)));
+		m_documentManager->setDocumentWidgetProperties(DocumentWidgetProperties::Ptr(new GCoderWidgetProperties(
+		            config.editorProperties)));
 		config.editorProperties.save(cfg);
 		emit intCapsLockChanged(config.editorProperties.intCapsLock);
 		m_documentManager->setDocumentStyle(DocumentStyle::Ptr(new GCoderStyle(config.codeStyle)));
@@ -2233,7 +2236,8 @@ void EdytorNc::createFindToolBar()
 		CapsLockEventFilter* findEditEventFilter = new CapsLockEventFilter(findEdit);
 		connect(this, SIGNAL(intCapsLockChanged(bool)), findEditEventFilter, SLOT(setCapsLockEnable(bool)));
 		bool intCapsLock = false;
-		GCoderWidgetProperties* prop = dynamic_cast<GCoderWidgetProperties*>(m_documentManager->documentWidgetProperties(GCoder::DOCUMENT_TYPE).get());
+		GCoderWidgetProperties* prop = dynamic_cast<GCoderWidgetProperties*>(m_documentManager->documentWidgetProperties(
+		                                   GCoder::DOCUMENT_TYPE).get());
 
 		if (prop) {
 			intCapsLock = prop->intCapsLock;

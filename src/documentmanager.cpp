@@ -276,17 +276,21 @@ DocumentWidgetProperties::Ptr DocumentManager::createDocumentWidgetProperties(co
 void DocumentManager::addDocument(Document* document, const QString& id)
 {
 	document->setParent(this);
-	connect(document, SIGNAL(closeRequested(Document*)), this, SLOT(documentCloseRequest(Document*)), Qt::ConnectionType::DirectConnection);
+	connect(document, SIGNAL(closeRequested(Document*)), this, SLOT(documentCloseRequest(Document*)),
+	        Qt::ConnectionType::DirectConnection);
 	connect(document, SIGNAL(closed(Document*)), this, SLOT(removeDocument(Document*)));
 	connect(document, SIGNAL(closed(Document*)), this, SLOT(documentClosed(Document*)));
-	connect(document, SIGNAL(modificationChanged(Document*, bool)), this, SLOT(documentModificationChanged(Document*, bool)));
+	connect(document, SIGNAL(modificationChanged(Document*, bool)), this, SLOT(documentModificationChanged(Document*,
+	        bool)));
 	connect(document, SIGNAL(cursorPositionChanged(Document*)), this, SLOT(documentCursorPositionChanged(Document*)));
 	connect(document, SIGNAL(selectionChanged(Document*)), this, SLOT(documentSelectionChanged(Document*)));
 	connect(document, SIGNAL(briefChanged(Document*)), this, SLOT(documentBriefChanged(Document*)));
 	connect(document, SIGNAL(redoAvailable(Document*, bool)), this, SLOT(documentRedoAvailable(Document*, bool)));
 	connect(document, SIGNAL(undoAvailable(Document*, bool)), this, SLOT(documentUndoAvailable(Document*, bool)));
-	connect(document, SIGNAL(customContextMenuRequested(Document*, const QPoint&)), this, SLOT(customContextMenuRequest(Document*, const QPoint&)));
-	connect(document, SIGNAL(fileWatchRequested(const QString&, bool)), this, SLOT(documentFileWatchRequest(const QString&, bool)));
+	connect(document, SIGNAL(customContextMenuRequested(Document*, const QPoint&)), this,
+	        SLOT(customContextMenuRequest(Document*, const QPoint&)));
+	connect(document, SIGNAL(fileWatchRequested(const QString&, bool)), this, SLOT(documentFileWatchRequest(const QString&,
+	        bool)));
 
 	DocumentListItem item;
 	item.document = document;

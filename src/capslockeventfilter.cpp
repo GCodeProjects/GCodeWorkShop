@@ -64,12 +64,14 @@ bool CapsLockEventFilter::keyEvent(QKeyEvent* event)
 
 	if (m_capsLockEnable && !event->text().isEmpty()) {
 		if (event->text().at(0).isLower() && (event->modifiers() == Qt::NoModifier)) {
-			QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::NoModifier, event->text().toUpper(), false, 1));
+			QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::NoModifier, event->text().toUpper(),
+			                        false, 1));
 			return true;
 		}
 
 		if (event->text().at(0).isUpper() && (event->modifiers() == Qt::ShiftModifier)) {
-			QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::ShiftModifier, event->text().toLower(), false, 1));
+			QApplication::sendEvent(parent(), new QKeyEvent(QEvent::KeyPress, event->key(), Qt::ShiftModifier,
+			                        event->text().toLower(), false, 1));
 			return true;
 		}
 	}
