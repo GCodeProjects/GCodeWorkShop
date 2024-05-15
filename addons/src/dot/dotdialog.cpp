@@ -18,7 +18,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// IWYU pragma: no_forward_declare QWidget
 #include <QCheckBox>    // for QCheckBox
 #include <QLineEdit>    // for QLineEdit
 #include <QPoint>       // for QPoint
@@ -29,8 +28,9 @@
 #include <QSpinBox>     // for QSpinBox
 #include <QString>      // for QString
 #include <QVariant>     // for QVariant
-#include <QWidget>      // for QWidget
 #include <QtGlobal>     // for Q_UNUSED
+
+class QWidget;
 
 #include "dotdialog.h"
 #include "dotoptions.h" // for DotOptions

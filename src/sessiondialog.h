@@ -27,11 +27,12 @@
 #include <QObject>      // for Q_OBJECT, slots
 #include <QString>      // for QString
 #include <QStringList>  // for QStringList
+
 class QWidget;
 
 class SessionManager;
 
-#include "ui_sessiondialog.h"  // for SessionDialog
+#include "ui_sessiondialog.h"  // for Ui::SessionDialog
 
 
 class SessionDialog: public QDialog, private Ui::SessionDialog

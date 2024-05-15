@@ -17,8 +17,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <memory>   // for __shared_ptr_access
-
 #include <QCloseEvent>  // for QCloseEvent
 #include <QFile>        // for QFile
 #include <QFileInfo>    // for QFileInfo

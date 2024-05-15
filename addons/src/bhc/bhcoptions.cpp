@@ -17,7 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QSettings>
+#include <QSettings>    // for QSettings
 
 #include "bhcoptions.h"
 #include "bhctaboptions.h"  // for BHCTabOptions

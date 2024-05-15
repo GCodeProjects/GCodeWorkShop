@@ -23,15 +23,15 @@
 #ifndef SERIALPORTCONFIGDIALOG_H
 #define SERIALPORTCONFIGDIALOG_H
 
-#include <QDialog>
-#include <QObject>   // Q_OBJECT
-#include <QString>
-#include <Qt>        // Qt::WindowFlags
-#include <QWidget>
-
-#include "ui_serialportconfigdialog.h"
+#include <QDialog>  // for QDialog
+#include <QObject>  // for Q_OBJECT, slots
+#include <QString>  // for QString
+#include <Qt>       // for WindowType, WindowFlags
 
 class QButtonGroup;
+class QWidget;
+
+#include "ui_serialportconfigdialog.h"  // for Ui::SerialPortConfigDialog
 
 
 class SerialPortConfigDialog : public QDialog, private Ui::SerialPortConfigDialog

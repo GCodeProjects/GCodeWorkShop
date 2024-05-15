@@ -24,8 +24,6 @@
 
 #include <cmath>    // for tan, M_PI, atan
 
-// IWYU pragma: no_forward_declare QValidator
-// IWYU pragma: no_forward_declare QWidget
 #include <QCheckBox>        // for QCheckBox
 #include <QDoubleValidator> // for QDoubleValidator
 #include <QLineEdit>        // for QLineEdit
@@ -36,10 +34,11 @@
 #include <QRect>            // for QRect
 #include <QSettings>        // for QSettings
 #include <QSize>            // for QSize
-#include <QValidator>       // for QValidator
 #include <QVariant>         // for QVariant
-#include <QWidget>          // for QWidget
-#include <Qt>               // for WA_DeleteOnClose, red
+#include <Qt>               // for GlobalColor, WidgetAttribute
+
+class QValidator;
+class QWidget;
 
 #include "chamferdialog.h"
 #include "chamferoptions.h" // for ChamferOptions

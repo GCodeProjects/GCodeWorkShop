@@ -20,28 +20,33 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QByteArray>
-#include <QDir>
-#include <QFile>
-#include <QIcon>
-#include <QIODevice>
-#include <QLabel>
-#include <QList>
-#include <QPixmap>
-#include <QRegularExpression>
-#include <QSettings>
-#include <Qt>               // Qt::WA_DeleteOnClose Qt::CaseInsensitive
-#include <QTableWidgetItem>
-#include <QTextStream>
-#include <QtGlobal>         // Q_UNUSED
-#include <QToolButton>
-#include <QWidget>
+#include <QByteArray>               // for QByteArray
+#include <QComboBox>                // for QComboBox
+#include <QDateTime>                // for QDateTime
+#include <QDir>                     // for QDir, operator|
+#include <QFile>                    // for QFile
+#include <QFileInfo>                // for QFileInfo
+#include <QIODevice>                // for QIODevice
+#include <QIcon>                    // for QIcon
+#include <QLabel>                   // for QLabel
+#include <QList>                    // for QList
+#include <QPixmap>                  // for QPixmap
+#include <QRegularExpression>       // for QRegularExpression
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QSettings>                // for QSettings
+#include <QSplitter>                // for QSplitter
+#include <QTableWidget>             // for QTableWidget
+#include <QTableWidgetItem>         // for QTableWidgetItem
+#include <QTextStream>              // for QTextStream
+#include <QToolButton>              // for QToolButton
+#include <QVariant>                 // for QVariant
+#include <Qt>                       // for AlignmentFlag, operator|, AspectRatioMode, TransformationMode, ItemDataRole
+#include <QtGlobal>                 // for QFlags, Q_UNUSED, QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, QTypeInfo<...
 
-#include <kdiff3/kdiff3.h> // KDiff3App
-#include <utils/medium.h>  // Medium
+#include <kdiff3/kdiff3.h> // for KDiff3App
+#include <utils/medium.h>  // for Medium
 
-#include "filechecker.h"   // FileChecker QDialog QObject
-
+#include "filechecker.h"
 #include "ui_filechecker.h"
 
 

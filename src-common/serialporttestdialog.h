@@ -20,20 +20,20 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef SERIALTRANSMISSION_H
-#define SERIALTRANSMISSION_H
+#ifndef SERIALPORTTESTDIALOG_H
+#define SERIALPORTTESTDIALOG_H
 
-#include <QDialog>
-#include <QObject> // Q_OBJECT
-#include <QString>
-#include <Qt>      // Qt::WindowFlags
-#include <QWidget>
-
-#include "serialportsettings.h"      // SerialPortSettings
-#include "ui_serialporttestdialog.h"
+#include <QDialog>  // for QDialog
+#include <QObject>  // for Q_OBJECT, slots
+#include <QString>  // for QString
+#include <Qt>       // for WindowType, WindowFlags
 
 class QSerialPort;
 class QTimer;
+class QWidget;
+
+#include "serialportsettings.h"         // for SerialPortSettings
+#include "ui_serialporttestdialog.h"    // for Ui::SerialPortTestDialog
 
 
 class SerialPortTestDialog : public QDialog, private Ui::SerialPortTestDialog
@@ -108,4 +108,4 @@ private:
 //    QTimer *timer;
 //};
 
-#endif // SERIALTRANSMISSION_H
+#endif // SERIALPORTTESTDIALOG_H

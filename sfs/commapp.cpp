@@ -20,32 +20,36 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QAction>
-#include <QComboBox>
-#include <QCloseEvent>
-#include <QComboBox>
-#include <QDesktopServices>
-#include <QIcon>
-#include <QMenu>
-#include <QMdiSubWindow>
-#include <QMessageBox>
-#include <QSettings>
-#include <QSignalMapper>
-#include <QString>
-#include <QStringList>
-#include <Qt>               // Qt::WA_DeleteOnClose Qt::NonModal
-#include <QTabBar>
-#include <QTimer>
-#include <QToolBar>
-#include <QWidget>
+#include <QAction>          // for QAction
+#include <QCloseEvent>      // for QCloseEvent
+#include <QComboBox>        // for QComboBox
+#include <QDesktopServices> // for QDesktopServices
+#include <QDialog>          // for QDialog
+#include <QIcon>            // for QIcon
+#include <QList>            // for QList
+#include <QMdiArea>         // for QMdiArea
+#include <QMdiSubWindow>    // for QMdiSubWindow
+#include <QMenu>            // for QMenu
+#include <QMessageBox>      // for QMessageBox
+#include <QSettings>        // for QSettings
+#include <QSignalMapper>    // for QSignalMapper
+#include <QString>          // for QString, operator==
+#include <QStringList>      // for QStringList
+#include <QTabBar>          // for QTabBar
+#include <QTimer>           // for QTimer
+#include <QToolBar>         // for QToolBar
+#include <QUrl>             // for QUrl
+#include <QVariant>         // for QVariant
+#include <QWidget>          // for QWidget
+#include <Qt>               // for WidgetAttribute, ToolBarArea, WindowModality, WindowType
+#include <QtGlobal>         // for QForeachContainer, qMakeForeachContainer, QTypeInfo<>::isLarge, QTypeI...
 
-#include <serialportconfigdialog.h>   // SerialPortConfigDialog
-#include <serialtransmissiondialog.h> // SerialTransmissionDialog
-#include <utils/medium.h>             // Medium
+#include <serialportconfigdialog.h>     // for SerialPortConfigDialog
+#include <serialtransmissiondialog.h>   // for SerialTransmissionDialog
+#include <utils/medium.h>               // for Medium
 
-#include "commapp.h"     // CommApp QMainWindow QObject
-#include "filechecker.h" // FileChecker
-
+#include "commapp.h"
+#include "filechecker.h" // for FileChecker
 #include "ui_commapp.h"
 
 

@@ -20,9 +20,8 @@
 #ifndef INLINECALC_H
 #define INLINECALC_H
 
-#include <QChar>        // for QChar
 #include <QLineEdit>    // for QLineEdit
-#include <QObject>      // for QObject, Q_OBJECT, slots
+#include <QObject>      // for Q_OBJECT, signals, slots
 #include <QString>      // for QString
 #include <QStringList>  // for QStringList
 

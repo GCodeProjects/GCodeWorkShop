@@ -17,7 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGlobal>     // for Q_UNUSED
+#include <QtGlobal> // for Q_UNUSED
 
 #include <documentwidgetproperties.h>  // IWYU pragma: associated
 

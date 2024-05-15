@@ -21,11 +21,11 @@
 #ifndef GCODERWIDGETPROPERTIES_H
 #define GCODERWIDGETPROPERTIES_H
 
-#include <QString>
+#include <QString>  // for QString
 
 class QSettings;
 
-#include <documentwidgetproperties.h>
+#include <documentwidgetproperties.h>   // for DocumentWidgetProperties
 
 
 enum WindowModeFlags {

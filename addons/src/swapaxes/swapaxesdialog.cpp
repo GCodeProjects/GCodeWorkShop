@@ -18,7 +18,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// IWYU pragma: no_forward_declare QWidget
 #include <QCheckBox>        // for QCheckBox
 #include <QComboBox>        // for QComboBox
 #include <QDoubleSpinBox>   // for QDoubleSpinBox
@@ -29,8 +28,9 @@
 #include <QSpinBox>         // for QSpinBox
 #include <QStringList>      // for QStringList
 #include <QVariant>         // for QVariant
-#include <QWidget>          // for QWidget
 #include <QtGlobal>         // for Q_UNUSED
+
+class QWidget;
 
 #include "swapaxesdialog.h"
 #include "swapaxesoptions.h"    // for SwapAxesOptions

@@ -23,20 +23,23 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include <QDialog>
-#include <QHash>
-#include <QList>
-#include <QObject>        // Q_OBJECT
-#include <QSharedPointer>
-
+#include <QDialog>          // for QDialog
+#include <QHash>            // for QHash
+#include <QList>            // for QList
+#include <QObject>          // for slots, Q_OBJECT, signals
+#include <QSharedPointer>   // for QTypeInfo<>::isLarge, QTypeInfo<>::isStatic
+#include <QString>          // for QString
 
 class QStackedLayout;
 class QTreeWidgetItem;
+class QWidget;
+
 class ConfigPage;
 
 namespace Ui {
 class ConfigDialog;
 }
+
 
 /**
  * @brief The ConfigDialog class, in conjunction with ConfigPage, is used to manage settings.

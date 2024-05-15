@@ -30,9 +30,9 @@ class QMenu;
 class QPoint;
 class QWidget;
 
-#include <documentinfo.h>
-#include <documentstyle.h>
-#include <documentwidgetproperties.h>
+#include <documentinfo.h>               // for DocumentInfo, DocumentInfo::Ptr
+#include <documentstyle.h>              // for DocumentStyle, DocumentStyle::Ptr
+#include <documentwidgetproperties.h>   // for DocumentWidgetProperties, DocumentWidgetProperties::Ptr
 
 
 /**

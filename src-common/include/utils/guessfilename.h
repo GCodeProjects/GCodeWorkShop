@@ -20,7 +20,7 @@
 #ifndef UTILS_GUESSFILENAME_H
 #define UTILS_GUESSFILENAME_H
 
-#include <QString>
+#include <QString>  // for QString
 
 
 namespace Utils {

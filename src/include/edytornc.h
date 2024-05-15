@@ -23,16 +23,14 @@
 #ifndef EDYTORNC_H
 #define EDYTORNC_H
 
-#include <QByteArray>
-#include <QFileSystemWatcher>
-#include <QObject>            // Q_OBJECT
-#include <QPointer>
-#include <QString>
-#include <QStringList>
-#include <QToolBar>
-#include <QMainWindow>
-
-#include <documentinfo.h>
+#include <QByteArray>   // for QByteArray
+#include <QMainWindow>  // for QMainWindow
+#include <QObject>      // for slots, Q_OBJECT, signals
+#include <QPoint>       // for QPoint
+#include <QPointer>     // for QPointer
+#include <QSize>        // for QSize
+#include <QString>      // for QString
+#include <QStringList>  // for QStringList
 
 class QAction;
 class QCheckBox;
@@ -42,22 +40,24 @@ class QComboBox;
 class QDir;
 class QEvent;
 class QFileSystemModel;
+class QFileSystemWatcher;
 class QLabel;
 class QLineEdit;
 class QMdiSubWindow;
 class QMenu;
 class QModelIndex;
 class QMoveEvent;
-class QPoint;
 class QPrinter;
 class QProcess;
 class QResizeEvent;
 class QSignalMapper;
-class QSize;
 class QStandardItem;
 class QStandardItemModel;
+class QToolBar;
 class QToolButton;
 class QWidget;
+
+#include <documentinfo.h>   // for DocumentInfo, DocumentInfo::Ptr
 
 class CommApp;
 class Document;

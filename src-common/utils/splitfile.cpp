@@ -20,12 +20,12 @@
 
 #include <algorithm>    // for sort
 
-#include <QList>                    // for QList<>::iterator, QList, QList<>::const_iterator
+#include <QList>                    // for QList
 #include <QRegularExpression>       // for QRegularExpression
 #include <QRegularExpressionMatch>  // for QRegularExpressionMatch
 #include <QString>                  // for QString
 #include <QStringList>              // for QStringList
-#include <QtGlobal>                 // for foreach
+#include <QtGlobal>                 // for QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, QForeachContainer, QTypeInfo...
 
 #include <utils/splitfile.h>    // IWYU pragma: associated
 

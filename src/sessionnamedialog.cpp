@@ -24,6 +24,7 @@
 #include <QLineEdit>        // for QLineEdit
 #include <QString>          // for QString
 #include <Qt>               // for WindowFlags
+
 class QWidget;
 
 #include "sessionnamedialog.h"

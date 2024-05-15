@@ -20,11 +20,11 @@
  *      along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QFrame>
-#include <QString>
-#include <QWidget>
+#include <QFrame>   // for QFrame
+#include <QString>  // for QString
+#include <QWidget>  // for QWidget
 
-#include "utils/configpage.h"
+#include <utils/configpage.h>   // IWYU pragma: associated
 
 
 const QString& ConfigPage::toolTip()

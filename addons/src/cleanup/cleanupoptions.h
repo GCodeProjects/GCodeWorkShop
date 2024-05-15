@@ -20,7 +20,7 @@
 #ifndef CLEANUPOPTIONS_H
 #define CLEANUPOPTIONS_H
 
-#include <QStringList>
+#include <QStringList>  // for QStringList
 
 class QSettings;
 

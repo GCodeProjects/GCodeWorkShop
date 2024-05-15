@@ -20,8 +20,8 @@
 #ifndef CAPSLOCKEVENTFILTER_H
 #define CAPSLOCKEVENTFILTER_H
 
-#include <QString>
-#include <QObject>
+#include <QObject>  // for QObject, Q_OBJECT, slots
+#include <QString>  // for QString
 
 class QEvent;
 class QKeyEvent;

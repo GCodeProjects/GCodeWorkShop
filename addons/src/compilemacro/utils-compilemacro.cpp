@@ -18,13 +18,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QCoreApplication>         // for 
+#include <QCoreApplication>         // for QCoreApplication
 #include <QChar>                    // for operator==, QChar, operator!=
 #include <QRegularExpression>       // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
 #include <QRegularExpressionMatch>  // for QRegularExpressionMatch
 
-#include <basic_interpreter.h>
-#include <utils/expressionparser.h>  // for processBrc, ERR_CONVERT, ERR_DOUBLE_DOT, ERR_NO_BRAC, ERR_NO_PARAM
+#include <basic_interpreter.h>      // for BasicInterpreter
+#include <utils/expressionparser.h> // for processBrc, ERR_CONVERT, ERR_DOUBLE_DOT, ERR_NO_BRAC, ERR_NO_PARAM
 
 #include "utils-compilemacro.h"
 

@@ -24,8 +24,6 @@
 
 #include <cmath> // for round, M_PI
 
-// IWYU pragma: no_forward_declare QValidator
-// IWYU pragma: no_forward_declare QWidget
 #include <QApplication>     // for QApplication
 #include <QChar>            // for operator==, QChar
 #include <QCheckBox>        // for QCheckBox
@@ -42,10 +40,11 @@
 #include <QSettings>        // for QSettings
 #include <QSize>            // for QSize
 #include <QString>          // for QString
-#include <QValidator>       // for QValidator
 #include <QVariant>         // for QVariant
-#include <QWidget>          // for QWidget
-#include <Qt>               // for Key_Comma, Key_Period, NoModifier, WA_DeleteOnClose, red
+#include <Qt>               // for Key, KeyboardModifier, GlobalColor, WidgetAttribute
+
+class QValidator;
+class QWidget;
 
 #include "feedsdialog.h"
 #include "feedsoptions.h"   // for FeedsOptions

@@ -20,11 +20,12 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QString>
+#include <QChar>                    // for operator==, QChar
+#include <QRegularExpression>       // for QRegularExpression
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QString>                  // for QString
 
-#include <utils/removezeros.h>
+#include <utils/removezeros.h>  // IWYU pragma: associated
 
 
 QString Utils::removeZeros(QString str)

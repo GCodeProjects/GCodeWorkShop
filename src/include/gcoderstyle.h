@@ -21,11 +21,11 @@
 #ifndef GCODERSTYLE_H
 #define GCODERSTYLE_H
 
-#include <QString>
+#include <QString>  // for QString
 
 class QSettings;
 
-#include <documentstyle.h>
+#include <documentstyle.h>  // for DocumentStyle
 
 
 class HighlightColors

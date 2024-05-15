@@ -22,8 +22,8 @@
 
 class QString;
 
-#include <documentstyle.h>
-#include <documentwidgetproperties.h>
+#include <documentstyle.h>              // for DocumentStyle, DocumentStyle::Ptr
+#include <documentwidgetproperties.h>   // for DocumentWidgetProperties, DocumentWidgetProperties::Ptr
 
 class Document;
 class DocumentInfo;

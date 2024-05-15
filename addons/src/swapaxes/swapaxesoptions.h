@@ -20,8 +20,8 @@
 #ifndef SWAPAXESOPTIONS_H
 #define SWAPAXESOPTIONS_H
 
-#include <QString>
-#include <QStringList>
+#include <QString>      // for QString
+#include <QStringList>  // for QStringList
 
 class QSettings;
 

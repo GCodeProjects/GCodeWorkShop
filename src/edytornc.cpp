@@ -20,80 +20,119 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <typeinfo> // for bad_cast
+#include <memory>   // for shared_ptr, shared_ptr<>::element_type
 
-#include <QAction>
-#include <QActionGroup>
-#include <QCheckBox>
-#include <QClipboard>
-#include <QCloseEvent>
-#include <QComboBox>
-#include <QDesktopServices>
-#include <QEvent>
-#include <QFileDialog>
-#include <QFileIconProvider>
-#include <QFileSystemModel>
-#include <QLabel>
-#include <QLineEdit>
-#include <QMdiSubWindow>
-#include <QMenu>
-#include <QMenuBar>
-#include <QMessageBox>
-#include <QModelIndex>
-#include <QMoveEvent>
-#include <QPageLayout>
-#include <QPlainTextEdit>
-#include <QPoint>
-#include <QPrintDialog>
-#include <QPrinter>
-#include <QPrintPreviewDialog>
-#include <QProcess>
-#include <QResizeEvent>
-#include <QRegularExpression>
-#include <QtSerialPort>
-#include <QSignalMapper>
-#include <QSize>
-#include <QStandardItem>
-#include <QStandardItemModel>
-#include <Qt>                  // Qt::SplitBehavior
-#include <QTextBlock>
-#include <QTextCharFormat>
-#include <QTextCursor>
-#include <QtGlobal>            // QT_VERSION QT_VERSION_CHECK
-#include <QToolButton>
-#include <QToolTip>
-#include <QWidget>
+#include <QAbstractItemModel>   // for QTypeInfo<>::isLarge, QTypeInfo<>::isStatic
+#include <QAbstractPrintDialog> // for QAbstractPrintDialog, QAbstractPrintDialog::PrintSelection
+#include <QAction>              // for QAction
+#include <QActionGroup>         // for QActionGroup
+#include <QApplication>         // for QApplication, qApp
+#include <QByteArray>           // for QByteArray
+#include <QCheckBox>            // for QCheckBox
+#include <QClipboard>           // for QClipboard
+#include <QCloseEvent>          // for QCloseEvent
+#include <QColor>               // for QColor
+#include <QComboBox>            // for QComboBox, QComboBox::AdjustToContents
+#include <QDesktopServices>     // for QDesktopServices
+#include <QDialog>              // for QDialog, QDialog::Accepted
+#include <QDir>                 // for QDir, operator|, QDir::Files, QDir::Hidden, QDir::Name, QDir::NoSymLinks
+#include <QEvent>               // for QEvent, QEvent::ToolTip
+#include <QFile>                // for QFile
+#include <QFileDialog>          // for QFileDialog, QFileDialog::DontConfirmOverwrite
+#include <QFileIconProvider>    // for QFileIconProvider
+#include <QFileInfo>            // for QFileInfo, QFileInfoList
+#include <QFileSystemModel>     // for QFileSystemModel
+#include <QFileSystemWatcher>   // for QFileSystemWatcher
+#include <QFont>                // for QFont
+#include <QFrame>               // for QFrame, QFrame::Box, QFrame::Sunken
+#include <QHeaderView>          // for QHeaderView, QHeaderView::ResizeToContents, QHeaderView::Stretch, QHea...
+#include <QHelpEvent>           // for QHelpEvent
+#include <QIODevice>            // for QIODevice, QIODevice::ReadWrite, operator|, QIODevice::ReadOnly, QIODe...
+#include <QIcon>                // for QIcon
+#include <QItemSelectionModel>  // for QItemSelectionModel
+#include <QKeySequence>         // for QKeySequence, QKeySequence::Back, QKeySequence::Copy, QKeySequence::Cut
+#include <QLabel>               // for QLabel
+#include <QLineEdit>            // for QLineEdit
+#include <QList>                // for QList, QList<>::iterator, QList<>::const_iterator, QList<>::Iterator
+#include <QMainWindow>          // for QMainWindow
+#include <QMdiArea>             // for QMdiArea, QMdiArea::SubWindowView, QMdiArea::TabbedView
+#include <QMdiSubWindow>        // for QMdiSubWindow
+#include <QMenu>                // for QMenu
+#include <QMenuBar>             // for QMenuBar
+#include <QMessageBox>          // for QMessageBox, operator|, QMessageBox::Save, QMessageBox::Discard, QMess...
+#include <QModelIndex>          // for QModelIndex
+#include <QModelIndexList>      // for QModelIndexList
+#include <QObject>              // for SIGNAL, SLOT, qobject_cast, emit
+#include <QPageLayout>          // for QPageLayout, QPageLayout::Orientation
+#include <QPageSize>            // for QPageSize, QPageSize::A4, QPageSize::PageSizeId
+#include <QPalette>             // for QPalette, QPalette::Base
+#include <QPoint>               // for QPoint
+#include <QPointer>             // for QPointer
+#include <QPrintDialog>         // for QPrintDialog
+#include <QPrintPreviewDialog>  // for QPrintPreviewDialog
+#include <QPrinter>             // for QPrinter, QPrinter::HighResolution, QPrinter::NativeFormat, QPrinter::...
+#include <QProcess>             // for QProcess
+#include <QPushButton>          // for QPushButton
+#include <QRect>                // for QRect
+#include <QRegularExpression>   // for QRegularExpression
+#include <QResizeEvent>         // for QResizeEvent
+#include <QSettings>            // for QSettings, QSettings::IniFormat, QSettings::NoError
+#include <QSignalMapper>        // for QSignalMapper
+#include <QSize>                // for QSize
+#include <QSpinBox>             // for QSpinBox
+#include <QSplitter>            // for QSplitter
+#include <QStandardItemModel>   // for QStandardItem, QStandardItemModel
+#include <QStatusBar>           // for QStatusBar
+#include <QString>              // for QString, operator+, operator!=, operator==
+#include <QStringList>          // for QStringList
+#include <QTabBar>              // for QTabBar
+#include <QTabWidget>           // for QTabWidget
+#include <QTableWidget>         // for QTableWidget, QTableWidgetItem::UserType
+#include <QTableWidgetItem>     // for QTableWidgetItem
+#include <QTextCursor>          // for QTextCursor
+#include <QTextDocument>        // for QTextDocument, QTextDocument::FindFlags, QTextDocument::FindCaseSensit...
+#include <QTextStream>          // for QTextStream
+#include <QToolBar>             // for QToolBar
+#include <QToolButton>          // for QToolButton
+#include <QToolTip>             // for QToolTip
+#include <QTreeView>            // for QTreeView
+#include <QUrl>                 // for QUrl, QUrl::TolerantMode
+#include <QVariant>             // for QVariant
+#include <QWidget>              // for QWidget
+#include <Qt>                   // for operator|, red, WindowStates, BusyCursor, Dialog, MouseFocusReason
+#include <QtGlobal>             // for QFlags, QT_VERSION, QT_VERSION_CHECK, qMakeForeachContainer, Q_OS_LINUX
 
-// Addons:
-// BHC Chamfer CleanUp Feeds Dot I2M I2MProg Renumber SwapAxes Triangle
-#include <addons-actions.h>
-#include <commapp.h>                  // CommApp
-#include <document.h>
-#include <gcoderstyle.h>
-#include <gcoderwidgetproperties.h>
-#include <kdiff3/kdiff3.h>            // KDiff3App
-#include <kdiff3/common.h>            // getFilters()
-#include <serialportconfigdialog.h>   // SerialPortConfigDialog
-#include <serialporttestdialog.h>     // SerialPortTestDialog
-#include <serialtransmissiondialog.h> // SerialTransmissionDialog
-#include <utils/medium.h>             // Medium
+#include <addons-actions.h>             // for Addons::Actions
+#include <commapp.h>                    // for CommApp
+#include <document.h>                   // for Document
+#include <documentinfo.h>               // for DocumentInfo::Ptr, DocumentInfo
+#include <documentmanager.h>            // for DocumentManager
+#include <documentstyle.h>              // for DocumentStyle::Ptr, DocumentStyle
+#include <documentwidgetproperties.h>   // for DocumentWidgetProperties::Ptr, DocumentWidgetProperties
+#include <edytornc.h>                   // IWYU pragma: associated
+#include <gcoderdocument.h>             // for GCoderDocument
+#include <gcoderstyle.h>                // for GCoderStyle
+#include <gcoderwidgetproperties.h>     // for GCoderWidgetProperties
+#include <kdiff3/kdiff3.h>              // KDiff3App
+#include <kdiff3/common.h>              // getFilters()
+#include <serialportconfigdialog.h>     // SerialPortConfigDialog
+#include <serialporttestdialog.h>       // SerialPortTestDialog
+#include <serialtransmissiondialog.h>   // SerialTransmissionDialog
+#include <utils/medium.h>               // Medium
 
-#include "capslockeventfilter.h"
-#include "setupdialog.h"    // SetupDialog
-#include "documentmanager.h"
-#include "edytornc.h"       // EdytorNc QObject QMainWindow
-#include "gcoder.h"
-#include "gcoderdocument.h"
-#include "gcoderinfo.h"     // GCoderInfo
-#include "gcoderproducer.h"
-#include "findinf.h"        // FindInFiles
-#include "highlightmode.h"
-#include "newfiledialog.h"  // newFileDialog
-#include "recentfiles.h"    // RecentFiles
-#include "sessionmanager.h" // SessionManager
-#include "sessiondialog.h"  // sessionDialog
-#include "tooltips.h"       // writeTooltipFile()
-#include "ui_edytornc.h"
+#include "capslockeventfilter.h"    // for CapsLockEventFilter
+#include "findinf.h"                // for FindInFiles
+#include "gcoder.h"                 // for DOCUMENT_TYPE
+#include "gcoderinfo.h"             // for GCoderInfo
+#include "gcoderproducer.h"         // for GCoderProducer
+#include "highlightmode.h"          // for MODE_AUTO, MODE_FANUC, MODE_HEIDENHAIN, MODE_HEIDENHAIN_ISO, MODE_LINU...
+#include "newfiledialog.h"          // for newFileDialog
+#include "recentfiles.h"            // for RecentFiles
+#include "sessiondialog.h"          // for SessionDialog
+#include "sessionmanager.h"         // for SessionManager
+#include "setupdialog.h"            // for AppConfig, SetupDialog
+#include "tooltips.h"               // for writeTooltipFile
+#include "ui_edytornc.h"            // for Ui::EdytorNc
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"

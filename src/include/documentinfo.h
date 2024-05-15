@@ -20,13 +20,14 @@
 #ifndef DOCUMENTINFO_H
 #define DOCUMENTINFO_H
 
-#include <memory>
-#include <QByteArray>
-#include <QString>
+#include <memory>   // for shared_ptr
 
-#define DOCUMENTINFO_CFG_KEY_TYPE       "Type"
+#include <QByteArray>   // for QByteArray
+#include <QString>      // for QString
 
 class QSettings;
+
+#define DOCUMENTINFO_CFG_KEY_TYPE       "Type"
 
 
 class DocumentInfo

@@ -29,13 +29,13 @@
 #include <QFontMetrics> // for QFontMetrics
 #include <QMouseEvent>  // for QMouseEvent
 #include <QPainter>     // for QPainter
-#include <QPalette>     // for QPalette, QPalette::Shadow
+#include <QPalette>     // for QPalette
 #include <QPen>         // for QPen
 #include <QPixmap>      // for QPixmap
 #include <QPointF>      // for QPointF
 #include <QRect>        // for QRect
 #include <QString>      // for QString
-#include <Qt>           // for gray, DotLine, SolidLine, DashDotLine, NoBrush
+#include <Qt>           // for PenStyle, GlobalColor, BrushStyle, MouseButton, WidgetAttribute, WindowFlags
 #include <QtGlobal>     // for qMin, qreal
 
 class QFocusEvent;

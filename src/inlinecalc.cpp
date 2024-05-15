@@ -22,11 +22,12 @@
 #include <QKeyEvent>    // for QKeyEvent
 #include <QLineEdit>    // for QLineEdit
 #include <QRect>        // for QRect
-#include <Qt>           // for Qt::Key_Return
+#include <Qt>           // for CaseSensitivity, Key
 #include <QWidget>      // for QWidget
 
-#include <utils/expressionparser.h>
-#include <utils/removezeros.h>
+#include <utils/expressionparser.h> // for processBrc
+#include <utils/removezeros.h>      // for removeZeros
+
 #include "inlinecalc.h"
 
 

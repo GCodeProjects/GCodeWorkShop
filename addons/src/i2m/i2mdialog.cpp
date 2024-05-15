@@ -18,7 +18,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// IWYU pragma: no_forward_declare QWidget
 #include <QChar>        // for operator==, QChar
 #include <QCheckBox>    // for QCheckBox
 #include <QLabel>       // for QLabel
@@ -30,8 +29,9 @@
 #include <QSize>        // for QSize
 #include <QString>      // for QString
 #include <QVariant>     // for QVariant
-#include <QWidget>      // for QWidget
 #include <Qt>           // for WA_DeleteOnClose
+
+class QWidget;
 
 #include "i2mdialog.h"
 #include "i2moptions.h" // for I2MOptions

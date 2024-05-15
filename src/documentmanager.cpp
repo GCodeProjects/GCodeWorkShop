@@ -17,8 +17,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <memory>   // for __shared_ptr_access
-
 #include <QList>            // for QList, QList<>::const_iterator, QList<>::iterator
 #include <QMap>             // for QMap, QMap<>::const_iterator
 #include <QMdiArea>         // for QMdiArea, QMdiArea::StackingOrder
@@ -34,11 +32,10 @@
 
 #include <document.h>                   // for Document
 #include <documentinfo.h>               // for DocumentInfo
+#include <documentmanager.h>            // IWYU pragma: associated
 #include <documentproducer.h>           // for DocumentProducer
 #include <documentstyle.h>              // for DocumentStyle
 #include <documentwidgetproperties.h>   // for DocumentWidgetProperties
-
-#include <documentmanager.h>            // IWYU pragma: associated
 
 
 DocumentManager::DocumentManager(QObject* parent) :

@@ -19,13 +19,14 @@
 
 #include <QLatin1String>    // for QLatin1String
 
-#include "documentproducer.h"       // for DocumentProducer
-#include "gcoder.h"                 // for DOCUMENT_TYPE
-#include "gcoderdocument.h"         // for GCoderDocument
-#include "gcoderinfo.h"             // for GCoderInfo
+#include <documentproducer.h>       // for DocumentProducer
+#include <gcoderdocument.h>         // for GCoderDocument
+#include <gcoderstyle.h>            // for GCoderStyle
+#include <gcoderwidgetproperties.h> // for GCoderWidgetProperties
+
+#include "gcoder.h"         // for DOCUMENT_TYPE
+#include "gcoderinfo.h"     // for GCoderInfo
 #include "gcoderproducer.h"
-#include "gcoderstyle.h"            // for GCoderStyle
-#include "gcoderwidgetproperties.h" // for GCoderWidgetProperties
 
 
 class Document;

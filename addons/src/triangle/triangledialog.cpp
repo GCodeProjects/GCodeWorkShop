@@ -24,13 +24,11 @@
 
 #include <cmath>    // for sin, M_PI, asin, acos, atan, cos
 
-// IWYU pragma: no_forward_declare QValidator
-// IWYU pragma: no_forward_declare QWidget
 #include <QApplication>     // for QApplication
 #include <QChar>            // for operator==, QChar
 #include <QCheckBox>        // for QCheckBox
 #include <QDoubleValidator> // for QDoubleValidator
-#include <QEvent>           // for QEvent, QEvent::KeyPress
+#include <QEvent>           // for QEvent
 #include <QKeyEvent>        // for QKeyEvent
 #include <QLabel>           // for QLabel
 #include <QLineEdit>        // for QLineEdit
@@ -42,10 +40,11 @@
 #include <QRect>            // for QRect
 #include <QSettings>        // for QSettings
 #include <QSize>            // for QSize
-#include <QValidator>       // for QValidator
 #include <QVariant>         // for QVariant
-#include <QWidget>          // for QWidget
-#include <Qt>               // for Key_Comma, Key_Period, NoModifier, blue, WA_DeleteOnClose, black, red
+#include <Qt>               // for GlobalColor, Key, KeyboardModifier, WidgetAttribute
+
+class QValidator;
+class QWidget;
 
 #include "triangledialog.h"
 #include "triangleoptions.h" // TriangleOptions

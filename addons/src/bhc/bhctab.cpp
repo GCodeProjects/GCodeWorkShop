@@ -18,21 +18,20 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// IWYU pragma: no_forward_declare QValidator
-#include <QAbstractItemView>    // for QAbstractItemView, QAbstractItemView::NoEditTriggers, QAbstractItemView::Sele...
+#include <QAbstractItemView>    // for QAbstractItemView
 #include <QAction>              // for QAction
 #include <QActionGroup>         // for QActionGroup
 #include <QApplication>         // for QApplication
 #include <QChar>                // for operator==, QChar
 #include <QCheckBox>            // for QCheckBox
-#include <QClipboard>           // for QClipboard, QClipboard::Clipboard, QClipboard::Selection
+#include <QClipboard>           // for QClipboard
 #include <QCursor>              // for QCursor
 #include <QDoubleValidator>     // for QDoubleValidator
-#include <QEvent>               // for QEvent, QEvent::KeyPress
+#include <QEvent>               // for QEvent
 #include <QIcon>                // for QIcon
 #include <QIntValidator>        // for QIntValidator
-#include <QKeyEvent>            // for QKeyEvent, QEvent, QEvent::KeyPress
-#include <QKeySequence>         // for QKeySequence, QKeySequence::Copy, QKeySequence::SelectAll
+#include <QKeyEvent>            // for QKeyEvent
+#include <QKeySequence>         // for QKeySequence
 #include <QLineEdit>            // for QLineEdit
 #include <QLocale>              // for QLocale
 #include <QMenu>                // for QMenu
@@ -42,9 +41,10 @@
 #include <QStringList>          // for QStringList
 #include <QTableWidget>         // for QTableWidget
 #include <QTableWidgetItem>     // for QTableWidgetItem
-#include <QValidator>           // for QValidator
-#include <Qt>                   // for Key_Comma, Key_Period, NoModifier, CustomContextMenu, red
+#include <Qt>                   // for Key, KeyboardModifier, ContextMenuPolicy, GlobalColor
 #include <QtGlobal>             // for Q_UNUSED
+
+class QValidator;
 
 #include <utils/removezeros.h>  // Utils::removeZeros()
 

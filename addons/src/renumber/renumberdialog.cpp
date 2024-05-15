@@ -18,7 +18,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// IWYU pragma: no_forward_declare QWidget
 #include <QCheckBox>    // for QCheckBox
 #include <QPoint>       // for QPoint
 #include <QPushButton>  // for QPushButton
@@ -28,7 +27,8 @@
 #include <QSize>        // for QSize
 #include <QSpinBox>     // for QSpinBox
 #include <QVariant>     // for QVariant
-#include <QWidget>      // for QWidget
+
+class QWidget;
 
 #include "renumberdialog.h"
 #include "renumberoptions.h"    // for RenumberOptions

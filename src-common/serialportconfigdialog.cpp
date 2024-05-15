@@ -20,23 +20,40 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QButtonGroup>
-#include <QDesktopServices>
-#include <QDir>
-#include <QFileDialog>
-#include <QPalette>
-#include <QRegularExpression>
-#include <QRegularExpressionValidator>
-#include <QSerialPort>
-#include <QSerialPortInfo>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <QValidator>
+#include <QButtonGroup>                 // for QButtonGroup
+#include <QCheckBox>                    // for QCheckBox
+#include <QComboBox>                    // for QComboBox
+#include <QCoreApplication>             // for QCoreApplication
+#include <QDesktopServices>             // for QDesktopServices
+#include <QDir>                         // for QDir
+#include <QDoubleSpinBox>               // for QDoubleSpinBox
+#include <QFileDialog>                  // for QFileDialog
+#include <QFileInfo>                    // for QFileInfo
+#include <QIntValidator>                // for QIntValidator
+#include <QLineEdit>                    // for QLineEdit
+#include <QList>                        // for QList
+#include <QListWidget>                  // for QListWidget
+#include <QPalette>                     // for QPalette
+#include <QPushButton>                  // for QPushButton
+#include <QRegularExpression>           // for QRegularExpression
+#include <QRegularExpressionValidator>  // for QRegularExpressionValidator
+#include <QSerialPort>                  // for QSerialPort
+#include <QSerialPortInfo>              // for QSerialPortInfo
+#include <QSettings>                    // for QSettings
+#include <QSpinBox>                     // for QSpinBox
+#include <QString>                      // for QString
+#include <QStringList>                  // for QStringList
+#include <QTabWidget>                   // for QTabWidget
+#include <QToolButton>                  // for QToolButton
+#include <QUrl>                         // for QUrl
+#include <QVariant>                     // for QVariant
+#include <QtGlobal>                     // for QForeachContainer, QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, Q_OS_...
 
-#include <utils/medium.h> // Medium
+class QWidget;
 
-#include "serialportconfigdialog.h"  // QDialog Qt QWidget
+#include <utils/medium.h>   // for Medium
+
+#include "serialportconfigdialog.h"
 
 
 // TODO: move into class SerialPortConfigDialog

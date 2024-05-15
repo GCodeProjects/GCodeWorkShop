@@ -20,14 +20,13 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QCheckBox>        // for QCheckBox
 #include <QList>            // for QList
 #include <QListWidget>      // for QListWidget
 #include <QListWidgetItem>  // for QListWidgetItem
 #include <QPushButton>      // for QPushButton
 #include <QString>          // for QString
-#include <QStringList>      // for QStringList
-#include <Qt>               // for Dialog, WindowFlags
+#include <Qt>               // for WindowType
+
 class QWidget;
 
 #include "sessiondialog.h"

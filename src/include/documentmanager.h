@@ -22,19 +22,17 @@
 
 #include <QList>    // for QList
 #include <QMap>     // for QMap
-#include <QObject>  // for Q_OBJECT, slots
+#include <QObject>  // for signals, QObject, Q_OBJECT, slots
 #include <QPointer> // for QPointer
 #include <QString>  // for QString
-#include <QtGlobal> // for QTypeInfo<>::isLarge, QTypeInfo<>::isStatic
 
 class QMdiArea;
 class QMdiSubWindow;
 class QPoint;
 
-#include <documentinfo.h>
-
-#include "documentstyle.h"             // for DocumentStyle, DocumentStyle::Ptr
-#include "documentwidgetproperties.h"  // for DocumentWidgetProperties, DocumentWidgetProperties::Ptr
+#include <documentinfo.h>               // for DocumentInfo, DocumentInfo::Ptr
+#include <documentstyle.h>              // for DocumentStyle, DocumentStyle::Ptr
+#include <documentwidgetproperties.h>   // for DocumentWidgetProperties, DocumentWidgetProperties::Ptr
 
 class Document;
 class DocumentProducer;

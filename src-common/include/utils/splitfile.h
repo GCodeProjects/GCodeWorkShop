@@ -21,6 +21,8 @@
 #ifndef SPLITFILE_H
 #define SPLITFILE_H
 
+#include <QtGlobal>    // for QT_VERSION_MAJOR
+
 class QString;
 
 #if QT_VERSION_MAJOR <= 5

@@ -19,7 +19,7 @@
  */
 
 #include <QApplication> // for QApplication
-#include <QDialog>      // for QDialog, QDialog::Accepted
+#include <QDialog>      // for QDialog
 #include <QString>      // for QString
 #include <QWidget>      // for QWidget
 #include <Qt>           // for BusyCursor

@@ -18,7 +18,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QDialog>  // for QDialog, QDialog::Accepted
+#include <QDialog>  // for QDialog
 #include <QString>  // for QString
 #include <QWidget>  // for QWidget
 

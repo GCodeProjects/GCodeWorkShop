@@ -23,17 +23,17 @@
 #ifndef HIGHLIGHTER_H
 #define HIGHLIGHTER_H
 
-#include <QFont>
-#include <QObject>
-#include <QRegularExpression>
-#include <QSyntaxHighlighter>
-#include <QTextCharFormat>
-#include <QVector>
+#include <QFont>                // for QFont
+#include <QObject>              // for Q_OBJECT
+#include <QRegularExpression>   // for QRegularExpression
+#include <QString>              // for QString
+#include <QSyntaxHighlighter>   // for QSyntaxHighlighter
+#include <QTextCharFormat>      // for QTextCharFormat
+#include <QVector>              // for QVector
 
-#include "gcoderstyle.h"
-
-class QString;
 class QTextDocument;
+
+#include <gcoderstyle.h>    // for HighlightColors
 
 
 int autoDetectHighligthMode(const QString text);

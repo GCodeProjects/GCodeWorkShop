@@ -20,7 +20,7 @@
 #ifndef UTILS_REMOVEBYREGEX_H
 #define UTILS_REMOVEBYREGEX_H
 
-#include <QStringList>
+#include <QStringList>  // for QStringList
 
 class QString;
 

@@ -20,18 +20,21 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QChar>
-#include <QColor>
-#include <QFont>
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QString>
-#include <QStringList>
-#include <QTextCharFormat>
-#include <QTextDocument>
+#include <QBrush>                   // for QBrush
+#include <QChar>                    // for QChar, operator==, operator<=, operator>=
+#include <QColor>                   // for QColor
+#include <QFont>                    // for QFont
+#include <QRegularExpression>       // for QRegularExpression
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QString>                  // for QString, operator+
+#include <QStringList>              // for QStringList
+#include <QTextCharFormat>          // for QTextCharFormat
+#include <QtGlobal>                 // for qMakeForeachContainer, foreach
+
+#include <gcoderstyle.h>            // for HighlightColors
 
 #include "highlighter.h"
-#include "highlightmode.h"
+#include "highlightmode.h"  // for HighlightMode
 
 
 Highlighter::Highlighter(QTextDocument* parent) : QSyntaxHighlighter(parent)

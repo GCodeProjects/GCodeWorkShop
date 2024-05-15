@@ -23,11 +23,11 @@
 #ifndef CONFIGPAGE_H
 #define CONFIGPAGE_H
 
-#include <QList>
-#include <QObject>        // Q_OBJECT
-#include <QSharedPointer>
+#include <QList>            // for QList
+#include <QObject>          // for QObject, slots, Q_OBJECT
+#include <QSharedPointer>   // for QSharedPointer, QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, QTypeInfo<>::isComplex
+#include <QString>          // for QString
 
-class QString;
 class QWidget;
 
 

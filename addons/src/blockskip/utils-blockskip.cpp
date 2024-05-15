@@ -23,7 +23,7 @@
 #include <QRegularExpressionMatch>  // for QRegularExpressionMatch
 #include <QString>                  // for QString
 #include <QStringList>              // for QStringList
-#include <QtGlobal>                 // for foreach
+#include <QtGlobal>                 // for QForeachContainer, qMakeForeachContainer, foreach
 
 #include "utils-blockskip.h"
 

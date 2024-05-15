@@ -26,7 +26,7 @@
 
 #include <documentinfo.h>   // for DocumentInfo
 
-#include "gcoder.h"
+#include "gcoder.h"     // for DOCUMENT_TYPE
 #include "gcoderinfo.h"
 
 #define CFG_KEY_INFO_CURSOR_POS     "CursorPosition"

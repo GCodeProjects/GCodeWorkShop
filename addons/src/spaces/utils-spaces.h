@@ -20,7 +20,7 @@
 #ifndef UTILS_SPACES_H
 #define UTILS_SPACES_H
 
-#include <functional>
+#include <functional>   // for function
 
 class QString;
 

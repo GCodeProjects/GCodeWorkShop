@@ -23,18 +23,19 @@
 #ifndef COMMAPP_H
 #define COMMAPP_H
 
-#include <QObject>
-#include <QMainWindow>
-#include <QSystemTrayIcon>
-#include <QWidget>
+#include <QMainWindow>      // for QMainWindow
+#include <QObject>          // for Q_OBJECT, slots
+#include <QString>          // for QString
+#include <QSystemTrayIcon>  // for QSystemTrayIcon
 
 class QAction;
-class QComboBox;
 class QCloseEvent;
-class QMenu;
+class QComboBox;
 class QMdiSubWindow;
+class QMenu;
 class QSignalMapper;
 class QToolBar;
+class QWidget;
 
 class SerialTransmissionDialog;
 

@@ -20,15 +20,39 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QAbstractButton>
-#include <QButtonGroup>
-#include <Qt>                          // Qt::WindowFlags
-#include <QWidget>
+#include <QAbstractButton>              // for QAbstractButton
+#include <QButtonGroup>                 // for QButtonGroup
+#include <QByteArray>                   // for QByteArray
+#include <QCheckBox>                    // for QCheckBox
+#include <QColor>                       // for QColor
+#include <QColorDialog>                 // for QColorDialog
+#include <QComboBox>                    // for QComboBox
+#include <QDir>                         // for QDir
+#include <QFileDialog>                  // for QFileDialog
+#include <QFileInfo>                    // for QFileInfo
+#include <QFont>                        // for QFont
+#include <QFontDialog>                  // for QFontDialog
+#include <QLabel>                       // for QLabel
+#include <QLineEdit>                    // for QLineEdit
+#include <QListWidget>                  // for QListWidget
+#include <QListWidgetItem>              // for QListWidgetItem
+#include <QPalette>                     // for QPalette
+#include <QPushButton>                  // for QPushButton
+#include <QRegularExpression>           // for QRegularExpression
+#include <QRegularExpressionValidator>  // for QRegularExpressionValidator
+#include <QVariant>                     // for QVariant
+#include <Qt>                           // for GlobalColor, WindowFlags
+#include <QtAlgorithms>                 // for qDeleteAll
+#include <QtGlobal>                     // for QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, Q_OS_WIN32
 
-#include <utils/medium.h> // Medium
+class QValidator;
+class QWidget;
 
-#include "highlightmode.h"
-#include "setupdialog.h" // SetupDialog QDialog QObject
+#include <gcoderstyle.h>            // for GCoderStyle, HighlightColors
+#include <gcoderwidgetproperties.h> // for GCoderWidgetProperties, SHOW_FILENAME, SHOW_FILEPATH, SHOW_PROGTITLE
+
+#include "highlightmode.h"  // for HighlightMode
+#include "setupdialog.h"
 
 
 SetupDialog::SetupDialog(QWidget* parent, const AppConfig* prop,

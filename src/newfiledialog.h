@@ -23,11 +23,11 @@
 #ifndef NEWFILEDIALOG_H
 #define NEWFILEDIALOG_H
 
-#include <QDialog>
-#include <QDir>
-#include <QObject>
+#include <QDialog>  // for QDialog
+#include <QDir>     // for QDir
+#include <QObject>  // for Q_OBJECT, slots
+#include <QString>  // for QString
 
-class QString;
 class QWidget;
 
 namespace Ui {

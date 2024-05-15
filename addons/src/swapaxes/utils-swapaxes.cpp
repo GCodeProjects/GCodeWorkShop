@@ -33,7 +33,7 @@
 
 #include <utils/removezeros.h>  // for Utils::removeZeros
 
-#include "swapaxesoptions.h"
+#include "swapaxesoptions.h"    // for SwapAxesOptions
 #include "utils-swapaxes.h"
 
 

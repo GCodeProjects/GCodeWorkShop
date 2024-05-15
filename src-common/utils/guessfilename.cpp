@@ -18,14 +18,15 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QString>
-#include <QtDebug>
+#include <QRegularExpression>       // for QRegularExpression
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QString>                  // for QString
+#include <QtDebug>                  // for qDebug
+#include <QtGlobal>                 // for forever
 
-#include <utils/guessfilename.h>
+#include <utils/guessfilename.h>    // IWYU pragma: associated
 
-#include "filepatterns.h"
+#include "filepatterns.h"   // for FILENAME_FADAL, FILENAME_FANUC, FILENAME_HEID1, FILENAME_HEID2, FILENAME_OSP
 
 
 Utils::FileExt Utils::guessFileNameByProgNum(const QString& text)

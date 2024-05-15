@@ -23,32 +23,30 @@
 #ifndef FINDINFILES_H
 #define FINDINFILES_H
 
-#include <QList>
-#include <QObject>
-#include <QString>
-#include <QTextEdit>
-#include <QtGlobal>  // QT_VERSION QT_VERSION_CHECK
-#include <QWidget>
-
-#include "gcoderstyle.h"
-#include "ui_findinfilesdialog.h"
+#include <QList>            // for QList
+#include <QObject>          // for slots, Q_OBJECT, signals
+#include <QString>          // for QString
+#include <QTextDocument>    // for QTextDocument, QTextDocument::FindFlags
+#include <QTextEdit>        // for QTextEdit::ExtraSelection, QTextEdit
+#include <QWidget>          // for QWidget
+#include <QtGlobal>         // for QT_VERSION, QT_VERSION_CHECK
 
 class QCloseEvent;
-class QComboBox;
 class QDir;
 class QEvent;
-class QLabel;
 class QProgressDialog;
-class QPushButton;
 class QSplitter;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	class QStringList;
 #else
 	using QStringList = QList<QString>;
 #endif
-class QTextDocument;
+
+#include <gcoderstyle.h>    // for HighlightColors
 
 class Highlighter;
+
+#include "ui_findinfilesdialog.h"   // for Ui::FindInFiles
 
 
 class FindInFiles : public QWidget, private Ui::FindInFiles

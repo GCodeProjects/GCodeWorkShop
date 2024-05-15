@@ -23,22 +23,21 @@
 #ifndef SERIALTRANSMISSIONDIALOG_H
 #define SERIALTRANSMISSIONDIALOG_H
 
-#include <QByteArray>
-#include <QDialog>
-#include <QObject>     // Q_OBJECT
-#include <QSerialPort>
-#include <QString>
-#include <QStringList>
-#include <Qt>          // Qt::WindowFlags
-#include <QtGlobal>    // qint64
-#include <QWidget>
-
-#include "serialportsettings.h"          // SerialPortSettings
-#include "ui_serialtransmissiondialog.h" // Ui::SerialTransmissionDialog
+#include <QByteArray>   // for QByteArray
+#include <QDialog>      // for QDialog
+#include <QObject>      // for slots, Q_OBJECT
+#include <QSerialPort>  // for QSerialPort
+#include <QString>      // for QString
+#include <QStringList>  // for QStringList
+#include <Qt>           // for WindowType, WindowFlags
+#include <QtGlobal>     // for qint64
 
 class QCloseEvent;
-class QString;
 class QTimer;
+class QWidget;
+
+#include "serialportsettings.h"             // for SerialPortSettings
+#include "ui_serialtransmissiondialog.h"    // for Ui::SerialTransmissionDialog
 
 
 class SerialTransmissionDialog : public QDialog, private Ui::SerialTransmissionDialog

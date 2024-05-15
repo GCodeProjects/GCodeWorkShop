@@ -20,7 +20,7 @@
 #ifndef I2MPROGOPTIONS_H
 #define I2MPROGOPTIONS_H
 
-#include <QString>
+#include <QString>  // for QString
 
 class QSettings;
 

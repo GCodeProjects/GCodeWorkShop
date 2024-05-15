@@ -20,15 +20,17 @@
  *      along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <QSharedPointer>
-#include <QStackedLayout>
-#include <QTreeWidgetItem>
-#include <QWidget>
+#include <QPushButton>      // for QPushButton
+#include <QSharedPointer>   // for QSharedPointer, QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, QTypeInfo<>::isCo...
+#include <QStackedLayout>   // for QStackedLayout
+#include <QTreeWidget>      // for QTreeWidget, QTreeWidgetItem
+#include <QWidget>          // for QWidget
+#include <QtGlobal>         // for QForeachContainer, QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, qMakeForeachCo...
 
-#include "utils/configpage.h"   // ConfigPage
-#include "utils/configdialog.h" // ConfigDialog QDialog QObject
+#include <utils/configdialog.h> // IWYU pragma: associated
+#include <utils/configpage.h>   // for ConfigPage
 
-#include "ui_configdialog.h"
+#include "ui_configdialog.h"    // for Ui::ConfigDialog
 
 
 class TreeItem: public QTreeWidgetItem

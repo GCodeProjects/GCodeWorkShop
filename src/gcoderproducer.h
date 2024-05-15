@@ -22,7 +22,7 @@
 
 #include <QString>  // for QString
 
-#include <documentproducer.h>
+#include <documentproducer.h>   // for DocumentProducer
 
 class Document;
 class DocumentInfo;

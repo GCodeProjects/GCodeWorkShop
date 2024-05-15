@@ -20,7 +20,7 @@
 #ifndef ADDONS_CONTEXT_H
 #define ADDONS_CONTEXT_H
 
-#include <QString>
+#include <QString>  // for QString
 
 class QPlainTextEdit;
 

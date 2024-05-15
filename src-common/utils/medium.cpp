@@ -22,20 +22,22 @@
 
 #include <cstdlib> // getenv()
 
-#include <QApplication>
-#include <QDir>
-#include <QLibraryInfo>
-#include <QList>
-#include <QLocale>
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QSettings>
-#include <QStandardPaths>
-#include <QtDebug>                 // qDebug() <<
-#include <QtGlobal>                // Q_OS_WIN
-#include <QTranslator>
+#include <QApplication>             // for QApplication
+#include <QCoreApplication>         // for QCoreApplication
+#include <QDir>                     // for QDir
+#include <QLatin1String>            // for QLatin1String
+#include <QLibraryInfo>             // for QLibraryInfo
+#include <QList>                    // for QList
+#include <QLocale>                  // for QLocale, QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, QTypeInfo<>::isComplex
+#include <QRegularExpression>       // for QRegularExpression
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QSettings>                // for QSettings
+#include <QStandardPaths>           // for QStandardPaths
+#include <QtDebug>                  // for QNoDebug, qDebug
+#include <QtGlobal>                 // for QForeachContainer, qMakeForeachContainer, QTypeInfo<>::isLarge, QTypeInfo...
+#include <QTranslator>              // for QTranslator
 
-#include "utils/medium.h"  // Medium QObject
+#include <utils/medium.h>   // IWYU pragma: associated
 
 
 const QString Medium::SLASH = QLatin1String("/");

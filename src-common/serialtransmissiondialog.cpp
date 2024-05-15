@@ -20,36 +20,42 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <algorithm> // std::sort()
+#include <QApplication>             // for QApplication, qApp
+#include <QByteArray>               // for QByteArray
+#include <QChar>                    // for QChar
+#include <QCloseEvent>              // for QCloseEvent
+#include <QDateTime>                // for QDate, QTime
+#include <QFile>                    // for QFile
+#include <QFileInfo>                // for QFileInfo
+#include <QFrame>                   // for QFrame
+#include <QIODevice>                // for QIODevice
+#include <QIcon>                    // for QIcon
+#include <QLabel>                   // for QLabel
+#include <QLocale>                  // for QLocale
+#include <QMessageBox>              // for QMessageBox
+#include <QPixmap>                  // for QPixmap
+#include <QPlainTextEdit>           // for QPlainTextEdit
+#include <QProgressBar>             // for QProgressBar
+#include <QPushButton>              // for QPushButton
+#include <QRegularExpression>       // for QRegularExpression
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QSerialPort>              // for QSerialPort
+#include <QSettings>                // for QSettings
+#include <QString>                  // for QString, operator+, operator==
+#include <QStringList>              // for QStringList
+#include <QTextStream>              // for QTextStream
+#include <QTimer>                   // for QTimer
+#include <QVariant>                 // for QVariant
+#include <Qt>                       // for SplitBehaviorFlags, WidgetAttribute, WindowFlags
+#include <QtDebug>                  // for qDebug
 
-#include <QCloseEvent>
-#include <QByteArray>
-#include <QDate>
-#include <QFile>
-#include <QFileInfo>
-#include <QIcon>
-#include <QIODevice>
-#include <QList>
-#include <QMessageBox>
-#include <QPixmap>
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QSerialPort>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <Qt>                 // Qt::WindowFlags
-#include <QtDebug>            // qDebug() <<
-#include <QTextStream>
-#include <QTime>
-#include <QTimer>
-#include <QWidget>
+class QWidget;
 
-#include <utils/medium.h>       // Medium
-#include <utils/guessfilename.h>
-#include <utils/splitfile.h>    // splitFile
+#include <utils/medium.h>           // for Medium
+#include <utils/guessfilename.h>    // for FileExt, guessFileNameByProgNum, guessFileNameByRegExp
+#include <utils/splitfile.h>        // for splitFile
 
-#include "serialtransmissiondialog.h" // SerialPortSettings QDialog QObject
+#include "serialtransmissiondialog.h"
 
 
 SerialTransmissionDialog::SerialTransmissionDialog(QWidget* parent, Qt::WindowFlags f,

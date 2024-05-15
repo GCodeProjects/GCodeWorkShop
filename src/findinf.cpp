@@ -20,39 +20,48 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QApplication>
-#include <QCloseEvent>
-#include <QColor>
-#include <QComboBox>
-#include <QDateTime>
-#include <QDir>
-#include <QEvent>
-#include <QFile>
-#include <QFileDialog>
-#include <QFont>
-#include <QIODevice>
-#include <QLabel>
-#include <QProgressDialog>
-#include <QPushButton>
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QSettings>
-#include <QSplitter>
-#include <QString>
-#include <QStringList>
-#include <Qt>               // Qt::WA_DeleteOnClose
-#include <QtGlobal>         // qint64 Q_UNUSED
-#include <QTableWidgetItem>
-#include <QTextCharFormat>
-#include <QTextCursor>
-#include <QTextDocument>    // QTextDocument::FindFlags
-#include <QTextOption>
-#include <QTextStream>
+#include <QApplication>             // for QApplication, qApp
+#include <QCheckBox>                // for QCheckBox
+#include <QCloseEvent>              // for QCloseEvent
+#include <QColor>                   // for QColor
+#include <QComboBox>                // for QComboBox
+#include <QDateTime>                // for QDateTime
+#include <QDir>                     // for QDir, operator|, QDir::NoSymLinks, QDir::Readable, QDir::AllDirs, QDir::F...
+#include <QEvent>                   // for QEvent, QEvent::KeyPress
+#include <QFile>                    // for QFile
+#include <QFileDialog>              // for QFileDialog
+#include <QFileInfo>                // for QFileInfo
+#include <QFont>                    // for QFont, QFont::Normal
+#include <QFrame>                   // for QFrame
+#include <QIODevice>                // for QIODevice, QIODevice::ReadOnly
+#include <QKeyEvent>                // for QKeyEvent
+#include <QPlainTextEdit>           // for QPlainTextEdit
+#include <QProgressDialog>          // for QProgressDialog
+#include <QPushButton>              // for QPushButton
+#include <QRegularExpression>       // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QSettings>                // for QSettings
+#include <QSplitter>                // for QSplitter
+#include <QString>                  // for QString, operator+, QCharRef
+#include <QStringList>              // for QStringList
+#include <QTableWidget>             // for QTableWidget
+#include <QTableWidgetItem>         // for QTableWidgetItem
+#include <QTextBlock>               // for QTextBlock
+#include <QTextCharFormat>          // for QTextCharFormat
+#include <QTextCursor>              // for QTextCursor
+#include <QTextDocument>            // for QTextDocument, QTextDocument::FindFlags, QTextDocument::FindWholeWords
+#include <QTextOption>              // for QTextOption, QTextOption::NoWrap
+#include <QTextStream>              // for QTextStream
+#include <QToolButton>              // for QToolButton
+#include <QVariant>                 // for QVariant
+#include <Qt>                       // for operator|, AlignVCenter, KeyboardModifiers, AlignLeft, NoModifier, AlignR...
+#include <QtGlobal>                 // for QFlags, qMakeForeachContainer, Q_UNUSED, foreach, qint64
 
-#include <utils/medium.h> // Medium
+#include <gcoderstyle.h>    // for HighlightColors
+#include <utils/medium.h>   // for Medium
 
-#include "findinf.h"     // FindInFiles QObject QWidget
-#include "highlighter.h" // Highlighter
+#include "findinf.h"
+#include "highlighter.h" //  for Highlighter, autoDetectHighligthMode
 
 
 #define MAXLISTS        20

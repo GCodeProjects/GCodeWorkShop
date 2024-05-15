@@ -20,9 +20,9 @@
 #ifndef DOCUMENTWIDGETPROPERTIES_H
 #define DOCUMENTWIDGETPROPERTIES_H
 
-#include <QString>
+#include <memory>   // for shared_ptr
 
-#include <memory>
+#include <QString>  // for QString
 
 class QSettings;
 

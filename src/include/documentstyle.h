@@ -20,9 +20,9 @@
 #ifndef DOCUMENTSTYLE_H
 #define DOCUMENTSTYLE_H
 
-#include <memory>
+#include <memory>   // for shared_ptr
 
-#include <QString>
+#include <QString>  // for QString
 
 class QSettings;
 

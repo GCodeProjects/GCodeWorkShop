@@ -25,7 +25,7 @@
 #include <QObject>  // for slots, Q_OBJECT
 #include <QString>  // for QString
 #include <QWidget>  // for QWidget
-#include <Qt>       // for operator|, Dialog, MSWindowsFixedSizeDialogHint
+#include <Qt>       // for WindowType, operator|, GlobalColor, WindowFlags
 #include <QtGlobal> // for qreal, QFlags
 
 class QFocusEvent;

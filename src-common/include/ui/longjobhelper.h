@@ -19,10 +19,12 @@
 #ifndef LONGJOBHELPER_H
 #define LONGJOBHELPER_H
 
-#include <time.h>
+#include <time.h>   // for clock_t
 
-#include <QString>
-#include <QProgressDialog>
+#include <QProgressDialog>  // for QProgressDialog
+#include <QString>          // for QString
+
+class QWidget;
 
 
 /**

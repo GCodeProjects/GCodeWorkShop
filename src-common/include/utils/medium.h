@@ -23,14 +23,14 @@
 #ifndef MEDIUM_H
 #define MEDIUM_H
 
-#include <QList>
-#include <QObject>     // Q_OBJECT
-#include <QString>
-#include <QStringList>
+#include <QList>        // for QList
+#include <QObject>      // for QObject, Q_OBJECT, signals
+#include <QString>      // for QString
+#include <QStringList>  // for QStringList
 
 class QLocale;
-class QTranslator;
 class QSettings;
+class QTranslator;
 
 
 /**

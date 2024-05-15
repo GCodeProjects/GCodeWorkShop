@@ -20,24 +20,35 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QChar>
-#include <QIcon>
-#include <QIODevice>
-#include <QScrollBar>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <Qt>              // Qt::WindowFlags
-#include <QTextCharFormat>
-#include <QTextCursor>
-#include <QtGlobal>        // Q_UNUSED
-#include <QTimer>
-#include <QWidget>
+#include <QApplication>     // for QApplication, qApp
+#include <QBrush>           // for QBrush
+#include <QChar>            // for QChar
+#include <QComboBox>        // for QComboBox
+#include <QIODevice>        // for QIODevice
+#include <QIcon>            // for QIcon
+#include <QLabel>           // for QLabel
+#include <QLineEdit>        // for QLineEdit
+#include <QPlainTextEdit>   // for QPlainTextEdit
+#include <QPushButton>      // for QPushButton
+#include <QScrollBar>       // for QScrollBar
+#include <QSerialPort>      // for QSerialPort
+#include <QSettings>        // for QSettings
+#include <QString>          // for QString, QCharRef
+#include <QStringList>      // for QStringList
+#include <QTextCharFormat>  // for QTextCharFormat
+#include <QTextCursor>      // for QTextCursor
+#include <QTimer>           // for QTimer
+#include <QToolButton>      // for QToolButton
+#include <QVariant>         // for QVariant
+#include <Qt>               // for GlobalColor, FocusReason, WidgetAttribute, WindowFlags
+#include <QtGlobal>         // for QFlags, Q_UNUSED, Q_OS_WIN32
 
-#include <utils/medium.h> // Medium
+class QWidget;
 
-#include "serialporttestdialog.h"   // SerialPortTestDialog QDialog QObject
-#include "serialportconfigdialog.h" // SerialPortConfigDialog
+#include <utils/medium.h>   // for Medium
+
+#include "serialportconfigdialog.h" //  for SerialPortConfigDialog
+#include "serialporttestdialog.h"
 
 
 SerialPortTestDialog::SerialPortTestDialog(QWidget* parent, Qt::WindowFlags f) : QDialog(parent, f)

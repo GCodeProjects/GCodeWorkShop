@@ -21,14 +21,17 @@
 // see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
 #define _USE_MATH_DEFINES
 
-#include <cmath>     // cos() pow() sin() sqrt() tan() trunc() M_PI
+#include <cmath>     // M_PI, abs, cos, pow, sin, sqrt, tan, trunc
 
-#include <QtDebug>                 // qDebug()
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QString>
+#include <QChar>                    // for operator==, QChar
+#include <QRegularExpression>       // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
+#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
+#include <QString>                  // for QString
+#include <Qt>                       // for CaseInsensitive
+#include <QtDebug>                  // for QNoDebug, qDebug
+#include <QtGlobal>                 // for qDebug
 
-#include <utils/expressionparser.h>
+#include <utils/expressionparser.h> // IWYU pragma: associated
 
 
 int Utils::processBrc(QString* str)

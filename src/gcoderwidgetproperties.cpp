@@ -27,7 +27,7 @@
 #include <documentwidgetproperties.h>   // for DocumentWidgetProperties
 #include <gcoderwidgetproperties.h>     // IWYU pragma: associated
 
-#include "gcoder.h"
+#include "gcoder.h"         // for DOCUMENT_TYPE
 #include "highlightmode.h"  // for MODE_AUTO
 
 

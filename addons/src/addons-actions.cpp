@@ -17,17 +17,19 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <functional>   // for function
+
 #include <QAction>          // for QAction
 #include <QApplication>     // for QApplication
 #include <QIcon>            // for QIcon
 #include <QMessageBox>      // for QMessageBox
-#include <QPlainTextEdit>   // for QPlainTextEdit
 #include <QStringList>      // for QStringList
 #include <Qt>               // for BusyCursor
 
 #include <addons-actions.h>
+#include <document.h>           // for Document
 #include <edytornc.h>           // for EdytorNc
-#include <gcoderdocument.h>
+#include <gcoderdocument.h>     // for GCoderDocument
 #include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 #include <utils/medium.h>       // for Medium
 #include <utils/splitfile.h>    // for splitFile

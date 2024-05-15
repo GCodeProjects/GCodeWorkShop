@@ -25,6 +25,7 @@
 
 class QString;
 
+
 namespace Utils {
 
 /**

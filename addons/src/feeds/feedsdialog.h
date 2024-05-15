@@ -22,7 +22,7 @@
 #define FEEDSDIALOG_H
 
 #include <QDialog>  // for QDialog
-#include <QObject>  // for slots, Q_OBJECT
+#include <QObject>  // for Q_OBJECT, slots
 #include <QPointer> // for QPointer
 #include <QString>  // for QString
 

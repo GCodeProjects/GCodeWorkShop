@@ -41,8 +41,8 @@
 #include <QVBoxLayout>      // for QVBoxLayout
 #include <QVariant>         // for QVariant
 #include <QWidget>          // for QWidget
-#include <Qt>               // for operator|, AlignRight, AlignVCenter
-#include <QtGlobal>         // for qreal, qMax, QFlags
+#include <Qt>               // for AlignmentFlag, GlobalColor, operator|, WidgetAttribute
+#include <QtGlobal>         // for qreal, QFlags, qMax
 
 #include <utils/removezeros.h>  // for Utils::removeZeros
 

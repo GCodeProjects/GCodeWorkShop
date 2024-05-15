@@ -19,9 +19,11 @@
 
 #include <algorithm>    // for max, min
 
+#include <QChar>            // for QChar
 #include <QPlainTextEdit>   // for QPlainTextEdit
 #include <QTextCursor>      // for QTextCursor, QTextCursor::KeepAnchor, QTextCursor::MoveAnchor, QTextCursor::End
 
+#include <document.h>       // for Document
 #include <edytornc.h>       // for EdytorNc
 #include <gcoderdocument.h> //
 

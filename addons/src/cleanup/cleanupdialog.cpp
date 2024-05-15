@@ -18,13 +18,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QAbstractItemView>    // for QAbstractItemView, QAbstractItemView::NoSelection
+#include <QAbstractItemView>    // for QAbstractItemView
 #include <QAction>              // for QAction
 #include <QApplication>         // for QApplication
+#include <QBrush>               // for QBrush
 #include <QColor>               // for QColor
 #include <QCursor>              // for QCursor
 #include <QIcon>                // for QIcon
-#include <QKeySequence>         // for QKeySequence, QKeySequence::Delete
+#include <QKeySequence>         // for QKeySequence
 #include <QList>                // for QList
 #include <QMenu>                // for QMenu
 #include <QPlainTextEdit>       // for QPlainTextEdit
@@ -39,12 +40,12 @@
 #include <QTableWidget>         // for QTableWidget
 #include <QTableWidgetItem>     // for QTableWidgetItem
 #include <QTextCharFormat>      // for QTextCharFormat
-#include <QTextCursor>          // for QTextCursor, QTextCursor::StartOfBlock
+#include <QTextCursor>          // for QTextCursor
 #include <QTextDocument>        // for QTextDocument
-#include <QTextEdit>            // for QTextEdit, QTextEdit::ExtraSelection
+#include <QTextEdit>            // for QTextEdit
 #include <QVariant>             // for QVariant
-#include <Qt>                   // for operator|, AlignLeft, AlignVCenter, Checked, ItemIsEnabled, ItemIsUserCheckable
-#include <QtGlobal>             // for QFlags, Q_UNUSED
+#include <Qt>                   // for operator|, AlignmentFlag, CheckState, ItemFlag, ContextMenuPolicy, GlobalColor
+#include <QtGlobal>             // for QFlags, QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, QTypeInfo<>::isComplex
 
 #include "cleanupdialog.h"
 #include "cleanupoptions.h" // for CleanUpOptions

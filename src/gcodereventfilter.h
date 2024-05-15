@@ -20,10 +20,10 @@
 #ifndef TOOLTIPEVENTFILTER_H
 #define TOOLTIPEVENTFILTER_H
 
-#include <QHash>
-#include <QRegularExpression>
-#include <QString>
-#include <QObject>
+#include <QHash>                // for QHash
+#include <QObject>              // for QObject, Q_OBJECT, signals
+#include <QRegularExpression>   // for QRegularExpression
+#include <QString>              // for QString
 
 class QEvent;
 class QHelpEvent;

@@ -16,9 +16,12 @@
  * limitations under the License.
  */
 
-#include <QApplication>
+#include <QApplication> // for QApplication
+#include <Qt>           // for CursorShape, WindowModality, WindowType
 
-#include "ui/longjobhelper.h"
+class QWidget;
+
+#include <ui/longjobhelper.h>   // IWYU pragma: associated
 
 
 LongJobHelper::LongJobHelper(QWidget* parent,

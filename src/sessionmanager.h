@@ -24,11 +24,10 @@
 #include <QObject>      // for QObject, Q_OBJECT, signals
 #include <QString>      // for QString
 #include <QStringList>  // for QStringList
-#include <QtGlobal>     // for QTypeInfo<>::isLarge, QTypeInfo<>::isStatic, QTypeInfo<>::isComplex
-
-#include <documentinfo.h>   // for DocumentInfo
 
 class QSettings;
+
+#include <documentinfo.h>   // for DocumentInfo
 
 class DocumentManager;
 

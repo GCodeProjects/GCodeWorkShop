@@ -23,6 +23,7 @@
 class QSettings;
 class QWidget;
 
+
 namespace Addons {
 void doBhc(QWidget* parent, QSettings* settings);
 }

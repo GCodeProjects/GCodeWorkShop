@@ -54,18 +54,18 @@
 class QMenu;
 
 #include <document.h>
-#include <documentinfo.h>              // for DocumentInfo, DocumentInfo::Ptr
-#include <documentstyle.h>             // for DocumentStyle, DocumentStyle::Ptr
-#include <documentwidgetproperties.h>  // for DocumentWidgetProperties, DocumentWidgetProperties::Ptr
-#include <gcoderdocument.h>         // IWYU pragma: associated
-#include <utils/guessfilename.h>    // for guessFileNameByComments, guessFileNameByProgNum, FileExt
-#include <utils/medium.h>           // for Medium
-#include <utils/removezeros.h>      // for removeZeros
+#include <documentinfo.h>               // for DocumentInfo, DocumentInfo::Ptr
+#include <documentstyle.h>              // for DocumentStyle, DocumentStyle::Ptr
+#include <documentwidgetproperties.h>   // for DocumentWidgetProperties, DocumentWidgetProperties::Ptr
+#include <gcoderdocument.h>             // IWYU pragma: associated
+#include <utils/guessfilename.h>        // for guessFileNameByComments, guessFileNameByProgNum, FileExt
+#include <utils/medium.h>               // for Medium
+#include <utils/removezeros.h>          // for removeZeros
 
-#include "capslockeventfilter.h"
-#include "gcoder.h"
+#include "capslockeventfilter.h"    // for CapsLockEventFilter
+#include "gcoder.h"                 // for DOCUMENT_TYPE
 #include "gcodereventfilter.h"      // for GCoderEventFilter
-#include "gcoderinfo.h"
+#include "gcoderinfo.h"             // for GCoderInfo
 #include "gcoderstyle.h"            // for GCoderStyle
 #include "gcoderwidgetproperties.h" // for GCoderWidgetProperties, SHOW_FILENAME, SHOW_FILEPATH, SHOW_PROGTITLE
 #include "highlighter.h"            // for Highlighter, autoDetectHighligthMode

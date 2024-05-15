@@ -28,9 +28,9 @@
 #include <QString>  // for QString
 #include <Qt>       // for WindowFlags, Dialog
 
-#include "ui_sessionnamedialog.h"  // for Ui::SessionNameDialog
-
 class QWidget;
+
+#include "ui_sessionnamedialog.h"  // for Ui::SessionNameDialog
 
 
 class SessionNameDialog: public QDialog, private Ui::SessionNameDialog

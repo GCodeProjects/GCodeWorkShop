@@ -23,23 +23,20 @@
 #ifndef SETUPDIALOG_H
 #define SETUPDIALOG_H
 
-#include <QColorDialog>
-#include <QDialog>
-#include <QDir>
-#include <QFileDialog>
-#include <QFileInfo>
-#include <QFontDialog>
-#include <QObject>
-#include <Qt>      // Qt::WindowFlags
-#include <QWidget>
-
-#include "gcoderstyle.h"
-#include "gcoderwidgetproperties.h"
-
-#include "ui_setupdialog.h"
+#include <QDialog>      // for QDialog
+#include <QObject>      // for slots, Q_OBJECT
+#include <QString>      // for QString
+#include <QStringList>  // for QStringList
+#include <Qt>           // for WindowType, WindowFlags
 
 class QAbstractButton;
 class QButtonGroup;
+class QWidget;
+
+#include <gcoderstyle.h>            // for GCoderStyle
+#include <gcoderwidgetproperties.h> // for GCoderWidgetProperties
+
+#include "ui_setupdialog.h" // for Ui::SetupDialog
 
 
 struct AppConfig  {

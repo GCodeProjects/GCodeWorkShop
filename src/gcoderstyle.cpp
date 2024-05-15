@@ -26,8 +26,9 @@
 #include <QVariant>         // for QVariant
 
 #include <documentstyle.h>  // for DocumentStyle
-#include "gcoder.h"
 #include <gcoderstyle.h>    // IWYU pragma: associated
+
+#include "gcoder.h" // for DOCUMENT_TYPE
 
 
 #define CFG_SECTION_GCODESTYLE  "GCoderStyle"

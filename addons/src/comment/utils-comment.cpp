@@ -21,7 +21,7 @@
 #include <QChar>        // for operator==, QChar, QChar::ParagraphSeparator
 #include <QString>      // for QString, QCharRef
 #include <QStringList>  // for QStringList
-#include <QtGlobal>     // for foreach
+#include <QtGlobal>     // for QForeachContainer, qMakeForeachContainer, foreach
 
 #include "utils-comment.h"
 

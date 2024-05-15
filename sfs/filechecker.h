@@ -29,9 +29,9 @@
 #include <QPointer>
 #include <QString>
 #include <QStringList>
-#include <QWidget>
 
 class QToolButton;
+class QWidget;
 
 class KDiff3App;
 

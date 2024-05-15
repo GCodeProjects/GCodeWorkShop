@@ -20,9 +20,9 @@
 #ifndef RECENTFILES_H
 #define RECENTFILES_H
 
-#include <QObject>
-#include <QString>
-#include <QStringList>
+#include <QObject>      // for QObject, Q_OBJECT, signals
+#include <QString>      // for QString
+#include <QStringList>  // for QStringList
 
 class QSettings;
 
