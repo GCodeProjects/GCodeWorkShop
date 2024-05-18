@@ -21,10 +21,10 @@ HEADERS += \
     include/documentstyle.h \
     include/documentproducer.h \
     include/documentwidgetproperties.h \
-    include/edytornc.h \
     include/gcoderdocument.h \
     include/gcoderstyle.h \
     include/gcoderwidgetproperties.h \
+    include/gcodeworkshop.h \
     include/utils/expressionparser.h \
     include/utils/removezeros.h
 
@@ -60,7 +60,6 @@ SOURCES += \
     documentstyle.cpp \
     documentwidgetcloseeventfilter.cpp \
     documentwidgetproperties.cpp \
-    edytornc.cpp \
     findinf.cpp \
     gcoderdocument.cpp \
     gcodereventfilter.cpp \
@@ -68,6 +67,7 @@ SOURCES += \
     gcoderproducer.cpp \
     gcoderstyle.cpp \
     gcoderwidgetproperties.cpp \
+    gcodeworkshop.cpp \
     highlighter.cpp \
     inlinecalc.cpp \
     main.cpp \
@@ -81,8 +81,8 @@ SOURCES += \
     src/utils/removezeros.cpp
 
 FORMS += \
-    edytornc.ui \
     findinfilesdialog.ui \
+    gcodeworkshop.ui \
     newfiledialog.ui \
     sessiondialog.ui \
     sessionnamedialog.ui \

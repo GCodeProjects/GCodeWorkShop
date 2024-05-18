@@ -28,7 +28,7 @@
 
 #include <addons-actions.h>
 #include <document.h>           // for Document
-#include <edytornc.h>           // for EdytorNc
+#include <gcodeworkshop.h>      // for GCodeWorkShop
 #include <gcoderdocument.h>     // for GCoderDocument
 #include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 #include <utils/medium.h>       // for Medium
@@ -175,7 +175,7 @@ void Addons::Actions::loadIcons()
 
 void Addons::Actions::doBhc()
 {
-	Addons::doBhc(EdytorNc::instance(), Medium::instance().settings());
+	Addons::doBhc(GCodeWorkShop::instance(), Medium::instance().settings());
 }
 
 void Addons::Actions::doBlockSkip(bool remove, bool inc)
@@ -209,7 +209,7 @@ void Addons::Actions::doBlockSkipRemove()
 
 void Addons::Actions::doChamfer()
 {
-	Addons::doChamfer(EdytorNc::instance(), Medium::instance().settings());
+	Addons::doChamfer(GCodeWorkShop::instance(), Medium::instance().settings());
 }
 
 void Addons::Actions::doCleanUp()
@@ -220,7 +220,7 @@ void Addons::Actions::doCleanUp()
 		return;
 	}
 
-	if (Addons::doCleanUp(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+	if (Addons::doCleanUp(GCodeWorkShop::instance(), Medium::instance().settings(), ctx.text())) {
 		ctx.push();
 	}
 }
@@ -258,7 +258,7 @@ void Addons::Actions::doCompileMacro()
 	}
 
 	Utils::CompileMacro compiler;
-	EdytorNc* enc = EdytorNc::instance();
+	GCodeWorkShop* enc = GCodeWorkShop::instance();
 
 	if (compiler.compile(ctx.text()) == -1) {
 		QMessageBox::warning(enc, tr("EdytorNc - compile macro"), compiler.status());
@@ -280,7 +280,7 @@ void Addons::Actions::doDot()
 		return;
 	}
 
-	if (Addons::doDot(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+	if (Addons::doDot(GCodeWorkShop::instance(), Medium::instance().settings(), ctx.text())) {
 		ctx.push();
 	}
 }
@@ -315,12 +315,12 @@ void Addons::Actions::doRemoveEmptyLines()
 
 void Addons::Actions::doFeeds()
 {
-	Addons::doFeeds(EdytorNc::instance(), Medium::instance().settings());
+	Addons::doFeeds(GCodeWorkShop::instance(), Medium::instance().settings());
 }
 
 void Addons::Actions::doI2M()
 {
-	Addons::doI2M(EdytorNc::instance(), Medium::instance().settings());
+	Addons::doI2M(GCodeWorkShop::instance(), Medium::instance().settings());
 }
 
 void Addons::Actions::doI2MProg()
@@ -331,7 +331,7 @@ void Addons::Actions::doI2MProg()
 		return;
 	}
 
-	if (Addons::doI2MProg(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+	if (Addons::doI2MProg(GCodeWorkShop::instance(), Medium::instance().settings(), ctx.text())) {
 		ctx.push();
 	}
 }
@@ -344,7 +344,7 @@ void Addons::Actions::doRenumber()
 		return;
 	}
 
-	if (Addons::doRenumber(EdytorNc::instance(), Medium::instance().settings(), ctx.text())) {
+	if (Addons::doRenumber(GCodeWorkShop::instance(), Medium::instance().settings(), ctx.text())) {
 		ctx.push();
 	}
 }
@@ -357,7 +357,7 @@ void Addons::Actions::doInsertSpaces()
 		return;
 	}
 
-	LongJobHelper helper{EdytorNc::instance()};
+	LongJobHelper helper{GCodeWorkShop::instance()};
 	helper.begin(ctx.text().length(), tr("Insert space", "Slow operation title in MDIChild"));
 
 	int changed = Utils::insertSpaces(ctx.text(), [&helper](int pos) -> bool{
@@ -379,7 +379,7 @@ void Addons::Actions::doRemoveSpaces()
 		return;
 	}
 
-	LongJobHelper helper{EdytorNc::instance()};
+	LongJobHelper helper{GCodeWorkShop::instance()};
 	helper.begin(ctx.text().length(), tr("Remove space", "Slow operation title in MDIChild"));
 
 	int changed = Utils::removeSpaces(ctx.text(), [&helper](int pos) -> bool{
@@ -411,7 +411,7 @@ void Addons::Actions::doSplitProgramms()
 	}
 
 	for (QString it : list) {
-		GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(EdytorNc::instance()->newFile());
+		GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(GCodeWorkShop::instance()->newFile());
 
 		if (gdoc == nullptr) {
 			continue;
@@ -432,10 +432,10 @@ void Addons::Actions::doSwapAxes()
 		return;
 	}
 
-	Addons::doSwapAxes(EdytorNc::instance(), Medium::instance().settings(), ctx.textEdit());
+	Addons::doSwapAxes(GCodeWorkShop::instance(), Medium::instance().settings(), ctx.textEdit());
 }
 
 void Addons::Actions::doTriangle()
 {
-	Addons::doTriangle(EdytorNc::instance(), Medium::instance().settings());
+	Addons::doTriangle(GCodeWorkShop::instance(), Medium::instance().settings());
 }

@@ -25,7 +25,7 @@
 #include <QString>              // for QString
 #include <QtGlobal>             // for Q_INIT_RESOURCE
 
-#include <edytornc.h>           // for EdytorNc
+#include <gcodeworkshop.h>      // for GCodeWorkShop
 #include <QtSingleApplication>  // for QtSingleApplication
 #include <utils/medium.h>       // for Medium
 
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 	bool argProccesed;
 
 	Q_INIT_RESOURCE(application);
-	QtSingleApplication app("EdytorNC", argc, argv);
+	QtSingleApplication app("GCodeWorkShop", argc, argv);
 
 	QString txMessage;
 
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 	Medium& medium = Medium::instance();
 	medium.addTranslationUnit("kdiff3");
 	medium.updateTranslation();
-	EdytorNc* mw = EdytorNc::instance();
+	GCodeWorkShop* mw = GCodeWorkShop::instance();
 
 	argProccesed = false;
 

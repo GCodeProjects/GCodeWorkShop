@@ -24,7 +24,7 @@
 #include <QTextCursor>      // for QTextCursor, QTextCursor::KeepAnchor, QTextCursor::MoveAnchor, QTextCursor::End
 
 #include <document.h>       // for Document
-#include <edytornc.h>       // for EdytorNc
+#include <gcodeworkshop.h>  // for GCodeWorkShop
 #include <gcoderdocument.h> //
 
 #include "addons-context.h"
@@ -32,7 +32,7 @@
 
 bool Addons::Context::pull(int mode)
 {
-	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(EdytorNc::instance()->activeDocument());
+	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(GCodeWorkShop::instance()->activeDocument());
 
 	if (!gdoc) {
 		return false;

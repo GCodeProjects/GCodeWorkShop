@@ -20,8 +20,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef EDYTORNC_H
-#define EDYTORNC_H
+#ifndef GCODEWORKSHOP_H
+#define GCODEWORKSHOP_H
 
 #include <QByteArray>   // for QByteArray
 #include <QMainWindow>  // for QMainWindow
@@ -74,18 +74,18 @@ class Actions;
 }
 
 namespace Ui {
-class EdytorNc;
+class GCodeWorkShop;
 }
 
 
-class EdytorNc : public QMainWindow
+class GCodeWorkShop : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	static EdytorNc* instance();
+	static GCodeWorkShop* instance();
 
-	~EdytorNc();
+	~GCodeWorkShop();
 
 	void resizeEvent(QResizeEvent* event);
 	void moveEvent(QMoveEvent* event);
@@ -97,10 +97,10 @@ public:
 	QString lastOpenedPath() const;
 
 protected:
-	Ui::EdytorNc* ui;
-	static EdytorNc* SINGLETON;
+	Ui::GCodeWorkShop* ui;
+	static GCodeWorkShop* SINGLETON;
 
-	EdytorNc(Medium* medium);
+	GCodeWorkShop(Medium* medium);
 
 	Medium* mMedium;
 
@@ -386,4 +386,4 @@ private:
 	QPointer<QFileSystemWatcher> fileChangeMonitor;
 };
 
-#endif // EDYTORNC_H
+#endif // GCODEWORKSHOP_H

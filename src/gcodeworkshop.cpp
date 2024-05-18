@@ -109,10 +109,10 @@
 #include <documentmanager.h>            // for DocumentManager
 #include <documentstyle.h>              // for DocumentStyle::Ptr, DocumentStyle
 #include <documentwidgetproperties.h>   // for DocumentWidgetProperties::Ptr, DocumentWidgetProperties
-#include <edytornc.h>                   // IWYU pragma: associated
 #include <gcoderdocument.h>             // for GCoderDocument
 #include <gcoderstyle.h>                // for GCoderStyle
 #include <gcoderwidgetproperties.h>     // for GCoderWidgetProperties
+#include <gcodeworkshop.h>              // IWYU pragma: associated
 #include <kdiff3/kdiff3.h>              // KDiff3App
 #include <kdiff3/common.h>              // getFilters()
 #include <serialportconfigdialog.h>     // SerialPortConfigDialog
@@ -132,30 +132,30 @@
 #include "sessionmanager.h"         // for SessionManager
 #include "setupdialog.h"            // for AppConfig, SetupDialog
 #include "tooltips.h"               // for writeTooltipFile
-#include "ui_edytornc.h"            // for Ui::EdytorNc
+#include "ui_gcodeworkshop.h"       // for Ui::GCodeWorkShop
 
 
 #define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
 
-EdytorNc* EdytorNc::SINGLETON;
+GCodeWorkShop* GCodeWorkShop::SINGLETON;
 
-EdytorNc* EdytorNc::instance()
+GCodeWorkShop* GCodeWorkShop::instance()
 {
 	if (SINGLETON == 0) {
-		SINGLETON = new EdytorNc(&Medium::instance());
+		SINGLETON = new GCodeWorkShop(&Medium::instance());
 	}
 
 	return SINGLETON;
 }
 
-EdytorNc::EdytorNc(Medium* medium)
+GCodeWorkShop::GCodeWorkShop(Medium* medium)
 	: QMainWindow(nullptr)
 {
 	mMedium = medium;
 
 	setAttribute(Qt::WA_DeleteOnClose);
 
-	ui = new Ui::EdytorNc();
+	ui = new Ui::GCodeWorkShop();
 	ui->setupUi(this);
 
 	findToolBar = nullptr;
@@ -253,7 +253,7 @@ EdytorNc::EdytorNc(Medium* medium)
 	clipboardLoad();
 }
 
-EdytorNc::~EdytorNc()
+GCodeWorkShop::~GCodeWorkShop()
 {
 	proc = findChild<QProcess*>();
 
@@ -269,7 +269,7 @@ EdytorNc::~EdytorNc()
 	delete ui;
 }
 
-void EdytorNc::resizeEvent(QResizeEvent* event)
+void GCodeWorkShop::resizeEvent(QResizeEvent* event)
 {
 	if (windowState() == Qt::WindowNoState && event->oldSize().isValid()) {
 		mMWConfig.size = event->size();
@@ -278,7 +278,7 @@ void EdytorNc::resizeEvent(QResizeEvent* event)
 	QMainWindow::resizeEvent(event);
 }
 
-void EdytorNc::moveEvent(QMoveEvent* event)
+void GCodeWorkShop::moveEvent(QMoveEvent* event)
 {
 	if (windowState() == Qt::WindowNoState) {
 		mMWConfig.pos = geometry().topLeft();
@@ -287,17 +287,17 @@ void EdytorNc::moveEvent(QMoveEvent* event)
 	QMainWindow::moveEvent(event);
 }
 
-Addons::Actions* EdytorNc::addonsActions()
+Addons::Actions* GCodeWorkShop::addonsActions()
 {
 	return m_addonsActions;
 }
 
-DocumentManager* EdytorNc::documentManager() const
+DocumentManager* GCodeWorkShop::documentManager() const
 {
 	return m_documentManager;
 }
 
-void EdytorNc::setMdiTabbedMode(bool tabbed)
+void GCodeWorkShop::setMdiTabbedMode(bool tabbed)
 {
 	m_MdiTabbedMode = tabbed;
 
@@ -315,17 +315,17 @@ void EdytorNc::setMdiTabbedMode(bool tabbed)
 	}
 }
 
-void EdytorNc::closeCurrentWindow()
+void GCodeWorkShop::closeCurrentWindow()
 {
 	ui->mdiArea->closeActiveSubWindow();
 }
 
-void EdytorNc::closeAllMdiWindows()
+void GCodeWorkShop::closeAllMdiWindows()
 {
 	ui->mdiArea->closeAllSubWindows();
 }
 
-void EdytorNc::closeEvent(QCloseEvent* event)
+void GCodeWorkShop::closeEvent(QCloseEvent* event)
 {
 	if (commApp) {
 		QMessageBox::StandardButton result = QMessageBox::warning(this,
@@ -354,7 +354,7 @@ void EdytorNc::closeEvent(QCloseEvent* event)
 	}
 }
 
-Document* EdytorNc::newFileFromTemplate()
+Document* GCodeWorkShop::newFileFromTemplate()
 {
 	Document* doc = 0;
 
@@ -389,7 +389,7 @@ Document* EdytorNc::newFileFromTemplate()
 //
 //**************************************************************************************************
 
-Document* EdytorNc::newFile()
+Document* GCodeWorkShop::newFile()
 {
 	Document* doc = createDocument(GCoder::DOCUMENT_TYPE);
 
@@ -405,7 +405,7 @@ Document* EdytorNc::newFile()
 //
 //**************************************************************************************************
 
-void EdytorNc::open(const QDir& dir)
+void GCodeWorkShop::open(const QDir& dir)
 {
 	const QString& filters = getFilters(m_extensions);
 
@@ -420,13 +420,13 @@ void EdytorNc::open(const QDir& dir)
 	}
 }
 
-void EdytorNc::open()
+void GCodeWorkShop::open()
 {
 	open(currentPath());
 	statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
-void EdytorNc::openExample()
+void GCodeWorkShop::openExample()
 {
 	QString dir;
 
@@ -441,7 +441,7 @@ void EdytorNc::openExample()
 	statusBar()->showMessage(tr("File loaded"), 5000);
 }
 
-void EdytorNc::openFile(const QString& fileName)
+void GCodeWorkShop::openFile(const QString& fileName)
 {
 	GCoderInfo* info = new GCoderInfo();
 	info->filePath = fileName;
@@ -450,7 +450,7 @@ void EdytorNc::openFile(const QString& fileName)
 	loadFile(DocumentInfo::Ptr(info), true);
 }
 
-bool EdytorNc::save(Document* doc, bool forceSaveAs)
+bool GCodeWorkShop::save(Document* doc, bool forceSaveAs)
 {
 	if (doc->isUntitled() || forceSaveAs) {
 		QString oldFileName;
@@ -519,7 +519,7 @@ bool EdytorNc::save(Document* doc, bool forceSaveAs)
 	return status;
 }
 
-bool EdytorNc::save()
+bool GCodeWorkShop::save()
 {
 	Document* doc = activeDocument();
 
@@ -539,7 +539,7 @@ bool EdytorNc::save()
 	return saved;
 }
 
-bool EdytorNc::saveAll()
+bool GCodeWorkShop::saveAll()
 {
 	bool saved = true;
 	int i = 0;
@@ -560,7 +560,7 @@ bool EdytorNc::saveAll()
 	return saved;
 }
 
-bool EdytorNc::saveAs()
+bool GCodeWorkShop::saveAs()
 {
 	Document* doc = activeDocument();
 
@@ -580,7 +580,7 @@ bool EdytorNc::saveAs()
 	return saved;
 }
 
-bool EdytorNc::maybeSaveAll()
+bool GCodeWorkShop::maybeSaveAll()
 {
 	bool saved = true;
 
@@ -593,7 +593,7 @@ bool EdytorNc::maybeSaveAll()
 	return saved;
 }
 
-bool EdytorNc::maybeSave(Document* doc)
+bool GCodeWorkShop::maybeSave(Document* doc)
 {
 	if (doc->isModified()) {
 		QMessageBox msgBox;
@@ -628,7 +628,7 @@ bool EdytorNc::maybeSave(Document* doc)
 	return true;
 }
 
-void EdytorNc::printFile()
+void GCodeWorkShop::printFile()
 {
 #ifndef QT_NO_PRINTER
 
@@ -660,7 +660,7 @@ void EdytorNc::printFile()
 #endif
 }
 
-void EdytorNc::filePrintPreview()
+void GCodeWorkShop::filePrintPreview()
 {
 #ifndef QT_NO_PRINTER
 
@@ -686,7 +686,7 @@ void EdytorNc::filePrintPreview()
 #endif
 }
 
-void EdytorNc::printPreview(QPrinter* printer)
+void GCodeWorkShop::printPreview(QPrinter* printer)
 {
 #ifndef QT_NO_PRINTER
 
@@ -702,7 +702,7 @@ void EdytorNc::printPreview(QPrinter* printer)
 #endif
 }
 
-void EdytorNc::cut()
+void GCodeWorkShop::cut()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -711,7 +711,7 @@ void EdytorNc::cut()
 	}
 }
 
-void EdytorNc::copy()
+void GCodeWorkShop::copy()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -720,7 +720,7 @@ void EdytorNc::copy()
 	}
 }
 
-void EdytorNc::findInFl()
+void GCodeWorkShop::findInFl()
 {
 	if (findFiles == nullptr) {
 		findFiles = new FindInFiles(ui->splitter);
@@ -747,7 +747,7 @@ void EdytorNc::findInFl()
 	}
 }
 
-bool EdytorNc::findNext()
+bool GCodeWorkShop::findNext()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	bool hasMdiChild = (gdoc != 0);
@@ -777,7 +777,7 @@ bool EdytorNc::findNext()
 	return found;
 }
 
-bool EdytorNc::findPrevious()
+bool GCodeWorkShop::findPrevious()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 	bool hasMdiChild = (gdoc != 0);
@@ -809,7 +809,7 @@ bool EdytorNc::findPrevious()
 	return found;
 }
 
-void EdytorNc::replaceNext()
+void GCodeWorkShop::replaceNext()
 {
 	QPalette palette;
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
@@ -839,7 +839,7 @@ void EdytorNc::replaceNext()
 	replaceAllAct->setEnabled(true);
 }
 
-void EdytorNc::replacePrevious()
+void GCodeWorkShop::replacePrevious()
 {
 	QPalette palette;
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
@@ -870,7 +870,7 @@ void EdytorNc::replacePrevious()
 	replaceAllAct->setEnabled(true);
 }
 
-void EdytorNc::replaceAll()
+void GCodeWorkShop::replaceAll()
 {
 	QPalette palette;
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
@@ -903,7 +903,7 @@ void EdytorNc::replaceAll()
 	replaceAllAct->setEnabled(true);
 }
 
-void EdytorNc::selAll()
+void GCodeWorkShop::selAll()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -912,7 +912,7 @@ void EdytorNc::selAll()
 	}
 }
 
-void EdytorNc::config()
+void GCodeWorkShop::config()
 {
 	AppConfig config;
 	config.editorProperties = *m_documentManager->documentWidgetProperties(GCoder::DOCUMENT_TYPE);
@@ -959,7 +959,7 @@ void EdytorNc::config()
 	delete setUpDialog;
 }
 
-void EdytorNc::readOnly()
+void GCodeWorkShop::readOnly()
 {
 	if (activeDocument()) {
 		activeDocument()->setReadOnly(readOnlyAct->isChecked());
@@ -968,7 +968,7 @@ void EdytorNc::readOnly()
 	updateMenus();
 }
 
-void EdytorNc::goToLine(const QString& fileName, int line)
+void GCodeWorkShop::goToLine(const QString& fileName, int line)
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -984,7 +984,7 @@ void EdytorNc::goToLine(const QString& fileName, int line)
 	}
 }
 
-void EdytorNc::createDiffApp()
+void GCodeWorkShop::createDiffApp()
 {
 	if (diffApp == nullptr) {
 		diffApp = new KDiff3App(ui->splitter, "DiffApp", m_extensions);
@@ -993,7 +993,7 @@ void EdytorNc::createDiffApp()
 	}
 }
 
-void EdytorNc::doDiffL()
+void GCodeWorkShop::doDiffL()
 {
 	QString fileName;
 
@@ -1023,7 +1023,7 @@ void EdytorNc::doDiffL()
 	}
 }
 
-void EdytorNc::doDiffR()
+void GCodeWorkShop::doDiffR()
 {
 	QString fileName;
 
@@ -1053,7 +1053,7 @@ void EdytorNc::doDiffR()
 	}
 }
 
-void EdytorNc::diffTwoFiles(const QString& filename1, const QString& filename2)
+void GCodeWorkShop::diffTwoFiles(const QString& filename1, const QString& filename2)
 {
 	createDiffApp();
 
@@ -1070,7 +1070,7 @@ void EdytorNc::diffTwoFiles(const QString& filename1, const QString& filename2)
 	}
 }
 
-void EdytorNc::diffEditorFile()
+void GCodeWorkShop::diffEditorFile()
 {
 	Document* doc = activeDocument();
 
@@ -1120,7 +1120,7 @@ void EdytorNc::diffEditorFile()
 	}
 }
 
-void EdytorNc::doDiff()
+void GCodeWorkShop::doDiff()
 {
 	QString fileName;
 
@@ -1145,7 +1145,7 @@ void EdytorNc::doDiff()
 	}
 }
 
-void EdytorNc::doCalc()
+void GCodeWorkShop::doCalc()
 {
 	if (!QFile::exists(m_calcBinary)) {
 		QMessageBox::information(this, tr("Information"),
@@ -1172,7 +1172,7 @@ void EdytorNc::doCalc()
 	}
 }
 
-void EdytorNc::deleteText()
+void GCodeWorkShop::deleteText()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -1181,7 +1181,7 @@ void EdytorNc::deleteText()
 	}
 }
 
-void EdytorNc::paste()
+void GCodeWorkShop::paste()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -1190,21 +1190,21 @@ void EdytorNc::paste()
 	}
 }
 
-void EdytorNc::undo()
+void GCodeWorkShop::undo()
 {
 	if (activeDocument()) {
 		activeDocument()->undo();
 	}
 }
 
-void EdytorNc::redo()
+void GCodeWorkShop::redo()
 {
 	if (activeDocument()) {
 		activeDocument()->redo();
 	}
 }
 
-void EdytorNc::activeWindowChanged(QMdiSubWindow* window)
+void GCodeWorkShop::activeWindowChanged(QMdiSubWindow* window)
 {
 	Q_UNUSED(window);
 	Document* doc;
@@ -1225,7 +1225,7 @@ void EdytorNc::activeWindowChanged(QMdiSubWindow* window)
 	fileTreeViewChangeRootDir();
 }
 
-void EdytorNc::about()
+void GCodeWorkShop::about()
 {
 	QMessageBox::about(this, tr("About EdytorNC"),
 	                   tr("The <b>EdytorNC</b> is text editor for CNC programmers."
@@ -1255,7 +1255,7 @@ void EdytorNc::about()
 	                      "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
 }
 
-void EdytorNc::updateMenus()
+void GCodeWorkShop::updateMenus()
 {
 	Document* doc = activeDocument();
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(doc);
@@ -1355,7 +1355,7 @@ void EdytorNc::updateMenus()
 	updateStatusBar();
 }
 
-void EdytorNc::updateCurrentSerialConfig()
+void GCodeWorkShop::updateCurrentSerialConfig()
 {
 	bool hasMdiChild = (activeDocument() != nullptr);
 
@@ -1378,7 +1378,7 @@ void EdytorNc::updateCurrentSerialConfig()
 	}
 }
 
-void EdytorNc::updateStatusBar()
+void GCodeWorkShop::updateStatusBar()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -1400,7 +1400,7 @@ void EdytorNc::updateStatusBar()
 	}
 }
 
-void EdytorNc::updateWindowMenu()
+void GCodeWorkShop::updateWindowMenu()
 {
 	QString text;
 
@@ -1439,7 +1439,7 @@ void EdytorNc::updateWindowMenu()
 	}
 }
 
-Document* EdytorNc::createDocument(const QString& type)
+Document* GCodeWorkShop::createDocument(const QString& type)
 {
 	Document* doc = m_documentManager->createDocument(type, "");
 
@@ -1462,7 +1462,7 @@ Document* EdytorNc::createDocument(const QString& type)
 	return doc;
 }
 
-void EdytorNc::createActions()
+void GCodeWorkShop::createActions()
 {
 	newAct = new QAction(QIcon(":/images/filenew.png"), tr("&New"), this);
 	newAct->setShortcut(QKeySequence::New);
@@ -1698,7 +1698,7 @@ void EdytorNc::createActions()
 	connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
 
-void EdytorNc::createMenus()
+void GCodeWorkShop::createMenus()
 {
 	fileMenu = menuBar()->addMenu(tr("&File"));
 	fileMenu->addAction(newAct);
@@ -1805,7 +1805,7 @@ void EdytorNc::createMenus()
 	helpMenu->addAction(aboutQtAct);
 }
 
-void EdytorNc::createToolBars()
+void GCodeWorkShop::createToolBars()
 {
 	fileToolBar = addToolBar(tr("File"));
 	fileToolBar->setObjectName("File");
@@ -1872,7 +1872,7 @@ void EdytorNc::createToolBars()
 	windowToolBar->addAction(nextAct);
 }
 
-void EdytorNc::createStatusBar()
+void GCodeWorkShop::createStatusBar()
 {
 	labelStat1 = new QLabel("    ");
 
@@ -1929,7 +1929,7 @@ void EdytorNc::createStatusBar()
 	statusBar()->showMessage(tr("Ready"));
 }
 
-void EdytorNc::setHighLightMode(int mode)
+void GCodeWorkShop::setHighLightMode(int mode)
 {
 	bool ok;
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
@@ -1941,7 +1941,7 @@ void EdytorNc::setHighLightMode(int mode)
 	}
 }
 
-void EdytorNc::readSettings()
+void GCodeWorkShop::readSettings()
 {
 	QSettings& settings = *Medium::instance().settings();
 
@@ -2042,7 +2042,7 @@ void EdytorNc::readSettings()
 	ui->filePreviewSpinBox->setValue(settings.value("FilePreviewNo", 10).toInt());
 }
 
-void EdytorNc::writeSettings()
+void GCodeWorkShop::writeSettings()
 {
 	QSettings& settings = *Medium::instance().settings();
 
@@ -2098,12 +2098,12 @@ void EdytorNc::writeSettings()
 	}
 }
 
-Document* EdytorNc::activeDocument() const
+Document* GCodeWorkShop::activeDocument() const
 {
 	return m_documentManager->activeDocument();
 }
 
-Document* EdytorNc::findDocument(const QString& fileName)
+Document* GCodeWorkShop::findDocument(const QString& fileName)
 {
 	QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
 
@@ -2114,7 +2114,7 @@ Document* EdytorNc::findDocument(const QString& fileName)
 	return m_documentManager->findDocumentByFilePath(canonicalFilePath);
 }
 
-void EdytorNc::setActiveSubWindow(QWidget* window)
+void GCodeWorkShop::setActiveSubWindow(QWidget* window)
 {
 	if (!window) {
 		return;
@@ -2123,7 +2123,7 @@ void EdytorNc::setActiveSubWindow(QWidget* window)
 	ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow*>(window));
 }
 
-QString EdytorNc::currentPath() const
+QString GCodeWorkShop::currentPath() const
 {
 	Document* child = activeDocument();
 
@@ -2134,17 +2134,17 @@ QString EdytorNc::currentPath() const
 	return QDir::homePath();
 }
 
-QString EdytorNc::lastOpenedPath() const
+QString GCodeWorkShop::lastOpenedPath() const
 {
 	return m_lastOpenedPath;
 }
 
-void EdytorNc::setLastOpenedPath(const QString& path)
+void GCodeWorkShop::setLastOpenedPath(const QString& path)
 {
 	m_lastOpenedPath = path;
 }
 
-void EdytorNc::loadFile(const DocumentInfo::Ptr& info, bool checkAlreadyLoaded)
+void GCodeWorkShop::loadFile(const DocumentInfo::Ptr& info, bool checkAlreadyLoaded)
 {
 	QFileInfo file;
 
@@ -2178,17 +2178,17 @@ void EdytorNc::loadFile(const DocumentInfo::Ptr& info, bool checkAlreadyLoaded)
 	}
 }
 
-void EdytorNc::recentFilesChanged()
+void GCodeWorkShop::recentFilesChanged()
 {
 	m_recentFiles->save(Medium::instance().settings());
 }
 
-void EdytorNc::fileOpenRecent(QAction* act)
+void GCodeWorkShop::fileOpenRecent(QAction* act)
 {
 	openFile(act->data().toString());
 }
 
-void EdytorNc::updateRecentFilesMenu(const QStringList& fileList)
+void GCodeWorkShop::updateRecentFilesMenu(const QStringList& fileList)
 {
 	recentFileMenu->clear();
 
@@ -2198,12 +2198,12 @@ void EdytorNc::updateRecentFilesMenu(const QStringList& fileList)
 	}
 }
 
-void EdytorNc::loadFoundedFile(const QString& fileName)
+void GCodeWorkShop::loadFoundedFile(const QString& fileName)
 {
 	openFile(fileName);
 }
 
-void EdytorNc::messReceived(const QString& text)
+void GCodeWorkShop::messReceived(const QString& text)
 {
 	QString str = text;
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
@@ -2220,7 +2220,7 @@ void EdytorNc::messReceived(const QString& text)
 	emit needToShow();
 }
 
-void EdytorNc::createFindToolBar()
+void GCodeWorkShop::createFindToolBar()
 {
 	QString selText;
 	QTextCursor cursor;
@@ -2357,7 +2357,7 @@ void EdytorNc::createFindToolBar()
 	findEdit->selectAll();
 }
 
-void EdytorNc::closeFindToolBar()
+void GCodeWorkShop::closeFindToolBar()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -2376,7 +2376,7 @@ void EdytorNc::closeFindToolBar()
 	//findToolBar = nullptr;
 }
 
-void EdytorNc::findTextChanged()
+void GCodeWorkShop::findTextChanged()
 {
 	if (findEdit->text().contains(QRegularExpression("\\$\\$"))
 	        || findEdit->text().contains(
@@ -2399,7 +2399,7 @@ void EdytorNc::findTextChanged()
 	}
 }
 
-void EdytorNc::createSerialToolBar()
+void GCodeWorkShop::createSerialToolBar()
 {
 	if (serialToolBar == nullptr) {
 		serialToolBar = new QToolBar(tr("Serial port toolbar"));
@@ -2482,7 +2482,7 @@ void EdytorNc::createSerialToolBar()
 	updateCurrentSerialConfig();
 }
 
-void EdytorNc::closeSerialToolbar()
+void GCodeWorkShop::closeSerialToolbar()
 {
 	serialToolBar->close();
 	delete (serialToolBar);
@@ -2490,7 +2490,7 @@ void EdytorNc::closeSerialToolbar()
 	showSerialToolBarAct->setChecked(false);
 }
 
-void EdytorNc::attachToDirButtonClicked(bool attach)
+void GCodeWorkShop::attachToDirButtonClicked(bool attach)
 {
 	QFile file;
 
@@ -2517,12 +2517,12 @@ void EdytorNc::attachToDirButtonClicked(bool attach)
 	}
 }
 
-void EdytorNc::deAttachToDirButtonClicked()
+void GCodeWorkShop::deAttachToDirButtonClicked()
 {
 	attachToDirButtonClicked(false);
 }
 
-void EdytorNc::createUserToolTipsFile()
+void GCodeWorkShop::createUserToolTipsFile()
 {
 	QString fileName;
 
@@ -2567,7 +2567,7 @@ void EdytorNc::createUserToolTipsFile()
 	m_documentManager->setActiveDocument(fileName);
 }
 
-void EdytorNc::createGlobalToolTipsFile()
+void GCodeWorkShop::createGlobalToolTipsFile()
 {
 	QString fileName = writeTooltipFile();
 
@@ -2579,7 +2579,7 @@ void EdytorNc::createGlobalToolTipsFile()
 	m_documentManager->setActiveDocument(fileName);
 }
 
-void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
+void GCodeWorkShop::attachHighlighterToDirButtonClicked(bool attach)
 {
 	QFile file;
 
@@ -2607,17 +2607,17 @@ void EdytorNc::attachHighlighterToDirButtonClicked(bool attach)
 	}
 }
 
-void EdytorNc::attachHighlightToDirActClicked()
+void GCodeWorkShop::attachHighlightToDirActClicked()
 {
 	attachHighlighterToDirButtonClicked(true);
 }
 
-void EdytorNc::deAttachHighlightToDirActClicked()
+void GCodeWorkShop::deAttachHighlightToDirActClicked()
 {
 	attachHighlighterToDirButtonClicked(false);
 }
 
-int EdytorNc::defaultHighlightMode(const QString& filePath)
+int GCodeWorkShop::defaultHighlightMode(const QString& filePath)
 {
 	QDir dir;
 	bool ok;
@@ -2642,7 +2642,7 @@ int EdytorNc::defaultHighlightMode(const QString& filePath)
 	return MODE_AUTO;
 }
 
-void EdytorNc::projectAdd()
+void GCodeWorkShop::projectAdd()
 {
 	QFileInfo file;
 	QStandardItem* item;
@@ -2730,7 +2730,7 @@ void EdytorNc::projectAdd()
 	statusBar()->showMessage(tr("Project opened"), 5000);
 }
 
-void EdytorNc::projectSave()
+void GCodeWorkShop::projectSave()
 {
 	QString path, fileName;
 	int fileCount;
@@ -2771,7 +2771,7 @@ void EdytorNc::projectSave()
 	}
 }
 
-void EdytorNc::projectSaveAs()
+void GCodeWorkShop::projectSaveAs()
 {
 	QString fileName = projectSelectName();
 
@@ -2787,7 +2787,7 @@ void EdytorNc::projectSaveAs()
 	projectSave();
 }
 
-void EdytorNc::projectNew()
+void GCodeWorkShop::projectNew()
 {
 	if (!maybeSaveProject()) {
 		return;
@@ -2811,7 +2811,7 @@ void EdytorNc::projectNew()
 	currentProjectModified = true;
 }
 
-void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex& index)
+void GCodeWorkShop::projectTreeViewDoubleClicked(const QModelIndex& index)
 {
 	QFileInfo file;
 
@@ -2840,7 +2840,7 @@ void EdytorNc::projectTreeViewDoubleClicked(const QModelIndex& index)
 	}
 }
 
-void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex& index)
+void GCodeWorkShop::fileTreeViewDoubleClicked(const QModelIndex& index)
 {
 	QFileInfo file;
 
@@ -2875,7 +2875,7 @@ void EdytorNc::fileTreeViewDoubleClicked(const QModelIndex& index)
 	}
 }
 
-QString EdytorNc::projectSelectName()
+QString GCodeWorkShop::projectSelectName()
 {
 	QString filters = tr("EdytorNC project file (*.ncp)");
 	QString file = QFileDialog::getSaveFileName(
@@ -2887,7 +2887,7 @@ QString EdytorNc::projectSelectName()
 	return file;
 }
 
-void EdytorNc::projectOpen()
+void GCodeWorkShop::projectOpen()
 {
 	if (!maybeSaveProject()) {
 		return;
@@ -2907,7 +2907,7 @@ void EdytorNc::projectOpen()
 	projectLoad(fileName);
 }
 
-void EdytorNc::hidePanel()
+void GCodeWorkShop::hidePanel()
 {
 	ui->hSplitter->setUpdatesEnabled(false);
 
@@ -2934,7 +2934,7 @@ void EdytorNc::hidePanel()
 	ui->hSplitter->setUpdatesEnabled(true);
 }
 
-void EdytorNc::projectTreeRemoveItem()
+void GCodeWorkShop::projectTreeRemoveItem()
 {
 	QModelIndexList list = ui->projectTreeView->selectionModel()->selectedIndexes();
 
@@ -2951,7 +2951,7 @@ void EdytorNc::projectTreeRemoveItem()
 	}
 }
 
-void EdytorNc::projectLoad(const QString& projectName)
+void GCodeWorkShop::projectLoad(const QString& projectName)
 {
 	QFileInfo file;
 	QIcon icon;
@@ -3022,7 +3022,7 @@ void EdytorNc::projectLoad(const QString& projectName)
 	currentProjectModified = false;
 }
 
-bool EdytorNc::maybeSaveProject()
+bool GCodeWorkShop::maybeSaveProject()
 {
 	if (currentProjectModified) {
 		QMessageBox msgBox;
@@ -3058,7 +3058,7 @@ bool EdytorNc::maybeSaveProject()
 	return true;
 }
 
-void EdytorNc::createFileBrowseTabs()
+void GCodeWorkShop::createFileBrowseTabs()
 {
 	dirModel = new QFileSystemModel();
 	dirModel->setResolveSymlinks(true);
@@ -3080,7 +3080,7 @@ void EdytorNc::createFileBrowseTabs()
 	ui->openFileTableWidget->setToolTip(tr("Open files"));
 }
 
-void EdytorNc::updateOpenFileList()
+void GCodeWorkShop::updateOpenFileList()
 {
 	QFileInfo file;
 	QStringList labels;
@@ -3141,7 +3141,7 @@ void EdytorNc::updateOpenFileList()
 	ui->openFileTableWidget->setUpdatesEnabled(true);
 }
 
-void EdytorNc::openFileTableWidgetClicked(int x, int y)
+void GCodeWorkShop::openFileTableWidgetClicked(int x, int y)
 {
 	QTableWidgetItem* item = ui->openFileTableWidget->item(x, 1);
 
@@ -3157,7 +3157,7 @@ void EdytorNc::openFileTableWidgetClicked(int x, int y)
 	}
 }
 
-void EdytorNc::fileTreeViewChangeRootDir()
+void GCodeWorkShop::fileTreeViewChangeRootDir()
 {
 	QString path;
 
@@ -3196,7 +3196,7 @@ void EdytorNc::fileTreeViewChangeRootDir()
 	fileTreeViewChangeRootDir(path);
 }
 
-void EdytorNc::fileTreeViewChangeRootDir(const QString& path)
+void GCodeWorkShop::fileTreeViewChangeRootDir(const QString& path)
 {
 	ui->fileTreeView->setRootIndex(dirModel->index(path));
 	dirModel->setRootPath(path);
@@ -3209,7 +3209,7 @@ void EdytorNc::fileTreeViewChangeRootDir(const QString& path)
 	ui->fileTreeView->resizeColumnToContents(3);
 }
 
-bool EdytorNc::event(QEvent* event)
+bool GCodeWorkShop::event(QEvent* event)
 {
 	QString key, text;
 	QModelIndex index;
@@ -3280,7 +3280,7 @@ bool EdytorNc::event(QEvent* event)
 	return QWidget::event(event);
 }
 
-void EdytorNc::updateSessionMenus(const QStringList& sessionList)
+void GCodeWorkShop::updateSessionMenus(const QStringList& sessionList)
 {
 	sessionsMenu->clear();
 
@@ -3300,29 +3300,29 @@ void EdytorNc::updateSessionMenus(const QStringList& sessionList)
 	sessionsMenu->addActions(actionGroup->actions());
 }
 
-void EdytorNc::sessionsChanged()
+void GCodeWorkShop::sessionsChanged()
 {
 	m_sessionManager->save(Medium::instance().settings());
 }
 
-void EdytorNc::changeSession(QAction* action)
+void GCodeWorkShop::changeSession(QAction* action)
 {
 	m_sessionManager->setCurrentSession(action->text());
 }
 
-void EdytorNc::beforeCurrentSessionChanged()
+void GCodeWorkShop::beforeCurrentSessionChanged()
 {
 	storeFileInfoInSession();
 }
 
-void EdytorNc::currentSessionChanged()
+void GCodeWorkShop::currentSessionChanged()
 {
 	closeAllMdiWindows();
 	openFilesFromSession();
 	statusBar()->showMessage(tr("Session %1 loaded").arg(m_sessionManager->currentSession()), 5000);
 }
 
-void EdytorNc::openFilesFromSession()
+void GCodeWorkShop::openFilesFromSession()
 {
 	for (const DocumentInfo::Ptr& info : m_sessionManager->documentInfoList()) {
 		m_MdiWidgetsMaximized = false;
@@ -3330,7 +3330,7 @@ void EdytorNc::openFilesFromSession()
 	}
 }
 
-void EdytorNc::storeFileInfoInSession()
+void GCodeWorkShop::storeFileInfoInSession()
 {
 	QList<DocumentInfo::Ptr> infoList;
 
@@ -3342,13 +3342,13 @@ void EdytorNc::storeFileInfoInSession()
 	m_sessionManager->setDocumentInfoList(infoList);
 }
 
-void EdytorNc::showSessionDialog()
+void GCodeWorkShop::showSessionDialog()
 {
 	SessionDialog sesDialog(this, m_sessionManager);
 	sesDialog.exec();
 }
 
-void EdytorNc::savePrinterSettings(QPrinter* printer)
+void GCodeWorkShop::savePrinterSettings(QPrinter* printer)
 {
 #ifndef QT_NO_PRINTER
 
@@ -3374,7 +3374,7 @@ void EdytorNc::savePrinterSettings(QPrinter* printer)
 #endif
 }
 
-void EdytorNc::loadPrinterSettings(QPrinter* printer)
+void GCodeWorkShop::loadPrinterSettings(QPrinter* printer)
 {
 #ifndef QT_NO_PRINTER
 
@@ -3406,7 +3406,7 @@ void EdytorNc::loadPrinterSettings(QPrinter* printer)
 #endif
 }
 
-void EdytorNc::serialConfig()
+void GCodeWorkShop::serialConfig()
 {
 	SerialPortConfigDialog* serialConfigDialog = new SerialPortConfigDialog(this,
 	    configBox->currentText());
@@ -3416,7 +3416,7 @@ void EdytorNc::serialConfig()
 	}
 }
 
-void EdytorNc::loadSerialConfignames()
+void GCodeWorkShop::loadSerialConfignames()
 {
 	int id;
 	QStringList list;
@@ -3439,14 +3439,14 @@ void EdytorNc::loadSerialConfignames()
 	settings.endGroup();
 }
 
-void EdytorNc::serialConfigTest()
+void GCodeWorkShop::serialConfigTest()
 {
 	SerialPortTestDialog* trDialog = new SerialPortTestDialog(this);
 
 	trDialog->show();
 }
 
-void EdytorNc::sendButtonClicked()
+void GCodeWorkShop::sendButtonClicked()
 {
 	QString tx;
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
@@ -3471,7 +3471,7 @@ void EdytorNc::sendButtonClicked()
 	QApplication::restoreOverrideCursor();
 }
 
-void EdytorNc::receiveButtonClicked()
+void GCodeWorkShop::receiveButtonClicked()
 {
 	receiveAct->setEnabled(false);
 	sendAct->setEnabled(false);
@@ -3516,7 +3516,7 @@ void EdytorNc::receiveButtonClicked()
 	QApplication::restoreOverrideCursor();
 }
 
-void EdytorNc::fileChanged(const QString& fileName)
+void GCodeWorkShop::fileChanged(const QString& fileName)
 {
 	Document* doc = findDocument(fileName);
 	bool modified = false;
@@ -3556,7 +3556,7 @@ void EdytorNc::fileChanged(const QString& fileName)
 	}
 }
 
-void EdytorNc::startSerialPortServer()
+void GCodeWorkShop::startSerialPortServer()
 {
 	QString path = QDir::toNativeSeparators(QApplication::applicationDirPath() + "/");
 	QString fileName;
@@ -3570,7 +3570,7 @@ void EdytorNc::startSerialPortServer()
 	QProcess::startDetached(path + fileName, QStringList(), path);
 }
 
-void EdytorNc::tileSubWindowsVertycally()
+void GCodeWorkShop::tileSubWindowsVertycally()
 {
 	if (ui->mdiArea->subWindowList().isEmpty()) {
 		return;
@@ -3587,7 +3587,7 @@ void EdytorNc::tileSubWindowsVertycally()
 	}
 }
 
-void EdytorNc::clipboardChanged()
+void GCodeWorkShop::clipboardChanged()
 {
 	QStandardItem* item;
 	QFont font;
@@ -3649,7 +3649,7 @@ void EdytorNc::clipboardChanged()
 	ui->clipboardTreeView->expandAll();
 }
 
-void EdytorNc::clipboardTreeViewContextMenu(const QPoint& point)
+void GCodeWorkShop::clipboardTreeViewContextMenu(const QPoint& point)
 {
 	Q_UNUSED(point);
 
@@ -3686,7 +3686,7 @@ void EdytorNc::clipboardTreeViewContextMenu(const QPoint& point)
 	}
 }
 
-void EdytorNc::customContextMenuRequest(Document* doc, const QPoint& pos)
+void GCodeWorkShop::customContextMenuRequest(Document* doc, const QPoint& pos)
 {
 	QMenu* menu = nullptr;
 
@@ -3704,7 +3704,7 @@ void EdytorNc::customContextMenuRequest(Document* doc, const QPoint& pos)
 	}
 }
 
-QMenu* EdytorNc::doContextMenuGCoder(GCoderDocument* doc, const QPoint& pos)
+QMenu* GCodeWorkShop::doContextMenuGCoder(GCoderDocument* doc, const QPoint& pos)
 {
 	QMenu* menu = doc->createStandardContextMenu(pos);
 	menu->addSeparator();
@@ -3725,7 +3725,7 @@ QMenu* EdytorNc::doContextMenuGCoder(GCoderDocument* doc, const QPoint& pos)
 	return menu;
 }
 
-void EdytorNc::deleteFromClipboardButtonClicked()
+void GCodeWorkShop::deleteFromClipboardButtonClicked()
 {
 	QModelIndexList list = ui->clipboardTreeView->selectionModel()->selectedIndexes();
 
@@ -3742,7 +3742,7 @@ void EdytorNc::deleteFromClipboardButtonClicked()
 	}
 }
 
-void EdytorNc::clipboardSave()
+void GCodeWorkShop::clipboardSave()
 {
 	QSettings settings(Medium::instance().settingsDir() + "/clipboard", QSettings::IniFormat);
 
@@ -3762,7 +3762,7 @@ void EdytorNc::clipboardSave()
 	settings.endArray();
 }
 
-void EdytorNc::clipboardLoad()
+void GCodeWorkShop::clipboardLoad()
 {
 	QString itemText;
 	QStandardItem* item;
@@ -3809,7 +3809,7 @@ void EdytorNc::clipboardLoad()
 	ui->clipboardTreeView->expandAll();
 }
 
-void EdytorNc::doShowInLineCalc()
+void GCodeWorkShop::doShowInLineCalc()
 {
 	GCoderDocument* gdoc = dynamic_cast<GCoderDocument*>(activeDocument());
 
@@ -3818,7 +3818,7 @@ void EdytorNc::doShowInLineCalc()
 	}
 }
 
-void EdytorNc::watchFile(const QString& fileName, bool add)
+void GCodeWorkShop::watchFile(const QString& fileName, bool add)
 {
 	if (fileChangeMonitor) {
 		bool exists = fileChangeMonitor->files().contains(fileName);
