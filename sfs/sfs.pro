@@ -1,3 +1,4 @@
+# GCoderFileServer
 
 VERSION = 0.1.0.0
 TEMPLATE = app
@@ -10,11 +11,19 @@ MODULES *= kdiff3 qtsingleapplication edytornc-common
 
 include(../common.pri)
 
-#EdytorNC - SFS
 
-SOURCES = main.cpp commapp.cpp filechecker.cpp
-HEADERS = commapp.h filechecker.h
-FORMS = commapp.ui filechecker.ui
+SOURCES = \
+    filechecker.cpp \
+    gcodefileserver.cpp \
+    main.cpp
+
+HEADERS = \
+    filechecker.h \
+    gcodefileserver.h
+
+FORMS = \
+    filechecker.ui \
+    gcodefileserver.ui
 
 
 # target platforms dependencies

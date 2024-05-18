@@ -48,12 +48,12 @@
 #include <serialtransmissiondialog.h>   // for SerialTransmissionDialog
 #include <utils/medium.h>               // for Medium
 
-#include "commapp.h"
-#include "filechecker.h" // for FileChecker
-#include "ui_commapp.h"
+#include "gcodefileserver.h"
+#include "filechecker.h"        // for FileChecker
+#include "ui_gcodefileserver.h" // for Ui::GCodeFileServer
 
 
-CommApp::CommApp(QWidget* parent) : QMainWindow(parent), ui(new Ui::CommApp)
+GCodeFileServer::GCodeFileServer(QWidget* parent) : QMainWindow(parent), ui(new Ui::GCodeFileServer)
 {
 	setAttribute(Qt::WA_DeleteOnClose);
 	ui->setupUi(this);
@@ -91,12 +91,12 @@ CommApp::CommApp(QWidget* parent) : QMainWindow(parent), ui(new Ui::CommApp)
 	}
 }
 
-CommApp::~CommApp()
+GCodeFileServer::~GCodeFileServer()
 {
 	delete ui;
 }
 
-void CommApp::closeEvent(QCloseEvent* event)
+void GCodeFileServer::closeEvent(QCloseEvent* event)
 {
 	//    QMessageBox::StandardButton result = QMessageBox::warning(this, tr("EdytorNC - Serial port file server"),
 	//                                                              tr("You are trying to close a file server.\nAre you shure?"),
@@ -134,7 +134,7 @@ void CommApp::closeEvent(QCloseEvent* event)
 	//    event->accept();
 }
 
-void CommApp::saveSettings()
+void GCodeFileServer::saveSettings()
 {
 	QStringList activeConfigs;
 
@@ -156,7 +156,7 @@ void CommApp::saveSettings()
 	settings.endGroup();
 }
 
-void CommApp::loadSettings()
+void GCodeFileServer::loadSettings()
 {
 	QSettings& settings = *Medium::instance().settings();
 	settings.beginGroup("CommApp");
@@ -179,7 +179,7 @@ void CommApp::loadSettings()
 	}
 }
 
-SerialTransmissionDialog* CommApp::createSerialPortServer(QString __config)
+SerialTransmissionDialog* GCodeFileServer::createSerialPortServer(QString __config)
 {
 	SerialTransmissionDialog* spServer = new SerialTransmissionDialog(this, Qt::SubWindow,
 	    true);  // Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint
@@ -191,7 +191,7 @@ SerialTransmissionDialog* CommApp::createSerialPortServer(QString __config)
 	return spServer;
 }
 
-void CommApp::startSerialPortServer()
+void GCodeFileServer::startSerialPortServer()
 {
 	QString _config = configBox->currentText();
 
@@ -206,7 +206,7 @@ void CommApp::startSerialPortServer()
 	}
 }
 
-void CommApp::stopSerialPortServer()
+void GCodeFileServer::stopSerialPortServer()
 {
 	QString _config = configBox->currentText();
 
@@ -220,7 +220,7 @@ void CommApp::stopSerialPortServer()
 	changeActiveWindow();
 }
 
-void CommApp::createActions()
+void GCodeFileServer::createActions()
 {
 	configPortAct = new QAction(QIcon(":/images/serialconfig.png"), tr("Serial port configuration"),
 	                            this);
@@ -320,7 +320,7 @@ void CommApp::createActions()
 	//updateCurrentSerialConfig();
 }
 
-void CommApp::serialConfig()
+void GCodeFileServer::serialConfig()
 {
 	SerialPortConfigDialog* serialConfigDialog = new SerialPortConfigDialog(this,
 	    configBox->currentText());
@@ -330,7 +330,7 @@ void CommApp::serialConfig()
 	}
 }
 
-void CommApp::loadSerialConfignames()
+void GCodeFileServer::loadSerialConfignames()
 {
 	int id;
 	QStringList list;
@@ -378,7 +378,7 @@ void CommApp::loadSerialConfignames()
 //    }
 //}
 
-void CommApp::tileSubWindowsVertycally()
+void GCodeFileServer::tileSubWindowsVertycally()
 {
 	//    if(ui->mdiArea->subWindowList().isEmpty())
 	//        return;
@@ -394,7 +394,7 @@ void CommApp::tileSubWindowsVertycally()
 	//    }
 }
 
-SerialTransmissionDialog* CommApp::findMdiChild(const QString __config)
+SerialTransmissionDialog* GCodeFileServer::findMdiChild(const QString __config)
 {
 	foreach (QMdiSubWindow* window, ui->mdiArea->subWindowList()) {
 		SerialTransmissionDialog* mdiChild = qobject_cast<SerialTransmissionDialog*>(window->widget());
@@ -408,7 +408,7 @@ SerialTransmissionDialog* CommApp::findMdiChild(const QString __config)
 	return nullptr;
 }
 
-void CommApp::setActiveSubWindow(QWidget* window)
+void GCodeFileServer::setActiveSubWindow(QWidget* window)
 {
 	if (!window) {
 		return;
@@ -417,7 +417,7 @@ void CommApp::setActiveSubWindow(QWidget* window)
 	ui->mdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow*>(window));
 }
 
-SerialTransmissionDialog* CommApp::activeMdiChild()
+SerialTransmissionDialog* GCodeFileServer::activeMdiChild()
 {
 	if (QMdiSubWindow* activeSubWindow = ui->mdiArea->activeSubWindow()) {
 		return qobject_cast<SerialTransmissionDialog*>(activeSubWindow->widget());
@@ -426,7 +426,7 @@ SerialTransmissionDialog* CommApp::activeMdiChild()
 	return nullptr;
 }
 
-void CommApp::activeWindowChanged(QMdiSubWindow* window)
+void GCodeFileServer::activeWindowChanged(QMdiSubWindow* window)
 {
 	if (!window) {
 		return;
@@ -458,7 +458,7 @@ void CommApp::activeWindowChanged(QMdiSubWindow* window)
 	}
 }
 
-void CommApp::changeActiveWindow()
+void GCodeFileServer::changeActiveWindow()
 {
 	SerialTransmissionDialog* mdiChild = findMdiChild(configBox->currentText());
 
@@ -476,7 +476,7 @@ void CommApp::changeActiveWindow()
 	}
 }
 
-void CommApp::closeTab(int i)
+void GCodeFileServer::closeTab(int i)
 {
 	QTabBar* tab = ui->mdiArea->findChild<QTabBar*>();
 
@@ -485,7 +485,7 @@ void CommApp::closeTab(int i)
 	}
 }
 
-void CommApp::doPortReset()
+void GCodeFileServer::doPortReset()
 {
 	SerialTransmissionDialog* mdiChild = activeMdiChild();
 
@@ -494,7 +494,7 @@ void CommApp::doPortReset()
 	}
 }
 
-void CommApp::showNewFiles()
+void GCodeFileServer::showNewFiles()
 {
 	SerialTransmissionDialog* mdiChild = activeMdiChild();
 
@@ -511,7 +511,7 @@ void CommApp::showNewFiles()
 	}
 }
 
-void CommApp::browseSaveFolder()
+void GCodeFileServer::browseSaveFolder()
 {
 	SerialTransmissionDialog* mdiChild = activeMdiChild();
 
@@ -521,7 +521,7 @@ void CommApp::browseSaveFolder()
 	}
 }
 
-void CommApp::createTrayIcon()
+void GCodeFileServer::createTrayIcon()
 {
 	trayIconMenu = new QMenu(this);
 	trayIconMenu->addAction(minimizeAction);
@@ -541,7 +541,7 @@ void CommApp::createTrayIcon()
 	trayIcon->show();
 }
 
-void CommApp::iconActivated(QSystemTrayIcon::ActivationReason reason)
+void GCodeFileServer::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
 	switch (reason) {
 	case QSystemTrayIcon::Trigger:
@@ -564,7 +564,7 @@ void CommApp::iconActivated(QSystemTrayIcon::ActivationReason reason)
 	}
 }
 
-void CommApp::quitApp()
+void GCodeFileServer::quitApp()
 {
 	saveSettings();
 
@@ -578,7 +578,7 @@ void CommApp::quitApp()
 	close();
 }
 
-void CommApp::about()
+void GCodeFileServer::about()
 {
 	QMessageBox::about(this, tr("About EdytorNC - Serial port file server"),
 	                   tr("The <b>EdytorNC</b> is text editor for CNC programmers."

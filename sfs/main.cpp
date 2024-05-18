@@ -28,13 +28,13 @@
 #include <QtSingleApplication>  // QtSingleApplication
 #include <utils/medium.h>       // Medium
 
-#include "commapp.h"    // CommApp
+#include "gcodefileserver.h"    // for GCodeFileServer
 
 
 int main(int argc, char* argv[])
 {
 	Q_INIT_RESOURCE(application);
-	QtSingleApplication app("CommApp", argc, argv);
+	QtSingleApplication app("GCodeFileServer", argc, argv);
 
 	QString txMessage;
 
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 
 	Medium& medium = Medium::instance();
 	medium.updateTranslation();
-	CommApp* mw = new CommApp();
+	GCodeFileServer* mw = new GCodeFileServer();
 	mw->show();
 
 	app.setActivationWindow(mw, false);

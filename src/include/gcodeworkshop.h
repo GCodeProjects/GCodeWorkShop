@@ -59,11 +59,11 @@ class QWidget;
 
 #include <documentinfo.h>   // for DocumentInfo, DocumentInfo::Ptr
 
-class CommApp;
 class Document;
 class DocumentManager;
 class FindInFiles;
 class GCoderDocument;
+class GCodeFileServer;
 class KDiff3App;
 class Medium;
 class RecentFiles;
@@ -381,7 +381,7 @@ private:
 	QAction* commAppAct;
 	QComboBox* configBox;
 
-	QPointer<CommApp> commApp;
+	QPointer<GCodeFileServer> m_fileServer;
 
 	QPointer<QFileSystemWatcher> fileChangeMonitor;
 };

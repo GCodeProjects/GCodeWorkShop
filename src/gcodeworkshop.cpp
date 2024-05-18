@@ -103,12 +103,12 @@
 #include <QtGlobal>             // for QFlags, QT_VERSION, QT_VERSION_CHECK, qMakeForeachContainer, Q_OS_LINUX
 
 #include <addons-actions.h>             // for Addons::Actions
-#include <commapp.h>                    // for CommApp
 #include <document.h>                   // for Document
 #include <documentinfo.h>               // for DocumentInfo::Ptr, DocumentInfo
 #include <documentmanager.h>            // for DocumentManager
 #include <documentstyle.h>              // for DocumentStyle::Ptr, DocumentStyle
 #include <documentwidgetproperties.h>   // for DocumentWidgetProperties::Ptr, DocumentWidgetProperties
+#include <gcodefileserver.h>            // for GCodeFileServer
 #include <gcoderdocument.h>             // for GCoderDocument
 #include <gcoderstyle.h>                // for GCoderStyle
 #include <gcoderwidgetproperties.h>     // for GCoderWidgetProperties
@@ -164,7 +164,7 @@ GCodeWorkShop::GCodeWorkShop(Medium* medium)
 	findFiles = nullptr;
 	dirModel = nullptr;
 	openExampleAct = nullptr;
-	commApp = nullptr;
+	m_fileServer = nullptr;
 
 	m_MdiWidgetsMaximized = true;
 	m_defaultReadOnly = false;
@@ -262,8 +262,8 @@ GCodeWorkShop::~GCodeWorkShop()
 		delete (proc);
 	}
 
-	if (commApp) {
-		commApp->close();
+	if (m_fileServer) {
+		m_fileServer->close();
 	}
 
 	delete ui;
@@ -327,7 +327,7 @@ void GCodeWorkShop::closeAllMdiWindows()
 
 void GCodeWorkShop::closeEvent(QCloseEvent* event)
 {
-	if (commApp) {
+	if (m_fileServer) {
 		QMessageBox::StandardButton result = QMessageBox::warning(this,
 		                                     tr("EdytorNC - Serial port file server"),
 		                                     tr("Serial port file server is running.\nClose anyway?"),
@@ -3562,9 +3562,9 @@ void GCodeWorkShop::startSerialPortServer()
 	QString fileName;
 
 #ifdef Q_OS_WIN32
-	fileName = "sfs.exe";
+	fileName = "gcodefileserver.exe";
 #else
-	fileName = "sfs";
+	fileName = "gcodefileserver";
 #endif
 
 	QProcess::startDetached(path + fileName, QStringList(), path);

@@ -20,8 +20,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef COMMAPP_H
-#define COMMAPP_H
+#ifndef GCODEFILESERVER_H
+#define GCODEFILESERVER_H
 
 #include <QMainWindow>      // for QMainWindow
 #include <QObject>          // for Q_OBJECT, slots
@@ -40,17 +40,17 @@ class QWidget;
 class SerialTransmissionDialog;
 
 namespace Ui {
-class CommApp;
+class GCodeFileServer;
 }
 
 
-class CommApp : public QMainWindow
+class GCodeFileServer : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	explicit CommApp(QWidget* parent = 0);
-	~CommApp();
+	explicit GCodeFileServer(QWidget* parent = 0);
+	~GCodeFileServer();
 
 protected:
 	void closeEvent(QCloseEvent* event);
@@ -72,7 +72,7 @@ private slots:
 	void about();
 
 private:
-	Ui::CommApp* ui;
+	Ui::GCodeFileServer* ui;
 	QSignalMapper* windowMapper;
 
 	QAction* configPortAct;
@@ -106,4 +106,4 @@ private:
 	void createTrayIcon();
 };
 
-#endif // COMMAPP_H
+#endif // GCODEFILESERVER_H
