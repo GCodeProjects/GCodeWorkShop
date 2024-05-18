@@ -2,12 +2,12 @@
 
 VERSION = 0.1.0.0
 TEMPLATE = app
-TARGET = sfs
+TARGET = gcodefileserver
 
 include(../common.pri)
 
 QT *= widgets serialport network
-MODULES *= kdiff3 qtsingleapplication edytornc-common
+MODULES *= kdiff3 qtsingleapplication GCodeShared
 
 include(../common.pri)
 

@@ -1,7 +1,7 @@
 
 TEMPLATE = subdirs
 CONFIG += ordered
-SUBDIRS = 3rdparty src-common addons src sfs
+SUBDIRS = 3rdparty gcodeshared addons gcodeworkshop gcodefileserver
 
 
 include(common.pri)
@@ -9,7 +9,7 @@ include(common.pri)
 QMAKE_EXTRA_TARGETS += lupdate
 lupdate.depends = lupdateEdytornc lupdateKdiff3
 QMAKE_EXTRA_TARGETS += lupdateEdytornc lupdateKdiff3
-lupdateEdytornc.commands = lupdate $$PROJECT_ROOT_PATH/src $$PROJECT_ROOT_PATH/src-common $$PROJECT_ROOT_PATH/sfs $$PROJECT_ROOT_PATH/addons  -ts $$tsFiles(edytornc)
+lupdateEdytornc.commands = lupdate $$PROJECT_ROOT_PATH/gcodeworkshop $$PROJECT_ROOT_PATH/gcodeshared $$PROJECT_ROOT_PATH/gcodefileserver $$PROJECT_ROOT_PATH/addons  -ts $$tsFiles(edytornc)
 lupdateKdiff3.commands = lupdate $$PROJECT_ROOT_PATH/3rdparty/kdiff3  -ts $$tsFiles(kdiff3)
 
 QMAKE_EXTRA_TARGETS += lrelease

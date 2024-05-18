@@ -55,24 +55,24 @@ contains(MODULES, addons) {
     LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/addons)
 }
 
-contains(MODULES, edytornc-common) {
-    INCLUDEPATH += $${PROJECT_ROOT_PATH}/src-common \
-                   $${PROJECT_ROOT_PATH}/src-common/include \
-                   $$shadowed($${PROJECT_ROOT_PATH}/src-common)
-    LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/src-common)
-    LIBS += -ledytornc-common
+contains(MODULES, GCodeShared) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/gcodeshared \
+                   $${PROJECT_ROOT_PATH}/gcodeshared/include \
+                   $$shadowed($${PROJECT_ROOT_PATH}/gcodeshared)
+    LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/gcodeshared)
+    LIBS += -lgcodeshared
 }
 
-contains(MODULES, edytornc) {
-    INCLUDEPATH += $${PROJECT_ROOT_PATH}/src/include
-#   LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/src)
-#   LIBS += -ledytornc
+contains(MODULES, GCodeWorkShop) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/gcodeworkshop/include
+#   LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/gcodeworkshop)
+#   LIBS += -lgcodeworkshop
 }
 
-contains(MODULES, sfs) {
-    INCLUDEPATH += $${PROJECT_ROOT_PATH}/sfs
-#   LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/sfs)
-#   LIBS += -lsfs
+contains(MODULES, GCodeFileServer) {
+    INCLUDEPATH += $${PROJECT_ROOT_PATH}/gcodefileserver
+#   LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/gcodefileserver)
+#   LIBS += -lgcodefileserver
 }
 
 contains(MODULES, basic) {

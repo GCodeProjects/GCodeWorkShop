@@ -5,7 +5,7 @@ TARGET = addons
 CONFIG += staticlib
 
 QT *= widgets
-MODULES *= edytornc edytornc-common basic
+MODULES *= GCodeWorkShop GCodeShared basic
 
 include(../common.pri)
 

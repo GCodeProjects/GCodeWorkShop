@@ -4,7 +4,7 @@ build/
 doc/html
 lang/*.qm
 
-/edytornc.pro.user*
+/gcodeworkshop_top.pro.user*
 *.autosave
 
 /Makefile

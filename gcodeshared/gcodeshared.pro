@@ -1,7 +1,7 @@
 
 VERSION = 2018.07
 TEMPLATE = lib
-TARGET = edytornc-common
+TARGET = gcodeshared
 CONFIG += staticlib
 
 QT *= widgets serialport network
@@ -10,7 +10,7 @@ include(../common.pri)
 
 INCLUDEPATH += include
 
-#EdytorNC common
+# GCoderShared
 
 SOURCES += \
     serialporttestdialog.cpp \
