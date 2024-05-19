@@ -888,7 +888,7 @@ void SerialPortConfigDialog::removeFileNameButtonClicked()
 void SerialPortConfigDialog::helpButtonClicked()
 {
 	// TODO: change a path to the file
-	QDesktopServices::openUrl(QUrl(QString("file:///%1/EdytorNC_SerialTransmission_Help.html").arg(
+	QDesktopServices::openUrl(QUrl(QString("file:///%1/SerialTransmission_Help.html").arg(
 	                                   QCoreApplication::applicationDirPath()), QUrl::TolerantMode));
 	//    SerialPortCfgHelpDialog helpDialog;
 	//    helpDialog.exec();

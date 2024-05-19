@@ -60,7 +60,7 @@ GCodeFileServer::GCodeFileServer(QWidget* parent) : QMainWindow(parent), ui(new 
 
 	setWindowModality(Qt::NonModal);
 
-	setWindowTitle(tr("EdytorNC - Serial port file server"));
+	setWindowTitle(tr("GCodeWorkShop - Serial port file server"));
 
 	windowMapper = new QSignalMapper(this);
 	connect(windowMapper, SIGNAL(mapped(QWidget*)), this, SLOT(setActiveSubWindow(QWidget*)));
@@ -98,7 +98,7 @@ GCodeFileServer::~GCodeFileServer()
 
 void GCodeFileServer::closeEvent(QCloseEvent* event)
 {
-	//    QMessageBox::StandardButton result = QMessageBox::warning(this, tr("EdytorNC - Serial port file server"),
+	//    QMessageBox::StandardButton result = QMessageBox::warning(this, tr("GCodeWorkShop - Serial port file server"),
 	//                                                              tr("You are trying to close a file server.\nAre you shure?"),
 	//                                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
@@ -112,7 +112,7 @@ void GCodeFileServer::closeEvent(QCloseEvent* event)
 		event->accept();
 	} else {
 		if (trayIcon->isVisible()) {
-			QMessageBox::information(this, tr("EdytorNC - Serial port file server"),
+			QMessageBox::information(this, tr("GCodeWorkShop - Serial port file server"),
 			                         tr("The program will keep running in the "
 			                            "system tray. To terminate the program, "
 			                            "choose <b>Quit</b> in the context menu "
@@ -580,14 +580,14 @@ void GCodeFileServer::quitApp()
 
 void GCodeFileServer::about()
 {
-	QMessageBox::about(this, tr("About EdytorNC - Serial port file server"),
-	                   tr("The <b>EdytorNC</b> is text editor for CNC programmers."
-	                      "<P>Version: same as EdytorNC"
+	QMessageBox::about(this, tr("About GCodeWorkShop - Serial port file server"),
+	                   tr("The <b>GCodeWorkShop</b> is text editor for CNC programmers."
+	                      "<P>Version: same as GCodeWorkShop"
 	                      "<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>"
 	                      "<P>"
-	                      "<P>EdytorNC contains pieces of code from other Open Source projects."
+	                      "<P>GCodeWorkShop contains pieces of code from other Open Source projects."
 	                      "<P>"
-	                      "<P><i>EdytorNC - Serial port file server is free software; you can redistribute it and/or modify"
+	                      "<P><i>GCodeWorkShop - Serial port file server is free software; you can redistribute it and/or modify"
 	                      "it under the terms of the GNU General Public License  as published by"
 	                      "the Free Software Foundation; either version 2 of the License, or"
 	                      "(at your option) any later version.</i>"

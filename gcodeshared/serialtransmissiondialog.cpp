@@ -415,7 +415,7 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
 	} else {
 		writeLog(tr("ERROR:\t Serial port error %1: \"%2\".").arg(error).arg(serialPort.errorString()),
 		         "");
-		msgBox.setWindowTitle(tr("EdytorNC - serial transmission"));
+		msgBox.setWindowTitle(tr("GCodeWorkShop - serial transmission"));
 		msgBox.setText(text);
 		msgBox.setIcon(QMessageBox::Critical);
 		msgBox.exec();

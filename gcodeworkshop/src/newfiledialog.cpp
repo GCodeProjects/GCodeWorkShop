@@ -38,7 +38,7 @@
 
 
 // TODO: change a path to the file
-#define TEMPLATE_PATH             "/usr/share/edytornc/TEMPLATE"
+#define TEMPLATE_PATH             "/usr/share/gcodeworkshop/TEMPLATE"
 
 
 newFileDialog::newFileDialog(QWidget* parent) :

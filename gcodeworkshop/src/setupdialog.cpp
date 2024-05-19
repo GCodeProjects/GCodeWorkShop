@@ -61,7 +61,7 @@ SetupDialog::SetupDialog(QWidget* parent, const AppConfig* prop,
 	QPalette palette;
 
 	setupUi(this);
-	setWindowTitle(tr("EdytorNC configuration"));
+	setWindowTitle(tr("GCodeWorkShop configuration"));
 
 	editProp = *prop;
 

@@ -3,7 +3,7 @@
 PROJECT_ROOT_DIR=$(realpath $(dirname $0)/../)
 APP_BIN_DIR=$PROJECT_ROOT_DIR/bin/release
 DLL_DIR=""
-DEFAULT_INSTALL_DIR="C:/EdytorNC"
+DEFAULT_INSTALL_DIR="C:/GCodeWorkShop"
 INSTALL_DIR=""
 
 set -e
@@ -105,7 +105,7 @@ mkdir -p $INSTALL_DIR/bin $INSTALL_DIR/doc $INSTALL_DIR/examples $INSTALL_DIR/la
 cp -r $PROJECT_ROOT_DIR/LICENSE                                     $INSTALL_DIR
 cp -r $APP_BIN_DIR/*                                                $INSTALL_DIR/bin
 cp -r $PROJECT_ROOT_DIR/README.md                                   $INSTALL_DIR/doc
-cp -r $PROJECT_ROOT_DIR/doc/EdytorNC_SerialTransmission_Help.html   $INSTALL_DIR/doc
+cp -r $PROJECT_ROOT_DIR/doc/SerialTransmission_Help.html            $INSTALL_DIR/doc
 cp -r $PROJECT_ROOT_DIR/examples/*                                  $INSTALL_DIR/examples
 cp -r $PROJECT_ROOT_DIR/lang/*.qm                                   $INSTALL_DIR/lang
 echo "OK"

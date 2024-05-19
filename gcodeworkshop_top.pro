@@ -7,18 +7,18 @@ SUBDIRS = 3rdparty gcodeshared addons gcodeworkshop gcodefileserver
 include(common.pri)
 
 QMAKE_EXTRA_TARGETS += lupdate
-lupdate.depends = lupdateEdytornc lupdateKdiff3
-QMAKE_EXTRA_TARGETS += lupdateEdytornc lupdateKdiff3
-lupdateEdytornc.commands = lupdate $$PROJECT_ROOT_PATH/gcodeworkshop $$PROJECT_ROOT_PATH/gcodeshared $$PROJECT_ROOT_PATH/gcodefileserver $$PROJECT_ROOT_PATH/addons  -ts $$tsFiles(edytornc)
+lupdate.depends = lupdateGCodeWorkShop lupdateKdiff3
+QMAKE_EXTRA_TARGETS += lupdateGCodeWorkShop lupdateKdiff3
+lupdateGCodeWorkShop.commands = lupdate $$PROJECT_ROOT_PATH/gcodeworkshop $$PROJECT_ROOT_PATH/gcodeshared $$PROJECT_ROOT_PATH/gcodefileserver $$PROJECT_ROOT_PATH/addons  -ts $$tsFiles(gcodeworkshop)
 lupdateKdiff3.commands = lupdate $$PROJECT_ROOT_PATH/3rdparty/kdiff3  -ts $$tsFiles(kdiff3)
 
 QMAKE_EXTRA_TARGETS += lrelease
 lrelease.target = FORCE
-lrelease.commands = lrelease $$tsFiles(edytornc) $$tsFiles(kdiff3)
+lrelease.commands = lrelease $$tsFiles(gcodeworkshop) $$tsFiles(kdiff3)
 
 translate.files = $$LANG_PATH/*.qm
 examples.files = $$PROJECT_ROOT_PATH/examples/*
-doc.files = $$PROJECT_ROOT_PATH/README.md $$PROJECT_ROOT_PATH/doc/EdytorNC_SerialTransmission_Help.html
+doc.files = $$PROJECT_ROOT_PATH/README.md $$PROJECT_ROOT_PATH/doc/SerialTransmission_Help.html
 
 
 # target platforms dependencies
@@ -26,14 +26,14 @@ doc.files = $$PROJECT_ROOT_PATH/README.md $$PROJECT_ROOT_PATH/doc/EdytorNC_Seria
 
 unix {
     mime.files = $$PROJECT_ROOT_PATH/install/linux/application-x-g-code.xml
-    desktop.files = $$PROJECT_ROOT_PATH/install/linux/edytornc.desktop
-#   desktop.files += $$PROJECT_ROOT_PATH/install/linux/sfs.desktop
+    desktop.files = $$PROJECT_ROOT_PATH/install/linux/gcodeworkshop.desktop
+#   desktop.files += $$PROJECT_ROOT_PATH/install/linux/gcodefileserver.desktop
 
-    examples.path = $${PREFIX}/share/edytornc/examples
-    doc.path = $${PREFIX}/share/doc/edytornc
+    examples.path = $${PREFIX}/share/gcodeworkshop/examples
+    doc.path = $${PREFIX}/share/doc/gcodeworkshop
     mime.path = $${PREFIX}/share/mime/packages
     desktop.path = $${PREFIX}/share/applications
-    translate.path = $${PREFIX}/share/edytornc/lang
+    translate.path = $${PREFIX}/share/gcodeworkshop/lang
 
     ICONS_BASE_PATH = $$PROJECT_ROOT_PATH/install/linux/images
     icons.base = $$ICONS_BASE_PATH

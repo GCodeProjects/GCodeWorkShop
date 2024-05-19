@@ -41,7 +41,7 @@ class Medium : public QObject
 	Q_OBJECT
 
 public:
-	const QString APP_NAME = "edytornc";
+	const QString APP_NAME = "gcodeworkshop";
 
 	enum {
 		LAUNCH_SANDBOX, /**< The application has been run in project directory. */

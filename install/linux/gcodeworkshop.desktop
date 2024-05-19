@@ -4,12 +4,12 @@ Type=Application
 Categories=Development;
 Version=1.0
 
-Name=EdytorNC
+Name=GCodeWorkShop
 GenericName=G-code text editor
-Comment=The EdytorNC is text editor for CNC programmers.
-Comment[pl]=EdytorNC jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.
+Comment=The GCodeWorkShop is text editor for CNC programmers.
+Comment[pl]=GCodeWorkShop jest tekstowym edytorem dla programistów obrabiarek numerycznych CNC.
 
-Exec=edytornc %F
+Exec=gcodeworkshop %F
 Icon=edytornc
 MimeType=application/x-g-code;
 

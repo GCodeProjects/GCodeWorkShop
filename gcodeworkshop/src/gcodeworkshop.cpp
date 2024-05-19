@@ -135,7 +135,7 @@
 #include "ui_gcodeworkshop.h"       // for Ui::GCodeWorkShop
 
 
-#define EXAMPLES_PATH             "/usr/share/edytornc/EXAMPLES"
+#define EXAMPLES_PATH             "/usr/share/gcodeworkshop/EXAMPLES"
 
 GCodeWorkShop* GCodeWorkShop::SINGLETON;
 
@@ -246,7 +246,7 @@ GCodeWorkShop::GCodeWorkShop(Medium* medium)
 	createMenus();
 	updateMenus();
 
-	setWindowTitle(tr("EdytorNC"));
+	setWindowTitle(tr("GCodeWorkShop"));
 	setWindowIcon(QIcon(":/images/edytornc.png"));
 
 	readSettings();
@@ -329,7 +329,7 @@ void GCodeWorkShop::closeEvent(QCloseEvent* event)
 {
 	if (m_fileServer) {
 		QMessageBox::StandardButton result = QMessageBox::warning(this,
-		                                     tr("EdytorNC - Serial port file server"),
+		                                     tr("GCodeWorkShop - Serial port file server"),
 		                                     tr("Serial port file server is running.\nClose anyway?"),
 		                                     QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
@@ -532,7 +532,7 @@ bool GCodeWorkShop::save()
 	if (saved) {
 		statusBar()->showMessage(tr("File saved"), 5000);
 	} else {
-		QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
+		QMessageBox::warning(this, tr("GCodeWorkShop"), tr("Cannot write file \"%1\".\n %2")
 		                     .arg(doc->filePath()).arg(doc->ioErrorString()));
 	}
 
@@ -550,7 +550,7 @@ bool GCodeWorkShop::saveAll()
 				i++;
 			} else {
 				saved = false;
-				QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
+				QMessageBox::warning(this, tr("GCodeWorkShop"), tr("Cannot write file \"%1\".\n %2")
 				                     .arg(doc->filePath()).arg(doc->ioErrorString()));
 			}
 		}
@@ -573,7 +573,7 @@ bool GCodeWorkShop::saveAs()
 	if (saved) {
 		statusBar()->showMessage(tr("File saved"), 5000);
 	} else {
-		QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot write file \"%1\".\n %2")
+		QMessageBox::warning(this, tr("GCodeWorkShop"), tr("Cannot write file \"%1\".\n %2")
 		                     .arg(doc->filePath()).arg(doc->ioErrorString()));
 	}
 
@@ -1094,7 +1094,7 @@ void GCodeWorkShop::diffEditorFile()
 		QFile file(fileName1);
 
 		if (!file.open(QIODevice::WriteOnly)) {
-			QMessageBox::warning(this, tr("EdytorNC"),
+			QMessageBox::warning(this, tr("GCodeWorkShop"),
 			                     tr("Cannot write tmp file \"%1\".\n %2")
 			                     .arg(QDir::toNativeSeparators(fileName1))
 			                     .arg(file.errorString()));
@@ -1227,8 +1227,8 @@ void GCodeWorkShop::activeWindowChanged(QMdiSubWindow* window)
 
 void GCodeWorkShop::about()
 {
-	QMessageBox::about(this, tr("About EdytorNC"),
-	                   tr("The <b>EdytorNC</b> is text editor for CNC programmers."
+	QMessageBox::about(this, tr("About GCodeWorkShop"),
+	                   tr("The <b>GCodeWorkShop</b> is text editor for CNC programmers."
 	                      "<P>Version: " "2018-07-26 BETA"
 	                      "<P>Copyright (C) 1998 - 2018 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>"
 	                      "<P>Spanish translation, fixes and other help thanks to Otto Huamani"
@@ -1244,9 +1244,9 @@ void GCodeWorkShop::about()
 	                      "<P>"
 	                      // "<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>"
 	                      // "<P>"
-	                      "<P>EdytorNC contains pieces of code from other Open Source projects."
+	                      "<P>GCodeWorkShop contains pieces of code from other Open Source projects."
 	                      "<P>"
-	                      "<P><i>EdytorNC is free software; you can redistribute it and/or modify"
+	                      "<P><i>GCodeWorkShop is free software; you can redistribute it and/or modify"
 	                      "it under the terms of the GNU General Public License  as published by"
 	                      "the Free Software Foundation; either version 2 of the License, or"
 	                      "(at your option) any later version.</i>"
@@ -2171,7 +2171,7 @@ void GCodeWorkShop::loadFile(const DocumentInfo::Ptr& info, bool checkAlreadyLoa
 			updateStatusBar();
 			m_recentFiles->add(info->filePath);
 		} else {
-			QMessageBox::warning(this, tr("EdytorNC"), tr("Cannot read file \"%1\".\n %2")
+			QMessageBox::warning(this, tr("GCodeWorkShop"), tr("Cannot read file \"%1\".\n %2")
 			                     .arg(doc->filePath()).arg(doc->ioErrorString()));
 			doc->close();
 		}
@@ -2877,7 +2877,7 @@ void GCodeWorkShop::fileTreeViewDoubleClicked(const QModelIndex& index)
 
 QString GCodeWorkShop::projectSelectName()
 {
-	QString filters = tr("EdytorNC project file (*.ncp)");
+	QString filters = tr("GCodeWorkShop project file (*.ncp)");
 	QString file = QFileDialog::getSaveFileName(
 	                   this,
 	                   tr("Select the project name and location..."),
@@ -2893,7 +2893,7 @@ void GCodeWorkShop::projectOpen()
 		return;
 	}
 
-	QString filters = tr("EdytorNC project file (*.ncp)");
+	QString filters = tr("GCodeWorkShop project file (*.ncp)");
 	QString fileName = QFileDialog::getOpenFileName(
 	                       this,
 	                       tr("Open the project file..."),

@@ -261,7 +261,7 @@ void Addons::Actions::doCompileMacro()
 	GCodeWorkShop* enc = GCodeWorkShop::instance();
 
 	if (compiler.compile(ctx.text()) == -1) {
-		QMessageBox::warning(enc, tr("EdytorNc - compile macro"), compiler.status());
+		QMessageBox::warning(enc, tr("GCodeWorkShop - compile macro"), compiler.status());
 		//return;
 	}
 
