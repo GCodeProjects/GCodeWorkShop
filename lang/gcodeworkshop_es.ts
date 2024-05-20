@@ -2,6 +2,175 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es_ES">
 <context>
+    <name>Addons::Actions</name>
+    <message>
+        <source>&amp;Bolt hole circle</source>
+        <translation type="unfinished">&amp;Taladrado Circunferencial</translation>
+    </message>
+    <message>
+        <source>Calculate bolt hole&apos;s positions</source>
+        <translation type="unfinished">Calcular posición de los taladrados</translation>
+    </message>
+    <message>
+        <source>Block Skip -</source>
+        <translation type="unfinished">Salto de bloque -</translation>
+    </message>
+    <message>
+        <source>Insert/decrease Block Skip /</source>
+        <translation type="unfinished">Insertar/disminuir salto de bloque /</translation>
+    </message>
+    <message>
+        <source>Block Skip +</source>
+        <translation type="unfinished">Salto de bloque +</translation>
+    </message>
+    <message>
+        <source>Insert/increase Block Skip /</source>
+        <translation type="unfinished">Insertar/incrementar salto de bloque /</translation>
+    </message>
+    <message>
+        <source>Block Skip remove</source>
+        <translation type="unfinished">Remover salto de bloque</translation>
+    </message>
+    <message>
+        <source>Remove Block Skip /</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chamfer</source>
+        <translation type="unfinished">Chaflán</translation>
+    </message>
+    <message>
+        <source>Calculate chamfer</source>
+        <translation type="unfinished">Calcular chaflán</translation>
+    </message>
+    <message>
+        <source>Clean &amp;up</source>
+        <translation type="unfinished">&amp;Limpieza</translation>
+    </message>
+    <message>
+        <source>Remove text using regular expressions</source>
+        <translation type="unfinished">Remover texto con expresiones regulares</translation>
+    </message>
+    <message>
+        <source>Comment ()</source>
+        <translation type="unfinished">Comentar ()</translation>
+    </message>
+    <message>
+        <source>Comment/uncomment selected text using parentheses</source>
+        <translation type="unfinished">Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
+    </message>
+    <message>
+        <source>Comment ;</source>
+        <translation type="unfinished">Comentar ;</translation>
+    </message>
+    <message>
+        <source>Comment/uncomment selected text using semicolon</source>
+        <translation type="unfinished">Comentar/Des-comentar texto seleccionado usando semicolon</translation>
+    </message>
+    <message>
+        <source>Compile macro - experimental</source>
+        <translation type="unfinished">Compilar macro - experimental</translation>
+    </message>
+    <message>
+        <source>Translate EdytorNC macro into CNC program</source>
+        <translation type="unfinished">Traducir macro EdytorNC a programa CNC</translation>
+    </message>
+    <message>
+        <source>Insert dots</source>
+        <translation type="unfinished">Insertar Puntos Decimales</translation>
+    </message>
+    <message>
+        <source>Inserts decimal dot</source>
+        <translation type="unfinished">Inserta punto decimal</translation>
+    </message>
+    <message>
+        <source>Insert empty lines</source>
+        <translation type="unfinished">Insertar líneas vacías</translation>
+    </message>
+    <message>
+        <source>Inserts empty lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove empty lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removes empty lines</source>
+        <translation type="unfinished">Remueve líneas vacías</translation>
+    </message>
+    <message>
+        <source>Feed&apos;s speed&apos;s</source>
+        <translation type="unfinished">Avance y Velocidad</translation>
+    </message>
+    <message>
+        <source>Calculate speed, feed, cutting speed</source>
+        <translation type="unfinished">Calcular velocidad, avance, velocidad de corte</translation>
+    </message>
+    <message>
+        <source>Convert inch &lt;-&gt; mm</source>
+        <translation type="unfinished">Convertir pulgadas &lt;-&gt;mm</translation>
+    </message>
+    <message>
+        <source>Convert program inch &lt;-&gt; mm</source>
+        <translation type="unfinished">Convertir programa: pulgadas &lt;-&gt;mm</translation>
+    </message>
+    <message>
+        <source>Renumber</source>
+        <translation type="unfinished">Renumerar</translation>
+    </message>
+    <message>
+        <source>Renumber program blocks</source>
+        <translation type="unfinished">Renumera bloques de programa</translation>
+    </message>
+    <message>
+        <source>&amp;Insert spaces</source>
+        <translation type="unfinished">&amp;Insertar espacios</translation>
+    </message>
+    <message>
+        <source>Inserts spaces</source>
+        <translation type="unfinished">Insertar espacios</translation>
+    </message>
+    <message>
+        <source>Remove spaces</source>
+        <translation type="unfinished">Remover espacios</translation>
+    </message>
+    <message>
+        <source>Removes spaces</source>
+        <translation type="unfinished">Remueve espacios</translation>
+    </message>
+    <message>
+        <source>Split file</source>
+        <translation type="unfinished">Dividir archivo</translation>
+    </message>
+    <message>
+        <source>Swap axes</source>
+        <translation type="unfinished">Intercambiar ejes</translation>
+    </message>
+    <message>
+        <source>Swap/modify axes, selected text or entire program</source>
+        <translation type="unfinished">Intercambiar/modificar ejes, en texto seleccionado o en todo el programa</translation>
+    </message>
+    <message>
+        <source>Solution of triangles</source>
+        <translation type="unfinished">Solucionador de triángulos</translation>
+    </message>
+    <message>
+        <source>GCodeWorkShop - compile macro</source>
+        <translation type="unfinished">GCodeWorkShop: compilar macro</translation>
+    </message>
+    <message>
+        <source>Insert space</source>
+        <comment>Slow operation title in MDIChild</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove space</source>
+        <comment>Slow operation title in MDIChild</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BHCDialog</name>
     <message>
         <source>Dialog</source>
@@ -226,7 +395,466 @@
     </message>
 </context>
 <context>
-    <name>CommApp</name>
+    <name>CleanUpDialog</name>
+    <message>
+        <source>Remove text using regular expressions</source>
+        <translation type="unfinished">Remover texto con expresiones regulares</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Information about: &lt;a href=&quot;http://doc.qt.digia.com/qt/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Qt regular expressions&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;http://doc.qt.digia.com/qt/qregexp.html&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished">Comentario</translation>
+    </message>
+    <message>
+        <source>Expression</source>
+        <translation type="unfinished">Expresión</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished">Seleccionar</translation>
+    </message>
+    <message>
+        <source>Preview, changes will not be saved</source>
+        <translation type="unfinished">Vista previa, no se guardarán los cambios</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close and save changes.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Delete the text that matches the regular expression selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cerrar y guardar cambios.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Eliminar el texto que coincide con la expresión regular seleccionada.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close and cancel all changes</source>
+        <translation type="unfinished">Cerrar y cancelar todos los cambios</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>Delete &amp;row</source>
+        <translation type="unfinished">Eliminar la hile&amp;ra</translation>
+    </message>
+    <message>
+        <source>Delete current row</source>
+        <translation type="unfinished">Eliminar la hilera actual</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigDialog</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Predeterminado</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Configuración</translation>
+    </message>
+</context>
+<context>
+    <name>DotDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation>Diálogo</translation>
+    </message>
+    <message>
+        <source>Insert &amp;dot at address</source>
+        <translation>Insertar punto &amp;decimal en la(s) dirección(es)</translation>
+    </message>
+    <message>
+        <source>&gt;Aaaaaaaaaaaaaaaaaaaaa; </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Dot</source>
+        <translation>Pinto Decimal</translation>
+    </message>
+    <message>
+        <source>&amp;Divide numbers by :</source>
+        <translation>&amp;Dividir números por :</translation>
+    </message>
+    <message>
+        <source>J&amp;ust insert at end</source>
+        <translation>&amp;Simplemente insertar al final</translation>
+    </message>
+    <message>
+        <source>&amp;Start</source>
+        <translation>&amp;Iniciar</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>Insert dots</source>
+        <translation>Insertar Puntos Decimales</translation>
+    </message>
+</context>
+<context>
+    <name>FeedsDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation>Diálogo</translation>
+    </message>
+    <message>
+        <source>Cutting speed</source>
+        <translation>Velocidad de corte</translation>
+    </message>
+    <message>
+        <source>Cutting speed (m/min)</source>
+        <translation>Velocidad de corte (m/min)</translation>
+    </message>
+    <message>
+        <source>90</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Feed per tooth</source>
+        <translation>Avance por diente</translation>
+    </message>
+    <message>
+        <source>Fz :</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Tool diameter</source>
+        <translation>Diámetro de herramienta</translation>
+    </message>
+    <message>
+        <source>D :</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Tool diameter (mm)</source>
+        <translation>Diámetro de herramienta (mm)</translation>
+    </message>
+    <message>
+        <source>10</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Number of toot&apos;s</source>
+        <translation>N° de dientes</translation>
+    </message>
+    <message>
+        <source>z :</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Spindle speed</source>
+        <translation>Velocidad de giro</translation>
+    </message>
+    <message>
+        <source>S :</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Table feed</source>
+        <translation>Avance de los ejes</translation>
+    </message>
+    <message>
+        <source>F :</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Table feed (mm/min)</source>
+        <translation>Avance de los ejes (mm/min)</translation>
+    </message>
+    <message>
+        <source>Compute spindle speed and table feed</source>
+        <translation>Calcular velocidad de giro y avance de ejes</translation>
+    </message>
+    <message>
+        <source>&amp;S, F</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Cl&amp;ose</source>
+        <translation>C&amp;errar</translation>
+    </message>
+    <message>
+        <source>Compute cutting speed and feed per tooth</source>
+        <translation>Calcular velocidad de corte y avance por diente</translation>
+    </message>
+    <message>
+        <source>&amp;Vc, Fz</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Cutting parameters</source>
+        <translation>Parámetros de corte</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>inches</source>
+        <translation>pulgadas</translation>
+    </message>
+    <message>
+        <source>Vc :</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Feed (chip load) per tooth (mm)</source>
+        <translation>Avance (carga de viruta) por diente (mm)</translation>
+    </message>
+    <message>
+        <source>Number of teeth on the cutter</source>
+        <translation>Número de dientes en la herramienta de corte</translation>
+    </message>
+    <message>
+        <source>Spindle speed (revs/min)</source>
+        <translation>Velocidad de giro (revs/min)</translation>
+    </message>
+    <message>
+        <source>Cutting speed (ft/min)</source>
+        <translation>Velocidad de corte (pie/min)</translation>
+    </message>
+    <message>
+        <source>Feed (chip load) per tooth (inches)</source>
+        <translation>Avance (carga de viruta) por diente (pulgadas)</translation>
+    </message>
+    <message>
+        <source>Tool diameter (inches)</source>
+        <translation>Diámetro de herramienta (pulgadas)</translation>
+    </message>
+    <message>
+        <source>Table feed (inches/min)</source>
+        <translation>Avance de los ejes (pulgadas/min)</translation>
+    </message>
+</context>
+<context>
+    <name>FileChecker</name>
+    <message>
+        <source>GCodeWorkShop - File checker</source>
+        <translation>GCodeWorkShop - Verificador de archivo</translation>
+    </message>
+    <message>
+        <source>Save path:</source>
+        <translation>Ruta de guardado:</translation>
+    </message>
+    <message>
+        <source>Auto save path as set in serial port configuration</source>
+        <translation>Ruta de autoguardado tal como está seleccionado en la configuración del puerto serie</translation>
+    </message>
+    <message>
+        <source>Search path:</source>
+        <translation>Ruta de búsqueda:</translation>
+    </message>
+    <message>
+        <source>Search path as set in serial port configuration</source>
+        <translation>Ruta de búsqueda tal como está seleccionado en la configuración del puerto serie</translation>
+    </message>
+    <message>
+        <source>List of files in save path (received files).
+Click to compare with file with the same name in selected search path.</source>
+        <translation>Lista de archivos en ruta de guardado (archivos recibidos).
+Click para comparar con archivo con el mismo nombre en la ruta de búsqueda seleccionada.</translation>
+    </message>
+    <message>
+        <source>File Name</source>
+        <translation>Nombre del archivo</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Información</translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation>Aceptar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Borrar</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Estado</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Tamaño</translation>
+    </message>
+    <message>
+        <source>Modification date</source>
+        <translation>Fecha de modificación</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Equal</source>
+        <translation>Igual</translation>
+    </message>
+    <message>
+        <source>Changed</source>
+        <translation>Cambiado</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Nuevo</translation>
+    </message>
+    <message>
+        <source>Status of received file:
+New - file does not exists in Search path.
+Equal - received file and file in Search path are identical.
+Changed - received file is modified</source>
+        <translation>Estado del archivo recibido:
+Nuevo - el archivo no existe en la ruta de búsqueda.
+Igual - el archivo recibido y el archivo en la ruta de búsqueda son idénticos.
+Cambiado - el archivo recibido está modificado
+</translation>
+    </message>
+    <message>
+        <source>Accept received file and move it to selected search path</source>
+        <translation>Aceptar archivo recibido y moverlo a la ruta de búsqueda seleccionada</translation>
+    </message>
+    <message>
+        <source>Delete received file</source>
+        <translation>Borrar archivo recibido</translation>
+    </message>
+</context>
+<context>
+    <name>FindInFiles</name>
+    <message>
+        <source>Dialog</source>
+        <translation>Diálogo</translation>
+    </message>
+    <message>
+        <source>Oneclick - preview, doubleclick - opens file in editor.</source>
+        <translation>1 click: Vista previa, doble click: Abre archivo en el editor.</translation>
+    </message>
+    <message>
+        <source>Whole words</source>
+        <translation>Palabras completas</translation>
+    </message>
+    <message>
+        <source>&amp;Browse</source>
+        <translation>&amp;Examinar</translation>
+    </message>
+    <message>
+        <source>In directory :</source>
+        <translation>En el directorio :</translation>
+    </message>
+    <message>
+        <source>*.nc</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Named :</source>
+        <translation>Con nombre :</translation>
+    </message>
+    <message>
+        <source>&amp;Find files</source>
+        <translation>&amp;Buscar archivos</translation>
+    </message>
+    <message>
+        <source>Containing text :</source>
+        <translation>Conteniendo el texto :</translation>
+    </message>
+    <message>
+        <source>Search subfolders</source>
+        <translation>Buscar en subcarpetas</translation>
+    </message>
+    <message>
+        <source>Subfolders</source>
+        <translation>Subcarpetas</translation>
+    </message>
+    <message>
+        <source>;...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>(...)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Ignore comments</source>
+        <translation>Ignorar comentarios</translation>
+    </message>
+    <message>
+        <source>Find files</source>
+        <translation>Buscar archivos</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation>Ocultar</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Find Files</source>
+        <translation>Buscar archivos</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>files</source>
+        <translation>archivos</translation>
+    </message>
+    <message>
+        <source>found.</source>
+        <translation>encontrado(s).</translation>
+    </message>
+    <message>
+        <source>Searching in folder: &quot;%1&quot;</source>
+        <translation>Buscando en carpeta: &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>File Name</source>
+        <translation>Nombre del archivo</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Información</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Tamaño</translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation>Modificado</translation>
+    </message>
+</context>
+<context>
+    <name>GCodeFileServer</name>
     <message>
         <source>toolBar</source>
         <translation>Barra de Herramienta</translation>
@@ -256,8 +884,8 @@
         <translation>&amp;Archivo</translation>
     </message>
     <message>
-        <source>EdytorNC - Serial port file server</source>
-        <translation>EdytorNC - Servidor de Archivos por Puerto Serie</translation>
+        <source>GCodeWorkShop - Serial port file server</source>
+        <translation>GCodeWorkShop - Servidor de Archivos por Puerto Serie</translation>
     </message>
     <message>
         <source>&amp;Start</source>
@@ -336,98 +964,40 @@
         <translation>Iniciar minimizado</translation>
     </message>
     <message>
-        <source>About EdytorNC - Serial port file server</source>
-        <translation>Acerca de EdytorNC - Servidor de Archivos por Puerto Serie</translation>
+        <source>About GCodeWorkShop - Serial port file server</source>
+        <translation type="vanished">Acerca de GCodeWorkShop - Servidor de Archivos por Puerto Serie</translation>
     </message>
     <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation>&lt;b&gt;EdytorNC&lt;/b&gt; es un editor de texto para programadores CNC.</translation>
+        <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.</source>
+        <translation type="vanished">&lt;b&gt;GCodeWorkShop&lt;/b&gt; es un editor de texto para programadores CNC.</translation>
     </message>
     <message>
-        <source>&lt;P&gt;Version: same as EdytorNC</source>
-        <translation>&lt;P&gt;Versión: la misma de EdytorNC</translation>
+        <source>&lt;P&gt;Version: same as GCodeWorkShop</source>
+        <translation type="vanished">&lt;P&gt;Versión: la misma de GCodeWorkShop</translation>
     </message>
     <message>
-        <source>&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation></translation>
+        <source>&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.</source>
+        <translation type="vanished">&lt;P&gt;GCodeWorkShop contiene piezas de código de otros proyectos &quot;Open Source&quot;.</translation>
     </message>
     <message>
-        <source>&lt;P&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation>&lt;P&gt;EdytorNC contiene piezas de código de otros proyectos &quot;Open Source&quot;.</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;i&gt;EdytorNC - Serial port file server is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation>&lt;P&gt;&lt;i&gt;EdytorNC - Servidor de Archivos por Puerto Serie es &quot;free software&quot;; puedes re-distribuirlo y/o modificarlo bajo los términos de &quot;the GNU General Public License&quot; tal como está publicado por &quot;the Free Software Foundation&quot;; sea esta la versión 2 de la Licencia o(a opción tuya) cualquier versión posterior.&lt;/i&gt;</translation>
+        <source>&lt;P&gt;&lt;i&gt;GCodeWorkShop - Serial port file server is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
+        <translation type="vanished">&lt;P&gt;&lt;i&gt;GCodeWorkShop - Servidor de Archivos por Puerto Serie es &quot;free software&quot;; puedes re-distribuirlo y/o modificarlo bajo los términos de &quot;the GNU General Public License&quot; tal como está publicado por &quot;the Free Software Foundation&quot;; sea esta la versión 2 de la Licencia o(a opción tuya) cualquier versión posterior.&lt;/i&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation>&lt;P&gt;&lt;i&gt;El programa se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, INCLUYENDO LA GARANTÍA DE DISEÑO, COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR.&lt;/i&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigDialog</name>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation type="vanished">&lt;P&gt;&lt;i&gt;El programa se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, INCLUYENDO LA GARANTÍA DE DISEÑO, COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR.&lt;/i&gt;</translation>
     </message>
     <message>
-        <source>Default</source>
-        <translation type="unfinished">Predeterminado</translation>
-    </message>
-    <message>
-        <source>Ok</source>
+        <source>About GCodeFileServer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation type="unfinished">Configuración</translation>
+        <source>The &lt;b&gt;GCodeFileServer&lt;/b&gt; is part of GCodeWorkShop.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;GCodeFileServer contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeFileServer is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>DotDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Diálogo</translation>
-    </message>
-    <message>
-        <source>Insert &amp;dot at address</source>
-        <translation>Insertar punto &amp;decimal en la(s) dirección(es)</translation>
-    </message>
-    <message>
-        <source>&gt;Aaaaaaaaaaaaaaaaaaaaa; </source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation>Pinto Decimal</translation>
-    </message>
-    <message>
-        <source>&amp;Divide numbers by :</source>
-        <translation>&amp;Dividir números por :</translation>
-    </message>
-    <message>
-        <source>J&amp;ust insert at end</source>
-        <translation>&amp;Simplemente insertar al final</translation>
-    </message>
-    <message>
-        <source>&amp;Start</source>
-        <translation>&amp;Iniciar</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Insert dots</source>
-        <translation>Insertar Puntos Decimales</translation>
-    </message>
-</context>
-<context>
-    <name>EdytorNc</name>
+    <name>GCodeWorkShop</name>
     <message>
         <source>MainWindow</source>
         <translation>Ventana Principal</translation>
@@ -489,7 +1059,7 @@
         <translation></translation>
     </message>
     <message>
-        <source>EdytorNC</source>
+        <source>GCodeWorkShop</source>
         <translation></translation>
     </message>
     <message>
@@ -516,11 +1086,11 @@
     </message>
     <message>
         <source>Removed : %1 line numbers.</source>
-        <translation>Eliminado : %1 número(s) de línea.</translation>
+        <translation type="vanished">Eliminado : %1 número(s) de línea.</translation>
     </message>
     <message>
         <source>Renumbered : %1 lines.</source>
-        <translation>Renumerado : %1 línea(s).</translation>
+        <translation type="vanished">Renumerado : %1 línea(s).</translation>
     </message>
     <message>
         <source>Information</source>
@@ -531,52 +1101,44 @@
         <translation>Establezca el nombre del programa calculador correcto en el diálogo de configuración.</translation>
     </message>
     <message>
-        <source>About EdytorNC</source>
-        <translation>Acerca de EdytorNC</translation>
+        <source>About GCodeWorkShop</source>
+        <translation>Acerca de GCodeWorkShop</translation>
     </message>
     <message>
-        <source>The &lt;b&gt;EdytorNC&lt;/b&gt; is text editor for CNC programmers.</source>
-        <translation>&lt;b&gt;EdytorNC&lt;/b&gt; es un editor de texto para programadores CNC.</translation>
+        <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.</source>
+        <translation type="vanished">&lt;b&gt;GCodeWorkShop&lt;/b&gt; es un editor de texto para programadores CNC.</translation>
     </message>
     <message>
         <source>&lt;P&gt;Version: </source>
-        <translation>&lt;P&gt;Versión: </translation>
+        <translation type="vanished">&lt;P&gt;Versión: </translation>
     </message>
     <message>
         <source>&lt;br /&gt;Czech translation thanks to Pavel Fric</source>
-        <translation>&lt;br /&gt;Traducción al checo gracias a Pavel Fric</translation>
+        <translation type="vanished">&lt;br /&gt;Traducción al checo gracias a Pavel Fric</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju</source>
-        <translation>&lt;br /&gt;Traducción al finlandés gracias a Janne Mäntyharju</translation>
+        <translation type="vanished">&lt;br /&gt;Traducción al finlandés gracias a Janne Mäntyharju</translation>
     </message>
     <message>
         <source>&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju</source>
-        <translation>&lt;br /&gt;Parche para OS X y otras actualizaciones gracias a Janne Mäntyharju</translation>
+        <translation type="vanished">&lt;br /&gt;Parche para OS X y otras actualizaciones gracias a Janne Mäntyharju</translation>
     </message>
     <message>
         <source>&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski</source>
-        <translation>&lt;P&gt;Nuevo ícono EdytorNC gracias a Jakub Gajewski</translation>
+        <translation type="vanished">&lt;P&gt;Nuevo ícono EdytorNC gracias a Jakub Gajewski</translation>
     </message>
     <message>
-        <source>&lt;P&gt;&lt;a href=&quot;http://sourceforge.net/projects/edytornc/&quot;&gt;http://sourceforge.net/projects/edytornc&lt;/a&gt;</source>
-        <translation></translation>
+        <source>&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.</source>
+        <translation type="vanished">&lt;P&gt;GCodeWorkShop contiene piezas de código de otros proyectos Open Source.</translation>
     </message>
     <message>
-        <source>&lt;P&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;EdytorNC contains pieces of code from other Open Source projects.</source>
-        <translation>&lt;P&gt;EdytorNC contiene piezas de código de otros proyectos Open Source.</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;i&gt;EdytorNC is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
-        <translation>&lt;P&gt;&lt;i&gt;EdytorNC es software libre; puedes redistribuirlo y/o modificarlo bajo los términos de &quot;the GNU General Public License&quot; publicada por &quot;the Free Software Foundation&quot;; ya sea la versión 2 de la Licencia, o (a su elección) cualquier versión posterior.&lt;/i&gt;</translation>
+        <source>&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;</source>
+        <translation type="vanished">&lt;P&gt;&lt;i&gt;GCodeWorkShop es software libre; puedes redistribuirlo y/o modificarlo bajo los términos de &quot;the GNU General Public License&quot; publicada por &quot;the Free Software Foundation&quot;; ya sea la versión 2 de la Licencia, o (a su elección) cualquier versión posterior.&lt;/i&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation>&lt;P&gt;&lt;i&gt;El programa se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, INCLUYENDO LA GARANTÍA DE DISEÑO, COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR.&lt;/i&gt;</translation>
+        <translation type="vanished">&lt;P&gt;&lt;i&gt;El programa se proporciona TAL CUAL, SIN GARANTÍA DE NINGÚN TIPO, INCLUYENDO LA GARANTÍA DE DISEÑO, COMERCIALIZACIÓN Y APTITUD PARA UN PROPÓSITO PARTICULAR.&lt;/i&gt;</translation>
     </message>
     <message>
         <source> Col: </source>
@@ -768,7 +1330,7 @@
     </message>
     <message>
         <source>&amp;Bolt hole circle</source>
-        <translation>&amp;Taladrado Circunferencial</translation>
+        <translation type="vanished">&amp;Taladrado Circunferencial</translation>
     </message>
     <message>
         <source>F8</source>
@@ -776,11 +1338,11 @@
     </message>
     <message>
         <source>Calculate bolt hole&apos;s positions</source>
-        <translation>Calcular posición de los taladrados</translation>
+        <translation type="vanished">Calcular posición de los taladrados</translation>
     </message>
     <message>
         <source>&amp;Insert spaces</source>
-        <translation>&amp;Insertar espacios</translation>
+        <translation type="vanished">&amp;Insertar espacios</translation>
     </message>
     <message>
         <source>F4</source>
@@ -788,11 +1350,11 @@
     </message>
     <message>
         <source>Inserts spaces</source>
-        <translation>Insertar espacios</translation>
+        <translation type="vanished">Insertar espacios</translation>
     </message>
     <message>
         <source>Remove spaces</source>
-        <translation>Remover espacios</translation>
+        <translation type="vanished">Remover espacios</translation>
     </message>
     <message>
         <source>F5</source>
@@ -800,27 +1362,27 @@
     </message>
     <message>
         <source>Removes spaces</source>
-        <translation>Remueve espacios</translation>
+        <translation type="vanished">Remueve espacios</translation>
     </message>
     <message>
         <source>Remove empty lines</source>
-        <translation>Remover líneas vacías</translation>
+        <translation type="vanished">Remover líneas vacías</translation>
     </message>
     <message>
         <source>Removes empty lines</source>
-        <translation>Remueve líneas vacías</translation>
+        <translation type="vanished">Remueve líneas vacías</translation>
     </message>
     <message>
         <source>Insert empty lines</source>
-        <translation>Insertar líneas vacías</translation>
+        <translation type="vanished">Insertar líneas vacías</translation>
     </message>
     <message>
         <source>Remove text using regular expressions</source>
-        <translation>Remover texto con expresiones regulares</translation>
+        <translation type="vanished">Remover texto con expresiones regulares</translation>
     </message>
     <message>
         <source>Insert dots</source>
-        <translation>Insertar Puntos Decimales</translation>
+        <translation type="vanished">Insertar Puntos Decimales</translation>
     </message>
     <message>
         <source>F6</source>
@@ -828,11 +1390,11 @@
     </message>
     <message>
         <source>Inserts decimal dot</source>
-        <translation>Inserta punto decimal</translation>
+        <translation type="vanished">Inserta punto decimal</translation>
     </message>
     <message>
         <source>Renumber</source>
-        <translation>Renumerar</translation>
+        <translation type="vanished">Renumerar</translation>
     </message>
     <message>
         <source>F7</source>
@@ -840,11 +1402,11 @@
     </message>
     <message>
         <source>Renumber program blocks</source>
-        <translation>Renumera bloques de programa</translation>
+        <translation type="vanished">Renumera bloques de programa</translation>
     </message>
     <message>
         <source>Feed&apos;s speed&apos;s</source>
-        <translation>Avance y Velocidad</translation>
+        <translation type="vanished">Avance y Velocidad</translation>
     </message>
     <message>
         <source>F9</source>
@@ -852,27 +1414,27 @@
     </message>
     <message>
         <source>Calculate speed, feed, cutting speed</source>
-        <translation>Calcular velocidad, avance, velocidad de corte</translation>
+        <translation type="vanished">Calcular velocidad, avance, velocidad de corte</translation>
     </message>
     <message>
         <source>Chamfer</source>
-        <translation>Chaflán</translation>
+        <translation type="vanished">Chaflán</translation>
     </message>
     <message>
         <source>Calculate chamfer</source>
-        <translation>Calcular chaflán</translation>
+        <translation type="vanished">Calcular chaflán</translation>
     </message>
     <message>
         <source>Solution of triangles</source>
-        <translation>Solucionador de triángulos</translation>
+        <translation type="vanished">Solucionador de triángulos</translation>
     </message>
     <message>
         <source>Convert inch &lt;-&gt; mm</source>
-        <translation>Convertir pulgadas &lt;-&gt;mm</translation>
+        <translation type="vanished">Convertir pulgadas &lt;-&gt;mm</translation>
     </message>
     <message>
         <source>Convert program inch &lt;-&gt; mm</source>
-        <translation>Convertir programa: pulgadas &lt;-&gt;mm</translation>
+        <translation type="vanished">Convertir programa: pulgadas &lt;-&gt;mm</translation>
     </message>
     <message>
         <source>Calculator</source>
@@ -888,11 +1450,11 @@
     </message>
     <message>
         <source>Compile macro - experimental</source>
-        <translation>Compilar macro - experimental</translation>
+        <translation type="vanished">Compilar macro - experimental</translation>
     </message>
     <message>
         <source>Translate EdytorNC macro into CNC program</source>
-        <translation>Traducir macro EdytorNC a programa CNC</translation>
+        <translation type="vanished">Traducir macro EdytorNC a programa CNC</translation>
     </message>
     <message>
         <source>Show diff - open current file in right diff window</source>
@@ -920,11 +1482,11 @@
     </message>
     <message>
         <source>Split file</source>
-        <translation>Dividir archivo</translation>
+        <translation type="vanished">Dividir archivo</translation>
     </message>
     <message>
         <source>Comment ;</source>
-        <translation>Comentar ;</translation>
+        <translation type="vanished">Comentar ;</translation>
     </message>
     <message>
         <source>Ctrl+;</source>
@@ -932,11 +1494,11 @@
     </message>
     <message>
         <source>Comment/uncomment selected text using semicolon</source>
-        <translation>Comentar/Des-comentar texto seleccionado usando semicolon</translation>
+        <translation type="vanished">Comentar/Des-comentar texto seleccionado usando semicolon</translation>
     </message>
     <message>
         <source>Comment ()</source>
-        <translation>Comentar ()</translation>
+        <translation type="vanished">Comentar ()</translation>
     </message>
     <message>
         <source>Ctrl+9</source>
@@ -944,19 +1506,19 @@
     </message>
     <message>
         <source>Comment/uncomment selected text using parentheses</source>
-        <translation>Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
+        <translation type="vanished">Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
     </message>
     <message>
         <source>Swap axes</source>
-        <translation>Intercambiar ejes</translation>
+        <translation type="vanished">Intercambiar ejes</translation>
     </message>
     <message>
         <source>Swap/modify axes, selected text or entire program</source>
-        <translation>Intercambiar/modificar ejes, en texto seleccionado o en todo el programa</translation>
+        <translation type="vanished">Intercambiar/modificar ejes, en texto seleccionado o en todo el programa</translation>
     </message>
     <message>
         <source>Block Skip remove</source>
-        <translation>Remover salto de bloque</translation>
+        <translation type="vanished">Remover salto de bloque</translation>
     </message>
     <message>
         <source>Ctrl+1</source>
@@ -964,11 +1526,11 @@
     </message>
     <message>
         <source>Remove Block Skip /</source>
-        <translation>Remover salto de bloque /</translation>
+        <translation type="vanished">Remover salto de bloque /</translation>
     </message>
     <message>
         <source>Block Skip +</source>
-        <translation>Salto de bloque +</translation>
+        <translation type="vanished">Salto de bloque +</translation>
     </message>
     <message>
         <source>Ctrl+2</source>
@@ -976,11 +1538,11 @@
     </message>
     <message>
         <source>Insert/increase Block Skip /</source>
-        <translation>Insertar/incrementar salto de bloque /</translation>
+        <translation type="vanished">Insertar/incrementar salto de bloque /</translation>
     </message>
     <message>
         <source>Block Skip -</source>
-        <translation>Salto de bloque -</translation>
+        <translation type="vanished">Salto de bloque -</translation>
     </message>
     <message>
         <source>Ctrl+3</source>
@@ -988,7 +1550,7 @@
     </message>
     <message>
         <source>Insert/decrease Block Skip /</source>
-        <translation>Insertar/disminuir salto de bloque /</translation>
+        <translation type="vanished">Insertar/disminuir salto de bloque /</translation>
     </message>
     <message>
         <source>Close the active window</source>
@@ -1264,7 +1826,7 @@
     </message>
     <message>
         <source>All files (*.* *);;CNC programs files *.nc (*.nc);;CNC programs files *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documents *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings *.dwg *.dxf (*.dwg *.dxf);;Pictures *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text files *.txt (*.txt)</source>
-        <translation>Todos los archivos (*.* *);;Archivos de programa CN *.nc (*.nc);;Archivos de programa CNC *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documentos *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Diagramas *.dwg *.dxf (*.dwg *.dxf);;Imágenes *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Archivos de texto *.txt (*.txt)</translation>
+        <translation type="vanished">Todos los archivos (*.* *);;Archivos de programa CN *.nc (*.nc);;Archivos de programa CNC *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Documentos *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Diagramas *.dwg *.dxf (*.dwg *.dxf);;Imágenes *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Archivos de texto *.txt (*.txt)</translation>
     </message>
     <message>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
@@ -1279,12 +1841,12 @@
         <translation>Proyecto guardado</translation>
     </message>
     <message>
-        <source>EdytorNC project file *.ncp (*.ncp)</source>
-        <translation>Archivo de proyecto EdytorNC *.ncp (*.ncp)</translation>
+        <source>GCodeWorkShop project file *.ncp (*.ncp)</source>
+        <translation type="vanished">Archivo de proyecto GCodeWorkShop *.ncp (*.ncp)</translation>
     </message>
     <message>
-        <source>EdytorNC project file (*.ncp)</source>
-        <translation>Archivo de proyecto EdytorNC (*.ncp)</translation>
+        <source>GCodeWorkShop project file (*.ncp)</source>
+        <translation>Archivo de proyecto GCodeWorkShop (*.ncp)</translation>
     </message>
     <message>
         <source>Select the project name and location...</source>
@@ -1354,7 +1916,7 @@
     </message>
     <message>
         <source>&lt;br /&gt;German translation and other fixes thanks to Michael Numberger</source>
-        <translation>&lt;br /&gt;Traducción al alemán y otras correcciones alemanes gracias a Michael Numberger</translation>
+        <translation type="vanished">&lt;br /&gt;Traducción al alemán y otras correcciones alemanes gracias a Michael Numberger</translation>
     </message>
     <message>
         <source>Pr&amp;int preview</source>
@@ -1378,7 +1940,7 @@
     </message>
     <message>
         <source>default</source>
-        <translation>predeterminado</translation>
+        <translation type="vanished">predeterminado</translation>
     </message>
     <message>
         <source>Session %1 loaded</source>
@@ -1389,8 +1951,8 @@
         <translation>Archivo &quot;%1&quot; &lt;b&gt;fue modificado en el disco.&lt;/b&gt;&lt;p&gt;Quieres recargarlo?&lt;/p&gt;%2</translation>
     </message>
     <message>
-        <source>EdytorNC - Serial port file server</source>
-        <translation>EdytorNC - Servidor de Archivos por Puerto Serie</translation>
+        <source>GCodeWorkShop - Serial port file server</source>
+        <translation>GCodeWorkShop - Servidor de Archivos por Puerto Serie</translation>
     </message>
     <message>
         <source>Serial port file server is running.
@@ -1436,11 +1998,11 @@ Cerrar de todas maneras?</translation>
     </message>
     <message>
         <source>&lt;br /&gt;Dutch translation thanks to Henk van Andel</source>
-        <translation>&lt;br /&gt;Traducción al holandés gracias a Henk van Andel</translation>
+        <translation type="vanished">&lt;br /&gt;Traducción al holandés gracias a Henk van Andel</translation>
     </message>
     <message>
         <source>Clean &amp;up</source>
-        <translation>&amp;Limpieza</translation>
+        <translation type="vanished">&amp;Limpieza</translation>
     </message>
     <message>
         <source>Right click to copy item back to system clipboard.
@@ -1451,10 +2013,6 @@ Items with non empty titles are not deleted automatically.</source>
 Los ítems con títulos vacíos son los últimos 5 textos copiados al portapapeles del sistema.
 Doble click en el título del ítem para editarlo.
 Los ítems con títulos no vacíos no son borrados automáticamente.</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</source>
-        <translation></translation>
     </message>
     <message>
         <source>Inline calculator</source>
@@ -1473,373 +2031,72 @@ Los ítems con títulos no vacíos no son borrados automáticamente.</translatio
         <translation></translation>
     </message>
     <message>
-        <source>&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Right click to copy item back to system clipboard.
 Items with empty titles are the last five texts copied to system clipboard.
 Double click on item title to edit it. 
 Items with non empty titles are not deleted automatically.</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>FeedsDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <source>CNC programs files %1 (%1);;</source>
+        <translation type="unfinished">Archivos de programa CNC %1 (%1);;</translation>
     </message>
     <message>
-        <source>Cutting speed</source>
-        <translation>Velocidad de corte</translation>
+        <source>CNC programs files (%1);;</source>
+        <translation type="unfinished">Archivos de programa CNC (%1);;</translation>
     </message>
     <message>
-        <source>Cutting speed (m/min)</source>
-        <translation>Velocidad de corte (m/min)</translation>
+        <source>Text files (*.txt);;All files (*.* *)</source>
+        <translation type="unfinished">Archivos de texto (*.txt);;Todos los archivos (*.* *)</translation>
     </message>
     <message>
-        <source>90</source>
-        <translation></translation>
+        <source>Save file as...</source>
+        <translation type="unfinished">Guardar archivo como...</translation>
     </message>
     <message>
-        <source>Feed per tooth</source>
-        <translation>Avance por diente</translation>
+        <source>&lt;b&gt;File &quot;%1&quot; exists.&lt;/b&gt;</source>
+        <translation type="unfinished">&lt;b&gt;Ya existe el archivo &quot;%1&quot;.&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Fz :</source>
-        <translation></translation>
+        <source>Do you want overwrite it ?</source>
+        <translation type="unfinished">¿Quiere sobreescribirlo?</translation>
     </message>
     <message>
-        <source>Tool diameter</source>
-        <translation>Diámetro de herramienta</translation>
+        <source>Cannot write file &quot;%1&quot;.
+ %2</source>
+        <translation type="unfinished">No se puede escribir el archivo &quot;%1&quot;.
+ %2</translation>
     </message>
     <message>
-        <source>D :</source>
-        <translation></translation>
+        <source>&lt;b&gt;File: &quot;%1&quot;
+ has been modified.&lt;/b&gt;</source>
+        <translation type="unfinished">&lt;b&gt;El archivo: &quot;%1&quot;
+ ha sido modificado.&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Tool diameter (mm)</source>
-        <translation>Diámetro de herramienta (mm)</translation>
+        <source>Cannot read file &quot;%1&quot;.
+ %2</source>
+        <translation type="unfinished">No se puede leer el archivo &quot;%1&quot;.
+ %2</translation>
     </message>
     <message>
-        <source>10</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Number of toot&apos;s</source>
-        <translation>N° de dientes</translation>
-    </message>
-    <message>
-        <source>z :</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Spindle speed</source>
-        <translation>Velocidad de giro</translation>
-    </message>
-    <message>
-        <source>S :</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Table feed</source>
-        <translation>Avance de los ejes</translation>
-    </message>
-    <message>
-        <source>F :</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Table feed (mm/min)</source>
-        <translation>Avance de los ejes (mm/min)</translation>
-    </message>
-    <message>
-        <source>Compute spindle speed and table feed</source>
-        <translation>Calcular velocidad de giro y avance de ejes</translation>
-    </message>
-    <message>
-        <source>&amp;S, F</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Cl&amp;ose</source>
-        <translation>C&amp;errar</translation>
-    </message>
-    <message>
-        <source>Compute cutting speed and feed per tooth</source>
-        <translation>Calcular velocidad de corte y avance por diente</translation>
-    </message>
-    <message>
-        <source>&amp;Vc, Fz</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Cutting parameters</source>
-        <translation>Parámetros de corte</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>inches</source>
-        <translation>pulgadas</translation>
-    </message>
-    <message>
-        <source>Vc :</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Feed (chip load) per tooth (mm)</source>
-        <translation>Avance (carga de viruta) por diente (mm)</translation>
-    </message>
-    <message>
-        <source>Number of teeth on the cutter</source>
-        <translation>Número de dientes en la herramienta de corte</translation>
-    </message>
-    <message>
-        <source>Spindle speed (revs/min)</source>
-        <translation>Velocidad de giro (revs/min)</translation>
-    </message>
-    <message>
-        <source>Cutting speed (ft/min)</source>
-        <translation>Velocidad de corte (pie/min)</translation>
-    </message>
-    <message>
-        <source>Feed (chip load) per tooth (inches)</source>
-        <translation>Avance (carga de viruta) por diente (pulgadas)</translation>
-    </message>
-    <message>
-        <source>Tool diameter (inches)</source>
-        <translation>Diámetro de herramienta (pulgadas)</translation>
-    </message>
-    <message>
-        <source>Table feed (inches/min)</source>
-        <translation>Avance de los ejes (pulgadas/min)</translation>
+        <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.&lt;br&gt;This is a fork of &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó&lt;br /&gt;German translation and other fixes thanks to Michael Numberger&lt;br /&gt;Czech translation thanks to Pavel Fric&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju&lt;br /&gt;Dutch translation thanks to Henk van Andel&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski&lt;P&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;GCodeWorkShop on GitHub&lt;/a&gt;&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>FileChecker</name>
+    <name>GCoderDocument</name>
     <message>
-        <source>EdytorNC - File checker</source>
-        <translation>EdytorNC - Verificador de archivo</translation>
+        <source>program%1.nc</source>
+        <translation type="unfinished">programa%1.nc</translation>
     </message>
     <message>
-        <source>Save path:</source>
-        <translation>Ruta de guardado:</translation>
+        <source>(DATE)</source>
+        <translation type="unfinished">(FECHA)</translation>
     </message>
     <message>
-        <source>Auto save path as set in serial port configuration</source>
-        <translation>Ruta de autoguardado tal como está seleccionado en la configuración del puerto serie</translation>
-    </message>
-    <message>
-        <source>Search path:</source>
-        <translation>Ruta de búsqueda:</translation>
-    </message>
-    <message>
-        <source>Search path as set in serial port configuration</source>
-        <translation>Ruta de búsqueda tal como está seleccionado en la configuración del puerto serie</translation>
-    </message>
-    <message>
-        <source>List of files in save path (received files).
-Click to compare with file with the same name in selected search path.</source>
-        <translation>Lista de archivos en ruta de guardado (archivos recibidos).
-Click para comparar con archivo con el mismo nombre en la ruta de búsqueda seleccionada.</translation>
-    </message>
-    <message>
-        <source>File Name</source>
-        <translation>Nombre del archivo</translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation>Información</translation>
-    </message>
-    <message>
-        <source>Accept</source>
-        <translation>Aceptar</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Borrar</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Estado</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Tamaño</translation>
-    </message>
-    <message>
-        <source>Modification date</source>
-        <translation>Fecha de modificación</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Equal</source>
-        <translation>Igual</translation>
-    </message>
-    <message>
-        <source>Changed</source>
-        <translation>Cambiado</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Nuevo</translation>
-    </message>
-    <message>
-        <source>Status of received file:
-New - file does not exists in Search path.
-Equal - received file and file in Search path are identical.
-Changed - received file is modified</source>
-        <translation>Estado del archivo recibido:
-Nuevo - el archivo no existe en la ruta de búsqueda.
-Igual - el archivo recibido y el archivo en la ruta de búsqueda son idénticos.
-Cambiado - el archivo recibido está modificado
-</translation>
-    </message>
-    <message>
-        <source>Accept received file and move it to selected search path</source>
-        <translation>Aceptar archivo recibido y moverlo a la ruta de búsqueda seleccionada</translation>
-    </message>
-    <message>
-        <source>Delete received file</source>
-        <translation>Borrar archivo recibido</translation>
-    </message>
-</context>
-<context>
-    <name>FindInFiles</name>
-    <message>
-        <source>Dialog</source>
-        <translation>Diálogo</translation>
-    </message>
-    <message>
-        <source>Oneclick - preview, doubleclick - opens file in editor.</source>
-        <translation>1 click: Vista previa, doble click: Abre archivo en el editor.</translation>
-    </message>
-    <message>
-        <source>Whole words</source>
-        <translation>Palabras completas</translation>
-    </message>
-    <message>
-        <source>&amp;Browse</source>
-        <translation>&amp;Examinar</translation>
-    </message>
-    <message>
-        <source>In directory :</source>
-        <translation>En el directorio :</translation>
-    </message>
-    <message>
-        <source>*.nc</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Named :</source>
-        <translation>Con nombre :</translation>
-    </message>
-    <message>
-        <source>&amp;Find files</source>
-        <translation>&amp;Buscar archivos</translation>
-    </message>
-    <message>
-        <source>Containing text :</source>
-        <translation>Conteniendo el texto :</translation>
-    </message>
-    <message>
-        <source>Search subfolders</source>
-        <translation>Buscar en subcarpetas</translation>
-    </message>
-    <message>
-        <source>Subfolders</source>
-        <translation>Subcarpetas</translation>
-    </message>
-    <message>
-        <source>;...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>(...)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ignore comments</source>
-        <translation>Ignorar comentarios</translation>
-    </message>
-    <message>
-        <source>Find files</source>
-        <translation>Buscar archivos</translation>
-    </message>
-    <message>
-        <source>Hide</source>
-        <translation>Ocultar</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Find Files</source>
-        <translation>Buscar archivos</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>files</source>
-        <translation>archivos</translation>
-    </message>
-    <message>
-        <source>found.</source>
-        <translation>encontrado(s).</translation>
-    </message>
-    <message>
-        <source>Searching in folder: &quot;%1&quot;</source>
-        <translation>Buscando en carpeta: &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>File Name</source>
-        <translation>Nombre del archivo</translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation>Información</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Tamaño</translation>
-    </message>
-    <message>
-        <source>Modified</source>
-        <translation>Modificado</translation>
+        <source>DATE</source>
+        <translation type="unfinished">FECHA</translation>
     </message>
 </context>
 <context>
@@ -1958,76 +2215,81 @@ Cambiado - el archivo recibido está modificado
     </message>
 </context>
 <context>
+    <name>InLineCalc</name>
+    <message>
+        <source>You can use:
+</source>
+        <translation type="unfinished">Puedes usar:
+</translation>
+    </message>
+    <message>
+        <source>Press Enter to accept or click anywere to canacel</source>
+        <translation type="unfinished">Presiona Ingresar para aceptar a click en cualquier otra parte para cancelar</translation>
+    </message>
+</context>
+<context>
     <name>MdiChild</name>
     <message>
-        <source>MdiChild</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>program%1.nc</source>
-        <translation>programa%1.nc</translation>
-    </message>
-    <message>
-        <source>EdytorNC</source>
-        <translation></translation>
+        <translation type="vanished">programa%1.nc</translation>
     </message>
     <message>
         <source>Cannot read file &quot;%1&quot;.
  %2</source>
-        <translation>No se puede leer el archivo &quot;%1&quot;.
+        <translation type="vanished">No se puede leer el archivo &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
         <source>CNC programs files %1 (%1);;</source>
-        <translation>Archivos de programa CNC %1 (%1);;</translation>
+        <translation type="vanished">Archivos de programa CNC %1 (%1);;</translation>
     </message>
     <message>
         <source>CNC programs files (%1);;</source>
-        <translation>Archivos de programa CNC (%1);;</translation>
+        <translation type="vanished">Archivos de programa CNC (%1);;</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.* *)</source>
-        <translation>Archivos de texto (*.txt);;Todos los archivos (*.* *)</translation>
+        <translation type="vanished">Archivos de texto (*.txt);;Todos los archivos (*.* *)</translation>
     </message>
     <message>
         <source>Save file as...</source>
-        <translation>Guardar archivo como...</translation>
+        <translation type="vanished">Guardar archivo como...</translation>
     </message>
     <message>
         <source>&lt;b&gt;File &quot;%1&quot; exists.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Ya existe el archivo &quot;%1&quot;.&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Ya existe el archivo &quot;%1&quot;.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Do you want overwrite it ?</source>
-        <translation>¿Quiere sobreescribirlo?</translation>
+        <translation type="vanished">¿Quiere sobreescribirlo?</translation>
     </message>
     <message>
         <source>Cannot write file &quot;%1&quot;.
  %2</source>
-        <translation>No se puede escribir el archivo &quot;%1&quot;.
+        <translation type="vanished">No se puede escribir el archivo &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
         <source>&lt;b&gt;File: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;El archivo: &quot;%1&quot;
+        <translation type="vanished">&lt;b&gt;El archivo: &quot;%1&quot;
  ha sido modificado.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Do you want to save your changes ?</source>
-        <translation>¿Quiere guardar los cambios?</translation>
+        <translation type="vanished">¿Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Inserted : %1 dots.</source>
-        <translation>Insertado : %1 punto(s).</translation>
+        <translation type="vanished">Insertado : %1 punto(s).</translation>
     </message>
     <message>
         <source>Converted : %1 numbers.</source>
-        <translation>Convertido : %1 número(s).</translation>
+        <translation type="vanished">Convertido : %1 número(s).</translation>
     </message>
     <message>
-        <source>EdytorNc - compile macro</source>
-        <translation>EdytorNC: compilar macro</translation>
+        <source>GCodeWorkShop - compile macro</source>
+        <translation type="vanished">GCodeWorkShop: compilar macro</translation>
     </message>
     <message>
         <source>No constant definition .
@@ -2035,23 +2297,15 @@ Cambiado - el archivo recibido está modificado
 ...
 {END}
  No macro ?</source>
-        <translation>No hay constantes definidas .
+        <translation type="vanished">No hay constantes definidas .
 {BEGIN}
 ...
 {END}
  No macro ?</translation>
     </message>
     <message>
-        <source>EdytorNC - compile macro</source>
-        <translation>EdytorNC: compilar macro</translation>
-    </message>
-    <message>
         <source>Param list: no bracket &apos;}&apos; !</source>
-        <translation>Lista de Parámetros: Sin Corchete &apos;}&apos; !</translation>
-    </message>
-    <message>
-        <source>No ( or ) !</source>
-        <translation></translation>
+        <translation type="vanished">Lista de Parámetros: Sin Corchete &apos;}&apos; !</translation>
     </message>
     <message>
         <source>Function parameter not found !
@@ -2063,188 +2317,163 @@ Comprobar +-*/.
     </message>
     <message>
         <source>Wrong number !</source>
-        <translation>Número errado !</translation>
+        <translation type="vanished">Número errado !</translation>
     </message>
     <message>
         <source>Unknown math function !
 &quot;%1&quot;</source>
-        <translation>Función matemática desconocida !
+        <translation type="vanished">Función matemática desconocida !
 &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Decimal point or minus writed two times !
 &quot;%1&quot;</source>
-        <translation>Punto decimal o signo menos escrito dos veces !
+        <translation type="vanished">Punto decimal o signo menos escrito dos veces !
 &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Unknown error !</source>
-        <translation>Error desconocido !</translation>
+        <translation type="vanished">Error desconocido !</translation>
     </message>
     <message>
         <source>Syntax error</source>
-        <translation>Error de sintaxis</translation>
+        <translation type="vanished">Error de sintaxis</translation>
     </message>
     <message>
         <source>Unbalanced parentheses</source>
-        <translation>Parentesis huérfano</translation>
+        <translation type="vanished">Parentesis huérfano</translation>
     </message>
     <message>
         <source>No expression present</source>
-        <translation>Ninguna expresión presente</translation>
+        <translation type="vanished">Ninguna expresión presente</translation>
     </message>
     <message>
         <source>Equals sign expected</source>
-        <translation>Se esperaban iguales signos</translation>
+        <translation type="vanished">Se esperaban iguales signos</translation>
     </message>
     <message>
         <source>Not a variable</source>
-        <translation>No es una variable</translation>
+        <translation type="vanished">No es una variable</translation>
     </message>
     <message>
         <source>Label table full</source>
-        <translation>Tabla de variables llena</translation>
+        <translation type="vanished">Tabla de variables llena</translation>
     </message>
     <message>
         <source>Duplicate label</source>
-        <translation>Variable duplicada</translation>
+        <translation type="vanished">Variable duplicada</translation>
     </message>
     <message>
         <source>Undefined label</source>
-        <translation>Variable no definida</translation>
+        <translation type="vanished">Variable no definida</translation>
     </message>
     <message>
         <source>THEN expected</source>
-        <translation>Se esperaba THEN</translation>
+        <translation type="vanished">Se esperaba THEN</translation>
     </message>
     <message>
         <source>TO expected</source>
-        <translation>Se esperaba TO</translation>
+        <translation type="vanished">Se esperaba TO</translation>
     </message>
     <message>
         <source>Too many nested FOR loops</source>
-        <translation>Demasiados bucles FOR anidados</translation>
+        <translation type="vanished">Demasiados bucles FOR anidados</translation>
     </message>
     <message>
         <source>NEXT without FOR</source>
-        <translation>NEXT sin FOR</translation>
+        <translation type="vanished">NEXT sin FOR</translation>
     </message>
     <message>
         <source>Too many nested GOSUBs</source>
-        <translation>Demasiados GOSUBs anidados</translation>
+        <translation type="vanished">Demasiados GOSUBs anidados</translation>
     </message>
     <message>
         <source>RETURN without GOSUBs</source>
-        <translation>RETURN sin GOSUBs</translation>
+        <translation type="vanished">RETURN sin GOSUBs</translation>
     </message>
     <message>
         <source>Unknown error</source>
-        <translation>Error desconocido</translation>
+        <translation type="vanished">Error desconocido</translation>
     </message>
     <message>
-        <source>EdytorNc - compile basic</source>
-        <translation>EdytorNC: compilar basic</translation>
+        <source>GCodeWorkShop - compile basic</source>
+        <translation type="vanished">GCodeWorkShop: compilar basic</translation>
     </message>
     <message>
         <source>(DATE)</source>
-        <translation>(FECHA)</translation>
+        <translation type="vanished">(FECHA)</translation>
     </message>
     <message>
         <source>DATE</source>
-        <translation>FECHA</translation>
+        <translation type="vanished">FECHA</translation>
     </message>
     <message>
         <source>Comment ;</source>
-        <translation>Comentar ;</translation>
-    </message>
-    <message>
-        <source>Ctrl+;</source>
-        <translation></translation>
+        <translation type="vanished">Comentar ;</translation>
     </message>
     <message>
         <source>Comment/uncomment selected text using semicolon</source>
-        <translation>Comentar/Des-comentar texto seleccionado usando semicolon</translation>
+        <translation type="vanished">Comentar/Des-comentar texto seleccionado usando semicolon</translation>
     </message>
     <message>
         <source>Comment ()</source>
-        <translation>Comentar ()</translation>
-    </message>
-    <message>
-        <source>Ctrl+9</source>
-        <translation></translation>
+        <translation type="vanished">Comentar ()</translation>
     </message>
     <message>
         <source>Comment/uncomment selected text using parentheses</source>
-        <translation>Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
+        <translation type="vanished">Comentar/Des-comentar texto seleccionado usando paréntesis</translation>
     </message>
     <message>
         <source>Block Skip remove</source>
-        <translation>Remover salto de bloque</translation>
-    </message>
-    <message>
-        <source>Ctrl+1</source>
-        <translation></translation>
+        <translation type="vanished">Remover salto de bloque</translation>
     </message>
     <message>
         <source>Remove Block Skip /</source>
-        <translation>Eliminar salto de bloque /</translation>
+        <translation type="vanished">Eliminar salto de bloque /</translation>
     </message>
     <message>
         <source>Block Skip +</source>
-        <translation>Salto de bloque +</translation>
-    </message>
-    <message>
-        <source>Ctrl+2</source>
-        <translation></translation>
+        <translation type="vanished">Salto de bloque +</translation>
     </message>
     <message>
         <source>Insert/increase Block Skip /</source>
-        <translation>Insertar/incrementar salto de bloque /</translation>
+        <translation type="vanished">Insertar/incrementar salto de bloque /</translation>
     </message>
     <message>
         <source>Block Skip -</source>
-        <translation>Salto de bloque -</translation>
-    </message>
-    <message>
-        <source>Ctrl+3</source>
-        <translation></translation>
+        <translation type="vanished">Salto de bloque -</translation>
     </message>
     <message>
         <source>Insert/decrease Block Skip /</source>
-        <translation>Insertar/disminuir salto de bloque /</translation>
+        <translation type="vanished">Insertar/disminuir salto de bloque /</translation>
     </message>
     <message>
         <source>Press Enter to accept or click anywere to canacel</source>
-        <translation>Presiona Ingresar para aceptar a click en cualquier otra parte para cancelar</translation>
+        <translation type="vanished">Presiona Ingresar para aceptar a click en cualquier otra parte para cancelar</translation>
     </message>
     <message>
         <source>Inline calculator</source>
-        <translation>Calculador en línea</translation>
-    </message>
-    <message>
-        <source>Ctrl+0</source>
-        <translation></translation>
+        <translation type="vanished">Calculador en línea</translation>
     </message>
     <message>
         <source>You can use:
 </source>
-        <translation>Puedes usar:
+        <translation type="vanished">Puedes usar:
 </translation>
     </message>
+</context>
+<context>
+    <name>QObject</name>
     <message>
-        <source>Remove space</source>
-        <comment>Slow operation title in MDIChild</comment>
+        <source>Lines with: &apos;(comment)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Insert space</source>
-        <comment>Slow operation title in MDIChild</comment>
+        <source>Any: (comment)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Function parameter not found ! 
- Check +-*/.
-&quot;%1&quot;</source>
+        <source>Empty lines:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2331,15 +2560,7 @@ Comprobar +-*/.
     <name>SerialPortCfgHelpDialog</name>
     <message>
         <source>Help - Serial port configuration</source>
-        <translation>Ayuda - Configuración del puerto serie</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:100%;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation type="vanished">Ayuda - Configuración del puerto serie</translation>
     </message>
 </context>
 <context>
@@ -2685,11 +2906,11 @@ Sólo son permitidos caracteres LFy CR, en mayúsculas.</translation>
     <message>
         <source>XON (DC1) - 17 Dec. 0x11 Hex.
 XON (DC2) - 18 Dec. 0x12 Hex.
-This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
+This setting is used only in GCodeWorkShop (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</source>
         <translation>XON (DC1) - 17 Dec. 0x11 Hex.
 XON (DC2) - 18 Dec. 0x12 Hex.
-Este ajuste sólo es usado por EdytorNC (no es aplicado al puerto serie) y trabaja con controles de flujo por hardware y software.
+Este ajuste sólo es usado por GCodeWorkShop (no es aplicado al puerto serie) y trabaja con controles de flujo por hardware y software.
 Ajuste XON o XOFF a 0 si quiere deshabilitarlo.</translation>
     </message>
     <message>
@@ -2710,11 +2931,11 @@ Este ajuste también es usado en el modo Servidor De Archivos para detectar el f
     <message>
         <source>XOFF (DC3) - 19 Dec. 0x13 Hex.
 XOFF (DC4) - 20 Dec. 0x14 Hex.
-This setting is used only in EdytorNC (is not applied to serial port) and works with hardware and software flow control.
+This setting is used only in GCodeWorkShop (is not applied to serial port) and works with hardware and software flow control.
 Set XON or XOFF to 0 if you want disable it.</source>
         <translation>XOFF (DC3) - 19 Dec. 0x13 Hex.
 XOFF (DC4) - 20 Dec. 0x14 Hex.
-Este ajuste es usado sólo en EdytorNC (no es aplicado al puerto serie) y trabaja con control de flujo por hardware/software.
+Este ajuste es usado sólo en GCodeWorkShop (no es aplicado al puerto serie) y trabaja con control de flujo por hardware/software.
 Ajuste XON o XOFF a 0 si quiere deshabilitarlo.</translation>
     </message>
     <message>
@@ -2746,8 +2967,8 @@ Si el nombre de archivo resulta vacío, se usará la versión con letras.</trans
         <translation>&amp;Borrar</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Este campo contiene expresión usada para encontrar el fin del programa CNC recibido (fin de la transmisión).&lt;/p&gt;&lt;p&gt;Debe contener una expresión regular QT (QRexExp) válida. Ver &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;En EdytorNC puedes verificar esta expresión en la función &amp;quot;Limpieza&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In GCodeWorkShop you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Este campo contiene expresión usada para encontrar el fin del programa CNC recibido (fin de la transmisión).&lt;/p&gt;&lt;p&gt;Debe contener una expresión regular QT (QRexExp) válida. Ver &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;En GCodeWorkShop puedes verificar esta expresión en la función &amp;quot;Limpieza&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -2765,7 +2986,7 @@ Si el nombre de archivo resulta vacío, se usará la versión con letras.</trans
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Serial port file server.&lt;/p&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Start file server in EdytorNC&lt;/li&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Start file server in GCodeWorkShop&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Send any file from CNC, it will be saved in computer (as is set in Autosave tab)&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Send special program from CNC: &lt;/li&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
@@ -2780,7 +3001,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Servidor de Archivos por Puerto Serie.&lt;/p&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Iniciar el Servidor de Archivos en EdytorNC&lt;/li&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Iniciar el Servidor de Archivos en GCodeWorkShop&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enviar cualquier archivo desde el CNC, será guardado automáticamente en el computador (tal como está configurado en la pestaña Guardado Automático)&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Enviar un programa especial desde el CNC: &lt;/li&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
@@ -2810,14 +3031,14 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This field contains expression used to find filename in &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In EdytorNC you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In GCodeWorkShop you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Este campo contiene expresión usada para encontrar el nombre de archivo en el programa &amp;quot;Caller&amp;quot;.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Debe contener una expresión regular QT (QRexExp) válida. Ver &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;En EdytorNC puede verificar esta expresión en la función &amp;quot;Limpieza&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;En GCodeWorkShop puede verificar esta expresión en la función &amp;quot;Limpieza&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</source>
@@ -3042,6 +3263,113 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
 </context>
 <context>
+    <name>SerialPortTestDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Diálogo</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Predeterminado</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Connect</source>
+        <translation type="unfinished">&amp;Conectar</translation>
+    </message>
+    <message>
+        <source>Clear To Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data Set Ready </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DSR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data Carrier Detect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Request To Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RTS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data Terminal Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DTR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set DTR</source>
+        <translation type="unfinished">Establecer DTR</translation>
+    </message>
+    <message>
+        <source>Send XON</source>
+        <translation type="unfinished">Enviar XON</translation>
+    </message>
+    <message>
+        <source>Set RTS</source>
+        <translation type="unfinished">Establecer RTS</translation>
+    </message>
+    <message>
+        <source>Send XOFF</source>
+        <translation type="unfinished">Enviar XOFF</translation>
+    </message>
+    <message>
+        <source>C&amp;lear text</source>
+        <translation type="unfinished">&amp;Limpiar texto</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Cerrar</translation>
+    </message>
+    <message>
+        <source>Serial transmission test</source>
+        <translation type="unfinished">Prueba de transmisión serial</translation>
+    </message>
+    <message>
+        <source>&amp;Disconnect</source>
+        <translation type="unfinished">&amp;Desconectar</translation>
+    </message>
+    <message>
+        <source>Recived: %1 bytes.</source>
+        <translation type="unfinished">Recibido: %1 bytes.</translation>
+    </message>
+    <message>
+        <source>Waiting...</source>
+        <translation type="unfinished">Esperando...</translation>
+    </message>
+    <message>
+        <source>Waiting for a signal readiness...</source>
+        <translation type="unfinished">Esperando señal de disponibilidad...</translation>
+    </message>
+    <message>
+        <source>Sending byte %1 of %2</source>
+        <translation type="unfinished">Enviando byte %1 de %2</translation>
+    </message>
+</context>
+<context>
     <name>SerialTransmissionDialog</name>
     <message>
         <source>Clear To Send</source>
@@ -3117,15 +3445,15 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <source>Parity error detected by the hardware while reading data</source>
-        <translation>Error de paridad detectado por el hardware mientras se leían datos</translation>
+        <translation type="vanished">Error de paridad detectado por el hardware mientras se leían datos</translation>
     </message>
     <message>
         <source>Framing error detected by the hardware while reading data</source>
-        <translation>Error de encuadre detectado por el hardware mientras se leían datos</translation>
+        <translation type="vanished">Error de encuadre detectado por el hardware mientras se leían datos</translation>
     </message>
     <message>
         <source>Break condition detected by the hardware on the input line</source>
-        <translation>Condición de interrupción detectada por el hardware en la línea de entrada</translation>
+        <translation type="vanished">Condición de interrupción detectada por el hardware en la línea de entrada</translation>
     </message>
     <message>
         <source>An I/O error occurred while writing the data</source>
@@ -3152,8 +3480,8 @@ If detected filename will contain an extension, then this setting will be ignore
         <translation>Ha ocurrido un error no identificado</translation>
     </message>
     <message>
-        <source>EdytorNC - serial transmission</source>
-        <translation>EdytorNC - transmisión serial</translation>
+        <source>GCodeWorkShop - serial transmission</source>
+        <translation>GCodeWorkShop - transmisión serial</translation>
     </message>
     <message>
         <source>Sending byte %1 of %2</source>
@@ -3318,6 +3646,59 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     <message>
         <source>WARNING:	 Could not find program name. Using date time code.</source>
         <translation>ADVERTENCIA:	 No se pudo encontrar el nombre del archivo. Usando código fecha-hora.</translation>
+    </message>
+</context>
+<context>
+    <name>SessionDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Diálogo</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nuevo</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation type="unfinished">&amp;Renombrar</translation>
+    </message>
+    <message>
+        <source>&amp;Clone</source>
+        <translation type="unfinished">&amp;Clonar</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished">&amp;Borrar</translation>
+    </message>
+    <message>
+        <source>&amp;Switch to</source>
+        <translation type="unfinished">&amp;Pasar a</translation>
+    </message>
+    <message>
+        <source>Session manager</source>
+        <translation type="unfinished">Gestión de sesión</translation>
+    </message>
+</context>
+<context>
+    <name>SessionManager</name>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SessionNameDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Diálogo</translation>
+    </message>
+    <message>
+        <source>Enter the name of the session:</source>
+        <translation type="unfinished">Ingrese el nombre de la sesión:</translation>
+    </message>
+    <message>
+        <source>New session...</source>
+        <translation type="unfinished">Nueva sesión...</translation>
     </message>
 </context>
 <context>
@@ -3594,8 +3975,8 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation>&amp;Cancelar</translation>
     </message>
     <message>
-        <source>EdytorNC configuration</source>
-        <translation>Configuración de EdytorNC</translation>
+        <source>GCodeWorkShop configuration</source>
+        <translation>Configuración de GCodeWorkShop</translation>
     </message>
     <message>
         <source>Current font : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</source>
@@ -3679,110 +4060,161 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     </message>
 </context>
 <context>
+    <name>SwapAxesDialog</name>
+    <message>
+        <source>Swap/modify axes</source>
+        <translation type="unfinished">Intercambiar/modificar ejes</translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Min:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap: </source>
+        <translation type="unfinished">Intercambiar: </translation>
+    </message>
+    <message>
+        <source>Max:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation type="unfinished">A:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Agregar</translation>
+    </message>
+    <message>
+        <source>Subtract</source>
+        <translation type="unfinished">Sustraer</translation>
+    </message>
+    <message>
+        <source>Multiply</source>
+        <translation type="unfinished">Multiplicar</translation>
+    </message>
+    <message>
+        <source>Divide</source>
+        <translation type="unfinished">Dividir</translation>
+    </message>
+    <message>
+        <source>Between</source>
+        <translation type="unfinished">Entre</translation>
+    </message>
+    <message>
+        <source>Modify</source>
+        <translation type="unfinished">Modificar</translation>
+    </message>
+    <message>
+        <source>Decimals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remember the values at closing</source>
+        <translation type="unfinished">Recordar los valores al cerrar</translation>
+    </message>
+</context>
+<context>
     <name>TransmissionDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation type="vanished">Diálogo</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Predeterminado</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation></translation>
+        <translation type="vanished">Predeterminado</translation>
     </message>
     <message>
         <source>&amp;Connect</source>
-        <translation>&amp;Conectar</translation>
-    </message>
-    <message>
-        <source>Clear To Send</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>CTS</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Data Set Ready </source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>DSR</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Data Carrier Detect</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>DCD</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Request To Send</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>RTS</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Data Terminal Ready</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>DTR</source>
-        <translation></translation>
+        <translation type="vanished">&amp;Conectar</translation>
     </message>
     <message>
         <source>Set DTR</source>
-        <translation>Establecer DTR</translation>
+        <translation type="vanished">Establecer DTR</translation>
     </message>
     <message>
         <source>Send XON</source>
-        <translation>Enviar XON</translation>
+        <translation type="vanished">Enviar XON</translation>
     </message>
     <message>
         <source>Set RTS</source>
-        <translation>Establecer RTS</translation>
+        <translation type="vanished">Establecer RTS</translation>
     </message>
     <message>
         <source>Send XOFF</source>
-        <translation>Enviar XOFF</translation>
+        <translation type="vanished">Enviar XOFF</translation>
     </message>
     <message>
         <source>C&amp;lear text</source>
-        <translation>&amp;Limpiar texto</translation>
+        <translation type="vanished">&amp;Limpiar texto</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;Cerrar</translation>
+        <translation type="vanished">&amp;Cerrar</translation>
     </message>
     <message>
         <source>Serial transmission test</source>
-        <translation>Prueba de transmisión serial</translation>
+        <translation type="vanished">Prueba de transmisión serial</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>
-        <translation>&amp;Desconectar</translation>
+        <translation type="vanished">&amp;Desconectar</translation>
     </message>
     <message>
         <source>Recived: %1 bytes.</source>
-        <translation>Recibido: %1 bytes.</translation>
+        <translation type="vanished">Recibido: %1 bytes.</translation>
     </message>
     <message>
         <source>Waiting...</source>
-        <translation>Esperando...</translation>
+        <translation type="vanished">Esperando...</translation>
     </message>
     <message>
         <source>Waiting for a signal readiness...</source>
-        <translation>Esperando señal de disponibilidad...</translation>
+        <translation type="vanished">Esperando señal de disponibilidad...</translation>
     </message>
     <message>
         <source>Sending byte %1 of %2</source>
-        <translation>Enviando byte %1 de %2</translation>
+        <translation type="vanished">Enviando byte %1 de %2</translation>
     </message>
 </context>
 <context>
@@ -3841,54 +4273,167 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     </message>
 </context>
 <context>
+    <name>Utils::CompileMacro</name>
+    <message>
+        <source>No constant definition .
+{BEGIN}
+...
+{END}
+ No macro ?</source>
+        <translation type="unfinished">No hay constantes definidas .
+{BEGIN}
+...
+{END}
+ No macro ?</translation>
+    </message>
+    <message>
+        <source>Param list: no bracket &apos;}&apos; !</source>
+        <translation type="unfinished">Lista de Parámetros: Sin Corchete &apos;}&apos; !</translation>
+    </message>
+    <message>
+        <source>No ( or ) !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function parameter not found ! 
+ Check +-*/.
+&quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong number !</source>
+        <translation type="unfinished">Número errado !</translation>
+    </message>
+    <message>
+        <source>Unknown math function !
+&quot;%1&quot;</source>
+        <translation type="unfinished">Función matemática desconocida !
+&quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>Decimal point or minus writed two times !
+&quot;%1&quot;</source>
+        <translation type="unfinished">Punto decimal o signo menos escrito dos veces !
+&quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>Unknown error !</source>
+        <translation type="unfinished">Error desconocido !</translation>
+    </message>
+    <message>
+        <source>BRC error:
+%1
+Code=%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Syntax error</source>
+        <translation type="unfinished">Error de sintaxis</translation>
+    </message>
+    <message>
+        <source>Unbalanced parentheses</source>
+        <translation type="unfinished">Parentesis huérfano</translation>
+    </message>
+    <message>
+        <source>No expression present</source>
+        <translation type="unfinished">Ninguna expresión presente</translation>
+    </message>
+    <message>
+        <source>Equals sign expected</source>
+        <translation type="unfinished">Se esperaban iguales signos</translation>
+    </message>
+    <message>
+        <source>Not a variable</source>
+        <translation type="unfinished">No es una variable</translation>
+    </message>
+    <message>
+        <source>Label table full</source>
+        <translation type="unfinished">Tabla de variables llena</translation>
+    </message>
+    <message>
+        <source>Duplicate label</source>
+        <translation type="unfinished">Variable duplicada</translation>
+    </message>
+    <message>
+        <source>Undefined label</source>
+        <translation type="unfinished">Variable no definida</translation>
+    </message>
+    <message>
+        <source>THEN expected</source>
+        <translation type="unfinished">Se esperaba THEN</translation>
+    </message>
+    <message>
+        <source>TO expected</source>
+        <translation type="unfinished">Se esperaba TO</translation>
+    </message>
+    <message>
+        <source>Too many nested FOR loops</source>
+        <translation type="unfinished">Demasiados bucles FOR anidados</translation>
+    </message>
+    <message>
+        <source>NEXT without FOR</source>
+        <translation type="unfinished">NEXT sin FOR</translation>
+    </message>
+    <message>
+        <source>Too many nested GOSUBs</source>
+        <translation type="unfinished">Demasiados GOSUBs anidados</translation>
+    </message>
+    <message>
+        <source>RETURN without GOSUBs</source>
+        <translation type="unfinished">RETURN sin GOSUBs</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation type="unfinished">Error desconocido</translation>
+    </message>
+    <message>
+        <source>Basic interpreter error:
+%1
+Code=%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>cleanUpDialog</name>
     <message>
         <source>Remove text using regular expressions</source>
-        <translation>Remover texto con expresiones regulares</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Information about: &lt;a href=&quot;http://doc.qt.digia.com/qt/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Qt regular expressions&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;http://doc.qt.digia.com/qt/qregexp.html&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation type="vanished">Remover texto con expresiones regulares</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Comentario</translation>
+        <translation type="vanished">Comentario</translation>
     </message>
     <message>
         <source>Expression</source>
-        <translation>Expresión</translation>
+        <translation type="vanished">Expresión</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation>Seleccionar</translation>
+        <translation type="vanished">Seleccionar</translation>
     </message>
     <message>
         <source>Preview, changes will not be saved</source>
-        <translation>Vista previa, no se guardarán los cambios</translation>
+        <translation type="vanished">Vista previa, no se guardarán los cambios</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close and save changes.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Delete the text that matches the regular expression selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cerrar y guardar cambios.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Eliminar el texto que coincide con la expresión regular seleccionada.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation></translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cerrar y guardar cambios.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Eliminar el texto que coincide con la expresión regular seleccionada.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Close and cancel all changes</source>
-        <translation>Cerrar y cancelar todos los cambios</translation>
+        <translation type="vanished">Cerrar y cancelar todos los cambios</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="vanished">&amp;Cancelar</translation>
     </message>
     <message>
         <source>Delete &amp;row</source>
-        <translation>Eliminar la hile&amp;ra</translation>
+        <translation type="vanished">Eliminar la hile&amp;ra</translation>
     </message>
     <message>
         <source>Delete current row</source>
-        <translation>Eliminar la hilera actual</translation>
+        <translation type="vanished">Eliminar la hilera actual</translation>
     </message>
 </context>
 <context>
@@ -3918,149 +4463,97 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     <name>newSessionDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation type="vanished">Diálogo</translation>
     </message>
     <message>
         <source>Enter the name of the session:</source>
-        <translation>Ingrese el nombre de la sesión:</translation>
+        <translation type="vanished">Ingrese el nombre de la sesión:</translation>
     </message>
     <message>
         <source>New session...</source>
-        <translation>Nueva sesión...</translation>
+        <translation type="vanished">Nueva sesión...</translation>
     </message>
 </context>
 <context>
     <name>sessionDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>Diálogo</translation>
+        <translation type="vanished">Diálogo</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Nuevo</translation>
+        <translation type="vanished">&amp;Nuevo</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation>&amp;Renombrar</translation>
+        <translation type="vanished">&amp;Renombrar</translation>
     </message>
     <message>
         <source>&amp;Clone</source>
-        <translation>&amp;Clonar</translation>
+        <translation type="vanished">&amp;Clonar</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Borrar</translation>
+        <translation type="vanished">&amp;Borrar</translation>
     </message>
     <message>
         <source>&amp;Switch to</source>
-        <translation>&amp;Pasar a</translation>
+        <translation type="vanished">&amp;Pasar a</translation>
     </message>
     <message>
         <source>Restore last session on startup</source>
-        <translation>Restaurar la última sesión al iniciar</translation>
+        <translation type="vanished">Restaurar la última sesión al iniciar</translation>
     </message>
     <message>
         <source>Session manager</source>
-        <translation>Gestión de sesión</translation>
+        <translation type="vanished">Gestión de sesión</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>Predeterminado</translation>
+        <translation type="vanished">Predeterminado</translation>
     </message>
 </context>
 <context>
     <name>swapAxesDialog</name>
     <message>
         <source>Swap/modify axes</source>
-        <translation>Intercambiar/modificar ejes</translation>
-    </message>
-    <message>
-        <source>X</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Z</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>W</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>V</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>H</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Min:</source>
-        <translation></translation>
+        <translation type="vanished">Intercambiar/modificar ejes</translation>
     </message>
     <message>
         <source>Swap: </source>
-        <translation>Intercambiar: </translation>
-    </message>
-    <message>
-        <source>Max:</source>
-        <translation></translation>
+        <translation type="vanished">Intercambiar: </translation>
     </message>
     <message>
         <source>To:</source>
-        <translation>A:</translation>
+        <translation type="vanished">A:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Agregar</translation>
+        <translation type="vanished">Agregar</translation>
     </message>
     <message>
         <source>Subtract</source>
-        <translation>Sustraer</translation>
+        <translation type="vanished">Sustraer</translation>
     </message>
     <message>
         <source>Multiply</source>
-        <translation>Multiplicar</translation>
+        <translation type="vanished">Multiplicar</translation>
     </message>
     <message>
         <source>Divide</source>
-        <translation>Dividir</translation>
+        <translation type="vanished">Dividir</translation>
     </message>
     <message>
         <source>Between</source>
-        <translation>Entre</translation>
+        <translation type="vanished">Entre</translation>
     </message>
     <message>
         <source>Modify</source>
-        <translation>Modificar</translation>
+        <translation type="vanished">Modificar</translation>
     </message>
     <message>
         <source>Remember the values at closing</source>
-        <translation>Recordar los valores al cerrar</translation>
-    </message>
-    <message>
-        <source>Decimals</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Recordar los valores al cerrar</translation>
     </message>
 </context>
 </TS>

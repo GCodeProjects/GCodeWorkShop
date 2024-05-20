@@ -14,7 +14,6 @@ lupdateGCodeWorkShop.commands = lupdate $$PROJECT_ROOT_PATH/gcodeworkshop $$PROJ
 lupdateKdiff3.commands = lupdate $$PROJECT_ROOT_PATH/3rdparty/kdiff3  -ts $$tsFiles(kdiff3)
 
 QMAKE_EXTRA_TARGETS += lrelease
-lrelease.target = FORCE
 lrelease.commands = lrelease $$tsFiles(gcodeworkshop) $$tsFiles(kdiff3)
 
 translate.files = $$LANG_PATH/*.qm
