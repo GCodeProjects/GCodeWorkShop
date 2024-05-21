@@ -119,6 +119,7 @@
 #include <serialporttestdialog.h>       // SerialPortTestDialog
 #include <serialtransmissiondialog.h>   // SerialTransmissionDialog
 #include <utils/medium.h>               // Medium
+#include <version.h>
 
 #include "capslockeventfilter.h"    // for CapsLockEventFilter
 #include "findinf.h"                // for FindInFiles
@@ -1229,8 +1230,10 @@ void GCodeWorkShop::about()
 {
 	QMessageBox::about(this, tr("About GCodeWorkShop"),
 	                   tr("The <b>GCodeWorkShop</b> is text editor for CNC programmers."
-	                      "<P>Version: " "2018-07-26 BETA"
+	                      "<br>This is a fork of <a href='https://github.com/artur3/EdytorNC'>EdytorNC</a>."
+	                      "<P>Version: %1"
 	                      "<P>Copyright (C) 1998 - 2018 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>"
+	                      "<br>Copyright (C) 2020 - 2024 by <a href='mailto:nicegorov@yandex.ru'>Nick Egorrov</a>"
 	                      "<P>Spanish translation, fixes and other help thanks to Otto Huamani"
 	                      "<br />Catalan translation and deb package thanks to Jordi Sayol i Salomó"
 	                      "<br />German translation and other fixes thanks to Michael Numberger"
@@ -1239,20 +1242,15 @@ void GCodeWorkShop::about()
 	                      "<br />Dutch translation thanks to Henk van Andel"
 	                      "<br />OS X patch and other updates thanks to Janne Mäntyharju"
 	                      "<P>New EdytorNC icon thanks to Jakub Gajewski"
-	                      "<P><a href=\"http://sourceforge.net/projects/edytornc/\">http://sourceforge.net/projects/edytornc</a>"
-	                      "<P><a href=\"https://plus.google.com/communities/117267107585407507443/\">EdytorNC Google Plus Community</a>"
-	                      "<P>"
-	                      // "<P>Cross platform installer made by <a href=\"http://installbuilder.bitrock.com/\">BitRock InstallBuilder for Qt</a>"
-	                      // "<P>"
+	                      "<P><a href='https://github.com/GCodeProjects/GCodeWorkShop'>GCodeWorkShop on GitHub</a>"
 	                      "<P>GCodeWorkShop contains pieces of code from other Open Source projects."
-	                      "<P>"
 	                      "<P><i>GCodeWorkShop is free software; you can redistribute it and/or modify"
 	                      "it under the terms of the GNU General Public License  as published by"
 	                      "the Free Software Foundation; either version 2 of the License, or"
 	                      "(at your option) any later version.</i>"
 	                      "<P><i>The program is provided AS IS with NO WARRANTY OF ANY KIND,"
 	                      "INCLUDING THE WARRANTY OF DESIGN,"
-	                      "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>"));
+	                      "MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</i>").arg(GCODEWORKSHOP_VERSION));
 }
 
 void GCodeWorkShop::updateMenus()

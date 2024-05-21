@@ -18,6 +18,7 @@ SOURCES += \
     serialportconfigdialog.cpp
 
 HEADERS += \
+    include/version.h \
     serialportsettings.h \
     serialporttestdialog.h \
     serialtransmissiondialog.h \
