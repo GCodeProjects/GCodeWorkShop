@@ -3619,6 +3619,10 @@ void GCodeWorkShop::clipboardChanged()
 	QFont font;
 	bool notFound = true;
 
+	if (!isActiveWindow()) {
+		return;
+	}
+
 	updateMenus();
 
 	QString text = clipboard->text();
