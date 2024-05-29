@@ -195,7 +195,7 @@ void FeedsDialog::computeButtonClicked()
 		S = (Vc * 1000) / (M_PI * D);
 		F = S * (Fz * z);
 
-		sInput->setText(QString("%1").arg(round(S)));
+		sInput->setText(QString("%1").arg(std::round(S)));
 		fInput->setText(QString("%1").arg(F, 0, 'f', 3));
 	}
 
@@ -203,7 +203,7 @@ void FeedsDialog::computeButtonClicked()
 		S = (Vc * 12) / (M_PI * D);
 		F = S * (Fz * z);
 
-		sInput->setText(QString("%1").arg(round(S)));
+		sInput->setText(QString("%1").arg(std::round(S)));
 		fInput->setText(QString("%1").arg(F, 0, 'f', 4));
 	}
 }
@@ -222,7 +222,7 @@ void FeedsDialog::computeVcButtonClicked()
 		Vc = (M_PI * D * S) / 1000;
 		Fz = (F / S) / z;
 
-		vcInput->setText(QString("%1").arg(round(round(Vc))));
+		vcInput->setText(QString("%1").arg(std::round(std::round(Vc))));
 		fzInput->setText(QString("%1").arg(Fz, 0, 'f', 3));
 	}
 
@@ -230,7 +230,7 @@ void FeedsDialog::computeVcButtonClicked()
 		Vc = (M_PI * D * S) / 12;
 		Fz = (F / S) / z;
 
-		vcInput->setText(QString("%1").arg(round(round(Vc))));
+		vcInput->setText(QString("%1").arg(std::round(std::round(Vc))));
 		fzInput->setText(QString("%1").arg(Fz, 0, 'f', 4));
 	}
 }

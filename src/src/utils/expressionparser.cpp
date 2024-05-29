@@ -153,37 +153,37 @@ int Utils::compute(QString* str)
 
 		while (1) {
 			if (oper == "SIN") {
-				result = sin((M_PI / 180) * result);
+				result = std::sin((M_PI / 180) * result);
 				break;
 			}
 
 			if (oper == "COS") {
-				result = cos((M_PI / 180) * result);
+				result = std::cos((M_PI / 180) * result);
 				break;
 			}
 
 			if (oper == "TAN") {
-				result = tan((M_PI / 180) * result);
+				result = std::tan((M_PI / 180) * result);
 				break;
 			}
 
 			if (oper == "SQRT") {
-				result = sqrt(result);
+				result = std::sqrt(result);
 				break;
 			}
 
 			if (oper == "SQR") {
-				result = pow(result, 2);
+				result = std::pow(result, 2);
 				break;
 			}
 
 			if (oper == "ABS") {
-				result = abs(result);
+				result = std::fabs(result);
 				break;
 			}
 
 			if (oper == "TRUNC") {
-				result = trunc(result);
+				result = std::trunc(result);
 				break;
 			}
 

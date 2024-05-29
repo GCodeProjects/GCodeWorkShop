@@ -346,8 +346,8 @@ int TriangleDialog::option1()  //any one side and two angles known
 		return (-1);
 	}
 
-	side2 = (side1 * sin((M_PI / 180) * angle2)) / sin((M_PI / 180) * angle1);
-	side3 = (side1 * sin((M_PI / 180) * angle3)) / sin((M_PI / 180) * angle1);
+	side2 = (side1 * std::sin((M_PI / 180) * angle2)) / std::sin((M_PI / 180) * angle1);
+	side3 = (side1 * std::sin((M_PI / 180) * angle3)) / std::sin((M_PI / 180) * angle1);
 
 	switch (mode) {
 	case 0x31:
@@ -436,9 +436,9 @@ int TriangleDialog::option2()  // two sides and the included angle
 		return (-1);
 	}
 
-	angle2 = (side1 * sin((M_PI / 180) * angle1)) / (side2 - side1 * cos((M_PI / 180) * angle1));
-	angle2 = atan(angle2) / (M_PI / 180);
-	side3 = (side1 * sin((M_PI / 180) * angle1)) / sin((M_PI / 180) * angle2);
+	angle2 = (side1 * std::sin((M_PI / 180) * angle1)) / (side2 - side1 * std::cos((M_PI / 180) * angle1));
+	angle2 = std::atan(angle2) / (M_PI / 180);
+	side3 = (side1 * std::sin((M_PI / 180) * angle1)) / std::sin((M_PI / 180) * angle2);
 	angle3 = 180 - (angle1 + angle2);
 
 	switch (mode) {
@@ -510,10 +510,10 @@ int TriangleDialog::option3()  // two sides and the opposite angle
 		return (-1);
 	}
 
-	angle2 = (side2 * sin((M_PI / 180) * angle1)) / side1;
-	angle2 = asin(angle2) / (M_PI / 180);
+	angle2 = (side2 * std::sin((M_PI / 180) * angle1)) / side1;
+	angle2 = std::asin(angle2) / (M_PI / 180);
 	angle3 = 180 - (angle1 + angle2);
-	side3 = (side1 * sin((M_PI / 180) * angle3)) / sin((M_PI / 180) * angle1);
+	side3 = (side1 * std::sin((M_PI / 180) * angle3)) / std::sin((M_PI / 180) * angle1);
 
 	switch (mode) {
 	case 0x13:
@@ -570,11 +570,11 @@ void TriangleDialog::option4()  // all sides given
 	side3 = QLocale().toDouble(cInput->text(), &ok);
 
 	angle1 = ((side2 * side2) + (side3 * side3) - (side1 * side1)) / (2 * side2 * side3);
-	angle1 = acos(angle1) / (M_PI / 180);
+	angle1 = std::acos(angle1) / (M_PI / 180);
 
-	angle2 = (side2 * sin((M_PI / 180) * angle1)) / side1;
+	angle2 = (side2 * std::sin((M_PI / 180) * angle1)) / side1;
 
-	angle2 = asin(angle2) / (M_PI / 180);
+	angle2 = std::asin(angle2) / (M_PI / 180);
 	angle3 = 180 - (angle1 + angle2);
 
 	aAInput->setText(QString("%1").arg(angle1, 0, 'f', 3));

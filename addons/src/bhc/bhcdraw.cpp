@@ -124,11 +124,11 @@ void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool 
 	paint->scale(sca, sca);
 
 	d = 12 / sca;
-	x = xcenter + (dia + (d)) * cos((M_PI / 180) * ang);
-	y = ycenter + (dia + (d)) * sin((M_PI / 180) * ang);
+	x = xcenter + (dia + (d)) * std::cos((M_PI / 180) * ang);
+	y = ycenter + (dia + (d)) * std::sin((M_PI / 180) * ang);
 
-	x1 = xcenter + (dia - (d)) * cos((M_PI / 180) * ang);
-	y1 = ycenter + (dia - (d)) * sin((M_PI / 180) * ang);
+	x1 = xcenter + (dia - (d)) * std::cos((M_PI / 180) * ang);
+	y1 = ycenter + (dia - (d)) * std::sin((M_PI / 180) * ang);
 
 
 	paint->setPen(QPen(Qt::gray, 0, Qt::DotLine));
@@ -151,10 +151,10 @@ void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool 
 		                -(ycenter + v.y() / 2)));
 
 		//circle radius line
-		x = xcenter + 0 * cos((M_PI / 180) * ang);
-		y = ycenter + (0) * sin((M_PI / 180) * ang);
-		x1 = xcenter + (dia - (d)) * cos((M_PI / 180) * ang);
-		y1 = ycenter + (dia - (d)) * sin((M_PI / 180) * ang);
+		x = xcenter + 0 * std::cos((M_PI / 180) * ang);
+		y = ycenter + (0) * std::sin((M_PI / 180) * ang);
+		x1 = xcenter + (dia - (d)) * std::cos((M_PI / 180) * ang);
+		y1 = ycenter + (dia - (d)) * std::sin((M_PI / 180) * ang);
 		paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
 		//diameter circle
@@ -167,8 +167,8 @@ void BHCDraw::drawHole(qreal ang, qreal dia, qreal xcenter, qreal ycenter, bool 
 		paint->setPen(QPen(color, 0, Qt::SolidLine));
 	}
 
-	x = xcenter + dia * cos((M_PI / 180) * ang);
-	y = ycenter + dia * sin((M_PI / 180) * ang);
+	x = xcenter + dia * std::cos((M_PI / 180) * ang);
+	y = ycenter + dia * std::sin((M_PI / 180) * ang);
 
 	d = 8 / sca;
 
@@ -201,16 +201,16 @@ void BHCDraw::drawLines(qreal dia, qreal ang, QColor cl)
 
 	paint->setPen(QPen(cl, 0, Qt::DotLine));
 
-	x = (dia + 4) * cos((M_PI / 180) * ang);
-	y = (dia + 4) * sin((M_PI / 180) * ang);
-	x1 = (dia + 4) * cos((M_PI / 180) * (ang + 180));
-	y1 = (dia + 4) * sin((M_PI / 180) * (ang + 180));
+	x = (dia + 4) * std::cos((M_PI / 180) * ang);
+	y = (dia + 4) * std::sin((M_PI / 180) * ang);
+	x1 = (dia + 4) * std::cos((M_PI / 180) * (ang + 180));
+	y1 = (dia + 4) * std::sin((M_PI / 180) * (ang + 180));
 	paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
-	x = (dia + 4) * cos((M_PI / 180) * (ang + 90));
-	y = (dia + 4) * sin((M_PI / 180) * (ang + 90));
-	x1 = (dia + 4) * cos((M_PI / 180) * (ang + 270));
-	y1 = (dia + 4) * sin((M_PI / 180) * (ang + 270));
+	x = (dia + 4) * std::cos((M_PI / 180) * (ang + 90));
+	y = (dia + 4) * std::sin((M_PI / 180) * (ang + 90));
+	x1 = (dia + 4) * std::cos((M_PI / 180) * (ang + 270));
+	y1 = (dia + 4) * std::sin((M_PI / 180) * (ang + 270));
 	paint->drawLine(QPointF(x, -y), QPointF(x1, -y1));
 
 	paint->restore();

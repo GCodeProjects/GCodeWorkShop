@@ -22,8 +22,7 @@
 // see https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/math-constant
 #define _USE_MATH_DEFINES
 
-#include <cmath>    // for cos, sin, M_PI
-#include <cstdlib>  // for abs
+#include <cmath>    // for fabs, cos, sin, M_PI
 
 #include <QCheckBox>        // for QCheckBox
 #include <QColor>           // for QColor
@@ -186,9 +185,9 @@ void BHCDialog::computeButtonClicked()
 		}
 
 		maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(),
-		                       &ok) + 2 * abs(QLocale().toDouble(tab->xCenterInput->text(), &ok))));
+		                       &ok) + 2 * std::fabs(QLocale().toDouble(tab->xCenterInput->text(), &ok))));
 		maxDia = qMax(maxDia, (QLocale().toDouble(tab->diaInput->text(),
-		                       &ok) + 2 * abs(QLocale().toDouble(tab->yCenterInput->text(), &ok))));
+		                       &ok) + 2 * std::fabs(QLocale().toDouble(tab->yCenterInput->text(), &ok))));
 	}
 
 	for (tabId = 0; tabId < tabBar->count(); tabId++) {
@@ -297,8 +296,8 @@ void BHCDialog::computeButtonClicked()
 				ang = ang + 360;
 			}
 
-			x = xCenter + (dia * cos((M_PI / 180) * ang));
-			y = yCenter + (dia * sin((M_PI / 180) * ang));
+			x = xCenter + (dia * std::cos((M_PI / 180) * ang));
+			y = yCenter + (dia * std::sin((M_PI / 180) * ang));
 
 			QTableWidgetItem* xItem = new QTableWidgetItem(Utils::removeZeros(QString("%1").arg(x, 0, 'f', 3)));
 			xItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

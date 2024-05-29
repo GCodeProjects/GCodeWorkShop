@@ -47,45 +47,45 @@ BasicInterpreter::BasicInterpreter()
 
     /* 20 Commands must be entered lowercase in this table*/
     int x = 0;
-    strcpy(table[x].command, "print");
+    std::strcpy(table[x].command, "print");
     table[x++].tok = PRINT;
 
-    strcpy(table[x].command, "sin");
+    std::strcpy(table[x].command, "sin");
     table[x++].tok = SIN;
-    strcpy(table[x].command, "cos");
+    std::strcpy(table[x].command, "cos");
     table[x++].tok = COS;
-    strcpy(table[x].command, "tan");
+    std::strcpy(table[x].command, "tan");
     table[x++].tok = TAN;
-    strcpy(table[x].command, "sqrt");
+    std::strcpy(table[x].command, "sqrt");
     table[x++].tok = SQRT;
-    strcpy(table[x].command, "sqr");
+    std::strcpy(table[x].command, "sqr");
     table[x++].tok = SQR;
-    strcpy(table[x].command, "abs");
+    std::strcpy(table[x].command, "abs");
     table[x++].tok = ABS;
-    strcpy(table[x].command, "trunc");
+    std::strcpy(table[x].command, "trunc");
     table[x++].tok = TRUNC;
-    strcpy(table[x].command, "pi");
+    std::strcpy(table[x].command, "pi");
     table[x++].tok = PI;
 
-    strcpy(table[x].command, "if");
+    std::strcpy(table[x].command, "if");
     table[x++].tok = IF;
-    strcpy(table[x].command, "then");
+    std::strcpy(table[x].command, "then");
     table[x++].tok = THEN;
-    strcpy(table[x].command, "goto");
+    std::strcpy(table[x].command, "goto");
     table[x++].tok = GOTO;
-    strcpy(table[x].command, "for");
+    std::strcpy(table[x].command, "for");
     table[x++].tok = FOR;
-    strcpy(table[x].command, "next");
+    std::strcpy(table[x].command, "next");
     table[x++].tok = NEXT;
-    strcpy(table[x].command, "to");
+    std::strcpy(table[x].command, "to");
     table[x++].tok = TO;
-    strcpy(table[x].command, "gosub");
+    std::strcpy(table[x].command, "gosub");
     table[x++].tok = GOSUB;
-    strcpy(table[x].command, "return");
+    std::strcpy(table[x].command, "return");
     table[x++].tok = RETURN;
-    strcpy(table[x].command, "end");
+    std::strcpy(table[x].command, "end");
     table[x++].tok = END;
-    strcpy(table[x].command, "");
+    std::strcpy(table[x].command, "");
     table[x++].tok = END + 1;
 }
 
@@ -132,12 +132,12 @@ void BasicInterpreter::exec_for()
 
     get_token(); /* read the control variable */
 
-    if (!isalpha(*token)) {
+    if (!std::isalpha(*token)) {
         serror(4);
         return;
     }
 
-    i.var = toupper(*token) - 'A'; /* save its index */
+    i.var = std::toupper(*token) - 'A'; /* save its index */
 
     get_token(); /* read the equals sign */
 
@@ -221,13 +221,13 @@ int BasicInterpreter::look_up(char *s)
     p = s;
 
     while (*p) {
-        *p = tolower(*p);
+        *p = std::tolower(*p);
         p++;
     }
 
     /* see if token is in table */
     for (i = 0; *table[i].command; i++) {
-        if (!strcmp(table[i].command, s)) {
+        if (!std::strcmp(table[i].command, s)) {
             return table[i].tok;
         }
     }
@@ -238,7 +238,7 @@ int BasicInterpreter::look_up(char *s)
 /* Return true if c is a delimiter. */
 int BasicInterpreter::isdelim(char c)
 {
-    if (strchr(" ;,+-<>/*%^=()", c) || c == 9 || c == '\n' || c == 0) {
+    if (std::strchr(" ;,+-<>/*%^=()", c) || c == 9 || c == '\n' || c == 0) {
         return 1;
     }
 
@@ -280,7 +280,7 @@ int BasicInterpreter::get_next_label(char *s)
             return t;
         }
 
-        if (!strcmp(label_table[t].name, s)) {
+        if (!std::strcmp(label_table[t].name, s)) {
             return -2;    /* dup */
         }
     }
@@ -350,7 +350,7 @@ int BasicInterpreter::get_token()
         return (token_type = QUOTE);
     }
 
-    if (isdigit(*prog)) {
+    if (std::isdigit(*prog)) {
         /* number */
         while (!isdelim(*prog)) {
             *temp++ = *prog++;
@@ -360,7 +360,7 @@ int BasicInterpreter::get_token()
         return (token_type = NUMBER);
     }
 
-    if (isalpha(*prog)) {
+    if (std::isalpha(*prog)) {
         /* var or command */
         while (!isdelim(*prog)) {
             *temp++ = *prog++;
@@ -394,12 +394,12 @@ void BasicInterpreter::assignment()
     /* get the variable name */
     get_token();
 
-    if (!isalpha(*token)) {
+    if (!std::isalpha(*token)) {
         serror(4);
         return;
     }
 
-    var = toupper(*token) - 'A';
+    var = std::toupper(*token) - 'A';
 
     /* get the equals sign */
     get_token();
@@ -482,7 +482,7 @@ void BasicInterpreter::scan_labels()
     get_token();
 
     if (token_type == NUMBER) {
-        strcpy(label_table[0].name, token);
+        std::strcpy(label_table[0].name, token);
         label_table[0].p = prog;
     }
 
@@ -498,7 +498,7 @@ void BasicInterpreter::scan_labels()
                 (addr == -1) ? serror(5) : serror(6);
             }
 
-            strcpy(label_table[addr].name, token);
+            std::strcpy(label_table[addr].name, token);
             label_table[addr].p = prog;  /* current point in program */
         }
 
@@ -520,7 +520,7 @@ char *BasicInterpreter::find_label(char *s)
     int t;
 
     for (t = 0; t < NUM_LAB; ++t) {
-        if (!strcmp(label_table[t].name, s)) {
+        if (!std::strcmp(label_table[t].name, s)) {
             return label_table[t].p;
         }
     }
@@ -641,12 +641,12 @@ void BasicInterpreter::exec_sin()
 
     get_token(); /* read the control variable */
 
-    if (!isalpha(*token)) {
+    if (!std::isalpha(*token)) {
         serror(4);
         return;
     }
 
-    i.var = toupper(*token) - 'A'; /* save its index */
+    i.var = std::toupper(*token) - 'A'; /* save its index */
 
     get_token(); /* read the equals sign */
 
@@ -705,12 +705,12 @@ void BasicInterpreter::greturn()
 /* Find the value of a variable. */
 double BasicInterpreter::find_var(char *s)
 {
-    if (!isalpha(*s)) {
+    if (!std::isalpha(*s)) {
         serror(4); /* not a variable */
         return 0;
     }
 
-    return variables[toupper(*token) - 'A'];
+    return variables[std::toupper(*token) - 'A'];
 }
 
 /* Find value of number or variable. */
@@ -787,43 +787,43 @@ void BasicInterpreter::level4(double *result)
     case SIN:
         get_token();
         level4(&hold);
-        *result = sin((M_PI / 180) * hold);
+        *result = std::sin((M_PI / 180) * hold);
         break;
 
     case COS:
         get_token();
         level4(&hold);
-        *result = cos((M_PI / 180) * hold);
+        *result = std::cos((M_PI / 180) * hold);
         break;
 
     case TAN:
         get_token();
         level4(&hold);
-        *result = tan((M_PI / 180) * hold);
+        *result = std::tan((M_PI / 180) * hold);
         break;
 
     case SQRT:
         get_token();
         level4(&hold);
-        *result = sqrt(hold);
+        *result = std::sqrt(hold);
         break;
 
     case SQR:
         get_token();
         level4(&hold);
-        *result = pow(hold, 2);
+        *result = std::pow(hold, 2);
         break;
 
     case ABS:
         get_token();
         level4(&hold);
-        *result = abs(hold);
+        *result = std::fabs(hold);
         break;
 
     case TRUNC:
         get_token();
         level4(&hold);
-        *result = trunc(hold);
+        *result = std::trunc(hold);
         break;
 
     case PI:
@@ -920,7 +920,7 @@ int BasicInterpreter::interpretBasic(QString &code)
 
     char *buf = new char[code.toLatin1().size() + 1];
 
-    memcpy(buf, code.toLatin1().data(), code.toLatin1().size());
+    std::memcpy(buf, code.toLatin1().data(), code.toLatin1().size());
 
     prog = buf;
     scan_labels(); /* find the labels in the program */

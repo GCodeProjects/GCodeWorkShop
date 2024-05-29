@@ -106,7 +106,7 @@ void ChamferDialog::computeButtonClicked()
 		ang = QLocale().toDouble(angInput->text(), &ok);
 		ZL = QLocale().toDouble(zlInput->text(), &ok);
 
-		XL = tan((M_PI / 180) * ang) * (ZL * 2);
+		XL = std::tan((M_PI / 180) * ang) * (ZL * 2);
 		dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
 
 		if (xoCheckBox->isChecked() && xoInput->hasAcceptableInput()) {
@@ -134,7 +134,7 @@ void ChamferDialog::computeButtonClicked()
 		ang = QLocale().toDouble(angInput->text(), &ok);
 		XL = QLocale().toDouble(dlInput->text(), &ok);
 
-		ZL = (XL / 2) / tan((M_PI / 180) * ang) ;
+		ZL = (XL / 2) / std::tan((M_PI / 180) * ang) ;
 		zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
 
 		return;
@@ -151,7 +151,7 @@ void ChamferDialog::computeButtonClicked()
 		X2 = QLocale().toDouble(xdInput->text(), &ok);
 		XL = X2 - X1;
 		dlInput->setText(QString("%1").arg(XL, 0, 'f', 3));
-		ZL = (XL / 2) / tan((M_PI / 180) * ang) ;
+		ZL = (XL / 2) / std::tan((M_PI / 180) * ang) ;
 		zlInput->setText(QString("%1").arg(ZL, 0, 'f', 3));
 
 		return;
@@ -164,7 +164,7 @@ void ChamferDialog::computeButtonClicked()
 
 		XL = QLocale().toDouble(dlInput->text(), &ok);
 		ZL = QLocale().toDouble(zlInput->text(), &ok);
-		ang = (atan((XL / 2) / ZL)) / (M_PI / 180);
+		ang = (std::atan((XL / 2) / ZL)) / (M_PI / 180);
 
 		angInput->setText(QString("%1").arg(ang, 0, 'f', 3));
 
