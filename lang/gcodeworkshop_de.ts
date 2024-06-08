@@ -6,213 +6,213 @@
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="107"/>
         <source>&amp;Bolt hole circle</source>
-        <translation type="unfinished">&amp;Lochkreise</translation>
+        <translation>&amp;Lochkreise</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="108"/>
         <source>Calculate bolt hole&apos;s positions</source>
-        <translation type="unfinished">Berechnet Bohrpositionen in Lochkreisen</translation>
+        <translation>Berechnet Bohrpositionen in Lochkreisen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="109"/>
         <source>Block Skip -</source>
-        <translation type="unfinished">Block Sprung -</translation>
+        <translation>Block Sprung -</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="110"/>
         <source>Insert/decrease Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Blocksprung + und -</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="111"/>
         <source>Block Skip +</source>
-        <translation type="unfinished">Block Sprung +</translation>
+        <translation>Block Sprung +</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="112"/>
         <source>Insert/increase Block Skip /</source>
-        <translation type="unfinished"></translation>
+        <translation>Blocksprung + und -</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="113"/>
         <source>Block Skip remove</source>
-        <translation type="unfinished">Block Sprung löschen</translation>
+        <translation>Block Sprung löschen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="114"/>
         <source>Remove Block Skip /</source>
-        <translation type="unfinished">Block Sprung löschen /</translation>
+        <translation>Block Sprung löschen /</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="115"/>
         <source>Chamfer</source>
-        <translation type="unfinished">Schräge berechnen</translation>
+        <translation>Schräge berechnen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="116"/>
         <source>Calculate chamfer</source>
-        <translation type="unfinished">Schräge berechnen</translation>
+        <translation>Schräge berechnen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="117"/>
         <source>Clean &amp;up</source>
-        <translation type="unfinished">Sä&amp;ubern</translation>
+        <translation>Sä&amp;ubern</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="118"/>
         <source>Remove text using regular expressions</source>
-        <translation type="unfinished">Löscht den Text mit den Ausdrücken</translation>
+        <translation>Löscht den Text mit den Ausdrücken</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="119"/>
         <source>Comment ()</source>
-        <translation type="unfinished">Kommentar ()</translation>
+        <translation>Kommentar ()</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="120"/>
         <source>Comment/uncomment selected text using parentheses</source>
-        <translation type="unfinished">Kommentieren/Auskommentieren des markierten Textes mit Klammer</translation>
+        <translation>Kommentieren/Auskommentieren des markierten Textes mit Klammer</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="121"/>
         <source>Comment ;</source>
-        <translation type="unfinished">Kommentar ;</translation>
+        <translation>Kommentar ;</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="122"/>
         <source>Comment/uncomment selected text using semicolon</source>
-        <translation type="unfinished">Kommentieren/Auskommentieren des markierten Textes mit Strichpunkt</translation>
+        <translation>Kommentieren/Auskommentieren des markierten Textes mit Strichpunkt</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="123"/>
         <source>Compile macro - experimental</source>
-        <translation type="unfinished">Macros übersetzen - experimentell</translation>
+        <translation>Macros übersetzen - experimentell</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="124"/>
         <source>Translate EdytorNC macro into CNC program</source>
-        <translation type="unfinished">Übersetzt EdytorNC Macro in CNC Programm</translation>
+        <translation>Übersetzt EdytorNC Macro in CNC Programm</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="125"/>
         <source>Insert dots</source>
-        <translation type="unfinished">Punkte einfügen</translation>
+        <translation>Punkte einfügen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="126"/>
         <source>Inserts decimal dot</source>
-        <translation type="unfinished">Dezimalpunkte einfügen</translation>
+        <translation>Dezimalpunkte einfügen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="127"/>
         <source>Insert empty lines</source>
-        <translation type="unfinished">Einfügen leere Zeile</translation>
+        <translation>Leerzeilen einfügen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="128"/>
         <source>Inserts empty lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Leerzeilen einfügen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="129"/>
         <source>Remove empty lines</source>
-        <translation type="unfinished">Leerzeilen löschen</translation>
+        <translation>Leerzeilen löschen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="130"/>
         <source>Removes empty lines</source>
-        <translation type="unfinished">Leerzeilen löschen</translation>
+        <translation>Leerzeilen löschen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="131"/>
         <source>Feed&apos;s speed&apos;s</source>
-        <translation type="unfinished">Drehzahl + Vorschub</translation>
+        <translation>Drehzahl + Vorschub</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="132"/>
         <source>Calculate speed, feed, cutting speed</source>
-        <translation type="unfinished">Berechnet Drehzahl, Vorschub und Schnittgeschwindigkeit</translation>
+        <translation>Berechnung Drehzahl, Vorschub und Schnittgeschwindigkeit</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="133"/>
         <location filename="../addons/src/addons-actions.cpp" line="134"/>
         <source>Convert inch &lt;-&gt; mm</source>
-        <translation type="unfinished">Umrechnen inch &lt;&gt; metrisch</translation>
+        <translation>Umrechnen inch &lt;&gt; metrisch</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="135"/>
         <location filename="../addons/src/addons-actions.cpp" line="136"/>
         <source>Convert program inch &lt;-&gt; mm</source>
-        <translation type="unfinished">Konvertierungsprogramm inch &lt;&gt; metrisch</translation>
+        <translation>Programm umrechnen inch &lt;&gt; metrisch</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="137"/>
         <source>Renumber</source>
-        <translation type="unfinished">Neu nummerieren</translation>
+        <translation>Neu nummerieren</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="138"/>
         <source>Renumber program blocks</source>
-        <translation type="unfinished">Programmblöcke neu nummerieren</translation>
+        <translation>Programmblöcke neu nummerieren</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="139"/>
         <source>&amp;Insert spaces</source>
-        <translation type="unfinished">&amp;Leerzeichen einfügen</translation>
+        <translation>&amp;Leerzeichen einfügen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="140"/>
         <source>Inserts spaces</source>
-        <translation type="unfinished">Leerzeichen einfügen</translation>
+        <translation>Leerzeichen einfügen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="141"/>
         <source>Remove spaces</source>
-        <translation type="unfinished">Leerzeichen entfernen</translation>
+        <translation>Leerzeichen entfernen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="142"/>
         <source>Removes spaces</source>
-        <translation type="unfinished">Leerzeichen entfernen</translation>
+        <translation>Leerzeichen entfernen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="143"/>
         <location filename="../addons/src/addons-actions.cpp" line="144"/>
         <source>Split file</source>
-        <translation type="unfinished">Datei teilen</translation>
+        <translation>Datei teilen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="145"/>
         <source>Swap axes</source>
-        <translation type="unfinished">Achsen wechseln</translation>
+        <translation>Achsen wechseln</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="146"/>
         <source>Swap/modify axes, selected text or entire program</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechsel/Änderung Achsen, Auswahl oder ganzes Program</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="147"/>
         <location filename="../addons/src/addons-actions.cpp" line="148"/>
         <source>Solution of triangles</source>
-        <translation type="unfinished">Dreiecke berechnen</translation>
+        <translation>Dreiecke berechnen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="264"/>
         <source>GCodeWorkShop - compile macro</source>
-        <translation type="unfinished">GCodeWorkShop - Kompilierungsmacro</translation>
+        <translation>GCodeWorkShop - Kompilierungsmacro</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="361"/>
         <source>Insert space</source>
         <comment>Slow operation title in MDIChild</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leerzeichen einfügen</translation>
     </message>
     <message>
         <location filename="../addons/src/addons-actions.cpp" line="383"/>
         <source>Remove space</source>
         <comment>Slow operation title in MDIChild</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leerzeichen löschen</translation>
     </message>
 </context>
 <context>
@@ -382,12 +382,12 @@
     <message>
         <location filename="../addons/src/bhc/bhctab.ui" line="407"/>
         <source>X</source>
-        <translation></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../addons/src/bhc/bhctab.ui" line="412"/>
         <source>Y</source>
-        <translation></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../addons/src/bhc/bhctab.cpp" line="84"/>
@@ -423,13 +423,15 @@
         <location filename="../addons/src/bhc/bhctab.cpp" line="251"/>
         <source>(DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3)
 </source>
-        <translation>(Durchmesser: %1, Anzahl der Bohrungen: %2, Start Winkel: %3)</translation>
+        <translation>(Durchmesser: %1, Anzahl der Bohrungen: %2, Startwinkel: %3)
+</translation>
     </message>
     <message>
         <location filename="../addons/src/bhc/bhctab.cpp" line="255"/>
         <source>;DIAMETER: %1, NO. OF HOLES: %2, START ANGLE: %3
 </source>
-        <translation>;Durchmesser: %1, NO. Anzahl der Bohrungen: %2, Start Winkel: %3</translation>
+        <translation>;Durchmesser: %1, NO. Anzahl der Bohrungen: %2, Start Winkel: %3
+</translation>
     </message>
 </context>
 <context>
@@ -447,7 +449,7 @@
     <message>
         <location filename="../addons/src/chamfer/chamferdialog.ui" line="46"/>
         <source>Angle: B</source>
-        <translation>Winkel :B</translation>
+        <translation>Winkel: B</translation>
     </message>
     <message>
         <location filename="../addons/src/chamfer/chamferdialog.ui" line="53"/>
@@ -503,62 +505,62 @@
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="17"/>
         <source>Remove text using regular expressions</source>
-        <translation type="unfinished">Löscht den Text mit den Ausdrücken</translation>
+        <translation>Löscht den Text mit den Ausdrücken</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="32"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Information about: &lt;a href=&quot;http://doc.qt.digia.com/qt/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Qt regular expressions&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;http://doc.qt.digia.com/qt/qregexp.html&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Informationen über: &lt;a href=&quot;http://doc.qt.digia.com/qt/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Qt reguläre Ausdrücke&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;http://doc.qt.digia.com/qt/qregexp.html&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Informationen über: &lt;a href=&quot;http://doc.qt.digia.com/qt/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Qt reguläre Ausdrücke&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;http://doc.qt.digia.com/qt/qregexp.html&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="45"/>
         <source>Comment</source>
-        <translation type="unfinished">Kommentar</translation>
+        <translation>Kommentar</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="50"/>
         <source>Expression</source>
-        <translation type="unfinished">Ausdruck</translation>
+        <translation>Ausdruck</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="55"/>
         <source>Select</source>
-        <translation type="unfinished">Wählen</translation>
+        <translation>Wählen</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="68"/>
         <source>Preview, changes will not be saved</source>
-        <translation type="unfinished">Vorschau, Änderungen werden nicht gespeichert</translation>
+        <translation>Vorschau, Änderungen werden nicht gespeichert</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="95"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close and save changes.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Delete the text that matches the regular expression selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Schließen und Änderungen speichern.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Löscht den Text der dem gewählten Ausdruck entspricht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Schließen und Änderungen speichern.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;result_box&quot;/&gt;Löscht den Text der dem gewählten Ausdruck entspricht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="98"/>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="123"/>
         <source>Close and cancel all changes</source>
-        <translation type="unfinished">Schließen und alle Änderungen verwerfen</translation>
+        <translation>Schließen und alle Änderungen verwerfen</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.ui" line="126"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Abbrechen</translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.cpp" line="67"/>
         <source>Delete &amp;row</source>
-        <translation type="unfinished">Lösche &amp;Zeile</translation>
+        <translation>Lösche &amp;Zeile</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/cleanupdialog.cpp" line="70"/>
         <source>Delete current row</source>
-        <translation type="unfinished">Lösche aktuelle Zeile</translation>
+        <translation>Lösche aktuelle Zeile</translation>
     </message>
 </context>
 <context>
@@ -566,22 +568,22 @@
     <message>
         <location filename="../gcodeshared/utils/configdialog.ui" line="116"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../gcodeshared/utils/configdialog.ui" line="89"/>
         <source>Default</source>
-        <translation type="unfinished">Vorgaben</translation>
+        <translation>Vorgaben</translation>
     </message>
     <message>
         <location filename="../gcodeshared/utils/configdialog.ui" line="14"/>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../gcodeshared/utils/configdialog.ui" line="146"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -1215,12 +1217,12 @@ Verändert - Empfange Datei ist verändert</translation>
     <message>
         <location filename="../gcodefileserver/gcodefileserver.cpp" line="584"/>
         <source>About GCodeFileServer</source>
-        <translation type="unfinished"></translation>
+        <translation>Über GCodeFileServer</translation>
     </message>
     <message>
         <location filename="../gcodefileserver/gcodefileserver.cpp" line="585"/>
         <source>The &lt;b&gt;GCodeFileServer&lt;/b&gt; is part of GCodeWorkShop.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;GCodeFileServer contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeFileServer is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Der &lt;b&gt;GCodeFileServer&lt;/b&gt; ist Teil von GCodeWorkShop.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;GCodeFileServer beinhaltet Teile von anderen Open Source Projekten.&lt;P&gt;&lt;i&gt;GCodeFileServer ist freie Software; Sie können sie weiter verteilen und/oder ändern unter Berücksichtigung der Richtlinien der GNU General Public License veröffentlicht durch die Free Software Foundation; entweder Version 2 von der Lizenz, oder (als Option) eine spätere Version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;Das Programm wird OHNE GEWÄHRLEISTUNG JEGLICHER ART, EINSCHLIESSLICH DER GARANTIE FÜR DESIGN, MARKTFÄHIGKEIT UND EIGNUNG FÜR EINEN BESTIMMTEN ZWECK zur Verfügung gestellt.&lt;/i&gt;</translation>
     </message>
     <message>
         <source>About GCodeWorkShop - Serial port file server</source>
@@ -1342,7 +1344,10 @@ Verändert - Empfange Datei ist verändert</translation>
 Items with empty titles are the last five texts copied to system clipboard.
 Double click on item title to edit it. 
 Items with non empty titles are not deleted automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts-Klick um Objekt wieder zurück zur System-Zwischenablage zu kopieren.
+Bei Objekten mit leeren Beschriftungen werden die letzten 5 Texte aus der System-Zwischenablage kopiert.
+Doppel-Klick auf ein Objekt um es zu editieren.
+Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
     </message>
     <message>
         <source>Right click to copy item back to system clipboard.
@@ -2435,7 +2440,7 @@ Abbrechen?</translation>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1260"/>
         <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.&lt;br&gt;This is a fork of &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó&lt;br /&gt;German translation and other fixes thanks to Michael Numberger&lt;br /&gt;Czech translation thanks to Pavel Fric&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju&lt;br /&gt;Dutch translation thanks to Henk van Andel&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski&lt;P&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;GCodeWorkShop on GitHub&lt;/a&gt;&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Der &lt;b&gt;GCodeWorkShop&lt;/b&gt; ist ein Texteditor für CNC Programmer.&lt;br&gt;Dies ist ein Fork von &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;Spanishe Übersetzung, Fixes und andere Hilfe Danke an to Otto Huamani&lt;br /&gt;Catalanische Übersetzung und deb package Danke an Jordi Sayol i Salomó&lt;br /&gt;Deutsche Übersetzung und andere Fixes Danke an Michael Numberger&lt;br /&gt;Czechische Übersetzung Danke an Pavel Fric&lt;br /&gt;Finnissche Übersetzung Danke an Janne Mäntyharju&lt;br /&gt;Niederländische Übersetzung Danke an to Henk van Andel&lt;br /&gt;OS X patch und andere Updates Danke an Janne Mäntyharju&lt;P&gt;Neues EdytorNCIicon Danke an Jakub Gajewski&lt;P&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;GCodeWorkShop on GitHub&lt;/a&gt;&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1621"/>
@@ -2495,32 +2500,32 @@ Abbrechen?</translation>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="488"/>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="492"/>
         <source>CNC programs files %1 (%1);;</source>
-        <translation type="unfinished">CNC Programm Dateien %1 (%1);;</translation>
+        <translation>CNC Programm Dateien %1 (%1);;</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="490"/>
         <source>CNC programs files (%1);;</source>
-        <translation type="unfinished">CNC Programm Dateien (%1);;</translation>
+        <translation>CNC Programm Dateien (%1);;</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="505"/>
         <source>Text files (*.txt);;All files (*.* *)</source>
-        <translation type="unfinished">Text Dateien (*.txt);;Alle Dateien (*.* *)</translation>
+        <translation>Text Dateien (*.txt);;Alle Dateien (*.* *)</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="520"/>
         <source>Save file as...</source>
-        <translation type="unfinished">Speichern unter...</translation>
+        <translation>Speichern unter...</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="531"/>
         <source>&lt;b&gt;File &quot;%1&quot; exists.&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Datei &quot;%1&quot; vorhanden.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Datei &quot;%1&quot; vorhanden.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="532"/>
         <source>Do you want overwrite it ?</source>
-        <translation type="unfinished">Überschreiben ?</translation>
+        <translation>Überschreiben ?</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="564"/>
@@ -2528,14 +2533,14 @@ Abbrechen?</translation>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="605"/>
         <source>Cannot write file &quot;%1&quot;.
  %2</source>
-        <translation type="unfinished">Kann Datei nicht schreiben &quot;%1&quot;.
+        <translation>Kann Datei nicht schreiben &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="630"/>
         <source>&lt;b&gt;File: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Datei: &quot;%1&quot;
+        <translation>&lt;b&gt;Datei: &quot;%1&quot;
  wurde verändert.&lt;/b&gt;</translation>
     </message>
     <message>
@@ -2569,7 +2574,7 @@ Abbrechen?</translation>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2200"/>
         <source>Cannot read file &quot;%1&quot;.
  %2</source>
-        <translation type="unfinished">Kann Datei nicht lesen &quot;%1&quot;.
+        <translation>Kann Datei nicht lesen &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
@@ -2603,17 +2608,17 @@ Abbrechen?</translation>
     <message>
         <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="140"/>
         <source>program%1.nc</source>
-        <translation type="unfinished">Datei%1.nc</translation>
+        <translation>Program%1.nc</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="479"/>
         <source>(DATE)</source>
-        <translation type="unfinished">(Datum)</translation>
+        <translation>(Datum)</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="489"/>
         <source>DATE</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
 </context>
 <context>
@@ -2656,7 +2661,14 @@ Abbrechen?</translation>
 .1/4
 1.3/4
 2.5/8</source>
-        <translation type="unfinished"></translation>
+        <translation>Akzeptierte Werte (Beispiele): 
+1.5 
+0.5 
+.5
+1/2
+.1/4
+1.3/4
+2.5/8</translation>
     </message>
     <message>
         <location filename="../addons/src/i2m/i2mdialog.ui" line="69"/>
@@ -2763,12 +2775,13 @@ Abbrechen?</translation>
         <location filename="../gcodeworkshop/src/inlinecalc.cpp" line="40"/>
         <source>You can use:
 </source>
-        <translation type="unfinished">Sie können verwenden:</translation>
+        <translation>Sie können verwenden:
+</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/inlinecalc.cpp" line="50"/>
         <source>Press Enter to accept or click anywere to canacel</source>
-        <translation type="unfinished">Enter für akzeptieren oder clicken außerhalb für Abbruch</translation>
+        <translation>Enter für Akzeptieren oder clicken außerhalb für Abbruch</translation>
     </message>
 </context>
 <context>
@@ -3039,17 +3052,17 @@ Abbrechen?</translation>
     <message>
         <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="49"/>
         <source>Lines with: &apos;(comment)</source>
-        <translation type="unfinished"></translation>
+        <translation>Linien mit: &apos;(Kommentar)</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="50"/>
         <source>Any: (comment)</source>
-        <translation type="unfinished"></translation>
+        <translation>Irgendwelche: (Kommentar)</translation>
     </message>
     <message>
         <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="51"/>
         <source>Empty lines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Leerzeilen:</translation>
     </message>
 </context>
 <context>
@@ -3289,12 +3302,12 @@ Abbrechen?</translation>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="284"/>
         <source>300</source>
-        <translation type="unfinished">300</translation>
+        <translation>300</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="294"/>
         <source>600</source>
-        <translation type="unfinished">600</translation>
+        <translation>600</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="324"/>
@@ -3435,7 +3448,8 @@ Vailid QtRegExp should be entered.</translation>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1670"/>
         <source>File extension. 
 If detected filename will contain an extension, then this setting will be ignored</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiendung. 
+Wenn im Dateiname eine Dateiendung erkannt wird, wird diese Einstellung ignoriert</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1645"/>
@@ -3837,13 +3851,15 @@ Wenn der Dateiname nicht automatisch erkannt wurde, wird er aus dem aktuellen Da
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1382"/>
         <source>Letters in detected filename will be removed (only digits will be left).
 If in result filename becomes empty, version with letters will be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Buchstaben in Dateinamen werden entfernt (nur Zahlen verbleiben).
+Wenn dadurch der Dateiname leer bleibt, wird die ursprüngliche Version mit den Buchstaben verwendet.</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1496"/>
         <source>Save debug information to log file:
 &quot;Save path&quot; &quot;settings name&quot;_serial_log.txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichert Debug-Informationen in eine Log-Datei:
+&quot;Speicher-Pfad&quot;.&quot;Name&quot;_serial_log.txt</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1435"/>
@@ -3859,7 +3875,8 @@ If in result filename becomes empty, version with letters will be used.</source>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1475"/>
         <source>If received data will contain more than one CNC program, they will be saved in independent files
 This setting can cause data loss if detection of filename fails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn die empfangenen Daten mehr als ein CNC-Programm enthalten, werden diese in einzelne Dateien gespeichert
+Diese Einstellung kann einen Datenverlust hervorrufen wenn dieErkennung von Dateinamen fehlt schlägt.</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1479"/>
@@ -3869,7 +3886,7 @@ This setting can cause data loss if detection of filename fails.</source>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="867"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This field contains expression used to find end of received CNC program (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In GCodeWorkShop you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dieses Feld beinhaltet den Ausdruck der das Ende vom CNC-Program empfangenen markiert (end of transmission).&lt;/p&gt;&lt;p&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;In GCodeWorkShop you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1528"/>
@@ -3894,7 +3911,21 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;after time set in &amp;quot;Auto close transmission dialog:&amp;quot; file server will send back file 0032 (paths, file extension are set in File Server tab)&lt;/span&gt;&lt;/li&gt;
 &lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and again ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Serial port file server.&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Starte den file server in GCodeWorkShop&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sende ein Programm von CNC, dann wird es auf dem Computer gespeichert (Wie eingestellt im Auto Speichern Tab)&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sende spizielles Programm von CNC: &lt;/li&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;:0001(Aufrufer)&lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt; -&amp;gt; O0001 or 0001 set in File Server tab &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;(0032)  &lt;/span&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;; font-style:italic;&quot;&gt;-&amp;gt; 0032 Dateiname um zurück zur CNC zu senden&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;M30&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot;&gt;%&lt;/span&gt;&lt;/p&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;after time set in &amp;quot;Auto close transmission dialog:&amp;quot; file server will send back file 0032 (paths, file extension are set in File Server tab)&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot; font-family:&apos;arial,sans-serif&apos;;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:15px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and again ...&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1584"/>
@@ -3925,12 +3956,18 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This field contains expression used to find filename in &amp;quot;Caller&amp;quot; program.&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;It must contain valid Qt regular expression (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In GCodeWorkShop you can check this expression in function &amp;quot;Clean up&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dieses Feld beinhaltet den Ausdruc kmit dem der Dateiname im &amp;quot;Aufrufer&amp;quot; Programm gesucht wird.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Es muß einen gültigen QT Ausdruck entsprechen (QRexExp). See &lt;a href=&quot;http://doc.qt.io/qt-5/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00a489;&quot;&gt;http://doc.qt.io/qt-5/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In GCodeWorkShop können Sie diesen Ausdruck in der Funktion &amp;quot;Clean up&amp;quot; testen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1393"/>
         <source>Filename extracted from Caller program will be changed to lowercase characters (maybe important if your OS is case sensitive).</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiname vom Aufrufer-Programm wird in Kleinbuchstaben geändert (veilleicht ist ihr Betriebssystem empfindlich für Groß-/Kleinschreibung).</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1854"/>
@@ -4006,142 +4043,142 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="33"/>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="420"/>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="423"/>
         <source>Default</source>
-        <translation type="unfinished">Vorgaben</translation>
+        <translation>Vorgaben</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="41"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="68"/>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="231"/>
         <source>&amp;Connect</source>
-        <translation type="unfinished">&amp;Verbinden</translation>
+        <translation>&amp;Verbinden</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="128"/>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="147"/>
         <source>Clear To Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereit zum Senden</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="131"/>
         <source>CTS</source>
-        <translation type="unfinished"></translation>
+        <translation>CTS</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="169"/>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="185"/>
         <source>Data Set Ready </source>
-        <translation type="unfinished"></translation>
+        <translation>Data Set Ready </translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="188"/>
         <source>DSR</source>
-        <translation type="unfinished"></translation>
+        <translation>DSR</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="204"/>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="220"/>
         <source>Data Carrier Detect</source>
-        <translation type="unfinished"></translation>
+        <translation>Data Carrier Detect</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="223"/>
         <source>DCD</source>
-        <translation type="unfinished"></translation>
+        <translation>DCD</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="239"/>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="255"/>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="338"/>
         <source>Request To Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufruf zum Senden</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="258"/>
         <source>RTS</source>
-        <translation type="unfinished"></translation>
+        <translation>RTS</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="274"/>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="290"/>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="303"/>
         <source>Data Terminal Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Data Terminal Ready</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="293"/>
         <source>DTR</source>
-        <translation type="unfinished"></translation>
+        <translation>DTR</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="306"/>
         <source>Set DTR</source>
-        <translation type="unfinished">Setze DTR</translation>
+        <translation>Setze DTR</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="322"/>
         <source>Send XON</source>
-        <translation type="unfinished"></translation>
+        <translation>Sende XON</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="341"/>
         <source>Set RTS</source>
-        <translation type="unfinished">Setze RTS</translation>
+        <translation>Setze RTS</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="357"/>
         <source>Send XOFF</source>
-        <translation type="unfinished">Sende XOFF</translation>
+        <translation>Sende XOFF</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="425"/>
         <source>C&amp;lear text</source>
-        <translation type="unfinished">&amp;Lösche Text</translation>
+        <translation>&amp;Lösche Text</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.ui" line="452"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Schließen</translation>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="58"/>
         <source>Serial transmission test</source>
-        <translation type="unfinished">Test serielle Schnittstelle</translation>
+        <translation>Test serielle Schnittstelle</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="170"/>
         <source>&amp;Disconnect</source>
-        <translation type="unfinished">Verbindung &amp;trennen</translation>
+        <translation>Verbindung &amp;trennen</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="323"/>
         <source>Recived: %1 bytes.</source>
-        <translation type="unfinished">Empfangen: %1 bytes.</translation>
+        <translation>Empfangen: %1 bytes.</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="500"/>
         <source>Waiting...</source>
-        <translation type="unfinished">Warten...</translation>
+        <translation>Warten...</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="508"/>
         <source>Waiting for a signal readiness...</source>
-        <translation type="unfinished">Warten auf das Signal Bereitschaft...</translation>
+        <translation>Warten auf das Signal Bereitschaft...</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="545"/>
         <source>Sending byte %1 of %2</source>
-        <translation type="unfinished">Sende Byte %1 von %2</translation>
+        <translation>Sende Byte %1 von %2</translation>
     </message>
 </context>
 <context>
@@ -4510,37 +4547,37 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
     <message>
         <location filename="../gcodeworkshop/src/sessiondialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessiondialog.ui" line="40"/>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Neu</translation>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessiondialog.ui" line="53"/>
         <source>&amp;Rename</source>
-        <translation type="unfinished">&amp;Umbenennen</translation>
+        <translation>&amp;Umbenennen</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessiondialog.ui" line="66"/>
         <source>&amp;Clone</source>
-        <translation type="unfinished">&amp;Schließen</translation>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessiondialog.ui" line="79"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Löschen</translation>
+        <translation>&amp;Löschen</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessiondialog.ui" line="92"/>
         <source>&amp;Switch to</source>
-        <translation type="unfinished">&amp;Wechseln zu</translation>
+        <translation>&amp;Wechseln zu</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessiondialog.cpp" line="41"/>
         <source>Session manager</source>
-        <translation type="unfinished">Sitzungsmanager</translation>
+        <translation>Sitzungsmanager</translation>
     </message>
 </context>
 <context>
@@ -4548,7 +4585,7 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
     <message>
         <location filename="../gcodeworkshop/src/sessionmanager.cpp" line="44"/>
         <source>default</source>
-        <translation type="unfinished">Vorgabe</translation>
+        <translation>Vorgabe</translation>
     </message>
 </context>
 <context>
@@ -4556,17 +4593,17 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
     <message>
         <location filename="../gcodeworkshop/src/sessionnamedialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessionnamedialog.ui" line="20"/>
         <source>Enter the name of the session:</source>
-        <translation type="unfinished">Name der Sitzung eintragen:</translation>
+        <translation>Name der Sitzung eintragen:</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/sessionnamedialog.cpp" line="36"/>
         <source>New session...</source>
-        <translation type="unfinished">Neue Sitzung...</translation>
+        <translation>Neue Sitzung...</translation>
     </message>
 </context>
 <context>
@@ -4758,12 +4795,12 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
     <message>
         <location filename="../gcodeworkshop/src/setupdialog.ui" line="381"/>
         <source>When saving, it modifies the date in the comments in the header of the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Speichern werden dadurch das Datum in den Kommentaren vom Datei-Kopf geändert.</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/setupdialog.ui" line="384"/>
         <source>Change date on save</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändere das Datum bei Speichern</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/setupdialog.ui" line="498"/>
@@ -5024,127 +5061,127 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="20"/>
         <source>Swap/modify axes</source>
-        <translation type="unfinished">Achsen wechseln/verschieben</translation>
+        <translation>Achsen wechseln/ändern</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="64"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="130"/>
         <source>X</source>
-        <translation type="unfinished">X</translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="69"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="135"/>
         <source>Y</source>
-        <translation type="unfinished">Y</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="74"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="140"/>
         <source>Z</source>
-        <translation type="unfinished">Z</translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="79"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="145"/>
         <source>A</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="84"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="150"/>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="89"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="155"/>
         <source>C</source>
-        <translation type="unfinished">C</translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="94"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="160"/>
         <source>U</source>
-        <translation type="unfinished">U</translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="99"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="165"/>
         <source>W</source>
-        <translation type="unfinished">W</translation>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="104"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="170"/>
         <source>V</source>
-        <translation type="unfinished">V</translation>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="109"/>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="175"/>
         <source>H</source>
-        <translation type="unfinished">H</translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="196"/>
         <source>Min:</source>
-        <translation type="unfinished">Min:</translation>
+        <translation>Min:</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="203"/>
         <source>Swap: </source>
-        <translation type="unfinished">Wechseln:</translation>
+        <translation>Wechseln: </translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="210"/>
         <source>Max:</source>
-        <translation type="unfinished">Max:</translation>
+        <translation>Max:</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="267"/>
         <source>To:</source>
-        <translation type="unfinished">To:</translation>
+        <translation>Zu:</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="278"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Addieren</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="283"/>
         <source>Subtract</source>
-        <translation type="unfinished">Subtrahieren</translation>
+        <translation>Subtrahieren</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="288"/>
         <source>Multiply</source>
-        <translation type="unfinished">Multiplizieren</translation>
+        <translation>Multiplizieren</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="293"/>
         <source>Divide</source>
-        <translation type="unfinished">Dividieren</translation>
+        <translation>Dividieren</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="326"/>
         <source>Between</source>
-        <translation type="unfinished">Zwischen</translation>
+        <translation>Zwischen</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="333"/>
         <source>Modify</source>
-        <translation type="unfinished">Ändern</translation>
+        <translation>Ändern</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="383"/>
         <source>Decimals</source>
-        <translation type="unfinished"></translation>
+        <translation>Dezimalstellen</translation>
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="407"/>
         <source>Remember the values at closing</source>
-        <translation type="unfinished">Einstellungen bei Schließen speichern</translation>
+        <translation>Einstellungen bei Schließen speichern</translation>
     </message>
 </context>
 <context>
@@ -5280,7 +5317,7 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
 ...
 {END}
  No macro ?</source>
-        <translation type="unfinished">Keine Konstanten definiert .
+        <translation>Keine Konstanten definiert .
 {ANFANG}
 ...
 {ENDE}
@@ -5289,132 +5326,138 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="70"/>
         <source>Param list: no bracket &apos;}&apos; !</source>
-        <translation type="unfinished">Parameterliste: Keine Klammer &apos;}&apos; !</translation>
+        <translation>Parameterliste: Keine Klammer &apos;}&apos; !</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="181"/>
         <source>No ( or ) !</source>
-        <translation type="unfinished">Nein ( oder ) !</translation>
+        <translation>Nein ( oder ) !</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="185"/>
         <source>Function parameter not found ! 
  Check +-*/.
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Funktion Parameter nicht gefunden ! 
+ Überprüfe +-*/.
+&quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="189"/>
         <source>Wrong number !</source>
-        <translation type="unfinished">Falsche Zahl !</translation>
+        <translation>Falsche Zahl !</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="193"/>
         <source>Unknown math function !
 &quot;%1&quot;</source>
-        <translation type="unfinished">Unbekannte mathematische Funktion !
+        <translation>Unbekannte mathematische Funktion !
 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="197"/>
         <source>Decimal point or minus writed two times !
 &quot;%1&quot;</source>
-        <translation type="unfinished">Dezimalpunkt oder MNinus doppelt geschrieben !
+        <translation>Dezimalpunkt oder Minus doppelt geschrieben !
 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="201"/>
         <source>Unknown error !</source>
-        <translation type="unfinished">Unbekannter Fehler !</translation>
+        <translation>Unbekannter Fehler !</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="204"/>
         <source>BRC error:
 %1
 Code=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>BRC Fehler:
+%1
+Code=%2</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="212"/>
         <source>Syntax error</source>
-        <translation type="unfinished"></translation>
+        <translation>Syntax Fehler</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="216"/>
         <source>Unbalanced parentheses</source>
-        <translation type="unfinished">Unausgeglichene Klammern</translation>
+        <translation>Unausgeglichene Klammern</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="220"/>
         <source>No expression present</source>
-        <translation type="unfinished">Kein Ausdruck bekannt</translation>
+        <translation>Kein Ausdruck bekannt</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="224"/>
         <source>Equals sign expected</source>
-        <translation type="unfinished">Gültige Zeichen erwartet</translation>
+        <translation>Gültige Zeichen erwartet</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="228"/>
         <source>Not a variable</source>
-        <translation type="unfinished">Ist keine Variable</translation>
+        <translation>Ist keine Variable</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="232"/>
         <source>Label table full</source>
-        <translation type="unfinished">Variablenbereich voll</translation>
+        <translation>Variablenbereich voll</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="236"/>
         <source>Duplicate label</source>
-        <translation type="unfinished">Doppelte Bezeichnung</translation>
+        <translation>Doppelte Bezeichnung</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="240"/>
         <source>Undefined label</source>
-        <translation type="unfinished">Undefinierte Bezeichnung</translation>
+        <translation>Undefinierte Bezeichnung</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="244"/>
         <source>THEN expected</source>
-        <translation type="unfinished">THEN erwartet</translation>
+        <translation>THEN erwartet</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="248"/>
         <source>TO expected</source>
-        <translation type="unfinished">TO erwartet</translation>
+        <translation>TO erwartet</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="252"/>
         <source>Too many nested FOR loops</source>
-        <translation type="unfinished">Zu viele verschachtelte Schleifen</translation>
+        <translation>Zu viele verschachtelte Schleifen</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="256"/>
         <source>NEXT without FOR</source>
-        <translation type="unfinished">NEXT ohne FOR</translation>
+        <translation>NEXT ohne FOR</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="260"/>
         <source>Too many nested GOSUBs</source>
-        <translation type="unfinished">Zu viele verschachtelte GOSUBs</translation>
+        <translation>Zu viele verschachtelte GOSUBs</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="264"/>
         <source>RETURN without GOSUBs</source>
-        <translation type="unfinished">RETURN ohne GOSUBs</translation>
+        <translation>RETURN ohne GOSUBs</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="268"/>
         <source>Unknown error</source>
-        <translation type="unfinished">Unbekannter Fehler</translation>
+        <translation>Unbekannter Fehler</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="271"/>
         <source>Basic interpreter error:
 %1
 Code=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Basic Interpreter Fehler:
+%1
+Code=%2</translation>
     </message>
 </context>
 <context>
