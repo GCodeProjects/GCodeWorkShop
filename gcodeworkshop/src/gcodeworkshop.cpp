@@ -2180,7 +2180,7 @@ void GCodeWorkShop::loadFile(const DocumentInfo::Ptr& info, bool checkAlreadyLoa
 
 	file.setFile(info->filePath);
 
-	if ((file.exists()) && (file.isReadable())) {
+	if ((file.exists()) && (file.isReadable()) && file.isFile()) {
 		Document* doc = createDocument(info->documentType());
 
 		if (!doc) {

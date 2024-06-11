@@ -108,6 +108,7 @@ GCoderDocument::GCoderDocument() : Document(nullptr)
 	connect(m_gCoderEventFilter, SIGNAL(requestUnderLine()), this, SLOT(underLine()));
 
 	document()->setDocumentMargin(8);
+	document()->setModified(false);
 }
 
 QString GCoderDocument::type() const
