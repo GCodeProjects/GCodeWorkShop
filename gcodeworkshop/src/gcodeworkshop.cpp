@@ -80,7 +80,6 @@
 #include <QRegularExpression>   // for QRegularExpression
 #include <QResizeEvent>         // for QResizeEvent
 #include <QSettings>            // for QSettings, QSettings::IniFormat, QSettings::NoError
-#include <QSignalMapper>        // for QSignalMapper
 #include <QSize>                // for QSize
 #include <QSpinBox>             // for QSpinBox
 #include <QSplitter>            // for QSplitter
@@ -184,8 +183,6 @@ GCodeWorkShop::GCodeWorkShop(Medium* medium)
 
 	clipboard = QApplication::clipboard();
 	connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
-	windowMapper = new QSignalMapper(this);
-	connect(windowMapper, SIGNAL(mapped(QWidget*)), this, SLOT(setActiveSubWindow(QWidget*)));
 
 	model = new QStandardItemModel();
 	ui->projectTreeView->setModel(model);
@@ -1460,8 +1457,9 @@ void GCodeWorkShop::updateWindowMenu()
 		action->setCheckable(true);
 		action->setChecked(doc == activeDocument());
 		action->setToolTip(doc->brief());
-		connect(action, SIGNAL(triggered()), windowMapper, SLOT(map()));
-		windowMapper->setMapping(action, docList.at(i));
+		connect(action, &QAction::triggered, [this, doc]() {
+			setActiveDocument(doc);
+		});
 	}
 }
 

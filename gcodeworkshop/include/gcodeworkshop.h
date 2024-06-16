@@ -52,7 +52,6 @@ class QMoveEvent;
 class QPrinter;
 class QProcess;
 class QResizeEvent;
-class QSignalMapper;
 class QStandardItem;
 class QStandardItemModel;
 class QToolBar;
@@ -291,7 +290,6 @@ private:
 	bool currentProjectModified;
 	QString currentProjectName;
 
-	QSignalMapper* windowMapper;
 	RecentFiles* m_recentFiles;
 
 	QMenu* fileMenu;
