@@ -39,29 +39,110 @@ public slots:
 	void loadIcons();
 
 public:
-    // *INDENT-OFF*
-    QAction *bhc() {return m_bhc;}
-    QAction *blockSkipDecrement() {return m_blockSkipDecrement;}
-    QAction *blockSkipIncrement() {return m_blockSkipIncrement;}
-    QAction *blockSkipRemove() {return m_blockSkipRemove;}
-    QAction *chamfer() {return m_chamfer;}
-    QAction *cleanUp() {return m_cleanUp;}
-    QAction *paraComment() {return m_paraComment;}
-    QAction *semiComment() {return m_semiComment;}
-    QAction *compileMacro() {return m_compileMacro;}
-    QAction *dot() {return m_dot;}
-    QAction *insertEmptyLines() {return m_insertEmptyLines;}
-    QAction *removeEmptyLines() {return m_removeEmptyLines;}
-    QAction *feeds() {return m_feeds;}
-    QAction *i2m() {return m_i2m;}
-    QAction *i2mProg() {return m_i2mProg;}
-    QAction *renumber() {return m_renumber;}
-    QAction *insertSpaces() {return m_insertSpaces;}
-    QAction *removeSpaces() {return m_removeSpaces;}
-    QAction *splitProgramms() {return m_splitProgramms;}
-    QAction *swapAxes() {return m_swapAxes;}
-    QAction *triangle() {return m_triangle;}
-    // *INDENT-ON*
+	QAction* bhc()
+	{
+		return m_bhc;
+	}
+
+	QAction* blockSkipDecrement()
+	{
+		return m_blockSkipDecrement;
+	}
+
+	QAction* blockSkipIncrement()
+	{
+		return m_blockSkipIncrement;
+	}
+
+	QAction* blockSkipRemove()
+	{
+		return m_blockSkipRemove;
+	}
+
+	QAction* chamfer()
+	{
+		return m_chamfer;
+	}
+
+	QAction* cleanUp()
+	{
+		return m_cleanUp;
+	}
+
+	QAction* paraComment()
+	{
+		return m_paraComment;
+	}
+
+	QAction* semiComment()
+	{
+		return m_semiComment;
+	}
+
+	QAction* compileMacro()
+	{
+		return m_compileMacro;
+	}
+
+	QAction* dot()
+	{
+		return m_dot;
+	}
+
+	QAction* insertEmptyLines()
+	{
+		return m_insertEmptyLines;
+	}
+
+	QAction* removeEmptyLines()
+	{
+		return m_removeEmptyLines;
+	}
+
+	QAction* feeds()
+	{
+		return m_feeds;
+	}
+
+	QAction* i2m()
+	{
+		return m_i2m;
+	}
+
+	QAction* i2mProg()
+	{
+		return m_i2mProg;
+	}
+
+	QAction* renumber()
+	{
+		return m_renumber;
+	}
+
+	QAction* insertSpaces()
+	{
+		return m_insertSpaces;
+	}
+
+	QAction* removeSpaces()
+	{
+		return m_removeSpaces;
+	}
+
+	QAction* splitProgramms()
+	{
+		return m_splitProgramms;
+	}
+
+	QAction* swapAxes()
+	{
+		return m_swapAxes;
+	}
+
+	QAction* triangle()
+	{
+		return m_triangle;
+	}
 
 protected:
 	QAction* m_bhc;

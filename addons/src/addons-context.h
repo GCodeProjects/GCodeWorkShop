@@ -41,17 +41,41 @@ public:
 		ALL
 	};
 
-    // *INDENT-OFF*
-    bool pull(int mode);
-    QString &text() {return m_text;}
-    int fragmentStart() {return m_fragmentStart;}
-    int fragmentEnd() {return m_fragmentEnd;}
-    void setSelectionStart(int pos) {m_selectionStart = pos;}
-    void setSelectionEnd(int pos) {m_selectionEnd = pos;}
-    void push(const QString &text);
-    void push();
-    QPlainTextEdit *textEdit()  {return m_edit;}
-    // *INDENT-ON*
+	bool pull(int mode);
+
+	QString& text()
+	{
+		return m_text;
+	}
+
+	int fragmentStart()
+	{
+		return m_fragmentStart;
+	}
+
+	int fragmentEnd()
+	{
+		return m_fragmentEnd;
+	}
+
+	void setSelectionStart(int pos)
+	{
+		m_selectionStart = pos;
+	}
+
+	void setSelectionEnd(int pos)
+	{
+		m_selectionEnd = pos;
+	}
+
+	void push(const QString& text);
+
+	void push();
+
+	QPlainTextEdit* textEdit()
+	{
+		return m_edit;
+	}
 
 protected:
 	int m_mode;
