@@ -91,7 +91,6 @@ GCoderDocument::GCoderDocument() : Document(nullptr)
 	m_textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_textEdit, SIGNAL(customContextMenuRequested(const QPoint&)), this,
 	        SLOT(customContextMenuRequest(const QPoint&)));
-	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 	connect(m_textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(cursorMoved()));
 	connect(m_textEdit, SIGNAL(selectionChanged()), this, SLOT(selectionUpdated()));
 	connect(m_textEdit, SIGNAL(modificationChanged(bool)), this, SLOT(setModified(bool)));
@@ -804,7 +803,7 @@ bool GCoderDocument::findNext(QString textToFind,
 	}
 
 	textEdit()->blockSignals(false);
-	highlightCurrentLine();
+	cursorMoved();
 
 	return found;
 }
@@ -905,7 +904,7 @@ bool GCoderDocument::replaceNext(QString textToFind,
 	}
 
 	textEdit()->blockSignals(false);
-	highlightCurrentLine();
+	cursorMoved();
 	highlightFindText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
 
 	return found;
@@ -1102,6 +1101,12 @@ void GCoderDocument::underLine()
 		cr.setCharFormat(format);
 		setTextCursor(cr);
 	}
+}
+
+void GCoderDocument::cursorMoved()
+{
+	Document::cursorMoved();
+	highlightCurrentLine();
 }
 
 void GCoderDocument::highlightFindText(const QString& searchString,

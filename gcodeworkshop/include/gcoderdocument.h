@@ -166,6 +166,7 @@ protected:
 
 private slots :
 	void underLine();
+	void cursorMoved();
 	void highlightCurrentLine();
 	void inLineCalcComplete(const QString& text);
 };
