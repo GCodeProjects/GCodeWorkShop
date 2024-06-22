@@ -290,6 +290,7 @@ void GCoderDocument::setDocumentWidgetProperties(const DocumentWidgetProperties:
 	}
 
 	m_capsLockEventFilter->setCapsLockEnable(m_widgetProperties.intCapsLock);
+	updateWindowTitle();
 
 	if (m_widgetProperties.syntaxH) {
 		if (m_highlighter == nullptr) {
