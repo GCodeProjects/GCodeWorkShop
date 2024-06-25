@@ -159,7 +159,8 @@ private slots:
 	void updateMenus();
 	void updateWindowMenu();
 	Document* createDocument(const QString& type);
-	void setActiveSubWindow(QWidget* window);
+	bool setActiveDocument(Document* doc);
+	bool setActiveDocument(const QString& fileName);
 	void loadFile(const DocumentInfo::Ptr& options, bool checkAlreadyLoaded = true);
 	void recentFilesChanged();
 	void fileOpenRecent(QAction* act);
