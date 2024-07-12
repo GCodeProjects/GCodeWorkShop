@@ -641,7 +641,7 @@ public:
 
 OptionDialog::OptionDialog(QWidget *parent) : QTabWidget(parent)
 {
-
+    setupEditPage();
     setupFontPage();
     setupColorPage();
     setupOtherOptions();
