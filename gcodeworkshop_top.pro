@@ -53,3 +53,6 @@ win32 {
 
     INSTALLS += translate examples doc
 }
+
+!defined(VERSION, var): VERSION = $$getVersion()
+message(Project version: $$VERSION)

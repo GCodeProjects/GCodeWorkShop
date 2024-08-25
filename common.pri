@@ -156,3 +156,20 @@ defineReplace(tsFiles) {
 
     return ($$file_list)
 }
+
+defineReplace(getVersion) {
+    version_file = gcodeshared/include/version.h
+    !exists ($${PROJECT_ROOT_PATH}/$${version_file}): error(In function getVersion: File \"$${version_file}\" not found)
+    version_header = $$cat($${PROJECT_ROOT_PATH}/$${version_file}, lines)
+
+    for (str, version_header) {
+        sub_str=$$split(str, " ")
+
+        contains (sub_str, GCODEWORKSHOP_VERSION) {
+        ver_str=$$find(sub_str, '".*"')
+            !isEmpty(ver_str): return ($$split(ver_str, '"'))
+        }
+    }
+
+    error(In function getVersion: GCODEWORKSHOP_VERSION not found in $${version_file})
+}
