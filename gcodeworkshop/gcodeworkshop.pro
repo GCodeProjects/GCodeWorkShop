@@ -1,5 +1,4 @@
 
-VERSION = 2018.07
 TEMPLATE = app
 TARGET = gcodeworkshop
 
@@ -7,6 +6,14 @@ QT *= widgets printsupport serialport network
 MODULES *= kdiff3 qtsingleapplication GCodeShared GCodeFileServer addons
 
 include(../common.pri)
+
+defined(VERSION, var) {
+    # Define the version as a string literal
+    # https://stackoverflow.com/a/2411008
+    DEFINES += 'GCODEWORKSHOP_VERSION=\\"$$VERSION\\"'
+} else {
+    VERSION = $$getVersion()
+}
 
 INCLUDEPATH += include
 
