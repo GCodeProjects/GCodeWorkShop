@@ -1,0 +1,130 @@
+name: release
+# Based on https://github.com/ra3xdh/qucs_s/.github/workflows/deploy.yml
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+jobs:
+  build-debian-packages:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os_name: ['bullseye', 'bookworm', 'trixie']
+    container:
+      # https://hub.docker.com/_/debian
+      image: debian:${{matrix.os_name}}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: 'Install Dependencies'
+      shell: bash
+      run: |
+        apt-get update
+        # https://serverfault.com/a/992421
+        DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y build-essential qtbase5-dev qttools5-dev-tools libqt5serialport5-dev
+
+    - name: 'Build'
+      shell: bash
+      run: install/deb-build.sh -s debian-${{matrix.os_name}} -v ${{ github.ref_name }}
+
+    - name: 'Upload debian packages'
+      uses: actions/upload-artifact@v4
+      with:
+        name: debian-${{matrix.os_name}}
+        path: '*.deb'
+
+  build-ubuntu-packages:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os_name: ['focal', 'jammy', 'mantic', 'noble']
+    container:
+      # https://hub.docker.com/_/ubuntu
+      image: ubuntu:${{matrix.os_name}}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: 'Install Dependencies'
+      shell: bash
+      run: |
+        apt-get update
+        DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y build-essential qtbase5-dev qttools5-dev-tools libqt5serialport5-dev
+
+    - name: 'Build'
+      shell: bash
+      run: install/deb-build.sh -s ubuntu-${{matrix.os_name}} -v ${{ github.ref_name }}
+
+    - name: 'Upload ubuntu packages'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ubuntu-${{matrix.os_name}}
+        path: '*.deb'
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: [build-debian-packages, build-ubuntu-packages]
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ~/artifacts
+        merge-multiple: true
+
+    - name: Calculate SHA-256 checksums
+      run: |
+        cd ~/artifacts
+        echo 'SHA-256 checksums' > notes.txt
+        echo '-----------------' >> notes.txt
+        echo -e '\n```' >> notes.txt
+        for file in $(find . -type f \( -name "*.exe" -o -name "*.zip" -o -name "*.deb" -o -name "*.rpm" \) | sort); do
+          filename=$(basename "$file")
+          checksum=$(sha256sum "$file" | awk '{print $1}')
+          echo "$checksum  $filename" >> notes.txt
+          #echo $checksum > "$filename".sha256
+        done
+        echo -e '```\n' >> notes.txt
+        cd ..
+        tree ~/artifacts
+
+    - name: Setup Release Information
+      run: |
+        echo "RELEASE_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+        echo "TAG_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+        echo "TAG_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+          
+    - name: Create GitHub Release
+      continue-on-error: false
+      run: |
+        # Find existing artifact files
+        hash_files=$(find ~/artifacts -name "*.sha256" -print0 | xargs -0 echo)
+        exe_files=$(find ~/artifacts -name "*.exe" -print0 | xargs -0 echo)
+        zip_files=$(find ~/artifacts -name "*.zip" -print0 | xargs -0 echo)
+        deb_files=$(find ~/artifacts -name "*.deb" -print0 | xargs -0 echo)
+        rpm_files=$(find ~/artifacts -name "*.rpm" -print0 | xargs -0 echo)
+
+        # Check existing release and delete if it's exist
+        if gh release view ${{ env.TAG_NAME }} --repo $GITHUB_REPOSITORY &> /dev/null; then
+          gh release delete ${{ env.TAG_NAME }} --repo $GITHUB_REPOSITORY
+          echo "${{ env.TAG_NAME }} deleted!"
+        fi
+
+        gh release create ${{ env.TAG_NAME }} \
+                            --repo $GITHUB_REPOSITORY \
+                            --draft \
+                            --title "${{ env.RELEASE_NAME }}" \
+                            --notes-file ~/artifacts/notes.txt \
+                            $hash_files \
+                            $exe_files \
+                            $zip_files \
+                            $deb_files \
+                            $rpm_files
+        
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
