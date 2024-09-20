@@ -10,11 +10,20 @@ include(install/install.pri)
 QMAKE_EXTRA_TARGETS += lupdate
 lupdate.depends = lupdateGCodeWorkShop lupdateKdiff3
 QMAKE_EXTRA_TARGETS += lupdateGCodeWorkShop lupdateKdiff3
-lupdateGCodeWorkShop.commands = lupdate $$PROJECT_ROOT_PATH/gcodeworkshop $$PROJECT_ROOT_PATH/gcodeshared $$PROJECT_ROOT_PATH/gcodefileserver $$PROJECT_ROOT_PATH/addons  -ts $$tsFiles(gcodeworkshop)
-lupdateKdiff3.commands = lupdate $$PROJECT_ROOT_PATH/3rdparty/kdiff3  -ts $$tsFiles(kdiff3)
+lupdateGCodeWorkShop.commands = $$[QT_INSTALL_BINS]/lupdate \
+    $$PROJECT_ROOT_PATH/gcodeworkshop \
+    $$PROJECT_ROOT_PATH/gcodeshared \
+    $$PROJECT_ROOT_PATH/gcodefileserver \
+    $$PROJECT_ROOT_PATH/addons \
+    -ts $$tsFiles(gcodeworkshop)
+lupdateKdiff3.commands = $$[QT_INSTALL_BINS]/lupdate \
+    $$PROJECT_ROOT_PATH/3rdparty/kdiff3 \
+    -ts $$tsFiles(kdiff3)
 
 QMAKE_EXTRA_TARGETS += lrelease
-lrelease.commands = lrelease $$tsFiles(gcodeworkshop) $$tsFiles(kdiff3)
+lrelease.commands = $$[QT_INSTALL_BINS]/lrelease \
+    $$tsFiles(gcodeworkshop) \
+    $$tsFiles(kdiff3)
 
 translate.files = $$LANG_PATH/*.qm
 examples.files = $$PROJECT_ROOT_PATH/examples/*
