@@ -43,22 +43,20 @@ jobs:
           }
         - {
             name:     macOS_x64,
-            os:       macos-11,
+            os:       macos-12,
             build:    make
           }
 
     steps:
     - name: checkout
-      uses: actions/checkout@v1
-      with:
-        submodules: true
+      uses: actions/checkout@v4
 
     - name: MSVC Environment Setup
       if: contains( matrix.config.os, 'Windows' )
       uses: ilammy/msvc-dev-cmd@v1
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v3
+      uses: jurplel/install-qt-action@v4
       with:
         cache: true
         version:  ${{ matrix.qt.version}}
