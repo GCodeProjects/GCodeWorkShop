@@ -4,6 +4,11 @@ GCodeWorkShop
 This is a fork of [EdytorNC](https://github.com/artur3/EdytorNC), a text editor
 for CNC programmers.
 
+- [Some features](#some-features)
+- [Some shotcuts](#some-shotcuts)
+- [Getting GCodeWorkShop](#getting-gcodeworkshop)
+- [Command line options](#command-line-options)
+
 
 Some features
 ------------
@@ -49,35 +54,16 @@ Some shotcuts
   `SQRT(x)` `SQR(x)` `ABS(x)` `TRUNC(x)` `PI`
 
 
+Getting GCodeWorkShop
+---------------------
+
+On the [release page](https://github.com/GCodeProjects/GCodeWorkShop/releases/latest)
+you can find binary builds for Debian, Ubuntu and Windows. For building the
+application yourself, the [build instructions](INSTALL.md) may be useful.
+
+
 Command line options
 ------------------
 
 - open file -> `gcodeworkshop file.nc`
 - diff two files -> `gcodeworkshop -diff file1.nc file2.nc`
-
-
-Compile GCodeWorkShop
--------------------
-
-
-### Ubuntu
-
-run terminal
-```
-sudo apt install qt5-default qtbase5-dev-tools qt5-qmake
-cd ~
-git clone https://github.com/GCodeProjects/GCodeWorkShop
-cd GCodeWorkShop
-qmake -r [CONFIG+=debug] [PREFIX=/usr/ | PREFIX=~/.local/bin/]
-make
-make lrelease
-```
-
-
-### Windows
-
-- [Install Qt5](http://www.qt.io/download-open-source)
-- download latest version of GCodeWorkShop [source files](https://github.com/GCodeProjects/GCodeWorkShop/archive/master.zip)
-- unzip downloaded file
-- open gcodeworkshop.pro in Qt Creator
-- press Ctrl+R
