@@ -49,7 +49,7 @@
 #include <QVariant>                 // for QVariant
 #include <QWidget>                  // for QWidget
 #include <Qt>                       // for CaseInsensitive, CaseSensitive, CaseSensitivity, WA_DeleteOnClose, Custo...
-#include <QtGlobal>                 // for QFlags, QFlags<>::enum_type, qDebug
+#include <QtGlobal>                 // for QFlags, QFlags<>::enum_type, qDebug, QT_VERSION, QT_VERSION_CHECK
 
 class QMenu;
 
@@ -639,7 +639,14 @@ void GCoderDocument::loadToolTips(QHash<QString, QString>& tips, const QString& 
 {
 	if (QFile::exists(fileName)) {
 		QSettings settings(fileName, QSettings::IniFormat);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+		// Qt5: By default QSettings will accept Latin-1 encoded INI files,
+		// where non-ASCII values are encoded using standard INI escape sequences.
+		// Qt6: QSettings will assume that values in the INI file are utf-8 encoded.
+		settings.setIniCodec("utf-8");
+#endif
 		settings.beginGroup(group);
+
 		const QStringList& keys = settings.childKeys();
 
 		for (const QString& k : keys) {
