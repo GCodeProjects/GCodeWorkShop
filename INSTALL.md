@@ -22,7 +22,7 @@ Install the following packages.
 ```sh
 apt update
 apt install build-essential \
-qtbase5-dev qttools5-dev-tools libqt5serialport5-dev
+    qtbase5-dev qttools5-dev-tools libqt5serialport5-dev
 ```
 
 Switch to the folder with sources. Now you can either build the application
@@ -36,9 +36,8 @@ create an installation package.
 mkdir -p build
 cd build
 qmake -r ..
-make lrelease -j $(nproc)
-qmake -r ..
 make -j $(nproc)
+make -j $(nproc) i18n
 ```
 
 
@@ -63,11 +62,26 @@ installed instead.
 ```sh
 apt update
 apt install build-essential \
-qt6-base-dev qt6-base-dev-tools qt6-serialport-dev qt6-l10n-tools qt6-translations-l10n
+    qt6-base-dev qt6-base-dev-tools qt6-serialport-dev qt6-5compat-dev \
+    qt6-l10n-tools qt6-translations-l10n
 ```
 
 Next, when building step-by-step, you should type qmake6 instead of qmake
 or add the `-q qmake6` switch when running the automatic build script.
+
+
+### Peculiarities of building in Ubuntu 18 (Bionic Beaver)
+
+In addition to the listed above packages you should install qt5-default or
+specify the full path `/usr/lib/i386-linux-gnu/qt5/bin/qmake` instead of `qmake`.
+
+If the build crashes at the linking stage because the `GL` library is missing
+even after installing the `libgl-dev` package, it may be needed to link
+`/usr/lib/lib/libGL.so` to the regular library:
+
+```
+sudo ln /usr/lib/i386-linux-gnu/libGL.so.1.7.0 /usr/lib/libGL.so
+```
 
 
 Building in windows with MSYS2
@@ -93,9 +107,8 @@ create an installer.
 mkdir -p build
 cd build
 qmake -r ..
-make lrelease -j $(nproc)
-qmake -r ..
 make -j $(nproc)
+make -j $(nproc) i18n
 ```
 
 
