@@ -227,7 +227,7 @@ Depends: $PACKAGE_DEPENDS
 Architecture: $PACKAGE_ARCH
 Maintainer: Nick Egorrov <nicegorov@yandex.ru>
 Description: $PACKAGE_DEBIAN_DESCRIPTION
-Installed-Size: $(du -s "$PACKAGE_DIR" | tr -cd 0-9)
+Installed-Size: $(du -s "$PACKAGE_DIR" | awk '{print $1}')
 EOF
 
 if [ -f "${PACKAGE_FULL_NAME}.deb" ]; then
