@@ -61,6 +61,13 @@ On the [release page](https://github.com/GCodeProjects/GCodeWorkShop/releases/la
 you can find binary builds for Debian, Ubuntu and Windows. For building the
 application yourself, the [build instructions](INSTALL.md) may be useful.
 
+In addition, third-party builds are available:
+
+- For [ALT Linux](https://packages.altlinux.org/ru/sisyphus/srpms/gcodeworkshop/),
+  thanks to Anton Midyukov (antohami).
+- For [OpenSuse](https://build.opensuse.org/package/show/home:AndnoVember:LXQt:Qt6/gcodeworkshop),
+  thanks to Андрей Алыпов (AndnoVember).
+
 
 Command line options
 ------------------

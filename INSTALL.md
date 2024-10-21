@@ -14,14 +14,15 @@ the following steps are needed to build it:
 - Run make to build the application.
 
 
-Building in Debian
+Building in Ubuntu
 ------------------
 
 Install the following packages.
 
-```
+```sh
 apt update
-apt install build-essential qtbase5-dev qttools5-dev-tools libqt5serialport5-dev
+apt install build-essential \
+qtbase5-dev qttools5-dev-tools libqt5serialport5-dev
 ```
 
 Switch to the folder with sources. Now you can either build the application
@@ -51,6 +52,22 @@ install/deb-build.sh
 
 The script creates a .deb package in the current folder and does not require
 root privileges.
+
+
+### Peculiarities of building with Qt6
+
+Install the following packages. Note that Ubuntu jammy (version 22) does not
+have the qt6-serialport-dev package and libqt6serialport6-dev should be
+installed instead.
+
+```sh
+apt update
+apt install build-essential \
+qt6-base-dev qt6-base-dev-tools qt6-serialport-dev qt6-l10n-tools qt6-translations-l10n
+```
+
+Next, when building step-by-step, you should type qmake6 instead of qmake
+or add the `-q qmake6` switch when running the automatic build script.
 
 
 Building in windows with MSYS2
