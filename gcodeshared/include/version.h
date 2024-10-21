@@ -21,7 +21,7 @@
 #define VERSION_H
 
 #ifndef GCODEWORKSHOP_VERSION
-	#define GCODEWORKSHOP_VERSION "2024.09"
+    #define GCODEWORKSHOP_VERSION "2024.10"
 #endif
 
 #endif // VERSION_H
