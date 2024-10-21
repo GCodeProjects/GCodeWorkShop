@@ -206,14 +206,18 @@ bool Document::saveFile(const QString& filePath)
 	QFile file(filePath);
 	m_ioErrorString.clear();
 
-	// WARNING: If opened in QIODevice::ReadOnly mode, a false positive in QFileSystemWatcher
+	// WARNING: If opened in QIODevice::WriteOnly mode, a false positive in QFileSystemWatcher
 	// occurs after writing and closing. This is correct for Windows 7.
+	// Update: it is possible that when opening a file with this flag, Windows
+	// immediately truncates the file size to zero and this happens before
+	// disabling monitoring in the code below.
 	if (!file.open(QIODevice::ReadWrite)) {
 		m_ioErrorString = file.errorString();
 		return false;
 	}
 
 	fileWatchStop();
+	file.resize(0);
 	file.write(rawData());
 	file.close();
 	fileWatchStart(filePath);
