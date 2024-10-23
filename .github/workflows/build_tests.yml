@@ -43,7 +43,7 @@ jobs:
           }
         - {
             name:     macOS_x64,
-            os:       macos-12,
+            os:       macos-13,
             build:    make
           }
 
