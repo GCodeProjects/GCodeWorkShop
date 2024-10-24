@@ -64,7 +64,12 @@ jobs:
         modules: ${{ matrix.qt.modules}}
 
     - name: Setup project
+      if: ! contains( matrix.config.os, 'macos' )
       run: qmake -recursive CONFIG+=debug
+
+    - name: Setup project
+      if: contains( matrix.config.os, 'macos' )
+      run: qmake -recursive CONFIG+=debug -early QMAKE_DEFAULT_LIBDIRS=$(xcrun -show-sdk-path)/usr/lib
 
     - name: Build project
       run: ${{ matrix.config.build }}
