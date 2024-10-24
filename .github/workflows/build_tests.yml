@@ -64,7 +64,7 @@ jobs:
         modules: ${{ matrix.qt.modules}}
 
     - name: Setup project
-      if: ! contains( matrix.config.os, 'macos' )
+      if: ${{ ! contains( matrix.config.os, 'macos' ) }}
       run: qmake -recursive CONFIG+=debug
 
     - name: Setup project
