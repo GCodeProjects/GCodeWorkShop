@@ -34,16 +34,20 @@ jobs:
         - {
             name:     Win_x64,
             os:       windows-2019,
+            q_extra:  "",
             build:    nmake
           }
         - {
             name:     Linux_x64,
             os:       ubuntu-20.04,
+            q_extra:  "",
             build:    make
           }
         - {
             name:     macOS_x64,
-            os:       macos-12,
+            os:       macos-13,
+            # https://stackoverflow.com/a/77631382
+            q_extra:  "-early QMAKE_DEFAULT_LIBDIRS=$(xcrun -show-sdk-path)/usr/lib",
             build:    make
           }
 
@@ -64,7 +68,7 @@ jobs:
         modules: ${{ matrix.qt.modules}}
 
     - name: Setup project
-      run: qmake -recursive CONFIG+=debug
+      run: qmake -recursive CONFIG+=debug ${{ matrix.config.q_extra }}
 
     - name: Build project
       run: ${{ matrix.config.build }}
