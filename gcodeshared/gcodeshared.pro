@@ -5,6 +5,8 @@ TARGET = gcodeshared
 CONFIG += staticlib
 
 QT *= widgets serialport network
+# QTextCodec in Qt6
+greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
 
 include(../common.pri)
 
@@ -38,6 +40,7 @@ HEADERS += include/ui/longjobhelper.h \
     include/utils/medium.h \
     include/utils/configpage.h \
     include/utils/configdialog.h \
+    include/utils/gcode-converter.h \
     include/utils/guessfilename.h \
     include/utils/splitfile.h \
     utils/filepatterns.h
@@ -46,6 +49,7 @@ SOURCES += ui/longjobhelper.cpp \
     utils/medium.cpp \
     utils/configpage.cpp \
     utils/configdialog.cpp \
+    utils/gcode-converter.cpp \
     utils/guessfilename.cpp \
     utils/splitfile.cpp
 

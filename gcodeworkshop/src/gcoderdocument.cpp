@@ -58,6 +58,7 @@ class QMenu;
 #include <documentstyle.h>              // for DocumentStyle, DocumentStyle::Ptr
 #include <documentwidgetproperties.h>   // for DocumentWidgetProperties, DocumentWidgetProperties::Ptr
 #include <gcoderdocument.h>             // IWYU pragma: associated
+#include <utils/gcode-converter.h>      // for Converter
 #include <utils/guessfilename.h>        // for guessFileNameByComments, guessFileNameByProgNum, FileExt
 #include <utils/medium.h>               // for Medium
 #include <utils/removezeros.h>          // for removeZeros
@@ -72,7 +73,6 @@ class QMenu;
 #include "highlightmode.h"          // for MODE_LINUXCNC, MODE_AUTO, MODE_SINUMERIK_840, MODE_FANUC, MODE_HEIDENHAIN
 #include "inlinecalc.h"
 
-
 GCoderDocument::GCoderDocument() : Document(nullptr)
 {
 	m_highlighter = nullptr;
@@ -85,7 +85,6 @@ GCoderDocument::GCoderDocument() : Document(nullptr)
 
 	m_inLineCalc = new InLineCalc(m_textEdit);
 	connect(m_inLineCalc, SIGNAL(complete(const QString&)), this, SLOT(inLineCalcComplete(const QString&)));
-
 
 	m_textEdit->setWindowIcon(QIcon(":/images/ncfile.png"));
 	m_textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -207,12 +206,14 @@ bool GCoderDocument::save()
 
 QByteArray GCoderDocument::rawData() const
 {
-	return text(true).toLocal8Bit();
+	GCode::Converter conv{};
+	return conv.toRawData(text(true));
 }
 
 void GCoderDocument::setRawData(const QByteArray& data)
 {
-	setText(QString::fromLocal8Bit(data));
+	GCode::Converter conv{};
+	setText(conv.fromRawData(data));
 }
 
 QMenu* GCoderDocument::createStandardContextMenu(const QPoint& pos)
@@ -1362,7 +1363,6 @@ void GCoderDocument::highlightCurrentLine()
 					}
 				}
 			}
-
 
 			if (m_highlightMode == MODE_SINUMERIK_840) {
 				cursor = textCursor();

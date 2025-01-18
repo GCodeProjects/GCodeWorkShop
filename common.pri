@@ -63,6 +63,8 @@ contains(MODULES, GCodeShared) {
                    $$shadowed($${PROJECT_ROOT_PATH}/gcodeshared)
     LIBS += -L$$shadowed($${PROJECT_ROOT_PATH}/gcodeshared)
     LIBS += -lgcodeshared
+    # QTextCodec in Qt6
+    greaterThan(QT_MAJOR_VERSION, 5): QT *= core5compat
 }
 
 contains(MODULES, GCodeWorkShop) {
