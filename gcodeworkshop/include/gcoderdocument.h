@@ -162,7 +162,7 @@ protected:
 	bool maybeSave();
 	void rehighlight();
 	void detectHighlightMode();
-	bool findText(const QString& text,  bool findBackward, bool wholeWords, bool ignoreCase, bool ignoreComments = true);
+	bool findText(const QString& text, bool wholeWords, bool ignoreCase, bool ignoreComments, bool backward);
 
 private slots :
 	void underLine();

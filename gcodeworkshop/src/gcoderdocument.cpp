@@ -788,7 +788,7 @@ bool GCoderDocument::findNext(QString textToFind,
 
 	textEdit()->blockSignals(true);
 
-	found = findText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+	found = findText(textToFind, wholeWords, ignoreCase, ignoreComments, backward);
 
 	if (!found) {
 		cursor = textCursor();
@@ -802,7 +802,7 @@ bool GCoderDocument::findNext(QString textToFind,
 
 		setTextCursor(cursor);
 
-		found = findText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+		found = findText(textToFind, wholeWords, ignoreCase, ignoreComments, backward);
 
 		if (!found) {
 			cursorOld.clearSelection();
@@ -843,7 +843,7 @@ bool GCoderDocument::replaceNext(QString textToFind,
 	if (foundTextMatched(textToFind, selectedText())) {
 		found = true;
 	} else {
-		found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+		found = findNext(textToFind, wholeWords, ignoreCase, ignoreComments, backward);
 	}
 
 	if (found) {
@@ -908,12 +908,12 @@ bool GCoderDocument::replaceNext(QString textToFind,
 		cr.endEditBlock();
 		setTextCursor(cr);
 
-		found = findNext(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+		found = findNext(textToFind, wholeWords, ignoreCase, ignoreComments, backward);
 	}
 
 	textEdit()->blockSignals(false);
 	cursorMoved();
-	highlightFindText(textToFind, backward, wholeWords, ignoreCase, ignoreComments);
+	highlightFindText(textToFind, wholeWords, ignoreCase, ignoreComments, backward);
 
 	return found;
 }
@@ -956,8 +956,8 @@ bool GCoderDocument::replaceAll(QString textToFind,
 	return found;
 }
 
-bool GCoderDocument::findText(const QString& text, bool findBackward, bool wholeWords, bool ignoreCase,
-                              bool ignoreComments)
+bool GCoderDocument::findText(const QString& text, bool wholeWords, bool ignoreCase,
+                              bool ignoreComments, bool backward)
 {
 	bool inComment = false;
 	bool found = false;
@@ -1023,7 +1023,7 @@ bool GCoderDocument::findText(const QString& text, bool findBackward, bool whole
 
 	do {
 		QTextDocument::FindFlags options{};
-		options = (findBackward ? QTextDocument::FindBackward : options) |
+		options = (backward ? QTextDocument::FindBackward : options) |
 		          (wholeWords ? QTextDocument::FindWholeWords : options) |
 		          (!ignoreCase ? QTextDocument::FindCaseSensitively : options);
 
