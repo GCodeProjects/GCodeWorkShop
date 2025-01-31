@@ -838,8 +838,6 @@ bool GCoderDocument::replaceNext(QString textToFind,
 
 	bool found = false;
 
-	textEdit()->blockSignals(true);
-
 	if (foundTextMatched(textToFind, selectedText())) {
 		found = true;
 	} else {
@@ -911,7 +909,6 @@ bool GCoderDocument::replaceNext(QString textToFind,
 		found = findNext(textToFind, wholeWords, ignoreCase, ignoreComments, backward);
 	}
 
-	textEdit()->blockSignals(false);
 	cursorMoved();
 	highlightFindText(textToFind, wholeWords, ignoreCase, ignoreComments, backward);
 
@@ -942,6 +939,7 @@ bool GCoderDocument::replaceAll(QString textToFind,
 	}
 
 	QTextCursor startCursor = textCursor();
+	startCursor.beginEditBlock();
 
 	while (found) {
 		found = replaceNext(textToFind, replacedText, backward, wholeWords, ignoreCase, ignoreComments);
@@ -952,6 +950,8 @@ bool GCoderDocument::replaceAll(QString textToFind,
 
 		qApp->processEvents();
 	}
+
+	startCursor.endEditBlock();
 
 	return found;
 }
