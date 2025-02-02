@@ -1,0 +1,6 @@
+[
+    { include: ['<qserialport.h>', 'private', '<QSerialPort>', 'public'] },
+    { include: ['"qserialport.h"', 'private', '<QSerialPort>', 'public'] },
+    { include: ['<qserialportinfo.h>', 'private', '<QSerialPortInfo>', 'public'] },
+    { include: ['"qserialportinfo.h"', 'private', '<QSerialPortInfo>', 'public'] }
+]

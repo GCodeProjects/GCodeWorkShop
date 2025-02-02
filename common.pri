@@ -90,6 +90,13 @@ contains(MODULES, basic) {
 # iwyu support     #
 #------------------#
 
+# https://doc.qt.io/qt-5/qmake-manual.html
+# https://wiki-qt-io-staging.herokuapp.com/Undocumented_QMake
+
+defineReplace(iwyu_out) {
+    return ($${OUT_PWD}/$$basename(1).log)
+}
+
 contains(USE, check_iwyu) {
     linux*:IWYU_FLAGS += -fPIE
 
@@ -101,7 +108,7 @@ contains(USE, check_iwyu) {
 
     IWYU_EXTRA_FLAGS += -Xiwyu --max_line_length=120 -Xiwyu --mapping_file=$${PROJECT_ROOT_PATH}/tools/iwyu.imp
 
-    iwyu.output  = ${QMAKE_FILE_BASE}.cpp.log
+    iwyu.output_function  = iwyu_out
     iwyu.commands = $${PROJECT_ROOT_PATH}/tools/iwyu_comp.sh $${IWYU_EXTRA_FLAGS} $${IWYU_FLAGS} ${QMAKE_FILE_NAME}
     iwyu.input = SOURCES
     iwyu.CONFIG += no_link target_predeps
