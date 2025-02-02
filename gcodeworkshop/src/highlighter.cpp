@@ -1731,7 +1731,6 @@ void Highlighter::highlightBlockToolTipsRule(const QString& tx)
 	highlightRules.append(ruleP);
 
 
-
 	keywordFormat.setForeground(QColor(highlightColors.mColor));
 	keywordFormat.setFontWeight(QFont::Normal);
 	ruleP.pattern = QRegularExpression("(<b>|<i>)[a-zA-Z0-9_.@=\\[\\]\\s]{1,30}(</b>|</i>)");

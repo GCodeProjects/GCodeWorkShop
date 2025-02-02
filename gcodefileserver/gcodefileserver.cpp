@@ -183,7 +183,7 @@ void GCodeFileServer::loadSettings()
 SerialTransmissionDialog* GCodeFileServer::createSerialPortServer(QString __config)
 {
 	SerialTransmissionDialog* spServer = new SerialTransmissionDialog(this, Qt::SubWindow,
-	    true);  // Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint
+	        true);  // Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint
 	spServer->setAttribute(Qt::WA_DeleteOnClose);
 	ui->mdiArea->addSubWindow(spServer);
 
@@ -324,7 +324,7 @@ void GCodeFileServer::createActions()
 void GCodeFileServer::serialConfig()
 {
 	SerialPortConfigDialog* serialConfigDialog = new SerialPortConfigDialog(this,
-	    configBox->currentText());
+	        configBox->currentText());
 
 	if (serialConfigDialog->exec() == QDialog::Accepted) {
 		loadSerialConfignames();

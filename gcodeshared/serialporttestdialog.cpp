@@ -359,7 +359,7 @@ void SerialPortTestDialog::updateLeds()
 void SerialPortTestDialog::configButtonClicked()
 {
 	SerialPortConfigDialog* serialConfigDialog = new SerialPortConfigDialog(this,
-	    configBox->currentText());
+	        configBox->currentText());
 
 	if (serialConfigDialog->exec() == QDialog::Accepted) {
 		changeSettings();

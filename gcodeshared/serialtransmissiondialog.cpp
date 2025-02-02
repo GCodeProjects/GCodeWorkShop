@@ -523,8 +523,6 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 //        serialPortReadBuffer.append(buf);
 
 
-
-
 //        setLabelText(tr("Receiving byte %1").arg(serialPortReadBuffer.size() - 1));
 
 //        //qDebug() << "Data read" << buff << "xoffReceived" << xoffReceived;
@@ -1339,7 +1337,7 @@ void SerialTransmissionDialog::fileServerProcessData()
 
 					if (!fileName.isEmpty()) {
 						path = portSettings.searchPath1 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt1 :
-						       ext);
+						        ext);
 						fileInfo.setFile(path);
 
 						if (!fileInfo.exists()) {
@@ -1348,7 +1346,7 @@ void SerialTransmissionDialog::fileServerProcessData()
 							}
 
 							path = portSettings.searchPath2 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt2 :
-							       ext);
+							        ext);
 							fileInfo.setFile(path);
 
 							if (!fileInfo.exists()) {
@@ -1357,7 +1355,7 @@ void SerialTransmissionDialog::fileServerProcessData()
 								}
 
 								path = portSettings.searchPath3 + "/" + fileName + (ext.isEmpty() ? portSettings.searchExt3 :
-								       ext);
+								        ext);
 								fileInfo.setFile(path);
 
 								if (!fileInfo.exists()) {

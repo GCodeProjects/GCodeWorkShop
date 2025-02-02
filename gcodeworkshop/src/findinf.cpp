@@ -356,7 +356,7 @@ bool FindInFiles::findFiles(const QString startDir, QString mainDir, bool notFou
 				}
 
 				QTableWidgetItem* fileNameItem = new QTableWidgetItem(QDir::toNativeSeparators(
-				        subDir) + files[i]);
+				            subDir) + files[i]);
 				fileNameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
 				QTableWidgetItem* infoNameItem = new QTableWidgetItem(comment_tx);

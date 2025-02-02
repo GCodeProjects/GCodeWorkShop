@@ -32,7 +32,7 @@ int Utils::i2mprog(QString tx, const QString& addr, bool toInch, int prec)
 
 	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 	regex.setPattern(
-	         QString("[%1]{1,1}([+-]?\\d*\\.?\\d*)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
+	    QString("[%1]{1,1}([+-]?\\d*\\.?\\d*)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
 	auto match = regex.match(tx);
 
 	while (match.hasMatch()) {

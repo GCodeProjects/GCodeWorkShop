@@ -306,7 +306,7 @@ void BHCDialog::computeButtonClicked()
 			yItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
 			QTableWidgetItem* hdr = new QTableWidgetItem(Utils::removeZeros(QString("%1 - %2 ").arg(i + 1).arg(ang,
-			    0, 'f', 3)));
+			        0, 'f', 3)));
 			tab->resultTable->setVerticalHeaderItem(i, hdr);
 			tab->resultTable->setItem(i, 0, xItem);
 			tab->resultTable->setItem(i, 1, yItem);
