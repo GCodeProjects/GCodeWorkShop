@@ -20,6 +20,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <algorithm>    // for sort, unique
+
 #include <QAbstractButton>              // for QAbstractButton
 #include <QButtonGroup>                 // for QButtonGroup
 #include <QByteArray>                   // for QByteArray
@@ -34,12 +36,14 @@
 #include <QFontDialog>                  // for QFontDialog
 #include <QLabel>                       // for QLabel
 #include <QLineEdit>                    // for QLineEdit
+#include <QList>                        // for QList
 #include <QListWidget>                  // for QListWidget
 #include <QListWidgetItem>              // for QListWidgetItem
 #include <QPalette>                     // for QPalette
 #include <QPushButton>                  // for QPushButton
 #include <QRegularExpression>           // for QRegularExpression
 #include <QRegularExpressionValidator>  // for QRegularExpressionValidator
+#include <QTextCodec>
 #include <QVariant>                     // for QVariant
 #include <Qt>                           // for GlobalColor, WindowFlags
 #include <QtAlgorithms>                 // for qDeleteAll
@@ -260,6 +264,18 @@ SetupDialog::SetupDialog(QWidget* parent, const AppConfig* prop,
 	connect(defaultButton, SIGNAL(clicked()), SLOT(setDefaultProp()));
 	connect(okButton, SIGNAL(clicked()), SLOT(accept()));
 	connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
+
+	connect(ui_showAllCodecs, &QCheckBox::stateChanged,
+	        this, &SetupDialog::showAllCodecsClicked);
+	connect(ui_showAllCodecs, &QCheckBox::stateChanged,
+	        this, &SetupDialog::fillCodecs);
+	connect(ui_showAliases, &QCheckBox::stateChanged,
+	        this, &SetupDialog::fillCodecs);
+	ui_dropControl->setChecked(prop->gcodeConverterOptions.dropControll);
+	ui_dropExtra->setChecked(prop->gcodeConverterOptions.dropExtented);
+	ui_dropEmptyLine->setChecked(prop->gcodeConverterOptions.dropEmptyLine);
+	showAllCodecsClicked();
+	fillCodecs();
 }
 
 SetupDialog::~SetupDialog()
@@ -428,6 +444,21 @@ AppConfig SetupDialog::getSettings()
 	editProp.saveDirectory = edtSaveDirectory->text();
 
 	editProp.editorProperties.guessFileNameByProgNum = progNumCheckBox->isChecked();
+
+	editProp.gcodeConverterOptions.dropControll = ui_dropControl->isChecked();
+	editProp.gcodeConverterOptions.dropExtented = ui_dropExtra->isChecked();
+	editProp.gcodeConverterOptions.dropEmptyLine = ui_dropEmptyLine->isChecked();
+	editProp.gcodeConverterOptions.codecName.clear();
+
+	if (ui_encodingCombo->currentIndex() != 0) {
+		QTextCodec* codec = QTextCodec::codecForName(ui_encodingCombo->currentText().toLatin1());
+
+		if (codec != nullptr) {
+			editProp.gcodeConverterOptions.codecName = codec->name();
+		} else {
+			editProp.gcodeConverterOptions.codecName = ui_encodingCombo->currentText().toLatin1();
+		}
+	}
 
 	return (editProp);
 }
@@ -666,4 +697,66 @@ void SetupDialog::on_btnBrowseDirectory_clicked()
 	if (!dir.isEmpty()) {
 		edtSaveDirectory->setText(dir);
 	}
+}
+
+void SetupDialog::showAllCodecsClicked()
+{
+	ui_showAliases->setEnabled(ui_showAllCodecs->isChecked());
+}
+
+void SetupDialog::fillCodecs()
+{
+	ui_encodingCombo->clear();
+	ui_encodingCombo->setEditable(!ui_showAllCodecs->isChecked());
+	ui_encodingCombo->addItem(tr("System charset (%1)").arg(QString(QTextCodec::codecForLocale()->name())));
+	ui_encodingCombo->insertSeparator(1);
+
+	QList<int> mibList;
+
+	if (ui_showAllCodecs->isChecked()) {
+		mibList = QTextCodec::availableMibs();
+	} else {
+		mibList = {
+			2250, 2251, 2252, 2253, 2254, 2255, 2256, 2257, 2258
+		};
+	}
+
+	QList<QByteArray> codecList;
+
+	for (int i : mibList) {
+		QTextCodec* tc = QTextCodec::codecForMib(i);
+
+		if (tc != nullptr) {
+			codecList.append(tc->name());
+
+			if (ui_showAllCodecs->isChecked() && ui_showAliases->isChecked()) {
+				codecList.append(tc->aliases());
+			}
+		}
+	}
+
+	std::sort(codecList.begin(), codecList.end());
+	auto last = std::unique(codecList.begin(), codecList.end());
+	codecList.erase(last, codecList.end());
+
+	for (auto i = codecList.cbegin(); i < codecList.cend(); ++i) {
+		ui_encodingCombo->addItem(*i);
+	}
+
+	QByteArray currentCodec = editProp.gcodeConverterOptions.codecName;
+	int currentIndex = codecList.indexOf(currentCodec);
+
+	if (currentIndex < 0) {
+		if (! currentCodec.isEmpty()) {
+			ui_encodingCombo->insertItem(2, currentCodec);
+			ui_encodingCombo->insertSeparator(3);
+			currentIndex = 2;
+		} else {
+			currentIndex = 0;
+		}
+	} else {
+		currentIndex += 2;
+	}
+
+	ui_encodingCombo->setCurrentIndex(currentIndex);
 }

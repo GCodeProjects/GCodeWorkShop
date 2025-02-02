@@ -20,8 +20,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <memory>   // for shared_ptr, shared_ptr<>::element_type
-
 #include <QAbstractItemModel>   // for QTypeInfo<>::isLarge, QTypeInfo<>::isStatic
 #include <QAbstractPrintDialog> // for QAbstractPrintDialog, QAbstractPrintDialog::PrintSelection
 #include <QAction>              // for QAction
@@ -121,6 +119,7 @@
 #include <serialporttestdialog.h>       // SerialPortTestDialog
 #include <serialtransmissiondialog.h>   // SerialTransmissionDialog
 #include <utils/medium.h>               // Medium
+#include <utils/gcode-converter.h>      // for Converter
 #include <version.h>
 
 #include "capslockeventfilter.h"    // for CapsLockEventFilter
@@ -951,6 +950,7 @@ void GCodeWorkShop::config()
 	config.defaultReadOnly = m_defaultReadOnly;
 	config.disableFileChangeMonitor = m_disableFileChangeMonitor;
 	config.startEmpty = m_startEmpty;
+	config.gcodeConverterOptions = GCode::Converter::defaultOptions();
 	SetupDialog* setUpDialog = new SetupDialog(this, &config);
 
 	if (setUpDialog->exec() == QDialog::Accepted) {
@@ -980,6 +980,8 @@ void GCodeWorkShop::config()
 		for (Document* doc : m_documentManager->documentList()) {
 			doc->setReadOnly(m_defaultReadOnly);
 		}
+
+		GCode::Converter::setDefaultOptions(config.gcodeConverterOptions);
 	}
 
 	delete setUpDialog;
@@ -2036,6 +2038,14 @@ void GCodeWorkShop::readSettings()
 		m_documentManager->setDocumentStyle(style);
 	}
 
+	settings.beginGroup("GCode");
+	settings.beginGroup("Converter");
+	GCode::Converter::Options gcodeOptions = GCode::Converter::defaultOptions();
+	gcodeOptions.load(&settings);
+	GCode::Converter::setDefaultOptions(gcodeOptions);
+	settings.endGroup();
+	settings.endGroup();
+
 	m_sessionManager->load(&settings);
 
 	if (!m_startEmpty) {
@@ -2116,6 +2126,12 @@ void GCodeWorkShop::writeSettings()
 
 	//cleanup old settings
 	settings.remove("LastDoc");
+
+	settings.beginGroup("GCode");
+	settings.beginGroup("Converter");
+	GCode::Converter::defaultOptions().save(&settings);
+	settings.endGroup();
+	settings.endGroup();
 
 	if (!m_startEmpty) {
 		storeFileInfoInSession();
@@ -3434,7 +3450,7 @@ void GCodeWorkShop::loadPrinterSettings(QPrinter* printer)
 void GCodeWorkShop::serialConfig()
 {
 	SerialPortConfigDialog* serialConfigDialog = new SerialPortConfigDialog(this,
-	    configBox->currentText());
+	        configBox->currentText());
 
 	if (serialConfigDialog->exec() == QDialog::Accepted) {
 		loadSerialConfignames();

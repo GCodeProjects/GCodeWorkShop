@@ -35,6 +35,7 @@ class QWidget;
 
 #include <gcoderstyle.h>            // for GCoderStyle
 #include <gcoderwidgetproperties.h> // for GCoderWidgetProperties
+#include <utils/gcode-converter.h>
 
 #include "ui_setupdialog.h" // for Ui::SetupDialog
 
@@ -50,6 +51,7 @@ struct AppConfig  {
 	bool defaultReadOnly;
 	bool startEmpty;
 	bool disableFileChangeMonitor;
+	GCode::Converter::Options gcodeConverterOptions;
 };
 
 
@@ -76,6 +78,8 @@ private slots:
 	void changeColor(QAbstractButton* button);
 	void setDefaultProp();
 	void browseButtonClicked();
+	void showAllCodecsClicked();
+	void fillCodecs();
 
 private:
 	AppConfig editProp;

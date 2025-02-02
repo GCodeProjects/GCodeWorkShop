@@ -56,7 +56,6 @@ class QStandardItem;
 class QStandardItemModel;
 class QToolBar;
 class QToolButton;
-class QWidget;
 
 #include <documentinfo.h>   // for DocumentInfo, DocumentInfo::Ptr
 
