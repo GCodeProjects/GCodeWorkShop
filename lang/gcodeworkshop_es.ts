@@ -2080,7 +2080,7 @@ Items with non empty titles are not deleted automatically.</source>
  %2</translation>
     </message>
     <message>
-        <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.&lt;br&gt;This is a fork of &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó&lt;br /&gt;German translation and other fixes thanks to Michael Numberger&lt;br /&gt;Czech translation thanks to Pavel Fric&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju&lt;br /&gt;Dutch translation thanks to Henk van Andel&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski&lt;P&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;GCodeWorkShop on GitHub&lt;/a&gt;&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.&lt;br&gt;This is a fork of &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2025 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;h2&gt;Sources and updates&lt;/h2&gt;&lt;p&gt;Source code and new releases are available at the following addresses:&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;https://github.com/GCodeProjects/GCodeWorkShop&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://codeberg.org/u-235/GCodeWorkShop&apos;&gt;https://codeberg.org/u-235/GCodeWorkShop&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://gitflic.ru/project/u-235/gcodeworkshop&apos;&gt;https://gitflic.ru/project/u-235/gcodeworkshop&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Thanks&lt;/h2&gt;&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó&lt;br /&gt;German translation and other fixes thanks to Michael Numberger&lt;br /&gt;Czech translation thanks to Pavel Fric&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju&lt;br /&gt;Dutch translation thanks to Henk van Andel&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;h2&gt;License&lt;/h2&gt;&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4056,6 +4056,54 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     </message>
     <message>
         <source>Change date on save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open/Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When open file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard control symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard additional empty lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Discard the upper 128 code points commonly used for national alphabets.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard extra symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use encoding:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show all avalaible codecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show aliases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System charset (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Older CNC systems could add control characters (&lt;code&gt;0x00&lt;/code&gt;-&lt;code&gt;0x1f&lt;/code&gt;) when uploading a file via the serial port, which looks like mojibake. The editor can delete such characters, leaving only carriage and newline characters.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In some cases, the CNC inserts additional blank lines when the file is unloaded. The editor can recognise such lines and delete them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

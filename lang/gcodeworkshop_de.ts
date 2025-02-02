@@ -1292,7 +1292,7 @@ Verändert - Empfange Datei ist verändert</translation>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.ui" line="205"/>
         <location filename="../gcodeworkshop/src/gcodeworkshop.ui" line="208"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2691"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2714"/>
         <source>Add files to project</source>
         <translation>Datein zu Projekt hinzufügen</translation>
     </message>
@@ -1365,7 +1365,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.ui" line="534"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3117"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3140"/>
         <source>File Name</source>
         <translation>Dateiname</translation>
     </message>
@@ -1380,29 +1380,29 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation>&lt;&lt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="254"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="564"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="582"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="605"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1126"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2200"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="250"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="560"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="578"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="601"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1125"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2223"/>
         <source>GCodeWorkShop</source>
         <translation>GCodeWorkShop</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="443"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="439"/>
         <source>Select one or more files to open</source>
         <translation>Ein oder mehrere Dateien zum öffnen wählen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="455"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="470"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="451"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="466"/>
         <source>File loaded</source>
         <translation>Datei geladen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="562"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="603"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="558"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="599"/>
         <source>File saved</source>
         <translation>Datei gespeichert</translation>
     </message>
@@ -1415,17 +1415,17 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Neu nummeriert : %1 Zeilen.</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1180"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1179"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1181"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1180"/>
         <source>Set correct calculator program name in configuration dialog.</source>
         <translation>Bitte richtiges Taschenrechner-Programm im Einstellungsdialog einfügen.</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1259"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1258"/>
         <source>About GCodeWorkShop</source>
         <translation>Über GCodeWorkShop</translation>
     </message>
@@ -1470,263 +1470,263 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">&lt;P&gt;&lt;i&gt;GCodeWorkShop - Serial Port Datei Serverist eine freie Software; Sie können sie verteilen und/oder modifizieren unter den Bedingungen der GNU General Public License veröffentlicht von der Free Software Foundation; entweder Version 2 der Lizenz, oder(Ihre Wahl) jede spätere Version.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1420"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1427"/>
         <source> Col: </source>
         <translation> Spalte: </translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1421"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1428"/>
         <source>  Line: </source>
         <translation> Zeile: </translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1422"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1429"/>
         <source>  &lt;b&gt;Modified&lt;/b&gt;  </source>
         <translation>  &lt;b&gt;Verändert&lt;/b&gt;  </translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1423"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1430"/>
         <source> Read only  </source>
         <translation>Schreibgeschützt</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1424"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1431"/>
         <source> Overwrite  </source>
         <translation> Überschreiben  </translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1424"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1431"/>
         <source> Insert </source>
         <translation> Einfügen </translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1454"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1461"/>
         <source>&amp;%1 %2</source>
         <translation>&amp;%1 %2</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1456"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1463"/>
         <source>%1 %2</source>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1493"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1501"/>
         <source>&amp;New</source>
         <translation>&amp;Neu</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1495"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1503"/>
         <source>Create a new file</source>
         <translation>Eine neue Datei erzeugen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1498"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1506"/>
         <source>&amp;Open...</source>
         <translation>&amp;Öffnen...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1500"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1508"/>
         <source>Open an existing file</source>
         <translation>Eine vorhandene Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1505"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1513"/>
         <source>&amp;Open example...</source>
         <translation>&amp;Öffne Beispiel...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1506"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1514"/>
         <source>Open an example file</source>
         <translation>Öffnet eine Beispiel-Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1512"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1520"/>
         <source>Save the document to disk</source>
         <translation>Speichern der Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1523"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1531"/>
         <source>Save the document under a new name</source>
         <translation>Speichern unter neuem Namen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1526"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1534"/>
         <source>E&amp;xit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1528"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1536"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1529"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1537"/>
         <source>Exit the application</source>
         <translation>Beenden des Programms</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1532"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1540"/>
         <source>&amp;Find files...</source>
         <translation>Dateien &amp;finden...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1535"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1543"/>
         <source>Find files</source>
         <translation>Dateien finden</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1538"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1546"/>
         <source>&amp;Print</source>
         <translation>D&amp;rucken</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1540"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1548"/>
         <source>Print file</source>
         <translation>Datei drucken</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1544"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1552"/>
         <source>Pr&amp;int preview</source>
         <translation>&amp;Druckvorschau</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1546"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1554"/>
         <source>Preview printing</source>
         <translation>Druckvorschau</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1549"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1557"/>
         <source>Session manager...</source>
         <translation>Sitzungsmanager...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1550"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1558"/>
         <source>Sessions manager</source>
         <translation>Sitzungsmanager</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1554"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1562"/>
         <source>&amp;Undo</source>
         <translation>&amp;Rückgängig</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1556"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1564"/>
         <source>Undo last operation</source>
         <translation>Letzte Aktion rückgängig machen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1560"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1568"/>
         <source>&amp;Redo</source>
         <translation>&amp;Wiederholen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1562"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1570"/>
         <source>Redo last operation</source>
         <translation>Letzte Aktion wiederholen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1566"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1574"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1568"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1576"/>
         <source>Cut the current selection&apos;s contents to the clipboard</source>
         <translation>Schneidet den markierten Text aus in die Zwischenablage</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1572"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1580"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1574"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1582"/>
         <source>Copy the current selection&apos;s contents to the clipboard</source>
         <translation>Kopiert den markierten Text in die Zwischenablage</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1578"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1586"/>
         <source>&amp;Paste</source>
         <translation>&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1580"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1588"/>
         <source>Paste the clipboard&apos;s contents into the current selection</source>
         <translation>Fügt den Text aus der Zwischenablage an der aktuellen Stelle ein</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1584"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1592"/>
         <source>&amp;Find</source>
         <translation>&amp;Suchen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1586"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1594"/>
         <source>Find text</source>
         <translation>Text suchen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1589"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1597"/>
         <source>&amp;Replace</source>
         <translation>E&amp;rsetzen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1590"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1598"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1591"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1599"/>
         <source>Find and replace text</source>
         <translation>Suchen und ersetzen von Text</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1595"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1603"/>
         <source>&amp;Delete</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1597"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1605"/>
         <source>Removes selected text</source>
         <translation>Ĺöscht den markierten Text</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1600"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1608"/>
         <source>&amp;Select all</source>
         <translation>&amp;Alles markieren</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1602"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1610"/>
         <source>Select all text</source>
         <translation>Markiert den gesamten Text</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1605"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1613"/>
         <source>Read &amp;only</source>
         <translation>&amp;Schreibgeschützt</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1606"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1614"/>
         <source>F12</source>
         <translation>F12</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1608"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1616"/>
         <source>Makes text read only</source>
         <translation>Text schreibschützen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1611"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1619"/>
         <source>Configuration</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1613"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1621"/>
         <source>Open configuration dialog</source>
         <translation>Öffnet das Einstellungsfenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1617"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3751"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1625"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3774"/>
         <source>Ctrl+0</source>
         <translation>Strg+0</translation>
     </message>
@@ -1735,7 +1735,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">&amp;Lochkreise</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1620"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1628"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
@@ -1748,7 +1748,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">&amp;Leerzeichen einfügen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1636"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1644"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
@@ -1761,7 +1761,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Leerzeichen entfernen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1637"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1645"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
@@ -1790,7 +1790,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Punkte einfügen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1629"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1637"/>
         <source>F6</source>
         <translation>F6</translation>
     </message>
@@ -1803,7 +1803,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Neu nummerieren</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1635"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1643"/>
         <source>F7</source>
         <translation>F7</translation>
     </message>
@@ -1816,7 +1816,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Drehzahl + Vorschub</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1632"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1640"/>
         <source>F9</source>
         <translation>F9</translation>
     </message>
@@ -1845,18 +1845,18 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Konvertierungsprogramm inch &lt;&gt; metrisch</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1641"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1649"/>
         <source>Calculator</source>
         <translation>Taschenrechner</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1643"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1651"/>
         <source>Run calculator</source>
         <translation>Taschenrechner starten</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1646"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1650"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1654"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1658"/>
         <source>Serial port send/receive</source>
         <translation>Serielle Schnittstelle senden/empfangen</translation>
     </message>
@@ -1869,34 +1869,34 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Übersetzt EdytorNC Macro in CNC Programm</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1654"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1655"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1662"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1663"/>
         <source>Show diff - open current file in right diff window</source>
         <translation>Zeigt Vergleich - Öffnet aktive Datei im rechten Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1659"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1660"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1667"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1668"/>
         <source>Show diff - open current file in left diff window</source>
         <translation>Zeigt Vergleich - Öffnet aktive Datei im linken Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1663"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1671"/>
         <source>On/off diff window</source>
         <translation>An/Aus Vergleich-Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1665"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1673"/>
         <source>Show diff window</source>
         <translation>Zeigt Vergleich-Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1668"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1676"/>
         <source>Show unsaved changes</source>
         <translation>Zeigt nicht gespeicherte Änderungen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1670"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1678"/>
         <source>Show diff of currently edited file and file on disk</source>
         <translation>Zeigt Unterschiede zwischen aktuell geöfneter Datei und Datei von der Festplatte</translation>
     </message>
@@ -1909,7 +1909,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Kommentar ;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1627"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1635"/>
         <source>Ctrl+;</source>
         <translation>Ctrl+;</translation>
     </message>
@@ -1922,7 +1922,7 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Kommentar ()</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1626"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1634"/>
         <source>Ctrl+9</source>
         <translation>Ctrl+9</translation>
     </message>
@@ -1935,22 +1935,22 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="vanished">Achsen wechseln</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1683"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1691"/>
         <source>Tile the windows horyzontally</source>
         <translation>Fenster horizontal beschriften</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3561"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3584"/>
         <source>File &quot;%1&quot; &lt;b&gt;was modified on disk.&lt;/b&gt;&lt;p&gt;Do you want to reload it?&lt;/p&gt;%2</source>
         <translation>File &quot;%1&quot; &lt;b&gt;wurde auf der Festplatte verändert.&lt;/b&gt;&lt;p&gt;Neu laden?&lt;/p&gt;%2</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3563"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3586"/>
         <source>&lt;p&gt;&lt;b&gt;Warning:&lt;/b&gt; File in editor contains unsaved changes.&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;b&gt;Warnung:&lt;/b&gt; Die Datei im Editor beinhaltet nicht gespeicherte Änderungen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1675"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1683"/>
         <source>Close the active window</source>
         <translation>Das aktive Fenster schließen</translation>
     </message>
@@ -1959,115 +1959,115 @@ Objekte mit Beschriftungen werden nicht automatisch gelöscht.</translation>
         <translation type="obsolete">&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt; {1998 ?} {2018 ?} {78@?}</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1678"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1686"/>
         <source>Close &amp;All</source>
         <translation>&amp;Alles schließen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1679"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1687"/>
         <source>Close all the windows</source>
         <translation>Alle Fenster schließen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1690"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1698"/>
         <source>&amp;Cascade</source>
         <translation>Fenster &amp;übereinander</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1691"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1699"/>
         <source>Cascade the windows</source>
         <translation>Fenster übereinander</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1694"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1702"/>
         <source>Ne&amp;xt</source>
         <translation>&amp;Nächstes</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1696"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1704"/>
         <source>Move the focus to the next window</source>
         <translation>Zum nächsten Fenster wechseln</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1699"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1707"/>
         <source>Pre&amp;vious</source>
         <translation>&amp;Vorheriges</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1701"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1709"/>
         <source>Move the focus to the previous window</source>
         <translation>Zum vorherigen Fenster wechseln</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1718"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1726"/>
         <source>&amp;About</source>
         <translation>&amp;Über</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1719"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1727"/>
         <source>Show the application&apos;s About box</source>
         <translation>Zeigt das Über GCodeWorkShop Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1722"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1730"/>
         <source>About &amp;Qt</source>
         <translation>Über &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1723"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1731"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>Zeigt das Über Qt Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1729"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1737"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1738"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1746"/>
         <source>&amp;Recent files</source>
         <translation>&amp;Letzte Dateien</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1762"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1770"/>
         <source>&amp;Edit</source>
         <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1789"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1797"/>
         <source>&amp;Tools</source>
         <translation>&amp;Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1779"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1787"/>
         <source>&amp;Block Skip</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="361"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="357"/>
         <source>GCodeWorkShop - Serial port file server</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="362"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="358"/>
         <source>Serial port file server is running.
 Close anyway?</source>
         <translation>Serial port file server läuft.
 Abbrechen?</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="588"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="584"/>
         <source>Saved %1 files</source>
         <translation>%1 Dateien gespeichert</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="673"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="669"/>
         <source>Print Document</source>
         <translation>Drucke Dokument</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="683"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="727"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="679"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="723"/>
         <source>The document was sent to a printer %1...</source>
         <translation>Das Dokument wurde an den Drucker %1 gesendet...</translation>
     </message>
@@ -2084,41 +2084,41 @@ Abbrechen?</translation>
         <translation type="vanished">&lt;P&gt;&lt;a href=&quot;https://plus.google.com/communities/117267107585407507443/&quot;&gt;EdytorNC Google Plus Community&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1376"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1510"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1383"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1518"/>
         <source>&amp;Save &quot;%1&quot;</source>
         <translation>&amp;Speichere &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1377"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1520"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1384"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1528"/>
         <source>Save &quot;%1&quot; &amp;As...</source>
         <translation>Speichern &quot;%1! &amp;unter...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1378"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1673"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1385"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1681"/>
         <source>Cl&amp;ose &quot;%1&quot;</source>
         <translation>&amp;Schließe &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1515"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1523"/>
         <source>Save A&amp;ll</source>
         <translation>Speicher a&amp;lles</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1516"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1524"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1517"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1525"/>
         <source>Save all modified documents to disk</source>
         <translation>Speicher alle geänderte Dokumente auf Laufwerk</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1616"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3750"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1624"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3773"/>
         <source>Inline calculator</source>
         <translation>Eingebauter Taschenrechner</translation>
     </message>
@@ -2127,124 +2127,124 @@ Abbrechen?</translation>
         <translation type="vanished">Sä&amp;ubern</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1682"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1690"/>
         <source>Tile &amp;horyzontally</source>
         <translation>&amp;Horizontal anordnen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1686"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1694"/>
         <source>Tile &amp;vertycally</source>
         <translation>&amp;Vertikal anordnen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1687"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1695"/>
         <source>Tile the windows vertycally</source>
         <translation>Die Fenster vertikal anordnen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1749"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1757"/>
         <source>Sessions</source>
         <translation>Sitzungen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1820"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1828"/>
         <source>&amp;Window</source>
         <translation>&amp;Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1826"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1834"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1836"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1844"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1848"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1856"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1870"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1878"/>
         <source>Tools</source>
         <translation>Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1895"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1903"/>
         <source>Window</source>
         <translation>Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1909"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1917"/>
         <source>Highlight style and tooltip mode</source>
         <translation>Hervorheben-Style und Tooltip-Modus</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1911"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1919"/>
         <source>AUTO</source>
         <translation>AUTO</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1912"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1920"/>
         <source>FANUC</source>
         <translation>FANUC</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1913"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1921"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation>HEIDENHAIN DIALOG</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1914"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1922"/>
         <source>HEIDENHAIN ISO</source>
         <translation>HEIDENHAIN ISO</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1915"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1923"/>
         <source>OKUMA OSP</source>
         <translation>OKUMA OSP</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1916"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1924"/>
         <source>PHILIPS</source>
         <translation>PHILIPS</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1917"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1925"/>
         <source>SINUMERIK OLD</source>
         <translation>SINUMERIK alt</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1918"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1926"/>
         <source>SINUMERIK NEW</source>
         <translation>SINUMERIK neu</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1919"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1927"/>
         <source>LinuxCNC</source>
         <translation>LinuxCNC</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1920"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1928"/>
         <source>TOOLTIPS</source>
         <translation>Werkzeugtips</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1926"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1928"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1934"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1936"/>
         <source>Attach current highlight setting to current directory of programs</source>
         <translation>Anhängen aktuelle Hervorheben-Einstellungen an aktuelles Datei-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1936"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1937"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1944"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1945"/>
         <source>Remove highlight settings from the directory</source>
         <translation>Löschen Hervorheben-Einstellung vom Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1955"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1963"/>
         <source>Ready</source>
         <translation>Fertig</translation>
     </message>
@@ -2253,166 +2253,166 @@ Abbrechen?</translation>
         <translation type="vanished">Vorgabe</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2255"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2278"/>
         <source>Find</source>
         <translation>Suchen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2261"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2263"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2284"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2286"/>
         <source>Find next</source>
         <translation>Suche vorwärts</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2266"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2268"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2289"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2291"/>
         <source>Find previous</source>
         <translation>Suche rückwärts</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2271"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2274"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2294"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2297"/>
         <source>Replace &amp;&amp; find next</source>
         <translation>Suche und ersetze vorwärts</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2278"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2280"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2301"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2303"/>
         <source>Replace &amp;&amp; find previous</source>
         <translation>Suche und ersetze rückwärts</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2283"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2285"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2306"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2308"/>
         <source>Replace all</source>
         <translation>Alle ersetzen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2288"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2289"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2311"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2312"/>
         <source>Close find toolbar</source>
         <translation>Schließe Suche Leiste</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2292"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2315"/>
         <source>Find:</source>
         <translation>Suchen:</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2297"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2320"/>
         <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
         <translation>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2319"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2342"/>
         <source>Replace with:</source>
         <translation>Ersetze mit:</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2324"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2347"/>
         <source>&lt;b&gt;$$OperatorNumber&lt;/b&gt; - do some math on replaced numbers. Operator +-*/&lt;p&gt;$$+1 - will add 1 to replaced numbers&lt;/p&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2336"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2359"/>
         <source>Ignore c&amp;ase</source>
         <translation>Groß/Kleinschreibung &amp;ignorieren</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2339"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2362"/>
         <source>&amp;Whole words only</source>
         <translation>Nur &amp;vollständige Worte</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2343"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2366"/>
         <source>Ignore c&amp;omments</source>
         <translation>K&amp;ommentare ignorieren</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2431"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2454"/>
         <source>Serial port toolbar</source>
         <translation>Sende/Empfange Leiste</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2435"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2438"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2458"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2461"/>
         <source>Serial port configuration</source>
         <translation>Einstellungen serielle Schnittstelle</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2441"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2443"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2464"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2466"/>
         <source>Receive new file</source>
         <translation>Neue Datei empfangen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2446"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2448"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2469"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2471"/>
         <source>Send current file</source>
         <translation>Aktuelle Datei senden</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2452"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2454"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2475"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2477"/>
         <source>Attach current port settings to current directory of programs</source>
         <translation>Speichert die aktuellen Schnittstellen-Einstellungen im aktuellen Programm-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2458"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2481"/>
         <source>Remove settings from the current directory</source>
         <translation>Löscht die aktuellen Schnittstellen-Einstellungen aus dem aktuellen Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2460"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2483"/>
         <source>Remove settings from the directory</source>
         <translation>Löscht die aktuellen Schnittstellen-Einstellungen aus dem Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2463"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2465"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2486"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2488"/>
         <source>Check serial port settings</source>
         <translation>Einstellungen der seriellen Schnittstelle überprüfen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2469"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2470"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2492"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2493"/>
         <source>Close send/receive toolbar</source>
         <translation>Schließe Sende/Empfange Leiste</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2474"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2476"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2497"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2499"/>
         <source>Start application &quot;Serial port file server&quot;</source>
         <translation>Starte den &quot;Serial port file server&quot;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2946"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2969"/>
         <source>Show</source>
         <translation>Zeigen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2955"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2978"/>
         <source>Hide</source>
         <translation>Verstecken</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3348"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3371"/>
         <source>Session %1 loaded</source>
         <translation>Sitzung %1 geladen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3455"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3458"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3478"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3481"/>
         <source>Default</source>
         <translation>Vorgaben</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2577"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2600"/>
         <source># ++++++ EXAMPLE ++++++</source>
         <translation># ++++++ Beispiel ++++++</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2579"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2602"/>
         <source># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - program stop, unconditional&quot;</source>
         <translation># M00=&quot;&lt;b&gt;M00&lt;/b&gt; - Programm Stop, bedingungslos&quot;</translation>
     </message>
@@ -2421,34 +2421,33 @@ Abbrechen?</translation>
         <translation type="vanished">Alle Dateien (*.* *);;CNC Programm Dateien *.nc (*.nc);;CNC Programm Dateien *.nc *.ngc *.min *.anc *.cnc (*.nc *.ngc *.min *.anc *.cnc);;Dokumente *.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Zeichnungen *.dwg *.dxf (*.dwg *.dxf);;Bilder *.jpg *.bmp *.svg (*.jpg *.bmp *.svg);;Text Dateien *.txt (*.txt)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2682"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2705"/>
         <source>All files (*.* *);;CNC programs files (*.nc);;CNC programs files (*.nc *.ngc *.min *.anc *.cnc);;Documents (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Drawings (*.dwg *.dxf);;Pictures (*.jpg *.bmp *.svg);;Text files (*.txt)</source>
         <translation>Alle Dateien (*.* *);;CNC Programm Dateien (*.nc);;CNC Programm Dateien (*.nc *.ngc *.min *.anc *.cnc);;Dokumente (*.odf *.odt *.pdf *.doc *.docx  *.xls *.xlsx);;Zeichnungen (*.dwg *.dxf);;Bilder (*.jpg *.bmp *.svg);;Text Dateien (*.txt)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3148"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3171"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3056"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3079"/>
         <source>&lt;b&gt;Project: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Projekt: &quot;%1&quot;
  wurde verändert.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1260"/>
         <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.&lt;br&gt;This is a fork of &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó&lt;br /&gt;German translation and other fixes thanks to Michael Numberger&lt;br /&gt;Czech translation thanks to Pavel Fric&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju&lt;br /&gt;Dutch translation thanks to Henk van Andel&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski&lt;P&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;GCodeWorkShop on GitHub&lt;/a&gt;&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
-        <translation>Der &lt;b&gt;GCodeWorkShop&lt;/b&gt; ist ein Texteditor für CNC Programmer.&lt;br&gt;Dies ist ein Fork von &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;Spanishe Übersetzung, Fixes und andere Hilfe Danke an to Otto Huamani&lt;br /&gt;Catalanische Übersetzung und deb package Danke an Jordi Sayol i Salomó&lt;br /&gt;Deutsche Übersetzung und andere Fixes Danke an Michael Numberger&lt;br /&gt;Czechische Übersetzung Danke an Pavel Fric&lt;br /&gt;Finnissche Übersetzung Danke an Janne Mäntyharju&lt;br /&gt;Niederländische Übersetzung Danke an to Henk van Andel&lt;br /&gt;OS X patch und andere Updates Danke an Janne Mäntyharju&lt;P&gt;Neues EdytorNCIicon Danke an Jakub Gajewski&lt;P&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;GCodeWorkShop on GitHub&lt;/a&gt;&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</translation>
+        <translation type="vanished">Der &lt;b&gt;GCodeWorkShop&lt;/b&gt; ist ein Texteditor für CNC Programmer.&lt;br&gt;Dies ist ein Fork von &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;Spanishe Übersetzung, Fixes und andere Hilfe Danke an to Otto Huamani&lt;br /&gt;Catalanische Übersetzung und deb package Danke an Jordi Sayol i Salomó&lt;br /&gt;Deutsche Übersetzung und andere Fixes Danke an Michael Numberger&lt;br /&gt;Czechische Übersetzung Danke an Pavel Fric&lt;br /&gt;Finnissche Übersetzung Danke an Janne Mäntyharju&lt;br /&gt;Niederländische Übersetzung Danke an to Henk van Andel&lt;br /&gt;OS X patch und andere Updates Danke an Janne Mäntyharju&lt;P&gt;Neues EdytorNCIicon Danke an Jakub Gajewski&lt;P&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;GCodeWorkShop on GitHub&lt;/a&gt;&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1621"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1629"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1622"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1630"/>
         <source>Ctrl+2</source>
         <translation>Ctrl+2</translation>
     </message>
@@ -2461,7 +2460,7 @@ Abbrechen?</translation>
         <translation type="vanished">Block Sprung -</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1623"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1631"/>
         <source>Ctrl+3</source>
         <translation>Ctrl+3</translation>
     </message>
@@ -2470,115 +2469,120 @@ Abbrechen?</translation>
         <translation type="vanished">Einsetzen/Erniedrigen Block Sprung /</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="631"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3057"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="627"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3080"/>
         <source>Do you want to save your changes ?</source>
         <translation>Wollen Sie Ihre Änderungen speichern ?</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3106"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3129"/>
         <source>Open files</source>
         <translation>Öffne Dateien</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.ui" line="529"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3117"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="3140"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2756"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2779"/>
         <source>Project opened</source>
         <translation>Projekt geöffnet</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="401"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="397"/>
         <source>EMPTY FILE</source>
         <translation>Leere Datei</translation>
     </message>
     <message>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="484"/>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="488"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="492"/>
         <source>CNC programs files %1 (%1);;</source>
         <translation>CNC Programm Dateien %1 (%1);;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="490"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="486"/>
         <source>CNC programs files (%1);;</source>
         <translation>CNC Programm Dateien (%1);;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="505"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="501"/>
         <source>Text files (*.txt);;All files (*.* *)</source>
         <translation>Text Dateien (*.txt);;Alle Dateien (*.* *)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="520"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="516"/>
         <source>Save file as...</source>
         <translation>Speichern unter...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="531"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="527"/>
         <source>&lt;b&gt;File &quot;%1&quot; exists.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Datei &quot;%1&quot; vorhanden.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="532"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="528"/>
         <source>Do you want overwrite it ?</source>
         <translation>Überschreiben ?</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="564"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="582"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="605"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="560"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="578"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="601"/>
         <source>Cannot write file &quot;%1&quot;.
  %2</source>
         <translation>Kann Datei nicht schreiben &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="630"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="626"/>
         <source>&lt;b&gt;File: &quot;%1&quot;
  has been modified.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Datei: &quot;%1&quot;
  wurde verändert.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1127"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1126"/>
         <source>Cannot write tmp file &quot;%1&quot;.
  %2</source>
         <translation>Kann Tmp-Datei nicht schrieben &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1710"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1259"/>
+        <source>The &lt;b&gt;GCodeWorkShop&lt;/b&gt; is text editor for CNC programmers.&lt;br&gt;This is a fork of &lt;a href=&apos;https://github.com/artur3/EdytorNC&apos;&gt;EdytorNC&lt;/a&gt;.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2018 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2025 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;h2&gt;Sources and updates&lt;/h2&gt;&lt;p&gt;Source code and new releases are available at the following addresses:&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/GCodeProjects/GCodeWorkShop&apos;&gt;https://github.com/GCodeProjects/GCodeWorkShop&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://codeberg.org/u-235/GCodeWorkShop&apos;&gt;https://codeberg.org/u-235/GCodeWorkShop&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://gitflic.ru/project/u-235/gcodeworkshop&apos;&gt;https://gitflic.ru/project/u-235/gcodeworkshop&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Thanks&lt;/h2&gt;&lt;P&gt;Spanish translation, fixes and other help thanks to Otto Huamani&lt;br /&gt;Catalan translation and deb package thanks to Jordi Sayol i Salomó&lt;br /&gt;German translation and other fixes thanks to Michael Numberger&lt;br /&gt;Czech translation thanks to Pavel Fric&lt;br /&gt;Finnish translation thanks to Janne Mäntyharju&lt;br /&gt;Dutch translation thanks to Henk van Andel&lt;br /&gt;OS X patch and other updates thanks to Janne Mäntyharju&lt;P&gt;New EdytorNC icon thanks to Jakub Gajewski&lt;P&gt;GCodeWorkShop contains pieces of code from other Open Source projects.&lt;h2&gt;License&lt;/h2&gt;&lt;P&gt;&lt;i&gt;GCodeWorkShop is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1718"/>
         <source>&amp;Create global cnc tooltips</source>
         <translation>&amp;Erstelle globale CNC-Tooltips</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1711"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1719"/>
         <source>Create default global cnc tooltips file</source>
         <translation>Erstellen Default CNC-Tooltips Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1714"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1722"/>
         <source>&amp;Create user cnc tooltips</source>
         <translation>&amp;Erstelle Benutzer CNC-Tooltips</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1715"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1723"/>
         <source>Create/edit user cnc tooltips file</source>
         <translation>Erstelle/editiere Benutzer CNC-Tooltips Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2200"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2223"/>
         <source>Cannot read file &quot;%1&quot;.
  %2</source>
         <translation>Kann Datei nicht lesen &quot;%1&quot;.
  %2</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2796"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2819"/>
         <source>Project saved</source>
         <translation>Projekt gespeichert</translation>
     </message>
@@ -2587,18 +2591,18 @@ Abbrechen?</translation>
         <translation type="vanished">GCodeWorkShop Projekt Datei *.ncp (*.ncp)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2906"/>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2922"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2929"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2945"/>
         <source>GCodeWorkShop project file (*.ncp)</source>
         <translation>GCodeWorkShop Projekt Datei (*.ncp)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2909"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2932"/>
         <source>Select the project name and location...</source>
         <translation>Wähle den Projektnamen und den Ort...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2925"/>
+        <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2948"/>
         <source>Open the project file...</source>
         <translation>Öffne die Projekt Datei...</translation>
     </message>
@@ -2606,17 +2610,17 @@ Abbrechen?</translation>
 <context>
     <name>GCoderDocument</name>
     <message>
-        <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="140"/>
+        <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="139"/>
         <source>program%1.nc</source>
         <translation>Program%1.nc</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="479"/>
+        <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="481"/>
         <source>(DATE)</source>
         <translation>(Datum)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="489"/>
+        <location filename="../gcodeworkshop/src/gcoderdocument.cpp" line="491"/>
         <source>DATE</source>
         <translation>Datum</translation>
     </message>
@@ -4367,7 +4371,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="447"/>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1445"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1443"/>
         <source>Sending byte %1 of %2</source>
         <translation>Sende Byte %1 von %2</translation>
     </message>
@@ -4377,23 +4381,23 @@ p, li { white-space: pre-wrap; }
         <translation>OK:	 Senden komplett.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="575"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="573"/>
         <source>Received data
 </source>
         <translation>Empfangene Daten</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1097"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1095"/>
         <source>WARNING:	 Could not find program name. Using date time code.</source>
         <translation>WARNUNG:	 Kann Dateiname nicht finden. Verwende das Datum.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1138"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1136"/>
         <source>ERROR:	 Received file to small (less than 15 characters).</source>
         <translation>Fehler:	 Empfangene Datei zu klein (weniger als 15 Zeichen).</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1456"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1454"/>
         <source>OK:	 Sending a file completed.</source>
         <translation>OK:	 SEnden der Datei komplett.</translation>
     </message>
@@ -4424,120 +4428,120 @@ p, li { white-space: pre-wrap; }
         <translation>Warten auf XON Zeichen...</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="557"/>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="568"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="555"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="566"/>
         <source>XOFF received...</source>
         <translation>XOFF empfangen...</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="563"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="561"/>
         <source>XON received...</source>
         <translation>XON empfangen...</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="584"/>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="902"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="582"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="900"/>
         <source>Receiving byte %1</source>
         <translation>Empfange Byte %1</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="593"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="591"/>
         <source>Program received</source>
         <translation>Pregramm empfangen</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1160"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1158"/>
         <source>OK:	 Renaming file: &quot;%1&quot; to &quot;%2&quot;.</source>
         <translation>OK:	 Datei umbenennen: &quot;%1&quot; in &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1164"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1162"/>
         <source>ERROR:	 Renaming file: &quot;%1&quot;. %2</source>
         <translation>Fehler:	 Datei umbenennen: &quot;%1&quot;. %2</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1179"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1177"/>
         <source>OK:	 Saving file: &quot;%1&quot;.</source>
         <translation>OK:	 Speichere Datei: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1182"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1180"/>
         <source>ERROR:	 Saving file: &quot;%1&quot;. %2</source>
         <translation>Fehler:	 Datei speichern: &quot;%1&quot;. %2</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1212"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1210"/>
         <source>Log file truncated, size &gt; 1MB.</source>
         <translation>Log Dateo gekürzt, Größe &gt; 1MB.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1247"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1245"/>
         <source>Serial transmission - File server</source>
         <translation>Serielle Übertragung - Datei Server</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1248"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1246"/>
         <source>Can&apos;t start.
 File server option is not enabled in serial port settings</source>
         <translation>Kann nicht starten.
 Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1261"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1259"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="240"/>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="248"/>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1263"/>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1435"/>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1457"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1261"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1433"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1455"/>
         <source>Waiting for data...</source>
         <translation>Warten auf Daten...</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1272"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1270"/>
         <source>Received data...</source>
         <translation>Empfangene Daten...</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1292"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1290"/>
         <source>INFO:	 Received &quot;Caller&quot; program: &quot;%1&quot;.</source>
         <translation>INFO:	 Angekommenes Anrufer Programm: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1347"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1345"/>
         <source>ERROR:	 Can&apos;t find file in path 1: &quot;%1&quot;.</source>
         <translation>FEHLER:	 Kann Datei nicht in Pfad 1 finden: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1356"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1354"/>
         <source>ERROR:	 Can&apos;t find file in path 2: &quot;%1&quot;.</source>
         <translation>FEHLER:	 Kann Datei nicht in Pfad 2 finden: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1365"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1363"/>
         <source>ERROR:	 Can&apos;t find file in path 3: &quot;%1&quot;.</source>
         <translation>FEHLER:	 Kann Datei nicht in Pfad 3 finden: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1416"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1414"/>
         <source>OK:	 Sending a file: &quot;%1&quot;.</source>
         <translation>OK:	 Sende eine Datei: &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1418"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1416"/>
         <source>ERROR:	 Can&apos;t send file: &quot;%1&quot;. %2</source>
         <translation>FEHLER:	 Kann Datei nicht senden: &quot;%1&quot;. %2</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1423"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1421"/>
         <source>ERROR:	 Can&apos;t find program name to send in &quot;Caller&quot; program.</source>
         <translation>FEHLER:	 Kann Programm Name laut &quot;Anrufer&quot; Programm nicht finden.</translation>
     </message>
     <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1479"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1477"/>
         <source>ERROR:	 Sending timedout. Reseting.</source>
         <translation>FEHLER:	 Senden Timeout. Reseting.</translation>
     </message>
@@ -4738,7 +4742,7 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
         <translation>&amp;Farbe hervorheben aktueller Zeile</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="777"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="885"/>
         <source>&amp;Editor tabbed mode</source>
         <translation>&amp;Editor im Registerkarten-Modus</translation>
     </message>
@@ -4763,22 +4767,22 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
         <translation>Farbe &amp;unterstreichen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="428"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="536"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="661"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="769"/>
         <source>Default save directory:</source>
         <translation>Voreingestelltes Verzeichnis zum Speichern:</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="673"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="781"/>
         <source>Browse...</source>
         <translation>Durchsuchen...</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="457"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="565"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -4803,107 +4807,157 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
         <translation>Ändere das Datum bei Speichern</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="498"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="425"/>
+        <source>Open/Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="431"/>
+        <source>When open file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="440"/>
+        <source>Discard control symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="447"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In some cases, the CNC inserts additional blank lines when the file is unloaded. The editor can recognise such lines and delete them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="450"/>
+        <source>Discard additional empty lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="457"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Discard the upper 128 code points commonly used for national alphabets.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="460"/>
+        <source>Discard extra symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="483"/>
+        <source>Use encoding:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="515"/>
+        <source>Show all avalaible codecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="522"/>
+        <source>Show aliases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="606"/>
         <source>Extension to add: </source>
         <translation>Erweiterung hinzu:</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="508"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="616"/>
         <source>*.</source>
         <translation>*.</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="518"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="626"/>
         <source>Add</source>
         <translation>Addiere</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="567"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="675"/>
         <source>Extension to be added to filename when saving</source>
         <translation>Erweiterung die beim Speichern angehängt wird</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="570"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="678"/>
         <source>*.Aaa</source>
         <translation>*.Aaa</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="573"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="681"/>
         <source>*.nc</source>
         <translation>*.nc</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="611"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="719"/>
         <source>Guess file name by:</source>
         <translation>Vorgeschlagener Dateiname nach:</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="620"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="728"/>
         <source>Program number</source>
         <translation>Programm-Nummer</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="636"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="744"/>
         <source>Ensure that first comment in program is valid file name</source>
         <translation>Stelle sicher das das erste Kommentar im Programm ein gültiger Programmname ist</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="639"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="747"/>
         <source>First comment</source>
         <translation>Erstes Kommentar</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="691"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="799"/>
         <source>Other</source>
         <translation>Anderes</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="699"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="807"/>
         <source>Calculator exe :</source>
         <translation>Calculator exe :</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="713"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="821"/>
         <source>&amp;Browse</source>
         <translation>&amp;Durchsuchen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="728"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="836"/>
         <source>Window title</source>
         <translation>Fenster Titel</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="734"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="842"/>
         <source>Show file name</source>
         <translation>Zeige Dateiname</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="741"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="849"/>
         <source>Show file path</source>
         <translation>Zeige Dateipfad</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="748"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="856"/>
         <source>Show program title</source>
         <translation>Zeige Programm Titel</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="784"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="892"/>
         <source>If set, all files will be opened in read-only mode</source>
         <translation>Wenn gesetzt, alle Dateien werden schreibgeschützt geöffnet</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="787"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="895"/>
         <source>&amp;Viewer mode</source>
         <translation>&amp;Viewer Modus</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="814"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="922"/>
         <source>Default highlight style:</source>
         <translation>Standard Hervorhebungs-Stil:</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="706"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="814"/>
         <source>Calculator executable</source>
         <translation>Taschenrechner Ausführungsdatei</translation>
     </message>
@@ -4929,131 +4983,141 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
         <translation>Zeige Editor Tooltips (Zuerst erstellen im Menü Hilfe)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="560"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="437"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Older CNC systems could add control characters (&lt;code&gt;0x00&lt;/code&gt;-&lt;code&gt;0x1f&lt;/code&gt;) when uploading a file via the serial port, which looks like mojibake. The editor can delete such characters, leaving only carriage and newline characters.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="668"/>
         <source>Default save extension:</source>
         <translation>Voreingestellte Erweiterung:</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="807"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="915"/>
         <source>Default highlight style and tooltip mode</source>
         <translation>Standard Hervorhebungs-Stil und Tooltip-Modus</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="821"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="929"/>
         <source>Do not reopen the editor windows at startup</source>
         <translation>Nich wieder Öffnen vom Editorfenster beim Start</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="824"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="932"/>
         <source>Start empty window</source>
         <translation>Starte leeres Fenster</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="831"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="939"/>
         <source>Do not show warning message when open file is modified by another application.</source>
         <translation>Ausschalten der Warnung wenn die geöffnete Datei von einem anderen Programm geändert wurde.</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="834"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="942"/>
         <source>Disable file change monitor</source>
         <translation>Deaktiviere Quelldatei Änderung Meldung</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="865"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="973"/>
         <source>&amp;Ok</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="892"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="1000"/>
         <source>&amp;Default</source>
         <translation>&amp;Vorgaben</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.ui" line="919"/>
+        <location filename="../gcodeworkshop/src/setupdialog.ui" line="1027"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="64"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="68"/>
         <source>GCodeWorkShop configuration</source>
         <translation>GCodeWorkShop Einstellungen</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="70"/>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="277"/>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="620"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="74"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="293"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="651"/>
         <source>Current font : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</source>
         <translation>Aktuelle Schriftart : &lt;b&gt;&quot;%1&quot;, %2 pt.&lt;<byte value="x8"/>&gt;</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="235"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="239"/>
         <source>AUTO</source>
         <translation>AUTO</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="236"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="240"/>
         <source>FANUC</source>
         <translation>FANUC</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="237"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="241"/>
         <source>HEIDENHAIN DIALOG</source>
         <translation>HEIDENHAIN DIALOG</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="238"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="242"/>
         <source>HEIDENHAIN ISO</source>
         <translation>HEIDENHAIN ISO</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="239"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="243"/>
         <source>OKUMA OSP</source>
         <translation>OKUMA OSP</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="240"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="244"/>
         <source>PHILIPS</source>
         <translation>PHILIPS</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="241"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="245"/>
         <source>SINUMERIK OLD</source>
         <translation>SINUMERIK alt</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="242"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="246"/>
         <source>SINUMERIK NEW</source>
         <translation>SINUMERIK neu</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="243"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="247"/>
         <source>LinuxCNC</source>
         <translation>LinuxCNC</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="244"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="248"/>
         <source>TOOLTIPS</source>
         <translation>Werkzeugtips</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="286"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="302"/>
         <source>Executables (*.exe)</source>
         <translation>Ausführbare Dateien (*.exe)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="288"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="304"/>
         <source>All files (*)</source>
         <translation>Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="293"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="309"/>
         <source>Select calculator executable</source>
         <translation>Wähle Taschenrechner Datei</translation>
     </message>
     <message>
-        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="663"/>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="694"/>
         <source>Select default save directory</source>
         <translation>Wähle voreingestelltes Verzeichnis zum Speichern</translation>
+    </message>
+    <message>
+        <location filename="../gcodeworkshop/src/setupdialog.cpp" line="711"/>
+        <source>System charset (%1)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
