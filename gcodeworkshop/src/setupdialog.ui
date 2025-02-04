@@ -565,7 +565,7 @@
               <string>Delete</string>
              </property>
              <property name="icon">
-              <iconset resource="application.qrc">
+              <iconset resource="../../gcodeshared/application.qrc">
                <normaloff>:/images/list-remove.png</normaloff>:/images/list-remove.png</iconset>
              </property>
             </widget>
@@ -626,7 +626,7 @@
               <string>Add</string>
              </property>
              <property name="icon">
-              <iconset resource="application.qrc">
+              <iconset resource="../../gcodeshared/application.qrc">
                <normaloff>:/images/add.png</normaloff>:/images/add.png</iconset>
              </property>
             </widget>
@@ -781,7 +781,7 @@
                 <string>Browse...</string>
                </property>
                <property name="icon">
-                <iconset resource="application.qrc">
+                <iconset resource="../../gcodeshared/application.qrc">
                  <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
                </property>
               </widget>
@@ -821,7 +821,7 @@
             <string>&amp;Browse</string>
            </property>
            <property name="icon">
-            <iconset resource="application.qrc">
+            <iconset resource="../../gcodeshared/application.qrc">
              <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
            </property>
           </widget>
@@ -973,7 +973,7 @@
         <string>&amp;Ok</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../gcodeshared/application.qrc">
          <normaloff>:/images/ok.png</normaloff>:/images/ok.png</iconset>
        </property>
        <property name="default">
@@ -1000,7 +1000,7 @@
         <string>&amp;Default</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../gcodeshared/application.qrc">
          <normaloff>:/images/default.png</normaloff>:/images/default.png</iconset>
        </property>
        <property name="autoDefault">
@@ -1027,7 +1027,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../gcodeshared/application.qrc">
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
        </property>
        <property name="autoDefault">
@@ -1103,7 +1103,7 @@
   <tabstop>cancelButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../src-common/application.qrc"/>
+  <include location="../../gcodeshared/application.qrc"/>
  </resources>
  <connections/>
 </ui>

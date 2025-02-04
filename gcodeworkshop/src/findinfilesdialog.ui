@@ -183,7 +183,7 @@
          <string>&amp;Browse</string>
         </property>
         <property name="icon">
-         <iconset resource="application.qrc">
+         <iconset resource="../../gcodeshared/application.qrc">
           <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
         </property>
         <property name="autoDefault">
@@ -282,7 +282,7 @@
          <string>&amp;Find files</string>
         </property>
         <property name="icon">
-         <iconset resource="application.qrc">
+         <iconset resource="../../gcodeshared/application.qrc">
           <normaloff>:/images/findnext.png</normaloff>:/images/findnext.png</iconset>
         </property>
         <property name="autoDefault">
@@ -407,7 +407,7 @@
         <string>Find files</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../gcodeshared/application.qrc">
          <normaloff>:/images/filefind.png</normaloff>
          <disabledoff>:/images/filefind.png</disabledoff>:/images/filefind.png</iconset>
        </property>
@@ -425,7 +425,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="application.qrc">
+        <iconset resource="../../gcodeshared/application.qrc">
          <normaloff>:/images/arrow-down.png</normaloff>
          <normalon>:/images/arrow-up.png</normalon>:/images/arrow-down.png</iconset>
        </property>
@@ -442,7 +442,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../src-common/application.qrc"/>
+  <include location="../../gcodeshared/application.qrc"/>
  </resources>
  <connections/>
 </ui>

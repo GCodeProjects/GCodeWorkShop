@@ -40,7 +40,7 @@
             <string>Browse...</string>
            </property>
            <property name="icon">
-            <iconset resource="application.qrc">
+            <iconset resource="../../gcodeshared/application.qrc">
              <normaloff>:/images/browse.png</normaloff>:/images/browse.png</iconset>
            </property>
           </widget>
@@ -142,7 +142,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../src-common/application.qrc"/>
+  <include location="../../gcodeshared/application.qrc"/>
  </resources>
  <connections>
   <connection>

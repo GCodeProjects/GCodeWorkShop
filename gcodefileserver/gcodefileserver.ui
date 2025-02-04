@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowIcon">
-   <iconset resource="application.qrc">
+   <iconset resource="../gcodeshared/application.qrc">
     <normaloff>:/images/serial.png</normaloff>:/images/serial.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -99,7 +99,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="../src-common/application.qrc"/>
+  <include location="../gcodeshared/application.qrc"/>
  </resources>
  <connections/>
 </ui>
