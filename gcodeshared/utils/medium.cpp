@@ -110,9 +110,7 @@ int Medium::checkLaunch()
 
 #endif // Q_OS_WIN
 
-	dir = dir.section(SLASH, -2, -1);
-
-	if (dir.startsWith(BIN) && (dir.endsWith(DEBUG) || dir.endsWith(RELEASE))) {
+	if (dir.contains("build")) {
 		return LAUNCH_SANDBOX;
 	}
 
@@ -144,7 +142,7 @@ void Medium::setupDirs()
 		break;
 
 	case LAUNCH_SANDBOX:
-		shareDir = rootDir.section(SLASH, 0, -3);
+		shareDir = rootDir.section(SLASH, 0, -2);
 		langDir = shareDir;
 		mSettingsDir = shareDir;
 		mSettingsDir.append(SLASH_BIN);

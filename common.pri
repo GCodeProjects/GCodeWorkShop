@@ -11,17 +11,13 @@ CONFIG(debug, debug|release) {
     DEFINES *= QT_NO_DEBUG_OUTPUT # QT_NO_INFO_OUTPUT
 }
 
-APP_BINS = $${PROJECT_ROOT_PATH}/bin/$${BUILD_FLAG}
+APP_BINS = $$shadowed($${PROJECT_ROOT_PATH})/bin
 
 CONFIG *= c++11
 CONFIG -= debug_and_release debug_and_release_target
 
 # moc doesn't detect Q_OS_LINUX correctly, so add this to make it work
 linux*:DEFINES *= __linux__
-
-LANG_PATH = $${PROJECT_ROOT_PATH}/lang
-# define locales for translation
-LANG_LIST = pl ca de fi cs_CZ es nl ru
 
 !CONFIG(staticlib) {
     DESTDIR = $$APP_BINS
@@ -135,36 +131,6 @@ defineReplace(findFiles) {
     return ($$file_list)
 }
 
-
-#
-# function tsFiles(modulename, locales)
-# Returns a list of files with this $${LANG_PATH}/modulename_lang.ts
-# example :
-# TARGET = bar
-# LANG_PATH = lang
-# LANG_LIST = pl fr de
-# $$tsFiles(foo, ru en) returns lang/foo_ru.ts lang/foo_en.ts
-# $$tsFiles(foo) returns lang/foo_pl.ts lang/foo_fr.ts lang/foo_de.ts
-# $$tsFiles() returns lang/bar_pl.ts lang/bar_fr.ts lang/bar_de.ts
-#
-defineReplace(tsFiles) {
-    module_name = $$1
-    locales = $$2
-
-    !defined(1, var) {
-        module_name = $$TARGET
-    }
-
-    !defined(2, var) {
-        locales = $$LANG_LIST
-    }
-
-    for(lang, locales) {
-        file_list += $${LANG_PATH}/$${module_name}_$${lang}.ts
-    }
-
-    return ($$file_list)
-}
 
 defineReplace(getVersion) {
     version_file = gcodeshared/include/version.h
