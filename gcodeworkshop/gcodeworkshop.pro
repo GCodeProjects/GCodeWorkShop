@@ -110,6 +110,7 @@ macx {
 win32 {
     target.path = $${PREFIX}/bin
     INSTALLS += target
+    QMAKE_TARGET_PRODUCT=GCodeWorkShop
 }
 
 RC_ICONS = images/edytornc.ico images/edytornc48.ico images/ncfile.ico

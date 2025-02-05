@@ -44,6 +44,7 @@ macx {
 win32 {
     target.path = $${PREFIX}/bin
     INSTALLS += target
+    QMAKE_TARGET_PRODUCT=GCodeFileServer
 }
 
 RC_ICONS = images/edytornc.ico images/edytornc48.ico
