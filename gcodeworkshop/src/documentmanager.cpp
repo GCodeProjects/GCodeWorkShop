@@ -29,6 +29,9 @@
 // As long as qAsConst is used.
 // IWYU pragma: no_include "type_traits"
 // IWYU pragma: no_include <type_traits>
+#if (QT_VERSION < QT_VERSION_CHECK(5, 7, 0))
+	#define qAsConst(s) (s)
+#endif
 
 #include <document.h>                   // for Document
 #include <documentinfo.h>               // for DocumentInfo
