@@ -17,6 +17,7 @@ jobs:
       matrix:
         os_name: ['bullseye', 'bookworm', 'trixie']
     container:
+      # https://en.wikipedia.org/wiki/Debian_version_history
       # https://hub.docker.com/_/debian
       image: debian:${{matrix.os_name}}
     steps:
@@ -31,7 +32,7 @@ jobs:
 
     - name: 'Build'
       shell: bash
-      run: install/deb-build.sh -s debian-${{matrix.os_name}} -v ${{ github.ref_name }}
+      run: install/build-deb.sh -s debian-${{matrix.os_name}} -v ${{ github.ref_name }}
 
     - name: 'Upload debian packages'
       uses: actions/upload-artifact@v4
@@ -44,8 +45,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os_name: ['focal', 'jammy', 'mantic', 'noble']
+        os_name: ['focal', 'jammy', 'noble']
     container:
+      # https://en.wikipedia.org/wiki/Ubuntu_version_history
       # https://hub.docker.com/_/ubuntu
       image: ubuntu:${{matrix.os_name}}
     steps:
@@ -59,7 +61,7 @@ jobs:
 
     - name: 'Build'
       shell: bash
-      run: install/deb-build.sh -s ubuntu-${{matrix.os_name}} -v ${{ github.ref_name }}
+      run: install/build-deb.sh -s ubuntu-${{matrix.os_name}} -v ${{ github.ref_name }}
 
     - name: 'Upload ubuntu packages'
       uses: actions/upload-artifact@v4
@@ -72,7 +74,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        msystem: ['mingw64', 'mingw32']
+        msystem: ['mingw64']
     defaults:
       run:
         shell: msys2 {0}
@@ -102,11 +104,12 @@ jobs:
         pacboy: >-
           gcc:p
           nsis:p
+          ntldd:p
           qt5-static:p
           openssl:p
 
     - name: 'Build'
-      run: install/win-msys2-build.sh -s windows -v ${{ github.ref_name }} -q /${{matrix.msystem}}/qt5-static/bin/qmake.exe
+      run: install/build-win-msys2.sh -s windows -v ${{ github.ref_name }} -q /${{matrix.msystem}}/qt5-static/bin/qmake.exe
 
     - name: 'Upload windows installers'
       uses: actions/upload-artifact@v4

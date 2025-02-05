@@ -47,7 +47,7 @@ make -j $(nproc)
 Run script:
 
 ```sh
-install/deb-build.sh
+install/build-deb.sh
 ```
 
 The script creates a .deb package in the current folder and does not require
@@ -104,7 +104,7 @@ make -j $(nproc)
 Run script:
 
 ```sh
-install/win-msys2-build.sh
+install/build-win-msys2.sh
 ```
 
 The script creates a .exe installer in the current folder.
