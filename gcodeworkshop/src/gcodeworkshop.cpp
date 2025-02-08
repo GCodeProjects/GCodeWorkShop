@@ -1260,7 +1260,7 @@ void GCodeWorkShop::about()
 	                      "<br>This is a fork of <a href='https://github.com/artur3/EdytorNC'>EdytorNC</a>."
 	                      "<P>Version: %1"
 	                      "<P>Copyright (C) 1998 - 2018 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>"
-	                      "<br>Copyright (C) 2020 - 2024 by <a href='mailto:nicegorov@yandex.ru'>Nick Egorrov</a>"
+	                      "<br>Copyright (C) 2020 - 2025 by <a href='mailto:nicegorov@yandex.ru'>Nick Egorrov</a>"
 	                      "<h2>Sources and updates</h2>"
 	                      "<p>Source code and new releases are available at the following addresses:"
 	                      "<ul>"

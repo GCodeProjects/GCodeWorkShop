@@ -585,7 +585,7 @@ void GCodeFileServer::about()
 	                   tr("The <b>GCodeFileServer</b> is part of GCodeWorkShop."
 	                      "<P>Version: %1"
 	                      "<P>Copyright (C) 1998 - 2015 by <a href=\"mailto:artkoz78@gmail.com\">Artur Kozioł</a>"
-	                      "<br>Copyright (C) 2020 - 2024 by <a href='mailto:nicegorov@yandex.ru'>Nick Egorrov</a>"
+	                      "<br>Copyright (C) 2020 - 2025 by <a href='mailto:nicegorov@yandex.ru'>Nick Egorrov</a>"
 	                      "<P>GCodeFileServer contains pieces of code from other Open Source projects."
 	                      "<P><i>GCodeFileServer is free software; you can redistribute it and/or modify"
 	                      "it under the terms of the GNU General Public License  as published by"
