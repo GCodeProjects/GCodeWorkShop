@@ -141,7 +141,7 @@ DocumentStyle::Ptr DocumentManager::documentStyle(const QString& type) const
 	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
-		qWarning() << "DocumentManager::documentStyle() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::documentStyle() : The" << type << "type is not registered." ;
 		return DocumentStyle::Ptr(new DocumentStyle());
 	}
 
@@ -159,7 +159,7 @@ void DocumentManager::setDocumentStyle(const DocumentStyle::Ptr& style)
 	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
-		qWarning() << "DocumentManager::setDocumentStyle() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::setDocumentStyle() : The" << type << "type is not registered." ;
 		return;
 	}
 
@@ -171,7 +171,7 @@ DocumentWidgetProperties::Ptr DocumentManager::documentWidgetProperties(const QS
 	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
-		qWarning() << "DocumentManager::documentWidgetProperties() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::documentWidgetProperties() : The" << type << "type is not registered." ;
 		return DocumentWidgetProperties::Ptr(new DocumentWidgetProperties());
 	}
 
@@ -189,7 +189,7 @@ void DocumentManager::setDocumentWidgetProperties(const DocumentWidgetProperties
 	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
-		qWarning() << "DocumentManager::setDocumentWidgetProperties() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::setDocumentWidgetProperties() : The" << type << "type is not registered." ;
 		return;
 	}
 
@@ -201,7 +201,7 @@ void DocumentManager::updateDocuments(const QString& type)
 	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
-		qWarning() << "DocumentManager::updateDocuments() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::updateDocuments() : The" << type << "type is not registered." ;
 		return;
 	}
 
@@ -217,7 +217,7 @@ Document* DocumentManager::createDocument(const QString& type, const QString& id
 	DocumentProducer* producer = documentProducer(type);
 
 	if (!producer) {
-		qWarning() << "DocumentManager::createDocument() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::createDocument() : The" << type << "type is not registered." ;
 		return nullptr;
 	}
 
@@ -239,7 +239,7 @@ DocumentInfo::Ptr DocumentManager::createDocumentInfo(const QString& type)
 	if (producer) {
 		info = producer->createDocumentInfo();
 	} else {
-		qWarning() << "DocumentManager::createDocumentInfo() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::createDocumentInfo() : The" << type << "type is not registered." ;
 	}
 
 	return DocumentInfo::Ptr(info);
@@ -253,7 +253,7 @@ DocumentStyle::Ptr DocumentManager::createDocumentStyle(const QString& type)
 	if (producer) {
 		style = producer->createDocumentStyle();
 	} else {
-		qWarning() << "DocumentManager::createDocumentStyle() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::createDocumentStyle() : The" << type << "type is not registered." ;
 	}
 
 	return DocumentStyle::Ptr(style);
@@ -267,7 +267,7 @@ DocumentWidgetProperties::Ptr DocumentManager::createDocumentWidgetProperties(co
 	if (producer) {
 		properties = producer->createDocumentWidgetProperties();
 	} else {
-		qWarning() << "DocumentManager::createDocumentWidgetProperties() : The" << type << "type is not registred." ;
+		qWarning() << "DocumentManager::createDocumentWidgetProperties() : The" << type << "type is not registered." ;
 	}
 
 	return DocumentWidgetProperties::Ptr(properties);
@@ -328,7 +328,7 @@ void DocumentManager::registerDocumentProducer(DocumentProducer* producer)
 	const QString& type = producer->documentType();
 
 	if (m_producers.contains(type)) {
-		qWarning() << "DocumentManager::registerProducer() : The" << type << "type always registred." ;
+		qWarning() << "DocumentManager::registerProducer() : The" << type << "type always registered." ;
 		return;
 	}
 

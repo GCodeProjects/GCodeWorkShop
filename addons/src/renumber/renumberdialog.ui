@@ -213,7 +213,7 @@
          <bool>true</bool>
         </property>
         <property name="toolTip">
-         <string>Just write N at begining of line and use this function to replace N with correct line number</string>
+         <string>Just write N at beginning of line and use this function to replace N with correct line number</string>
         </property>
         <property name="text">
          <string>Renumber lines marked 'N'</string>

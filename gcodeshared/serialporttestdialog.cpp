@@ -320,7 +320,7 @@ void SerialPortTestDialog::updateLeds()
 			}
 
 			count++;
-			errorLabel->setText(tr("Recived: %1 bytes.").arg(count));
+			errorLabel->setText(tr("Received: %1 bytes.").arg(count));
 			tx = ch;
 
 			qApp->processEvents();
@@ -430,7 +430,7 @@ void SerialPortTestDialog::showError(int error)
 {
 	switch (error) {
 	case QSerialPort::NoError:
-		errorLabel->setText("No Error has occured");
+		errorLabel->setText("No Error has occurred");
 		break;
 
 	case QSerialPort::DeviceNotFoundError:

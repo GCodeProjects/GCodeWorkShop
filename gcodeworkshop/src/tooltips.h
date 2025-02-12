@@ -268,7 +268,7 @@ QString writeTooltipFile()
 	settings.setValue("G97", _TR("<b>G97 S</b>xx - constant spindle speed xx"));
 
 	settings.setValue("NCYL",
-	                  _TR("<b>NCYL</b> - if specified in fixed cycle, positioning to the definied hole position is performed, but the cycle axis does not operate"));
+	                  _TR("<b>NCYL</b> - if specified in fixed cycle, positioning to the defined hole position is performed, but the cycle axis does not operate"));
 	settings.setValue("NOEX",
 	                  _TR("<b>NOEX</b> - if specified in fixed cycle, no axis movements may be performed"));
 
@@ -294,10 +294,10 @@ QString writeTooltipFile()
 	                  _TR("<b>DFUP[</b>val<b>]</b> - unit integer implementation (raising)"));
 	settings.setValue("MOD", _TR("<b>MOD[</b>val<b>,</b>yy<b>]</b> - remainder of val/yy"));
 
-	settings.setValue("VDIN", _TR("<b>VDIN[</b>xx<b>]</b> - imput variable no. xx"));
+	settings.setValue("VDIN", _TR("<b>VDIN[</b>xx<b>]</b> - input variable no. xx"));
 	settings.setValue("VDOUT", _TR("<b>VDOUT[</b>xx<b>]</b> - output variable no. xx"));
 	settings.setValue("VUACM",
-	                  _TR("<b>VUACM[</b>n<b>]='</b>text<b>'</b> - sub message for user definied alarms, n - subscript expression, text - max. 16 chracters"));
+	                  _TR("<b>VUACM[</b>n<b>]='</b>text<b>'</b> - sub message for user defined alarms, n - subscript expression, text - max. 16 characters"));
 
 	settings.setValue("MODIN",
 	                  _TR("<b>MODIN O</b>nnnn [<b>Q</b>]xx - subprogram call after axis movement, nnnn - prog. name, xx - number of repetitions"));
@@ -320,10 +320,10 @@ QString writeTooltipFile()
 
 	settings.setValue("EQ", _TR("<b>EQ</b> - equal to"));
 	settings.setValue("NE", _TR("<b>NE</b> - not equal to"));
-	settings.setValue("GT", _TR("<b>GT</b> - greather than"));
+	settings.setValue("GT", _TR("<b>GT</b> - greater than"));
 	settings.setValue("LE", _TR("<b>LE</b> - less than or equal to"));
 	settings.setValue("LT", _TR("<b>LT</b> - less than"));
-	settings.setValue("GE", _TR("<b>GE</b> - greather than or equal to"));
+	settings.setValue("GE", _TR("<b>GE</b> - greater than or equal to"));
 	settings.setValue("IF",
 	                  _TR("<b>IF[</b>condition<b>] N</b>xxxx - if condition is true goto block xxxx"));
 
@@ -480,16 +480,16 @@ QString writeTooltipFile()
 
 	settings.setValue("EQ", _TR("<b>EQ</b> - equal to"));
 	settings.setValue("NE", _TR("<b>NE</b> - not equal to"));
-	settings.setValue("GT", _TR("<b>GT</b> - greather than"));
+	settings.setValue("GT", _TR("<b>GT</b> - greater than"));
 	settings.setValue("LE", _TR("<b>LE</b> - less than or equal to"));
 	settings.setValue("LT", _TR("<b>LT</b> - less than"));
-	settings.setValue("GE", _TR("<b>GE</b> - greather than or equal to"));
+	settings.setValue("GE", _TR("<b>GE</b> - greater than or equal to"));
 	settings.setValue("IF",
 	                  _TR("<b>IF[</b>condition<b>]</b>do something - if condition is true do something"));
 	settings.setValue("GOTO", _TR("<b>GOTO</b>nnnn - jump to block nnnn"));
 
 	settings.setValue("WHILE",
-	                  _TR("<b>WHILE[</b>condition<b>] DO</b>n <br />...<br />commands<br />... <br /><b>END</b>n  - loop - while condition true do commands beetwen DOn and ENDn"));
+	                  _TR("<b>WHILE[</b>condition<b>] DO</b>n <br />...<br />commands<br />... <br /><b>END</b>n  - loop - while condition true do commands between DOn and ENDn"));
 	settings.setValue("END", _TR("<b>END</b>n - end of WHILE DOn loop"));
 
 	settings.setValue("EOR", _TR("<b>EOR</b> - exclusive OR"));
@@ -572,9 +572,9 @@ QString writeTooltipFile()
 	settings.setValue("@124",
 	                  _TR("<b>@124 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is less than xx jump to nnnn"));
 	settings.setValue("@125",
-	                  _TR("<b>@125 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greather than or equal to xx jump to nnnn"));
+	                  _TR("<b>@125 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greater than or equal to xx jump to nnnn"));
 	settings.setValue("@126",
-	                  _TR("<b>@126 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greather than xx jump to nnnn"));
+	                  _TR("<b>@126 R</b>|<b>K</b>yy <b>R</b>|<b>K</b>xx <b>K</b>nnnn - if yy is greater than xx jump to nnnn"));
 
 	settings.setValue("@620", _TR("<b>@620 R</b>xx - increment value in param. xx"));
 	settings.setValue("@621", _TR("<b>@621 R</b>xx - decrement value in param. xx"));

@@ -64,10 +64,10 @@ Medium::Medium(QObject* parent) :
 	setupDirs();
 	mShareDirs.append(COLON);
 
-	qDebug() << "Seting directoryes:";
+	qDebug() << "Setting directories:";
 	qDebug() << "  translation   " << mTranslationDirs;
 	qDebug() << "  config        " << mSettingsDir;
-	qDebug() << "  programm data " << mShareDirs;
+	qDebug() << "  program data  " << mShareDirs;
 
 	QString settingFile = mSettingsDir;
 	settingFile.append(SLASH).append(APP_NAME).append(".ini");

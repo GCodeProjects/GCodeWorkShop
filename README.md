@@ -5,7 +5,7 @@ This is a fork of [EdytorNC](https://github.com/artur3/EdytorNC), a text editor
 for CNC programmers.
 
 - [Some features](#some-features)
-- [Some shotcuts](#some-shotcuts)
+- [Some shortcuts](#some-shortcuts)
 - [Getting GCodeWorkShop](#getting-gcodeworkshop)
 - [Command line options](#command-line-options)
 
@@ -37,7 +37,7 @@ Some features
 * Solutions of triangles calculation
 
 
-Some shotcuts
+Some shortcuts
 ------------
 
 * `Ctrl+;` Comments/uncomments selected text with semicolon ;
@@ -49,7 +49,7 @@ Some shotcuts
   operations directly in editor. You can select address (eg `X123.45`) before
   pressing `Ctrl+0` (`Ctrl+Double Click` will do the same), value will be
   entered in the calc.  
-  After presing `Enter` (and if no error) result will be pasted in cursor
+  After pressing `Enter` (and if no error) result will be pasted in cursor
   position. Supported operators: `+` `-` `*` `/` `SIN(x)` `COS(x)` `TAN(x)`
   `SQRT(x)` `SQR(x)` `ABS(x)` `TRUNC(x)` `PI`
 

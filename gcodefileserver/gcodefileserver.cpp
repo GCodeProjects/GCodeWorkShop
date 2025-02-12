@@ -100,7 +100,7 @@ GCodeFileServer::~GCodeFileServer()
 void GCodeFileServer::closeEvent(QCloseEvent* event)
 {
 	//    QMessageBox::StandardButton result = QMessageBox::warning(this, tr("GCodeWorkShop - Serial port file server"),
-	//                                                              tr("You are trying to close a file server.\nAre you shure?"),
+	//                                                              tr("You are trying to close a file server.\nAre you sure?"),
 	//                                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
 	//    if(result == QMessageBox::No)

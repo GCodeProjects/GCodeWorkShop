@@ -507,7 +507,7 @@ bool GCodeWorkShop::save(Document* doc, bool forceSaveAs)
 		}
 
 		if (QFileInfo(oldFileName).suffix() == "") {
-			// sometimes when file has no extension QFileDialog::getSaveFileName will no apply choosen filter (extension)
+			// sometimes when file has no extension QFileDialog::getSaveFileName will not apply chosen filter (extension)
 			oldFileName.append(".nc");
 		}
 
@@ -1687,8 +1687,8 @@ void GCodeWorkShop::createActions()
 	closeAllAct->setToolTip(tr("Close all the windows"));
 	connect(closeAllAct, SIGNAL(triggered()), this, SLOT(closeAllMdiWindows()));
 
-	tileHAct = new QAction(QIcon(":/images/tile_h.png"), tr("Tile &horyzontally"), this);
-	tileHAct->setToolTip(tr("Tile the windows horyzontally"));
+	tileHAct = new QAction(QIcon(":/images/tile_h.png"), tr("Tile &horizontally"), this);
+	tileHAct->setToolTip(tr("Tile the windows horizontally"));
 	connect(tileHAct, SIGNAL(triggered()), ui->mdiArea, SLOT(tileSubWindows()));
 
 	tileVAct = new QAction(QIcon(":/images/tile_v.png"), tr("Tile &vertycally"), this);
@@ -2319,7 +2319,7 @@ void GCodeWorkShop::createFindToolBar()
 		findEdit->setToolTip(
 		    tr("<b>Letter$$</b> - matches any number.<p><b>Letter$max$min</b> - matches number &lt;=max &gt;=min.</p>"
 		       \
-		       "<p><b>$min</b> can be ommited, then equal 0</p>" \
+		       "<p><b>$min</b> can be omitted, then equal 0</p>" \
 		       "<p><b>X$100$-10</b> - matches all X with value -10 to 100</p>"));
 		CapsLockEventFilter* findEditEventFilter = new CapsLockEventFilter(findEdit);
 		connect(this, SIGNAL(intCapsLockChanged(bool)), findEditEventFilter, SLOT(setCapsLockEnable(bool)));
@@ -3333,7 +3333,7 @@ void GCodeWorkShop::updateSessionMenus(const QStringList& sessionList)
 {
 	sessionsMenu->clear();
 
-	// TODO memory leack?
+	// TODO memory leak?
 	QActionGroup* actionGroup = new QActionGroup(sessionsMenu);
 	actionGroup->setExclusive(true);
 
