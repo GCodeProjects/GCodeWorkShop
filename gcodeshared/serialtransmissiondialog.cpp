@@ -295,7 +295,7 @@ void SerialTransmissionDialog::updateStatus()
 					}
 				}
 			} else {
-				if (writeBufferIterator != serialPortWriteBuffer.end()) { // try to restart trasmission
+				if (writeBufferIterator != serialPortWriteBuffer.end()) { // try to restart transmission
 					serialPortBytesWritten(0);
 				}
 
@@ -351,7 +351,7 @@ void SerialTransmissionDialog::showSerialPortError(QSerialPort::SerialPortError 
 
 	switch (error) {
 	case QSerialPort::NoError:
-		text = tr("No Error has occured");
+		text = tr("No Error has occurred");
 		//statusBar()->showMessage(text);
 		return;
 
@@ -457,7 +457,7 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 			sendTimeoutCountner = 0;
 			sendTimeoutTimer->stop();
 			setLabelText(tr("OK:\t Sending completed."), serverMode, true);
-			setLabelText(tr("Wainting for data..."));
+			setLabelText(tr("Waiting for data..."));
 			setRange(0, 0);
 		} else {
 			autoCloseCountner = portSettings.autoCloseTimeout;
@@ -530,7 +530,7 @@ void SerialTransmissionDialog::serialPortBytesWritten(qint64 bytes)
 //        if(QString(buff).contains(endOfProgChar) && (!endOfProgChar.isEmpty()))
 //        {
 //            qDebug() << "endOfProgChar" << endOfProgChar;
-//            qDebug() << "Procces data" << processReceivedData();
+//            qDebug() << "Process data" << processReceivedData();
 //        }
 
 //    }
@@ -695,7 +695,7 @@ void SerialTransmissionDialog::prepareDataBeforeSending(QString* data)
 	auto behavior = Qt::SkipEmptyParts;
 #endif
 	serialPortWriteBuffer = data->split("\n", behavior);
-	// insert line endings. \r is replaced with choosen line ending
+	// insert line endings. \r is replaced with chosen line ending
 	serialPortWriteBuffer.replaceInStrings("\r", portSettings.eobChar);
 
 	noOfBytes = serialPortWriteBuffer.join("").length();  // get new size
@@ -1116,7 +1116,7 @@ QStringList SerialTransmissionDialog::guessFileName(QString* text)
 }
 
 //**************************************************************************************************
-//  Save received program to a file. Return filename and empty program text if succes or leave program text unchanged
+//  Save received program to a file. Return filename and empty program text if successful or leave program text unchanged
 //**************************************************************************************************
 
 QString SerialTransmissionDialog::saveDataToFile(QString* text)
@@ -1474,7 +1474,7 @@ void SerialTransmissionDialog::fileServerBytesWritten(qint64 bytes)
 void SerialTransmissionDialog::sendTimeoutTimerTimeout()
 {
 	if (sendTimeoutCountner == 0) {
-		setLabelText(tr("ERROR:\t Sending timedout. Reseting."), serverMode, true);
+		setLabelText(tr("ERROR:\t Sending timedout. Resetting."), serverMode, true);
 		sendTimeoutTimer->stop();
 		reset(false);
 		return;

@@ -47,7 +47,7 @@ InLineCalc::InLineCalc(QWidget* parent) : QLineEdit(parent)
 	           "ABS(x)\n" +
 	           "TRUNC(x)\n" +
 	           "PI\n" +
-	           tr("Press Enter to accept or click anywere to canacel"));
+	           tr("Press Enter to accept or click anywhere to cancel"));
 
 	connect(this, SIGNAL(editingFinished()), this, SLOT(done()));
 

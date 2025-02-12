@@ -44,10 +44,10 @@ Options:
               By default this is <bld_dir>/<pkg_name>_<pkg_version>
   -q qmake    The name or full path of the qmake utility. In some
               distributives, qmake for Qt 6 is named qmake6.
-  -s suffux   The suffix that will be added to the package name after the
+  -s suffix   The suffix that will be added to the package name after the
               version and before the architecture type.
               Nothing is added by default.
-  -v version  Define the package version. By default version gettings from
+  -v version  Define the package version. By default version settings from
               the version.h file.
   -w browser  Define the webengine to be used. Possible values:
               WebEngine or WebKit (default).

@@ -113,14 +113,14 @@ public slots:
 	/**
 	 * @brief Actions when confirm the changes made.
 	 *
-	 * This is happend by pressing the "OK" button.
+	 * This occurs when pressing the "OK" button.
 	 */
 	virtual void accept() {}
 
 	/**
 	 * @brief Actions when rejecting the changes made.
 	 *
-	 * This is happend by pressing the "Cancel" button. If you have @link start() backup@endlink
+	 * This occurs when pressing the "Cancel" button. If you have @link start() backup@endlink
 	 * your settings, it's time to apply them.
 	 */
 	virtual void reject() {}
@@ -128,7 +128,7 @@ public slots:
 	/**
 	 * @brief Actions when requesting default settings.
 	 *
-	 * This is happend by pressing the "Default" button. If you implement this feature,
+	 * This occurs when pressing the "Default" button. If you implement this feature,
 	 * override the hasReset() function so that it returns @c true.
 	 */
 	virtual void reset() {}

@@ -7,7 +7,7 @@ CONFIG(debug, debug|release) {
     CONFIG *= warn_on
 } else {
     BUILD_FLAG = release
-    # Supress debug message
+    # Suppress debug message
     DEFINES *= QT_NO_DEBUG_OUTPUT # QT_NO_INFO_OUTPUT
 }
 

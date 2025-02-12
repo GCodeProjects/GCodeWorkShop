@@ -40,8 +40,8 @@ class QWidget;
  *
  * The derived class must have a unique type returned by type(). The value returned by
  * brief() is used in a widget with a list of open documents. The guessFileName() function
- * is called when an unitled document is saved to guess a possible file name. Whether the
- * document is unitled can be checked using the isUntitled() function.
+ * is called when an untitled document is saved to guess a possible file name. Whether the
+ * document is untitled can be checked using the isUntitled() function.
  *
  * The class has an associated widget, accessible using widget() function. The descendants
  * must call setWidget() in the constructor to associate the widget with the document.

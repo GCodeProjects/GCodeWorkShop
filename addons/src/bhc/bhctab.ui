@@ -145,7 +145,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Angle beetwen holes :</string>
+           <string>Angle between holes :</string>
           </property>
           <property name="buddy">
            <cstring>angleBeetwenInput</cstring>

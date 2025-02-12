@@ -270,7 +270,7 @@
          <item row="4" column="1">
           <widget class="QPushButton" name="backgroundColorButton">
            <property name="text">
-            <string>Backgroud</string>
+            <string>Background</string>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -309,10 +309,10 @@
        <item row="4" column="2">
         <widget class="QPushButton" name="curLineColorButton">
          <property name="toolTip">
-          <string>Highlighed current line color</string>
+          <string>Highlighted current line color</string>
          </property>
          <property name="text">
-          <string>Hi&amp;ghlighed current line color</string>
+          <string>Hi&amp;ghlighted current line color</string>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -512,7 +512,7 @@
           <item row="0" column="0">
            <widget class="QCheckBox" name="ui_showAllCodecs">
             <property name="text">
-             <string>Show all avalaible codecs</string>
+             <string>Show all available codecs</string>
             </property>
            </widget>
           </item>

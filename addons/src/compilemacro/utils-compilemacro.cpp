@@ -194,7 +194,7 @@ void Utils::CompileMacro::setError(int error, const QString& tx)
 			break;
 
 		case ERR_DOUBLE_DOT:
-			m_status = tr("Decimal point or minus writed two times !\n\"%1\"").arg(tx);
+			m_status = tr("Decimal point or minus written two times !\n\"%1\"").arg(tx);
 			break;
 
 		default:
