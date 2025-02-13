@@ -279,7 +279,7 @@
     </message>
     <message>
         <location filename="../addons/src/bhc/bhcdialog.cpp" line="432"/>
-        <source>Angle beetwen holes : %1</source>
+        <source>Angle between holes : %1</source>
         <translation>Kąt pomiędzy otworami: %1</translation>
     </message>
     <message>
@@ -341,7 +341,7 @@
     </message>
     <message>
         <location filename="../addons/src/bhc/bhctab.ui" line="148"/>
-        <source>Angle beetwen holes :</source>
+        <source>Angle between holes :</source>
         <translation>Kąt pomiędzy otworami:</translation>
     </message>
     <message>
@@ -1170,7 +1170,7 @@ Changed - received file is modified</source>
     </message>
     <message>
         <location filename="../gcodefileserver/gcodefileserver.cpp" line="585"/>
-        <source>The &lt;b&gt;GCodeFileServer&lt;/b&gt; is part of GCodeWorkShop.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;GCodeFileServer contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeFileServer is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <source>The &lt;b&gt;GCodeFileServer&lt;/b&gt; is part of GCodeWorkShop.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2025 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;GCodeFileServer contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeFileServer is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1940,12 +1940,12 @@ Wpisy z nie pustym tytułem nie są usuwane automtycznie.</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1690"/>
-        <source>Tile &amp;horyzontally</source>
+        <source>Tile &amp;horizontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="1691"/>
-        <source>Tile the windows horyzontally</source>
+        <source>Tile the windows horizontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2396,7 +2396,7 @@ Close anyway?</source>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/gcodeworkshop.cpp" line="2320"/>
-        <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
+        <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be omitted, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
         <translation type="unfinished">&lt;b&gt;Litera$$&lt;/b&gt; - znajduje dowolną liczbę.&lt;p&gt;&lt;b&gt;Litera$max$min&lt;/b&gt; - znajduje liczbę &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; można pominąć, wtedy równe 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - znajduje wszystkie X z liczbą od -10 do 100&lt;/p&gt;</translation>
     </message>
     <message>
@@ -2762,7 +2762,7 @@ Close anyway?</source>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/inlinecalc.cpp" line="50"/>
-        <source>Press Enter to accept or click anywere to canacel</source>
+        <source>Press Enter to accept or click anywhere to cancel</source>
         <translation type="unfinished">Naciśnij Enter by zaakceptować lub kliknij gdziekolwiek by anulować</translation>
     </message>
 </context>
@@ -2946,7 +2946,7 @@ To nie jest program makro ?</translation>
         <translation type="obsolete">Podręczny kalkulator</translation>
     </message>
     <message>
-        <source>Press Enter to accept or click anywere to canacel</source>
+        <source>Press Enter to accept or click anywhere to cancel</source>
         <translation type="vanished">Naciśnij Enter by zaakceptować lub kliknij gdziekolwiek by anulować</translation>
     </message>
     <message>
@@ -3064,7 +3064,7 @@ To nie jest program makro ?</translation>
     </message>
     <message>
         <location filename="../addons/src/renumber/renumberdialog.ui" line="216"/>
-        <source>Just write N at begining of line and use this function to replace N with correct line number</source>
+        <source>Just write N at beginning of line and use this function to replace N with correct line number</source>
         <translation>Wpisz N na początku lini i użyj tej funkcji aby zastąpić N kolejnym numerem linii</translation>
     </message>
     <message>
@@ -3326,7 +3326,7 @@ To nie jest program makro ?</translation>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="777"/>
         <source>Use this to remove some unwanted characters from received data.
-Vailid QtRegExp should be entered.</source>
+Valid QtRegExp should be entered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3431,7 +3431,7 @@ Set to 300s to disable timer.</source>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1306"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user defined regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user defined regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3537,7 +3537,7 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="745"/>
-        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
+        <source>Delete all control characters (&lt;0x3F; &gt;0x7F) from received file</source>
         <translation type="unfinished">Usuwa wszystkie znaki sterujące (&lt;0x3F; &gt;0x7F) z otrzymanego pliku</translation>
     </message>
     <message>
@@ -3623,12 +3623,12 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="947"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carriage Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="966"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carriage Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3669,7 +3669,7 @@ Works only when receiving file.</source>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1015"/>
-        <source>Line (block) endings charcters.
+        <source>Line (block) endings characters.
 Only uppercase LF, CR character are allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3684,14 +3684,14 @@ Set XON or XOFF to 0 if you want disable it.</source>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="1174"/>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
-This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
+This setting works also with hardware flow control, put 0 to XON or XOFF characters to start transmission without waiting for XON.
 This setting is ignored in serial File Server.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialportconfigdialog.ui" line="649"/>
         <source>Automatically close transmission dialog after the last character was sent/received.
-This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to swich CNC into reciving mode.</source>
+This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to switch CNC into receiving mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4034,7 +4034,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../gcodeshared/serialporttestdialog.cpp" line="323"/>
-        <source>Recived: %1 bytes.</source>
+        <source>Received: %1 bytes.</source>
         <translation type="unfinished">Odebrano %1 bajtów.</translation>
     </message>
     <message>
@@ -4160,7 +4160,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="354"/>
-        <source>No Error has occured</source>
+        <source>No Error has occurred</source>
         <translation>Brak błędu</translation>
     </message>
     <message>
@@ -4328,12 +4328,13 @@ File server option is not enabled in serial port settings</source>
     </message>
     <message>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1477"/>
-        <source>ERROR:	 Sending timedout. Reseting.</source>
+        <source>ERROR:	 Sending timedout. Resetting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="240"/>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="248"/>
+        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="460"/>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1261"/>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1433"/>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1455"/>
@@ -4360,11 +4361,6 @@ File server option is not enabled in serial port settings</source>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="294"/>
         <source>Waiting for XON character...</source>
         <translation>Oczekiwanie na znak XON...</translation>
-    </message>
-    <message>
-        <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="460"/>
-        <source>Wainting for data...</source>
-        <translation>Oczekiwanie na dane...</translation>
     </message>
     <message>
         <location filename="../gcodeshared/serialtransmissiondialog.cpp" line="1095"/>
@@ -4676,12 +4672,12 @@ File server option is not enabled in serial port settings</source>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/setupdialog.ui" line="312"/>
-        <source>Highlighed current line color</source>
+        <source>Highlighted current line color</source>
         <translation>Kolor podświetlenia aktualnej linii</translation>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/setupdialog.ui" line="315"/>
-        <source>Hi&amp;ghlighed current line color</source>
+        <source>Hi&amp;ghlighted current line color</source>
         <translation>Kolor podświetlenia aktualnej linii</translation>
     </message>
     <message>
@@ -4701,7 +4697,7 @@ File server option is not enabled in serial port settings</source>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/setupdialog.ui" line="273"/>
-        <source>Backgroud</source>
+        <source>Background</source>
         <translation>Tło</translation>
     </message>
     <message>
@@ -4791,7 +4787,7 @@ File server option is not enabled in serial port settings</source>
     </message>
     <message>
         <location filename="../gcodeworkshop/src/setupdialog.ui" line="515"/>
-        <source>Show all avalaible codecs</source>
+        <source>Show all available codecs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5111,7 +5107,7 @@ File server option is not enabled in serial port settings</source>
         <translation type="vanished">Test transmisji szeregowej</translation>
     </message>
     <message>
-        <source>Recived: %1 bytes.</source>
+        <source>Received: %1 bytes.</source>
         <translation type="vanished">Odebrano %1 bajtów.</translation>
     </message>
     <message>
@@ -5301,7 +5297,7 @@ To nie jest program makro ?</translation>
     </message>
     <message>
         <location filename="../addons/src/compilemacro/utils-compilemacro.cpp" line="197"/>
-        <source>Decimal point or minus writed two times !
+        <source>Decimal point or minus written two times !
 &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>

@@ -217,7 +217,7 @@
         <translation>Ángulo del primer Agujero : %1</translation>
     </message>
     <message>
-        <source>Angle beetwen holes : %1</source>
+        <source>Angle between holes : %1</source>
         <translation>Ángulo entre Agujeros : %1</translation>
     </message>
     <message>
@@ -271,7 +271,7 @@
         <translation>Ángulo inicial :</translation>
     </message>
     <message>
-        <source>Angle beetwen holes :</source>
+        <source>Angle between holes :</source>
         <translation>Ángulo entre Agujeros :</translation>
     </message>
     <message>
@@ -992,7 +992,7 @@ Cambiado - el archivo recibido está modificado
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The &lt;b&gt;GCodeFileServer&lt;/b&gt; is part of GCodeWorkShop.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2024 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;GCodeFileServer contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeFileServer is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
+        <source>The &lt;b&gt;GCodeFileServer&lt;/b&gt; is part of GCodeWorkShop.&lt;P&gt;Version: %1&lt;P&gt;Copyright (C) 1998 - 2015 by &lt;a href=&quot;mailto:artkoz78@gmail.com&quot;&gt;Artur Kozioł&lt;/a&gt;&lt;br&gt;Copyright (C) 2020 - 2025 by &lt;a href=&apos;mailto:nicegorov@yandex.ru&apos;&gt;Nick Egorrov&lt;/a&gt;&lt;P&gt;GCodeFileServer contains pieces of code from other Open Source projects.&lt;P&gt;&lt;i&gt;GCodeFileServer is free software; you can redistribute it and/or modifyit under the terms of the GNU General Public License  as published bythe Free Software Foundation; either version 2 of the License, or(at your option) any later version.&lt;/i&gt;&lt;P&gt;&lt;i&gt;The program is provided AS IS with NO WARRANTY OF ANY KIND,INCLUDING THE WARRANTY OF DESIGN,MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.&lt;/i&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1753,7 +1753,7 @@ Cambiado - el archivo recibido está modificado
         <translation>Buscar:</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be ommited, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
+        <source>&lt;b&gt;Letter$$&lt;/b&gt; - matches any number.&lt;p&gt;&lt;b&gt;Letter$max$min&lt;/b&gt; - matches number &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; can be omitted, then equal 0&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - matches all X with value -10 to 100&lt;/p&gt;</source>
         <translation>&lt;b&gt;Letra$$&lt;/b&gt; - detecta cualquier número.&lt;p&gt;&lt;b&gt;Letra$max$min&lt;/b&gt; - detecta números &amp;lt;=max &amp;gt;=min.&lt;/p&gt;&lt;p&gt;&lt;b&gt;$min&lt;/b&gt; puede ser omitido(igual a 0)&lt;/p&gt;&lt;p&gt;&lt;b&gt;X$100$-10&lt;/b&gt; - detecta a todos los X con valores de -10 a 100&lt;/p&gt;</translation>
     </message>
     <message>
@@ -1961,11 +1961,11 @@ Close anyway?</source>
 Cerrar de todas maneras?</translation>
     </message>
     <message>
-        <source>Tile &amp;horyzontally</source>
+        <source>Tile &amp;horizontally</source>
         <translation>Mozaico &amp;horizontal</translation>
     </message>
     <message>
-        <source>Tile the windows horyzontally</source>
+        <source>Tile the windows horizontally</source>
         <translation>Ventanas en mosaico horizontal</translation>
     </message>
     <message>
@@ -2223,7 +2223,7 @@ Items with non empty titles are not deleted automatically.</source>
 </translation>
     </message>
     <message>
-        <source>Press Enter to accept or click anywere to canacel</source>
+        <source>Press Enter to accept or click anywhere to cancel</source>
         <translation type="unfinished">Presiona Ingresar para aceptar a click en cualquier otra parte para cancelar</translation>
     </message>
 </context>
@@ -2326,7 +2326,7 @@ Comprobar +-*/.
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Decimal point or minus writed two times !
+        <source>Decimal point or minus written two times !
 &quot;%1&quot;</source>
         <translation type="vanished">Punto decimal o signo menos escrito dos veces !
 &quot;%1&quot;</translation>
@@ -2448,7 +2448,7 @@ Comprobar +-*/.
         <translation type="vanished">Insertar/disminuir salto de bloque /</translation>
     </message>
     <message>
-        <source>Press Enter to accept or click anywere to canacel</source>
+        <source>Press Enter to accept or click anywhere to cancel</source>
         <translation type="vanished">Presiona Ingresar para aceptar a click en cualquier otra parte para cancelar</translation>
     </message>
     <message>
@@ -2536,7 +2536,7 @@ Comprobar +-*/.
         <translation>Renumerar líneas vacías</translation>
     </message>
     <message>
-        <source>Just write N at begining of line and use this function to replace N with correct line number</source>
+        <source>Just write N at beginning of line and use this function to replace N with correct line number</source>
         <translation>Sólo escribir N al inicio de la línea y luego usar esta función para reemplazar N con el número de línea correcto</translation>
     </message>
     <message>
@@ -2754,7 +2754,7 @@ Comprobar +-*/.
         <translation>Iniciar envío después de:</translation>
     </message>
     <message>
-        <source>Delete all control chracters (&lt;0x3F; &gt;0x7F) from recieved file</source>
+        <source>Delete all control characters (&lt;0x3F; &gt;0x7F) from received file</source>
         <translation>Eliminar todos los caracteres de control (&lt;0x3F; &gt; 0x7F) en archivo recibido</translation>
     </message>
     <message>
@@ -2898,7 +2898,7 @@ Works only when receiving file.</source>
 Funciona sólo para recepción.</translation>
     </message>
     <message>
-        <source>Line (block) endings charcters.
+        <source>Line (block) endings characters.
 Only uppercase LF, CR character are allowed.</source>
         <translation>Caracteres para fin de línea (EOB).
 Sólo son permitidos caracteres LFy CR, en mayúsculas.</translation>
@@ -2915,7 +2915,7 @@ Ajuste XON o XOFF a 0 si quiere deshabilitarlo.</translation>
     </message>
     <message>
         <source>If 0 then waits for XON, if &gt;0 waits for timeout or XON, which one first.
-This setting works also with hardware flow control, put 0 to XON or XOFF characters to start trasmission without waiting for XON.
+This setting works also with hardware flow control, put 0 to XON or XOFF characters to start transmission without waiting for XON.
 This setting is ignored in serial File Server.</source>
         <translation>Si es 0 espera por XON, si &gt;0 espera por XON o que se agote el tiempo de espera, el que sea primero.
 Este ajuste también trabajo con control de flujo por hardware, ajuste los caracteres XON o XOFF a 0 para iniciar la transmisión sin esperar por XON.
@@ -2924,7 +2924,7 @@ Este ajuste es ignorado en el modo Servidor De Archivos.
     </message>
     <message>
         <source>Automatically close transmission dialog after the last character was sent/received.
-This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to swich CNC into reciving mode.</source>
+This setting is also used in file server mode to detect end of incoming transmission and gives time to operator to switch CNC into receiving mode.</source>
         <translation>Cierra Automáticamente el diálogo de transmisión después que el último caracter ha sido enviado/recibido.
 Este ajuste también es usado en el modo Servidor De Archivos para detectar el fin de transmisión entrante y da tiempo al operador para pasar el CNC a modo recepción.</translation>
     </message>
@@ -3095,11 +3095,11 @@ Si el nombre de archivo detectado contiene una extensión, este ajuste será ign
         <translation>Borrar de la lista</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the end of the program.&lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carriage Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estos caracteres serán agregados al final del programa.&lt;/p&gt;&lt;p&gt;Aquí puedes escribir:&lt;/p&gt;&lt;p&gt;	Texto sin formato&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Códigos hexadecimales de caracteres ASCII.&lt;/p&gt;&lt;p&gt;	Ejemplo: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % caracteres de línea nueva&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - caracter de espacio y caracteres de linea nueva&lt;/p&gt;&lt;p&gt;	caracteres de espacio y de control sólo pueden ser escritos como números hexadecimales:&lt;/p&gt;&lt;p&gt;	0x20 (espacio), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;Y/O&lt;/p&gt;&lt;p&gt;	Pueden ser usados caracteres especiales:&lt;/p&gt;&lt;p&gt;	LF - Line Feed también Carrige Return (reemplazado luego por caracteres de fin de bloque)&lt;/p&gt;&lt;p&gt;	SP - Espacio&lt;/p&gt;&lt;p&gt;	TAB - Tabulación&lt;/p&gt;&lt;p&gt;	FN - Nombre de archivo&lt;/p&gt;&lt;p&gt;	FE - Extensión del archivo (la parte despues del punto)&lt;/p&gt;&lt;p&gt;	FA - Extensión del archivo agregado al final del nombre del archivo (la parte después del caracter _ y antes del punto)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carrige Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These characters will be added at the beginning of the program. &lt;/p&gt;&lt;p&gt;You can write here:&lt;/p&gt;&lt;p&gt;	Plain text&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Hex codes of ASCII characters.&lt;/p&gt;&lt;p&gt;	Example: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % and new line characters&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - space character and new line characters&lt;/p&gt;&lt;p&gt;	Space and control characters can only be written as hex numbers:&lt;/p&gt;&lt;p&gt;	0x20 (space), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Special characters codes can be used:&lt;/p&gt;&lt;p&gt;	LF - Line Feed also Carriage Return (replaced later by end of block characters)&lt;/p&gt;&lt;p&gt;	SP - Space&lt;/p&gt;&lt;p&gt;	TAB - Tabulation&lt;/p&gt;&lt;p&gt;	FN - File name&lt;/p&gt;&lt;p&gt;	FE - File name Extension (part after dot)&lt;/p&gt;&lt;p&gt;	FA - File name extension Appended at end of file name (part after _ character and before dot)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estos caracteres serán agregados al inicio del programa. &lt;/p&gt;&lt;p&gt;Aquí puedes escribir:&lt;/p&gt;&lt;p&gt;	Texto sin formato&lt;/p&gt;&lt;p&gt;AND/OR&lt;/p&gt;&lt;p&gt;	Códigos hexadecimales de caracteres ASCII.&lt;/p&gt;&lt;p&gt;	Ejemplo: &lt;/p&gt;&lt;p&gt;	% 0x0A 0x0D - % caracteres de línea nueva&lt;/p&gt;&lt;p&gt;	0x20 0x0A 0x0D - caracter de espacio y caracteres de linea nueva&lt;/p&gt;&lt;p&gt;	caracteres de espacio y de control sólo pueden ser escritos como números hexadecimales:&lt;/p&gt;&lt;p&gt;	0x20 (espacio), 0x13 (XOFF), 0x11 (XON) ...&lt;/p&gt;&lt;p&gt;Y/O&lt;/p&gt;&lt;p&gt;	Pueden ser usados caracteres especiales:&lt;/p&gt;&lt;p&gt;	LF - Line Feed, también Carrige Return (reemplazado luego por caracteres de fin de bloque)&lt;/p&gt;&lt;p&gt;	SP - Espacio&lt;/p&gt;&lt;p&gt;	TAB - Tabulación&lt;/p&gt;&lt;p&gt;	FN - Nombre de archivo&lt;/p&gt;&lt;p&gt;	FE - Extensión del archivo (la parte despues del punto)&lt;/p&gt;&lt;p&gt;	FA - Extensión del archivo agregado al final del nombre del archivo (la parte después del caracter _ y antes del punto)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -3143,7 +3143,7 @@ Si el nombre de archivo detectado contiene una extensión, este ajuste será ign
         <translation>Nombre de archivo</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user definied regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user definied regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, filename of program to save will be taken from program name eg O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;If filename will be empty (not found) user defined regular expression will be used. If not found date-time code will be uased as filename. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If checked, user defined regular expression will be used first, if not found name of program will be used and if not found date-code.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si es seleccionada, el nombre de archivo del programa a guardar será tomado del nombre del programa ejm. O0051, :1246, %MPF456, %_N_PR25475002_MPF, $O0004.MIN%... &lt;/p&gt;&lt;p&gt;Si el nombre de archivo está vacío (no fue encontrado) será usada la expresión regular definida por el usuario. Si no es encontrado, código fecha-hora será usado como nombre de archivo. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Si es seleccionada, primero será usada la expresión regular definida por el usuario. Si no es encontrado, será usado el nombre del programa y si no es encontrado sera usado el código fecha-hora&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -3244,7 +3244,7 @@ Ajuste el temporizador a 300s para desactivarlo.</translation>
     </message>
     <message>
         <source>Use this to remove some unwanted characters from received data.
-Vailid QtRegExp should be entered.</source>
+Valid QtRegExp should be entered.</source>
         <translation>Usa esto para remover algunos caracteres no deseados de los datos recibidos.
 Debería ser ingresado un QTRegExp válido.</translation>
     </message>
@@ -3353,7 +3353,7 @@ If detected filename will contain an extension, then this setting will be ignore
         <translation type="unfinished">&amp;Desconectar</translation>
     </message>
     <message>
-        <source>Recived: %1 bytes.</source>
+        <source>Received: %1 bytes.</source>
         <translation type="unfinished">Recibido: %1 bytes.</translation>
     </message>
     <message>
@@ -3424,7 +3424,7 @@ If detected filename will contain an extension, then this setting will be ignore
         <translation>&amp;Cierre automático en %1s</translation>
     </message>
     <message>
-        <source>No Error has occured</source>
+        <source>No Error has occurred</source>
         <translation>Nu hubieron errores</translation>
     </message>
     <message>
@@ -3509,10 +3509,6 @@ If detected filename will contain an extension, then this setting will be ignore
     </message>
     <message>
         <source>Waiting for data...</source>
-        <translation>Esperando datos...</translation>
-    </message>
-    <message>
-        <source>Wainting for data...</source>
         <translation>Esperando datos...</translation>
     </message>
     <message>
@@ -3610,7 +3606,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation>ERROR:	 No se pudo encontrar dentro del programa &quot;Caller&quot; el nombre del programa a enviar.</translation>
     </message>
     <message>
-        <source>ERROR:	 Sending timedout. Reseting.</source>
+        <source>ERROR:	 Sending timedout. Resetting.</source>
         <translation>ERROR:	 Tiempo de espera para enviar ha vencido. Reinicializando.</translation>
     </message>
     <message>
@@ -3795,7 +3791,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation>Color predeterminado</translation>
     </message>
     <message>
-        <source>Backgroud</source>
+        <source>Background</source>
         <translation>Fondo</translation>
     </message>
     <message>
@@ -3807,11 +3803,11 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation>Resaltado de &amp;sintáxis</translation>
     </message>
     <message>
-        <source>Highlighed current line color</source>
+        <source>Highlighted current line color</source>
         <translation>Color del resaltado de línea actual</translation>
     </message>
     <message>
-        <source>Hi&amp;ghlighed current line color</source>
+        <source>Hi&amp;ghlighted current line color</source>
         <translation>Co&amp;lor del resaltado de línea actual</translation>
     </message>
     <message>
@@ -4087,7 +4083,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show all avalaible codecs</source>
+        <source>Show all available codecs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4249,7 +4245,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation type="vanished">&amp;Desconectar</translation>
     </message>
     <message>
-        <source>Recived: %1 bytes.</source>
+        <source>Received: %1 bytes.</source>
         <translation type="vanished">Recibido: %1 bytes.</translation>
     </message>
     <message>
@@ -4359,7 +4355,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Decimal point or minus writed two times !
+        <source>Decimal point or minus written two times !
 &quot;%1&quot;</source>
         <translation type="unfinished">Punto decimal o signo menos escrito dos veces !
 &quot;%1&quot;</translation>
