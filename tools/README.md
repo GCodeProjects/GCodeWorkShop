@@ -41,3 +41,11 @@ Additional links:
 
 * https://github.com/include-what-you-use/include-what-you-use/blob/master/docs/IWYUMappings.md
 * https://github.com/include-what-you-use/include-what-you-use/blob/master/docs/IWYUPragmas.md
+
+
+Tips
+----
+
+Convert png to ico
+
+    convert application-x-g-code.png  -define icon:auto-resize=256,128,64,48,32,24,16 gcode_file.ico
