@@ -30,10 +30,12 @@ struct RenumberOptions;
 namespace Utils {
 
 bool renumber(QString& text, const RenumberOptions& opt, const std::function<bool(int)>& interrupt);
-bool renumberWithoutN(QString& line, int num, const RenumberOptions& opt);
-bool renumberWithN(QString& line, int num, const RenumberOptions& opt);
-bool renumberAll(QString& line, int num, const RenumberOptions& opt);
-bool renumberRemoveAll(QString& line);
+bool renumberWithoutN(QString& line, int num, int width, bool renumAll);
+bool renumberWithN(QString& line, int num, int width, int from, int to, bool renumMarked);
+bool renumberAll(QString& line, int num, int width, bool renumEmpty, bool renumComm, bool keepExisting);
+bool renumberRemoveAll(QString& line, bool removeMarked);
+
+void insertNWord(QString& line, int num, int width);
 
 } // namespace Utils
 
