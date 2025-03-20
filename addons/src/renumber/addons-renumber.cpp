@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -18,11 +18,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication> // for QApplication
-#include <QDialog>      // for QDialog
-#include <QString>      // for QString
-#include <QWidget>      // for QWidget
-#include <Qt>           // for BusyCursor
+#include <functional>   // for function
+
+#include <QCoreApplication> // for translate
+#include <QDialog>          // for QDialog
+#include <QString>          // for QString
+#include <QWidget>          // for QWidget
+
+#include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 
 #include "addons-renumber.h"
 #include "renumberdialog.h"     // for RenumberDialog
@@ -46,10 +49,14 @@ bool Addons::doRenumber(QWidget* parent, QSettings* settings, QString& tx)
 		return false;
 	}
 
-	const RenumberOptions& opt = dlg->options();
-	QApplication::setOverrideCursor(Qt::BusyCursor);
-	Utils::renumber(opt, tx);
-	QApplication::restoreOverrideCursor();
-	return true;
+	LongJobHelper helper{parent};
+	helper.begin(tx.length(), QCoreApplication::translate("Addons::Actions", "Renumbering"), 20);
+
+	bool changed = Utils::renumber(tx, dlg->options(), [&helper](int pos) -> bool{
+		return helper.check(pos) == LongJobHelper::CANCEL;
+	});
+
+	helper.end();
+	return changed;
 }
 

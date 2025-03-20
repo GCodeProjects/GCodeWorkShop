@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -28,80 +28,98 @@
 #include "utils-renumber.h"
 
 
-void Utils::renumber(const RenumberOptions& opt, QString& tx)
+bool Utils::renumber(QString& text, const RenumberOptions& opt, const std::function<bool(int)>& interrupt)
 {
-	int lineCount = tx.count("\n");
+	bool changed = false;
+	QString result;
+	int num = opt.startAt;
+	int substr_start = 0;
+	int substr_end = 0;
 
-	switch (opt.mode) {
-	case RenumberOptions::RenumberWithN:
-		renumberWithN(opt, tx);
-		break;
+	while (substr_end >= 0) {
+		substr_end = text.indexOf('\n', substr_start);
+		QString line = text.mid(substr_start, substr_end - substr_start + 1);
+		substr_start = substr_end + 1;
+		bool localChange = false;
 
-	case RenumberOptions::RenumberAll:
-		renumberAll(opt, tx, lineCount);
-		break;
+		if (interrupt(substr_start)) {
+			return false;
+		}
 
-	case RenumberOptions::RemoveAll:
-		removeAll(tx);
-		break;
+		switch (opt.mode) {
+		case RenumberOptions::RenumberWithN:
+			localChange = renumberWithN(line, num, opt);
+			break;
 
-	case RenumberOptions::RenumberWithoutN:
-		renumberWithoutN(opt, tx, lineCount);
-		break;
+		case RenumberOptions::RenumberAll:
+			localChange = renumberAll(line, num, opt);
+			break;
 
-	default:
-		;
+		case RenumberOptions::RemoveAll:
+			localChange = renumberRemoveAll(line);
+			break;
+
+		case RenumberOptions::RenumberWithoutN:
+			localChange = renumberWithoutN(line, num, opt);
+			break;
+
+		default:
+			;
+		}
+
+		if (localChange) {
+			changed = true;
+			num += opt.inc;
+		}
+
+		result += line;
 	}
+
+	text = result;
+	return changed;
 }
 
-
-void Utils::renumberWithoutN(const RenumberOptions& opt, QString& tx, int lineCount)
+bool Utils::renumberWithoutN(QString& line, int num, const RenumberOptions& opt)
 {
-	QString line, i_tx, new_tx;
+	bool changed = false;
+	QString i_tx;
 	QRegularExpression regex;
 
-	int num = opt.startAt;
 	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 	regex.setPattern("^[0-9]{1,9}\\s\\s");
 
-	for (int i = 0; i < lineCount; i++) {
-		line = tx.section(QLatin1Char('\n'), i, i);
+	i_tx = QString("%1").arg(num, opt.width);
+	i_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
+	i_tx += "  ";
 
-		i_tx = QString("%1").arg(num, opt.width);
-		i_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
-		i_tx += "  ";
+	auto match = regex.match(line);
 
-		auto match = regex.match(line);
-
-		if (match.hasMatch()) {
-			line.replace(match.capturedStart(), match.capturedLength(), i_tx);
-			num += opt.inc;
-		} else {
-			if (opt.renumEmpty) {
-				line.insert(0, i_tx);
-				num += opt.inc;
-			}
+	if (match.hasMatch()) {
+		line.replace(match.capturedStart(), match.capturedLength(), i_tx);
+		changed = true;
+	} else {
+		if (opt.renumEmpty) {
+			line.insert(0, i_tx);
+			changed = true;
 		}
-
-		new_tx += line + '\n';
 	}
 
-	tx = new_tx;
+	return changed;
 }
 
-void Utils::renumberWithN(const RenumberOptions& opt, QString& tx)
+bool Utils::renumberWithN(QString& line, int num, const RenumberOptions& opt)
 {
+	bool changed = false;
 	int pos;
-	long int i, num, it;
+	long int i, it;
 	QString f_tx;
 	QRegularExpression regex;
 	bool ok, insertSpace;
 
 	pos = 0;
-	num = opt.startAt;
 	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 	regex.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
-	auto match = regex.match(tx);
+	auto match = regex.match(line);
 
 	while (match.hasMatch()) {
 		pos = match.capturedStart();
@@ -110,7 +128,7 @@ void Utils::renumberWithN(const RenumberOptions& opt, QString& tx)
 		//qDebug() << f_tx;
 
 		if (pos > 0)
-			if (tx[pos - 1].isLetterOrNumber()) {
+			if (line[pos - 1].isLetterOrNumber()) {
 				pos = match.capturedEnd();
 				continue;
 			}
@@ -146,104 +164,87 @@ void Utils::renumberWithN(const RenumberOptions& opt, QString& tx)
 					f_tx.append(QLatin1String(" "));
 				}
 
-				tx.replace(pos, i, f_tx);
-				num += opt.inc;
+				line.replace(pos, i, f_tx);
+				changed = true;
 			}
 		}
 
-		match = regex.match(tx, match.capturedEnd());
+		match = regex.match(line, match.capturedEnd());
 	}
+
+	return changed;
 }
 
-void Utils::renumberAll(const RenumberOptions& opt, QString& tx, int lineCount)
+bool Utils::renumberAll(QString& line, int num, const RenumberOptions& opt)
 {
 	int pos;
-	long int num;
-	QString f_tx, line, i_tx, new_tx;
+	QString f_tx, i_tx;
 	QRegularExpression regex;
 
-	num = opt.startAt;
 	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 	regex.setPattern("[Nn]{1,1}[0-9]+[\\s]{0,}|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
 
-	for (int i = 0; i < lineCount; i++) {
-		line = tx.section(QLatin1Char('\n'), i, i, QString::SectionIncludeTrailingSep);
+	pos = 0;
 
-		//qDebug() << line;
-
-		pos = 0;
-
-		while (1) {
-			if (line.isEmpty()) {
-				if (!opt.renumEmpty) {
-					break;
-				}
-
-				f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
-				f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
-				num += opt.inc;
-				line.insert(0, f_tx);
-				break;
-			}
-
-			auto match = regex.match(line, pos);
-
-			if (match.hasMatch() && (line.at(0) != QLatin1Char('$'))) {
-				pos = match.capturedStart();
-				i_tx = match.captured();
-				i_tx.remove('\n');
-
-				if ((!i_tx.contains(QLatin1Char('(')) && !i_tx.contains(QLatin1Char('\''))
-				        && !i_tx.contains(QLatin1Char(';')))) {
-					f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
-					f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
-					num += opt.inc;
-					f_tx.append(QLatin1String(" "));
-					line.replace(i_tx, f_tx);
-					break;
-				} else if (opt.renumComm) {
-					break;
-				}
-			}
-
-			if ((line.at(0) == QLatin1Char('N')) && (!line.at(1).isLetter())) {
-				f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
-				f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
-				num += opt.inc;
-				f_tx.append(QLatin1String(" "));
-				line.replace(0, 1, f_tx);
-				break;
-			}
-
-			if (((line.at(0) != QLatin1Char('%')) && (line.at(0) != QLatin1Char(':'))
-			        && (line.at(0) != QLatin1Char('O')) && (line.at(0) != QLatin1Char('$')))) {
-				f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
-				f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
-				num += opt.inc;
-				f_tx.append(QLatin1String(" "));
-				line.insert(0, f_tx);
-				break;
-			}
-
-			break;
+	if (line.isEmpty()) {
+		if (!opt.renumEmpty) {
+			return false;
 		}
 
-		new_tx += line; // + '\n';
+		f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
+		f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
+		line.insert(0, f_tx);
+		return true;
 	}
 
-	tx = new_tx;
+	auto match = regex.match(line, pos);
+
+	if (match.hasMatch() && (line.at(0) != QLatin1Char('$'))) {
+		pos = match.capturedStart();
+		i_tx = match.captured();
+		i_tx.remove('\n');
+
+		if ((!i_tx.contains(QLatin1Char('(')) && !i_tx.contains(QLatin1Char('\''))
+		        && !i_tx.contains(QLatin1Char(';')))) {
+			f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
+			f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
+			f_tx.append(QLatin1String(" "));
+			line.replace(i_tx, f_tx);
+			return true;
+		} else if (opt.renumComm) {
+			return false;
+		}
+	}
+
+	if ((line.at(0) == QLatin1Char('N')) && (!line.at(1).isLetter())) {
+		f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
+		f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
+		f_tx.append(QLatin1String(" "));
+		line.replace(0, 1, f_tx);
+		return true;
+	}
+
+	if (((line.at(0) != QLatin1Char('%')) && (line.at(0) != QLatin1Char(':'))
+	        && (line.at(0) != QLatin1Char('O')) && (line.at(0) != QLatin1Char('$')))) {
+		f_tx = QString(QLatin1String("N%1")).arg(num, opt.width);
+		f_tx.replace(QLatin1Char(' '), QLatin1Char('0'));
+		f_tx.append(QLatin1String(" "));
+		line.insert(0, f_tx);
+		return true;
+	}
+
+	return false;
 }
 
-void Utils::removeAll(QString& tx)
+bool Utils::renumberRemoveAll(QString& line)
 {
-	long int num;
+	bool changed = false;
 	QString f_tx;
 	QRegularExpression regex;
 
-	num = 0;
 	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 	regex.setPattern("[N]{1,1}[0-9\\s]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*");
-	auto match = regex.match(tx);
+	auto match = regex.match(line);
 
 	while (match.hasMatch()) {
 		int pos = match.capturedStart();
@@ -253,12 +254,14 @@ void Utils::removeAll(QString& tx)
 
 		if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
 		        && !f_tx.contains(QLatin1Char(';'))) {
-			tx.remove(pos, match.capturedLength());
-			num++;
+			line.remove(pos, match.capturedLength());
+			changed = true;
 		} else {
 			pos = match.capturedEnd();
 		}
 
-		match = regex.match(tx, pos);
+		match = regex.match(line, pos);
 	}
+
+	return changed;
 }

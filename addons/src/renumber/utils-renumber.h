@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -20,17 +20,21 @@
 #ifndef UTILS_REMOVEBYREGEX_H
 #define UTILS_REMOVEBYREGEX_H
 
+#include <functional>   // for function
+
 class QString;
 
 struct RenumberOptions;
 
 
 namespace Utils {
-void renumber(const RenumberOptions& opt, QString& tx);
-void renumberWithoutN(const RenumberOptions& opt, QString& tx, int lineCount);
-void renumberWithN(const RenumberOptions& opt, QString& tx);
-void renumberAll(const RenumberOptions& opt, QString& tx, int lineCount);
-void removeAll(QString& tx);
-}
+
+bool renumber(QString& text, const RenumberOptions& opt, const std::function<bool(int)>& interrupt);
+bool renumberWithoutN(QString& line, int num, const RenumberOptions& opt);
+bool renumberWithN(QString& line, int num, const RenumberOptions& opt);
+bool renumberAll(QString& line, int num, const RenumberOptions& opt);
+bool renumberRemoveAll(QString& line);
+
+} // namespace Utils
 
 #endif // UTILSREMOVEBY_REGEX_H
