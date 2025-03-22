@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -20,12 +20,22 @@
 #ifndef UTILS_COMMENT_H
 #define UTILS_COMMENT_H
 
+#include <functional>   // for function
+
 class QString;
 
 
 namespace Utils {
-void paraComment(QString& tx);
-void semiComment(QString& tx);
-}
+
+enum CommentMode {
+	ParenthesisComments,
+	SemicolonComments
+};
+
+bool autoComments(QString& text, int mode, const std::function<bool(int)>& interrupt);
+bool parenthesisComments(QString& line, bool remove);
+bool semicolonComments(QString& line, bool remove);
+
+} // namespace Utils
 
 #endif // UTILS_COMMENT_H

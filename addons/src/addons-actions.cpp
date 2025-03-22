@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -233,8 +233,18 @@ void Addons::Actions::doParaComment()
 		return;
 	}
 
-	Utils::paraComment(ctx.text());
-	ctx.push();
+	LongJobHelper helper{GCodeWorkShop::instance()};
+	helper.begin(ctx.text().length(), tr("Comments/uncomments"));
+
+	bool changed = Utils::autoComments(ctx.text(), Utils::ParenthesisComments, [&helper](int pos) -> bool{
+		return helper.check(pos) == LongJobHelper::CANCEL;
+	});
+
+	helper.end();
+
+	if (changed) {
+		ctx.push();
+	}
 }
 
 void Addons::Actions::doSemiComment()
@@ -245,8 +255,18 @@ void Addons::Actions::doSemiComment()
 		return;
 	}
 
-	Utils::semiComment(ctx.text());
-	ctx.push();
+	LongJobHelper helper{GCodeWorkShop::instance()};
+	helper.begin(ctx.text().length(), tr("Comments/uncomments"));
+
+	bool changed = Utils::autoComments(ctx.text(), Utils::SemicolonComments, [&helper](int pos) -> bool{
+		return helper.check(pos) == LongJobHelper::CANCEL;
+	});
+
+	helper.end();
+
+	if (changed) {
+		ctx.push();
+	}
 }
 
 void Addons::Actions::doCompileMacro()

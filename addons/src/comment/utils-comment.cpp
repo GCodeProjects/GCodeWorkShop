@@ -1,6 +1,5 @@
 /*
- *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -18,79 +17,108 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QChar>        // for operator==, QChar, QChar::LineFeed
-#include <QString>      // for QString, QCharRef
-#include <QStringList>  // for QStringList
-#include <QtGlobal>     // for QForeachContainer, qMakeForeachContainer, foreach
+#include <QString>  // for QString
 
 #include "utils-comment.h"
 
 
-void Utils::paraComment(QString& tx)
+bool Utils::autoComments(QString& text, int mode, const std::function<bool(int)>& interrupt)
 {
-	QStringList list = tx.split(QChar::LineFeed);
+	bool changed = false;
 	bool remove = false;
+	QString result;
+	int substr_start = 0;
+	int substr_end = 0;
 
-	if (tx[0] == '(') {
-		remove = true;
-	}
-
-	tx.clear();
-
-	foreach (QString txLine, list) {
-		if (remove) {
-			if (txLine.length() > 0) {
-				int idx = txLine.indexOf("(");
-
-				if (idx >= 0) {
-					txLine.remove(idx, 1);
-				}
-
-				idx = txLine.indexOf(")");
-
-				if (idx >= 0) {
-					txLine.remove(idx, 1);
-				}
-			}
-		} else {
-			txLine.prepend("(");
-			txLine.append(")");
+	switch (mode) {
+	case ParenthesisComments:
+		if (text.startsWith('(')) {
+			remove = true;
 		}
 
-		txLine.append("\n");
-		tx.append(txLine);
+		break;
+
+	case SemicolonComments:
+		if (text.startsWith(';')) {
+			remove = true;
+		}
+
+		break;
+
+	default:
+		;
 	}
 
-	tx.remove(tx.length() - 1, 1);
+	while (substr_end >= 0) {
+		substr_end = text.indexOf('\n', substr_start);
+		QString line = text.mid(substr_start, substr_end - substr_start + 1);
+		substr_start = substr_end + 1;
+		bool localChange = false;
+
+		if (interrupt(substr_start)) {
+			return false;
+		}
+
+		switch (mode) {
+		case ParenthesisComments:
+			localChange = parenthesisComments(line, remove);
+			break;
+
+		case SemicolonComments:
+			localChange = semicolonComments(line, remove);
+			break;
+
+		default:
+			;
+		}
+
+		if (localChange) {
+			changed = true;
+		}
+
+		result += line;
+	}
+
+	text = result;
+	return changed;
 }
 
-void Utils::semiComment(QString& tx)
+bool Utils::parenthesisComments(QString& line, bool remove)
 {
-	QStringList list = tx.split(QChar::LineFeed);
-	bool remove = false;
+	int oldSize = line.size();
 
-	if (tx[0] == ';') {
-		remove = true;
-	}
+	if (remove && line.startsWith('(')) {
+		line.remove(0, 1);
+		int pli = line.lastIndexOf(')');
 
-	tx.clear();
-
-	foreach (QString txLine, list) {
-		if (remove) {
-			if (txLine.length() > 0) {
-				int idx = txLine.indexOf(";");
-
-				if (idx >= 0) {
-					txLine.remove(idx, 1);
-				}
-			}
-		} else {
-			txLine.prepend(";");
+		if (pli >= 0) {
+			line.remove(pli, 1);
 		}
-
-		txLine.append("\n");
-		tx.append(txLine);
 	}
 
-	tx.remove(tx.length() - 1, 1);
+	if (!remove) {
+		line.prepend("(");
+		int eol = line.indexOf('\n');
+
+		if (eol < 0) {
+			line.append(')');
+		} else {
+			line.insert(eol, ')');
+		}
+	}
+
+	return oldSize != line.size();
+}
+
+bool Utils::semicolonComments(QString& line, bool remove)
+{
+	int oldSize = line.size();
+
+	if (remove && line.startsWith(';')) {
+		line.remove(0, 1);
+	} else {
+		line.prepend(";");
+	}
+
+	return oldSize != line.size();
 }
