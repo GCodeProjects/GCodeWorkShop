@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -98,6 +98,16 @@ void Addons::Context::push(const QString& text)
 	cursor.setPosition(m_fragmentEnd, QTextCursor::MoveAnchor);
 	cursor.setPosition(m_fragmentStart, QTextCursor::KeepAnchor);
 	cursor.insertText(text);
+	int diff = text.size() - m_fragmentEnd + m_fragmentStart;
+
+	if (m_selectionStart == m_fragmentEnd) {
+		m_selectionStart += diff;
+	}
+
+	if (m_selectionEnd == m_fragmentEnd) {
+		m_selectionEnd += diff;
+	}
+
 	cursor.setPosition(m_selectionEnd, QTextCursor::MoveAnchor);
 	cursor.setPosition(m_selectionStart, QTextCursor::KeepAnchor);
 	m_edit->setTextCursor(cursor);
