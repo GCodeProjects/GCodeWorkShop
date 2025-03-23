@@ -64,8 +64,8 @@ int LongJobHelper::real_check(int progress)
 {
 	mTotalTime = time_ms();
 
-	if (!mIsLongJob) {
-		int remaining = mTotalTime * mMaximum / (mMaximum - progress);
+	if (!mIsLongJob && progress > 0) {
+		int remaining = mTotalTime * (mMaximum - progress) / progress;
 
 		if (mTotalTime > mDeadLine || remaining > mDeadLine) {
 			mIsLongJob = true;
