@@ -16,6 +16,16 @@ or
     astyle  --project=tools/astyle.cfg -I -r 'module/*.cpp' 'module/*.h'
 
 
+codespell
+---------
+
+https://github.com/codespell-project/codespell
+
+Usage (from source root):
+
+    codespell --config tools/codespell.cfg
+
+
 Include-What-You-Use
 --------------------
 
