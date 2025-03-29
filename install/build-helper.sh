@@ -158,7 +158,7 @@ get_deb_dependencies()
     cat "$PKG_LIST_FILE"
 
     title3 "String with dependencies:"
-    cat "$PKG_LIST_FILE" | xargs xargs dpkg-query -W -f='${Package} (>= ${Version}), '| awk '{print substr( $0, 1, length($0)-2 )}' > "$DEP_LIST_FILE"
+    cat "$PKG_LIST_FILE" | xargs dpkg-query -W -f='${Package} (>= ${Version}), '| awk '{print substr( $0, 1, length($0)-2 )}' > "$DEP_LIST_FILE"
     cat "$DEP_LIST_FILE"
     PACKAGE_DEPENDS=$(cat "$DEP_LIST_FILE")
 }
