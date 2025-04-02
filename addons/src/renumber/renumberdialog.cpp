@@ -87,6 +87,7 @@ void RenumberDialog::renumClicked()
 	mRenumWithComm->setEnabled(false);
 	mRenumEmpty->setEnabled(false);
 	mRenumMarked->setEnabled(true);
+	mKeepExisting->setEnabled(false);
 	mCheckDivide->setEnabled(true);
 	divideClicked();
 }
@@ -103,6 +104,7 @@ void RenumberDialog::mRenumHeClicked()
 	mRenumWithComm->setEnabled(false);
 	mRenumEmpty->setEnabled(true);
 	mRenumMarked->setEnabled(false);
+	mKeepExisting->setEnabled(false);
 	mCheckDivide->setEnabled(true);
 	divideClicked();
 }
@@ -119,6 +121,7 @@ void RenumberDialog::allLinesClicked()
 	mRenumWithComm->setEnabled(true);
 	mRenumEmpty->setEnabled(true);
 	mRenumMarked->setEnabled(false);
+	mKeepExisting->setEnabled(true);
 	mCheckDivide->setEnabled(true);
 	divideClicked();
 }
@@ -135,6 +138,7 @@ void RenumberDialog::removeAllClicked()
 	mRenumWithComm->setEnabled(false);
 	mRenumEmpty->setEnabled(false);
 	mRenumMarked->setEnabled(false);
+	mKeepExisting->setEnabled(false);
 	mCheckDivide->setEnabled(false);
 	divideClicked();
 }
@@ -147,6 +151,7 @@ void RenumberDialog::setOptions(const RenumberOptions& options)
 	mRenumEmpty->setChecked(options.renumEmpty);
 	mRenumWithComm->setChecked(options.renumComm);
 	mRenumMarked->setChecked(options.renumMarked);
+	mKeepExisting->setChecked(options.keepExisting);
 	toInput->setValue(options.to);
 	mSpinBox->setValue(options.width);
 	mCheckDivide->setChecked(options.applyWidth);
@@ -191,6 +196,7 @@ RenumberOptions RenumberDialog::options()
 	options.renumEmpty = mRenumEmpty->isChecked();
 	options.renumComm = mRenumWithComm->isChecked();
 	options.renumMarked = mRenumMarked->isChecked();
+	options.keepExisting = mKeepExisting->isChecked();
 	options.to = toInput->value();
 	options.width = mSpinBox->value();
 	options.applyWidth = mCheckDivide->isChecked();

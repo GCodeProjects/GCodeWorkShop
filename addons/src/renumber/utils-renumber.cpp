@@ -60,7 +60,7 @@ bool Utils::renumber(QString& text, const RenumberOptions& opt, const std::funct
 			break;
 
 		case RenumberOptions::RenumberAll:
-			localChange = renumberAll(line, num, width, opt.renumEmpty, opt.renumComm, true);
+			localChange = renumberAll(line, num, width, opt.renumEmpty, opt.renumComm, opt.keepExisting);
 			break;
 
 		case RenumberOptions::RemoveAll:

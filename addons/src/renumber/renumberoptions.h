@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -41,6 +41,7 @@ struct RenumberOptions {
 	bool    renumEmpty;
 	bool    renumComm;
 	bool    renumMarked;
+	bool    keepExisting;
 
 	void load(QSettings* settings, const RenumberOptions& defaultOptions);
 	void save(QSettings* settings);

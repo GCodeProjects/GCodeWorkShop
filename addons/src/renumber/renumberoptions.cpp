@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -26,6 +26,7 @@
 #define CFG_KEY_APPLY_WIDTH     "ApplyWidth"
 #define CFG_KEY_FROM            "From"
 #define CFG_KEY_INC             "Inc"
+#define CFG_KEY_KEEP_EXISTING   "KeepExisting"
 #define CFG_KEY_MODE            "Mode"
 #define CFG_KEY_RENUM_EMPTY     "RenumEmpty"
 #define CFG_KEY_RENUM_MARKED    "RenumMarked"
@@ -46,6 +47,7 @@ void RenumberOptions::load(QSettings* settings, const RenumberOptions& defaultOp
 	renumComm = settings->value(CFG_KEY_RENUM_WITH_COMM, defaultOptions.renumComm).toBool();
 	renumEmpty = settings->value(CFG_KEY_RENUM_EMPTY, defaultOptions.renumEmpty).toBool();
 	renumMarked = settings->value(CFG_KEY_RENUM_MARKED, defaultOptions.renumMarked).toBool();
+	keepExisting = settings->value(CFG_KEY_KEEP_EXISTING, defaultOptions.keepExisting).toBool();
 	width = settings->value(CFG_KEY_WIDTH, defaultOptions.width).toInt();
 }
 
@@ -58,6 +60,7 @@ void RenumberOptions::save(QSettings* settings)
 	settings->setValue(CFG_KEY_RENUM_WITH_COMM, renumComm);
 	settings->setValue(CFG_KEY_RENUM_EMPTY, renumEmpty);
 	settings->setValue(CFG_KEY_RENUM_MARKED, renumMarked);
+	settings->setValue(CFG_KEY_KEEP_EXISTING, keepExisting);
 	settings->setValue(CFG_KEY_START, startAt);
 	settings->setValue(CFG_KEY_TO, to);
 	settings->setValue(CFG_KEY_WIDTH, width);

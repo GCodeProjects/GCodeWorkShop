@@ -223,6 +223,22 @@
         </property>
        </widget>
       </item>
+      <item row="9" column="0">
+       <widget class="QCheckBox" name="mKeepExisting">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Keep existing block numbers.</string>
+        </property>
+        <property name="toolTip">
+         <string>Keep already existing block numbers for empty lines.</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
