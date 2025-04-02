@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -77,58 +77,66 @@ void RenumberDialog::divideClicked()
 
 void RenumberDialog::renumClicked()
 {
+	startAtlabel->setEnabled(true);
 	formInput->setEnabled(true);
 	startAtInput->setEnabled(true);
 	incInput->setEnabled(true);
+	toLabel->setEnabled(true);
 	toInput->setEnabled(true);
-
-	mRenumLines->setChecked(true);
-	mAllLines->setChecked(false);
-	mRemoveAll->setChecked(false);
 
 	mRenumWithComm->setEnabled(false);
 	mRenumEmpty->setEnabled(false);
-
+	mRenumMarked->setEnabled(true);
 	mCheckDivide->setEnabled(true);
+	divideClicked();
 }
 
 void RenumberDialog::mRenumHeClicked()
 {
+	startAtlabel->setEnabled(false);
 	formInput->setEnabled(false);
 	startAtInput->setEnabled(true);
 	incInput->setEnabled(true);
+	toLabel->setEnabled(false);
 	toInput->setEnabled(false);
 
 	mRenumWithComm->setEnabled(false);
 	mRenumEmpty->setEnabled(true);
-
-	mCheckDivide->setEnabled(false);
+	mRenumMarked->setEnabled(false);
+	mCheckDivide->setEnabled(true);
+	divideClicked();
 }
 
 void RenumberDialog::allLinesClicked()
 {
+	startAtlabel->setEnabled(false);
 	formInput->setEnabled(false);
 	startAtInput->setEnabled(true);
 	incInput->setEnabled(true);
+	toLabel->setEnabled(false);
 	toInput->setEnabled(false);
 
 	mRenumWithComm->setEnabled(true);
 	mRenumEmpty->setEnabled(true);
-
+	mRenumMarked->setEnabled(false);
 	mCheckDivide->setEnabled(true);
+	divideClicked();
 }
 
 void RenumberDialog::removeAllClicked()
 {
+	startAtlabel->setEnabled(false);
 	formInput->setEnabled(false);
 	startAtInput->setEnabled(false);
 	incInput->setEnabled(false);
+	toLabel->setEnabled(false);
 	toInput->setEnabled(false);
 
 	mRenumWithComm->setEnabled(false);
 	mRenumEmpty->setEnabled(false);
-
+	mRenumMarked->setEnabled(false);
 	mCheckDivide->setEnabled(false);
+	divideClicked();
 }
 
 void RenumberDialog::setOptions(const RenumberOptions& options)
@@ -181,7 +189,7 @@ RenumberOptions RenumberDialog::options()
 	options.from = formInput->value();
 	options.inc = incInput->value();
 	options.renumEmpty = mRenumEmpty->isChecked();
-	options.renumComm = !mRenumWithComm->isChecked();
+	options.renumComm = mRenumWithComm->isChecked();
 	options.renumMarked = mRenumMarked->isChecked();
 	options.to = toInput->value();
 	options.width = mSpinBox->value();
