@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -21,11 +21,13 @@
 #ifndef UTILS_INSERTDOT_H
 #define UTILS_INSERTDOT_H
 
+#include <functional>   // for function
+
 class QString;
 
 
 namespace Utils {
-int insertDot(QString& tx, const QString& addr, bool convert, int divider);
+int insertDot(QString& tx, const QString& addr, bool convert, int divider, const std::function<bool(int)>& interrupt);
 }
 
 #endif // UTILS_INSERTDOT_H

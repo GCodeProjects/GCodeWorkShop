@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -18,9 +18,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QDialog>  // for QDialog
-#include <QString>  // for QString
-#include <QWidget>  // for QWidget
+#include <functional>   // for function
+
+#include <QCoreApplication> // for translate
+#include <QDialog>          // for QDialog
+#include <QString>          // for QString
+#include <QWidget>          // for QWidget
+
+#include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 
 #include "addons-dot.h"
 #include "dotdialog.h"          // for DotDialog
@@ -41,11 +46,19 @@ int Addons::doDot(QWidget* parent, QSettings* settings,  QString& tx)
 		dlg->loadSettings(DotOptions());
 	}
 
-	if (dlg->exec() == QDialog::Accepted) {
-		DotOptions opt = dlg->options();
-		result = Utils::insertDot(tx, opt.axes, opt.convert, opt.divider);
+	if (dlg->exec() != QDialog::Accepted) {
+		return 0;
 	}
 
+	LongJobHelper helper{parent};
+	helper.begin(tx.length(), QCoreApplication::translate("Addons::Actions", "Inserting dots"), 20);
+
+	DotOptions opt = dlg->options();
+	result = Utils::insertDot(tx, opt.axes, opt.convert, opt.divider, [&helper](int pos) -> bool{
+		return helper.check(pos) == LongJobHelper::CANCEL;
+	});
+
+	helper.end();
 	dlg->deleteLater();
 	return result;
 }

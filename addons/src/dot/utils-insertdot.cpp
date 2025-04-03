@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -26,7 +26,11 @@
 #include "utils-insertdot.h"
 
 
-int Utils::insertDot(QString& tx, const QString& addr, bool convert, int divider)
+int Utils::insertDot(QString& tx,
+                     const QString& addr,
+                     bool convert,
+                     int divider,
+                     const std::function<bool (int)>& interrupt)
 {
 	int count = 0;
 	int pos = 0;
@@ -40,6 +44,10 @@ int Utils::insertDot(QString& tx, const QString& addr, bool convert, int divider
 	while (match.hasMatch()) {
 		f_tx = match.captured();
 		pos = match.capturedEnd();
+
+		if (interrupt(pos)) {
+			return count;
+		}
 
 		if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
 		        && !f_tx.contains(QLatin1Char(';'))) {
