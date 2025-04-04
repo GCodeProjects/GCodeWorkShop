@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2023 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -17,26 +17,60 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QRegularExpression>   // for QRegularExpression
-#include <QString>              // for QString
-#include <QStringList>          // for QStringList
+#include <QRegularExpression>               // for QRegularExpression
+#include <QRegularExpressionMatch>          // for QRegularExpressionMatch
+#include <QRegularExpressionMatchIterator>  // for QRegularExpressionMatchIterator
+#include <QString>                          // for QString
+#include <QStringList>                      // for QStringList
 
 #include "utils-removebyregex.h"
 
 
-bool Utils::removeTextByRegExp(QString& tx, QStringList expList, bool replaceDollar)
+bool Utils::removeTextByRegExp(QString& tx,
+                               const QStringList& expList,
+                               bool replaceDollar,
+                               const std::function<bool (int)>& interrupt)
 {
 	if (expList.isEmpty()) {
 		return false;
 	}
 
-	for (QString regexp : expList) {
-		if (replaceDollar && regexp.contains('$') && !regexp.contains("\\$")) {
-			regexp.replace('$', "\\n");
+	QString complex;
+
+	// Glue multiple regular expressions into one.
+	for (QString exp : expList) {
+		if (replaceDollar && exp.contains('$') && !exp.contains("\\$")) {
+			exp.replace('$', "\\n");
 		}
 
-		tx.remove(QRegularExpression(regexp));
+		if (!complex.isEmpty()) {
+			complex.append("|");
+		}
+
+		complex.append(exp);
 	}
 
+	QRegularExpression regexpr{
+		complex,
+		QRegularExpression::CaseInsensitiveOption
+	};
+	QRegularExpressionMatchIterator iterator = regexpr.globalMatch(tx);
+
+	int pos = 0;
+	QString result;
+
+	while (iterator.hasNext()) {
+		if (interrupt(pos)) {
+			return false;
+		}
+
+		const QRegularExpressionMatch& match = iterator.next();
+		const QString& sub = tx.mid(pos, match.capturedStart() - pos);
+		result.append(sub);
+		pos = match.capturedEnd();
+	}
+
+	result.append(tx.mid(pos));
+	tx = result;
 	return true;
 }

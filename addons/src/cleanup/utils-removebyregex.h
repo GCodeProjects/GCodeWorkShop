@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -20,13 +20,18 @@
 #ifndef UTILS_REMOVEBYREGEX_H
 #define UTILS_REMOVEBYREGEX_H
 
+#include <functional>   // for function
+
 #include <QStringList>  // for QStringList
 
 class QString;
 
 
 namespace Utils {
-bool removeTextByRegExp(QString& tx, QStringList expList, bool replaceDollar = true);
+bool removeTextByRegExp(QString& tx,
+                        const QStringList& expList,
+                        bool replaceDollar,
+                        const std::function<bool(int)>& interrupt);
 }
 
 #endif // UTILSREMOVEBY_REGEX_H
