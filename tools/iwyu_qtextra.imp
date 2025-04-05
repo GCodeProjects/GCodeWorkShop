@@ -64,6 +64,7 @@
     { symbol:  ['QPointF', 'private', '<QPointF>', 'public'] },
     { symbol:  ['QRegularExpressionIterator', 'private', '<QRegularExpressionIterator>', 'public'] },
     { symbol:  ['QRegularExpressionMatch', 'private', '<QRegularExpressionMatch>', 'public'] },
+    { symbol:  ['QRegularExpressionMatchIterator', 'private', '<QRegularExpressionMatchIterator>', 'public'] },
     { symbol:  ['QRegularExpressionValidator', 'private', '<QRegularExpressionValidator>', 'public'] },
     { symbol:  ['QTableWidget', 'private', '<QTableWidget>', 'public'] },
     { symbol:  ['QTableWidgetItem', 'private', '<QTableWidgetItem>', 'public'] },
