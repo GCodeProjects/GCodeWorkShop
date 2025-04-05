@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -21,11 +21,16 @@
 #ifndef UTILS_I2M_H
 #define UTILS_I2M_H
 
+#include <functional>   // for function
+
 class QString;
 
 
 namespace Utils {
-int i2mprog(QString tx, const QString& addr, bool toInch, int prec);
+int i2mprog(QString tx,
+            const QString& addr,
+            bool toInch, int prec,
+            const std::function<bool(int)>& interrupt);
 }
 
 #endif // UTILS_I2M_H
