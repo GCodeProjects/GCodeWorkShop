@@ -27,7 +27,7 @@ class QString;
 
 
 namespace Utils {
-int i2mprog(QString tx,
+int i2mprog(QString& tx,
             const QString& addr,
             bool toInch, int prec,
             const std::function<bool(int)>& interrupt);

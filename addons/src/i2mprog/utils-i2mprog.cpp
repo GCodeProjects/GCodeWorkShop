@@ -18,35 +18,55 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QRegularExpression>       // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
-#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
-#include <QString>                  // for QString
+#include <QRegularExpression>               // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
+#include <QRegularExpressionMatch>          // for QRegularExpressionMatch
+#include <QRegularExpressionMatchIterator>  // for QRegularExpressionMatchIterator
+#include <QString>                          // for QString
 
 #include "utils-i2mprog.h"
 
 
-int Utils::i2mprog(QString tx,
+#define APOSTROPHE_COMMENT_REGEXPR  "\\'[^\\n\\r]*\\'"
+#define GCODE_COMMENT_REGEXPR       "\\([^\\n\\r]*\\)"
+#define SINUMERIK_COMMENT_REGEXPR   ";[^\\n\\r]*$"
+//                            |<     sign      >| |<     digits-dot-digits     >| |<  digits-dot  >| |<  dot-digits  >| |<   digits  >|
+#define WORD_REGEXPR    "[%1]([ \\t]*[-+]?[ \\t]*((\\d[ \\t\\d]*\\.[ \\t\\d]*\\d)|(\\d[ \\t\\d]*\\.)|(\\.[ \\t\\d]*\\d)|([ \\t\\d]*\\d)))"
+
+
+int Utils::i2mprog(QString& tx,
                    const QString& addr,
                    bool toInch, int prec,
                    const std::function<bool (int)>& interrupt)
 {
 	int count = 0;
-	QRegularExpression regex;
+	QRegularExpression regex{
+		QString(
+		    WORD_REGEXPR
+		    "|"
+		    GCODE_COMMENT_REGEXPR
+		    "|"
+		    APOSTROPHE_COMMENT_REGEXPR
+		    "|"
+		    SINUMERIK_COMMENT_REGEXPR
+		).arg(addr),
+		QRegularExpression::CaseInsensitiveOption
+	};
+	QRegularExpressionMatchIterator iterator = regex.globalMatch(tx);
 
-	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-	regex.setPattern(
-	    QString("[%1]{1,1}([+-]?\\d*\\.?\\d*)|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
-	auto match = regex.match(tx);
+	int pos = 0;
+	QString result;
 
-	while (match.hasMatch()) {
-		int pos = match.capturedEnd();
-
+	while (iterator.hasNext()) {
 		if (interrupt(pos)) {
-			return count;
+			return 0;
 		}
+
+		const QRegularExpressionMatch& match = iterator.next();
 
 		if (match.capturedLength(1) > 0) {
 			QString f_tx = match.captured(1);
+			f_tx.remove(' ');
+			f_tx.remove('\t');
 			bool ok;
 			double it = f_tx.toDouble(&ok);
 
@@ -58,14 +78,15 @@ int Utils::i2mprog(QString tx,
 				}
 
 				QString conv = QString("%1").arg(it, 0, 'f', prec);
-				tx.replace(match.capturedStart(), match.capturedLength(), conv);
-				pos += conv.length() - match.capturedLength();
+				result.append(tx.mid(pos, match.capturedStart(1) - pos));
+				result.append(conv);
+				pos = match.capturedEnd(1);
 				count++;
 			}
 		}
-
-		match = regex.match(tx, pos);
 	}
 
+	result.append(tx.mid(pos));
+	tx = result;
 	return count;
 }
