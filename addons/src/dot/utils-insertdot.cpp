@@ -18,12 +18,20 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QLatin1Char>              // for QLatin1Char
-#include <QRegularExpression>       // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
-#include <QRegularExpressionMatch>  // for QRegularExpressionMatch
-#include <QString>                  // for QString
+#include <QLatin1Char>                      // for QLatin1Char
+#include <QRegularExpression>               // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
+#include <QRegularExpressionMatch>			// for QRegularExpressionMatch
+#include <QRegularExpressionMatchIterator>  // for QRegularExpressionMatchIterator
+#include <QString>                          // for QString
 
 #include "utils-insertdot.h"
+
+
+#define APOSTROPHE_COMMENT_REGEXPR  "\\'[^\\n\\r]*\\'"
+#define GCODE_COMMENT_REGEXPR       "\\([^\\n\\r]*\\)"
+#define SINUMERIK_COMMENT_REGEXPR   ";[^\\n\\r]*$"
+//                            |<     sign      >| |<     digits-dot-digits     >| |<  digits-dot  >| |<  dot-digits  >| |<   digits  >|
+#define WORD_REGEXPR    "[%1]([ \\t]*[-+]?[ \\t]*((\\d[ \\t\\d]*\\.[ \\t\\d]*\\d)|(\\d[ \\t\\d]*\\.)|(\\.[ \\t\\d]*\\d)|([ \\t\\d]*\\d)))"
 
 
 int Utils::insertDot(QString& tx,
@@ -34,47 +42,57 @@ int Utils::insertDot(QString& tx,
 {
 	int count = 0;
 	int pos = 0;
-	QString f_tx;
-	QRegularExpression regex;
+	QRegularExpression regex{
+		QString(
+		    WORD_REGEXPR
+		    "|"
+		    GCODE_COMMENT_REGEXPR
+		    "|"
+		    APOSTROPHE_COMMENT_REGEXPR
+		    "|"
+		    SINUMERIK_COMMENT_REGEXPR
+		).arg(addr),
+		QRegularExpression::CaseInsensitiveOption
+	};
+	QRegularExpressionMatchIterator iterator = regex.globalMatch(tx);
+	QString result;
 
-	regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-	regex.setPattern(QString("[%1]{1,1}[-.+0-9]+|\\([^\\n\\r]*\\)|\'[^\\n\\r]*\'|;[^\\n\\r]*$").arg(addr));
-	auto match = regex.match(tx);
-
-	while (match.hasMatch()) {
-		f_tx = match.captured();
-		pos = match.capturedEnd();
-
+	while (iterator.hasNext()) {
 		if (interrupt(pos)) {
-			return count;
+			return 0;
 		}
 
-		if (!f_tx.contains(QLatin1Char('(')) && !f_tx.contains(QLatin1Char('\''))
-		        && !f_tx.contains(QLatin1Char(';'))) {
-			if (convert && !f_tx.contains(QLatin1Char('.'))) {
-				f_tx.remove(0, 1);
+		QRegularExpressionMatch match = iterator.next();
 
-				//f_tx.remove('+');
+		if (match.capturedLength(1) > 0) {
+			QString f_tx = match.captured(1);
+			f_tx.remove(' ');
+			f_tx.remove('\t');
+
+			if (convert && !f_tx.contains(QLatin1Char('.'))) {
 				bool ok;
 				double it = f_tx.toDouble(&ok);
 
 				if (ok) {
 					it = it / divider;
-					tx.replace(match.capturedStart() + 1, match.capturedLength() - 1,
-					           QString("%1").arg(it, 0, 'f', 3));
+					QString conv = QString("%1").arg(it, 0, 'f', 3);
+					result.append(tx.mid(pos, match.capturedStart(1) - pos));
+					result.append(conv);
+					pos = match.capturedEnd(1);
 					count++;
 				}
 			}
 
 			if (!convert && !f_tx.contains(QLatin1Char('.'))) {
-				tx.insert(match.capturedEnd(), QLatin1Char('.'));
-				pos++;
+				result.append(tx.mid(pos, match.capturedEnd(1) - pos));
+				result.append(QLatin1Char('.'));
+				pos = match.capturedEnd(1);
 				count++;
 			}
 		}
-
-		match =  regex.match(tx, pos);
 	}
 
+	result.append(tx.mid(pos));
+	tx = result;
 	return count;
 }
