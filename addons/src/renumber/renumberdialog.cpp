@@ -19,6 +19,7 @@
  */
 
 #include <QCheckBox>    // for QCheckBox
+#include <QLabel>       // for QLabel
 #include <QPoint>       // for QPoint
 #include <QPushButton>  // for QPushButton
 #include <QRadioButton> // for QRadioButton
