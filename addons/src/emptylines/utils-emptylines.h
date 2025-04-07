@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -20,12 +20,14 @@
 #ifndef UTILS_EMPTYLINES_H
 #define UTILS_EMPTYLINES_H
 
+#include <functional>   // for function
+
 class QString;
 
 
 namespace Utils {
-void insertEmptyLines(QString& tx);
-void removeEmptyLines(QString& tx);
+bool insertEmptyLines(QString& tx, const std::function<bool(int)>& interrupt);
+bool removeEmptyLines(QString& tx, const std::function<bool(int)>& interrupt);
 }
 
 #endif // UTILS_EMPTYLINES_H

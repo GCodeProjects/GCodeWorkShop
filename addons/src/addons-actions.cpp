@@ -313,10 +313,18 @@ void Addons::Actions::doInsertEmptyLines()
 		return;
 	}
 
-	QApplication::setOverrideCursor(Qt::BusyCursor);
-	Utils::insertEmptyLines(ctx.text());
-	ctx.push();
-	QApplication::restoreOverrideCursor();
+	LongJobHelper helper{GCodeWorkShop::instance()};
+	helper.begin(ctx.text().length(), tr("Inserting empty lines"));
+
+	bool changed = Utils::insertEmptyLines(ctx.text(), [&helper](int pos) -> bool{
+		return helper.check(pos) == LongJobHelper::CANCEL;
+	});
+
+	helper.end();
+
+	if (changed) {
+		ctx.push();
+	}
 }
 
 void Addons::Actions::doRemoveEmptyLines()
@@ -327,10 +335,18 @@ void Addons::Actions::doRemoveEmptyLines()
 		return;
 	}
 
-	QApplication::setOverrideCursor(Qt::BusyCursor);
-	Utils::removeEmptyLines(ctx.text());
-	ctx.push();
-	QApplication::restoreOverrideCursor();
+	LongJobHelper helper{GCodeWorkShop::instance()};
+	helper.begin(ctx.text().length(), tr("Removing empty lines"));
+
+	bool changed = Utils::removeEmptyLines(ctx.text(), [&helper](int pos) -> bool{
+		return helper.check(pos) == LongJobHelper::CANCEL;
+	});
+
+	helper.end();
+
+	if (changed) {
+		ctx.push();
+	}
 }
 
 void Addons::Actions::doFeeds()

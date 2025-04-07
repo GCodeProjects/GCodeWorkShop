@@ -1,6 +1,5 @@
 /*
- *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -25,28 +24,56 @@
 #include "utils-emptylines.h"
 
 
-void Utils::insertEmptyLines(QString& tx)
+bool Utils::insertEmptyLines(QString& tx, const std::function<bool (int)>& interrupt)
 {
-	if (tx.contains(QLatin1String("\r\n"))) {
-		tx.replace(QLatin1String("\r\n"), QLatin1String("\r\n\r\n"));
-	} else {
-		tx.replace(QLatin1String("\n"), QLatin1String("\n\n"));
+	bool changed = false;
+	int pos = 0;
+	QRegularExpression regexpr{
+		"\\n|\\r\\n"
+	};
+	QRegularExpressionMatchIterator iterator = regexpr.globalMatch(tx);
+	QString result;
+
+	while (iterator.hasNext()) {
+		if (interrupt(pos)) {
+			return false;
+		}
+
+		QRegularExpressionMatch match = iterator.next();
+		result.append(tx.mid(pos, match.capturedStart() - pos));
+		result.append("\n\n");
+		pos = match.capturedEnd();
+		changed = true;
 	}
+
+	result.append(tx.mid(pos));
+	tx = result;
+	return changed;
 }
 
-void Utils::removeEmptyLines(QString& tx)
+bool Utils::removeEmptyLines(QString& tx, const std::function<bool (int)>& interrupt)
 {
-	int i;
-	QRegularExpression regex;
+	bool changed = false;
+	int pos = 0;
+	QRegularExpression regexpr{
+		"[\\n\\r]+"
+	};
+	QRegularExpressionMatchIterator iterator = regexpr.globalMatch(tx);
+	QString result;
 
-	regex.setPattern("[\\n]{2,}");
-	i = 0;
-
-	while (i >= 0) {
-		i = tx.indexOf(regex, 0);
-
-		if (i >= 0) {
-			tx.replace(regex, "\r\n");
+	while (iterator.hasNext()) {
+		if (interrupt(pos)) {
+			return false;
 		}
+
+		QRegularExpressionMatch match = iterator.next();
+		result.append(tx.mid(pos, match.capturedStart() - pos));
+		result.append("\n");
+		pos = match.capturedEnd();
+		changed = true;
 	}
+
+	result.append(tx.mid(pos));
+	tx = result;
+	return changed;
 }
