@@ -37,22 +37,22 @@ BHCOptions::BHCOptions() :
 {
 }
 
-void BHCOptions::load(QSettings* settings, const BHCOptions& defaultOptions)
+void BHCOptions::load(QSettings* settings)
 {
 	settings->beginGroup(CFG_SECTION_GREEN);
-	green.load(settings, defaultOptions.green);
+	green.load(settings);
 	settings->endGroup();
 
 	settings->beginGroup(CFG_SECTION_BLUE);
-	blue.load(settings, defaultOptions.blue);
+	blue.load(settings);
 	settings->endGroup();
 
 	settings->beginGroup(CFG_SECTION_RED);
-	red.load(settings, defaultOptions.red);
+	red.load(settings);
 	settings->endGroup();
 
 	settings->beginGroup(CFG_SECTION_YELLOW);
-	yellow.load(settings, defaultOptions.yellow);
+	yellow.load(settings);
 	settings->endGroup();
 }
 

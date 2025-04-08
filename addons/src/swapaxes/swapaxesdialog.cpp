@@ -137,7 +137,7 @@ SwapAxesOptions SwapAxesDialog::options()
 	return options;
 }
 
-void SwapAxesDialog::loadSettings(const SwapAxesOptions& defaultOptions)
+void SwapAxesDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -152,7 +152,7 @@ void SwapAxesDialog::loadSettings(const SwapAxesOptions& defaultOptions)
 	}
 
 	SwapAxesOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

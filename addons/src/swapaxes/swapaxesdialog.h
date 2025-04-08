@@ -45,7 +45,7 @@ public:
 	void setOptions(const SwapAxesOptions& options);
 	SwapAxesOptions options();
 
-	void loadSettings(const SwapAxesOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 private slots:

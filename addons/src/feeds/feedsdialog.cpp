@@ -346,7 +346,7 @@ FeedsOptions FeedsDialog::options()
 	return options;
 }
 
-void FeedsDialog::loadSettings(const FeedsOptions& defaultOptions)
+void FeedsDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -361,7 +361,7 @@ void FeedsDialog::loadSettings(const FeedsOptions& defaultOptions)
 	}
 
 	FeedsOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

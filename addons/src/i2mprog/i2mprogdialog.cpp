@@ -88,7 +88,7 @@ I2MProgOptions I2MProgDialog::options()
 	return options;
 }
 
-void I2MProgDialog::loadSettings(const I2MProgOptions& defaultOptions)
+void I2MProgDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -103,7 +103,7 @@ void I2MProgDialog::loadSettings(const I2MProgOptions& defaultOptions)
 	}
 
 	I2MProgOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

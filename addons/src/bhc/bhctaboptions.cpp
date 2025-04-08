@@ -49,18 +49,18 @@ BHCTabOptions::BHCTabOptions() :
 {
 }
 
-void BHCTabOptions::load(QSettings* settings, const BHCTabOptions& defaultOptions)
+void BHCTabOptions::load(QSettings* settings)
 {
-	x = settings->value(CFG_KEY_X, defaultOptions.x).toDouble();
-	y = settings->value(CFG_KEY_Y, defaultOptions.y).toDouble();
-	diam = settings->value(CFG_KEY_DIAM, defaultOptions.diam).toDouble();
-	start = settings->value(CFG_KEY_START, defaultOptions.start).toDouble();
-	step = settings->value(CFG_KEY_STEP, defaultOptions.step).toDouble();
-	count = settings->value(CFG_KEY_COUNT, defaultOptions.count).toInt();
-	rotate = settings->value(CFG_KEY_ROTATE, defaultOptions.rotate).toInt();
-	mirrorX = settings->value(CFG_KEY_MIRRORX, defaultOptions.mirrorX).toBool();
-	mirrorY = settings->value(CFG_KEY_MIRRORY, defaultOptions.mirrorY).toBool();
-	common = settings->value(CFG_KEY_COMMON, defaultOptions.common).toBool();
+	x = settings->value(CFG_KEY_X, x).toDouble();
+	y = settings->value(CFG_KEY_Y, y).toDouble();
+	diam = settings->value(CFG_KEY_DIAM, diam).toDouble();
+	start = settings->value(CFG_KEY_START, start).toDouble();
+	step = settings->value(CFG_KEY_STEP, step).toDouble();
+	count = settings->value(CFG_KEY_COUNT, count).toInt();
+	rotate = settings->value(CFG_KEY_ROTATE, rotate).toInt();
+	mirrorX = settings->value(CFG_KEY_MIRRORX, mirrorX).toBool();
+	mirrorY = settings->value(CFG_KEY_MIRRORY, mirrorY).toBool();
+	common = settings->value(CFG_KEY_COMMON, common).toBool();
 }
 
 void BHCTabOptions::save(QSettings* settings)

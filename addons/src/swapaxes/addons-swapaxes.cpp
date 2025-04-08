@@ -41,7 +41,7 @@ bool Addons::doSwapAxes(QWidget* parent, QSettings* settings, QString& text)
 	if (!dlg) {
 		dlg = new SwapAxesDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(SwapAxesOptions());
+		dlg->loadSettings();
 	}
 
 	if (dlg->exec() != QDialog::Accepted) {

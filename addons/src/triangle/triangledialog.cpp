@@ -748,7 +748,7 @@ TriangleOptions TriangleDialog::options()
 	return options;
 }
 
-void TriangleDialog::loadSettings(const TriangleOptions& defaultOptions)
+void TriangleDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -763,7 +763,7 @@ void TriangleDialog::loadSettings(const TriangleOptions& defaultOptions)
 	}
 
 	TriangleOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

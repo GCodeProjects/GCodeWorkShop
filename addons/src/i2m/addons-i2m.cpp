@@ -23,7 +23,6 @@
 
 #include "addons-i2m.h"
 #include "i2mdialog.h"  // for I2MDialog
-#include "i2moptions.h" // for I2MOptions
 
 
 void Addons::doI2M(QWidget* parent, QSettings* settings)
@@ -35,7 +34,7 @@ void Addons::doI2M(QWidget* parent, QSettings* settings)
 	if (!dlg) {
 		dlg = new I2MDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(I2MOptions());
+		dlg->loadSettings();
 	}
 
 	dlg->show();

@@ -54,7 +54,8 @@ bool Addons::doCleanUp(QWidget* parent, QSettings* settings,  QString& tx)
 		        << QObject::tr("Lines with: '(comment)")
 		        << QObject::tr("Any: (comment)")
 		        << QObject::tr("Empty lines:");
-		dlg->loadSettings(opt);
+		dlg->setOptions(opt);
+		dlg->loadSettings();
 	}
 
 	dlg->setText(tx);

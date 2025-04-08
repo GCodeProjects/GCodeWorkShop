@@ -48,7 +48,7 @@ public:
 	void setOptions(const ChamferOptions& options);
 	ChamferOptions options();
 
-	void loadSettings(const ChamferOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 protected slots:

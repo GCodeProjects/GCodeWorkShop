@@ -51,19 +51,19 @@ RenumberOptions::RenumberOptions() :
 {
 }
 
-void RenumberOptions::load(QSettings* settings, const RenumberOptions& defaultOptions)
+void RenumberOptions::load(QSettings* settings)
 {
-	applyWidth = settings->value(CFG_KEY_APPLY_WIDTH, defaultOptions.applyWidth).toBool();
-	from = settings->value(CFG_KEY_FROM, defaultOptions.from).toInt();
-	inc = settings->value(CFG_KEY_INC, defaultOptions.inc).toInt();
-	mode = settings->value(CFG_KEY_MODE, defaultOptions.mode).toInt();
-	startAt = settings->value(CFG_KEY_START, defaultOptions.startAt).toInt();
-	to = settings->value(CFG_KEY_TO, defaultOptions.to).toInt();
-	renumComm = settings->value(CFG_KEY_RENUM_WITH_COMM, defaultOptions.renumComm).toBool();
-	renumEmpty = settings->value(CFG_KEY_RENUM_EMPTY, defaultOptions.renumEmpty).toBool();
-	renumMarked = settings->value(CFG_KEY_RENUM_MARKED, defaultOptions.renumMarked).toBool();
-	keepExisting = settings->value(CFG_KEY_KEEP_EXISTING, defaultOptions.keepExisting).toBool();
-	width = settings->value(CFG_KEY_WIDTH, defaultOptions.width).toInt();
+	applyWidth = settings->value(CFG_KEY_APPLY_WIDTH, applyWidth).toBool();
+	from = settings->value(CFG_KEY_FROM, from).toInt();
+	inc = settings->value(CFG_KEY_INC, inc).toInt();
+	mode = settings->value(CFG_KEY_MODE, mode).toInt();
+	startAt = settings->value(CFG_KEY_START, startAt).toInt();
+	to = settings->value(CFG_KEY_TO, to).toInt();
+	renumComm = settings->value(CFG_KEY_RENUM_WITH_COMM, renumComm).toBool();
+	renumEmpty = settings->value(CFG_KEY_RENUM_EMPTY, renumEmpty).toBool();
+	renumMarked = settings->value(CFG_KEY_RENUM_MARKED, renumMarked).toBool();
+	keepExisting = settings->value(CFG_KEY_KEEP_EXISTING, keepExisting).toBool();
+	width = settings->value(CFG_KEY_WIDTH, width).toInt();
 }
 
 void RenumberOptions::save(QSettings* settings)

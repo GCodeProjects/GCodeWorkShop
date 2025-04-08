@@ -32,7 +32,7 @@ struct DotOptions {
 	bool    convert;
 	int     divider;
 
-	void load(QSettings* settings, const DotOptions& defaultOptions);
+	void load(QSettings* settings);
 	void save(QSettings* settings);
 };
 

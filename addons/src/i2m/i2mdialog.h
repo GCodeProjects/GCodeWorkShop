@@ -48,7 +48,7 @@ public:
 	void setOptions(const I2MOptions& options);
 	I2MOptions options();
 
-	void loadSettings(const I2MOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 protected slots:

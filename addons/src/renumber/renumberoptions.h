@@ -45,7 +45,7 @@ struct RenumberOptions {
 	bool    renumMarked;
 	bool    keepExisting;
 
-	void load(QSettings* settings, const RenumberOptions& defaultOptions);
+	void load(QSettings* settings);
 	void save(QSettings* settings);
 };
 

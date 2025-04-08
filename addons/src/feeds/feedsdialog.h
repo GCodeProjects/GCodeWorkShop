@@ -49,7 +49,7 @@ public:
 	void setOptions(const FeedsOptions& options);
 	FeedsOptions options();
 
-	void loadSettings(const FeedsOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 protected:

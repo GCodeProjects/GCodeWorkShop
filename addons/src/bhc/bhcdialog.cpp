@@ -505,7 +505,7 @@ BHCOptions BHCDialog::options()
 	return options;
 }
 
-void BHCDialog::loadSettings(const BHCOptions& defaultOptions)
+void BHCDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -520,7 +520,7 @@ void BHCDialog::loadSettings(const BHCOptions& defaultOptions)
 	}
 
 	BHCOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

@@ -33,7 +33,7 @@ struct BHCOptions {
 	BHCTabOptions   red;
 	BHCTabOptions   yellow;
 
-	void load(QSettings* settings, const BHCOptions& defaultOptions);
+	void load(QSettings* settings);
 	void save(QSettings* settings);
 };
 

@@ -52,7 +52,7 @@ public:
 	void setOptions(const TriangleOptions& options);
 	TriangleOptions options();
 
-	void loadSettings(const TriangleOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 protected:

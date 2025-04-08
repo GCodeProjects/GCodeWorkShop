@@ -43,7 +43,7 @@ int Addons::doDot(QWidget* parent, QSettings* settings,  QString& tx)
 	if (!dlg) {
 		dlg = new DotDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(DotOptions());
+		dlg->loadSettings();
 	}
 
 	if (dlg->exec() != QDialog::Accepted) {

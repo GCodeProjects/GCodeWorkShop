@@ -40,7 +40,7 @@ struct TriangleOptions {
 	InOut   sideB;
 	InOut   sideC;
 
-	void load(QSettings* settings, const TriangleOptions& defaultOptions);
+	void load(QSettings* settings);
 	void save(QSettings* settings);
 };
 

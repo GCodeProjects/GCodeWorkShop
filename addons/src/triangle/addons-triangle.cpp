@@ -23,7 +23,6 @@
 
 #include "addons-triangle.h"
 #include "triangledialog.h"     // for TriangleDialog
-#include "triangleoptions.h"    // for TriangleOptions
 
 
 void Addons::doTriangle(QWidget* parent, QSettings* settings)
@@ -35,7 +34,7 @@ void Addons::doTriangle(QWidget* parent, QSettings* settings)
 	if (!dlg) {
 		dlg = new TriangleDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(TriangleOptions());
+		dlg->loadSettings();
 	}
 
 	dlg->show();

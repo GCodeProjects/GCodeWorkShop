@@ -48,7 +48,7 @@ public:
 	void setOptions(const DotOptions& options);
 	DotOptions options();
 
-	void loadSettings(const DotOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 private slots:

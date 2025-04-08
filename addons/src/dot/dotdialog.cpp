@@ -127,7 +127,7 @@ DotOptions DotDialog::options()
 	return options;
 }
 
-void DotDialog::loadSettings(const DotOptions& defaultOptions)
+void DotDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -142,7 +142,7 @@ void DotDialog::loadSettings(const DotOptions& defaultOptions)
 	}
 
 	DotOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

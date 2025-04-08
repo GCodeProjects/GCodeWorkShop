@@ -48,7 +48,7 @@ public:
 	void setOptions(const RenumberOptions& options);
 	RenumberOptions options();
 
-	void loadSettings(const RenumberOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 private slots:

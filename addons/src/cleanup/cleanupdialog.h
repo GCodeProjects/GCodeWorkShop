@@ -50,7 +50,7 @@ public:
 	void setOptions(const CleanUpOptions& options);
 	CleanUpOptions options();
 
-	void loadSettings(const CleanUpOptions& defaultOptions);
+	void loadSettings();
 	void saveSettings(bool saveOptions = true);
 
 private:

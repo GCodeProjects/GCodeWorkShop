@@ -214,7 +214,7 @@ RenumberOptions RenumberDialog::options()
 	return options;
 }
 
-void RenumberDialog::loadSettings(const RenumberOptions& defaultOptions)
+void RenumberDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -229,7 +229,7 @@ void RenumberDialog::loadSettings(const RenumberOptions& defaultOptions)
 	}
 
 	RenumberOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

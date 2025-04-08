@@ -42,7 +42,7 @@ bool Addons::doRenumber(QWidget* parent, QSettings* settings, QString& tx)
 	if (!dlg) {
 		dlg = new RenumberDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(RenumberOptions());
+		dlg->loadSettings();
 	}
 
 	if (dlg->exec() != QDialog::Accepted) {

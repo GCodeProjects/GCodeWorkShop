@@ -23,7 +23,6 @@
 
 #include "addons-feeds.h"
 #include "feedsdialog.h"    // for FeedsDialog
-#include "feedsoptions.h"   // for FeedsOptions
 
 
 void Addons::doFeeds(QWidget* parent, QSettings* settings)
@@ -35,7 +34,7 @@ void Addons::doFeeds(QWidget* parent, QSettings* settings)
 	if (!dlg) {
 		dlg = new FeedsDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(FeedsOptions());
+		dlg->loadSettings();
 	}
 
 	dlg->show();

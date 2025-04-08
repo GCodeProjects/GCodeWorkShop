@@ -270,7 +270,7 @@ CleanUpOptions CleanUpDialog::options()
 	return options;
 }
 
-void CleanUpDialog::loadSettings(const CleanUpOptions& defaultOptions)
+void CleanUpDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -285,7 +285,7 @@ void CleanUpDialog::loadSettings(const CleanUpOptions& defaultOptions)
 	}
 
 	CleanUpOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

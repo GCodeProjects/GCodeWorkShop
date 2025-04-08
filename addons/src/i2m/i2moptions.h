@@ -36,7 +36,7 @@ struct I2MOptions {
 	InOut   mm;
 	InOut   inch;
 
-	void load(QSettings* settings, const I2MOptions& defaultOptions);
+	void load(QSettings* settings);
 	void save(QSettings* settings);
 };
 

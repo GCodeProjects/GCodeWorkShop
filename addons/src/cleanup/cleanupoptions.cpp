@@ -36,11 +36,11 @@ CleanUpOptions::CleanUpOptions() :
 {
 }
 
-void CleanUpOptions::load(QSettings* settings, const CleanUpOptions& defaultOptions)
+void CleanUpOptions::load(QSettings* settings)
 {
-	comments = settings->value(CFG_KEY_COMMENTS, defaultOptions.comments).toStringList();
-	expressions = settings->value(CFG_KEY_EXPRESSIONS, defaultOptions.expressions).toStringList();
-	selected = settings->value(CFG_KEY_SELECTED, defaultOptions.selected).toStringList();
+	comments = settings->value(CFG_KEY_COMMENTS, comments).toStringList();
+	expressions = settings->value(CFG_KEY_EXPRESSIONS, expressions).toStringList();
+	selected = settings->value(CFG_KEY_SELECTED, selected).toStringList();
 }
 
 void CleanUpOptions::save(QSettings* settings)

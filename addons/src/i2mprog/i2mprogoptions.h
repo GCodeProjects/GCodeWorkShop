@@ -32,7 +32,7 @@ struct I2MProgOptions {
 	int     prec;
 	QString axes;
 
-	void load(QSettings* settings, const I2MProgOptions& defaultOptions);
+	void load(QSettings* settings);
 	void save(QSettings* settings);
 };
 

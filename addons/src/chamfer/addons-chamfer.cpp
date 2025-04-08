@@ -23,7 +23,6 @@
 
 #include "addons-chamfer.h"
 #include "chamferdialog.h"  // for ChamferDialog
-#include "chamferoptions.h" // for ChamferOptions
 
 
 void Addons::doChamfer(QWidget* parent, QSettings* settings)
@@ -35,7 +34,7 @@ void Addons::doChamfer(QWidget* parent, QSettings* settings)
 	if (!dlg) {
 		dlg = new ChamferDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(ChamferOptions());
+		dlg->loadSettings();
 	}
 
 	dlg->show();

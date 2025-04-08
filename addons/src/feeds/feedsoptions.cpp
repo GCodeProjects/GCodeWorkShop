@@ -49,21 +49,21 @@ FeedsOptions::FeedsOptions() :
 {
 }
 
-void FeedsOptions::load(QSettings* settings, const FeedsOptions& defaultOptions)
+void FeedsOptions::load(QSettings* settings)
 {
-	diam.value = settings->value(CFG_KEY_DIAM_VALUE, defaultOptions.diam.value).toDouble();
-	diam.in = settings->value(CFG_KEY_DIAM_IN, defaultOptions.diam.in).toBool();
-	feed.value = settings->value(CFG_KEY_FEED_VALUE, defaultOptions.feed.value).toDouble();
-	feed.in = settings->value(CFG_KEY_FEED_IN, defaultOptions.feed.in).toBool();
-	Fz.value = settings->value(CFG_KEY_FZ_VALUE, defaultOptions.Fz.value).toDouble();
-	Fz.in = settings->value(CFG_KEY_FZ_IN, defaultOptions.Fz.in).toBool();
-	speed.value = settings->value(CFG_KEY_SPEED_VALUE, defaultOptions.speed.value).toDouble();
-	speed.in = settings->value(CFG_KEY_SPEED_IN, defaultOptions.speed.in).toBool();
-	Vc.value = settings->value(CFG_KEY_VC_VALUE, defaultOptions.Vc.value).toDouble();
-	Vc.in = settings->value(CFG_KEY_VC_IN, defaultOptions.Vc.in).toBool();
-	useInch = settings->value(CFG_KEY_USE_INCH, defaultOptions.useInch).toBool();
-	z.value = settings->value(CFG_KEY_Z_VALUE, defaultOptions.z.value).toDouble();
-	z.in = settings->value(CFG_KEY_Z_IN, defaultOptions.z.in).toBool();
+	diam.value = settings->value(CFG_KEY_DIAM_VALUE, diam.value).toDouble();
+	diam.in = settings->value(CFG_KEY_DIAM_IN, diam.in).toBool();
+	feed.value = settings->value(CFG_KEY_FEED_VALUE, feed.value).toDouble();
+	feed.in = settings->value(CFG_KEY_FEED_IN, feed.in).toBool();
+	Fz.value = settings->value(CFG_KEY_FZ_VALUE, Fz.value).toDouble();
+	Fz.in = settings->value(CFG_KEY_FZ_IN, Fz.in).toBool();
+	speed.value = settings->value(CFG_KEY_SPEED_VALUE, speed.value).toDouble();
+	speed.in = settings->value(CFG_KEY_SPEED_IN, speed.in).toBool();
+	Vc.value = settings->value(CFG_KEY_VC_VALUE, Vc.value).toDouble();
+	Vc.in = settings->value(CFG_KEY_VC_IN, Vc.in).toBool();
+	useInch = settings->value(CFG_KEY_USE_INCH, useInch).toBool();
+	z.value = settings->value(CFG_KEY_Z_VALUE, z.value).toDouble();
+	z.in = settings->value(CFG_KEY_Z_IN, z.in).toBool();
 }
 
 void FeedsOptions::save(QSettings* settings)

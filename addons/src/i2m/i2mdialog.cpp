@@ -226,7 +226,7 @@ I2MOptions I2MDialog::options()
 	return options;
 }
 
-void I2MDialog::loadSettings(const I2MOptions& defaultOptions)
+void I2MDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -241,7 +241,7 @@ void I2MDialog::loadSettings(const I2MOptions& defaultOptions)
 	}
 
 	I2MOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 

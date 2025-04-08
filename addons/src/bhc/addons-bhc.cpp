@@ -23,7 +23,6 @@
 
 #include "addons-bhc.h"
 #include "bhcdialog.h"  // for BHCDialog
-#include "bhcoptions.h" // for BHCOptions
 
 
 void Addons::doBhc(QWidget* parent, QSettings* settings)
@@ -35,7 +34,7 @@ void Addons::doBhc(QWidget* parent, QSettings* settings)
 	if (!dlg) {
 		dlg = new BHCDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(BHCOptions());
+		dlg->loadSettings();
 	}
 
 	dlg->show();

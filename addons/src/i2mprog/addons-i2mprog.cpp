@@ -43,7 +43,7 @@ int Addons::doI2MProg(QWidget* parent, QSettings* settings,  QString& tx)
 	if (!dlg) {
 		dlg = new I2MProgDialog(parent, settings);
 		dlg->setObjectName(key);
-		dlg->loadSettings(I2MProgOptions());
+		dlg->loadSettings();
 	}
 
 	if (dlg->exec() != QDialog::Accepted) {

@@ -324,7 +324,7 @@ ChamferOptions ChamferDialog::options()
 	return options;
 }
 
-void ChamferDialog::loadSettings(const ChamferOptions& defaultOptions)
+void ChamferDialog::loadSettings()
 {
 	if (mSettings.isNull()) {
 		return;
@@ -339,7 +339,7 @@ void ChamferDialog::loadSettings(const ChamferOptions& defaultOptions)
 	}
 
 	ChamferOptions opt;
-	opt.load(mSettings, defaultOptions);
+	opt.load(mSettings);
 
 	mSettings->endGroup();
 
