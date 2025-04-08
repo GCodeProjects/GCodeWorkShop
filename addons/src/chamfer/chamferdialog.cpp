@@ -332,9 +332,11 @@ void ChamferDialog::loadSettings(const ChamferOptions& defaultOptions)
 
 	mSettings->beginGroup(CFG_SECTION);
 
-	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-	setGeometry(QRect(pos, size));
+	if (mSettings->contains(CFG_KEY_POS)) {
+		QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+		QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+		setGeometry(QRect(pos, size));
+	}
 
 	ChamferOptions opt;
 	opt.load(mSettings, defaultOptions);

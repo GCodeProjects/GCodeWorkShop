@@ -96,9 +96,11 @@ void I2MProgDialog::loadSettings(const I2MProgOptions& defaultOptions)
 
 	mSettings->beginGroup(CFG_SECTION);
 
-	QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
-	QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
-	setGeometry(QRect(pos, size));
+	if (mSettings->contains(CFG_KEY_POS)) {
+		QPoint pos = mSettings->value(CFG_KEY_POS, geometry().topLeft()).toPoint();
+		QSize size = mSettings->value(CFG_KEY_SIZE, geometry().size()).toSize();
+		setGeometry(QRect(pos, size));
+	}
 
 	I2MProgOptions opt;
 	opt.load(mSettings, defaultOptions);
