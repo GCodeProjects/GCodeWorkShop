@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -21,41 +21,26 @@
 #ifndef UTILS_SWAPAXES_H
 #define UTILS_SWAPAXES_H
 
-#include <QString>          // for QString
-#include <QTextDocument>    // for QTextDocument, QTextDocument::FindFlags
+#include <functional>   // for function
 
-class QPlainTextEdit;
+#include <QString>	// for QString
 
 struct SwapAxesOptions;
 
 
-enum {
-	COMMENT_ID_UNKNOWN,
-	COMMENT_ID_BRACES,
-	COMMENT_ID_SEMYCOLON
-};
-
-
 namespace Utils {
-void swapAxes(QPlainTextEdit* textEdit,
-              bool highlightChanges,
-              int highlightColor,
-              int commentId,
-              const SwapAxesOptions& opt);
+bool swapAxes(QString& text, const SwapAxesOptions& opt, const std::function<bool (int)>& interrupt);
 
-bool swapAxes(QPlainTextEdit* textEdit,
-              bool underlineChanges,
-              int underlineColor,
-              int commentId,
+bool swapAxes(QString& text,
               const QString& textToFind,
               const QString& replacedText,
+              bool checkBound,
               double min,
               double max,
               int oper,
               double modifier,
-              QTextDocument::FindFlags options,
-              bool ignoreComments,
-              int prec);
+              int prec,
+              const std::function<bool(int)>& interrupt);
 }
 
 #endif // UTILS_SWAPAXES_H

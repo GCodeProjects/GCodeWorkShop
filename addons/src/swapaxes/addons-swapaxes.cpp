@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -18,9 +18,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <functional>   // for function
+
 #include <QDialog>  // for QDialog, QDialog::Accepted
 #include <QString>  // for QString
 #include <QWidget>  // for QWidget
+
+#include <ui/longjobhelper.h>   // for LongJobHelper, LongJobHelper::CANCEL
 
 #include "addons-swapaxes.h"
 #include "swapaxesdialog.h"     // for SwapAxesDialog
@@ -28,9 +32,8 @@
 #include "utils-swapaxes.h"     // for swapAxes, COMMENT_ID_UNKNOWN
 
 
-int Addons::doSwapAxes(QWidget* parent, QSettings* settings, QPlainTextEdit* textEdit)
+bool Addons::doSwapAxes(QWidget* parent, QSettings* settings, QString& text)
 {
-	int result = 0;
 	QString key = "SwapAxesDialog";
 	SwapAxesDialog* dlg;
 	dlg = parent->findChild<SwapAxesDialog*>(key);
@@ -41,10 +44,19 @@ int Addons::doSwapAxes(QWidget* parent, QSettings* settings, QPlainTextEdit* tex
 		dlg->loadSettings(SwapAxesOptions());
 	}
 
-	if (dlg->exec() == QDialog::Accepted) {
-		Utils::swapAxes(textEdit, false, 40000, COMMENT_ID_UNKNOWN, dlg->options());
+	if (dlg->exec() != QDialog::Accepted) {
+		return false;
 	}
 
+
+	LongJobHelper helper{parent};
+	helper.begin(text.length(), QCoreApplication::translate("Addons::Actions", "Axis exchange"), 20);
+
+	bool changed = Utils::swapAxes(text, dlg->options(), [&helper](int pos) -> bool{
+		return helper.check(pos) == LongJobHelper::CANCEL;
+	});
+
+	helper.end();
 	dlg->deleteLater();
-	return result;
+	return changed;
 }

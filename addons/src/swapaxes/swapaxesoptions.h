@@ -41,6 +41,7 @@ struct SwapAxesOptions {
 	} limit;
 
 	enum Operation {
+		Nop = -1,
 		Add,
 		Subtract,
 		Multiply,

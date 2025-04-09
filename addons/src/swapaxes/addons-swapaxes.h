@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -20,13 +20,13 @@
 #ifndef ADDONS_SWAPAXES_H
 #define ADDONS_SWAPAXES_H
 
-class QPlainTextEdit;
 class QSettings;
+class QString;
 class QWidget;
 
 
 namespace Addons {
-int doSwapAxes(QWidget* parent, QSettings* settings,  QPlainTextEdit* textEdit);
+bool doSwapAxes(QWidget* parent, QSettings* settings,  QString& text);
 }
 
 #endif // ADDONS_SWAPAXES_H

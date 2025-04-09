@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2006-2018 by Artur Kozioł, artkoz78@gmail.com
- *  Copyright (C) 2023 Nick Egorrov, nicegorov@yandex.ru
+ *  Copyright (C) 2023-2025 Nick Egorrov, nicegorov@yandex.ru
  *
  *  This file is part of GCodeWorkShop.
  *
@@ -18,18 +18,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QChar>                    // for operator==, QChar
-#include <QColor>                   // for QColor
-#include <QLatin1Char>              // for QLatin1Char
-#include <QPlainTextEdit>           // for QPlainTextEdit
-#include <QRegularExpression>       // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
-#include <QString>                  // for QString, operator+, operator!=, QCharRef
-#include <QTextBlock>               // for QTextBlock
-#include <QTextCharFormat>          // for QTextCharFormat, QTextCharFormat::DotLine
-#include <QTextCursor>              // for QTextCursor, QTextCursor::Document, QTextCursor::KeepAnchor, QTextCursor::M...
-#include <QTextDocument>            // for QTextDocument, QTextDocument::FindFlags, QTextDocument::FindCaseSensitively
-#include <QTextDocumentFragment>    // for QTextDocumentFragment
-#include <QtGlobal>                 // for QFlags
+#include <algorithm>	// for max, min
+
+#include <QChar>                            // for operator==, QChar
+#include <QRegularExpression>               // for QRegularExpression, QRegularExpression::CaseInsensitiveOption
+#include <QRegularExpressionMatch>          // for QRegularExpressionMatch
+#include <QRegularExpressionMatchIterator>  // for QRegularExpressionMatchIterator
+#include <QString>                          // for QString, operator+, operator!=, QCharRef
 
 #include <utils/removezeros.h>  // for Utils::removeZeros
 
@@ -37,228 +32,134 @@
 #include "utils-swapaxes.h"
 
 
-void Utils::swapAxes(QPlainTextEdit* textEdit,
-                     bool highlightChanges,
-                     int highlightColor,
-                     int commentId,
-                     const SwapAxesOptions& opt)
+#define APOSTROPHE_COMMENT_REGEXPR  "\\'[^\\n\\r]*\\'"
+#define GCODE_COMMENT_REGEXPR       "\\([^\\n\\r]*\\)"
+#define SINUMERIK_COMMENT_REGEXPR   ";[^\\n\\r]*$"
+// Group 2: an word
+// Group 3: an address
+// Group 4: an value
+//                                         |<     sign      >| |<     digits-dot-digits     >| |<  digits-dot  >| |<  dot-digits  >| |<   digits  >|
+#define WORD_REGEXPR    "(\\B|\\b)((%1|%2)([ \\t]*[-+]?[ \\t]*((\\d[ \\t\\d]*\\.[ \\t\\d]*\\d)|(\\d[ \\t\\d]*\\.)|(\\.[ \\t\\d]*\\d)|([ \\t\\d]*\\d))))"
+
+
+bool Utils::swapAxes(QString& text, const SwapAxesOptions& opt, const std::function<bool(int)>& interrupt)
 {
-	QString textToFind = opt.from;
-	QString replacedText = opt.to;
-	double min = opt.limit.enable ? opt.limit.min : -999999;
-	double max = opt.limit.enable ? opt.limit.max : 999999;
-	int oper = opt.convert.enable ? opt.convert.operation : -1;
+	double min = std::min(opt.limit.min, opt.limit.max);
+	double max = std::max(opt.limit.min, opt.limit.max);
+	int oper = opt.convert.enable ? opt.convert.operation : SwapAxesOptions::Nop;
 	double modifier = opt.convert.enable ? opt.convert.value : 0;
-	int precision = opt.precision;
-	bool ignoreComments = true;
-	QTextDocument::FindFlags findOptions = QTextDocument::FindFlags();
-
-	// Original code from MdiChild::doSwapAxes()
-	QTextCursor startCursor = textEdit->textCursor();
-	startCursor.beginEditBlock();
-
-	if (textToFind != replacedText) {
-		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-		                replacedText, QString("~%1").arg(replacedText), min, max, -1, modifier, findOptions,
-		                ignoreComments, precision);
-		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-		                textToFind, replacedText, min, max, oper, modifier, findOptions, ignoreComments, precision);
-		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-		                QString("~%1").arg(replacedText), textToFind, -999999, 0, -1, 0, findOptions, ignoreComments,
-		                precision);
-	} else {
-		Utils::swapAxes(textEdit, highlightChanges, highlightColor, commentId,
-		                textToFind, replacedText, min, max, oper, modifier, findOptions, ignoreComments, precision);
-	}
-
-	startCursor.movePosition(QTextCursor::StartOfLine);
-	startCursor.endEditBlock();
-	textEdit->setTextCursor(startCursor);
+	return Utils::swapAxes(text, opt.from, opt.to,
+	                       opt.limit.enable, min, max,
+	                       oper, modifier, opt.precision,
+	                       interrupt);
 }
 
-bool Utils::swapAxes(QPlainTextEdit* textEdit,
-                     bool underlineChanges,
-                     int underlineColor,
-                     int commentId,
+bool Utils::swapAxes(QString& text,
                      const QString& textToFind,
                      const QString& replacedText,
+                     bool checkBound,
                      double min,
                      double max,
                      int oper,
                      double modifier,
-                     QTextDocument::FindFlags options,
-                     bool ignoreComments,
-                     int prec)
+                     int prec,
+                     const std::function<bool (int)>& interrupt)
 {
-	double val, val1;
-	QRegularExpression regex;
-	bool found = false;
-	bool ok, inSelection;
-	QString newText, foundText;
-	bool inComment;
-	int commentPos;
-	QTextDocument* document;
-	int cursorStart, cursorEnd;
-
-	cursorStart = 0;
-	cursorEnd = 0;
-
-	if (textEdit->isReadOnly()) {
-		return false;
-	}
-
 	if (textToFind.isEmpty()) {
 		return false;
 	}
 
-	if (!(options & QTextDocument::FindCaseSensitively)) {
-		regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
-	}
+	bool changed = false;
+	QRegularExpression regex{
+		QString(
+		    WORD_REGEXPR
+		    "|"
+		    GCODE_COMMENT_REGEXPR
+		    "|"
+		    APOSTROPHE_COMMENT_REGEXPR
+		    "|"
+		    SINUMERIK_COMMENT_REGEXPR
+		).arg(textToFind, replacedText),
+		QRegularExpression::CaseInsensitiveOption
+	};
+	QRegularExpressionMatchIterator iterator = regex.globalMatch(text);
+	int pos = 0;
+	QString result;
 
-	inSelection = textEdit->textCursor().hasSelection();
-
-	if (inSelection) {
-		cursorStart = textEdit->textCursor().selectionStart();
-		cursorEnd = textEdit->textCursor().selectionEnd();
-		document = new QTextDocument(textEdit->textCursor().selectedText(), textEdit);
-	} else {
-		document = textEdit->document();
-	}
-
-	QTextCursor cursor(document);
-	cursor.setPosition(0);
-
-	do {
-		if ((oper == -1) && (min == -999999)) {
-			regex.setPattern(QString("(%1)(?=[-=#<.0-9]{0,1}[0-9]{0,}[.]{0,1}[0-9]{0,})(?![A-Z$ ])").arg(
-			                     textToFind));
-		} else {
-			regex.setPattern(QString("(%1)[-]{0,1}[0-9]{0,}[0-9.]{1,1}[0-9]{0,}").arg(textToFind));
+	while (iterator.hasNext()) {
+		if (interrupt(pos)) {
+			return false;
 		}
 
-		cursor = document->find(regex, cursor, options);
-		found = !cursor.isNull();
+		QRegularExpressionMatch match = iterator.next();
 
-		if (found && ignoreComments) {
-			QString cur_line = cursor.block().text();
-			int cur_line_column = cursor.columnNumber();
-
-			if (commentId == COMMENT_ID_SEMYCOLON) {
-				commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-			} else if (commentId == COMMENT_ID_BRACES) {
-				commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
-			} else {
-				commentPos  = cur_line.indexOf(QLatin1Char('('), 0);
-
-				if (commentPos > cur_line_column) {
-					commentPos = -1;
-				}
-
-				if (commentPos < 0) {
-					commentPos  = cur_line.indexOf(QLatin1Char(';'), 0);
-				}
-			}
-
-			if (commentPos < 0) {
-				commentPos = cur_line_column + 1;
-			}
-
-			inComment = (commentPos < cur_line_column);
-		} else {
-			inComment = false;
+		if (match.capturedLength(2) == 0) {
+			continue;
 		}
 
-		if (found && !inComment) {
-			foundText = cursor.selectedText();
-			foundText.remove(textToFind);
+		QString digits = match.captured(4);
+		digits.remove(' ');
+		digits.remove('\t');
+		bool ok;
+		double val = digits.toDouble(&ok);
 
-			val = 0;
-			ok = false;
+		if (!ok) {
+			continue;
+		}
 
-			val1 = foundText.toDouble(&ok);
+		if (checkBound && (val < min || val > max)) {
+			continue;
+		}
 
-			if (min > -999999) {
-				if (!ok) {
-					continue;
-				}
+		QString word;
 
-				if (!((val1 >= min) && (val1 <= max))) {
-					continue;
-				}
-			}
-
-			if ((modifier == 0) && (oper == 3)) { //divide by 0
-				modifier = 1;
-			}
-
+		if (match.captured(3) == textToFind) {
 			switch (oper) {
-			case 0:
-				val = val1 + modifier;
+			case SwapAxesOptions::Add:
+				val += modifier;
 				break;
 
-			case 1:
-				val = val1 - modifier;
+			case SwapAxesOptions::Subtract:
+				val -= modifier;
 				break;
 
-			case 2:
-				val = val1 * modifier;
+			case SwapAxesOptions::Multiply:
+				val *= modifier;
 				break;
 
-			case 3:
-				val = val1 / modifier;
+			case SwapAxesOptions::Divide:
+				if (modifier != 0) {
+					val /= modifier;
+				}
+
 				break;
 
 			default:
-				val = val1;
-				break;
+				;
 			}
 
-			if (ok) {
-				if (replacedText == "#" || replacedText == "O" || replacedText == "o" || replacedText == "N"
-				        || replacedText == "n") {
-					newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
-
-					if (newText[newText.length() - 1] == '.') {
-						newText = newText.remove((newText.length() - 1), 1);
-					}
-				} else {
-					newText = replacedText + removeZeros(QString("%1").arg(val, 0, 'f', prec));
-				}
-			} else {
-				newText = replacedText;
-			}
-
-
-			if (underlineChanges) {
-				QTextCharFormat format = cursor.charFormat();
-				format.setUnderlineStyle(QTextCharFormat::DotLine);
-				format.setUnderlineColor(QColor(underlineColor));
-				cursor.mergeCharFormat(format);
-			}
-
-			cursor.insertText(newText);
+			word = replacedText;
+		} else {
+			word = textToFind;
 		}
 
-	} while (found);
+		word.append(removeZeros(QString("%1").arg(val, 0, 'f', prec)));
 
-
-	if (inSelection) {
-		cursor = QTextCursor(document);
-		cursor.select(QTextCursor::Document);
-
-		if (cursorStart > cursorEnd) {
-			cursorStart = cursorEnd;
+		if ((word == "#" ||
+		        word == "O" ||
+		        word == "o" ||
+		        word == "N" ||
+		        word == "n") && word.endsWith('.')) {
+			word.chop(1);
 		}
 
-		cursorEnd = cursorStart + cursor.selectedText().length();
-		textEdit->textCursor().insertFragment(cursor.selection());
-		delete (document);
-
-		cursor = textEdit->textCursor();  //restore selection
-		cursor.setPosition(cursorStart, QTextCursor::MoveAnchor);
-		cursor.setPosition(cursorEnd, QTextCursor::KeepAnchor);
-		textEdit->setTextCursor(cursor);
+		result.append(text.mid(pos, match.capturedStart(2) - pos));
+		result.append(word);
+		pos = match.capturedEnd(2);
+		changed = true;
 	}
 
-	return found;
+	result.append(text.mid(pos));
+	text = result;
+	return changed;
 }

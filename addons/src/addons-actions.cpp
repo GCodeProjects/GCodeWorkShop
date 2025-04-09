@@ -464,11 +464,13 @@ void Addons::Actions::doSwapAxes()
 {
 	Addons::Context ctx;
 
-	if (!ctx.pull(Addons::Context::ALL)) {
+	if (!ctx.pull(Addons::Context::SELECTED_OR_ALL)) {
 		return;
 	}
 
-	Addons::doSwapAxes(GCodeWorkShop::instance(), Medium::instance().settings(), ctx.textEdit());
+	if (Addons::doSwapAxes(GCodeWorkShop::instance(), Medium::instance().settings(), ctx.text())) {
+		ctx.push();
+	}
 }
 
 void Addons::Actions::doTriangle()
