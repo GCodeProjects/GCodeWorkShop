@@ -24,6 +24,8 @@ class QSettings;
 
 
 struct ChamferOptions {
+	ChamferOptions();
+
 	struct InOut {
 		bool    in;
 		double  value;

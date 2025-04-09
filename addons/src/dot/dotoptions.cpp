@@ -28,6 +28,13 @@
 #define CFG_KEY_DIVIDER "Divider"
 
 
+DotOptions::DotOptions() :
+	axes{"XYZUVWCH"},
+	convert{false},
+	divider{3}
+{
+}
+
 void DotOptions::load(QSettings* settings, const DotOptions& defaultOptions)
 {
 	axes = settings->value(CFG_KEY_AXES, defaultOptions.axes).toString();

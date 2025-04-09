@@ -24,6 +24,8 @@ class QSettings;
 
 
 struct FeedsOptions {
+	FeedsOptions();
+
 	bool    useInch;
 
 	struct InOut {

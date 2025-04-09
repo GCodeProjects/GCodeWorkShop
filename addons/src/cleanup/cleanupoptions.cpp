@@ -29,6 +29,13 @@
 #define CFG_KEY_SELECTED    "Selected"
 
 
+CleanUpOptions::CleanUpOptions() :
+	expressions{},
+	comments{},
+	selected{}
+{
+}
+
 void CleanUpOptions::load(QSettings* settings, const CleanUpOptions& defaultOptions)
 {
 	comments = settings->value(CFG_KEY_COMMENTS, defaultOptions.comments).toStringList();

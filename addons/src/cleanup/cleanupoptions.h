@@ -26,6 +26,8 @@ class QSettings;
 
 
 struct CleanUpOptions {
+	CleanUpOptions();
+
 	QStringList expressions;
 	QStringList comments;
 	QStringList selected;

@@ -35,6 +35,20 @@
 #define CFG_KEY_Y       "YCenter"
 
 
+BHCTabOptions::BHCTabOptions() :
+	x{0},
+	y{0},
+	diam{0},
+	start{0},
+	step{0},
+	count{1},
+	rotate{0},
+	mirrorX{false},
+	mirrorY{false},
+	common{false}
+{
+}
+
 void BHCTabOptions::load(QSettings* settings, const BHCTabOptions& defaultOptions)
 {
 	x = settings->value(CFG_KEY_X, defaultOptions.x).toDouble();

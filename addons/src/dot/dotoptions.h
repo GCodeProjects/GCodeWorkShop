@@ -26,6 +26,8 @@ class QSettings;
 
 
 struct DotOptions {
+	DotOptions();
+
 	QString axes;
 	bool    convert;
 	int     divider;

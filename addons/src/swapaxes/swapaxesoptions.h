@@ -27,6 +27,8 @@ class QSettings;
 
 
 struct SwapAxesOptions {
+	SwapAxesOptions();
+
 	QString     from;
 	QString     to;
 	int         precision;

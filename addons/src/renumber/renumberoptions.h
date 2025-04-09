@@ -24,6 +24,8 @@ class QSettings;
 
 
 struct RenumberOptions {
+	RenumberOptions();
+
 	enum RenumberMode {
 		RenumberWithN,
 		RenumberAll,

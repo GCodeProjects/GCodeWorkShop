@@ -26,6 +26,8 @@ class QSettings;
 
 
 struct I2MProgOptions {
+	I2MProgOptions();
+
 	bool    toInch;
 	int     prec;
 	QString axes;

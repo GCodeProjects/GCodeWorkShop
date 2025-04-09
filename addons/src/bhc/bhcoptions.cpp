@@ -29,6 +29,14 @@
 #define CFG_SECTION_YELLOW  "YellowTab"
 
 
+BHCOptions::BHCOptions() :
+	green{},
+	blue{},
+	red{},
+	yellow{}
+{
+}
+
 void BHCOptions::load(QSettings* settings, const BHCOptions& defaultOptions)
 {
 	settings->beginGroup(CFG_SECTION_GREEN);

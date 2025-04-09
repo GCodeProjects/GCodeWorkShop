@@ -28,6 +28,13 @@
 #define CFG_KEY_TO_INCH   "ToInch"
 
 
+I2MProgOptions::I2MProgOptions() :
+	toInch{false},
+	prec{3},
+	axes{"XYZUVW"}
+{
+}
+
 void I2MProgOptions::load(QSettings* settings, const I2MProgOptions& defaultOptions)
 {
 	axes = settings->value(CFG_KEY_AXES, defaultOptions.axes).toString();

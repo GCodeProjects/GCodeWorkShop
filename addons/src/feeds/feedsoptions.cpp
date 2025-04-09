@@ -38,6 +38,17 @@
 #define CFG_KEY_Z_IN        "zIn"
 
 
+FeedsOptions::FeedsOptions() :
+	useInch{false},
+	Vc{true, 100.0},
+	z{true, 1.0},
+	Fz{true, 0.3},
+	diam{true, 32.0},
+	speed{false, 0.0},
+	feed{false, 0.0}
+{
+}
+
 void FeedsOptions::load(QSettings* settings, const FeedsOptions& defaultOptions)
 {
 	diam.value = settings->value(CFG_KEY_DIAM_VALUE, defaultOptions.diam.value).toDouble();

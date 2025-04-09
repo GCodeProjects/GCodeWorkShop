@@ -34,6 +34,15 @@
 #define CFG_KEY_WIDTH_IN        "WidthIn"
 
 
+ChamferOptions::ChamferOptions() :
+	angle{true, 45.0},
+	width{true, 1.0},
+	hight{false, 0.0},
+	minDiam{false, 0.0},
+	maxDiam{true, 32.0}
+{
+}
+
 void ChamferOptions::load(QSettings* settings, const ChamferOptions& defaultOptions)
 {
 	angle.value = settings->value(CFG_KEY_ANGLE_VALUE, defaultOptions.angle.value).toDouble();

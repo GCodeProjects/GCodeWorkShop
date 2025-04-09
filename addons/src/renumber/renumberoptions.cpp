@@ -36,6 +36,21 @@
 #define CFG_KEY_WIDTH           "Width"
 
 
+RenumberOptions::RenumberOptions() :
+	mode{RenumberAll},
+	from{0},
+	to{999999},
+	startAt{10},
+	inc{10},
+	width{6},
+	applyWidth{false},
+	renumEmpty{false},
+	renumComm{false},
+	renumMarked{true},
+	keepExisting{true}
+{
+}
+
 void RenumberOptions::load(QSettings* settings, const RenumberOptions& defaultOptions)
 {
 	applyWidth = settings->value(CFG_KEY_APPLY_WIDTH, defaultOptions.applyWidth).toBool();

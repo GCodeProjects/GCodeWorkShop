@@ -24,6 +24,8 @@ class QSettings;
 
 
 struct BHCTabOptions {
+	BHCTabOptions();
+
 	double  x;
 	double  y;
 	double  diam;

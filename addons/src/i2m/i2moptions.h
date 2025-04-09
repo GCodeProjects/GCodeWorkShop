@@ -24,6 +24,8 @@ class QSettings;
 
 
 struct I2MOptions {
+	I2MOptions();
+
 	bool    toInch;
 
 	struct InOut {

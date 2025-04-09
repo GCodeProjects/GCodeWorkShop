@@ -26,6 +26,8 @@ class QSettings;
 
 
 struct BHCOptions {
+	BHCOptions();
+
 	BHCTabOptions   green;
 	BHCTabOptions   blue;
 	BHCTabOptions   red;

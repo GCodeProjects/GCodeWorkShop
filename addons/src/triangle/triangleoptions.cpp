@@ -38,6 +38,17 @@
 #define CFG_KEY_RIGHT_TRIANGLE  "RightTriangle"
 
 
+TriangleOptions::TriangleOptions() :
+	rightTriangle{true},
+	angleA{false, 0.0},
+	angleB{false, 0.0},
+	angleC{false, 0.0},
+	sideA{false, 0.0},
+	sideB{true, 30.0},
+	sideC{true, 40.0}
+{
+}
+
 void TriangleOptions::load(QSettings* settings, const TriangleOptions& defaultOptions)
 {
 	angleA.in = settings->value(CFG_KEY_ANGLE_A_IN, defaultOptions.angleA.in).toBool();

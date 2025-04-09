@@ -24,6 +24,8 @@ class QSettings;
 
 
 struct TriangleOptions {
+	TriangleOptions();
+
 	bool rightTriangle;
 
 	struct InOut {

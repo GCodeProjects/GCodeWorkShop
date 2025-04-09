@@ -30,6 +30,13 @@
 #define CFG_KEY_TO_INCH     "ToInch"
 
 
+I2MOptions::I2MOptions() :
+	toInch{true},
+	mm{true, 100.0},
+	inch{false, 0.0}
+{
+}
+
 void I2MOptions::load(QSettings* settings, const I2MOptions& defaultOptions)
 {
 	inch.value = settings->value(CFG_KEY_INCH_VALUE, defaultOptions.inch.value).toDouble();

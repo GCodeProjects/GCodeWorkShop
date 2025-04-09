@@ -36,6 +36,17 @@
 #define CFG_KEY_PRECISION           "Precision"
 
 
+SwapAxesOptions::SwapAxesOptions() :
+	from{"C"},
+	to{"Y"},
+	precision{2},
+	fromList{"X", "Y", "Z", "U", "V", "W", "C"},
+	toList{"X", "Y", "Z", "U", "V", "W", "C"},
+	limit{false, -100.0, 100.0},
+	convert{false, Add, 0.0}
+{
+}
+
 void SwapAxesOptions::load(QSettings* settings, const SwapAxesOptions& defaultOptions)
 {
 	convert.enable = settings->value(CFG_KEY_CONVERT_ENABLE, defaultOptions.convert.enable).toBool();
