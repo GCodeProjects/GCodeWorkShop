@@ -157,7 +157,7 @@
         <string>&amp;Close</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../src-common/application.qrc">
+        <iconset resource="../../../gcodeshared/application.qrc">
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
        </property>
        <property name="autoDefault">
@@ -183,7 +183,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../src-common/application.qrc"/>
+  <include location="../../../gcodeshared/application.qrc"/>
  </resources>
  <connections/>
 </ui>

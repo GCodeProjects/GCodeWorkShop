@@ -17,7 +17,7 @@
    <string>Remove text using regular expressions</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../src-common/application.qrc">
+   <iconset resource="../../../gcodeshared/application.qrc">
     <normaloff>:/images/cleanup.png</normaloff>:/images/cleanup.png</iconset>
   </property>
   <property name="modal">
@@ -126,7 +126,7 @@
         <string>&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../src-common/application.qrc">
+        <iconset resource="../../../gcodeshared/application.qrc">
          <normaloff>:/images/cancel.png</normaloff>:/images/cancel.png</iconset>
        </property>
        <property name="autoDefault">
@@ -152,7 +152,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../src-common/application.qrc"/>
+  <include location="../../../gcodeshared/application.qrc"/>
  </resources>
  <connections/>
 </ui>

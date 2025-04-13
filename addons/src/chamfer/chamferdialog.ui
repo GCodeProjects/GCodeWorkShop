@@ -28,7 +28,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../../src-common/application.qrc">:/images/chamfer_big.png</pixmap>
+        <pixmap resource="../../../gcodeshared/application.qrc">:/images/chamfer_big.png</pixmap>
        </property>
       </widget>
      </item>
@@ -153,7 +153,7 @@
         <string>C&amp;ompute</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../src-common/application.qrc">
+        <iconset resource="../../../gcodeshared/application.qrc">
          <normaloff>:/images/funct.png</normaloff>:/images/funct.png</iconset>
        </property>
        <property name="default">
@@ -180,7 +180,7 @@
         <string>&amp;Close</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../src-common/application.qrc">
+        <iconset resource="../../../gcodeshared/application.qrc">
          <normaloff>:/images/window-close.png</normaloff>:/images/window-close.png</iconset>
        </property>
        <property name="autoDefault">
@@ -206,7 +206,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../src-common/application.qrc"/>
+  <include location="../../../gcodeshared/application.qrc"/>
  </resources>
  <connections/>
 </ui>
