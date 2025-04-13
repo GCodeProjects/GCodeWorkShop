@@ -394,7 +394,7 @@ void Addons::Actions::doInsertSpaces()
 	}
 
 	LongJobHelper helper{GCodeWorkShop::instance()};
-	helper.begin(ctx.text().length(), tr("Insert space", "Slow operation title in MDIChild"));
+	helper.begin(ctx.text().length(), tr("Inserting space"));
 
 	int changed = Utils::insertSpaces(ctx.text(), [&helper](int pos) -> bool{
 		return helper.check(pos) == LongJobHelper::CANCEL;
@@ -416,7 +416,7 @@ void Addons::Actions::doRemoveSpaces()
 	}
 
 	LongJobHelper helper{GCodeWorkShop::instance()};
-	helper.begin(ctx.text().length(), tr("Remove space", "Slow operation title in MDIChild"));
+	helper.begin(ctx.text().length(), tr("Removing space"));
 
 	int changed = Utils::removeSpaces(ctx.text(), [&helper](int pos) -> bool{
 		return helper.check(pos) == LongJobHelper::CANCEL;

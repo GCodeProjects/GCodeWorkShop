@@ -27,11 +27,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="mInput">
-       <property name="inputMask">
-        <string>&gt;Aaaaaaaaaaaaaaaaaaaaa; </string>
-       </property>
-      </widget>
+      <widget class="QLineEdit" name="mInput"/>
      </item>
     </layout>
    </item>

@@ -200,7 +200,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Swap: </string>
+        <string>Swap:</string>
        </property>
       </widget>
      </item>
@@ -387,33 +387,6 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="saveAtCloseCheckBox">
-       <property name="text">
-        <string>Remember the values at closing</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <spacer name="horizontalSpacer_3">
@@ -464,7 +437,6 @@
   <tabstop>modifyCheckBox</tabstop>
   <tabstop>operatorComboBox</tabstop>
   <tabstop>modiferDoubleSpinBox</tabstop>
-  <tabstop>saveAtCloseCheckBox</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
