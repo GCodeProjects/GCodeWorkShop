@@ -198,21 +198,82 @@
         <translation>Dreiecke berechnen</translation>
     </message>
     <message>
-        <location filename="../addons/src/addons-actions.cpp" line="264"/>
+        <location filename="../addons/src/addons-actions.cpp" line="237"/>
+        <location filename="../addons/src/addons-actions.cpp" line="259"/>
+        <source>Comments/uncomments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/addons-actions.cpp" line="284"/>
         <source>GCodeWorkShop - compile macro</source>
         <translation>GCodeWorkShop - Kompilierungsmacro</translation>
     </message>
     <message>
-        <location filename="../addons/src/addons-actions.cpp" line="361"/>
-        <source>Insert space</source>
-        <comment>Slow operation title in MDIChild</comment>
-        <translation>Leerzeichen einfügen</translation>
+        <location filename="../addons/src/addons-actions.cpp" line="317"/>
+        <source>Inserting empty lines</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../addons/src/addons-actions.cpp" line="383"/>
+        <location filename="../addons/src/addons-actions.cpp" line="339"/>
+        <source>Removing empty lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/addons-actions.cpp" line="397"/>
+        <source>Inserting space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/addons-actions.cpp" line="419"/>
+        <source>Removing space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert space</source>
+        <translation type="obsolete">Leerzeichen einfügen</translation>
+    </message>
+    <message>
+        <source>Remove space</source>
+        <translation type="obsolete">Leerzeichen löschen</translation>
+    </message>
+    <message>
+        <source>Insert space</source>
+        <comment>Slow operation title in MDIChild</comment>
+        <translation type="vanished">Leerzeichen einfügen</translation>
+    </message>
+    <message>
         <source>Remove space</source>
         <comment>Slow operation title in MDIChild</comment>
-        <translation>Leerzeichen löschen</translation>
+        <translation type="vanished">Leerzeichen löschen</translation>
+    </message>
+    <message>
+        <source>Inch to metric</source>
+        <translation type="obsolete">Inch &lt;&gt; metrisch</translation>
+    </message>
+    <message>
+        <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="68"/>
+        <source>Cleaning up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/dot/addons-dot.cpp" line="54"/>
+        <source>Inserting dots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/i2mprog/addons-i2mprog.cpp" line="54"/>
+        <source>Converting inch to metric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/renumber/addons-renumber.cpp" line="53"/>
+        <source>Renumbering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/swapaxes/addons-swapaxes.cpp" line="53"/>
+        <source>Axis exchange</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -321,7 +382,7 @@
     </message>
     <message>
         <location filename="../addons/src/bhc/bhctab.ui" line="84"/>
-        <source>Roate by (x0.1) :</source>
+        <source>Rotate by (x0.1) :</source>
         <translation>Drehe um (x0.1) :</translation>
     </message>
     <message>
@@ -366,7 +427,7 @@
     </message>
     <message>
         <location filename="../addons/src/bhc/bhctab.ui" line="349"/>
-        <source>Common mirror and roate</source>
+        <source>Common mirror and rotate</source>
         <translation>Zusammen spiegeln und drehen</translation>
     </message>
     <message>
@@ -553,12 +614,12 @@
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../addons/src/cleanup/cleanupdialog.cpp" line="67"/>
+        <location filename="../addons/src/cleanup/cleanupdialog.cpp" line="66"/>
         <source>Delete &amp;row</source>
         <translation>Lösche &amp;Zeile</translation>
     </message>
     <message>
-        <location filename="../addons/src/cleanup/cleanupdialog.cpp" line="70"/>
+        <location filename="../addons/src/cleanup/cleanupdialog.cpp" line="69"/>
         <source>Delete current row</source>
         <translation>Lösche aktuelle Zeile</translation>
     </message>
@@ -599,32 +660,27 @@
         <translation>Füge &amp;Punkt an Adresse ein</translation>
     </message>
     <message>
-        <location filename="../addons/src/dot/dotdialog.ui" line="32"/>
-        <source>&gt;Aaaaaaaaaaaaaaaaaaaaa; </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../addons/src/dot/dotdialog.ui" line="41"/>
+        <location filename="../addons/src/dot/dotdialog.ui" line="37"/>
         <source>Dot</source>
         <translation>Punkt</translation>
     </message>
     <message>
-        <location filename="../addons/src/dot/dotdialog.ui" line="62"/>
+        <location filename="../addons/src/dot/dotdialog.ui" line="58"/>
         <source>&amp;Divide numbers by :</source>
         <translation>&amp;Teile Zahlen durch :</translation>
     </message>
     <message>
-        <location filename="../addons/src/dot/dotdialog.ui" line="69"/>
+        <location filename="../addons/src/dot/dotdialog.ui" line="65"/>
         <source>J&amp;ust insert at end</source>
         <translation>Am &amp;Ende einsetzen</translation>
     </message>
     <message>
-        <location filename="../addons/src/dot/dotdialog.ui" line="96"/>
+        <location filename="../addons/src/dot/dotdialog.ui" line="92"/>
         <source>&amp;Start</source>
         <translation>&amp;Start</translation>
     </message>
     <message>
-        <location filename="../addons/src/dot/dotdialog.ui" line="123"/>
+        <location filename="../addons/src/dot/dotdialog.ui" line="119"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -2735,39 +2791,38 @@ Abbrechen?</translation>
         <translation>Umwandeln zahlen ab Adresse :</translation>
     </message>
     <message>
-        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="35"/>
         <source>Aaaaaaaaaaaaaaa;_</source>
         <oldsource>Aaaaaaaaaaaaaaaaaaaaa;_</oldsource>
-        <translation>Aaaaaaaaaaaaaaa;_</translation>
+        <translation type="vanished">Aaaaaaaaaaaaaaa;_</translation>
     </message>
     <message>
-        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="38"/>
+        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="35"/>
         <source>XYZ</source>
         <oldsource>XYZB</oldsource>
         <translation>XYZ</translation>
     </message>
     <message>
-        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="50"/>
+        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="44"/>
         <source>Prec. :</source>
         <translation>Nachkommastellen :</translation>
     </message>
     <message>
-        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="81"/>
+        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="75"/>
         <source>&amp;Inch to mm</source>
         <translation>&amp;Inch nach mm</translation>
     </message>
     <message>
-        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="94"/>
+        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="88"/>
         <source>&amp;mm to inch</source>
         <translation>&amp;mm nach inch</translation>
     </message>
     <message>
-        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="137"/>
+        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="131"/>
         <source>&amp;Start</source>
         <translation>&amp;Start</translation>
     </message>
     <message>
-        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="161"/>
+        <location filename="../addons/src/i2mprog/i2mprogdialog.ui" line="155"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -3058,17 +3113,17 @@ Abbrechen?</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="49"/>
+        <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="54"/>
         <source>Lines with: &apos;(comment)</source>
         <translation>Linien mit: &apos;(Kommentar)</translation>
     </message>
     <message>
-        <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="50"/>
+        <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="55"/>
         <source>Any: (comment)</source>
         <translation>Irgendwelche: (Kommentar)</translation>
     </message>
     <message>
-        <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="51"/>
+        <location filename="../addons/src/cleanup/addons-cleanup.cpp" line="56"/>
         <source>Empty lines:</source>
         <translation>Leerzeilen:</translation>
     </message>
@@ -3156,17 +3211,27 @@ Abbrechen?</translation>
         <translation>Neu nummerieren von Zeilen mit &apos;N&apos;</translation>
     </message>
     <message>
-        <location filename="../addons/src/renumber/renumberdialog.ui" line="247"/>
+        <location filename="../addons/src/renumber/renumberdialog.ui" line="235"/>
+        <source>Keep existing block numbers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/renumber/renumberdialog.ui" line="238"/>
+        <source>Keep already existing block numbers for empty lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../addons/src/renumber/renumberdialog.ui" line="263"/>
         <source>&amp;Start</source>
         <translation>&amp;Start</translation>
     </message>
     <message>
-        <location filename="../addons/src/renumber/renumberdialog.ui" line="271"/>
+        <location filename="../addons/src/renumber/renumberdialog.ui" line="287"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../addons/src/renumber/renumberdialog.cpp" line="49"/>
+        <location filename="../addons/src/renumber/renumberdialog.cpp" line="50"/>
         <source>Renumber lines</source>
         <translation>Zeilen neu nummerieren</translation>
     </message>
@@ -5194,7 +5259,7 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
     </message>
     <message>
         <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="203"/>
-        <source>Swap: </source>
+        <source>Swap:</source>
         <translation>Wechseln: </translation>
     </message>
     <message>
@@ -5243,9 +5308,8 @@ Datei Server Option ist nicht aktiviert in den seriellen Port Einstellungen</tra
         <translation>Dezimalstellen</translation>
     </message>
     <message>
-        <location filename="../addons/src/swapaxes/swapaxesdialog.ui" line="407"/>
         <source>Remember the values at closing</source>
-        <translation>Einstellungen bei Schließen speichern</translation>
+        <translation type="vanished">Einstellungen bei Schließen speichern</translation>
     </message>
 </context>
 <context>
@@ -5710,7 +5774,7 @@ Code=%2</translation>
         <translation type="vanished">Min:</translation>
     </message>
     <message>
-        <source>Swap: </source>
+        <source>Swap:</source>
         <translation type="vanished">Wechseln:</translation>
     </message>
     <message>

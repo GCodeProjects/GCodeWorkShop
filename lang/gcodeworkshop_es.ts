@@ -160,13 +160,47 @@
         <translation type="unfinished">GCodeWorkShop: compilar macro</translation>
     </message>
     <message>
-        <source>Insert space</source>
-        <comment>Slow operation title in MDIChild</comment>
+        <source>Comments/uncomments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove space</source>
-        <comment>Slow operation title in MDIChild</comment>
+        <source>Inch to metric</source>
+        <translation type="obsolete">Pulgada a métrico</translation>
+    </message>
+    <message>
+        <source>Inserting empty lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing empty lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inserting space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cleaning up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inserting dots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Converting inch to metric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Renumbering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis exchange</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -255,7 +289,7 @@
         <translation>Centro Y :</translation>
     </message>
     <message>
-        <source>Roate by (x0.1) :</source>
+        <source>Rotate by (x0.1) :</source>
         <translation>Rotar en (x0.1) :</translation>
     </message>
     <message>
@@ -287,7 +321,7 @@
         <translation></translation>
     </message>
     <message>
-        <source>Common mirror and roate</source>
+        <source>Common mirror and rotate</source>
         <translation>Espejo y Rotación juntos</translation>
     </message>
     <message>
@@ -473,10 +507,6 @@
     <message>
         <source>Insert &amp;dot at address</source>
         <translation>Insertar punto &amp;decimal en la(s) dirección(es)</translation>
-    </message>
-    <message>
-        <source>&gt;Aaaaaaaaaaaaaaaaaaaaa; </source>
-        <translation></translation>
     </message>
     <message>
         <source>Dot</source>
@@ -2182,10 +2212,6 @@ Items with non empty titles are not deleted automatically.</source>
         <translation>Convertir los números en las direcciones :</translation>
     </message>
     <message>
-        <source>Aaaaaaaaaaaaaaa;_</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>XYZ</source>
         <translation></translation>
     </message>
@@ -2554,6 +2580,14 @@ Comprobar +-*/.
     <message>
         <source>Renumber lines</source>
         <translation>Renumerar líneas</translation>
+    </message>
+    <message>
+        <source>Keep existing block numbers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep already existing block numbers for empty lines.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4154,7 +4188,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Swap: </source>
+        <source>Swap:</source>
         <translation type="unfinished">Intercambiar: </translation>
     </message>
     <message>
@@ -4195,7 +4229,7 @@ Opción Servidor De Archivos no está habilitado en la configuración del puerto
     </message>
     <message>
         <source>Remember the values at closing</source>
-        <translation type="unfinished">Recordar los valores al cerrar</translation>
+        <translation type="obsolete">Recordar los valores al cerrar</translation>
     </message>
 </context>
 <context>
@@ -4564,8 +4598,8 @@ Code=%2</source>
         <translation type="vanished">Intercambiar/modificar ejes</translation>
     </message>
     <message>
-        <source>Swap: </source>
-        <translation type="vanished">Intercambiar: </translation>
+        <source>Swap:</source>
+        <translation type="vanished">Intercambiar:</translation>
     </message>
     <message>
         <source>To:</source>
