@@ -791,7 +791,7 @@ bool KDiff3App::eventFilter(QObject *o, QEvent *e)
 
         QPoint d = w->pixelDelta();
 
-        if (d.isNull()) {
+        if (w->source() != Qt::MouseEventSynthesizedBySystem) {
             d = - w->angleDelta() / 120 * QApplication::wheelScrollLines();
         }
 
