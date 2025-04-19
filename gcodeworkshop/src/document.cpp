@@ -146,7 +146,7 @@ void Document::setWidget(QWidget* widget)
 	sizePolicy.setVerticalStretch(0);
 	sizePolicy.setHeightForWidth(m_widget->sizePolicy().hasHeightForWidth());
 	m_widget->setSizePolicy(sizePolicy);
-	m_widget->setMinimumSize(QSize(350, 300));
+	m_widget->setMinimumSize(QSize(64, 48));
 	m_widget->setFocusPolicy(Qt::WheelFocus);
 	m_widget->setAutoFillBackground(true);
 
