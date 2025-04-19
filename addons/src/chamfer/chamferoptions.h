@@ -33,7 +33,7 @@ struct ChamferOptions {
 
 	InOut   angle;
 	InOut   width;
-	InOut   hight;
+	InOut   height;
 	InOut   minDiam;
 	InOut   maxDiam;
 

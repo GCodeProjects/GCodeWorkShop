@@ -87,7 +87,7 @@ private:
 	QTextEdit::ExtraSelection selection;
 	bool intCapsLock;
 	HighlightColors highlighterColors;
-	bool highligh;
+	bool highlight;
 	QList<int> currentHeight;
 	QSplitter* f_parent;
 

@@ -294,8 +294,8 @@ void ChamferDialog::setOptions(const ChamferOptions& options)
 {
 	angInput->setText(QString::number(options.angle.value));
 	angCheckBox->setChecked(options.angle.in);
-	dlInput->setText(QString::number(options.hight.value));
-	dlCheckBox->setChecked(options.hight.in);
+	dlInput->setText(QString::number(options.height.value));
+	dlCheckBox->setChecked(options.height.in);
 	xdInput->setText(QString::number(options.maxDiam.value));
 	xdCheckBox->setChecked(options.maxDiam.in);
 	xoInput->setText(QString::number(options.minDiam.value));
@@ -312,8 +312,8 @@ ChamferOptions ChamferDialog::options()
 
 	options.angle.value = angInput->text().toDouble();
 	options.angle.in = angCheckBox->isChecked();
-	options.hight.value = dlInput->text().toDouble();
-	options.hight.in = dlCheckBox->isChecked();
+	options.height.value = dlInput->text().toDouble();
+	options.height.in = dlCheckBox->isChecked();
 	options.maxDiam.value = xdInput->text().toDouble();
 	options.maxDiam.in = xdCheckBox->isChecked();
 	options.minDiam.value = xoInput->text().toDouble();

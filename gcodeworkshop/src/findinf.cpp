@@ -74,7 +74,7 @@ FindInFiles::FindInFiles(QSplitter* parent): QWidget(parent)
 	setObjectName("FindInFiles");
 
 	highlighter = nullptr;
-	highligh = false;
+	highlight = false;
 
 	connect(browseButton, SIGNAL(clicked()), SLOT(browse()));
 	connect(findButton, SIGNAL(clicked()), SLOT(find()));
@@ -567,7 +567,7 @@ void FindInFiles::filePreview(int x, int y)
 		preview->setPlainText(in.readAll());
 		file.close();
 
-		if (highligh) {
+		if (highlight) {
 			if (highlighter == nullptr) {
 				highlighter = new Highlighter(preview->document());
 			}
@@ -658,7 +658,7 @@ bool FindInFiles::findText(const QString& exp, QTextDocument::FindFlags options,
 
 void FindInFiles::setHighlightColors(const HighlightColors colors)
 {
-	highligh = true;
+	highlight = true;
 	highlighterColors = colors;
 }
 

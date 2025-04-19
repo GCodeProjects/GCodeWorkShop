@@ -363,7 +363,7 @@ void Highlighter::highlightBlockFanucRule(const QString& tx)
 	int pos, count;
 	int sellen;
 	QChar ch;
-	QString adrress, val;
+	QString address, val;
 	QTextCharFormat format;
 
 	format.setFontWeight(QFont::Normal);
@@ -403,19 +403,19 @@ void Highlighter::highlightBlockFanucRule(const QString& tx)
 			//***********************************************************************
 
 			if ((ch >= 'A' && ch <= 'Z') || (ch == '#') || (ch == '@') || (ch == '_')) {
-				adrress = "";
+				address = "";
 
 				do {
-					adrress.append(ch);
+					address.append(ch);
 
-					if ((adrress.length() + pos) >= tx.length()) {
+					if ((address.length() + pos) >= tx.length()) {
 						break;
 					}
 
-					ch = tx.at(adrress.length() + pos).toUpper();
+					ch = tx.at(address.length() + pos).toUpper();
 				} while ((ch >= 'A' && ch <= 'Z') || (ch == '_'));
 
-				sellen = adrress.length();
+				sellen = address.length();
 
 				val = "";
 
@@ -430,16 +430,16 @@ void Highlighter::highlightBlockFanucRule(const QString& tx)
 					ch = tx.at(sellen + val.length() + pos).toUpper();
 				}
 
-				sellen = adrress.length() + val.length();
+				sellen = address.length() + val.length();
 
-				if (adrress.length() > 1) {
+				if (address.length() > 1) {
 					break;
 				} else {
 					if (tx.isEmpty()) {
 						break;
 					}
 
-					ch = adrress.at(0);
+					ch = address.at(0);
 
 					switch (ch.toLatin1()) {
 					case 'G':
@@ -578,7 +578,7 @@ void Highlighter::highlightBlockSinuRule(const QString& tx)
 	int pos;
 	int sellen;
 	QChar ch;
-	QString adrress, val;
+	QString address, val;
 	QTextCharFormat format;
 
 	format.setFontWeight(QFont::Normal);
@@ -607,20 +607,20 @@ void Highlighter::highlightBlockSinuRule(const QString& tx)
 			//***********************************************************************
 
 			if ((ch >= 'A' && ch <= 'Z') || (ch == '_')) {
-				adrress = "";
+				address = "";
 
 				do {
-					adrress.append(ch);
+					address.append(ch);
 
-					if ((adrress.length() + pos) >= tx.length()) {
+					if ((address.length() + pos) >= tx.length()) {
 						break;
 					}
 
-					ch = tx.at(adrress.length() + pos).toUpper().toUpper();
+					ch = tx.at(address.length() + pos).toUpper().toUpper();
 
 				} while ((ch >= 'A' && ch <= 'Z') || (ch == '_'));
 
-				sellen = adrress.length();
+				sellen = address.length();
 
 				val = "";
 
@@ -637,15 +637,15 @@ void Highlighter::highlightBlockSinuRule(const QString& tx)
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
-						sellen = adrress.length() + 1;
+						sellen = address.length() + 1;
 						break;
 					}
 				}
 
-				adrress = adrress + val;
-				sellen = adrress.length();
+				address = address + val;
+				sellen = address.length();
 
-				if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
+				if (address.contains(QRegularExpression("[A-Z_]{2,}"))) {
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
@@ -667,7 +667,7 @@ void Highlighter::highlightBlockSinuRule(const QString& tx)
 						break;
 					}
 
-					ch = adrress.at(0);
+					ch = address.at(0);
 
 					switch (ch.toLatin1()) {
 					case 'G':
@@ -807,7 +807,7 @@ void Highlighter::highlightBlockOkumaRule(const QString& tx)
 	int pos, count;
 	int sellen;
 	QChar ch;
-	QString adrress, val;
+	QString address, val;
 	QTextCharFormat format;
 
 	format.setFontWeight(QFont::Normal);
@@ -847,20 +847,20 @@ void Highlighter::highlightBlockOkumaRule(const QString& tx)
 			//***********************************************************************
 
 			if ((ch >= 'A' && ch <= 'Z') || (ch == '_')) {
-				adrress = "";
+				address = "";
 
 				do {
-					adrress.append(ch);
+					address.append(ch);
 
-					if ((adrress.length() + pos) >= tx.length()) {
+					if ((address.length() + pos) >= tx.length()) {
 						break;
 					}
 
-					ch = tx.at(adrress.length() + pos).toUpper();
+					ch = tx.at(address.length() + pos).toUpper();
 
 				} while ((ch >= 'A' && ch <= 'Z') || (ch == '_'));
 
-				sellen = adrress.length();
+				sellen = address.length();
 
 				val = "";
 
@@ -877,15 +877,15 @@ void Highlighter::highlightBlockOkumaRule(const QString& tx)
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
-						sellen = adrress.length() + 1;
+						sellen = address.length() + 1;
 						break;
 					}
 				}
 
-				adrress = adrress + val;
-				sellen = adrress.length();
+				address = address + val;
+				sellen = address.length();
 
-				if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
+				if (address.contains(QRegularExpression("[A-Z_]{2,}"))) {
 					pos = pos + sellen;
 					sellen = 0;
 					break;
@@ -894,7 +894,7 @@ void Highlighter::highlightBlockOkumaRule(const QString& tx)
 						break;
 					}
 
-					ch = adrress.at(0);
+					ch = address.at(0);
 
 					switch (ch.toLatin1()) {
 					case 'G':
@@ -1033,7 +1033,7 @@ void Highlighter::highlightBlockSinuOldRule(const QString& tx)
 	int pos, count;
 	int sellen;
 	QChar ch;
-	QString adrress, val;
+	QString address, val;
 	QTextCharFormat format;
 
 	format.setFontWeight(QFont::Normal);
@@ -1074,19 +1074,19 @@ void Highlighter::highlightBlockSinuOldRule(const QString& tx)
 			//***********************************************************************
 
 			if ((ch >= 'A' && ch <= 'Z') || (ch == '_')) {
-				adrress = "";
+				address = "";
 
 				do {
-					adrress.append(ch);
+					address.append(ch);
 
-					if ((adrress.length() + pos) >= tx.length()) {
+					if ((address.length() + pos) >= tx.length()) {
 						break;
 					}
 
-					ch = tx.at(adrress.length() + pos).toUpper();
+					ch = tx.at(address.length() + pos).toUpper();
 				} while ((ch >= 'A' && ch <= 'Z') || (ch == '_'));
 
-				sellen = adrress.length();
+				sellen = address.length();
 
 				val = "";
 
@@ -1101,16 +1101,16 @@ void Highlighter::highlightBlockSinuOldRule(const QString& tx)
 					ch = tx.at(sellen + val.length() + pos).toUpper();
 				}
 
-				sellen = adrress.length() + val.length();
+				sellen = address.length() + val.length();
 
-				if (adrress.length() > 1) {
+				if (address.length() > 1) {
 					break;
 				} else {
 					if (tx.isEmpty()) {
 						break;
 					}
 
-					ch = adrress.at(0);
+					ch = address.at(0);
 
 					switch (ch.toLatin1()) {
 					case 'G':
@@ -1250,7 +1250,7 @@ void Highlighter::highlightBlockHeidRule(const QString& tx)
 	int pos;
 	int sellen;
 	QChar ch;
-	QString adrress, val;
+	QString address, val;
 	QTextCharFormat format;
 
 	format.setFontWeight(QFont::Normal);
@@ -1278,19 +1278,19 @@ void Highlighter::highlightBlockHeidRule(const QString& tx)
 			//***********************************************************************
 
 			if ((ch >= 'A' && ch <= 'Z') || (ch == '_')) {
-				adrress = "";
+				address = "";
 
 				do {
-					adrress.append(ch);
+					address.append(ch);
 
-					if ((adrress.length() + pos) >= tx.length()) {
+					if ((address.length() + pos) >= tx.length()) {
 						break;
 					}
 
-					ch = tx.at(adrress.length() + pos).toUpper();
+					ch = tx.at(address.length() + pos).toUpper();
 				} while ((ch >= 'A' && ch <= 'Z') || (ch == '_'));
 
-				sellen = adrress.length();
+				sellen = address.length();
 
 				val = "";
 
@@ -1307,15 +1307,15 @@ void Highlighter::highlightBlockHeidRule(const QString& tx)
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
-						sellen = adrress.length() + 1;
+						sellen = address.length() + 1;
 						break;
 					}
 				}
 
-				adrress = adrress + val;
-				sellen = adrress.length();
+				address = address + val;
+				sellen = address.length();
 
-				if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
+				if (address.contains(QRegularExpression("[A-Z_]{2,}"))) {
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
@@ -1337,7 +1337,7 @@ void Highlighter::highlightBlockHeidRule(const QString& tx)
 						break;
 					}
 
-					ch = adrress.at(0);
+					ch = address.at(0);
 
 					switch (ch.toLatin1()) {
 					case 'L':
@@ -1477,7 +1477,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString& tx)
 	int pos;
 	int sellen;
 	QChar ch;
-	QString adrress, val;
+	QString address, val;
 	QTextCharFormat format;
 
 	format.setFontWeight(QFont::Normal);
@@ -1505,20 +1505,20 @@ void Highlighter::highlightBlockHeidIsoRule(const QString& tx)
 			//***********************************************************************
 
 			if ((ch >= 'A' && ch <= 'Z') || (ch == '_')) {
-				adrress = "";
+				address = "";
 
 				do {
-					adrress.append(ch);
+					address.append(ch);
 
-					if ((adrress.length() + pos) >= tx.length()) {
+					if ((address.length() + pos) >= tx.length()) {
 						break;
 					}
 
-					ch = tx.at(adrress.length() + pos).toUpper();
+					ch = tx.at(address.length() + pos).toUpper();
 
 				} while ((ch >= 'A' && ch <= 'Z') || (ch == '_'));
 
-				sellen = adrress.length();
+				sellen = address.length();
 
 				val = "";
 
@@ -1535,15 +1535,15 @@ void Highlighter::highlightBlockHeidIsoRule(const QString& tx)
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
-						sellen = adrress.length() + 1;
+						sellen = address.length() + 1;
 						break;
 					}
 				}
 
-				adrress = adrress + val;
-				sellen = adrress.length();
+				address = address + val;
+				sellen = address.length();
 
-				if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
+				if (address.contains(QRegularExpression("[A-Z_]{2,}"))) {
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
@@ -1564,7 +1564,7 @@ void Highlighter::highlightBlockHeidIsoRule(const QString& tx)
 						break;
 					}
 
-					ch = adrress.at(0);
+					ch = address.at(0);
 
 					switch (ch.toLatin1()) {
 					case 'G':
@@ -1807,7 +1807,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString& tx)
 	int pos, count;
 	int sellen;
 	QChar ch;
-	QString adrress, val;
+	QString address, val;
 	QTextCharFormat format;
 
 	format.setFontWeight(QFont::Normal);
@@ -1861,20 +1861,20 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString& tx)
 			//***********************************************************************
 
 			if ((ch >= 'A' && ch <= 'Z') || (ch == '_')) {
-				adrress = "";
+				address = "";
 
 				do {
-					adrress.append(ch);
+					address.append(ch);
 
-					if ((adrress.length() + pos) >= tx.length()) {
+					if ((address.length() + pos) >= tx.length()) {
 						break;
 					}
 
-					ch = tx.at(adrress.length() + pos).toUpper();
+					ch = tx.at(address.length() + pos).toUpper();
 
 				} while ((ch >= 'A' && ch <= 'Z') || (ch == '_'));
 
-				sellen = adrress.length();
+				sellen = address.length();
 
 				val = "";
 
@@ -1891,15 +1891,15 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString& tx)
 					if (ch == ':') {
 						format.setForeground(QColor(highlightColors.keyWordColor));
 						format.setFontWeight(QFont::Bold);
-						sellen = adrress.length() + 1;
+						sellen = address.length() + 1;
 						break;
 					}
 				}
 
-				adrress = adrress + val;
-				sellen = adrress.length();
+				address = address + val;
+				sellen = address.length();
 
-				if (adrress.contains(QRegularExpression("[A-Z_]{2,}"))) {
+				if (address.contains(QRegularExpression("[A-Z_]{2,}"))) {
 					pos = pos + sellen;
 					sellen = 0;
 					break;
@@ -1908,7 +1908,7 @@ void Highlighter::highlightBlockLinuxCNCRule(const QString& tx)
 						break;
 					}
 
-					ch = adrress.at(0);
+					ch = address.at(0);
 
 					switch (ch.toLatin1()) {
 					case 'G':

@@ -24,8 +24,8 @@
 
 #define CFG_KEY_ANGLE_VALUE     "Angle"
 #define CFG_KEY_ANGLE_IN        "AngleIn"
-#define CFG_KEY_HIGHT_VALUE     "Hight"
-#define CFG_KEY_HIGHT_IN        "HightIn"
+#define CFG_KEY_HEIGHT_VALUE    "Height"
+#define CFG_KEY_HEIGHT_IN       "HeightIn"
 #define CFG_KEY_MAX_DIAM_VALUE  "MaxDiam"
 #define CFG_KEY_MAX_DIAM_IN     "MaxDiamIn"
 #define CFG_KEY_MIN_DIAM_VALUE  "MinDiam"
@@ -37,7 +37,7 @@
 ChamferOptions::ChamferOptions() :
 	angle{true, 45.0},
 	width{true, 1.0},
-	hight{false, 0.0},
+	height{false, 0.0},
 	minDiam{false, 0.0},
 	maxDiam{true, 32.0}
 {
@@ -47,8 +47,8 @@ void ChamferOptions::load(QSettings* settings)
 {
 	angle.value = settings->value(CFG_KEY_ANGLE_VALUE, angle.value).toDouble();
 	angle.in = settings->value(CFG_KEY_ANGLE_IN, angle.in).toBool();
-	hight.value = settings->value(CFG_KEY_HIGHT_VALUE, hight.value).toDouble();
-	hight.in = settings->value(CFG_KEY_HIGHT_IN, hight.in).toBool();
+	height.value = settings->value(CFG_KEY_HEIGHT_VALUE, height.value).toDouble();
+	height.in = settings->value(CFG_KEY_HEIGHT_IN, height.in).toBool();
 	maxDiam.value = settings->value(CFG_KEY_MAX_DIAM_VALUE, maxDiam.value).toDouble();
 	maxDiam.in = settings->value(CFG_KEY_MAX_DIAM_IN, maxDiam.in).toBool();
 	minDiam.value = settings->value(CFG_KEY_MIN_DIAM_VALUE, minDiam.value).toDouble();
@@ -61,8 +61,8 @@ void ChamferOptions::save(QSettings* settings)
 {
 	settings->setValue(CFG_KEY_ANGLE_VALUE, angle.value);
 	settings->setValue(CFG_KEY_ANGLE_IN, angle.in);
-	settings->setValue(CFG_KEY_HIGHT_VALUE, hight.value);
-	settings->setValue(CFG_KEY_HIGHT_IN, hight.in);
+	settings->setValue(CFG_KEY_HEIGHT_VALUE, height.value);
+	settings->setValue(CFG_KEY_HEIGHT_IN, height.in);
 	settings->setValue(CFG_KEY_MAX_DIAM_VALUE, maxDiam.value);
 	settings->setValue(CFG_KEY_MAX_DIAM_IN, maxDiam.in);
 	settings->setValue(CFG_KEY_MIN_DIAM_VALUE, minDiam.value);

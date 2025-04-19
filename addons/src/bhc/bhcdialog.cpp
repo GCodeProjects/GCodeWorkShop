@@ -105,14 +105,14 @@ BHCDialog::~BHCDialog()
 void BHCDialog::comChk()
 {
 	BHCTab* tab;
-	int tabId, roat, activTab;
+	int tabId, rotate, activTab;
 	bool mirX, mirY;
 
 	tab = (BHCTab*)tabBar->currentWidget();
 	activTab = tabBar->currentIndex();
 
 	if (tab->all->isChecked()) {
-		roat = tab->roateInput->value();
+		rotate = tab->rotateInput->value();
 		mirX = tab->mirrorX->isChecked();
 		mirY = tab->mirrorY->isChecked();
 
@@ -128,7 +128,7 @@ void BHCDialog::comChk()
 			}
 
 			if (tab->all->isChecked()) {
-				tab->roateInput->setValue(roat);
+				tab->rotateInput->setValue(rotate);
 				tab->mirrorX->setChecked(mirX);
 				tab->mirrorY->setChecked(mirY);
 			}
@@ -153,7 +153,7 @@ void BHCDialog::clearAll()
 		tab->angleStartInput->setText("0");
 		tab->angleBeetwenInput->setText("0");
 		tab->holesInput->setText("0");
-		tab->roateInput->setValue(0);
+		tab->rotateInput->setValue(0);
 
 		tab->resultTable->setRowCount(0);
 		tab->resultTable->clearContents();
@@ -172,7 +172,7 @@ void BHCDialog::computeButtonClicked()
 	int tabId, i, textPosY, textPosX, dir;
 	bool ok;
 	int holeCount;
-	qreal dia, firstAngle, angleBeetwen, roate, x, y, ang, xCenter, yCenter;
+	qreal dia, firstAngle, angleBeetwen, rotate, x, y, ang, xCenter, yCenter;
 	double maxDia;
 
 	maxDia = 0;
@@ -240,7 +240,7 @@ void BHCDialog::computeButtonClicked()
 			holeCount = 0;
 		}
 
-		roate = tab->roateInput->text().toInt(&ok);
+		rotate = tab->rotateInput->text().toInt(&ok);
 
 		if ((holeCount == 0) && (angleBeetwen == 0)) {
 			tab->resultTable->setRowCount(0);
@@ -251,7 +251,7 @@ void BHCDialog::computeButtonClicked()
 			continue;
 		}
 
-		roate = roate / 10;
+		rotate = rotate / 10;
 
 		if (holeCount <= 0) {
 			holeCount = 360 / angleBeetwen;
@@ -261,7 +261,7 @@ void BHCDialog::computeButtonClicked()
 			angleBeetwen = double(360 / double(holeCount));
 		}
 
-		firstAngle += roate;
+		firstAngle += rotate;
 
 		tab->resultTable->setRowCount(holeCount);
 
@@ -377,14 +377,14 @@ void BHCDialog::computeButtonClicked()
 			holeCount = 0;
 		}
 
-		roate = tab->roateInput->text().toInt(&ok);
+		rotate = tab->rotateInput->text().toInt(&ok);
 
 		if ((holeCount == 0) && (angleBeetwen == 0)) {
 			tab->resultTable->setRowCount(0);
 			continue;
 		}
 
-		roate = roate / 10;
+		rotate = rotate / 10;
 
 		if (holeCount <= 0) {
 			holeCount = 360 / angleBeetwen;
@@ -432,7 +432,7 @@ void BHCDialog::computeButtonClicked()
 		                   QString(tr("Angle between holes : %1")).arg(angleBeetwen), col);
 		drawing->printText(textPosX, textPosY, 4 - dir,
 		                   QString(tr("Center position : X%1 Y%2")).arg(xCenter).arg(yCenter), col);
-		firstAngle += roate;
+		firstAngle += rotate;
 
 		tab->resultTable->setRowCount(holeCount);
 

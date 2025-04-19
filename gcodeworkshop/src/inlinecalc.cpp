@@ -74,12 +74,12 @@ void InLineCalc::keyPressEvent(QKeyEvent* event)
 		QLineEdit::keyPressEvent(event);
 	} else {
 		event->accept();
-		evalute();
+		evaluate();
 		done();
 	}
 }
 
-void InLineCalc::evalute()
+void InLineCalc::evaluate()
 {
 	QString result = text();
 	result.replace(',', '.');

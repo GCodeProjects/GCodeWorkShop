@@ -87,7 +87,7 @@ public:
 	/**
 	 * @brief End of checks.
 	 * @details The operation time is fixed, a cursor is restored and, if necessary, a progress
-	 * dialog is hided.
+	 * dialog is hiding.
 	 * @see time()
 	 */
 	void end();

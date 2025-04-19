@@ -74,7 +74,7 @@ BHCTab::BHCTab(QWidget* parent) : QWidget(parent)
 	angleBeetwenInput->setValidator(angleBeetwenInputValid);
 	angleBeetwenInput->installEventFilter(this);
 
-	connect(roateInput, SIGNAL(valueChanged(int)), SLOT(inputChk()));
+	connect(rotateInput, SIGNAL(valueChanged(int)), SLOT(inputChk()));
 	connect(mirrorX, SIGNAL(toggled(bool)), SLOT(inputChk()));
 	connect(mirrorY, SIGNAL(toggled(bool)), SLOT(inputChk()));
 
@@ -276,7 +276,7 @@ void BHCTab::setOptions(const BHCTabOptions& options)
 	angleStartInput->setText(QString::number(options.start));
 	angleBeetwenInput->setText(QString::number(options.step));
 	holesInput->setText(QString::number(options.count));
-	roateInput->setValue(options.rotate);
+	rotateInput->setValue(options.rotate);
 	mirrorX->setChecked(options.mirrorX);
 	mirrorY->setChecked(options.mirrorY);
 	all->setChecked(options.common);
@@ -294,7 +294,7 @@ BHCTabOptions BHCTab::options()
 	options.start = angleStartInput->text().toDouble();
 	options.step = angleBeetwenInput->text().toDouble();
 	options.count = holesInput->text().toInt();
-	options.rotate = roateInput->value();
+	options.rotate = rotateInput->value();
 	options.mirrorX = mirrorX->isChecked();
 	options.mirrorY = mirrorY->isChecked();
 	options.common = all->isChecked();

@@ -81,10 +81,10 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Roate by (x0.1) :</string>
+           <string>Rotate by (x0.1) :</string>
           </property>
           <property name="buddy">
-           <cstring>roateInput</cstring>
+           <cstring>rotateInput</cstring>
           </property>
          </widget>
         </item>
@@ -167,7 +167,7 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QSpinBox" name="roateInput">
+         <widget class="QSpinBox" name="rotateInput">
           <property name="sizePolicy">
            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -346,7 +346,7 @@
       <item>
        <widget class="QCheckBox" name="all">
         <property name="text">
-         <string>Common mirror and roate</string>
+         <string>Common mirror and rotate</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -423,7 +423,7 @@
   <tabstop>holesInput</tabstop>
   <tabstop>angleStartInput</tabstop>
   <tabstop>angleBeetwenInput</tabstop>
-  <tabstop>roateInput</tabstop>
+  <tabstop>rotateInput</tabstop>
   <tabstop>mirrorX</tabstop>
   <tabstop>mirrorY</tabstop>
   <tabstop>all</tabstop>

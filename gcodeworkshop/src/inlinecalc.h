@@ -40,7 +40,7 @@ public:
 
 protected:
 	virtual void keyPressEvent(QKeyEvent* event) override ;
-	void evalute();
+	void evaluate();
 
 protected slots :
 	void done();
