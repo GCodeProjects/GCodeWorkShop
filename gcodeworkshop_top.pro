@@ -9,6 +9,7 @@ include(lang/lang.pri)
 
 examples.files = $$PROJECT_ROOT_PATH/examples/*
 doc.files = $$PROJECT_ROOT_PATH/README.md $$PROJECT_ROOT_PATH/doc/SerialTransmission_Help.html
+license.files = $$PROJECT_ROOT_PATH/COPYING $$PROJECT_ROOT_PATH/COPYING.LESSER
 
 
 # target platforms dependencies
@@ -21,6 +22,7 @@ unix {
 
     examples.path = $${PREFIX}/share/gcodeworkshop/examples
     doc.path = $${PREFIX}/share/doc/gcodeworkshop
+    license.path = $${PREFIX}/share/doc/gcodeworkshop
     mime.path = $${PREFIX}/share/mime/packages
     desktop.path = $${PREFIX}/share/applications
 
@@ -29,7 +31,7 @@ unix {
     icons.files = $$findFiles($$ICONS_BASE_PATH, *.png)
     icons.path = $${PREFIX}/share/icons
 
-    INSTALLS += mime desktop icons examples doc
+    INSTALLS += mime desktop icons examples doc license
 }
 
 macx {

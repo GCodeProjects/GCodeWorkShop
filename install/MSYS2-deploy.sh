@@ -102,7 +102,8 @@ echo ""
 echo "Application installation."
 echo "Destination folder: $INSTALL_DIR"
 mkdir -p $INSTALL_DIR/bin $INSTALL_DIR/doc $INSTALL_DIR/examples $INSTALL_DIR/lang
-cp -r $PROJECT_ROOT_DIR/LICENSE                                     $INSTALL_DIR
+cp -r $PROJECT_ROOT_DIR/COPYING                                     $INSTALL_DIR
+cp -r $PROJECT_ROOT_DIR/COPYING.LESSER                              $INSTALL_DIR
 cp -r $APP_BIN_DIR/*                                                $INSTALL_DIR/bin
 cp -r $PROJECT_ROOT_DIR/README.md                                   $INSTALL_DIR/doc
 cp -r $PROJECT_ROOT_DIR/doc/SerialTransmission_Help.html            $INSTALL_DIR/doc

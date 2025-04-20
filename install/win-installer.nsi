@@ -101,6 +101,7 @@
 Section "-Install"
     SetOutPath "$INSTDIR"
     File LICENSE.txt
+    File LICENSE.LESSER.txt
 
     SetOutPath "$INSTDIR\${PKG_BIN_DIR}"
     File /oname=GCodeWorkShop.exe ${APP_BIN_DIR}\gcodeworkshop.exe
@@ -134,6 +135,7 @@ Section "Uninstall"
     Delete "$INSTDIR\${PKG_BIN_DIR}\GCodeWorkShop.exe"
     Delete "$INSTDIR\${PKG_BIN_DIR}\GCodeFileServer.exe"
     Delete "$INSTDIR\LICENSE.txt"
+    Delete "$INSTDIR\LICENSE.LESSER.txt"
     Delete "$INSTDIR\uninst.exe"
 
     RMDir "$INSTDIR\${PKG_BIN_DIR}"
