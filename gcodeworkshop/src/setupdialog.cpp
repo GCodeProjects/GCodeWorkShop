@@ -255,8 +255,8 @@ SetupDialog::SetupDialog(QWidget* parent, const AppConfig* prop,
 	QValidator* edtExtensionValid = new QRegularExpressionValidator(regex, this);
 	edtExtension->setValidator(edtExtensionValid);
 
-	//   QRegularExpression ext("(\\(|;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[-./]{1,1}(M|MM|d|dd)[-./]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}");
-	//   // (\\(;){1,1}[\\s]{0,5}(d|dd|M|MM|YYYY)[.-/]{1,1}(M|MM|d|dd)[.-/]{1,1}(d|dd|M|MM|YYYY)[\\s]{1,5}(\\)){0,1}
+	//   QRegularExpression ext("(\\(|;){1,1}[ \\t]{0,5}(d|dd|M|MM|YYYY)[-./]{1,1}(M|MM|d|dd)[-./]{1,1}(d|dd|M|MM|YYYY)[ \\t]{1,5}(\\)){0,1}");
+	//   // (\\(;){1,1}[ \\t]{0,5}(d|dd|M|MM|YYYY)[.-/]{1,1}(M|MM|d|dd)[.-/]{1,1}(d|dd|M|MM|YYYY)[ \\t]{1,5}(\\)){0,1}
 	//   ext.setCaseSensitivity(Qt::CaseSensitive);
 	//   QValidator *dateFormatValidator = new QRegExpValidator(ext, this);
 	//   dateFormatComboBox->setValidator(dateFormatValidator);

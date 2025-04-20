@@ -108,11 +108,11 @@ void Highlighter::loadRules()
 	        || m_highlightMode == MODE_FANUC
 	        || m_highlightMode == MODE_SINUMERIK
 	        || m_highlightMode == MODE_AUTO) { // () comment
-		commentStartExpression = QRegularExpression("\\s\\(|^\\(");
+		commentStartExpression = QRegularExpression("[ \\t]\\(|^\\(");
 		commentEndExpression = QRegularExpression("\\)");
 	} else {
-		commentStartExpression = QRegularExpression("][");
-		commentEndExpression = QRegularExpression("][");
+		commentStartExpression = QRegularExpression(";");
+		commentEndExpression = QRegularExpression("$");
 	}
 
 	if (m_highlightMode == MODE_FANUC
@@ -182,7 +182,7 @@ void Highlighter::loadRules()
 		pogRule.pattern = QRegularExpression(pattern);
 		progNameHighlightRules.append(pogRule);
 
-		pattern = "[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)($|\\s)";  // OKUMA
+		pattern = "[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)($|[ \\t])";  // OKUMA
 		pogRule.pattern = QRegularExpression(pattern);
 		progNameHighlightRules.append(pogRule);
 	}
@@ -214,7 +214,7 @@ void Highlighter::loadRules()
 		keywords << "@[0-9]{3,3}";
 		keywordPatterns.append(keywords);
 
-		pattern = "%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}$\\b";
+		pattern = "%\\b(MPF|SPF|TEA)[ \\t]{0,3}[0-9]{1,4}$\\b";
 		pogRule.pattern = QRegularExpression(pattern);
 		progNameHighlightRules.append(pogRule);
 	}
@@ -249,7 +249,7 @@ void Highlighter::loadRules()
 		         << "\\b(MAX)\\b";
 		keywordPatterns.append(keywords);
 
-		pattern = "(BEGIN|END)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)";  // HEIDENHAIN
+		pattern = "(BEGIN|END)([ \\t]PGM[ \\t])[a-zA-Z0-9_-+*]{1,}([ \\t]MM|[ \\t]INCH)";  // HEIDENHAIN
 		pogRule.pattern = QRegularExpression(pattern);
 		progNameHighlightRules.append(pogRule);
 	}
@@ -1726,14 +1726,14 @@ void Highlighter::highlightBlockToolTipsRule(const QString& tx)
 
 	keywordFormat.setForeground(QColor(highlightColors.gColor));
 	keywordFormat.setFontWeight(QFont::Normal);
-	ruleP.pattern = QRegularExpression("(\\s-)[a-zA-Z0-9_.,://\\-+;\\s\\(\\)]{1,}");
+	ruleP.pattern = QRegularExpression("([ \\t]-)[a-zA-Z0-9_.,://\\-+;[ \\t]\\(\\)]{1,}");
 	ruleP.format = keywordFormat;
 	highlightRules.append(ruleP);
 
 
 	keywordFormat.setForeground(QColor(highlightColors.mColor));
 	keywordFormat.setFontWeight(QFont::Normal);
-	ruleP.pattern = QRegularExpression("(<b>|<i>)[a-zA-Z0-9_.@=\\[\\]\\s]{1,30}(</b>|</i>)");
+	ruleP.pattern = QRegularExpression("(<b>|<i>)[a-zA-Z0-9_.@=\\[\\] \\t]{1,30}(</b>|</i>)");
 	ruleP.format = keywordFormat;
 	highlightRules.append(ruleP);
 
@@ -1757,7 +1757,7 @@ int autoDetectHighligthMode(const QString text)
 		if (text.contains(
 		            QRegularExpression("^\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"))
 		        || text.contains(
-		            QRegularExpression("[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)($|\\s)"))) {
+		            QRegularExpression("[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)($|[ \\t])"))) {
 			return MODE_OKUMA;
 		}
 
@@ -1771,16 +1771,16 @@ int autoDetectHighligthMode(const QString text)
 			return MODE_PHILIPS;
 		}
 
-		if (text.contains(QRegularExpression("%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b"))) {
+		if (text.contains(QRegularExpression("%\\b(MPF|SPF|TEA)[ \\t]{0,3}[0-9]{1,4}\\b"))) {
 			return MODE_SINUMERIK;
 		}
 
-		if (text.contains(QRegularExpression("%[a-zA-Z0-9_]{1,30}(\\s)"))) {
+		if (text.contains(QRegularExpression("%[a-zA-Z0-9_]{1,30}([ \\t])"))) {
 			return MODE_HEIDENHAIN_ISO;
 		}
 
 		if (text.contains(
-		            QRegularExpression("(BEGIN|END)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"))) {
+		            QRegularExpression("(BEGIN|END)([ \\t]PGM[ \\t])[a-zA-Z0-9_-+*]{1,}([ \\t]MM|[ \\t]INCH)"))) {
 			return MODE_HEIDENHAIN;
 		}
 

@@ -26,10 +26,10 @@
 #define FILENAME_SINU840     "%_N_[a-zA-Z0-9_]{1,31}_(MPF|SPF|TEA|COM|PLC|DEF|INI)"
 #define FILENAME_OSP         "\\$[A-Z]{1,1}[A-Z0-9_-]{1,}\\.(MIN|SSB|SDF|TOP|LIB|SUB|MSB)[%]{0,1}"
 #define FILENAME_FANUC       "(?:\\n|\\r)(O|:)[0-9]{1,}"
-#define FILENAME_SINU        "%\\b(MPF|SPF|TEA)[\\s]{0,3}[0-9]{1,4}\\b"
-#define FILENAME_HEID1       "%[a-zA-Z0-9_]{1,30}(\\s)"
-#define FILENAME_HEID2       "(BEGIN)(\\sPGM\\s)[a-zA-Z0-9_-+*]{1,}(\\sMM|\\sINCH)"
-#define FILENAME_PHIL        "%PM[\\s]{1,}N[0-9]{4,4}"
+#define FILENAME_SINU        "%\\b(MPF|SPF|TEA)[ \\t]{0,3}[0-9]{1,4}\\b"
+#define FILENAME_HEID1       "%[a-zA-Z0-9_]{1,30}( \\t)"
+#define FILENAME_HEID2       "(BEGIN)([ \\t]PGM[ \\t])[a-zA-Z0-9_-+*]{1,}([ \\t]MM|[ \\t]INCH)"
+#define FILENAME_PHIL        "%PM[ \\t]{1,}N[0-9]{4,4}"
 #define FILENAME_FADAL       "(N1)(O|:)[0-9]{1,}"
 
 #endif // FILEPATTERNS_H

@@ -478,7 +478,7 @@ void GCoderDocument::changeDateInComment()
 
 	QRegularExpression regex;
 	QString strDate = QLocale().toString(QDate::currentDate(), QLocale::ShortFormat);
-	regex.setPattern(tr("(DATE)") + "[:\\s]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
+	regex.setPattern(tr("(DATE)") + "[: \\t]*[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}");
 	QTextCursor cursor = textCursor();
 	cursor.setPosition(0);
 
@@ -496,12 +496,12 @@ void GCoderDocument::changeDateInComment()
 	} else {
 		cursor = textCursor();
 
-		regex.setPattern("(\\(){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}(\\)){1,1}");
+		regex.setPattern("(\\(){1,1}[ \\t]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[ \\t]{0,5}(\\)){1,1}");
 		cursor.setPosition(0);
 		cursor = document()->find(regex, cursor);
 
 		if (cursor.isNull()) {
-			regex.setPattern("(;){1,1}[\\s]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[\\s]{0,5}");
+			regex.setPattern("(;){1,1}[ \\t]{0,}[\\d]{1,4}(\\.|-|/)[\\d]{1,2}(\\.|-|/)[\\d]{2,4}[ \\t]{0,5}");
 			cursor.setPosition(0);
 			cursor = document()->find(regex, cursor);
 		}

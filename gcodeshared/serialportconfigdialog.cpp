@@ -401,7 +401,7 @@ void SerialPortConfigDialog::changeSettings()
 
 	list.clear();
 	list.append(settings.value("EndOfProgExp",
-	                           (QStringList() << "(M30|M02|M2|M99)[\\n\\r\\s]{1,}%" << "")).toStringList());
+	                           (QStringList() << "(M30|M02|M2|M99)[\\n\\r \\t]{1,}%" << "")).toStringList());
 	list.removeDuplicates();
 	endOfProgComboBox->insertItems(0, list);
 

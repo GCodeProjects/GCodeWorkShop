@@ -93,9 +93,9 @@ Utils::FileExt Utils::guessFileNameByProgNum(const QString& text)
 
 		if (match.hasMatch()) {
 			file.name = match.captured();
-			//name1.remove(QRegularExpression("%(MPF|SPF|TEA)[\\s]{0,3}"));
+			//name1.remove(QRegularExpression("%(MPF|SPF|TEA)[ \\t]{0,3}"));
 
-			regex.setPattern("%(MPF|SPF|TEA)[\\s]{0,3}");
+			regex.setPattern("%(MPF|SPF|TEA)[ \\t]{0,3}");
 			match = regex.match(file.name);
 
 			if (match.hasMatch()) {
@@ -119,7 +119,7 @@ Utils::FileExt Utils::guessFileNameByProgNum(const QString& text)
 
 		if (match.hasMatch()) {
 			file.name = match.captured();
-			file.name.remove(QRegularExpression("%PM[\\s]{1,}[N]{1,1}"));
+			file.name.remove(QRegularExpression("%PM[ \\t]{1,}[N]{1,1}"));
 			file.ext.clear();
 			qDebug() << "12" << file.name << file.ext;
 			break;
@@ -148,7 +148,7 @@ Utils::FileExt Utils::guessFileNameByProgNum(const QString& text)
 		if (match.hasMatch()) {
 			file.name = match.captured();
 			file.name.remove("%");
-			file.name.remove(QRegularExpression("\\s"));
+			file.name.remove(QRegularExpression("[ \\t]"));
 			file.ext.clear();
 			qDebug() << "14" << file.name << file.ext;
 			break;
@@ -159,8 +159,8 @@ Utils::FileExt Utils::guessFileNameByProgNum(const QString& text)
 
 		if (match.hasMatch()) {
 			file.name = match.captured();
-			file.name.remove(QRegularExpression("(BEGIN)(\\sPGM\\s)"));
-			file.name.remove(QRegularExpression("(\\sMM|\\sINCH)"));
+			file.name.remove(QRegularExpression("(BEGIN)([ \\t]PGM[ \\t])"));
+			file.name.remove(QRegularExpression("([ \\t]MM|[ \\t]INCH)"));
 			file.ext.clear();
 
 			break;
