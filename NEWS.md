@@ -1,3 +1,28 @@
+2025-04-26 v2025-04
+--------------------
+
+This release focuses on the work of add-ons that change the program text. These
+additions include:
+
+* renumbering,
+* axis swapping,
+* inserting dots,
+* converting from imperial to metric and back again,
+* removing fragments by regular expressions.
+
+### Bug fixes
+
+* Fixed freezing in some cases during renumbering.
+* Fixed incorrect renumbering of empty lines and lines with comments.
+
+### New features
+
+* All add-ons that modify the program text have received a pop-up dialog with
+  progress and a button to cancel the operation. The dialog appears if the
+  operation is delayed.
+* Renumbering has a new option "Keep existing numbers".
+
+
 2025-02-08 v2025-02
 --------------------
 
