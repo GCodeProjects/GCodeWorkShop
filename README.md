@@ -8,6 +8,7 @@ for CNC programmers.
 - [Some shortcuts](#some-shortcuts)
 - [Getting GCodeWorkShop](#getting-gcodeworkshop)
 - [Command line options](#command-line-options)
+- [License](#license)
 
 
 Some features
@@ -68,9 +69,21 @@ In addition, third-party builds are available:
 - For [OpenSuse](https://build.opensuse.org/package/show/home:AndnoVember:LXQt:Qt6/gcodeworkshop),
   thanks to Андрей Алыпов (AndnoVember).
 
+[![Packaging status](https://repology.org/badge/vertical-allrepos/gcodeworkshop.svg)](https://repology.org/project/gcodeworkshop/versions)
+
 
 Command line options
 ------------------
 
 - open file -> `gcodeworkshop file.nc`
 - diff two files -> `gcodeworkshop -diff file1.nc file2.nc`
+
+
+## License
+
+GCodeWorkShop is distributed under the GNU LGPL version 3 license. You can get
+the source code at the following sites:
+
+- [GitHub](https://github.com/GCodeProjects/GCodeWorkShop)
+- [GitFlic](https://gitflic.ru/project/u-235/gcodeworkshop)
+- [Codeberg](https://codeberg.org/u-235/GCodeWorkShop)
