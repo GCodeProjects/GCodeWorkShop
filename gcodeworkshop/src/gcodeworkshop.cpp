@@ -2216,7 +2216,7 @@ void GCodeWorkShop::loadFile(const DocumentInfo::Ptr& info, bool checkAlreadyLoa
 		QApplication::restoreOverrideCursor();
 
 		if (status) {
-			setLastOpenedPath(info->filePath);
+			setLastOpenedPath(file.path());
 			updateStatusBar();
 			m_recentFiles->add(info->filePath);
 		} else {
